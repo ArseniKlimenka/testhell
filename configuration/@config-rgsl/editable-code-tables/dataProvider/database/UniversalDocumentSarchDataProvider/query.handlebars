@@ -1,0 +1,26 @@
+﻿select
+	ud.UNIVERSAL_DOCUMENT_ID,
+	ud.UNIVERSAL_DOCUMENT_NUMBER,
+	CAST(ud.UNIVERSAL_DOCUMENT_ID AS nvarchar(50)) + ':' + CAST(ud.SYS_VERSION as nvarchar(50)) as ETAG,
+	ud.BODY,
+	ps.CODE_NAME as UNIVERSAL_DOCUMENT_STATE,
+	pa.CODE_NAME as CONFIGURATION_NAME
+from BFX.UNIVERSAL_DOCUMENT ud
+join CFX.PUBLISHED_ARTIFACT pa ON ud.PUBLISHED_ARTIFACT_ID = pa.PUBLISHED_ARTIFACT_ID
+join CFG.PROCESS_STATE ps ON ps.PROCESS_STATE_ID = ud.STATE_ID
+where 1=1
+{{#if parameters.universalDocumentNumber}}
+and ud.UNIVERSAL_DOCUMENT_NUMBER = @universalDocumentNumber
+{{/if}}
+{{#if parameters.universalDocumentName}}
+and pa.CODE_NAME = @universalDocumentName
+{{/if}}
+{{#if parameters.universalDocumentState}}
+and ps.CODE_NAME = @universalDocumentState
+{{/if}}
+{{#if parameters.universalDocumentId}}
+and ud.UNIVERSAL_DOCUMENT_ID = @universalDocumentId
+{{/if}}
+{{#if parameters.universalDocumentNumbers}}
+and ud.UNIVERSAL_DOCUMENT_NUMBER IN (@universalDocumentNumbers)
+{{/if}}

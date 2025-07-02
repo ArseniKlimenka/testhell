@@ -1,0 +1,111 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema",
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+        "additionalServices": {
+            "$ref": "component:AdditionalServices"
+        },
+        "basicConditions": {
+            "$ref": "component:BasicConditions"
+        },
+        "basicInvestmentParameters": {
+            "$ref": "component:RateOfReturn"
+        },
+        "insuranceRules": {
+            "$ref": "component:InsuranceRules"
+        },
+        "insuredPerson": {
+            "$ref": "component:InsuredPerson"
+        },
+        "issueForm": {
+            "allOf": [
+                {
+                    "$ref": "component:IssueForm"
+                },
+                {
+                    "aiAdditionalContext": {
+                        "name": "policyHolder",
+                        "$data": "/policyHolder",
+                        "source": "Body"
+                    }
+                },
+                {
+                    "aiAdditionalContext": {
+                        "name": "insuredPerson",
+                        "$data": "/insuredPerson",
+                        "source": "Body"
+                    }
+                }
+            ]
+        },
+        "paymentPlan": {
+            "$ref": "component:PaymentPlan"
+        },
+        "policyHolder": {
+            "$ref": "component:PolicyHolder"
+        },
+        "policyTerms": {
+            "$ref": "component:PolicyTerms"
+        },
+        "risks": {
+            "$ref": "component:Risks"
+        },
+        "risksPackages": {
+            "$ref": "component:RisksPackages"
+        },
+        "surrenderValues": {
+            "$ref": "component:SurrenderValues"
+        },
+        "mainInsuranceConditions": {
+            "$ref": "component:MainInsuranceConditions"
+        },
+        "initiator": {
+            "$ref": "component:Initiator"
+        },
+        "additionalInitiators": {
+            "$ref": "component:AdditionalInitiators"
+        },
+        "amendmentData": {
+            "type": "object",
+            "additionalProperties": true,
+            "properties": {
+                "portfolioMovementAmendmentData": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+                        "mainAttributes": {
+                            "$ref": "component:PolicyPortfolioMovementAmendmentMainAttrs"
+                        },
+                        "applicationInfo": {
+                            "$ref": "component:PolicyPortfolioMovementAmendmentApplicationInfo"
+                        },
+                        "amendmentInfo": {
+                            "$ref": "component:PolicyChangeAmendmentInfo"
+                        },
+                        "technicalData": {
+                            "type": "object",
+                            "additionalProperties": true,
+                            "properties": {}
+                        }
+                    }
+                }
+            }
+        },
+        "commission": {
+            "$ref": "component:PolicyCommission"
+        },
+        "oldCommission": {
+            "type": "object"
+        },
+        "productConfiguration": {
+            "$ref": "component:ProductConfiguration"
+        },
+        "policyEnrichments": {
+            "$ref": "component:PolicyEnrichments"
+        },
+        "consent": {
+            "$ref": "component:Consent"
+        }
+    }
+}

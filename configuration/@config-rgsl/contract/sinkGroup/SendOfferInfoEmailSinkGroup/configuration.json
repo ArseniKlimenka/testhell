@@ -1,0 +1,65 @@
+{
+    "sinks": [
+        {
+            "name": "GetPrintoutsInfo",
+            "class": {
+                "className": "Adacta.AdInsure.RGSL.Common.API.Shared.Services.IDocumentConfigurationInfoProvider, Adacta.AdInsure.RGSL.Common.API",
+                "methodName": "GetPrintoutsInfo"
+            }
+        },
+        {
+            "name": "GetExistingContractAttachment",
+            "class": {
+                "className": "Adacta.AdInsure.Framework.Core.SPI.Attachment.IAttachmentProvider, Adacta.AdInsure.Framework.Core",
+                "methodName": "GetAttachments"
+            }
+        },
+        {
+            "name": "CreateContractPrintoutFile",
+            "executeAs": "System",
+            "printout": {
+                "printoutConfiguration": {
+                    "attachmentTypes": [
+                    ]
+                }
+            }
+        },
+        {
+            "name": "CreateContractSignedAttachment",
+            "executeAs": "System",
+            "createAttachment": {
+                "attachmentType": "contractSigned"
+            }
+        },
+        {
+            "name": "GetExistingKIDAttachment",
+            "class": {
+                "className": "Adacta.AdInsure.Framework.Core.SPI.Attachment.IAttachmentProvider, Adacta.AdInsure.Framework.Core",
+                "methodName": "GetAttachments"
+            }
+        },
+        {
+            "name": "CreateKIDPrintoutFile",
+            "executeAs": "System",
+            "printout": {
+                "printoutConfiguration": {
+                    "attachmentTypes": [
+                    ]
+                }
+            }
+        },
+        {
+            "name": "CreateKIDAttachment",
+            "executeAs": "System",
+            "createAttachment": {
+                "attachmentType": "KIDAttachment"
+            }
+        },
+        {
+            "name": "SendContractForVerification",
+            "notification": {
+                "notificationName": "PolicySignedNotification"
+            }
+        }
+    ]
+}

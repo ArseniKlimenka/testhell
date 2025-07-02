@@ -1,0 +1,7 @@
+select
+	c.CONTRACT_NUMBER as AMENDMENT_NUMBER,
+	ps.CODE_NAME as STATE
+from
+	pas.CONTRACT c
+	inner join cfg.PROCESS_STATE ps on ps.PROCESS_STATE_ID = c.STATE_ID
+where c.CONTRACT_NUMBER = @amendmentNumber

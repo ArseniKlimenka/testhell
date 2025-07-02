@@ -1,0 +1,247 @@
+{
+    "formProperties": {
+        "events": {
+            "onLoad": "onLoadFiltersContent"
+        }
+    },
+    "type": "Group",
+    "width": 4,
+    "elements": [
+        {
+            "type": "Lookup",
+            "value": {
+                "$ref": "#"
+            },
+            "width": 1,
+            "dialogButton": {
+                "icon": {
+                    "name": "User",
+                    "color": "Primary"
+                }
+            },
+            "dialog": {
+                "viewReference": {
+                    "configurationCodeName": "GeneralPartySearchView",
+                    "configurationVersion": "1",
+                    "configurationConceptType": "SearchView"
+                }
+            },
+            "clearButton": {
+                "clearAction": "debtorClearButton"
+            },
+            "onSelected": "debtorSearchResultAssignment",
+            "selectedDisplayValueUISchema": {
+                "type": "Input",
+                "label": "Debtor",
+                "readOnly": false,
+                "value": {
+                    "$ref": "#/properties/request/properties/data/properties/criteria/properties/debtorName"
+                }
+            }
+        },
+        {
+            "type": "Lookup",
+            "value": {
+                "$ref": "#"
+            },
+            "width": 1,
+            "dialogButton": {
+                "icon": {
+                    "name": "User",
+                    "color": "Primary"
+                }
+            },
+            "dialog": {
+                "viewReference": {
+                    "configurationCodeName": "GeneralPartySearchView",
+                    "configurationVersion": "1",
+                    "configurationConceptType": "SearchView"
+                }
+            },
+            "clearButton": {
+                "clearAction": "creditorClearButton"
+            },
+            "onSelected": "creditorSearchResultAssignment",
+            "selectedDisplayValueUISchema": {
+                "type": "Input",
+                "label": "Creditor",
+                "readOnly": false,
+                "value": {
+                    "$ref": "#/properties/request/properties/data/properties/criteria/properties/creditorName"
+                }
+            }
+        },
+        {
+            "type": "Number",
+            "useGroupDelimiter": false,
+            "decimalPlaces": 0,
+            "label": "BankStatementItemId",
+            "value": {
+                "$ref": "#/properties/request/properties/data/properties/criteria/properties/bankStatementItemId"
+            },
+            "width": 1
+        },
+        {
+            "type": "Input",
+            "label": "BankStatementItemNo",
+            "value": {
+                "$ref": "#/properties/request/properties/data/properties/criteria/properties/bankStatementItemNo"
+            },
+            "width": 1
+        },
+        {
+            "type": "Input",
+            "control": "DateRange",
+            "dateFrom": {
+                "type": "Input",
+                "label": "Transaction date from",
+                "width": 1,
+                "value": {
+                    "$ref": "#/properties/request/properties/data/properties/criteria/properties/transactionDateFrom"
+                },
+                "control": "DatetimePicker"
+            },
+            "dateTo": {
+                "type": "Input",
+                "label": "Transaction date to",
+                "width": 1,
+                "value": {
+                    "$ref": "#/properties/request/properties/data/properties/criteria/properties/transactionDateTo"
+                },
+                "control": "DatetimePicker"
+            },
+            "width": 2
+        },
+        {
+            "type": "Input",
+            "label": "Description",
+            "value": {
+                "$ref": "#/properties/request/properties/data/properties/criteria/properties/description"
+            },
+            "width": 1
+        },
+        {
+            "type": "Input",
+            "label": "Reference No",
+            "value": {
+                "$ref": "#/properties/request/properties/data/properties/criteria/properties/referenceNo"
+            },
+            "width": 1
+        },
+        {
+            "type": "Input",
+            "control": "DateRange",
+            "dateFrom": {
+                "type": "Input",
+                "label": "Payment date from",
+                "width": 1,
+                "value": {
+                    "$ref": "#/properties/request/properties/data/properties/criteria/properties/paymentDateFrom"
+                },
+                "control": "DatetimePicker"
+            },
+            "dateTo": {
+                "type": "Input",
+                "label": "Payment date to",
+                "width": 1,
+                "value": {
+                    "$ref": "#/properties/request/properties/data/properties/criteria/properties/paymentDateTo"
+                },
+                "control": "DatetimePicker"
+            },
+            "width": 2
+        },
+        {
+            "type": "Input",
+            "elementId": "amount",
+            "label": "Amount",
+            "value": {
+                "$ref": "#/properties/request/properties/data/properties/criteria/properties/amount"
+            },
+            "width": 1
+        },
+        {
+            "type": "Component",
+            "name": "CurrencyCodeDropdown",
+            "value": {
+                "$ref": "#/properties/request/properties/data/properties/criteria/properties/currencyCode"
+            }
+        },
+        {
+            "type": "Input",
+            "elementId": "paymentStatusIds",
+            "multiple": true,
+            "control": "Dropdown",
+            "label": "Payment statuses",
+            "value": {
+                "$ref": "#/properties/request/properties/data/properties/criteria/properties/paymentStatusIds"
+            },
+            "width": 1
+        },
+        {
+            "type": "Input",
+            "elementId": "direction",
+            "multiple": false,
+            "control": "Dropdown",
+            "label": "Direction",
+            "value": {
+                "$ref": "#/properties/request/properties/data/properties/criteria/properties/direction"
+            },
+            "width": 1
+        },
+        {
+            "type": "Input",
+            "elementId": "paymentSourceIds",
+            "multiple": true,
+            "control": "Dropdown",
+            "label": "Payment sources",
+            "value": {
+                "$ref": "#/properties/request/properties/data/properties/criteria/properties/paymentSourceIds"
+            },
+            "width": 1
+        },
+        {
+            "type": "Input",
+            "control": "Dropdown",
+            "label": "Income source id",
+            "value": {
+                "$ref": "#/properties/request/properties/data/properties/criteria/properties/incomeSourceId"
+            },
+            "width": 1
+        },
+        {
+            "type": "ThreeState",
+            "elementId": "isRegistry",
+            "label": "IsRegistry",
+            "value": {
+                "$ref": "#/properties/request/properties/data/properties/criteria/properties/isRegistry"
+            },
+            "width": 1
+        },
+        {
+            "type": "Component",
+            "name": "DebtorAccountNoDropdown",
+            "value": {
+                "$ref": "#/properties/request/properties/data/properties/criteria/properties/debtorAccountNo"
+            }
+        },
+        {
+            "type": "Input",
+            "multiple": false,
+            "control": "Dropdown",
+            "label": "RegistryFileFormat",
+            "value": {
+                "$ref": "#/properties/request/properties/data/properties/criteria/properties/registryFileFormat"
+            },
+            "width": 1
+        },
+        {
+            "type": "Input",
+            "label": "RgslGuid",
+            "value": {
+                "$ref": "#/properties/request/properties/data/properties/criteria/properties/rgslGuid"
+            },
+            "width": 1
+        }
+    ]
+}

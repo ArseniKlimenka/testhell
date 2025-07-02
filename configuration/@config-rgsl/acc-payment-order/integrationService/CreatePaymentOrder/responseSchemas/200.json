@@ -1,0 +1,25 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema",
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+        "paymentOrders": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                    "paymentOrderNumber": {
+                        "type": "string"
+                    },
+                    "paymentOrderType": {
+                        "$ref": "component:PaymentOrderType"
+                    },
+                    "paymentOrderSubtype": {
+                        "$ref": "component:PaymentOrderSubtype"
+                    }
+                }
+            }
+        }
+    }
+}

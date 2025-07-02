@@ -1,0 +1,53 @@
+{
+    "allowMultipleTransactions": true,
+    "sinks": [
+        {
+            "name": "GenerateExecutionId",
+            "sequence": {
+                "sequenceName": "BFX_IMPL.CONTRACT_MODIFICATION_EXEC_ID",
+                "createNewSequenceName": true
+            }
+        },
+        {
+            "name": "GetAgentAgreement",
+            "fetch": {
+                "configuration": {
+                    "name": "AADocumentSearchDataSource"
+                }
+            }
+        },
+        {
+            "name": "GetContractVersions",
+            "fetch": {
+                "configuration": {
+                    "name": "ContractVersionsDataSource"
+                }
+            }
+        },
+        {
+            "name": "CalculateCommission",
+            "class": {
+                "className": "Adacta.AdInsure.RGSL.PAS.API.Shared.AgentAgreement.Services.IAaCommissionServiceExecutor, Adacta.AdInsure.RGSL.PAS.API",
+                "methodName": "ExecuteCommissionCalculation"
+            }
+        },
+        {
+            "name": "UpdateContractVersions",
+            "executeAs": "System",
+            "document": {
+            }
+        },
+        {
+            "name": "WriteExecutionHistory",
+            "database": {
+                "tables": [
+                    "BFX_IMPL.CONTRACT_MODIFICATION_HISTORY"
+                ]
+            }
+        }
+    ],
+    "responses": [
+        200,
+        422
+    ]
+}

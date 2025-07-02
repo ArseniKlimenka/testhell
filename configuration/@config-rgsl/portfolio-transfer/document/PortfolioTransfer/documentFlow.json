@@ -1,0 +1,59 @@
+{
+    "processType": "PortfolioTransfer",
+    "initialState": "Draft",
+    "actors": [
+        "ViewerCommissionAct",
+        "AdminCommissionAct",
+        "System"
+    ],
+    "states": [
+        {
+            "name": "Draft",
+            "operations": [
+                {
+                    "name": "Save"
+                }
+            ]
+        },
+        {
+            "name": "TransferProcessing",
+            "operations": []
+        },
+        {
+            "name": "ProcessedWithErrors",
+            "operations": []
+        },
+        {
+            "name": "Processed",
+            "operations": []
+        }
+    ],
+    "transitions": [
+        {
+            "name": "Draft_To_TransferProcessing",
+            "from": "Draft",
+            "to": "TransferProcessing"
+        },
+        {
+            "name": "TransferProcessing_To_Processed",
+            "from": "TransferProcessing",
+            "to": "Processed",
+            "broadcastEvent": {
+                "serverSideEvents": true
+            }
+        },
+        {
+            "name": "TransferProcessing_To_ProcessedWithErrors",
+            "from": "TransferProcessing",
+            "to": "ProcessedWithErrors",
+            "broadcastEvent": {
+                "serverSideEvents": true
+            }
+        },
+        {
+            "name": "ProcessedWithErrors_To_TransferProcessing",
+            "from": "ProcessedWithErrors",
+            "to": "TransferProcessing"
+        }
+    ]
+}

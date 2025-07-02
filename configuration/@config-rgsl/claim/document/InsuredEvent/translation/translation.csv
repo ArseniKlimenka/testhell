@@ -1,0 +1,34 @@
+ConfigurationType	ConfigurationName	ItemType	TranslationKey	Expression	Translation_ru-RU	Translation_en-US
+DocumentConfiguration	InsuredEvent	actors	ViewClaim	ViewClaim	Просмотр убытка	ViewClaim
+DocumentFlowDefinition	InsuredEventFlow	transitions	transitions@DraftToCancelled@Title	DraftToCancelled	Отменить	DraftToCancelled
+DocumentFlowDefinition	InsuredEventFlow	transitions	transitions@ConfirmedToCancelled@Title	ConfirmedToCancelled	Отменить	ConfirmedToCancelled
+DocumentFlowDefinition	InsuredEventFlow	operations	operations@Save@Title	Save	Сохранить	Save
+DocumentFlowDefinition	InsuredEventFlow	states	states@Draft	Draft	Проект	Draft
+DocumentFlowDefinition	InsuredEventFlow	states	states@Confirmed	Confirmed	Подтверждено	Confirmed
+DocumentFlowDefinition	InsuredEventFlow	states	states@Cancelled	Cancelled	Отменено	Cancelled
+UiSchema	InsuredEventMainContent	ui-label	insuredEventDetailsTab	insuredEventDetailsTab	Страховое событие	insuredEventDetailsTab
+UiSchema	InsuredEventMainContent	ui-label	mainInformation	mainInformation	Основная информация	mainInformation
+UiSchema	InsuredEventMainContent	ui-label	Contract	Contract	Договор	Contract
+UiSchema	InsuredEventMainContent	ui-label	Contract Number	Contract Number	Номер договора	Contract Number
+UiSchema	InsuredEventMainContent	ui-label	eventDate	eventDate	Дата страхового события	eventDate
+UiSchema	InsuredEventMainContent	ui-label	yearQuarter	yearQuarter	Квартал страхового события	yearQuarter
+UiSchema	InsuredEventMainContent	ui-label	externalNumber	externalNumber	Номер договора страхования вне системы	externalNumber
+UiSchema	InsuredEventMainContent	ui-label	isExternal	isExternal	Вне системы	isExternal
+UiSchema	InsuredEventMainContent	ui-label	insuredEventType	insuredEventType	Тип страхового события	insuredEventType
+UiSchema	InsuredEventMainContent	ui-label	insuredEventReason	insuredEventReason	Причина страхового события	insuredEventReason
+UiSchema	InsuredEventMainContent	ui-label	diagnosis	diagnosis	Диагноз МКБ-10	diagnosis
+UiSchema	InsuredEventMainContent	ui-label	diagnosisNote	diagnosisNote	Диагноз (для страхового акта)	diagnosisNote
+UiSchema	InsuredEventMainContent	ui-label	Related claims	Related claims	Связанные документы	Related claims
+Rule	InsuredEventRootLevelValidation	rule	validation@ContractIsRequired	rootLevelValidation	E: Необходимо указать договор страхования	E: validation@ContractIsRequired
+Rule	InsuredEventRootLevelValidation	rule	validation@EventDateIsRequired	rootLevelValidation	E: Дата страхового события обязательна для заполнения	E: validation@EventDateIsRequired
+Rule	InsuredEventRootLevelValidation	rule	validation@InsuredEventTypeIsRequired	rootLevelValidation	E: Тип страхового события обязателен для заполнения	E: validation@InsuredEventTypeIsRequired
+Rule	InsuredEventRootLevelValidation	rule	validation@InsuredEventReasonIsRequired	rootLevelValidation	E: Причина страхового события обязательна для заполнения	E: validation@InsuredEventReasonIsRequired
+Rule	InsuredEventRootLevelValidation	rule	validation@DiagnosisIsRequired	rootLevelValidation	E: Диагноз МКБ-10 обязателен для заполнения	E: validation@DiagnosisIsRequired
+Rule	InsuredEventConfirmedToCancelledTransitionRule	rule	validation@insuredEventHasActiveClaims	ConfirmedToCancelled	E: Не возможно отменить страховое событие. Присутствуют активные связанные убытки.	E: ConfirmedToCancelled
+DocumentConfiguration	InsuredEvent	rootConfiguration	InsuredEvent@Title	InsuredEvent	Страховое событие	InsuredEvent
+Rule	InsuredEventRootLevelValidation	rule	validation@insuredEventDateOutOfRange	rootLevelValidation	W: Дата страхового события за пределами действия договора	W: validation@insuredEventDateOutOfRange
+DocumentFlowDefinition	InsuredEventFlow	transitions	transitions@DraftToConfirmed@Title	DraftToConfirmed	Подтвердить	DraftToConfirmed
+Rule	InsuredEventRootLevelValidation	rule	validation@InsuredEventDateSholdBeLesserOrEqualToToday	rootLevelValidation	E: Дата страхового события должна быть меньше или равна текущей дате	E: validation@InsuredEventDateSholdBeLesserOrEqualToToday
+Rule	InsuredEventRootLevelValidation	rule	validation@DiagnosisNoteIsRequired	rootLevelValidation	E: Диагноз (для страхового акта) обязателен для заполнения	E: validation@DiagnosisNoteIsRequired
+DocumentConfiguration	InsuredEvent	actors	ClaimManager	ClaimManager	Урегулирование убытков	ClaimManager
+DocumentConfiguration	InsuredEvent	actors	Operations	Operations	Оперу	Operations

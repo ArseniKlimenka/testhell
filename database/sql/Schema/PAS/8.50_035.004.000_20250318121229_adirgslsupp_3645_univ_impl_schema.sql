@@ -1,0 +1,25 @@
+IF NOT EXISTS (SELECT * FROM SYS.SCHEMAS WHERE [NAME] = N'UNIV_IMPL')
+EXEC('CREATE SCHEMA [UNIV_IMPL]')
+GO
+
+GRANT ALTER ON SCHEMA::UNIV_IMPL TO RUN_USER
+GO
+
+IF EXISTS (
+        SELECT type_desc, type
+        FROM sys.procedures WITH(NOLOCK)
+        WHERE NAME = 'UNIV_IMPL_SCRIPT_RUNNER'
+            AND type = 'P'
+      )
+     DROP PROCEDURE UNIV_IMPL.UNIV_IMPL_SCRIPT_RUNNER
+GO
+
+CREATE PROCEDURE UNIV_IMPL.UNIV_IMPL_SCRIPT_RUNNER
+    @stmnt nvarchar(max),
+    @param nvarchar(1000) = NULL
+AS
+BEGIN
+    EXECUTE AS USER = 'RUN_USER'
+    EXEC sp_executesql @stmnt, N'@param nvarchar(1000)', @param
+END
+GO

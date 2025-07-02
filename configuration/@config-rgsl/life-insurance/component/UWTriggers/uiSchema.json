@@ -1,0 +1,71 @@
+{
+    "type": "DataGrid",
+    "mode": "Array",
+    "labelType": "H1",
+    "label": "UW Triggers",
+    "pagination": {
+        "mode": "Regular",
+        "pageSizes": [
+            100,
+            200,
+            300
+        ],
+        "defaultPageSize": 100
+    },
+    "isCollapsed": false,
+    "value": {
+        "$ref": "#"
+    },
+    "actions": [],
+    "edit": {
+        "mode": "Detached"
+    },
+    "height": "None",
+    "columns": [
+        {
+            "title": "objectName",
+            "name": "objectName",
+            "cellContent": {
+                "type": "OutputText",
+                "defaultValue": "",
+                "value": {
+                    "$ref": "#/properties/objectName"
+                }
+            }
+        },
+        {
+            "title": "triggerName",
+            "name": "triggerName",
+            "cellContent": {
+                "type": "OutputText",
+                "defaultValue": "",
+                "value": {
+                    "$ref": "#/properties/triggerName"
+                }
+            }
+        },
+        {
+            "title": "confirmationDepartment",
+            "name": "confirmationDepartment",
+            "cellContent": {
+                "type": "OutputText",
+                "defaultValue": "",
+                "value": {
+                    "$ref": "#/properties/confirmationDepartment"
+                }
+            },
+            "rule": {
+                "effect": "HIDE",
+                "condition": {
+                    "type": "FUNC",
+                    "value": [
+                        {
+                            "$ref": "#"
+                        }
+                    ],
+                    "ruleFunction": "hideColumnForNonBackOffice"
+                }
+            }
+        }
+    ]
+}

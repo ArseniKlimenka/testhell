@@ -1,0 +1,20 @@
+﻿SELECT ig.SUBGROUP_CODE_LEVEL_1,
+	ig.SUBGROUP_CODE_LEVEL_2,
+	ig.SUBGROUP_CODE_LEVEL_3,
+	ig.SUBGROUP_CODE_LEVEL_4,
+	ig.INJURY_GROUP
+FROM BFX_IMPL.INJURY_GENERAL ig
+WHERE 1 = 1
+
+{{#if parameters.ruleCode}}
+AND ig.RULE_CODE = @ruleCode
+{{/if}}
+
+{{#if parameters.injuryGroup}}
+AND ig.INJURY_GROUP LIKE @injuryGroup
+{{/if}}
+
+ORDER BY ig.SUBGROUP_CODE_LEVEL_1,
+		ig.SUBGROUP_CODE_LEVEL_2,
+		ig.SUBGROUP_CODE_LEVEL_3,
+		ig.SUBGROUP_CODE_LEVEL_4

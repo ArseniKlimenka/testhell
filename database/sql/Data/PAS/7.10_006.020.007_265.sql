@@ -1,0 +1,7 @@
+UPDATE BFX.ATTACHMENT
+SET ATTACHMENT_TYPE = 'KIDAttachment'
+WHERE ATTACHMENT_TYPE in ('KIDPrintout', 'KIDCreditPrintout');
+
+UPDATE BFX.ATTACHMENT
+SET NAME = N'Ключевой информационный документ'
+WHERE ATTACHMENT_TYPE = 'KIDAttachment'

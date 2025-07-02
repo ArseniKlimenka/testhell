@@ -1,0 +1,49 @@
+{
+    "targetDocument": "Endowment",
+    "targetDocumentVersion": "1",
+    "targetState": "OperationsApproval",
+    "relationType": "Sibling",
+    "allowOnValidationErrors": {
+        "all": false
+    },
+    "requiredConfirmedConstraints": {
+        "all": false
+    },
+    "exclusiveToAssignedUser": false,
+    "enrichment": {
+        "fields": [
+            "[GetRisksData]",
+            "[GetPolicyPaymentInfo]",
+            "[GetCbRate]",
+            "[SetDefaultBeneficiariesBankAccounts]"
+        ]
+    },
+    "sourceDocument": "MedLifeInsurancePolicy",
+    "sourceDocumentVersion": "1",
+    "sourceDocumentStates": [
+        {
+            "name": "Activated",
+            "actors": [
+                "Operations"
+            ]
+        },
+        {
+            "name": "Cancelled",
+            "actors": [
+                "Operations"
+            ]
+        },
+        {
+            "name": "CancelledByAmendment",
+            "actors": [
+                "Operations"
+            ]
+        },
+        {
+            "name": "Completed",
+            "actors": [
+                "Operations"
+            ]
+        }
+    ]
+}

@@ -1,0 +1,33 @@
+{
+    "sinks": [
+        {
+            "name": "ExecuteNettingPayment",
+            "class": {
+                "className": "Adacta.AdInsure.RGSL.Accounting.API.Shared.CashFlow.PaymentOrder.Services.IPaymentOrderNettingAppServiceRGSL, Adacta.AdInsure.RGSL.Accounting.API",
+                "methodName": "ExecutePaymentOrderNetting"
+            }
+        },
+        {
+            "name": "GetPaymentOrder",
+            "fetch": {
+                "configuration": {
+                    "name": "GetPaymentOrderGeneralDataSource"
+                }
+            }
+        },
+        {
+            "name": "UpdatePaymentOrder",
+            "document": {
+                "configuration": {
+                    "name": "PaymentOrder",
+                    "version": "1"
+                },
+                "allowUpdating": {
+                    "inStates": [
+                        "Approved"
+                    ]
+                }
+            }
+        }
+    ]
+}

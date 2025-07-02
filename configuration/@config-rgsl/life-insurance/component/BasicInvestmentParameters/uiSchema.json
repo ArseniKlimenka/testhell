@@ -1,0 +1,400 @@
+{
+    "type": "Section",
+    "label": "Basic Investment Parameters",
+    "isCollapsed": false,
+    "width": 12,
+    "elements": [
+        {
+            "type": "Group",
+            "width": 12,
+            "elements": [
+                {
+                    "type": "Group",
+                    "width": 4,
+                    "elements": [
+                        {
+                            "type": "Input",
+                            "label": "investmentStrategy",
+                            "value": {
+                                "$ref": "#/properties/investmentStrategy"
+                            },
+                            "onValueChanged": [
+                                {
+                                    "commandType": "executeAction",
+                                    "actionName": "onChangeInvestmentStrategy"
+                                }
+                            ],
+                            "source": {
+                                "dataSource": {
+                                    "name": "InvestmentStrategyDataSource",
+                                    "reloadOnOpen": true,
+                                    "searchFieldPath": "investmentStrategyDescription",
+                                    "responseMapping": "investmentStrategyResponseMapping",
+                                    "resultCount": 1000
+                                },
+                                "displayFieldName": "investmentStrategyDescription"
+                            },
+                            "control": "Dropdown",
+                            "filter": "investmentStrategyFilter",
+                            "width": 4,
+                            "rule": {
+                                "effect": "STYLE",
+                                "condition": {
+                                    "type": "FUNC",
+                                    "style": {
+                                        "background-color": "lemonchiffon"
+                                    },
+                                    "value": [
+                                        {
+                                            "$ref": "#/properties/ClientViewModel"
+                                        }
+                                    ],
+                                    "ruleFunction": "onChangeProductStyle"
+                                }
+                            }
+                        }
+                    ],
+                    "rule": {
+                        "effect": "DISABLE_INITIAL",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "hasFutureNumberForAgent",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "type": "Component",
+                    "metadata": {
+                        "autogenerate": true
+                    },
+                    "name": "RateOfReturn",
+                    "value": {
+                        "$ref": "#"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "Group",
+            "rule": {
+                "effect": "SHOW",
+                "condition": {
+                    "type": "FUNC",
+                    "ruleFunction": "isBackOfficeUser",
+                    "value": [
+                        {
+                            "$ref": "#"
+                        }
+                    ]
+                }
+            },
+            "elements": [
+                {
+                    "type": "Input",
+                    "readOnly": true,
+                    "control": "TextArea",
+                    "label": "investmentStrategyDescriptionFull",
+                    "value": {
+                        "$ref": "#/properties/investmentStrategyDescriptionFull"
+                    },
+                    "width": 6
+                },
+                {
+                    "type": "Input",
+                    "readOnly": true,
+                    "control": "TextArea",
+                    "label": "payOffDescription",
+                    "value": {
+                        "$ref": "#/properties/payOffDescription"
+                    },
+                    "width": 6
+                },
+                {
+                    "type": "Input",
+                    "readOnly": true,
+                    "control": "TextArea",
+                    "label": "baseActiveDescription",
+                    "value": {
+                        "$ref": "#/properties/baseActiveDescription"
+                    },
+                    "width": 12
+                },
+                {
+                    "type": "Group",
+                    "width": 12,
+                    "rule": {
+                        "effect": "ENABLE_INITIAL",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "enableIsManualSetInvestmentParams",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    },
+                    "elements": [
+                        {
+                            "type": "Input",
+                            "label": "isManualSetInvestmentParams",
+                            "value": {
+                                "$ref": "#/properties/isManualSetInvestmentParams"
+                            },
+                            "onValueChanged": [
+                                {
+                                    "commandType": "executeAction",
+                                    "actionName": "onChangeIsManualSetInvestmentParams"
+                                }
+                            ],
+                            "rule": {
+                                "effect": "SHOW",
+                                "condition": {
+                                    "type": "FUNC",
+                                    "ruleFunction": "showIsManualSetInvestmentParams",
+                                    "value": [
+                                        {
+                                            "$ref": "#"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    ]
+                },
+                {
+                    "type": "Input",
+                    "control": "Percentage",
+                    "decimalPlaces": 2,
+                    "label": "participationCoeff",
+                    "value": {
+                        "$ref": "#/properties/participationCoeff"
+                    },
+                    "width": 3,
+                    "rule": {
+                        "effect": "ENABLE_INITIAL",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "enableInvestmentParams",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "type": "Input",
+                    "readOnly": true,
+                    "control": "Percentage",
+                    "decimalPlaces": 2,
+                    "label": "optionPrice",
+                    "value": {
+                        "$ref": "#/properties/optionPrice"
+                    },
+                    "width": 3,
+                    "rule": {
+                        "effect": "ENABLE_INITIAL",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "enableInvestmentParams",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "type": "Input",
+                    "readOnly": true,
+                    "label": "barrier",
+                    "value": {
+                        "$ref": "#/properties/barrier"
+                    },
+                    "width": 3,
+                    "rule": {
+                        "effect": "ENABLE_INITIAL",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "enableInvestmentParams",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "type": "Input",
+                    "readOnly": true,
+                    "label": "barrierAutoCall",
+                    "value": {
+                        "$ref": "#/properties/barrierAutoCall"
+                    },
+                    "width": 3,
+                    "rule": {
+                        "effect": "ENABLE_INITIAL",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "enableInvestmentParams",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "type": "Input",
+                    "readOnly": true,
+                    "label": "participationCoeffByPeriods",
+                    "value": {
+                        "$ref": "#/properties/participationCoeffByPeriods"
+                    },
+                    "width": 3,
+                    "rule": {
+                        "effect": "ENABLE_INITIAL",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "enableInvestmentParams",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "type": "Input",
+                    "readOnly": true,
+                    "label": "fixRate",
+                    "value": {
+                        "$ref": "#/properties/fixRate"
+                    },
+                    "width": 3,
+                    "rule": {
+                        "effect": "ENABLE_INITIAL",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "enableInvestmentParams",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "type": "Input",
+                    "readOnly": true,
+                    "label": "hedgeCost",
+                    "value": {
+                        "$ref": "#/properties/hedgeCost"
+                    },
+                    "width": 3,
+                    "rule": {
+                        "effect": "ENABLE_INITIAL",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "enableInvestmentParams",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "type": "Input",
+                    "readOnly": true,
+                    "label": "spreadBA",
+                    "value": {
+                        "$ref": "#/properties/spreadBA"
+                    },
+                    "width": 3,
+                    "rule": {
+                        "effect": "ENABLE_INITIAL",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "enableInvestmentParams",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "type": "Input",
+                    "readOnly": true,
+                    "label": "payOffShortDescription",
+                    "value": {
+                        "$ref": "#/properties/payOffShortDescription"
+                    },
+                    "width": 3
+                },
+                {
+                    "type": "Input",
+                    "readOnly": true,
+                    "label": "toolType",
+                    "value": {
+                        "$ref": "#/properties/toolType"
+                    },
+                    "width": 3
+                },
+                {
+                    "type": "Input",
+                    "readOnly": true,
+                    "label": "measureToolNominal",
+                    "value": {
+                        "$ref": "#/properties/measureToolNominal"
+                    },
+                    "width": 3
+                },
+                {
+                    "type": "Input",
+                    "readOnly": true,
+                    "label": "calculatingAgent",
+                    "value": {
+                        "$ref": "#/properties/calculatingAgent"
+                    },
+                    "width": 3
+                },
+                {
+                    "type": "Input",
+                    "readOnly": true,
+                    "label": "priceOfMeasureTool",
+                    "control": "Percentage",
+                    "value": {
+                        "$ref": "#/properties/priceOfMeasureTool"
+                    },
+                    "width": 3
+                },
+                {
+                    "type": "Input",
+                    "readOnly": true,
+                    "control": "Percentage",
+                    "label": "partOfPremiumForTool",
+                    "value": {
+                        "$ref": "#/properties/partOfPremiumForTool"
+                    },
+                    "width": 3
+                }
+            ]
+        }
+    ]
+}

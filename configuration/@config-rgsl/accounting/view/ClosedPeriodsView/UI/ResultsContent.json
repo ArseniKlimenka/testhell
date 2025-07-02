@@ -1,0 +1,118 @@
+{
+    "type": "Group",
+    "elements": [
+        {
+            "type": "DataGrid",
+            "value": {
+                "$ref": "#/properties/response/properties/data"
+            },
+            "mode": "DataSource",
+            "pagination": {
+                "mode": "Regular",
+                "pageSizes": [
+                    10,
+                    25,
+                    50
+                ]
+            },
+            "selection": {
+                "mode": "Multi",
+                "enableRowSelection": true,
+                "showCheckBox": true,
+                "onSelectionChanged": [
+                    {
+                        "commandType": "raiseEvent",
+                        "eventName": "Selected"
+                    }
+                ]
+            },
+            "height": "None",
+            "columns": [
+                {
+                    "sortable": true,
+                    "title": "StartDate",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "template": "{{expr startDate 'd'}}",
+                        "value": {
+                            "$ref": "#/properties/resultData"
+                        }
+                    },
+                    "name": "startDate"
+                },
+                {
+                    "sortable": true,
+                    "title": "EndDate",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "template": "{{expr endDate 'd'}}",
+                        "value": {
+                            "$ref": "#/properties/resultData"
+                        }
+                    },
+                    "name": "endDate"
+                },
+                {
+                    "sortable": true,
+                    "title": "PeriodStatusId",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/periodStatusId"
+                        }
+                    },
+                    "name": "periodStatusId"
+                },
+                {
+                    "sortable": true,
+                    "title": "PeriodTypeId",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/periodTypeId"
+                        }
+                    },
+                    "name": "periodTypeId"
+                },
+                {
+                    "sortable": true,
+                    "title": "LastUpdated",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "template": "{{expr lastUpdated 'dt'}}",
+                        "value": {
+                            "$ref": "#/properties/resultData"
+                        }
+                    },
+                    "name": "lastUpdated"
+                },
+                {
+                    "sortable": true,
+                    "title": "Username",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/username"
+                        }
+                    },
+                    "name": "username"
+                }
+            ],
+            "elementId": "TableViewId",
+            "actions": [
+                "Details"
+            ],
+            "detailsTemplates": {
+                "view": {
+                    "content": {
+                        "type": "Component",
+                        "name": "ClosedPeriodsViewGridDetails",
+                        "value": {
+                            "$ref": "#/properties/resultData"
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}

@@ -1,0 +1,19 @@
+﻿select g.APPLICATION_USER_GROUP_ID,
+       g.APPLICATION_USER_GROUP_CODE,
+       JSON_VALUE(g.BODY, '$.name') as NAME,
+       JSON_VALUE(g.BODY, '$.type') as TYPE,
+  (select r.APPLICATION_ROLE_ID as id,
+          r.CODE_NAME as codeName
+   from CFX.USER_GROUP_APPLICATION_ROLE gr
+   join CFG.APPLICATION_ROLE r on r.APPLICATION_ROLE_ID = gr.APPLICATION_ROLE_ID
+   where gr.APPLICATION_USER_GROUP_ID = g.APPLICATION_USER_GROUP_ID
+   for json path) as ROLES
+from ORG.APPLICATION_USER_GROUP g
+where 
+  1 = 1
+{{#if parameters.code}}
+  and g.APPLICATION_USER_GROUP_CODE like @code
+{{/if}}
+{{#if parameters.name}}
+  and JSON_VALUE(g.BODY, '$.name') like @name
+{{/if}}

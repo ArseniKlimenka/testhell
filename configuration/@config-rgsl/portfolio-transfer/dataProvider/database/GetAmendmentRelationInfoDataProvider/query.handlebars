@@ -1,0 +1,25 @@
+select
+	mc.CONTRACT_NUMBER,
+	c.VERSION_STATE,
+	mainState.CODE_NAME as MAIN_STATE_CODE,
+	amState.CODE_NAME as AMENDMENT_STATE_CODE,
+	paMain.CODE_NAME as MAIN_CONFIGURATION_NAME,
+	paAm.CODE_NAME as AMENDMENT_CONFIGURATION_NAME,
+	paMain.CODE_NAME + 'CreatePortfolioMovementAmendmentRelation' as RELATION_NAME
+from
+	pas.CONTRACT mc
+	outer apply (
+		select top 1 *
+		from pas.CONTRACT cc
+		where cc.ORIGINAL_DOCUMENT_ID = mc.CONTRACT_ID
+			and (cc.VERSION_STATE is null or cc.VERSION_STATE = 'Applied')
+			AND cc.SEQ_NUMBER != 0
+		order by SEQ_NUMBER desc
+	) c
+	inner join cfg.PROCESS_STATE mainState on mainState.PROCESS_STATE_ID = mc.STATE_ID
+	inner join cfx.PUBLISHED_ARTIFACT paMain on paMain.PUBLISHED_ARTIFACT_ID = mc.PUBLISHED_ARTIFACT_ID
+	left join cfg.PROCESS_STATE amState on amState.PROCESS_STATE_ID = c.STATE_ID
+	left join cfx.PUBLISHED_ARTIFACT paAm on paAm.PUBLISHED_ARTIFACT_ID = c.PUBLISHED_ARTIFACT_ID
+where 1=1
+	and mc.SEQ_NUMBER = 0
+	and mc.CONTRACT_NUMBER = @contractNumber

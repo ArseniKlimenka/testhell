@@ -1,0 +1,223 @@
+{
+    "formProperties": {
+        "events": {
+            "onLoad": "onLoadFiltersContent"
+        }
+    },
+    "type": "Group",
+    "elements": [
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "Input",
+                    "label": "Ref document no",
+                    "value": {
+                        "$ref": "#/properties/request/properties/data/properties/criteria/properties/refDocumentNo"
+                    },
+                    "width": 1
+                },
+                {
+                    "type": "Lookup",
+                    "value": {
+                        "$ref": "#"
+                    },
+                    "width": 1,
+                    "dialogButton": {
+                        "icon": {
+                            "name": "User",
+                            "color": "Primary"
+                        }
+                    },
+                    "dialog": {
+                        "viewReference": {
+                            "configurationCodeName": "GeneralPartySearchView",
+                            "configurationVersion": "1",
+                            "configurationConceptType": "SearchView"
+                        }
+                    },
+                    "clearButton": {
+                        "clearAction": "payerClearButton"
+                    },
+                    "onSelected": "payerSearchResultAssignment",
+                    "selectedDisplayValueUISchema": {
+                        "type": "Input",
+                        "label": "Payer",
+                        "readOnly": false,
+                        "value": {
+                            "$ref": "#/properties/request/properties/data/properties/criteria/properties/payerName"
+                        }
+                    }
+                },
+                {
+                    "type": "Lookup",
+                    "value": {
+                        "$ref": "#"
+                    },
+                    "width": 1,
+                    "label": "Policy holder",
+                    "dialogButton": {
+                        "icon": {
+                            "name": "User",
+                            "color": "Primary"
+                        }
+                    },
+                    "dialog": {
+                        "viewReference": {
+                            "configurationCodeName": "GeneralPartySearchView",
+                            "configurationVersion": "1",
+                            "configurationConceptType": "SearchView"
+                        }
+                    },
+                    "clearButton": {
+                        "clearAction": "policyHolderClearButton"
+                    },
+                    "onSelected": "policyHolderSearchResultAssignment",
+                    "selectedDisplayValueTemplate": "{{expr resultData.fullName}}"
+                }
+            ]
+        },
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "Input",
+                    "control": "DateRange",
+                    "dateFrom": {
+                        "type": "Input",
+                        "label": "Payment date from",
+                        "width": 1,
+                        "value": {
+                            "$ref": "#/properties/request/properties/data/properties/criteria/properties/paymentDateFrom"
+                        },
+                        "control": "DatetimePicker"
+                    },
+                    "dateTo": {
+                        "type": "Input",
+                        "label": "Payment date to",
+                        "width": 1,
+                        "value": {
+                            "$ref": "#/properties/request/properties/data/properties/criteria/properties/paymentDateTo"
+                        },
+                        "control": "DatetimePicker"
+                    },
+                    "width": 2
+                },
+                {
+                    "type": "Input",
+                    "control": "DateRange",
+                    "dateFrom": {
+                        "type": "Input",
+                        "label": "Policy start date from",
+                        "width": 1,
+                        "value": {
+                            "$ref": "#/properties/request/properties/data/properties/criteria/properties/policyStartDateFrom"
+                        },
+                        "control": "DatetimePicker"
+                    },
+                    "dateTo": {
+                        "type": "Input",
+                        "label": "Policy start date to",
+                        "width": 1,
+                        "value": {
+                            "$ref": "#/properties/request/properties/data/properties/criteria/properties/policyStartDateTo"
+                        },
+                        "control": "DatetimePicker"
+                    },
+                    "width": 2
+                }
+            ]
+        },
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "Input",
+                    "control": "DateRange",
+                    "dateFrom": {
+                        "type": "Input",
+                        "label": "Transaction date from",
+                        "width": 1,
+                        "value": {
+                            "$ref": "#/properties/request/properties/data/properties/criteria/properties/transactionDateFrom"
+                        },
+                        "control": "DatetimePicker"
+                    },
+                    "dateTo": {
+                        "type": "Input",
+                        "label": "Transaction date to",
+                        "width": 1,
+                        "value": {
+                            "$ref": "#/properties/request/properties/data/properties/criteria/properties/transactionDateTo"
+                        },
+                        "control": "DatetimePicker"
+                    },
+                    "width": 2
+                },
+                {
+                    "type": "NumberRange",
+                    "width": 1,
+                    "numberFrom": {
+                        "type": "Input",
+                        "label": "Allocation payment amount from",
+                        "value": {
+                            "$ref": "#/properties/request/properties/data/properties/criteria/properties/payAmountFrom"
+                        }
+                    },
+                    "numberTo": {
+                        "type": "Input",
+                        "label": "Allocation payment amount to",
+                        "value": {
+                            "$ref": "#/properties/request/properties/data/properties/criteria/properties/payAmountTo"
+                        }
+                    }
+                },
+                {
+                    "type": "Component",
+                    "name": "CurrencyCodeDropdown",
+                    "value": {
+                        "$ref": "#/properties/request/properties/data/properties/criteria/properties/currencyCode"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "Number",
+                    "useGroupDelimiter": false,
+                    "decimalPlaces": 0,
+                    "label": "Bank statement item id",
+                    "value": {
+                        "$ref": "#/properties/request/properties/data/properties/criteria/properties/bankStatementItemId"
+                    },
+                    "width": 1
+                },
+                {
+                    "type": "Input",
+                    "label": "Bank statement item no",
+                    "value": {
+                        "$ref": "#/properties/request/properties/data/properties/criteria/properties/bankStatementItemNo"
+                    },
+                    "width": 1
+                },
+                {
+                    "type": "Component",
+                    "name": "ProductCode",
+                    "value": {
+                        "$ref": "#/properties/request/properties/data/properties/criteria/properties/productCode"
+                    }
+                },
+                {
+                    "type": "Input",
+                    "label": "Is not cancelled",
+                    "value": {
+                        "$ref": "#/properties/request/properties/data/properties/criteria/properties/isNotCancelled"
+                    },
+                    "width": 1
+                }
+            ]
+        }
+    ]
+}

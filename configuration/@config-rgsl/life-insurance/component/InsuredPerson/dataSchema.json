@@ -1,0 +1,25 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "Life Insurance",
+    "description": "Data schema describing Insured Person",
+    "type": "object",
+    "additionalProperties": false,
+    "aiValidation": {
+        "rule": "validateInsuredPerson"
+    },
+    "properties": {
+        "partyData": {
+            "$ref": "component:PartyLookUpSearch"
+        },
+        "isPolicyHolder": {
+            "type": "boolean",
+            "aiTitle": "isPolicyHolder"
+        },
+        "participantType": {
+            "type": "string"
+        },
+        "sportsmanBookNumber": {
+            "type": "string"
+        }
+    }
+}

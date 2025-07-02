@@ -1,0 +1,31 @@
+{
+    "entityType": "UniversalDocument",
+    "condition": {
+        "events": [
+            "Created",
+            "StatusChanged"
+        ],
+        "configuration": {
+            "names": [],
+            "dimensions": {
+                "universalDocumentType": [
+                    "LifeInsuranceAttachmentVerification"
+                ]
+            }
+        }
+    },
+    "sinks": [
+        {
+            "name": "Verification",
+            "database": {
+                "tables": [
+                    "PAS_IMPL.VERIFICATION_HUB",
+                    "PAS_IMPL.VERIFICATION_SAT",
+                    "PAS_IMPL.POLICY_VERIFICATION_LINK",
+                    "PAS_IMPL.VERIFICATION_ERROR_SAT"
+                ]
+            }
+        }
+    ],
+    "version": "1"
+}

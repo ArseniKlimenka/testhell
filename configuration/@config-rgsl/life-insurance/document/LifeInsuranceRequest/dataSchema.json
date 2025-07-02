@@ -1,0 +1,270 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema",
+    "type": "object",
+    "additionalProperties": false,
+    "aiDataEnrichment": [
+        {
+            "name": "SetOperationsUsername"
+        },
+        {
+            "name": "SetSellerUsername"
+        },
+        {
+            "name": "GetInvestmentEndDate",
+            "dataSource": "GetContractInvestmentDataDataSource"
+        }
+    ],
+    "aiValidation": {
+        "rule": "validationLifeInsuranceRequest"
+    },
+    "aiAudit": {
+        "scope": "General"
+    },
+    "properties": {
+        "contract": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "configurationName": {
+                    "type": "string"
+                },
+                "number": {
+                    "type": "string"
+                },
+                "lastAmendmentNumber": {
+                    "type": "string"
+                },
+                "isAmendmentsOnPolicy": {
+                    "type": "boolean",
+                    "aiTitle": "isAmendmentsOnPolicy"
+                },
+                "partnerBusinessCode": {
+                    "type": "string"
+                },
+                "stateCode": {
+                    "type": "string"
+                },
+                "issueDate": {
+                    "type": "string",
+                    "aiFormat": "date"
+                },
+                "startDate": {
+                    "type": "string",
+                    "aiFormat": "date"
+                },
+                "endDate": {
+                    "type": "string",
+                    "aiFormat": "date"
+                },
+                "productCode": {
+                    "type": "string",
+                    "aiTitle": "productCode"
+                },
+                "productGroup": {
+                    "type": "string",
+                    "aiTitle": "productGroup"
+                },
+                "percentRateImpact": {
+                    "type": "boolean",
+                    "aiTitle": "percentRateImpact"
+                },
+                "partner": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+                        "partnerCode": {
+                            "type": "string"
+                        },
+                        "partnerDescription": {
+                            "type": "string"
+                        },
+                        "partnerShortDescription": {
+                            "type": "string"
+                        },
+                        "partnerBusinessCode": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "createdFinAmendmentNumber": {
+                    "type": "string"
+                },
+                "createdNonFinAmendmentNumber": {
+                    "type": "string"
+                },
+                "createdPolicyHolderChangeAmendmentNumber": {
+                    "type": "string"
+                },
+                "investmentEndDate": {
+                    "type": "string",
+                    "aiFormat": "date"
+                },
+                "assets": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+                        "netAssetsAmount": {
+                            "type": "number"
+                        }
+                    }
+                }
+            }
+        },
+        "amountWithAllRisks": {
+            "type": "number"
+        },
+        "holder": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "fullName": {
+                    "type": "string"
+                },
+                "partyCode": {
+                    "type": "string"
+                }
+            }
+        },
+        "typeOfRequest": {
+            "type": "string",
+            "enum": [
+                "Cancellation",
+                "Modification"
+            ]
+        },
+        "registrationDate": {
+            "type": "string",
+            "aiFormat": "date"
+        },
+        "coolOffPeriodEndSyncWithCalendar": {
+            "type": "string",
+            "aiFormat": "date"
+        },
+        "issueDate": {
+            "type": "string",
+            "aiFormat": "date"
+        },
+        "receivedDate": {
+            "type": "string",
+            "aiFormat": "date"
+        },
+        "applicantType": {
+            "$ref": "component:ApplicantType"
+        },
+        "applicant": {
+            "$ref": "component:Applicant"
+        },
+        "receiveMethod": {
+            "$ref": "component:StatementReceiveMethod",
+            "aiTitle": "receiveMethod"
+        },
+        "amendmentReason": {
+            "type": "string",
+            "enum": [
+                "byClientCoolOff",
+                "creditRepayment",
+                "byClientNonCoolOff"
+            ]
+        },
+        "returnForRevisionReason": {
+            "type": "string",
+            "aiTitle": "returnForRevisionReason"
+        },
+        "informationLetterNumber": {
+            "type": "string",
+            "aiTitle": "informationLetterNumber"
+        },
+        "sellerUsername": {
+            "type": "string",
+            "aiTitle": "sellerUsername"
+        },
+        "operationsUsername": {
+            "type": "string",
+            "aiTitle": "operationsUsername"
+        },
+        "bankAccount": {
+            "$ref": "component:BankAccount"
+        },
+        "bankAccountsArray": {
+            "$ref": "component:BankAccounts"
+        },
+        "changeSubtype": {
+            "type": "array",
+            "items": {
+                "type": "string",
+                "enum": [
+                    "FinancialChange",
+                    "NonFinancialChange"
+                ]
+            }
+        },
+        "changeClass": {
+            "type": "array",
+            "items": {
+                "type": "string",
+                "enum": [
+                    "policyHolderPersonalDataEdit",
+                    "insuredPersonPersonalDataEdit",
+                    "beneficiaryEdit",
+                    "beneficiarySelection",
+                    "insuredSumAndPaymentEdit",
+                    "insuranceTermEdit",
+                    "riskEdit",
+                    "paymentPeriodTypeEdit",
+                    "reduction",
+                    "noteEdit",
+                    "allowPaymentStateChange",
+                    "policyHolderChange",
+                    "financialVacations",
+                    "paymentPlanEdit",
+                    "removeOrAddInsuredPerson",
+                    "investmentParametersEdit",
+                    "didPayment",
+                    "additionalIncome"
+                ]
+            }
+        },
+        "changeType": {
+            "$ref": "component:PersonalDataChangeTypes"
+        },
+        "signatureForm": {
+            "$ref": "component:SignatureFormTypes"
+        },
+        "risks": {
+            "$ref": "component:Risks"
+        },
+        "equityDidPayment": {
+            "$ref": "component:EquityDidPayment"
+        },
+        "equityStrategies": {
+            "$ref": "component:EquityStrategies"
+        },
+        "initiator": {
+            "type": "string",
+            "enum": [
+                "insurer",
+                "applicant"
+            ]
+        },
+        "changeReason": {
+            "type": "string",
+            "enum": [
+                "bugFix",
+                "decision",
+                "other"
+            ]
+        },
+        "attachmentsPackage": {
+            "$ref": "component:UniversalDocumentAttachmentsPackage"
+        },
+        "technicalInformation": {
+            "$ref": "component:RequestTechnicalInformation"
+        },
+        "paymentCalculation": {
+            "$ref": "component:LifeInsurancePaymentCalculation"
+        },
+        "recipient": {
+            "$ref": "component:Recipient"
+        }
+    }
+}

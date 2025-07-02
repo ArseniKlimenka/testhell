@@ -1,0 +1,165 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "description": "Schema describing work calendar",
+    "type": "object",
+    "additionalProperties": true,
+    "required": [
+        "name"
+    ],
+    "aiValidation": {
+        "rule": "validateTimeZone"
+    },
+    "properties": {
+        "name": {
+            "type": "string",
+            "aiTitle": "Name",
+            "description": "Work calendar name"
+        },
+        "timeZone": {
+            "aiTitle": "Time zone",
+            "$ref": "component:TimeZone",
+            "description": "Time zone"
+        },
+        "applicationUserId": {
+            "type": "string",
+            "aiTitle": "Application user",
+            "description": "User calendar is related to specific application user"
+        },
+        "parentCalendarCode": {
+            "type": "string",
+            "aiTitle": "Parent calendar",
+            "description": "Parent calendar code"
+        },
+        "parentCalendarName": {
+            "type": "string",
+            "aiTitle": "Parent calendar name",
+            "description": "Parent calendar name"
+        },
+        "rules": {
+            "type": "array",
+            "description": "List of calendar rules",
+            "items": {
+                "type": "object",
+                "required": [
+                    "ruleLevel",
+                    "description",
+                    "repetition"
+                ],
+                "aiValidation": {
+                    "rule": "validateWorkHours"
+                },
+                "properties": {
+                    "ruleLevel": {
+                        "type": "string",
+                        "aiTitle": "Rule level",
+                        "description": "Level of the rule",
+                        "enum": [
+                            "general",
+                            "exception"
+                        ]
+                    },
+                    "description": {
+                        "type": "string",
+                        "aiTitle": "Rule description",
+                        "description": "Rule description"
+                    },
+                    "sourceCalendarCode": {
+                        "type": "string",
+                        "aiTitle": "Source calendar",
+                        "description": "From which calendar was rule inherited"
+                    },
+                    "isWork": {
+                        "type": "boolean",
+                        "aiTitle": "Workday",
+                        "description": "TRUE if user is that time on work. FALSE if user is that time out of work"
+                    },
+                    "dateFrom": {
+                        "type": "string",
+                        "aiTitle": "Date from",
+                        "aiFormat": "date",
+                        "description": "From which date rule is valid from"
+                    },
+                    "dateTo": {
+                        "type": "string",
+                        "aiTitle": "Date to",
+                        "aiFormat": "date",
+                        "description": "To which date rule is valid to"
+                    },
+                    "timeFrom": {
+                        "type": "string",
+                        "aiTitle": "Time from",
+                        "aiFormat": "time",
+                        "description": "From what time on inside date interval is rule valid"
+                    },
+                    "timeTo": {
+                        "type": "string",
+                        "aiTitle": "Time to",
+                        "aiFormat": "time",
+                        "description": "To what time inside date interval is rule valid"
+                    },
+                    "capacity": {
+                        "type": "number",
+                        "aiTitle": "Capacity",
+                        "description": "Duration of the work in hours",
+                        "minimum": 0
+                    },
+                    "repetition": {
+                        "type": "object",
+                        "required": [
+                            "pattern"
+                        ],
+                        "aiValidation": {
+                            "rule": "validateRepetition"
+                        },
+                        "properties": {
+                            "pattern": {
+                                "type": "string",
+                                "aiTitle": "Repeat pattern",
+                                "description": "Pattern of repetition of the rule",
+                                "enum": [
+                                    "daily",
+                                    "weekly",
+                                    "yearly"
+                                ],
+                                "ai-enum-descriptions": {
+                                    "daily": "RepetitionPattern@daily",
+                                    "weekly": "RepetitionPattern@weekly",
+                                    "yearly": "RepetitionPattern@yearly"
+                                }
+                            },
+                            "dayOfWeek": {
+                                "type": "string",
+                                "aiTitle": "Day of week",
+                                "description": "Is used in combination with pattern weekly to specify day of the week",
+                                "enum": [
+                                    "monday",
+                                    "tuesday",
+                                    "wednesday",
+                                    "thursday",
+                                    "friday",
+                                    "saturday",
+                                    "sunday"
+                                ],
+                                "ai-enum-descriptions": {
+                                    "monday": "DayOfWeek@monday",
+                                    "tuesday": "DayOfWeek@tuesday",
+                                    "wednesday": "DayOfWeek@wednesday",
+                                    "thursday": "DayOfWeek@thursday",
+                                    "friday": "DayOfWeek@friday",
+                                    "saturday": "DayOfWeek@saturday",
+                                    "sunday": "DayOfWeek@sunday"
+                                }
+                            },
+                            "eventDate": {
+                                "type": "string",
+                                "aiFormat": "date",
+                                "aiTitle": "Event date",
+                                "description": "Date of the event related for example to yearly pattern"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

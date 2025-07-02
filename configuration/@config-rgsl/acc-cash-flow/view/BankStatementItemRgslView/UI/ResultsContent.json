@@ -1,0 +1,514 @@
+{
+    "type": "Group",
+    "elements": [
+        {
+            "type": "DataGrid",
+            "customCSSStyle":{
+                "--data-grid-ai-grid-buttons-text-align": "left"
+            },
+            "value": {
+                "$ref": "#/properties/response/properties/data"
+            },
+            "mode": "DataSource",
+            "pagination": {
+                "mode": "Regular",
+                "pageSizes": [
+                    5,
+                    10,
+                    15
+                ]
+            },
+            "selection": {
+                "mode": "Multi",
+                "enableRowSelection": true,
+                "showCheckBox": true,
+                "onSelectionChanged": [
+                    {
+                        "commandType": "raiseEvent",
+                        "eventName": "Selected"
+                    }
+                ]
+            },
+            "height": "None",
+            "columns": [
+                {
+                    "sortable": true,
+                    "title": "Id",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "template": "{{expr bankStatementItemId 'i::false'}}",
+                        "value": {
+                            "$ref": "#/properties/resultData"
+                        }
+                    },
+                    "filter": {
+                        "content": {
+                            "type": "Number",
+                            "useGroupDelimiter": false,
+                            "decimalPlaces": 0,
+                            "value": {
+                                "$ref": "#/properties/request/properties/data/properties/criteria/properties/bankStatementItemId"
+                            },
+                            "width": 2
+                        }
+                    },
+                    "name": "bankStatementItemId"
+                },
+                {
+                    "sortable": true,
+                    "title": "BSI No",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/bankStatementItemNo"
+                        }
+                    },
+                    "filter": {
+                        "content": {
+                            "type": "Input",
+                            "label": "BSI No",
+                            "value": {
+                                "$ref": "#/properties/request/properties/data/properties/criteria/properties/bankStatementItemNo"
+                            },
+                            "width": 1
+                        }
+                    },
+                    "name": "bankStatementItemNo"
+                },
+                {
+                    "title": "Description",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/description"
+                        }
+                    },
+                    "filter": {
+                        "content": {
+                            "type": "Input",
+                            "label": "Description",
+                            "value": {
+                                "$ref": "#/properties/request/properties/data/properties/criteria/properties/description"
+                            },
+                            "width": 1
+                        }
+                    },
+                    "name": "description"
+                },
+                {
+                    "title": "Reference numbers",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/referenceNumbers"
+                        }
+                    },
+                    "filter": {
+                        "content": {
+                            "type": "Input",
+                            "label": "Description",
+                            "value": {
+                                "$ref": "#/properties/request/properties/data/properties/criteria/properties/referenceNo"
+                            },
+                            "width": 1
+                        }
+                    },
+                    "name": "referenceNumbers"
+                },
+                {
+                    "sortable": true,
+                    "title": "Transaction date",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "template": "{{expr transactionDate 'd'}}",
+                        "value": {
+                            "$ref": "#/properties/resultData"
+                        }
+                    },
+                    "filter": {
+                        "content": {
+                            "type": "Input",
+                            "control": "DateRange",
+                            "dateFrom": {
+                                "type": "Input",
+                                "label": "Transaction date from",
+                                "width": 1,
+                                "value": {
+                                    "$ref": "#/properties/request/properties/data/properties/criteria/properties/transactionDateFrom"
+                                },
+                                "control": "DatetimePicker"
+                            },
+                            "dateTo": {
+                                "type": "Input",
+                                "label": "Transaction date to",
+                                "width": 1,
+                                "value": {
+                                    "$ref": "#/properties/request/properties/data/properties/criteria/properties/transactionDateTo"
+                                },
+                                "control": "DatetimePicker"
+                            },
+                            "width": 2
+                        }
+                    },
+                    "name": "transactionDate"
+                },
+                {
+                    "sortable": true,
+                    "title": "Amount",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "template": "{{#style 'right'}}{{expr amount 'n:2'}}{{/style}}",
+                        "value": {
+                            "$ref": "#/properties/resultData"
+                        }
+                    },
+                    "filter": {
+                        "content": {
+                            "type": "NumberRange",
+                            "width": 1,
+                            "numberFrom": {
+                                "type": "Input",
+                                "label": "Amount from",
+                                "value": {
+                                    "$ref": "#/properties/request/properties/data/properties/criteria/properties/amountFrom"
+                                }
+                            },
+                            "numberTo": {
+                                "type": "Input",
+                                "label": "Amount to",
+                                "value": {
+                                    "$ref": "#/properties/request/properties/data/properties/criteria/properties/amountTo"
+                                }
+                            }
+                        }
+                    },
+                    "name": "amount"
+                },
+                {
+                    "title": "Currency",
+                    "sortable": true,
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/currencyCode"
+                        }
+                    },
+                    "filter": {
+                        "content": {
+                            "type": "Component",
+                            "name": "CurrencyCodeDropdown",
+                            "value": {
+                                "$ref": "#/properties/request/properties/data/properties/criteria/properties/currencyCode"
+                            }
+                        }
+                    },
+                    "name": "currency"
+                },
+                {
+                    "title": "Status",
+                    "sortable": true,
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/paymentStatusId"
+                        }
+                    },
+                    "filter": {
+                        "content": {
+                            "type": "Dropdown",
+                            "elementId": "paymentStatusIds2",
+                            "label": "Payment statuses",
+                            "multiple": true,
+                            "value": {
+                                "$ref": "#/properties/request/properties/data/properties/criteria/properties/paymentStatusIds"
+                            },
+                            "width": 1
+                        }
+                    },
+                    "name": "status"
+                },
+                {
+                    "sortable": false,
+                    "title": "HasRefunds",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "template": "{{#if hasRefunds '===' 'true'}}Да{{else}}Нет{{/if}}",
+                        "value": {
+                            "$ref": "#/properties/resultData"
+                        }
+                    },
+                    "filter": {
+                        "content": {
+                            "type": "Input",
+                            "label": "Has refunds",
+                            "value": {
+                                "$ref": "#/properties/request/properties/data/properties/criteria/properties/HasRefunds"
+                            },
+                            "width": 1
+                        }
+                    },
+                    "name": "hasRefunds"
+                },
+                {
+                    "title": "Open amount",
+                    "sortable": false,
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/openAmount"
+                        }
+                    },
+                    "filter": {
+                        "content": {
+                            "type": "NumberRange",
+                            "width": 1,
+                            "numberFrom": {
+                                "type": "Input",
+                                "label": "Open amount from",
+                                "value": {
+                                    "$ref": "#/properties/request/properties/data/properties/criteria/properties/openAmountFrom"
+                                }
+                            },
+                            "numberTo": {
+                                "type": "Input",
+                                "label": "Open amount to",
+                                "value": {
+                                    "$ref": "#/properties/request/properties/data/properties/criteria/properties/openAmountTo"
+                                }
+                            }
+                        }
+                    },
+                    "name": "openAmount"
+                },
+                {
+                    "title": "Debtor",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/debtorName"
+                        }
+                    },
+                    "filter": {
+                        "content": {
+                            "type": "Input",
+                            "label": "Debtor name",
+                            "value": {
+                                "$ref": "#/properties/request/properties/data/properties/criteria/properties/debtorName"
+                            },
+                            "width": 1
+                        }
+                    },
+                    "name": "debtor"
+                },
+                {
+                    "title": "Source",
+                    "sortable": true,
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/paymentSourceId"
+                        }
+                    },
+                    "filter": {
+                        "content": {
+                            "type": "Input",
+                            "elementId": "paymentSourceIds2",
+                            "multiple": true,
+                            "control": "Dropdown",
+                            "label": "Payment sources",
+                            "value": {
+                                "$ref": "#/properties/request/properties/data/properties/criteria/properties/paymentSourceIds"
+                            },
+                            "width": 1
+                        }
+                    },
+                    "name": "source"
+                },
+                {
+                    "title": "Direction",
+                    "sortable": true,
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/direction"
+                        }
+                    },
+                    "filter": {
+                        "content": {
+                            "type": "Input",
+                            "elementId": "direction2",
+                            "multiple": false,
+                            "control": "Dropdown",
+                            "label": "Direction",
+                            "value": {
+                                "$ref": "#/properties/request/properties/data/properties/criteria/properties/direction"
+                            },
+                            "width": 1
+                        }
+                    },
+                    "name": "direction"
+                },
+                {
+                    "title": "Is registry",
+                    "sortable": true,
+                    "cellContent": {
+                        "type": "Input",
+                        "readOnly": true,
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/isRegistry"
+                        }
+                    },
+                    "filter": {
+                        "content": {
+                            "type": "ThreeState",
+                            "elementId": "isRegistry2",
+                            "label": "IsRegistry",
+                            "value": {
+                                "$ref": "#/properties/request/properties/data/properties/criteria/properties/isRegistry"
+                            },
+                            "width": 1
+                        }
+                    },
+                    "name": "isRegistry"
+                },
+                {
+                    "title": "Is acquiring",
+                    "sortable": true,
+                    "cellContent": {
+                        "type": "Input",
+                        "readOnly": true,
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/isAcquiring"
+                        }
+                    },
+                    "filter": {
+                        "content": {
+                            "type": "ThreeState",
+                            "elementId": "isAcquiring2",
+                            "label": "Is acquiring",
+                            "value": {
+                                "$ref": "#/properties/request/properties/data/properties/criteria/properties/isAcquiring"
+                            },
+                            "width": 1
+                        }
+                    },
+                    "name": "isAcquiring"
+                },
+                {
+                    "title": "Segment",
+                    "sortable": true,
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/segment"
+                        }
+                    },
+                    "filter": {
+                        "content": {
+                            "type": "Input",
+                            "label": "Segment",
+                            "value": {
+                                "$ref": "#/properties/request/properties/data/properties/criteria/properties/segment"
+                            },
+                            "width": 1
+                        }
+                    },
+                    "name": "segment"
+                },
+                {
+                    "title": "RegistryFileFormat",
+                    "sortable": true,
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/registryFileFormat"
+                        }
+                    },
+                    "filter": {
+                        "content": {
+                            "type": "Input",
+                            "multiple": false,
+                            "control": "Dropdown",
+                            "label": "RegistryFileFormat",
+                            "value": {
+                                "$ref": "#/properties/request/properties/data/properties/criteria/properties/registryFileFormat"
+                            },
+                            "width": 1
+                        }
+                    },
+                    "name": "registryFileFormat"
+                },
+                {
+                    "title": "RgslGuid",
+                    "sortable": true,
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/rgslGuid"
+                        }
+                    },
+                    "filter": {
+                        "content": {
+                            "type": "Input",
+                            "label": "RgslGuid",
+                            "value": {
+                                "$ref": "#/properties/request/properties/data/properties/criteria/properties/rgslGuid"
+                            },
+                            "width": 1
+                        }
+                    },
+                    "name": "rgslGuid"
+                },
+                {
+                    "sortable": true,
+                    "title": "Create date",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "template": "{{expr createDate 'd'}}",
+                        "value": {
+                            "$ref": "#/properties/resultData"
+                        }
+                    },
+                    "filter": {
+                        "content": {
+                            "type": "Input",
+                            "control": "DateRange",
+                            "dateFrom": {
+                                "type": "Input",
+                                "label": "Create date from",
+                                "value": {
+                                    "$ref": "#/properties/request/properties/data/properties/criteria/properties/createDateFrom"
+                                },
+                                "control": "DatetimePicker"
+                            },
+                            "dateTo": {
+                                "type": "Input",
+                                "label": "Create date to",
+                                "value": {
+                                    "$ref": "#/properties/request/properties/data/properties/criteria/properties/createDateTo"
+                                },
+                                "control": "DatetimePicker"
+                            }
+                        }
+                    },
+                    "name": "createDate"
+                }
+            ],
+            "elementId": "TableViewId",
+            "actions": [
+                "Details"
+            ],
+            "detailsTemplates": {
+                "view": {
+                    "content": {
+                        "type": "Component",
+                        "name": "BankStatementItemRgslGridDetails",
+                        "value": {
+                            "$ref": "#/properties/resultData"
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}

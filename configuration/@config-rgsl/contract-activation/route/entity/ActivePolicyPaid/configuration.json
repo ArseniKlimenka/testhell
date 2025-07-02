@@ -1,0 +1,35 @@
+{
+    "entityType": "Contract",
+    "version": "1",
+    "condition": {
+        "events": [
+            "StatusChanged"
+        ],
+        "configuration": {
+            "dimensions": {
+                "contractType": [
+                    "Policy"
+                ]
+            }
+        },
+        "documentStates": [
+            "Activated"
+        ]
+    },
+    "allowMultipleTransactions": true,
+    "executionOrderWeight": 10,
+    "sinks": [
+        {
+            "ref": "PostPremiumIncreaseTransactionsSinkGroup"
+        },
+        {
+            "ref": "RevaluationSinkGroup"
+        },
+        {
+            "ref": "CalculateInvoicedCommissionSinkGroup"
+        },
+        {
+            "ref": "PendingPaymentsSinkGroup"
+        }
+    ]
+}

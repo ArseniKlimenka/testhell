@@ -1,0 +1,82 @@
+{
+    "type": "Group",
+    "width": 12,
+    "elements": [
+        {
+            "type": "Group",
+            "width": 12,
+            "elements": [
+                {
+                    "type": "DatetimePicker",
+                    "label": "conclusionDate",
+                    "value": {
+                        "$ref": "#/properties/conclusionDate"
+                    },
+                    "width": 3,
+                    "rule": {
+                        "effect": "DISABLE_INITIAL",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "conclusionDateReadOnly",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "type": "Input",
+                    "control": "DateRange",
+                    "dateFrom": {
+                        "type": "Input",
+                        "label": "startDate",
+                        "width": 1,
+                        "value": {
+                            "$ref": "#/properties/startDate"
+                        },
+                        "control": "DatetimePicker",
+                        "rule": {
+                            "effect": "DISABLE_INITIAL",
+                            "condition": {
+                                "type": "FUNC",
+                                "ruleFunction": "startDateReadOnly",
+                                "value": [
+                                    {
+                                        "$ref": "#"
+                                    }
+                                ]
+                            }
+                        },
+                        "onValueChanged": [
+                            {
+                                "commandType": "executeAction",
+                                "actionName": "onStartDateChanged"
+                            }
+                        ]
+                    },
+                    "dateTo": {
+                        "type": "Input",
+                        "label": "endDate",
+                        "width": 1,
+                        "value": {
+                            "$ref": "#/properties/endDate"
+                        },
+                        "control": "DatetimePicker"
+                    },
+                    "width": 6
+                },
+                {
+                    "type": "DatetimePicker",
+                    "label": "cancellationDate",
+                    "value": {
+                        "$ref": "#/properties/cancellationDate"
+                    },
+                    "readOnly": true,
+                    "width": 3
+                }
+            ]
+        }
+    ]
+}

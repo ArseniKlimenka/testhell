@@ -1,0 +1,35 @@
+{
+    "entityType": "UniversalDocument",
+    "condition": {
+        "events": [
+            "StatusChanged"
+        ],
+        "configuration": {
+            "names": [
+                "EndowmentInquiry"
+            ]
+        },
+        "documentStates": [
+            "Issued",
+            "Rejected",
+            "Cancelled"
+        ]
+    },
+    "sinks": [
+        {
+            "name": "GetExistingInquiries",
+            "fetch": {
+                "configuration": {
+                    "name": "EndowmentInquiriesDataSource"
+                }
+            }
+        },
+        {
+            "name": "UpdateEndowmentState",
+            "documentTransition": {
+                "transition": {}
+            }
+        }
+    ],
+    "version": "1"
+}

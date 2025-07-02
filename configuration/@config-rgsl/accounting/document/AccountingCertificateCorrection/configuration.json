@@ -1,0 +1,322 @@
+{
+    "entityType": "UniversalVersionedDocument",
+    "dimensions": {
+        "universalVersionedDocumentType": "AccountingCertificate"
+    },
+    "validFrom": "2000-01-01",
+    "ui": {
+        "layout": "VersionedDocumentLayoutDirtySave",
+        "composition": {
+            "MainContent": "MainContent",
+            "SummaryContent": "SummaryContent"
+        }
+    },
+    "states": [
+        {
+            "name": "Draft",
+            "actors": [
+                {
+                    "actor": "AccountingCertificateEditor",
+                    "uiSchema": "MainContent",
+                    "operations": [
+                        "Save"
+                    ],
+                    "relations": [],
+                    "transitions": [
+                        "Draft_to_Cancelled",
+                        "Draft_to_Checked"
+                    ]
+                },
+                {
+                    "actor": "AccountingCertificateViewer",
+                    "uiSchema": "MainContent",
+                    "operations": [],
+                    "relations": [],
+                    "transitions": []
+                },
+                {
+                    "actor": "AccountingCertificateAttachmentEditor",
+                    "uiSchema": "MainContent",
+                    "operations": [
+                        "Save"
+                    ],
+                    "relations": [],
+                    "transitions": [
+                        "Draft_to_Issued",
+                        "Draft_to_Cancelled"
+                    ]
+                },
+                {
+                    "actor": "System",
+                    "uiSchema": "MainContent",
+                    "operations": [
+                        "Save"
+                    ],
+                    "transitions": [
+                        "Draft_to_Issued_System",
+                        "Draft_to_Issued",
+                        "Draft_to_Cancelled",
+                        "Draft_to_Checked"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Checked",
+            "actors": [
+                {
+                    "actor": "AccountingCertificateEditor",
+                    "uiSchema": "MainContent",
+                    "operations": [],
+                    "relations": [],
+                    "transitions": [
+                        "Checked_to_Issued",
+                        "Checked_to_Draft",
+                        "Checked_to_Cancelled"
+                    ]
+                },
+                {
+                    "actor": "System",
+                    "uiSchema": "MainContent",
+                    "operations": [],
+                    "relations": [],
+                    "transitions": [
+                        "Checked_to_Issued",
+                        "Checked_to_Draft",
+                        "Checked_to_Cancelled"
+                    ]
+                },
+                {
+                    "actor": "AccountingCertificateAttachmentEditor",
+                    "uiSchema": "MainContent",
+                    "operations": [],
+                    "relations": [],
+                    "transitions": [
+                        "Checked_to_Issued",
+                        "Checked_to_Draft",
+                        "Checked_to_Cancelled"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Issued",
+            "actors": [
+                {
+                    "actor": "AccountingCertificateEditor",
+                    "uiSchema": "MainContent",
+                    "operations": [],
+                    "relations": [],
+                    "attachmentsRestrictions": [
+                        {
+                            "attachmentType": "taxDeductionCertificate",
+                            "permissions": [
+                                "Create",
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "taxDeductionCertificateDraft",
+                            "permissions": [
+                                "Create",
+                                "Read"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "actor": "AccountingCertificateViewer",
+                    "uiSchema": "MainContent",
+                    "operations": [],
+                    "relations": [],
+                    "attachmentsRestrictions": [
+                        {
+                            "attachmentType": "taxDeductionCertificate",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "taxDeductionCertificateDraft",
+                            "permissions": [
+                                "Read"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "actor": "AccountingCertificateAttachmentEditor",
+                    "uiSchema": "MainContent",
+                    "operations": [],
+                    "relations": [],
+                    "attachmentsRestrictions": [
+                        {
+                            "attachmentType": "taxDeductionCertificate",
+                            "permissions": [
+                                "Create",
+                                "Read",
+                                "Update",
+                                "Delete"
+                            ]
+                        },
+                        {
+                            "attachmentType": "taxDeductionCertificateDraft",
+                            "permissions": [
+                                "Create",
+                                "Read",
+                                "Update",
+                                "Delete"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "actor": "System",
+                    "uiSchema": "MainContent",
+                    "operations": [],
+                    "relations": [],
+                    "attachmentsRestrictions": [
+                        {
+                            "attachmentType": "taxDeductionCertificate",
+                            "permissions": [
+                                "Create",
+                                "Read",
+                                "Update",
+                                "Delete"
+                            ]
+                        },
+                        {
+                            "attachmentType": "taxDeductionCertificateDraft",
+                            "permissions": [
+                                "Create",
+                                "Read",
+                                "Update",
+                                "Delete"
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Cancelled",
+            "actors": [
+                {
+                    "actor": "AccountingCertificateEditor",
+                    "uiSchema": "MainContent",
+                    "operations": [],
+                    "relations": [],
+                    "transitions": [
+                        "Cancelled_to_Draft"
+                    ],
+                    "attachmentsRestrictions": [
+                        {
+                            "attachmentType": "taxDeductionCertificate",
+                            "permissions": [
+                                "Create",
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "taxDeductionCertificateDraft",
+                            "permissions": [
+                                "Create",
+                                "Read"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "actor": "AccountingCertificateViewer",
+                    "uiSchema": "MainContent",
+                    "operations": [],
+                    "relations": [],
+                    "attachmentsRestrictions": [
+                        {
+                            "attachmentType": "taxDeductionCertificate",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "taxDeductionCertificateDraft",
+                            "permissions": [
+                                "Read"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "actor": "AccountingCertificateAttachmentEditor",
+                    "uiSchema": "MainContent",
+                    "operations": [],
+                    "relations": [],
+                    "attachmentsRestrictions": [
+                        {
+                            "attachmentType": "taxDeductionCertificate",
+                            "permissions": [
+                                "Create",
+                                "Read",
+                                "Update",
+                                "Delete"
+                            ]
+                        },
+                        {
+                            "attachmentType": "taxDeductionCertificateDraft",
+                            "permissions": [
+                                "Create",
+                                "Read",
+                                "Update",
+                                "Delete"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "actor": "System",
+                    "uiSchema": "MainContent",
+                    "operations": [],
+                    "relations": [],
+                    "transitions": [
+                        "Cancelled_to_Draft"
+                    ],
+                    "attachmentsRestrictions": [
+                        {
+                            "attachmentType": "taxDeductionCertificate",
+                            "permissions": [
+                                "Create",
+                                "Read",
+                                "Update",
+                                "Delete"
+                            ]
+                        },
+                        {
+                            "attachmentType": "taxDeductionCertificateDraft",
+                            "permissions": [
+                                "Create",
+                                "Read",
+                                "Update",
+                                "Delete"
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "attachments": [
+        {
+            "attachmentType": "taxDeductionCertificate",
+            "flow": "Incoming"
+        },
+        {
+            "attachmentType": "other",
+            "flow": "Incoming"
+        },
+        {
+            "attachmentType": "taxDeductionCertificateDraft",
+            "flow": "Incoming"
+        }
+    ],
+    "version": "1"
+}

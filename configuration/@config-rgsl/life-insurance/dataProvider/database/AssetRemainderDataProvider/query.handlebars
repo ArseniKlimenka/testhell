@@ -1,0 +1,98 @@
+WITH
+    -- количество данного актива по котировкам на отчетную дату. Учитываются котировки в статусах Проект, На рассмотрении СК, Запрос информации, Согласована.
+    reservedForQuotesCte AS (
+        select ASSET_UNITS_COUNT as unitCount , ASSET_NUMBER as assetNumber, ROW_NUMBER() OVER (PARTITION BY qh.CONTRACT_NUMBER ORDER BY qs.LOAD_DATE DESC) AS rn
+        from PAS_IMPL.QUOTE_ASSET_SAT qas
+        join PAS_IMPL.QUOTE_HUB qh on qas.QUOTE_ASSET_HKEY = qh.QUOTE_HKEY
+        join PAS_IMPL.QUOTE_SAT qs on qs.QUOTE_HKEY = qh.QUOTE_HKEY
+        join PAS.CONTRACT c on c.CONTRACT_NUMBER = qh.CONTRACT_NUMBER
+        join CFG.PROCESS_STATE ps on ps.PROCESS_STATE_ID = c.STATE_ID
+        where ps.DESCRIPTION in ('Draft', 'OnReview', 'InfoRequest', 'Approved') and @reportDate >= qs.LOAD_DATE
+    ),
+
+    -- количество данного актива по договорам на отчетную дату. Учитываются договоры в статусах Проект, Подписан, Действует
+    reservedForPoliciesCte AS (
+        select ASSET_UNITS_COUNT as unitCount , ASSET_NUMBER as assetNumber, ROW_NUMBER() OVER (PARTITION BY qh.CONTRACT_NUMBER
+        ORDER BY psat.LOAD_DATE DESC) AS rn
+        from PAS_IMPL.POLICY_ASSET_SAT qas
+        join PAS_IMPL.POLICY_HUB qh on qas.POLICY_ASSET_HKEY = qh.POLICY_HKEY
+        join PAS_IMPL.POLICY_SAT psat on psat.POLICY_HKEY = qh.POLICY_HKEY
+        join PAS.CONTRACT c on c.CONTRACT_NUMBER = qh.CONTRACT_NUMBER
+        join CFG.PROCESS_STATE ps on ps.PROCESS_STATE_ID = c.STATE_ID
+        where ps.DESCRIPTION in ('Draft', 'Active', 'Activated') and @reportDate >= psat.LOAD_DATE
+    ),
+
+    -- количество данного актива по всем договорам в статусе действует на отчетную дату
+    reservedForActivatedPolicyCte AS (
+        select ASSET_UNITS_COUNT as unitCount , ASSET_NUMBER as assetNumber, ROW_NUMBER() OVER (PARTITION BY qh.CONTRACT_NUMBER
+        ORDER BY psat.LOAD_DATE DESC) AS rn
+        from PAS_IMPL.POLICY_ASSET_SAT qas
+        join PAS_IMPL.POLICY_HUB qh on qas.POLICY_ASSET_HKEY = qh.POLICY_HKEY
+        join PAS_IMPL.POLICY_SAT psat on psat.POLICY_HKEY = qh.POLICY_HKEY
+        join PAS.CONTRACT c on c.CONTRACT_NUMBER = qh.CONTRACT_NUMBER
+        join CFG.PROCESS_STATE ps on ps.PROCESS_STATE_ID = c.STATE_ID
+        where ps.DESCRIPTION in ('Activated')and @reportDate >= psat.LOAD_DATE
+    ),
+
+    -- количество данного актива по всем договорам в статусе действует, по которым идет период охлаждения
+    contractsInCooloffCte AS (
+        select ASSET_UNITS_COUNT as unitCount , ASSET_NUMBER as assetNumber, ROW_NUMBER() OVER (PARTITION BY qh.CONTRACT_NUMBER
+        ORDER BY psat.LOAD_DATE DESC) AS rn
+        from PAS_IMPL.POLICY_ASSET_SAT qas
+        join PAS_IMPL.POLICY_HUB qh on qas.POLICY_ASSET_HKEY = qh.POLICY_HKEY
+        join PAS_IMPL.POLICY_SAT psat on qh.POLICY_HKEY = psat.POLICY_HKEY
+        join PAS.CONTRACT c on c.CONTRACT_NUMBER = qh.CONTRACT_NUMBER
+        join CFG.PROCESS_STATE ps on ps.PROCESS_STATE_ID = c.STATE_ID
+        join BFX_IMPL.PRODUCT_CONF pc on pc.PRODUCT_CODE = psat.PRODUCT_CODE
+        where ps.DESCRIPTION in ('Activated') 
+            and @reportDate < DATEADD(day, pc.COOL_OFF_PERIOD_DAYS, psat.ISSUE_DATE) 
+            and pc.CONF_VERSION=(
+                select max(CONF_VERSION) 
+                    from BFX_IMPL.PRODUCT_CONF) 
+    ), 
+
+-- количество данного актива по всем договорам в статусе действует, по которым период охлаждения завершен 
+    contractsNotInCooloffCte AS ( 
+        select ASSET_UNITS_COUNT as unitCount , ASSET_NUMBER as assetNumber, ROW_NUMBER() OVER (PARTITION BY qh.CONTRACT_NUMBER ORDER BY psat.LOAD_DATE DESC) AS rn 
+        from PAS_IMPL.POLICY_ASSET_SAT qas 
+        join PAS_IMPL.POLICY_HUB qh on qas.POLICY_ASSET_HKEY=qh.POLICY_HKEY 
+        join PAS_IMPL.POLICY_SAT psat on qh.POLICY_HKEY=psat.POLICY_HKEY 
+        join PAS.CONTRACT c on c.CONTRACT_NUMBER=qh.CONTRACT_NUMBER join CFG.PROCESS_STATE ps on ps.PROCESS_STATE_ID=c.STATE_ID
+        join BFX_IMPL.PRODUCT_CONF pc on pc.PRODUCT_CODE=psat.PRODUCT_CODE
+        where ps.DESCRIPTION in ('Activated') 
+            and @reportDate>= DATEADD(day, pc.COOL_OFF_PERIOD_DAYS, psat.ISSUE_DATE) 
+            and pc.CONF_VERSION = (select max(CONF_VERSION)
+                                    from BFX_IMPL.PRODUCT_CONF)
+    )
+
+    select distinct ID_ISIN, ORIGINAL_DOCUMENT_NUMBER, ASSET_SIZE,
+            reservedForQuotes.ASSET_UNITS_COUNT as reservedForQuotesAssetUnitsCount ,
+            reservedForPolicies.ASSET_UNITS_COUNT as reservedForPoliciesAssetUnitsCount,
+            reservedForActivatedPolicy.ASSET_UNITS_COUNT as reservedForActivatedAssetUnitsCount,
+            contractsInCooloff.ASSET_UNITS_COUNT as contractsInCooloffAssetUnitsCount,
+            contractsNotInCooloff.ASSET_UNITS_COUNT as contractsNotInCooloffAssetUnitsCount,
+            @reportDate as reportDate
+    from PAS_IMPL.QUOTE_HUB qh
+    join PAS_IMPL.QUOTE_ASSET_SAT qas on qh.QUOTE_HKEY = qas.QUOTE_ASSET_HKEY
+    right join PAS_IMPL.ASSET_HUB ah on ah.ASSET_NUMBER = qas.ASSET_NUMBER
+    join PAS_IMPL.ASSET_SAT_LATEST asat on asat.ASSET_HKEY = ah.ASSET_HKEY
+
+    outer apply (select sum(cte.unitCount) as ASSET_UNITS_COUNT from reservedForQuotesCte cte where rn = 1 and
+    ah.ASSET_NUMBER = cte.assetNumber) reservedForQuotes
+
+    outer apply (select sum(cte.unitCount) as ASSET_UNITS_COUNT from reservedForPoliciesCte cte where rn = 1 and
+    ah.ASSET_NUMBER = cte.assetNumber) reservedForPolicies
+
+    outer apply (select sum(cte.unitCount) as ASSET_UNITS_COUNT from reservedForActivatedPolicyCte cte where rn = 1 and
+    ah.ASSET_NUMBER = cte.assetNumber) reservedForActivatedPolicy
+
+    outer apply (select sum(cte.unitCount) as ASSET_UNITS_COUNT from contractsInCooloffCte cte where rn = 1 and
+    ah.ASSET_NUMBER = cte.assetNumber) contractsInCooloff
+
+    outer apply (select sum(cte.unitCount) as ASSET_UNITS_COUNT from contractsNotInCooloffCte cte where rn = 1 and
+    ah.ASSET_NUMBER = cte.assetNumber) contractsNotInCooloff
+
+where STATE = 'Open' or 
+    (STATE = 'Closed' 
+        and (reservedForQuotes.ASSET_UNITS_COUNT > 0 or reservedForPolicies.ASSET_UNITS_COUNT > 0 or reservedForActivatedPolicy.ASSET_UNITS_COUNT > 0)
+        )

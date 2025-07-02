@@ -1,0 +1,94 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "Technical information for life insurance request",
+    "type": "object",
+    "additionalProperties": false,
+    "aiDataEnrichment": [
+        {
+            "name": "CheckPolicyStatus",
+            "dataSource": "GeneralContractSearchDataSource"
+        },
+        {
+            "name": "CheckPolicyAmendmentsStatus",
+            "dataSource": "ContractVersionsDataSource"
+        }
+    ],
+    "properties": {
+        "policyInCorrectStatus": {
+            "type": "boolean",
+            "aiTitle": "policyInCorrectStatus"
+        },
+        "policyAmendmentsInCorrectStatus": {
+            "type": "boolean",
+            "aiTitle": "policyAmendmentsInCorrectStatus"
+        },
+        "finAmendmentWasCreated": {
+            "type": "boolean"
+        },
+        "nonFinAmendmentWasCreated": {
+            "type": "boolean"
+        },
+        "finPolicyHolderAmendmentWasCreated": {
+            "type": "boolean"
+        },
+        "allAmendmentsCreated": {
+            "type": "boolean"
+        },
+        "duplicateCancelledRequestsNumbers": {
+            "type": "string"
+        },
+        "blockedAgentCancellation": {
+            "type": "boolean"
+        },
+        "allowToChangeInvestmentParametersEdit": {
+            "type": "boolean"
+        },
+        "duplicateCancelledRequests": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "requestNumber": {
+                        "type": "string"
+                    },
+                    "requestStateEn": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "newCancellationRequestAvailable": {
+            "type": "boolean"
+        },
+        "nonFinAmendmentNumber": {
+            "type": "string"
+        },
+        "finAmendmenNumber": {
+            "type": "string"
+        },
+        "finPolicyHolderAmendmentNumber": {
+            "type": "string"
+        },
+        "cancellationAmendmentNumber": {
+            "type": "string"
+        },
+        "createdFromPolicy": {
+            "type": "string"
+        },
+        "policyWasFound": {
+            "type": "boolean",
+            "aiTitle": "policyWasFound"
+        },
+        "amendmentBeneficiaryData": {
+            "type": "object",
+            "properties": {
+                "beneficiaryName": {
+                    "type": "string"
+                },
+                "beneficiaryDateOfBirth": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

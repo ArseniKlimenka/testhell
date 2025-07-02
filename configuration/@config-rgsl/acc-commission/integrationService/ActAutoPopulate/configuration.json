@@ -1,0 +1,99 @@
+{
+    "sinks": [
+        {
+            "name": "FetchAct",
+            "fetch": {
+                "configuration": {
+                    "name": "CommissionActRgslDataSource"
+                }
+            }
+        },
+        {
+            "name": "FetchVat",
+            "fetch": {
+                "configuration": {
+                    "name": "CommissionActGetVatRateRgslDataSource"
+                }
+            }
+        },
+        {
+            "name": "FetchPc",
+            "fetch": {
+                "configuration": {
+                    "name": "GetCommissionActAutoPopulationPcDataSource"
+                }
+            }
+        },
+        {
+            "name": "GetLocalCurrencyExchangeRate",
+            "class": {
+                "className": "Adacta.AdInsure.RGSL.Common.API.Shared.Services.IRgslCurrencyConverterService, Adacta.AdInsure.RGSL.Common.API",
+                "methodName": "Convert"
+            }
+        },
+        {
+            "name": "GetPolicyAaCommission",
+            "fetch": {
+                "configuration": {
+                    "name": "GetPolicyAaCommissionDataSource"
+                }
+            }
+        },
+        {
+            "name": "GenerateItems",
+            "class": {
+                "className": "Adacta.AdInsure.RGSL.Common.API.Shared.Services.ISequenceGeneratorRGSL, Adacta.AdInsure.RGSL.Common.API",
+                "methodName": "GenerateSequenceValues"
+            }
+        },
+        {
+            "name": "FillInstallmentAmounts",
+            "class": {
+                "className": "Adacta.AdInsure.RGSL.Accounting.API.Shared.Commission.Services.ICommissionActServiceApp, Adacta.AdInsure.RGSL.Accounting.API",
+                "methodName": "GetInstallmentAmounts"
+            }
+        },
+        {
+            "name": "FillInvoicedCommissions",
+            "class": {
+                "className": "Adacta.AdInsure.RGSL.Accounting.API.Shared.Commission.Services.ICommissionActServiceApp, Adacta.AdInsure.RGSL.Accounting.API",
+                "methodName": "GetInvoicedCommission"
+            }
+        },
+        {
+            "name": "UpdateItemStatusToNormal",
+            "class": {
+                "className": "Adacta.AdInsure.RGSL.Accounting.API.Shared.Commission.Services.ICommissionActServiceApp, Adacta.AdInsure.RGSL.Accounting.API",
+                "methodName": "UpdateItemStatus"
+            }
+        },
+        {
+            "name": "InsertActItem",
+            "class": {
+                "className": "Adacta.AdInsure.RGSL.Accounting.API.Shared.Commission.Services.ICommissionActServiceApp, Adacta.AdInsure.RGSL.Accounting.API",
+                "methodName": "InsertActItem"
+            }
+        },
+        {
+            "name": "InsertActItemPc",
+            "class": {
+                "className": "Adacta.AdInsure.RGSL.Accounting.API.Shared.Commission.Services.ICommissionActServiceApp, Adacta.AdInsure.RGSL.Accounting.API",
+                "methodName": "InsertActItemPc"
+            }
+        },
+        {
+            "name": "UpdateActHeader",
+            "class": {
+                "className": "Adacta.AdInsure.RGSL.Accounting.API.Shared.Commission.Services.ICommissionActServiceApp, Adacta.AdInsure.RGSL.Accounting.API",
+                "methodName": "UpdateActHeader"
+            }
+        },
+        {
+            "ref": "UpdateActItemJsonSinkGroup"
+        }
+    ],
+    "responses": [
+        200,
+        422
+    ]
+}

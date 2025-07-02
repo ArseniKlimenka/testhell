@@ -1,0 +1,325 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "properties": {
+        "id": {
+            "type": "string"
+        },
+        "number": {
+            "type": "string",
+            "aiTitle": "number"
+        },
+        "stateCode": {
+            "type": "string",
+            "aiTitle": "stateCode"
+        },
+        "stateCodeDescription": {
+            "type": "string",
+            "aiTitle": "stateCodeDescription"
+        },
+        "issueDate": {
+            "type": "string",
+            "aiFormat": "date",
+            "aiTitle": "issueDate"
+        },
+        "startDate": {
+            "type": "string",
+            "aiFormat": "date",
+            "aiTitle": "startDate"
+        },
+        "endDate": {
+            "type": "string",
+            "aiFormat": "date",
+            "aiTitle": "endDate"
+        },
+        "policyHolderName": {
+            "type": "string",
+            "aiTitle": "policyHolderName"
+        },
+        "insuredPersonName": {
+            "type": "string",
+            "aiTitle": "policyHolderName"
+        },
+        "productCode": {
+            "type": "string",
+            "aiTitle": "productCode"
+        },
+        "productDescription": {
+            "type": "string",
+            "aiTitle": "productDescription"
+        },
+        "productGroup": {
+            "type": "string",
+            "aiTitle": "productGroup"
+        },
+        "productGroupDescription": {
+            "type": "string",
+            "aiTitle": "productGroupDescription"
+        },
+        "contractType": {
+            "type": "string",
+            "aiTitle": "contractType"
+        },
+        "contractTypeDescription": {
+            "type": "string",
+            "aiTitle": "contractTypeDescription"
+        },
+        "paymentFrequency": {
+            "type": "string",
+            "aiTitle": "paymentFrequency"
+        },
+        "currencyCode": {
+            "type": "string",
+            "aiTitle": "currencyCode"
+        },
+        "amount": {
+            "type": "number",
+            "aiTitle": "amount"
+        },
+        "amountWithAllRisks": {
+            "type": "number",
+            "aiTitle": "amountWithAllRisks"
+        },
+        "initiatorName": {
+            "type": "string",
+            "aiTitle": "initiatorName"
+        },
+        "initiatorOrganisationUnitName": {
+            "type": "string",
+            "aiTitle": "initiatorOrganisationUnitName"
+        },
+        "partner": {
+            "type": "object",
+            "properties": {
+                "partnerCode": {
+                    "type": "string"
+                },
+                "partnerDescription": {
+                    "type": "string"
+                },
+                "partnerShortDescription": {
+                    "type": "string"
+                },
+                "partnerBusinessCode": {
+                    "type": "string"
+                }
+            }
+        },
+        "parties": {
+            "type": "object",
+            "properties": {
+                "holder": {
+                    "type": "object",
+                    "properties": {
+                        "personId": {
+                            "type": "string"
+                        },
+                        "personCode": {
+                            "type": "string"
+                        },
+                        "partyType": {
+                            "type": "string"
+                        },
+                        "fullName": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "insuredPerson": {
+                    "type": "object",
+                    "properties": {
+                        "personId": {
+                            "type": "string"
+                        },
+                        "personCode": {
+                            "type": "string"
+                        },
+                        "partyType": {
+                            "type": "string"
+                        },
+                        "fullName": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "items": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "currency": {
+                        "type": "string"
+                    },
+                    "attributes": {
+                        "type": "object",
+                        "properties": {
+                            "risks": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "riskCode": {
+                                            "type": "string"
+                                        },
+                                        "riskShortDescription": {
+                                            "type": "string"
+                                        },
+                                        "riskFullDescription": {
+                                            "type": "string"
+                                        },
+                                        "riskInsuredSum": {
+                                            "type": "number"
+                                        },
+                                        "risksGroup": {
+                                            "type": "string"
+                                        },
+                                        "riskInsuredSumByPeriod": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "insuredSum": {
+                                                        "type": "number"
+                                                    },
+                                                    "startDate": {
+                                                        "type": "string",
+                                                        "format": "date"
+                                                    },
+                                                    "endDate": {
+                                                        "type": "string",
+                                                        "format": "date"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "isReinvest": {
+            "type": "boolean",
+            "aiTitle": "isReinvest"
+        },
+        "issueFormCode": {
+            "type": "string",
+            "aiTitle": "issueFormCode"
+        },
+        "creditProgram": {
+            "type": "object",
+            "properties": {
+                "creditProgramId": {
+                    "type": "string"
+                },
+                "externalContractId": {
+                    "type": "string"
+                },
+                "percentRateImpact": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "insuranceRules": {
+            "type": "object",
+            "properties": {
+                "ruleCode": {
+                    "type": "string"
+                },
+                "ruleDescription": {
+                    "type": "string"
+                },
+                "ruleDate": {
+                    "type": "string",
+                    "aiFormat": "date"
+                }
+            }
+        },
+        "beneficiaries": {
+            "type": "object",
+            "properties": {
+                "beneficiaries": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "beneficiaryId": {
+                                "type": "string"
+                            },
+                            "partyFullName": {
+                                "type": "string"
+                            },
+                            "dateOfBirth": {
+                                "type": "string",
+                                "format": "date"
+                            },
+                            "share": {
+                                "type": "number"
+                            },
+                            "relationType": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                },
+                "isHeritors": {
+                    "type": "boolean"
+                },
+                "isNotHeritors": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "paymentFrequencyWithCode": {
+            "type": "object",
+            "properties": {
+                "paymentFrequencyCode": {
+                    "type": "string"
+                },
+                "paymentFrequencyDescription": {
+                    "type": "string"
+                }
+            }
+        },
+        "endowmentPaymentVariant": {
+            "type": "object",
+            "properties": {
+                "endowmentPaymentVariantCode": {
+                    "type": "string"
+                },
+                "endowmentPaymentVariantDescription": {
+                    "type": "string"
+                }
+            }
+        },
+        "productStrategyCode": {
+            "type": "string",
+            "aiTitle": "productStrategyCode"
+        },
+        "productStrategyDescription": {
+            "type": "string",
+            "aiTitle": "productStrategyDescription"
+        },
+        "insuranceTerms": {
+            "type": "number",
+            "aiTitle": "insuranceTerms"
+        },
+        "consent": {
+            "type": "object",
+            "properties": {
+                "consentToDataTransferingFNS": {
+                    "type": "boolean"
+                }
+            }
+        }
+    }
+}

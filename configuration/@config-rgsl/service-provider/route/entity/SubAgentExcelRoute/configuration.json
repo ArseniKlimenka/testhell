@@ -1,0 +1,29 @@
+{
+    "entityType": "ImportDocument",
+    "condition": {
+        "events": [
+            "StatusChanged"
+        ],
+        "configuration": {
+            "names": [
+                "SubAgentExcelImport"
+            ],
+            "dimensions": {}
+        },
+        "transitions": [
+            "StartImporting"
+        ]
+    },
+    "sinks": [
+        {
+            "name": "SubAgentExcel",
+            "etlService": {
+                "configuration": {
+                    "name": "SubAgentExcelETL",
+                    "version": "1"
+                }
+            }
+        }
+    ],
+    "version": "1"
+}

@@ -1,0 +1,168 @@
+{
+    "mappings": {
+        "dynamic": "strict",
+        "dynamic_templates": [
+            {
+                "additional_attributes_template": {
+                    "path_match": "additionalAttributes.*",
+                    "mapping": {
+                        "type": "object",
+                        "dynamic": "strict",
+                        "properties": {
+                            "valueCode": {
+                                "type": "keyword"
+                            },
+                            "value": {
+                                "type": "text"
+                            },
+                            "fullTextSearchableValue": {
+                                "type": "text",
+                                "copy_to": [
+                                    "body._summary"
+                                ]
+                            }
+                        }
+                    }
+                }
+            }
+        ],
+        "properties": {
+            "id": {
+                "type": "keyword"
+            },
+            "code": {
+                "type": "keyword",
+                "fields": {
+                    "as_int": {
+                    "type": "integer"
+                    }
+                },
+                "copy_to": [
+                    "body._summary"
+                ]
+            },
+            "metadata": {
+                "properties": {
+                    "createdOn": {
+                        "type": "date"
+                    },
+                    "createdBy": {
+                        "type": "keyword"
+                    },
+                    "createdByDisplayName": {
+                        "type": "keyword"
+                    },
+                    "updatedOn": {
+                        "type": "date"
+                    },
+                    "updatedBy": {
+                        "type": "keyword"
+                    },
+                    "recordVersion": {
+                        "type": "integer"
+                    },
+                    "entityType": {
+                        "type": "keyword"
+                    },
+                    "configuration": {
+                        "properties": {
+                            "name": {
+                                "type": "keyword"
+                            },
+                            "version": {
+                                "type": "keyword"
+                            },
+                            "dimension": {
+                                "type": "keyword"
+                            }
+                        }
+                    },
+                    "ownership": {
+                        "dynamic": "false",
+                        "properties": {
+                            "owner": {
+                                "type": "keyword"
+                            },
+                            "partyCode": {
+                                "type": "keyword"
+                            },
+                            "organisationUnit": {
+                                "type": "keyword"
+                            }
+                        }
+                    }
+                }
+            },
+            "body": {
+                "properties": {
+                    "_summary": {
+                        "type": "text"
+                    },
+                    "businessCode": {
+                        "type": "keyword",
+                        "copy_to": [
+                            "body._summary"
+                        ]
+                    },
+                    "partyId": {
+                        "type": "keyword",
+                        "copy_to": [
+                            "body._summary"
+                        ]
+                    },
+                    "partyCode": {
+                        "type": "keyword",
+                        "fields": {
+                            "as_int": {
+                            "type": "integer"
+                            }
+                        },
+                        "copy_to": [
+                            "body._summary"
+                        ]
+                    },
+                    "partyDisplayName": {
+                        "type": "keyword",
+                        "copy_to": [
+                            "body._summary"
+                        ]
+                    },
+                    "partyShortName": {
+                        "type": "keyword",
+                        "copy_to": [
+                            "body._summary"
+                        ]
+                    },
+                    "orgUnitCode": {
+                        "type": "keyword",
+                        "copy_to": [
+                            "body._summary"
+                        ]
+                    },
+                    "orgUnitName": {
+                        "type": "keyword",
+                        "copy_to": [
+                            "body._summary"
+                        ]
+                    },
+                    "isPersonalManager": {
+                        "type": "keyword",
+                        "copy_to": [
+                            "body._summary"
+                        ]
+                    },
+                    "sadNumber": {
+                        "type": "keyword",
+                        "copy_to": [
+                            "body._summary"
+                        ]
+                    },
+                    "additionalAttributes": {
+                        "type": "object",
+                        "dynamic": "true"
+                    }
+                }
+            }
+        }
+    }
+}

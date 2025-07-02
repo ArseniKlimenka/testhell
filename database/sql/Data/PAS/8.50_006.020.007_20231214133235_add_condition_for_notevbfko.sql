@@ -1,0 +1,4 @@
+  -- Добавление функции к риску Смерть НС
+  update BFX_IMPL.RISK_PRODUCT_RELATION
+  set CONDITIONS_FUNCTION = 'DNS36404NOTEV1BFKO'
+  where PRODUCT_CODE = 'NOTEV1BFKO' and RISK_CODE = 'DNS36404'

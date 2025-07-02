@@ -1,0 +1,66 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "object",
+    "properties": {
+        "criteria": {
+            "type": "object",
+            "properties": {
+                "inquiryCodeName": {
+                    "type": "string"
+                },
+                "inquiryNumber": {
+                    "type": "string"
+                },
+                "inquiryState": {
+                    "$ref": "component:InquiryState"
+                },
+                "inquiryCreatedFrom": {
+                    "type": "string",
+                    "aiFormat": "date"
+                },
+                "inquiryCreatedTo": {
+                    "type": "string",
+                    "aiFormat": "date"
+                },
+                "documentCodeName": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "component:InquiryCreatedFromDocumentType"
+                    }
+                },
+                "reasonCode": {
+                    "$ref": "component:InquiryReasonCode"
+                },
+                "documentNumber": {
+                    "type": "string"
+                },
+                "contractNumber": {
+                    "type": "string"
+                },
+                "holderCode": {
+                    "type": "string"
+                },
+                "departmentCodes": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "component:DepartmentCodes"
+                    }
+                },
+                "includedInRussianPostRegister": {
+                    "type": "boolean"
+                },
+                "russianPostRegisterInclusionDateFrom": {
+                    "type": "string",
+                    "aiFormat": "date"
+                },
+                "russianPostRegisterInclusionDateTo": {
+                    "type": "string",
+                    "aiFormat": "date"
+                }
+            }
+        },
+        "sort": {
+            "type": "array"
+        }
+    }
+}

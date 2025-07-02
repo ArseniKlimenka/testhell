@@ -1,0 +1,3 @@
+
+delete from bfx_impl.declaration_main where id = 'C50E54D4-1BC9-494E-BD5B-0AC03B1EB028'; insert into bfx_impl.declaration_main values ('C50E54D4-1BC9-494E-BD5B-0AC03B1EB028', 'IBAKVV5VTB', '2', '0CED5798-2B31-4BBF-A14D-2B555A0253BE', 'compliance', '1900-01-01', '2099-12-31');
+delete from bfx_impl.declaration_main where id = '7CF464FF-1BE2-4184-97DA-1B261295617D'; insert into bfx_impl.declaration_main values ('7CF464FF-1BE2-4184-97DA-1B261295617D', 'IBAKVP5VTB', '2', '0CED5798-2B31-4BBF-A14D-2B555A0253BE', 'compliance', '1900-01-01', '2099-12-31');

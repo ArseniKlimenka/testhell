@@ -1,0 +1,29 @@
+{
+    "entityType": "ImportDocument",
+    "condition": {
+        "events": [
+            "StatusChanged"
+        ],
+        "configuration": {
+            "names": [
+                "InvestmentProfitImport"
+            ],
+            "dimensions": {}
+        },
+        "transitions": [
+            "StartImporting"
+        ]
+    },
+    "sinks": [
+        {
+            "name": "InvestmentProfitExcelImport",
+            "etlService": {
+                "configuration": {
+                    "name": "InvestmentProfitImportEtlService",
+                    "version": "1"
+                }
+            }
+        }
+    ],
+    "version": "1"
+}

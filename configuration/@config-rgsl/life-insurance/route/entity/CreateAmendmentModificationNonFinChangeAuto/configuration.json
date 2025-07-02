@@ -1,0 +1,41 @@
+{
+    "entityType": "UniversalDocument",
+    "condition": {
+        "events": [
+            "StatusChanged"
+        ],
+        "configuration": {
+            "names": [
+                "LifeInsuranceRequest"
+            ]
+        },
+        "documentStates": [
+            "OnReview"
+        ]
+    },
+    "sinks": [
+        {
+            "name": "OnReviewToCreateAmendment",
+            "documentTransition": {
+                "transition": {}
+            }
+        },
+        {
+            "name": "CreateAmendmentToCreateNonFinancialAmendment",
+            "documentTransition": {
+                "transition": {}
+            }
+        }
+    ],
+    "errorSinks": [
+        {
+            "name": "WriteSinkError",
+            "database": {
+                "tables": [
+                    "BFX_IMPL.SINK_ERROR"
+                ]
+            }
+        }
+    ],
+    "version": "1"
+}

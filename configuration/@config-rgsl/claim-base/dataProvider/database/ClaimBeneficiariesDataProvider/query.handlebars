@@ -1,0 +1,11 @@
+﻿SELECT c.CLAIM_NUMBER,
+	   r.BENEFICIARY_PARTY_CODE,
+	   r.BENEFICIARY_REASON_CODE
+FROM CLM.CLAIM c
+CROSS APPLY OPENJSON(c.BODY,'$.claimBeneficiaries')
+    with  
+    (    
+        BENEFICIARY_PARTY_CODE NVARCHAR(50) N'lax $.partyCode',	 
+        BENEFICIARY_REASON_CODE NVARCHAR(50) N'lax $.beneficiaryReason.code'
+    ) r
+    WHERE c.CLAIM_NUMBER = @documentNumber

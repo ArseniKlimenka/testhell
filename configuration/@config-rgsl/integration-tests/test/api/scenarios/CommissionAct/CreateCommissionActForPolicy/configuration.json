@@ -1,0 +1,29 @@
+{
+    "description": "Create commission act and populate it with a policy",
+    "steps": [
+        {
+            "code": "CreateCommissionAct",
+            "description": "Create commission act",
+            "actor": "AdminCommissionAct",
+            "requests": [
+                {
+                    "code": "Body",
+                    "path": "./steps/01.createCommAct/act.json"
+                }
+            ],
+            "executor": {
+                "module": "./steps/01.createCommAct/executor.js",
+                "function": "executor"
+            }
+        },
+        {
+            "code": "PopulateCommissionAct",
+            "description": "Populate commission act",
+            "requests": [],
+            "executor": {
+                "module": "./steps/02.populateCommAct/executor.js",
+                "function": "executor"
+            }
+        }
+    ]
+}

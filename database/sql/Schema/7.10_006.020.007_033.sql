@@ -1,0 +1,55 @@
+alter table BFX_IMPL.CREDIT_PROGRAM add PROGRAM_VERSION nvarchar(500) null
+go
+
+update BFX_IMPL.CREDIT_PROGRAM
+set PROGRAM_VERSION = N'Вариант 01'
+where CODE = N'п00712022'
+go
+update BFX_IMPL.CREDIT_PROGRAM
+set PROGRAM_VERSION = N'Вариант 02'
+where CODE = N'п00722022'
+go
+update BFX_IMPL.CREDIT_PROGRAM
+set PROGRAM_VERSION = N'Вариант 03'
+where CODE = N'п00732022'
+go
+update BFX_IMPL.CREDIT_PROGRAM
+set PROGRAM_VERSION = N'Вариант 04'
+where CODE = N'п00742022'
+go
+update BFX_IMPL.CREDIT_PROGRAM
+set PROGRAM_VERSION = N'Вариант 05'
+where CODE = N'п00752022'
+go
+update BFX_IMPL.CREDIT_PROGRAM
+set PROGRAM_VERSION = N'Вариант 06'
+where CODE = N'п00762022'
+go
+update BFX_IMPL.CREDIT_PROGRAM
+set PROGRAM_VERSION = N'Вариант 07'
+where CODE = N'п00772022'
+go
+update BFX_IMPL.CREDIT_PROGRAM
+set PROGRAM_VERSION = N'Вариант 08'
+where CODE = N'п00782022'
+go
+update BFX_IMPL.CREDIT_PROGRAM
+set PROGRAM_VERSION = N'Вариант 09'
+where CODE = N'п00792022'
+go
+update BFX_IMPL.CREDIT_PROGRAM
+set PROGRAM_VERSION = N'Вариант 10'
+where CODE = N'п00802022'
+go
+update BFX_IMPL.CREDIT_PROGRAM
+set PROGRAM_VERSION = N'Вариант 11'
+where CODE = N'п00812022'
+go
+update BFX_IMPL.CREDIT_PROGRAM
+set PROGRAM_VERSION = N'Вариант 12'
+where CODE = N'п00822022'
+go
+update BFX_IMPL.CREDIT_PROGRAM
+set PROGRAM_VERSION = N'Вариант 13'
+where CODE = N'п00832022'
+go

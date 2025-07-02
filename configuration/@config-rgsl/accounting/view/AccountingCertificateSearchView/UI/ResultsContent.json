@@ -1,0 +1,239 @@
+{
+    "type": "Group",
+    "elements": [
+        {
+            "type": "DataGrid",
+            "value": {
+                "$ref": "#/properties/response/properties/data"
+            },
+            "mode": "DataSource",
+            "pagination": {
+                "mode": "Regular",
+                "pageSizes": [
+                    10,
+                    25,
+                    50,
+                    100
+                ]
+            },
+            "selection": {
+                "mode": "Multi",
+                "enableRowSelection": true,
+                "showCheckBox": true,
+                "onSelectionChanged": [
+                    {
+                        "commandType": "raiseEvent",
+                        "eventName": "Selected"
+                    }
+                ]
+            },
+            "height": "None",
+            "columns": [
+                {
+                    "sortable": true,
+                    "title": "Accounting certificate number",
+                    "cellContent": {
+                        "type": "Link",
+                        "targetType": "Entity",
+                        "value": {
+                            "mapping": "accountingCertificateUrlMapping",
+                            "$ref": "#"
+                        },
+                        "width": 1,
+                        "content": {
+                            "text": {
+                                "type": "OutputText",
+                                "value": {
+                                    "$ref": "#/properties/resultData/properties/accountingCertificateNumber"
+                                }
+                            }
+                        }
+                    },
+                    "name": "accountingCertificateNumber"
+                },
+                {
+                    "sortable": true,
+                    "title": "Accounting certificate state description",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/accountingCertificateStateDescription"
+                        }
+                    },
+                    "name": "stateDescription"
+                },
+                {
+                    "title": "contractNumber",
+                    "name": "contractNumber",
+                    "sortable": false,
+                    "cellContent": {
+                        "type": "Link",
+                        "targetType": "Url",
+                        "openInNewTab": false,
+                        "value": {
+                            "mapping": "contractUrlMapping",
+                            "$ref": "#"
+                        },
+                        "content": {
+                            "text": {
+                                "type": "OutputText",
+                                "textProperties": [
+                                    "bold"
+                                ],
+                                "template": "{{expr contractNumber}}",
+                                "value": {
+                                    "$ref": "#/properties/resultData"
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "sortable": true,
+                    "title": "Applicant full name",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/applicantFullName"
+                        }
+                    },
+                    "name": "applicantFullName"
+                },
+                {
+                    "sortable": true,
+                    "title": "Request date",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/requestDate"
+                        }
+                    },
+                    "name": "requestDate"
+                },
+                {
+                    "sortable": true,
+                    "title": "Accounting year",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/accountingYear"
+                        }
+                    },
+                    "name": "accountingYear"
+                },
+                {
+                    "sortable": true,
+                    "title": "Correction number",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/correctionNumber"
+                        }
+                    },
+                    "name": "correctionNumber"
+                },
+                {
+                    "sortable": true,
+                    "title": "Amount of premium paid",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "template": "{{#style 'right'}}{{expr amountOfPremiumPaid 'n:2'}}{{/style}}",
+                        "value": {
+                            "$ref": "#/properties/resultData"
+                        }
+                    },
+                    "name": "amountOfPremiumPaid"
+                },
+                {
+                    "sortable": true,
+                    "title": "Certificate issue date",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/certificateIssueDate"
+                        }
+                    },
+                    "name": "certificateIssueDate"
+                },
+                {
+                    "sortable": true,
+                    "title": "Certificate income source",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/incomeSource"
+                        }
+                    },
+                    "name": "certificateIssueDate"
+                },
+                {
+                    "sortable": false,
+                    "title": "transitionCommitor",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/transitionCommitor"
+                        }
+                    },
+                    "name": "transitionCommitor"
+                },
+                {
+                    "sortable": true,
+                    "title": "hasAttachment",
+                    "cellContent": {
+                        "type": "Input",
+                        "readOnly": true,
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/hasAttachment"
+                        }
+                    },
+                    "name": "hasAttachment"
+                }
+            ],
+            "elementId": "TableViewId"
+        },
+        {
+            "type": "Group",
+            "width": 4,
+            "stackContent": "Left",
+            "elements": [
+                {
+                    "type": "Button",
+                    "label": "Export Report",
+                    "onClick": [
+                        {
+                            "commandType": "executeAction",
+                            "actionName": "exportReport"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "Group",
+            "width": 4,
+            "stackContent": "Right",
+            "elements": [
+                {
+                    "type": "Button",
+                    "label": "Export",
+                    "submitOnEnter": true,
+                    "onClick": [
+                        {
+                            "commandType": "executeOperation",
+                            "operation": "EXPORT"
+                        }
+                    ],
+                    "icon": {
+                        "name": "Search",
+                        "color": "BackgroundColor",
+                        "size": "Small"
+                    },
+                    "value": {
+                        "$ref": "#"
+                    }
+                }
+            ]
+        }
+    ]
+}

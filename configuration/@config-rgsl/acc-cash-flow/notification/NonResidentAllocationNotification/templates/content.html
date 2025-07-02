@@ -1,0 +1,27 @@
+<html>
+
+<head></head>
+
+<body>
+    <div>
+        <p>Коллеги, добрый день.</p>
+        <p>Сегодня был идентифицирован платеж на договор нерезидента:</p>
+        <p><u>ДОГОВОР</u>: {{content.contractNo}} от {{content.issueDate}} г.</p>
+        <p><u>Клиент</u>: {{content.fullName}}.</p>
+        <p><u>Гражданство</u>: {{content.citizenship}}.</p>
+        <p><u>Страховая премия</u>, {{content.premiumCurrencyCode}}: {{content.premiumAmount}}.</p>
+        <p>
+            {{#unless content.paymentFrequency}}
+                <u>Страховая премия уплачивается единовременно в полном объеме не позднее</u>: {{content.paymentExpirationDate}}.
+            {{else}}
+                <u>Страховая премия уплачивается в виде страховых взносов {{content.paymentFrequency}}, оплата очередного страхового взноса не позднее</u>: {{content.paymentExpirationDate}}.
+            {{/unless}}
+        </p>
+        <p><u>Срок действия договора страхования</u>: {{content.endDate}}.</p>
+        <p><u>Источник поступления оплаты</u>: {{content.incomeSourceName}}.</p>
+        <p><u>Сумма оплаты</u> {{content.paymentCurrencyCode}}: {{content.paymentAmout}}.</p>
+        <p><u>Дата оплаты</u>: {{content.paymentDate}}.</p>
+    </div>
+</body>
+
+</html>

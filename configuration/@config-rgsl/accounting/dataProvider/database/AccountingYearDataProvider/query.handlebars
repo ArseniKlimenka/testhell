@@ -1,0 +1,17 @@
+﻿SELECT 
+	ay.YEAR_DESCRIPTION
+FROM ACC_IMPL.ACCOUNTING_YEAR ay
+WHERE 1 = 1
+{{#if parameters.year}}
+AND ay.YEAR_DESCRIPTION = @year
+{{/if}}
+{{#if parameters.years}}
+AND rt.YEAR_DESCRIPTION IN (@years)
+{{/if}}
+{{#if parameters.fromYear}}
+AND ay.YEAR_DESCRIPTION >= @fromYear
+{{/if}}
+{{#if parameters.toYear}}
+AND ay.YEAR_DESCRIPTION <= @toYear
+{{/if}}
+ORDER BY ay.YEAR_DESCRIPTION DESC

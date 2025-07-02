@@ -1,0 +1,35 @@
+{
+    "processType": "CollectiveLifeInsurancePolicyImportTemplate",
+    "initialState": "Draft",
+    "actors": [
+        "Administrator"
+    ],
+    "states": [
+        {
+            "name": "Draft",
+            "operations": [
+                {
+                    "name": "Save"
+                }
+            ]
+        },
+        {
+            "name": "Confirmed",
+            "operations": []
+        }
+    ],
+    "transitions": [
+        {
+            "name": "Draft_to_Confirmed",
+            "from": "Draft",
+            "to": "Confirmed",
+            "exclusiveToAssignedUser": false,
+            "allowOnValidationErrors": {
+                "all": false
+            },
+            "requiredConfirmedConstraints": {
+                "all": false
+            }
+        }
+    ]
+}

@@ -1,0 +1,30 @@
+select
+	ph.CONTRACT_NUMBER,
+	aaHub.AA_NUMBER,
+	aa.MANUAL_NUMBER,
+	MVZ_NUMBER,
+	agent.AGENT_PARTY_CODE,
+	agent.PARTNER_TYPE,
+	agent.PARTY_CONFIGURATION_CODE_NAME,
+	agent.PARTY_TRADING_PARTNER_CODE,
+	aa.ORDER_NUMBER
+from
+	pas_impl.POLICY_HUB ph
+	inner join pas_impl.POLICY_COMMISSION_LINK pcl on ph.POLICY_HKEY = pcl.POLICY_HKEY
+	inner join pas_impl.AA_SAT aa on aa.AA_HKEY = pcl.AA_HKEY
+	inner join pas_impl.AA_HUB aaHub on aa.AA_HKEY = aaHub.AA_HKEY
+	left join (
+		select
+			pl.AA_HKEY,
+			spis.PARTY_CODE as AGENT_PARTY_CODE,
+			spis.PARTNER_TYPE,
+			ptys.TRADING_PARTNER_CODE as PARTY_TRADING_PARTNER_CODE,
+			ptys.CONFIGURATION_CODE_NAME as PARTY_CONFIGURATION_CODE_NAME
+		from
+			PAS_IMPL.AA_PARTICIPANT_LINK pl
+			inner join pas_impl.AA_PARTICIPANT_SAT ps on pl.AA_PARTICIPANT_HKEY = ps.AA_PARTICIPANT_HKEY and ps.ROLE = 'Agent'
+			inner join org_impl.SERVICE_PROVIDER_INFO_SAT_LATEST spis on spis.SERVICE_PROVIDER_INFO_HKEY = pl.SERVICE_PROVIDER_HKEY
+			inner join pty_impl.PARTY_HUB ptyh on ptyh.PARTY_CODE = spis.PARTY_CODE
+			inner join pty_impl.PARTY_INFO_SAT_LATEST ptys on ptyh.PARTY_HKEY = ptys.PARTY_INFO_HKEY
+	) agent on agent.AA_HKEY = aa.AA_HKEY
+where ph.CONTRACT_NUMBER in (@contractNumbers)

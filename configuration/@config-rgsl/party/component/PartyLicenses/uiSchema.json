@@ -1,0 +1,81 @@
+{
+    "type": "GridLayout",
+    "numberOfColumns": 4,
+    "elements": [
+        {
+            "type": "DataGrid",
+            "mode": "Array",
+            "label": "PartyLicenses",
+            "labelType": "H1",
+            "pagination": {
+                "mode": "Regular",
+                "pageSizes": [
+                    5,
+                    10,
+                    15
+                ],
+                "defaultPageSize": 5
+            },
+            "isCollapsed": false,
+            "value": {
+                "$ref": "#"
+            },
+            "actions": [
+                "Add",
+                "Edit",
+                "Delete"
+            ],
+            "edit": {
+                "mode": "Detached",
+                "onBeforeGridAction": "partyLicensesOnBeforeGridAction"
+            },
+            "height": "Small",
+            "columns": [
+                {
+                    "title": "licenseNumber",
+                    "name": "licenseNumber",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/licenseNumber"
+                        }
+                    }
+                },
+                {
+                    "title": "licensingAuthority",
+                    "name": "licensingAuthority",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/licensingAuthority"
+                        }
+                    }
+                },
+                {
+                    "title": "dateOfIssueOfLicense",
+                    "name": "dateOfIssueOfLicense",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/dateOfIssueOfLicense"
+                        }
+                    }
+                }
+            ],
+            "detailsTemplates": {
+                "edit": {
+                    "content": {
+                        "type": "Component",
+                        "name": "PartyLicense",
+                        "value": {
+                            "$ref": "#"
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}

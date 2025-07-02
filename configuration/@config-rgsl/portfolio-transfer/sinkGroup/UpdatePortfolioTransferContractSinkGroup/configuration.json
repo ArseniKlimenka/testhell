@@ -1,0 +1,56 @@
+{
+    "sinks": [
+        {
+            "name": "GetAmendmentRelationInfo",
+            "fetch": {
+                "configuration": {
+                    "name": "GetAmendmentRelationInfoDataSource"
+                }
+            }
+        },
+        {
+            "name": "GetMainContractBody",
+            "fetch": {
+                "configuration": {
+                    "name": "ContractVersionsDataSource"
+                }
+            }
+        },
+        {
+            "name": "CreateAmendment",
+            "executeAs": "System",
+            "documentRelation": {}
+        },
+        {
+            "name": "UpdateAmendment",
+            "executeAs": "Operations",
+            "document": {
+                "allowUpdating": {
+                    "inStates": [
+                        "Draft",
+                        "Active"
+                    ]
+                }
+            }
+        },
+        {
+            "name": "UpdateAmendment2",
+            "executeAs": "Operations",
+            "document": {
+                "allowUpdating": {
+                    "inStates": [
+                        "Draft",
+                        "Active"
+                    ]
+                }
+            }
+        },
+        {
+            "name": "ActivateAmendment",
+            "executeAs": "Operations",
+            "documentTransition": {
+                "transition": {}
+            }
+        }
+    ]
+}

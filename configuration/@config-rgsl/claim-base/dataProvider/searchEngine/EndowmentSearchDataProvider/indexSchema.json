@@ -1,0 +1,384 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema",
+    "type": "object",
+    "properties": {
+        "contractNumber": {
+            "type": "string",
+            "mapping": {
+                "path": "#/properties/attributes/properties/mainAttributes/properties/contract/properties/number"
+            }
+        },
+        "risk": {
+            "type": "object",
+            "properties": {
+                "riskCode": {
+                    "type": "string",
+                    "mapping": {
+                        "path": "#/properties/attributes/properties/mainAttributes/properties/selectedRisk/properties/riskCode"
+                    }
+                },
+                "riskInsuredSum": {
+                    "type": "number",
+                    "mapping": {
+                        "path": "#/properties/attributes/properties/mainAttributes/properties/selectedRisk/properties/riskInsuredSum"
+                    }
+                },
+                "riskShortDescription": {
+                    "type": "string",
+                    "mapping": {
+                        "path": "#/properties/attributes/properties/mainAttributes/properties/selectedRisk/properties/riskShortDescription"
+                    }
+                }
+            }
+        },
+        "risksInsuredSumByPeriod": {
+            "type": "array",
+            "mapping": {
+                "path": "#/properties/attributes/properties/mainAttributes/properties/risksInsuredSumByPeriod"
+            },
+            "items": {
+                "type": "object",
+                "properties": {
+                    "riskCode": {
+                        "type": "string",
+                        "mapping": {
+                            "path": "#/properties/riskCode"
+                        }
+                    },
+                    "periods": {
+                        "type": "array",
+                        "mapping": {
+                            "path": "#/properties/periods"
+                        },
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "insuredSum": {
+                                    "type": "number",
+                                    "mapping": {
+                                        "path": "#/properties/insuredSum"
+                                    }
+                                },
+                                "startDate": {
+                                    "type": "string",
+                                    "aiFormat": "date",
+                                    "mapping": {
+                                        "path": "#/properties/startDate"
+                                    }
+                                },
+                                "endDate": {
+                                    "type": "string",
+                                    "aiFormat": "date",
+                                    "mapping": {
+                                        "path": "#/properties/endDate"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "applicationInfo": {
+            "type": "object",
+            "properties": {
+                "applicantCode": {
+                    "type": "string",
+                    "mapping": {
+                        "path": "#/properties/attributes/properties/mainAttributes/properties/applicationInfo/applicant/properties/partyCode"
+                    }
+                },
+                "statementReceivedDate": {
+                    "type": "string",
+                    "format": "date",
+                    "mapping": {
+                        "path": "#/properties/attributes/properties/mainAttributes/properties/applicationInfo/properties/statementReceivedDate"
+                    }
+                },
+                "statementApplicationDate": {
+                    "type": "string",
+                    "format": "date",
+                    "mapping": {
+                        "path": "#/properties/attributes/properties/mainAttributes/properties/applicationInfo/properties/statementApplicationDate"
+                    }
+                },
+                "eventDate": {
+                    "type": "string",
+                    "format": "date",
+                    "mapping": {
+                        "path": "#/properties/attributes/properties/mainAttributes/properties/applicationInfo/properties/eventDate"
+                    }
+                }
+            }        
+        },
+        "contractCurrency": {
+            "type": "number",
+            "mapping": {
+                "path": "#/properties/attributes/properties/endowmentAmounts/properties/contractCurrency"
+            }
+        },
+        "eventType": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "string",
+                    "mapping": {
+                        "path": "#/properties/attributes/properties/mainAttributes/properties/eventType/properties/code"
+                    }
+                },
+                "description": {
+                    "type": "string",
+                    "mapping": {
+                        "path": "#/properties/attributes/properties/mainAttributes/properties/eventType/properties/description"
+                    }
+                }
+            }
+        },
+        "eventReason": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "string",
+                    "mapping": {
+                        "path": "#/properties/attributes/properties/mainAttributes/properties/eventReason/properties/code"
+                    }
+                },
+                "description": {
+                    "type": "string",
+                    "mapping": {
+                        "path": "#/properties/attributes/properties/mainAttributes/properties/eventReason/properties/description"
+                    }
+                }
+            }
+        },
+        "endowmentBeneficiaries": {
+            "type": "array",
+            "mapping": {
+                "path": "#/properties/attributes/properties/endowmentBeneficiaries"
+            },
+            "items": {
+                "type": "object",
+                "properties": {
+                    "partyCode": {
+                        "type": "string",
+                        "mapping": {
+                            "path": "#/properties/partyCode"
+                        }
+                    },
+                    "beneficiaryReason": {
+                        "type": "object",
+                        "properties": {
+                            "code": {
+                                "type": "string",
+                                "mapping": {
+                                    "path": "#/properties/beneficiaryReason/properties/code"
+                                }
+                            },
+                            "description": {
+                                "type": "string",
+                                "mapping": {
+                                    "path": "#/properties/beneficiaryReason/description"
+                                }
+                            }
+                        }
+                    },
+                    "beneficiaryPaymentType": {
+                        "type": "object",
+                        "properties": {
+                            "code": {
+                                "type": "string",
+                                "mapping": {
+                                    "path": "#/properties/beneficiaryPaymentType/properties/code"
+                                }
+                            },
+                            "description": {
+                                "type": "string",
+                                "mapping": {
+                                    "path": "#/properties/beneficiaryPaymentType/properties/description"
+                                }
+                            }
+                        }
+                    },
+                    "amountToPayPercetage": {
+                        "type": "number",
+                        "mapping": {
+                            "path": "#/properties/amountToPayPercetage"
+                        }
+                    },
+                    "bankAccount": {
+                        "type": "object",
+                        "properties": {
+                            "bankId": {
+                                "type": "string",
+                                "mapping": {
+                                    "path": "#/properties/bankAccount/properties/bankId"
+                                }
+                            },
+                            "bankName": {
+                                "type": "string",
+                                "mapping": {
+                                    "path": "#/properties/bankAccount/properties/bankName"
+                                }
+                            },
+                            "bankBic": {
+                                "type": "string",
+                                "mapping": {
+                                    "path": "#/properties/bankAccount/properties/bankBic"
+                                }
+                            },
+                            "bankCorrespondentAccount": {
+                                "type": "string",
+                                "mapping": {
+                                    "path": "#/properties/bankAccount/properties/bankCorrespondentAccount"
+                                }
+                            },
+                            "SWIFT": {
+                                "type": "string",
+                                "mapping": {
+                                    "path": "#/properties/bankAccount/properties/SWIFT"
+                                }
+                            },
+                            "IBAN": {
+                                "type": "string",
+                                "mapping": {
+                                    "path": "#/properties/bankAccount/properties/IBAN"
+                                }
+                            },
+                            "foreignBank": {
+                                "type": "boolean",
+                                "mapping": {
+                                    "path": "#/properties/bankAccount/properties/foreignBank"
+                                }
+                            },
+                            "currency": {
+                                "type": "object",
+                                "properties": {
+                                    "currencyCode": {
+                                        "type": "string",
+                                        "mapping": {
+                                            "path": "#/properties/bankAccount/properties/currency/properties/currencyCode"
+                                        }
+                                    },
+                                    "currencyDesc": {
+                                        "type": "string",
+                                        "mapping": {
+                                            "path": "#/properties/bankAccount/properties/currency/properties/currencyDesc"
+                                        }
+                                    },
+                                    "currencyNumericCode": {
+                                        "type": "string",
+                                        "mapping": {
+                                            "path": "#/properties/bankAccount/properties/currency/properties/currencyNumericCode"
+                                        }
+                                    }
+                                }
+                            },
+                            "number": {
+                                "type": "string",
+                                "mapping": {
+                                    "path": "#/properties/bankAccount/properties/number"
+                                }
+                            },
+                            "openingDate": {
+                                "type": "string",
+                                "aiFormat": "date",
+                                "mapping": {
+                                    "path": "#/properties/bankAccount/properties/openingDate"
+                                }
+                            },
+                            "closingDate": {
+                                "type": "string",
+                                "aiFormat": "date",
+                                "mapping": {
+                                    "path": "#/properties/bankAccount/properties/closingDate"
+                                }
+                            },
+                            "bankInn": {
+                                "type": "string",
+                                "mapping": {
+                                    "path": "#/properties/bankAccount/properties/bankInn"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "paymentLines": {
+            "type": "array",
+            "mapping": {
+                "path": "#/properties/attributes/properties/endowmentAmounts/properties/paymentLines"
+            },
+            "items": {
+                "type": "object",
+                "properties": {
+                    "lineType": {
+                        "type": "string",
+                        "mapping": {
+                            "path": "#/properties/lineType"
+                        }
+                    },
+                    "lineAmountInContractCurrency": {
+                        "type": "number",
+                        "mapping": {
+                            "path": "#/properties/lineAmountInContractCurrency"
+                        }
+                    },
+                    "lineAmountInRubCurrency": {
+                        "type": "number",
+                        "mapping": {
+                            "path": "#/properties/lineAmountInRubCurrency"
+                        }
+                    }
+                }
+            }
+        },
+        "approvalConclusions": {
+            "type": "object",
+            "properties": {
+                "insuranceMethodologyConclusion": {
+                    "type": "string",
+                    "mapping": {
+                        "path": "#/properties/attributes/properties/approvalConclusions/properties/insuranceMethodologyConclusion"
+                    }
+                },
+                "actuaryConclusion": {
+                    "type": "string",
+                    "mapping": {
+                        "path": "#/properties/attributes/properties/approvalConclusions/properties/actuaryConclusion"
+                    }
+                },
+                "legalConclusion": {
+                    "type": "string",
+                    "mapping": {
+                        "path": "#/properties/attributes/properties/approvalConclusions/properties/legalConclusion"
+                    }
+                },
+                "securityConclusion": {
+                    "type": "string",
+                    "mapping": {
+                        "path": "#/properties/attributes/properties/approvalConclusions/properties/securityConclusion"
+                    }
+                },
+                "complianceConclusion": {
+                    "type": "string",
+                    "mapping": {
+                        "path": "#/properties/attributes/properties/approvalConclusions/properties/complianceConclusion"
+                    }
+                }
+            }
+        },
+        "fixedExchangeRate": {
+            "type": "number",
+            "mapping": {
+                "path": "#/properties/attributes/properties/endowmentAmounts/properties/fixedExchangeRate"
+            }
+        },
+        "useFixedExchangeRate": {
+            "type": "boolean",
+            "mapping": {
+                "path": "#/properties/attributes/properties/endowmentAmounts/properties/useFixedExchangeRate"
+            }
+        }
+    }
+}

@@ -1,0 +1,67 @@
+{
+    "processType": "AgentAgreement",
+    "initialState": "Draft",
+    "actors": [
+        "AdministratorAA",
+        "General",
+        "ViewerAA"
+    ],
+    "states": [
+        {
+            "name": "Draft",
+            "operations": [
+                {
+                    "name": "Save"
+                }
+            ]
+        },
+        {
+            "name": "Activated"
+        },
+        {
+            "name": "PortfolioMovement"
+        },
+        {
+            "name": "Cancelled"
+        },
+        {
+            "name": "Annulled"
+        }
+    ],
+    "transitions": [
+        {
+            "name": "DraftToAnnulled",
+            "from": "Draft",
+            "to": "Annulled",
+            "allowOnValidationErrors": {
+                "all": true
+            }
+        },
+        {
+            "name": "DraftToActivated",
+            "from": "Draft",
+            "to": "Activated"
+        },
+        {
+            "name": "ActivatedToPortfolioMovement",
+            "from": "Activated",
+            "to": "PortfolioMovement"
+        },
+        {
+            "name": "ActivatedToCancelled",
+            "from": "Activated",
+            "to": "Cancelled",
+            "allowOnValidationErrors": {
+                "all": true
+            }
+        },
+        {
+            "name": "CancelledtoActivated",
+            "from": "Cancelled",
+            "to": "Activated",
+            "allowOnValidationErrors": {
+                "all": true
+            }
+        }
+    ]
+}

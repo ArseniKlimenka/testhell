@@ -1,0 +1,63 @@
+{
+    "description": "Scenario description",
+    "input": {
+        "Document": {
+            "Items": {
+                "Item": {
+                    "No": "0093_STAS",
+                    "incomeSource": {
+                        "id": 93
+                    },
+                    "Direction": "1",
+                    "PaymentDescription": "Лучший платёж!",
+                    "CurrencyCode": "EUR",
+                    "Amount": "200",
+                    "PaymentDate": "2021-02-28",
+                    "TransactionDate": "2021-02-28",
+                    "IsRegistry": "true",
+                    "IsAcquiring": "true",
+                    "NonAcceptance": "true",
+                    "ToleranceType": "1",
+                    "Debtor": {
+                        "Name": "Березовиков Станислав Владимирович",
+                        "BankAccountNo": "SI56300000214629220"
+                    },
+                    "Creditor": {
+                        "Name": "INSURANCE COMPANY, D.D.",
+                        "BankAccountNo": "SI20436266963946784"
+                    }
+                }
+            }
+        }
+    },
+    "expectedResult": {
+        "data": {
+            "items": [
+                {
+                    "bankStatementItemNo": "0093_STAS",
+                    "incomeSource": {
+                        "id": 93
+                    },
+                    "direction": 1,
+                    "paymentDescription": "Лучший платёж!",
+                    "currencyCode": "EUR",
+                    "amount": 200,
+                    "paymentDate": "2021-02-28",
+                    "transactionDate": "2021-02-28",
+                    "isRegistry": true,
+                    "isAcquiring": true,
+                    "nonAcceptance": true,
+                    "toleranceType": 1,
+                    "debtor": {
+                        "name": "Березовиков Станислав Владимирович",
+                        "bankAccountNo": "SI56300000214629220"
+                    },
+                    "creditor": {
+                        "name": "INSURANCE COMPANY, D.D.",
+                        "bankAccountNo": "SI20436266963946784"
+                    }
+                }
+            ]
+        }
+    }
+}

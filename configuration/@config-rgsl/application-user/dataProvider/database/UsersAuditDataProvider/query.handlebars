@@ -1,0 +1,106 @@
+﻿with audit_trail as
+(
+select username, event_timestamp, event_type from bfx.audit_trail
+union all
+select username, event_timestamp, event_type from bfx_impl.audit_trail_arch
+), levels (organisation_unit_id, top_parent, level)
+as
+(
+select oup.organisation_unit_id,
+       oup.organisation_unit_id as top_parent,
+       0 as level
+  from org.organisation_unit oup
+ where oup.parent_id is null
+ union all
+select ou.organisation_unit_id,
+       c.top_parent as top_parent,
+       level + 1 as level
+  from org.organisation_unit ou,
+       levels c
+ where ou.parent_id = c.organisation_unit_id
+),
+org_units as (
+select ou.organisation_unit_id as organisationUnitId,
+       ou.organisation_unit_code as organisationUnitCode,
+       ousat.NAME as organisationUnitName,
+       ousat.full_name as organisationUnitFullName,
+       ousat.code as organisationUnitBusinessCode,
+       ou.parent_id as parentId,
+       oup.organisation_unit_code as parentCode,
+       oupsat.NAME as parentName,
+       oupsat.full_name as parentFullName,
+       oupsat.code as parentBusinessCode,
+       oupt.organisation_unit_id as topParentId,
+       oupt.organisation_unit_code as topParentCode,
+       ouptsat.NAME as topParentName,
+       ouptsat.full_name as topParentFullName,
+       ouptsat.code as topParentBusinessCode,
+       l.level
+  from org.organisation_unit ou
+       join levels l on ou.organisation_unit_id = l.organisation_unit_id
+       left join org_impl.organisation_unit_hub ouhub on ou.organisation_unit_code = ouhub.organisation_unit_code
+       left join org_impl.organisation_unit_info_sat_latest ousat on ouhub.organisation_unit_hkey = ousat.organisation_unit_info_hkey
+       left join org.organisation_unit oup on oup.organisation_unit_id = ou.parent_id
+       left join org_impl.organisation_unit_hub ouphub on oup.organisation_unit_code = ouphub.organisation_unit_code
+       left join org_impl.organisation_unit_info_sat_latest oupsat on ouphub.organisation_unit_hkey = oupsat.organisation_unit_info_hkey
+       left join org.organisation_unit oupt on oupt.organisation_unit_id = l.top_parent
+       left join org_impl.organisation_unit_hub oupthub on oupt.organisation_unit_code = oupthub.organisation_unit_code
+       left join org_impl.organisation_unit_info_sat_latest ouptsat on oupthub.organisation_unit_hkey = ouptsat.organisation_unit_info_hkey
+),
+user_roles as
+(
+select t.application_user_id,
+       string_agg(t.code_name, ';') within group (order by t.code_name) as user_roles
+  from
+(
+-- directly assigned roles
+select uar.application_user_id, ar.code_name
+  from cfx.user_application_role uar,
+       cfg.application_role ar
+ where uar.application_role_id = ar.application_role_id
+ union
+-- through group assigned roles
+select auga.application_user_id, ar.code_name
+  from org.application_user_group_assignment auga,
+       cfx.user_group_application_role ugar,
+       cfg.application_role ar
+ where auga.application_user_group_id = ugar.application_user_group_id
+   and ar.application_role_id = ugar.application_role_id
+) t
+ group by t.application_user_id
+),
+last_login as
+(
+select username,
+       max(event_timestamp) as max_event_timestamp
+  from audit_trail
+ where event_type = 'Login'
+ group by username
+)
+select cd.value as N'NAME',
+       u.username as N'LOGIN',
+       ll.max_event_timestamp as N'LAST_LOGIN',
+       ou.organisationUnitName as N'UNIT',
+       ou.topParentName as N'PARTNER',
+       ur.user_roles as N'ROLE',
+       spsl.tab_number as N'TAB_NUMBER',
+       ou.organisationUnitBusinessCode as N'UNIT_CODE'
+  from org.application_user u
+         join org.application_user_claim cp
+               on cp.application_user_id = u.application_user_id
+              and cp.claim_type = 'PartyCode'
+         join org.application_user_claim cd
+               on cd.application_user_id = u.application_user_id
+              and cd.claim_type = 'DisplayName'
+         join org.application_user_claim ca
+               on ca.application_user_id = u.application_user_id
+              and ca.claim_type = 'IsUserActive'
+              and ca.value = 'true'
+         join org_impl.service_provider_info_sat_latest spsl
+               on spsl.party_code = cp.value
+         join org_units ou
+               on ou.organisationunitcode = spsl.organisation_unit_code
+         left join user_roles ur
+                    on ur.application_user_id = u.application_user_id
+         left join last_login ll
+                    on ll.username = u.username

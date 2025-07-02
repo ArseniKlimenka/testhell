@@ -1,0 +1,13 @@
+﻿SELECT
+	COUNT(*) as dublicate_count
+FROM 
+	pas.CONTRACT c
+	JOIN CFG.PROCESS_STATE ps ON ps.PROCESS_STATE_ID = c.STATE_ID
+	JOIN PAS_IMPL.POLICY_HUB ph ON c.CONTRACT_NUMBER = ph.CONTRACT_NUMBER
+	JOIN PAS_IMPL.POLICY_SAT_LATEST psl ON psl.POLICY_HKEY = ph.POLICY_HKEY
+WHERE
+	c.CONTRACT_NUMBER != @currentContractNumber AND
+	ps.CODE_NAME = @state AND
+	psl.INSURED_CODE = @partyCode AND
+	psl.PRODUCT_CODE = @productCode AND
+	psl.START_DATE <= @endDate AND psl.END_DATE >= @startDate

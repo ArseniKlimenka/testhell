@@ -1,0 +1,15 @@
+'use strict';
+
+module.exports = function rule(input) {
+
+    const body = input.body;
+    const issueFormCode = body.issueForm?.code?.issueFormCode ?? '';
+    const isNotEPolicy = issueFormCode != 'ePolicy';
+
+    const productConf = input.body?.productConfiguration ?? {};
+
+    if (productConf.policyPrintout == 'driverGuaranteePSBPolicyPrintout' && isNotEPolicy == true) {
+
+        return true;
+    }
+};

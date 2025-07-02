@@ -1,0 +1,21 @@
+ConfigurationType	ConfigurationName	ItemType	TranslationKey	Expression	Translation_ru-RU	Translation_en-US
+DataSchema	Reinsurer	field-title	partyCode	partyCode	Код контрагента	partyCode
+DataSchema	Reinsurer	field-title	partyDisplayName	partyDisplayName	Наименование контрагента	partyDisplayName
+UiSchema	ReinsurerMainContent	ui-label	MainTab	MainTab	Общая информация	MainTab
+UiSchema	ReinsurerMainContent	ui-label	partyCode	partyCode	Код контрагента	partyCode
+UiSchema	ReinsurerMainContent	ui-label	partyDisplayName	partyDisplayName	Наименование контрагента	partyDisplayName
+Rule	ReinsurerValidateReinsurer	rule	validation@reinsurerCodeIsRequired	validateReinsurer	E: Необходимо указать код перестраховщика	E: validation@reinsurerCodeIsRequired
+Rule	ReinsurerValidateReinsurer	rule	validation@partyIsRequired	validateReinsurer	E: Необходимо указать контрагента	E: validation@partyIsRequired
+MasterEntityConfiguration	Reinsurer	rootConfiguration	Reinsurer@Title	Reinsurer	Перестраховщик	Reinsurer@Title
+UiSchema	ReinsurerMainContent	operations	operations@Save@Title	Save	Сохранить	Save
+UiSchema	ReinsurerSummaryContent	operations	operations@Save@Title	Save	Сохранить	Save
+UiSchema	ReinsurerConfiguration	operations	operations@Save@Title	Save	Сохранить	Save
+DataSchema	Reinsurer	field-title	reinsurerCode	reinsurerCode	Код перестраховщика	reinsurerCode
+UiSchema	ReinsurerMainContent	ui-label	reinsurerCode	reinsurerCode	Код перестраховщика	reinsurerCode
+DataSchema	Reinsurer	field-title	reinsurerType	reinsurerType	Тип перестраховщика	reinsurerType
+DataSchema	Reinsurer	enum	reinsurerType@broker	broker	Брокер	broker
+UiSchema	ReinsurerMainContent	ui-label	reinsurerType	reinsurerType	Тип перестраховщика	reinsurerType
+Rule	ReinsurerValidateReinsurer	rule	validation@reinsurerTypeIsRequired	validateReinsurer	E: Необходимо указать тип перестраховщика	E: validation@reinsurerTypeIsRequired
+MasterEntityConfiguration	Reinsurer	actors	OrganisationAdministrator	OrganisationAdministrator	Администратор орг. структуры	OrganisationAdministrator
+DataSchema	Reinsurer	enum	reinsurerType@insuranceCompany	insuranceCompany	СК	insuranceCompany
+MasterEntityConfiguration	Reinsurer	actors	OrganisationViewer	OrganisationViewer	Просмотр	OrganisationViewer

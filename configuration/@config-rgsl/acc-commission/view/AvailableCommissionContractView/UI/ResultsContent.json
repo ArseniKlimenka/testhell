@@ -1,0 +1,150 @@
+{
+    "type": "Group",
+    "elements": [
+        {
+            "type": "DataGrid",
+            "mode": "DataSource",
+            "alternateRowColors": true,
+            "selection": {
+                "mode": "None"
+            },
+            "pagination": {
+                "mode": "Regular"
+            },
+            "columns": [
+                {
+                    "sortable": true,
+                    "title": "aaExternalNumber",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/aaExternalNumber"
+                        }
+                    },
+                    "name": "aaExternalNumber"
+                },
+                {
+                    "sortable": true,
+                    "title": "agent",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/agent"
+                        }
+                    },
+                    "name": "agent"
+                },
+                {
+                    "sortable": true,
+                    "title": "contractNumber",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/contractNumber"
+                        }
+                    },
+                    "name": "contractNumber"
+                },
+                {
+                    "sortable": true,
+                    "title": "contractStateCode",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/contractStateCode"
+                        }
+                    },
+                    "name": "contractStateCode",
+                    "filter": {
+                        "content": {
+                            "type": "Dropdown",
+                            "value": {
+                                "$ref": "#/properties/request/properties/data/properties/criteria/properties/contractStateCode"
+                            }
+                        }
+                    }
+                },
+                {
+                    "sortable": true,
+                    "title": "installmentStatus",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/installmentStatus"
+                        }
+                    },
+                    "name": "installmentStatus",
+                    "filter": {
+                        "content": {
+                            "type": "Dropdown",
+                            "value": {
+                                "$ref": "#/properties/request/properties/data/properties/criteria/properties/installmentStatus"
+                            }
+                        }
+                    }
+                },
+                {
+                    "sortable": true,
+                    "title": "transactionDate",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/transactionDate"
+                        }
+                    },
+                    "name": "transactionDate",
+                    "filter": {
+                        "content": {
+                            "type": "Input",
+                            "control": "DateRange",
+                            "dateFrom": {
+                                "type": "Input",
+                                "label": "Transaction date from",
+                                "width": 1,
+                                "value": {
+                                    "$ref": "#/properties/request/properties/data/properties/criteria/properties/transactionDateFrom"
+                                },
+                                "control": "DatetimePicker"
+                            },
+                            "dateTo": {
+                                "type": "Input",
+                                "label": "Transaction date to",
+                                "width": 1,
+                                "value": {
+                                    "$ref": "#/properties/request/properties/data/properties/criteria/properties/transactionDateTo"
+                                },
+                                "control": "DatetimePicker"
+                            }
+                        }
+                    }
+                },
+                {
+                    "sortable": true,
+                    "title": "verificationState",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/verificationState"
+                        }
+                    },
+                    "name": "verificationState",
+                    "filter": {
+                        "content": {
+                            "type": "Dropdown",
+                            "value": {
+                                "$ref": "#/properties/request/properties/data/properties/criteria/properties/verificationState"
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "type": "Component",
+            "name": "ExportButtonSimple",
+            "value": {
+                "$ref": "#"
+            }
+        }
+    ]
+}

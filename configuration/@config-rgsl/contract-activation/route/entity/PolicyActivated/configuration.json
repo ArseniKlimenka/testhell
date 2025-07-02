@@ -1,0 +1,31 @@
+{
+    "entityType": "Contract",
+    "condition": {
+        "events": [
+            "Created",
+            "StatusChanged"
+        ],
+        "configuration": {
+            "dimensions": {
+                "contractType": [
+                    "Policy"
+                ]
+            }
+        },
+        "documentStates": [
+            "Active"
+        ]
+    },
+    "executionOrderWeight": 0,
+    "sinks": [
+        {
+            "name": "PolicyStatusChanged",
+            "database": {
+                "tables": [
+                    "ACC_IMPL.REFERENCE_NUMBER"
+                ]
+            }
+        }
+    ],
+    "version": "1"
+}

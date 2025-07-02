@@ -1,0 +1,62 @@
+﻿WITH BaseQuery AS (
+    SELECT 
+        OU.ORGANISATION_UNIT_CODE,
+        OU.ORGANISATION_UNIT_ID,
+        OU.PARENT_ID,
+        SAT.NAME,
+        SAT.CODE,
+        SAT.PARTNER_CODE
+    FROM 
+        ORG.ORGANISATION_UNIT OU
+    JOIN 
+        ORG_IMPL.ORGANISATION_UNIT_HUB HUB 
+        ON OU.ORGANISATION_UNIT_CODE = HUB.ORGANISATION_UNIT_CODE
+    JOIN 
+        ORG_IMPL.ORGANISATION_UNIT_INFO_SAT_LATEST SAT 
+        ON HUB.ORGANISATION_UNIT_HKEY = SAT.ORGANISATION_UNIT_INFO_HKEY
+),
+OrganisationHierarchy AS (
+    SELECT 
+        BQ.ORGANISATION_UNIT_CODE,
+        BQ.ORGANISATION_UNIT_ID,
+        BQ.PARENT_ID,
+        BQ.NAME,
+        BQ.CODE,
+        BQ.PARTNER_CODE
+    FROM 
+        BaseQuery BQ
+    WHERE 
+         1 = 1 
+         {{#if parameters.name}}
+            AND (BQ.NAME LIKE @name)
+         {{/if}}
+         
+         {{#if parameters.code}}
+            AND (BQ.CODE LIKE @code)
+         {{/if}}
+
+    UNION ALL
+
+    SELECT 
+        BQ.ORGANISATION_UNIT_CODE,
+        BQ.ORGANISATION_UNIT_ID,
+        BQ.PARENT_ID,
+        BQ.NAME,
+        BQ.CODE,
+        BQ.PARTNER_CODE
+    FROM 
+        BaseQuery BQ
+    INNER JOIN 
+        OrganisationHierarchy OH
+    ON 
+        BQ.ORGANISATION_UNIT_ID = OH.PARENT_ID
+)
+SELECT 
+    ORGANISATION_UNIT_CODE,
+    ORGANISATION_UNIT_ID,
+    PARENT_ID,
+    NAME,
+    CODE,
+    PARTNER_CODE
+FROM 
+    OrganisationHierarchy

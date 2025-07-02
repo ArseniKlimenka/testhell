@@ -1,0 +1,202 @@
+{
+    "type": "Section",
+    "label": "issueForm",
+    "isCollapsed": false,
+    "width": 12,
+    "elements": [
+        {
+            "type": "GridLayout",
+            "fillAvailableSpace": true,
+            "title": "issueForm",
+            "fixedButton": true,
+            "numberOfColumns": 12,
+            "elements": [
+                {
+                    "type": "Group",
+                    "width": 12,
+                    "elements": [
+                        {
+                            "type": "Input",
+                            "label": "issueForm",
+                            "value": {
+                                "$ref": "#/properties/code"
+                            },
+                            "source": {
+                                "dataSource": {
+                                    "name": "IssueFormDataSource",
+                                    "reloadOnOpen": true,
+                                    "searchFieldPath": "issueFormDescription",
+                                    "responseMapping": "issueFormResponseMapping"
+                                },
+                                "displayFieldName": "issueFormDescription"
+                            },
+                            "onValueChanged": [
+                                {
+                                    "commandType": "executeAction",
+                                    "actionName": "onIssueFormCodeChanged"
+                                }
+                            ],
+                            "control": "Dropdown",
+                            "width": 4,
+                            "rule": {
+                                "effect": "ENABLE_INITIAL",
+                                "condition": {
+                                    "type": "FUNC",
+                                    "ruleFunction": "enableIssueForm",
+                                    "value": [
+                                        {
+                                            "$ref": "#"
+                                        }
+                                    ]
+                                }
+                            }
+                        },
+                        {
+                            "type": "Input",
+                            "elementId": "phoneNumberElementId",
+                            "label": "phoneNumber",
+                            "filter": "transformPhoneNumbers",
+                            "value": {
+                                "$ref": "#/properties/phoneNumber"
+                            },
+                            "source": {
+                                "valueFieldName": "fullNumber",
+                                "displayFieldName": "fullNumberFormatted",
+                                "reloadOnOpen": true,
+                                "array": {
+                                    "$ref": "#/aiAdditionalContext/policyHolder/properties/partyData/properties/partyBody/properties/partyPhones"
+                                }
+                            },
+                            "control": "Dropdown",
+                            "rule": {
+                                "effect": "SHOW",
+                                "condition": {
+                                    "type": "LEAF",
+                                    "value": {
+                                        "$ref": "#/properties/code/properties/issueFormCode"
+                                    },
+                                    "expectedValue": "ePolicy"
+                                }
+                            },
+                            "width": 4
+                        },
+                        {
+                            "type": "Input",
+                            "elementId": "emailElementId",
+                            "label": "email",
+                            "value": {
+                                "$ref": "#/properties/email"
+                            },
+                            "source": {
+                                "valueFieldName": "email",
+                                "displayFieldName": "email",
+                                "reloadOnOpen": true,
+                                "array": {
+                                    "$ref": "#/aiAdditionalContext/policyHolder/properties/partyData/properties/partyBody/properties/partyEmails"
+                                }
+                            },
+                            "control": "Dropdown",
+                            "rule": {
+                                "effect": "SHOW",
+                                "condition": {
+                                    "type": "FUNC",
+                                    "value": [
+                                        {
+                                            "$ref": "#/properties/code/properties/issueFormCode"
+                                        },
+                                        {
+                                            "$ref": "#/aiAdditionalContext/policyHolder/properties/partyData/properties/partyType"
+                                        }
+                                    ],
+                                    "ruleFunction": "showPolicyHolderEmail"
+                                }
+                            },
+                            "width": 4
+                        },
+                        {
+                            "type": "Input",
+                            "elementId": "emailElementId",
+                            "label": "email",
+                            "value": {
+                                "$ref": "#/properties/email"
+                            },
+                            "source": {
+                                "valueFieldName": "email",
+                                "displayFieldName": "email",
+                                "reloadOnOpen": true,
+                                "array": {
+                                    "$ref": "#/aiAdditionalContext/insuredPerson/properties/partyData/properties/partyBody/properties/partyEmails"
+                                }
+                            },
+                            "control": "Dropdown",
+                            "rule": {
+                                "effect": "SHOW",
+                                "condition": {
+                                    "type": "FUNC",
+                                    "value": [
+                                        {
+                                            "$ref": "#/properties/code/properties/issueFormCode"
+                                        },
+                                        {
+                                            "$ref": "#/aiAdditionalContext/policyHolder/properties/partyData/properties/partyType"
+                                        }
+                                    ],
+                                    "ruleFunction": "showInsuredPersonEmail"
+                                }
+                            },
+                            "width": 4
+                        },
+                        {
+                            "type": "Input",
+                            "isCompact": true,
+                            "label": "polciyHolderIsPayer",
+                            "value": {
+                                "$ref": "#/properties/polciyHolderIsPayer"
+                            },
+                            "width": 4,
+                            "readOnly": true,
+                            "rule": {
+                                "effect": "SHOW",
+                                "condition": {
+                                    "type": "FUNC",
+                                    "ruleFunction": "showPolicyHolderIsPayer",
+                                    "value": [
+                                        {
+                                            "$ref": "#"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "Input",
+                    "label": "futureContractNumber",
+                    "value": {
+                        "$ref": "#/aiAdditionalContext/futureContractNumber"
+                    },
+                    "width": 4,
+                    "readOnly": true,
+                    "rule": {
+                        "effect": "SHOW",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "showFutureContractNumber",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    }
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,35 @@
+{
+    "sinks": [
+        {
+            "name": "GetActData",
+            "fetch": {
+                "configuration": {
+                    "name": "GetCommissionActFullDataDataSource"
+                }
+            }
+        },
+        {
+            "name": "ActUpdatePayDate",
+            "document": {
+                "configuration": {
+                    "name": "CommissionAct"
+                },
+                "allowUpdating": {
+                    "inStates": [
+                        "Approved"
+                    ]
+                }
+            }
+        },
+        {
+            "name": "ActSetStatus",
+            "documentTransition": {
+                "transition": {
+                    "transitionName": "Approved_To_CompletedPaid",
+                    "configurationName": "CommissionAct",
+                    "configurationVersion": "1"
+                }
+            }
+        }
+    ]
+}

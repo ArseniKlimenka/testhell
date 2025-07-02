@@ -1,0 +1,49 @@
+{
+    "processType": "Asset",
+    "initialState": "Draft",
+    "actors": [
+        "AssetEditor",
+        "AssetViewer"
+    ],
+    "states": [
+        {
+            "name": "Draft",
+            "operations": [
+                "Save"
+            ]
+        },
+        {
+            "name": "Activated",
+            "appliesVersion": true
+        },
+        {
+            "name": "Annulled",
+            "discardsVersion": true
+        }
+    ],
+    "transitions": [
+        {
+            "name": "DraftToAnnulled",
+            "from": "Draft",
+            "to": "Annulled",
+            "allowOnValidationErrors": {
+                "all": true
+            },
+            "whenBlocked": "Greyout"
+        },
+        {
+            "name": "DraftToActivated",
+            "from": "Draft",
+            "to": "Activated",
+            "broadcastEvent": {
+                "serverSideEvents": true
+            },
+            "whenBlocked": "Greyout"
+        },
+        {
+            "name": "ActivatedToAnnulled",
+            "from": "Activated",
+            "to": "Annulled"
+        }
+    ]
+}

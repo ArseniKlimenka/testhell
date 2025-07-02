@@ -1,0 +1,6 @@
+create table ADIRGSLSUPP394
+(
+  ID int identity(1, 1),
+  DATE_LOG DATETIME,
+  COMMENT_LOG NVARCHAR(1024)
+)

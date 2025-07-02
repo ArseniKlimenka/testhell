@@ -1,0 +1,109 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "object",
+    "properties": {
+        "criteria": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "freeText": {
+                    "type": "string"
+                },
+                "number": {
+                    "type": "string"
+                },
+                "stateCode": {
+                    "type": "string",
+                    "enum": [
+                        "Activated",
+                        "CancelledByAmendment",
+                        "Active",
+                        "Completed"
+                    ],
+                    "aiTitle": "stateCode"
+                },
+                "configurationName": {
+                    "type": "string"
+                },
+                "contractType": {
+                    "type": "string",
+                    "enum": [
+                        "Policy"
+                    ]
+                },
+                "productGroup": {
+                    "$ref": "component:ProductGroup"
+                },
+                "product": {
+                    "type": "object",
+                    "properties": {
+                        "productCode": {
+                            "type": "string"
+                        },
+                        "productGroup": {
+                            "type": "string"
+                        },
+                        "productDescription": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "createdOnFrom": {
+                    "type": "string",
+                    "aiFormat": "date"
+                },
+                "issueDateFrom": {
+                    "type": "string",
+                    "aiFormat": "date"
+                },
+                "issueDateTo": {
+                    "type": "string",
+                    "aiFormat": "date"
+                },
+                "startDateFrom": {
+                    "type": "string",
+                    "aiFormat": "date"
+                },
+                "startDateTo": {
+                    "type": "string",
+                    "aiFormat": "date"
+                },
+                "endDateFrom": {
+                    "type": "string",
+                    "aiFormat": "date"
+                },
+                "endDateTo": {
+                    "type": "string",
+                    "aiFormat": "date"
+                },
+                "holder": {
+                    "type": "string"
+                },
+                "initiatorServiceProviderCode": {
+                    "type": "string"
+                },
+                "organisationUnitCode": {
+                    "type": "string"
+                },
+                "organisationUnitCodes": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "userAdditionalOrgUnits": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "includeChildren": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "sort": {
+            "type": "array"
+        }
+    }
+}

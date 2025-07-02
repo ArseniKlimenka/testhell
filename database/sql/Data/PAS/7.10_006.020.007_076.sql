@@ -1,0 +1,73 @@
+ --- Обновление декларации по продуктам ОАС_Восстанови здоровье
+ update bfx_impl.[DECLARATION_MAIN]
+   set [ITEM_NUMBER] = 9
+ where [ITEM_TEXT_ID] = '18520DB3-0E99-4C8C-B306-0A7AE40722D2' 
+ and [PRODUCT_CODE] in ('RHELIGHTOAS','RHEBASEOAS','RHEOPTIMAOAS') 
+
+ update bfx_impl.[DECLARATION_MAIN]
+   set [ITEM_NUMBER] = 10
+ where [ITEM_TEXT_ID] = 'B6685B8D-D161-44B8-BCC8-3694FACCA2EA' 
+ and [PRODUCT_CODE] in ('RHELIGHTOAS','RHEBASEOAS','RHEOPTIMAOAS') 
+
+ update bfx_impl.[DECLARATION_MAIN]
+   set [ITEM_NUMBER] = 11
+ where [ITEM_TEXT_ID] = '2B3821F2-6B8B-471C-B405-5CE211DF5979' 
+ and [PRODUCT_CODE] in ('RHELIGHTOAS','RHEBASEOAS','RHEOPTIMAOAS') 
+
+ update bfx_impl.[DECLARATION_MAIN]
+   set [ITEM_NUMBER] = 12
+ where [ITEM_TEXT_ID] = 'D7803117-24FF-46DA-A950-6D3BE614FC35'
+ and [PRODUCT_CODE] in ('RHELIGHTOAS','RHEBASEOAS','RHEOPTIMAOAS') 
+
+ update bfx_impl.[DECLARATION_MAIN]
+   set [ITEM_NUMBER] = 13
+ where [ITEM_TEXT_ID] = 'A2829772-348E-421D-B2E1-9AB027FB70F4'
+ and [PRODUCT_CODE] in ('RHELIGHTOAS','RHEBASEOAS','RHEOPTIMAOAS') 
+
+ update bfx_impl.[DECLARATION_MAIN]
+   set [ITEM_NUMBER] = 14
+ where [ITEM_TEXT_ID] = 'A3277657-7481-43BF-9403-A7AC4B1B723C'
+ and [PRODUCT_CODE] in ('RHELIGHTOAS','RHEBASEOAS','RHEOPTIMAOAS') 
+
+ update bfx_impl.[DECLARATION_MAIN]
+   set [ITEM_NUMBER] = 15
+ where [ITEM_TEXT_ID] = '2B39EC23-A49D-4205-AB77-EC6ED74055AD'
+ and [PRODUCT_CODE] in ('RHELIGHTOAS','RHEBASEOAS','RHEOPTIMAOAS') 
+
+
+delete from bfx_impl.declaration_main_questions where id = 'A9F3253A-182E-4CA0-B74A-057099484CBF'; insert into bfx_impl.declaration_main_questions values ('A9F3253A-182E-4CA0-B74A-057099484CBF', N'Страхователь подтверждает, что страхование осуществляется в целях обеспечения защиты его интересов, за счет средств Страхователя.');
+delete from bfx_impl.declaration_main_questions where id = '55B67CE3-E008-4460-813C-05AC53423F54'; insert into bfx_impl.declaration_main_questions values ('55B67CE3-E008-4460-813C-05AC53423F54', N'Страхователь подтверждает отсутствие у него: действующей профессиональной дисквалификации, непогашенной судимости или административного взыскания в соответствии с законодательством Российской Федерации, просроченной задолженности в кредитных организациях.');
+delete from bfx_impl.declaration_main_questions where id = 'B2DE2878-5917-47CE-87EB-5A42A35E27D2'; insert into bfx_impl.declaration_main_questions values ('B2DE2878-5917-47CE-87EB-5A42A35E27D2', N'Страхователь не является иностранным публичным должностным лицом («иностранное публичное должностное лицо» означает любое назначаемое или избираемое лицо, занимающее какую-либо должность в законодательном, исполнительном, административном или судебном органе иностранного государства, и любое лицо, выполняющее какую-либо публичную функцию для иностранного государства, в том числе для публичного ведомства или публичного предприятия), должностным лицом публичных международных организаций («должностное лицо публичной международной организации» означает международного гражданского служащего или любое лицо, которое уполномочено такой организацией действовать от ее имени), российским публичным должностным лицом, лицом, замещающим (занимающим) государственные должности в Российской Федерации, должности членов Совета директоров Банка России, должности федеральной государственной службы, назначение на которые и освобождение от которых осуществляются Президентом Российской Федерации или Правительством Российской Федерации, должности в Банке России, государственных корпорациях и иных организациях, созданных Российской Федерацией на основании федеральных законов, включенные в перечни должностей, определяемые Президентом Российской Федерации, родственником кого-то из вышеперечисленных лиц (супругом, родителем, ребенком, дедушкой, бабушкой, внуком, полнородным и неполнородным (имеющим общих отца или мать) братом и сестрой, усыновителем и усыновленным) или представителем, действующим от его имени.');
+delete from bfx_impl.declaration_main_questions where id = '1DA09414-B8A1-4AD8-B963-7B702ABA4974'; insert into bfx_impl.declaration_main_questions values ('1DA09414-B8A1-4AD8-B963-7B702ABA4974', N'Страхователь подтверждает, что не принадлежит (не зарегистрирован, не проживает и не находится) к государству (территории): с высокой террористической или экстремистской активностью; в отношении которого (которой) применяются специальные экономические меры в соответствии с Федеральным законом «О специальных экономических мерах»; которое (которая) не выполняет рекомендации Группы разработки финансовых мер борьбы с отмыванием денег (ФАТФ), либо с использованием счета в банке, зарегистрированном в указанном государстве (на указанной территории) – ИР Иран, КНДР (включая международные неправительственные организации), к государствам (территориям) с повышенным уровнем коррупции и/или другой преступной деятельности; предоставляющему (предоставляющей) льготный режим налогообложения и/или не предусматривающему (предусматривающей) раскрытия и предоставления информации при проведении финансовых операций (офшорной зоны); не имеет открытого банковского счета, зарегистрированного в указанном государстве или на указанной территории.');
+delete from bfx_impl.declaration_main_questions where id = '4BE5A64F-FD03-4521-88E7-AD665F844E54'; insert into bfx_impl.declaration_main_questions values ('4BE5A64F-FD03-4521-88E7-AD665F844E54', N'Страхователь подтверждает, что иное физическое лицо не имеет возможности контролировать действия Страхователя.');
+delete from bfx_impl.declaration_main_questions where id = 'B65A19A7-5337-4033-87E0-E5A295041C64'; insert into bfx_impl.declaration_main_questions values ('B65A19A7-5337-4033-87E0-E5A295041C64', N'Страхователь подтверждает, что он не является налоговым резидентом США и не обладает ни одним из признаков налогового резидента США (не имеет гражданства США (в том числе в случае наличия двух и более гражданств) и разрешения на постоянное пребывание в США (форма I-551 Green Card); не соответствует критерию «Долгосрочное пребывание» на территории США; местом рождения Страхователя не является территория США; не имеет адреса проживания и/или почтового адреса, номера контактного телефона и/или факса на территории США; не имеет открытых счетов в кредитных организациях на территории США). (Физическое лицо соответствует критерию «Долгосрочное пребывание», если оно находилось на территории США не менее 31 дня в течение текущего календарного года и не менее 183 дней в течение 3 лет, включая текущий год и два непосредственно предшествующих года. При этом сумма дней, в течение которых физическое лицо присутствовало на территории США в текущем году, а также двух предшествующих годах, умножается на установленный коэффициент: коэффициент для текущего года равен 1 (т. е. учитываются все дни, проведенные в США в текущем году); коэффициент предшествующего года равен 1/3; коэффициент позапрошлого года – 1/6.).');
+delete from bfx_impl.declaration_main_questions where id = '44611373-7B12-4548-BA55-E9E2459ECD95'; insert into bfx_impl.declaration_main_questions values ('44611373-7B12-4548-BA55-E9E2459ECD95', N'Страхователь подтверждает, что на момент заключения настоящего договора страхования, не является налоговым резидентом страны, отличной от Российской Федерации и не обладает ни одним из признаков иностранного налогового резидентства (не имеет иностранного адреса места фактического проживания или почтового адреса в иностранном государстве; не имеет номера телефона в иностранном государстве при отсутствии номера телефона в Российской Федерации; не имеет постоянного поручения на перечисление средств (за исключением банковского вклада) на счет или адрес в иностранном государстве; не имеет доверенности или права подписи, предоставленных лицу, проживающему в иностранном государстве; не имеет адреса до востребования в иностранной юрисдикции.');
+delete from bfx_impl.declaration_main_questions where id = '5F822180-49C3-44C9-A02F-F1FB405BC60B'; insert into bfx_impl.declaration_main_questions values ('5F822180-49C3-44C9-A02F-F1FB405BC60B', N'Страхователь обязуется не реже одного раза в год и/или по мере изменения идентификационных данных, указанных в настоящем договоре страхования, направлять Страховщику обновленные персональные данные по форме, предложенной Страховщиком.
+Непредставление соответствующей информации Страховщик вправе расценить как неизменность сведений о Страхователе, установленных при его идентификации, и обновить идентификационные сведения на основе данных, представленных Страхователем ранее в сроки, установленные Федеральным законом от 07.08.2001 N 115-ФЗ «О противодействии легализации (отмыванию) доходов, полученных преступным путем, и финансированию терроризма».');
+
+delete from bfx_impl.declaration_main where id = '4D4F1460-915C-42A8-A1A2-02367191678D'; insert into bfx_impl.declaration_main values ('4D4F1460-915C-42A8-A1A2-02367191678D', 'RHELIGHTOAS', '1', 'A9F3253A-182E-4CA0-B74A-057099484CBF', 'compliance');
+delete from bfx_impl.declaration_main where id = '53CF337E-9664-43CB-B40B-14E95E342B2D'; insert into bfx_impl.declaration_main values ('53CF337E-9664-43CB-B40B-14E95E342B2D', 'RHELIGHTOAS', '2', '55B67CE3-E008-4460-813C-05AC53423F54', 'compliance');
+delete from bfx_impl.declaration_main where id = '7E3FDBC1-EB8A-4627-AD4E-292CA021CC3A'; insert into bfx_impl.declaration_main values ('7E3FDBC1-EB8A-4627-AD4E-292CA021CC3A', 'RHELIGHTOAS', '3', 'B2DE2878-5917-47CE-87EB-5A42A35E27D2', 'compliance');
+delete from bfx_impl.declaration_main where id = '5F67349D-77E0-4C87-8ACF-2FBD9BC984A1'; insert into bfx_impl.declaration_main values ('5F67349D-77E0-4C87-8ACF-2FBD9BC984A1', 'RHELIGHTOAS', '4', '1DA09414-B8A1-4AD8-B963-7B702ABA4974', 'compliance');
+delete from bfx_impl.declaration_main where id = '5567D651-C911-448D-991E-AA493703D37C'; insert into bfx_impl.declaration_main values ('5567D651-C911-448D-991E-AA493703D37C', 'RHELIGHTOAS', '5', '4BE5A64F-FD03-4521-88E7-AD665F844E54', 'compliance');
+delete from bfx_impl.declaration_main where id = '6DD6787C-27A8-47BA-9A14-B702798BE5D2'; insert into bfx_impl.declaration_main values ('6DD6787C-27A8-47BA-9A14-B702798BE5D2', 'RHELIGHTOAS', '6', 'B65A19A7-5337-4033-87E0-E5A295041C64', 'compliance');
+delete from bfx_impl.declaration_main where id = '0C4B870C-ECC9-4271-BCDD-C54F6C5C3F90'; insert into bfx_impl.declaration_main values ('0C4B870C-ECC9-4271-BCDD-C54F6C5C3F90', 'RHELIGHTOAS', '7', '44611373-7B12-4548-BA55-E9E2459ECD95', 'compliance');
+delete from bfx_impl.declaration_main where id = 'D52EEDEC-D2A3-42A2-9ED7-EE6557271FDA'; insert into bfx_impl.declaration_main values ('D52EEDEC-D2A3-42A2-9ED7-EE6557271FDA', 'RHELIGHTOAS', '8', '5F822180-49C3-44C9-A02F-F1FB405BC60B', 'compliance');
+
+delete from bfx_impl.declaration_main where id = 'F9DBDB8C-A441-443D-B21C-0AD531D0356B'; insert into bfx_impl.declaration_main values ('F9DBDB8C-A441-443D-B21C-0AD531D0356B', 'RHEBASEOAS', '1', 'A9F3253A-182E-4CA0-B74A-057099484CBF', 'compliance');
+delete from bfx_impl.declaration_main where id = '6C04CBE9-1597-453D-974F-191DE8875B25'; insert into bfx_impl.declaration_main values ('6C04CBE9-1597-453D-974F-191DE8875B25', 'RHEBASEOAS', '2', '55B67CE3-E008-4460-813C-05AC53423F54', 'compliance');
+delete from bfx_impl.declaration_main where id = '0C8F68AF-809C-4628-B7C0-2625D344154C'; insert into bfx_impl.declaration_main values ('0C8F68AF-809C-4628-B7C0-2625D344154C', 'RHEBASEOAS', '3', 'B2DE2878-5917-47CE-87EB-5A42A35E27D2', 'compliance');
+delete from bfx_impl.declaration_main where id = 'D224DA96-6BB5-4F98-9ACD-3EB41437051A'; insert into bfx_impl.declaration_main values ('D224DA96-6BB5-4F98-9ACD-3EB41437051A', 'RHEBASEOAS', '4', '1DA09414-B8A1-4AD8-B963-7B702ABA4974', 'compliance');
+delete from bfx_impl.declaration_main where id = 'DE380F8C-115B-4034-B72F-43C00C67B0D6'; insert into bfx_impl.declaration_main values ('DE380F8C-115B-4034-B72F-43C00C67B0D6', 'RHEBASEOAS', '5', '4BE5A64F-FD03-4521-88E7-AD665F844E54', 'compliance');
+delete from bfx_impl.declaration_main where id = 'FA1CBED7-5553-4A11-ABD1-78DB5F94C66B'; insert into bfx_impl.declaration_main values ('FA1CBED7-5553-4A11-ABD1-78DB5F94C66B', 'RHEBASEOAS', '6', 'B65A19A7-5337-4033-87E0-E5A295041C64', 'compliance');
+delete from bfx_impl.declaration_main where id = '7C188578-1533-4FE2-94BA-AEBA6B177FED'; insert into bfx_impl.declaration_main values ('7C188578-1533-4FE2-94BA-AEBA6B177FED', 'RHEBASEOAS', '7', '44611373-7B12-4548-BA55-E9E2459ECD95', 'compliance');
+delete from bfx_impl.declaration_main where id = '95486347-590A-415D-BEFC-DA604D109EAB'; insert into bfx_impl.declaration_main values ('95486347-590A-415D-BEFC-DA604D109EAB', 'RHEBASEOAS', '8', '5F822180-49C3-44C9-A02F-F1FB405BC60B', 'compliance');
+
+delete from bfx_impl.declaration_main where id = '44E930C2-60B1-4BB1-BA80-28250D8A55AD'; insert into bfx_impl.declaration_main values ('44E930C2-60B1-4BB1-BA80-28250D8A55AD', 'RHEOPTIMAOAS', '1', 'A9F3253A-182E-4CA0-B74A-057099484CBF', 'compliance');
+delete from bfx_impl.declaration_main where id = '9659A9F2-569A-4986-8A0D-541C21D2FBDC'; insert into bfx_impl.declaration_main values ('9659A9F2-569A-4986-8A0D-541C21D2FBDC', 'RHEOPTIMAOAS', '2', '55B67CE3-E008-4460-813C-05AC53423F54', 'compliance');
+delete from bfx_impl.declaration_main where id = 'C0E63A65-7DEB-4FC5-AC2F-9EF5340D7844'; insert into bfx_impl.declaration_main values ('C0E63A65-7DEB-4FC5-AC2F-9EF5340D7844', 'RHEOPTIMAOAS', '3', 'B2DE2878-5917-47CE-87EB-5A42A35E27D2', 'compliance');
+delete from bfx_impl.declaration_main where id = 'E8F88F6E-CD9E-48B3-AA5E-A17A4F782018'; insert into bfx_impl.declaration_main values ('E8F88F6E-CD9E-48B3-AA5E-A17A4F782018', 'RHEOPTIMAOAS', '4', '1DA09414-B8A1-4AD8-B963-7B702ABA4974', 'compliance');
+delete from bfx_impl.declaration_main where id = '7192E17B-F84E-4610-B7E6-A72E4AEDC95C'; insert into bfx_impl.declaration_main values ('7192E17B-F84E-4610-B7E6-A72E4AEDC95C', 'RHEOPTIMAOAS', '5', '4BE5A64F-FD03-4521-88E7-AD665F844E54', 'compliance');
+delete from bfx_impl.declaration_main where id = 'D71FB382-2D88-470F-B4EB-CC1A9A70E627'; insert into bfx_impl.declaration_main values ('D71FB382-2D88-470F-B4EB-CC1A9A70E627', 'RHEOPTIMAOAS', '6', 'B65A19A7-5337-4033-87E0-E5A295041C64', 'compliance');
+delete from bfx_impl.declaration_main where id = 'ED50CFD4-40A8-40BB-96E2-DE7FC22677F5'; insert into bfx_impl.declaration_main values ('ED50CFD4-40A8-40BB-96E2-DE7FC22677F5', 'RHEOPTIMAOAS', '7', '44611373-7B12-4548-BA55-E9E2459ECD95', 'compliance');
+delete from bfx_impl.declaration_main where id = 'A684E0F7-6A60-477D-8840-F3C156A743E0'; insert into bfx_impl.declaration_main values ('A684E0F7-6A60-477D-8840-F3C156A743E0', 'RHEOPTIMAOAS', '8', '5F822180-49C3-44C9-A02F-F1FB405BC60B', 'compliance');

@@ -1,0 +1,33 @@
+{
+    "mainDataSource": "DisableUserIfExpiredDataSource",
+    "useBackgroundTaskWorker": true,
+    "restartable": false,
+    "enableAutomaticRecovery": false,
+    "sinks": [
+        {
+            "name": "GetKeycloakUser",
+            "api": {
+                "configuration": {
+                    "name": "KeycloakGetUserByIdApiDataProvider"
+                }
+            }
+        },
+        {
+            "name": "UpdateKeycloakUser",
+            "api": {
+                "configuration": {
+                    "name": "KeycloakUpdateUserApiDataProvider"
+                }
+            }
+        },
+        {
+            "name": "WriteLog",
+            "database": {
+                "tables": [
+                    "ORG_IMPL.DISABLE_USER_IF_EXPIRED_ETL_LOG"
+                ]
+            }
+        }
+    ],
+    "version": "1"
+}

@@ -1,0 +1,53 @@
+{
+    "mainDataSource": "ImportStagingDataSource",
+    "allowParallelExecution": false,
+    "sinks": [
+        {
+            "name": "GetInsuranceRulesVersion",
+            "fetch": {
+                "configuration": {
+                    "name": "GetInsuranceRulesImportDataSource"
+                }
+            }
+        },
+        {
+            "name": "WriteSuccessStatus",
+            "database": {
+                "tables": [
+                    "BFX.IMPORT_RECORD_STATUS"
+                ]
+            }
+        },
+        {
+            "name": "WriteToInsuranceRulesTable",
+            "database": {
+                "tables": [
+                    "BFX_IMPL.INSURANCE_RULES"
+                ]
+            }
+        }
+    ],
+    "errorSinks": [
+        {
+            "name": "WriteErrorStatus",
+            "database": {
+                "tables": [
+                    "BFX.IMPORT_RECORD_STATUS"
+                ]
+            }
+        }
+    ],
+    "completionSinks": [
+        {
+            "name": "FinishedImporting",
+            "documentTransition": {
+                "transition": {
+                    "transitionName": "FinishImporting",
+                    "configurationName": "InsuranceRulesImport",
+                    "configurationVersion": "1"
+                }
+            }
+        }
+    ],
+    "version": "1"
+}

@@ -1,0 +1,51 @@
+{
+    "id": "ClaimAdministrationView.json",
+    "type": "GridLayout",
+    "numberOfColumns": 12,
+    "width": 12,
+    "elements": [
+        {
+            "type": "HeaderContentLayout",
+            "fixedPosition": true,
+            "elements": []
+        },
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "TabLayout",
+                    "elements": [
+                        {
+                            "type": "Tab",
+                            "elementId": "claimAdministrationTabId",
+                            "title": "claimAdministrationTab",
+                            "elements": [
+                                {
+                                    "type": "Section",
+                                    "label": "claimsReadyForPayment",
+                                    "elements": [
+                                        {
+                                            "type": "InlineView",
+                                            "showContainerActions": false,
+                                            "views": [
+                                                {
+                                                    "viewReference": {
+                                                        "configurationCodeName": "ClaimsReadyForPaymentSearchView",
+                                                        "configurationVersion": "1",
+                                                        "configurationConceptType": "SearchView"
+                                                    },
+                                                    "onViewInitialized": "initClaimsReadyForPayment",
+                                                    "viewType": "Search"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

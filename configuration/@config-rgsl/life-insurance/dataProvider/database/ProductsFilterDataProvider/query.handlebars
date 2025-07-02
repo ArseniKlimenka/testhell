@@ -1,0 +1,128 @@
+﻿SELECT p.CODE
+      ,p.PRODUCT_GROUP
+      ,p.DESCRIPTION
+      ,p.SALES_SEGMENT
+      ,pc.CONF_VERSION
+      ,pc.EXCEL_ROW_NUMBER
+      ,pc.PRODUCT_CODE
+      ,pc.ISSUE_DATE_FROM
+      ,pc.ISSUE_DATE_TO
+      ,pc.ISSUE_DATE_STR
+      ,pc.PRODUCT_DESCRIPTION
+      ,pc.PRODUCT_GROUP_CODE
+      ,pc.PAYMENT_FREQUENCY
+      ,pc.INSURANCE_TERMS
+      ,pc.INSURANCE_TERMS_MONTHS
+      ,pc.IS_WHOLE_LIFE
+      ,pc.INSURED_IS_POLICY_HOLDER
+      ,pc.HOLDER_AGE_ON_START_DATE_MIN
+      ,pc.HOLDER_AGE_ON_START_DATE_MAX
+      ,pc.HOLDER_AGE_ON_START_DATE_MAX_MA
+      ,pc.HOLDER_AGE_ON_END_DATE_MAX
+      ,pc.INSURED_AGE_ON_START_DATE_MIN
+      ,pc.INSURED_AGE_ON_START_DATE_MAX
+      ,pc.INSURED_AGE_ON_START_DATE_MA
+      ,pc.INSURED_AGE_ON_END_DATE_MAX
+      ,pc.INSURED_AGE_ON_END_DATE_MAX_MA
+      ,pc.STRATEGY
+      ,pc.ADDITIONAL_SERVICES
+      ,pc.GIFT_SERVICES
+      ,pc.GIFT_SERVICES_PREMIUM
+      ,pc.PREFIX_OLD
+      ,pc.PREFIX
+      ,pc.PREFIX_BY_STRATEGY_OLD
+      ,pc.PREFIX_BY_STRATEGY
+      ,pc.FIXED_PREMIUMS
+      ,pc.FIXED_INSURED_SUMS
+      ,pc.SET_FIRST_FIXED_INSURED_SUM
+      ,pc.DISABLE_RISK_INSURED_SUM
+      ,pc.ALLOW_CALC_FROM_PREMIUM
+      ,pc.ALLOW_CALC_FROM_INSURED_SUM
+      ,pc.CAN_HAVE_ADDITIONAL_RISKS
+      ,pc.MIN_RISK_INSURED_SUM
+      ,pc.MAX_RISK_INSURED_SUM
+      ,pc.MIN_PREMIUM
+      ,pc.MAX_PREMIUM
+      ,pc.MAX_PREMIUM_MA
+      ,pc.MAX_INSURED_SUM_MAIN_RISK
+      ,pc.MAX_INSURED_SUM_MAIN_RISK_MA
+      ,pc.IS_PAID_UP_AVAILABLE
+      ,pc.RULE_CODE
+      ,pc.DAYS_BETWEEN_ISSUE_AND_START
+      ,pc.PAY_PERIOD_DAYS
+      ,pc.GRACE_PERIOD_DAYS
+      ,pc.COOL_OFF_PERIOD_DAYS
+      ,pc.PARTNER_BUSINESS_CODE
+      ,pc.RISK_PACKAGES
+      ,pc.USE_THREE_PAYMENTS
+      ,pc.ACTIVE_FROM
+      ,pc.ACTIVE_TO
+      ,pc.PAPER_TYPES
+      ,pc.APPLICATION_PRINTOUT
+      ,pc.POLICY_PRINTOUT
+      ,pc.CASH_BACK_COEFFICIENT
+      ,pc.SHOW_FIN_KNOW_QUEST
+      ,pc.IS_REINVEST_AVAILABLE
+      ,pc.IS_REINVEST_FIELDS_AVAILABLE
+      ,pc.INVOICE_ON_ACTIVATION_IF_REINVEST
+      ,pc.DAYS_BETWEEN_ISSUE_AND_START_REINVEST
+      ,pc.PAY_PERIOD_DAYS_REINVEST
+      ,pc.CREDIT_PROGRAMS
+      ,pc.AVAILABLE_CURRENCIES
+      ,pc.IS_MIGRATED
+      ,pc.GUARANTEED_INCOME
+      ,pc.AVAILABLE_PAYMENT_FREQUENCY
+      ,pc.POLICY_HOLDER_TYPE
+      ,pc.CARD_TYPE
+      ,pc.CUMULATION_PRODUCT_GROUP
+      ,pc.IS_PRODUCT_LINKED_TO_ASSET
+      ,pc.DID_TYPE
+      ,pc.IMPORT_DOCUMENT_ID
+      ,pc.LOADED_BY
+      ,pc.LOAD_DATE
+FROM
+	(SELECT MAX(CONF_VERSION) MAX_VERSION FROM BFX_IMPL.PRODUCT_CONF) maxConfVersion,
+	BFX_IMPL.PRODUCTS p
+	LEFT JOIN BFX_IMPL.PRODUCT_CONF pc ON pc.PRODUCT_CODE = p.CODE
+WHERE 1 = 1
+{{#if parameters.code}}
+       AND p.CODE = @code
+{{/if}}
+{{#if parameters.codes}}
+       AND p.CODE IN (@codes)
+{{/if}}
+{{#if parameters.description}}
+       AND (p.DESCRIPTION LIKE @description OR p.CODE LIKE @description)
+{{/if}}
+{{#if parameters.productGroup}}
+       AND p.PRODUCT_GROUP = @productGroup
+{{/if}}
+{{#if parameters.searchText}}
+       AND (p.DESCRIPTION LIKE @searchText OR p.CODE LIKE @searchText)
+{{/if}}
+{{#if parameters.productCode}}
+	AND pc.PRODUCT_CODE = @productCode
+{{/if}}
+{{#if parameters.issueDate}}
+	AND @issueDate >= pc.ISSUE_DATE_FROM AND @issueDate <= pc.ISSUE_DATE_TO
+{{/if}}
+{{#if parameters.issueDateFrom}}
+	AND pc.ISSUE_DATE_FROM >= @issueDate
+{{/if}}
+{{#if parameters.issueDateTo}}
+	AND @issueDate <= pc.ISSUE_DATE_TO
+{{/if}}
+{{#if parameters.importDocumentId}}
+	AND pc.IMPORT_DOCUMENT_ID = @importDocumentId
+{{/if}}
+{{#if parameters.partnerBusinessCode}}
+	AND pc.PARTNER_BUSINESS_CODE = @partnerBusinessCode
+{{/if}}
+{{#if parameters.version}}
+	AND (pc.CONF_VERSION = @version OR pc.CONF_VERSION IS NULL)
+{{else}}
+	AND (pc.CONF_VERSION = maxConfVersion.MAX_VERSION OR pc.CONF_VERSION IS NULL)
+{{/if}}
+{{#if parameters.productDescription}}
+	AND pc.PRODUCT_DESCRIPTION LIKE '%' + @productDescription + '%'
+{{/if}}

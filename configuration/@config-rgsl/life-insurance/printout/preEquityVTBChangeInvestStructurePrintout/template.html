@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="ru-RU" xml:lang="ru-RU" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+	<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+	<title>Заявление на изменение структуры ИС</title>
+	<link rel="stylesheet" href="assets/styles/style.css">
+</head>
+
+<body>
+
+	<div class="container">
+
+		<div class="logoDiv">
+			<img src="../component/POImageConst/printout/assets/img/logoHeader.png" alt="Логотип Росгосстрах Жизнь"
+				class="logo">
+			<p class="right">ООО СК «Росгосстрах Жизнь»
+				<br>121059, г. Москва, вн.тер.г. муниципальный округ Дорогомилово, ул. Киевская, д. 7, к. 1
+				<br>Лицензии Банка России: СЖ № 3879, СЛ № 3879
+			</p>
+		</div>
+
+		<div class="main">
+
+			<table>
+
+				<col class="col1">
+				<col class="col2">
+				<col class="col3">
+				<col class="col4">
+
+				<tr>
+					<td class="colorBackGray fontColorWhite fontSizeEleven fontBold" colspan="4">
+						<div>ЗАЯВЛЕНИЕ О ВНЕСЕНИИ ИЗМЕНЕНИЙ В УСЛОВИЯ ДОГОВОРА СТРАХОВАНИЯ</div>
+						<div>(ИЗМЕНЕНИЕ СТРУКТУРЫ ИНВЕСТИЦИОННОГО СЧЕТА)</div>
+					</td>
+				</tr>
+
+				<tr>
+					<td class="colorBackGrayLight" colspan="4">ПОЛЯ, ГДЕ ТРЕБУЕТСЯ ВЫБРАТЬ ОТВЕТ, ПРОСИМ ОТМЕТИТЬ ЗНАКОМ V</td>
+				</tr>
+
+				<tr>
+					<td colspan="4">Я,</td>
+				</tr>
+
+				<tr>
+					<td colspan="2" class="noneBorders">являясь Страхователем по договору страхования №</td>
+					<td colspan="2" class="noneBorders dateLeftIndent">
+						от <img src="assets/img/date.png" alt="Date" width="100" height="14"> г.
+					</td>
+				</tr>
+
+				<tr>
+					<td class="colorBackGrayLight fontBold" colspan="4">
+						Прошу Страховщика осуществить покупку/продажу активов для обеспечения
+						следующей целевой структуры инвестиционного счета с учетом допустимых
+						отклонений каждого актива от целевой доли:
+					</td>
+				</tr>
+
+				<tr class="invTableHeader">
+					<td class="invTableTitleActive">Тип актива</td>
+					<td class="center">ISIN</td>
+					<td class="center">Доля</td>
+					<td class="center">Допустимое <br>отклонение от <br>доли актива</td>
+				</tr>
+
+				{{#if invDeclaration.isShares}}
+					<tr>
+						<td class="invTableTitle invTableTitleHideRightBorder">Акции</td>
+					</tr>
+				{{/if}}
+				{{#each invDeclaration.shares}}
+					<tr>
+						<td class="invTableText">Эмитент: {{this.strategy.emitent}} (название актива:
+							{{this.strategy.strategyName}})</td>
+						<td class="center">{{this.strategy.isin}}</td>
+						<td class="center">{{this.sharePercent}}%</td>
+						<td class="center">10%</td>
+					</tr>
+				{{/each}}
+
+				{{#if invDeclaration.isBonds}}
+					<tr>
+						<td class="invTableTitle invTableTitleHideRightBorder">Облигации</td>
+					</tr>
+				{{/if}}
+				{{#each invDeclaration.bonds}}
+					<tr>
+						<td class="invTableText">Эмитент: {{this.strategy.emitent}} (название актива:
+							{{this.strategy.strategyName}})</td>
+						<td class="center">{{this.strategy.isin}}</td>
+						<td class="center">{{this.sharePercent}}%</td>
+						<td class="center">10%</td>
+					</tr>
+				{{/each}}
+
+				{{#if invDeclaration.isDepositaryReceipts}}
+					<tr>
+						<td class="invTableTitle invTableTitleHideRightBorder">Депозитарные расписки</td>
+					</tr>
+				{{/if}}
+				{{#each invDeclaration.depositaryReceipts}}
+					<tr>
+						<td class="invTableText">Эмитент: {{this.strategy.emitent}} (название актива:
+							{{this.strategy.strategyName}})</td>
+						<td class="center">{{this.strategy.isin}}</td>
+						<td class="center">{{this.sharePercent}}%</td>
+						<td class="center">10%</td>
+					</tr>
+				{{/each}}
+
+				{{#if invDeclaration.isAmericanDepositaryReceipts}}
+					<tr>
+						<td class="invTableTitle invTableTitleHideRightBorder">Американские депозитарные расписки (АДР)</td>
+					</tr>
+				{{/if}}
+				{{#each invDeclaration.americanDepositaryReceipts}}
+					<tr>
+						<td class="invTableText">Эмитент: {{this.strategy.emitent}} (название актива:
+							{{this.strategy.strategyName}})</td>
+						<td class="center">{{this.strategy.isin}}</td>
+						<td class="center">{{this.sharePercent}}%</td>
+						<td class="center">10%</td>
+					</tr>
+				{{/each}}
+
+				{{#if invDeclaration.isTotalPercent}}
+					<tr>
+						<td class="invTableTitle">Инструменты денежного рынка</td>
+						<td class="center"></td>
+						<td class="center">{{invDeclaration.totalPercent}}%</td>
+						<td class="center">100%</td>
+					</tr>
+				{{/if}}
+
+			</table>
+
+			<table class="tableNoBorders fontSizeTen">
+
+				<col class="signingCol1">
+				<col class="signingCol2">
+
+				<tr>
+					<td class="colorBackGrayLight" colspan="2">
+						<span>Подписывая заявление Страхователь подтверждает, что понимает следующее:</span>
+					</td>
+				</tr>
+
+				<tr>
+					<td class="tableNoBordersIndent colorBackGrayLight textAlignTop signingLeftIndent" colspan="1">&ndash;</td>
+					<td class="tableNoBordersIndent colorBackGrayLight textJustify" colspan="1">
+						<span>отзыв настоящего заявления после его получения Страховщиком возможен только при согласии Страховщика;</span>
+					</td>
+				</tr>
+
+				<tr>
+					<td class="tableNoBordersIndent colorBackGrayLight textAlignTop signingLeftIndent" colspan="1">&ndash;</td>
+					<td class="tableNoBordersIndent colorBackGrayLight textJustify" colspan="1">
+						<span>в целях исполнения поручений, данных Страхователем в рамках настоящего заявления, для обеспечения фактической структуры инвестиционного счета целевой структуре, установленной настоящим заявлением, Страховщик в течение периода инвестирования осуществляет продажу и/или покупку инвестиционных активов (дата начала периода инвестирования – следующий рабочий день за датой получения Страховщиком настоящего заявления; дата окончания периода инвестирования – 5-й рабочий день с даты начала периода инвестирования);</span>
+					</td>
+				</tr>
+
+				<tr>
+					<td class="tableNoBordersIndent colorBackGrayLight textAlignTop signingLeftIndent" colspan="1">&ndash;</td>
+					<td class="tableNoBordersIndent colorBackGrayLight textJustify" colspan="1">
+						<span>Страховщик самостоятельно без дополнительного согласования со Страхователем в течение периода инвестирования совершает сделки на финансовых рынках с активами, указанными в настоящем заявлении, при этом Страховщик действует в интересах Страхователя, но не имеет обязательства совершать какие-либо сделки по лучшим ценам приобретения и/или продажи в течение какого-либо временного периода;</span>
+					</td>
+				</tr>
+
+				<tr>
+					<td class="tableNoBordersIndent colorBackGrayLight textAlignTop signingLeftIndent" colspan="1">&ndash;</td>
+					<td class="tableNoBordersIndent colorBackGrayLight textJustify" colspan="1">
+						<span>в связи с тем, что совершение сделок на финансовых рынках обусловлено таким факторами, как нормальное функционирование торговой инфраструктуры, наличием ликвидности каждого из активов и прочими факторами, фактическая структура инвестиционного счета на дату окончания периода инвестирования может как соответствовать, так и отличаться от целевой структуры инвестиционного счета, установленной в настоящем заявлении, в случае если актив (его часть в соответствии с согласованной долей) не был приобретен в течение периода инвестирования, неиспользованные на покупку актива денежные средства распределяются в актив «Инструменты денежного рынка» до момента получения от Страхователя дополнительного заявления на изменение структуры инвестиционного счета;</span>
+					</td>
+				</tr>
+
+				<tr>
+					<td class="tableNoBordersIndent colorBackGrayLight textAlignTop signingLeftIndent" colspan="1">&ndash;</td>
+					<td class="tableNoBordersIndent colorBackGrayLight textJustify" colspan="1">
+						<span>Страховщик информирует Страхователя согласованным сторонами способом о фактической структуре инвестиционного счета.</span>
+					</td>
+				</tr>
+
+			</table>
+
+			<table class="signatureTable">
+
+				<col class="signatureCol1">
+				<col class="signatureCol2">
+
+				<tr>
+					<td colspan="1">Ф.И.О. СТРАХОВАТЕЛЯ:</td>
+					<td colspan="3"></td>
+				</tr>
+
+				<tr>
+					<td colspan="1">ПОДПИСЬ</td>
+					<td colspan="1"></td>
+					<td colspan="1" class="center">ДАТА ЗАПОЛНЕНИЯ</td>
+					<td colspan="1"><img src="assets/img/date.png" alt="Date" width="100" height="14"> г.</td>
+				</tr>
+
+			</table>
+
+		</div>
+
+	</div>
+
+</body>
+
+</html>

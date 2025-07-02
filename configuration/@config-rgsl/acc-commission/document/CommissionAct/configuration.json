@@ -1,0 +1,282 @@
+{
+    "entityType": "UniversalDocument",
+    "dimensions": {},
+    "hideFromDashboard": false,
+    "ui": {
+        "layout": "CommissionActLayout",
+        "composition": {
+            "HeaderContent": "Header",
+            "HistoryContent": "History",
+            "AditionalDataSearchFiltersContent": "AditionalDataSearchFilters",
+            "ItemsContent": "Items",
+            "FooterContent": "Footer",
+            "AccountingEntries": "AccountingEntries"
+        }
+    },
+    "validFrom": "2000-01-01",
+    "states": [
+        {
+            "name": "Draft",
+            "actors": [
+                {
+                    "actor": "ViewerCommissionAct",
+                    "operations": [],
+                    "transitions": []
+                },
+                {
+                    "actor": "UserCommissionAct",
+                    "operations": [],
+                    "transitions": []
+                },
+                {
+                    "actor": "AdminCommissionAct",
+                    "operations": [
+                        "Save"
+                    ],
+                    "transitions": [
+                        "Draft_To_Confirming",
+                        "Draft_To_Deleted"
+                    ]
+                },
+                {
+                    "actor": "System",
+                    "transitions": [
+                        "Draft_To_Generating"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Deleted",
+            "actors": [
+                {
+                    "actor": "ViewerCommissionAct",
+                    "operations": [],
+                    "transitions": []
+                },
+                {
+                    "actor": "UserCommissionAct",
+                    "operations": [],
+                    "transitions": []
+                },
+                {
+                    "actor": "AdminCommissionAct",
+                    "operations": [],
+                    "transitions": []
+                }
+            ]
+        },
+        {
+            "name": "Generating",
+            "actors": [
+                {
+                    "actor": "ViewerCommissionAct",
+                    "operations": [],
+                    "transitions": []
+                },
+                {
+                    "actor": "UserCommissionAct",
+                    "operations": [],
+                    "transitions": []
+                },
+                {
+                    "actor": "AdminCommissionAct",
+                    "operations": [],
+                    "transitions": []
+                },
+                {
+                    "actor": "System",
+                    "transitions": [
+                        "Generating_To_Draft"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Confirming",
+            "actors": [
+                {
+                    "actor": "ViewerCommissionAct",
+                    "operations": [],
+                    "transitions": []
+                },
+                {
+                    "actor": "UserCommissionAct",
+                    "operations": [],
+                    "transitions": []
+                },
+                {
+                    "actor": "AdminCommissionAct",
+                    "operations": [],
+                    "transitions": [
+                        "Confirming_To_Draft",
+                        "Confirming_To_Confirmed"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Confirmed",
+            "actors": [
+                {
+                    "actor": "ViewerCommissionAct",
+                    "operations": [],
+                    "transitions": []
+                },
+                {
+                    "actor": "UserCommissionAct",
+                    "operations": [],
+                    "transitions": []
+                },
+                {
+                    "actor": "AdminCommissionAct",
+                    "operations": [],
+                    "transitions": [
+                        "Confirmed_To_Approved"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Approved",
+            "actors": [
+                {
+                    "actor": "ViewerCommissionAct",
+                    "operations": [],
+                    "transitions": []
+                },
+                {
+                    "actor": "UserCommissionAct",
+                    "operations": [],
+                    "transitions": []
+                },
+                {
+                    "actor": "AdminCommissionAct",
+                    "operations": [
+                        "Save"
+                    ],
+                    "transitions": [
+                        "Approved_To_Annulled"
+                    ]
+                },
+                {
+                    "actor": "System",
+                    "operations": [
+                        "Save"
+                    ],
+                    "transitions": [
+                        "Approved_To_CompletedPayOrder",
+                        "Approved_To_CompletedPaid",
+                        "Approved_To_CompletedPaidNegative"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "CompletedPayOrder",
+            "actors": [
+                {
+                    "actor": "ViewerCommissionAct",
+                    "operations": [],
+                    "transitions": []
+                },
+                {
+                    "actor": "UserCommissionAct",
+                    "operations": [],
+                    "transitions": []
+                },
+                {
+                    "actor": "AdminCommissionAct",
+                    "operations": [],
+                    "transitions": []
+                }
+            ]
+        },
+        {
+            "name": "CompletedPaid",
+            "actors": [
+                {
+                    "actor": "ViewerCommissionAct",
+                    "operations": [],
+                    "transitions": []
+                },
+                {
+                    "actor": "UserCommissionAct",
+                    "operations": [],
+                    "transitions": []
+                },
+                {
+                    "actor": "AdminCommissionAct",
+                    "operations": [],
+                    "transitions": []
+                }
+            ]
+        },
+        {
+            "name": "CompletedPaidNegative",
+            "actors": [
+                {
+                    "actor": "ViewerCommissionAct",
+                    "operations": [],
+                    "transitions": []
+                },
+                {
+                    "actor": "UserCommissionAct",
+                    "operations": [],
+                    "transitions": []
+                },
+                {
+                    "actor": "AdminCommissionAct",
+                    "operations": [],
+                    "transitions": []
+                },
+                {
+                    "actor": "System",
+                    "operations": [],
+                    "transitions": [
+                        "CompletedPaidNegative_To_Approved"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Annulled",
+            "actors": [
+                {
+                    "actor": "ViewerCommissionAct",
+                    "operations": [],
+                    "transitions": []
+                },
+                {
+                    "actor": "UserCommissionAct",
+                    "operations": [],
+                    "transitions": []
+                },
+                {
+                    "actor": "AdminCommissionAct",
+                    "operations": [],
+                    "transitions": []
+                }
+            ]
+        }
+    ],
+    "components": [],
+    "transitions": {
+        "Approved_To_CompletedPaidNegative": {
+            "transitionEffects": {
+                "enrich": [
+                    "[UpdatePayDate]"
+                ]
+            }
+        },
+        "CompletedPaidNegative_To_Approved": {
+            "transitionEffects": {
+                "enrich": [
+                    "[UpdatePayDate]"
+                ]
+            }
+        }
+    },
+    "attachments": [],
+    "version": "1"
+}

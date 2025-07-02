@@ -1,0 +1,200 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "object",
+    "properties": {
+        "criteria": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "noCriteria": {
+                    "type": "boolean"
+                },
+                "businessNumber": {
+                    "type": "string",
+                    "description": "Business number of a contract."
+                },
+                "documentState": {
+                    "type": "string",
+                    "description": "Document state."
+                },
+                "groupCode": {
+                    "type": "string",
+                    "description": "User Group Code."
+                },
+                "assigneeId": {
+                    "type": "string",
+                    "description": "Assignee to activity."
+                },
+                "hasAssigneeId": {
+                    "type": "boolean",
+                    "description": "If assignee id is not null."
+                },
+                "deadlineFrom": {
+                    "type": "string",
+                    "aiFormat": "date-time",
+                    "description": "From date for deadline."
+                },
+                "deadlineTo": {
+                    "type": "string",
+                    "aiFormat": "date-time",
+                    "description": "To date for deadline."
+                },
+                "createdOnFrom": {
+                    "type": "string",
+                    "aiFormat": "date",
+                    "description": "From date for creation date."
+                },
+                "createdOnTo": {
+                    "type": "string",
+                    "aiFormat": "date",
+                    "description": "To date for creation date."
+                },
+                "closedOnFrom": {
+                    "type": "string",
+                    "aiFormat": "date",
+                    "description": "From date for closing date."
+                },
+                "closedOnTo": {
+                    "type": "string",
+                    "aiFormat": "date",
+                    "description": "To date for closing date."
+                },
+                "activityStatus": {
+                    "type": "string",
+                    "description": "Activity status.",
+                    "enum": [
+                        "Open",
+                        "Closed"
+                    ]
+                },
+                "activityType": {
+                    "type": "string",
+                    "description": "Activity type.",
+                    "enum": [
+                        "State",
+                        "Confirmation",
+                        "Manual"
+                    ]
+                },
+                "username": {
+                    "type": "string",
+                    "description": "Filter activities only to user user is a member of by username."
+                },
+                "showVerification": {
+                    "type": "boolean"
+                },
+                "holderName": {
+                    "type": "string"
+                },
+                "holderAgeFrom": {
+                    "type": "integer"
+                },
+                "holderAgeTo": {
+                    "type": "integer"
+                },
+                "insuredName": {
+                    "type": "string"
+                },
+                "contractNumber": {
+                    "type": "string"
+                },
+                "issueDateFrom": {
+                    "type": "string",
+                    "aiFormat": "date"
+                },
+                "issueDateTo": {
+                    "type": "string",
+                    "aiFormat": "date"
+                },
+                "paymentFrequency": {
+                    "type": "object",
+                    "properties": {
+                        "paymentFrequencyCode": {
+                            "type": "string"
+                        },
+                        "paymentFrequencyDescription": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "insuranceProduct": {
+                    "type": "object",
+                    "properties": {
+                        "productCode": {
+                            "type": "string"
+                        },
+                        "productDescription": {
+                            "type": "string"
+                        },
+                        "productGroup": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "insuranceProducts": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "productCode": {
+                                "type": "string"
+                            },
+                            "productDescription": {
+                                "type": "string"
+                            },
+                            "productGroup": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                },
+                "partner": {
+                    "type": "object",
+                    "properties": {
+                        "partnerCode": {
+                            "type": "string"
+                        },
+                        "partnerDescription": {
+                            "type": "string"
+                        },
+                        "partnerShortDescription": {
+                            "type": "string"
+                        },
+                        "partnerBusinessCode": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "attachmentVerificationState": {
+                    "$ref": "component:AttachmentVerificationState"
+                },
+                "contractStates": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "component:ContractState"
+                    }
+                },
+                "hideUnassignedTasks": {
+                    "type": "boolean"
+                },
+                "userId": {
+                    "type": "string"
+                }
+            }
+        },
+        "sort": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "descending": {
+                        "type": "boolean"
+                    },
+                    "fieldName": {
+                        "type": "string"
+                    }
+                }
+            }
+        }
+    }
+}

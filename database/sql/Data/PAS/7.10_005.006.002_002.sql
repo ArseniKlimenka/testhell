@@ -1,0 +1,2 @@
+UPDATE BFX_IMPL.RISKS SET FULL_DESCRIPTION = N'Первичное диагностирование Застрахованному критического заболевания (выплата)' WHERE RISKS.CODE  = 'CDP36404'
+UPDATE BFX_IMPL.RISKS SET FULL_DESCRIPTION = N'Первичное диагностирование Застрахованному критического заболевания (лечение)' WHERE RISKS.CODE  = 'CDH36404'

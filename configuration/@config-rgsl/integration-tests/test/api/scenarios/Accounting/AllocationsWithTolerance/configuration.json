@@ -1,0 +1,177 @@
+{
+    "description": "Validate allocation and deallocation process using tolerances",
+    "steps": [
+        {
+            "$ref": "AdjustAccountingPeriods",
+            "context": {
+                "firstOpenPeriod": "2022-01-01"
+            }
+        },
+        {
+            "$ref": "CreateALIPolicyDemo",
+            "context": {
+                "paymentFrequencyCode": "2"
+            }
+        },
+        {
+            "$ref": "AdjustCurrentDate",
+            "context": {
+                "currentDate": "2022-01-01"
+            }
+        },
+        {
+            "$ref": "CreatePaymentAndAutoAllocate",
+            "description": "Pay first installment",
+            "context": {
+                "amountToAllocate": 99900,
+                "expectedPostAmount": 100000,
+                "transactionDate": "2022-01-01",
+                "referenceNoToAllocate": "{{$.contractNumber}}"
+            }
+        },
+        {
+            "code": "ValidateTransactions_1",
+            "description": "Validate transactions 1 (underpayment normal)",
+            "requests": [],
+            "assert": {
+                "expected": "./steps/validateTransactions/expectedResult_1.json",
+                "module": "../../lib/accounting/assert.js",
+                "function": "assertTransactions"
+            }
+        },
+        {
+            "$ref": "AdjustAccountingPeriods",
+            "context": {
+                "firstOpenPeriod": "2023-01-01"
+            }
+        },
+        {
+            "$ref": "AdjustCurrentDate",
+            "context": {
+                "currentDate": "2023-01-01"
+            }
+        },
+        {
+            "$ref": "CreatePaymentAndAutoAllocate",
+            "description": "Pay second installment",
+            "context": {
+                "amountToAllocate": 99900,
+                "expectedPostAmount": 0,
+                "transactionDate": "2022-06-01",
+                "referenceNoToAllocate": "{{$.contractNumber}}"
+            }
+        },
+        {
+            "$ref": "ExecuteEtl",
+            "description": "Invoice 2. installment",
+            "context": {
+                "etlName": "PreparePaymentPlanBasedInvoiceETLService",
+                "etlRequest": {
+                    "contractNumbers": ["{{$.contractNumber}}"],
+                    "postingDateTo": "2023-01-01"
+                }
+            }
+        },
+        {
+            "code": "ValidateTransactions_2",
+            "description": "Validate transactions 2 (underpayment advance)",
+            "requests": [],
+            "assert": {
+                "expected": "./steps/validateTransactions/expectedResult_2.json",
+                "module": "../../lib/accounting/assert.js",
+                "function": "assertTransactions"
+            }
+        },
+        {
+            "$ref": "ExecuteEtl",
+            "description": "Invoice 3. installment",
+            "context": {
+                "etlName": "PreparePaymentPlanBasedInvoiceETLService",
+                "etlRequest": {
+                    "contractNumbers": ["{{$.contractNumber}}"],
+                    "postingDateTo": "2024-01-01"
+                }
+            }
+        },
+        {
+            "$ref": "CreatePaymentAndAutoAllocate",
+            "description": "Pay 3. installment",
+            "context": {
+                "amountToAllocate": 100100,
+                "expectedPostAmount": 100000,
+                "transactionDate": "2024-01-01",
+                "referenceNoToAllocate": "{{$.contractNumber}}"
+            }
+        },
+        {
+            "code": "ValidateTransactions_3",
+            "description": "Validate transactions 3 (overpayment normal)",
+            "requests": [],
+            "assert": {
+                "expected": "./steps/validateTransactions/expectedResult_3.json",
+                "module": "../../lib/accounting/assert.js",
+                "function": "assertTransactions"
+            }
+        },
+        {
+            "$ref": "CreatePaymentAndAutoAllocate",
+            "description": "Pay 4. installment",
+            "context": {
+                "amountToAllocate": 100100,
+                "expectedPostAmount": 0,
+                "transactionDate": "2024-12-01",
+                "referenceNoToAllocate": "{{$.contractNumber}}"
+            }
+        },
+        {
+            "$ref": "ExecuteEtl",
+            "description": "Invoice 4. installment (overpayment advance)",
+            "context": {
+                "etlName": "PreparePaymentPlanBasedInvoiceETLService",
+                "etlRequest": {
+                    "contractNumbers": ["{{$.contractNumber}}"],
+                    "postingDateTo": "2025-01-01"
+                }
+            }
+        },
+        {
+            "code": "ValidateTransactions_4",
+            "description": "Validate transactions 4",
+            "requests": [],
+            "assert": {
+                "expected": "./steps/validateTransactions/expectedResult_4.json",
+                "module": "../../lib/accounting/assert.js",
+                "function": "assertTransactions"
+            }
+        },
+        {
+            "$ref": "CancelAllocation",
+            "description": "Cancel all allocations",
+            "context": {
+                "cancelAllocContractNumber": "{{$.contractNumber}}"
+            }
+        },
+        {
+            "code": "ValidateTransactions_5",
+            "description": "Validate transactions 5",
+            "requests": [],
+            "assert": {
+                "expected": "./steps/validateTransactions/expectedResult_5.json",
+                "module": "../../lib/accounting/assert.js",
+                "function": "assertTransactions"
+            }
+        },
+        {
+            "$ref": "AdjustCurrentDate",
+            "context": {
+                "currentDate": null
+            }
+        },
+        {
+            "$ref": "AdjustAccountingPeriods",
+            "context": {
+                "firstOpenPeriod": "2022-07-01"
+            }
+        }
+    ]
+}

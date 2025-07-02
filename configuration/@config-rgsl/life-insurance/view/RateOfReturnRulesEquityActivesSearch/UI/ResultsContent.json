@@ -1,0 +1,242 @@
+{
+    "type": "Group",
+    "elements": [
+        {
+            "type": "DataGrid",
+            "elementId": "RateOfReturnRulesSearchTable",
+            "mode": "DataSource",
+            "pagination": {
+                "mode": "Regular",
+                "pageSizes": [
+                    10,
+                    50,
+                    100
+                ]
+            },
+            "selection": {
+                "mode": "None"
+            },
+            "columns": [
+                {
+                    "sortable": true,
+                    "title": "excelRowNumber",
+                    "name": "excelRowNumber",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/excelRowNumber"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "productCode",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/productCode"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "insuranceTerms",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/insuranceTerms"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "issueDateFrom",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/issueDateFrom"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "issueDateTo",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/issueDateTo"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "issueDateStr",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/issueDateStr"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "manualRate",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "decimalPlaces": 4,
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/manualRate"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "investmentFrequency",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "decimalPlaces": 4,
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/investmentFrequency"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "mf",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "decimalPlaces": 5,
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/mf"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "costsOpenContracts",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "decimalPlaces": 4,
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/costsOpenContracts"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "commWithdrawalFunds",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/commWithdrawalFunds"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "rko",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "decimalPlaces": 4,
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/rko"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "isStandardContractConditions",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/isStandardContractConditions"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "isCoordinationUDRequired",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/isCoordinationUDRequired"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "importDocumentId",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/importDocumentId"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "version",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/version"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "loadedBy",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/loadedBy"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "loadDate",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/loadDate"
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "type": "GridLayout",
+            "numberOfColumns": 3,
+            "elements": [
+                {
+                    "type": "Group",
+                    "stackContent": "Left",
+                    "width": 2,
+                    "elements": [
+                        {
+                            "type": "Button",
+                            "label": "Export last imported rate of return equity and actives",
+                            "onClick": [
+                                {
+                                    "commandType": "executeAction",
+                                    "actionName": "exportLastRateOfReturnRulesEquityActives"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Button",
+                            "label": "Export filtered rate of return equity and actives",
+                            "onClick": [
+                                {
+                                    "commandType": "executeAction",
+                                    "actionName": "exportFilteredRateOfReturnRulesEquityActives"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

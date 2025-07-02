@@ -1,0 +1,225 @@
+{
+    "type": "Group",
+    "elements": [
+        {
+            "type": "DataGrid",
+            "elementId": "serchResultTable",
+            "mode": "DataSource",
+            "pagination": {
+                "mode": "Regular",
+                "pageSizes": [
+                    5,
+                    10,
+                    15
+                ]
+            },
+            "selection": {
+                "mode": "Multi",
+                "enableRowSelection": true,
+                "showCheckBox": true
+            },
+            "columns": [
+                {
+                    "sortable": false,
+                    "title": "Claim number",
+                    "name": "Claim number",
+                    "cellContent": {
+                        "type": "Link",
+                        "readOnly": true,
+                        "targetType": "Url",
+                        "label": "Claim number",
+                        "value": {
+                            "mapping": "claimNumberUriMapping",
+                            "$ref": "#"
+                        },
+                        "width": 5,
+                        "content": {
+                            "text": {
+                                "type": "OutputText",
+                                "value": {
+                                    "$ref": "#/properties/resultData/properties/claimNumber"
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "activityDate",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/activityDate"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "riskName",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/riskName"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "applicationDate",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/applicationDate"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "insuredEventNumber",
+                    "name": "insuredEventNumber",
+                    "cellContent": {
+                        "type": "Link",
+                        "readOnly": true,
+                        "targetType": "Url",
+                        "label": "insuredEventNumber",
+                        "value": {
+                            "mapping": "insuredEventNumberUriMapping",
+                            "$ref": "#"
+                        },
+                        "width": 5,
+                        "content": {
+                            "text": {
+                                "type": "OutputText",
+                                "value": {
+                                    "$ref": "#/properties/resultData/properties/insuredEventNumber"
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "insuredEventDate",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/insuredEventDate"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "insuredEventNumber",
+                    "name": "insuredEventNumber",
+                    "cellContent": {
+                        "type": "Link",
+                        "readOnly": true,
+                        "targetType": "Url",
+                        "label": "contractNumber",
+                        "value": {
+                            "mapping": "contractNumberUriMapping",
+                            "$ref": "#"
+                        },
+                        "width": 5,
+                        "content": {
+                            "text": {
+                                "type": "OutputText",
+                                "value": {
+                                    "$ref": "#/properties/resultData/properties/contractNumber"
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "productName",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/productName"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "productGroup",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/productGroupName"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "policyHolderName",
+                    "name": "policyHolderName",
+                    "cellContent": {
+                        "type": "Link",
+                        "readOnly": true,
+                        "targetType": "Url",
+                        "label": "policyHolderName",
+                        "value": {
+                            "mapping": "policyHolderUriMapping",
+                            "$ref": "#"
+                        },
+                        "width": 5,
+                        "content": {
+                            "text": {
+                                "type": "OutputText",
+                                "value": {
+                                    "$ref": "#/properties/resultData/properties/policyHolderName"
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "amountInDocCurrency",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/amountInDocCurrency"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "docCurrencyCode",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/docCurrencyCode"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "amountInRubCurrency",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/amountInRubCurrency"
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "type": "Button",
+            "value": {
+                "$ref": "#"
+            },
+            "width": 1,
+            "onClick": [
+                {
+                    "commandType": "executeAction",
+                    "actionName": "sendClaimsToPayment"
+                }
+            ],
+            "label": "sendClaimsToPayment"
+        }
+    ]
+}

@@ -1,0 +1,21 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "Life Insurance",
+    "description": "Data schema describing Policy Holder information",
+    "type": "object",
+    "additionalProperties": false,
+    "aiValidation": [
+        {
+            "rule": "validatePolicyHolder"
+        }
+    ],
+    "properties": {
+        "partyData": {
+            "$ref": "component:PartyLookUpSearch",
+            "aiTitle": "policyHolderObj"
+        },
+        "participantType": {
+            "type": "string"
+        }
+    }
+}

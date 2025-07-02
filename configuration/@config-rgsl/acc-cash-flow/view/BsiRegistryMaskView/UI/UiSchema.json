@@ -1,0 +1,105 @@
+{
+    "type": "GridLayout",
+    "numberOfColumns": 4,
+    "formProperties": {
+        "events": {
+            "onLoad": "onLoad"
+        }
+    },
+    "elements": [
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "DataGrid",
+                    "mode": "Array",
+                    "width": 8,
+                    "actions": [
+                        "Add",
+                        "Edit",
+                        "Delete"
+                    ],
+                    "edit": {
+                        "mode": "Detached"
+                    },
+                    "value": {
+                        "$ref": "#/properties/Body/properties/rules"
+                    },
+                    "height": "None",
+                    "columns": [
+                        {
+                            "title": "accountNumber",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "value": {
+                                    "$ref": "#/properties/accountNumber"
+                                }
+                            },
+                            "name": "accountNumber"
+                        },
+                        {
+                            "title": "paymentDescription",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "value": {
+                                    "$ref": "#/properties/paymentDescription"
+                                }
+                            },
+                            "name": "paymentDescription"
+                        }
+                    ],
+                    "detailsTemplates": {
+                        "edit": {
+                            "content": {
+                                "type": "GridLayout",
+                                "fillAvailableSpace": true,
+                                "numberOfColumns": 2,
+                                "elements": [
+                                    {
+                                        "type": "Group",
+                                        "elements": [
+                                            {
+                                                "type": "Input",
+                                                "label": "accountNumber",
+                                                "value": {
+                                                    "$ref": "#/properties/accountNumber"
+                                                },
+                                                "width": 1
+                                            },
+                                            {
+                                                "type": "Input",
+                                                "label": "paymentDescription",
+                                                "value": {
+                                                    "$ref": "#/properties/paymentDescription"
+                                                },
+                                                "width": 1
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "Button",
+                    "value": {
+                        "$ref": "#"
+                    },
+                    "onClick": [
+                        {
+                            "commandType": "executeAction",
+                            "actionName": "onSaveAction"
+                        }
+                    ],
+                    "label": "Save"
+                }
+            ]
+        }
+    ]
+}

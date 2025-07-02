@@ -1,0 +1,75 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "Life Insurance",
+    "description": "Data schema describing cancellation inquiry",
+    "type": "object",
+    "additionalProperties": false,
+    "aiAudit": {
+        "scope": "General"
+    },
+    "properties": {
+        "department": {
+            "type": "object",
+            "aiTitle": "department",
+            "additionalProperties": false,
+            "properties": {
+                "code": {
+                    "type": "string"
+                },
+                "nameLocalized": {
+                    "type": "string"
+                }
+            }
+        },
+        "inquiryReasons": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                    "code": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "textOfInquiry": {
+            "type": "string",
+            "aiTitle": "textOfInquiry"
+        },
+        "textOfAnswer": {
+            "type": "string",
+            "aiTitle": "textOfAnswer"
+        },
+        "textOfComment": {
+            "type": "string",
+            "aiTitle": "textOfComment"
+        },
+        "endowmentNumber": {
+            "type": "string",
+            "aiTitle": "endowmentNumber"
+        },
+        "endowmentId": {
+            "type": "string",
+            "aiTitle": "endowmentId"
+        },
+        "creatorUserName": {
+            "type": "string"
+        },
+        "holder": {
+            "type": "string",
+            "aiTitle": "holder"
+        },
+        "contractNumber": {
+            "type": "string",
+            "aiTitle": "contractNumber"
+        },
+        "contractConfigurationCodeName": {
+            "type": "string",
+            "aiTitle": "contractConfigurationCodeName"
+        }
+    }
+}

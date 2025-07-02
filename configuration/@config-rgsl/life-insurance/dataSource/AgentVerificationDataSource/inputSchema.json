@@ -1,0 +1,61 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+        "criteria": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "documentNumber": {
+                    "type": "string"
+                },
+                "listName": {
+                    "$ref": "component:ListName"
+                },
+                "listNames": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "component:ListName"
+                    }
+                },
+                "partyCodes": {
+                    "type": "string"
+                },
+                "foundCodes": {
+                    "type": "string"
+                },
+                "creationDate": {
+                    "type": "string",
+                    "aiFormat": "date"
+                },
+                "listDate": {
+                    "type": "string",
+                    "aiFormat": "date"
+                },
+                "isNotCancelled": {
+                    "type": "boolean"
+                },
+                "isNotDraft": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "sort": {
+            "type": "array",
+            "additionalProperties": false,
+            "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                    "descending": {
+                        "type": "boolean"
+                    },
+                    "fieldName": {
+                        "type": "string"
+                    }
+                }
+            }
+        }
+    }
+}

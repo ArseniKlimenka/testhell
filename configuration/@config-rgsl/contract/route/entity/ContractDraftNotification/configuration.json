@@ -1,0 +1,35 @@
+{
+    "entityType": "Contract",
+    "version": "1",
+    "condition": {
+        "events": [
+            "Created"
+        ],
+        "configuration": {
+            "dimensions": {
+                "contractType": [
+                    "Policy"
+                ]
+            }
+        },
+        "documentStates": [
+            "Draft"
+        ]
+    },
+    "sinks": [
+        {
+            "name": "GetContractVersions",
+            "fetch": {
+                "configuration": {
+                    "name": "ContractVersionsDataSource"
+                }
+            }
+        },
+        {
+            "name": "PolicyNonResidentNotification",
+            "notification": {
+                "notificationName": "PolicyNonResidentNotification"
+            }
+        }
+    ]
+}

@@ -1,0 +1,108 @@
+{
+    "id": "StrategyConfLoadedDataErrorsFromExcelUiSchema",
+    "type": "Group",
+    "elements": [
+        {
+            "type": "GridLayout",
+            "numberOfColumns": 4,
+            "elements": [
+                {
+                    "type": "Group",
+                    "elements": [
+                        {
+                            "type": "Group",
+                            "width": 2,
+                            "stackContent": "Left",
+                            "elements": [
+                                {
+                                    "type": "Button",
+                                    "onClick": [
+                                        {
+                                            "commandType": "executeOperation",
+                                            "operation": "EXPORT"
+                                        }
+                                    ],
+                                    "label": "Export"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Group",
+                            "width": 2,
+                            "stackContent": "Right",
+                            "elements": []
+                        }
+                    ]
+                },
+                {
+                    "type": "Group",
+                    "elements": [
+                        {
+                            "type": "DataGrid",
+                            "orderBy": "Description",
+                            "mode": "DataSource",
+                            "header": {
+                                "showReloadButton": true,
+                                "showNumberOfResults": false
+                            },
+                            "pagination": {
+                                "mode": "Regular",
+                                "pageSizes": [
+                                    5,
+                                    10,
+                                    15
+                                ]
+                            },
+                            "selection": {
+                                "mode": "None"
+                            },
+                            "height": "None",
+                            "columns": [
+                                {
+                                    "sortable": false,
+                                    "title": "RowNumber",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "value": {
+                                            "$ref": "#/properties/resultData/properties/rowNumber"
+                                        }
+                                    }
+                                },
+                                {
+                                    "sortable": false,
+                                    "title": "ErrorMessage",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "value": {
+                                            "$ref": "#/properties/resultData/properties/errorMessage"
+                                        }
+                                    }
+                                },
+                                {
+                                    "sortable": false,
+                                    "title": "SourceId",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "value": {
+                                            "$ref": "#/properties/resultData/properties/sourceId"
+                                        }
+                                    }
+                                },
+                                {
+                                    "sortable": false,
+                                    "title": "ErrorType",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "value": {
+                                            "$ref": "#/properties/resultData/properties/errorType"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

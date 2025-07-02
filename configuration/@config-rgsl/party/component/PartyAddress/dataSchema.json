@@ -1,0 +1,162 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "Party address",
+    "type": "object",
+    "additionalProperties": false,
+    "aiValidation": {
+        "rule": "validatePartyAddress"
+    },
+    "description": "Schema describing an address list",
+    "properties": {
+        "isManualAddress": {
+            "type": "boolean",
+            "aiTitle": "isManualAddress"
+        },
+        "isForeignAddress": {
+            "type": "boolean",
+            "aiTitle": "isForeignAddress"
+        },
+        "isSameAsRegistration": {
+            "type": "boolean",
+            "aiTitle": "isSameAsRegistration"
+        },
+        "manualCountry": {
+            "$ref": "component:PartyCountry"
+        },
+        "fullAddress": {
+            "type": "object",
+            "additionalProperties": false,
+            "description": "Autocomplete full address",
+            "aiTitle": "fullAddress",
+            "properties": {
+                "value": {
+                    "type": "string"
+                },
+                "data": {
+                    "type": "object",
+                    "additionalProperties": true
+                }
+            }
+        },
+        "addressType": {
+            "type": "object",
+            "additionalProperties": false,
+            "aiTitle": "addressType",
+            "properties": {
+                "addressTypeCode": {
+                    "type": "string",
+                    "aiTitle": "addressTypeCode"
+                },
+                "addressTypeDesc": {
+                    "type": "string",
+                    "aiTitle": "addressTypeDesc"
+                }
+            }
+        },
+        "comment": {
+            "type": "string",
+            "description": "comment",
+            "aiTitle": "comment"
+        },
+        "postalCode": {
+            "type": "string",
+            "description": "postalCode",
+            "aiTitle": "postalCode"
+        },
+        "country": {
+            "type": "string",
+            "description": "country",
+            "aiTitle": "country"
+        },
+        "region": {
+            "type": "string",
+            "description": "region",
+            "aiTitle": "region"
+        },
+        "area": {
+            "type": "string",
+            "description": "area",
+            "aiTitle": "area"
+        },
+        "city": {
+            "type": "string",
+            "description": "city",
+            "aiTitle": "city"
+        },
+        "settlement": {
+            "type": "string",
+            "description": "settlement",
+            "aiTitle": "settlement"
+        },
+        "street": {
+            "type": "string",
+            "description": "street",
+            "aiTitle": "street"
+        },
+        "house": {
+            "type": "string",
+            "description": "house",
+            "aiTitle": "house"
+        },
+        "houseExtension": {
+            "type": "string",
+            "description": "houseExtension",
+            "aiTitle": "houseExtension"
+        },
+        "flat": {
+            "type": "string",
+            "description": "flat",
+            "aiTitle": "flat"
+        },
+        "codeOkato": {
+            "type": "string",
+            "description": "codeOkato",
+            "aiTitle": "codeOkato"
+        },
+        "codeKladr": {
+            "type": "string",
+            "description": "codeKladr",
+            "aiTitle": "codeKladr"
+        },
+        "actualFrom": {
+            "type": "string",
+            "aiFormat": "date",
+            "aiTitle": "actualFrom",
+            "aiMeaning": "past"
+        },
+        "actualTo": {
+            "type": "string",
+            "aiFormat": "date",
+            "aiTitle": "actualTo",
+            "aiMeaning": "future"
+        },
+        "streetType": {
+            "type": "string",
+            "description": "streetType"
+        },
+        "settlementWithType": {
+            "type": "string",
+            "description": "codeOkato"
+        },
+        "cityType": {
+            "type": "string",
+            "description": "codeOkato"
+        },
+        "regionWithType": {
+            "type": "string",
+            "description": "codeOkato"
+        },
+        "areaWithType": {
+            "type": "string",
+            "description": "codeOkato"
+        },
+        "korpus": {
+            "type": "string",
+            "description": "korpus"
+        },
+        "stroenie": {
+            "type": "string",
+            "description": "stroenie"
+        }
+    }
+}

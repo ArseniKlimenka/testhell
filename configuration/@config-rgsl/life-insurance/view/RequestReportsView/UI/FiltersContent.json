@@ -1,0 +1,46 @@
+{
+    "type": "Section",
+    "sectionLevel": 1,
+    "label": "CoolingPeriodReport",
+    "width": 6,
+    "elements": [
+        {
+            "type": "Input",
+            "control": "DateRange",
+            "dateFrom": {
+                "type": "Input",
+                "label": "requestIssuedDateFrom",
+                "width": 1,
+                "value": {
+                    "$ref": "#/properties/request/properties/data/properties/criteria/properties/requestIssuedDateFrom"
+                },
+                "control": "DatetimePicker"
+            },
+            "dateTo": {
+                "type": "Input",
+                "label": "requestIssuedDateTo",
+                "width": 1,
+                "value": {
+                    "$ref": "#/properties/request/properties/data/properties/criteria/properties/requestIssuedDateTo"
+                },
+                "control": "DatetimePicker"
+            },
+            "width": 2
+        },
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "Button",
+                    "label": "ExportCoolingPeriodReport",
+                    "onClick": [
+                        {
+                            "commandType": "executeAction",
+                            "actionName": "exportCoolingPeriodReport"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,30 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "DataSchemaForCancellationActPrintout",
+    "description": "Schema for payment order cancellation act",
+    "type": "object",
+    "additionalProperties": true,
+    "aiDataEnrichment": [
+        {
+            "name": "GetContractRelatedData",
+            "integrationService": {
+                "name": "GetPolicyRelatedDataForCnlInsuranceAct",
+                "version": "1"
+            }
+        },
+        {
+            "name": "GetAgentAgreementData",
+            "dataSource": "AAShortInfoDataSource"
+        },
+        {
+            "name": "GetRiskInfo",
+            "dataSource": "RisksDataSource"
+        },
+        {
+            "name": "GetSignerData",
+            "dataSource": "GetPartyDataSource"
+        }
+    ],
+    "properties": {
+    }
+}

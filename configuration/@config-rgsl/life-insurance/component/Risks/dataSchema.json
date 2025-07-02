@@ -1,0 +1,19 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "Life Insurance",
+    "description": "Data schema describing Risks",
+    "type": "array",
+    "additionalProperties": false,
+    "aiDataEnrichment": [
+        {
+            "name": "setRisksEnrichment",
+            "dataSource": "RiskProductRelationDataSource"
+        }
+    ],
+    "aiValidation": {
+        "rule": "validateRisks"
+    },
+    "items": {
+        "$ref": "component:Risk"
+    }
+}

@@ -1,0 +1,63 @@
+{
+    "processType": "Claim",
+    "initialState": "Draft",
+    "actors": [
+        "ClaimManager",
+        "ViewClaim",
+        "Operations"
+    ],
+    "states": [
+        {
+            "name": "Draft",
+            "operations": [
+                {
+                    "name": "Save"
+                }
+            ]
+        },
+        {
+            "name": "Confirmed",
+            "operations": [
+                {
+                    "name": "Save"
+                }
+            ]
+        },
+        {
+            "name": "Cancelled",
+            "operations": [
+                {
+                    "name": "Save"
+                }
+            ]
+        }
+    ],
+    "transitions": [
+        {
+            "name": "DraftToConfirmed",
+            "from": "Draft",
+            "to": "Confirmed",
+            "allowOnValidationErrors": {
+                "codes": [
+                    "insuredEventDateOutOfRange"
+                ]
+            }
+        },
+        {
+            "name": "DraftToCancelled",
+            "from": "Draft",
+            "to": "Cancelled",
+            "allowOnValidationErrors": {
+                "all": true
+            }
+        },
+        {
+            "name": "ConfirmedToCancelled",
+            "from": "Confirmed",
+            "to": "Cancelled",
+            "allowOnValidationErrors": {
+                "all": true
+            }
+        }
+    ]
+}

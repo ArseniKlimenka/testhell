@@ -1,0 +1,18 @@
+﻿SELECT
+    CODE,
+    DESCRIPTION,
+    PROGRAM_VERSION
+FROM BFX_IMPL.CREDIT_PROGRAM p
+WHERE 1 = 1
+{{#if parameters.code}}
+AND p.CODE = @code
+{{/if}}
+{{#if parameters.codes}}
+AND p.CODE IN (@codes)
+{{/if}}
+{{#if parameters.description}}
+AND p.DESCRIPTION LIKE @description
+{{/if}}
+{{#if parameters.searchText}}
+AND (p.DESCRIPTION LIKE @searchText OR p.PROGRAM_VERSION LIKE @searchText)
+{{/if}}

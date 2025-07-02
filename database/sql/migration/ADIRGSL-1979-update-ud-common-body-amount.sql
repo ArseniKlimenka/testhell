@@ -1,0 +1,20 @@
+BEGIN TRY
+BEGIN TRAN
+
+UPDATE ud SET COMMON_BODY = JSON_MODIFY(ud.COMMON_BODY, '$.amountWithAllRisks', JSON_VALUE(c.BODY, '$.basicConditions.riskPremium'))
+FROM BFX.UNIVERSAL_DOCUMENT ud
+LEFT JOIN PAS.CONTRACT c ON c.CONTRACT_NUMBER = JSON_VALUE(ud.BODY, '$.contract.number')
+LEFT JOIN CFX.PUBLISHED_ARTIFACT pa ON pa.PUBLISHED_ARTIFACT_ID = ud.PUBLISHED_ARTIFACT_ID
+WHERE pa.CODE_NAME = 'LifeInsuranceRequest';
+
+COMMIT TRAN
+END TRY
+
+BEGIN CATCH
+
+    ROLLBACK TRAN
+    DECLARE @ErrorMessage NVARCHAR(4000); DECLARE @ErrorSeverity INT; DECLARE @ErrorState INT;
+    SELECT @ErrorMessage = ERROR_MESSAGE(), @ErrorSeverity = ERROR_SEVERITY(), @ErrorState = 1;
+    RAISERROR (@ErrorMessage, @ErrorSeverity, @ErrorState);
+
+END CATCH

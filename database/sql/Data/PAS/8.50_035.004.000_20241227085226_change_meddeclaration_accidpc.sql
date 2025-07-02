@@ -1,0 +1,1 @@
+delete from bfx_impl.declaration_medical_questions where id = 'ADEF38D7-B61D-42CD-B3B8-2DCED2CA1E58'; insert into bfx_impl.declaration_medical_questions values ('ADEF38D7-B61D-42CD-B3B8-2DCED2CA1E58', N'не является и не являлся ранее инвалидом I, II группы или не имеет и не имел ранее присвоенной категории «ребенок-инвалид»;');

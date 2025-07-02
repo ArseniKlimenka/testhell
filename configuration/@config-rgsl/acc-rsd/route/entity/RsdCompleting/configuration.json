@@ -1,0 +1,28 @@
+{
+    "entityType": "UniversalDocument",
+    "condition": {
+        "events": [
+            "StatusChanged"
+        ],
+        "configuration": {
+            "names": [
+                "RSD"
+            ]
+        },
+        "documentStates": [
+            "Completing"
+        ]
+    },
+    "sinks": [
+        {
+            "name": "StartEtl",
+            "etlService": {
+                "configuration": {
+                    "name": "CreateRsdPaymentsForContractsEtl",
+                    "version": "1"
+                }
+            }
+        }
+    ],
+    "version": "1"
+}

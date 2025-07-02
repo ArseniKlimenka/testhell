@@ -1,0 +1,335 @@
+{
+    "id": "MainContent",
+    "type": "Group",
+    "formProperties": {
+        "events": {
+            "beforeSave": "AccountingCertificateBeforeSave",
+            "afterSave": "AccountingCertificateAfterSave",
+            "onLoad": "AccountingCertificateOnLoad"
+        }
+    },
+    "elements": [
+        {
+            "type": "TabLayout",
+            "elementId": "TabLayout",
+            "options": {
+                "fixedPosition": true,
+                "scrollableTabs": false,
+                "buttonsForSwitchingTabs": true
+            },
+            "elements": [
+                {
+                    "type": "Tab",
+                    "elementId": "AccountingCertificateConditions",
+                    "whenLocked": "Disable",
+                    "title": "Accounting certificate conditions",
+                    "elements": [
+                        {
+                            "type": "Group",
+                            "width": 12,
+                            "elements": [
+                                {
+                                    "type": "Input",
+                                    "label": "Type of request",
+                                    "value": {
+                                        "$ref": "#/properties/Body/properties/typeOfRequest"
+                                    },
+                                    "autocomplete": {
+                                        "minTextLength": 1
+                                    },
+                                    "control": "Dropdown",
+                                    "source": {
+                                        "dataSource": {
+                                            "name": "AccountingRequestTypeDataSource",
+                                            "reloadOnOpen": true,
+                                            "searchFieldPath": "description",
+                                            "requestMapping": "accountingRequestTypeRequestMapping",
+                                            "responseMapping": "accountingRequestTypeResponseMapping"
+                                        },
+                                        "displayFieldName": "displayName",
+                                        "valueFieldName": "value"
+                                    },
+                                    "width": 3,
+                                    "rule": {
+                                        "effect": "DISABLE_INITIAL",
+                                        "condition": {
+                                            "type": "FUNC",
+                                            "ruleFunction": "disableTypeOfRequest",
+                                            "value": [
+                                                {
+                                                    "$ref": "#"
+                                                }
+                                            ]
+                                        }
+                                    }
+                                },
+                                {
+                                    "type": "Input",
+                                    "label": "Applicant full name",
+                                    "value": {
+                                        "$ref": "#/properties/Body/properties/applicantFullName"
+                                    },
+                                    "rule": {
+                                        "effect": "DISABLE_INITIAL",
+                                        "condition": {
+                                            "type": "FUNC",
+                                            "ruleFunction": "disableApplicantFullName",
+                                            "value": [
+                                                {
+                                                    "$ref": "#"
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    "width": 5
+                                },
+                                {
+                                    "type": "Input",
+                                    "label": "Is applicant policy holder",
+                                    "value": {
+                                        "$ref": "#/properties/Body/properties/isApplicantPolicyHolder"
+                                    },
+                                    "onValueChanged": [
+                                        {
+                                            "commandType": "executeAction",
+                                            "actionName": "onChangeIsApplicantPolicyHolder"
+                                        }
+                                    ],
+                                    "width": 2
+                                },
+                                {
+                                    "type": "Input",
+                                    "label": "Request date",
+                                    "value": {
+                                        "$ref": "#/properties/Body/properties/requestDate"
+                                    },
+                                    "width": 2
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Component",
+                            "metadata": {
+                                "autogenerate": true
+                            },
+                            "name": "AccountingCertificateContract",
+                            "value": {
+                                "$ref": "#/properties/Body/properties/contract"
+                            }
+                        },
+                        {
+                            "type": "Group",
+                            "width": 12,
+                            "elements": [
+                                {
+                                    "type": "Input",
+                                    "label": "Insured full name",
+                                    "value": {
+                                        "$ref": "#/properties/Body/properties/insuredPerson/properties/personCode"
+                                    },
+                                    "autocomplete": {
+                                        "minTextLength": 1,
+                                        "dropDownItemsCount": 10
+                                    },
+                                    "control": "Dropdown",
+                                    "readOnly": true,
+                                    "source": {
+                                        "array": {
+                                            "$ref": "#/properties/Body/properties/technicalInformation/properties/availableInsuredPersons"
+                                        },
+                                        "displayFieldName": "fullName",
+                                        "valueFieldName": "personCode"
+                                    },
+                                    "onValueChanged": [
+                                        {
+                                            "commandType": "executeAction",
+                                            "actionName": "onChangeInsuredPerson"
+                                        }
+                                    ],
+                                    "width": 6
+                                },
+                                {
+                                    "type": "Component",
+                                    "metadata": {
+                                        "autogenerate": true
+                                    },
+                                    "name": "AccountingCertificateYear",
+                                    "readOnly": true,
+                                    "value": {
+                                        "$ref": "#/properties/Body/properties/accountingYear"
+                                    }
+                                },
+                                {
+                                    "type": "Input",
+                                    "label": "Correction number",
+                                    "readOnly": true,
+                                    "value": {
+                                        "$ref": "#/properties/Body/properties/correctionNumber"
+                                    },
+                                    "width": 3
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "Tab",
+                    "elementId": "AccountingCertificateInformation",
+                    "whenLocked": "Disable",
+                    "title": "Accounting certificate information",
+                    "elements": [
+                        {
+                            "type": "Button",
+                            "onClick": [
+                                {
+                                    "commandType": "executeAction",
+                                    "actionName": "downloadAndAttachPrintout"
+                                }
+                            ],
+                            "label": "downloadAndAttachPrintout",
+                            "rule": {
+                                "effect": "DISABLE_INITIAL",
+                                "condition": {
+                                    "type": "FUNC",
+                                    "ruleFunction": "canCreatePrintout",
+                                    "value": [
+                                        {
+                                            "$ref": "#"
+                                        }
+                                    ]
+                                }
+                            }
+                        },
+                        {
+                            "type": "GridLayout",
+                            "fixedButton": true,
+                            "numberOfColumns": 12,
+                            "elements": [
+                                {
+                                    "type": "Component",
+                                    "metadata": {
+                                        "autogenerate": true
+                                    },
+                                    "name": "AccountingCertificatePaymentContract",
+                                    "value": {
+                                        "$ref": "#/properties/Body/properties/paymentContract"
+                                    }
+                                },
+                                {
+                                    "type": "Component",
+                                    "metadata": {
+                                        "autogenerate": true
+                                    },
+                                    "name": "AccountingCertificateTaxPayer",
+                                    "value": {
+                                        "$ref": "#/properties/Body/properties/taxPayerData"
+                                    }
+                                },
+                                {
+                                    "type": "Component",
+                                    "metadata": {
+                                        "autogenerate": true
+                                    },
+                                    "name": "AccountingCertificateInsuredPerson",
+                                    "value": {
+                                        "$ref": "#/properties/Body/properties/insuredPersonData"
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Component",
+                            "metadata": {
+                                "autogenerate": true
+                            },
+                            "name": "AccountingCertificateIssueData",
+                            "value": {
+                                "$ref": "#/properties/Body/properties/issueData"
+                            }
+                        }
+                    ],
+                    "rule": {
+                        "effect": "SHOW",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "showAdditionalTabs",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "type": "Component",
+                    "name": "AccountingAttachmentsTab",
+                    "value": {
+                        "$ref": "#"
+                    },
+                    "width": 1
+                },
+                {
+                    "type": "Tab",
+                    "elementId": "CommentTab",
+                    "title": "CommentTab",
+                    "elements": [
+                        {
+                            "type": "Group",
+                            "width": 12,
+                            "elements": [
+                                {
+                                    "type": "TextArea",
+                                    "label": "Comment",
+                                    "value": {
+                                        "$ref": "#/properties/Body/properties/comment"
+                                    },
+                                    "width": 12,
+                                    "numberOfRows": 5,
+                                    "enableResize": true
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "Tab",
+                    "elementId": "tabHistory",
+                    "title": "History",
+                    "elements": [
+                        {
+                            "type": "Component",
+                            "metadata": {
+                                "autogenerate": true
+                            },
+                            "name": "DocumentStateHistory",
+                            "value": {
+                                "$ref": "#"
+                            }
+                        },
+                        {
+                            "type": "OutputText",
+                            "label": "accountingCertificateIncomeSource",
+                            "value": {
+                                "$ref": "#/properties/Body/properties/accountingCertificateIncomeSource"
+                            },
+                            "width": 3
+                        }
+                    ],
+                    "rule": {
+                        "effect": "SHOW",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "historyTabVisibility",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    }
+                }
+            ]
+        }
+    ]
+}

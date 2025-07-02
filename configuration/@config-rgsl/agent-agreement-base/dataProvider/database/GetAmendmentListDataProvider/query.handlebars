@@ -1,0 +1,29 @@
+SELECT 
+	   d.AGENT_AGREEMENT_NUMBER,
+       d.SEQ_NUMBER,
+	   d.MANUAL_DOCUMENT_NUMBER,
+	   d.CODE_NAME as DOCUMENT_TYPE,
+	   d.NEW_STATE,
+	   d.SYS_CREATED_ON,
+	   d.USERNAME,
+	   d.CHANGES_NOTE
+FROM
+(SELECT aa.AGENT_AGREEMENT_NUMBER,
+	    aa.SEQ_NUMBER,
+	    COALESCE(JSON_VALUE(aa.body, '$.amendmentData.changeAmendmentData.manualDocumentNumber'), JSON_VALUE(aa.body, '$.amendmentData.cancellationAmendmentData.manualDocumentNumber')) as MANUAL_DOCUMENT_NUMBER,
+	    pa.CODE_NAME,
+	    hist.NEW_STATE,
+	    aa.SYS_CREATED_ON,
+	    au.USERNAME,
+		JSON_VALUE(aa.body, '$.amendmentData.changeAmendmentData.changesNote') as CHANGES_NOTE,
+	    ROW_NUMBER() OVER (PARTITION BY hist.ENTITY_ID ORDER BY hist.HISTORY_VERSION DESC) as RowNum   
+FROM PAS.AGENT_AGREEMENT aa
+     JOIN CFX.PUBLISHED_ARTIFACT pa on pa.PUBLISHED_ARTIFACT_ID = aa.PUBLISHED_ARTIFACT_ID
+     JOIN BFX.ENTITY_REF e on aa.PUBLISHED_ARTIFACT_ID = e.PUBLISHED_ARTIFACT_ID and e.BUSINESS_KEY = aa.AGENT_AGREEMENT_NUMBER
+     JOIN BFX.ENTITY_HISTORY hist on hist.ENTITY_ID = e.ENTITY_ID
+     JOIN ORG.APPLICATION_USER au on au.APPLICATION_USER_ID = aa.SYS_CREATED_BY_ID
+         WHERE aa.ORIGINAL_DOCUMENT_ID = @originalDocumentId
+         AND SEQ_NUMBER != 0
+		 AND hist.STATE_CHANGED = 1) d
+WHERE d.RowNum = 1
+ORDER BY d.SEQ_NUMBER DESC

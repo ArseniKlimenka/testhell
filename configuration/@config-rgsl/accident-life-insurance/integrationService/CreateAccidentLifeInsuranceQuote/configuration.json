@@ -1,0 +1,31 @@
+{
+    "additionalDataSources": [
+        "GetProductConfigurationDataSource"
+    ],
+    "sinks": [
+        {
+            "name": "GetInitiatorData",
+            "fetch": {
+                "configuration": {
+                    "name": "UserDataSource"
+                }
+            }
+        },
+        {
+            "name": "CreateQuote",
+            "document": {
+                "configuration": {
+                    "name": "AccidentLifeInsuranceQuote",
+                    "version": "1"
+                },
+                "allowOnValidationErrors": {
+                    "all": true
+                }
+            }
+        }
+    ],
+    "responses": [
+        200,
+        422
+    ]
+}

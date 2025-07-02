@@ -1,0 +1,95 @@
+{
+    "id": "InvestmentProfitLoadedDataFromExcelUiSchema",
+    "type": "Group",
+    "elements": [
+        {
+            "type": "GridLayout",
+            "numberOfColumns": 4,
+            "elements": [
+                {
+                    "type": "Group",
+                    "elements": [
+                        {
+                            "type": "DataGrid",
+                            "mode": "DataSource",
+                            "header": {
+                                "showReloadButton": true,
+                                "showNumberOfResults": true
+                            },
+                            "pagination": {
+                                "mode": "Regular",
+                                "pageSizes": [
+                                    5,
+                                    10,
+                                    15
+                                ]
+                            },
+                            "selection": {
+                                "mode": "None"
+                            },
+                            "height": "None",
+                            "initialSort": {
+                                "sortBy": "excelRowNumber",
+                                "sortOrder": "Desc"
+                            },
+                            "columns": [
+                                {
+                                    "sortable": true,
+                                    "title": "Excel row number",
+                                    "name": "excelRowNumber",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "value": {
+                                            "$ref": "#/properties/resultData/properties/data/properties/excelRowNumber"
+                                        }
+                                    }
+                                },
+                                {
+                                    "sortable": false,
+                                    "title": "Contract number",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "value": {
+                                            "$ref": "#/properties/resultData/properties/data/properties/contractNumber"
+                                        }
+                                    }
+                                },
+                                {
+                                    "sortable": false,
+                                    "title": "InvestmentProfit calculation date",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "template": "{{expr investmentProfitCalculationDate 'd'}}",
+                                        "value": {
+                                            "$ref": "#/properties/resultData/properties/data"
+                                        }
+                                    }
+                                },
+                                {
+                                    "sortable": false,
+                                    "title": "InvestmentProfit rate",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "value": {
+                                            "$ref": "#/properties/resultData/properties/data/properties/investmentProfitRate"
+                                        }
+                                    }
+                                },
+                                {
+                                    "sortable": false,
+                                    "title": "InvestmentProfit payment type code",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "value": {
+                                            "$ref": "#/properties/resultData/properties/data/properties/investmentProfitPaymentTypeCode"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

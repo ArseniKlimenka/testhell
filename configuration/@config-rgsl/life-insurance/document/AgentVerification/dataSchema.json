@@ -1,0 +1,55 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "Life Insurance",
+    "description": "Data schema describing agent verifications",
+    "type": "object",
+    "additionalProperties": false,
+    "aiValidation": {
+        "rule": "rootLevelValidation"
+    },
+    "aiAudit": {
+        "scope": "General"
+    },
+    "properties": {
+        "listName": {
+            "$ref": "component:ListName",
+            "aiTitle": "ListName"
+        },
+        "listDate": {
+            "type": "string",
+            "aiTitle": "listDate",
+            "aiFormat": "date"
+        },
+        "partyCodes": {
+            "type": "string",
+            "aiTitle": "partyCodes"
+        },
+        "creationDate": {
+            "type": "string",
+            "aiTitle": "creationDate",
+            "aiFormat": "date"
+        },
+        "transitionResult": {
+            "type": "object",
+            "description": "Result of the transition."
+        },
+        "validations": {
+            "type": "object",
+            "description": "Result of the transition."
+        },
+        "summary": {
+            "type": "object",
+            "description": "Result of the transition."
+        },
+        "foundCodes": {
+            "type": "string"
+        },
+        "notFoundCodes": {
+            "type": "string"
+        },
+        "listNumber": {
+            "type": "string",
+            "aiTitle": "listNumber"
+        }
+    }
+}

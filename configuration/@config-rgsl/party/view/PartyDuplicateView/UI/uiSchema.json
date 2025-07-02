@@ -1,0 +1,73 @@
+{
+    "id": "PartyDuplicateViewUiSchema",
+    "type": "Group",
+    "elements": [
+        {
+            "type": "GridLayout",
+            "numberOfColumns": 4,
+            "elements": [
+                {
+                    "type": "Group",
+                    "elements": [
+                        {
+                            "type": "DataGrid",
+                            "orderBy": "Description",
+                            "mode": "DataSource",
+                            "header": {
+                                "showReloadButton": true,
+                                "showNumberOfResults": true
+                            },
+                            "pagination": {
+                                "mode": "Regular",
+                                "pageSizes": [
+                                    5,
+                                    10,
+                                    15
+                                ]
+                            },
+                            "selection": {
+                                "mode": "None"
+                            },
+                            "height": "None",
+                            "columns": [
+                                {
+                                    "sortable": false,
+                                    "title": "duplicatePartyFullName",
+                                    "name": "duplicatePartyFullName",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "defaultValue": "",
+                                        "value": {
+                                            "$ref": "#/properties/resultData/properties/partyFullName"
+                                        }
+                                    }
+                                },
+                                {
+                                    "sortable": false,
+                                    "title": "duplicatePartyCode",
+                                    "name": "duplicatePartyCode",
+                                    "cellContent": {
+                                        "type": "Link",
+                                        "targetType": "Url",
+                                        "value": {
+                                            "mapping": "partyUrlMapping",
+                                            "$ref": "#"
+                                        },
+                                        "content": {
+                                            "text": {
+                                                "type": "OutputText",
+                                                "value": {
+                                                    "$ref": "#/properties/resultData/properties/partyCode"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,100 @@
+with root (ENTITY_ID, PARENT_ID)
+as (
+    select er.ENTITY_ID, er.PARENT_ID
+    from bfx.ENTITY_REF er
+    where 1=1
+    {{#if parameters.documentId}}
+        AND er.ENTITY_ID = @documentId
+    {{/if}}
+    {{#if parameters.documentNumber}}
+        AND er.ENTITY_ID = (select ORIGINAL_DOCUMENT_ID from pas.contract where CONTRACT_NUMBER = @documentNumber)
+    {{/if}}
+    union all
+    select er.ENTITY_ID, er.PARENT_ID
+    from root
+        join bfx.ENTITY_REF er on er.ENTITY_ID = root.PARENT_ID
+),
+documents (ENTITY_ID, PARENT_ID, ENTITY_TYPE_ID)
+as (
+    select er.ENTITY_ID, er.PARENT_ID, er.ENTITY_TYPE_ID
+    from bfx.ENTITY_REF er
+    where er.ENTITY_ID in (
+        select  ENTITY_ID
+        from root
+        where PARENT_ID is null
+    )
+    union all
+    select er.ENTITY_ID, er.PARENT_ID, er.ENTITY_TYPE_ID
+    from documents
+        join bfx.ENTITY_REF er on er.PARENT_ID = documents.ENTITY_ID
+)
+
+select c1.CONTRACT_ID AS DOCUMENT_ID, c1.CONTRACT_NUMBER as DOCUMENT_NUMBER, ps.CODE_NAME as DOCUMENT_STATE, et.code_name as ENTITY_TYPE, pa.CODE_NAME as CODE_NAME, pa.PUBLISHED_VERSION as PUBLISHED_VERSION, c1.SYS_CREATED_ON as CREATED_ON
+from documents
+    join pas.CONTRACT c1 on documents.ENTITY_ID = c1.CONTRACT_ID
+    join cfg.PROCESS_STATE ps on c1.STATE_ID = ps.PROCESS_STATE_ID
+    join cfx.PUBLISHED_ARTIFACT pa on c1.PUBLISHED_ARTIFACT_ID = pa.PUBLISHED_ARTIFACT_ID
+    join cfg.ENTITY_TYPE et on documents.ENTITY_TYPE_ID = et.ENTITY_TYPE_ID
+{{#if parameters.requestNumber}}
+where ((JSON_VALUE(c1.BODY, '$.amendmentData.nonFinChangeAmendmentData.technicalData.requestData.number') = @requestNumber) or
+	   (JSON_VALUE(c1.BODY, '$.amendmentData.finChangeAmendmentData.technicalData.requestData.number') = @requestNumber) or
+       (JSON_VALUE(c1.BODY, '$.amendmentData.changeAmendmentData.technicalData.requestData.number') = @requestNumber) or
+       (JSON_VALUE(c1.BODY, '$.technicalInformation.requestNumber') = @requestNumber))
+{{/if}}
+
+{{#unless parameters.requestNumber}}
+union
+
+select clm.CLAIM_ID as DOCUMENT_ID,
+	   hub.CLAIM_NUMBER as DOCUMENT_NUMBER,
+	   sat.CLAIM_STATE as DOCUMENT_STATE,
+	   et.CODE_NAME as ENTITY_TYPE,
+	   art.CODE_NAME,
+	   art.PUBLISHED_VERSION,
+	   clm.SYS_CREATED_ON as CREATED_ON
+from CLM_IMPL.CLM_HUB hub
+join CLM_IMPL.CLM_SAT_LATEST sat on hub.CLM_HKEY = sat.CLM_HKEY
+join CLM.CLAIM clm on clm.CLAIM_NUMBER = hub.CLAIM_NUMBER
+join cfx.PUBLISHED_ARTIFACT art on art.PUBLISHED_ARTIFACT_ID = clm.PUBLISHED_ARTIFACT_ID
+join cfg.ENTITY_TYPE et on et.ENTITY_TYPE_ID = art.ENTITY_TYPE_ID
+join CLM_IMPL.CLM_IE_LINK clmIeLink on clmIeLink.CLM_HKEY = hub.CLM_HKEY
+join CLM_IMPL.CLM_IE_SAT_LATEST clmIeSat on clmIeSat.CLM_IE_HKEY = clmIeLink.CLM_IE_HKEY and clmIeSat.IS_DELETED = 0
+join CLM_IMPL.IE_HUB ieHub on ieHub.IE_HKEY = clmIeLink.IE_HKEY
+join CLM_IMPL.IE_CONTRACT_LINK ieCtrLink on ieCtrLink.IE_HKEY = ieHub.IE_HKEY
+join CLM_IMPL.IE_CONTRACT_SAT_LATEST ieCtrSat on ieCtrSat.IE_CONTRACT_HKEY = ieCtrLink.IE_CONTRACT_HKEY and ieCtrSat.IS_DELETED = 0
+join PAS_IMPL.POLICY_HUB pHub on pHub.POLICY_HKEY = ieCtrLink.POLICY_HKEY
+join pas.CONTRACT ctr on ctr.CONTRACT_NUMBER = pHub.CONTRACT_NUMBER
+where 1=1
+    {{#if parameters.documentId}}
+        AND ctr.CONTRACT_ID = @documentId
+    {{/if}}
+    {{#if parameters.documentNumber}}
+        AND ctr.CONTRACT_ID = (select ORIGINAL_DOCUMENT_ID from pas.contract where CONTRACT_NUMBER = @documentNumber)
+    {{/if}}
+
+union
+
+select
+	ud.UNIVERSAL_DOCUMENT_ID as DOCUMENT_ID,
+	ud.UNIVERSAL_DOCUMENT_NUMBER as DOCUMENT_NUMBER,
+	ps.CODE_NAME as DOCUMENT_STATE,
+	et.CODE_NAME as ENTITY_TYPE,
+	art.CODE_NAME,
+	art.PUBLISHED_VERSION,
+	ud.SYS_CREATED_ON as CREATED_ON
+from
+	ewt_impl.EWT_SAT_LATEST es
+	inner join ewt_impl.EWT_HUB eh on eh.EWT_HKEY = es.EWT_HKEY
+	inner join bfx.UNIVERSAL_DOCUMENT ud on ud.UNIVERSAL_DOCUMENT_NUMBER = eh.ENDOWMENT_NUMBER
+	inner join pas.CONTRACT ctr on ctr.CONTRACT_NUMBER = es.CONTRACT_NUMBER
+	join cfg.PROCESS_STATE ps on ud.STATE_ID = ps.PROCESS_STATE_ID
+	join cfx.PUBLISHED_ARTIFACT art on art.PUBLISHED_ARTIFACT_ID = ud.PUBLISHED_ARTIFACT_ID
+	join cfg.ENTITY_TYPE et on et.ENTITY_TYPE_ID = art.ENTITY_TYPE_ID
+where 1=1
+    {{#if parameters.documentId}}
+        AND ctr.CONTRACT_ID = @documentId
+    {{/if}}
+    {{#if parameters.documentNumber}}
+        AND ctr.CONTRACT_ID = (select ORIGINAL_DOCUMENT_ID from pas.contract where CONTRACT_NUMBER = @documentNumber)
+    {{/if}}
+ {{/unless}}

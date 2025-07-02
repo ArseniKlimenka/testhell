@@ -1,0 +1,17 @@
+ConfigurationType	ConfigurationName	ItemType	TranslationKey	Expression	Translation_ru-RU	Translation_en-US
+DataSchema	TaxDeduction	enum	hasCertificate@yes	yes	Да	yes
+DataSchema	TaxDeduction	enum	hasCertificate@no	no	Нет	no
+DataSchema	TaxDeduction	enum	isClaimed@yes	yes	Да	yes
+DataSchema	TaxDeduction	enum	isClaimed@no	no	Нет	no
+DataSchema	TaxDeduction	enum	isClaimed@noInfo	noInfo	Нет информации	noInfo
+UiSchema	TaxDeduction	ui-label	taxDeduction	taxDeduction	СНВ	taxDeduction
+UiSchema	TaxDeduction	ui-label	taxDeductionSection	taxDeductionSection	Информация о СНВ	taxDeductionSection
+UiSchema	TaxDeduction	ui-label	taxDeductionYear	taxDeductionYear	Календарный год	taxDeductionYear
+UiSchema	TaxDeduction	ui-label	hasTaxDeductionCertificate	hasTaxDeductionCertificate	Наличие справки СНВ	hasTaxDeductionCertificate
+UiSchema	TaxDeduction	ui-label	isTaxDeductionClaimed	isTaxDeductionClaimed	Налоговый вычет получен	isTaxDeductionClaimed
+UiSchema	TaxDeduction	ui-label	taxDeductionAmount	taxDeductionAmount	Сумма налогового вычета, руб.	taxDeductionAmount
+Rule	TaxDeductionValidateTaxDeduction	rule	validation@taxDeductionAmountIsRequired	validateTaxDeduction	E: Сумма налогового вычета обязательна для заполнения	E: validation@taxDeductionAmountIsRequired
+Rule	TaxDeductionValidateTaxDeduction	rule	validation@taxDeductionAmountIsTooLarge	validateTaxDeduction	E: Сумма налогового вычета не должна превышать 120 000 руб.	E: validation@taxDeductionAmountIsTooLarge
+Rule	TaxDeductionValidateTaxDeduction	rule	validation@taxDeductionAmountIsTooSmall	validateTaxDeduction	E: Сумма налогового вычета не должна быть меньше 0 руб.	E: validation@taxDeductionAmountIsTooSmall
+DataSchema	TaxDeduction	enum	isClaimed@thirdParty	thirdParty	Взнос от 3го лица	thirdParty
+Rule	TaxDeductionValidateTaxDeduction	rule	validation@notPaidEndowmentsFound	validateTaxDeduction	W: Найдены дожитияв нефинальном статусе: ${items}	W: Found not paid endowments: ${items}

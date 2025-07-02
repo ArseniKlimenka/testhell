@@ -1,0 +1,47 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "array",
+    "aiDataEnrichment": [
+        {
+            "name": "GetTaxDeductionYears",
+            "dataSource": "ContractPaymentInfoDataSource"
+        },
+        {
+            "name": "GetNotPaidEdowments",
+            "dataSource": "GetNotPaidEndowmentsDataSource"
+        }
+    ],
+    "aiValidation": {
+        "rule": "validateTaxDeduction"
+    },
+    "items": {
+        "type": "object",
+        "properties": {
+            "year": {
+                "type": "string"
+            },
+            "yearPaymentsAmount": {
+                "type": "number"
+            },
+            "hasCertificate": {
+                "type": "string",
+                "enum": [
+                    "yes",
+                    "no"
+                ]
+            },
+            "isClaimed": {
+                "type": "string",
+                "enum": [
+                    "yes",
+                    "no",
+                    "noInfo",
+                    "thirdParty"
+                ]
+            },
+            "amount": {
+                "type": "number"
+            }
+        }
+    }
+}

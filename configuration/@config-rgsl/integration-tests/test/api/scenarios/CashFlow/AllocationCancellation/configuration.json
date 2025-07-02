@@ -1,0 +1,34 @@
+{
+    "description": "Check allocation cancellation",
+    "steps": [
+        {
+            "$ref": "AdjustAccountingPeriods",
+            "context": {
+                "firstOpenPeriod": "2022-01-01"
+            }
+        },
+        {
+            "$ref": "CreateCreditPolicy"
+        },
+        {
+            "$ref": "CreatePayment",
+            "context": {
+                "paymentAmount": 99980
+            }
+        },
+        {
+            "code": "CreateAndCancelAllocation",
+            "description": "Allocate and then cancel allocation",
+            "requests": [],
+            "executor": {
+                "module": "./createAndCancelAllocation.js",
+                "function": "createAndCancelAllocation"
+            },
+            "assert": {
+                "expected": "./expectedResult.json",
+                "module": "./assert.js",
+                "function": "assertAllocations"
+            }
+        }
+    ]
+}

@@ -1,0 +1,150 @@
+{
+    "id": "PaymentCancellationDataViewUiSchema",
+    "type": "Group",
+    "elements": [
+        {
+            "type": "TreeTable",
+            "label": "Allocations to cancel",
+            "labelType": "H1",
+            "mode": "DataSource",
+            "pagination": {
+                "mode": "Regular",
+                "pageSizes": [
+                    10,
+                    50,
+                    100
+                ]
+            },
+            "subArrayDataPath": "#/properties/resultData/properties/allocations",
+            "columns": [
+                {
+                    "title": "Record key",
+                    "skipTranslate": true,
+                    "mainArray": true,
+                    "cellContent": {
+                        "type": "OutputText",
+                        "template": "{{#style 'right'}}{{expr recordKey 'i'}}{{/style}}",
+                        "value": {
+                            "$ref": "#/properties/resultData"
+                        }
+                    }
+                },
+                {
+                    "title": "Bank statement item id",
+                    "skipTranslate": true,
+                    "mainArray": true,
+                    "cellContent": {
+                        "type": "OutputText",
+                        "template": "{{#style 'right'}}{{expr bankStatementItemId 'i::false'}}{{/style}}",
+                        "value": {
+                            "$ref": "#/properties/resultData"
+                        }
+                    }
+                },
+                {
+                    "title": "Payment status",
+                    "mainArray": true,
+                    "cellContent": {
+                        "type": "GridLayout",
+                        "numberOfColumns": 6,
+                        "elements": [
+                            {
+                                "type": "Group",
+                                "width": 5,
+                                "elements": [
+                                    {
+                                        "type": "OutputText",
+                                        "template": "{{#i18n}}PaymentStatusComponent@paymentStatusComponent@{{expr paymentStatusId}}{{/i18n}}",
+                                        "value": {
+                                            "$ref": "#/properties/resultData"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "Group",
+                                "width": 1,
+                                "stackContent": "Right",
+                                "elements": [
+                                    {
+                                        "type": "Icon",
+                                        "iconStyleFunction": "showIconForPaymentStatus",
+                                        "value": {
+                                            "$ref": "#/properties/resultData/properties/paymentStatusId"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                },
+                {
+                    "title": "Payment error message",
+                    "mainArray": true,
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/paymentErrorMessage"
+                        }
+                    }
+                },
+                {
+                    "title": "Allocation id",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "template": "{{#style 'right'}}{{expr allocationId 'i::false'}}{{/style}}",
+                        "value": {
+                            "$ref": "#"
+                        }
+                    }
+                },
+                {
+                    "title": "Allocation cancelled",
+                    "cellContent": {
+                        "type": "Icon",
+                        "width": 1,
+                        "iconStyleFunction": "showIconForAllocationStatus",
+                        "value": {
+                            "$ref": "#/properties/cancelled"
+                        }
+                    }
+                },
+                {
+                    "title": "Allocation error message",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/errorMessage"
+                        }
+                    }
+                },
+                {
+                    "mainArray": true,
+                    "cellContent": {
+                        "type": "GridButtonGroup",
+                        "elements": [
+                            {
+                                "type": "Button",
+                                "onClick": "showDetailsDialog",
+                                "icon": {
+                                    "name": "eye"
+                                },
+                                "value": {
+                                    "$ref": "#"
+                                }
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "type": "ExportDataButton",
+            "labelColor": "Primary",
+            "backgroundColor": "BackgroundColor",
+            "fill": "Solid",
+            "readOnly": false,
+            "label": "Export data"
+        }
+    ]
+}

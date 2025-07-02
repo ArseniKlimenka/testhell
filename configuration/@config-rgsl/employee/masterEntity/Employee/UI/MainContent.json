@@ -1,0 +1,386 @@
+{
+    "type": "Group",
+    "title": "Employee",
+    "fillAvailableSpace": true,
+    "formProperties": {
+        "events": {
+            "onLoad": "onLoad"
+        }
+    },
+    "elements": [
+        {
+            "type": "TabLayout",
+            "elementId": "MainContent",
+            "options": {
+                "fixedPosition": true,
+                "scrollableTabs": false,
+                "buttonsForSwitchingTabs": false
+            },
+            "elements": [
+                {
+                    "type": "Tab",
+                    "elementId": "MainTab",
+                    "title": "MainTab",
+                    "elements": [
+                        {
+                            "type": "Component",
+                            "name": "EmployeeParty",
+                            "value": {
+                                "$ref": "#/properties/Body/properties/employeeParty"
+                            }
+                        },
+                        {
+                            "type": "Group",
+                            "elements": [
+                                {
+                                    "type": "Input",
+                                    "label": "position",
+                                    "value": {
+                                        "$ref": "#/properties/Body/properties/position"
+                                    },
+                                    "width": 4
+                                },
+                                {
+                                    "type": "Input",
+                                    "label": "tabNumber",
+                                    "value": {
+                                        "$ref": "#/properties/Body/properties/tabNumber"
+                                    },
+                                    "width": 4
+                                },
+                                {
+                                    "type": "Input",
+                                    "label": "actualEmail",
+                                    "value": {
+                                        "$ref": "#/properties/Body/properties/actualEmail"
+                                    },
+                                    "width": 4
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Group",
+                            "elements": [
+                                {
+                                    "type": "Lookup",
+                                    "label": "orgUnitName",
+                                    "commands": [
+                                        {
+                                            "commandType": "executeOperation",
+                                            "operation": "SEARCH",
+                                            "errorHandling": "silent",
+                                            "data": null
+                                        }
+                                    ],
+                                    "value": {
+                                        "$ref": "#"
+                                    },
+                                    "width": 4,
+                                    "dialogButton": {},
+                                    "clearButton": {
+                                        "clearAction": "orgUnitNameClear"
+                                    },
+                                    "dialog": {
+                                        "viewReference": {
+                                            "configurationCodeName": "OrganisationUnitImplLookup",
+                                            "configurationVersion": "1",
+                                            "configurationConceptType": "SearchView"
+                                        },
+                                        "onLoad": "orgUnitNameOnLoad"
+                                    },
+                                    "onSelected": "orgUnitNameOnSelected",
+                                    "selectedDisplayValueUISchema": {
+                                        "type": "Input",
+                                        "label": "orgUnitName",
+                                        "readOnly": true,
+                                        "value": {
+                                            "$ref": "#/properties/Body/properties/orgUnitName"
+                                        }
+                                    }
+                                },
+                                {
+                                    "type": "Link",
+                                    "readOnly": true,
+                                    "targetType": "Entity",
+                                    "value": {
+                                        "mapping": "orgUnitNameURLMapping",
+                                        "$ref": "#"
+                                    },
+                                    "content": {
+                                        "text": {
+                                            "type": "OutputText",
+                                            "defaultValue": "",
+                                            "value": {
+                                                "mapping": "orgUnitNameMapping"
+                                            }
+                                        }
+                                    },
+                                    "width": 4
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Group",
+                            "elements": [
+                                {
+                                    "type": "Input",
+                                    "label": "visibilityType",
+                                    "value": {
+                                        "$ref": "#/properties/Body/properties/visibilityType"
+                                    },
+                                    "width": 4
+                                },
+                                {
+                                    "type": "Input",
+                                    "label": "isPersonalManager",
+                                    "value": {
+                                        "$ref": "#/properties/Body/properties/isPersonalManager"
+                                    },
+                                    "width": 4
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Section",
+                            "label": "SAD information",
+                            "isCollapsed": false,
+                            "width": 12,
+                            "elements": [
+                                {
+                                    "type": "Input",
+                                    "label": "sadNumber",
+                                    "useGroupDelimiter": false,
+                                    "value": {
+                                        "$ref": "#/properties/Body/properties/sadNumber"
+                                    },
+                                    "width": 4
+                                },
+                                {
+                                    "type": "Input",
+                                    "label": "physicalPersonID",
+                                    "value": {
+                                        "$ref": "#/properties/Body/properties/physicalPersonID"
+                                    },
+                                    "width": 4
+                                },
+                                {
+                                    "type": "Input",
+                                    "label": "sadBeginDate",
+                                    "value": {
+                                        "$ref": "#/properties/Body/properties/sadBeginDate"
+                                    },
+                                    "width": 4
+                                },
+                                {
+                                    "type": "Input",
+                                    "label": "sadEndDate",
+                                    "value": {
+                                        "$ref": "#/properties/Body/properties/sadEndDate"
+                                    },
+                                    "width": 4
+                                },
+                                {
+                                    "type": "Input",
+                                    "label": "lnrNumber",
+                                    "useGroupDelimiter": false,
+                                    "value": {
+                                        "$ref": "#/properties/Body/properties/lnrNumber"
+                                    },
+                                    "width": 4
+                                },
+                                {
+                                    "type": "Input",
+                                    "label": "positionKFN",
+                                    "value": {
+                                        "$ref": "#/properties/Body/properties/positionKFN"
+                                    },
+                                    "width": 4
+                                },
+                                {
+                                    "type": "Input",
+                                    "label": "sadNumber1",
+                                    "value": {
+                                        "$ref": "#/properties/Body/properties/sadNumber1"
+                                    },
+                                    "width": 4
+                                },
+                                {
+                                    "type": "Input",
+                                    "label": "sadNumber2",
+                                    "value": {
+                                        "$ref": "#/properties/Body/properties/sadNumber2"
+                                    },
+                                    "width": 4
+                                },
+                                {
+                                    "type": "Input",
+                                    "label": "sadNumberMAG",
+                                    "value": {
+                                        "$ref": "#/properties/Body/properties/sadNumberMAG"
+                                    },
+                                    "width": 4
+                                },
+                                {
+                                    "type": "Input",
+                                    "label": "sadNumberNSO",
+                                    "value": {
+                                        "$ref": "#/properties/Body/properties/sadNumberNSO"
+                                    },
+                                    "width": 4
+                                },
+                                {
+                                    "type": "Input",
+                                    "label": "isSASAgent",
+                                    "value": {
+                                        "$ref": "#/properties/Body/properties/isSASAgent"
+                                    },
+                                    "width": 4
+                                },
+                                {
+                                    "type": "Input",
+                                    "label": "level",
+                                    "value": {
+                                        "$ref": "#/properties/Body/properties/level"
+                                    },
+                                    "width": 4
+                                },
+                                {
+                                    "type": "Input",
+                                    "label": "sadFinal",
+                                    "value": {
+                                        "$ref": "#/properties/Body/properties/sadFinal"
+                                    },
+                                    "width": 4
+                                },
+                                {
+                                    "type": "Input",
+                                    "label": "SKK",
+                                    "useGroupDelimiter": false,
+                                    "value": {
+                                        "$ref": "#/properties/Body/properties/SKK"
+                                    },
+                                    "width": 4
+                                },
+                                {
+                                    "type": "Input",
+                                    "label": "receiveType",
+                                    "useGroupDelimiter": false,
+                                    "value": {
+                                        "$ref": "#/properties/Body/properties/receiveType"
+                                    },
+                                    "width": 4
+                                },
+                                {
+                                    "type": "Input",
+                                    "label": "order",
+                                    "value": {
+                                        "$ref": "#/properties/Body/properties/order"
+                                    },
+                                    "width": 4
+                                },
+                                {
+                                    "type": "Input",
+                                    "label": "sapAD",
+                                    "value": {
+                                        "$ref": "#/properties/Body/properties/sapAD"
+                                    },
+                                    "width": 4
+                                },
+                                {
+                                    "type": "Input",
+                                    "label": "salesChannel",
+                                    "value": {
+                                        "$ref": "#/properties/Body/properties/salesChannel"
+                                    },
+                                    "width": 4
+                                },
+                                {
+                                    "type": "Group",
+                                    "elements": [
+                                        {
+                                            "type": "Input",
+                                            "label": "branch",
+                                            "value": {
+                                                "$ref": "#/properties/Body/properties/branch"
+                                            },
+                                            "control": "Dropdown",
+                                            "autocomplete": {
+                                                "minTextLength": 0,
+                                                "dropDownItemsCount": 1000,
+                                                "selectItemOnMatch": false
+                                            },
+                                            "source": {
+                                                "dataSource": {
+                                                    "name": "RGSBranchesDataSource",
+                                                    "searchFieldPath": "searchText",
+                                                    "responseMapping": "branchResponseMapping",
+                                                    "resultCount": 1000
+                                                },
+                                                "displayFieldName": "branchName"
+                                            },
+                                            "onValueChanged": [
+                                                {
+                                                    "commandType": "executeAction",
+                                                    "actionName": "onChangeBranch"
+                                                }
+                                            ],
+                                            "width": 8
+                                        },
+                                        {
+                                            "type": "Input",
+                                            "label": "department",
+                                            "value": {
+                                                "$ref": "#/properties/Body/properties/department"
+                                            },
+                                            "width": 4
+                                        },
+                                        {
+                                            "type": "OutputText",
+                                            "label": "branchKSP",
+                                            "value": {
+                                                "$ref": "#/properties/Body/properties/branch/properties/branchKSP"
+                                            },
+                                            "rule": {
+                                                "effect": "HIDE",
+                                                "condition": {
+                                                    "type": "FUNC",
+                                                    "ruleFunction": "disableBranchDetails",
+                                                    "value": [
+                                                        {
+                                                            "$ref": "#"
+                                                        }
+                                                    ]
+                                                }
+                                            },
+                                            "width": 4
+                                        },
+                                        {
+                                            "type": "OutputText",
+                                            "label": "branchRegion",
+                                            "value": {
+                                                "$ref": "#/properties/Body/properties/branch/properties/branchRegion"
+                                            },
+                                            "rule": {
+                                                "effect": "HIDE",
+                                                "condition": {
+                                                    "type": "FUNC",
+                                                    "ruleFunction": "disableBranchDetails",
+                                                    "value": [
+                                                        {
+                                                            "$ref": "#"
+                                                        }
+                                                    ]
+                                                }
+                                            },
+                                            "width": 4
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

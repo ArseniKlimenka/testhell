@@ -1,0 +1,227 @@
+{
+    "type": "Section",
+    "label": "RisksCorrection",
+    "sectionLevel": 2,
+    "width": 12,
+    "elements": [
+        {
+            "type": "Input",
+            "isCompact": true,
+            "label": "manualCorrection",
+            "value": {
+                "$ref": "#/properties/manualCorrection"
+            },
+            "width": 4,
+            "onValueChanged": [
+                {
+                    "commandType": "executeAction",
+                    "actionName": "onChangeManualCorrection"
+                }
+            ],
+            "rule": {
+                "effect": "ENABLE_INITIAL",
+                "condition": {
+                    "type": "FUNC",
+                    "ruleFunction": "shouldEnableManualCorrection",
+                    "value": [
+                        {
+                            "$ref": "#"
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "type": "Group",
+            "width": 4,
+            "elements": [
+                {
+                    "type": "Input",
+                    "isCompact": true,
+                    "label": "manualRiskDeletion",
+                    "value": {
+                        "$ref": "#/properties/manualRiskDeletion"
+                    },
+                    "width": 4,
+                    "onValueChanged": [
+                        {
+                            "commandType": "executeAction",
+                            "actionName": "onChangeManualRiskDeletion"
+                        }
+                    ],
+                    "rule": {
+                        "effect": "ENABLE_INITIAL",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "shouldEnableManualRiskDeletion",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    }
+                }
+            ],
+            "rule": {
+                "effect": "SHOW",
+                "condition": {
+                    "type": "FUNC",
+                    "ruleFunction": "shouldShowManualRiskDeletion",
+                    "value": [
+                        {
+                            "$ref": "#"
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "type": "Group",
+            "width": 4,
+            "elements": [
+                {
+                    "type": "Input",
+                    "isCompact": true,
+                    "label": "replaceDisabilityAnyReason",
+                    "value": {
+                        "$ref": "#/properties/replaceDisabilityAnyReason"
+                    },
+                    "width": 4,
+                    "onValueChanged": [
+                        {
+                            "commandType": "executeAction",
+                            "actionName": "onChangeReplaceDisabilityAnyReason"
+                        }
+                    ],
+                    "rule": {
+                        "effect": "ENABLE_INITIAL",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "shouldEnableReplaceDisabilityAnyReason",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    }
+                }
+            ],
+            "rule": {
+                "effect": "SHOW",
+                "condition": {
+                    "type": "FUNC",
+                    "ruleFunction": "shouldShowReplaceDisabilityAnyReason",
+                    "value": [
+                        {
+                            "$ref": "#"
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "type": "Group",
+            "width": 4,
+            "elements": [
+                {
+                    "type": "Input",
+                    "isCompact": true,
+                    "label": "replaceDisabilityECOF",
+                    "value": {
+                        "$ref": "#/properties/replaceDisabilityECOF"
+                    },
+                    "width": 4,
+                    "onValueChanged": [
+                        {
+                            "commandType": "executeAction",
+                            "actionName": "onChangeReplaceDisabilityECOF"
+                        }
+                    ],
+                    "rule": {
+                        "effect": "ENABLE_INITIAL",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "shouldEnableReplaceDisabilityECOF",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    }
+                }
+            ],
+            "rule": {
+                "effect": "SHOW",
+                "condition": {
+                    "type": "FUNC",
+                    "ruleFunction": "shouldShowReplaceDisabilityECOF",
+                    "value": [
+                        {
+                            "$ref": "#"
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "type": "Group",
+            "width": 4,
+            "elements": [
+                {
+                    "type": "Input",
+                    "isCompact": true,
+                    "label": "correctionWithoutCalc",
+                    "value": {
+                        "$ref": "#/properties/correctionWithoutCalc"
+                    },
+                    "width": 4,
+                    "onValueChanged": [
+                        {
+                            "commandType": "executeAction",
+                            "actionName": "onChangeCorrectionWithoutCalc"
+                        }
+                    ],
+                    "rule": {
+                        "effect": "ENABLE_INITIAL",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "shouldEnableCorrectionWithoutCalc",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    }
+                }
+            ],
+            "rule": {
+                "effect": "SHOW",
+                "condition": {
+                    "type": "FUNC",
+                    "ruleFunction": "shouldShowCorrectionWithoutCalc",
+                    "value": [
+                        {
+                            "$ref": "#"
+                        }
+                    ]
+                }
+            }
+        }
+    ],
+    "rule": {
+        "effect": "SHOW",
+        "condition": {
+            "type": "FUNC",
+            "ruleFunction": "shouldShowManualCorrection",
+            "value": [
+                {
+                    "$ref": "#"
+                }
+            ]
+        }
+    }
+}

@@ -1,0 +1,189 @@
+{
+    "type": "Group",
+    "elements": [
+        {
+            "type": "DataGrid",
+            "orderBy": "Description",
+            "mode": "DataSource",
+            "pagination": {
+                "mode": "Regular",
+                "pageSizes": [
+                    50,
+                    100,
+                    500
+                ],
+                "defaultPageSize": 100
+            },
+            "selection": {
+                "mode": "Multi",
+                "enableRowSelection": false,
+                "showCheckBox": true
+            },
+            "height": "None",
+            "columns": [
+                {
+                    "sortable": true,
+                    "title": "ReferenceNo",
+                    "cellContent": {
+                        "type": "Link",
+                        "label": "Link to contract",
+                        "targetType": "Entity",
+                        "value": {
+                            "mapping": "linkToContractOverview",
+                            "$ref": "#"
+                        },
+                        "width": 1,
+                        "openInNewTab": true,
+                        "content": {
+                            "text": {
+                                "type": "OutputText",
+                                "value": {
+                                    "$ref": "#/properties/resultData/properties/referenceNo"
+                                }
+                            }
+                        }
+                    },
+                    "filter": {
+                        "content": {
+                            "type": "Input",
+                            "label": "contractNumbersStrFilter",
+                            "value": {
+                                "$ref": "#/properties/request/properties/data/properties/criteria/properties/contractNumbersStr"
+                            },
+                            "width": 2
+                        }
+                    },
+                    "name": "referenceNo"
+                },
+                {
+                    "sortable": true,
+                    "title": "StartDate",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/startDate"
+                        }
+                    },
+                    "filter": {
+                        "content": {
+                            "type": "Input",
+                            "label": "startDateFilter",
+                            "value": {
+                                "$ref": "#/properties/request/properties/data/properties/criteria/properties/startDate"
+                            },
+                            "width": 2
+                        }
+                    },
+                    "name": "startDate"
+                },
+                {
+                    "sortable": true,
+                    "title": "DueDate",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/dueDate"
+                        }
+                    },
+                    "filter": {
+                        "content": {
+                            "type": "Input",
+                            "label": "startDateFilter",
+                            "value": {
+                                "$ref": "#/properties/request/properties/data/properties/criteria/properties/dueDate"
+                            },
+                            "width": 2
+                        }
+                    },
+                    "name": "dueDate"
+                },
+                {
+                    "sortable": true,
+                    "title": "stateCode",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/stateCode"
+                        }
+                    },
+                    "filter": {
+                        "content": {
+                            "type": "Dropdown",
+                            "elementId": "stateCode",
+                            "label": "Contract State Code",
+                            "multiple": true,
+                            "value": {
+                                "$ref": "#/properties/request/properties/data/properties/criteria/properties/contractState"
+                            },
+                            "width": 1
+                        }
+                    },
+                    "name": "stateCode"
+                },
+                {
+                    "sortable": true,
+                    "title": "HolderName",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/holderName"
+                        }
+                    },
+                    "filter": {
+                        "content": {
+                            "type": "Input",
+                            "label": "holderNameFilter",
+                            "value": {
+                                "$ref": "#/properties/request/properties/data/properties/criteria/properties/holderName"
+                            },
+                            "width": 2
+                        }
+                    },
+                    "name": "holderName"
+                },
+                {
+                    "sortable": true,
+                    "title": "ProductDescription",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/productDescription"
+                        }
+                    },
+                    "filter": {
+                        "content": {
+                            "type": "Input",
+                            "label": "productDescriptionFilter",
+                            "value": {
+                                "$ref": "#/properties/request/properties/data/properties/criteria/properties/productDescription"
+                            },
+                            "width": 2
+                        }
+                    },
+                    "name": "productDescription"
+                },
+                {
+                    "sortable": true,
+                    "title": "TransferState",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/transferState"
+                        }
+                    },
+                    "filter": {
+                        "content": {
+                            "type": "Input",
+                            "label": "holderNameFilter",
+                            "value": {
+                                "$ref": "#/properties/request/properties/data/properties/criteria/properties/transferState"
+                            },
+                            "width": 2
+                        }
+                    },
+                    "name": "transferState"
+                }
+            ]
+        }
+    ]
+}

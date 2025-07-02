@@ -1,0 +1,107 @@
+{
+    "processType": "DataImport",
+    "initialState": "Draft",
+    "actors": [
+        "ChiefPaymentDistributor",
+        "System"
+    ],
+    "states": [
+        {
+            "name": "Draft",
+            "operations": [
+                "Save"
+            ]
+        },
+        {
+            "name": "Loading",
+            "operations": []
+        },
+        {
+            "name": "Loaded",
+            "operations": []
+        },
+        {
+            "name": "Importing",
+            "operations": []
+        },
+        {
+            "name": "Imported",
+            "operations": []
+        },
+        {
+            "name": "AllocationCancellation",
+            "operations": []
+        },
+        {
+            "name": "PaymentCancellation",
+            "operations": []
+        },
+        {
+            "name": "Done",
+            "operations": []
+        }
+    ],
+    "transitions": [
+        {
+            "name": "StartLoading",
+            "from": "Draft",
+            "to": "Loading"
+        },
+        {
+            "name": "FinishLoading",
+            "from": "Loading",
+            "to": "Loaded",
+            "broadcastEvent": {
+                "serverSideEvents": true
+            }
+        },
+        {
+            "name": "StartImporting",
+            "from": "Loaded",
+            "to": "Importing",
+            "automatic": true
+        },
+        {
+            "name": "FinishImporting",
+            "from": "Importing",
+            "to": "Imported",
+            "broadcastEvent": {
+                "serverSideEvents": true
+            }
+        },
+        {
+            "name": "CancelAllocation",
+            "from": "Imported",
+            "to": "AllocationCancellation"
+        },
+        {
+            "name": "FinishCancelAllocation",
+            "from": "AllocationCancellation",
+            "to": "Imported",
+            "broadcastEvent": {
+                "serverSideEvents": true
+            }
+        },
+        {
+            "name": "CancelPayment",
+            "from": "Imported",
+            "to": "PaymentCancellation"
+        },
+        {
+            "name": "FinishCancelPayment",
+            "from": "PaymentCancellation",
+            "to": "Imported",
+            "broadcastEvent": {
+                "serverSideEvents": true
+            }
+        },
+        {
+            "name": "FinishDocument",
+            "from": "PaymentCancellation",
+            "to": "Done",
+            "broadcastEvent": {
+                "serverSideEvents": true
+            }
+        }
+    ]
+}

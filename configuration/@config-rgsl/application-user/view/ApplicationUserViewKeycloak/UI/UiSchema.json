@@ -1,0 +1,424 @@
+{
+    "id": "user.ui-schema.json",
+    "type": "GridLayout",
+    "numberOfColumns": 4,
+    "formProperties": {
+        "events": {
+            "onLoad": "getUserById"
+        }
+    },
+    "elements": [
+        {
+            "type": "HeaderContentLayout",
+            "fixedPosition": true,
+            "elements": [
+                {
+                    "type": "Group",
+                    "width": 2,
+                    "stackContent": "Left",
+                    "elements": [
+                        {
+                            "type": "OutputText",
+                            "skipTranslate": true,
+                            "template": "{{#style 'bold'}}{{#i18n}}{{expr ConfigurationCodeName}}@Title{{/i18n}}:{{/style}}",
+                            "value": {
+                                "$ref": "#"
+                            },
+                            "textStyle": {
+                                "uppercase": true,
+                                "textSize": "Normal",
+                                "textColor": "Black"
+                            }
+                        },
+                        {
+                            "type": "OutputText",
+                            "skipTranslate": true,
+                            "value": {
+                                "$ref": "#/properties/Body/properties/general/properties/username"
+                            },
+                            "textStyle": {
+                                "uppercase": true,
+                                "textSize": "Normal",
+                                "textColor": "Blue"
+                            },
+                            "elementId": "ai-info-control",
+                            "defaultValue": ""
+                        }
+                    ]
+                },
+                {
+                    "type": "Group",
+                    "width": 2,
+                    "stackContent": "Right",
+                    "elements": [
+                        {
+                            "type": "Actor",
+                            "value": {
+                                "$ref": "#/properties/WorkUnitActor"
+                            },
+                            "elementId": "ai-actor-selection-control"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "GridLayout",
+            "numberOfColumns": 4,
+            "width": 3,
+            "fillAvailableSpace": true,
+            "elements": [
+                {
+                    "type": "GridLayout",
+                    "numberOfColumns": 4,
+                    "width": 4,
+                    "elements": [
+                        {
+                            "type": "Component",
+                            "name": "ApplicationUserDetails",
+                            "value": {
+                                "$ref": "#/properties/Body/properties/general"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "type": "Section",
+                    "label": "Groups and roles",
+                    "sectionLevel": 1,
+                    "elements": [
+                        {
+                            "type": "DataGrid",
+                            "mode": "Array",
+                            "pagination": {
+                                "mode": "Regular",
+                                "pageSizes": [
+                                    5,
+                                    10,
+                                    15
+                                ]
+                            },
+                            "label": "User groups",
+                            "value": {
+                                "$ref": "#/properties/Body/properties/groups"
+                            },
+                            "actions": [
+                                "Add",
+                                "Edit",
+                                "Delete"
+                            ],
+                            "edit": {
+                                "mode": "Detached",
+                                "onBeforeGridAction": "checkAndDisableAddingSameGroups",
+                                "onAfterGridAction": "userGroupArrayOperationHandler"
+                            },
+                            "height": "None",
+                            "columns": [
+                                {
+                                    "title": "Group",
+                                    "name": "nameLocalized",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "skipTranslate": true,
+                                        "value": {
+                                            "$ref": "#/properties/nameLocalized"
+                                        }
+                                    }
+                                },
+                                {
+                                    "title": "Is group manager",
+                                    "name": "isGroupManager",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "template": "{{#if isGroupManager}}{{#i18n}}Yes{{/i18n}}{{else}}{{#i18n}}No{{/i18n}}{{/if}}",
+                                        "value": {
+                                            "$ref": "#"
+                                        }
+                                    }
+                                },
+                                {
+                                    "title": "Substitute user",
+                                    "name": "substituteUserDisplayName",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "skipTranslate": true,
+                                        "value": {
+                                            "$ref": "#/properties/substituteUserDisplayName"
+                                        },
+                                        "defaultValue": ""
+                                    }
+                                }
+                            ],
+                            "detailsTemplates": {
+                                "edit": {
+                                    "content": {
+                                        "type": "GridLayout",
+                                        "numberOfColumns": 4,
+                                        "elements": [
+                                            {
+                                                "type": "Group",
+                                                "elements": [
+                                                    {
+                                                        "type": "Lookup",
+                                                        "elementId": "GroupUserLookup",
+                                                        "value": {
+                                                            "$ref": "#/properties/name"
+                                                        },
+                                                        "width": 2,
+                                                        "dialogButton": {},
+                                                        "dialog": {
+                                                            "viewReference": {
+                                                                "configurationCodeName": "ApplicationUserGroupSearchView",
+                                                                "configurationConceptType": "SearchView",
+                                                                "configurationVersion": "1"
+                                                            }
+                                                        },
+                                                        "onSelected": "applicationUserGroupResultMapping",
+                                                        "selectedDisplayValueUISchema": {
+                                                            "type": "Input",
+                                                            "label": "Group",
+                                                            "elementId": "GroupUserLookupDropdown",
+                                                            "readOnly": true,
+                                                            "value": {
+                                                                "$ref": "#/properties/code"
+                                                            },
+                                                            "control": "Dropdown",
+                                                            "source": {
+                                                                "displayFieldName": "nameLocalized",
+                                                                "valueFieldName": "code",
+                                                                "dataSource": {
+                                                                    "name": "GetApplicationUserGroupsDataSource",
+                                                                    "searchFieldPath": "code",
+                                                                    "requestMapping": "applicationUserSearchRequestMapping",
+                                                                    "responseMapping": "applicationUserSearchResponseMapping"
+                                                                }
+                                                            }
+                                                        }
+                                                    },
+                                                    {
+                                                        "type": "Input",
+                                                        "control": "Boolean",
+                                                        "label": "Is group manager",
+                                                        "value": {
+                                                            "$ref": "#/properties/isGroupManager"
+                                                        },
+                                                        "elementId": "ai-toggle-switch-test",
+                                                        "width": 1
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "type": "Lookup",
+                                                "elementId": "SubstituteUserLookup",
+                                                "rule": {
+                                                    "effect": "HIDE",
+                                                    "condition": {
+                                                        "type": "FUNC",
+                                                        "ruleFunction": "disableSubstituteSelectionIfNoGroupSelected",
+                                                        "value": [
+                                                            {
+                                                                "$ref": "#/properties/name"
+                                                            }
+                                                        ]
+                                                    }
+                                                },
+                                                "value": {
+                                                    "$ref": "#/properties/substituteUserId"
+                                                },
+                                                "width": 2,
+                                                "dialogButton": {},
+                                                "clearButton": {
+                                                    "clearAction": "clearSubstituteUser"
+                                                },
+                                                "dialog": {
+                                                    "onLoad": "initUserLookupToGroupUsersOnly",
+                                                    "viewReference": {
+                                                        "configurationCodeName": "ApplicationUserLookup",
+                                                        "configurationConceptType": "SearchView",
+                                                        "configurationVersion": "1"
+                                                    }
+                                                },
+                                                "onSelected": "substituteUserResultMapping",
+                                                "selectedDisplayValueUISchema": {
+                                                    "type": "Input",
+                                                    "label": "Substitute user",
+                                                    "readOnly": true,
+                                                    "value": {
+                                                        "$ref": "#/properties/substituteUserDisplayName"
+                                                    }
+                                                }
+                                            }
+                                        ]
+                                    }
+                                }
+                            },
+                            "elementId": "user-groups"
+                        },
+                        {
+                            "type": "DataGrid",
+                            "mode": "Array",
+                            "pagination": {
+                                "mode": "Regular",
+                                "pageSizes": [
+                                    5,
+                                    10,
+                                    15
+                                ]
+                            },
+                            "label": "Assigned roles",
+                            "value": {
+                                "$ref": "#/properties/Body/properties/roles"
+                            },
+                            "actions": [
+                                "Add",
+                                "Delete"
+                            ],
+                            "edit": {
+                                "mode": "Detached",
+                                "onBeforeGridAction": "checkAndDisableAddingSameRoles"
+                            },
+                            "checkIfRowActionIsAllowed": "checkAllowedOperationsOnRows",
+                            "height": "None",
+                            "columns": [
+                                {
+                                    "title": "Description",
+                                    "name": "Description",
+                                    "sortable": true,
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "skipTranslate": true,
+                                        "value": {
+                                            "$ref": "#/properties/codeName"
+                                        }
+                                    }
+                                },
+                                {
+                                    "title": "Derived from user groups",
+                                    "name": "Derived from user groups",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "skipTranslate": true,
+                                        "value": {
+                                            "$ref": "#/properties/userGroupNames"
+                                        },
+                                        "defaultValue": ""
+                                    }
+                                }
+                            ],
+                            "detailsTemplates": {
+                                "edit": {
+                                    "content": {
+                                        "type": "Group",
+                                        "elements": [
+                                            {
+                                                "type": "Lookup",
+                                                "label": "User roles",
+                                                "value": {
+                                                    "$ref": "#/properties/codeName"
+                                                },
+                                                "clearButton": {
+                                                    "clearAction": "clearUserRole"
+                                                },
+                                                "width": 1,
+                                                "dialogButton": {},
+                                                "dialog": {
+                                                    "viewReference": {
+                                                        "configurationCodeName": "ApplicationRGSLRoleSearchView",
+                                                        "configurationConceptType": "SearchView",
+                                                        "configurationVersion": "1"
+                                                    }
+                                                },
+                                                "onSelected": "applicationRoleResultMapping",
+                                                "selectedDisplayValueTemplate": "{{expr resultData.codeName}}"
+                                            }
+                                        ]
+                                    }
+                                }
+                            },
+                            "elementId": "user-roles"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "SideContentLayout",
+            "fixedPosition": true,
+            "width": 1,
+            "elements": [
+                {
+                    "type": "GridLayout",
+                    "numberOfColumns": 2,
+                    "elements": [
+                        {
+                            "type": "TabLayout",
+                            "elements": [
+                                {
+                                    "type": "Tab",
+                                    "tabType": "error",
+                                    "additionalInfo": {
+                                        "display": "ValidationErrorsCount"
+                                    },
+                                    "elements": [
+                                        {
+                                            "type": "ValidationSummary",
+                                            "elementId": "RequiredPropertiesValidations"
+                                        }
+                                    ],
+                                    "elementId": "tab-error",
+                                    "icon": {
+                                        "name": "Bell",
+                                        "size": "Large"
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "FooterContentLayout",
+            "elements": [
+                {
+                    "type": "Group",
+                    "width": 2,
+                    "stackContent": "Left"
+                },
+                {
+                    "type": "Group",
+                    "width": 2,
+                    "stackContent": "Right",
+                    "rule": {
+                        "effect": "HIDE",
+                        "condition": {
+                            "type": "FUNC",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ],
+                            "ruleFunction": "hideSaveButton"
+                        }
+                    },
+                    "elements": [
+                        {
+                            "type": "Button",
+                            "value": {
+                                "$ref": "#"
+                            },
+                            "onClick": [
+                                {
+                                    "commandType": "executeAction",
+                                    "actionName": "saveUser"
+                                }
+                            ],
+                            "label": "Save",
+                            "elementId": "saveUserButton"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,218 @@
+{
+    "type": "Section",
+    "label": "Initiator",
+    "isCollapsed": false,
+    "width": 12,
+    "elements": [
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "DataGrid",
+                    "elementId": "additionalInitiators",
+                    "checkIfRowActionIsAllowed": "isAdditioanlInitiatorsRowActionAllowed",
+                    "checkIfAddButtonVisible": "isAdditionalInitiatorAddButtonVisible",
+                    "mode": "Array",
+                    "pagination": {
+                        "mode": "Regular",
+                        "pageSizes": [
+                            5,
+                            10,
+                            15
+                        ]
+                    },
+                    "actions": [
+                        "Add",
+                        "Edit",
+                        "Details",
+                        "Delete"
+                    ],
+                    "edit": {
+                        "mode": "Detached",
+                        "onBeforeGridAction": "beforeAdditioanlInitiatorsGridAction"
+                    },
+                    "height": "None",
+                    "value": {
+                        "$ref": "#/properties/additionalInitiatorsLines"
+                    },
+                    "selection": {
+                        "mode": "Single",
+                        "enableRowSelection": true,
+                        "showCheckBox": true
+                    },
+                    "columns": [
+                        {
+                            "sortable": false,
+                            "title": "agent",
+                            "name": "agent",
+                            "cellContent": {
+                                "readOnly": true,
+                                "label": "agent",
+                                "width": 5,
+                                "type": "OutputText",
+                                "value": {
+                                    "$ref": "#/properties/agent/properties/partyFullName"
+                                }
+                            }
+                        },
+                        {
+                            "sortable": false,
+                            "title": "agentShare",
+                            "name": "agentShare",
+                            "cellContent": {
+                                "readOnly": true,
+                                "type": "OutputText",
+                                "label": "agentShare",
+                                "width": 5,
+                                "value": {
+                                    "$ref": "#/properties/agentShare"
+                                }
+                            }
+                        },
+                        {
+                            "sortable": false,
+                            "title": "agentType",
+                            "name": "agentType",
+                            "cellContent": {
+                                "readOnly": true,
+                                "label": "agentType",
+                                "type": "OutputText",
+                                "width": 5,
+                                "value": {
+                                    "$ref": "#/properties/agentType"
+                                }
+                            }
+                        }
+                    ],
+                    "detailsTemplates": {
+                        "edit": {
+                            "content": {
+                                "type": "Group",
+                                "elements": [
+                                    {
+                                        "type": "GridLayout",
+                                        "fillAvailableSpace": true,
+                                        "numberOfColumns": 12,
+                                        "elements": [
+                                            {
+                                                "type": "Group",
+                                                "elements": [
+                                                    {
+                                                        "type": "Input",
+                                                        "label": "agentType",
+                                                        "value": {
+                                                            "$ref": "#/properties/agentType"
+                                                        },
+                                                        "autocomplete": {
+                                                            "minTextLength": 3,
+                                                            "dropDownItemsCount": 30
+                                                        },
+                                                        "control": "Dropdown",
+                                                        "width": 12
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "type": "Group",
+                                                "elements": [
+                                                    {
+                                                        "elementId": "agentLookup",
+                                                        "type": "Lookup",
+                                                        "label": "agent",
+                                                        "commands": [
+                                                            {
+                                                                "commandType": "executeOperation",
+                                                                "operation": "SEARCH",
+                                                                "errorHandling": "silent",
+                                                                "data": null
+                                                            }
+                                                        ],
+                                                        "value": {
+                                                            "$ref": "#/properties/agent"
+                                                        },
+                                                        "width": 4,
+                                                        "dialogButton": {},
+                                                        "dialog": {
+                                                            "viewReference": {
+                                                                "configurationCodeName": "ServiceProviderSearchView",
+                                                                "configurationVersion": "1",
+                                                                "configurationConceptType": "SearchView"
+                                                            },
+                                                            "onLoad": "mainAgentOnLoad"
+                                                        },
+                                                        "onSelected": "agentOnSelected",
+                                                        "selectedDisplayValueUISchema": {
+                                                            "elementId": "initiatorLookupSubUI",
+                                                            "type": "OutputText",
+                                                            "label": "mainAgent",
+                                                            "readOnly": true,
+                                                            "value": {
+                                                                "$ref": "#/properties/agent/properties/partyFullName"
+                                                            },
+                                                            "defaultValue": "",
+                                                            "backgroundColor": "Secondary"
+                                                        }
+                                                    },
+                                                    {
+                                                        "type": "Input",
+                                                        "label": "agentShare",
+                                                        "value": {
+                                                            "$ref": "#/properties/agentShare"
+                                                        },
+                                                        "control": "Dropdown",
+                                                        "width": 4,
+                                                        "multiple": false,
+                                                        "enableClear": true,
+                                                        "enableCustomValue": false,
+                                                        "preSelectFirstItem": true,
+                                                        "elementId": "agent",
+                                                        "rule": {
+                                                            "effect": "DISABLE_INITIAL",
+                                                            "condition": {
+                                                                "type": "FUNC",
+                                                                "ruleFunction": "disableShare",
+                                                                "value": [
+                                                                    {
+                                                                        "$ref": "#"
+                                                                    }
+                                                                ]
+                                                            }
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            "rule": {
+                                "effect": "DISABLE_INITIAL",
+                                "condition": {
+                                    "type": "FUNC",
+                                    "ruleFunction": "disableGrid",
+                                    "value": [
+                                        {
+                                            "$ref": "#"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            ]
+        }
+    ],
+    "rule": {
+        "effect": "SHOW",
+        "condition": {
+            "type": "FUNC",
+            "ruleFunction": "showInitiator",
+            "value": [
+                {
+                    "$ref": "#"
+                }
+            ]
+        }
+    }
+}

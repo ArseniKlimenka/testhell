@@ -1,0 +1,36 @@
+{
+    "sinks": [
+        {
+            "name": "GetParty",
+            "fetch": {
+                "configuration": {
+                    "name": "GetPartyDataSource"
+                }
+            }
+        },
+        {
+            "name": "UpdatePartyBody",
+            "executeAs": "OrganisationAdministrator",
+            "masterEntity": {
+                "configuration": {
+                    "name": "NaturalPerson"
+                },
+                "allowUpdating": true
+            }
+        },
+        {
+            "name": "UpdatePartyBodyForMultiplePerDayTime",
+            "executeAs": "OrganisationAdministrator",
+            "masterEntity": {
+                "configuration": {
+                    "name": "NaturalPerson"
+                },
+                "allowUpdating": true
+            }
+        }
+    ],
+    "responses": [
+        200,
+        422
+    ]
+}

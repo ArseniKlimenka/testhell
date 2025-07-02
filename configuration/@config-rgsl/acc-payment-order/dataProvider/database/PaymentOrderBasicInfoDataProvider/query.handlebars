@@ -1,0 +1,27 @@
+﻿SELECT tpo.PAYMENT_ORDER_NUMBER,
+	   tpo.STATE_CODE
+FROM
+    (SELECT po.PAYMENT_ORDER_NUMBER,
+            hist.NEW_STATE as STATE_CODE,
+            hist.HISTORY_VERSION,
+            MAX(hist.HISTORY_VERSION) over(partition by po.PAYMENT_ORDER_NUMBER) AS HISTORY_VERSION_MAX,
+	        ps.CONTRACT_NUMBER,
+	        ps.CONTRACT_AMENDMENT_NUMBER,
+	        ps.PAYMENT_ORDER_TYPE
+     FROM acc.PAYMENT_ORDER po
+        JOIN bfx.ENTITY_HISTORY hist on hist.BUSINESS_ID = po.PAYMENT_ORDER_NUMBER
+	    JOIN acc_impl.PAYMENT_ORDER_HUB ph on ph.PAYMENT_ORDER_NUMBER = po.PAYMENT_ORDER_NUMBER
+	    JOIN acc_impl.PAYMENT_ORDER_SAT_LATEST ps on ps.PAYMENT_ORDER_HKEY = ph.PAYMENT_ORDER_HKEY) tpo
+WHERE tpo.HISTORY_VERSION = tpo.HISTORY_VERSION_MAX
+{{#if parameters.contractNumber}}
+AND tpo.CONTRACT_NUMBER = @contractNumber
+{{/if}}
+{{#if parameters.poNumbers}}
+AND tpo.PAYMENT_ORDER_NUMBER in (@poNumbers)
+{{/if}}
+{{#if parameters.paymentOrderTypes}}
+AND tpo.PAYMENT_ORDER_TYPE in (@paymentOrderTypes)
+{{/if}}
+{{#if parameters.paymentOrderStates}}
+AND tpo.STATE_CODE in (@paymentOrderStates)
+{{/if}}

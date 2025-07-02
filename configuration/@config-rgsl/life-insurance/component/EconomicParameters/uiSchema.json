@@ -1,0 +1,1385 @@
+{
+    "type": "Group",
+    "width": 12,
+    "elements": [
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "DataGrid",
+                    "elementId": "economicParametersTable",
+                    "mode": "Array",
+                    "pagination": {
+                        "mode": "Regular",
+                        "pageSizes": [
+                            50
+                        ]
+                    },
+                    "actions": [
+                        "Add",
+                        "Edit",
+                        "Delete"
+                    ],
+                    "onInit": "economicParametersOnAfterAndInitGridAction",
+                    "edit": {
+                        "mode": "Detached",
+                        "onAfterGridAction": "economicParametersOnAfterAndInitGridAction",
+                        "onPrepareAddedRow": "economicParametersOnPrepareAddedRow",
+                        "onPrepareEditedRow": "economicParametersOnPrepareEditedRow"
+                    },
+                    "checkIfRowActionIsAllowed": "economicParametersCheckIfRowActionIsAllowed",
+                    "checkIfAddButtonVisible": "economicParametersCheckIfAddButtonVisible",
+                    "selection": {
+                        "mode": "Multi",
+                        "enableRowSelection": true,
+                        "showCheckBox": true
+                    },
+                    "height": "None",
+                    "value": {
+                        "$ref": "#"
+                    },
+                    "customCSSStyle": {
+                        "--data-grid-ai-grid-buttons-text-align": "left",
+                        "--data-grid-detached-row-display": "table-row"
+                    },
+                    "columns": [
+                        {
+                            "title": "",
+                            "cellContent": {
+                                "type": "GridButtonGroup",
+                                "elements": [
+                                    {
+                                        "type": "Button",
+                                        "label": "economicParametersCopyRow",
+                                        "onClick": "economicParametersCopyRow",
+                                        "icon": {
+                                            "name": "Clone"
+                                        },
+                                        "value": {
+                                            "$ref": "#"
+                                        },
+                                        "whenLocked": "Disable"
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "sortable": true,
+                            "title": "ruleNum",
+                            "name": "ruleNum",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "defaultValue": "",
+                                "allowMultiLine": false,
+                                "template": "{{expr ruleNum 'i'}}",
+                                "value": {
+                                    "$ref": "#"
+                                }
+                            },
+                            "filter": {
+                                "customAction": "filterRowsRuleNumber"
+                            }
+                        },
+                        {
+                            "sortable": true,
+                            "title": "enterValuesDate",
+                            "name": "enterValuesDate",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "defaultValue": "",
+                                "template": "{{expr enterValuesDate 'd'}}",
+                                "value": {
+                                    "$ref": "#"
+                                }
+                            },
+                            "filter": {
+                                "customAction": "filterRowsEnterValuesDate"
+                            }
+                        },
+                        {
+                            "sortable": true,
+                            "title": "partner",
+                            "name": "partner",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "allowMultiLine": true,
+                                "defaultValue": "",
+                                "template": "{{expr partnerDescription}} ({{expr partnerBusinessCode}})",
+                                "value": {
+                                    "$ref": "#/properties/partner"
+                                },
+                                "width": 4
+                            },
+                            "filter": {
+                                "customAction": "filterRowsPartner"
+                            }
+                        },
+                        {
+                            "sortable": true,
+                            "title": "agentAgreement",
+                            "name": "agentAgreement",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "allowMultiLine": true,
+                                "defaultValue": "",
+                                "template": "{{expr aaName}}",
+                                "value": {
+                                    "$ref": "#/properties/agentAgreement"
+                                },
+                                "width": 4
+                            },
+                            "filter": {
+                                "customAction": "filterRowsAgentAgreement"
+                            }
+                        },
+                        {
+                            "sortable": true,
+                            "title": "commRate",
+                            "name": "commRate",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "defaultValue": "",
+                                "value": {
+                                    "$ref": "#/properties/commRate"
+                                }
+                            },
+                            "filter": {
+                                "customAction": "filterRowsCommRate"
+                            }
+                        },
+                        {
+                            "sortable": true,
+                            "title": "insuranceProduct",
+                            "name": "insuranceProduct",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "allowMultiLine": true,
+                                "defaultValue": "",
+                                "template": "{{expr productDescription}} ({{expr productCode}})",
+                                "value": {
+                                    "$ref": "#/properties/insuranceProduct"
+                                },
+                                "width": 4
+                            },
+                            "filter": {
+                                "customAction": "filterRowsInsuranceProduct"
+                            }
+                        },
+                        {
+                            "sortable": true,
+                            "title": "policyIssueDateStart",
+                            "name": "policyIssueDateStart",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "defaultValue": "",
+                                "value": {
+                                    "$ref": "#/properties/policyIssueDateStart"
+                                }
+                            },
+                            "filter": {
+                                "customAction": "filterRowsPolicyIssueDateStart"
+                            }
+                        },
+                        {
+                            "sortable": true,
+                            "title": "policyIssueDateEnd",
+                            "name": "policyIssueDateEnd",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "defaultValue": "",
+                                "value": {
+                                    "$ref": "#/properties/policyIssueDateEnd"
+                                }
+                            },
+                            "filter": {
+                                "customAction": "filterRowsPolicyIssueDateEnd"
+                            }
+                        },
+                        {
+                            "sortable": true,
+                            "title": "strategyDescription",
+                            "name": "basicInvestmentParameters",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "defaultValue": "",
+                                "value": {
+                                    "$ref": "#/properties/basicInvestmentParameters/properties/strategyDescription"
+                                }
+                            },
+                            "filter": {
+                                "customAction": "filterRowsStrategyDescription"
+                            }
+                        },
+                        {
+                            "sortable": true,
+                            "title": "insuranceTermFrom",
+                            "name": "insuranceTermFrom",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "allowMultiLine": true,
+                                "defaultValue": "",
+                                "template": "{{expr insuranceTermsYearCode}}",
+                                "value": {
+                                    "$ref": "#/properties/insuranceTermFrom"
+                                },
+                                "width": 4
+                            },
+                            "filter": {
+                                "customAction": "filterRowsInsuranceTermFrom"
+                            }
+                        },
+                        {
+                            "sortable": true,
+                            "title": "insuranceTermTo",
+                            "name": "insuranceTermTo",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "allowMultiLine": true,
+                                "defaultValue": "",
+                                "template": "{{expr insuranceTermsYearCode}}",
+                                "value": {
+                                    "$ref": "#/properties/insuranceTermTo"
+                                },
+                                "width": 4
+                            },
+                            "filter": {
+                                "customAction": "filterRowsInsuranceTermTo"
+                            }
+                        },
+                        {
+                            "sortable": true,
+                            "title": "currency",
+                            "name": "currency",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "allowMultiLine": true,
+                                "defaultValue": "",
+                                "template": "{{expr currencyDesc}} ({{expr currencyCode}})",
+                                "value": {
+                                    "$ref": "#/properties/currency"
+                                },
+                                "width": 4
+                            },
+                            "filter": {
+                                "customAction": "filterRowsCurrency"
+                            }
+                        },
+                        {
+                            "sortable": true,
+                            "title": "paymentFrequency",
+                            "name": "paymentFrequency",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "defaultValue": "",
+                                "value": {
+                                    "$ref": "#/properties/paymentFrequency/properties/paymentFrequencyDescription"
+                                }
+                            },
+                            "filter": {
+                                "customAction": "filterRowsPaymentFrequency"
+                            }
+                        },
+                        {
+                            "sortable": true,
+                            "title": "ratesOfReturn",
+                            "name": "ratesOfReturn",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "defaultValue": "",
+                                "template": "{{expr rateOfReturn 'p:2'}}",
+                                "value": {
+                                    "$ref": "#/properties/ratesOfReturn"
+                                }
+                            },
+                            "filter": {
+                                "customAction": "filterRowsRateOfReturn"
+                            }
+                        },
+                        {
+                            "sortable": true,
+                            "title": "optionPrice",
+                            "name": "optionPrice",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "defaultValue": "",
+                                "value": {
+                                    "$ref": "#/properties/strategyConfiguration/properties/optionPrice"
+                                }
+                            },
+                            "filter": {
+                                "customAction": "filterRowsOptionPrice"
+                            }
+                        },
+                        {
+                            "sortable": true,
+                            "title": "fixRate",
+                            "name": "fixRate",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "defaultValue": "",
+                                "value": {
+                                    "$ref": "#/properties/strategyConfiguration/properties/fixRate"
+                                }
+                            },
+                            "filter": {
+                                "customAction": "filterRowsFixRate"
+                            }
+                        },
+                        {
+                            "sortable": true,
+                            "title": "participationCoeff",
+                            "name": "participationCoeff",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "defaultValue": "",
+                                "value": {
+                                    "$ref": "#/properties/strategyConfiguration/properties/participationCoeff"
+                                }
+                            },
+                            "filter": {
+                                "customAction": "filterRowsParticipationCoeff"
+                            }
+                        },
+                        {
+                            "sortable": true,
+                            "title": "segment",
+                            "name": "segment",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "defaultValue": "",
+                                "value": {
+                                    "$ref": "#/properties/segment"
+                                }
+                            },
+                            "filter": {
+                                "customAction": "filterRowsSegment"
+                            }
+                        },
+                        {
+                            "sortable": true,
+                            "title": "isin",
+                            "name": "isin",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "defaultValue": "",
+                                "value": {
+                                    "$ref": "#/properties/isin"
+                                }
+                            },
+                            "filter": {
+                                "customAction": "filterRowsIsin"
+                            }
+                        },
+                        {
+                            "sortable": true,
+                            "title": "rko",
+                            "name": "rko",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "defaultValue": "",
+                                "value": {
+                                    "$ref": "#/properties/rko"
+                                }
+                            },
+                            "filter": {
+                                "customAction": "filterRowsRko"
+                            }
+                        },
+                        {
+                            "sortable": true,
+                            "title": "motivationFromMargin",
+                            "name": "motivationFromMargin",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "defaultValue": "",
+                                "value": {
+                                    "$ref": "#/properties/motivationFromMargin"
+                                }
+                            },
+                            "filter": {
+                                "customAction": "filterRowsMotivationFromMargin"
+                            }
+                        },
+                        {
+                            "sortable": true,
+                            "title": "motivationFromProductEconomic",
+                            "name": "motivationFromProductEconomic",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "defaultValue": "",
+                                "value": {
+                                    "$ref": "#/properties/motivationFromProductEconomic"
+                                }
+                            },
+                            "filter": {
+                                "customAction": "filterRowsMotivationFromProductEconomic"
+                            }
+                        },
+                        {
+                            "sortable": true,
+                            "title": "skMargin",
+                            "name": "skMargin",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "decimalPlaces": 3,
+                                "defaultValue": "",
+                                "value": {
+                                    "$ref": "#/properties/skMargin"
+                                }
+                            },
+                            "filter": {
+                                "customAction": "filterRowsSkMargin"
+                            }
+                        },
+                        {
+                            "sortable": true,
+                            "title": "fundingRateSwaps",
+                            "name": "fundingRateSwaps",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "defaultValue": "",
+                                "value": {
+                                    "$ref": "#/properties/fundingRateSwaps"
+                                }
+                            },
+                            "filter": {
+                                "customAction": "filterRowsFundingRateSwaps"
+                            }
+                        },
+                        {
+                            "sortable": true,
+                            "title": "laps",
+                            "name": "laps",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "defaultValue": "",
+                                "value": {
+                                    "$ref": "#/properties/laps"
+                                }
+                            },
+                            "filter": {
+                                "customAction": "filterRowsLaps"
+                            }
+                        },
+                        {
+                            "sortable": true,
+                            "title": "hedge",
+                            "name": "hedge",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "defaultValue": "",
+                                "value": {
+                                    "$ref": "#/properties/hedge"
+                                }
+                            },
+                            "filter": {
+                                "customAction": "filterRowsHedge"
+                            }
+                        },
+                        {
+                            "sortable": true,
+                            "title": "clientID",
+                            "name": "clientID",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "defaultValue": "",
+                                "value": {
+                                    "$ref": "#/properties/clientID"
+                                }
+                            },
+                            "filter": {
+                                "customAction": "filterRowsClientID"
+                            }
+                        },
+                        {
+                            "sortable": true,
+                            "title": "shareRF",
+                            "name": "shareRF",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "defaultValue": "",
+                                "value": {
+                                    "$ref": "#/properties/shareRF"
+                                }
+                            },
+                            "filter": {
+                                "customAction": "filterRowsShareRF"
+                            }
+                        },
+                        {
+                            "sortable": true,
+                            "title": "shareGF",
+                            "name": "shareGF",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "defaultValue": "",
+                                "value": {
+                                    "$ref": "#/properties/shareGF"
+                                }
+                            },
+                            "filter": {
+                                "customAction": "filterRowsShareGF"
+                            }
+                        },
+                        {
+                            "sortable": true,
+                            "title": "rvd",
+                            "name": "rvd",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "defaultValue": "",
+                                "value": {
+                                    "$ref": "#/properties/rvd"
+                                }
+                            },
+                            "filter": {
+                                "customAction": "filterRowsRvd"
+                            }
+                        },
+                        {
+                            "sortable": true,
+                            "title": "fundingVersionSubFundID",
+                            "name": "fundingVersionSubFundID",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "defaultValue": "",
+                                "value": {
+                                    "$ref": "#/properties/fundingVersionSubFundID"
+                                }
+                            },
+                            "filter": {
+                                "customAction": "filterRowsFundingVersionSubFundID"
+                            }
+                        },
+                        {
+                            "sortable": true,
+                            "title": "memorandumPkDate",
+                            "name": "memorandumPkDate",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "defaultValue": "",
+                                "value": {
+                                    "$ref": "#/properties/memorandumPkDate"
+                                }
+                            },
+                            "filter": {
+                                "customAction": "filterRowsMemorandumPkDate"
+                            }
+                        },
+                        {
+                            "sortable": true,
+                            "title": "pkNumber",
+                            "name": "pkNumber",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "defaultValue": "",
+                                "value": {
+                                    "$ref": "#/properties/pkNumber"
+                                }
+                            },
+                            "filter": {
+                                "customAction": "filterRowsPkNumber"
+                            }
+                        },
+                        {
+                            "sortable": true,
+                            "title": "analyticalAdjustment",
+                            "name": "analyticalAdjustment",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "defaultValue": "",
+                                "value": {
+                                    "$ref": "#/properties/analyticalAdjustment"
+                                }
+                            },
+                            "filter": {
+                                "customAction": "filterRowsAnalyticalAdjustment"
+                            }
+                        },
+                        {
+                            "sortable": true,
+                            "title": "expectedReturnPercentAK",
+                            "name": "expectedReturnPercentAK",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "defaultValue": "",
+                                "value": {
+                                    "$ref": "#/properties/expectedReturnPercentAK"
+                                }
+                            },
+                            "filter": {
+                                "customAction": "filterRowsExpectedReturnPercentAK"
+                            }
+                        },
+                        {
+                            "sortable": true,
+                            "title": "insurance",
+                            "name": "insurance",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "defaultValue": "",
+                                "value": {
+                                    "$ref": "#/properties/insurance"
+                                }
+                            },
+                            "filter": {
+                                "customAction": "filterRowsInsurance"
+                            }
+                        },
+                        {
+                            "sortable": true,
+                            "title": "riskTransferProduct",
+                            "name": "riskTransferProduct",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "defaultValue": "",
+                                "value": {
+                                    "$ref": "#/properties/riskTransferProduct"
+                                }
+                            },
+                            "filter": {
+                                "customAction": "filterRowsRiskTransferProduct"
+                            }
+                        },
+                        {
+                            "sortable": true,
+                            "title": "comments",
+                            "name": "comments",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "defaultValue": "",
+                                "value": {
+                                    "$ref": "#/properties/comments"
+                                }
+                            },
+                            "filter": {
+                                "customAction": "filterComments"
+                            }
+                        }
+                    ],
+                    "detailsTemplates": {
+                        "showDetailsBelowRow": false,
+                        "removeScrollOnEditForm": true,
+                        "edit": {
+                            "content": {
+                                "type": "Group",
+                                "elements": [
+                                    {
+                                        "type": "GridLayout",
+                                        "fillAvailableSpace": false,
+                                        "numberOfColumns": 12,
+                                        "elements": [
+                                            {
+                                                "type": "Group",
+                                                "width": 12,
+                                                "elements": [
+                                                    {
+                                                        "type": "Input",
+                                                        "label": "policyIssueDateStart",
+                                                        "width": 3,
+                                                        "onValueChanged": [
+                                                            {
+                                                                "commandType": "executeAction",
+                                                                "actionName": "policyIssueDateStartOnChange"
+                                                            }
+                                                        ],
+                                                        "value": {
+                                                            "$ref": "#/properties/policyIssueDateStart"
+                                                        }
+                                                    },
+                                                    {
+                                                        "type": "Input",
+                                                        "label": "policyIssueDateEnd",
+                                                        "width": 3,
+                                                        "onValueChanged": [
+                                                            {
+                                                                "commandType": "executeAction",
+                                                                "actionName": "policyIssueDateEndOnChange"
+                                                            }
+                                                        ],
+                                                        "value": {
+                                                            "$ref": "#/properties/policyIssueDateEnd"
+                                                        },
+                                                        "control": "DatetimePicker"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "type": "Group",
+                                                "width": 12,
+                                                "elements": [
+                                                    {
+                                                        "type": "Input",
+                                                        "elementId": "insuranceTermFrom",
+                                                        "label": "insuranceTermFrom",
+                                                        "source": {
+                                                            "dataSource": {
+                                                                "name": "InsuranceTermsYearDataSource",
+                                                                "searchFieldPath": "insuranceTermsYearCode",
+                                                                "requestMapping": "insuranceTermsYearRequestMapping",
+                                                                "responseMapping": "insuranceTermsYearResponseMapping"
+                                                            },
+                                                            "reloadOnOpen": true,
+                                                            "ignoreItemsExistValidation": true,
+                                                            "displayFieldName": "insuranceTermsYearCode"
+                                                        },
+                                                        "onValueChanged": [
+                                                            {
+                                                                "commandType": "executeAction",
+                                                                "actionName": "insuranceTermsOnChange"
+                                                            }
+                                                        ],
+                                                        "filter": "insuranceTermsFilter",
+                                                        "control": "Dropdown",
+                                                        "value": {
+                                                            "$ref": "#/properties/insuranceTermFrom"
+                                                        },
+                                                        "width": 3
+                                                    },
+                                                    {
+                                                        "type": "Input",
+                                                        "elementId": "insuranceTermTo",
+                                                        "label": "insuranceTermTo",
+                                                        "source": {
+                                                            "dataSource": {
+                                                                "name": "InsuranceTermsYearDataSource",
+                                                                "searchFieldPath": "insuranceTermsYearCode",
+                                                                "requestMapping": "insuranceTermsYearRequestMapping",
+                                                                "responseMapping": "insuranceTermsYearResponseMapping"
+                                                            },
+                                                            "reloadOnOpen": true,
+                                                            "ignoreItemsExistValidation": true,
+                                                            "displayFieldName": "insuranceTermsYearCode"
+                                                        },
+                                                        "onValueChanged": [
+                                                            {
+                                                                "commandType": "executeAction",
+                                                                "actionName": "insuranceTermsOnChange"
+                                                            }
+                                                        ],
+                                                        "filter": "insuranceTermsFilter",
+                                                        "control": "Dropdown",
+                                                        "value": {
+                                                            "$ref": "#/properties/insuranceTermTo"
+                                                        },
+                                                        "width": 3
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "type": "Group",
+                                                "width": 12,
+                                                "elements": [
+                                                    {
+                                                        "type": "Input",
+                                                        "label": "partner",
+                                                        "value": {
+                                                            "$ref": "#/properties/partner"
+                                                        },
+                                                        "filter": "partnerFilter",
+                                                        "control": "Dropdown",
+                                                        "source": {
+                                                            "dataSource": {
+                                                                "name": "ServiceProviderDataSource",
+                                                                "searchFieldPath": "partnerSearchText",
+                                                                "requestMapping": "partnerRequestMapping",
+                                                                "responseMapping": "partnerResponseMapping"
+                                                            },
+                                                            "reloadOnOpen": true,
+                                                            "ignoreItemsExistValidation": true,
+                                                            "displayFieldName": "displayName",
+                                                            "valueFieldName": "value"
+                                                        },
+                                                        "width": 6,
+                                                        "onValueChanged": [
+                                                            {
+                                                                "commandType": "executeAction",
+                                                                "actionName": "partnerOnChange"
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "type": "Group",
+                                                "width": 12,
+                                                "elements": [
+                                                    {
+                                                        "type": "Input",
+                                                        "label": "agentAgreement",
+                                                        "value": {
+                                                            "$ref": "#/properties/agentAgreement"
+                                                        },
+                                                        "filter": "agentAgreementFilter",
+                                                        "control": "Dropdown",
+                                                        "source": {
+                                                            "dataSource": {
+                                                                "name": "AgentAgreementByPartnerDataSource",
+                                                                "searchFieldPath": "agentAgreementSearchText",
+                                                                "requestMapping": "agentAgreementRequestMapping",
+                                                                "responseMapping": "agentAgreementResponseMapping"
+                                                            },
+                                                            "reloadOnOpen": true,
+                                                            "ignoreItemsExistValidation": true,
+                                                            "displayFieldName": "displayName",
+                                                            "valueFieldName": "value"
+                                                        },
+                                                        "width": 6,
+                                                        "onValueChanged": [
+                                                            {
+                                                                "commandType": "executeAction",
+                                                                "actionName": "agentAgreementOnChange"
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "type": "Group",
+                                                "width": 12,
+                                                "elements": [
+                                                    {
+                                                        "type": "Input",
+                                                        "readOnly": false,
+                                                        "label": "commRate",
+                                                        "value": {
+                                                            "$ref": "#/properties/commRate"
+                                                        },
+                                                        "width": 3
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "type": "Group",
+                                                "width": 12,
+                                                "elements": [
+                                                    {
+                                                        "type": "Input",
+                                                        "elementId": "paymentFrequency",
+                                                        "label": "paymentFrequency",
+                                                        "source": {
+                                                            "dataSource": {
+                                                                "name": "PaymentFrequencyDataSource",
+                                                                "searchFieldPath": "paymentFrequencyDescription",
+                                                                "responseMapping": "paymentFrequencyResponseMapping"
+                                                            },
+                                                            "reloadOnOpen": true,
+                                                            "ignoreItemsExistValidation": true,
+                                                            "displayFieldName": "paymentFrequencyDescription"
+                                                        },
+                                                        "onValueChanged": [
+                                                            {
+                                                                "commandType": "executeAction",
+                                                                "actionName": "paymentFrequencyOnChange"
+                                                            }
+                                                        ],
+                                                        "filter": "paymentFrequencyFilter",
+                                                        "control": "Dropdown",
+                                                        "value": {
+                                                            "$ref": "#/properties/paymentFrequency"
+                                                        },
+                                                        "width": 3
+                                                    },
+                                                    {
+                                                        "type": "Input",
+                                                        "elementId": "guaranteedIncome",
+                                                        "label": "guaranteedIncome",
+                                                        "source": {
+                                                            "dataSource": {
+                                                                "name": "GuaranteedIncomeDataSource",
+                                                                "searchFieldPath": "guaranteedIncomeDescription",
+                                                                "responseMapping": "guaranteedIncomeResponseMapping"
+                                                            },
+                                                            "reloadOnOpen": true,
+                                                            "ignoreItemsExistValidation": true,
+                                                            "displayFieldName": "guaranteedIncomeDescription"
+                                                        },
+                                                        "onValueChanged": [
+                                                            {
+                                                                "commandType": "executeAction",
+                                                                "actionName": "guaranteedIncomeOnChange"
+                                                            }
+                                                        ],
+                                                        "filter": "guaranteedIncomeFilter",
+                                                        "control": "Dropdown",
+                                                        "value": {
+                                                            "$ref": "#/properties/guaranteedIncome"
+                                                        },
+                                                        "width": 3
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "type": "Group",
+                                                "width": 12,
+                                                "elements": [
+                                                    {
+                                                        "type": "Input",
+                                                        "label": "currency",
+                                                        "value": {
+                                                            "$ref": "#/properties/currency"
+                                                        },
+                                                        "filter": "currencyFilter",
+                                                        "control": "Dropdown",
+                                                        "autocomplete": {
+                                                            "minTextLength": 0,
+                                                            "dropDownItemsCount": 1000,
+                                                            "selectItemOnMatch": false
+                                                        },
+                                                        "source": {
+                                                            "dataSource": {
+                                                                "name": "CurrenciesDataSource",
+                                                                "searchFieldPath": "currencySearchText",
+                                                                "responseMapping": "currencyResponseMapping",
+                                                                "resultCount": 1000
+                                                            },
+                                                            "reloadOnOpen": true,
+                                                            "ignoreItemsExistValidation": true,
+                                                            "displayValueTemplate": "{{expr currencyDesc}} ({{expr currencyCode}})"
+                                                        },
+                                                        "width": 6,
+                                                        "onValueChanged": [
+                                                            {
+                                                                "commandType": "executeAction",
+                                                                "actionName": "currencyOnChange"
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "type": "Group",
+                                                "width": 12,
+                                                "elements": [
+                                                    {
+                                                        "type": "Input",
+                                                        "elementId": "ratesOfReturn",
+                                                        "label": "ratesOfReturn",
+                                                        "source": {
+                                                            "dataSource": {
+                                                                "name": "GetRateOfReturnRulesDataSource",
+                                                                "searchFieldPath": "ratesOfReturnDescription",
+                                                                "requestMapping": "ratesOfReturnRequestMapping",
+                                                                "responseMapping": "ratesOfReturnResponseMapping"
+                                                            },
+                                                            "reloadOnOpen": true,
+                                                            "ignoreItemsExistValidation": true,
+                                                            "displayFieldName": "displayName",
+                                                            "valueFieldName": "value"
+                                                        },
+                                                        "onValueChanged": [
+                                                            {
+                                                                "commandType": "executeAction",
+                                                                "actionName": "ratesOfReturnOnChange"
+                                                            }
+                                                        ],
+                                                        "filter": "ratesOfReturnFilter",
+                                                        "control": "Dropdown",
+                                                        "value": {
+                                                            "$ref": "#/properties/ratesOfReturn"
+                                                        },
+                                                        "width": 6
+                                                    }
+                                                ],
+                                                "rule": {
+                                                    "effect": "DISABLE_INITIAL",
+                                                    "condition": {
+                                                        "type": "FUNC",
+                                                        "ruleFunction": "ratesOfReturnDisableInitial",
+                                                        "value": [
+                                                            {
+                                                                "$ref": "#"
+                                                            }
+                                                        ]
+                                                    }
+                                                }
+                                            },
+                                            {
+                                                "type": "Group",
+                                                "width": 12,
+                                                "elements": [
+                                                    {
+                                                        "type": "Input",
+                                                        "label": "basicInvestmentParameters",
+                                                        "value": {
+                                                            "$ref": "#/properties/basicInvestmentParameters"
+                                                        },
+                                                        "autocomplete": {
+                                                            "minTextLength": 1,
+                                                            "dropDownItemsCount": 5
+                                                        },
+                                                        "control": "Dropdown",
+                                                        "multiple": false,
+                                                        "source": {
+                                                            "dataSource": {
+                                                                "name": "GetStrategyConfDataSource",
+                                                                "searchFieldPath": "strategyDescription",
+                                                                "requestMapping": "basicInvestmentParametersRequestMapping",
+                                                                "responseMapping": "basicInvestmentParametersResponseMapping"
+                                                            },
+                                                            "reloadOnOpen": true,
+                                                            "ignoreItemsExistValidation": true,
+                                                            "displayFieldName": "displayName",
+                                                            "valueFieldName": "value"
+                                                        },
+                                                        "filter": "basicInvestmentParametersFilter",
+                                                        "width": 6
+                                                    }
+                                                ],
+                                                "rule": {
+                                                    "effect": "DISABLE_INITIAL",
+                                                    "condition": {
+                                                        "type": "FUNC",
+                                                        "ruleFunction": "basicInvestmentParametersDisableInitial",
+                                                        "value": [
+                                                            {
+                                                                "$ref": "#"
+                                                            }
+                                                        ]
+                                                    }
+                                                }
+                                            },
+                                            {
+                                                "type": "Group",
+                                                "width": 12,
+                                                "elements": [
+                                                    {
+                                                        "type": "Input",
+                                                        "elementId": "strategyConfiguration",
+                                                        "label": "strategyConfiguration",
+                                                        "source": {
+                                                            "dataSource": {
+                                                                "name": "GetStrategyConfDataSource",
+                                                                "searchFieldPath": "strategyConfigurationDescription",
+                                                                "requestMapping": "strategyConfigurationRequestMapping",
+                                                                "responseMapping": "strategyConfigurationResponseMapping"
+                                                            },
+                                                            "reloadOnOpen": true,
+                                                            "ignoreItemsExistValidation": true,
+                                                            "displayFieldName": "displayName",
+                                                            "valueFieldName": "value"
+                                                        },
+                                                        "onValueChanged": [
+                                                            {
+                                                                "commandType": "executeAction",
+                                                                "actionName": "strategyConfigurationOnChange"
+                                                            }
+                                                        ],
+                                                        "filter": "strategyConfigurationFilter",
+                                                        "control": "Dropdown",
+                                                        "value": {
+                                                            "$ref": "#/properties/strategyConfiguration"
+                                                        },
+                                                        "width": 6
+                                                    }
+                                                ],
+                                                "rule": {
+                                                    "effect": "DISABLE_INITIAL",
+                                                    "condition": {
+                                                        "type": "FUNC",
+                                                        "ruleFunction": "strategyConfigurationDisableInitial",
+                                                        "value": [
+                                                            {
+                                                                "$ref": "#"
+                                                            }
+                                                        ]
+                                                    }
+                                                }
+                                            },
+                                            {
+                                                "type": "Group",
+                                                "width": 12,
+                                                "elements": [
+                                                    {
+                                                        "type": "Input",
+                                                        "elementId": "segment",
+                                                        "control": "Dropdown",
+                                                        "multiple": false,
+                                                        "label": "segment",
+                                                        "value": {
+                                                            "$ref": "#/properties/segment"
+                                                        },
+                                                        "width": 2
+                                                    },
+                                                    {
+                                                        "type": "Input",
+                                                        "readOnly": false,
+                                                        "label": "isin",
+                                                        "value": {
+                                                            "$ref": "#/properties/isin"
+                                                        },
+                                                        "width": 2
+                                                    },
+                                                    {
+                                                        "type": "Input",
+                                                        "readOnly": false,
+                                                        "label": "rko",
+                                                        "value": {
+                                                            "$ref": "#/properties/rko"
+                                                        },
+                                                        "width": 2
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "type": "Group",
+                                                "width": 12,
+                                                "elements": [
+                                                    {
+                                                        "type": "Input",
+                                                        "readOnly": false,
+                                                        "label": "motivationFromMargin",
+                                                        "value": {
+                                                            "$ref": "#/properties/motivationFromMargin"
+                                                        },
+                                                        "width": 2
+                                                    },
+                                                    {
+                                                        "type": "Input",
+                                                        "readOnly": false,
+                                                        "label": "motivationFromProductEconomic",
+                                                        "value": {
+                                                            "$ref": "#/properties/motivationFromProductEconomic"
+                                                        },
+                                                        "width": 2
+                                                    },
+                                                    {
+                                                        "type": "Input",
+                                                        "decimalPlaces": 3,
+                                                        "readOnly": false,
+                                                        "label": "skMargin",
+                                                        "value": {
+                                                            "$ref": "#/properties/skMargin"
+                                                        },
+                                                        "width": 2
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "type": "Group",
+                                                "width": 12,
+                                                "elements": [
+                                                    {
+                                                        "type": "Input",
+                                                        "readOnly": false,
+                                                        "label": "fundingRateSwaps",
+                                                        "value": {
+                                                            "$ref": "#/properties/fundingRateSwaps"
+                                                        },
+                                                        "width": 2
+                                                    },
+                                                    {
+                                                        "type": "Input",
+                                                        "readOnly": false,
+                                                        "label": "laps",
+                                                        "value": {
+                                                            "$ref": "#/properties/laps"
+                                                        },
+                                                        "width": 2
+                                                    },
+                                                    {
+                                                        "type": "Input",
+                                                        "readOnly": false,
+                                                        "label": "hedge",
+                                                        "value": {
+                                                            "$ref": "#/properties/hedge"
+                                                        },
+                                                        "width": 2
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "type": "Group",
+                                                "width": 12,
+                                                "elements": [
+                                                    {
+                                                        "type": "Input",
+                                                        "readOnly": false,
+                                                        "label": "clientID",
+                                                        "value": {
+                                                            "$ref": "#/properties/clientID"
+                                                        },
+                                                        "width": 2
+                                                    },
+                                                    {
+                                                        "type": "Input",
+                                                        "readOnly": false,
+                                                        "label": "shareRF",
+                                                        "value": {
+                                                            "$ref": "#/properties/shareRF"
+                                                        },
+                                                        "width": 2
+                                                    },
+                                                    {
+                                                        "type": "Input",
+                                                        "readOnly": false,
+                                                        "label": "shareGF",
+                                                        "value": {
+                                                            "$ref": "#/properties/shareGF"
+                                                        },
+                                                        "width": 2
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "type": "Group",
+                                                "width": 12,
+                                                "elements": [
+                                                    {
+                                                        "type": "Input",
+                                                        "readOnly": false,
+                                                        "label": "rvd",
+                                                        "value": {
+                                                            "$ref": "#/properties/rvd"
+                                                        },
+                                                        "width": 2
+                                                    },
+                                                    {
+                                                        "type": "Input",
+                                                        "readOnly": false,
+                                                        "label": "fundingVersionSubFundID",
+                                                        "value": {
+                                                            "$ref": "#/properties/fundingVersionSubFundID"
+                                                        },
+                                                        "width": 2
+                                                    },
+                                                    {
+                                                        "type": "Input",
+                                                        "readOnly": false,
+                                                        "label": "memorandumPkDate",
+                                                        "value": {
+                                                            "$ref": "#/properties/memorandumPkDate"
+                                                        },
+                                                        "width": 2
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "type": "Group",
+                                                "width": 12,
+                                                "elements": [
+                                                    {
+                                                        "type": "Input",
+                                                        "readOnly": false,
+                                                        "label": "pkNumber",
+                                                        "value": {
+                                                            "$ref": "#/properties/pkNumber"
+                                                        },
+                                                        "width": 2
+                                                    },
+                                                    {
+                                                        "type": "Input",
+                                                        "readOnly": false,
+                                                        "label": "analyticalAdjustment",
+                                                        "value": {
+                                                            "$ref": "#/properties/analyticalAdjustment"
+                                                        },
+                                                        "width": 2
+                                                    },
+                                                    {
+                                                        "type": "Input",
+                                                        "readOnly": false,
+                                                        "label": "expectedReturnPercentAK",
+                                                        "value": {
+                                                            "$ref": "#/properties/expectedReturnPercentAK"
+                                                        },
+                                                        "width": 2
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "type": "Group",
+                                                "width": 12,
+                                                "elements": [
+                                                    {
+                                                        "type": "Input",
+                                                        "readOnly": false,
+                                                        "label": "insurance",
+                                                        "value": {
+                                                            "$ref": "#/properties/insurance"
+                                                        },
+                                                        "width": 2
+                                                    },
+                                                    {
+                                                        "type": "Input",
+                                                        "readOnly": false,
+                                                        "label": "riskTransferProduct",
+                                                        "value": {
+                                                            "$ref": "#/properties/riskTransferProduct"
+                                                        },
+                                                        "width": 2
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "type": "Group",
+                                                "width": 12,
+                                                "elements": [
+                                                    {
+                                                        "type": "Input",
+                                                        "readOnly": false,
+                                                        "label": "comments",
+                                                        "control": "TextArea",
+                                                        "enableResize": true,
+                                                        "numberOfRows": 2,
+                                                        "value": {
+                                                            "$ref": "#/properties/comments"
+                                                        },
+                                                        "width": 6
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "type": "Group",
+            "width": 12,
+            "elements": [
+                {
+                    "type": "Button",
+                    "value": {
+                        "$ref": "#"
+                    },
+                    "width": 4,
+                    "onClick": [
+                        {
+                            "commandType": "executeAction",
+                            "actionName": "economicParametersUpdateContractEntities"
+                        }
+                    ],
+                    "label": "economicParametersUpdateContractEntities",
+                    "elementId": "economicParametersUpdateContractEntitiesId"
+                },
+                {
+                    "type": "Component",
+                    "metadata": {
+                        "autogenerate": true
+                    },
+                    "name": "RelatedEconomicParametersUpdateErrors",
+                    "value": {
+                        "$ref": "#"
+                    }
+                }
+            ],
+            "rule": {
+                "effect": "SHOW",
+                "condition": {
+                    "type": "FUNC",
+                    "ruleFunction": "economicParametersUpdateContractEntitiesShow",
+                    "value": [
+                        {
+                            "$ref": "#"
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}

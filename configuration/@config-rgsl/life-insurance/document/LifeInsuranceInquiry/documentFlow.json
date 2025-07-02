@@ -1,0 +1,41 @@
+{
+    "processType": "LifeInsuranceInquiry",
+    "actors": [
+        "GeneralBackOffice"
+    ],
+    "initialState": "Draft",
+    "states": [
+        {
+            "name": "Draft",
+            "operations": [
+                {
+                    "name": "Save"
+                }
+            ]
+        },
+        {
+            "name": "Issued",
+            "operations": []
+        },
+        {
+            "name": "Cancelled",
+            "operations": []
+        }
+    ],
+    "transitions": [
+        {
+            "name": "DraftIssued",
+            "from": "Draft",
+            "to": "Issued",
+            "exclusiveToAssignedUser": true,
+            "whenBlocked": "DisplayNormally"
+        },
+        {
+            "name": "DraftCancelled",
+            "from": "Draft",
+            "to": "Cancelled",
+            "exclusiveToAssignedUser": false,
+            "whenBlocked": "DisplayNormally"
+        }
+    ]
+}

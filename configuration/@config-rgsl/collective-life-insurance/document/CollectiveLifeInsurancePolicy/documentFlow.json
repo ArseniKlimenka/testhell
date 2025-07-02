@@ -1,0 +1,254 @@
+{
+    "processType": "Policy",
+    "actors": [
+        "Operations",
+        "Underwriter",
+        "UKSP",
+        "System"
+    ],
+    "initialState": "Draft",
+    "states": [
+        {
+            "name": "Draft",
+            "operations": [
+                {
+                    "name": "Save",
+                    "exclusiveToAssignedUser": true
+                }
+            ]
+        },
+        {
+            "name": "PremiumCalculating",
+            "operations": []
+        },
+        {
+            "name": "InquiryCreating",
+            "operations": []
+        },
+        {
+            "name": "OnReview",
+            "operations": []
+        },
+        {
+            "name": "InquiryCancelling",
+            "operations": []
+        },
+        {
+            "name": "Active",
+            "operations": []
+        },
+        {
+            "name": "Activated",
+            "isTerminal": true,
+            "appliesVersion": true,
+            "operations": []
+        },
+        {
+            "name": "Cancelled",
+            "isTerminal": true,
+            "discardsVersion": true,
+            "operations": []
+        },
+        {
+            "name": "CancelledByAmendment",
+            "isTerminal": true,
+            "appliesVersion": true,
+            "operations": []
+        },
+        {
+            "name": "Completed",
+            "isTerminal": true,
+            "discardsVersion": true,
+            "operations": []
+        }
+    ],
+    "transitions": [
+        {
+            "name": "Draft_To_PremiumCalculating",
+            "from": "Draft",
+            "to": "PremiumCalculating",
+            "exclusiveToAssignedUser": false,
+            "allowOnValidationErrors": {
+                "all": true
+            },
+            "requiredConfirmedConstraints": {
+                "all": false
+            },
+            "whenBlocked": "DisplayNormally"
+        },
+        {
+            "name": "Draft_to_InquiryCreating",
+            "from": "Draft",
+            "to": "InquiryCreating",
+            "exclusiveToAssignedUser": false,
+            "allowOnValidationErrors": {
+                "all": false
+            },
+            "whenBlocked": "DisplayNormally"
+        },
+        {
+            "name": "Draft_to_Active",
+            "from": "Draft",
+            "to": "Active",
+            "exclusiveToAssignedUser": false,
+            "allowOnValidationErrors": {
+                "all": false
+            },
+            "whenBlocked": "DisplayNormally"
+        },
+        {
+            "name": "Draft_to_Cancelled",
+            "from": "Draft",
+            "to": "Cancelled",
+            "exclusiveToAssignedUser": true,
+            "allowOnValidationErrors": {
+                "all": true
+            }
+        },
+        {
+            "name": "PremiumCalculating_To_Draft",
+            "from": "PremiumCalculating",
+            "to": "Draft",
+            "exclusiveToAssignedUser": false,
+            "allowOnValidationErrors": {
+                "all": true
+            },
+            "requiredConfirmedConstraints": {
+                "all": false
+            },
+            "broadcastEvent": {
+                "serverSideEvents": true
+            }
+        },
+        {
+            "name": "InquiryCreating_To_OnReview",
+            "from": "InquiryCreating",
+            "to": "OnReview",
+            "exclusiveToAssignedUser": true,
+            "allowOnValidationErrors": {
+                "all": true
+            },
+            "requiredConfirmedConstraints": {
+                "all": false
+            },
+            "broadcastEvent": {
+                "serverSideEvents": true
+            }
+        },
+        {
+            "name": "OnReview_to_InquiryCancelling",
+            "from": "OnReview",
+            "to": "InquiryCancelling",
+            "exclusiveToAssignedUser": false,
+            "allowOnValidationErrors": {
+                "all": true
+            },
+            "whenBlocked": "DisplayNormally"
+        },
+        {
+            "name": "OnReview_to_Active",
+            "from": "OnReview",
+            "to": "Active",
+            "exclusiveToAssignedUser": false,
+            "allowOnValidationErrors": {
+                "all": true
+            },
+            "whenBlocked": "DisplayNormally"
+        },
+        {
+            "name": "InquiryCancelling_To_Draft",
+            "from": "InquiryCancelling",
+            "to": "Draft",
+            "exclusiveToAssignedUser": false,
+            "allowOnValidationErrors": {
+                "all": true
+            },
+            "requiredConfirmedConstraints": {
+                "all": false
+            },
+            "broadcastEvent": {
+                "serverSideEvents": true
+            }
+        },
+        {
+            "name": "Active_to_Draft",
+            "from": "Active",
+            "to": "Draft",
+            "exclusiveToAssignedUser": false,
+            "allowOnValidationErrors": {
+                "all": true
+            },
+            "whenBlocked": "DisplayNormally"
+        },
+        {
+            "name": "Active_to_Cancelled",
+            "from": "Active",
+            "to": "Cancelled",
+            "exclusiveToAssignedUser": true,
+            "allowOnValidationErrors": {
+                "all": true
+            },
+            "whenBlocked": "DisplayNormally"
+        },
+        {
+            "name": "Active_to_Activated",
+            "from": "Active",
+            "to": "Activated",
+            "exclusiveToAssignedUser": false,
+            "allowOnValidationErrors": {
+                "all": true
+            },
+            "whenBlocked": "DisplayNormally"
+        },
+        {
+            "name": "Activated_to_Draft",
+            "from": "Activated",
+            "to": "Draft",
+            "exclusiveToAssignedUser": false,
+            "allowOnValidationErrors": {
+                "all": true
+            },
+            "whenBlocked": "DisplayNormally"
+        },
+        {
+            "name": "Activated_to_CancelledByAmendment",
+            "from": "Activated",
+            "to": "CancelledByAmendment",
+            "exclusiveToAssignedUser": false,
+            "allowOnValidationErrors": {
+                "all": true
+            },
+            "whenBlocked": "DisplayNormally"
+        },
+        {
+            "name": "Activated_to_Completed",
+            "from": "Activated",
+            "to": "Completed",
+            "exclusiveToAssignedUser": false,
+            "allowOnValidationErrors": {
+                "all": true
+            },
+            "whenBlocked": "DisplayNormally"
+        },
+        {
+            "name": "Cancelled_to_Draft",
+            "from": "Cancelled",
+            "to": "Draft",
+            "exclusiveToAssignedUser": false,
+            "allowOnValidationErrors": {
+                "all": true
+            },
+            "whenBlocked": "DisplayNormally"
+        },
+        {
+            "name": "CancelledByAmendment_to_Draft",
+            "from": "CancelledByAmendment",
+            "to": "Draft",
+            "exclusiveToAssignedUser": false,
+            "allowOnValidationErrors": {
+                "all": true
+            },
+            "whenBlocked": "DisplayNormally"
+        }
+    ]
+}

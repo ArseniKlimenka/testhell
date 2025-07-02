@@ -1,0 +1,31 @@
+{
+  "name": "@config-rgsl/employee",
+  "version": "1.0.0",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test-validate": "node ../../../node_modules/@adinsure-tools/test-runner -t validation -e ../../../test/validate/test-main.js -c {{@config-rgsl::employee::(?:.*)}}$",
+    "test-validate-debug": "node --inspect-brk ../../../node_modules/@adinsure-tools/test-runner -t validation -e ../../../test/validate/test-main.js -c {{@config-rgsl::employee::(?:.*)}}$",
+    "build": "npm run build:validate-schemas & npm run build:build & npm run build:check-es-mapping & npm run build:config-items & npm run build:translate",
+    "build:check-es-mapping": "node ../../../node_modules/@adinsure-tools/studio-services/dist/scripts/check-es-mapping.js -w ../../../ -r ./"
+  },
+  "keywords": [
+    "configuration"
+  ],
+  "adInsure": {
+    "projectNameDisplay": "Employee",
+    "ownershipScope": "organisation",
+    "domain": "SupportingProcesses"
+  },
+  "dependencies": {
+    "@config-rgsl/party": "1.0.0",
+    "@config-system/infrastructure": "43.4.0",
+    "@config-rgsl/application-user": "1.0.0",
+    "@config-rgsl/infrastructure": "1.0.0",
+    "@config-rgsl/natural-person": "1.0.0",
+    "@config-rgsl/application-user-group": "1.0.0",
+    "@config-rgsl/organisation-unit": "1.0.0"
+  }
+}

@@ -1,0 +1,113 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema",
+    "description": "Accounting certificate document",
+    "type": "object",
+    "additionalProperties": false,
+    "aiValidation": {
+        "rule": "validationAccountingCertificate"
+    },
+    "required": [
+        "taxPayerData",
+        "typeOfRequest",
+        "applicantFullName",
+        "requestDate",
+        "contract",
+        "insuredPerson"
+    ],
+    "aiAudit": {
+        "scope": "General"
+    },
+    "properties": {
+        "typeOfRequest": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+                "code",
+                "description"
+            ],
+            "properties": {
+                "code": {
+                    "type": "string",
+                    "aiTitle": "code"
+                },
+                "description": {
+                    "type": "string",
+                    "aiTitle": "description"
+                }
+            }
+        },
+        "applicantFullName": {
+            "type": "string",
+            "aiTitle": "applicantFullName"
+        },
+        "isApplicantPolicyHolder": {
+            "type": "boolean"
+        },
+        "requestDate": {
+            "type": "string",
+            "aiFormat": "date",
+            "aiTitle": "requestDate"
+        },
+        "insuredPerson": {
+            "type": "object",
+            "additionalProperties": false,
+            "aiTitle": "insuredPerson",
+            "required": [
+                "personCode",
+                "fullName"
+            ],
+            "properties": {
+                "personCode": {
+                    "type": "string"
+                },
+                "partyType": {
+                    "type": "string"
+                },
+                "fullName": {
+                    "type": "string"
+                }
+            }
+        },
+        "accountingYear": {
+            "$ref": "component:AccountingCertificateYear",
+            "aiTitle": "accountingYear"
+        },
+        "correctionNumber": {
+            "type": "integer"
+        },
+        "comment": {
+            "type": "string"
+        },
+        "taxCertificateFormat": {
+            "$ref": "component:AccountingTaxCertificateFormatComponent"
+        },
+        "contract": {
+            "$ref": "component:AccountingCertificateContract",
+            "aiTitle": "contract"
+        },
+        "paymentContract": {
+            "$ref": "component:AccountingCertificatePaymentContract"
+        },
+        "taxPayerData": {
+            "$ref": "component:AccountingCertificateTaxPayer"
+        },
+        "insuredPersonData": {
+            "$ref": "component:AccountingCertificateInsuredPerson"
+        },
+        "issueData": {
+            "$ref": "component:AccountingCertificateIssueData"
+        },
+        "attachmentsPackage": {
+            "$ref": "component:AttachmentsPackage"
+        },
+        "technicalInformation": {
+            "$ref": "component:AccountingCertificateTechnicalInformation"
+        },
+        "accountingCertificateEnrichments": {
+            "$ref": "component:AccountingCertificateEnrichments"
+        },
+        "accountingCertificateIncomeSource": {
+            "$ref": "component:AccountingCertificateIncomeSourceComponent"
+        }
+    }
+}

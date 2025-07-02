@@ -1,0 +1,104 @@
+{
+    "type": "GridLayout",
+    "numberOfColumns": 4,
+    "elements": [
+        {
+            "type": "DataGrid",
+            "mode": "Array",
+            "label": "PartyTaxResidencies",
+            "labelType": "H1",
+            "pagination": {
+                "mode": "Regular",
+                "pageSizes": [
+                    5,
+                    10,
+                    15
+                ],
+                "defaultPageSize": 5
+            },
+            "isCollapsed": false,
+            "value": {
+                "$ref": "#"
+            },
+            "actions": [
+                "Add",
+                "Edit",
+                "Delete"
+            ],
+            "edit": {
+                "mode": "Detached",
+                "onBeforeGridAction": "taxResidenciesOnBeforeGridAction"
+            },
+            "checkIfRowActionIsAllowed": "arrayCheckRowOperationHandler",
+            "height": "Small",
+            "columns": [
+                {
+                    "title": "residenceCountry",
+                    "name": "residenceCountry",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/residenceCountry/properties/countryShortName"
+                        }
+                    }
+                },
+                {
+                    "title": "docTypeDesc",
+                    "name": "docTypeDesc",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/docType/properties/docTypeDesc"
+                        }
+                    }
+                },
+                {
+                    "title": "startDate",
+                    "name": "startDate",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/startDate"
+                        }
+                    }
+                },
+                {
+                    "title": "endDate",
+                    "name": "endDate",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/endDate"
+                        }
+                    }
+                },
+                {
+                    "title": "daysCount",
+                    "name": "daysCount",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/daysCount"
+                        }
+                    }
+                }
+            ],
+            "detailsTemplates": {
+                "edit": {
+                    "content": {
+                        "type": "Component",
+                        "name": "PartyTaxResidency",
+                        "value": {
+                            "$ref": "#"
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}

@@ -1,0 +1,24 @@
+{
+    "mainDataSource": "GetNewBankStatementsSetSuccessfulFlagDataSource",
+    "useBackgroundTaskWorker": true,
+    "restartable": true,
+    "enableAutomaticRecovery": true,
+    "sinks": [
+        {
+            "name": "SendConfirmation",
+            "class": {
+                "className": "Adacta.AdInsure.RGSL.Common.API.Shared.Services.IXmlRequestServiceAppRGSL, Adacta.AdInsure.RGSL.Common.API",
+                "methodName": "PostXmlRequest"
+            }
+        },
+        {
+            "name": "WriteLog",
+            "database": {
+                "tables": [
+                    "ACC_IMPL.GET_NEW_BS_LOG_SAT"
+                ]
+            }
+        }
+    ],
+    "version": "1"
+}

@@ -1,0 +1,13 @@
+ConfigurationType	ConfigurationName	ItemType	TranslationKey	Expression	Translation_ru-RU	Translation_en-US
+UiSchema	InsuredPerson	ui-label	Insured Person	Insured Person	Застрахованное лицо	Insured Person
+Rule	InsuredPersonValidateInsuredPerson	rule	validation@isEmptyDataByInsuredPerson	validateInsuredPerson	E: Дополните информацию о застрахованном	E: validation@isEmptyDataByInsuredPerson
+DataSchema	InsuredPerson	field-title	isPolicyHolder	isPolicyHolder	Застрахованный совпадает со страхователем	isPolicyHolder
+UiSchema	InsuredPerson	ui-label	isPolicyHolder	isPolicyHolder	Застрахованный совпадает со страхователем	isPolicyHolder
+Rule	InsuredPersonValidateInsuredPerson	rule	validation@insuredPersonIsRequired	validateInsuredPerson	E: Необходимо указать застрахованного	E: validation@insuredPersonIsRequired
+Rule	InsuredPersonValidateInsuredPerson	rule	validation@insuredPersonAge	validateInsuredPerson	E: Возраст застрахованного не соответствует ограничениям продукта. ${entity.insuredAgeMin} ${entity.insuredAgeMax} ${entity.insuredAgeOnEndDateMax}	E: validation@insuredPersonAge
+Rule	InsuredPersonValidateInsuredPerson	rule	validation@dateOfBirthEmpty	validateInsuredPerson	E: Необходимо указать дату рождения	E: validation@dateOfBirthEmpty
+Rule	InsuredPersonValidateInsuredPerson	rule	validation@personGenderEmpty	validateInsuredPerson	E: Необходимо указать пол	E: validation@personGenderEmpty
+Rule	InsuredPersonValidateInsuredPerson	rule	validation@insuredPersonProMedAge	validateInsuredPerson	E: Возраст застрахованного должен быть от 0 до 17 включительно.	E: validation@insuredPersonProMedAge
+UiSchema	InsuredPerson	ui-label	sportsmanBookNumber	sportsmanBookNumber	Номер книжки спортсмена	sportsmanBookNumber
+UiSchema	InsuredPerson	ui-label	sportsmanBookNumberDesc	sportsmanBookNumberDesc	Номер книжки спортсмена Федерации спортивных танцев РФ	sportsmanBookNumberDesc
+Rule	InsuredPersonValidateInsuredPerson	rule	validation@insuredMinPersonAge	validateInsuredPerson	E: Возраст застрахованного не соответствует ограничениям продукта. ${entity.insuredAgeMin}	E: validation@insuredMinPersonAge

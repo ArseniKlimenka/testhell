@@ -1,0 +1,267 @@
+{
+    "type": "Group",
+    "title": "Legal Entity",
+    "fillAvailableSpace": true,
+    "formProperties": {
+        "events": {
+            "onLoad": "onLoad",
+            "beforeSave": "beforeSave"
+        }
+    },
+    "elements": [
+        {
+            "type": "TabLayout",
+            "elementId": "MainContent",
+            "options": {
+                "fixedPosition": true,
+                "scrollableTabs": false,
+                "buttonsForSwitchingTabs": false
+            },
+            "elements": [
+                {
+                    "type": "Tab",
+                    "elementId": "MainTab",
+                    "title": "MainTab",
+                    "elements": [
+                        {
+                            "type": "Component",
+                            "metadata": {
+                                "autogenerate": true
+                            },
+                            "name": "PartyRoleOfPerson",
+                            "value": {
+                                "$ref": "#/properties/Body/properties/partyRoleOfPerson"
+                            }
+                        },
+                        {
+                            "type": "Component",
+                            "metadata": {
+                                "autogenerate": true
+                            },
+                            "name": "PartyOrganisationData",
+                            "value": {
+                                "$ref": "#/properties/Body/properties/partyOrganisationData"
+                            }
+                        },
+                        {
+                            "type": "Component",
+                            "metadata": {
+                                "autogenerate": true
+                            },
+                            "name": "PartyLicensesAdditionalInfo",
+                            "value": {
+                                "$ref": "#/properties/Body/properties/partyLicensesAdditionalInfo"
+                            }
+                        },
+                        {
+                            "type": "Group",
+                            "elements": [
+                                {
+                                    "type": "Component",
+                                    "metadata": {
+                                        "autogenerate": true
+                                    },
+                                    "name": "PartyLicenses",
+                                    "value": {
+                                        "$ref": "#/properties/Body/properties/partyLicenses"
+                                    }
+                                }
+                            ],
+                            "rule": {
+                                "effect": "SHOW",
+                                "condition": {
+                                    "type": "FUNC",
+                                    "ruleFunction": "hasLicenses",
+                                    "value": [
+                                        {
+                                            "$ref": "#"
+                                        }
+                                    ]
+                                }
+                            }
+                        },
+                        {
+                            "type": "Component",
+                            "elementId": "partyGeneralData",
+                            "metadata": {
+                                "autogenerate": true
+                            },
+                            "name": "PartyGeneralData",
+                            "value": {
+                                "$ref": "#/properties/Body/properties/partyGeneralData"
+                            }
+                        },
+                        {
+                            "type": "Component",
+                            "metadata": {
+                                "autogenerate": true
+                            },
+                            "name": "PartyCRS",
+                            "value": {
+                                "$ref": "#/properties/Body/properties/partyCRS"
+                            }
+                        },
+                        {
+                            "type": "Component",
+                            "metadata": {
+                                "autogenerate": true
+                            },
+                            "name": "PartyFatca",
+                            "value": {
+                                "$ref": "#/properties/Body/properties/partyFatca"
+                            }
+                        },
+                        {
+                            "type": "Component",
+                            "metadata": {
+                                "autogenerate": true
+                            },
+                            "name": "PartyAddresses",
+                            "value": {
+                                "$ref": "#/properties/Body/properties/partyAddresses"
+                            }
+                        },
+                        {
+                            "type": "Component",
+                            "metadata": {
+                                "autogenerate": true
+                            },
+                            "name": "PartyPhones",
+                            "value": {
+                                "$ref": "#/properties/Body/properties/partyPhones"
+                            }
+                        },
+                        {
+                            "type": "Component",
+                            "metadata": {
+                                "autogenerate": true
+                            },
+                            "name": "PartyEmails",
+                            "value": {
+                                "$ref": "#/properties/Body/properties/partyEmails"
+                            }
+                        },
+                        {
+                            "type": "Component",
+                            "metadata": {
+                                "autogenerate": true
+                            },
+                            "name": "PartyEmailsAdditionalInfo",
+                            "value": {
+                                "$ref": "#/properties/Body/properties/partyEmailsAdditionalInfo"
+                            },
+                            "rule" : {
+                                "effect" : "DISABLE_INITIAL",
+                                "condition" : {
+                                    "type" : "FUNC",
+                                    "ruleFunction": "isEmailFilled",
+                                    "value": [
+                                        {
+                                            "$ref": "#/properties/Body/properties/partyEmails"
+                                        }
+                                    ]
+                                }
+                            }
+                        },
+                        {
+                            "type": "Component",
+                            "metadata": {
+                                "autogenerate": true
+                            },
+                            "name": "PartyBankAccounts",
+                            "value": {
+                                "$ref": "#/properties/Body/properties/partyBankAccounts"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "type": "Tab",
+                    "elementId": "VerificationsTab",
+                    "title": "VerificationsTab",
+                    "elements": [
+                        {
+                            "type": "Group",
+                            "elements": [
+                                {
+                                    "type": "InlineView",
+                                    "showContainerActions": false,
+                                    "views": [
+                                        {
+                                            "viewReference": {
+                                                "configurationCodeName": "AgentPartyVerificationView",
+                                                "configurationVersion": "1",
+                                                "configurationConceptType": "SearchView"
+                                            },
+                                            "viewType": "Search"
+                                        }
+                                    ],
+                                    "hide": false,
+                                    "elementId": "StatusView"
+                                }
+                            ]
+                        }
+                    ],
+                    "rule": {
+                        "effect": "SHOW",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "isSavedAndIsBackOffice",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "type": "Component",
+                    "metadata": {
+                        "autogenerate": true
+                    },
+                    "name": "AttachmentsTab",
+                    "value": {
+                        "$ref": "#"
+                    }
+                },
+                {
+                    "type": "Tab",
+                    "elementId": "AdditionalDataTab",
+                    "title": "AdditionalDataTab",
+                    "elements": [
+                        {
+                            "type": "Component",
+                            "name": "PartyTaxResidenceHistory",
+                            "value": {
+                                "$ref": "#"
+                            }
+                        },
+                        {
+                            "type": "GroupSeparator"
+                        },
+                        {
+                            "type": "Component",
+                            "name": "GetContractorsButton",
+                            "value": {
+                                "$ref": "#"
+                            }
+                        }
+                    ],
+                    "rule": {
+                        "effect": "SHOW",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "isSavedAndIsBackOffice",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    }
+                }
+            ]
+        }
+    ]
+}

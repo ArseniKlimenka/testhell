@@ -1,0 +1,97 @@
+{
+    "type": "Group",
+    "elements": [
+        {
+            "type": "DataGrid",
+            "value": {
+                "$ref": "#/properties/response/properties/data"
+            },
+            "mode": "DataSource",
+            "pagination": {
+                "mode": "Regular",
+                "pageSizes": [
+                    10,
+                    25,
+                    50,
+                    100
+                ]
+            },
+            "selection": {
+                "mode": "Multi",
+                "enableRowSelection": false,
+                "showCheckBox": false
+            },
+            "height": "None",
+            "columns": [
+                {
+                    "sortable": true,
+                    "title": "rsdNumber",
+                    "cellContent": {
+                        "type": "Link",
+                        "targetType": "Entity",
+                        "value": {
+                            "mapping": "linkToRsdOverview",
+                            "$ref": "#"
+                        },
+                        "width": 1,
+                        "content": {
+                            "text": {
+                                "type": "OutputText",
+                                "value": {
+                                    "$ref": "#/properties/resultData/properties/rsdNumber"
+                                }
+                            }
+                        }
+                    },
+                    "name": "rsdNumber"
+                },
+                {
+                    "sortable": true,
+                    "title": "rsdAmount",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "template": "{{#style 'right'}}{{expr rsdAmount 'n:2'}}{{/style}}",
+                        "value": {
+                            "$ref": "#/properties/resultData"
+                        }
+                    },
+                    "name": "rsdAmount"
+                },
+                {
+                    "sortable": true,
+                    "title": "stateDescription",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/stateDescription"
+                        }
+                    },
+                    "name": "stateDescription"
+                },
+                {
+                    "sortable": true,
+                    "title": "stateChangedOn",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/stateChangedOn"
+                        }
+                    },
+                    "name": "stateChangedOn"
+                },
+                {
+                    "sortable": true,
+                    "title": "stateChangedBy",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/stateChangedBy"
+                        }
+                    },
+                    "name": "stateChangedBy"
+                }
+            ],
+            "elementId": "TableViewId"
+        }
+    ]
+}

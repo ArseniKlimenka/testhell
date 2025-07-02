@@ -1,0 +1,41 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema",
+    "description": "Input schema for EFR products reverse optional.",
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+        "productGroup": {
+            "type": "string",
+            "description": "Product group"
+        },
+        "productCode": {
+            "type": "string",
+            "description": "Product code"
+        },
+        "investmentStrategyCode": {
+            "type": "string",
+            "description": "Strategy code"
+        },
+        "risks": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                    "riskCode": {
+                        "type": "string",
+                        "description": "Risk code"
+                    }
+                }
+            }
+        },
+        "activeTo": {
+            "type": "string",
+            "description": "Product active to"
+        },
+        "isProductClosed": {
+            "type": "boolean",
+            "description": "Whether the product closed"
+        }
+    }
+}

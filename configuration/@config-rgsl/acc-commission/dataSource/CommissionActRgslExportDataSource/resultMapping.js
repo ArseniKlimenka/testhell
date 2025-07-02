@@ -1,0 +1,30 @@
+module.exports = function resultMapping(input) {
+    return {
+        actId: input.ACT_ID,
+        actNo: input.ACT_NO,
+        actIssueDate: input.ISSUE_DATE,
+        aaServiceProviderName: input.AGENT_SERVICE_PROVIDER_NAME,
+        aaNumber: input.AGENT_AGREEMENT_NUMBER,
+        aaIssueDate: input.CONCLUSION_DATE,
+        reportingPeriodFrom: input.REPORTING_PERIOD_FROM,
+        reportingPeriodTo: input.REPORTING_PERIOD_TO,
+        commAmountLc: input.COMM_AMOUNT_LC,
+        vatAmountLc: input.VAT_AMOUNT_LC,
+        inn: input.INNKIO,
+        bankAccount: input.BANK_ACCOUNT,
+        correspondentAccount: input.CORRESPONDENT_ACCOUNT,
+        bic: input.BIC,
+
+        actItemId: input.ACT_ITEM_ID,
+        referenceNo: input.REFERENCE_NO,
+        polHolderName: input.HOLDER_NAME,
+        polStartDate: input.POL_START_DATE,
+        docCurrencyCode: input.DOC_CURRENCY_CODE,
+        productDesc: input.PRODUCT_DESC,
+        insuredYearsCount: input.INSURED_YEARS_COUNT,
+        paymentTransactionDate: input.PAYMENT_TRANSACTION_DATE,
+        paymentDocAmount: input.PAYMENT_DOC_AMOUNT,
+        commRateFinal: input.COMM_RATE_FINAL,
+        lcCommAmountFinal: input.LC_COMM_AMOUNT_FINAL,
+    };
+};

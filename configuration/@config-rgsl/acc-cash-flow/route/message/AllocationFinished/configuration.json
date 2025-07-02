@@ -1,0 +1,66 @@
+{
+    "condition": {
+        "messageChannel": {
+            "policy": "DefaultMessageQueuePolicy",
+            "destination": "RGSL.Accounting.CashFlow.Allocation.AllocationFinished"
+        }
+    },
+    "additionalDataSources": [],
+    "sinks": [
+        {
+            "name": "GetAllocationData",
+            "fetch": {
+                "configuration": {
+                    "name": "AllocationDataSource"
+                }
+            }
+        },
+        {
+            "name": "GetPaymentPlanData",
+            "fetch": {
+                "configuration": {
+                    "name": "NonResidentNotificationDataDataSource"
+                }
+            }
+        },
+        {
+            "name": "GetBsiData",
+            "fetch": {
+                "configuration": {
+                    "name": "BankStatementItemDatabaseDataSource"
+                }
+            }
+        },
+        {
+            "name": "GetContractData",
+            "fetch": {
+                "configuration": {
+                    "name": "GetContractFullDataDataSource"
+                }
+            }
+        },
+        {
+            "name": "NonResidentNotification",
+            "notification": {
+                "notificationName": "NonResidentAllocationNotification"
+            }
+        }
+    ],
+    "completionSinks": [
+        {
+            "name": "RouteLoggingSink",
+            "log": {
+                "loggerName": "AllocationFinishedLogger",
+                "logLevel": "debug"
+            }
+        },
+        {
+            "name": "ResultLoggingSink",
+            "log": {
+                "loggerName": "NonResidentAllocationFinishedLogger",
+                "logLevel": "debug"
+            }
+        }
+    ],
+    "version": "1"
+}

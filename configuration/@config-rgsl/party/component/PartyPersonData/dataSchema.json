@@ -1,0 +1,158 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "Party",
+    "description": "Data schema describing party phisical person information. Required items from FD 2.0 19.1.1 check for double 1",
+    "type": "object",
+    "aiValidation": {
+        "rule": "validationPartyPersonData"
+    },
+    "additionalProperties": false,
+    "aiDeepRequired": [
+        "/lastName",
+        "/firstName"
+    ],
+    "aiDataEnrichment": [
+        {
+            "name": "ExecutivePersonEnrichment"
+        },
+        {
+            "name": "StatelessPersonEnrichment"
+        },
+        {
+            "name": "SetBoxRolePersonData"
+        }
+    ],
+    "properties": {
+        "lastName": {
+            "type": "string",
+            "aiTitle": "lastName"
+        },
+        "firstName": {
+            "type": "string",
+            "aiTitle": "firstName"
+        },
+        "middleName": {
+            "type": "string",
+            "aiTitle": "middleName"
+        },
+        "personGender": {
+            "type": "string",
+            "enum": [
+                "Male",
+                "Female"
+            ],
+            "aiTitle": "personGender"
+        },
+        "dateOfBirth": {
+            "type": "string",
+            "aiFormat": "date",
+            "aiTitle": "dateOfBirth"
+        },
+        "birthPlace": {
+            "type": "string",
+            "aiTitle": "birthPlace"
+        },
+        "countryPlace": {
+            "aiTitle": "countryPlace",
+            "$ref": "component:PartyCountry"
+        },
+        "SNILS": {
+            "type": "string",
+            "aiTitle": "SNILS"
+        },
+        "citizenship": {
+            "type": "array",
+            "aiTitle": "citizenship",
+            "items": {
+                "$ref": "component:PartyCountry"
+            }
+        },
+        "isStatelessPerson": {
+            "type": "boolean",
+            "aiTitle": "isStatelessPerson"
+        },
+        "foreignDocumentType": {
+            "type": "string",
+            "aiTitle": "foreignDocumentType"
+        },
+        "foreignDocumentSeria": {
+            "type": "string",
+            "aiTitle": "foreignDocumentSeria"
+        },
+        "foreignDocumentNumber": {
+            "type": "string",
+            "aiTitle": "foreignDocumentNumber"
+        },
+        "foreignDocumentStartDate": {
+            "type": "string",
+            "aiFormat": "date",
+            "aiTitle": "foreignDocumentStartDate"
+        },
+        "foreignDocumentEndDate": {
+            "type": "string",
+            "aiFormat": "date",
+            "aiTitle": "foreignDocumentEndDate"
+        },
+        "isPublicOfficial": {
+            "type": "boolean",
+            "aiTitle": "isPublicOfficial"
+        },
+        "executivePerson": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "executivePersonDesc": {
+                    "type": "string",
+                    "aiTitle": "executivePersonDesc"
+                },
+                "executivePersonCode": {
+                    "type": "string",
+                    "aiTitle": "executivePersonCode"
+                }
+            },
+            "aiTitle": "executivePerson"
+        },
+        "relationType": {
+            "type": "string",
+            "aiTitle": "relationType"
+        },
+        "segment": {
+            "type": "object",
+            "properties": {
+                "segmentCode": {
+                    "type": "string",
+                    "aiTitle": "segmentCode"
+                },
+                "segmentDesc": {
+                    "type": "string",
+                    "aiTitle": "segmentDesc"
+                }
+            },
+            "aiTitle": "segment"
+        },
+        "naturalPersonCategory": {
+            "type": "string",
+            "aiTitle": "naturalPersonCategory",
+            "enum": [
+                "soleProprietor",
+                "privatePracticeAccordingToLaw"
+            ]
+        },
+        "site": {
+            "$ref": "component:PartyWebsite"
+        },
+        "soleProprietorHistory": {
+            "$ref": "component:SoleProprietorHistory"
+        },
+        "partyLicenses": {
+            "$ref": "component:PartyLicenses"
+        },
+        "partyLicensesAdditionalInfo": {
+            "$ref": "component:PartyLicensesAdditionalInfo"
+        },
+        "innerBankId": {
+            "type": "string",
+            "aiTitle": "innerBankId"
+        }
+    }
+}

@@ -1,0 +1,32 @@
+{
+    "entityType": "UniversalVersionedDocument",
+    "condition": {
+        "events": [
+            "StatusChanged"
+        ],
+        "configuration": {
+            "names": [
+                "AccountingCertificate",
+                "AccountingCertificateCorrection"
+            ],
+            "dimensions": {}
+        },
+        "documentStates": [
+            "Checked"
+        ]
+    },
+    "sinks": [
+        {
+            "ref": "CreateAttachmentSinkGroup"
+        },
+        {
+            "name": "CheckedToIssued",
+            "documentTransition": {
+                "transition": {
+                    "transitionName": "Checked_to_Issued"
+                }
+            }
+        }
+    ],
+    "version": "1"
+}

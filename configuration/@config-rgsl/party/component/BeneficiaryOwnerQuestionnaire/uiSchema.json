@@ -1,0 +1,306 @@
+{
+    "type": "Section",
+    "sectionLevel": 1,
+    "collapsing": {
+        "initial": true,
+        "enabled": true
+    },
+    "label": "beneficiaryOwnerQuestionnaire",
+    "elementId": "beneficiaryOwnerQuestionnaire",
+    "elements": [
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "Group",
+                    "elements": [
+                        {
+                            "type": "OutputText",
+                            "width": 11,
+                            "hideLabel": true,
+                            "preserveLabelSpace": true,
+                            "allowMultiLine": true,
+                            "literalValue": "answer1"
+                        },
+                        {
+                            "type": "ThreeState",
+                            "width": 1,
+                            "dropdownMode": false,
+                            "preserveLabelSpace": true,
+                            "value": {
+                                "$ref": "#/properties/questionnaire1/properties/answer"
+                            },
+                            "onValueChanged": [
+                                {
+                                    "commandType": "executeAction",
+                                    "actionName": "onChangeItemConfirmation1"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "Group",
+                    "elements": [
+                        {
+                            "type": "Input",
+                            "hide": false,
+                            "label": "relationType",
+                            "description": "relationTypeDesc",
+                            "source": {
+                                "dataSource": {
+                                    "name": "PartyRelationsTypeDataSource",
+                                    "reloadOnOpen": true,
+                                    "searchFieldPath": "relationTypeDescription",
+                                    "responseMapping": "relationTypeResponseMapping",
+                                    "resultCount": 1000
+                                }
+                            },
+                            "control": "Dropdown",
+                            "value": {
+                                "$ref": "#/properties/questionnaire1/properties/relationType"
+                            },
+                            "width": 3
+                        },
+                        {
+                            "type": "Input",
+                            "label": "position",
+                            "value": {
+                                "$ref": "#/properties/questionnaire1/properties/position"
+                            },
+                            "width": 3
+                        },
+                        {
+                            "type": "Input",
+                            "label": "employerName",
+                            "value": {
+                                "$ref": "#/properties/questionnaire1/properties/employerName"
+                            },
+                            "width": 3
+                        },
+                        {
+                            "type": "Input",
+                            "label": "employerAddress",
+                            "value": {
+                                "$ref": "#/properties/questionnaire1/properties/employerAddress"
+                            },
+                            "width": 3
+                        }
+                    ],
+                    "rule": {
+                        "effect": "ENABLE_INITIAL",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "enableAdditionalInfoItem1",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "Group",
+                    "elements": [
+                        {
+                            "type": "OutputText",
+                            "width": 11,
+                            "hideLabel": true,
+                            "preserveLabelSpace": true,
+                            "allowMultiLine": true,
+                            "literalValue": "answer2"
+                        },
+                        {
+                            "type": "ThreeState",
+                            "width": 1,
+                            "dropdownMode": false,
+                            "preserveLabelSpace": true,
+                            "value": {
+                                "$ref": "#/properties/questionnaire2/properties/answer"
+                            },
+                            "onValueChanged": [
+                                {
+                                    "commandType": "executeAction",
+                                    "actionName": "onChangeItemConfirmation2"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "Group",
+                    "elements": [
+                        {
+                            "type": "Input",
+                            "hide": false,
+                            "label": "relationType",
+                            "description": "relationTypeDesc",
+                            "source": {
+                                "dataSource": {
+                                    "name": "PartyRelationsTypeDataSource",
+                                    "reloadOnOpen": true,
+                                    "searchFieldPath": "relationTypeDescription",
+                                    "responseMapping": "relationTypeResponseMapping",
+                                    "resultCount": 1000
+                                }
+                            },
+                            "control": "Dropdown",
+                            "value": {
+                                "$ref": "#/properties/questionnaire2/properties/relationType"
+                            },
+                            "width": 3
+                        },
+                        {
+                            "type": "Input",
+                            "label": "position",
+                            "value": {
+                                "$ref": "#/properties/questionnaire2/properties/position"
+                            },
+                            "width": 3
+                        },
+                        {
+                            "type": "Input",
+                            "label": "employerName",
+                            "value": {
+                                "$ref": "#/properties/questionnaire2/properties/employerName"
+                            },
+                            "width": 3
+                        },
+                        {
+                            "type": "Input",
+                            "label": "employerAddress",
+                            "value": {
+                                "$ref": "#/properties/questionnaire2/properties/employerAddress"
+                            },
+                            "width": 3
+                        }
+                    ],
+                    "rule": {
+                        "effect": "ENABLE_INITIAL",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "enableAdditionalInfoItem2",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "Group",
+                    "elements": [
+                        {
+                            "type": "OutputText",
+                            "width": 11,
+                            "hideLabel": true,
+                            "preserveLabelSpace": true,
+                            "allowMultiLine": true,
+                            "literalValue": "answer3"
+                        },
+                        {
+                            "type": "ThreeState",
+                            "width": 1,
+                            "dropdownMode": false,
+                            "preserveLabelSpace": true,
+                            "value": {
+                                "$ref": "#/properties/questionnaire3/properties/answer"
+                            },
+                            "onValueChanged": [
+                                {
+                                    "commandType": "executeAction",
+                                    "actionName": "onChangeItemConfirmation3"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "Group",
+                    "elements": [
+                        {
+                            "type": "Input",
+                            "hide": false,
+                            "label": "relationType",
+                            "description": "relationTypeDesc",
+                            "source": {
+                                "dataSource": {
+                                    "name": "PartyRelationsTypeDataSource",
+                                    "reloadOnOpen": true,
+                                    "searchFieldPath": "relationTypeDescription",
+                                    "responseMapping": "relationTypeResponseMapping",
+                                    "resultCount": 1000
+                                }
+                            },
+                            "control": "Dropdown",
+                            "value": {
+                                "$ref": "#/properties/questionnaire3/properties/relationType"
+                            },
+                            "width": 3
+                        },
+                        {
+                            "type": "Input",
+                            "label": "position",
+                            "value": {
+                                "$ref": "#/properties/questionnaire3/properties/position"
+                            },
+                            "width": 3
+                        },
+                        {
+                            "type": "Input",
+                            "label": "employerName",
+                            "value": {
+                                "$ref": "#/properties/questionnaire3/properties/employerName"
+                            },
+                            "width": 3
+                        },
+                        {
+                            "type": "Input",
+                            "label": "employerAddress",
+                            "value": {
+                                "$ref": "#/properties/questionnaire3/properties/employerAddress"
+                            },
+                            "width": 3
+                        }
+                    ],
+                    "rule": {
+                        "effect": "ENABLE_INITIAL",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "enableAdditionalInfoItem3",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    }
+                }
+            ]
+        }
+    ],
+    "rule": {
+        "effect": "SHOW",
+        "condition": {
+            "type": "FUNC",
+            "ruleFunction": "showBeneficiaryOwnerQuestionnaire",
+            "value": [
+                {
+                    "$ref": "#"
+                }
+            ]
+        }
+    }
+}

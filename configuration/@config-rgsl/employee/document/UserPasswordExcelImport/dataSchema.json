@@ -1,0 +1,36 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema",
+    "description": "Changing users passwords",
+    "type": "object",
+    "aiDeepRequired": [
+        "/file/fileId",
+        "/file/fileName"
+    ],
+    "properties": {
+        "file": {
+            "$ref": "component:FileUpload"
+        },
+        "summary": {
+            "type": "object",
+            "properties": {
+                "date":{
+                    "type":"string",
+                    "aiFormat": "date"
+                },
+                "documentState":{
+                    "type":"string"
+                },
+                "numberOfRowsImported":{
+                    "type":"number"
+                },
+                "numberOfRowsImportedError":{
+                    "type":"number"
+                }                
+            }         
+        }
+    },
+    "required": [
+        "file"
+    ],
+    "additionalProperties": false
+}

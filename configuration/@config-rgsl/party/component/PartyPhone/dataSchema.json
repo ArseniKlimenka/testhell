@@ -1,0 +1,86 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "PartyPhone",
+    "type": "object",
+    "additionalProperties": false,
+    "aiValidation": {
+        "rule": "validatePartyPhone"
+    },
+    "aiDataEnrichment": [
+        {
+            "name": "setFullNumberFormatted"
+        }
+    ],
+    "properties": {
+        "phoneType": {
+            "type": "object",
+            "additionalProperties": false,
+            "aiTitle": "phoneType",
+            "properties": {
+                "phoneTypeCode": {
+                    "type": "string",
+                    "aiTitle": "phoneTypeCode"
+                },
+                "phoneTypeDesc": {
+                    "type": "string",
+                    "aiTitle": "phoneTypeDesc"
+                }
+            }
+        },
+        "countryCode": {
+            "type": "object",
+            "aiTitle": "countryCode",
+            "additionalProperties": false,
+            "properties": {
+                "countryCode": {
+                    "type": "string"
+                },
+                "alfa2": {
+                    "type": "string"
+                },
+                "countryShortName": {
+                    "type": "string"
+                },
+                "countryPhoneCode": {
+                    "type": "string"
+                }
+            }
+        },
+        "cityCode": {
+            "type": "string",
+            "aiTitle": "cityCode"
+        },
+        "number": {
+            "type": "string",
+            "aiTitle": "number"
+        },
+        "fullNumber": {
+            "type": "string",
+            "aiTitle": "fullNumber"
+        },
+        "fullNumberFormatted": {
+            "type": "string",
+            "aiTitle": "fullNumberFormatted"
+        },
+        "isForNewsletters": {
+            "type": "boolean",
+            "aiTitle": "isForNewsletters"
+        },
+        "isPreferable": {
+            "type": "boolean",
+            "aiTitle": "isPreferable"
+        },
+        "isAdditional": {
+            "type": "boolean",
+            "aiTitle": "isAdditional"
+        },
+        "isNonActual": {
+            "type": "boolean",
+            "aiTitle": "isNonActual"
+        },
+        "comments": {
+            "type": "string",
+            "aiTitle": "comments"
+        }
+    }
+}

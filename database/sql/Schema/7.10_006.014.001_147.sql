@@ -1,0 +1,3 @@
+alter table ACC_IMPL.CA_ACT
+add ORIGINAL_RECEIPT_DATE date
+go

@@ -1,0 +1,61 @@
+SELECT
+	act.ACT_ID,
+	act.ACT_NO,
+	act.LAST_UPDATED,
+	act.ISSUE_DATE,
+	act.PAY_DATE,
+	act.ORIGINAL_RECEIPT_DATE,
+	act.ACT_TYPE_ID,
+	act.STATUS_ID,
+	ps.CODE_NAME as STATE_CODE,
+	act.AGENT_SERVICE_PROVIDER_CODE,
+	pis.CONFIGURATION_CODE_NAME PARTY_CONFIGURATION,
+	pis.FULL_NAME AGENT_FULL_NAME,
+	pis.SHORT_NAME AGENT_SHORT_NAME,
+	act.AGENT_AGREEMENT_NUMBER,
+	coalesce(act.HISTORICAL_AGENT_AGREEMENT, (coalesce(aas.MANUAL_NUMBER, aah.AA_NUMBER) + '/' + aas.EXTERNAL_NUMBER)) as AGENT_AGREEMENT_NAME,
+	spis.TAB_NUMBER as AGENT_PERSONAL_NUMBER,
+	spis.PARTNER_CODE as AGENT_BUSINESS_CODE,
+	act.PERIOD_FROM,
+	act.PERIOD_TO,
+	act.REPORTING_PERIOD_FROM,
+	act.REPORTING_PERIOD_TO,
+	act.ITEMS_COUNT,
+	act.PREMIUM_AMOUNT_LC,
+	act.COMM_AMOUNT_LC,
+	act.VAT_RATE,
+	act.VAT_AMOUNT_LC,
+	act.NOTES,
+	act.IS_DOC_CORRECT,
+	act.PRODUCT_GROUP_INCLUDE,
+	act.PRODUCT_GROUP_EXCLUDE,
+	(
+		select CODE
+		from acc_impl.CA_ACT_PRODUCT_FILTER
+		where act_id = act.ACT_ID and EXCLUSIVE = 0
+		for json path
+	) as PRODUCTS_INCLUDE,
+	(
+		select CODE
+		from acc_impl.CA_ACT_PRODUCT_FILTER
+		where act_id = act.ACT_ID and EXCLUSIVE = 1
+		for json path
+	) as PRODUCTS_EXCLUDE
+from
+	acc_impl.CA_ACT act
+	left join bfx.UNIVERSAL_DOCUMENT ud on ud.UNIVERSAL_DOCUMENT_NUMBER = act.ACT_NO -- left join is temporal while the data is not migrated yet.
+	left join cfx.PUBLISHED_ARTIFACT pa on pa.PUBLISHED_ARTIFACT_ID = ud.PUBLISHED_ARTIFACT_ID and pa.CODE_NAME = 'CommissionAct'
+	left join cfg.PROCESS_STATE ps on ps.PROCESS_STATE_ID = ud.STATE_ID
+	inner join org_impl.SERVICE_PROVIDER_HUB sph on sph.SERVICE_PROVIDER_CODE = act.AGENT_SERVICE_PROVIDER_CODE
+	inner join org_impl.SERVICE_PROVIDER_INFO_SAT_LATEST spis on spis.SERVICE_PROVIDER_INFO_HKEY = sph.SERVICE_PROVIDER_HKEY
+	inner join pas_impl.AA_HUB aah on aah.AA_NUMBER = act.AGENT_AGREEMENT_NUMBER
+	inner join pas_impl.AA_SAT_LATEST aas on aas.AA_HKEY = aah.AA_HKEY
+	inner join pty_impl.PARTY_HUB ph on ph.PARTY_CODE = spis.PARTY_CODE
+	inner join pty_impl.PARTY_INFO_SAT_LATEST pis on pis.PARTY_INFO_HKEY = ph.PARTY_HKEY
+where 1=1
+{{#if parameters.actId}}
+	and act.act_id = @actId
+{{/if}}
+{{#if parameters.actNo}}
+	and act.act_no = @actNo
+{{/if}}

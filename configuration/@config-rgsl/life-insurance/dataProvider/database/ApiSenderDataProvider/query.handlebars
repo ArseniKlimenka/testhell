@@ -1,0 +1,5 @@
+﻿SELECT 
+	JSON_VALUE(c.BODY, '$.technicalInformation.apiSender') AS API_SENDER,
+	JSON_VALUE(c.BODY, '$.technicalInformation.creatorUsername') AS CREATOR_USERNAME
+FROM pas.CONTRACT c
+WHERE c.CONTRACT_NUMBER = @contractNumber

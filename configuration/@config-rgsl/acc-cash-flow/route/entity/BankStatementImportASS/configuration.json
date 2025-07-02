@@ -1,0 +1,29 @@
+{
+    "entityType": "ImportDocument",
+    "condition": {
+        "events": [
+            "StatusChanged"
+        ],
+        "configuration": {
+            "names": [
+                "BankStatementImport"
+            ],
+            "dimensions": {}
+        },
+        "documentStates": [
+            "Importing"
+        ]
+    },
+    "sinks": [
+        {
+            "name": "TriggerEtlServiceSink",
+            "etlService": {
+                "configuration": {
+                    "name": "BankStatementImportEtlService",
+                    "version": "1"
+                }
+            }
+        }
+    ],
+    "version": "1"
+}

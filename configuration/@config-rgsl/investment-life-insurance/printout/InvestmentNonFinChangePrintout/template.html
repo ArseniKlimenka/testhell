@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="ru-RU" xml:lang="ru-RU" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+	<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+	<title>НЕФИНАНСОВЫЕ ИЗМЕНЕНИЯ</title>
+	<link rel="stylesheet" href="assets/styles/style.css">
+	{{{exampleLabel}}}
+	{{{sideContent}}}
+</head>
+
+<body>
+
+	<div id="content-container">
+
+		<div class="bottom-row-spacer">
+			<span class="underline-span">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{{activatedStateDate}}&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span>
+			<span>№</span>
+			<span class="underline-span">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{{mailNumber}}&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span>
+		</div>
+
+		<div class="bottom-row-spacer">
+			<span>на №</span>
+			<span class="underline-span">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span>
+			<span>от</span>
+			<span class="underline-span">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span>
+		</div>
+
+		<div class="bottom-row-spacer-double insurer-name-container">
+			<b>{{policyHolder}}</b>
+		</div>
+
+		<div class="bottom-row-spacer-double insurer-address-container">
+			<b>{{mailAddressText}}</b>
+		</div>
+
+		<div id="title-container">
+			<span>ИЗМЕНЕНИЯ</span><span id="footnote">1</span>
+			<p class="text-with-double-indent">к Страховому полису (Договору страхования жизни) {{contractNumber}} от
+				{{policyIssueDate}} (далее – договор страхования)</p>
+		</div>
+
+		<div class="bottom-row-spacer-double">
+
+			<p class="text-with-indent">Настоящие Изменения выданы Обществом с ограниченной ответственностью Страховой
+				компанией «Росгосстрах Жизнь» (далее – «Страховщик») Страхователю в подтверждение факта внесения
+				изменений в договор (-ы) страхования на основании Заявления от <strong>{{requestIssueDate}}</strong></p>
+
+			{{#if showBeneficiaries}}
+
+			<div class="change-container">
+
+				<p class="text-with-indent">Изложить раздел ВЫГОДОПРИОБРЕТАТЕЛИ НА СЛУЧАЙ СМЕРТИ ЗАСТРАХОВАННОГО в новой
+					редакции:</p>
+
+				<div class="policy_item">
+					ВЫГОДОПРИОБРЕТАТЕЛИ НА СЛУЧАЙ СМЕРТИ ЗАСТРАХОВАННОГО
+				</div>
+
+				{{#if isBeneficiaries}}
+
+				<table class="person">
+					<col class="col1">
+					<col class="col2">
+					<col class="col3">
+					<col class="col4">
+					<col class="col5">
+					<col class="col6">
+					<col class="col7">
+					{{#each beneficiaries}}
+					<tr>
+						<td class="tgrey" colspan="7">Выгодоприобретатель {{this.index}}. Доля {{this.percentage}}%</td>
+					</tr>
+					<tr>
+						<td class="tgrey">Фамилия Имя Отчество, Дата рождения:</td>
+						<td class="twhite" colspan="4">{{this.beneficiar.fullName}}, {{this.beneficiar.dateOfBirth}}</td>
+						<td class="tgrey">Пол:</td>
+						<td class="twhite  center">{{this.beneficiar.gender}}</td>
+					</tr>
+					{{#if this.dateOfBirthPlaceOfBirth}}
+					<tr>
+						<td class="tgrey">Дата рождения:</td>
+						<td class="twhite center">{{this.beneficiar.dateOfBirth}}</td>
+						<td class="tgrey" colspan="2">Место рождения:</td>
+						<td class="twhite" colspan="3">{{this.beneficiar.placeOfBirth}}</td>
+					</tr>
+					{{/if}}
+					{{#if this.phoneEmailCitizenship}}
+					<tr>
+						<td class="tgrey">Телефон:</td>
+						<td class="twhite center">{{this.beneficiar.phoneNumber}}</td>
+						<td class="tgrey">E-mail:</td>
+						<td class="twhite center" colspan="2">{{this.beneficiar.email}}</td>
+						<td class="tgrey">Гражданство:</td>
+						<td class="twhite center">{{this.beneficiar.citizenship}}</td>
+					</tr>
+					{{/if}}
+					{{#if this.isDocument}}
+					<tr>
+						<td class="tgrey">Документ, удостоверяющий личность:</td>
+						<td class="twhite" colspan="4">{{this.beneficiar.document.typeAndSN}}</td>
+						<td class="tgrey">Дата выдачи:</td>
+						<td class="twhite center">{{this.beneficiar.document.dateOfIssue}}</td>
+					</tr>
+					{{#unless this.beneficiar.isNotIssuedBy}}
+					<tr>
+						<td class="tgrey">Кем выдан:</td>
+						<td class="twhite" colspan="6">{{this.beneficiar.document.document.issuedBy}}</td>
+					</tr>
+					{{/unless}}
+					{{/if}}
+					{{#if this.isRegistrationAddress}}
+					<tr>
+						<td class="tgrey">Адрес постоянной регистрации:</td>
+						<td class="twhite" colspan="6">{{this.beneficiar.registrationAddress}}</td>
+					</tr>
+					{{/if}}
+					{{#if this.isPostAddress}}
+					<tr>
+						<td class="tgrey">Почтовый адрес:</td>
+						<td class="twhite" colspan="6">{{this.beneficiar.postAddress}}</td>
+					</tr>
+					{{/if}}
+					{{/each}}
+				</table>
+
+				{{#if shareSumIsNot1}}
+
+				<p class="afterTable">
+					В случае если общая доля менее 100%, Выгодоприобретателями на случай смерти Застрахованного по
+					оставшейся доле являются наследники Застрахованного по закону.
+				</p>
+
+				{{/if}}
+
+				{{else}}
+
+				<p class="afterTable">
+					Наследники по закону
+				</p>
+
+				{{/if}}
+
+				{{#if attachStampToBeneficiaries}}
+
+				<div id="stamp-container" class="extra-small-text">
+
+					<div id="stamp-info-container">
+		
+						<span>Подпись Страховщика:</span>
+						<span class="underline-span">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+							&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span>
+						<span>/&nbsp&nbsp</span>
+						<span class="underline-span">Пушкарев Максим Сергеевич</span>
+						<span>/&nbsp</span>
+						<br>
+						<p class="bottom-row-spacer">
+							&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+							&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+							&nbsp(подпись)
+						</p>
+						<p>Первый заместитель Генерального директора, Директор партнерских продаж</p>
+						<p>на основании доверенности № 192 от 29 декабря 2020 г.</p>
+						<p class="bottom-row-spacer">
+							&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+							&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+							&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+							&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspмп
+						</p>
+					</div>
+		
+					<img id="signature-image" src="assets/img/stampAndSignature.png">
+		
+				</div>
+
+				{{/if}}
+
+			</div>
+
+			{{/if}}
+
+			{{{additionalRiskContentMarkup}}}
+
+			{{#if showPolicyHolder}}
+
+			<div class="change-container">
+
+				<p class="text-with-indent">Изложить раздел СТРАХОВАТЕЛЬ в новой редакции:</p>
+
+				<div class="policy_item">
+					СТРАХОВАТЕЛЬ
+				</div>
+
+				<table class="person">
+					<col class="col1">
+					<col class="col2">
+					<col class="col3">
+					<col class="col4">
+					<col class="col5">
+					<col class="col6">
+					<col class="col7">
+					<tr>
+						<td class="tgrey">Фамилия Имя Отчество:</td>
+						<td class="twhite" colspan="4">{{holder.fullName}}</td>
+						<td class="tgrey">Пол:</td>
+						<td class="twhite center">{{holder.gender}}</td>
+					</tr>
+					<tr>
+						<td class="tgrey">Дата рождения:</td>
+						<td class="twhite center" colspan="2">{{holder.dateOfBirth}}</td>
+						<td class="tgrey" colspan="2">Место рождения:</td>
+						<td class="twhite center" colspan="2">{{holder.birthPlace}}</td>
+					</tr>
+					<tr>
+						<td class="tgrey">Телефон:</td>
+						<td class="twhite center" colspan="2">{{holder.phoneNumber}}</td>
+						<td class="tgrey" colspan="2">Гражданство:</td>
+						<td class="twhite center" colspan="2">{{holder.citizenship}}</td>
+					</tr>
+					<tr>
+						<td class="tgrey">E-mail:</td>
+						<td class="twhite" colspan="6">{{holder.email}}</td>
+					</tr>
+					<tr>
+						<td class="tgrey">Документ, удостоверяющий личность:</td>
+						<td class="twhite" colspan="4">{{holder.document.typeAndSN}}</td>
+						<td class="tgrey">Дата выдачи:</td>
+						<td class="twhite center">{{holder.document.dateOfIssue}}</td>
+					</tr>
+					{{#unless holder.isNotIssuedBy}}
+					<tr>
+						<td class="tgrey">Кем выдан:</td>
+						<td class="twhite" colspan="6">{{holder.document.issuedBy}}</td>
+					</tr>
+					{{/unless}}
+					<tr>
+						<td class="tgrey">Адрес постоянной регистрации:</td>
+						<td class="twhite" colspan="6">{{holder.registrationAddress}}</td>
+					</tr>
+					<tr>
+						<td class="tgrey">Почтовый адрес:</td>
+						<td class="twhite" colspan="6">{{holder.postAddress}}</td>
+					</tr>
+				</table>
+
+				{{#if attachStampToPolicyHolder}}
+
+				<div id="stamp-container" class="extra-small-text">
+
+					<div id="stamp-info-container">
+		
+						<span>Подпись Страховщика:</span>
+						<span class="underline-span">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+							&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span>
+						<span>/&nbsp&nbsp</span>
+						<span class="underline-span">Пушкарев Максим Сергеевич</span>
+						<span>/&nbsp</span>
+						<br>
+						<p class="bottom-row-spacer">
+							&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+							&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+							&nbsp(подпись)
+						</p>
+						<p>Первый заместитель Генерального директора, Директор партнерских продаж</p>
+						<p>на основании доверенности № 192 от 29 декабря 2020 г.</p>
+						<p class="bottom-row-spacer">
+							&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+							&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+							&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+							&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspмп
+						</p>
+					</div>
+		
+					<img id="signature-image" src="assets/img/stampAndSignature.png">
+		
+				</div>
+
+				{{/if}}
+
+			</div>
+
+			{{/if}}
+
+			{{#if showInsuredPerson}}
+
+			<div class="change-container">
+
+				<p class="text-with-indent">Изложить раздел ЗАСТРАХОВАННЫЙ в новой редакции:</p>
+
+				<div class="policy_item">
+					ЗАСТРАХОВАННЫЙ
+				</div>
+
+				<table class="person">
+					<col class="col1">
+					<col class="col2">
+					<col class="col3">
+					<col class="col4">
+					<col class="col5">
+					<col class="col6">
+					<col class="col7">
+					<tr>
+						<td class="tgrey">Фамилия Имя Отчество:</td>
+						<td class="twhite" colspan="4">{{insured.fullName}}</td>
+						<td class="tgrey">Пол:</td>
+						<td class="twhite  center">{{insured.gender}}</td>
+					</tr>
+					<tr>
+						<td class="tgrey">Дата рождения:</td>
+						<td class="twhite center" colspan="2">{{insured.dateOfBirth}}</td>
+						<td class="tgrey" colspan="2">Место рождения:</td>
+						<td class="twhite center" colspan="2">{{insured.birthPlace}}</td>
+					</tr>
+					<tr>
+						<td class="tgrey">Телефон:</td>
+						<td class="twhite center" colspan="2">{{insured.phoneNumber}}</td>
+						<td class="tgrey" colspan="2">Гражданство:</td>
+						<td class="twhite center" colspan="2">{{insured.citizenship}}</td>
+					</tr>
+					<tr>
+						<td class="tgrey">E-mail:</td>
+						<td class="twhite" colspan="6">{{insured.email}}</td>
+					</tr>
+					<tr>
+						<td class="tgrey">Документ, удостоверяющий личность:</td>
+						<td class="twhite" colspan="4">{{insured.document.typeAndSN}}</td>
+						<td class="tgrey">Дата выдачи:</td>
+						<td class="twhite center">{{insured.document.dateOfIssue}}</td>
+					</tr>
+					{{#unless insured.isNotIssuedBy}}
+					<tr>
+						<td class="tgrey">Кем выдан:</td>
+						<td class="twhite" colspan="6">{{insured.document.issuedBy}}</td>
+					</tr>
+					{{/unless}}
+					<tr>
+						<td class="tgrey">Адрес постоянной регистрации:</td>
+						<td class="twhite" colspan="6">{{insured.registrationAddress}}</td>
+					</tr>
+					<tr>
+						<td class="tgrey">Почтовый адрес:</td>
+						<td class="twhite" colspan="6">{{insured.postAddress}}</td>
+					</tr>
+				</table>
+
+				{{#if attachStampToInsuredPerson}}
+
+				<div id="stamp-container" class="extra-small-text">
+
+					<div id="stamp-info-container">
+		
+						<span>Подпись Страховщика:</span>
+						<span class="underline-span">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+							&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span>
+						<span>/&nbsp&nbsp</span>
+						<span class="underline-span">Пушкарев Максим Сергеевич</span>
+						<span>/&nbsp</span>
+						<br>
+						<p class="bottom-row-spacer">
+							&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+							&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+							&nbsp(подпись)
+						</p>
+						<p>Первый заместитель Генерального директора, Директор партнерских продаж</p>
+						<p>на основании доверенности № 192 от 29 декабря 2020 г.</p>
+						<p class="bottom-row-spacer">
+							&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+							&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+							&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+							&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspмп
+						</p>
+					</div>
+		
+					<img id="signature-image" src="assets/img/stampAndSignature.png">
+		
+				</div>
+
+				{{/if}}
+
+			</div>
+
+		</div>
+
+		{{/if}}	
+
+		<div id="footnote-text">
+			<div><span class="underline-span-footnote">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span>
+			</div>
+			<div><span id="footnote">1</span><span class="small-text">Никакие отметки (а также дополнения, исправления и
+					т.п.), сделанные
+					на Изменениях от руки, не имеют юридической силы, если их верность не засвидетельствована
+					собственноручной подписью уполномоченного представителя Страховщика и оригинальным оттиском печати
+					Страховщика</span></div>
+		</div>
+
+	</div>
+
+</body>
+
+</html>

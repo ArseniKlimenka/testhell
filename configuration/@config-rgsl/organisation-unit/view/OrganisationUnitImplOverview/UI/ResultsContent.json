@@ -1,0 +1,56 @@
+{
+    "type": "Group",
+    "elements": [
+        {
+            "type": "TreeView",
+            "showFilter": false,
+            "skipSetDirty": true,
+            "filterPlaceHolder": "Filter",
+            "selectionMode": "single",
+            "parentNode": {
+                "selectionMode": "single",
+                "isSelectable": true
+            },
+            "source": {
+                "$ref": "#/properties/response/properties/data",
+                "resultMappingHandler": "organisationUnitLookup_convertToNodes"
+            },
+            "value": {
+                "$ref": "#/properties/selection"
+            },
+            "onValueChanged": [
+                {
+                    "commandType": "raiseEvent",
+                    "eventName": "REFRESH_VIEW"
+                }
+            ],
+            "elementId": "OrganisationUnitImplOverviewTreeView"
+        },
+        {
+            "type": "InlineView",
+            "showContainerActions": false,
+            "views": [
+                {
+                    "viewReference": {
+                        "configurationCodeName": "OrganisationUnitImplOverviewDetails",
+                        "configurationConceptType": "SearchView",
+                        "configurationVersion": "1"
+                    }
+                }
+            ],
+            "eventHandlers": [
+                {
+                    "eventName": "REFRESH_VIEW",
+                    "senders": [
+                        "OrganisationUnitImplOverviewTreeView"
+                    ],
+                    "commands": {
+                        "commandType": "executeAction",
+                        "actionName": "initOrganisationUnitOverviewDetails"
+                    }
+                }
+            ],
+            "width": 4
+        }
+    ]
+}

@@ -1,0 +1,74 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema",
+    "type": "object",
+    "additionalProperties": false,
+    "aiValidation": {
+        "rule": "rootLevelValidation"
+    },
+    "aiDataEnrichment": [
+        {
+            "name": "GetNonActiveAmendments",
+            "dataSource": "GetPrevNonActiveAmendmentsDataSource"
+        }
+    ],
+    "aiAudit": {
+        "scope": "General"
+    },
+    "properties": {
+        "mainAttributes": {
+            "$ref": "component:AADocumentMainAttributes"
+        },
+        "additionalAttributes": {
+            "$ref": "component:AADocumentAdditionlaAttributes"
+        },
+        "validity": {
+            "$ref": "component:AADocumentValidity"
+        },
+        "organisation": {
+            "$ref": "component:AADocumentOrganisation"
+        },
+        "participants": {
+            "$ref": "component:AADocumentParticipants"
+        },
+        "commissionRules": {
+            "allOf": [
+                {
+                    "$ref": "component:AACommissionRules"
+                },
+                {
+                    "aiAdditionalContext": {
+                        "name": "aaCommissionRulesClient",
+                        "$data": "/aaCommissionRulesClient",
+                        "source": "ClientViewModel"
+                    }
+                }
+            ]
+        },
+        "budgetRule": {
+            "$ref": "component:AADocumentBudgetRule"
+        },
+        "amendmentData": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "changeAmendmentData": {
+                    "$ref": "component:AAChangeAmendmentData"
+                },
+                "cancellationAmendmentData": {
+                    "$ref": "component:AACancellationAmendmentData"
+                }
+            }
+        },
+        "technicalData": {
+            "type": "object",
+            "properties": {
+            },
+            "additionalProperties": true
+        },
+        "tempTechnicalData": {
+            "type": "object",
+            "properties": {},
+            "additionalProperties": true
+        }
+    }
+}

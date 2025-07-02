@@ -1,0 +1,48 @@
+{
+    "entityType": "Contract",
+    "condition": {
+        "events": [
+            "Created",
+            "StatusChanged"
+        ],
+        "configuration": {
+            "dimensions": {
+                "contractType": [
+                    "Policy"
+                ],
+                "productGroup": [
+                    "endowment",
+                    "equity",
+                    "investment",
+                    "med",
+                    "risk",
+                    "collectiveAll"
+                ]
+            }
+        },
+        "documentStates": [
+            "Active"
+        ]
+    },
+    "executionOrderWeight": 100,
+    "sinks": [
+        {
+            "name": "GetCurrentAttacmentVerification",
+            "fetch": {
+                "configuration": {
+                    "name": "AttachmentsVerificationsDataSource"
+                }
+            }
+        },
+        {
+            "name": "CreateAttacmentVerification",
+            "document": {
+                "configuration": {
+                    "name": "LifeInsuranceAttachmentVerification",
+                    "version": "1"
+                }
+            }
+        }
+    ],
+    "version": "1"
+}

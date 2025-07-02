@@ -1,0 +1,397 @@
+{
+    "type": "Group",
+    "title": "Natural Person",
+    "fillAvailableSpace": true,
+    "formProperties": {
+        "events": {
+            "beforeSave": "beforeSave"
+        }
+    },
+    "elements": [
+        {
+            "type": "TabLayout",
+            "options": {
+                "fixedPosition": true,
+                "scrollableTabs": false,
+                "buttonsForSwitchingTabs": false
+            },
+            "elements": [
+                {
+                    "type": "Tab",
+                    "elements": [
+                        {
+                            "type": "Group",
+                            "elements": [
+                                {
+                                    "type": "Input",
+                                    "label": "name",
+                                    "value": {
+                                        "$ref": "#/properties/Body/properties/name"
+                                    },
+                                    "width": 4
+                                },
+                                {
+                                    "type": "Input",
+                                    "label": "fullName",
+                                    "value": {
+                                        "$ref": "#/properties/Body/properties/fullName"
+                                    },
+                                    "width": 4
+                                },
+                                {
+                                    "type": "Input",
+                                    "label": "code",
+                                    "value": {
+                                        "$ref": "#/properties/Body/properties/code"
+                                    },
+                                    "width": 4
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Group",
+                            "rule": {
+                                "effect": "SHOW",
+                                "condition": {
+                                    "type": "FUNC",
+                                    "ruleFunction": "showParentName",
+                                    "value": [
+                                        {
+                                            "$ref": "#"
+                                        }
+                                    ]
+                                }
+                            },
+                            "elements": [
+                                {
+                                    "type": "Lookup",
+                                    "label": "parentName",
+                                    "commands": [
+                                        {
+                                            "commandType": "executeOperation",
+                                            "operation": "SEARCH",
+                                            "errorHandling": "silent",
+                                            "data": null
+                                        }
+                                    ],
+                                    "value": {
+                                        "$ref": "#"
+                                    },
+                                    "width": 4,
+                                    "dialogButton": {},
+                                    "clearButton": {
+                                        "clearAction": "parentNameClear"
+                                    },
+                                    "dialog": {
+                                        "viewReference": {
+                                            "configurationCodeName": "OrganisationUnitImplLookup",
+                                            "configurationVersion": "1",
+                                            "configurationConceptType": "SearchView"
+                                        },
+                                        "onLoad": "parentNameOnLoad"
+                                    },
+                                    "onSelected": "parentNameOnSelected",
+                                    "selectedDisplayValueUISchema": {
+                                        "type": "Input",
+                                        "label": "parentName",
+                                        "readOnly": true,
+                                        "value": {
+                                            "$ref": "#/properties/Body/properties/parentName"
+                                        }
+                                    }
+                                },
+                                {
+                                    "type": "Link",
+                                    "readOnly": true,
+                                    "targetType": "Entity",
+                                    "value": {
+                                        "mapping": "parentNameURLMapping",
+                                        "$ref": "#"
+                                    },
+                                    "content": {
+                                        "text": {
+                                            "type": "OutputText",
+                                            "defaultValue": "",
+                                            "value": {
+                                                "mapping": "parentNameMapping"
+                                            }
+                                        }
+                                    },
+                                    "width": 4
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Group",
+                            "rule": {
+                                "effect": "SHOW",
+                                "condition": {
+                                    "type": "FUNC",
+                                    "ruleFunction": "showPartnerName",
+                                    "value": [
+                                        {
+                                            "$ref": "#"
+                                        }
+                                    ]
+                                }
+                            },
+                            "elements": [
+                                {
+                                    "type": "Lookup",
+                                    "label": "partnerName",
+                                    "commands": [
+                                        {
+                                            "commandType": "executeOperation",
+                                            "operation": "SEARCH",
+                                            "errorHandling": "silent",
+                                            "data": null
+                                        }
+                                    ],
+                                    "value": {
+                                        "$ref": "#"
+                                    },
+                                    "width": 4,
+                                    "dialogButton": {},
+                                    "clearButton": {
+                                        "clearAction": "partnerNameClear"
+                                    },
+                                    "dialog": {
+                                        "viewReference": {
+                                            "configurationCodeName": "ServiceProviderSearchView",
+                                            "configurationVersion": "1",
+                                            "configurationConceptType": "SearchView"
+                                        },
+                                        "onLoad": "partnerNameOnLoad"
+                                    },
+                                    "onSelected": "partnerNameOnSelected",
+                                    "selectedDisplayValueUISchema": {
+                                        "type": "Input",
+                                        "label": "partnerName",
+                                        "readOnly": true,
+                                        "value": {
+                                            "$ref": "#/properties/Body/properties/partnerName"
+                                        }
+                                    }
+                                },
+                                {
+                                    "type": "Link",
+                                    "readOnly": true,
+                                    "targetType": "Entity",
+                                    "value": {
+                                        "mapping": "partnerNameURLMapping",
+                                        "$ref": "#"
+                                    },
+                                    "content": {
+                                        "text": {
+                                            "type": "OutputText",
+                                            "defaultValue": "",
+                                            "value": {
+                                                "mapping": "partnerNameMapping"
+                                            }
+                                        }
+                                    },
+                                    "width": 4
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Group",
+                            "elements": [
+                                {
+                                    "type": "Lookup",
+                                    "label": "coach",
+                                    "commands": [
+                                        {
+                                            "commandType": "executeOperation",
+                                            "operation": "SEARCH",
+                                            "errorHandling": "silent",
+                                            "data": null
+                                        }
+                                    ],
+                                    "value": {
+                                        "$ref": "#/properties/ClientViewModel/properties/coach"
+                                    },
+                                    "width": 4,
+                                    "dialogButton": {},
+                                    "clearButton": {
+                                        "clearAction": "employeeClear"
+                                    },
+                                    "dialog": {
+                                        "viewReference": {
+                                            "configurationCodeName": "ServiceProviderSearchView",
+                                            "configurationVersion": "1",
+                                            "configurationConceptType": "SearchView"
+                                        },
+                                        "onLoad": "employeeOnLoad"
+                                    },
+                                    "onSelected": "employeeOnSelected",
+                                    "selectedDisplayValueUISchema": {
+                                        "type": "Input",
+                                        "label": "coach",
+                                        "readOnly": true,
+                                        "value": {
+                                            "$ref": "#/properties/Body/properties/coach/properties/employeeFullName"
+                                        }
+                                    }
+                                },
+                                {
+                                    "type": "Link",
+                                    "readOnly": true,
+                                    "targetType": "Entity",
+                                    "value": {
+                                        "mapping": "employeeURLMapping",
+                                        "$ref": "#/properties/ClientViewModel/properties/coach"
+                                    },
+                                    "content": {
+                                        "text": {
+                                            "type": "OutputText",
+                                            "defaultValue": "",
+                                            "value": {
+                                                "mapping": "employeeNameMapping",
+                                                "$ref": "#/properties/ClientViewModel/properties/coach"
+                                            }
+                                        }
+                                    },
+                                    "width": 4
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Group",
+                            "elements": [
+                                {
+                                    "type": "Lookup",
+                                    "label": "territorialChief",
+                                    "commands": [
+                                        {
+                                            "commandType": "executeOperation",
+                                            "operation": "SEARCH",
+                                            "errorHandling": "silent",
+                                            "data": null
+                                        }
+                                    ],
+                                    "value": {
+                                        "$ref": "#/properties/ClientViewModel/properties/territorialChief"
+                                    },
+                                    "width": 4,
+                                    "dialogButton": {},
+                                    "clearButton": {
+                                        "clearAction": "employeeClear"
+                                    },
+                                    "dialog": {
+                                        "viewReference": {
+                                            "configurationCodeName": "ServiceProviderSearchView",
+                                            "configurationVersion": "1",
+                                            "configurationConceptType": "SearchView"
+                                        },
+                                        "onLoad": "employeeOnLoad"
+                                    },
+                                    "onSelected": "employeeOnSelected",
+                                    "selectedDisplayValueUISchema": {
+                                        "type": "Input",
+                                        "label": "territorialChief",
+                                        "readOnly": true,
+                                        "value": {
+                                            "$ref": "#/properties/Body/properties/territorialChief/properties/employeeFullName"
+                                        }
+                                    }
+                                },
+                                {
+                                    "type": "Link",
+                                    "readOnly": true,
+                                    "targetType": "Entity",
+                                    "value": {
+                                        "mapping": "employeeURLMapping",
+                                        "$ref": "#/properties/ClientViewModel/properties/territorialChief"
+                                    },
+                                    "content": {
+                                        "text": {
+                                            "type": "OutputText",
+                                            "defaultValue": "",
+                                            "value": {
+                                                "mapping": "employeeNameMapping",
+                                                "$ref": "#/properties/ClientViewModel/properties/territorialChief"
+                                            }
+                                        }
+                                    },
+                                    "width": 4
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Group",
+                            "elements": [
+                                {
+                                    "type": "Lookup",
+                                    "label": "regionalChief",
+                                    "commands": [
+                                        {
+                                            "commandType": "executeOperation",
+                                            "operation": "SEARCH",
+                                            "errorHandling": "silent",
+                                            "data": null
+                                        }
+                                    ],
+                                    "value": {
+                                        "$ref": "#/properties/ClientViewModel/properties/regionalChief"
+                                    },
+                                    "width": 4,
+                                    "dialogButton": {},
+                                    "clearButton": {
+                                        "clearAction": "employeeClear"
+                                    },
+                                    "dialog": {
+                                        "viewReference": {
+                                            "configurationCodeName": "ServiceProviderSearchView",
+                                            "configurationVersion": "1",
+                                            "configurationConceptType": "SearchView"
+                                        },
+                                        "onLoad": "employeeOnLoad"
+                                    },
+                                    "onSelected": "employeeOnSelected",
+                                    "selectedDisplayValueUISchema": {
+                                        "type": "Input",
+                                        "label": "regionalChief",
+                                        "readOnly": true,
+                                        "value": {
+                                            "$ref": "#/properties/Body/properties/regionalChief/properties/employeeFullName"
+                                        }
+                                    }
+                                },
+                                {
+                                    "type": "Link",
+                                    "readOnly": true,
+                                    "targetType": "Entity",
+                                    "value": {
+                                        "mapping": "employeeURLMapping",
+                                        "$ref": "#/properties/ClientViewModel/properties/regionalChief"
+                                    },
+                                    "content": {
+                                        "text": {
+                                            "type": "OutputText",
+                                            "defaultValue": "",
+                                            "value": {
+                                                "mapping": "employeeNameMapping",
+                                                "$ref": "#/properties/ClientViewModel/properties/regionalChief"
+                                            }
+                                        }
+                                    },
+                                    "width": 4
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Component",
+                            "name": "PartyAddresses",
+                            "value": {
+                                "$ref": "#/properties/Body/properties/partyAddresses"
+                            }
+                        }
+                    ],
+                    "elementId": "tab-General Information",
+                    "title": "General Information"
+                }
+            ]
+        }
+    ]
+}

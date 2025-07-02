@@ -1,0 +1,65 @@
+{
+    "entityType": "Contract",
+    "version": "1",
+    "condition": {
+        "events": [
+            "StatusChanged"
+        ],
+        "configuration": {
+            "dimensions": {
+                "contractType": [
+                    "Quote"
+                ]
+            }
+        },
+        "documentStates": [
+            "InfoRequest",
+            "Approved",
+            "Rejected"
+        ]
+    },
+    "sinks": [
+        {
+            "name": "GetComments",
+            "fetch": {
+                "configuration": {
+                    "name": "ContractCommentsDataSource"
+                }
+            }
+        },
+        {
+            "name": "GetContractVersions",
+            "fetch": {
+                "configuration": {
+                    "name": "ContractVersionsDataSource"
+                }
+            }
+        },
+        {
+            "name": "GetInitiatorData",
+            "fetch": {
+                "configuration": {
+                    "name": "UserDataSource"
+                }
+            }
+        },
+        {
+            "name": "InformationRequestNotification",
+            "notification": {
+                "notificationName": "InformationRequestNotification"
+            }
+        },
+        {
+            "name": "AboutApproveNotification",
+            "notification": {
+                "notificationName": "AboutApproveNotification"
+            }
+        },
+        {
+            "name": "AboutRejectNotification",
+            "notification": {
+                "notificationName": "AboutRejectNotification"
+            }
+        }
+    ]
+}

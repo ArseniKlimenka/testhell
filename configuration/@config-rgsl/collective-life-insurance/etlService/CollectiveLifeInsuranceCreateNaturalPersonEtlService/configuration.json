@@ -1,0 +1,46 @@
+{
+    "allowParallelExecution": true,
+    "mainDataSource": "CollectivePolicyInsuredListDataSource",
+    "sinks": [
+        {
+            "name": "FindNaturalPerson",
+            "fetch": {
+                "configuration": {
+                    "name": "GeneralPartyDataSource"
+                }
+            }
+        },
+        {
+            "name": "GetNaturalPerson",
+            "fetch": {
+                "configuration": {
+                    "name": "GetPartyDataSource"
+                }
+            }
+        },
+        {
+            "name": "CreateOrUpdateNaturalPerson",
+            "masterEntity": {
+                "configuration": {
+                    "name": "NaturalPerson",
+                    "version": "1"
+                },
+                "allowUpdating": true
+            }
+        },
+        {
+            "name": "SetInsuredPartyCode",
+            "class": {
+                "className": "Adacta.AdInsure.RGSL.PAS.API.Shared.Contract.Services.ICollectiveContractService, Adacta.AdInsure.RGSL.PAS.API",
+                "methodName": "SetInsuredPartyCode"
+            }
+        }
+    ],
+    "completionSinks": [
+
+    ],
+    "errorSinks": [
+        
+    ],
+    "version": "1"
+}

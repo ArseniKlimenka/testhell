@@ -1,0 +1,25 @@
+{
+    "entityType": "PaymentOrder",
+    "condition": {
+        "events": [
+            "StatusChanged"
+        ],
+        "documentStates": [
+            "WaitingForApproval"
+        ]
+    },
+    "sinks": [
+        {
+            "name": "GetPaymentOrder",
+            "fetch": {
+                "configuration": {
+                    "name": "GetPaymentOrderGeneralDataSource"
+                }
+            }
+        }
+    ],
+    "errorSinks": [
+        
+    ],
+    "version": "1"
+}

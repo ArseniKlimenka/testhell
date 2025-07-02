@@ -1,0 +1,41 @@
+{
+    "entityType": "Contract",
+    "condition": {
+        "events": [
+            "StatusChanged"
+        ],
+        "configuration": {
+            "dimensions": {
+                "contractType": [
+                    "Policy"
+                ]
+            }
+        },
+        "documentStates": [
+            "CancelledByAmendment"
+        ]
+    },
+    "sinks": [
+        {
+            "name": "GetPolicyData",
+            "fetch": {
+                "configuration": {
+                    "name": "ContractBodyDataSource"
+                }
+            }
+        },
+        {
+            "ref": "PaymentPlanSinkGroup"
+        },
+        {
+            "ref": "PostPremiumIncreaseTransactionsSinkGroup"
+        },
+        {
+            "ref": "RevaluationSinkGroup"
+        },
+        {
+            "ref": "CalculateInvoicedCommissionSinkGroup"
+        }
+    ],
+    "version": "1"
+}

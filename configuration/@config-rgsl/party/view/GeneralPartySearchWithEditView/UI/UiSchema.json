@@ -1,0 +1,173 @@
+{
+    "id": "GeneralPartySearchWithEditView.json",
+    "type": "GridLayout",
+    "numberOfColumns": 4,
+    "formProperties": {
+        "events": {
+            "onLoad": "onLoadAction"
+        }
+    },
+    "elements": [
+        {
+            "type": "InlineView",
+            "showContainerActions": true,
+            "views": [
+                {
+                    "onViewInitialized": "partySearchViewInitialization",
+                    "viewReference": {
+                        "configurationCodeName": "GeneralPartySearchView",
+                        "configurationConceptType": "SearchView",
+                        "configurationVersion": "1"
+                    }
+                },
+                {
+                    "onViewInitialized": "newPersonViewInitialization",
+                    "button": {
+                        "label": "New Legal entity"
+                    },
+                    "viewReference": {
+                        "configurationCodeName": "LegalEntityBasicEdit",
+                        "configurationConceptType": "SearchView",
+                        "configurationVersion": "1"
+                    }
+                },
+                {
+                    "onViewInitialized": "newPersonViewInitialization",
+                    "button": {
+                        "label": "New Natural person"
+                    },
+                    "viewReference": {
+                        "configurationCodeName": "NaturalPersonBasicEdit",
+                        "configurationConceptType": "SearchView",
+                        "configurationVersion": "1"
+                    }
+                }
+            ],
+            "eventHandlers": [
+                {
+                    "eventName": "PARTY_SELECTED",
+                    "senders": [
+                        "generalPartySearchTable"
+                    ],
+                    "commands": {
+                        "commandType": "executeAction",
+                        "actionName": "partySelected"
+                    }
+                },
+                {
+                    "eventName": "NATURAL_PERSON_CREATED",
+                    "commands": {
+                        "commandType": "executeAction",
+                        "actionName": "naturalPersonCreated"
+                    }
+                },
+                {
+                    "eventName": "LEGAL_ENTITY_CREATED",
+                    "commands": {
+                        "commandType": "executeAction",
+                        "actionName": "legalEntityCreated"
+                    }
+                }
+            ],
+            "value": {
+                "$ref": "#"
+            },
+            "elementId": "GeneralPartySearchInline",
+            "width": 4,
+            "rule": {
+                "effect": "HIDE",
+                "condition": {
+                    "type": "FUNC",
+                    "ruleFunction": "isEdit",
+                    "value": [
+                        {
+                            "$ref": "#/properties/viewContext/properties/editPartyCode"
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "InlineView",
+                    "showContainerActions": false,
+                    "views": [
+                        {
+                            "onViewInitialized": "editPersonViewInitialization",
+                            "viewReference": {
+                                "configurationCodeName": "NaturalPersonBasicEdit",
+                                "configurationConceptType": "SearchView",
+                                "configurationVersion": "1"
+                            }
+                        }
+                    ],
+                    "value": {
+                        "$ref": "#"
+                    },
+                    "elementId": "NaturalPersonEditInline",
+                    "width": 4,
+                    "rule": {
+                        "effect": "SHOW",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "isEditOfNaturalPerson",
+                            "value": [
+                                {
+                                    "$ref": "#/properties/viewContext/properties/editPartyConfiguration"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "type": "InlineView",
+                    "showContainerActions": false,
+                    "views": [
+                        {
+                            "onViewInitialized": "editPersonViewInitialization",
+                            "button": {
+                                "label": "New Legal entity"
+                            },
+                            "viewReference": {
+                                "configurationCodeName": "LegalEntityBasicEdit",
+                                "configurationConceptType": "SearchView",
+                                "configurationVersion": "1"
+                            }
+                        }
+                    ],
+                    "value": {
+                        "$ref": "#"
+                    },
+                    "elementId": "LegalEntityEditInline",
+                    "width": 4,
+                    "rule": {
+                        "effect": "SHOW",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "isEditOfLegalEntity",
+                            "value": [
+                                {
+                                    "$ref": "#/properties/viewContext/properties/editPartyConfiguration"
+                                }
+                            ]
+                        }
+                    }
+                }
+            ],
+            "rule": {
+                "effect": "SHOW",
+                "condition": {
+                    "type": "FUNC",
+                    "ruleFunction": "isEdit",
+                    "value": [
+                        {
+                            "$ref": "#/properties/viewContext/properties/editPartyCode"
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}

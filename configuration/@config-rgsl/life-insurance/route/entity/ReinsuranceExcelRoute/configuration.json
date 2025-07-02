@@ -1,0 +1,29 @@
+{
+    "entityType": "ImportDocument",
+    "condition": {
+        "events": [
+            "StatusChanged"
+        ],
+        "configuration": {
+            "names": [
+                "ReinsuranceImport"
+            ],
+            "dimensions": {}
+        },
+        "transitions": [
+            "StartImporting"
+        ]
+    },
+    "sinks": [
+        {
+            "name": "ReinsuranceExcelImport",
+            "etlService": {
+                "configuration": {
+                    "name": "ReinsuranceImportEtlService",
+                    "version": "1"
+                }
+            }
+        }
+    ],
+    "version": "1"
+}

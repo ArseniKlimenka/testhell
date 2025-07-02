@@ -1,0 +1,44 @@
+{
+    "formProperties": {
+        "events": {
+            "onLoad": "onLoadFiltersContent"
+        }
+    },
+    "type": "Group",
+    "width": 4,
+    "elements": [
+        {
+            "type": "Input",
+            "control": "DateRange",
+            "dateFrom": {
+                "type": "Input",
+                "label": "ReportingPeriodFrom",
+                "width": 1,
+                "value": {
+                    "$ref": "#/properties/request/properties/data/properties/criteria/properties/reportingPeriodFrom"
+                },
+                "control": "DatetimePicker"
+            },
+            "dateTo": {
+                "type": "Input",
+                "label": "ReportingPeriodTo",
+                "width": 1,
+                "value": {
+                    "$ref": "#/properties/request/properties/data/properties/criteria/properties/reportingPeriodTo"
+                },
+                "control": "DatetimePicker"
+            },
+            "width": 2
+        },
+        {
+            "type": "Input",
+            "multiple": true,
+            "control": "Dropdown",
+            "label": "PeriodTypeIds",
+            "value": {
+                "$ref": "#/properties/request/properties/data/properties/criteria/properties/periodTypeIds"
+            },
+            "width": 1
+        }
+    ]
+}

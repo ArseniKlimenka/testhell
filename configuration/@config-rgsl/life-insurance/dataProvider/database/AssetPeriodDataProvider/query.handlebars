@@ -1,0 +1,180 @@
+WITH
+    -- количество данного актива по котировкам на отчетную дату. Учитываются котировки в статусах Проект, На рассмотрении СК, Запрос информации, Согласована.
+    reservedForQuotesBeginDateCte AS (
+        select ASSET_UNITS_COUNT as unitCount , ASSET_NUMBER as assetNumber, ROW_NUMBER() OVER (PARTITION BY qh.CONTRACT_NUMBER
+        ORDER BY qs.LOAD_DATE DESC) AS rn
+        from PAS_IMPL.QUOTE_ASSET_SAT qas
+        join PAS_IMPL.QUOTE_HUB qh on qas.QUOTE_ASSET_HKEY = qh.QUOTE_HKEY
+        join PAS_IMPL.QUOTE_SAT qs on qs.QUOTE_HKEY = qh.QUOTE_HKEY
+        join PAS.CONTRACT c on c.CONTRACT_NUMBER = qh.CONTRACT_NUMBER
+        join CFG.PROCESS_STATE ps on ps.PROCESS_STATE_ID = c.STATE_ID
+        where ps.DESCRIPTION in ('Draft', 'OnReview', 'InfoRequest', 'Approved') and @beginDate >= qs.LOAD_DATE
+    ),
+    
+    reservedForQuotesEndDateCte AS (
+        select ASSET_UNITS_COUNT as unitCount , ASSET_NUMBER as assetNumber, ROW_NUMBER() OVER (PARTITION BY qh.CONTRACT_NUMBER
+        ORDER BY qs.LOAD_DATE DESC) AS rn
+        from PAS_IMPL.QUOTE_ASSET_SAT qas
+        join PAS_IMPL.QUOTE_HUB qh on qas.QUOTE_ASSET_HKEY = qh.QUOTE_HKEY
+        join PAS_IMPL.QUOTE_SAT qs on qs.QUOTE_HKEY = qh.QUOTE_HKEY
+        join PAS.CONTRACT c on c.CONTRACT_NUMBER = qh.CONTRACT_NUMBER
+        join CFG.PROCESS_STATE ps on ps.PROCESS_STATE_ID = c.STATE_ID
+        where ps.DESCRIPTION in ('Draft', 'OnReview', 'InfoRequest', 'Approved') and @endDate >= qs.LOAD_DATE
+    ),
+
+    -- количество данного актива по договорам на отчетную дату. Учитываются договоры в статусах Проект, Подписан, Действует
+    reservedForPoliciesBeginDateCte AS (
+        select ASSET_UNITS_COUNT as unitCount , ASSET_NUMBER as assetNumber, ROW_NUMBER() OVER (PARTITION BY qh.CONTRACT_NUMBER
+        ORDER BY psat.LOAD_DATE DESC) AS rn
+        from PAS_IMPL.POLICY_ASSET_SAT qas
+        join PAS_IMPL.POLICY_HUB qh on qas.POLICY_ASSET_HKEY = qh.POLICY_HKEY
+        join PAS_IMPL.POLICY_SAT psat on psat.POLICY_HKEY = qh.POLICY_HKEY
+        join PAS.CONTRACT c on c.CONTRACT_NUMBER = qh.CONTRACT_NUMBER
+        join CFG.PROCESS_STATE ps on ps.PROCESS_STATE_ID = c.STATE_ID
+        where ps.DESCRIPTION in ('Draft', 'Active', 'Activated') and @beginDate >= psat.LOAD_DATE
+    ),
+    reservedForPoliciesEndDateCte AS (
+        select ASSET_UNITS_COUNT as unitCount , ASSET_NUMBER as assetNumber, ROW_NUMBER() OVER (PARTITION BY qh.CONTRACT_NUMBER
+        ORDER BY psat.LOAD_DATE DESC) AS rn
+        from PAS_IMPL.POLICY_ASSET_SAT qas
+        join PAS_IMPL.POLICY_HUB qh on qas.POLICY_ASSET_HKEY = qh.POLICY_HKEY
+        join PAS_IMPL.POLICY_SAT psat on psat.POLICY_HKEY = qh.POLICY_HKEY
+        join PAS.CONTRACT c on c.CONTRACT_NUMBER = qh.CONTRACT_NUMBER
+        join CFG.PROCESS_STATE ps on ps.PROCESS_STATE_ID = c.STATE_ID
+        where ps.DESCRIPTION in ('Draft', 'Active', 'Activated') and @endDate >= psat.LOAD_DATE
+    ),
+
+    -- количество данного актива по всем договорам в статусе действует на отчетную дату
+    reservedForActivatedPolicyBeginDateCte AS (
+        select ASSET_UNITS_COUNT as unitCount , ASSET_NUMBER as assetNumber, ROW_NUMBER() OVER (PARTITION BY qh.CONTRACT_NUMBER
+        ORDER BY psat.LOAD_DATE DESC) AS rn
+        from PAS_IMPL.POLICY_ASSET_SAT qas
+        join PAS_IMPL.POLICY_HUB qh on qas.POLICY_ASSET_HKEY = qh.POLICY_HKEY
+        join PAS_IMPL.POLICY_SAT psat on psat.POLICY_HKEY = qh.POLICY_HKEY
+        join PAS.CONTRACT c on c.CONTRACT_NUMBER = qh.CONTRACT_NUMBER
+        join CFG.PROCESS_STATE ps on ps.PROCESS_STATE_ID = c.STATE_ID
+        where ps.DESCRIPTION in ('Activated')and @beginDate >= psat.LOAD_DATE
+    ),
+    reservedForActivatedPolicyEndDateCte AS (
+        select ASSET_UNITS_COUNT as unitCount , ASSET_NUMBER as assetNumber, ROW_NUMBER() OVER (PARTITION BY qh.CONTRACT_NUMBER
+        ORDER BY psat.LOAD_DATE DESC) AS rn
+        from PAS_IMPL.POLICY_ASSET_SAT qas
+        join PAS_IMPL.POLICY_HUB qh on qas.POLICY_ASSET_HKEY = qh.POLICY_HKEY
+        join PAS_IMPL.POLICY_SAT psat on psat.POLICY_HKEY = qh.POLICY_HKEY
+        join PAS.CONTRACT c on c.CONTRACT_NUMBER = qh.CONTRACT_NUMBER
+        join CFG.PROCESS_STATE ps on ps.PROCESS_STATE_ID = c.STATE_ID
+        where ps.DESCRIPTION in ('Activated')and @endDate >= psat.LOAD_DATE
+    ),
+
+    -- количество данного актива по всем договорам в статусе действует, по которым идет период охлаждения
+    contractsInCooloffBeginDateCte AS (
+        select ASSET_UNITS_COUNT as unitCount , ASSET_NUMBER as assetNumber, ROW_NUMBER() OVER (PARTITION BY qh.CONTRACT_NUMBER
+        ORDER BY psat.LOAD_DATE DESC) AS rn
+        from PAS_IMPL.POLICY_ASSET_SAT qas
+        join PAS_IMPL.POLICY_HUB qh on qas.POLICY_ASSET_HKEY = qh.POLICY_HKEY
+        join PAS_IMPL.POLICY_SAT psat on qh.POLICY_HKEY = psat.POLICY_HKEY
+        join PAS.CONTRACT c on c.CONTRACT_NUMBER = qh.CONTRACT_NUMBER
+        join CFG.PROCESS_STATE ps on ps.PROCESS_STATE_ID = c.STATE_ID
+        join BFX_IMPL.PRODUCT_CONF pc on pc.PRODUCT_CODE = psat.PRODUCT_CODE
+        where ps.DESCRIPTION in ('Activated') 
+            and @beginDate < DATEADD(day, pc.COOL_OFF_PERIOD_DAYS, psat.ISSUE_DATE) 
+            and pc.CONF_VERSION=(
+                select max(CONF_VERSION) 
+                    from BFX_IMPL.PRODUCT_CONF) 
+    ), 
+
+    contractsInCooloffEndDateCte AS (
+		select ASSET_UNITS_COUNT as unitCount , ASSET_NUMBER as assetNumber, ROW_NUMBER() OVER (PARTITION BY qh.CONTRACT_NUMBER ORDER BY psat.LOAD_DATE DESC) AS rn
+			from PAS_IMPL.POLICY_ASSET_SAT qas
+			join PAS_IMPL.POLICY_HUB qh on qas.POLICY_ASSET_HKEY = qh.POLICY_HKEY
+			join PAS_IMPL.POLICY_SAT psat on qh.POLICY_HKEY = psat.POLICY_HKEY
+			join PAS.CONTRACT c on c.CONTRACT_NUMBER = qh.CONTRACT_NUMBER
+			join CFG.PROCESS_STATE ps on ps.PROCESS_STATE_ID = c.STATE_ID
+			join BFX_IMPL.PRODUCT_CONF pc on pc.PRODUCT_CODE = psat.PRODUCT_CODE
+			where ps.DESCRIPTION in ('Activated') 
+                and @endDate < DATEADD(day, pc.COOL_OFF_PERIOD_DAYS, psat.ISSUE_DATE)
+                and pc.CONF_VERSION = 
+                    (select max(CONF_VERSION) 
+                        from BFX_IMPL.PRODUCT_CONF)
+		),
+
+-- количество данного актива по всем договорам в статусе действует, по которым период охлаждения завершен 
+    contractsNotInCooloffBeginDateCte AS ( 
+        select ASSET_UNITS_COUNT as unitCount , ASSET_NUMBER as assetNumber, ROW_NUMBER() OVER (PARTITION BY qh.CONTRACT_NUMBER ORDER BY psat.LOAD_DATE DESC) AS rn 
+        from PAS_IMPL.POLICY_ASSET_SAT qas 
+        join PAS_IMPL.POLICY_HUB qh on qas.POLICY_ASSET_HKEY=qh.POLICY_HKEY 
+        join PAS_IMPL.POLICY_SAT psat on qh.POLICY_HKEY=psat.POLICY_HKEY 
+        join PAS.CONTRACT c on c.CONTRACT_NUMBER=qh.CONTRACT_NUMBER join CFG.PROCESS_STATE ps on ps.PROCESS_STATE_ID=c.STATE_ID
+        join BFX_IMPL.PRODUCT_CONF pc on pc.PRODUCT_CODE=psat.PRODUCT_CODE
+        where ps.DESCRIPTION in ('Activated') 
+            and @beginDate>= DATEADD(day, pc.COOL_OFF_PERIOD_DAYS, psat.ISSUE_DATE) 
+            and pc.CONF_VERSION = (select max(CONF_VERSION)
+                                    from BFX_IMPL.PRODUCT_CONF)
+    ),
+    contractsNotInCooloffEndDateCte AS (
+        select ASSET_UNITS_COUNT as unitCount , ASSET_NUMBER as assetNumber, ROW_NUMBER() OVER (PARTITION BY qh.CONTRACT_NUMBER
+        ORDER BY psat.LOAD_DATE DESC) AS rn
+        from PAS_IMPL.POLICY_ASSET_SAT qas
+        join PAS_IMPL.POLICY_HUB qh on qas.POLICY_ASSET_HKEY = qh.POLICY_HKEY
+        join PAS_IMPL.POLICY_SAT psat on qh.POLICY_HKEY = psat.POLICY_HKEY
+        join PAS.CONTRACT c on c.CONTRACT_NUMBER = qh.CONTRACT_NUMBER
+        join CFG.PROCESS_STATE ps on ps.PROCESS_STATE_ID = c.STATE_ID
+        join BFX_IMPL.PRODUCT_CONF pc on pc.PRODUCT_CODE = psat.PRODUCT_CODE
+        where ps.DESCRIPTION in ('Activated') 
+            and @endDate >= DATEADD(day, pc.COOL_OFF_PERIOD_DAYS, psat.ISSUE_DATE) 
+            and pc.CONF_VERSION = (select max(CONF_VERSION) 
+                                    from BFX_IMPL.PRODUCT_CONF)
+    )
+
+    select distinct ID_ISIN, @beginDate as BEGIN_DATE, @endDate as END_DATE, ORIGINAL_DOCUMENT_NUMBER, ASSET_SIZE,
+        reservedForQuotesBeginDate.ASSET_UNITS_COUNT as reservedForQuotesAssetUnitsCountBeginDate ,
+        reservedForQuotesEndDate.ASSET_UNITS_COUNT as reservedForQuotesAssetUnitsCountEndDate ,
+        reservedForPoliciesBeginDate.ASSET_UNITS_COUNT as reservedForPoliciesAssetUnitsCountBeginDate,
+        reservedForPoliciesEndDate.ASSET_UNITS_COUNT as reservedForPoliciesAssetUnitsCountEndDate,
+        reservedForActivatedPolicyBeginDate.ASSET_UNITS_COUNT as reservedForActivatedAssetUnitsCountBeginDate,
+        reservedForActivatedPolicyEndDate.ASSET_UNITS_COUNT as reservedForActivatedAssetUnitsCountEndDate,
+        contractsInCooloffBeginDate.ASSET_UNITS_COUNT as contractsInCooloffAssetUnitsCountBeginDate,
+        contractsInCooloffEndDate.ASSET_UNITS_COUNT as contractsInCooloffAssetUnitsCountEndDate,
+        contractsNotInCooloffBeginDate.ASSET_UNITS_COUNT as contractsNotInCooloffAssetUnitsCountBeginDate,
+        contractsNotInCooloffEndDate.ASSET_UNITS_COUNT as contractsNotInCooloffAssetUnitsCountEndDate
+    from PAS_IMPL.QUOTE_HUB qh
+    join PAS_IMPL.QUOTE_ASSET_SAT qas on qh.QUOTE_HKEY = qas.QUOTE_ASSET_HKEY
+    right join PAS_IMPL.ASSET_HUB ah on ah.ASSET_NUMBER = qas.ASSET_NUMBER
+    join PAS_IMPL.ASSET_SAT_LATEST asat on asat.ASSET_HKEY = ah.ASSET_HKEY
+    
+    outer apply (select sum(cte.unitCount) as ASSET_UNITS_COUNT from reservedForQuotesBeginDateCte cte where rn = 1 and
+    ah.ASSET_NUMBER = cte.assetNumber) reservedForQuotesBeginDate
+    
+    outer apply (select sum(cte.unitCount) as ASSET_UNITS_COUNT from reservedForQuotesEndDateCte cte where rn = 1 and
+    ah.ASSET_NUMBER = cte.assetNumber) reservedForQuotesEndDate
+    
+    outer apply (select sum(cte.unitCount) as ASSET_UNITS_COUNT from reservedForPoliciesBeginDateCte cte where rn = 1 and
+    ah.ASSET_NUMBER = cte.assetNumber) reservedForPoliciesBeginDate
+    
+    outer apply (select sum(cte.unitCount) as ASSET_UNITS_COUNT from reservedForPoliciesEndDateCte cte where rn = 1 and
+    ah.ASSET_NUMBER = cte.assetNumber) reservedForPoliciesEndDate
+    
+    outer apply (select sum(cte.unitCount) as ASSET_UNITS_COUNT from reservedForActivatedPolicyBeginDateCte cte where rn = 1
+    and ah.ASSET_NUMBER = cte.assetNumber) reservedForActivatedPolicyBeginDate
+    
+    outer apply (select sum(cte.unitCount) as ASSET_UNITS_COUNT from reservedForActivatedPolicyEndDateCte cte where rn = 1
+    and ah.ASSET_NUMBER = cte.assetNumber) reservedForActivatedPolicyEndDate
+    
+    outer apply (select sum(cte.unitCount) as ASSET_UNITS_COUNT from contractsInCooloffBeginDateCte cte where rn = 1 and
+    ah.ASSET_NUMBER = cte.assetNumber) contractsInCooloffBeginDate
+    
+    outer apply (select sum(cte.unitCount) as ASSET_UNITS_COUNT from contractsInCooloffEndDateCte cte where rn = 1 and
+    ah.ASSET_NUMBER = cte.assetNumber) contractsInCooloffEndDate
+    
+    outer apply (select sum(cte.unitCount) as ASSET_UNITS_COUNT from contractsNotInCooloffBeginDateCte cte where rn = 1 and
+    ah.ASSET_NUMBER = cte.assetNumber) contractsNotInCooloffBeginDate
+    
+    outer apply (select sum(cte.unitCount) as ASSET_UNITS_COUNT from contractsNotInCooloffEndDateCte cte where rn = 1 and
+    ah.ASSET_NUMBER = cte.assetNumber) contractsNotInCooloffEndDate
+    
+    where STATE = 'Open' or (STATE = 'Closed' and (reservedForQuotesBeginDate.ASSET_UNITS_COUNT > 0 or
+    reservedForQuotesEndDate.ASSET_UNITS_COUNT > 0 or
+    reservedForPoliciesBeginDate.ASSET_UNITS_COUNT > 0 or
+    reservedForPoliciesEndDate.ASSET_UNITS_COUNT > 0 or
+    reservedForActivatedPolicyBeginDate.ASSET_UNITS_COUNT > 0 or
+    reservedForActivatedPolicyEndDate.ASSET_UNITS_COUNT > 0 ))

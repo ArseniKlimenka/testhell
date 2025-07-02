@@ -1,0 +1,247 @@
+{
+    "type": "Group",
+    "elements": [
+        {
+            "type": "DataGrid",
+            "elementId": "RateOfReturnRulesSearchTable",
+            "mode": "DataSource",
+            "pagination": {
+                "mode": "Regular",
+                "pageSizes": [
+                    10,
+                    50,
+                    100
+                ]
+            },
+            "selection": {
+                "mode": "None"
+            },
+            "columns": [
+                {
+                    "sortable": true,
+                    "title": "excelRowNumber",
+                    "name": "excelRowNumber",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/excelRowNumber"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "productCode",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/productCode"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "strategyCode",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/strategyCode"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "issueDateFrom",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/issueDateFrom"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "issueDateTo",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/issueDateTo"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "issueDateStr",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/issueDateStr"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "insuranceTerms",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/insuranceTerms"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "currencyCode",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/currencyCode"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "guaranteedIncome",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/guaranteedIncome"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "variant",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/variant"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "rateOfReturn",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/rateOfReturn"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "cashback",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/cashback"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "rko",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/rko"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "participationCoeff",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/participationCoeff"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "manualRate",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/manualRate"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "importDocumentId",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/importDocumentId"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "version",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/version"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "loadedBy",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/loadedBy"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "loadDate",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/loadDate"
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "type": "GridLayout",
+            "numberOfColumns": 3,
+            "elements": [
+                {
+                    "type": "Group",
+                    "stackContent": "Left",
+                    "width": 2,
+                    "elements": [
+                        {
+                            "type": "Button",
+                            "label": "Export last imported product configuration",
+                            "onClick": [
+                                {
+                                    "commandType": "executeAction",
+                                    "actionName": "exportLastRateOfReturnRules"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Button",
+                            "label": "Export filtered product configuration",
+                            "onClick": [
+                                {
+                                    "commandType": "executeAction",
+                                    "actionName": "exportFilteredRateOfReturnRules"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

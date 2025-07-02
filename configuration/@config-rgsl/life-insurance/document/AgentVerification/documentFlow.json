@@ -1,0 +1,47 @@
+{
+    "processType": "AgentVerification",
+    "initialState": "Draft",
+    "actors": [
+        "AgentVerificationViewer",
+        "AgentVerificationEditor"
+    ],
+    "states": [
+        {
+            "name": "Draft",
+            "operations": [
+                "Save"
+            ]
+        },
+        {
+            "name": "Executed",
+            "operations": []
+        },
+        {
+            "name": "Cancelled",
+            "operations": []
+        }
+    ],
+    "transitions": [
+        {
+            "name": "Draft_to_Executed",
+            "from": "Draft",
+            "to": "Executed"
+        },
+        {
+            "name": "Draft_to_Cancelled",
+            "from": "Draft",
+            "to": "Cancelled",
+            "allowOnValidationErrors": {
+                "all": true
+            }
+        },
+        {
+            "name": "Executed_to_Cancelled",
+            "from": "Executed",
+            "to": "Cancelled",
+            "allowOnValidationErrors": {
+                "all": true
+            }
+        }
+    ]
+}

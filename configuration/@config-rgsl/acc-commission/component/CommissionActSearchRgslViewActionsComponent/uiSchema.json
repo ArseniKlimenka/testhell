@@ -1,0 +1,91 @@
+{
+    "type": "ButtonGroup",
+    "label": "Actions",
+    "elements": [
+        {
+            "type": "Button",
+            "hide": false,
+            "readOnly": true,
+            "icon": {
+                "size": "Small",
+                "color": "BackgroundColor",
+                "name": "Edit"
+            },
+            "eventHandlers": [
+                {
+                    "eventName": "Selected",
+                    "senders": [
+                        "TableViewId"
+                    ],
+                    "commands": {
+                        "commandType": "executeAction",
+                        "actionName": "enableSetStatusOnSelection"
+                    }
+                }
+            ],
+            "styleClass": "md-icon-button",
+            "value": {
+                "$ref": "#"
+            },
+            "onClick": [
+                {
+                    "commandType": "executeAction",
+                    "actionName": "setStatusOnSelection"
+                }
+            ],
+            "label": "Set status"
+        },
+        {
+            "type": "Button",
+            "hide": false,
+            "readOnly": true,
+            "icon": {
+                "size": "Small",
+                "color": "BackgroundColor",
+                "name": "Print"
+            },
+            "eventHandlers": [
+                {
+                    "eventName": "Selected",
+                    "senders": [
+                        "TableViewId"
+                    ],
+                    "commands": {
+                        "commandType": "executeAction",
+                        "actionName": "enablePrintReportOnSelection"
+                    }
+                }
+            ],
+            "styleClass": "md-icon-button",
+            "value": {
+                "$ref": "#"
+            },
+            "onClick": [
+                {
+                    "commandType": "executeAction",
+                    "actionName": "printReport"
+                }
+            ],
+            "label": "Print report"
+        },
+        {
+            "type": "Button",
+            "icon": {
+                "size": "Small",
+                "color": "BackgroundColor",
+                "name": "Print"
+            },
+            "styleClass": "md-icon-button",
+            "value": {
+                "$ref": "#"
+            },
+            "onClick": [
+                {
+                    "commandType": "executeAction",
+                    "actionName": "exportReport"
+                }
+            ],
+            "label": "Export report"
+        }
+    ]
+}

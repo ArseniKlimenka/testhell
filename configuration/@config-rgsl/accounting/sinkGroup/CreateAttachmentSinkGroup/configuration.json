@@ -1,0 +1,35 @@
+{
+    "sinks": [
+        {
+            "name": "GetPrintoutsInfo",
+            "class": {
+                "className": "Adacta.AdInsure.RGSL.Common.API.Shared.Services.IDocumentConfigurationInfoProvider, Adacta.AdInsure.RGSL.Common.API",
+                "methodName": "GetPrintoutsInfo"
+            }
+        },
+        {
+            "name": "GetExistingCertificateAttachment",
+            "class": {
+                "className": "Adacta.AdInsure.Framework.Core.SPI.Attachment.IAttachmentProvider, Adacta.AdInsure.Framework.Core",
+                "methodName": "GetAttachments"
+            }
+        },
+        {
+            "name": "CreateCertificatePrintoutFile",
+            "executeAs": "AccountingCertificateAttachmentEditor",
+            "printout": {
+                "printoutConfiguration": {
+                    "attachmentTypes": [
+                    ]
+                }
+            }
+        },
+        {
+            "name": "CreateCertificateSignedAttachment",
+            "executeAs": "AccountingCertificateAttachmentEditor",
+            "createAttachment": {
+                "attachmentType": "taxDeductionCertificate"
+            }
+        }
+    ]
+}

@@ -1,0 +1,168 @@
+{
+    "type": "GridLayout",
+    "id": "ContractEntityId",
+    "numberOfColumns": 12,
+    "width": 12,
+    "formProperties": {
+        "events": {
+            "beforeSave": "beforeSaveContractEntity",
+            "afterSave": "afterSaveContractEntity",
+            "onLoad": "onLoadContractEntity"
+        }
+    },
+    "elements": [
+        {
+            "type": "Group",
+            "width": 12,
+            "elements": [
+                {
+                    "type": "Link",
+                    "label": "Quote number",
+                    "targetType": "Entity",
+                    "value": {
+                        "mapping": "prepareQuoteLink",
+                        "$ref": "#/properties/Body/properties/quote"
+                    },
+                    "content": {
+                        "text": {
+                            "type": "OutputText",
+                            "textProperties": [
+                                "bold"
+                            ],
+                            "template": "{{expr number}}",
+                            "value": {
+                                "$ref": "#"
+                            }
+                        }
+                    },
+                    "width": 3
+                },
+                {
+                    "type": "Link",
+                    "label": "Policy number",
+                    "targetType": "Entity",
+                    "value": {
+                        "mapping": "preparePolicyLink",
+                        "$ref": "#/properties/Body/properties/policy"
+                    },
+                    "content": {
+                        "text": {
+                            "type": "OutputText",
+                            "textProperties": [
+                                "bold"
+                            ],
+                            "template": "{{expr number}}",
+                            "value": {
+                                "$ref": "#"
+                            }
+                        }
+                    },
+                    "width": 3
+                },
+                {
+                    "type": "Link",
+                    "label": "Product configuration number",
+                    "targetType": "Entity",
+                    "value": {
+                        "mapping": "prepareProductConfigurationLink",
+                        "$ref": "#/properties/Body/properties/economicParameters"
+                    },
+                    "content": {
+                        "text": {
+                            "type": "OutputText",
+                            "textProperties": [
+                                "bold"
+                            ],
+                            "template": "{{expr productConfNumber}}",
+                            "value": {
+                                "$ref": "#"
+                            }
+                        }
+                    },
+                    "width": 3
+                },
+                {
+                    "type": "OutputText",
+                    "label": "lastUpdateDate",
+                    "defaultValue": "",
+                    "template": "{{expr lastUpdateDate 'dt'}}",
+                    "value": {
+                        "$ref": "#/properties/Body"
+                    },
+                    "width": 3
+                }
+            ]
+        },
+        {
+            "type": "GridLayout",
+            "numberOfColumns": 12,
+            "elements": [
+                {
+                    "type": "TabLayout",
+                    "elementId": "ContractEntityTabLayout",
+                    "elements": [
+                        {
+                            "type": "Tab",
+                            "elementId": "PolicyEconomicsTab",
+                            "title": "Policy economics",
+                            "elements": [
+                                {
+                                    "type": "Section",
+                                    "label": "Policy economics",
+                                    "metadata": {
+                                        "autogenerate": false
+                                    },
+                                    "sectionLevel": 1,
+                                    "width": 12,
+                                    "elements": [
+                                        {
+                                            "type": "Component",
+                                            "name": "EconomicParametersContractEntity",
+                                            "value": {
+                                                "$ref": "#/properties/Body/properties/economicParameters"
+                                            }
+                                        }
+                                    ]
+                                }
+                            ],
+                            "rule": {
+                                "effect": "HIDE",
+                                "condition": {
+                                    "type": "FUNC",
+                                    "ruleFunction": "hidePolicyEconomics",
+                                    "value": [
+                                        {
+                                            "$ref": "#"
+                                        }
+                                    ]
+                                }
+                            }
+                        },
+                        {
+                            "type": "Tab",
+                            "elementId": "ReceivedDocumentsTab",
+                            "title": "Received documents",
+                            "elements": [
+                                {
+                                    "type": "Section",
+                                    "label": "Received documents",
+                                    "sectionLevel": 1,
+                                    "width": 12,
+                                    "elements": [
+                                        {
+                                            "type": "Component",
+                                            "name": "ReceivedDocumentsContractEntity",
+                                            "value": {
+                                                "$ref": "#/properties/Body/properties/receivedDocuments"
+                                            }
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

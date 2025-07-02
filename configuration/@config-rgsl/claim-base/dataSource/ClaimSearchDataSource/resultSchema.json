@@ -1,0 +1,390 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+        "claimNumber": {
+            "type": "string"
+        },
+        "documentState": {
+            "type": "string"
+        },
+        "documentStateCode": {
+            "type": "string"
+        },
+        "contractNumber": {
+            "type": "string"
+        },
+        "contractConfigurationName": {
+            "type": "string"
+        },
+        "contractConfigurationVersion": {
+            "type": "string"
+        },
+        "contractStateCode": {
+            "type": "string"
+        },
+        "contractStateDescription": {
+            "type": "string"
+        },
+        "risk": {
+            "type": "object",
+            "properties": {
+                "riskCode": {
+                    "type": "string"
+                },
+                "riskInsuredSum": {
+                    "type": "number"
+                },
+                "riskShortDescription": {
+                    "type": "string"
+                }
+            }
+        },
+        "risksInsuredSumByPeriod": {
+            "type": "array",
+            "aiTitle": "riskInsuredSumByPeriod",
+            "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                    "riskCode": {
+                        "type": "string"
+                    },
+                    "periods": {
+                        "type": "array",
+                        "aiTitle": "riskInsuredSumByPeriod",
+                        "items": {
+                            "type": "object",
+                            "additionalProperties": false,
+                            "properties": {
+                                "insuredSum": {
+                                    "type": "number",
+                                    "aiTitle": "riskInsuredSum"
+                                },
+                                "startDate": {
+                                    "type": "string",
+                                    "aiFormat": "date",
+                                    "aiTitle": "periodStartDate"
+                                },
+                                "endDate": {
+                                    "type": "string",
+                                    "aiFormat": "date",
+                                    "aiTitle": "periodEndDate"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "riskAdditionalAttributes": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "disabilityGroup": {
+                    "type": "string",
+                    "enum": [
+                        "I",
+                        "II",
+                        "III"
+                    ]
+                },
+                "numberOfPaidDays": {
+                    "type": "integer"
+                },
+                "injuries": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "properties": {
+                            "injuryDetails": {
+                                "type": "object",
+                                "additionalProperties": false,
+                                "properties": {
+                                    "code": {
+                                        "type": "string",
+                                        "aiTitle": "injuryCode"
+                                    },
+                                    "description": {
+                                        "type": "string"
+                                    },
+                                    "defaultPymentPercentage": {
+                                        "type": "number",
+                                        "minimum": 0,
+                                        "maximum": 1
+                                    },
+                                    "group": {
+                                        "type":"object",
+                                        "properties": {
+                                            "code": {
+                                                "type": "integer"
+                                            },
+                                            "description": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    },
+                                    "subgroupLevel1": {
+                                        "type":"object",
+                                        "properties": {
+                                            "code": {
+                                                "type": "string"
+                                            },
+                                            "description": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    }
+                                },
+                                "aiTitle": "injuryDetails",                                
+                                "required": [
+                                    "code"
+                                ]
+                            },
+                            "paymentInjuryPercentage": {
+                                "type": "number",
+                                "minimum": 0,
+                                "maximum": 1
+                            },
+                            "numberOfInjuries": {
+                                "type": "integer",
+                                "minimum": 1
+                            }
+                        },
+                        "required": [
+                            "paymentInjuryPercentage",
+                            "numberOfInjuries",
+                            "injuryDetails"
+                        ]
+                    }
+                }
+            }
+        },
+        "paymentAmountInDocCurrency": {
+            "type": "number"
+        },
+        "paymentAmountInRubCurrency": {
+            "type": "number"
+        },
+        "contractCurrency": {
+            "type": "string"
+        },
+        "totalPaymentPercentage": {
+            "type": "number"
+        },
+        "diagnosis": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                }
+            }
+        },
+        "diagnosisNote": {
+            "type": "string"
+        },
+        "insuredEvent": {
+            "type":"object",
+            "properties": {
+                "insuredEventNumber": {
+                    "type": "string"
+                },        
+                "insuredEventType": {
+                    "type": "object",
+                    "properties": {
+                        "code": {
+                            "type": "string"
+                        },
+                        "description": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "insuredEventReason": {
+                    "type": "object",
+                    "properties": {
+                        "code": {
+                            "type": "string"
+                        },
+                        "description": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "insuredEventDate": {
+                    "type": "string",
+                    "format": "date",
+                    "aiFormat": "date"
+                }
+            }
+        },
+        "applicationInfo": {
+            "type":"object",
+            "properties": {
+                "applicantCode": {
+                    "type": "string"
+                },
+                "applicantFullName": {
+                    "type": "string"
+                },
+                "applicantType": {
+                    "type": "string"
+                },
+                "statementReceivedDate": {
+                    "type": "string",
+                    "aiFormat": "date"
+                },
+                "statementApplicationDate": {
+                    "type": "string",
+                    "aiFormat": "date"
+                }
+            }
+        },
+        "insuredPersonInfo": {
+            "type":"object",
+            "properties": {
+                "insuredPersonCode": {
+                    "type": "string"
+                },
+                "insuredPersonFullName": {
+                    "type": "string"
+                },
+                "insuredPersonType": {
+                    "type": "string"
+                }
+            }
+        },
+        "policyHolderInfo": {
+            "type":"object",
+            "properties": {
+                "policyHolderCode": {
+                    "type": "string"
+                },
+                "policyHolderFullName": {
+                    "type": "string"
+                },
+                "policyHolderType": {
+                    "type": "string"
+                }
+            }
+        },
+        "claimBeneficiaries": {
+            "type": "array",
+            "mapping": {
+                "path": "#/properties/claimBeneficiaries"
+            },
+            "items": {
+                "type": "object",
+                "properties": {
+                    "partyCode": {
+                        "type": "string"
+                    },
+                    "beneficiaryReason": {
+                        "type": "object",
+                        "properties": {
+                            "code": {
+                                "type": "string"
+                            },
+                            "description": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "beneficiaryPaymentType": {
+                        "type": "object",
+                        "properties": {
+                            "code": {
+                                "type": "string"
+                            },
+                            "description": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "bankAccount": {
+                        "type": "object",
+                        "properties": {
+                            "value": {
+                                "type": "object",
+                                "properties": {
+                                    "bankId": {
+                                        "type": "string"
+                                    },
+                                    "bankName": {
+                                        "type": "string"
+                                    },
+                                    "bankBic": {
+                                        "type": "string"
+                                    },
+                                    "bankCorrespondentAccount": {
+                                        "type": "string"
+                                    },
+                                    "SWIFT": {
+                                        "type": "string"
+                                    },
+                                    "IBAN": {
+                                        "type": "string"
+                                    },
+                                    "foreignBank": {
+                                        "type": "boolean"
+                                    },
+                                    "currency": {
+                                        "type": "object",
+                                        "additionalProperties": false,
+                                        "properties": {
+                                            "currencyCode": {
+                                                "type": "string"
+                                            },
+                                            "currencyDesc": {
+                                                "type": "string"
+                                            },
+                                            "currencyNumericCode": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    },
+                                    "number": {
+                                        "type": "string"
+                                    },
+                                    "openingDate": {
+                                        "type": "string",
+                                        "aiFormat": "date",
+                                        "aiMeaning": "past"
+                                    },
+                                    "closingDate": {
+                                        "type": "string",
+                                        "aiFormat": "date",
+                                        "aiMeaning": "future"
+                                    },
+                                    "bankInn": {
+                                        "type": "string"
+                                    }
+                                }
+                            },
+                            "displayName": {
+                                "type": "string"
+                            }
+                        }
+                    }                  
+                }
+            }
+        },
+        "approvalConclusions": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "legalConclusion": {
+                    "type": "string"
+                },
+                "securityConclusion": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

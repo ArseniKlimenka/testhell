@@ -1,0 +1,448 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema",
+    "type": "object",
+    "properties": {
+        "productCode": {
+            "type": "string",
+            "mapping": {
+                "path": "#/properties/productCode"
+            }
+        },
+        "productDescription": {
+            "type": "string",
+            "mapping": {
+                "path": "#/properties/attributes/properties/productConfigurationData/properties/productDescription"
+            }
+        },
+        "issueDate": {
+            "type": "string",
+            "format": "date",
+            "mapping": {
+                "path": "#/properties/issueDate"
+            }
+        },
+        "startDate": {
+            "type": "string",
+            "format": "date",
+            "mapping": {
+                "path": "#/properties/startDate"
+            }
+        },
+        "endDate": {
+            "type": "string",
+            "format": "date",
+            "mapping": {
+                "path": "#/properties/endDate"
+            }
+        },
+        "parties": {
+            "type": "object",
+            "properties": {
+                "holder": {
+                    "type": "object",
+                    "properties": {
+                        "personId": {
+                            "type": "string"
+                        },
+                        "personCode": {
+                            "type": "string"
+                        },
+                        "partyType": {
+                            "type": "string"
+                        },
+                        "fullName": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "insuredPerson": {
+                    "type": "object",
+                    "properties": {
+                        "personId": {
+                            "type": "string"
+                        },
+                        "personCode": {
+                            "type": "string"
+                        },
+                        "partyType": {
+                            "type": "string"
+                        },
+                        "fullName": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "additionalAttributes": {
+            "type": "object"
+        },
+        "initiatorServiceProviderCode": {
+            "type": "string",
+            "mapping": {
+                "path": "#/properties/organisation/properties/salesInitial"
+            }
+        },
+        "initiatorName": {
+            "type": "string",
+            "mapping": {
+                "path": "#/properties/attributes/properties/initiatorName"
+            }
+        },
+        "initiatorOrganisationUnitName": {
+            "type": "string",
+            "mapping": {
+                "path": "#/properties/attributes/properties/initiatorOrganisationUnitName"
+            }
+        },
+        "partner": {
+            "type": "object",
+            "properties": {
+                "partnerCode": {
+                    "type": "string",
+                    "mapping": {
+                        "path": "#/properties/attributes/properties/partner/properties/partnerCode"
+                    }
+                },
+                "partnerDescription": {
+                    "type": "string",
+                    "mapping": {
+                        "path": "#/properties/attributes/properties/partner/properties/partnerDescription"
+                    }
+                },
+                "partnerShortDescription": {
+                    "type": "string",
+                    "mapping": {
+                        "path": "#/properties/attributes/properties/partner/properties/partnerShortDescription"
+                    }
+                },
+                "partnerBusinessCode": {
+                    "type": "string",
+                    "mapping": {
+                        "path": "#/properties/attributes/properties/partner/properties/partnerBusinessCode"
+                    }
+                }
+            }
+        },
+        "organisationUnitCode": {
+            "type": "string",
+            "mapping": {
+                "path": "#/properties/organisation/properties/organisationalUnit"
+            }
+        },
+        "currencyCode": {
+            "type": "string"
+        },
+        "paymentFrequency": {
+            "type": "string",
+            "mapping": {
+                "path": "#/properties/payment/properties/paymentFrequency"
+            }
+        },
+        "paymentFrequencyWithCode": {
+            "type": "object",
+            "properties": {
+                "paymentFrequencyCode": {
+                    "type": "string"
+                },
+                "paymentFrequencyDescription": {
+                    "type": "string"
+                }
+            }
+        },
+        "endowmentPaymentVariant": {
+            "type": "object",
+            "properties": {
+                "endowmentPaymentVariantCode": {
+                    "type": "string"
+                },
+                "endowmentPaymentVariantDescription": {
+                    "type": "string"
+                }
+            }
+        },
+        "amount": {
+            "type": "string",
+            "mapping": {
+                "path": "#/properties/attributes/properties/riskPremium"
+            }
+        },
+        "amountWithAllRisks": {
+            "type": "string",
+            "mapping": {
+                "path": "#/properties/attributes/properties/riskPremiumAll"
+            }
+        },
+        "items": {
+            "type": "array",
+            "mapping": {
+                "path": "#/properties/items"
+            },
+            "items": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "mapping": {
+                            "path": "#/properties/id"
+                        }
+                    },
+                    "description": {
+                        "type": "string",
+                        "mapping": {
+                            "path": "#/properties/description"
+                        }
+                    },
+                    "attributes": {
+                        "type": "object",
+                        "properties": {
+                            "currency": {
+                                "type": "string",
+                                "mapping": {
+                                    "path": "#/properties/attributes/properties/currency"
+                                }
+                            },
+                            "risks": {
+                                "type": "array",
+                                "mapping": {
+                                    "path": "#/properties/attributes/properties/risks"
+                                },
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "riskCode": {
+                                            "type": "string",
+                                            "mapping": {
+                                                "path": "#/properties/risk/properties/riskCode"
+                                            }
+                                        },
+                                        "riskShortDescription": {
+                                            "type": "string",
+                                            "mapping": {
+                                                "path": "#/properties/risk/properties/riskShortDescription"
+                                            }
+                                        },
+                                        "riskFullDescription": {
+                                            "type": "string",
+                                            "mapping": {
+                                                "path": "#/properties/risk/properties/riskFullDescription"
+                                            }
+                                        },
+                                        "riskInsuredSum": {
+                                            "type": "string",
+                                            "mapping": {
+                                                "path": "#/properties/riskInsuredSum"
+                                            }
+                                        },
+                                        "risksGroup": {
+                                            "type": "string",
+                                            "mapping": {
+                                                "path": "#/properties/risk/properties/risksGroup"
+                                            }
+                                        },
+                                        "riskPerson": {
+                                            "type": "string",
+                                            "mapping": {
+                                                "path": "#/properties/risk/properties/riskPerson"
+                                            }
+                                        },
+                                        "riskInsuredSumByPeriod": {
+                                            "type": "array",
+                                            "mapping": {
+                                                "path": "#/properties/riskInsuredSumByPeriod"
+                                            },
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "insuredSum": {
+                                                        "type": "string",
+                                                        "mapping": {
+                                                            "path": "#/properties/insuredSum"
+                                                        }
+                                                    },
+                                                    "startDate": {
+                                                        "type": "string",
+                                                        "format": "date",
+                                                        "mapping": {
+                                                            "path": "#/properties/periodStartDate"
+                                                        }
+                                                    },
+                                                    "endDate": {
+                                                        "type": "string",
+                                                        "format": "date",
+                                                        "mapping": {
+                                                            "path": "#/properties/periodEndDate"
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "isReinvest": {
+            "type": "string",
+            "mapping": {
+                "path": "#/properties/attributes/properties/isReinvest"
+            }
+        },
+        "issueFormCode": {
+            "type": "string",
+            "mapping": {
+                "path": "#/properties/attributes/properties/issueFormCode"
+            }
+        },
+        "creditProgram": {
+            "type": "object",
+            "properties": {
+                "creditProgramId": {
+                    "type": "string",
+                    "mapping": {
+                        "path": "#/properties/attributes/properties/creditProgramId"
+                    }
+                },
+                "externalContractId": {
+                    "type": "string",
+                    "mapping": {
+                        "path": "#/properties/attributes/properties/externalContractId"
+                    }
+                },
+                "percentRateImpact": {
+                    "type": "boolean",
+                    "mapping": {
+                        "path": "#/properties/attributes/properties/percentRateImpact"
+                    }
+                }
+            }
+        },
+        "insuranceRules": {
+            "type": "object",
+            "properties": {
+                "ruleCode": {
+                    "type": "string"
+                },
+                "ruleDescription": {
+                    "type": "string"
+                },
+                "ruleDate": {
+                    "type": "string",
+                    "format": "date"
+                }
+            }
+        },
+        "beneficiaries": {
+            "type": "object",
+            "properties": {
+                "beneficiaries": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "beneficiaryId": {
+                                "type": "string"
+                            },
+                            "partyFullName": {
+                                "type": "string"
+                            },
+                            "dateOfBirth": {
+                                "type": "string",
+                                "format": "date"
+                            },
+                            "share": {
+                                "type": "number"
+                            },
+                            "relationType": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                },
+                "isHeritors": {
+                    "type": "boolean"
+                },
+                "isNotHeritors": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "commission": {
+            "type": "object",
+            "properties": {
+                "agentAgreement": {
+                    "type": "object",
+                    "properties": {
+                        "externalNumber": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "productStrategyCode": {
+            "type": "string",
+            "mapping": {
+                "path": "#/properties/attributes/properties/productStrategyCode"
+            }
+        },
+        "productStrategyDescription": {
+            "type": "string"
+        },
+        "insuranceTerms": {
+            "type": "string"
+        },
+        "futureContractNumber": {
+            "type": "string"
+        },
+        "exchangeRate": {
+            "type": "number"
+        },
+        "isEvaluationContract": {
+            "type": "boolean",
+            "mapping": {
+                "path": "#/properties/attributes/properties/isEvaluationContract"
+            }
+        },
+        "cardType": {
+            "type": "string",
+            "mapping": {
+                "path": "#/properties/attributes/properties/productConfigurationData/properties/cardType"
+            }
+        },
+        "consent": {
+            "type": "object",
+            "properties": {
+                "consentToDataTransferingFNS": {
+                    "type": "boolean",
+                    "mapping": {
+                        "path": "#/properties/consent/properties/consentToDataTransferingFNS"
+                    }
+                }
+            }
+        }
+    },
+    "relatedEntities": {
+        "holderRef": {
+            "href": "api/party/public/parties/common-data/{id}",
+            "parameters": {
+                "id": "#/properties/parties/properties/holder/properties/personId"
+            }
+        },
+        "insuredPersonRef": {
+            "type": "array",
+            "href": "api/party/public/parties/common-data/{id}",
+            "mapping": {
+                "path": "#/properties/parties/properties/insuredPersons"
+            },
+            "items": {
+                "parameters": {
+                    "id": "#/properties/personId"
+                }
+            }
+        }
+    }
+}

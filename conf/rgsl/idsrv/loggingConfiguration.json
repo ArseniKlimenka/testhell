@@ -1,0 +1,56 @@
+﻿{
+    "NLog": {
+        "variables": {
+            "logRoot": "C:\\AdInsure\\Logs",
+            "maxSize": "104857600",
+            "maxFiles": "20"
+        },
+        "targets": {
+            "json": {
+                "type": "File",
+                "maxArchiveFiles": "${maxFiles}",
+                "archiveAboveSize": "${maxSize}",
+                "fileName": "${logRoot}/identityServer4.log",
+                "layout": {
+                    "type": "JsonLayout",
+                    "includeAllProperties": "true",
+                    "attributes": [
+                        {
+                            "name": "time",
+                            "layout": "${longdate}"
+                        },
+                        {
+                            "name": "level",
+                            "layout": "${level:uppercase=true}"
+                        },
+                        {
+                            "name": "message",
+                            "layout": "${message}"
+                        },
+                        {
+                            "name": "eventProperties",
+                            "encode": "false",
+                            "layout": {
+                                "type": "JsonLayout",
+                                "includeAllProperties": "true",
+                                "maxRecursionLimit": "8"
+                            }
+                        },
+                        {
+                            "name": "exception",
+                            "layout": "${onexception:${exception:format=tostring}}"
+                        }
+                    ]
+                }
+            }
+        },
+        "rules": [
+            {
+                "logger": "*",
+                "minLevel": "Error",
+                "writeTo": "json",
+                "final": "true"
+            }
+        ]
+    }
+}

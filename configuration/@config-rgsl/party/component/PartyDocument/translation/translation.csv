@@ -1,0 +1,45 @@
+ConfigurationType	ConfigurationName	ItemType	TranslationKey	Expression	Translation_ru-RU	Translation_en-US
+DataSchema	PartyDocument	field-title	docType	docType	Тип	docType
+DataSchema	PartyDocument	field-title	docSeries	docSeries	Серия	docSeries
+DataSchema	PartyDocument	field-title	docNumber	docNumber	Номер	docNumber
+DataSchema	PartyDocument	field-title	issueDate	issueDate	Дата выдачи	issueDate
+DataSchema	PartyDocument	field-title	expireDate	expireDate	Дата окончания срока действия	expireDate
+DataSchema	PartyDocument	field-title	issuerName	issuerName	Кем выдан	issuerName
+DataSchema	PartyDocument	field-title	issuerCode	issuerCode	Код подразделения	issuerCode
+UiSchema	PartyDocument	ui-label	docType	docType	Тип	docType
+UiSchema	PartyDocument	ui-label	docSeries	docSeries	Серия	docSeries
+UiSchema	PartyDocument	ui-label	docNumber	docNumber	Номер	docNumber
+UiSchema	PartyDocument	ui-label	issueDate	issueDate	Дата выдачи	issueDate
+UiSchema	PartyDocument	ui-label	expireDate	expireDate	Дата окончания срока действия	expireDate
+UiSchema	PartyDocument	ui-label	issuerName	issuerName	Кем выдан	issuerName
+UiSchema	PartyDocument	ui-label	issuerCode	issuerCode	Код подразделения	issuerCode
+Rule	PartyDocumentValidatePartyDocument	rule	validation@issueDateMoreExpireDate	validatePartyDocument	E: Должна быть меньше даты окончания срока действия	E: validation@issueDateMoreExpireDate
+Rule	PartyDocumentValidatePartyDocument	rule	validation@expireDateLessIssueDate	validatePartyDocument	E: Должна быть больше даты выдачи	E: validation@expireDateLessIssueDate
+Rule	PartyDocumentValidatePartyDocument	rule	validation@docSeriesFormatGeneral	validatePartyDocument	E: Формат: 1-10 символов	E: validation@docSeriesFormatGeneral
+Rule	PartyDocumentValidatePartyDocument	rule	validation@docNumberFormatGeneral	validatePartyDocument	E: Формат: 1-25 символов	E: validation@docNumberFormatGeneral
+Rule	PartyDocumentValidatePartyDocument	rule	validation@docSeriesFormatRefugeeCertificate	validatePartyDocument	E: Формат: ББ-999	E: validation@docSeriesFormatRefugeeCertificate
+Rule	PartyDocumentValidatePartyDocument	rule	validation@docNumberFormatRefugeeCertificate	validatePartyDocument	E: Формат: 9999999	E: validation@docNumberFormatRefugeeCertificate
+Rule	PartyDocumentValidatePartyDocument	rule	validation@docSeriesFormatPassport	validatePartyDocument	E: Формат: 9999	E: validation@docSeriesFormatPassport
+Rule	PartyDocumentValidatePartyDocument	rule	validation@docNumberFormatPassport	validatePartyDocument	E: Формат: 999999	E: validation@docNumberFormatPassport
+Rule	PartyDocumentValidatePartyDocument	rule	validation@issuerNameRequired	validatePartyDocument	E: Необходимо заполнить Кем выдан.	E: validation@issuerNameRequired
+Rule	PartyDocumentValidatePartyDocument	rule	validation@issuerCodeFormatPassport	validatePartyDocument	E: Формат: 999-999	E: validation@issuerCodeFormatPassport
+Rule	PartyDocumentValidatePartyDocument	rule	validation@docSeriesFormatMilitaryID	validatePartyDocument	E: Формат: ББ	E: validation@docSeriesFormatMilitaryID
+Rule	PartyDocumentValidatePartyDocument	rule	validation@docNumberFormatMilitaryID	validatePartyDocument	E: Формат: 9999999	E: validation@docNumberFormatMilitaryID
+Rule	PartyDocumentValidatePartyDocument	rule	validation@docSeriesFormatForeignTravelPassport	validatePartyDocument	E: Формат: 99	E: validation@docSeriesFormatForeignTravelPassport
+Rule	PartyDocumentValidatePartyDocument	rule	validation@docNumberFormatForeignTravelPassport	validatePartyDocument	E: Формат: 9999999	E: validation@docNumberFormatForeignTravelPassport
+Rule	PartyDocumentValidatePartyDocument	rule	validation@docSeriesFormatDriverID	validatePartyDocument	E: Формат: 9999	E: validation@docSeriesFormatDriverID
+Rule	PartyDocumentValidatePartyDocument	rule	validation@docNumberFormatDriverID	validatePartyDocument	E: Формат: 9999999	E: validation@docNumberFormatDriverID
+Rule	PartyDocumentValidatePartyDocument	rule	validation@docSeriesFormatBirthCertificate	validatePartyDocument	E: Формат: R-ББ	E: validation@docSeriesFormatBirthCertificate
+Rule	PartyDocumentValidatePartyDocument	rule	validation@docNumberFormatBirthCertificate	validatePartyDocument	E: Формат: 999999	E: validation@docNumberFormatBirthCertificate
+Rule	PartyDocumentValidatePartyDocument	rule	validation@docTypeRequired	validatePartyDocument	E: Необходимо заполнить Тип.	E: validation@docTypeRequired
+Rule	PartyDocumentValidatePartyDocument	rule	validation@issueDateRequired	validatePartyDocument	E: Необходимо заполнить Дата выдачи.	E: validation@issueDateRequired
+DataSchema	PartyDocument	field-title	otherDocTypeDesc	otherDocTypeDesc	Наименование иного вида документа	otherDocTypeDesc
+UiSchema	PartyDocument	ui-label	otherDocTypeDesc	otherDocTypeDesc	Наименование иного вида документа	otherDocTypeDesc
+Rule	PartyDocumentValidatePartyDocument	rule	validation@otherDocTypeDescIsRequired	validatePartyDocument	E: Необходимо заполнить Наименование иного вида документа.	E: validation@otherDocTypeDescIsRequired
+Rule	PartyDocumentValidatePartyDocument	rule	validation@issuerNameShouldBeInCyrillic	validatePartyDocument	E: Должно состоять только из кириллицы	E: validation@issuerNameShouldBeInCyrillic
+Rule	PartyDocumentValidatePartyDocument	rule	validation@issueDateMoreDateOfBirth	validatePartyDocument	E: Дата выдачи документа не может быть ранее даты рождения	E: validation@issueDateMoreDateOfBirth
+Rule	PartyDocumentValidatePartyDocument	rule	validation@issueDateInFuture	validatePartyDocument	E: Дата выдачи документа не может быть позже текущей даты	E: validation@issueDateInFuture
+Rule	PartyDocumentValidatePartyDocument	rule	validation@invalidAgePassport	validatePartyDocument	E: Паспорт является не действительным, по достижении 20 или 45 лет	E: validation@invalidAgePassport
+Rule	PartyDocumentValidatePartyDocument	rule	validation@invalidAgePassport14	validatePartyDocument	E: Дата выдачи паспорта не может быть ранее достижения 14 лет	E: validation@invalidAgePassport14
+Rule	PartyDocumentValidatePartyDocument	rule	validation@invalidAgePassport20	validatePartyDocument	E: Паспорт просрочен по достижении 20 лет	E: validation@invalidAgePassport20
+Rule	PartyDocumentValidatePartyDocument	rule	validation@invalidAgePassport45	validatePartyDocument	E: Паспорт просрочен по достижении 45 лет	E: validation@invalidAgePassport45

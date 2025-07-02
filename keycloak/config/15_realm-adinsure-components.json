@@ -1,0 +1,45 @@
+{
+    "id": "AdInsure",
+    "realm": "adinsure",
+    "components": {
+        "org.keycloak.userprofile.UserProfileProvider": [
+            {
+                "id": "e518c232-2573-4ff6-8a9a-8e7bd299cb6b",
+                "providerId": "declarative-user-profile",
+                "subComponents": {},
+                "config": {
+                    "kc.user.profile.config": [
+                        "{\"attributes\":[{\"name\":\"username\",\"displayName\":\"${username}\",\"validations\":{\"length\":{\"min\":3,\"max\":255},\"username-prohibited-characters\":{},\"up-username-not-idn-homograph\":{}},\"annotations\":{},\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\"]},\"multivalued\":false},{\"name\":\"email\",\"displayName\":\"${email}\",\"validations\":{\"email\":{},\"length\":{\"max\":255}},\"annotations\":{},\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\"]},\"multivalued\":false},{\"name\":\"firstName\",\"displayName\":\"${firstName}\",\"validations\":{\"length\":{\"max\":255},\"person-name-prohibited-characters\":{}},\"annotations\":{},\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\"]},\"multivalued\":false},{\"name\":\"lastName\",\"displayName\":\"${lastName}\",\"validations\":{\"length\":{\"max\":255},\"person-name-prohibited-characters\":{}},\"annotations\":{},\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\"]},\"multivalued\":false},{\"name\":\"PartyCode\",\"displayName\":\"${partyCode}\",\"validations\":{},\"annotations\":{},\"required\":{\"roles\":[\"user\"]},\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\"]},\"multivalued\":false},{\"name\":\"ExpireDate\",\"displayName\":\"${expireDate}\",\"validations\":{},\"annotations\":{\"inputType\":\"html5-date\"},\"required\":{\"roles\":[\"admin\",\"user\"]},\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\"]},\"multivalued\":false},{\"name\":\"AccountType\",\"displayName\":\"${accountType}\",\"validations\":{\"options\":{\"options\":[\"Standard\",\"Privileged\",\"Technology\"]}},\"annotations\":{\"inputType\":\"select\"},\"required\":{\"roles\":[\"admin\",\"user\"]},\"permissions\":{\"view\":[\"admin\",\"user\"],\"edit\":[\"admin\"]},\"multivalued\":false}],\"groups\":[{\"name\":\"user-metadata\",\"displayHeader\":\"User metadata\",\"displayDescription\":\"Attributes, which refer to user metadata\"}]}"
+                    ]
+                }
+            }
+        ],
+        "org.keycloak.storage.UserStorageProvider": [
+            {
+                "id": "c97980e9-0c85-4e25-9863-bbf2c90b4d5e",
+                "name": "skss-scim2-storage",
+                "providerId": "skss-scim2-storage",
+                "config": {
+                    "endPoint": [
+                        "$(env:SCIM_BASE_URL:-http://server:60000)/scim"
+                    ],
+                    "password": [
+                        "$(env:KEYCLOAK_ADINSURE_SCIM_INTEGRATION_PASSWORD)"
+                    ],
+                    "clientId": [
+                        "scim"
+                    ],
+                    "authorityUrl": [
+                        "$(env:ADINSURE_appSettings__AdInsure__Settings__OAuthIdentity__IdentityEndpointUrl:-http://keycloak:8080/realms/adinsure)"
+                    ],
+                    "clientSecret": [
+                        "$(env:KEYCLOAK_DEFAULT_SECRET)"
+                    ],
+                    "username": [
+                        "adinsure-scim-integration"
+                    ]
+                }
+            }
+        ]
+    }
+}

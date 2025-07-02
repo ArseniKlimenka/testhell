@@ -1,0 +1,58 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+        "criteria": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "rgslGuid": {
+                    "type": "string"
+                },
+                "registryReferenceNo": {
+                    "type": "string"
+                },
+                "bankStatementItemId": {
+                    "type": "integer"
+                },
+                "bankStatementItemIds": {
+                    "type": "array",
+                    "items": {
+                        "type": "integer"
+                    }
+                },
+                "skipLocked": {
+                    "type": "boolean"
+                },
+                "paymentStatusIds": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "component:PaymentStatusComponent"
+                    }
+                },
+                "direction": {
+                    "$ref": "component:DirectionComponent"
+                },
+                "transactionDateFrom": {
+                    "type": "string",
+                    "aiFormat": "date"
+                },
+                "amountFrom": {
+                    "type": "number"
+                },
+                "skipReloading": {
+                    "type": "boolean"
+                },
+                "createdDateFrom": {
+                    "type": "string",
+                    "aiFormat": "date-time"
+                },
+                "createdDateTo": {
+                    "type": "string",
+                    "aiFormat": "date-time"
+                }
+            }
+        }
+    }
+}

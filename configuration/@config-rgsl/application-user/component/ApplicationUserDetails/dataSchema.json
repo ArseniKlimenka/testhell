@@ -1,0 +1,110 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "Application user details",
+    "description": "A schema that describes application user details.",
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+        "username",
+        "loginType",
+        "claims"
+    ],
+    "aiValidation": {
+        "rule": "validateApplicationUserView"
+    },
+    "properties": {
+        "allowEdit": {
+            "type": "boolean"
+        },
+        "isNewUser": {
+            "type": "boolean",
+            "description": "Used for validations to know when we are creating new user"
+        },
+        "username": {
+            "type": "string",
+            "description": "Username.",
+            "aiTitle": "Username"
+        },
+        "password": {
+            "type": "string",
+            "description": "User password (only for username/password login type",
+            "aiValidation": {
+                "rule": "passwordComplexity"
+            }
+        },
+        "confirmPassword": {
+            "type": "string",
+            "description": "password confirmation",
+            "aiValidation": {
+                "rule": "passwordConfirmation"
+            }
+        },
+        "loginType": {
+            "type": "string",
+            "enum": [
+                "UsernamePassword",
+                "WindowsAuthentication",
+                "AzureADAuthentication",
+                "SCIM"
+            ],
+            "ai-enum-descriptions": {
+                "UsernamePassword": "applicationUserLoginType@UsernamePassword",
+                "WindowsAuthentication": "applicationUserLoginType@WindowsAuthentication",
+                "AzureADAuthentication": "applicationUserLoginType@AzureADAuthentication",
+                "SCIM": "applicationUserLoginType@SCIM"
+            },
+            "description": "Login type (Username/password, ActiveDirectory or Azure AD user)",
+            "aiTitle": "Login Type"
+        },
+        "externalId": {
+            "type": "string",
+            "description": "External system ID."
+        },
+        "editUrl": {
+            "type": "string",
+            "description": "Edit page URL."
+        },
+        "claims": {
+            "type": "object",
+            "additionalProperties": true,
+            "required": [
+                "PartyCode",
+                "Email",
+                "DisplayName",
+                "ExpireDate",
+                "AccountType"
+            ],
+            "properties": {
+                "PartyCode": {
+                    "type": "string",
+                    "description": "Party code."
+                },
+                "IsUserActive": {
+                    "type": "boolean",
+                    "description": "Determines whether the user is active or not."
+                },
+                "Email": {
+                    "type": "string",
+                    "description": "The client's email.",
+                    "aiValidation": {
+                        "rule": "emailValidation"
+                    },
+                    "aiTitle": "Email"
+                },
+                "DisplayName": {
+                    "type": "string",
+                    "description": "Display name."
+                },
+                "AccountType": {
+                    "$ref": "component:AccountType"
+                },
+                "ExpireDate": {
+                    "type": "string",
+                    "aiFormat": "date",
+                    "description": "Expire date",
+                    "aiTitle": "ExpireDate"
+                }
+            }
+        }
+    }
+}

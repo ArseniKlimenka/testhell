@@ -1,0 +1,6 @@
+UPDATE PAS.CONTRACT
+SET BODY = JSON_MODIFY(JSON_MODIFY(BODY, '$.finKnowledgeQuestionnaire2023', NULL), '$.finKnowledgeQuestionnaire', NULL)
+FROM PAS.CONTRACT c 
+WHERE (JSON_QUERY(BODY, '$.finKnowledgeQuestionnaire') IS NOT NULL OR JSON_QUERY(BODY, '$.finKnowledgeQuestionnaire2023') IS NOT NULL)
+--AND CONTRACT_NUMBER = 'CONTRACT_NUMBER'
+--AND SYS_CREATED_ON >= 'SYS_CREATED_ON'

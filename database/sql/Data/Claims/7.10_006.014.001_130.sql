@@ -1,0 +1,5 @@
+INSERT INTO BFX_IMPL.BENEFICIARY_REASON (CODE, DESCRIPTION) VALUES ('006', N'Страхователь')
+go
+
+INSERT INTO BFX_IMPL.BENEFICIARY_REASON (CODE, DESCRIPTION) VALUES ('007', N'Представитель страхователя (по доверенности)')
+go

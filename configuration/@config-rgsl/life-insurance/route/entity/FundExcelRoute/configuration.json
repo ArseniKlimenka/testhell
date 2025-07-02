@@ -1,0 +1,29 @@
+{
+    "entityType": "ImportDocument",
+    "condition": {
+        "events": [
+            "StatusChanged"
+        ],
+        "configuration": {
+            "names": [
+                "FundImport"
+            ],
+            "dimensions": {}
+        },
+        "transitions": [
+            "StartImporting"
+        ]
+    },
+    "sinks": [
+        {
+            "name": "FundExcelImport",
+            "etlService": {
+                "configuration": {
+                    "name": "FundImportEtlService",
+                    "version": "1"
+                }
+            }
+        }
+    ],
+    "version": "1"
+}

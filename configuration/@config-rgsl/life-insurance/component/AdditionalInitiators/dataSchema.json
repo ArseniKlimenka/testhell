@@ -1,0 +1,37 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "additionalInitiators",
+    "type": "object",
+    "additionalProperties": true,
+    "properties": {
+        "additionalInitiatorsLines": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                    "agentShare": {
+                        "type": "integer",
+                        "enum": [
+                            0, 25, 50, 75, 100
+                        ]
+                    },
+                    "agentType": {
+                        "type": "string",
+                        "enum": [
+                            "Main", "Split", "Mage"
+                        ]
+                    },
+                    "agent": {
+                        "type": "object",
+                        "properties": {
+                            "partyFullName":{
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

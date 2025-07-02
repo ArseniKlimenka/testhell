@@ -1,0 +1,49 @@
+{
+    "entityType": "UniversalDocument",
+    "dimensions": {
+        "universalDocumentType": "CollectiveLifeInsurancePolicyImportTemplate"
+    },
+    "version": "1",
+    "hideFromDashboard": false,
+    "states": [
+        {
+            "name": "Draft",
+            "actors": [
+                {
+                    "actor": "Administrator",
+                    "uiSchema": "UiSchemaImportTemplate",
+                    "transitions": [
+                        "Draft_to_Confirmed"
+                    ],
+                    "operations": [
+                        "Save"
+                    ],
+                    "relations": []
+                }
+            ]
+        },
+        {
+            "name": "Confirmed",
+            "actors": [
+                {
+                    "actor": "Administrator",
+                    "uiSchema": "UiSchemaImportTemplate",
+                    "transitions": [],
+                    "operations": [],
+                    "relations": []
+                }
+            ]
+        }
+    ],
+    "transitions":                         {
+        "Draft_to_Confirmed": {
+            "transitionEffects": {
+                "enrich": [
+                    "[CollectiveLifeInsurancePolicyReturnConfirmedData]"
+                ]
+            }
+        }
+    },
+    "components": [],
+    "validFrom": "2000-01-01"
+}

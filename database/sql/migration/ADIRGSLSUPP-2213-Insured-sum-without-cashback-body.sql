@@ -1,0 +1,324 @@
+CREATE TABLE #TempUseCashback
+(
+  PRODUCT_CODE nvarchar(100),
+  RISK_CODE nvarchar(100)
+)
+
+INSERT INTO #TempUseCashback (PRODUCT_CODE, RISK_CODE)
+VALUES
+-- BeMillionaire (beMillionaireSumInsuredConfig.xlsx, risk with useCashBack == true)
+('EBMBFKO', 'E36404'),
+('EBMZENIT', 'E36404'),
+('EBMAKCEPT', 'E36404'),
+('EBMOAS', 'E36404'),
+('EBMAKBARS', 'E36404'),
+('EBMBFKO', 'DLP36404'),
+('EBMZENIT', 'DLP36404'),
+('EBMAKCEPT', 'DLP36404'),
+('EBMOAS', 'DLP36404'),
+('EBMAKBARS', 'DLP36404'),
+('EBMBFKO', 'DLPVV6536404'),
+('EBMZENIT', 'DLPVV6536404'),
+('EBMAKCEPT', 'DLPVV6536404'),
+('EBMOAS', 'DLPVV6536404'),
+('EBMAKBARS', 'DLPVV6536404'),
+('EBMGBFKO', 'E36404'),
+('EBMGMINBANK', 'E36404'),
+('EBMOAS2', 'E36404'),
+('EBMG', 'E36404'),
+('EBMGP', 'E36404'),
+('EBMGSMP', 'E36404'),
+('EBMGREINVEST', 'E36404'),
+('EBMGZENIT', 'E36404'),
+('EBMOPTIMAOAS2', 'E36404'),
+('EBMGVTB', 'E36404'),
+('EBMGBESTVTB', 'E36404'),
+('EBMGRETVTB', 'E36404'),
+('EBMMGREINVEST', 'E36404'),
+('EBMGRETVTB', 'E36404'),
+('EBMGLIFEINVEST', 'E36404'),
+('EBMGPB', 'E36404'),
+('EBMGVVTB', 'E36404'),
+('EBMIBFKO', 'IE36904'),
+('EBMPYBFKO', 'E36404'),
+('EBMPFBFKO', 'E36404'),
+('EBMGN', 'E36404'),
+-- CareAboutTheFuture (all main risks except period sum)
+-- SELECT DISTINCT RISK_CODE FROM BFX_IMPL.RISK_PRODUCT_RELATION rpr
+-- JOIN BFX_IMPL.RISKS r ON r.CODE = rpr.RISK_CODE
+-- WHERE PRODUCT_CODE IN ('ECATFPVTB', 'ECATFVVTB') AND (PAYMENT_FORM != 'SurrenderValues' AND PAYMENT_FORM != 'WOP')
+('ECATFPVTB', 'DLPDPE36404'),
+('ECATFPVTB', 'E36404'),
+('ECATFVVTB', 'DLPDPE36404'),
+('ECATFVVTB', 'E36404')
+
+
+CREATE TABLE #TempPremiumCoeffTable
+(
+  PRODUCT_CODE nvarchar(100),
+  ISSUE_DATE_FROM date,
+  ISSUE_DATE_TO date,
+  INSURANCE_TERMS nvarchar(100),
+  CASH_BACK_COEFF decimal(18, 2),
+)
+
+INSERT INTO #TempPremiumCoeffTable (PRODUCT_CODE, ISSUE_DATE_FROM, ISSUE_DATE_TO, INSURANCE_TERMS, CASH_BACK_COEFF)
+VALUES
+('EBMBFKO', '2022-07-11', '2022-07-31', '5', 1.2123),
+('EBMBFKO', '2022-08-01', '2022-11-14', '5', 1.2123),
+('EBMBFKO', '2022-11-15', '2022-11-15', '5', 1.2123),
+('EBMZENIT', '2022-07-15', '2022-08-31', '5', 1.2123),
+('EBMZENIT', '2022-09-01', '2022-12-31', '5', 1.2123),
+('EBMZENIT', '2023-01-01', '2023-03-31', '5', 1.2123),
+('EBMZENIT', '2023-04-01', '2023-07-24', '5', 1.2123),
+('EBMAKCEPT', '2022-08-25', '2022-08-31', '5', 1.2123),
+('EBMAKCEPT', '2022-09-01', '2022-12-31', '5', 1.2123),
+('EBMAKCEPT', '2023-01-01', '2023-03-31', '5', 1.2123),
+('EBMAKCEPT', '2023-04-01', '2023-07-31', '5', 1.2123),
+('EBMOAS', '2022-08-01', '2022-12-31', '5', 1.2123),
+('EBMOAS', '2023-01-01', '2023-01-23', '5', 1.2123),
+('EBMAKBARS', '2022-08-01', '2022-08-31', '5', 1.2123),
+('EBMAKBARS', '2022-09-01', '2022-12-31', '5', 1.2123),
+('EBMAKBARS', '2023-01-01', '2023-03-31', '5', 1.2123),
+('EBMGBFKO', '2022-11-01', '2023-01-26', '5', 1.255),
+('EBMPYBFKO', '2022-11-22', '2023-01-26', '5', 1.05),
+('EBMIBFKO', '2022-11-01', '2023-01-26', '5', 1.12),
+('EBMPFBFKO', '2022-10-31', '2023-01-26', '5', 1.1),
+('EBMGMINBANK', '2022-12-14', '2023-03-31', '5', 1.235),
+('EBMOAS2', '2023-01-24', '2023-01-26', '5', 1.23),
+('EBMGBFKO', '2023-01-27', '2023-03-26', '5', 1.255),
+('EBMGBFKO', '2023-03-27', '2023-03-31', '5', 1.255),
+('EBMGBFKO', '2023-04-01', '2023-05-09', '5', 1.255),
+('EBMGBFKO', '2023-05-10', '2023-08-27', '5', 1.255),
+('EBMGBFKO', '2023-08-28', '2023-11-13', '5', 1.3),
+('EBMGBFKO', '2023-11-14', '2024-01-19', '5', 1.345),
+('EBMGBFKO', '2024-01-20', '2024-02-09', '5', 1.3),
+('EBMGBFKO', '2024-02-10', '2024-03-31', '5', 1.3),
+('EBMPYBFKO', '2023-01-27', '2023-03-14', '5', 1.05),
+('EBMIBFKO', '2023-01-27', '2023-03-26', '5', 1.12),
+('EBMIBFKO', '2023-03-27', '2024-02-09', '5', 1.12),
+('EBMIBFKO', '2024-02-10', '2024-03-31', '5', 1.12),
+('EBMPFBFKO', '2023-01-27', '2023-03-14', '5', 1.1),
+('EBMOAS2', '2023-01-27', '2023-03-31', '5', 1.23),
+('EBMOAS2', '2023-04-01', '2023-04-04', '5', 1.23),
+('EBMOAS2', '2023-04-05', '2023-08-27', '5', 1.255),
+('EBMOAS2', '2023-08-28', '2023-11-13', '5', 1.3),
+('EBMOAS2', '2023-11-14', '2024-01-14', '5', 1.345),
+('EBMOAS2', '2024-01-15', '2024-02-09', '5', 1.3),
+('EBMOAS2', '2024-02-10', '2024-07-03', '5', 1.3),
+('EBMOAS2', '2024-07-04', '2099-12-31', '5', 1.38),
+('EBMG', '2023-02-16', '2023-03-31', '5', 1.235),
+('EBMG', '2023-04-01', '2023-07-31', '5', 1.235),
+('EBMGP', '2023-02-16', '2023-03-31', '5', 1.235),
+('EBMGP', '2023-04-01', '2023-07-31', '5', 1.235),
+('EBMGP', '2023-08-01', '2023-08-08', '5', 1.235),
+('EBMGP', '2023-08-09', '2023-08-29', '5', 1.26),
+('EBMGP', '2023-08-30', '2023-11-09', '5', 1.3),
+('EBMGP', '2023-11-10', '2024-01-14', '5', 1.345),
+('EBMGP', '2024-01-15', '2024-06-30', '5', 1.35),
+('EBMGP', '2024-07-01', '2099-12-31', '5', 1.38),
+('EBMGSMP', '2023-05-05', '2023-07-31', '5', 1.235),
+('EBMGREINVEST', '2023-06-22', '2023-07-31', '5', 1.235),
+('EBMGZENIT', '2023-07-11', '2023-08-27', '5', 1.2123),
+('EBMGZENIT', '2023-08-28', '2023-11-13', '5', 1.25),
+('EBMGZENIT', '2023-11-14', '2024-01-15', '5', 1.3),
+('EBMGZENIT', '2024-01-16', '2024-06-30', '5', 1.255),
+('EBMGZENIT', '2024-07-01', '2099-12-31', '5', 1.30),
+('EBMOPTIMAOAS2', '2023-07-20', '2099-12-31', '5', 1.225),
+('EBMAKCEPT', '2023-08-01', '2023-11-06', '5', 1.2123),
+('EBMAKCEPT', '2023-11-07', '2099-12-31', '5', 1.25),
+('EBMG', '2023-08-01', '2023-08-08', '5', 1.235),
+('EBMG', '2023-08-09', '2023-08-29', '5', 1.26),
+('EBMG', '2023-08-30', '2023-11-09', '5', 1.3),
+('EBMG', '2023-11-10', '2024-01-14', '5', 1.345),
+('EBMG', '2024-01-15', '2024-06-30', '5', 1.35),
+('EBMG', '2024-07-01', '2099-12-31', '5', 1.38),
+('EBMGSMP', '2023-08-01', '2023-08-29', '5', 1.235),
+('EBMGSMP', '2023-08-30', '2023-11-13', '5', 1.3),
+('EBMGSMP', '2023-11-14', '2024-03-05', '5', 1.345),
+('EBMGREINVEST', '2023-08-01', '2023-08-27', '5', 1.235),
+('EBMGREINVEST', '2023-08-28', '2023-11-13', '5', 1.255),
+('EBMGREINVEST', '2023-11-14', '2024-01-14', '5', 1.3),
+('EBMGREINVEST', '2024-01-15', '2024-04-23', '5', 1.255),
+('EBMGREINVEST', '2024-04-24', '2099-12-31', '5', 1.3),
+('EBMGVTB', '2023-10-20', '2023-11-13', '5', 1.3),
+('EBMGVTB', '2023-11-14', '2024-01-14', '5', 1.345),
+('EBMGVTB', '2024-01-15', '2024-01-24', '5', 1.3),
+('EBMGVTB', '2024-01-25', '2024-02-09', '5', 1.3),
+('EBMGVTB', '2024-02-10', '2024-05-14', '5', 1.3),
+('EBMGVTB', '2024-05-15', '2024-06-12', '5', 1.31),
+('EBMGVTB', '2024-06-13', '2099-12-31', '5', 1.31),
+('EBMGVVTB', '2023-11-07', '2024-01-14', '5', 1.345),
+('EBMGVVTB', '2024-01-15', '2024-02-09', '5', 1.3),
+('EBMGVVTB', '2024-02-10', '2024-05-14', '5', 1.3),
+('EBMGVVTB', '2024-05-15', '2024-06-12', '5', 1.32),
+('EBMGVVTB', '2024-06-13', '2099-12-31', '5', 1.32),
+('EBMGBESTVTB', '2023-12-22', '2024-02-09', '5', 1.39),
+('EBMGBESTVTB', '2024-02-10', '2099-12-31', '5', 1.39),
+('ECATFPVTB', '2024-02-01', '2099-12-31', '5', 1.15),
+('ECATFPVTB', '2024-02-01', '2099-12-31', '6', 1.18),
+('ECATFPVTB', '2024-02-01', '2099-12-31', '7', 1.21),
+('ECATFPVTB', '2024-02-01', '2099-12-31', '8', 1.28),
+('ECATFPVTB', '2024-02-01', '2099-12-31', '9', 1.36),
+('ECATFPVTB', '2024-02-01', '2099-12-31', '10', 1.40),
+('ECATFVVTB', '2024-02-01', '2099-12-31', '5', 1.15),
+('ECATFVVTB', '2024-02-01', '2099-12-31', '6', 1.18),
+('ECATFVVTB', '2024-02-01', '2099-12-31', '7', 1.21),
+('ECATFVVTB', '2024-02-01', '2099-12-31', '8', 1.28),
+('ECATFVVTB', '2024-02-01', '2099-12-31', '9', 1.36),
+('ECATFVVTB', '2024-02-01', '2099-12-31', '10', 1.40),
+('EBMGRETVTB', '2024-03-11', '2099-12-31', '5', 1.30),
+('EBMMGREINVEST', '2024-01-15', '2099-12-31', '5', 1.30),
+('EBMGLIFEINVEST', '2024-01-15', '2099-12-31', '5', 1.3),
+('EBMGPB', '2024-05-29', '2099-12-31', '5', 1.12),
+('EBMGN', '2024-07-01', '2099-12-31', '5', 1.38)
+
+-- ############### Some declarations
+DECLARE @contractNumber NVARCHAR(20);
+DECLARE @risksCode NVARCHAR(50);
+DECLARE @riskInsuredSumWithoutCashBack DECIMAL(18, 2);
+DECLARE @riskIndex NVARCHAR(4);
+
+DECLARE cur_contract CURSOR LOCAL STATIC FORWARD_ONLY for
+
+	SELECT tempUpd.CONTRACT_NUMBER, tempUpd.RISK_CODE, tempUpd.riskInsuredSumWithoutCashBack, tempUpd.RISK_INDEX FROM (
+	SELECT c.CONTRACT_NUMBER, qrs.RISK_CODE, (
+		SELECT qrs.INSURED_SUM / tpc.CASH_BACK_COEFF FROM #TempPremiumCoeffTable tpc
+		WHERE (qs.ISSUE_DATE >= tpc.ISSUE_DATE_FROM AND qs.ISSUE_DATE <= tpc.ISSUE_DATE_TO)
+		AND tpc.PRODUCT_CODE = qs.PRODUCT_CODE AND tpc.INSURANCE_TERMS = qs.INSURANCE_TERMS
+		AND (SELECT COUNT(*) APPLY_CASHBACK FROM #TempUseCashback
+			WHERE PRODUCT_CODE = qs.PRODUCT_CODE AND RISK_CODE = qrs.RISK_CODE) > 0
+		AND EXISTS (
+		SELECT 1 FROM OPENJSON(BODY, '$.risks') WITH (
+			riskCode NVARCHAR(50) '$.risk.riskCode'
+		) AS risks WHERE riskCode = qrs.RISK_CODE)
+	) riskInsuredSumWithoutCashBack,
+	(SELECT [key] AS Index_Number
+		 FROM OPENJSON(BODY, '$.risks')
+		 WHERE JSON_VALUE([value], '$.risk.riskCode') = qrs.RISK_CODE) RISK_INDEX
+	FROM PAS.CONTRACT c
+	JOIN PAS_IMPL.POLICY_HUB qh ON qh.CONTRACT_NUMBER = c.CONTRACT_NUMBER
+	JOIN PAS_IMPL.POLICY_SAT_LATEST qs ON qs.POLICY_HKEY = qh.POLICY_HKEY
+	JOIN PAS_IMPL.POLICY_RISKS_SAT_LATEST qrs ON qrs.POLICY_RISKS_HKEY = qh.POLICY_HKEY
+	WHERE qs.PRODUCT_CODE IN (
+	-- CareAboutTheFuture
+	'ECATFPVTB',
+	'ECATFVVTB',
+	-- BeMillionaire
+	'EBMBFKO',
+	'EBMZENIT',
+	'EBMAKCEPT',
+	'EBMOAS',
+	'EBMAKBARS',
+	'EBMGBFKO',
+	'EBMPYBFKO',
+	'EBMIBFKO',
+	'EBMPFBFKO',
+	'EBMGMINBANK',
+	'EBMOAS2',
+	'EBMG',
+	'EBMGP',
+	'EBMGSMP',
+	'EBMGREINVEST',
+	'EBMGZENIT',
+	'EBMOPTIMAOAS2',
+	'EBMGVTB',
+	'EBMGVVTB',
+	'EBMGBESTVTB',
+	'EBMGRETVTB',
+	'EBMMGREINVEST',
+	'EBMGLIFEINVEST',
+	'EBMGPB',
+	-- TermLife
+	'TERMVVTB'
+	)
+	) tempUpd
+	WHERE tempUpd.riskInsuredSumWithoutCashBack IS NOT NULL
+
+	UNION
+
+	SELECT tempUpd.CONTRACT_NUMBER, tempUpd.RISK_CODE, tempUpd.riskInsuredSumWithoutCashBack, tempUpd.RISK_INDEX FROM (
+	SELECT c.CONTRACT_NUMBER, qrs.RISK_CODE, (
+		SELECT qrs.INSURED_SUM / tpc.CASH_BACK_COEFF FROM #TempPremiumCoeffTable tpc
+		WHERE (qs.ISSUE_DATE >= tpc.ISSUE_DATE_FROM AND qs.ISSUE_DATE <= tpc.ISSUE_DATE_TO)
+		AND tpc.PRODUCT_CODE = qs.PRODUCT_CODE AND tpc.INSURANCE_TERMS = qs.INSURANCE_TERMS
+		AND (SELECT COUNT(*) APPLY_CASHBACK FROM #TempUseCashback
+			WHERE PRODUCT_CODE = qs.PRODUCT_CODE AND RISK_CODE = qrs.RISK_CODE) > 0
+		AND EXISTS (
+		SELECT 1 FROM OPENJSON(BODY, '$.risks') WITH (
+			riskCode NVARCHAR(50) '$.risk.riskCode'
+		) AS risks WHERE riskCode = qrs.RISK_CODE)
+	) riskInsuredSumWithoutCashBack,
+	(SELECT [key] AS Index_Number
+		 FROM OPENJSON(BODY, '$.risks')
+		 WHERE JSON_VALUE([value], '$.risk.riskCode') = qrs.RISK_CODE) RISK_INDEX
+	FROM PAS.CONTRACT c
+	JOIN PAS_IMPL.QUOTE_HUB qh ON qh.CONTRACT_NUMBER = c.CONTRACT_NUMBER
+	JOIN PAS_IMPL.QUOTE_SAT_LATEST qs ON qs.QUOTE_HKEY = qh.QUOTE_HKEY
+	JOIN PAS_IMPL.QUOTE_RISKS_SAT_LATEST qrs ON qrs.QUOTE_RISKS_HKEY = qh.QUOTE_HKEY
+	WHERE qs.PRODUCT_CODE IN (
+	-- CareAboutTheFuture
+	'ECATFPVTB',
+	'ECATFVVTB',
+	-- BeMillionaire
+	'EBMBFKO',
+	'EBMZENIT',
+	'EBMAKCEPT',
+	'EBMOAS',
+	'EBMAKBARS',
+	'EBMGBFKO',
+	'EBMPYBFKO',
+	'EBMIBFKO',
+	'EBMPFBFKO',
+	'EBMGMINBANK',
+	'EBMOAS2',
+	'EBMG',
+	'EBMGP',
+	'EBMGSMP',
+	'EBMGREINVEST',
+	'EBMGZENIT',
+	'EBMOPTIMAOAS2',
+	'EBMGVTB',
+	'EBMGVVTB',
+	'EBMGBESTVTB',
+	'EBMGRETVTB',
+	'EBMMGREINVEST',
+	'EBMGLIFEINVEST',
+	'EBMGPB',
+	-- TermLife
+	'TERMVVTB'
+	)
+	) tempUpd
+	WHERE tempUpd.riskInsuredSumWithoutCashBack IS NOT NULL
+
+open cur_contract;
+
+-- ############### Update quote and policy body
+fetch next from cur_contract into @contractNumber, @risksCode, @riskInsuredSumWithoutCashBack, @riskIndex;
+while @@FETCH_STATUS = 0
+BEGIN
+
+	--PRINT @contractNumber + ' ' + @risksCode + ' ' + @riskIndex;
+
+	UPDATE PAS.CONTRACT
+	SET BODY = JSON_MODIFY(BODY, '$.risks[' + @riskIndex +']', JSON_MODIFY(JSON_QUERY(BODY, '$.risks[' + @riskIndex +']'), '$.riskInsuredSumWithoutCashBack', @riskInsuredSumWithoutCashBack))
+	--OUTPUT inserted.CONTRACT_NUMBER
+	WHERE CONTRACT_NUMBER = @contractNumber;
+
+	fetch next from cur_contract into @contractNumber, @risksCode, @riskInsuredSumWithoutCashBack, @riskIndex;
+END;
+close cur_contract;
+deallocate cur_contract;
+GO
+
+IF EXISTS (select * from tempdb.dbo.sysobjects o where o.xtype in ('U') and o.id = object_id(N'tempdb..#TempPremiumCoeffTable'))
+BEGIN
+  DROP TABLE #TempPremiumCoeffTable;
+END
+GO
+
+IF EXISTS (select * from tempdb.dbo.sysobjects o where o.xtype in ('U') and o.id = object_id(N'tempdb..#TempUseCashback'))
+BEGIN
+  DROP TABLE #TempUseCashback;
+END
+GO

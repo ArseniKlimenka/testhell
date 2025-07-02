@@ -1,0 +1,38 @@
+{
+    "targetDocument": "AccumulatedLifeInsuranceCancellation",
+    "targetDocumentVersion": "1",
+    "targetState": "OperationsApproval",
+    "relationType": "Child",
+    "actors": [
+        "Operations"
+    ],
+    "allowOnValidationErrors": {
+        "all": true
+    },
+    "requiredConfirmedConstraints": {
+        "all": false
+    },
+    "enrichment": {
+        "fields": [
+            "/taxDeductionItems[GetTaxDeductionYears]",
+            "/paymentAmendmentConditions[SetDefaultRecipientsBankAccounts]",
+            "/allocationsInfo",
+            "/paymentAmendmentConditions[SetPolicyParties]"
+        ]
+    },
+    "copyAttachments": {
+        "all": false
+    },
+    "exclusiveToAssignedUser": false,
+    "sourceDocument": "AccumulatedLifeInsurancePolicy",
+    "sourceDocumentVersion": "1",
+    "sourceDocumentStates": [
+        {
+            "name": "Activated",
+            "actors": [
+                "Operations",
+                "System"
+            ]
+        }
+    ]
+}

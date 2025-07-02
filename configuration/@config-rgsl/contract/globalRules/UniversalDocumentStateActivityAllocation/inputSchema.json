@@ -1,0 +1,47 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema",
+    "type": "object",
+    "properties": {
+        "body": {
+            "description": "Document's body.",
+            "type": "object",
+            "additionalProperties": true
+        },
+        "commonBody": {
+            "description": "Document's common body.",
+            "type": "object",
+            "additionalProperties": true
+        },
+        "documentConfiguration": {
+            "description": "Configuration properties of current document.",
+            "type": "object",
+            "properties": {
+                "codeName": {
+                    "description": "Code name of document configuration",
+                    "type": "string"
+                },
+                "version": {
+                    "description": "Version of document configuration",
+                    "type": "integer"
+                },
+                "dimensions": {
+                    "description": "Dimensions of document configuration",
+                    "type": "object",
+                    "additionalProperties": true
+                }
+            },
+            "additionalProperties": false
+        },
+        "stateCodeName": {
+            "description": "Code name of state.",
+            "type": "string"
+        }
+    },
+    "additionalProperties": false,
+    "required": [
+        "body",
+        "commonBody",
+        "documentConfiguration",
+        "stateCodeName"
+    ]
+}

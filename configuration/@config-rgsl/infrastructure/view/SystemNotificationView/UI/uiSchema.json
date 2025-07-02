@@ -1,0 +1,105 @@
+{
+    "id": "SystemNotificationViewUiSchema.json",
+    "type": "GridLayout",
+    "numberOfColumns": 4,
+    "formProperties": {
+        "events": {
+            "onLoad": "onLoad"
+        }
+    },
+    "elements": [
+        {
+            "type": "Component",
+            "name": "OverviewHeader",
+            "label": "SystemNotifications",
+            "value": {
+                "$ref": "#"
+            }
+        },
+        {
+            "type": "GroupSeparator"
+        },
+        {
+            "type": "DataGrid",
+            "labelType": "H1",
+            "header": {
+                "showReloadButton": true,
+                "showNumberOfResults": true
+            },
+            "mode": "DataSource",
+            "pagination": {
+                "mode": "Regular",
+                "pageSizes": [
+                    5,
+                    10,
+                    15
+                ]
+            },
+            "selection": {
+                "mode": "Single",
+                "enableRowSelection": false,
+                "showCheckBox": true
+            },
+            "height": "None",
+            "columns": [
+                {
+                    "sortable": false,
+                    "title": "Subject",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/subject"
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "Button",
+                    "label": "DeleteNotification",
+                    "onClick": "deleteNotificationButtonClick",
+                    "value": {
+                        "$ref": "#"
+                    },
+                    "width": 1
+                }
+            ]
+        },
+        {
+            "type": "GroupSeparator"
+        },
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "Input",
+                    "numberOfRows": 2,
+                    "label": "NotificationMessage",
+                    "enableResize": true,
+                    "value": {
+                        "$ref": "#/properties/request/properties/data/properties/notificationMessage"
+                    },
+                    "control": "TextArea",
+                    "width": 4
+                }
+            ]
+        },
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "Button",
+                    "label": "SendNotification",
+                    "onClick": "sendNotificationButtonClick",
+                    "value": {
+                        "$ref": "#"
+                    },
+                    "width": 1
+                }
+            ]
+        }
+    ]
+}

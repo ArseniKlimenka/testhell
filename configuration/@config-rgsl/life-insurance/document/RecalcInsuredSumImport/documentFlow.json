@@ -1,0 +1,60 @@
+{
+    "processType": "DataImport",
+    "initialState": "Draft",
+    "actors": [
+        "RecalcInsuredSum",
+        "System"
+    ],
+    "states": [
+        {
+            "name": "Draft",
+            "operations": [
+                "Save"
+            ]
+        },
+        {
+            "name": "Loading",
+            "operations": []
+        },
+        {
+            "name": "Loaded",
+            "operations": []
+        },
+        {
+            "name": "Importing",
+            "operations": []
+        },
+        {
+            "name": "Imported",
+            "operations": []
+        }
+    ],
+    "transitions": [
+        {
+            "name": "StartLoading",
+            "from": "Draft",
+            "to": "Loading"
+        },
+        {
+            "name": "FinishLoading",
+            "from": "Loading",
+            "to": "Loaded",
+            "broadcastEvent": {
+                "serverSideEvents": true
+            }
+        },
+        {
+            "name": "StartImporting",
+            "from": "Loaded",
+            "to": "Importing"
+        },
+        {
+            "name": "FinishImporting",
+            "from": "Importing",
+            "to": "Imported",
+            "broadcastEvent": {
+                "serverSideEvents": true
+            }
+        }
+    ]
+}

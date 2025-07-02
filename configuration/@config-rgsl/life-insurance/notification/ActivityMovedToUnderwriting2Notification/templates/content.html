@@ -1,0 +1,38 @@
+<html>
+
+<head></head>
+
+<body>
+    <div>
+        <p>Заявка переведена в группу Андеррайтинг 2 для дальнейшего согласования.</p>
+        <p>Заявка: <a href={{content.contractUri}}>{{content.contractNumber}}</a>.</p>
+        <p>Партнер: {{content.partnerShortDescription}}.</p>
+        <p>Страхователь: {{content.policyHolderFullName}}.</p>
+        <p>Наименование программы: {{content.productDescription}}.</p>
+        <p>Размер взноса: {{content.riskPremium}}.</p>
+        <p>Срок страхования: {{content.insuranceTerms}} лет.</p>
+        <p>Валюта: {{content.currencyDesc}}.</p>
+
+        <table align="left" width="1200" border="1" cellspacing="4" cellpadding="4"
+            style="border-collapse: collapse; border:1px solid black;">
+        
+            <tr align="center" bgcolor="dimgray" style="color: white;">
+                <th align="center">Наименование объекта</th>
+                <th align="center">Наименование триггера</th>
+                <th align="center">Согласующее подразделение</th>
+            </tr>
+        
+            {{#each content.uwTriggers}}
+            <tr align="center" bgcolor="white" color="black">
+                <td align="center">{{this.objectName}}</td>
+                <td align="center">{{this.triggerName}}</a></td>
+                <td align="center">{{this.confirmationDepartment}}</a></td>
+            </tr>
+            {{/each}}
+        
+        </table>
+        
+    </div>
+</body>
+
+</html>

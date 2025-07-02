@@ -1,0 +1,45 @@
+{
+    "type": "Group",
+    "elements": [
+        {
+            "type": "DataGrid",
+            "elementId": "serchResultTable",
+            "mode": "DataSource",
+            "pagination": {
+                "mode": "Regular",
+                "pageSizes": [
+                    5,
+                    10,
+                    15
+                ]
+            },
+            "selection": {
+                "mode": "Single",
+                "enableRowSelection": true,
+                "showCheckBox": true
+            },
+            "columns": [
+                {
+                    "sortable": false,
+                    "title": "contractNumber",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/contractNumber"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "openAmount",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/openAmount"
+                        }
+                    }
+                }
+            ]
+        }
+    ]
+}

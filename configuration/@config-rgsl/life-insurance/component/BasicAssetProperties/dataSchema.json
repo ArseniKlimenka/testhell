@@ -1,0 +1,47 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "object",
+    "additionalProperties": false,
+    "aiDataEnrichment": [
+        {
+            "name": "SetAdditionalInvestmentParameters"
+        },
+        {
+            "name": "CheckAvailableLimit",
+            "dataSource": "AssetLimitDataSource"
+        }
+    ],
+    "aiValidation": {
+        "rule": "validateBasicAssetProperties"
+    },
+    "properties": {
+        "assetProperties": {
+            "type": "array",
+            "aiValidation": {
+                "rule": "validateAssetProperties"
+            },
+            "items": {
+                "$ref": "component:BasicAssetProperty"
+            }
+        },
+        "rateOfReturnEquityActives": {
+            "$ref": "component:RateOfReturnEquityActives",
+            "aiTitle": "rateOfReturnEquityActives"
+        },
+        "assetUnitsCountOnClient": {
+            "type": "number",
+            "aiType": "decimal(15,4)",
+            "aiTitle": "assetUnitsCountOnClient"
+        },
+        "riskPremium": {
+            "type": "number",
+            "aiTitle": "riskPremium"
+        },
+        "availableLimitCount": {
+            "type": "number"
+        },
+        "availableLimitRub": {
+            "type": "number"
+        }
+    }
+}

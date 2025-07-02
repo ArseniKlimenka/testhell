@@ -1,0 +1,75 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema",
+    "type": "object",
+    "additionalProperties": false,
+    "aiAudit": {
+        "scope": "General"
+    },
+    "properties": {
+        "technicalInformation": {
+            "$ref": "component:TechnicalInformation"
+        },
+        "basicAmendmentConditions": {
+            "allOf": [
+                {
+                    "$ref": "component:BasicAmendmentConditions"
+                },
+                {
+                    "aiAdditionalContext": {
+                        "name": "paymentAmendmentConditions",
+                        "$data": "/paymentAmendmentConditions",
+                        "source": "Body"
+                    }
+                },
+                {
+                    "aiAdditionalContext": {
+                        "name": "contractVersions",
+                        "$data": "/contractVersions",
+                        "source": "Body"
+                    }
+                }
+            ]
+        },
+        "paymentAmendmentConditions": {
+            "$ref": "component:PaymentAmendmentConditions"
+        },
+        "allocationsInfo": {
+            "$ref": "component:AllocationsInfo"
+        },
+        "contractVersions": {
+            "$ref": "component:ContractVersions"
+        },
+        "taxDeductionItems": {
+            "$ref": "component:TaxDeduction"
+        },
+        "attachmentsPackage": {
+            "$ref": "component:AttachmentsPackage"
+        },
+        "technicalData": {
+            "type":"object",
+            "additionalProperties": true,
+            "properties": {}
+        },
+        "tempTechnicalData": {
+            "type":"object",
+            "additionalProperties": true,
+            "properties": {
+                "inquiries": {
+                    "$ref": "component:CancellationInquiries"
+                }
+            }
+        },
+        "productConfiguration": {
+            "$ref": "component:ProductConfiguration"
+        },
+        "policyEnrichments": {
+            "$ref": "component:PolicyEnrichments"
+        },
+        "selectedClaimRisks": {
+            "$ref": "component:SelectedClaimRisks"
+        },
+        "consent": {
+            "$ref": "component:Consent"
+        }
+    }
+}

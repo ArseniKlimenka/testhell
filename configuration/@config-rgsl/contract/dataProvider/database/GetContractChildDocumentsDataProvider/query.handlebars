@@ -1,0 +1,21 @@
+﻿select
+  chl.CONTRACT_ID,
+  chl.CONTRACT_NUMBER,
+  art.CODE_NAME CONFIGURATION_NAME,
+  art.DIMENSIONS,
+  pst.CODE_NAME STATE_CODE
+from
+  PAS.CONTRACT prt,
+  BFX.ENTITY_RELATION rlt,
+  PAS.CONTRACT chl,
+  CFX.PUBLISHED_ARTIFACT art,
+  CFG.PROCESS_STATE pst
+where prt.CONTRACT_NUMBER = @contractNumber
+  and prt.CONTRACT_ID = rlt.RELATED_ENTITY_ID
+  and rlt.ENTITY_ID = chl.CONTRACT_ID
+  and chl.PUBLISHED_ARTIFACT_ID = art.PUBLISHED_ARTIFACT_ID
+  and chl.STATE_ID = pst.PROCESS_STATE_ID
+  {{#if parameters.excludeStates}}
+  and pst.CODE_NAME not in (@excludeStates) 
+  {{/if}}
+  

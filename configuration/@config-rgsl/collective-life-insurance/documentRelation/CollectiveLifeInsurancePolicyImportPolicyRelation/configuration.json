@@ -1,0 +1,27 @@
+{
+    "description": "Relation between CollectiveLifeInsurancePolicy and CollectiveLifeInsurancePolicyImport",
+    "targetDocument": "CollectiveLifeInsurancePolicyImport",
+    "targetState": "Draft",
+    "relationType": "Child",
+    "targetDocumentVersion": "1",
+    "whenBlocked": "Hide",
+    "allowOnValidationErrors": {
+        "codes": [
+            "premiumCalculatingRequired"
+        ]
+    },
+    "enrichment": {
+        "all": true
+    },
+    "sourceDocument": "CollectiveLifeInsurancePolicy",
+    "sourceDocumentVersion": "1",
+    "sourceDocumentStates": [
+        {
+            "name": "Draft",
+            "actors": [
+                "Operations",
+                "Underwriter"
+            ]
+        }
+    ]
+}

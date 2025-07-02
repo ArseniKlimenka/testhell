@@ -1,0 +1,4 @@
+delete from bfx_impl.products where code = N'I665Rosbank'; insert into bfx_impl.products values ('EE76C501-2DC0-4E50-9BB7-6FEDC723F295', N'I665Rosbank',N'investment',N'Драйвер Гарантия Бонд Репак 5RUB',N'НСЖ');
+delete from bfx_impl.products where code = N'I712PSB'; insert into bfx_impl.products values ('B55D5E83-7CB2-40C2-90F6-333938420500', N'I712PSB',N'investment',N'Базис Актив Премиум Индекс Мосбиржи 5RUB',N'ИСЖ');
+delete from bfx_impl.products where code = N'I815VTBP'; insert into bfx_impl.products values ('B4051963-3C48-461E-B78B-AF49E47F1BC0', N'I815VTBP',N'investment',N'Драйвер Гарантия Ультра БондРепак 15RUB',N'НСЖ');
+delete from bfx_impl.products where code = N'I817InnResheniya'; insert into bfx_impl.products values ('91A1F988-8F3C-4DA5-A8BC-493B95A0CD64', N'I817InnResheniya',N'investment',N'Драйвер Гранд 10RUB',N'ИСЖ');

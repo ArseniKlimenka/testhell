@@ -1,0 +1,136 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema",
+    "type": "object",
+    "additionalProperties": false,
+    "aiValidation": {
+        "rule": "commissionRuleValidation"
+    },
+    "properties": {
+        "ruleNum": {
+            "type": "number",
+            "aiType": "int"
+        },
+        "startDate": {
+            "type": "string",
+            "aiFormat": "date",
+            "aiTitle": "startDate"
+        },
+        "endDate": {
+            "type": "string",
+            "aiFormat": "date",
+            "aiTitle": "endDate"
+        },
+        "registratorNumber": {
+            "type": "string",
+            "aiTitle": "registratorNumber"
+        },
+        "insuranceProduct": {
+            "$ref": "component:AAMultiValueAttribute",
+            "aiTitle": "insuranceProduct"
+        },
+        "insuranceCurrency": {
+            "$ref": "component:AASingleValueAttribute",
+            "description": "Insurance currency"
+        },
+        "insuranceYear": {
+            "$ref": "component:AAIntegerRangeValueAttribute",
+            "description": "Insurance year"
+        },
+        "insuranceTerm": {
+            "$ref": "component:AAIntegerRangeValueAttribute",
+            "description": "Insurance term"
+        },
+        "premiumPeriod": {
+            "$ref": "component:AAIntegerRangeValueAttribute",
+            "description": "Premium period"
+        },
+        "premiumPeriodType": {
+            "$ref": "component:AAMultiValueAttribute",
+            "description": "Premium period type"
+        },
+        "minRate": {
+            "type": "number",
+            "aiType": "decimal(15,2)",
+            "minimum:": 0,
+            "aiTitle": "minRate"
+        },
+        "maxRate": {
+            "type": "number",
+            "aiType": "decimal(15,2)",
+            "minimum:": 0,
+            "aiTitle": "maxRate"
+        },
+        "maxRateLimit": {
+            "type": "number",
+            "aiType": "decimal(15,2)",
+            "minimum:": 0,
+            "aiTitle": "maxRateLimit"
+        },
+        "rate": {
+            "type": "number",
+            "aiType": "decimal(15,2)",
+            "minimum:": 0,
+            "aiTitle": "rate"
+        },
+        "expensesRate": {
+            "type": "number",
+            "aiType": "decimal(15,2)",
+            "minimum:": 0,
+            "aiTitle": "expensesRate"
+        },
+        "natuaralPersonRate": {
+            "type": "number",
+            "aiType": "decimal(15,2)",
+            "minimum:": 0,
+            "aiTitle": "natuaralPersonRate"
+        },
+        "solePropriatorRate": {
+            "type": "number",
+            "aiType": "decimal(15,2)",
+            "minimum:": 0,
+            "aiTitle": "solePropriatorRate"
+        },
+        "amount": {
+            "type": "number",
+            "aiType": "decimal(15,2)",
+            "minimum:": 0,
+            "aiTitle": "amount"
+        },
+        "isManualCorrectionDisabled": {
+            "type": "boolean",
+            "aiTitle": "isManualCorrectionDisabled"
+        },
+        "alwaysUseMaxRate": {
+            "type": "boolean",
+            "aiTitle": "alwaysUseMaxRate"
+        },
+        "isDiscountDisabled": {
+            "type": "boolean",
+            "aiTitle": "isDiscountDisabled"
+        },
+        "commissionType": {
+            "type": "string",
+            "aiTitle": "commissionType"
+        },
+        "isInconsistent": {
+            "type": "boolean",
+            "aiTitle": "isInconsistent"
+        },
+        "creditProgram": {
+            "$ref": "component:AAMultiValueAttribute",
+            "aiTitle": "creditProgram"
+        },
+        "variant": {
+            "$ref": "component:AAMultiValueAttribute",
+            "description": "Product variant"
+        },
+        "manualRule": {
+            "type": "string",
+            "aiTitle": "manualRule"
+        },
+        "manualRuleDescription": {
+            "type": "string",
+            "aiTitle": "manualRuleDescription"
+        }
+    }
+}

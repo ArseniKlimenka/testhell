@@ -1,0 +1,70 @@
+{
+    "entityType": "Contract",
+    "condition": {
+        "events": [
+            "StatusChanged"
+        ],
+        "configuration": {
+            "names": [
+                "AccumulatedLifeInsuranceNonFinChange",
+                "CreditLifeInsuranceNonFinChange",
+                "EquityLifeInsuranceNonFinChange",
+                "InvestmentLifeInsuranceNonFinChange",
+                "RiskLifeInsuranceNonFinChange",
+                "AccumulatedLifeInsuranceFinChange",
+                "CreditLifeInsuranceFinChange",
+                "EquityLifeInsuranceFinChange",
+                "InvestmentLifeInsuranceFinChange",
+                "RiskLifeInsuranceFinChange"
+            ]
+        },
+        "documentStates": [
+            "Activated"
+        ]
+    },
+    "executionOrderWeight": 10,
+    "sinks": [
+        {
+            "name": "GetRequest",
+            "fetch": {
+                "configuration": {
+                    "name": "UniversalDocumentDataSource"
+                }
+            }
+        },
+        {
+            "name": "UpdateRequestBody",
+            "document": {
+                "configuration": {
+                    "name": "LifeInsuranceRequest",
+                    "version": "1"
+                },
+                "allowUpdating": {
+                    "inStates": [
+                        "CreateAmendment"
+                    ]
+                },
+                "allowOnValidationErrors": {
+                    "all": true
+                }
+            }
+        },
+        {
+            "name": "RequestToAmendmentsCreated",
+            "documentTransition": {
+                "transition": {}
+            }
+        }
+    ],
+    "errorSinks": [
+        {
+            "name": "WriteSinkError",
+            "database": {
+                "tables": [
+                    "BFX_IMPL.SINK_ERROR"
+                ]
+            }
+        }
+    ],
+    "version": "1"
+}

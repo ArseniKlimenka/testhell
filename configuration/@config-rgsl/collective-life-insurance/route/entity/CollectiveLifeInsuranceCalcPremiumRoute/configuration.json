@@ -1,0 +1,30 @@
+{
+    "entityType": "Contract",
+    "condition": {
+        "events": [
+            "StatusChanged"
+        ],
+        "configuration": {
+            "names": [
+                "CollectiveLifeInsurancePolicy"
+            ],
+            "dimensions": {}
+        },
+        "documentStates": [
+            "PremiumCalculating"
+        ]
+    },
+    "sinks": [
+        {
+            "name": "CollectiveLifeInsuranceCalcPremiumEtlServiceSink",
+            "etlService": {
+                "configuration": {
+                    "name": "CollectiveLifeInsuranceCalcPremiumEtlService",
+                    "version": "1"
+                }
+            }
+        }
+    ],
+    "errorSinks": [],
+    "version": "1"
+}

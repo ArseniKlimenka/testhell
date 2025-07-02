@@ -1,0 +1,1454 @@
+<!DOCTYPE html>
+<html lang="ru-RU" xml:lang="ru-RU" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+	<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+	<title>Договор</title>
+	<link rel="stylesheet" href="assets/styles/style.css">
+	{{{exampleLabel}}}
+	{{{bottomRightContentHolder}}}
+	{{{bottomRightContentBoth}}}
+	{{{bottomLeftContentHolder}}}
+	{{{bottomLeftContentHolder2}}}
+	{{{bottomLeftContentBoth}}}
+	{{{reducePrintoutPagesTotalNumber}}}
+</head>
+
+<body>
+
+	<!-- для загрузки динамических изображений в хранилище печатки. -->
+	{{#if alwaysFalse}}
+		{{> ../../../life-insurance/component/TempSignatureContainer/printout/template.html }}
+	{{/if}}
+
+	{{#if alwaysFalse}}
+		{{> ../../../life-insurance/component/CommonAppendixImageContainer/printout/template.html }}
+	{{/if}}
+
+	<!-- Уведомление от ВТБ-->
+	{{#if isVTBpartner}}
+		<div class="signatureNone break">
+			<div class="VTBNotice">
+				<p class=" boldText textCenter">
+					ИНФОРМАЦИЯ, ПРЕДОСТАВЛЯЕМАЯ БАНКОМ ВТБ (ПУБЛИЧНЫМ<br>
+					АКЦИОНЕРНЫМ ОБЩЕСТВОМ), ДЕЙСТВУЮЩИМ ОТ ИМЕНИ СТРАХОВОЙ<br>
+					ОРГАНИЗАЦИИ  ООО СК « РОСГОССТРАХ ЖИЗНЬ», ПРИ ЗАКЛЮЧЕНИИ С<br>
+					ФИЗИЧЕСКИМ ЛИЦОМ ДОГОВОРА ДОБРОВОЛЬНОГО СТРАХОВАНИЯ ЖИЗНИ С<br>
+					УЧАСТИЕМ СТРАХОВАТЕЛЯ В ИНВЕСТИЦИОННОМ ДОХОДЕ СТРАХОВЩИКА
+				</p>
+				<p class="textCenter boldText">№ {{policy.number}} от {{policy.issueDate}} г.</p>
+				<table class="VTBTable">
+					<col class="col1">
+					<col class="col2">
+					<col class="col3">
+					<col class="col4">
+					<tr>
+						<td class="boldText textCenter">
+							N п/п
+						</td>
+						<td class="boldText textCenter">
+							Вид информации
+						</td>
+						<td class="boldText textCenter">
+							Содержание предоставляемой информации
+						</td>
+						<td class="boldText textCenter">
+							Подпись физического лица, подтверждающая его ознакомление с информацией
+						</td>
+					</tr>
+					<tr>
+						<td class="boldText textCenter">1</td>
+						<td class="boldText textCenter">2</td>
+						<td class="boldText textCenter">3</td>
+						<td class="boldText textCenter">4</td>
+					</tr>
+					<tr>
+						<td rowspan=3 class="textCenter">1</td>
+						<td rowspan=3>
+							Информация о договоре добровольного страхования жизни с участием страхователя в инвестиционном
+							доходе страховщика (далее - договор добровольного страхования)
+						</td>
+						<td>
+							1.1 Переданные по договору добровольного страхования денежные средства не подлежат страхованию в
+							соответствии с Федеральным законом от 23 декабря 2003 года N 177-ФЗ «О страховании вкладов в банках
+							Российской Федерации»
+						</td>
+						<td class="textCenter">
+							<p class="borderCheck"></p>
+							<p>С информацией ознакомлен</p>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							1.2 Отсутствует гарантия получения доходности*
+						</td>
+						<td class="textCenter">
+							<p class="borderCheck"></p>
+							<p>С информацией ознакомлен</p>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							1.3 Договор добровольного страхования не является договором банковского вклада (банковского счета)
+						</td>
+						<td class="textCenter">
+							<p class="borderCheck"></p>
+							<p>С информацией ознакомлен</p>
+						</td>
+					</tr>
+				</table>
+
+				<p>
+					* Наличие и величина дополнительного инвестиционного дохода, обеспечивающего доходность по договору добровольного
+					страхования, зависят от результатов инвестиционной деятельности ООО СК «Росгосстрах Жизнь». Дополнительный
+					инвестиционный доход формируется в соответствии с Правилами страхования и подлежит выплате при наступлении
+					страховых случаев «ДОЖИТИЕ» или «СМЕРТЬ по любой причине», либо при досрочном расторжении договора добровольного
+					страхования.
+				</p>
+				<p>
+					Основные положения договора добровольного страхования указаны в Информации  (памятке) о договоре добровольного
+					страхования, в том числе о его условиях и рисках, связанных с его исполнением.
+				</p>
+			</div>
+		</div>
+	{{/if}}
+
+	<!-- Договор -->
+	<div class="policySignature">
+		<div class="container">
+
+			<div class="logoDiv">
+				<img src="../component/POImageConst/printout/assets/img/logoHeader.png" alt="Логотип Росгосстрах Жизнь" class="logo">
+			</div>
+			<div class="qrCodeAndInsurerInfo">
+				<div class="qrDiv">
+					<span class="qr_code">
+						{{QR}}
+					</span>
+				</div>
+				<div class="insurerInfoDiv">
+					<p>
+						<strong>Страховщик: </strong>ООО СК «Росгосстрах Жизнь», лицензии Банка России: {{insurer.license}}, ИНН {{insurer.INN}}, КПП {{insurer.KPP}}<br>
+						<strong>Юридический адрес: </strong>{{insurer.address}}<br>
+						<strong>Реквизиты банка: </strong>{{bankInfo}}<br>
+						<strong>Телефон круглосуточного Контакт-центра: </strong>8 800 100 12 10 (бесплатный номер для
+						звонков по России).
+					</p>
+				</div>
+			</div>
+
+			<div class="container2">
+				<p id="qrInfoTop" class="qrInfo">Для оплаты считайте данный штрих код</p>
+				<p id="qrInfoMiddle" class="qrInfo">в мобильном приложении интернет-банка</p>
+				<p id="policyheadingTop" class="policyheading">ДОГОВОР СТРАХОВАНИЯ № {{policy.number}} от
+					{{policy.issueDate}} г.</p>
+				<p id="policyheadingMiddle" class="policyheading">по программе «{{policy.product}}»</p>
+				<p id="policyheadingButton" class="policyheading">на основании {{policy.rule}} (далее по тексту –
+					Правила).
+				</p>
+			</div>
+
+			<table class="person margin_top_20">
+
+				<col class="col1">
+				<col class="col2">
+				<col class="col3">
+				<col class="col4">
+				<col class="col5">
+				<col class="col6">
+				<col class="col7">
+
+				<tr><td class="policy_item" colspan="7">I. СТРАХОВАТЕЛЬ</td></tr>
+
+				<tr>
+					<td class="tgrey">Фамилия Имя Отчество:</td>
+					<td class="twhite" colspan="4">{{holder.fullName}}</td>
+					<td class="tgrey">Пол:</td>
+					<td class="twhite center">{{holder.gender}}</td>
+				</tr>
+				<tr>
+					<td class="tgrey">Дата рождения:</td>
+					<td class="twhite center" colspan="2">{{holder.dateOfBirth}}</td>
+					<td class="tgrey" colspan="2">Место рождения:</td>
+					<td class="twhite center" colspan="2">{{holder.birthPlace}}</td>
+				</tr>
+				<tr>
+					<td class="tgrey">Телефон:</td>
+					<td class="twhite center" colspan="2">{{holder.phoneNumber}}</td>
+					<td class="tgrey" colspan="2">Гражданство:</td>
+					<td class="twhite center" colspan="2">{{holder.citizenship}}</td>
+				</tr>
+				<tr>
+					<td class="tgrey">E-mail:</td>
+					<td class="twhite" colspan="6">{{holder.email}}</td>
+				</tr>
+				<tr>
+					<td class="tgrey">Документ, удостоверяющий личность:</td>
+					<td class="twhite" colspan="4">{{holder.document.typeAndSN}}</td>
+					<td class="tgrey">Дата выдачи:</td>
+					<td class="twhite center">{{holder.document.dateOfIssue}}</td>
+				</tr>
+				{{#unless holder.isNotIssuedBy}}
+				<tr>
+					<td class="tgrey">Кем выдан:</td>
+					<td class="twhite" colspan="6">{{holder.document.issuedBy}}</td>
+				</tr>
+				{{/unless}}
+				<tr>
+					<td class="tgrey">Адрес постоянной регистрации:</td>
+					<td class="twhite" colspan="6">{{holder.registrationAddress}}</td>
+				</tr>
+				<tr>
+					<td class="tgrey">Почтовый адрес:</td>
+					<td class="twhite" colspan="6">{{holder.postAddress}}</td>
+				</tr>
+			</table>
+
+			<table class="person margin_top_20">
+
+				<col class="col1">
+				<col class="col2">
+				<col class="col3">
+				<col class="col4">
+				<col class="col5">
+				<col class="col6">
+				<col class="col7">
+
+				<tr><td class="policy_item" colspan="7">II. ЗАСТРАХОВАННЫЙ</td></tr>
+
+				<tr>
+					<td class="tgrey">Фамилия Имя Отчество:</td>
+					<td class="twhite" colspan="4">{{insured.fullName}}</td>
+					<td class="tgrey">Пол:</td>
+					<td class="twhite  center">{{insured.gender}}</td>
+				</tr>
+				<tr>
+					<td class="tgrey">Дата рождения:</td>
+					<td class="twhite center" colspan="2">{{insured.dateOfBirth}}</td>
+					<td class="tgrey" colspan="2">Место рождения:</td>
+					<td class="twhite center" colspan="2">{{insured.birthPlace}}</td>
+				</tr>
+				<tr>
+					<td class="tgrey">Телефон:</td>
+					<td class="twhite center" colspan="2">{{insured.phoneNumber}}</td>
+					<td class="tgrey" colspan="2">Гражданство:</td>
+					<td class="twhite center" colspan="2">{{insured.citizenship}}</td>
+				</tr>
+				<tr>
+					<td class="tgrey">E-mail:</td>
+					<td class="twhite" colspan="6">{{insured.email}}</td>
+				</tr>
+				<tr>
+					<td class="tgrey">Документ, удостоверяющий личность:</td>
+					<td class="twhite" colspan="4">{{insured.document.typeAndSN}}</td>
+					<td class="tgrey">Дата выдачи:</td>
+					<td class="twhite center">{{insured.document.dateOfIssue}}</td>
+				</tr>
+				{{#unless insured.isNotIssuedBy}}
+				<tr>
+					<td class="tgrey">Кем выдан:</td>
+					<td class="twhite" colspan="6">{{insured.document.issuedBy}}</td>
+				</tr>
+				{{/unless}}
+				<tr>
+					<td class="tgrey">Адрес постоянной регистрации:</td>
+					<td class="twhite" colspan="6">{{insured.registrationAddress}}</td>
+				</tr>
+				<tr>
+					<td class="tgrey">Почтовый адрес:</td>
+					<td class="twhite" colspan="6">{{insured.postAddress}}</td>
+				</tr>
+			</table>
+
+			<div class="policy_item">III. ВЫГОДОПРИОБРЕТАТЕЛИ НА СЛУЧАЙ СМЕРТИ ЗАСТРАХОВАННОГО</div>
+
+			{{#if isBeneficiaries}}
+			<table class="person">
+				<col class="col1">
+				<col class="col2">
+				<col class="col3">
+				<col class="col4">
+				<col class="col5">
+				<col class="col6">
+				<col class="col7">
+				{{#each beneficiaries}}
+				<tr>
+					<td class="tgrey" colspan="7">Выгодоприобретатель {{this.index}}. Доля {{this.percentage}}%</td>
+				</tr>
+				<tr>
+					<td class="tgrey">Фамилия Имя Отчество, Дата рождения:</td>
+					<td class="twhite" colspan="4">{{this.beneficiar.fullName}}, {{this.beneficiar.dateOfBirth}}</td>
+					<td class="tgrey">Пол:</td>
+					<td class="twhite  center">{{this.beneficiar.gender}}</td>
+				</tr>
+				{{#if this.dateOfBirthPlaceOfBirth}}
+				<tr>
+					<td class="tgrey">Дата рождения:</td>
+					<td class="twhite center">{{this.beneficiar.dateOfBirth}}</td>
+					<td class="tgrey" colspan="2">Место рождения:</td>
+					<td class="twhite" colspan="3">{{this.beneficiar.placeOfBirth}}</td>
+				</tr>
+				{{/if}}
+				{{#if this.phoneEmailCitizenship}}
+				<tr>
+					<td class="tgrey">Телефон:</td>
+					<td class="twhite center">{{this.beneficiar.phoneNumber}}</td>
+					<td class="tgrey">E-mail:</td>
+					<td class="twhite center" colspan="2">{{this.beneficiar.email}}</td>
+					<td class="tgrey">Гражданство:</td>
+					<td class="twhite center">{{this.beneficiar.citizenship}}</td>
+				</tr>
+				{{/if}}
+				{{#if this.isDocument}}
+				<tr>
+					<td class="tgrey">Документ, удостоверяющий личность:</td>
+					<td class="twhite" colspan="4">{{this.beneficiar.document.typeAndSN}}</td>
+					<td class="tgrey">Дата выдачи:</td>
+					<td class="twhite center">{{this.beneficiar.document.dateOfIssue}}</td>
+				</tr>
+				{{#unless this.beneficiar.isNotIssuedBy}}
+				<tr>
+					<td class="tgrey">Кем выдан:</td>
+					<td class="twhite" colspan="6">{{this.beneficiar.document.document.issuedBy}}</td>
+				</tr>
+				{{/unless}}
+				{{/if}}
+				{{#if this.isRegistrationAddress}}
+				<tr>
+					<td class="tgrey">Адрес постоянной регистрации:</td>
+					<td class="twhite" colspan="6">{{this.beneficiar.registrationAddress}}</td>
+				</tr>
+				{{/if}}
+				{{#if this.isPostAddress}}
+				<tr>
+					<td class="tgrey">Почтовый адрес:</td>
+					<td class="twhite" colspan="6">{{this.beneficiar.postAddress}}</td>
+				</tr>
+				{{/if}}
+				{{/each}}
+			</table>
+			{{#if shareSumIsNot1}}
+			<p class="afterTable">
+				В случае если общая доля менее 100%, Выгодоприобретателями на случай смерти Застрахованного по
+				оставшейся доле являются наследники Застрахованного по закону.
+			</p>
+			{{/if}}
+			{{else}}
+			<p class="afterTable">
+				Наследники по закону
+			</p>
+			{{/if}}
+
+			<table class="risks margin_top_20">
+
+				<col class="col1">
+				<col class="col2">
+				<col class="col3">
+
+				<tr><td class="policy_item" colspan="3">IV. СТРАХОВЫЕ РИСКИ, СТРАХОВЫЕ СУММЫ, СТРАХОВАЯ ПРЕМИЯ</td></tr>
+
+				<tr>
+					<td class="tgrey center">Страховые риски</td>
+					<td class="tgrey center">Страховая сумма, {{currency}}</td>
+					<td class="tgrey center">Страховая премия, {{currency}}</td>
+				</tr>
+				<tr>
+					<td class="invisible" colspan="2"></td>
+					<td class="twhite center boldtext" rowspan="{{numberOfrisk}}">{{risk.premium.sum}}</td>
+				</tr>
+				{{#each risk.mandatory}}
+				<tr>
+					<td class="twhite">{{this.insuranceRisks}}</td>
+					<td class="twhite center">{{this.sumInsured}}</td>
+				</tr>
+				{{/each}}
+				{{#each risk.additional}}
+				<tr>
+					<td class="twhite">{{this.insuranceRisks}}</td>
+					<td class="twhite center">{{this.sumInsured}}</td>
+				</tr>
+				{{/each}}
+			</table>
+
+			<p class="afterTable" id="marginTopAndButton">
+				При определении страховой суммы в договоре страхования в иностранной валюте
+				страховая выплата производится в рублях по курсу Банка России на дату выплаты.
+				Банковские расходы, связанные с осуществлением страховой выплаты, оплачиваются получателем платежа.
+			</p>
+
+			<table class="insuranceTerms">
+				<col class="col1">
+				<col class="col2">
+				<col class="col3">
+				<tr>
+					<td class="tgrey" colspan="2">Страховая премия уплачивается единовременно в полном объеме не позднее:</td>
+					<td class="twhite">{{experationDate}}</td>
+				</tr>
+			</table>
+
+			<p class="afterTable" id="marginTopAndButton">
+				<div class="textJustify">
+					<b>В случае если страховая премия не была оплачена (или была оплачена не
+						полностью) в указанный срок, 
+						{{#if insuranceTerms.paymentPeriodLastDate}} либо в случае оплаты страховой премии позднее {{insuranceTerms.paymentPeriodLastDate}}, {{/if}}
+						Страховщик вправе считать договор
+						страхования не вступившим в силу и произвести возврат поступивших средств Страхователю.
+					</b>
+				</div>
+				<div class="textJustify">
+					<b>Стороны признают, что события, имеющие признаки страхового
+						и наступившие до уплаты страховой премии в полном объеме, не признаются страховым случаем и
+						страховая выплата по ним не осуществляется (пункт 2 статьи 957 Гражданского кодекса Российской Федерации).
+					</b>
+				</div>
+				<div class="textJustify">
+					При определении страховой премии в договоре страхования
+					в иностранной валюте сумма, подлежащая уплате в рублях, определяется по курсу Банка России
+					соответствующей валюты на дату оплаты. Банковские расходы, связанные с оплатой страховой премии, несет Страхователь.
+				</div>
+			</p>
+
+			<table class="insuranceTerms margin_top_20">
+
+				<col class="col1">
+				<col class="col2">
+				<col class="col3">
+
+				<tr><td class="policy_item" colspan="3">V. СРОК ДЕЙСТВИЯ ДОГОВОРА СТРАХОВАНИЯ</td></tr>
+
+				<tr>
+					<td class="tgrey">Срок действия договора страхования:</td>
+					<td class="twhite center">{{insuranceTerms.text}}</td>
+					<td class="twhite textJustify">Договор страхования вступает в силу с {{insuranceTerms.startDate}}
+						при условии уплаты страховой премии в полном объеме до этой даты и действует до
+						{{insuranceTerms.endDate}} включительно.
+					</td>
+				</tr>
+
+				<tr>
+					<td class="twhite textJustify" colspan="3">
+						Стороны могут договориться о продлении срока действия договора страхования путем подписания дополнительного соглашения.
+					</td>
+				</tr>
+
+			</table>
+
+			<table class="surrenderValues margin_top_20">
+
+				<col class="col1">
+				<col class="col2">
+				<col class="col3">
+
+				<tr><td class="policy_item" colspan="3">VI. ВЫКУПНЫЕ СУММЫ</td></tr>
+
+				<tr>
+					<td class="twhite textJustify" colspan="3">
+						При расторжении договора страхования выкупная сумма определяется в пределах сформированного
+						в установленном порядке страхового резерва на день прекращения договора страхования.
+					</td>
+				</tr>
+
+				<tr>
+					<td class="tgrey center" colspan="2">Период действия договора страхования</td>
+					<td class="tgrey center" rowspan="2">Выкупная сумма, {{currency}}</td>
+				</tr>
+
+				<tr>
+					<td class="tgrey center">начало</td>
+					<td class="tgrey center">окончание</td>
+				</tr>
+
+				{{#each surrenderValues}}
+					<tr>
+						<td class="twhite center">{{this.periodStartDate}}</td>
+						<td class="twhite center">{{this.periodEndDate}}</td>
+						<td class="twhite center">{{this.surrenderValue}}</td>
+					</tr>
+				{{/each}}
+
+			</table>
+
+			<p class="afterTable">
+				При определении выкупной суммы в договоре страхования в иностранной валюте выплата
+				выкупной суммы переводится в рублях по курсу Банка России на дату выплаты.
+				Банковские расходы, связанные с осуществлением выплаты выкупной суммы, оплачиваются получателем платежа.
+			</p>
+
+			<table class="declarationMedical margin_top_20">
+
+				<col class="col1">
+				<col class="col2">
+				<col class="col3">
+
+				<tr><td class="policy_item" colspan="3">VII. ДЕКЛАРАЦИЯ О СОСТОЯНИИ ЗДОРОВЬЯ И ФАКТОРАХ РИСКА ЗАСТРАХОВАННОГО</td></tr>
+
+				<tr>
+					<td class="twhite">Настоящим я, {{insured.fullName}},</td>
+					<td class="twhite"><input type="checkbox" checked> подтверждаю, что:</td>
+					<td class="twhite"><input type="checkbox"> не подтверждаю, что:</td>
+				</tr>
+
+			</table>
+
+			<ul class="declaration">
+				{{#each declarationMedical}}
+				<li>
+					<p>{{this}}</p>
+				</li>
+				{{/each}}
+			</ul>
+
+			<table class="declarationMain margin_top_20">
+
+				<tr><td class="policy_item" colspan="3">VIII. ДЕКЛАРАЦИЯ СТРАХОВАТЕЛЯ И ЗАСТРАХОВАННОГО</td></tr>
+
+				<tr>
+					<td class="twhite">Настоящим Страхователь и Застрахованный</td>
+					<td class="twhite"><input type="checkbox" checked> подтверждают, что:</td>
+					<td class="twhite"><input type="checkbox"> не подтверждают, что:</td>
+				</tr>
+
+			</table>
+
+			<ul class="declaration">
+				{{#each declarationMain}}
+				<li>
+					<p>{{this}}</p>
+				</li>
+				{{/each}}
+			</ul>
+
+			<div class="policy_item">IX. ИНЫЕ УСЛОВИЯ</div>
+
+			<ol class="otherCondition">
+				<li>
+					Стороны приняли решение внести изменения в п. 9.1.4 Правил и изложить его в следующей редакции:
+					«9.1.4. в случае отказа Страхователя (физического лица) от Договора страхования в течение
+					14 (четырнадцати) календарных дней (в соответствии с Указанием Банка России от 20.11.2015 №3854-У
+					«О минимальных (стандартных) требованиях к условиям и порядку осуществления отдельных видов
+					добровольного страхования») со дня его заключения при отсутствии событий, имеющих признаки
+					страхового случая, а также в случае если к моменту истечения указанного срока Договор страхования
+					не вступил в силу, до вступления Договора страхования в силу, Страхователь имеет право на
+					возврат уплаченной по Договору страхования страховой премии в полном объеме».
+				</li>
+				<li>
+					В случае отказа Страхователя (физического лица) от договора страхования в период,
+					предусмотренный договором страхования и действующим законодательством, когда Страхователь
+					имеет право на возврат уплаченной страховой премии (уплаченных страховых взносов),
+					Страховщик осуществляет возврат уплаченной Страхователем суммы в рублях независимо от
+					курса валюты, в которой выражены обязательства по договору страхования. Если страховая
+					премия была уплачена в иной валюте, возврату подлежит сумма денежных средств в валюте,
+					в которой она была уплачена.
+				</li>
+				<li>
+					Страхователь и Страховщик согласовали внести изменения в п. 10.6 Правил и изложить его в следующей редакции:
+					«10.6. Из страховой выплаты по рискам, указанным в п.п. 4.1.1 – 4.1.3 Правил, а также из выплаты ДИД,
+					предусмотренной п. 13.5.3 Правил, удерживается налог на доходы физических лиц в соответствии
+					со ст. 213 Налогового кодекса Российской Федерации».
+				</li>
+				<li>
+					Если после заключения договора страхования будет выявлено, что Страхователь/Застрахованный
+					сообщил в настоящем договоре или иных документах, заполняемых при заключении договора
+					страхования заведомо ложные сведения или предоставил подложные документы, и если эти сведения
+					или документы привели к заключению договора страхования на условиях, отличных от тех,
+					на которых он был бы заключен, то Страховщик имеет право отказать в страховой выплате.
+				</li>
+				<li>
+					Стороны пришли к соглашению о том, что факсимильное воспроизведение подписей уполномоченных
+					лиц Страховщика и факсимильный оттиск печати Страховщика признаются сторонами аналогом
+					собственноручной подписи уполномоченных лиц Страховщика и оригинала печати Страховщика.
+				</li>
+				<li>
+					В случае заключения договора страхования в электронном виде в соответствии с Соглашением
+					об электронном документообороте, к которому присоединяется Страхователь, подписанные со
+					стороны Страховщика усиленной квалифицированной электронной подписью договор страхования,
+					включая Инвестиционную декларацию (приложение №1 к договору страхования), и Информация о
+					договоре добровольного страхования, в том числе о его условиях и рисках, связанных с его
+					исполнением  направляются Страхователю в электронном виде на адрес электронной почты,
+					указанный в настоящем договоре страхования. Согласие Страхователя с условиями договора
+					страхования подтверждается простой электронной подписью Страхователя в соответствии с Соглашением.
+				</li>
+				<li>
+					Неотъемлемой частью договора страхования являются: Информация о договоре добровольного
+					страхования, в том числе о его условиях и рисках, связанных с его исполнением,
+					Инвестиционная декларация (приложение №1 к договору страхования), заявления,
+					составленные и заполненные по просьбе Страховщика Страхователем, а также Правила,
+					с которыми Страхователь ознакомился на сайте Страховщика. Отдельные условия договора
+					страхования разъяснены в Информации о договоре добровольного страхования, в том числе
+					о его условиях и рисках, связанных с его исполнением  и в Инвестиционной декларации
+					(приложение №1 к договору страхования).
+				</li>
+				{{#if otherCondition.isOtherCondition}}
+				<li>
+					{{otherCondition.policySpecialConditions}}
+				</li>
+				{{/if}}
+			</ol>
+
+		</div>
+	</div>
+
+    <!-- Инвестиционная декларация -->
+    <div class="containerAdd break invDeclarationPage">
+
+		<div class="mainInfo">
+			<div>
+				<div class="boldText"> Приложение №1</div>
+				<div> Инвестиционная декларация</div>
+				<div>к договору страхования по программе «{{policy.product}}»</div>
+				<div>№ {{policy.number}} от {{policy.issueDate}} г. (далее – Декларация)</div>
+			</div>
+		</div>
+
+		<div>
+			<br>
+			<div class="textJustify boldText pageBreakAfterAvoid"><span class="invPInd1">1</span>Формирование и изменение структуры инвестиционного счета</div>
+			<div class="textJustify"><span class="invPInd2">1.1</span>Страховщик в течение периода инвестирования приобретает инвестиционные активы, выбранные Страхователем при заключении договора, для обеспечения целевой структуры инвестиционного счета, указанной в п. 1.8 Декларации, с учетом допустимых отклонений каждого актива от целевой доли.</div>
+			<div class="textJustify"><span class="invPInd2">1.2</span>Дата начала периода инвестирования: {{invDeclaration.investmentStartDateFormatted}}</div>
+			<div class="textJustify"><span class="invPInd2">1.3</span>Дата окончания периода инвестирования: {{invDeclaration.investmentEndDateFormatted}}</div>
+			<div class="textJustify"><span class="invPInd2">1.4</span>Брокерский счет: {{invDeclaration.brokerAccountNumber}}, {{invDeclaration.brokerName}}</div>
+			<div class="textJustify"><span class="invPInd2">1.5</span>Расчетный счет: {{invDeclaration.bankAccount}}, {{invDeclaration.bankFullName}}</div>
+			<div class="textJustify"><span class="invPInd2">1.6</span>Стоимость инвестиционного счета на дату начала периода инвестирования – {{invDeclaration.percentCoefficientE36914}}% от страховой премии (тип актива «Инструменты денежного рынка»).</div>
+			<div class="textJustify"><span class="invPInd2">1.7</span>Тип актива «Инструменты денежного рынка» – денежные средства, которые находятся на брокерском и/или расчетном счетах, указанных в п.п. 1.4, 1.5 Декларации.</div>
+			<div class="textJustify"><span class="invPInd2">1.8</span>Целевая структура инвестиционного счета на дату окончания периода инвестирования с учетом допустимых отклонений каждого актива от указанной доли:</div>
+
+			<table class="invTableActives">
+
+				<col class="col1">
+				<col class="col2">
+				<col class="col3">
+				<col class="col4">
+				<tr class="invTableHeader">
+					<td class="invTableTitleActive">Тип актива</td>
+					<td class="center">ISIN</td>
+					<td class="center">Доля</td>
+					<td class="center">Допустимое <br>отклонение от <br>доли актива</td>
+				</tr>
+
+				{{#if invDeclaration.isShares}}
+					<tr><td class="invTableTitle invTableTitleHideRightBorder">Акции</td></tr>
+				{{/if}}
+				{{#each invDeclaration.shares}}
+					<tr>
+						<td class="invTableText">Эмитент: {{this.strategy.emitent}} (название актива: {{this.strategy.strategyName}})</td>
+						<td class="center">{{this.strategy.isin}}</td>
+						<td class="center">{{this.sharePercent}}%</td>
+						<td class="center">10,00%</td>
+					</tr>
+				{{/each}}
+
+				{{#if invDeclaration.isBonds}}
+					<tr><td class="invTableTitle invTableTitleHideRightBorder">Облигации</td></tr>
+				{{/if}}
+				{{#each invDeclaration.bonds}}
+					<tr>
+						<td class="invTableText">Эмитент: {{this.strategy.emitent}} (название актива: {{this.strategy.strategyName}})</td>
+						<td class="center">{{this.strategy.isin}}</td>
+						<td class="center">{{this.sharePercent}}%</td>
+						<td class="center">10,00%</td>
+					</tr>
+				{{/each}}
+
+				{{#if invDeclaration.isDepositaryReceipts}}
+					<tr><td class="invTableTitle invTableTitleHideRightBorder">Депозитарные расписки</td></tr>
+				{{/if}}
+				{{#each invDeclaration.depositaryReceipts}}
+					<tr>
+						<td class="invTableText">Эмитент: {{this.strategy.emitent}} (название актива: {{this.strategy.strategyName}})</td>
+						<td class="center">{{this.strategy.isin}}</td>
+						<td class="center">{{this.sharePercent}}%</td>
+						<td class="center">10,00%</td>
+					</tr>
+				{{/each}}
+
+				{{#if invDeclaration.isAmericanDepositaryReceipts}}
+					<tr><td class="invTableTitle invTableTitleHideRightBorder">Американские депозитарные расписки (АДР)</td></tr>
+				{{/if}}
+				{{#each invDeclaration.americanDepositaryReceipts}}
+					<tr>
+						<td class="invTableText">Эмитент: {{this.strategy.emitent}} (название актива: {{this.strategy.strategyName}})</td>
+						<td class="center">{{this.strategy.isin}}</td>
+						<td class="center">{{this.sharePercent}}%</td>
+						<td class="center">10,00%</td>
+					</tr>
+				{{/each}}
+
+				{{#if invDeclaration.isTotalPercent}}
+					<tr>
+						<td class="invTableTitle">Инструменты денежного рынка</td>
+						<td class="center"></td>
+						<td class="center">{{invDeclaration.totalPercent}}%</td>
+						<td class="center">100,00%</td>
+					</tr>
+				{{/if}}
+
+			</table>
+
+			<div class="textJustify">
+				<span class="invPInd2">1.9</span>Страховщик с целью обеспечения соответствия фактической структуры инвестиционного счета целевой структуре,
+				установленной п. 1.8 Декларации, самостоятельно без дополнительного согласования со Страхователем
+				в течение периода инвестирования совершает сделки на финансовых рынках с активами, указанными
+				в п. 1.8 Декларации. При этом Страховщик действует в интересах Страхователя, но не имеет обязательства
+				совершать какие-либо сделки по лучшим ценам приобретения и/или продажи в течение какого-либо временного периода.
+				В связи с тем, что совершение сделок на финансовых рынках обусловлено таким факторами, как нормальное
+				функционирование торговой инфраструктуры, наличием ликвидности каждого из активов и прочими факторами,
+				фактическая структура инвестиционного счета на дату окончания периода инвестирования может как соответствовать,
+				так и отличаться от целевой структуры инвестиционного счета, установленной п. 1.8 Декларации.
+				В случае если актив (его часть в соответствии с согласованной долей), установленный п. 1.8 Декларации,
+				не был приобретен в течение периода инвестирования, неиспользованные на покупку актива денежные средства
+				распределяются в актив «Инструменты денежного рынка» до момента получения от Страхователя дополнительного
+				заявления на приобретение активов за счет средств, размещенных в активе «Инструменты денежного рынка».
+				Страховщик информирует Страхователя согласованным сторонами способом о фактической структуре инвестиционного счета.
+			</div>
+
+			<div class="textJustify invParagraph pageBreakAfterAvoid"><span class="invPInd1">2</span>Изменение инвестиционного счета</div>
+			<div class="textJustify"><span class="invPInd2">2.1</span>Покупка и/или продажа активов, относящихся к инвестиционному счету, в случае изменения структуры инвестиционного счета, внесения дополнительного взноса и выплаты выкупной суммы производится Страховщиком по заявлению Страхователя.</div>
+			<div class="textJustify"><span class="invPInd2">2.2</span>Осуществление выплаты дополнительного инвестиционного дохода производится Страховщиком по заявлению Застрахованного (или иного лица, в пользу которого заключен договор страхования по риску «Дожитие»).</div>
+			<div class="textJustify"><span class="invPInd2">2.3</span>Покупка и/или продажа активов, относящихся к инвестиционному счету, в случае наступления страхового случая производится Страховщиком по заявлению Выгодоприобретателя.</div>
+			<div class="textJustify"><span class="invPInd2">2.4</span>Покупка и/или продажа активов, кроме случаев выплаты при страховом случае или выплаты выкупной суммы или иных случаев, если такие случаи согласованы Страховщиком, и выплата дополнительного инвестиционного дохода не осуществляется в течение 90 календарных дней с даты окончания периода инвестирования.</div>
+			<div class="textJustify"><span class="invPInd2">2.5</span>Все денежные поступления от активов, относящихся к инвестиционному счету, увеличивают стоимость инструментов денежного рынка (тип активов «Инструменты денежного рынка»).</div>
+
+			<div class="textJustify invParagraph pageBreakAfterAvoid"><span class="invPInd1">3</span>Расходы Страховщика</div>
+			<div class="textJustify">
+				<span class="invPInd2">3.1</span>
+				Расходы Страховщика <img src="assets/img/invDecl_C_P(T).png" alt="С_Р(Т)" width="40" height="10"> на администрирование договора
+				страхования рассчитываются ежедневно, начиная с даты начала периода инвестирования,
+				и составляют на дату расчета <img src="assets/img/invDecl_T.png" alt="Т" width="10" height="10">:
+			</div>
+			<div class="center"><img src="assets/img/invDecl_C_P(T)-C_IC(T-1)PM.png" alt="С_Р(Т)=С_ИС(Т-1)*Р/m" width="160" height="30"></div>
+
+			<table class="invTableNoBorders">
+				<col class="col1">
+				<col class="col2">
+				<col class="col3">
+
+				<tr class="invTableNoBorders">
+					<td class="invTableNoBorders invTableEndowmentText">Где</td>
+					<td class="invTableNoBorders invTableEndowmentText"><img src="assets/img/invDecl_C_IC(T-1).png" alt="С_ИС(Т-1)" width="65" height="10"></td>
+					<td class="invTableNoBorders invTableEndowmentText">- стоимость инвестиционного счета, определенная Страховщиком на дату, предшествующую дате расчета <img src="assets/img/invDecl_T.png" alt="Т" width="10" height="10">;</td>
+				</tr>
+
+				<tr class="invTableNoBorders">
+					<td class="invTableNoBorders invTableEndowmentText"></td>
+					<td class="invTableNoBorders invTableEndowmentText"><img src="assets/img/invDecl_P.png" alt="P" width="10" height="10"></td>
+					<td class="invTableNoBorders invTableEndowmentText">- показатель расходов Страховщика на администрирование договора страхования, выраженный в процентах от суммарной стоимости активов инвестиционного счета, установленный на дату расчета <img src="assets/img/invDecl_T.png" alt="Т" width="10" height="10">;</td>
+				</tr>
+
+				<tr class="invTableNoBorders">
+					<td class="invTableNoBorders invTableEndowmentText"></td>
+					<td class="invTableNoBorders invTableEndowmentText"><img src="assets/img/invDecl_m_sm.png" alt="m" width="10" height="8"></td>
+					<td class="invTableNoBorders invTableEndowmentText">- количество календарных дней в году (365 или 366), соответствующем дате расчета <img src="assets/img/invDecl_T.png" alt="Т" width="10" height="10">.</td>
+				</tr>
+			</table>
+
+			<div class="textJustify"><span class="invPInd3">3.1.1</span>Годовой показатель <img src="assets/img/invDecl_P.png" alt="P" width="10" height="10"> составляет {{invDeclaration.investmentMFPercent}}% на дату начала периода инвестирования.</div>
+			<div class="textJustify"><span class="invPInd2">3.2</span>Доля расходов Страховщика <img src="assets/img/invDecl_M.png" alt="M" width="10" height="10">, выраженная в процентах от размера ДИД, на досрочное прекращение договора страхования или выплаты ДИД (его части) в течение срока страхования зависит от основания выплаты ДИД и количества полных лет действия договора страхования, истекших до даты <img src="assets/img/invDecl_T.png" alt="Т" width="10" height="10">:</div>
+
+			<table class="invTable">
+				<col class="col1">
+				<col class="col2">
+				<col class="col3">
+				<col class="col4">
+				<tr class="invTableHeader">
+					<td class="center">Основание выплаты ДИД</td>
+					<td class="center">Наступление страхового случая по рискам «Дожитие», «Смерть»</td>
+					<td class="center">Досрочное прекращение договора страхования по причинам иным, чем наступление страхового случая</td>
+					<td class="center">Обращения Застрахованного (или иного лица, в пользу которого заключен Договор страхования по риску «Дожитие») в течение срока страхования за выплатой ДИД (или его части)</td>
+				</tr>
+				<tr class="invTableSubHeader">
+					<td class="center">Количество полных лет действия договора страхования, истекших до даты <img src="assets/img/invDecl_T.png" alt="Т" width="10" height="10"></td>
+					<td class="center">М</td>
+					<td class="center">М</td>
+					<td class="center">М</td>
+				</tr>
+
+				<tr>
+					<td class="center">0</td>
+					<td class="center">0%</td>
+					<td class="center">{{invDeclaration.insurerShareExpensesByYear_0_Percent}}%</td>
+					<td class="center">{{invDeclaration.insurerShareExpensesByYear_0_Percent}}%</td>
+				</tr>
+
+				<tr>
+					<td class="center">1</td>
+					<td class="center">0%</td>
+					<td class="center">{{invDeclaration.insurerShareExpensesByYear_1_Percent}}%</td>
+					<td class="center">{{invDeclaration.insurerShareExpensesByYear_1_Percent}}%</td>
+				</tr>
+
+				<tr>
+					<td class="center">2</td>
+					<td class="center">0%</td>
+					<td class="center">{{invDeclaration.insurerShareExpensesByYear_2_Percent}}%</td>
+					<td class="center">{{invDeclaration.insurerShareExpensesByYear_2_Percent}}%</td>
+				</tr>
+
+				<tr>
+					<td class="center">3 и более</td>
+					<td class="center">0%</td>
+					<td class="center">{{invDeclaration.insurerShareExpensesByYear_3_Percent}}%</td>
+					<td class="center">{{invDeclaration.insurerShareExpensesByYear_3_Percent}}%</td>
+				</tr>
+
+			</table>
+
+			<div class="textJustify pageBreakAfterAvoid"><strong><span class="invPInd1">4</span>Стоимость инвестиционного счета</strong></div>
+			<div class="textJustify"><span class="invPInd2">4.1</span>Стоимость инвестиционного счета на дату начала периода инвестирования определяется в соответствии с п. 1.6 Декларации.</div>
+			<div class="textJustify"><span class="invPInd2">4.2</span>Стоимость инвестиционного счета на дату расчета <img src="assets/img/invDecl_T.png" alt="Т" width="10" height="10"> определяется как стоимость активов, относящихся к инвестиционному счету, за вычетом начисленных, но не списанных расходов Страховщика:</div>
+			<div class="center margin_top_10"><img src="assets/img/invDecl_C_IC(T)=C_A(T)-C_P(T).png" alt="С_ИС(Т)=С_А(Т)- С_Р(Т)" width="150" height="12"></div>
+
+			<table class="invTableNoBorders">
+				<col class="col1">
+				<col class="col2">
+				<col class="col3">
+
+				<tr class="invTableNoBorders">
+					<td class="invTableNoBorders invTableEndowmentText">Где</td>
+					<td class="invTableNoBorders invTableEndowmentText"><img src="assets/img/invDecl_T.png" alt="Т" width="10" height="10"></td>
+					<td class="invTableNoBorders invTableEndowmentText">- дата расчета, не ранее даты начала периода инвестирования;</td>
+				</tr>
+
+				<tr class="invTableNoBorders">
+					<td class="invTableNoBorders invTableEndowmentText"></td>
+					<td class="invTableNoBorders invTableEndowmentText"><img src="assets/img/invDecl_C_IC(T).png" alt="С_ИС(Т)" width="40" height="10"></td>
+					<td class="invTableNoBorders invTableEndowmentText">- стоимость инвестиционного счета на дату расчета <img src="assets/img/invDecl_T.png" alt="Т" width="10" height="10"></td>
+				</tr>
+
+				<tr class="invTableNoBorders">
+					<td class="invTableNoBorders invTableEndowmentText"></td>
+					<td class="invTableNoBorders invTableEndowmentText"><img src="assets/img/invDecl_C_A(T).png" alt="С_Р(Т)" width="40" height="10"></td>
+					<td class="invTableNoBorders invTableEndowmentText">- стоимость активов, относящихся к инвестиционному счету, определенная по справедливой
+						стоимости Страховщиком в соответствии внутренними нормативными документами на дату расчета
+						<img src="assets/img/invDecl_T.png" alt="Т" width="10" height="10">. Оценка справедливой стоимости активов осуществляется
+						Страховщиком в соответствии с Международным стандартом финансовой отчетности (IFRS) 13 «Оценка справедливой стоимости»,
+						введенным в действие на территории Российской Федерации приказом Министерства финансов Российской Федерации от 28.12.2015 № 217н.
+					</td>
+				</tr>
+
+				<tr class="invTableNoBorders">
+					<td class="invTableNoBorders invTableEndowmentText"></td>
+					<td class="invTableNoBorders invTableEndowmentText"><img src="assets/img/invDecl_C_P(T).png" alt="С_Р(Т)" width="40" height="10"></td>
+					<td class="invTableNoBorders invTableEndowmentText">- расходы Страховщика, определенные в соответствии с п. 3.1 Декларации.</td>
+				</tr>
+			</table>
+
+			<div class="textJustify invParagraph pageBreakAfterAvoid"><span class="invPInd1">5</span>Порядок определения и выплаты дополнительного инвестиционного дохода</div>
+			<div class="textJustify">
+				<span class="invPInd2">5.1</span>ДИД (или его часть) выплачивается при наступлении страховых случаев по рискам «Дожитие», «Смерть»
+				и по причинам иным, чем наступление страхового случая, а также в случае обращения Застрахованного
+				(или иного лица, в пользу которого заключен договор страхования по риску «Дожитие»)
+				в течение срока страхования за выплатой ДИД (или его части).
+			</div>
+			<div class="textJustify">
+				<span class="invPInd2">5.2</span>Размер ДИД рассчитывается на даты определения ДИД, установленные в следующем порядке:
+			</div>
+
+			<table class="invTable">
+				<col class="col1">
+				<col class="col2">
+				<tr class="invTableHeader">
+					<td class="center">Основание выплаты ДИД</td>
+					<td class="center">Дата определения ДИД</td>
+				</tr>
+				<tr>
+					<td class="invTableEndowmentText">Наступление страхового случая по риску «Дожитие»</td>
+					<td class="invTableEndowmentText">Самая ранняя из двух дат:
+						<div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1) дата окончания срока страхования;</div>
+						<div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2) дата получения заявления на страховую выплату + 5 рабочих дней</div>
+					</td>
+				</tr>
+				<tr>
+					<td class="invTableEndowmentText">Наступление страхового случая по риску «Смерть»</td>
+					<td class="invTableEndowmentText">Дата принятия решения о страховой выплате + 5 рабочих дней</td>
+				</tr>
+				<tr>
+					<td class="invTableEndowmentText">Досрочное прекращение договора страхования по причинам иным, чем наступление страхового случая</td>
+					<td class="invTableEndowmentText">Дата получения заявления на досрочное прекращение договора + 5 рабочих дней</td>
+				</tr>
+				<tr>
+					<td class="invTableEndowmentText">Обращения Застрахованного (или иного лица, в пользу которого заключен Договор страхования по риску «Дожитие»)
+						в течение срока страхования за выплатой ДИД (или его части)
+					</td>
+					<td class="invTableEndowmentText">Первое число календарного месяца, следующего за датой обращения Застрахованного
+						(или иного лица, в пользу которого заключен договор страхования по риску «Дожитие»)
+						за выплатой ДИД (или его части) + 5 рабочих дней
+					</td>
+				</tr>
+			</table>
+
+			<div class="textJustify"><span class="invPInd2">5.3</span>В случае ненаступления рисков, указанных в разделе 7 Декларации,
+				размер ДИД определяется на дату расчета <img src="assets/img/invDecl_T.png" alt="Т" width="10" height="10"> как
+				стоимость инвестиционного счета <img src="assets/img/invDecl_C_IC(T).png" alt="С_ИС(Т)" width="40" height="10"> на дату расчета:</div>
+			<div class="center margin_top_5"><img src="assets/img/invDecl_DID(T)=C_IC(T).png" alt="ДИД(Т)=С_ИС(Т)" width="150" height="18"></div>
+			<div class="textJustify"><span class="invPInd2">5.4</span>Выплата ДИД (или его части) осуществляется за вычетом расходов
+				Страховщика <img src="assets/img/invDecl_M.png" alt="M" width="10" height="10"> на досрочное прекращение
+				договора страхования или выплаты ДИД (или его части) в течение срока страхования:</div>
+			<div class="center margin_top_5"><img src="assets/img/invDecl_Payment_DID=(100%-M)kDID(T).png" alt="Выплата_ДИД=(100%-М)*k*ДИД(Т)" width="250" height="14"></div>
+
+			<div class="textJustify">Где <img src="assets/img/invDecl_k_sm.png" alt="k" width="10" height="10"> - доля выплачиваемого ДИД (в % от размера ДИД) определяется в зависимости от основания выплаты ДИД:</div>
+			<table class="invTableEndowmentK">
+				<col class="col1">
+				<col class="col2">
+				<tr class="invTableHeader">
+					<td class="center">Основание выплаты ДИД</td>
+					<td class="center"><img src="assets/img/invDecl_k_sm.png" alt="k" width="10" height="10"></td>
+				</tr>
+				<tr>
+					<td class="invTableEndowmentText">Наступление страхового случая по риску «Дожитие»</td>
+					<td class="invTableEndowmentText">100%</td>
+				</tr>
+				<tr>
+					<td class="invTableEndowmentText">Наступление страхового случая по риску «Смерть»</td>
+					<td class="invTableEndowmentText">100%</td>
+				</tr>
+				<tr>
+					<td class="invTableEndowmentText">Досрочное прекращение договора страхования по причинам иным, чем наступление страхового случая</td>
+					<td class="invTableEndowmentText">100%</td>
+				</tr>
+				<tr>
+					<td class="invTableEndowmentText">Обращения Застрахованного (или иного лица, в пользу которого заключен
+						Договор страхования по риску «Дожитие») в течение срока
+						страхования за выплатой ДИД (или его части)
+					</td>
+					<td class="invTableEndowmentText">Доля указывается в заявлении на выплату ДИД</td>
+				</tr>
+			</table>
+
+			<div>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<img src="assets/img/invDecl_M.png" alt="M" width="10" height="10"> – доля расходов Страховщика (в % от размера ДИД) на досрочное прекращение
+				договора страхования или выплаты ДИД (или его части) в течение срока страхования,
+				определенная в соответствии с п. 3.2 Декларации.
+			</div>
+
+			<div class="textJustify"><span class="invPInd2">5.5</span>Стоимость инвестиционного счета уменьшается на размер определенного к выплате ДИД (или его части).</div>
+
+			<div class="textJustify invParagraph pageBreakAfterAvoid"><span class="invPInd1">6</span>Порядок информирования о размере рассчитанного дополнительного инвестиционного дохода</div>
+			<div class="textJustify"><span class="invPInd2">6.1</span>Страховщик после расчета ДИД в соответствии с разделом 5 Декларации информирует лицо,
+				в пользу которого заключен договор страхования по риску «Дожитие»
+				(далее – Выгодоприобретатель по риску «Дожитие») о размере рассчитанного
+				ДИД одним или несколькими способами:
+			</div>
+			<div class="textJustify"><span class="invPInd3">6.1.1</span>смс-уведомление и/или телефонный звонок по номеру телефона, указанному в имеющихся у Страховщика документах;</div>
+			<div class="textJustify"><span class="invPInd3">6.1.2</span>уведомление по электронной почте по адресу электронной почты, указанному в имеющихся у Страховщика документах;</div>
+			<div class="textJustify"><span class="invPInd3">6.1.3</span>нарочно или посредством почтовой связи по адресу регистрации, указанному в имеющихся у Страховщика документах;</div>
+			<div class="textJustify"><span class="invPInd3">6.1.4</span>посредством размещения информации на своем сайте в информационно-телекоммуникационной сети Интернет,
+				в т. ч. в «Личном кабинете» – информационном ресурсе, размещенном на сайте Страховщика,
+				или в мобильном приложении – программном обеспечении, предназначенном для работы
+				на мобильных устройствах (смартфон, планшет и др.), используемом для доступа к информационным ресурсам Страховщика.
+			</div>
+			<div class="textJustify"><span class="invPInd2">6.2</span>В случае если Выгодоприобретатель по риску «Дожитие» не совпадает со Страхователем / Застрахованным
+				по риску «Дожитие» Страховщик информирует Выгодоприобретателя по риску «Дожитие» о размере ДИД,
+				рассчитанного в соответствии с настоящей Декларацией, в течение 30 календарных дней с даты его
+				обращения к Страховщику одним или несколькими способами, указанными в п. 6.1 Декларации.
+			</div>
+			<div class="textJustify"><span class="invPInd2">6.3</span>Страховщик может не информировать Выгодоприобретателя по риску «Дожитие» о размере ДИД,
+				рассчитанного в соответствии с настоящей Декларацией, если в течение 30 календарных дней
+				с даты обращения Выгодоприобретателя по риску «Дожитие» будет осуществлена выплата
+				ДИД и/или от Выгодоприобретателя по риску «Дожитие» не поступало заявление о предоставлении расчета ДИД.
+			</div>
+
+			<div class="textJustify invParagraph pageBreakAfterAvoid"><span class="invPInd1">7</span>Основные риски</div>
+			<div class="textJustify">
+				<span class="invPInd2">7.1</span>Инвестирование связано с принятием рисков. Цель настоящего раздела – предоставить
+				Страхователю информацию о рисках, связанных с инвестированием, а также предупредить о возможных потерях,
+				которые могут негативно повлиять на стоимость инвестиционного счета,
+				а соответственно на размер ДИД и возможность его выплаты.
+			</div>
+			<div class="textJustify">
+				<span class="invPInd2">7.2</span>В случае невозможности получения Страховщиком средств от реализации инвестиционных активов
+				по независящим от него причинам, в том числе реализации рисков, указанных
+				в настоящем пункте (и в зависимости от их характера), Страховщик вправе полностью
+				или в течение определенного периода времени не распределять, не начислять,
+				не рассчитывать и не выплачивать ДИД:
+			</div>
+			<div class="textJustify">
+				<span class="invPInd3">7.2.1</span>Кредитный риск. Риск потерь в результате полного или частичного неисполнения
+				обязательств со стороны лиц, определенных п.п. 1.4, 1.5, 1.8 Декларации, в силу их
+				неплатежеспобности или отказа от исполнения обязательств по другим причинам.
+				В период срока действия договора страхования в случае изменения/замены лиц,
+				указанных в п.п. 1.4, 1.5, 1.8 Декларации, кредитный риск переходит на лиц,
+				заменяющих выбывшие из правоотношений.
+			</div>
+			<div class="textJustify">
+				<span class="invPInd3">7.2.2</span>Прочие риски (не отраженные в Декларации вследствие разнообразия ситуаций,
+				возникающих на финансовом рынке), которые могут повлиять на возможность выплатить ДИД,
+				если такие риски предусмотрены страховым законодательством Российской Федерации.
+			</div>
+			<div class="textJustify">
+				<span class="invPInd2">7.3</span>В случае реализации указанных ниже рисков ДИД может быть равен нулю:
+			</div>
+			<div class="textJustify">
+				<span class="invPInd3">7.3.1</span>Рыночный риск. Риск проявляется в неблагоприятном изменении стоимости
+				финансовых инструментов, в том числе из-за неблагоприятного изменения политической ситуации,
+				резкой девальвации национальной валюты, кризиса рынка государственных долговых обязательств,
+				банковского и валютного кризиса, обстоятельств непреодолимой силы, главным образом стихийного
+				и военного характера, и как следствие, приводит к снижению доходности или даже убыткам.
+			</div>
+			<div class="textJustify">
+				<span class="invPInd3">7.3.2</span>Риск изменения кредитного качества контрагентов, определенных п.п. 1.4, 1.5, 1.8 Декларации,
+				а также замены на иных контрагентов, кредитное качество которых может быть ниже.
+			</div>
+			<div class="textJustify">
+				<span class="invPInd3">7.3.3</span>Специфический риск компании. Риск, свойственный исключительно инвестициям
+				в ценные бумаги конкретной компании, проистекающий из её внутренних особенностей.
+				Он дополняет риски, присущие всему фондовому рынку в целом. Страхователь самостоятельно
+				определяет состав контрагентов, указанных в п. 1.4, 1.5, 1.8 Декларации,
+				и несет риски, связанные с данными контрагентами.
+			</div>
+			<div class="textJustify">
+				<span class="invPInd3">7.3.4</span>Процентный риск. Проявляется в неблагоприятном изменении процентной ставки,
+				влияющей на стоимость облигаций.
+			</div>
+			<div class="textJustify">
+				<span class="invPInd3">7.3.5</span>Валютный риск. Проявляется в изменении курса рубля по отношению
+				к иностранным валютам, в т. ч. в случае осуществления выплаты эмитентом/контрагентом
+				по инструментам, номинированным в иностранной валюте, в рублёвом эквиваленте.
+			</div>
+			<div class="textJustify">
+				<span class="invPInd3">7.3.6</span>Риск ликвидности. Этот риск проявляется в снижении возможности или
+				в невозможности реализовать финансовые инструменты по необходимой цене из-за снижения спроса на них.
+				Данный риск может проявиться, в частности, при необходимости продажи финансовых инструментов,
+				в убытках, связанных со значительным снижением их стоимости. При определенных рыночных условиях
+				ликвидировать позиции или оценить их рыночную стоимость может быть невозможно.
+			</div>
+			<div class="textJustify">
+				<span class="invPInd3">7.3.7</span>Прочие риски (не отраженные в Декларации вследствие разнообразия ситуаций,
+				возникающих на финансовом рынке), которые могут повлиять на стоимость инструментов
+				финансового рынка и, как следствие, на величину ДИД.
+			</div>
+			<div class="textJustify">
+				<span class="invPInd2">7.4</span>Страховщик не выступает с инвестиционными рекомендациями и не гарантирует выплату ДИД.
+			</div>
+			<div class="textJustify">
+				<span class="invPInd2">7.5</span>Страхователь понимает и принимает указанные риски.
+			</div>
+
+			<div class="signatureHolder2"></div>
+
+		</div>
+	</div>
+
+	<!-- Памятка ЦБ -->
+	<div class="containerCBRF break CBRPage">
+
+		<div class="logoDivCBRF">
+			<img class="resizelogoCBRF" src="../component/POImageConst/printout/assets/img/logoHeader.png" alt="Логотип Росгосстрах Жизнь">
+		</div>
+
+		<div class="mainInfoCBR">
+			<p class="boldText">Информация<br>
+				о договоре добровольного страхования, в том числе о его<br>
+				условиях и рисках, связанных с его исполнением<br>
+				по программе «{{cbrMemo.policy.product}}» № {{cbrMemo.policy.number}} от {{cbrMemo.policy.issueDate}} г.
+			</p>
+			<br>
+			<p>Используйте информацию, содержащуюся в данной таблице,<br>
+				при принятии решения о том, подходит ли Вам предлагаемая<br>
+				услуга с учетом уровня Вашего среднемесячного дохода<br>
+			</p>
+		</div>
+
+		<div class="right-side-three-col">
+			<col class="col1">
+			<col class="col2">
+			<col class="col3">
+			<table class="firstTable">
+				<tr>
+					<td class="tdThreeCol"><u><strong>Разница между<br>страховой суммой<br>по риску<br>«Дожитие» и
+								<br>совокупной<br>страховой
+								премией<br>по договору<br>добровольного<br>страхования</strong></u>
+					</td>
+					<td class="tdThreeCol"><u><strong>Разница между<br>страховой суммой<br>по риску «Смерть»
+								<br>совокупной<br>страховой премией<br>по
+								договору<br>добровольного<br>страхования</strong></u>
+					</td>
+					<td class="tdThreeCol"><u><strong>Разница между<br>страховой суммой<br>по риску «Смерть<br>
+								НС» и совокупной<br>страховой премией<br>по
+								договору<br>добровольного<br>страхования</strong></u>
+					</td>
+				</tr>
+				<tr>
+					<td><u><strong>{{cbrMemo.differenceDLP36914.printDiffSurvavial1}}<sup>1</sup>
+								{{cbrMemo.differenceDLP36914.printDiffSurvavial2}}</strong></u></td>
+					<td><u><strong>{{cbrMemo.differenceDLP36914.printDiffDeath1}}<sup>1</sup>
+								{{cbrMemo.differenceDLP36914.printDiffDeath2}}</strong></u></td>
+					<td><u><strong>{{cbrMemo.differenceDNS36414.printDiffDeath1}}<sup>1</sup>
+								{{cbrMemo.differenceDNS36414.printDiffDeath2}}</strong></u></td>
+				</tr>
+			</table>
+		</div>
+
+		<div class="CBRTable">
+			<table class="secondTable">
+				<col class="col1">
+				<col class="col2">
+				<col class="col3">
+				<tr>
+					<td class="boldText textCentered">№ п/п</td>
+					<td class="boldText textCentered" colspan="2">
+						ОПИСАНИЕ СОДЕРЖАНИЯ ПРЕДОСТАВЛЯЕМОЙ ИНФОРМАЦИИ
+					</td>
+				</tr>
+				<tr>
+					<td class="textCenter">1</td>
+					<td>
+						<div class="indent">Информация о Страховщике</div>
+					</td>
+					<td>
+						<div class="indent"><strong>Полное наименование:</strong> Общество с ограниченной
+							ответственностью Страховая
+							компания «Росгосстрах
+							Жизнь»
+							(далее – Страховая компания или Страховщик). Лицензии Банка России {{cbrMemo.insurer.license}}.
+						</div>
+						<br>
+						<div class="indent"><strong>Кредитный рейтинг:</strong> {{cbrMemo.creditRating}}</div>
+					</td>
+				</tr>
+				<tr>
+					<td class="textCenter">2</td>
+					<td>
+						<div class="indent">Информация о доходности по договорам добровольного страхования с участием
+							Страхователя в
+							инвестиционном доходе Страховщика, по которым обязательства по уплате страховой суммы по
+							риску
+							Дожитие за 3 (три) предшествующих календарных года прекращены исполнением</div>
+					</td>
+					<td>
+						<div class="indent">
+							Расчет доходности невозможен в силу отсутствия договоров с участием
+							Страхователя в инвестиционном доходе Страховщика, по которым обязательства по уплате
+							страховой суммы по риску Дожитие за 3 (три) календарных года, предшествующих заключению настоящего
+							договора, прекращены исполнением и которые содержат условия, аналогичные заключаемому
+							договору.
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td class="textCenter">3</td>
+					<td>
+						<div class="indent">Предупреждение о риске:</div>
+					</td>
+					<td>
+						<ul>
+							<li>
+								&emsp;&emsp;&emsp;значение (изменение значения) показателей, от которых зависит размер
+								дохода по договору
+								добровольного страхования, и (или) доходность по договорам добровольного страхования в
+								прошлом не гарантирует доход по договору добровольного страхования;
+							</li>
+							<li>
+								&emsp;&emsp;&emsp;договор добровольного страхования не является договором банковского
+								вклада в кредитной
+								организации;
+							</li>
+							<li>
+								&emsp;&emsp;&emsp;переданные по договору добровольного страхования денежные средства не
+								подлежат
+								страхованию в соответствии с Федеральным законом от 23 декабря 2003 года № 177-ФЗ «О
+								страховании вкладов в банках Российской Федерации».
+							</li>
+						</ul>
+					</td>
+				</tr>
+				<tr>
+					<td class="textCenter">4</td>
+					<td>
+						<div class="indent">Информация о праве получателя страховых услуг отказаться от договора
+							добровольного страхования,
+							порядке определения размера страховой выплаты, порядке и сроке осуществления страховой
+							выплаты
+							по каждому страховому риску, обязанности Страховщика удержать налог при расчете страховой
+							выплаты</div>
+					</td>
+					<td>
+						<ul>
+							<li>
+								&emsp;&emsp;&emsp;Страхователь вправе отказаться от договора страхования в течение 14 (четырнадцати)
+								календарных дней со дня его заключения (период охлаждения). Оплаченная страховая премия
+								в полном размере возвращается Страхователю в течение 10 (десяти) рабочих дней, при
+								отсутствии в данном периоде событий, имеющих признаки страхового случая<sup>2</sup>.
+								<br>
+								<div class="indent">По окончании периода охлаждения в случае досрочного расторжения
+									договора страхования
+									Страхователю выплачивается выкупная сумма. Размер выкупной суммы зависит от периода
+									действия договора страхования, соответствующего дате расторжения (приложение к
+									Информации о договоре добровольного страхования, в том числе о его условиях и
+									рисках,
+									связанных с его исполнением).</div>
+							</li>
+							<li>
+								&emsp;&emsp;&emsp;Порядок определения размера страховой выплаты, размер страховой суммы
+								по страховым
+								рискам договора страхования:
+
+								<table class="risksCBR">
+									<col class="col1">
+									<col class="col2">
+									<col class="col3">
+									<tr>
+										<td class="center">Страховой риск</td>
+										<td class="center">Страховая сумма, {{cbrMemo.currency}}</td>
+										<td class="center">Страховая выплата</td>
+									</tr>
+									{{#each cbrMemo.risk.mandatory}}
+										<tr>
+											<td class="twhite">{{this.insuranceRisks}}</td>
+											<td class="twhite center">{{this.sumInsured}}</td>
+											<td class="twhite center">{{this.insurancePayment}}</td>
+										</tr>
+									{{/each}}
+									{{#each cbrMemo.risk.additional}}
+									<tr>
+										<td class="twhite">{{this.insuranceRisks}}</td>
+										<td class="twhite center">{{this.sumInsured}}</td>
+										<td class="twhite center">{{this.insurancePayment}}</td>
+									</tr>
+									{{/each}}
+								</table>
+
+								<div class="indent">
+									Требование (заявление) об осуществлении страховой выплаты может быть предъявлено
+									Страховщику сразу же после наступления страхового случая.
+								</div>
+								<div class="indent">В случае принятия решения об осуществлении страховой выплаты,
+									страховая выплата
+									производится в течение 30 (тридцати) календарных дней со дня получения Страховщиком
+									полного пакета документов на выплату.</div>
+							</li>
+							<li>
+								&emsp;&emsp;&emsp;Страховая компания в случаях, когда она является налоговым агентом,
+								обязана удержать налог при расчете страховой выплаты (выкупной суммы). Ставка налога
+								на доход физических лиц составляет 13% (тринадцать процентов)
+								{{#if cbrMemo.isAfter_01_01_2025}}
+									или 15% (пятнадцать процентов) (в зависимости от размера дохода)
+								{{/if}} для налоговых резидентов Российской Федерации,
+								30% (тридцать процентов) для лиц, не являющихся налоговыми резидентами Российской Федерации.
+							</li>
+						</ul>
+					</td>
+				</tr>
+				<tr>
+					<td class="textCenter">5</td>
+					<td>
+						<div class="indent">Информация о размере денежных средств (в процентах на день предоставления
+							информации),
+							направляемых на обеспечение исполнения обязательств Страховщика по договору добровольного
+							страхования по выплате страховой суммы и инвестиционного дохода</div>
+					</td>
+					<td>
+						<div class="indent">{{cbrMemo.commission.allOutcome}}% от страховой премии (суммы страховых взносов за
+							весь период действия
+							договора страхования) в размере {{cbrMemo.commission.allPremium}} рублей<sup>1</sup>.</div>
+					</td>
+				</tr>
+				<tr>
+					<td class="textCenter">6</td>
+					<td>
+						<div class="indent">Информация о размерах агентского вознаграждения, комиссионного
+							вознаграждения, а также платежей,
+							связанных с заключением и исполнением договора добровольного страхования (в процентах)</div>
+					</td>
+					<td>
+						<div class="indent">{{cbrMemo.commission.allIncome}} %.</div>
+					</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td colspan="2">
+						<div class="indent">Примечание к пунктам 5 и 6:</div>
+						<div class="indent">Сумма денежных средств за весь срок действия договора добровольного
+							страхования, подлежащих
+							передаче получателем страховых услуг, направляется на обеспечение исполнения обязательств
+							Страховщика по выплате выгодоприобретателю страховой суммы и инвестиционного дохода, на
+							выплату
+							агентского вознаграждения, комиссионного вознаграждения, а также на платежи, связанные с
+							заключением и исполнением договора добровольного страхования, и составляет 100% (сто
+							процентов).</div>
+					</td>
+				</tr>
+				<tr>
+					<td class="textCenter">7</td>
+					<td>
+						<div class="indent">Информация о способе определения дохода по договору добровольного
+							страхования жизни, а также,
+							если применимо, перечне показателей, от значения (изменения значений) которых зависит размер
+							дохода по договору добровольного страхования</div>
+					</td>
+
+					<td>
+						<div class="indent">
+							Страховщик в течение периода инвестирования приобретает следующие выбранные Страхователем инвестиционные активы,
+							которые формируют структуру инвестиционного счета:
+
+							{{#each invDeclaration.shares}}
+								{{this.payOffTypePrintout}}: {{this.strategy.strategyName}} (эмитент: {{this.strategy.emitent}}; ISIN: {{this.strategy.isin}});
+							{{/each}}
+
+							{{#each invDeclaration.bonds}}
+								{{this.payOffTypePrintout}}: {{this.strategy.strategyName}} (эмитент: {{this.strategy.emitent}}; ISIN: {{this.strategy.isin}});
+							{{/each}}
+
+							{{#each invDeclaration.depositaryReceipts}}
+								{{this.payOffTypePrintout}}: {{this.strategy.strategyName}} (эмитент: {{this.strategy.emitent}}; ISIN: {{this.strategy.isin}});
+							{{/each}}
+
+							{{#each invDeclaration.americanDepositaryReceipts}}
+								{{this.payOffTypePrintout}}: {{this.strategy.strategyName}} (эмитент: {{this.strategy.emitent}}; ISIN: {{this.strategy.isin}});
+							{{/each}}
+
+							Инструменты денежного рынка (брокерский счет: {{invDeclaration.brokerAccountNumber}}, {{invDeclaration.brokerName}};
+							расчетный счет: {{invDeclaration.bankAccount}}, {{invDeclaration.bankFullName}}).
+							В период действия договора страхования структура инвестиционного счета может измениться
+							по соглашению сторон / по результатам инвестирования, о чем Страховщик информирует
+							Страхователя согласованным сторонами способом.
+						</div>
+
+						<div class="indent">
+							Размер ДИД определяется как стоимость инвестиционного счета
+							<img src="assets/img/invDecl_C_IC(T).png" alt="С_ИС(Т)" width="40" height="10"> на дату
+							расчета <img src="assets/img/invDecl_T.png" alt="Т" width="10" height="10">.
+							Выплата ДИД (или его части) осуществляется за вычетом расходов Страховщика (<img src="assets/img/invDecl_M.png" alt="M" width="10" height="10">) на досрочное прекращение
+							договора страхования или выплаты ДИД (или его части) в течение срока страхования.
+						</div>
+
+						<div class="indent">
+							Стоимость инвестиционного счета (<img src="assets/img/invDecl_C_IC(T).png" alt="С_ИС(Т)" width="40" height="10">) на дату
+							расчета <img src="assets/img/invDecl_T.png" alt="Т" width="10" height="10"> определяется по формуле:
+							<img src="assets/img/invDecl_C_IC(T)=C_A(T)-C_P(T).png" alt="С_ИС(Т)=С_А(Т)- С_Р(Т)" width="150" height="12">,
+							где <img src="assets/img/invDecl_C_A(T).png" alt="С_Р(Т)" width="40" height="10"> - стоимость активов, относящихся к инвестиционному счету,
+							определенная по справедливой стоимости Страховщиком в соответствии внутренними нормативными
+							документами на дату расчета <img src="assets/img/invDecl_T.png" alt="Т" width="10" height="10">;
+							<img src="assets/img/invDecl_C_P(T).png" alt="С_Р(Т)" width="40" height="10"> - расходы Страховщика.
+						</div>
+
+						<div class="indent">
+							Расходы Страховщика:
+						</div>
+						<div class="indent">
+							1) Расходы Страховщика (<img src="assets/img/invDecl_C_P(T).png" alt="С_Р(Т)" width="40" height="10">) на администрирование договора страхования рассчитываются
+							на дату расчета <img src="assets/img/invDecl_T.png" alt="Т" width="10" height="10"> по формуле: <img src="assets/img/invDecl_C_P(T)-C_IC(T-1)PM.png" alt="С_Р(Т)=С_ИС(Т-1)*Р/m" width="160" height="30">,
+							где <img src="assets/img/invDecl_C_IC(T-1).png" alt="С_ИС(Т-1)" width="65" height="10"> - стоимость инвестиционного счета,
+							определенная Страховщиком на дату, предшествующую дате расчета <img src="assets/img/invDecl_T.png" alt="Т" width="10" height="10">;
+							<img src="assets/img/invDecl_P.png" alt="P" width="10" height="10"> - показатель расходов Страховщика
+							на администрирование договора страхования, выраженный в процентах от суммарной стоимости активов
+							инвестиционного счета, установленный на дату расчета <img src="assets/img/invDecl_T.png" alt="Т" width="10" height="10"> (годовой показатель
+							<img src="assets/img/invDecl_P.png" alt="P" width="10" height="10"> составляет {{invDeclaration.investmentMFPercent}}%
+							на дату начала периода инвестирования); <img src="assets/img/invDecl_m_sm.png" alt="m" width="10" height="8"> - количество календарных дней в году (365 или 366),
+							соответствующем дате расчета <span><img src="assets/img/invDecl_T.png" alt="Т" width="10" height="10">.</span>
+						</div>
+						<div class="indent">
+							2) Доля расходов Страховщика (<img src="assets/img/invDecl_M.png" alt="M" width="10" height="10">), выраженная в процентах от размера ДИД, на досрочное
+							прекращение договора страхования или выплаты ДИД (или его части) в течение срока страхования
+							зависит от основания выплаты ДИД и количества полных лет действия договора страхования, истекших до даты <img src="assets/img/invDecl_T.png" alt="Т" width="10" height="10">:
+						</div>
+						<div class="indent">
+							а) <img src="assets/img/invDecl_M.png" alt="M" width="10" height="10"> = 0%, в случае выплаты ДИД при наступлении страхового случая по рискам «Дожитие»
+							или «Смерть», а также в случае досрочного прекращения договора страхования и/или выплаты ДИД (или его части)
+							в течение срока страхования, если на дату расчета <img src="assets/img/invDecl_T.png" alt="Т" width="10" height="10">
+							договор страхования действовал более 4 полных лет (включительно);
+						</div>
+						<div class="indent">
+							б) <img src="assets/img/invDecl_M.png" alt="M" width="10" height="10"> = {{invDeclaration.insurerShareExpensesByYear_0_Percent}}% в случае досрочного прекращения договора страхования и/или выплаты ДИД (или его части)
+							в течение срока страхования, если на дату расчета <img src="assets/img/invDecl_T.png" alt="Т" width="10" height="10">
+							договор страхования действовал менее 1 полного года;
+						</div>
+						<div class="indent">
+							в) <img src="assets/img/invDecl_M.png" alt="M" width="10" height="10"> = {{invDeclaration.insurerShareExpensesByYear_1_Percent}}% в случае досрочного прекращения договора страхования и/или выплаты ДИД (или его части)
+							в течение срока страхования, если на дату расчета <img src="assets/img/invDecl_T.png" alt="Т" width="10" height="10">
+							договор страхования действовал менее 2 полных лет;
+						</div>
+						<div class="indent">
+							г) <img src="assets/img/invDecl_M.png" alt="M" width="10" height="10"> = {{invDeclaration.insurerShareExpensesByYear_2_Percent}}% в случае досрочного прекращения договора страхования и/или выплаты ДИД (или его части)
+							в течение срока страхования, если на дату расчета <img src="assets/img/invDecl_T.png" alt="Т" width="10" height="10">
+							договор страхования действовал менее 3 полных лет.
+						</div>
+
+						<div class="indent">
+							ДИД не выплачивается в случаях, которые предусмотрены страховым законодательством Российской Федерации,
+							а также в случаях, когда Страховщик не рассчитал ДИД согласно условиям договора страхования в связи с тем, что:
+						</div>
+
+						<div class="indent">
+							1)     ДИД по договору страхования зависит от исполнения обязательств лицом, обязанным по ценной бумаге,
+							и/или стороной договора, являющегося производным финансовым инструментом, договора банковского вклада,
+							поименованным в договоре страхования, и такие лица не исполнили свои обязательства;
+						</div>
+						<div class="indent">
+							2)     получение Страховщиком информации о значении (изменении значения) показателя, от которого зависит
+							размер ДИД по договору страхования, невозможно и у Страховщика имеются документы,
+							подтверждающие невозможность получения такой информации.
+						</div>
+
+						<div class="indent boldText">
+							Дополнительно рекомендуем ознакомиться с Инвестиционной декларацией (приложение к договору страхования),
+							особенно с рисками, связанными с инвестированием.
+						</div>
+
+					</td>
+
+				</tr>
+			</table>
+		</div>
+
+		<div class="CBRSmall">
+			<p><sup>1</sup>По курсу Банка России на дату заключения договора страхования, в случае если договор
+				страхования заключен в валюте отличной от рублей</p>
+			<p><sup>2</sup>Указание Банка России от 20.11.2015 № 3854-У «О минимальных (стандартных) требованиях к
+				условиям и порядку осуществления отдельных видов добровольного страхования».</p>
+		</div>
+		<div class="signatureHolder2">
+			<div class="signatureText">{{cbrMemo.holder.signatureName}}</div>
+		</div>
+	</div>
+
+	<!-- Таблица выкупных сумм ЦБ -->
+	<div class="CBRHeader break CBRPage">
+
+		<p class="CBRheaderAlign">
+			Приложение к Информации о договоре добровольного страхования, в том числе о его условиях и рисках,
+			связанных
+			с его исполнением
+			<br>по программе «{{cbrMemo.policy.product}}» № {{cbrMemo.policy.number}} от {{cbrMemo.policy.issueDate}} г.
+		</p>
+
+		<p class="center">Таблица выкупных сумм</p>
+
+		<p class="textJustify">
+			При расторжении договора страхования выкупная сумма определяется в пределах сформированного
+			в установленном порядке страхового резерва на день прекращения договора страхования.
+		</p>
+
+		<div class="CBRTable">
+			<table class="CBRPlusSurrenderValues">
+				<col class="col1">
+				<col class="col2">
+				<col class="col3">
+				<tr>
+					<td class="center" colspan="2"><strong>Период действия договора страхования</strong></td>
+					<td class=" center" rowspan="2"><strong>Выкупная сумма, {{cbrMemo.currency}}</strong></td>
+				</tr>
+				<tr>
+					<td class="center"><strong>начало</strong></td>
+					<td class="center"><strong>окончание</strong></td>
+				</tr>
+				{{#each cbrMemo.surrenderValues}}
+				<tr>
+					<td class="center">{{this.periodStartDate}}</td>
+					<td class="center">{{this.periodEndDate}}</td>
+					<td class="center">{{this.surrenderValue}}</td>
+				</tr>
+				{{/each}}
+			</table>
+		</div>
+		<div class="signatureHolder2">
+			<div class="signatureText">{{cbrMemo.holder.signatureName}}</div>
+		</div>
+	</div>
+
+
+
+</body>
+
+</html>

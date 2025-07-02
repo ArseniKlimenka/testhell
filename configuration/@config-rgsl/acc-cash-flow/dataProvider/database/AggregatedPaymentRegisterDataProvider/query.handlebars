@@ -1,0 +1,26 @@
+select
+	reg.AGGREGATED_PAYMENT_REGISTER_ID,
+	reg.AGGREGATED_PAYMENT_NUMBER,
+	reg.BANK_STATEMENT_NUMBER,
+	reg.SMALL_PAYMENT_NUMBER,
+	reg.PAYMENT_DATE,
+	reg.PAYER_FULL_NAME,
+	reg.PAYMENT_DESCRIPTION,
+	reg.CONTRACT_BEGIN_DATE,
+	reg.PRODUCT_NAME,
+	reg.PAYMENT_AMOUNT,
+	reg.CURRENCY_CODE,
+	reg.CONTRACT_DURATION,
+	reg.ADDITIONAL_INFORMATION,
+	reg.SEGMENT,
+	case when bsi.BANK_STATEMENT_ITEM_ID is not null then 1 else 0 end as HAS_PAYMENT
+from
+	ACC_IMPL.AGGREGATED_PAYMENT_REGISTER reg
+	left join acc_impl.BANK_STATEMENT_ITEM bsi on bsi.AGGREGATED_PAYMENT_REGISTER_ID = reg.AGGREGATED_PAYMENT_REGISTER_ID
+WHERE 1=1
+{{#if parameters.aggregatedPaymentNumber}}
+	and reg.AGGREGATED_PAYMENT_NUMBER = @aggregatedPaymentNumber
+{{/if}}
+{{#if parameters.bankStatementNo}}
+	and reg.BANK_STATEMENT_NUMBER = @bankStatementNo
+{{/if}}

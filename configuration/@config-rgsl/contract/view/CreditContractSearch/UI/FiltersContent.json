@@ -1,0 +1,35 @@
+{
+    "type": "Group",
+    "formProperties": {
+        "events": {}
+    },
+    "elements": [
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "Lookup",
+                    "label": "policyHolder",
+                    "value": {
+                        "$ref": "#"
+                    },
+                    "width": 1,
+                    "dialogButton": {},
+                    "clearButton": {
+                        "clearAction": "policyHolderClearAction"
+                    },
+                    "dialog": {
+                        "viewReference": {
+                            "configurationCodeName": "GeneralPartySearchView",
+                            "configurationVersion": "1",
+                            "configurationConceptType": "SearchView"
+                        },
+                        "onLoad": "policyHolderOnLoad"
+                    },
+                    "onSelected": "policyHolderOnSelected",
+                    "selectedDisplayValueTemplate": "{{expr resultData.fullName}}"
+                }
+            ]
+        }
+    ]
+}

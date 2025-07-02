@@ -1,0 +1,174 @@
+{
+    "dimensions": {
+        "contractType": "Amendment",
+        "amendmentType": "FinancialChange",
+        "productGroup": "investment",
+        "premiumEvent": "financialChange"
+    },
+    "entityType": "Contract",
+    "validFrom": "2000-01-01",
+    "ui": {
+        "layout": "VersionedDocumentLayout",
+        "composition": {
+            "SummaryContent": "SummaryContent",
+            "MainContent": "MainContent"
+        }
+    },
+    "states": [
+        {
+            "name": "Draft",
+            "actors": [
+                {
+                    "actor": "Operations",
+                    "transitions": [
+                        "Draft_to_OperationsApproval",
+                        "Draft_to_Cancelled"
+                    ],
+                    "uiSchema": "MainContent",
+                    "allowComments": true,
+                    "operations": [
+                        "Save"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "OperationsApproval",
+            "actors": [
+                {
+                    "actor": "Operations",
+                    "transitions": [
+                        "OperationsApproval_to_Cancelled",
+                        "OperationsApproval_to_Activated"
+                    ],
+                    "uiSchema": "MainContent",
+                    "allowComments": true,
+                    "operations": [
+                        "Save"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Activated",
+            "actors": [
+                {
+                    "actor": "Operations",
+                    "transitions": [],
+                    "uiSchema": "MainContent",
+                    "allowComments": true,
+                    "operations": []
+                },
+                {
+                    "actor": "System",
+                    "uiSchema": "MainContent",
+                    "operations": [
+                        "Save"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Cancelled",
+            "actors": [
+                {
+                    "actor": "Operations",
+                    "transitions": [],
+                    "uiSchema": "MainContent"
+                },
+                {
+                    "actor": "System",
+                    "uiSchema": "MainContent",
+                    "operations": [
+                        "Save"
+                    ]
+                }
+            ]
+        }
+    ],
+    "transitions": {
+        "OperationsApproval_to_Activated": {
+            "transitionEffects": {
+                "enrich": [
+                    "/amendmentData/amendmentAttachmentsPackage"
+                ]
+            }
+        }
+    },
+    "version": "1",
+    "components": [
+        "PolicyFinChangeAmendmentMainAttrs",
+        "PolicyFinChangeAmendmentApplicationInfo",
+        "PolicyChangeAmendmentInfo"
+    ],
+    "attachments": [
+        {
+            "attachmentType": "changeApplication",
+            "flow": "Incoming"
+        },
+        {
+            "attachmentType": "amendment",
+            "flow": "Incoming"
+        },
+        {
+            "attachmentType": "amendmentSign",
+            "flow": "Incoming"
+        },
+        {
+            "attachmentType": "copyPassport",
+            "flow": "Incoming"
+        },
+        {
+            "attachmentType": "bankDetails",
+            "flow": "Incoming"
+        },
+        {
+            "attachmentType": "attorney",
+            "flow": "Incoming"
+        },
+        {
+            "attachmentType": "additionalQuestionnaireTab",
+            "flow": "Incoming"
+        },
+        {
+            "attachmentType": "additionalQuestionnaire",
+            "flow": "Incoming"
+        },
+        {
+            "attachmentType": "medicalDocuments",
+            "flow": "Incoming"
+        },
+        {
+            "attachmentType": "servicesMemo",
+            "flow": "Incoming"
+        },
+        {
+            "attachmentType": "incomeConfirmation",
+            "flow": "Incoming"
+        },
+        {
+            "attachmentType": "recalculation",
+            "flow": "Incoming"
+        },
+        {
+            "attachmentType": "preCalculation",
+            "flow": "Incoming"
+        },
+        {
+            "attachmentType": "paymentOrder",
+            "flow": "Incoming"
+        },
+        {
+            "attachmentType": "policyholderRepresentativeInsured",
+            "flow": "Incoming"
+        },
+        {
+            "attachmentType": "other",
+            "flow": "Incoming"
+        },
+        {
+            "attachmentType": "paymentConfirmation",
+            "flow": "Incoming"
+        }
+    ]
+}

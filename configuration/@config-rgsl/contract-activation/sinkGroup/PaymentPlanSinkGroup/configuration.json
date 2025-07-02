@@ -1,0 +1,29 @@
+{
+    "sinks": [
+        {
+            "name": "GetPolicyData",
+            "fetch": {
+                "configuration": {
+                    "name": "ContractBodyDataSource"
+                }
+            }
+        },
+        {
+            "name": "GetPolicyPaymentPlanData",
+            "fetch": {
+                "configuration": {
+                    "name": "GetPaymentPlanShortDataSource"
+                }
+            }
+        },
+        {
+            "name": "PolicyPaymentPlan",
+            "database": {
+                "tables": [
+                    "PAS_IMPL.P_PAYMENT_PLAN_LINK",
+                    "PAS_IMPL.P_PAYMENT_PLAN_SAT"
+                ]
+            }
+        }
+    ]
+}

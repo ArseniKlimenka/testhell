@@ -1,0 +1,125 @@
+{
+    "type": "GridLayout",
+    "numberOfColumns": 4,
+    "elements": [
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "Button",
+                    "onClick": [
+                        {
+                            "commandType": "executeAction",
+                            "actionName": "removeAttachmentFromUpload"
+                        }
+                    ],
+                    "value": {
+                        "$ref": "#/properties/"
+                    },
+                    "backgroundColor": "BackgroundColor",
+                    "icon": {
+                        "name": "Times",
+                        "size": "Medium",
+                        "color": "Primary"
+                    },
+                    "rule": {
+                        "effect": "HIDE",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "hideDeleteButtonOnEdit",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    }
+                }
+            ],
+            "width": 4,
+            "stackContent": "Right"
+        },
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "Input",
+                    "control": "Dropdown",
+                    "label": "Attachment Type",
+                    "filter": "attachmentTypeFilter",
+                    "source": {
+                        "valueFieldName": "type",
+                        "displayFieldName": "typeName",
+                        "reloadOnOpen": true,
+                        "array": {
+                            "$ref": "#/properties/Body/properties/availableAttachmentTypes"
+                        }
+                    },
+                    "rule": {
+                        "effect": "DISABLE_INITIAL",
+                        "condition": {
+                            "type": "LEAF",
+                            "expected": "Outgoing",
+                            "value": {
+                                "$ref": "#/properties/flow"
+                            }
+                        }
+                    },
+                    "value": {
+                        "$ref": "#/properties/attachmentType"
+                    },
+                    "onValueChanged": "setAttachmentName",
+                    "width": 2
+                },
+                {
+                    "type": "Input",
+                    "label": "Attachment Name",
+                    "rule": {
+                        "effect": "DISABLE_INITIAL",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "disableFieldsOnEditingPrintout",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    },
+                    "value": {
+                        "$ref": "#/properties/attachmentName"
+                    },
+                    "width": 2
+                }
+            ],
+            "width": 4
+        },
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "Input",
+                    "readOnly": true,
+                    "label": "File",
+                    "rule": {
+                        "effect": "HIDE",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "hideFieldsOnEdit",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    },
+                    "value": {
+                        "$ref": "#/properties/file/properties/name"
+                    },
+                    "width": 2
+                }
+            ],
+            "width": 4
+        }
+    ]
+}

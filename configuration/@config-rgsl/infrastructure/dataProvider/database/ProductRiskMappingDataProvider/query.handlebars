@@ -1,0 +1,236 @@
+﻿SELECT 
+	MAP_ID,
+	PRODUCT_NAME,
+	CONTRACT_TERM,
+	PRODUCT_PREFIX,
+	PRODUCT_CODE_SAP,
+	PRODUCT_TARIFF,
+	PRODUCT_VERSION,
+	PRODUCT_TYPE_SAP,
+      PRODUCT_TYPE_ADINSURE,
+	COVER,
+	RISK,
+	RISK_SHORT_NAME_SAP,
+	RISK_FULL_NAME_SAP,
+	RISK_MANDATORY,
+	OBJECT_TYPE,
+	STRATEGY_TYPE,
+      INDEX_NAME,
+	STRATEGY_CODE_DESCRIPTION,
+	LLOB,
+	CURRENCY,
+	FIRST_INST_INTO_3_PAYMENT,
+	POLICYHOLDER_IS_INSURED,
+	PACKAGE_NUMBER,
+	ZZATLEASTONE_GROUP,
+	VPDVORM,
+      VPDAUSM,
+	QUESTIONNAIRE_CODE,
+	QUESTIONNAIRE_MANDATORY,
+	AGENT,
+	INSURED_MIN_AGE_FOR_COVER,
+	INSURED_MAX_AGE_FOR_COVER,
+      PRODUCT_TYPE_CODE,
+	ID,
+	PRODUCT_CODE,
+	STRATEGY_CODE,
+      STRATEGY_DESCRIPTION_FULL,
+	PRODUCT_TYPE,
+	ENDOWMENT_PAYMENT,
+	ENDOWMENT_PAYMENT_DESCRIPTION,
+	PRODUCT_DESCRIPTION,
+	RISK_CODE,
+	RISK_SHORT_NAME,
+	RISK_FULL_NAME,
+	ENDOWMENT_PACKAGE,
+	MANDATORY,
+	BUSINESS_LINE,
+	REPLACEABLE_RISK,
+	QUESTIONNAIRE_SHOW,
+	PARTNER_CODE,
+	PARTNER_SHORT_DESCRIPTION,
+	PARTNER_BUSINESS_CODE,
+	CURRENCY_CODE,
+	CURRENCY_NUMERIC_CODE,
+	CURRENCY_DESCRIPTION,
+	INSURED_MIN_AGE_FOR_PRODUCT,
+	INSURED_MAX_AGE_FOR_PRODUCT,
+      PRODUCT_ACTIVE_TO,
+      EFR
+FROM PAS_IMPL.EFR_PRODUCT_RISK
+WHERE 1=1
+   {{#if parameters.mapId}}
+         and MAP_ID = @mapId
+   {{/if}}
+   {{#if parameters.productName}}
+         and PRODUCT_NAME = @productName
+   {{/if}}
+   {{#if parameters.contractTerm}}
+         and CONTRACT_TERM = @contractTerm
+   {{/if}}
+   {{#if parameters.productPrefix}}
+         and PRODUCT_PREFIX = @productPrefix
+   {{/if}}
+   {{#if parameters.productCodeSap}}
+         and PRODUCT_CODE_SAP = @productCodeSap
+   {{/if}}
+   {{#if parameters.productTariff}}
+         and PRODUCT_TARIFF = @productTariff
+   {{/if}}
+   {{#if parameters.productVersion}}
+         and PRODUCT_VERSION = @productVersion
+   {{/if}}
+   {{#if parameters.productTypeSap}}
+         and PRODUCT_TYPE_SAP = @productTypeSap
+   {{/if}}
+   {{#if parameters.productTypeAdInsure}}
+         and PRODUCT_TYPE_ADINSURE = @productTypeAdInsure
+   {{/if}}
+   {{#if parameters.cover}}
+         and COVER in (@cover)
+   {{/if}}
+   {{#if parameters.risk}}
+         and RISK = @risk
+   {{/if}}
+   {{#if parameters.riskShortNameSap}}
+         and RISK_SHORT_NAME_SAP = @riskShortNameSap
+   {{/if}}
+   {{#if parameters.riskFullNameSap}}
+         and RISK_FULL_NAME_SAP = @riskFullNameSap
+   {{/if}}
+   {{#if parameters.riskMandatory}}
+         and RISK_MANDATORY = @riskMandatory
+   {{/if}}
+   {{#if parameters.objectType}}
+         and OBJECT_TYPE = @objectType
+   {{/if}}
+   {{#if parameters.strategyType}}
+         and STRATEGY_TYPE = @strategyType
+   {{/if}}
+   {{#if parameters.strategyCodeDescription}}
+         and STRATEGY_CODE_DESCRIPTION = @strategyCodeDescription
+   {{/if}}
+   {{#if parameters.llob}}
+         and LLOB = @llob
+   {{/if}}
+   {{#if parameters.currency}}
+         and CURRENCY = @currency
+   {{/if}}
+   {{#if parameters.firstInstInto3Payments}}
+         and FIRST_INST_INTO_3_PAYMENT = @firstInstInto3Payments
+   {{/if}}
+   {{#if parameters.policyHolderIsInsured}}
+         and POLICYHOLDER_IS_INSURED = @policyHolderIsInsured
+   {{/if}}
+   {{#if parameters.packageNumber}}
+         and PACKAGE_NUMBER = @packageNumber
+   {{/if}}
+   {{#if parameters.zzAtLeastOneGroup}}
+         and ZZATLEASTONE_GROUP = @zzAtLeastOneGroup
+   {{/if}}
+   {{#if parameters.vpdvorm}}
+         and VPDVORM = @vpdvorm
+   {{/if}}
+      {{#if parameters.vpdausm}}
+         and VPDAUSM = @vpdausm
+   {{/if}}
+   {{#if parameters.questionnaireCode}}
+         and QUESTIONNAIRE_CODE = @questionnaireCode
+   {{/if}}
+   {{#if parameters.questionnaireMandatory}}
+         and QUESTIONNAIRE_MANDATORY = @questionnaireMandatory
+   {{/if}}
+   {{#if parameters.agent}}
+         and AGENT = @agent
+   {{/if}}
+   {{#if parameters.insuredMinAgeForCover}}
+         and INSURED_MIN_AGE_FOR_COVER = @insuredMinAgeForCover
+   {{/if}}
+   {{#if parameters.insuredMaxAgeForCover}}
+         and INSURED_MAX_AGE_FOR_COVER = @insuredMaxAgeForCover
+   {{/if}}
+   {{#if parameters.id}}
+         and ID = @id
+   {{/if}}
+   {{#if parameters.productCode}}
+         and PRODUCT_CODE = @productCode
+   {{/if}}
+   {{#if parameters.strategyCode}}
+         and STRATEGY_CODE = @strategyCode
+   {{/if}}
+   {{#if parameters.productType}}
+         and PRODUCT_TYPE = @productType
+   {{/if}}
+   {{#if parameters.endowmentPayment}}
+         and ENDOWMENT_PAYMENT = @endowmentPayment
+   {{/if}}
+   {{#if parameters.endowmentPaymentDescription}}
+         and ENDOWMENT_PAYMENT_DESCRIPTION = @endowmentPaymentDescription
+   {{/if}}
+   {{#if parameters.productDescription}}
+         and PRODUCT_DESCRIPTION = @productDescription
+   {{/if}}
+   {{#if parameters.riskCode}}
+         and RISK_CODE = @riskCode
+   {{/if}}
+   {{#if parameters.riskCodes}}
+         and RISK_CODE IN (@riskCodes)
+   {{/if}}
+   {{#if parameters.riskShortName}}
+         and RISK_SHORT_NAME = @riskShortName
+   {{/if}}
+   {{#if parameters.riskFullName}}
+         and RISK_FULL_NAME = @riskFullName
+   {{/if}}
+   {{#if parameters.endowmentPackage}}
+         and ENDOWMENT_PACKAGE = @endowmentPackage
+   {{/if}}
+   {{#if parameters.mandatory}}
+         and MANDATORY = @mandatory
+   {{/if}}
+   {{#if parameters.businessLine}}
+         and BUSINESS_LINE = @businessLine
+   {{/if}}
+   {{#if parameters.replaceableRisk}}
+         and REPLACEABLE_RISK = @replaceableRisk
+   {{/if}}
+   {{#if parameters.questionnaireShow}}
+         and QUESTIONNAIRE_SHOW = @questionnaireShow
+   {{/if}}
+   {{#if parameters.partnerCode}}
+         and PARTNER_CODE = @partnerCode
+   {{/if}}
+   {{#if parameters.partnerShortDescription}}
+         and PARTNER_SHORT_DESCRIPTION = @partnerShortDescription
+   {{/if}}
+   {{#if parameters.partnerBusinessCode}}
+         and PARTNER_BUSINESS_CODE = @partnerBusinessCode
+   {{/if}}
+   {{#if parameters.currencyCode}}
+         and CURRENCY_CODE = @currencyCode
+   {{/if}}
+   {{#if parameters.currencyNumericCode}}
+         and CURRENCY_NUMERIC_CODE = @currencyNumericCode
+   {{/if}}
+   {{#if parameters.currencyDescription}}
+         and CURRENCY_DESCRIPTION = @currencyDescription
+   {{/if}}
+   {{#if parameters.insuredMinAgeForProduct}}
+         and INSURED_MIN_AGE_FOR_PRODUCT = @insuredMinAgeForProduct
+   {{/if}}
+   {{#if parameters.insuredMaxAgeForProduct}}
+         and INSURED_MAX_AGE_FOR_PRODUCT = @insuredMaxAgeForProduct
+   {{/if}}
+   {{#if parameters.productActiveTo}}
+         and PRODUCT_ACTIVE_TO = @productActiveTo
+   {{/if}}
+   {{#if parameters.isProductClosed}}
+         and (PRODUCT_ACTIVE_TO IS NOT NULL AND PRODUCT_ACTIVE_TO != '' AND PRODUCT_ACTIVE_TO <= (SELECT CAST( GETDATE() AS Date )))
+   {{/if}}
+   {{#if parameters.contracts}}
+         and PRODUCT_DESCRIPTION in (@contractProductDescription)
+         and (STRATEGY_DESCRIPTION_FULL in 
+            (@contractInvestmentStrategyDescription) OR STRATEGY_DESCRIPTION_FULL IS NULL)
+         and PRODUCT_CODE in (@contractProductCode)
+         and PRODUCT_TYPE_SAP in (@contractProductGroupDescription)
+   {{/if}}

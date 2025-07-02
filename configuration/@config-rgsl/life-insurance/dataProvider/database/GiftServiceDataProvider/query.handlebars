@@ -1,0 +1,11 @@
+﻿SELECT
+    gs.ID,
+	gs.NAME,
+	gs.CODE,
+	gs.DESCRIPTION
+FROM
+    BFX_IMPL.GIFT_SERVICE gs
+WHERE 1=1
+{{#if parameters.serviceName}}
+    AND gs.NAME = serviceName
+{{/if}}

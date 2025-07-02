@@ -1,0 +1,38 @@
+{
+    "input": {
+        "number": "00666/1",
+        "originalDocumentNumber": "00666",
+        "state": "Active",
+        "commonBody": {
+            "parties": {
+                "otherParties": [
+                    {
+                        "roleCode": "Payer",
+                        "personCode": "Payer1",
+                        "attributes": {
+                            "paymentType": "Transfer2"
+                        }
+                    }
+                ]
+            },
+            "items": [
+                {
+                    "attributes": {
+                        "currency": "ABC"
+                    }
+                }
+            ]
+        }
+    },
+    "expectedResult": {
+        "ACC_IMPL.REFERENCE_NUMBER": [
+            {
+                "REFERENCE_NO": "00666",
+                "DOCUMENT_NO": "00666",
+                "PAYMENT_TYPE_CODE": "Transfer2",
+                "DOCUMENT_TYPE_ID": 1,
+                "CURRENCY_CODE": "ABC"
+            }
+        ]
+    }
+}

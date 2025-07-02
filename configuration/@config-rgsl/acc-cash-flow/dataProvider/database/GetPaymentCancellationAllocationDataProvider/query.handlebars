@@ -1,0 +1,36 @@
+select
+	pcis.RECORD_KEY,
+	pcih.BANK_STATEMENT_ITEM_ID,
+	bsi.STATUS_ID,
+	pcis.ERROR_MESSAGE as PAYMENT_ERROR_MESSAGE,
+	(
+		select
+			alc.ALLOCATION_ID as allocationId,
+			alc.CANCELLED as cancelled,
+			pca.ERROR_MESSAGE as errorMessage
+		from
+			acc_impl.PAYMENT_CANCELLATION_ALLOCATION_LINK pcal
+			inner join acc_impl.ALLOCATION alc on alc.ALLOCATION_ID = pcal.ALLOCATION_ID
+			left join acc_impl.PAYMENT_CANCELLATION_ALLOCATION_SAT_LATEST pca on pca.PAYMENT_CANCELLATION_ALLOCATION_HKEY = pcal.PAYMENT_CANCELLATION_ALLOCATION_HKEY
+		where pcal.PAYMENT_CANCELLATION_ITEM_HKEY = pcis.PAYMENT_CANCELLATION_ITEM_HKEY
+		for json path
+	) as ALLOCATIONS
+from
+	acc_impl.PAYMENT_CANCELLATION_ITEM_HUB pcih
+	inner join acc_impl.PAYMENT_CANCELLATION_ITEM_SAT_LATEST pcis on pcis.PAYMENT_CANCELLATION_ITEM_HKEY = pcih.PAYMENT_CANCELLATION_ITEM_HKEY
+	inner join acc_impl.BANK_STATEMENT_ITEM bsi on bsi.BANK_STATEMENT_ITEM_ID = pcih.BANK_STATEMENT_ITEM_ID
+where 1=1
+	and pcih.IMPORT_DOCUMENT_ID = @paymentCancellationId
+{{#if parameters.notCancelled}}
+	and bsi.STATUS_ID != 3
+{{/if}}
+{{#if parameters.hasNoActiveAllocation}}
+	and not exists (
+		select *
+		from acc_impl.ALLOCATION alc
+		where 1=1
+			and alc.CANCELLED = 0
+			and alc.CANCELLED_ALLOCATION_ID is null
+			and alc.BANK_STATEMENT_ITEM_ID = pcih.BANK_STATEMENT_ITEM_ID
+	)
+{{/if}}

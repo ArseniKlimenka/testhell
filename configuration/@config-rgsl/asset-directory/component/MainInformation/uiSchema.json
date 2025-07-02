@@ -1,0 +1,273 @@
+{
+    "type": "GridLayout",
+    "numberOfColumns": 4,
+    "width": 12,
+    "elements": [
+        {
+            "type": "Dropdown",
+            "label": "Active type",
+            "metadata": {
+                "autogenerate": true
+            },
+            "useParentScope": true,
+            "value": {
+                "$ref": "#/properties/activeType"
+            },
+            "width": 1
+        },
+        {
+            "type": "Input",
+            "control": "String",
+            "label": "Issuer",
+            "metadata": {
+                "autogenerate": true
+            },
+            "useParentScope": true,
+            "value": {
+                "$ref": "#/properties/issuer"
+            },
+            "width": 1
+        },
+        {
+            "type": "Input",
+            "control": "String",
+            "label": "Paper short name",
+            "metadata": {
+                "autogenerate": true
+            },
+            "useParentScope": true,
+            "value": {
+                "$ref": "#/properties/paperShortName"
+            },
+            "width": 1
+        },
+        {
+            "type": "Input",
+            "control": "String",
+            "label": "Information resource",
+            "metadata": {
+                "autogenerate": true
+            },
+            "useParentScope": true,
+            "value": {
+                "$ref": "#/properties/informationResource"
+            },
+            "width": 1
+        },
+        {
+            "type": "Input",
+            "control": "String",
+            "label": "ID / ISIN",
+            "metadata": {
+                "autogenerate": true
+            },
+            "useParentScope": true,
+            "value": {
+                "$ref": "#/properties/idIsin"
+            },
+            "width": 1,
+            "rule": {
+                "effect": "DISABLE_INITIAL",
+                "condition": {
+                    "type": "FUNC",
+                    "ruleFunction": "disableIdIsin",
+                    "value": [
+                        {
+                            "$ref": "#"
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "type": "Dropdown",
+            "label": "Is risk transfered to client",
+            "metadata": {
+                "autogenerate": true
+            },
+            "useParentScope": true,
+            "value": {
+                "$ref": "#/properties/isRiskTransferedToClient"
+            },
+            "width": 1
+        },
+        {
+            "type": "Input",
+            "control": "Number",
+            "decimalPlaces": 4,
+            "label": "Asset size",
+            "metadata": {
+                "autogenerate": true
+            },
+            "useParentScope": true,
+            "value": {
+                "$ref": "#/properties/assetSize"
+            },
+            "width": 1
+        },
+        {
+            "type": "Input",
+            "label": "currency",
+            "value": {
+                "$ref": "#/properties/currency"
+            },
+            "filter": "currencyFilter",
+            "readOnly": false,
+            "control": "Dropdown",
+            "autocomplete": {
+                "minTextLength": 0,
+                "dropDownItemsCount": 1000,
+                "selectItemOnMatch": false
+            },
+            "preSelectFirstItem": true,
+            "source": {
+                "dataSource": {
+                    "name": "CurrenciesDataSource",
+                    "searchFieldPath": "currencySearchText",
+                    "responseMapping": "currencyResponseMapping",
+                    "resultCount": 1000
+                },
+                "displayValueTemplate": "{{expr currencyDesc}} ({{expr currencyCode}})"
+            },
+            "width": 1
+        },
+        {
+            "type": "Input",
+            "control": "Number",
+            "decimalPlaces": 4,
+            "label": "Acquisition Rate",
+            "metadata": {
+                "autogenerate": true
+            },
+            "useParentScope": true,
+            "value": {
+                "$ref": "#/properties/acquisitionRate"
+            },
+            "width": 1
+        },
+        {
+            "type": "Input",
+            "control": "Number",
+            "decimalPlaces": 4,
+            "label": "unitPurchasePrice",
+            "metadata": {
+                "autogenerate": true
+            },
+            "useParentScope": true,
+            "value": {
+                "$ref": "#/properties/unitPurchasePrice"
+            },
+            "width": 1
+        },
+        {
+            "type": "Input",
+            "control": "Number",
+            "decimalPlaces": 4,
+            "label": "bondDenominationInCurrency",
+            "metadata": {
+                "autogenerate": true
+            },
+            "useParentScope": true,
+            "value": {
+                "$ref": "#/properties/bondDenominationInCurrency"
+            },
+            "width": 1
+        },
+        {
+            "type": "Input",
+            "control": "Number",
+            "decimalPlaces": 4,
+            "label": "assetUnitPrice",
+            "metadata": {
+                "autogenerate": true
+            },
+            "useParentScope": true,
+            "value": {
+                "$ref": "#/properties/assetUnitPrice"
+            },
+            "width": 1
+        },
+        {
+            "type": "Input",
+            "control": "Number",
+            "decimalPlaces": 4,
+            "label": "endUnitPrice",
+            "metadata": {
+                "autogenerate": true
+            },
+            "useParentScope": true,
+            "value": {
+                "$ref": "#/properties/endUnitPrice"
+            },
+            "width": 1
+        },
+        {
+            "type": "Input",
+            "control": "Number",
+            "decimalPlaces": 2,
+            "label": "Correction factor",
+            "metadata": {
+                "autogenerate": true
+            },
+            "useParentScope": true,
+            "value": {
+                "$ref": "#/properties/correctionFactor"
+            },
+            "width": 1
+        },
+        {
+            "type": "Input",
+            "control": "Number",
+            "decimalPlaces": 2,
+            "label": "Coupon rate for the asset",
+            "metadata": {
+                "autogenerate": true
+            },
+            "useParentScope": true,
+            "value": {
+                "$ref": "#/properties/assetCouponRate"
+            },
+            "width": 1
+        },
+        {
+            "type": "Input",
+            "decimalPlaces": 2,
+            "label": "Asset maturity date",
+            "metadata": {
+                "autogenerate": true
+            },
+            "useParentScope": true,
+            "value": {
+                "$ref": "#/properties/assetMaturityDate"
+            },
+            "width": 1
+        },
+        {
+            "type": "Input",
+            "control": "Number",
+            "decimalPlaces": 2,
+            "label": "term",
+            "metadata": {
+                "autogenerate": true
+            },
+            "useParentScope": true,
+            "value": {
+                "$ref": "#/properties/term"
+            },
+            "width": 1
+        }
+    ],
+    "studioMetadata": {
+        "autogeneratedNodes": [
+            {
+                "path": "#/properties/assetSize"
+            },
+            {
+                "path": "#/properties/idIsin"
+            },
+            {
+                "path": "#/properties/isRiskTransferedToClient"
+            }
+        ]
+    }
+}

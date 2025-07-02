@@ -1,0 +1,492 @@
+{
+    "dimensions": {
+        "contractType": "Policy",
+        "productGroup": "med"
+    },
+    "entityType": "Contract",
+    "attachments": [
+        {
+            "attachmentType": "other",
+            "flow": "Incoming"
+        },
+        {
+            "attachmentType": "application",
+            "flow": "Incoming"
+        },
+        {
+            "attachmentType": "contractProject",
+            "flow": "Incoming"
+        },
+        {
+            "attachmentType": "contractSigned",
+            "flow": "Incoming"
+        },
+        {
+            "attachmentType": "cancellationApplication",
+            "flow": "Incoming"
+        },
+        {
+            "attachmentType": "changeApplication",
+            "flow": "Incoming"
+        },
+        {
+            "attachmentType": "returnPayments",
+            "flow": "Incoming"
+        },
+        {
+            "attachmentType": "amendment",
+            "flow": "Incoming"
+        },
+        {
+            "attachmentType": "infoLetter",
+            "flow": "Incoming"
+        },
+        {
+            "attachmentType": "issue",
+            "flow": "Incoming"
+        },
+        {
+            "attachmentType": "issueAnswer",
+            "flow": "Incoming"
+        },
+        {
+            "attachmentType": "incomeConfirmation",
+            "flow": "Incoming"
+        },
+        {
+            "attachmentType": "questionary",
+            "flow": "Incoming"
+        },
+        {
+            "attachmentType": "medicalDocuments",
+            "flow": "Incoming"
+        },
+        {
+            "attachmentType": "heritageDocuments",
+            "flow": "Incoming"
+        },
+        {
+            "attachmentType": "a7",
+            "flow": "Incoming"
+        },
+        {
+            "attachmentType": "attorney",
+            "flow": "Incoming"
+        },
+        {
+            "attachmentType": "servicesMemo",
+            "flow": "Incoming"
+        },
+        {
+            "attachmentType": "paymentsSummary",
+            "flow": "Incoming"
+        },
+        {
+            "attachmentType": "bankNotification",
+            "flow": "Incoming"
+        },
+        {
+            "attachmentType": "ApplicationPaymentInvestProfit",
+            "flow": "Incoming"
+        },
+        {
+            "attachmentType": "ApplicationCancellationInvestProfit",
+            "flow": "Incoming"
+        },
+        {
+            "attachmentType": "ApplicationInsuranceClaim",
+            "flow": "Incoming"
+        },
+        {
+            "attachmentType": "ApplicationMed",
+            "flow": "Incoming"
+        },
+        {
+            "attachmentType": "ePolicy",
+            "flow": "Incoming"
+        },
+        {
+            "attachmentType": "ePolicyDigitallySigned",
+            "flow": "Incoming"
+        },
+        {
+            "attachmentType": "holder60plus",
+            "flow": "Incoming"
+        },
+        {
+            "attachmentType": "personalData",
+            "flow": "Incoming"
+        },
+        {
+            "attachmentType": "noticeFinServices",
+            "flow": "Incoming"
+        },
+        {
+            "attachmentType": "KIDAttachment",
+            "flow": "Incoming"
+        },
+        {
+            "attachmentType": "formSeventyPlus",
+            "flow": "Incoming"
+        },
+        {
+            "attachmentType": "managingDirectorUPIP",
+            "flow": "Incoming"
+        },
+        {
+            "attachmentType": "managingDirectorDRPK",
+            "flow": "Incoming"
+        }
+    ],
+    "validFrom": "2000-01-01",
+    "ui": {
+        "layout": "VersionedDocumentLayout",
+        "composition": {
+            "SummaryContent": "SummaryContent",
+            "MainContent": "MainContent"
+        }
+    },
+    "states": [
+        {
+            "name": "Draft",
+            "actors": [
+                {
+                    "actor": "Agent",
+                    "transitions": [
+                        "Draft_to_Active",
+                        "Draft_to_Cancelled"
+                    ],
+                    "uiSchema": "MainContent",
+                    "operations": [],
+                    "relations": []
+                },
+                {
+                    "actor": "Operations",
+                    "transitions": [
+                        "Draft_to_Active",
+                        "Draft_to_Cancelled",
+                        "Draft_to_Active_Operations"
+                    ],
+                    "uiSchema": "MainContent",
+                    "operations": [
+                        "Save"
+                    ],
+                    "relations": []
+                },
+                {
+                    "actor": "Claims",
+                    "transitions": [],
+                    "uiSchema": "MainContent",
+                    "operations": [],
+                    "relations": []
+                },
+                {
+                    "actor": "Viewer",
+                    "transitions": [],
+                    "uiSchema": "MainContent",
+                    "operations": []
+                },
+                {
+                    "actor": "System",
+                    "uiSchema": "MainContent",
+                    "operations": [
+                        "Save"
+                    ],
+                    "transitions": [
+                        "Draft_to_Active_System",
+                        "Draft_to_Active",
+                        "Draft_to_Cancelled",
+                        "Draft_to_Active_Operations"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Active",
+            "actors": [
+                {
+                    "actor": "Agent",
+                    "transitions": [],
+                    "uiSchema": "MainContent",
+                    "operations": [
+                        "Save"
+                    ],
+                    "relations": []
+                },
+                {
+                    "actor": "Operations",
+                    "transitions": [
+                        "Active_to_Cancelled",
+                        "Active_to_Cancelled_Operations"
+                    ],
+                    "uiSchema": "MainContent",
+                    "operations": [
+                        "Save"
+                    ],
+                    "relations": []
+                },
+                {
+                    "actor": "Claims",
+                    "transitions": [],
+                    "uiSchema": "MainContent",
+                    "operations": [],
+                    "relations": []
+                },
+                {
+                    "actor": "Viewer",
+                    "transitions": [],
+                    "uiSchema": "MainContent",
+                    "operations": []
+                },
+                {
+                    "actor": "System",
+                    "transitions": [
+                        "Active_to_Activated",
+                        "Active_to_Cancelled"
+                    ],
+                    "uiSchema": "MainContent",
+                    "operations": [
+                        "Save"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Activated",
+            "actors": [
+                {
+                    "actor": "Agent",
+                    "transitions": [],
+                    "uiSchema": "MainContent",
+                    "operations": [],
+                    "relations": []
+                },
+                {
+                    "actor": "Operations",
+                    "transitions": [
+                        "Activated_to_Completed",
+                        "Activated_to_Cancelled"
+                    ],
+                    "uiSchema": "MainContent",
+                    "operations": [],
+                    "relations": []
+                },
+                {
+                    "actor": "Claims",
+                    "transitions": [],
+                    "uiSchema": "MainContent",
+                    "operations": [],
+                    "relations": []
+                },
+                {
+                    "actor": "Viewer",
+                    "transitions": [],
+                    "uiSchema": "MainContent",
+                    "operations": []
+                },
+                {
+                    "actor": "System",
+                    "transitions": [
+                        "Activated_to_CancelledByAmendment",
+                        "Activated_to_Completed",
+                        "Activated_to_Cancelled"
+                    ],
+                    "uiSchema": "MainContent",
+                    "operations": [
+                        "Save"
+                    ],
+                    "relations": []
+                }
+            ]
+        },
+        {
+            "name": "Cancelled",
+            "actors": [
+                {
+                    "actor": "Agent",
+                    "transitions": [],
+                    "uiSchema": "MainContent",
+                    "operations": []
+                },
+                {
+                    "actor": "Operations",
+                    "transitions": [
+                        "Cancelled_to_Draft",
+                        "Cancelled_to_Active"
+                    ],
+                    "uiSchema": "MainContent",
+                    "operations": [],
+                    "relations": []
+                },
+                {
+                    "actor": "Claims",
+                    "transitions": [],
+                    "uiSchema": "MainContent",
+                    "operations": [],
+                    "relations": []
+                },
+                {
+                    "actor": "Viewer",
+                    "transitions": [],
+                    "uiSchema": "MainContent",
+                    "operations": []
+                },
+                {
+                    "actor": "System",
+                    "transitions": [
+                        "Cancelled_to_Draft",
+                        "Cancelled_to_Active"
+                    ],
+                    "uiSchema": "MainContent",
+                    "operations": [
+                        "Save"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "CancelledByAmendment",
+            "actors": [
+                {
+                    "actor": "Agent",
+                    "transitions": [],
+                    "uiSchema": "MainContent",
+                    "operations": []
+                },
+                {
+                    "actor": "Operations",
+                    "transitions": [],
+                    "uiSchema": "MainContent",
+                    "operations": [],
+                    "relations": []
+                },
+                {
+                    "actor": "Claims",
+                    "transitions": [],
+                    "uiSchema": "MainContent",
+                    "operations": [],
+                    "relations": []
+                },
+                {
+                    "actor": "Viewer",
+                    "transitions": [],
+                    "uiSchema": "MainContent",
+                    "operations": []
+                },
+                {
+                    "actor": "System",
+                    "uiSchema": "MainContent",
+                    "operations": [
+                        "Save"
+                    ],
+                    "transitions": [
+                        "CancelledByAmendment_to_Activated"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Completed",
+            "actors": [
+                {
+                    "actor": "Agent",
+                    "transitions": [],
+                    "uiSchema": "MainContent",
+                    "operations": []
+                },
+                {
+                    "actor": "Operations",
+                    "transitions": [],
+                    "uiSchema": "MainContent",
+                    "operations": [],
+                    "relations": []
+                },
+                {
+                    "actor": "Claims",
+                    "transitions": [],
+                    "uiSchema": "MainContent",
+                    "operations": [],
+                    "relations": []
+                },
+                {
+                    "actor": "Viewer",
+                    "transitions": [],
+                    "uiSchema": "MainContent",
+                    "operations": []
+                },
+                {
+                    "actor": "System",
+                    "transitions": [
+                        "Completed_to_Activated"
+                    ],
+                    "uiSchema": "MainContent",
+                    "operations": []
+                }
+            ]
+        }
+    ],
+    "transitions": {
+        "Draft_to_Active": {
+            "transitionEffects": {
+                "enrich": [
+                    "/attachmentsPackage"
+                ]
+            }
+        },
+        "Draft_to_Active_Operations": {
+            "transitionEffects": {
+                "enrich": [
+                    "/attachmentsPackage"
+                ]
+            }
+        },
+        "Active_to_Activated": {
+            "transitionEffects": {
+                "enrich": [
+                    "/basicConditions[SetOriginalReceiptDate]"
+                ]
+            }
+        },
+        "Activated_to_Cancelled": {
+            "transitionEffects": {
+                "enrich": [
+                    "/allocationInformation"
+                ]
+            }
+        },
+        "Activated_to_Completed": {
+            "transitionEffects": {
+                "enrich": [
+                    "external-data:/lastContractData[GetLastContractData]"
+                ]
+            }
+        }
+    },
+    "version": "1",
+    "components": [
+        "AdditionalServices",
+        "GiftServices",
+        "AttachmentData",
+        "BasicConditions",
+        "BasicInvestmentParameters",
+        "Beneficiaries",
+        "CreateMedLifeInsuranceQuote",
+        "InsuranceRules",
+        "InsuredPerson",
+        "IssueForm",
+        "PaymentPlan",
+        "PolicyHolder",
+        "PolicyTerms",
+        "Promotions",
+        "Risks",
+        "SurrenderValues",
+        "UWTriggers",
+        "MainInsuranceConditions",
+        "InquiriesList",
+        "InsurerComment",
+        "DeclarationMedical",
+        "DeclarationMain",
+        "EPolicyVerification",
+        "MigrationAttributes"
+    ]
+}

@@ -1,0 +1,19 @@
+﻿select g.APPLICATION_USER_GROUP_ID,
+       g.APPLICATION_USER_GROUP_CODE,
+       JSON_VALUE(g.BODY, '$.name') as NAME,
+  (select json_arrayagg(
+      json_object(
+          key 'id' value r.APPLICATION_ROLE_ID,
+          key 'codeName' value asciistr(r.CODE_NAME)))
+   from CFX.USER_GROUP_APPLICATION_ROLE gr
+   join CFG.APPLICATION_ROLE r on r.APPLICATION_ROLE_ID = gr.APPLICATION_ROLE_ID
+   where gr.APPLICATION_USER_GROUP_ID = g.APPLICATION_USER_GROUP_ID) as roles
+from ORG.APPLICATION_USER_GROUP g
+where
+    1 = 1
+{{#if parameters.code}}
+    and UPPER(g.APPLICATION_USER_GROUP_CODE) like UPPER(@code)
+{{/if}}
+{{#if parameters.name}}
+    and UPPER(JSON_VALUE(g.BODY, '$.name')) like UPPER(@name)
+{{/if}}

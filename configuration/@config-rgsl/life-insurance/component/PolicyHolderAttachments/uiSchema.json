@@ -1,0 +1,86 @@
+{
+    "type": "Group",
+    "elements": [
+        {
+            "type": "GroupSeparator"
+        },
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "OutputText",
+                    "label": "policyHolderLabel",
+                    "textProperties": [
+                        "bold"
+                    ],
+                    "literalValue": "policyHolder",
+                    "width": 12
+                }
+            ]
+        },
+        {
+            "type": "InlineView",
+            "showContainerActions": false,
+            "views": [
+                {
+                    "viewReference": {
+                        "configurationCodeName": "LegalEntity",
+                        "configurationVersion": "1",
+                        "configurationConceptType": "Party"
+                    },
+                    "onCreateViewParams": "policyHolderAttachmentsOnCreateViewParams"
+                }
+            ],
+            "rule": {
+                "effect": "SHOW",
+                "condition": {
+                    "type": "FUNC",
+                    "ruleFunction": "policyHolderLegalEntityShow",
+                    "value": [
+                        {
+                            "$ref": "#"
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "type": "InlineView",
+            "showContainerActions": false,
+            "views": [
+                {
+                    "viewReference": {
+                        "configurationCodeName": "NaturalPerson",
+                        "configurationVersion": "1",
+                        "configurationConceptType": "Party"
+                    },
+                    "onCreateViewParams": "policyHolderAttachmentsOnCreateViewParams"
+                }
+            ],
+            "rule": {
+                "effect": "SHOW",
+                "condition": {
+                    "type": "FUNC",
+                    "ruleFunction": "policyHolderNaturalPersonShow",
+                    "value": [
+                        {
+                            "$ref": "#"
+                        }
+                    ]
+                }
+            }
+        }
+    ],
+    "rule": {
+        "effect": "SHOW",
+        "condition": {
+            "type": "FUNC",
+            "ruleFunction": "policyHolderAttachmentsShow",
+            "value": [
+                {
+                    "$ref": "#"
+                }
+            ]
+        }
+    }
+}

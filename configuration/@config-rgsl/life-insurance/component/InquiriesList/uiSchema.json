@@ -1,0 +1,39 @@
+{
+    "type": "Section",
+    "label": "InquiriesList",
+    "elements": [
+        {
+            "type": "InlineView",
+            "showContainerActions": false,
+            "views": [
+                {
+                    "viewReference": {
+                        "configurationCodeName": "InquiriesView",
+                        "configurationVersion": "1",
+                        "configurationConceptType": "SearchView"
+                    },
+                    "onViewInitialized": "documentIdToDataSource",
+                    "viewType": "Search"
+                }
+            ],
+            "value": {
+                "$ref": "#"
+            },
+            "hide": false
+        }
+    ],
+    "sectionLevel": 1,
+    "hide": true,
+    "rule": {
+        "effect": "SHOW",
+        "condition": {
+            "type": "FUNC",
+            "ruleFunction": "showInquiriesList",
+            "value": [
+                {
+                    "$ref": "#"
+                }
+            ]
+        }
+    }
+}

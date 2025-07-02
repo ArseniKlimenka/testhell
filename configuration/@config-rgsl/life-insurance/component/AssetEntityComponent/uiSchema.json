@@ -1,0 +1,44 @@
+{
+    "type": "Section",
+    "elementId": "AssetEntityTab",
+    "title": "Asset Entity",
+    "label": "Asset Entity",
+    "elements": [
+        {
+            "type": "InlineView",
+            "elementId": "AssetEntityInlineViewId",
+            "label": "AssetEntity",
+            "showContainerActions": false,
+            "views": [
+                {
+                    "viewReference": {
+                        "configurationCodeName": "AssetEntity",
+                        "configurationConceptType": "UniversalMasterEntity",
+                        "configurationVersion": "1"
+                    },
+                    "onCreateViewParams": "onCreateViewParamsEntityAdditionalParameters"
+                }
+            ],
+            "value": {
+                "$ref": "#"
+            }
+        },
+        {
+            "type": "Button",
+            "hide": true,
+            "label": "Create Asset Entity",
+            "metadata": {
+                "autogenerate": true
+            },
+            "useParentScope": false,
+            "onClick": [
+                {
+                    "commandType": "executeAction",
+                    "actionName": "createAssetEntity"
+                }
+            ],
+            "width": 2,
+            "elementId": "createAssetEntityButtonId"
+        }
+    ]
+}

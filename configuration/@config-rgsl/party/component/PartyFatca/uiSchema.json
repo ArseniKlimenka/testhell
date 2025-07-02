@@ -1,0 +1,47 @@
+{
+    "type": "Section",
+    "label": "Party Fatca Data",
+    "collapsing": {
+        "initial": false,
+        "enabled": true
+    },
+    "width": 12,
+    "elements": [
+        {
+            "type": "Input",
+            "label": "confirmationExists",
+            "value": {
+                "$ref": "#/properties/confirmationExists"
+            },
+            "width": 4
+        },
+        {
+            "type": "Input",
+            "label": "confirmationDate",
+            "value": {
+                "$ref": "#/properties/confirmationDate"
+            },
+            "width": 4
+        },
+        {
+            "type": "Input",
+            "label": "statusCheckDate",
+            "value": {
+                "$ref": "#/properties/statusCheckDate"
+            },
+            "width": 4
+        }
+    ],
+    "rule": {
+        "effect": "SHOW",
+        "condition": {
+            "type": "FUNC",
+            "ruleFunction": "showFatca",
+            "value": [
+                {
+                    "$ref": "#"
+                }
+            ]
+        }
+    }
+}

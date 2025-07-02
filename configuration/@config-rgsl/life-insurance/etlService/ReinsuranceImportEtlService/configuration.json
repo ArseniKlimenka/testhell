@@ -1,0 +1,69 @@
+{
+    "mainDataSource": "ImportStagingDataSource",
+    "allowParallelExecution": false,
+    "sinks": [
+        {
+            "name": "GetLatestReinsuranceVersion",
+            "fetch": {
+                "configuration": {
+                    "name": "GetReinsuranceImportDataSource"
+                }
+            }
+        },
+        {
+            "name": "CheckServiceProviders",
+            "fetch": {
+                "configuration": {
+                    "name": "GetServiceProviderDataSource"
+                }
+            }
+        },
+        {
+            "name": "CheckContracts",
+            "fetch": {
+                "configuration": {
+                    "name": "ContractVersionsDataSource"
+                }
+            }
+        },
+        {
+            "name": "WriteSuccessStatus",
+            "database": {
+                "tables": [
+                    "BFX.IMPORT_RECORD_STATUS"
+                ]
+            }
+        },
+        {
+            "name": "WriteToReinsuranceTable",
+            "database": {
+                "tables": [
+                    "PAS_IMPL.REINSURANCE"
+                ]
+            }
+        }
+    ],
+    "errorSinks": [
+        {
+            "name": "WriteErrorStatus",
+            "database": {
+                "tables": [
+                    "BFX.IMPORT_RECORD_STATUS"
+                ]
+            }
+        }
+    ],
+    "completionSinks": [
+        {
+            "name": "FinishedImporting",
+            "documentTransition": {
+                "transition": {
+                    "transitionName": "FinishImporting",
+                    "configurationName": "ReinsuranceImport",
+                    "configurationVersion": "1"
+                }
+            }
+        }
+    ],
+    "version": "1"
+}

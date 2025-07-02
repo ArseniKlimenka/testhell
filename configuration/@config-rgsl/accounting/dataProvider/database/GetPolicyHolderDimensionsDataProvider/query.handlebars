@@ -1,0 +1,20 @@
+select
+	ph.CONTRACT_NUMBER,
+	ps.HOLDER_CODE as PARTY_CODE,
+	ptys.TRADING_PARTNER_CODE,
+	ptys.CONFIGURATION_CODE_NAME as PARTY_TYPE,
+	spis.PARTNER_TYPE,
+	spis.PARTNER_CODE as PARTNER_MANUAL_CODE,
+	ispsa.ORDER_NUMBER as INITIATOR_ORDER_NUMBER,
+	rgslb.KSP as INITIATOR_KSP
+from PAS_IMPL.POLICY_HUB ph
+	inner join pas_impl.POLICY_SAT_LATEST ps on ph.POLICY_HKEY = ps.POLICY_HKEY
+	inner join pty_impl.PARTY_HUB ptyh on ps.HOLDER_CODE = ptyh.PARTY_CODE
+	inner join pty_impl.PARTY_INFO_SAT_LATEST ptys on ptys.PARTY_INFO_HKEY = ptyh.PARTY_HKEY
+	inner join org_impl.SERVICE_PROVIDER_HUB psph on psph.SERVICE_PROVIDER_CODE = ps.PARTNER_CODE
+	inner join org_impl.SERVICE_PROVIDER_INFO_SAT_LATEST spis on spis.SERVICE_PROVIDER_INFO_HKEY = psph.SERVICE_PROVIDER_HKEY
+	inner join org_impl.SERVICE_PROVIDER_HUB isph on isph.SERVICE_PROVIDER_CODE = ps.INITIATOR_EMPLOYEE_CODE
+	left join org_impl.SP_SUB_AGENT_SAT_LATEST ispsa on ispsa.SP_SUB_AGENT_HKEY = isph.SERVICE_PROVIDER_HKEY
+	left join bfx_impl.RGS_BRANCHES rgslb on rgslb.ID = ispsa.BRANCH_ID
+where
+	ph.CONTRACT_NUMBER in (@contractNumbers)

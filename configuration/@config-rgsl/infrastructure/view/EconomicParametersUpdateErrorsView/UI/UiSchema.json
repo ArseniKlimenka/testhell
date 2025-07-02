@@ -1,0 +1,101 @@
+{
+    "type": "Group",
+    "elements": [
+        {
+            "type": "GridLayout",
+            "numberOfColumns": 12,
+            "elements": [
+                {
+                    "type": "Group",
+                    "elements": [
+                        {
+                            "type": "DataGrid",
+                            "orderBy": "Description",
+                            "value": {
+                                "$ref": "#"
+                            },
+                            "mode": "DataSource",
+                            "header": {
+                                "showReloadButton": true,
+                                "showNumberOfResults": true
+                            },
+                            "pagination": {
+                                "mode": "Regular",
+                                "pageSizes": [
+                                    5,
+                                    10,
+                                    15
+                                ]
+                            },
+                            "selection": {
+                                "mode": "None"
+                            },
+                            "height": "None",
+                            "columns": [
+                                {
+                                    "sortable": false,
+                                    "title": "Document number",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "skipTranslate": true,
+                                        "allowMultiLine": true,
+                                        "value": {
+                                            "$ref": "#/properties/resultData/properties/number"
+                                        }
+                                    }
+                                },
+                                {
+                                    "sortable": false,
+                                    "title": "Universal master entity code",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "skipTranslate": true,
+                                        "allowMultiLine": true,
+                                        "value": {
+                                            "$ref": "#/properties/resultData/properties/relatedUniMECode"
+                                        }
+                                    }
+                                },
+                                {
+                                    "sortable": false,
+                                    "title": "Error message",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "skipTranslate": true,
+                                        "allowMultiLine": true,
+                                        "value": {
+                                            "$ref": "#/properties/resultData/properties/errorMessage"
+                                        }
+                                    }
+                                },
+                                {
+                                    "sortable": false,
+                                    "title": "Business errors message",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "skipTranslate": true,
+                                        "allowMultiLine": true,
+                                        "value": {
+                                            "$ref": "#/properties/resultData/properties/businessErrors"
+                                        }
+                                    }
+                                },
+                                {
+                                    "sortable": false,
+                                    "title": "Error date",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "template": "{{expr errorDate 'dt'}}",
+                                        "value": {
+                                            "$ref": "#/properties/resultData"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

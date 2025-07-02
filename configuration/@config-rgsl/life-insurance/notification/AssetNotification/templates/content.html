@@ -1,0 +1,37 @@
+<html>
+
+<head></head>
+
+<body>
+    <div>
+        <table align="left" width="1200" border="1" cellspacing="4" cellpadding="4"
+            style="border-collapse: collapse; border:1px solid black;">
+        
+            <tr align="center" bgcolor="dimgray" style="color: white;">
+                <th align="center">ISIN</th>
+                <th align="center">Дата отчета</th>
+                <th align="center">Максимальное количество на клиенте (лимит)</th>
+                <th align="center">Количество актива: выпущено</th>
+                <th align="center">Количество актива: действующие договоры</th>
+                <th align="center">В т.ч. количество актива: действует, идет период охлаждения</th>
+                <th align="center">В т.ч. количество актива: действует, период охлаждения закончен</th>
+                <th align="center">Доступное количество актива для продажи</th>
+            </tr>
+        
+            {{#each content.assets}}
+            <tr align="center" bgcolor="white" color="black">
+                <td align="center">{{this.id_isin}}</td>
+                <td align="center">{{this.reportDate}}</td>
+                <td align="center">{{this.assetSize}}</td>
+                <td align="center">{{this.issuedCount}}</td>
+                <td align="center">{{this.reservedForActivatedAssetUnitsCount}}</td>
+                <td align="center">{{this.contractsInCooloffAssetUnitsCount}}</td>
+                <td align="center">{{this.contractsNotInCooloffAssetUnitsCount}}</td>
+                <td align="center">{{this.availableForSale}}</td>
+            </tr>
+            {{/each}}
+        
+        </table>
+</body>
+
+</html>

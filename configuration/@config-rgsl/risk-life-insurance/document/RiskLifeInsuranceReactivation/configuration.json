@@ -1,0 +1,98 @@
+{
+    "entityType": "Contract",
+    "dimensions": {
+        "contractType": "Amendment",
+        "productGroup": "risk",
+        "amendmentType": "Reactivation"
+    },
+    "version": "1",
+    "validFrom": "2000-01-01",
+    "ui": {
+        "layout": "VersionedDocumentLayout",
+        "composition": {
+            "MainContent": "MainContent",
+            "SummaryContent": "SummaryContent"
+        }
+    },
+    "states": [
+        {
+            "name": "Draft",
+            "actors": [
+                {
+                    "actor": "Operations",
+                    "uiSchema": "MainContent",
+                    "transitions": [
+                        "Draft_to_Cancelled",
+                        "Draft_to_Activated"
+                    ],
+                    "operations": [
+                        "Save"
+                    ],
+                    "relations": [],
+                    "allowComments": true
+                },
+                {
+                    "actor": "Viewer",
+                    "uiSchema": "MainContent",
+                    "transitions": [],
+                    "operations": [],
+                    "relations": []
+                }
+            ]
+        },
+        {
+            "name": "Activated",
+            "actors": [
+                {
+                    "actor": "Operations",
+                    "uiSchema": "MainContent",
+                    "transitions": [],
+                    "operations": [],
+                    "relations": []
+                },
+                {
+                    "actor": "Viewer",
+                    "uiSchema": "MainContent",
+                    "transitions": [],
+                    "operations": [],
+                    "relations": []
+                },
+                {
+                    "actor": "System",
+                    "uiSchema": "MainContent",
+                    "operations": [
+                        "Save"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Cancelled",
+            "actors": [
+                {
+                    "actor": "Operations",
+                    "uiSchema": "MainContent",
+                    "transitions": [],
+                    "operations": [],
+                    "relations": []
+                },
+                {
+                    "actor": "Viewer",
+                    "uiSchema": "MainContent",
+                    "transitions": [],
+                    "operations": [],
+                    "relations": []
+                },
+                {
+                    "actor": "System",
+                    "uiSchema": "MainContent",
+                    "operations": [
+                        "Save"
+                    ]
+                }
+            ]
+        }
+    ],
+    "attachments": [],
+    "components": []
+}

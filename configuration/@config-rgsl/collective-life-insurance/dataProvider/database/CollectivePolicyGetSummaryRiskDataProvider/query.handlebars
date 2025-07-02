@@ -1,0 +1,9 @@
+﻿select
+  RISK_CODE,
+  sum(AMOUNT) AMOUNT,
+  sum(PREMIUM) PREMIUM
+from 
+  PAS_IMPL.COLLECTIVE_POLICY_RISK_DATA
+where CONTRACT_NUMBER = @contractNumber
+group by
+  RISK_CODE

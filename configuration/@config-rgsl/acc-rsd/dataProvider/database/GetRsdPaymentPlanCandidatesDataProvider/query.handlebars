@@ -1,0 +1,32 @@
+with dates as
+(
+	select
+		polh.CONTRACT_NUMBER,
+		convert(varchar, ppsl.LOAD_DATE, 23) as CALCULATION_DATE
+	from
+		pas_impl.POLICY_HUB polh
+		inner join pas_impl.P_PAYMENT_PLAN_LINK ppl on ppl.POLICY_HKEY = polh.POLICY_HKEY
+		inner join pas_impl.P_PAYMENT_PLAN_SAT ppsl on ppsl.P_PAYMENT_PLAN_HKEY = ppl.P_PAYMENT_PLAN_HKEY
+	where 1=1
+		and ppsl.LOAD_DATE >= @from
+		and ppsl.LOAD_DATE < @to
+	union
+	select
+		alc.DOCUMENT_NO as CONTRACT_NUMBER,
+		convert(varchar, alc.CREATE_DATE, 23) as CALCULATION_DATE
+	from
+		ACC_IMPL.ALLOCATION alc
+	where 1=1
+		and alc.DOCUMENT_TYPE_ID = 1
+		and alc.CREATE_DATE >= @from
+		and alc.CREATE_DATE < @to
+)
+select
+	CONTRACT_NUMBER,
+	JSON_QUERY('[' + (select STRING_AGG('"' + CALCULATION_DATE + '"', ', ')) + ']') as DATES
+from dates
+where 1=1
+{{#if parameters.contractNumber}}
+	and CONTRACT_NUMBER = @contractNumber
+{{/if}}
+group by CONTRACT_NUMBER

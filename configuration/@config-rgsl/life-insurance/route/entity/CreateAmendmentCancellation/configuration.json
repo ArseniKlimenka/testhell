@@ -1,0 +1,280 @@
+{
+    "entityType": "UniversalDocument",
+    "condition": {
+        "events": [
+            "StatusChanged"
+        ],
+        "configuration": {
+            "names": [
+                "LifeInsuranceRequest"
+            ]
+        },
+        "documentStates": [
+            "Issued",
+            "CancelWithoutPayment"
+        ]
+    },
+    "allowMultipleTransactions": true,
+    "sinks": [
+        {
+            "name": "CheckRequestType",
+            "document": {}
+        },
+        {
+            "name": "GetExistingRequestAttachments",
+            "fetch": {
+                "configuration": {
+                    "name": "EntitiesAttachmentDataSource"
+                }
+            }
+        },
+        {
+            "name": "GetContract",
+            "fetch": {
+                "configuration": {
+                    "name": "ContractVersionsDataSource"
+                }
+            }
+        },
+        {
+            "name": "GetAllocations",
+            "fetch": {
+                "configuration": {
+                    "name": "AllocationDataSource"
+                }
+            }
+        },
+        {
+            "name": "GetExchangeRate",
+            "class": {
+                "className": "Adacta.AdInsure.RGSL.Common.API.Shared.Services.IRgslCurrencyConverterService, Adacta.AdInsure.RGSL.Common.API",
+                "methodName": "Convert"
+            }
+        },
+        {
+            "name": "GetParty",
+            "fetch": {
+                "configuration": {
+                    "name": "GetPartyDataSource"
+                }
+            }
+        },
+        {
+            "name": "GetHolderData",
+            "fetch": {
+                "configuration": {
+                    "name": "GeneralPartyDataSource"
+                }
+            }
+        },
+        {
+            "name": "GetRequestChangeStateDate",
+            "fetch": {
+                "configuration": {
+                    "name": "DocumentStateHistoryDataSource"
+                }
+            }
+        },
+        {
+            "name": "CreateAccumulatedLifeAmendmentCancellation",
+            "documentRelation": {
+                "relation": {
+                    "relationName": "AccumulatedLifeInsurancePolicyCreateLifeAmendmentCancellationRelation",
+                    "configurationName": "AccumulatedLifeInsurancePolicy",
+                    "configurationVersion": "1"
+                }
+            }
+        },
+        {
+            "name": "CreateEquityLifeAmendmentCancellation",
+            "documentRelation": {
+                "relation": {
+                    "relationName": "EquityLifeInsurancePolicyCreateLifeAmendmentCancellationRelation",
+                    "configurationName": "EquityLifeInsurancePolicy",
+                    "configurationVersion": "1"
+                }
+            }
+        },
+        {
+            "name": "CreateInvestmentLifeAmendmentCancellation",
+            "documentRelation": {
+                "relation": {
+                    "relationName": "InvestmentLifeInsurancePolicyCreateLifeAmendmentCancellationRelation",
+                    "configurationName": "InvestmentLifeInsurancePolicy",
+                    "configurationVersion": "1"
+                }
+            }
+        },
+        {
+            "name": "CreateCreditLifeAmendmentCancellation",
+            "documentRelation": {
+                "relation": {
+                    "relationName": "CreditLifeInsurancePolicyCreateLifeAmendmentCancellationRelation",
+                    "configurationName": "CreditLifeInsurancePolicy",
+                    "configurationVersion": "1"
+                }
+            }
+        },
+        {
+            "name": "CreateRiskLifeAmendmentCancellation",
+            "documentRelation": {
+                "relation": {
+                    "relationName": "RiskLifeInsurancePolicyCreateLifeAmendmentCancellationRelation",
+                    "configurationName": "RiskLifeInsurancePolicy",
+                    "configurationVersion": "1"
+                }
+            }
+        },
+        {
+            "name": "CreateMedLifeAmendmentCancellation",
+            "documentRelation": {
+                "relation": {
+                    "relationName": "MedLifeInsurancePolicyCreateLifeAmendmentCancellationRelation",
+                    "configurationName": "MedLifeInsurancePolicy",
+                    "configurationVersion": "1"
+                }
+            }
+        },
+        {
+            "name": "CreateAccidentLifeAmendmentCancellation",
+            "documentRelation": {
+                "relation": {
+                    "relationName": "AccidentLifeInsurancePolicyCreateLifeAmendmentCancellationRelation",
+                    "configurationName": "AccidentLifeInsurancePolicy",
+                    "configurationVersion": "1"
+                }
+            }
+        },
+        {
+            "name": "AmendmentGetId",
+            "fetch": {
+                "configuration": {
+                    "name": "ContractVersionsDataSource"
+                }
+            }
+        },
+        {
+            "ref": "CopyAttachmentsSinkGroup"
+        },
+        {
+            "name": "UpdateAccumulatedLifeAmendmentCancellation",
+            "document": {
+                "configuration": {
+                    "name": "AccumulatedLifeInsuranceCancellation",
+                    "version": "1"
+                },
+                "allowUpdating": {
+                    "inStates": [
+                        "OperationsApproval"
+                    ]
+                },
+                "allowOnValidationErrors": {
+                    "all": true
+                }
+            }
+        },
+        {
+            "name": "UpdateEquityLifeAmendmentCancellation",
+            "document": {
+                "configuration": {
+                    "name": "EquityLifeInsuranceCancellation",
+                    "version": "1"
+                },
+                "allowUpdating": {
+                    "inStates": [
+                        "OperationsApproval"
+                    ]
+                },
+                "allowOnValidationErrors": {
+                    "all": true
+                }
+            }
+        },
+        {
+            "name": "UpdateInvestmentLifeAmendmentCancellation",
+            "document": {
+                "configuration": {
+                    "name": "InvestmentLifeInsuranceCancellation",
+                    "version": "1"
+                },
+                "allowUpdating": {
+                    "inStates": [
+                        "OperationsApproval"
+                    ]
+                },
+                "allowOnValidationErrors": {
+                    "all": true
+                }
+            }
+        },
+        {
+            "name": "UpdateCreditLifeAmendmentCancellation",
+            "document": {
+                "configuration": {
+                    "name": "CreditLifeInsuranceCancellation",
+                    "version": "1"
+                },
+                "allowUpdating": {
+                    "inStates": [
+                        "OperationsApproval"
+                    ]
+                },
+                "allowOnValidationErrors": {
+                    "all": true
+                }
+            }
+        },
+        {
+            "name": "UpdateRiskLifeAmendmentCancellation",
+            "document": {
+                "configuration": {
+                    "name": "RiskLifeInsuranceCancellation",
+                    "version": "1"
+                },
+                "allowUpdating": {
+                    "inStates": [
+                        "OperationsApproval"
+                    ]
+                },
+                "allowOnValidationErrors": {
+                    "all": true
+                }
+            }
+        },
+        {
+            "name": "UpdateMedLifeAmendmentCancellation",
+            "document": {
+                "configuration": {
+                    "name": "MedLifeInsuranceCancellation",
+                    "version": "1"
+                },
+                "allowUpdating": {
+                    "inStates": [
+                        "OperationsApproval"
+                    ]
+                },
+                "allowOnValidationErrors": {
+                    "all": true
+                }
+            }
+        },
+        {
+            "name": "UpdateAccidentLifeAmendmentCancellation",
+            "document": {
+                "configuration": {
+                    "name": "AccidentLifeInsuranceCancellation",
+                    "version": "1"
+                },
+                "allowUpdating": {
+                    "inStates": [
+                        "OperationsApproval"
+                    ]
+                },
+                "allowOnValidationErrors": {
+                    "all": true
+                }
+            }
+        }
+    ],
+    "version": "1"
+}

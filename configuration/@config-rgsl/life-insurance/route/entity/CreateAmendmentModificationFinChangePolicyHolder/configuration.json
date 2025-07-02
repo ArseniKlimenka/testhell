@@ -1,0 +1,123 @@
+{
+    "entityType": "UniversalDocument",
+    "allowMultipleTransactions": true,
+    "condition": {
+        "events": [
+            "StatusChanged"
+        ],
+        "configuration": {
+            "names": [
+                "LifeInsuranceRequest"
+            ]
+        },
+        "documentStates": [
+            "CreateFinancialPolicyHolderChangeAmendment"
+        ]
+    },
+    "sinks": [
+        {
+            "name": "GetExistingRequestAttachments",
+            "fetch": {
+                "configuration": {
+                    "name": "EntitiesAttachmentDataSource"
+                }
+            }
+        },
+        {
+            "name": "GetContract",
+            "fetch": {
+                "configuration": {
+                    "name": "ContractVersionsDataSource"
+                }
+            }
+        },
+        {
+            "name": "CreateAccumulatedLifeNonFinChangeAmendment",
+            "documentRelation": {
+                "relation": {
+                    "relationName": "AccumulatedLifeInsurancePolicyCreateFinancialChangeAmendmentRelation",
+                    "configurationName": "AccumulatedLifeInsurancePolicy",
+                    "configurationVersion": "1"
+                }
+            }
+        },
+        {
+            "name": "CreateEquityLifeNonFinChangeAmendment",
+            "documentRelation": {
+                "relation": {
+                    "relationName": "EquityLifeInsurancePolicyCreateFinancialChangeAmendmentRelation",
+                    "configurationName": "EquityLifeInsurancePolicy",
+                    "configurationVersion": "1"
+                }
+            }
+        },
+        {
+            "name": "CreateInvestmentLifeNonFinChangeAmendment",
+            "documentRelation": {
+                "relation": {
+                    "relationName": "InvestmentLifeInsurancePolicyCreateFinancialChangeAmendmentRelation",
+                    "configurationName": "InvestmentLifeInsurancePolicy",
+                    "configurationVersion": "1"
+                }
+            }
+        },
+        {
+            "name": "CreateCreditLifeNonFinChangeAmendment",
+            "documentRelation": {
+                "relation": {
+                    "relationName": "CreditLifeInsurancePolicyCreateFinancialChangeAmendmentRelation",
+                    "configurationName": "CreditLifeInsurancePolicy",
+                    "configurationVersion": "1"
+                }
+            }
+        },
+        {
+            "name": "CreateRiskLifeNonFinChangeAmendment",
+            "documentRelation": {
+                "relation": {
+                    "relationName": "RiskLifeInsurancePolicyCreateFinancialChangeAmendmentRelation",
+                    "configurationName": "RiskLifeInsurancePolicy",
+                    "configurationVersion": "1"
+                }
+            }
+        },
+        {
+            "name": "CreateMedLifeNonFinChangeAmendment",
+            "documentRelation": {
+                "relation": {
+                    "relationName": "MedLifeInsurancePolicyCreateFinancialChangeAmendmentRelation",
+                    "configurationName": "MedLifeInsurancePolicy",
+                    "configurationVersion": "1"
+                }
+            }
+        },
+        {
+            "name": "CreateAccidentLifeNonFinChangeAmendment",
+            "documentRelation": {
+                "relation": {
+                    "relationName": "AccidentLifeInsurancePolicyCreateFinancialChangeAmendmentRelation",
+                    "configurationName": "AccidentLifeInsurancePolicy",
+                    "configurationVersion": "1"
+                }
+            }
+        },
+        {
+            "name": "GetAmendmentId",
+            "fetch": {
+                "configuration": {
+                    "name": "ContractVersionsDataSource"
+                }
+            }
+        },
+        {
+            "ref": "CopyAttachmentsSinkGroup"
+        },
+        {
+            "name": "RequestToCreateAmendment",
+            "documentTransition": {
+                "transition": {}
+            }
+        }
+    ],
+    "version": "1"
+}

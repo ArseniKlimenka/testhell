@@ -1,0 +1,239 @@
+{
+    "Logging": {
+        "LogLevel": {
+            "Default": "Trace"
+        }
+    },
+    "appSettings": {
+        "dbDataAccess": {
+            "readSync": true,
+            "writeSync": true
+        },
+        "AdInsure": {
+            "NotificationChannels": {
+                "email": {
+                    "type": "email",
+                    "host": "mail.adacta-fintech.com",
+                    "port": 25,
+                    "username": "",
+                    "password": "",
+                    "useSSL": false,
+                    "sender": {
+                        "name": "Adacta",
+                        "email": "donotreply@adacta-fintech.com"
+                    }
+                },
+                "Adinsure": {
+                    "type": "Adinsure"
+                }
+            },
+            /*
+            Integration of AdInsure with ActiveMQ
+                Uri: ActiveMQ Broker URI
+                Username: ActiveMQ Username
+                Password: ActiveMQ Password
+            */
+            "MessageBroker": {
+                "Password": "user",
+                "Uri": "activemq:tcp://localhost:61616",
+                "Username": "user"
+            },
+            "Healthcheck": {
+                "Enabled": "false"
+            },
+            "Monitoring": {
+                "Enabled": "false"
+            },
+            "Settings": {
+				"Swagger": {
+				  "IdentityEndpointUrl": "http://localhost:60001",
+				  "ClientId": "swagger-ui-client"
+				},
+                "MaxRequestBodySize": 50000000,
+                "OAuthIdentity": {
+                    "IdentityEndpointUrl": "http://localhost:60001/realms/adinsure",
+                    "Audience": "adinsure",
+                    "DiscoveryEndpointUrl": ".well-known/openid-configuration"
+                },
+                "scriptingEnginePools": {
+                    "all": {
+                        "MaxOldSpaceSize": 4096
+                    }
+                },
+                /*
+                Settings for PDFreactor
+                    Debug level: Debug level as string
+                    Url: Url to PDFreactor's REST API for rendering printouts (always append /service/rest)
+                */
+                "PrintoutRenderer": {
+                    "DebugLevel": "All",
+                    "Url": "http://localhost:9423/service/rest",
+                    "StaticAssetsServerBaseUrl": "http://localhost:60010/"
+                },
+                //"MultipartBodyLengthLimit": 134217728,
+                /* Port used by AdInsure's internal node.js server Webpack nodejs server port: Integer (Port) */
+                "WebpackNodejsServerPort": "3000",
+                //"ApplicationUsers": {
+                /* Specifies user claims (additional user properties, ie. attributes) that are stored together with authentication claim AvailableClaimTypes: Name of the claim type */
+                //  "AvailableClaimTypes": "PartyCode,DisplayName,IsUserActive"
+                //},
+                "AuditTrail": {
+                    /* Whether to use audit logging or not */
+                    "EnableAuditing": true,
+                    /* Name of the search engine index used to store audit log */
+                    "AuditLogSearchEngineIndexName": "auditlog"
+                },
+                //"ExternalDirectory": {
+                //  /* External directory LDAP request timeout in seconds (default 30) */
+                //  "LdapRequestTimeout": "30"
+                //},
+                "Extensions": {
+                    /*Path to folder where AdInsure extensions are stored (ASS, printouts, plugins) file system root folder: Path */
+                    "FileSystemRootFolder": "..\\..\\..\\..\\..\\..\\implementation\\extensions\\server"
+                },
+                "Core": {
+                    "LocalCurrencyCode": "RUB"
+                },
+                "General": {
+                    "Language": "ru-RU"
+                },
+                "SearchEngine": {
+                    /*
+                        Integration of AdInsure with ElasticSearch
+                        URL: cluster URI
+                        IndexPrefix: index prefix
+                        User: Username of the search user
+                        Password: Password of the search user
+                        NOTE: Username and password are only viable if the cluster has security enabled (xpack.security.enabled flag)
+                    */
+                    "IndexPrefix": "adinsure_index",
+                    "URL": "http://localhost:9200",
+                    //"User": "elastic",
+                    //"SPassword": "adinsure",
+                    "SniffOnStartup": true
+                },
+                "Log": {
+                    "LogRoot": "..\\..\\..\\Logs"
+                },
+                "JsonSchemas": {
+                    /* THIS SHOULD BE CHANGED ON YOUR OWN RISK! */
+                    "FileStorageRoot": "..\\..\\..\\..\\JsonSchemas\\"
+                },
+                "WebApi": {
+                    /* THIS SHOULD BE CHANGED ON YOUR OWN RISK! */
+                    "request_xml_schema_folders": "..\\..\\..\\..\\Integration"
+                },
+                /* RGSL plugin settings */
+                "RGSL": {
+                    "Integration": {
+                        "Dadata": {
+                            "EnableDadataService": "true",
+                            "Uri": "https://suggestions.dadata.ru/suggestions/api/4_1/rs/suggest/address/",
+                            "Token": "f949daffbafc4ac32b3ec28e2c974fc69d6ddac4"
+                        },
+                        /* KPK plugin setting s*/
+                        //"KPK": {
+                        //  "UserName": "true",
+                        //  "Password": "wl#df9rUuW",
+                        //  "Uri": "http://life-1cw-03/1C_KPK_LIFE2021_PRD/ws/Kpk.1cws"
+                        //},
+                        /* KPK test plugin settings */
+                        "KPK": {
+                            "UserName": "",
+                            "Password": "",
+                            "Uri": "http://localhost:60000/api/rgsl/mock-services/check-contractors/simulate"
+                        },
+                        "BlackList": {
+                            "EnableBlackListService": "true",
+                            "Login": "",
+                            "Password": "",
+                            "Url": "http://localhost:60000/api/rgsl/mock-services/check-black-list/simulate"
+                        },
+                        "Cbr": {
+                            "CurrencyExchangeRatesUrl": "http://www.cbr.ru/scripts/XML_daily.asp",
+                            "WebServiceDailyInfoCbrUrl": "https://www.cbr.ru/DailyInfoWebServ/DailyInfo.asmx",
+                            /* set below option to true for use ProxyCredentialAddressPort for Cbr requests */
+                            "UseProxy": "false"
+                        },
+                        "SAP": {
+                            "Login": "TEST_ADAKTA",
+                            "Password": "Xc$Fpw1zZU",
+                            "CreatePartyUrl": "http://localhost:60000/api/rgsl/mock-services/sap-create-party/simulate",
+                            "UpdatePartyUrl": "http://localhost:60000/api/rgsl/mock-services/sap-update-party/simulate",
+                            "CreateContractUrl": "http://localhost:60000/api/rgsl/mock-services/sap-create-contract/simulate"
+                        },
+                        "DigitalSignature": {
+                            "Uri": "http://localhost:60000/api/rgsl/mock-services/digital-signature/simulate"
+                        },
+                        "SecuritySmsNotification": {
+                            "Uri": "http://localhost:60000/api/rgsl/mock-services/sms-notification/simulate",
+                            "SecurityCodeExpirationInMinutes": "5",
+                            "SecurityCodeCooldownInMinutes": "1",
+                            "SmsServiceLogin": "rgsl4",
+                            "SmsServicePassword": "5tUu3qwz"
+                        },
+                        "AuthService": {
+                            "Scope": "adinsure",
+                            "ClientId": "services",
+                            "ClientSecret": "kMXHSBJ2cVRiYmnbMfmAw2lKlwulR72J"
+                        },
+                        "Rosfinmonitoring": {
+                            "FormatVersion": "2.0",
+                            "SoftwareVersion": "ПорталРФМ 01",
+                            "CorrespondentId": "2000039473",
+                            "OutputFolder": "..\\..\\..\\Output\\"
+                        },
+                        "GetContractDataCustomService": {
+                            "EnableLogging": false
+                        },
+                        "SendEvent": {
+                            "EnableLogging": false
+                        },
+                        "Fns": {
+                            "FormatVersion": "5.01",
+                            "OutputFolder": "..\\..\\..\\Output\\"
+                        },
+                        "NalogPDF": {
+                            "OutputFolder": "/"
+                        }
+                    }
+                },
+                "AssetServer": {
+                    "PublicUpload": {
+                        "Url": "http://localhost:60010/",
+                        "Username": "adinsure",
+                        "Password": "adinsure"
+                    }
+                }
+            }
+        }
+    },
+    "MessagingInfrastructure": {
+        "messageBusses": {
+            "Default": {
+                "transport": {
+                    /* UPGRADE_TODO: Temporal workaround for a strange timeouts on docker */
+                    "connectionString": "Endpoint=failover:(tcp://localhost:61616)?transport.startupMaxReconnectAttempts=3&transport.timeout=5000&connection.requestTimeout=1000;Username=user;Password=user"
+                }
+            }
+        },
+        "messageChannels": {
+            "RGSL.Accounting.CashFlow.BSI.Index": {
+                "topology": "PointToPoint",
+                "producer": {
+                    "outbox": {
+                        "outboxType": "InMemory"
+                    }
+                }
+            },
+            "RGSL.Accounting.CashFlow.Allocation.AllocationFinished": {
+                "topology": "PointToPoint",
+                "producer": {
+                    "outbox": {
+                        "outboxType": "InMemory"
+                    }
+                }
+            }
+        }
+    }
+}

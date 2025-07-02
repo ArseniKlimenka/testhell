@@ -1,0 +1,149 @@
+{
+    "id": "SuccessfullyImportedContractEntityAttributesUiSchema",
+    "type": "Group",
+    "elements": [
+        {
+            "type": "GridLayout",
+            "numberOfColumns": 4,
+            "elements": [
+                {
+                    "type": "Group",
+                    "elements": [
+                        {
+                            "type": "DataGrid",
+                            "orderBy": "Description",
+                            "mode": "DataSource",
+                            "header": {
+                                "showReloadButton": true,
+                                "showNumberOfResults": true
+                            },
+                            "pagination": {
+                                "mode": "Regular",
+                                "pageSizes": [
+                                    15,
+                                    5,
+                                    10
+                                ]
+                            },
+                            "selection": {
+                                "mode": "None"
+                            },
+                            "height": "None",
+                            "columns": [
+                                {
+                                    "sortable": true,
+                                    "title": "excelRowNumber",
+                                    "name": "excelRowNumber",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "value": {
+                                            "$ref": "#/properties/resultData/properties/resultSummary/properties/excelRowNumber"
+                                        }
+                                    }
+                                },
+                                {
+                                    "sortable": false,
+                                    "title": "contractNumber",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "value": {
+                                            "$ref": "#/properties/resultData/properties/resultSummary/properties/contractNumber"
+                                        }
+                                    }
+                                },
+                                {
+                                    "sortable": false,
+                                    "title": "originalReceiptDate",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "value": {
+                                            "$ref": "#/properties/resultData/properties/resultSummary/properties/originalReceiptDate"
+                                        }
+                                    },
+                                    "rule": {
+                                        "effect": "SHOW",
+                                        "condition": {
+                                            "type": "FUNC",
+                                            "ruleFunction": "showOriginalReceiptDate",
+                                            "value": [
+                                                {
+                                                    "$ref": "#"
+                                                }
+                                            ]
+                                        }
+                                    }
+                                },
+                                {
+                                    "sortable": false,
+                                    "title": "hasAmendment",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "value": {
+                                            "$ref": "#/properties/resultData/properties/resultSummary/properties/hasAmendment"
+                                        }
+                                    },
+                                    "rule": {
+                                        "effect": "SHOW",
+                                        "condition": {
+                                            "type": "FUNC",
+                                            "ruleFunction": "showHasAmendment",
+                                            "value": [
+                                                {
+                                                    "$ref": "#"
+                                                }
+                                            ]
+                                        }
+                                    }
+                                },
+                                {
+                                    "sortable": false,
+                                    "title": "hasPaymentIntermediateApplication",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "value": {
+                                            "$ref": "#/properties/resultData/properties/resultSummary/properties/hasPaymentIntermediateApplication"
+                                        }
+                                    },
+                                    "rule": {
+                                        "effect": "SHOW",
+                                        "condition": {
+                                            "type": "FUNC",
+                                            "ruleFunction": "showPaymentIntermediateApplication",
+                                            "value": [
+                                                {
+                                                    "$ref": "#"
+                                                }
+                                            ]
+                                        }
+                                    }
+                                },
+                                {
+                                    "sortable": false,
+                                    "title": "paymentIntermediateApplicationDate",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "value": {
+                                            "$ref": "#/properties/resultData/properties/resultSummary/properties/paymentIntermediateApplicationDate"
+                                        }
+                                    },
+                                    "rule": {
+                                        "effect": "SHOW",
+                                        "condition": {
+                                            "type": "FUNC",
+                                            "ruleFunction": "showPaymentIntermediateApplication",
+                                            "value": [
+                                                {
+                                                    "$ref": "#"
+                                                }
+                                            ]
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

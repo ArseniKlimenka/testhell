@@ -1,0 +1,86 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "array",
+    "aiDataEnrichment": [
+        {
+            "name": "ClearContractVersions"
+        },
+        {
+            "name": "SetContractVersions",
+            "dataSource": "ContractVersionsDataSource"
+        }
+    ],
+    "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+            "contractId": {
+                "type": "string"
+            },
+            "contractNumber": {
+                "type": "string"
+            },
+            "originalContractNumber": {
+                "type": "string"
+            },
+            "seqNumber": {
+                "type": "integer",
+                "aiType": "int"
+            },
+            "body": {
+                "type": "object",
+                "additionalProperties": true
+            },
+            "commonBody": {
+                "type": "object",
+                "additionalProperties": true
+            },
+            "snapshotBody": {
+                "type": "object",
+                "additionalProperties": true
+            },
+            "versionState": {
+                "type": "string"
+            },
+            "stateId": {
+                "type": "integer",
+                "aiType": "int"
+            },
+            "configurationName": {
+                "type": "string"
+            },
+            "dimensions": {
+                "type": "array",
+                "items": {
+                    "type": "object",
+                    "additionalProperties": true
+                }
+            },
+            "createdOn": {
+                "type": "string",
+                "aiType": "datetime",
+                "aiTitle": "createdOn"
+            },
+            "contractState": {
+                "type": "string",
+                "aiTitle": "contractState"
+            },
+            "documentType": {
+                "type": "string",
+                "aiTitle": "documentType"
+            },
+            "documentState": {
+                "type": "string",
+                "aiTitle": "documentState"
+            },
+            "documentStateCode": {
+                "type": "string",
+                "aiTitle": "documentStateCode"
+            },
+            "productDescription": {
+                "type": "string",
+                "aiTitle": "productDescription"
+            }
+        }
+    }
+}

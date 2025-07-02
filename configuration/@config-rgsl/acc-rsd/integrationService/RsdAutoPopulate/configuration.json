@@ -1,0 +1,33 @@
+{
+    "sinks": [
+        {
+            "name": "FetchRsd",
+            "fetch": {
+                "configuration": {
+                    "name": "GetRsdDocumentDataSource"
+                }
+            }
+        },
+        {
+            "name": "FetchRsdPaymentPlanData",
+            "fetch": {
+                "configuration": {
+                    "name": "GetRsdPaymentPlanDataDataSource"
+                }
+            }
+        },
+        {
+            "name": "WriteItemsASS",
+            "database": {
+                "tables": [
+                    "ACC_IMPL.RSD_ITEM_LINK",
+                    "ACC_IMPL.RSD_ITEM_SAT"
+                ]
+            }
+        }
+    ],
+    "responses": [
+        200,
+        422
+    ]
+}

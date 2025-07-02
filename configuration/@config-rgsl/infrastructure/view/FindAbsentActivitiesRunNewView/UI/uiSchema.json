@@ -1,0 +1,87 @@
+{
+    "id": "FindAbsentActivitiesRunNewViewUiSchema",
+    "type": "GridLayout",
+    "numberOfColumns": 4,
+    "elements": [
+        {
+            "type": "HeaderContentLayout",
+            "elements": [
+                {
+                    "type": "OutputText",
+                    "skipTranslate": true,
+                    "value": {
+                        "$ref": "#"
+                    },
+                    "textStyle": {
+                        "uppercase": true,
+                        "textSize": "Normal",
+                        "width": 4,
+                        "textColor": "Black"
+                    },
+                    "template": "{{#style 'bold'}}{{#i18n}}{{expr ConfigurationCodeName}}@Title{{/i18n}}{{/style}}"
+                }
+            ]
+        },
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "Input",
+                    "control": "DateRange",
+                    "dateFrom": {
+                        "type": "Input",
+                        "label": "Date from",
+                        "width": 1,
+                        "value": {
+                            "$ref": "#/properties/Body/properties/dateFrom"
+                        },
+                        "control": "DatetimePicker"
+                    },
+                    "dateTo": {
+                        "type": "Input",
+                        "label": "Date to",
+                        "width": 1,
+                        "value": {
+                            "$ref": "#/properties/Body/properties/dateTo"
+                        },
+                        "control": "DatetimePicker"
+                    },
+                    "width": 4
+                }
+            ]
+        },
+        {
+            "type": "Group",
+            "width": 2,
+            "stackContent": "Left",
+            "elements": [
+                {
+                    "type": "Button",
+                    "onClick": [
+                        {
+                            "commandType": "executeAction",
+                            "actionName": "confirmDialog"
+                        }
+                    ],
+                    "submitOnEnter": true,
+                    "label": "Confirm"
+                },
+                {
+                    "type": "Button",
+                    "onClick": [
+                        {
+                            "commandType": "executeAction",
+                            "actionName": "closeDialog"
+                        }
+                    ],
+                    "icon": {
+                        "name": "Times",
+                        "color": "BackgroundColor",
+                        "size": "Small"
+                    },
+                    "label": "Close"
+                }
+            ]
+        }
+    ]
+}

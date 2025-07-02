@@ -1,0 +1,44 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema",
+    "type": "object",
+    "required": [
+        "recordKey",
+        "bankStatementItemId",
+        "paymentStatusId"
+    ],
+    "properties": {
+        "recordKey": {
+            "type": "string"
+        },
+        "bankStatementItemId": {
+            "type": "integer"
+        },
+        "paymentStatusId": {
+            "$ref": "component:PaymentStatusComponent"
+        },
+        "paymentErrorMessage": {
+            "type": "string"
+        },
+        "allocations": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "required": [
+                    "allocationId",
+                    "cancelled"
+                ],
+                "properties": {
+                    "allocationId": {
+                        "type": "integer"
+                    },
+                    "cancelled": {
+                        "type": "boolean"
+                    },
+                    "errorMessage": {
+                        "type": "string"
+                    }
+                }
+            }
+        }
+    }
+}

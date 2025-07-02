@@ -1,0 +1,3 @@
+delete from bfx_impl.products where code = N'I876InnResheniya'; insert into bfx_impl.products values ('CC79A1BA-C6C2-45A9-8321-915C852FD094', N'I876InnResheniya',N'investment',N'Драйвер Гарант Плюс 7RUB',N'ИСЖ', N'migrated', NULL);
+delete from bfx_impl.products where code = N'I877InnResheniya'; insert into bfx_impl.products values ('FD90A43B-DD57-475B-A681-EE04776BEC16', N'I877InnResheniya',N'investment',N'Драйвер Гарант Плюс 10RUB',N'ИСЖ', N'migrated', NULL);
+delete from bfx_impl.products where code = N'I886VTBP'; insert into bfx_impl.products values ('704DB41C-8880-45D4-AC3F-C5D33276DBC8', N'I886VTBP',N'investment',N'Стабильный процент Бонд Ультра 1RUB',N'ИСЖ', N'migrated', NULL);

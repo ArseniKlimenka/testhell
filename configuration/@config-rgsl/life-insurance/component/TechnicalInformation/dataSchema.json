@@ -1,0 +1,147 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "TechnicalInformation",
+    "type": "object",
+    "additionalProperties": false,
+    "aiDataEnrichment": [
+        {
+            "name": "getCommentsEnrichment",
+            "dataSource": "ContractCommentsDataSource"
+        },
+        {
+            "name": "GetRatesOfReturnRules",
+            "dataSource": "GetRateOfReturnRulesDataSource"
+        },
+        {
+            "name": "CheckContractDuplicates",
+            "dataSource": "GetContractDublicateCountDataSource"
+        }
+    ],
+    "properties": {
+        "isCreatedByOperations": {
+            "type": "boolean"
+        },
+        "DMSquestion": {
+            "type": "boolean"
+        },
+        "createdFromPolicy": {
+            "type": "string"
+        },
+        "createdFromPolicyOriginal": {
+            "type": "string"
+        },
+        "creatorUsername": {
+            "type": "string"
+        },
+        "lastCommenterUsername": {
+            "type": "string"
+        },
+        "lastCommentId": {
+            "type": "integer"
+        },
+        "originalDocumentId": {
+            "type": "string"
+        },
+        "originalDocumentNumber": {
+            "type": "string"
+        },
+        "requestId": {
+            "type": "string"
+        },
+        "requestNumber": {
+            "type": "string"
+        },
+        "requestAmendmentReason": {
+            "type": "string"
+        },
+        "requestState": {
+            "type": "string"
+        },
+        "duplicateGenChkPolicyNumbers": {
+            "type": "string"
+        },
+        "contractDuplicates": {
+            "type": "string"
+        },
+        "apiSender": {
+            "type": "string"
+        },
+        "futureContractNumber": {
+            "type": "string"
+        },
+        "isNeedGenerateFutureNumber": {
+            "type": "boolean"
+        },
+        "collectivePolicyInsuredCount": {
+            "type": "integer"
+        },
+        "collectivePolicyPremiumWasCalculated": {
+            "type": "boolean"
+        },
+        "collectivePolicyInsuredLoadedProductCode": {
+            "type": "string"
+        },
+        "allRisks": {
+            "type": "array",
+            "additionalProperties": false,
+            "items": {
+                "$ref": "component:Risk"
+            }
+        },
+        "collectivePolicyTariffFactors": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "paymentFrequencyCode": {
+                    "type": "string"
+                },
+                "riskPremium": {
+                    "type": "number"
+                },
+                "insuranceTerms": {
+                    "$ref": "component:EnumStringNumbers"
+                },
+                "startDate": {
+                    "type": "string",
+                    "aiFormat": "date"
+                },
+                "endDate": {
+                    "type": "string",
+                    "aiFormat": "date"
+                }
+            }
+        },
+        "policyReviewNumber": {
+            "type": "integer"
+        },
+        "ratesOfReturn": {
+            "type": "array",
+            "additionalProperties": false,
+            "items": {
+                "$ref": "component:RatesOfReturn"
+            }
+        },
+        "ratesOfReturnVariants": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "variant": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "ratesOfReturnCashback": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "cashback": {
+                        "type": "number"
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,42 @@
+{
+    "sinks": [
+        {
+            "name": "GetByUserName",
+            "class": {
+                "className": "Adacta.AdInsure.Organisation.API.Public.Users.Services.IUserManagementService, Adacta.AdInsure.Organisation.API",
+                "methodName": "GetByUsername"
+            }
+        },
+        {
+            "name": "UpdateKeycloakUser",
+            "api": {
+                "configuration": {
+                    "name": "KeycloakUpdateUserApiDataProvider"
+                }
+            }
+        },
+        {
+            "name": "CreateKeycloakUser",
+            "api": {
+                "configuration": {
+                    "name": "KeycloakCreateUserApiDataProvider"
+                }
+            }
+        },
+        {
+            "name": "GetKeycloakUser",
+            "api": {
+                "configuration": {
+                    "name": "KeycloakGetUserApiDataProvider"
+                }
+            }
+        },
+        {
+            "name": "Cleanup",
+            "class": {
+                "className": "Adacta.AdInsure.RGSL.ORG.API.Shared.ApplicationUser.Services.IApplicationUserAppService, Adacta.AdInsure.RGSL.ORG.API",
+                "methodName": "CleanupUserMigration"
+            }
+        }
+    ]
+}

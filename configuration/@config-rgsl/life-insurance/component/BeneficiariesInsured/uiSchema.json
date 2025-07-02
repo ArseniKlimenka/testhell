@@ -1,0 +1,83 @@
+{
+    "type": "Section",
+    "label": "BeneficiariesInsured",
+    "labelType": "H1",
+    "collapsing": {
+        "initial": false,
+        "enabled": true
+    },
+    "width": 12,
+    "elements": [
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "DataGrid",
+                    "mode": "Array",
+                    "pagination": {
+                        "mode": "Regular",
+                        "pageSizes": [
+                            5,
+                            10,
+                            15
+                        ],
+                        "defaultPageSize": 5
+                    },
+                    "isCollapsed": false,
+                    "value": {
+                        "$ref": "#/properties/beneficiaries"
+                    },
+                    "actions": [],
+                    "height": "Small",
+                    "columns": [
+                        {
+                            "title": "beneficiary",
+                            "name": "beneficiary",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "defaultValue": "",
+                                "value": {
+                                    "$ref": "#/properties/partyFullName"
+                                }
+                            }
+                        },
+                        {
+                            "title": "dateOfBirth",
+                            "name": "dateOfBirth",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "defaultValue": "",
+                                "value": {
+                                    "$ref": "#/properties/dateOfBirth"
+                                }
+                            }
+                        },
+                        {
+                            "title": "personGender",
+                            "name": "personGender",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "defaultValue": "",
+                                "value": {
+                                    "$ref": "#/properties/personGender"
+                                }
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "rule": {
+        "effect": "HIDE",
+        "condition": {
+            "type": "FUNC",
+            "value": [
+                {
+                    "$ref": "#"
+                }
+            ],
+            "ruleFunction": "hideBeneficiaries"
+        }
+    }
+}

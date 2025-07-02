@@ -1,0 +1,762 @@
+{
+    "type": "Group",
+    "elements": [
+        {
+            "type": "DataGrid",
+            "orderBy": "Description",
+            "mode": "DataSource",
+            "pagination": {
+                "mode": "Regular",
+                "pageSizes": [
+                    50,
+                    100,
+                    500
+                ],
+                "defaultPageSize": 100
+            },
+            "selection": {
+                "mode": "Multi",
+                "enableRowSelection": false,
+                "showCheckBox": true
+            },
+            "height": "None",
+            "rowBackgroundColorAction": "applyBackgroundColor",
+            "columns": [
+                {
+                    "sortable": true,
+                    "title": "StatusId",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/statusId"
+                        }
+                    },
+                    "name": "statusId"
+                },
+                {
+                    "sortable": true,
+                    "title": "ActStateCode",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/actStateCode"
+                        }
+                    },
+                    "name": "actStateCode"
+                },
+                {
+                    "sortable": true,
+                    "title": "ReportingPeriodFrom",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/reportingPeriodFrom"
+                        }
+                    },
+                    "name": "reportingPeriodFrom"
+                },
+                {
+                    "sortable": true,
+                    "title": "ReportingPeriodTo",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/reportingPeriodTo"
+                        }
+                    },
+                    "name": "reportingPeriodTo"
+                },
+                {
+                    "sortable": true,
+                    "title": "IssueDate",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/issueDate"
+                        }
+                    },
+                    "name": "issueDate"
+                },
+                {
+                    "sortable": true,
+                    "title": "ActNo",
+                    "cellContent": {
+                        "type": "Link",
+                        "targetType": "Entity",
+                        "openInNewTab": true,
+                        "value": {
+                            "mapping": "linkToActOverview",
+                            "$ref": "#"
+                        },
+                        "width": 1,
+                        "content": {
+                            "text": {
+                                "type": "OutputText",
+                                "value": {
+                                    "$ref": "#/properties/resultData/properties/actNo"
+                                }
+                            }
+                        }
+                    },
+                    "name": "actNo"
+                },
+                {
+                    "sortable": true,
+                    "title": "AgentAgreementNumber",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/agentAgreementNumber"
+                        }
+                    },
+                    "name": "agentAgreementNumber"
+                },
+                {
+                    "sortable": true,
+                    "title": "AAExternalNumber",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/aaExternalNumber"
+                        }
+                    },
+                    "name": "aaExternalNumber"
+                },
+                {
+                    "sortable": true,
+                    "title": "AgentName",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/agentName"
+                        }
+                    },
+                    "name": "agentName"
+                },
+                {
+                    "sortable": true,
+                    "title": "ReferenceNo",
+                    "cellContent": {
+                        "type": "Link",
+                        "label": "Link to contract",
+                        "targetType": "Entity",
+                        "value": {
+                            "mapping": "linkToContractOverview",
+                            "$ref": "#"
+                        },
+                        "width": 1,
+                        "openInNewTab": true,
+                        "content": {
+                            "text": {
+                                "type": "OutputText",
+                                "value": {
+                                    "$ref": "#/properties/resultData/properties/referenceNo"
+                                }
+                            }
+                        }
+                    },
+                    "name": "referenceNo"
+                },
+                {
+                    "sortable": true,
+                    "title": "stateCodeDescription",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "template": "{{#if stateCode '===' '\"CancelledByAmendment\"'}}{{#style 'color-danger'}}{{expr stateCodeDescription}}{{/style}}{{else}}{{expr stateCodeDescription}}{{/if}}",
+                        "value": {
+                            "$ref": "#/properties/resultData/"
+                        }
+                    },
+                    "name": "stateCodeDescription"
+                },
+                {
+                    "sortable": true,
+                    "title": "hasNoChanges",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "template": "{{#if hasNoChanges '===' '2'}}{{#style 'color-danger'}}{{#i18n}}ActHasNoChangesComponent@actHasNoChangesComponent@{{expr hasNoChanges}}{{/i18n}}{{/style}}{{else}}{{#i18n}}ActHasNoChangesComponent@actHasNoChangesComponent@{{expr hasNoChanges}}{{/i18n}}{{/if}}",
+                        "value": {
+                            "$ref": "#/properties/resultData/"
+                        }
+                    },
+                    "name": "hasNoChanges"
+                },
+                {
+                    "sortable": true,
+                    "title": "HolderName",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/polHolderName"
+                        }
+                    },
+                    "name": "holderName"
+                },
+                {
+                    "sortable": true,
+                    "title": "ProductCode",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/productCode"
+                        }
+                    },
+                    "name": "productCode"
+                },
+                {
+                    "sortable": true,
+                    "title": "Product",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/productDesc"
+                        }
+                    },
+                    "name": "productDesc"
+                },
+                {
+                    "sortable": true,
+                    "title": "CreditProgramVersion",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/creditProgramVersion"
+                        }
+                    },
+                    "name": "creditProgramVersion"
+                },
+                {
+                    "sortable": true,
+                    "title": "SourceLineId",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/sourceLineId"
+                        }
+                    },
+                    "name": "sourceLineId"
+                },
+                {
+                    "sortable": true,
+                    "title": "InsuredYearsCount",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/insuredYearsCount"
+                        }
+                    },
+                    "name": "insuredYearsCount"
+                },
+                {
+                    "sortable": true,
+                    "title": "PaymentPeriod",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/paymentPeriod"
+                        }
+                    },
+                    "name": "paymentPeriod"
+                },
+                {
+                    "sortable": true,
+                    "title": "InsuranceYear",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/insuranceYear"
+                        }
+                    },
+                    "name": "insuranceYear"
+                },
+                {
+                    "sortable": true,
+                    "title": "StartDate",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "template": "{{expr polStartDate 'd'}}",
+                        "value": {
+                            "$ref": "#/properties/resultData"
+                        }
+                    },
+                    "name": "polStartDate"
+                },
+                {
+                    "sortable": true,
+                    "title": "EndDate",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "template": "{{expr polEndDate 'd'}}",
+                        "value": {
+                            "$ref": "#/properties/resultData"
+                        }
+                    },
+                    "name": "polEndDate"
+                },
+                {
+                    "sortable": true,
+                    "title": "RiskPremiumYear",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/riskPremiumYear"
+                        }
+                    },
+                    "name": "riskPremiumYear"
+                },
+                {
+                    "sortable": true,
+                    "title": "PaymentFrequency",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/paymentFrequencyCode"
+                        }
+                    },
+                    "name": "paymentFrequencyCode"
+                },
+                {
+                    "sortable": true,
+                    "title": "RiskPremium",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/riskPremium"
+                        }
+                    },
+                    "name": "riskPremium"
+                },
+                {
+                    "sortable": true,
+                    "title": "PaymentFrequency2",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/paymentFrequency2Code"
+                        }
+                    },
+                    "name": "paymentFrequency2Code"
+                },
+                {
+                    "sortable": true,
+                    "title": "Currency",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/docCurrencyCode"
+                        }
+                    },
+                    "name": "docCurrencyCode"
+                },
+                {
+                    "sortable": true,
+                    "title": "InstallmentType",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/installmentType"
+                        }
+                    },
+                    "name": "installmentType"
+                },
+                {
+                    "sortable": true,
+                    "title": "PaymentTransactionDate",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "template": "{{expr paymentTransactionDate 'd'}}",
+                        "value": {
+                            "$ref": "#/properties/resultData"
+                        }
+                    },
+                    "name": "paymentTransactionDate"
+                },
+                {
+                    "sortable": true,
+                    "title": "PaymentLcAmount",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "template": "{{#style 'right'}}{{expr paymentLcAmount 'n:2'}}{{/style}}",
+                        "value": {
+                            "$ref": "#/properties/resultData"
+                        }
+                    },
+                    "name": "paymentLcAmount"
+                },
+                {
+                    "sortable": true,
+                    "title": "DueDate",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "template": "{{expr dueDate 'd'}}",
+                        "value": {
+                            "$ref": "#/properties/resultData"
+                        }
+                    },
+                    "name": "dueDate"
+                },
+                {
+                    "sortable": true,
+                    "title": "AaDocCommRate",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "template": "{{#style 'right'}}{{expr aaDocCommRate 'p:2'}}{{/style}}",
+                        "value": {
+                            "$ref": "#/properties/resultData"
+                        }
+                    },
+                    "name": "aaDocCommRate"
+                },
+                {
+                    "sortable": true,
+                    "title": "LcCommAmountCalc",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "template": "{{#style 'right'}}{{expr lcCommAmountCalc 'n:2'}}{{/style}}",
+                        "value": {
+                            "$ref": "#/properties/resultData"
+                        }
+                    },
+                    "name": "lcCommAmountCalc"
+                },
+                {
+                    "sortable": true,
+                    "title": "CommRateManual",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "template": "{{#style 'right'}}{{expr commRateManual 'p'}}{{/style}}",
+                        "value": {
+                            "$ref": "#/properties/resultData"
+                        }
+                    },
+                    "name": "commRateManual"
+                },
+                {
+                    "sortable": true,
+                    "title": "LcCommAmountManual",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "template": "{{#style 'right'}}{{expr lcCommAmountManual 'n:2'}}{{/style}}",
+                        "value": {
+                            "$ref": "#/properties/resultData"
+                        }
+                    },
+                    "name": "lcCommAmountManual"
+                },
+                {
+                    "sortable": true,
+                    "title": "LcCommAmountExtra",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "template": "{{#style 'right'}}{{expr lcCommAmountExtra 'n:2'}}{{/style}}",
+                        "value": {
+                            "$ref": "#/properties/resultData"
+                        }
+                    },
+                    "name": "lcCommAmountExtra"
+                },
+                {
+                    "sortable": true,
+                    "title": "CommissionType",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "template": "{{#if lcCommAmountExtra}}Доп. КВ{{else}}Обычный{{/if}}",
+                        "value": {
+                            "$ref": "#/properties/resultData"
+                        }
+                    },
+                    "name": "commissionType"
+                },
+                {
+                    "sortable": true,
+                    "title": "LcCommAmountFinal",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "template": "{{expr lcCommAmountFinal 'n:2'}}",
+                        "textProperties": [
+                            "right"
+                        ],
+                        "backgroundColor": "Secondary",
+                        "value": {
+                            "$ref": "#/properties/resultData"
+                        }
+                    },
+                    "name": "lcCommAmountFinal"
+                },
+                {
+                    "sortable": true,
+                    "title": "IsManualRate",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/isManualRate"
+                        }
+                    },
+                    "name": "isManualRate"
+                },
+                {
+                    "sortable": true,
+                    "title": "IsManualRule",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/manualRule"
+                        }
+                    },
+                    "name": "IsManualRule"
+                },
+                {
+                    "sortable": true,
+                    "title": "VatLc",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "template": "{{#style 'right'}}{{expr vatLc 'n:2'}}{{/style}}",
+                        "value": {
+                            "$ref": "#/properties/resultData"
+                        }
+                    },
+                    "name": "vatLc"
+                },
+                {
+                    "sortable": true,
+                    "title": "InvCommRate",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "template": "{{#style 'right'}}{{expr invCommRate 'p'}}{{/style}}",
+                        "value": {
+                            "$ref": "#/properties/resultData"
+                        }
+                    },
+                    "name": "invCommRate"
+                },
+                {
+                    "sortable": true,
+                    "title": "InvCommLcAmount",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "template": "{{#style 'right'}}{{expr invCommLcAmount 'n:2'}}{{/style}}",
+                        "value": {
+                            "$ref": "#/properties/resultData"
+                        }
+                    },
+                    "name": "invCommLcAmount"
+                },
+                {
+                    "sortable": true,
+                    "title": "VerificationState",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/verificationState"
+                        }
+                    },
+                    "name": "verificationState"
+                },
+                {
+                    "sortable": true,
+                    "title": "BusinessLine",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/businessLine"
+                        }
+                    },
+                    "name": "businessLine"
+                },
+                {
+                    "sortable": true,
+                    "title": "AmendmentReason",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/amendmentReason"
+                        }
+                    },
+                    "name": "amendmentReason"
+                },
+                {
+                    "sortable": true,
+                    "title": "CancellationIssueDate",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/cancellationIssueDate"
+                        }
+                    },
+                    "name": "cancellationIssueDate"
+                },
+                {
+                    "sortable": true,
+                    "title": "CancellationCreatedOn",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/cancellationCreatedOn"
+                        }
+                    },
+                    "name": "cancellationCreatedOn"
+                },
+                {
+                    "sortable": true,
+                    "title": "ExpensesRate",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "template": "{{#style 'right'}}{{expr expensesRate 'p'}}{{/style}}",
+                        "value": {
+                            "$ref": "#/properties/resultData"
+                        }
+                    },
+                    "name": "expensesRate"
+                },
+                {
+                    "sortable": true,
+                    "title": "ExpensesAmount",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "template": "{{#style 'right'}}{{expr expensesAmount 'n:2'}}{{/style}}",
+                        "value": {
+                            "$ref": "#/properties/resultData"
+                        }
+                    },
+                    "name": "expensesAmount"
+                },
+                {
+                    "sortable": true,
+                    "title": "NaturalPersonRate",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "template": "{{#style 'right'}}{{expr naturalPersonRate 'p'}}{{/style}}",
+                        "value": {
+                            "$ref": "#/properties/resultData"
+                        }
+                    },
+                    "name": "naturalPersonRate"
+                },
+                {
+                    "sortable": true,
+                    "title": "NaturalPersonAmount",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "template": "{{#style 'right'}}{{expr naturalPersonAmount 'n:2'}}{{/style}}",
+                        "value": {
+                            "$ref": "#/properties/resultData"
+                        }
+                    },
+                    "name": "naturalPersonAmount"
+                },
+                {
+                    "sortable": true,
+                    "title": "SolePropriatorRate",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "template": "{{#style 'right'}}{{expr solePropriatorRate 'p'}}{{/style}}",
+                        "value": {
+                            "$ref": "#/properties/resultData"
+                        }
+                    },
+                    "name": "solePropriatorRate"
+                },
+                {
+                    "sortable": true,
+                    "title": "SolePropriatorAmount",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "template": "{{#style 'right'}}{{expr solePropriatorAmount 'n:2'}}{{/style}}",
+                        "value": {
+                            "$ref": "#/properties/resultData"
+                        }
+                    },
+                    "name": "solePropriatorAmount"
+                },
+                {
+                    "sortable": true,
+                    "title": "subAgentSadNumber",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/subAgentSadNumber"
+                        }
+                    },
+                    "name": "subAgentSadNumber"
+                },
+                {
+                    "sortable": true,
+                    "title": "subAgentType",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/subAgentType"
+                        }
+                    },
+                    "name": "subAgentType"
+                },
+                {
+                    "sortable": true,
+                    "title": "subAgentBranchName",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/subAgentBranchName"
+                        }
+                    },
+                    "name": "subAgentBranchName"
+                },
+                {
+                    "sortable": true,
+                    "title": "subAgentBranchRegion",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/subAgentBranchRegion"
+                        }
+                    },
+                    "name": "subAgentBranchRegion"
+                },
+                {
+                    "sortable": true,
+                    "title": "ProductGroup",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/productGroup"
+                        }
+                    },
+                    "name": "productGroup"
+                },
+                {
+                    "sortable": true,
+                    "title": "InitiatorOrgunitCode",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/initiatorOrgunitCode"
+                        }
+                    },
+                    "name": "initiatorOrgunitCode"
+                },
+                {
+                    "sortable": true,
+                    "title": "Notes",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/notes"
+                        }
+                    },
+                    "name": "notes"
+                },
+                {
+                    "sortable": false,
+                    "title": "SubAgentAmounts",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/subAgentAmounts"
+                        }
+                    },
+                    "name": "subAgentAmounts"
+                }
+            ]
+        }
+    ]
+}

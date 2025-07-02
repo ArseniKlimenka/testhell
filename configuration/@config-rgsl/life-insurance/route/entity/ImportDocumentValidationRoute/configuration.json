@@ -1,0 +1,31 @@
+{
+    "entityType": "ImportDocument",
+    "condition": {
+        "events": [
+            "StatusChanged"
+        ],
+        "configuration": {
+            "dimensions": {
+                "validationSettings": ["stopImportWithErrors"]
+            }
+        },
+        "documentStates": [
+            "Validating"
+        ]
+    },
+    "sinks": [
+        {
+            "name": "GetLoadedDataErrors",
+            "fetch": {
+                "configuration": {
+                    "name": "LoadDataErrorsDataSource"
+                }
+            }
+        },
+        {
+            "name": "FinishImportDocumentTransfer",
+            "documentTransition": {}
+        }
+    ],
+    "version": "1"
+}

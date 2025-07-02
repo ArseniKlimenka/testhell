@@ -1,0 +1,105 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema",
+    "type": "object",
+    "additionalProperties": false,
+    "aiValidation": {
+        "rule": "rootLevelValidation"
+    },
+    "aiDataEnrichment": [
+        {
+            "name": "GetPolicyDates",
+            "dataSource": "GeneralContractSearchDataSource"
+        },
+        {
+            "name": "GetRelatedClaims",
+            "dataSource": "ClaimSearchDataSource"
+        }
+    ],
+    "aiAudit": {
+        "scope": "General"
+    },
+    "properties": {
+        "contract": {
+            "type": "object",
+            "properties": {
+                "number": {
+                    "type": "string"
+                },
+                "holder": {
+                    "type": "string"
+                },
+                "externalNumber": {
+                    "type": "string"
+                },
+                "configurationName": {
+                    "type": "string"
+                },
+                "configurationVersion": {
+                    "type": "string"
+                },
+                "isExternal": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "eventDateInfo": {
+            "type": "object",
+            "properties": {
+                "eventDate": {
+                    "type": "string",
+                    "aiFormat": "date"
+                },
+                "yearQuarter": {
+                    "type": "integer"
+                }
+            }
+        },
+        "insuredEventType": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                }
+            }
+        },
+        "insuredEventReason": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                }
+            }
+        },
+        "diagnosis": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                }
+            }
+        },
+        "diagnosisNote": {
+            "type": "string"
+        },
+        "fixedExchangeRate": {
+            "type": "number"
+        },
+        "useFixedExchangeRate": {
+            "type": "boolean"
+        },
+        "tempTechnicalData": {
+            "type": "object",
+            "properties": {},
+            "additionalProperties": true
+        }
+    }
+}

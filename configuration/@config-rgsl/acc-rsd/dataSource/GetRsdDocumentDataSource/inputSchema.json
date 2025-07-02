@@ -1,0 +1,49 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+        "criteria": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "rsdNumber": {
+                    "type": "string"
+                },
+                "stateCodes": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "createdDateFrom": {
+                    "type": "string",
+                    "aiFormat": "date"
+                },
+                "createdDateTo": {
+                    "type": "string",
+                    "aiFormat": "date"
+                },
+                "contractNumber": {
+                    "type": "string"
+                }
+            }
+        },
+        "sort": {
+            "type": "array",
+            "additionalProperties": false,
+            "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                    "descending": {
+                        "type": "boolean"
+                    },
+                    "fieldName": {
+                        "type": "string"
+                    }
+                }
+            }
+        }
+    }
+}

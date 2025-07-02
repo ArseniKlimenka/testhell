@@ -1,0 +1,110 @@
+{
+    "type": "DataGrid",
+    "mode": "Array",
+    "labelType": "H1",
+    "label": "Surrender Values",
+    "pagination": {
+        "mode": "Regular",
+        "pageSizes": [
+            100,
+            200,
+            300
+        ],
+        "defaultPageSize": 100
+    },
+    "isCollapsed": false,
+    "value": {
+        "$ref": "#"
+    },
+    "actions": [
+        "Edit"
+    ],
+    "edit": {
+        "mode": "Detached",
+        "inline": "SingleRow"
+    },
+    "checkIfRowActionIsAllowed": "surrenderValuesIfRowActionIsAllowed",
+    "height": "None",
+    "columns": [
+        {
+            "title": "periodStartDate",
+            "name": "periodStartDate",
+            "cellContent": {
+                "type": "OutputText",
+                "defaultValue": "",
+                "value": {
+                    "$ref": "#/properties/periodStartDate"
+                }
+            }
+        },
+        {
+            "title": "periodEndDate",
+            "name": "periodEndDate",
+            "cellContent": {
+                "type": "OutputText",
+                "defaultValue": "",
+                "value": {
+                    "$ref": "#/properties/periodEndDate"
+                }
+            }
+        },
+        {
+            "title": "surrenderValue",
+            "name": "surrenderValue",
+            "cellContent": {
+                "type": "OutputText",
+                "defaultValue": "",
+                "value": {
+                    "$ref": "#/properties/surrenderValue"
+                }
+            },
+            "editCellContent": {
+                "type": "Input",
+                "value": {
+                    "$ref": "#/properties/surrenderValue"
+                }
+            }
+        },
+        {
+            "title": "periodSurrenderValue",
+            "name": "periodSurrenderValue",
+            "cellContent": {
+                "type": "OutputText",
+                "defaultValue": "",
+                "value": {
+                    "$ref": "#/properties/periodSurrenderValue"
+                }
+            },
+            "editCellContent": {
+                "type": "Input",
+                "value": {
+                    "$ref": "#/properties/periodSurrenderValue"
+                }
+            },
+            "rule": {
+                "effect": "SHOW",
+                "condition": {
+                    "type": "FUNC",
+                    "ruleFunction": "showPeriodSurrenderValue",
+                    "value": [
+                        {
+                            "$ref": "#"
+                        }
+                    ]
+                }
+            }
+        }
+    ],
+    "rule": {
+        "effect": "ENABLE_INITIAL",
+        "condition": {
+            "type": "FUNC",
+            "ruleFunction": "enableSurrenderValuesTable",
+            "value": [
+                {
+                    "$ref": "#"
+                }
+            ]
+        }
+    }
+}

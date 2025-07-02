@@ -1,0 +1,56 @@
+{
+    "type": "GridLayout",
+    "numberOfColumns": 4,
+    "elements": [
+        {
+            "type": "DataGrid",
+            "mode": "Array",
+            "label": "PartyExcludedPersons",
+            "labelType": "H1",
+            "pagination": {
+                "mode": "Regular",
+                "pageSizes": [
+                    5,
+                    10,
+                    15
+                ],
+                "defaultPageSize": 5
+            },
+            "isCollapsed": false,
+            "value": {
+                "$ref": "#"
+            },
+            "actions": [
+                "Add",
+                "Edit",
+                "Delete"
+            ],
+            "edit": {
+                "mode": "Immediate",
+                "inline": "SingleRow",
+                "onBeforeGridAction": "excludedPersonsOnBeforeGridAction"
+            },
+            "checkIfRowActionIsAllowed": "arrayCheckRowOperationHandler",
+            "height": "Small",
+            "columns": [
+                {
+                    "title": "excludedPersonName",
+                    "name": "excludedPersonName",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/excludedPersonName"
+                        }
+                    },
+                    "editCellContent": {
+                        "type": "Input",
+                        "value": {
+                            "$ref": "#/properties/excludedPersonName"
+                        }
+                    }
+                }
+            ]
+        }
+    ]
+}

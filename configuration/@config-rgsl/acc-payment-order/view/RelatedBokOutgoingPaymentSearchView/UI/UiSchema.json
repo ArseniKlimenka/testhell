@@ -1,0 +1,107 @@
+{
+    "id": "RelatedPaymentOrdersSearchViewUI",
+    "type": "Group",
+    "elements": [
+        {
+            "type": "GridLayout",
+            "numberOfColumns": 12,
+            "elements": [
+                {
+                    "type": "Group",
+                    "elements": [
+                        {
+                            "type": "DataGrid",
+                            "defaultPageSize": 10,
+                            "mode": "DataSource",
+                            "header": {
+                                "showReloadButton": true,
+                                "showNumberOfResults": false
+                            },
+                            "pagination": {
+                                "mode": "Regular",
+                                "pageSizes": [
+                                    5,
+                                    10,
+                                    15
+                                ]
+                            },
+                            "selection": {
+                                "mode": "None"
+                            },
+                            "height": "None",
+                            "columns": [
+                                {
+                                    "sortable": false,
+                                    "title": "payoutType",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "defaultValue": "",
+                                        "value": {
+                                            "$ref": "#/properties/resultData/properties/payoutType"
+                                        }
+                                    }
+                                },
+                                {
+                                    "sortable": false,
+                                    "title": "collectionNumber",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "defaultValue": "",
+                                        "value": {
+                                            "$ref": "#/properties/resultData/properties/collectionNumber"
+                                        }
+                                    }
+                                },
+                                {
+                                    "sortable": false,
+                                    "title": "claimNumber",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "defaultValue": "",
+                                        "value": {
+                                            "$ref": "#/properties/resultData/properties/claimNumber"
+                                        }
+                                    }
+                                },
+                                {
+                                    "sortable": false,
+                                    "title": "actNumber",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "defaultValue": "",
+                                        "value": {
+                                            "$ref": "#/properties/resultData/properties/actNumber"
+                                        }
+                                    }
+                                },
+                                {
+                                    "sortable": false,
+                                    "title": "paymentDate",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "template": "{{expr paymentDate 'd'}}",
+                                        "defaultValue": "",
+                                        "value": {
+                                            "$ref": "#/properties/resultData"
+                                        }
+                                    }
+                                },
+                                {
+                                    "sortable": false,
+                                    "title": "payoutAmountLc",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "defaultValue": "",
+                                        "value": {
+                                            "$ref": "#/properties/resultData/properties/payoutAmountLc"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

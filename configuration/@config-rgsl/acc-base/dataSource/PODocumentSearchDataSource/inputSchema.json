@@ -1,0 +1,97 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+        "criteria": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "recipientPartyCode": {
+                    "type": "string"
+                },
+                "recipientFullName": {
+                    "type": "string"
+                },
+                "stateCode": {
+                    "type": "string",
+                    "enum": [
+                        "Draft",
+                        "WaitingForApproval",
+                        "Cancelled",
+                        "Approved",
+                        "Paid",
+                        "PaidCancelledNetting"
+                    ]
+                },
+                "paymentOrderDateFrom": {
+                    "type": "string",
+                    "format": "date",
+                    "aiFormat": "date"
+                },
+                "paymentOrderDateTo": {
+                    "type": "string",
+                    "format": "date",
+                    "aiFormat": "date"
+                },
+                "paymentOrderNumber": {
+                    "type": "string"
+                },
+                "referenceNumber": {
+                    "type": "string"
+                },
+                "referenceNumbers": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "contractNumber": {
+                    "type": "string"
+                },
+                "contractNumbersStr": {
+                    "type": "string"
+                },
+                "contractNumbers": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "paymentOrderType": {
+                    "$ref": "component:PaymentOrderType"
+                },
+                "paymentOrderSubType": {
+                    "$ref": "component:PaymentOrderSubtype"
+                },
+                "paymentOrderCurrencyCode": {
+                    "type": "string"
+                },
+                "totalPaymentAmountFrom": {
+                    "type": "number"
+                },
+                "totalPaymentAmountTo": {
+                    "type": "number"
+                },
+                "isCoolOffPeriod": {
+                    "type": "boolean"
+                },
+                "onlyPaid": {
+                    "type": "boolean"
+                },
+                "isManual": {
+                    "type": "boolean"
+                },
+                "isCreatedFromNetting": {
+                    "type": "boolean"
+                },
+                "parentPaymentOrderNumber": {
+                    "type": "string"
+                }
+            }
+        },
+        "sort": {
+            "type": "array"
+        }
+    }
+}

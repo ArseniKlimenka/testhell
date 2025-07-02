@@ -1,0 +1,281 @@
+{
+    "id": "CalendarSearchViewUI.json",
+    "type": "GridLayout",
+    "numberOfColumns": 4,
+    "elements": [
+        {
+            "type": "Component",
+            "name": "OverviewHeader",
+            "value": {
+                "$ref": "#"
+            }
+        },
+        {
+            "elementId": "calendar-search-param",
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "Group",
+                    "elements": [
+                        {
+                            "elementId": "calendar-search-id",
+                            "type": "Input",
+                            "label": "ID",
+                            "value": {
+                                "$ref": "#/properties/request/properties/data/properties/criteria/properties/code"
+                            },
+                            "width": 2
+                        },
+                        {
+                            "elementId": "hide-system-checkbox",
+                            "type": "Input",
+                            "label": "Hide system calendars",
+                            "value": {
+                                "$ref": "#/properties/request/properties/data/properties/criteria/properties/skipSystemCalendars"
+                            },
+                            "width": 1
+                        },
+                        {
+                            "elementId": "hide-user-checkbox",
+                            "type": "Input",
+                            "label": "Hide user calendars",
+                            "value": {
+                                "$ref": "#/properties/request/properties/data/properties/criteria/properties/skipUserCalendars"
+                            },
+                            "width": 1
+                        }
+                    ]
+                },
+                {
+                    "type": "Group",
+                    "elements": [
+                        {
+                            "elementId": "calendar-search-name",
+                            "type": "Input",
+                            "label": "Name",
+                            "value": {
+                                "$ref": "#/properties/request/properties/data/properties/criteria/properties/name"
+                            },
+                            "width": 4
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "Group",
+                    "width": 2,
+                    "stackContent": "Left",
+                    "elements": [
+                        {
+                            "elementId": "calendar-search-button",
+                            "type": "Button",
+                            "value": {
+                                "$ref": "#"
+                            },
+                            "onClick": [
+                                {
+                                    "commandType": "executeOperation",
+                                    "operation": "SEARCH"
+                                }
+                            ],
+                            "submitOnEnter": true,
+                            "icon": {
+                                "name": "Search",
+                                "color": "BackgroundColor",
+                                "size": "Small"
+                            },
+                            "label": "Search"
+                        }
+                    ]
+                },
+                {
+                    "type": "Group",
+                    "width": 2,
+                    "stackContent": "Right",
+                    "elements": [
+                        {
+                            "elementId": "calendar-clear-button",
+                            "type": "Button",
+                            "label": "Clear",
+                            "onClick": [
+                                {
+                                    "commandType": "raiseEvent",
+                                    "eventName": "ClearFilter"
+                                }
+                            ],
+                            "icon": {
+                                "name": "Times",
+                                "color": "BackgroundColor",
+                                "size": "Small"
+                            },
+                            "value": {
+                                "$ref": "#/properties/response/properties/data"
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "elementId": "calendar-search-table",
+                    "type": "DataGrid",
+                    "mode": "DataSource",
+                    "orderBy": "code",
+                    "rule": {
+                        "effect": "SHOW",
+                        "condition": {
+                            "type": "LEAF",
+                            "expectedValue": true,
+                            "value": {
+                                "$ref": "#/properties/viewContext/properties/isSearch"
+                            }
+                        }
+                    },
+                    "pagination": {
+                        "mode": "Regular",
+                        "pageSizes": [
+                            5,
+                            10,
+                            15
+                        ]
+                    },
+                    "selection": {
+                        "mode": "None"
+                    },
+                    "height": "None",
+                    "columns": [
+                        {
+                            "title": "Calendar ID",
+                            "cellContent": {
+                                "elementId": "calendar-search-table_id-link",
+                                "type": "Link",
+                                "targetType": "Entity",
+                                "value": {
+                                    "mapping": "urlMappingCalendar",
+                                    "$ref": "#"
+                                },
+                                "content": {
+                                    "text": {
+                                        "type": "OutputText",
+                                        "textProperties": [
+                                            "bold"
+                                        ],
+                                        "template": "{{expr code}}",
+                                        "defaultValue": "",
+                                        "value": {
+                                            "$ref": "#/properties/resultData"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "title": "Calendar name",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "defaultValue": "",
+                                "value": {
+                                    "$ref": "#/properties/resultData/properties/name"
+                                }
+                            }
+                        },
+                        {
+                            "title": "Based on",
+                            "cellContent": {
+                                "elementId": "calendar-search-table_based-link",
+                                "type": "Link",
+                                "targetType": "Entity",
+                                "value": {
+                                    "mapping": "urlMappingParentCalendar",
+                                    "$ref": "#"
+                                },
+                                "content": {
+                                    "text": {
+                                        "type": "OutputText",
+                                        "textProperties": [
+                                            "bold"
+                                        ],
+                                        "template": "{{expr parentCalendarCode}}",
+                                        "defaultValue": "",
+                                        "value": {
+                                            "$ref": "#/properties/resultData"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    ]
+                },
+                {
+                    "type": "DataGrid",
+                    "mode": "DataSource",
+                    "orderBy": "code",
+                    "rule": {
+                        "effect": "SHOW",
+                        "condition": {
+                            "type": "LEAF",
+                            "expectedValue": true,
+                            "value": {
+                                "$ref": "#/properties/viewContext/properties/isLookup"
+                            }
+                        }
+                    },
+                    "pagination": {
+                        "mode": "Regular",
+                        "pageSizes": [
+                            5,
+                            10,
+                            15
+                        ]
+                    },
+                    "selection": {
+                        "mode": "Single",
+                        "enableRowSelection": true,
+                        "showCheckBox": true
+                    },
+                    "height": "None",
+                    "columns": [
+                        {
+                            "title": "Calendar ID",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "value": {
+                                    "$ref": "#/properties/resultData/properties/code"
+                                }
+                            }
+                        },
+                        {
+                            "title": "Calendar name",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "defaultValue": "",
+                                "value": {
+                                    "$ref": "#/properties/resultData/properties/name"
+                                }
+                            }
+                        },
+                        {
+                            "sortable": true,
+                            "title": "Based on",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "defaultValue": "",
+                                "value": {
+                                    "$ref": "#/properties/resultData/properties/parentCalendarCode"
+                                }
+                            },
+                            "name": "Based on"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

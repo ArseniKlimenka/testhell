@@ -1,0 +1,287 @@
+{
+    "type": "Group",
+    "formProperties": {
+        "events": {
+            "beforeSave": "onBeforeSave",
+            "onBeforeLoad": "onBeforeLoad",
+            "onLoad": "onLoad"
+        }
+    },
+    "eventHandlers": [
+        {
+            "eventName": "ACT_ITEMS_CHANGED",
+            "senders": [
+                "actItemsChanged"
+            ],
+            "commands": {
+                "commandType": "executeAction",
+                "actionName": "actItemsChanged"
+            }
+        },
+        {
+            "eventName": "GROUP_BY_CONTRACT_CHANGED",
+            "senders": [
+                "groupByContract"
+            ],
+            "commands": {
+                "commandType": "executeAction",
+                "actionName": "groupByContractChanged"
+            }
+        }
+    ],
+    "elements": [
+        {
+            "type": "GridLayout",
+            "numberOfColumns": 6,
+            "elements": [
+                {
+                    "type": "Input",
+                    "control": "DateRange",
+                    "whenLocked": "Disable",
+                    "dateFrom": {
+                        "type": "Input",
+                        "label": "ReportingPeriodFrom",
+                        "width": 1,
+                        "value": {
+                            "$ref": "#/properties/Body/properties/reportingPeriodFrom"
+                        },
+                        "control": "DatetimePicker"
+                    },
+                    "dateTo": {
+                        "type": "Input",
+                        "label": "ReportingPeriodTo",
+                        "width": 1,
+                        "value": {
+                            "$ref": "#/properties/Body/properties/reportingPeriodTo"
+                        },
+                        "control": "DatetimePicker"
+                    },
+                    "width": 2
+                },
+                {
+                    "type": "OutputText",
+                    "label": "ItemsCount",
+                    "value": {
+                        "$ref": "#/properties/ClientViewModel/properties/calcAmounts/properties/itemsCount"
+                    },
+                    "width": 1
+                },
+                {
+                    "type": "Currency",
+                    "label": "CommissionAmount",
+                    "currencyValue": {
+                        "$ref": "#/properties/Body/properties/currencyCode"
+                    },
+                    "value": {
+                        "$ref": "#/properties/ClientViewModel/properties/calcAmounts/properties/commAmountLc"
+                    },
+                    "skipTranslate": true,
+                    "width": 1,
+                    "readOnly": true
+                },
+                {
+                    "type": "Currency",
+                    "label": "VatAmount",
+                    "currencyValue": {
+                        "$ref": "#/properties/Body/properties/currencyCode"
+                    },
+                    "value": {
+                        "$ref": "#/properties/ClientViewModel/properties/calcAmounts/properties/vatAmountLc"
+                    },
+                    "skipTranslate": true,
+                    "width": 1,
+                    "readOnly": true
+                },
+                {
+                    "type": "Group",
+                    "whenLocked": "Disable",
+                    "width": 1,
+                    "elements": [
+                        {
+                            "type": "Component",
+                            "name": "ActTypeComponent",
+                            "value": {
+                                "$ref": "#/properties/Body/properties/actTypeId"
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "Input",
+                    "control": "DateRange",
+                    "whenLocked": "Disable",
+                    "dateFrom": {
+                        "type": "Input",
+                        "label": "PeriodFrom",
+                        "width": 1,
+                        "value": {
+                            "$ref": "#/properties/Body/properties/periodFrom"
+                        },
+                        "control": "DatetimePicker"
+                    },
+                    "dateTo": {
+                        "type": "Input",
+                        "label": "PeriodTo",
+                        "width": 1,
+                        "value": {
+                            "$ref": "#/properties/Body/properties/periodTo"
+                        },
+                        "control": "DatetimePicker"
+                    },
+                    "width": 2
+                },
+                {
+                    "type": "Input",
+                    "control": "DatetimePicker",
+                    "label": "ActIssueDate",
+                    "readOnly": true,
+                    "rule": {
+                        "effect": "ENABLE_INITIAL",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "enableActIssueDate",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    },
+                    "value": {
+                        "$ref": "#/properties/Body/properties/actIssueDate"
+                    },
+                    "width": 1
+                },
+                {
+                    "type": "Input",
+                    "control": "DatetimePicker",
+                    "label": "PayDate",
+                    "readOnly": true,
+                    "value": {
+                        "$ref": "#/properties/Body/properties/payDate"
+                    },
+                    "width": 1
+                },
+                {
+                    "type": "Input",
+                    "control": "DatetimePicker",
+                    "label": "OriginalReceiptDate",
+                    "readOnly": true,
+                    "rule": {
+                        "effect": "ENABLE_INITIAL",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "enableOriginalReceiptDate",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    },
+                    "value": {
+                        "$ref": "#/properties/Body/properties/originalReceiptDate"
+                    },
+                    "width": 1
+                }
+            ]
+        },
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "Lookup",
+                    "value": {
+                        "$ref": "#"
+                    },
+                    "label": "AaServiceProviderCode",
+                    "whenLocked": "Disable",
+                    "dialogButton": {
+                        "icon": {
+                            "name": "User",
+                            "color": "Primary"
+                        }
+                    },
+                    "clearButton": {
+                        "clearAction": "aaServiceProviderCodeClearButton"
+                    },
+                    "width": 1,
+                    "dialog": {
+                        "viewReference": {
+                            "configurationCodeName": "ServiceProviderSearchView",
+                            "configurationConceptType": "SearchView",
+                            "configurationVersion": "1"
+                        }
+                    },
+                    "onSelected": "aaServiceProviderCodeSearchResultAssignment",
+                    "selectedDisplayValueUISchema": {
+                        "type": "Input",
+                        "label": "AgentAgreementServiceProviderName",
+                        "readOnly": true,
+                        "value": {
+                            "$ref": "#/properties/Body/properties/aaServiceProviderName"
+                        }
+                    }
+                },
+                {
+                    "type": "Lookup",
+                    "elementId": "aaNumber",
+                    "value": {
+                        "$ref": "#"
+                    },
+                    "whenLocked": "Disable",
+                    "width": 1,
+                    "dialogButton": {},
+                    "dialog": {
+                        "viewReference": {
+                            "configurationCodeName": "AADocumentSearchView",
+                            "configurationVersion": "1",
+                            "configurationConceptType": "SearchView"
+                        },
+                        "onLoad": "onLoadAADocumentSearchView",
+                        "inputParameters": {
+                            "uiContext": {
+                                "selectionMode": "Single"
+                            }
+                        }
+                    },
+                    "clearButton": {
+                        "clearAction": "aaNumberClearButton"
+                    },
+                    "onSelected": "aaNumberSearchResultAssignment",
+                    "selectedDisplayValueUISchema": {
+                        "type": "Input",
+                        "label": "AANumber",
+                        "readOnly": true,
+                        "value": {
+                            "$ref": "#/properties/Body/properties/aaName"
+                        }
+                    }
+                },
+                {
+                    "type": "Input",
+                    "label": "AgentPersonalNumber",
+                    "readOnly": true,
+                    "value": {
+                        "$ref": "#/properties/Body/properties/agentPersonalNumber"
+                    },
+                    "width": 1
+                },
+                {
+                    "type": "Input",
+                    "label": "Notes",
+                    "whenLocked": "Disable",
+                    "value": {
+                        "$ref": "#/properties/Body/properties/notes"
+                    },
+                    "width": 2
+                }
+            ]
+        }
+    ]
+}

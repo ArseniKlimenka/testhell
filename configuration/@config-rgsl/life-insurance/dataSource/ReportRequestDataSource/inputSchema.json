@@ -1,0 +1,104 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "object",
+    "properties": {
+        "criteria": {
+            "type": "object",
+            "properties": {
+                "requestNumber": {
+                    "type": "string"
+                },
+                "requestState": {
+                    "type": "string",
+                    "enum": [
+                        "Draft",
+                        "OnReview",
+                        "Issued",
+                        "Correction",
+                        "CancelWithoutPayment",
+                        "RefusalToTerminateByPolicyholder",
+                        "Cancelled"
+                    ]
+                },
+                "contractNumber": {
+                    "type": "string"
+                },
+                "contractStateCode": {
+                    "type": "string",
+                    "enum": [
+                        "Draft",
+                        "Active",
+                        "Activated",
+                        "Cancelled",
+                        "CancelledByAmendment"
+                    ]
+                },
+                "productGroup": {
+                    "$ref": "component:ProductGroup"
+                },
+                "product": {
+                    "type": "object",
+                    "properties": {
+                        "productCode": {
+                            "type": "string"
+                        },
+                        "productGroup": {
+                            "type": "string"
+                        },
+                        "productDescription": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "partner": {
+                    "type": "string",
+                    "aiTitle": "partner"
+                },
+                "amount": {
+                    "type": "number",
+                    "aiTitle": "amount"
+                },
+                "typeOfRequest": {
+                    "type": "string",
+                    "enum": [
+                        "Cancellation",
+                        "Modification"
+                    ]
+                },
+                "amendmentReason": {
+                    "type": "string",
+                    "enum": [
+                        "byClientCoolOff",
+                        "byClientNonCoolOff",
+                        "creditRepayment"
+                    ]
+                },
+                "policyHolderCode": {
+                    "type": "string"
+                },
+                "applicantCode": {
+                    "type": "string"
+                },
+                "contractIssueDateFrom": {
+                    "type": "string",
+                    "aiFormat": "date"
+                },
+                "contractIssueDateTo": {
+                    "type": "string",
+                    "aiFormat": "date"
+                },
+                "requestIssueDateFrom": {
+                    "type": "string",
+                    "aiFormat": "date"
+                },
+                "requestIssueDateTo": {
+                    "type": "string",
+                    "aiFormat": "date"
+                }
+            }
+        },
+        "sort": {
+            "type": "array"
+        }
+    }
+}

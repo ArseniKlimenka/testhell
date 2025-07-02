@@ -1,0 +1,128 @@
+{
+    "type": "Group",
+    "elements": [
+        {
+            "type": "DataGrid",
+            "elementId": "generalPartySearchTable",
+            "mode": "DataSource",
+            "pagination": {
+                "mode": "Regular",
+                "pageSizes": [
+                    5,
+                    10,
+                    15
+                ]
+            },
+            "selection": {
+                "mode": "Single",
+                "enableRowSelection": true,
+                "showCheckBox": true,
+                "onSelectionChanged": {
+                    "commandType": "raiseEvent",
+                    "eventName": "PARTY_SELECTED",
+                    "parameters": {
+                        "selection": "dataSource.selectionModel"
+                    }
+                }
+            },
+            "columns": [
+                {
+                    "title": "code",
+                    "name": "code.as_int",
+                    "sortable": true,
+                    "cellContent": {
+                        "type": "Link",
+                        "targetType": "Entity",
+                        "value": {
+                            "mapping": "urlMapping",
+                            "$ref": "#"
+                        },
+                        "content": {
+                            "text": {
+                                "type": "OutputText",
+                                "textProperties": [
+                                    "bold"
+                                ],
+                                "template": "{{expr code}}",
+                                "value": {
+                                    "$ref": "#/properties/metadata"
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "title": "fullName",
+                    "name": "fullName",
+                    "sortable": false,
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/fullName"
+                        }
+                    }
+                },
+                {
+                    "title": "dateOfBirth",
+                    "name": "dateOfBirth",
+                    "sortable": false,
+                    "cellContent": {
+                        "type": "OutputText",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/dateOfBirth"
+                        }
+                    }
+                },
+                {
+                    "title": "OGRNOGRNIP",
+                    "name": "OGRNOGRNIP",
+                    "sortable": false,
+                    "cellContent": {
+                        "type": "OutputText",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/OGRNOGRNIP"
+                        }
+                    }
+                },
+                {
+                    "title": "docTypeCode",
+                    "name": "docTypeCode",
+                    "sortable": false,
+                    "cellContent": {
+                        "type": "OutputText",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/docTypeCode"
+                        }
+                    }
+                },
+                {
+                    "title": "docSeries",
+                    "name": "docSeries",
+                    "sortable": false,
+                    "cellContent": {
+                        "type": "OutputText",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/docSeries"
+                        }
+                    }
+                },
+                {
+                    "title": "docNumber",
+                    "name": "docNumber",
+                    "sortable": false,
+                    "cellContent": {
+                        "type": "OutputText",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/docNumber"
+                        }
+                    }
+                }
+            ]
+        }
+    ]
+}

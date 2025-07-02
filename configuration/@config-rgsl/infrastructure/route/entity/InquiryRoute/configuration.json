@@ -1,0 +1,31 @@
+{
+    "entityType": "UniversalDocument",
+    "condition": {
+        "events": [
+            "Created",
+            "StatusChanged"
+        ],
+        "configuration": {
+            "names": [],
+            "dimensions": {
+                "universalDocumentType": [
+                    "LifeInsuranceInquiry",
+                    "LifeInsurancePolicyInquiry"
+                ]
+            }
+        }
+    },
+    "sinks": [
+        {
+            "name": "Inquiry",
+            "database": {
+                "tables": [
+                    "PAS_IMPL.INQUIRY_HUB",
+                    "PAS_IMPL.INQUIRY_SAT",
+                    "PAS_IMPL.QUOTE_INQUIRY_LINK"
+                ]
+            }
+        }
+    ],
+    "version": "1"
+}

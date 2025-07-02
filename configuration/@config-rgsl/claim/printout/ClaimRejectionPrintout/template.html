@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ru-RU" xml:lang="ru-RU" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+	<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+	<title>ЗАПРОС КЛИЕНТУ</title>
+	<link rel="stylesheet" href="assets/styles/style.css">
+	{{{sideContent}}}
+</head>
+
+<body>
+
+	<div id="content-container">
+
+		<div>
+			<b>{{stateDateFormated}} № {{mailNumber}}</b>
+		</div>
+
+		<div class="top-row-spacer right-text-container">
+			<p class="bottom-row-spacer">{{applicantPostalCode}}, {{applicantAddress}}</p>
+			<p>г-ну(же) {{applicantName}}</p>
+		</div>
+
+		<div id="title-container">
+			<b>Уважаемый(ая) {{applicantFirstName}} {{applicantMiddleName}}!</b>
+		</div>
+
+		<div class="text-with-indent">
+			<p class="bottom-row-spacer">ООО СК «Росгосстрах Жизнь» рассмотрело заявление, касающееся события,
+				произошедшего {{insuredEventDateFormated}}г. и сообщает следующее:</p>
+			<p class="bottom-row-spacer">Между {{policyHolderName}} и ООО СК «Росгосстрах Жизнь» (далее также –
+				«Стороны») заключён (ы) договор(ы) страхования:</p>
+			<p>{{contractNumber}} от {{policyIssueDateFormated}} на основании «{{insuranceRuleName}}» от
+				{{insuranceRuleDateFormated}} (далее также – «Правила», «Правила страхования»), которые являются
+				неотъемлемой частью Договора страхования.</p>
+			<p class="bottom-row-spacer">Застрахованное лицо: {{insuredPersonName}}</p>
+		</div>
+
+		<table>
+			<th>Наименование риска</th>
+			<th>Застрахованное лицо / выгодоприобретатель</th>
+			{{{riskTableItems}}}
+		</table>
+
+		<div class="text-with-indent top-row-spacer-double bottom-row-spacer-double">
+			{{{formatedRejectionNote}}}
+		</div>
+
+		<div class="text-with-indent">
+			<p>Учитывая вышеизложенное, у ООО СК «Росгосстрах Жизнь» не возникает законных оснований для осуществления
+				страховой выплаты в связи с произошедшим с Вами {{insuredEventDateFormated}}г. событием.</p>
+		</div>
+
+		<div class="forbid-page-break">
+
+			<div>
+
+				<div id="sender-container">
+
+					<div id="sender-position-container">
+						<p class="top-row-spacer-double bottom-row-spacer">С уважением,</p>
+						<p class>Руководитель<br>Управления урегулирования убытков</p>
+					</div>
+
+					<div id="sender-name-container">
+						<p><br><br><br><br><br><br>А.А. Романов</p>
+					</div>
+
+				</div>
+
+			</div>
+
+			<div id="executor-container">
+				<p class="min-font-size bottom-row-spacer">Доверенность № 69 от 01.01.2022 г.</p>
+				<p class="min-font-size">Исп.: {{stateExecutedBy}}</p>
+				<p class="min-font-size">Тел.: 8 (800) 100 12 10</p>
+			</div>
+
+		</div>
+
+	</div>
+
+	<div id="bottom-spacer"></div>
+
+</body>
+
+</html>

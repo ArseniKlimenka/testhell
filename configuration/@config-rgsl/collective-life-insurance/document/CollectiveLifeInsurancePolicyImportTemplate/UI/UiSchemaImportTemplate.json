@@ -1,0 +1,230 @@
+{
+    "id": "UiSchemaAttachments.json",
+    "type": "GridLayout",
+    "title": "CollectiveLifeInsurancePolicyImportTemplate",
+    "formProperties": {
+        "events": {
+            "onLoad": "onLoad"
+        }
+    },
+    "numberOfColumns": 4,
+    "elements": [
+        {
+            "type": "Component",
+            "name": "DocumentHeader",
+            "value": {
+                "$ref": "#"
+            }
+        },
+        {
+            "type": "Group",
+            "width": 4,
+            "elements": [
+                {
+                    "type": "GridLayout",
+                    "elements": [
+                        {
+                            "type": "TabLayout",
+                            "options": {
+                                "menuAlligment": "Horizontal",
+                                "menuMode": "Single"
+                            },
+                            "elements": [
+                                {
+                                    "type": "Tab",
+                                    "elements": [
+                                        {
+                                            "type": "Section",
+                                            "label": "ImportInfo",
+                                            "elements": [
+                                                {
+                                                    "type": "Group",
+                                                    "elements": [
+                                                        {
+                                                            "type": "FileUpload",
+                                                            "label": "FileSelection",
+                                                            "description": "FileSelectionDescription",
+                                                            "value": {
+                                                                "$ref": "#/properties/Body/properties/file"
+                                                            },
+                                                            "width": 3
+                                                        },
+                                                        {
+                                                            "type": "Lookup",
+                                                            "readOnly": false,
+                                                            "label": "partner",
+                                                            "commands": [
+                                                                {
+                                                                    "commandType": "executeOperation",
+                                                                    "operation": "SEARCH",
+                                                                    "errorHandling": "silent",
+                                                                    "data": null
+                                                                }
+                                                            ],
+                                                            "value": {
+                                                                "$ref": "#"
+                                                            },
+                                                            "width": 12,
+                                                            "dialogButton": {},
+                                                            "clearButton": {
+                                                                "clearAction": "partnerClear"
+                                                            },
+                                                            "dialog": {
+                                                                "viewReference": {
+                                                                    "configurationCodeName": "ServiceProviderSearchView",
+                                                                    "configurationVersion": "1",
+                                                                    "configurationConceptType": "SearchView"
+                                                                },
+                                                                "onLoad": "partnerOnLoad"
+                                                            },
+                                                            "onSelected": "partnerOnSelected",
+                                                            "selectedDisplayValueUISchema": {
+                                                                "type": "Input",
+                                                                "label": "partner",
+                                                                "readOnly": true,
+                                                                "value": {
+                                                                    "$ref": "#/properties/Body/properties/partner/properties/partnerDescription"
+                                                                }
+                                                            }
+                                                        },
+                                                        {
+                                                            "type": "Input",
+                                                            "label": "insuranceProduct",
+                                                            "value": {
+                                                                "$ref": "#/properties/Body/properties/insuranceProduct"
+                                                            },
+                                                            "control": "Dropdown",
+                                                            "autocomplete": {
+                                                                "minTextLength": 0,
+                                                                "dropDownItemsCount": 10000,
+                                                                "selectItemOnMatch": false
+                                                            },
+                                                            "source": {
+                                                                "dataSource": {
+                                                                    "name": "ProductsDataSource",
+                                                                    "searchFieldPath": "description",
+                                                                    "responseMapping": "productResponseMapping",
+                                                                    "resultCount": 10000
+                                                                },
+                                                                "displayFieldName": "productDescription"
+                                                            },
+                                                            "width": 12,
+                                                            "filter": "insuranceProductFilter"
+                                                        },
+                                                        {
+                                                            "type": "Input",
+                                                            "label": "withTarification",
+                                                            "value": {
+                                                                "$ref": "#/properties/Body/properties/withTarification"
+                                                            },
+                                                            "width": 4
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "sectionLevel": 1
+                                        }
+                                    ],
+                                    "title": "CollectiveLifeInsurancePolicyImportTemplate",
+                                    "elementId": "tab-CollectiveLifeInsurancePolicyImportTemplate"
+                                }
+                            ],
+                            "elementId": "TabLayout"
+                        }
+                    ],
+                    "numberOfColumns": 12,
+                    "width": 3
+                },
+                {
+                    "type": "SideContentLayout",
+                    "fixedPosition": true,
+                    "numberOfColumns": 12,
+                    "width": 1,
+                    "elements": [
+                        {
+                            "type": "GridLayout",
+                            "numberOfColumns": 6,
+                            "elements": [
+                                {
+                                    "type": "TabLayout",
+                                    "options": {
+                                        "fixedPosition": true,
+                                        "scrollableTabs": true
+                                    },
+                                    "elements": [
+                                        {
+                                            "type": "Tab",
+                                            "elements": [
+                                                {
+                                                    "type": "Group",
+                                                    "elements": []
+                                                },
+                                                {
+                                                    "type": "Group",
+                                                    "elements": [
+                                                        {
+                                                            "type": "OutputText",
+                                                            "label": "Create date",
+                                                            "value": {
+                                                                "$ref": "#/properties/Body/properties/created"
+                                                            }
+                                                        },
+                                                        {
+                                                            "type": "OutputText",
+                                                            "label": "Created by",
+                                                            "value": {
+                                                                "$ref": "#/properties/Body/properties/createdBy"
+                                                            }
+                                                        },
+                                                        {
+                                                            "type": "OutputText",
+                                                            "label": "Confirm date",
+                                                            "value": {
+                                                                "$ref": "#/properties/Body/properties/confirmed"
+                                                            }
+                                                        },
+                                                        {
+                                                            "type": "OutputText",
+                                                            "label": "Confirmed by",
+                                                            "value": {
+                                                                "$ref": "#/properties/Body/properties/confirmedBy"
+                                                            }
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "elementId": "tab-Summary",
+                                            "title": "Summary"
+                                        },
+                                        {
+                                            "type": "Tab",
+                                            "tabType": "error",
+                                            "elementId": "tab-Notifications",
+                                            "title": "Notifications",
+                                            "additionalInfo": {
+                                                "display": "ValidationErrorsCount"
+                                            },
+                                            "elements": [
+                                                {
+                                                    "type": "ValidationSummary",
+                                                    "elementId": "RequiredPropertiesValidations"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "Component",
+            "name": "DocumentFooter",
+            "value": {
+                "$ref": "#"
+            }
+        }
+    ]
+}

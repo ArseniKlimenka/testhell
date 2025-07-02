@@ -1,0 +1,39 @@
+{
+    "type": "object",
+    "additionalProperties": false,
+    "aiValidation": {
+        "rule": "applicationInfoValidation"
+    },
+    "properties": {
+        "applicant": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "partyCode": {
+                    "type": "string"
+                },
+                "partyType": {
+                    "type": "string"
+                },
+                "fullName": {
+                    "type": "string"
+                }
+            }
+        },
+        "receiveMethod": {
+            "$ref": "component:StatementReceiveMethod"
+        },
+        "applicationDate": {
+            "type": "string",
+            "aiFormat": "date"
+        },
+        "registrationDate": {
+            "type": "string",
+            "aiFormat": "date"
+        },
+        "requestIssueDate": {
+            "type": "string",
+            "aiFormat": "date"
+        }
+    }
+}

@@ -1,0 +1,157 @@
+{
+    "id": "LoadedErrorsFromExcelUiSchema",
+    "type": "Group",
+    "elements": [
+        {
+            "type": "GridLayout",
+            "numberOfColumns": 4,
+            "elements": [
+                {
+                    "type": "Group",
+                    "elements": [
+                        {
+                            "type": "Button",
+                            "label": "Export",
+                            "width": 1,
+                            "onClick": [
+                                {
+                                    "commandType": "executeOperation",
+                                    "operation": "EXPORT"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "Group",
+                    "elements": [
+                        {
+                            "type": "DataGrid",
+                            "header": {
+                                "showReloadButton": true,
+                                "showNumberOfResults": true
+                            },
+                            "orderBy": "Description",
+                            "mode": "DataSource",
+                            "pagination": {
+                                "mode": "Regular",
+                                "pageSizes": [
+                                    5,
+                                    10,
+                                    15
+                                ]
+                            },
+                            "selection": {
+                                "mode": "None"
+                            },
+                            "actions": [
+                                "Details"
+                            ],
+                            "height": "None",
+                            "detailsTemplates": {
+                                "view": {
+                                    "content": {
+                                        "type": "GridLayout",
+                                        "numberOfColumns": 4,
+                                        "elements": [
+                                            {
+                                                "type": "Group",
+                                                "elements": [
+                                                    {
+                                                        "type": "Input",
+                                                        "readOnly": true,
+                                                        "label": "RowNumber",
+                                                        "value": {
+                                                            "$ref": "#/properties/resultData/properties/rowNumber"
+                                                        },
+                                                        "width": 1
+                                                    },
+                                                    {
+                                                        "type": "Input",
+                                                        "readOnly": true,
+                                                        "label": "RecordKey",
+                                                        "value": {
+                                                            "$ref": "#/properties/resultData/properties/recordKey"
+                                                        },
+                                                        "width": 1
+                                                    },
+                                                    {
+                                                        "type": "Input",
+                                                        "readOnly": true,
+                                                        "label": "ErrorType",
+                                                        "value": {
+                                                            "$ref": "#/properties/resultData/properties/errorType"
+                                                        },
+                                                        "width": 2
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "type": "DataGrid",
+                                                "showReloadButton": false,
+                                                "showNumberOfResults": false,
+                                                "mode": "Array",
+                                                "selection": {
+                                                    "mode": "None"
+                                                },
+                                                "value": {
+                                                    "$ref": "#/properties/resultData/properties/errorDetails"
+                                                },
+                                                "height": "None",
+                                                "columns": [
+                                                    {
+                                                        "sortable": false,
+                                                        "title": "Message",
+                                                        "cellContent": {
+                                                            "type": "OutputText",
+                                                            "skipTranslate": true,
+                                                            "value": {
+                                                                "$ref": "#/properties/message"
+                                                            }
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                }
+                            },
+                            "columns": [
+                                {
+                                    "sortable": false,
+                                    "title": "SourceId",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "value": {
+                                            "$ref": "#/properties/resultData/properties/sourceId"
+                                        }
+                                    }
+                                },
+                                {
+                                    "sortable": false,
+                                    "title": "RowNumber",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "value": {
+                                            "$ref": "#/properties/resultData/properties/rowNumber"
+                                        }
+                                    }
+                                },
+                                {
+                                    "sortable": false,
+                                    "title": "RecordKey",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "value": {
+                                            "$ref": "#/properties/resultData/properties/recordKey"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

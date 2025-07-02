@@ -1,0 +1,72 @@
+{
+    "allowParallelExecution": true,
+    "mainDataSource": "ImportStagingDataSource",
+    "additionalDataSources": [
+
+    ],
+    "initialisationSinks": [
+
+    ],
+    "sinks": [
+        {
+            "name": "GetContractFullData",
+            "fetch": {
+                "configuration": {
+                    "name": "GetContractFullDataDataSource"
+                }
+            }
+        },
+        {
+            "name": "EvaluateContract",
+            "class": {
+                "className": "Adacta.AdInsure.RGSL.PAS.API.Shared.Contract.Services.IContractServiceRGSL, Adacta.AdInsure.RGSL.PAS.API",
+                "methodName": "EvaluateContract"
+            }
+        },
+        {
+            "name": "UpdateContractRisks",
+            "class": {
+                "className": "Adacta.AdInsure.RGSL.PAS.API.Shared.Contract.Services.IContractServiceRGSL, Adacta.AdInsure.RGSL.PAS.API",
+                "methodName": "UpdateContractRisks"
+            }
+        },
+        {
+            "name": "ReIndexContract",
+            "class": {
+                "className": "Adacta.AdInsure.RGSL.Framework.API.EntitySearch.Services.IElasticSearchIndexerServiceRGSL, Adacta.AdInsure.RGSL.Framework.API",
+                "methodName": "IndexDocument"
+            }
+        },
+        {
+            "name": "WriteSuccessStatus",
+            "database": {
+                "tables": [
+                    "BFX.IMPORT_RECORD_STATUS"
+                ]
+            }
+        }
+    ],
+    "completionSinks": [
+        {
+            "name": "FinishedImporting",
+            "documentTransition": {
+                "transition": {
+                    "transitionName": "FinishImporting",
+                    "configurationName": "RecalcInsuredSumImport",
+                    "configurationVersion": "1"
+                }
+            }
+        }
+    ],
+    "errorSinks": [
+        {
+            "name": "WriteErrorStatus",
+            "database": {
+                "tables": [
+                    "BFX.IMPORT_RECORD_STATUS"
+                ]
+            }
+        }
+    ],
+    "version": "1"
+}

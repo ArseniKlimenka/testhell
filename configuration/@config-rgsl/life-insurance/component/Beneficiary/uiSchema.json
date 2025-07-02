@@ -1,0 +1,86 @@
+{
+    "type": "GridLayout",
+    "numberOfColumns": 12,
+    "elements": [
+        {
+            "type": "Group",
+            "width": 12,
+            "elements": [
+                {
+                    "type": "Input",
+                    "label": "partyFullName",
+                    "value": {
+                        "$ref": "#/properties/partyFullName"
+                    },
+                    "width": 4
+                },
+                {
+                    "type": "Input",
+                    "label": "dateOfBirth",
+                    "value": {
+                        "$ref": "#/properties/dateOfBirth"
+                    },
+                    "width": 4
+                },
+                {
+                    "type": "Input",
+                    "label": "personGender",
+                    "value": {
+                        "$ref": "#/properties/personGender"
+                    },
+                    "width": 4
+                }
+            ]
+        },
+        {
+            "type": "Group",
+            "width": 12,
+            "elements": [
+                {
+                    "type": "Input",
+                    "showAsRequired": true,
+                    "label": "share",
+                    "decimalPlaces": 2,
+                    "clearValueOutOfRange": true,
+                    "control": "Percentage",
+                    "value": {
+                        "$ref": "#/properties/share"
+                    },
+                    "width": 4
+                },
+                {
+                    "type": "Input",
+                    "hide": false,
+                    "showAsRequired": true,
+                    "enableCustomValue": true,
+                    "label": "relationType",
+                    "description": "relationTypeDesc",
+                    "source": {
+                        "dataSource": {
+                            "name": "PartyRelationsTypeDataSource",
+                            "reloadOnOpen": true,
+                            "searchFieldPath": "relationTypeDescription",
+                            "responseMapping": "relationTypeResponseMapping",
+                            "resultCount": 1000
+                        }
+                    },
+                    "control": "Dropdown",
+                    "value": {
+                        "$ref": "#/properties/relationType"
+                    },
+                    "width": 4
+                },
+                {
+                    "type": "Input",
+                    "label": "beneficiaryCategory",
+                    "filter": "beneficiaryCategoryFilter",
+                    "preSelectFirstItem": true,
+                    "value": {
+                        "$ref": "#/properties/beneficiaryCategory"
+                    },
+                    "width": 4
+                }
+            ]
+        }
+    ]
+}

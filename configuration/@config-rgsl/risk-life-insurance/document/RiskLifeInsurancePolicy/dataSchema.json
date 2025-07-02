@@ -1,0 +1,178 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema",
+    "type": "object",
+    "additionalProperties": false,
+    "aiAudit": {
+        "scope": "General"
+    },
+    "properties": {
+        "additionalServices": {
+            "$ref": "component:AdditionalServices"
+        },
+        "mainInsuranceConditions": {
+            "$ref": "component:MainInsuranceConditions"
+        },
+        "basicConditions": {
+            "allOf": [
+                {
+                    "$ref": "component:BasicConditions"
+                },
+                {
+                    "aiAdditionalContext": {
+                        "name": "issueFormCode",
+                        "$data": "/issueForm/code/issueFormCode",
+                        "source": "Body"
+                    }
+                }
+            ]
+        },
+        "beneficiaries": {
+            "$ref": "component:Beneficiaries"
+        },
+        "additionalBeneficiaries": {
+            "$ref": "component:AdditionalBeneficiaries"
+        },
+        "insuranceRules": {
+            "$ref": "component:InsuranceRules"
+        },
+        "insuredPerson": {
+            "$ref": "component:InsuredPerson"
+        },
+        "issueForm": {
+            "allOf": [
+                {
+                    "$ref": "component:IssueForm"
+                },
+                {
+                    "aiAdditionalContext": {
+                        "name": "policyHolder",
+                        "$data": "/policyHolder",
+                        "source": "Body"
+                    }
+                },
+                {
+                    "aiAdditionalContext": {
+                        "name": "insuredPerson",
+                        "$data": "/insuredPerson",
+                        "source": "Body"
+                    }
+                },
+                {
+                    "aiAdditionalContext": {
+                        "name": "futureContractNumber",
+                        "$data": "/technicalInformation/futureContractNumber",
+                        "source": "Body"
+                    }
+                }
+            ]
+        },
+        "paymentPlan": {
+            "$ref": "component:PaymentPlan"
+        },
+        "policyHolder": {
+            "$ref": "component:PolicyHolder"
+        },
+        "policyTerms": {
+            "$ref": "component:PolicyTerms"
+        },
+        "promotions": {
+            "$ref": "component:Promotions"
+        },
+        "risks": {
+            "$ref": "component:Risks"
+        },
+        "risksPackages": {
+            "$ref": "component:RisksPackages"
+        },
+        "risksCorrection": {
+            "$ref": "component:RisksCorrection"
+        },
+        "riskConditions": {
+            "$ref": "component:RiskConditions"
+        },
+        "surrenderValues": {
+            "$ref": "component:SurrenderValues"
+        },
+        "uwTriggers": {
+            "$ref": "component:UWTriggers"
+        },
+        "insurerComment": {
+            "$ref": "component:InsurerComment"
+        },
+        "initiator": {
+            "$ref": "component:Initiator"
+        },
+        "additionalInitiators": {
+            "$ref": "component:AdditionalInitiators"
+        },
+        "technicalInformation": {
+            "$ref": "component:TechnicalInformation"
+        },
+        "declarationMedicalConfirmation": {
+            "$ref": "component:DeclarationMedicalConfirmation"
+        },
+        "declarationMedical": {
+            "$ref": "component:DeclarationMedical"
+        },
+        "declarationMainConfirmation": {
+            "$ref": "component:DeclarationMainConfirmation"
+        },
+        "declarationMain": {
+            "$ref": "component:DeclarationMain"
+        },
+        "declarationSport": {
+            "$ref": "component:DeclarationSport"
+        },
+        "declarationSportConfirmation": {
+            "$ref": "component:DeclarationSportConfirmation"
+        },
+        "amateurSportCondition": {
+            "$ref": "component:AmateurSportCondition"
+        },
+        "triggersConditions": {
+            "$ref": "component:UWTriggersConditions"
+        },
+        "inquiriesList": {
+            "$ref": "component:InquiriesList"
+        },
+        "attachmentsPackage": {
+            "$ref": "component:AttachmentsPackage"
+        },
+        "amendmentData": {
+            "type": "object",
+            "additionalProperties": true
+        },
+        "commission": {
+            "$ref": "component:PolicyCommission"
+        },
+        "oldCommission": {
+            "type": "object"
+        },
+        "migrationAttributes": {
+            "$ref": "component:MigrationAttributes"
+        },
+        "allocationInformation": {
+            "$ref": "component:AllocationInformation"
+        },
+        "summary": {
+            "type": "object",
+            "additionalProperties": true,
+            "properties": {}
+        },
+        "cumulation": {
+            "$ref": "component:Cumulation"
+        },
+        "productConfiguration": {
+            "$ref": "component:ProductConfiguration"
+        },
+        "policyEnrichments": {
+            "$ref": "component:PolicyEnrichments"
+        },
+        "selectedClaimRisks": {
+            "$ref": "component:SelectedClaimRisks"
+        },
+        "consent": {
+            "$ref": "component:Consent"
+        }
+    }
+}

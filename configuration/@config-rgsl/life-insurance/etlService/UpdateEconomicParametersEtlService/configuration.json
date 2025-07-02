@@ -1,0 +1,72 @@
+{
+    "mainDataSource": "EconomicParametersContractDataSource",
+    "allowParallelExecution": false,
+    "additionalDataSources": [],
+    "initialisationSinks": [
+        {
+            "name": "ProductConfToUpdating",
+            "executeAs": "System",
+            "documentTransition": {}
+        }
+    ],
+    "sinks": [
+        {
+            "name": "CheckContractAdditionalParameters",
+            "fetch": {
+                "configuration": {
+                    "name": "ContractAdditionalParametersDataSource"
+                }
+            }
+        },
+        {
+            "name": "GetQuoteByPolicyNumber",
+            "fetch": {
+                "configuration": {
+                    "name": "RelatedDocumentsDataSource"
+                }
+            }
+        },
+        {
+            "name": "GetExistingContractEntity",
+            "fetch": {
+                "configuration": {
+                    "name": "UniversalMasterEntityDataSource"
+                }
+            }
+        },
+        {
+            "name": "UpdateContractEntity",
+            "masterEntity": {
+                "configuration": {
+                    "name": "ContractEntity",
+                    "version": "1"
+                },
+                "allowUpdating": true
+            }
+        },
+        {
+            "name": "RaiseContractEntityReload",
+            "serverSideEvent": {
+                "eventType": "ContractEntityReload"
+            }
+        }
+    ],
+    "completionSinks": [
+        {
+            "name": "ProductConfToActivated",
+            "executeAs": "System",
+            "documentTransition": {}
+        }
+    ],
+    "errorSinks": [
+        {
+            "name": "WriteSinkError",
+            "database": {
+                "tables": [
+                    "BFX_IMPL.SINK_ERROR"
+                ]
+            }
+        }
+    ],
+    "version": "1"
+}

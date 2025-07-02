@@ -1,0 +1,29 @@
+{
+    "entityType": "ImportDocument",
+    "condition": {
+        "events": [
+            "StatusChanged"
+        ],
+        "configuration": {
+            "names": [
+                "CollectiveLifeInsurancePolicyImport"
+            ],
+            "dimensions": {}
+        },
+        "documentStates": [
+            "Importing"
+        ]
+    },
+    "sinks": [
+        {
+            "name": "CollectiveLifeInsurancePolicyImportSink",
+            "etlService": {
+                "configuration": {
+                    "name": "CollectiveLifeInsurancePolicyImportEtlService",
+                    "version": "1"
+                }
+            }
+        }
+    ],
+    "version": "1"
+}

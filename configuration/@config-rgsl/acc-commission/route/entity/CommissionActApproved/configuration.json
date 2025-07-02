@@ -1,0 +1,42 @@
+{
+    "entityType": "UniversalDocument",
+    "condition": {
+        "events": [
+            "StatusChanged"
+        ],
+        "configuration": {
+            "names": [
+                "CommissionAct"
+            ]
+        },
+        "documentStates": [
+            "Approved"
+        ]
+    },
+    "sinks": [
+        {
+            "name": "GetActData",
+            "fetch": {
+                "configuration": {
+                    "name": "CommissionActRgslDataSource"
+                }
+            }
+        },
+        {
+            "name": "ReferenceNumber",
+            "database": {
+                "tables": [
+                    "ACC_IMPL.REFERENCE_NUMBER"
+                ]
+            }
+        },
+        {
+            "name": "CreatePaymentOrder",
+            "class": {
+                "className": "Adacta.AdInsure.Framework.Core.Domain.Entities.IntegrationService.Interfaces.IIntegrationServiceExecutor, Adacta.AdInsure.Framework.Core.Domain",
+                "methodName": "Execute"
+            }
+        }
+    ],
+    "version": "1"
+}

@@ -1,0 +1,36 @@
+{
+    "type": "Section",
+    "sectionLevel": 1,
+    "label": "SocialTaxDeductionConfirmationUI",
+    "isCollapsed": false,
+    "width": 12,
+    "elements": [
+        {
+            "type": "OutputText",
+            "hideLabel": true,
+            "label": "QuestionForSocialTax",
+            "literalValue": "Сообщите клиенту, что по данной программе он может получить социальный налоговый вычет до 19 500 рублей (при наличии налогооблагаемого дохода по ставке 13%).",
+            "skipTranslate": true,
+            "allowMultiLine": true
+        },
+        {
+            "type": "Component",
+            "name": "SocialTaxDeduction",
+            "value": {
+                "$ref": "#/properties/socialTaxDeduction"
+            }
+        }
+    ],
+    "rule": {
+        "effect": "SHOW",
+        "condition": {
+            "type": "FUNC",
+            "ruleFunction": "showSocialTaxDeduction",
+            "value": [
+                {
+                    "$ref": "#"
+                }
+            ]
+        }
+    }
+}

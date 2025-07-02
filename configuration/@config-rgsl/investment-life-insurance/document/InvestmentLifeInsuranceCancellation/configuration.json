@@ -1,0 +1,1490 @@
+{
+    "entityType": "Contract",
+    "dimensions": {
+        "contractType": "Amendment",
+        "productGroup": "investment",
+        "amendmentType": "Cancellation",
+        "premiumEvent": "cancellation"
+    },
+    "version": "1",
+    "validFrom": "2000-01-01",
+    "ui": {
+        "layout": "VersionedDocumentLayout",
+        "composition": {
+            "MainContent": "MainContent",
+            "SummaryContent": "SummaryContent"
+        }
+    },
+    "states": [
+        {
+            "name": "Draft",
+            "actors": [
+                {
+                    "actor": "Operations",
+                    "uiSchema": "MainContent",
+                    "transitions": [
+                        "Draft_to_OperationsApproval"
+                    ],
+                    "operations": [
+                        "Save"
+                    ],
+                    "relations": [],
+                    "allowComments": true
+                },
+                {
+                    "actor": "Accounting",
+                    "uiSchema": "MainContent",
+                    "transitions": [],
+                    "operations": [
+                        "Save"
+                    ],
+                    "relations": [],
+                    "allowComments": true
+                },
+                {
+                    "actor": "Viewer",
+                    "uiSchema": "MainContent",
+                    "transitions": [],
+                    "attachmentsRestrictions": [
+                        {
+                            "attachmentType": "bankDetails",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "attorney",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "cancellationApplication",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "copyPassport",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "copyPolicy",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "reportCurrentPayments",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "cancellationAgreementParties",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "deathCertificate",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "informationTax",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "policyholderRepresentativeInsured",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "act",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "other",
+                            "permissions": [
+                                "Read"
+                            ]
+                        }
+                    ],
+                    "operations": [],
+                    "relations": []
+                }
+            ]
+        },
+        {
+            "name": "OperationsApproval",
+            "actors": [
+                {
+                    "actor": "Operations",
+                    "uiSchema": "MainContent",
+                    "transitions": [
+                        "OperationsApproval_to_RequestToClient",
+                        "OperationsApproval_to_Cancelled",
+                        "OperationsApproval_to_Activated",
+                        "OperationsApproval_to_AwaitingApproval",
+                        "OperationsApproval_to_AwaitingCancellationDate",
+                        "OperationsApproval_to_AwaitingPaymentDocuments",
+                        "OperationsApproval_to_POCreation",
+                        "OperationsApproval_to_Rejected"
+                    ],
+                    "operations": [
+                        "Save"
+                    ],
+                    "relations": [],
+                    "allowComments": true
+                },
+                {
+                    "actor": "System",
+                    "uiSchema": "MainContent",
+                    "transitions": [
+                        "OperationsApproval_to_RequestToClient",
+                        "OperationsApproval_to_Cancelled",
+                        "OperationsApproval_to_Activated",
+                        "OperationsApproval_to_AwaitingApproval",
+                        "OperationsApproval_to_AwaitingCancellationDate",
+                        "OperationsApproval_to_AwaitingPaymentDocuments",
+                        "OperationsApproval_to_POCreation",
+                        "OperationsApproval_to_Rejected"
+                    ],
+                    "operations": [
+                        "Save"
+                    ],
+                    "relations": [],
+                    "allowComments": true
+                },
+                {
+                    "actor": "Accounting",
+                    "uiSchema": "MainContent",
+                    "transitions": [],
+                    "operations": [
+                        "Save"
+                    ],
+                    "relations": [],
+                    "allowComments": true
+                },
+                {
+                    "actor": "Viewer",
+                    "uiSchema": "MainContent",
+                    "transitions": [],
+                    "attachmentsRestrictions": [
+                        {
+                            "attachmentType": "bankDetails",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "attorney",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "cancellationApplication",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "copyPassport",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "copyPolicy",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "reportCurrentPayments",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "cancellationAgreementParties",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "deathCertificate",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "informationTax",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "policyholderRepresentativeInsured",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "act",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "other",
+                            "permissions": [
+                                "Read"
+                            ]
+                        }
+                    ],
+                    "operations": [],
+                    "relations": []
+                }
+            ]
+        },
+        {
+            "name": "RequestToClient",
+            "actors": [
+                {
+                    "actor": "UKSP",
+                    "uiSchema": "MainContent",
+                    "transitions": [
+                    ],
+                    "operations": [],
+                    "relations": [],
+                    "allowComments": true
+                },
+                {
+                    "actor": "Operations",
+                    "uiSchema": "MainContent",
+                    "transitions": [
+                        "RequestToClient_to_OperationsApproval"
+                    ],
+                    "operations": [
+                        "Save"
+                    ],
+                    "relations": [],
+                    "allowComments": true
+                },
+                {
+                    "actor": "Accounting",
+                    "uiSchema": "MainContent",
+                    "transitions": [],
+                    "operations": [
+                        "Save"
+                    ],
+                    "relations": [],
+                    "allowComments": true
+                },
+                {
+                    "actor": "Viewer",
+                    "uiSchema": "MainContent",
+                    "transitions": [],
+                    "attachmentsRestrictions": [
+                        {
+                            "attachmentType": "bankDetails",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "attorney",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "cancellationApplication",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "copyPassport",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "copyPolicy",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "reportCurrentPayments",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "cancellationAgreementParties",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "deathCertificate",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "informationTax",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "policyholderRepresentativeInsured",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "act",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "other",
+                            "permissions": [
+                                "Read"
+                            ]
+                        }
+                    ],
+                    "operations": [],
+                    "relations": []
+                }
+            ]
+        },
+        {
+            "name": "AwaitingApproval",
+            "actors": [
+                {
+                    "actor": "Operations",
+                    "uiSchema": "MainContent",
+                    "transitions": [
+                        "AwaitingApproval_to_OperationsApproval"
+                    ],
+                    "operations": [],
+                    "relations": [],
+                    "allowComments": true
+                },
+                {
+                    "actor": "Viewer",
+                    "uiSchema": "MainContent",
+                    "transitions": [],
+                    "attachmentsRestrictions": [
+                        {
+                            "attachmentType": "bankDetails",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "attorney",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "cancellationApplication",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "copyPassport",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "copyPolicy",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "reportCurrentPayments",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "cancellationAgreementParties",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "deathCertificate",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "informationTax",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "policyholderRepresentativeInsured",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "act",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "other",
+                            "permissions": [
+                                "Read"
+                            ]
+                        }
+                    ],
+                    "operations": [],
+                    "relations": []
+                },
+                {
+                    "actor": "System",
+                    "uiSchema": "MainContent",
+                    "transitions": [
+                        "AwaitingApproval_to_OperationsApproval"
+                    ],
+                    "operations": [
+                        "Save"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "AwaitingCancellationDate",
+            "actors": [
+                {
+                    "actor": "Operations",
+                    "uiSchema": "MainContent",
+                    "transitions": [
+                        "AwaitingCancellationDate_to_OperationsApproval"
+                    ],
+                    "operations": [
+                    ],
+                    "relations": [],
+                    "allowComments": true
+                },
+                {
+                    "actor": "Viewer",
+                    "uiSchema": "MainContent",
+                    "transitions": [],
+                    "attachmentsRestrictions": [
+                        {
+                            "attachmentType": "bankDetails",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "attorney",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "cancellationApplication",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "copyPassport",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "copyPolicy",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "reportCurrentPayments",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "cancellationAgreementParties",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "deathCertificate",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "informationTax",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "policyholderRepresentativeInsured",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "act",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "other",
+                            "permissions": [
+                                "Read"
+                            ]
+                        }
+                    ],
+                    "operations": [],
+                    "relations": []
+                },
+                {
+                    "actor": "System",
+                    "uiSchema": "MainContent",
+                    "transitions": [
+                        "AwaitingCancellationDate_to_OperationsApproval"
+                    ],
+                    "operations": [
+                        "Save"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "AwaitingPaymentDocuments",
+            "actors": [
+                {
+                    "actor": "Operations",
+                    "uiSchema": "MainContent",
+                    "transitions": [
+                        "AwaitingPaymentDocuments_to_POCreation",
+                        "AwaitingPaymentDocuments_to_Activated"
+                    ],
+                    "operations": [
+                        "Save"
+                    ],
+                    "relations": [],
+                    "allowComments": true
+                },
+                {
+                    "actor": "Accounting",
+                    "uiSchema": "MainContent",
+                    "transitions": [],
+                    "operations": [
+                        "Save"
+                    ],
+                    "relations": [],
+                    "allowComments": true
+                },
+                {
+                    "actor": "Viewer",
+                    "uiSchema": "MainContent",
+                    "transitions": [],
+                    "attachmentsRestrictions": [
+                        {
+                            "attachmentType": "bankDetails",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "attorney",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "cancellationApplication",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "copyPassport",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "copyPolicy",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "reportCurrentPayments",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "cancellationAgreementParties",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "deathCertificate",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "informationTax",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "policyholderRepresentativeInsured",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "act",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "other",
+                            "permissions": [
+                                "Read"
+                            ]
+                        }
+                    ],
+                    "operations": [],
+                    "relations": []
+                }
+            ]
+        },
+        {
+            "name": "OperationsDirectorApproval",
+            "actors": [
+                {
+                    "actor": "OperationsDirector",
+                    "uiSchema": "MainContent",
+                    "transitions": [
+                        "OperationsDirectorApproval_to_SentToPayment",
+                        "OperationsDirectorApproval_to_OperationsApproval"
+                    ],
+                    "operations": [
+                        "Save"
+                    ],
+                    "relations": [],
+                    "allowComments": true
+                },
+                {
+                    "actor": "Operations",
+                    "uiSchema": "MainContent",
+                    "transitions": [
+                    ],
+                    "operations": [],
+                    "relations": [],
+                    "allowComments": true
+                },
+                {
+                    "actor": "Accounting",
+                    "uiSchema": "MainContent",
+                    "transitions": [],
+                    "operations": [
+                        "Save"
+                    ],
+                    "relations": [],
+                    "allowComments": true
+                },
+                {
+                    "actor": "Viewer",
+                    "uiSchema": "MainContent",
+                    "transitions": [],
+                    "attachmentsRestrictions": [
+                        {
+                            "attachmentType": "bankDetails",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "attorney",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "cancellationApplication",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "copyPassport",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "copyPolicy",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "reportCurrentPayments",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "cancellationAgreementParties",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "deathCertificate",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "informationTax",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "policyholderRepresentativeInsured",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "act",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "other",
+                            "permissions": [
+                                "Read"
+                            ]
+                        }
+                    ],
+                    "operations": [],
+                    "relations": []
+                }
+            ]
+        },
+        {
+            "name": "POCreation",
+            "actors": [
+                {
+                    "actor": "Operations",
+                    "uiSchema": "MainContent",
+                    "transitions": [],
+                    "operations": [],
+                    "relations": [],
+                    "allowComments": true
+                },
+                {
+                    "actor": "ContractAdministrator",
+                    "uiSchema": "MainContent",
+                    "operations": [],
+                    "transitions": [
+                        "FinishPOCreation"
+                    ]
+                },
+                {
+                    "actor": "Viewer",
+                    "uiSchema": "MainContent",
+                    "operations": [
+                    ],
+                    "transitions": [
+                    ]
+                },
+                {
+                    "actor": "System",
+                    "uiSchema": "MainContent",
+                    "operations": [],
+                    "transitions": [
+                        "FinishPOCreation"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "SentToPayment",
+            "actors": [
+                {
+                    "actor": "Operations",
+                    "uiSchema": "MainContent",
+                    "transitions": [],
+                    "operations": [
+                        "Save"
+                    ],
+                    "relations": [],
+                    "allowComments": true
+                },
+                {
+                    "actor": "Viewer",
+                    "uiSchema": "MainContent",
+                    "transitions": [],
+                    "attachmentsRestrictions": [
+                        {
+                            "attachmentType": "bankDetails",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "attorney",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "cancellationApplication",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "copyPassport",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "copyPolicy",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "reportCurrentPayments",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "cancellationAgreementParties",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "deathCertificate",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "informationTax",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "policyholderRepresentativeInsured",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "act",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "other",
+                            "permissions": [
+                                "Read"
+                            ]
+                        }
+                    ],
+                    "operations": [],
+                    "relations": []
+                },
+                {
+                    "actor": "ContractAdministrator",
+                    "uiSchema": "MainContent",
+                    "operations": [],
+                    "transitions": []
+                }
+            ]
+        },
+        {
+            "name": "Activated",
+            "actors": [
+                {
+                    "actor": "Viewer",
+                    "uiSchema": "MainContent",
+                    "transitions": [],
+                    "attachmentsRestrictions": [
+                        {
+                            "attachmentType": "bankDetails",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "attorney",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "cancellationApplication",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "copyPassport",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "copyPolicy",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "reportCurrentPayments",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "cancellationAgreementParties",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "deathCertificate",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "informationTax",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "policyholderRepresentativeInsured",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "act",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "other",
+                            "permissions": [
+                                "Read"
+                            ]
+                        }
+                    ],
+                    "operations": [],
+                    "relations": []
+                },
+                {
+                    "actor": "System",
+                    "uiSchema": "MainContent",
+                    "operations": [
+                        "Save"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Cancelled",
+            "actors": [
+                {
+                    "actor": "Viewer",
+                    "uiSchema": "MainContent",
+                    "transitions": [],
+                    "attachmentsRestrictions": [
+                        {
+                            "attachmentType": "bankDetails",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "attorney",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "cancellationApplication",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "copyPassport",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "copyPolicy",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "reportCurrentPayments",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "cancellationAgreementParties",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "deathCertificate",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "informationTax",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "policyholderRepresentativeInsured",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "act",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "other",
+                            "permissions": [
+                                "Read"
+                            ]
+                        }
+                    ],
+                    "operations": [],
+                    "relations": []
+                },
+                {
+                    "actor": "System",
+                    "uiSchema": "MainContent",
+                    "operations": [
+                        "Save"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Rejected",
+            "actors": [
+                {
+                    "actor": "Viewer",
+                    "uiSchema": "MainContent",
+                    "transitions": [],
+                    "attachmentsRestrictions": [
+                        {
+                            "attachmentType": "bankDetails",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "attorney",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "cancellationApplication",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "copyPassport",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "copyPolicy",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "reportCurrentPayments",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "cancellationAgreementParties",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "deathCertificate",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "informationTax",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "policyholderRepresentativeInsured",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "act",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "other",
+                            "permissions": [
+                                "Read"
+                            ]
+                        }
+                    ],
+                    "operations": [],
+                    "relations": []
+                },
+                {
+                    "actor": "System",
+                    "uiSchema": "MainContent",
+                    "operations": [
+                        "Save"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Paid",
+            "actors": [
+                {
+                    "actor": "Viewer",
+                    "uiSchema": "MainContent",
+                    "transitions": [],
+                    "attachmentsRestrictions": [
+                        {
+                            "attachmentType": "bankDetails",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "attorney",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "cancellationApplication",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "copyPassport",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "copyPolicy",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "reportCurrentPayments",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "cancellationAgreementParties",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "deathCertificate",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "informationTax",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "policyholderRepresentativeInsured",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "act",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "other",
+                            "permissions": [
+                                "Read"
+                            ]
+                        }
+                    ],
+                    "operations": [],
+                    "relations": []
+                },
+                {
+                    "actor": "System",
+                    "uiSchema": "MainContent",
+                    "operations": [
+                        "Save"
+                    ]
+                }
+            ]
+        }
+    ],
+    "transitions": {
+        "OperationsApproval_to_Activated": {
+            "transitionEffects": {
+                "enrich": [
+                    "/attachmentsPackage"
+                ]
+            }
+        },
+        "OperationsApproval_to_RequestToClient": {
+            "transitionEffects": {
+                "enrich": [
+                    "/attachmentsPackage",
+                    "/paymentAmendmentConditions[SetCancellationtAmounts]"
+                ]
+            }
+        },
+        "OperationsApproval_to_AwaitingApproval": {
+            "transitionEffects": {
+                "enrich": [
+                    "/attachmentsPackage",
+                    "/paymentAmendmentConditions[SetCancellationtAmounts]"
+                ]
+            }
+        },
+        "OperationsApproval_to_AwaitingCancellationDate": {
+            "transitionEffects": {
+                "enrich": [
+                    "/attachmentsPackage",
+                    "/paymentAmendmentConditions[SetCancellationtAmounts]"
+                ]
+            }
+        },
+        "OperationsApproval_to_AwaitingPaymentDocuments": {
+            "transitionEffects": {
+                "enrich": [
+                    "/attachmentsPackage",
+                    "/paymentAmendmentConditions[SetCancellationtAmounts]"
+                ]
+            }
+        },
+        "OperationsDirectorApproval_to_OperationsApproval": {
+            "transitionEffects": {
+                "enrich": [
+                    "/attachmentsPackage",
+                    "/paymentAmendmentConditions[SetCancellationtAmounts]"
+                ]
+            }
+        }
+        ,
+        "RequestToClient_to_OperationsApproval": {
+            "transitionEffects": {
+                "enrich": [
+                    "/attachmentsPackage",
+                    "/paymentAmendmentConditions[SetCancellationtAmounts]"
+                ]
+            }
+        },
+        "Draft_to_OperationsApproval": {
+            "transitionEffects": {
+                "enrich": [
+                    "/paymentAmendmentConditions[SetCancellationtAmounts]"
+                ]
+            }
+        },
+        "AwaitingApproval_to_OperationsApproval": {
+            "transitionEffects": {
+                "enrich": [
+                    "/attachmentsPackage",
+                    "/paymentAmendmentConditions[SetCancellationtAmounts]"
+                ]
+            }
+        },
+        "AwaitingCancellationDate_to_OperationsApproval": {
+            "transitionEffects": {
+                "enrich": [
+                    "/attachmentsPackage",
+                    "/paymentAmendmentConditions[SetCancellationtAmounts]"
+                ]
+            }
+        },
+        "OperationsApproval_to_POCreation": {
+            "transitionEffects": {
+                "enrich": [
+                    "/attachmentsPackage",
+                    "/paymentAmendmentConditions[SetCancellationtAmounts]"
+                ]
+            }
+        },
+        "AwaitingPaymentDocuments_to_POCreation": {
+            "transitionEffects": {
+                "enrich": [
+                    "/attachmentsPackage",
+                    "/paymentAmendmentConditions[SetCancellationtAmounts]"
+                ]
+            }
+        },
+        "OperationsDirectorApproval_to_SentToPayment": {
+            "transitionEffects": {
+                "enrich": [
+                    "/attachmentsPackage",
+                    "/paymentAmendmentConditions[SetCancellationtAmounts]"
+                ]
+            }
+        }
+    },
+    "attachments": [
+        {
+            "attachmentType": "bankDetails",
+            "flow": "Incoming"
+        },
+        {
+            "attachmentType": "attorney",
+            "flow": "Incoming"
+        },
+        {
+            "attachmentType": "cancellationApplication",
+            "flow": "Incoming"
+        },
+        {
+            "attachmentType": "copyPassport",
+            "flow": "Incoming"
+        },
+        {
+            "attachmentType": "copyPolicy",
+            "flow": "Incoming"
+        },
+        {
+            "attachmentType": "reportCurrentPayments",
+            "flow": "Incoming"
+        },
+        {
+            "attachmentType": "cancellationAgreementParties",
+            "flow": "Incoming"
+        },
+        {
+            "attachmentType": "deathCertificate",
+            "flow": "Incoming"
+        },
+        {
+            "attachmentType": "informationTax",
+            "flow": "Incoming"
+        },
+        {
+            "attachmentType": "policyholderRepresentativeInsured",
+            "flow": "Incoming"
+        },
+        {
+            "attachmentType": "act",
+            "flow": "Incoming"
+        },
+        {
+            "attachmentType": "other",
+            "flow": "Incoming"
+        },
+        {
+            "attachmentType": "paymentConfirmation",
+            "flow": "Incoming"
+        }
+    ],
+    "components": []
+}

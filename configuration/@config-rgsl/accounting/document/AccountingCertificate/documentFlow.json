@@ -1,0 +1,106 @@
+{
+    "processType": "AccountingCertificate",
+    "actors": [
+        "AccountingCertificateEditor",
+        "AccountingCertificateViewer",
+        "AccountingCertificateAttachmentEditor",
+        "System"
+    ],
+    "initialState": "Draft",
+    "states": [
+        {
+            "name": "Draft",
+            "operations": [
+                {
+                    "name": "Save",
+                    "exclusiveToAssignedUser": false
+                }
+            ]
+        },
+        {
+            "name": "Checked",
+            "operations": [
+                {
+                    "name": "Save",
+                    "exclusiveToAssignedUser": false
+                }
+            ]
+        },
+        {
+            "name": "Issued",
+            "isTerminal": true,
+            "appliesVersion": true,
+            "operations": []
+        },
+        {
+            "name": "Cancelled",
+            "isTerminal": true,
+            "discardsVersion": true,
+            "operations": []
+        }
+    ],
+    "transitions": [
+        {
+            "name": "Draft_to_Issued",
+            "from": "Draft",
+            "to": "Issued",
+            "exclusiveToAssignedUser": false,
+            "whenBlocked": "Greyout"
+        },
+        {
+            "name": "Draft_to_Checked",
+            "from": "Draft",
+            "to": "Checked",
+            "exclusiveToAssignedUser": false,
+            "whenBlocked": "Greyout"
+        },
+        {
+            "name": "Checked_to_Issued",
+            "from": "Checked",
+            "to": "Issued",
+            "exclusiveToAssignedUser": false,
+            "whenBlocked": "Greyout"
+        },
+        {
+            "name": "Checked_to_Draft",
+            "from": "Checked",
+            "to": "Draft",
+            "exclusiveToAssignedUser": false,
+            "whenBlocked": "Greyout"
+        },
+        {
+            "name": "Checked_to_Cancelled",
+            "from": "Checked",
+            "to": "Cancelled",
+            "exclusiveToAssignedUser": false,
+            "whenBlocked": "Greyout"
+        },
+        {
+            "name": "Draft_to_Issued_System",
+            "from": "Draft",
+            "to": "Issued",
+            "exclusiveToAssignedUser": false,
+            "whenBlocked": "Hide"
+        },
+        {
+            "name": "Draft_to_Cancelled",
+            "from": "Draft",
+            "to": "Cancelled",
+            "exclusiveToAssignedUser": false,
+            "allowOnValidationErrors": {
+                "all": true
+            },
+            "whenBlocked": "DisplayNormally"
+        },
+        {
+            "name": "Cancelled_to_Draft",
+            "from": "Cancelled",
+            "to": "Draft",
+            "exclusiveToAssignedUser": false,
+            "allowOnValidationErrors": {
+                "all": true
+            },
+            "whenBlocked": "DisplayNormally"
+        }
+    ]
+}

@@ -1,0 +1,300 @@
+{
+    "type": "Section",
+    "label": "Policy Term",
+    "collapsing": {
+        "initial": false,
+        "enabled": true
+    },
+    "width": 12,
+    "readOnly": true,
+    "elements": [
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "Input",
+                    "label": "startDate",
+                    "value": {
+                        "$ref": "#/properties/startDate"
+                    },
+                    "onValueChanged": [
+                        {
+                            "commandType": "executeAction",
+                            "actionName": "onChangeStartDate"
+                        }
+                    ],
+                    "width": 4,
+                    "rule": {
+                        "effect": "ENABLE_INITIAL",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "enableStartDate",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "type": "Input",
+                    "label": "endDate",
+                    "value": {
+                        "$ref": "#/properties/endDate"
+                    },
+                    "onValueChanged": [
+                        {
+                            "commandType": "executeAction",
+                            "actionName": "onChangeEndDate"
+                        }
+                    ],
+                    "width": 4,
+                    "rule": {
+                        "effect": "ENABLE_INITIAL",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "enableEndDate",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "type": "Input",
+                    "label": "effectiveDate",
+                    "value": {
+                        "$ref": "#/properties/effectiveDate"
+                    },
+                    "width": 4
+                }
+            ]
+        },
+        {
+            "type": "Group",
+            "rule": {
+                "effect": "SHOW",
+                "condition": {
+                    "type": "FUNC",
+                    "ruleFunction": "isBackOfficeUser",
+                    "value": [
+                        {
+                            "$ref": "#"
+                        }
+                    ]
+                }
+            },
+            "elements": [
+                {
+                    "type": "Group",
+                    "elements": [
+                        {
+                            "type": "Input",
+                            "label": "paymentPeriodStartDate",
+                            "value": {
+                                "$ref": "#/properties/paymentPeriodStartDate"
+                            },
+                            "width": 4
+                        },
+                        {
+                            "type": "Input",
+                            "label": "paymentPeriodEndDate",
+                            "value": {
+                                "$ref": "#/properties/paymentPeriodEndDate"
+                            },
+                            "width": 4
+                        },
+                        {
+                            "type": "Group",
+                            "elements": [
+                                {
+                                    "type": "Input",
+                                    "label": "paymentPeriodLastDate",
+                                    "value": {
+                                        "$ref": "#/properties/paymentPeriodLastDate"
+                                    },
+                                    "rule": {
+                                        "effect": "SHOW",
+                                        "condition": {
+                                            "type": "FUNC",
+                                            "ruleFunction": "showPaymentPeriodLastDate",
+                                            "value": [
+                                                {
+                                                    "$ref": "#"
+                                                }
+                                            ]
+                                        }
+                                    }
+                                }
+                            ],
+                            "width": 4,
+                            "rule": {
+                                "effect": "ENABLE_INITIAL",
+                                "condition": {
+                                    "type": "FUNC",
+                                    "ruleFunction": "enablePaymentPeriodLastDate",
+                                    "value": [
+                                        {
+                                            "$ref": "#"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    ]
+                },
+                {
+                    "type": "Group",
+                    "elements": [
+                        {
+                            "type": "Input",
+                            "label": "accumulationPeriodStartDate",
+                            "value": {
+                                "$ref": "#/properties/accumulationPeriodStartDate"
+                            },
+                            "width": 4
+                        },
+                        {
+                            "type": "Input",
+                            "label": "accumulationPeriodEndDate",
+                            "value": {
+                                "$ref": "#/properties/accumulationPeriodEndDate"
+                            },
+                            "width": 4
+                        }
+                    ]
+                },
+                {
+                    "type": "Group",
+                    "elements": [
+                        {
+                            "type": "Input",
+                            "label": "payOutStartDate",
+                            "value": {
+                                "$ref": "#/properties/payOutStartDate"
+                            },
+                            "width": 4
+                        },
+                        {
+                            "type": "Input",
+                            "label": "payOutEndDate",
+                            "value": {
+                                "$ref": "#/properties/payOutEndDate"
+                            },
+                            "width": 4
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "Group",
+                    "elements": [
+                        {
+                            "type": "OutputText",
+                            "label": "Payment period string",
+                            "defaultValue": "",
+                            "value": {
+                                "$ref": "#/properties/paymentPeriodString"
+                            },
+                            "width": 4
+                        }
+                    ]
+                }
+            ],
+            "rule": {
+                "effect": "SHOW",
+                "condition": {
+                    "type": "FUNC",
+                    "ruleFunction": "showPaymentPeriodString",
+                    "value": [
+                        {
+                            "$ref": "#"
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "Group",
+                    "elements": [
+                        {
+                            "type": "OutputText",
+                            "elementId": "migratedPaymentPeriodControl",
+                            "label": "Payment period string",
+                            "value": {
+                                "mapping": "getMigratedPaymentPeriodString"
+                            },
+                            "width": 4
+                        }
+                    ]
+                }
+            ],
+            "rule": {
+                "effect": "SHOW",
+                "condition": {
+                    "type": "FUNC",
+                    "ruleFunction": "showMigratedPaymentPeriodString",
+                    "value": [
+                        {
+                            "$ref": "#"
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "Input",
+                    "isCompact": true,
+                    "label": "Manual correction",
+                    "value": {
+                        "$ref": "#/properties/manualCorrection"
+                    },
+                    "width": 4,
+                    "onValueChanged": [
+                        {
+                            "commandType": "executeAction",
+                            "actionName": "onChangeManualCorrection"
+                        }
+                    ],
+                    "rule": {
+                        "effect": "ENABLE_INITIAL",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "canManualCorrection",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    }
+                }
+            ],
+            "rule": {
+                "effect": "SHOW",
+                "condition": {
+                    "type": "FUNC",
+                    "ruleFunction": "canManualCorrection",
+                    "value": [
+                        {
+                            "$ref": "#"
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}

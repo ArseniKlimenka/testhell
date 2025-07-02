@@ -1,0 +1,33 @@
+{
+    "entityType": "Contract",
+    "condition": {
+        "events": [
+            "Created"
+        ],
+        "configuration": {
+            "names": [
+                "EquityLifeInsuranceNonFinChange"
+            ]
+        }
+    },
+    "sinks": [
+        {
+            "name": "AmendmentToActivatedStatus",
+            "executeAs": "System",
+            "documentTransition": {
+                "transition": {}
+            }
+        }
+    ],
+    "errorSinks": [
+        {
+            "name": "WriteSinkError",
+            "database": {
+                "tables": [
+                    "BFX_IMPL.SINK_ERROR"
+                ]
+            }
+        }
+    ],
+    "version": "1"
+}

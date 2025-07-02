@@ -1,0 +1,132 @@
+{
+    "type": "Group",
+    "width": 6,
+    "elements": [
+        {
+            "type": "Input",
+            "elementId": "variantId",
+            "label": "variant",
+            "value": {
+                "$ref": "#/properties/variant"
+            },
+            "autocomplete": {
+                "minTextLength": 1,
+                "dropDownItemsCount": 5
+            },
+            "control": "Dropdown",
+            "multiple": false,
+            "source": {
+                "dataSource": {
+                    "name": "VariantDataSource",
+                    "reloadOnOpen": true,
+                    "searchFieldPath": "description",
+                    "requestMapping": "variantRequestMapping",
+                    "responseMapping": "variantResponseMapping"
+                },
+                "displayFieldName": "displayName",
+                "valueFieldName": "value"
+            },
+            "width": 2,
+            "onValueChanged": [
+                {
+                    "commandType": "executeAction",
+                    "actionName": "onChangeVariant"
+                }
+            ],
+            "rule": {
+                "effect": "DISABLE_INITIAL",
+                "condition": {
+                    "type": "FUNC",
+                    "ruleFunction": "disableVariant",
+                    "value": [
+                        {
+                            "$ref": "#"
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "type": "Input",
+            "elementId": "rateOfReturnId",
+            "label": "rateOfReturn",
+            "value": {
+                "$ref": "#/properties/rateOfReturn"
+            },
+            "onValueChanged": [
+                {
+                    "commandType": "executeAction",
+                    "actionName": "onChangeRateOfReturn"
+                }
+            ],
+            "control": "Dropdown",
+            "source": {
+                "array": {
+                    "$ref": "#/properties/Body/properties/technicalInformation/properties/ratesOfReturn"
+                },
+                "valueFieldName": "rateOfReturn",
+                "displayValueTemplate": "{{expr rateOfReturn 'p:2'}}"
+            },
+            "rule": {
+                "effect": "DISABLE_INITIAL",
+                "condition": {
+                    "type": "FUNC",
+                    "ruleFunction": "disableRateOfReturn",
+                    "value": [
+                        {
+                            "$ref": "#"
+                        }
+                    ]
+                }
+            },
+            "width": 2
+        },
+        {
+            "type": "Input",
+            "elementId": "cashbackId",
+            "label": "cashback",
+            "value": {
+                "$ref": "#/properties/cashback"
+            },
+            "onValueChanged": [
+                {
+                    "commandType": "executeAction",
+                    "actionName": "onChangeCashback"
+                }
+            ],
+            "control": "Dropdown",
+            "source": {
+                "array": {
+                    "$ref": "#/properties/Body/properties/technicalInformation/properties/ratesOfReturnCashback"
+                },
+                "valueFieldName": "cashback",
+                "displayValueTemplate": "{{expr cashback 'p:4'}}"
+            },
+            "rule": {
+                "effect": "DISABLE_INITIAL",
+                "condition": {
+                    "type": "FUNC",
+                    "ruleFunction": "disableCashback",
+                    "value": [
+                        {
+                            "$ref": "#"
+                        }
+                    ]
+                }
+            },
+            "width": 2
+        }
+    ],
+    "rule": {
+        "effect": "SHOW",
+        "condition": {
+            "type": "FUNC",
+            "ruleFunction": "showRateOfReturn",
+            "value": [
+                {
+                    "$ref": "#"
+                }
+            ]
+        }
+    }
+}

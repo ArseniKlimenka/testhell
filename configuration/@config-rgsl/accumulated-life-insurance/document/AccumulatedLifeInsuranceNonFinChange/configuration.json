@@ -1,0 +1,533 @@
+{
+    "dimensions": {
+        "contractType": "Amendment",
+        "amendmentType": "NonFinancialChange",
+        "productGroup": "endowment"
+    },
+    "entityType": "Contract",
+    "validFrom": "2000-01-01",
+    "ui": {
+        "layout": "VersionedDocumentLayout",
+        "composition": {
+            "SummaryContent": "SummaryContent",
+            "MainContent": "MainContent"
+        }
+    },
+    "states": [
+        {
+            "name": "OperationsApproval",
+            "actors": [
+                {
+                    "actor": "Operations",
+                    "transitions": [
+                        "OperationsApproval_to_Cancelled",
+                        "OperationsApproval_to_Rejected",
+                        "OperationsApproval_to_RejectedByClient",
+                        "OperationsApproval_to_AwaitingRequestAnswers",
+                        "OperationsApproval_to_Activated"
+                    ],
+                    "uiSchema": "MainContent",
+                    "allowComments": true,
+                    "operations": [
+                        "Save"
+                    ]
+                },
+                {
+                    "actor": "Viewer",
+                    "transitions": [],
+                    "uiSchema": "MainContent",
+                    "allowComments": false
+                },
+                {
+                    "actor": "System",
+                    "transitions": [
+                        "OperationsApproval_to_Cancelled",
+                        "OperationsApproval_to_Rejected",
+                        "OperationsApproval_to_RejectedByClient",
+                        "OperationsApproval_to_InsuranceMethodologyApproval",
+                        "OperationsApproval_to_ActuaryApproval",
+                        "OperationsApproval_to_LegalApproval",
+                        "OperationsApproval_to_SecurityApproval",
+                        "OperationsApproval_to_UnderwriterApproval",
+                        "OperationsApproval_to_CallCenterApproval",
+                        "OperationsApproval_to_PartnerSalesSupportApproval",
+                        "OperationsApproval_to_CustomerServiceApproval",
+                        "OperationsApproval_to_Activated"
+                    ],
+                    "uiSchema": "MainContent",
+                    "operations": [
+                        "Save"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Cancelled",
+            "actors": [
+                {
+                    "actor": "Operations",
+                    "transitions": [],
+                    "uiSchema": "MainContent",
+                    "allowComments": true
+                },
+                {
+                    "actor": "Viewer",
+                    "transitions": [],
+                    "uiSchema": "MainContent",
+                    "allowComments": false
+                },
+                {
+                    "actor": "System",
+                    "uiSchema": "MainContent",
+                    "operations": [
+                        "Save"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Rejected",
+            "actors": [
+                {
+                    "actor": "Operations",
+                    "transitions": [],
+                    "uiSchema": "MainContent",
+                    "allowComments": true
+                },
+                {
+                    "actor": "Viewer",
+                    "transitions": [],
+                    "uiSchema": "MainContent",
+                    "allowComments": false
+                },
+                {
+                    "actor": "System",
+                    "uiSchema": "MainContent",
+                    "operations": [
+                        "Save"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "RejectedByClient",
+            "actors": [
+                {
+                    "actor": "Operations",
+                    "transitions": [],
+                    "uiSchema": "MainContent",
+                    "allowComments": true
+                },
+                {
+                    "actor": "Viewer",
+                    "transitions": [],
+                    "uiSchema": "MainContent",
+                    "allowComments": false
+                },
+                {
+                    "actor": "System",
+                    "uiSchema": "MainContent",
+                    "operations": [
+                        "Save"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "InsuranceMethodologyApproval",
+            "actors": [
+                {
+                    "actor": "Methodology",
+                    "transitions": [
+                        "InsuranceMethodologyApproval_to_OperationsApproval"
+                    ],
+                    "uiSchema": "MainContent",
+                    "allowComments": true,
+                    "operations": [
+                        "Save"
+                    ]
+                },
+                {
+                    "actor": "Viewer",
+                    "transitions": [],
+                    "uiSchema": "MainContent",
+                    "allowComments": false
+                },
+                {
+                    "actor": "System",
+                    "transitions": [
+                        "InsuranceMethodologyApproval_to_OperationsApproval"
+                    ],
+                    "uiSchema": "MainContent",
+                    "operations": [
+                        "Save"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "ActuaryApproval",
+            "actors": [
+                {
+                    "actor": "Actuary",
+                    "transitions": [
+                        "ActuaryApproval_to_OperationsApproval"
+                    ],
+                    "uiSchema": "MainContent",
+                    "allowComments": true,
+                    "operations": [
+                        "Save"
+                    ]
+                },
+                {
+                    "actor": "Viewer",
+                    "transitions": [],
+                    "uiSchema": "MainContent",
+                    "allowComments": false
+                },
+                {
+                    "actor": "System",
+                    "transitions": [
+                        "ActuaryApproval_to_OperationsApproval"
+                    ],
+                    "uiSchema": "MainContent",
+                    "operations": [
+                        "Save"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "LegalApproval",
+            "actors": [
+                {
+                    "actor": "Legal",
+                    "transitions": [
+                        "LegalApproval_to_OperationsApproval"
+                    ],
+                    "uiSchema": "MainContent",
+                    "allowComments": true,
+                    "operations": [
+                        "Save"
+                    ]
+                },
+                {
+                    "actor": "Viewer",
+                    "transitions": [],
+                    "uiSchema": "MainContent",
+                    "allowComments": false
+                },
+                {
+                    "actor": "System",
+                    "transitions": [
+                        "LegalApproval_to_OperationsApproval"
+                    ],
+                    "uiSchema": "MainContent",
+                    "operations": [
+                        "Save"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "SecurityApproval",
+            "actors": [
+                {
+                    "actor": "Security",
+                    "transitions": [
+                        "SecurityApproval_to_OperationsApproval"
+                    ],
+                    "uiSchema": "MainContent",
+                    "allowComments": true,
+                    "operations": [
+                        "Save"
+                    ]
+                },
+                {
+                    "actor": "Viewer",
+                    "transitions": [],
+                    "uiSchema": "MainContent",
+                    "allowComments": false
+                },
+                {
+                    "actor": "System",
+                    "transitions": [
+                        "SecurityApproval_to_OperationsApproval"
+                    ],
+                    "uiSchema": "MainContent",
+                    "operations": [
+                        "Save"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "UnderwriterApproval",
+            "actors": [
+                {
+                    "actor": "Underwriting",
+                    "transitions": [
+                        "UnderwriterApproval_to_OperationsApproval"
+                    ],
+                    "uiSchema": "MainContent",
+                    "allowComments": true,
+                    "operations": [
+                        "Save"
+                    ]
+                },
+                {
+                    "actor": "Viewer",
+                    "transitions": [],
+                    "uiSchema": "MainContent",
+                    "allowComments": false
+                },
+                {
+                    "actor": "System",
+                    "transitions": [
+                        "UnderwriterApproval_to_OperationsApproval"
+                    ],
+                    "uiSchema": "MainContent",
+                    "operations": [
+                        "Save"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "CallCenterApproval",
+            "actors": [
+                {
+                    "actor": "CallCenter",
+                    "transitions": [
+                        "CallCenterApproval_to_RequestToClient"
+                    ],
+                    "uiSchema": "MainContent",
+                    "allowComments": true,
+                    "operations": []
+                },
+                {
+                    "actor": "Viewer",
+                    "transitions": [],
+                    "uiSchema": "MainContent",
+                    "allowComments": false
+                },
+                {
+                    "actor": "System",
+                    "transitions": [
+                        "CallCenterApproval_to_RequestToClient"
+                    ],
+                    "uiSchema": "MainContent",
+                    "operations": [
+                        "Save"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "PartnerSalesSupportApproval",
+            "actors": [
+                {
+                    "actor": "PartnerSalesSupport",
+                    "transitions": [
+                        "PartnerSalesSupportApproval_to_RequestToClient"
+                    ],
+                    "uiSchema": "MainContent",
+                    "allowComments": true,
+                    "operations": []
+                },
+                {
+                    "actor": "Viewer",
+                    "transitions": [],
+                    "uiSchema": "MainContent",
+                    "allowComments": false
+                },
+                {
+                    "actor": "System",
+                    "transitions": [
+                        "PartnerSalesSupportApproval_to_RequestToClient"
+                    ],
+                    "uiSchema": "MainContent",
+                    "operations": [
+                        "Save"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "CustomerServiceApproval",
+            "actors": [
+                {
+                    "actor": "ClientServiceCenter",
+                    "transitions": [
+                        "CustomerServiceApproval_to_RequestToClient"
+                    ],
+                    "uiSchema": "MainContent",
+                    "allowComments": true,
+                    "operations": []
+                },
+                {
+                    "actor": "Viewer",
+                    "transitions": [],
+                    "uiSchema": "MainContent",
+                    "allowComments": false
+                },
+                {
+                    "actor": "System",
+                    "transitions": [
+                        "CustomerServiceApproval_to_RequestToClient"
+                    ],
+                    "uiSchema": "MainContent",
+                    "operations": [
+                        "Save"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "RequestToClient",
+            "actors": [
+                {
+                    "actor": "Operations",
+                    "transitions": [
+                        "RequestToClient_to_OperationsApproval"
+                    ],
+                    "uiSchema": "MainContent",
+                    "allowComments": true,
+                    "operations": [
+                        "Save"
+                    ]
+                },
+                {
+                    "actor": "Viewer",
+                    "transitions": [],
+                    "uiSchema": "MainContent",
+                    "allowComments": false
+                },
+                {
+                    "actor": "System",
+                    "transitions": [
+                        "RequestToClient_to_OperationsApproval"
+                    ],
+                    "uiSchema": "MainContent",
+                    "operations": [
+                        "Save"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Activated",
+            "actors": [
+                {
+                    "actor": "Operations",
+                    "transitions": [],
+                    "uiSchema": "MainContent",
+                    "allowComments": true,
+                    "operations": []
+                },
+                {
+                    "actor": "Viewer",
+                    "transitions": [],
+                    "uiSchema": "MainContent",
+                    "allowComments": false
+                },
+                {
+                    "actor": "System",
+                    "uiSchema": "MainContent",
+                    "operations": [
+                        "Save"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "AwaitingRequestAnswers",
+            "actors": [
+                {
+                    "actor": "Operations",
+                    "transitions": [
+                        "AwaitingRequestAnswers_to_OperationsApproval"
+                    ],
+                    "uiSchema": "MainContent",
+                    "operations": [
+                        "Save"
+                    ]
+                }
+            ]
+        }
+    ],
+    "transitions": {
+        "OperationsApproval_to_Activated": {
+            "transitionEffects": {
+                "enrich": [
+                    "/amendmentData/amendmentAttachmentsPackage",
+                    "/tempTechnicalData/inquiries[SetAmendmentInquiries]"
+                ]
+            }
+        }
+    },
+    "version": "1",
+    "components": [
+        "PolicyNonFinChangeAmendmentMainAttrs",
+        "PolicyNonFinChangeAmendmentApplicationInfo",
+        "PolicyChangeAmendmentInfo"
+    ],
+    "attachments": [
+        {
+            "attachmentType": "changeApplication",
+            "flow": "Incoming"
+        },
+        {
+            "attachmentType": "amendment",
+            "flow": "Incoming"
+        },
+        {
+            "attachmentType": "amendmentSign",
+            "flow": "Incoming"
+        },
+        {
+            "attachmentType": "infoLetter",
+            "flow": "Incoming"
+        },
+        {
+            "attachmentType": "copyPassport",
+            "flow": "Incoming"
+        },
+        {
+            "attachmentType": "attorney",
+            "flow": "Incoming"
+        },
+        {
+            "attachmentType": "additionalQuestionnaireTab",
+            "flow": "Incoming"
+        },
+        {
+            "attachmentType": "additionalQuestionnaire",
+            "flow": "Incoming"
+        },
+        {
+            "attachmentType": "medicalDocuments",
+            "flow": "Incoming"
+        },
+        {
+            "attachmentType": "servicesMemo",
+            "flow": "Incoming"
+        },
+        {
+            "attachmentType": "incomeConfirmation",
+            "flow": "Incoming"
+        },
+        {
+            "attachmentType": "deathCertificate",
+            "flow": "Incoming"
+        },
+        {
+            "attachmentType": "policyholderRepresentativeInsured",
+            "flow": "Incoming"
+        },
+        {
+            "attachmentType": "other",
+            "flow": "Incoming"
+        }
+    ]
+}

@@ -1,0 +1,217 @@
+{
+    "type": "Group",
+    "elements": [
+        {
+            "type": "DataGrid",
+            "defaultPageSize": 10,
+            "mode": "DataSource",
+            "header": {
+                "showReloadButton": true,
+                "showNumberOfResults": false
+            },
+            "pagination": {
+                "mode": "Regular",
+                "pageSizes": [
+                    5,
+                    10,
+                    15
+                ]
+            },
+            "selection": {
+                "mode": "None"
+            },
+            "height": "None",
+            "columns": [
+                {
+                    "sortable": false,
+                    "title": "IsCancelled",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "template": "{{#if isCancelled '===' 'true'}}Отвязан{{else}}Привязан{{/if}}",
+                        "value": {
+                            "$ref": "#/properties/resultData"
+                        }
+                    },
+                    "name": "isCancelled"
+                },
+                {
+                    "sortable": false,
+                    "title": "Allocation date",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/allocationDate"
+                        }
+                    },
+                    "name": "allocationDate"
+                },
+                {
+                    "sortable": false,
+                    "title": "BSI Id",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/bsiId"
+                        }
+                    },
+                    "name": "bankStatementItemId"
+                },
+                {
+                    "sortable": false,
+                    "title": "BSI No",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/bsi/properties/bsiNo"
+                        }
+                    },
+                    "name": "bankStatementItemNo"
+                },
+                {
+                    "sortable": false,
+                    "title": "Description",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/bsi/properties/description"
+                        }
+                    },
+                    "name": "description"
+                },
+                {
+                    "sortable": false,
+                    "title": "Installment amount",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/installmentAmount"
+                        }
+                    },
+                    "name": "installmentAmount"
+                },
+                {
+                    "sortable": false,
+                    "title": "Installment open amount",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/installmentOpenAmount"
+                        }
+                    },
+                    "name": "installmentOpenAmount"
+                },
+                {
+                    "sortable": false,
+                    "title": "Payment amount",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/bsi/properties/amount"
+                        }
+                    },
+                    "name": "paymentAmount"
+                },
+                {
+                    "sortable": false,
+                    "title": "Payment open amount",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/bsi/properties/openAmount"
+                        }
+                    },
+                    "name": "paymentOpenAmount"
+                },
+                {
+                    "sortable": false,
+                    "title": "Installment status",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/installmentStatus"
+                        }
+                    },
+                    "name": "installmentStatus"
+                },
+                {
+                    "sortable": false,
+                    "title": "Transaction date",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/bsi/properties/transactionDate"
+                        }
+                    },
+                    "name": "transactionDate"
+                },
+                {
+                    "sortable": false,
+                    "title": "Payment date",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/bsi/properties/paymentDate"
+                        }
+                    },
+                    "name": "paymentDate"
+                },
+                {
+                    "sortable": false,
+                    "title": "Pay amount",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/payAmount"
+                        }
+                    },
+                    "name": "payAmount"
+                },
+                {
+                    "sortable": false,
+                    "title": "Doc amount",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/docAmount"
+                        }
+                    },
+                    "name": "docAmount"
+                },
+                {
+                    "sortable": false,
+                    "title": "Exchange difference",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/exchangeDifference"
+                        }
+                    },
+                    "name": "exchangeDifference"
+                },
+                {
+                    "sortable": false,
+                    "title": "Pay currency code",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/payCurrencyCode"
+                        }
+                    },
+                    "name": "payCurrencyCode"
+                },
+                {
+                    "sortable": false,
+                    "title": "Payer name",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/bsi/properties/payerName"
+                        }
+                    },
+                    "name": "payerName"
+                }
+            ],
+            "elementId": "TableViewId"
+        }
+    ]
+}

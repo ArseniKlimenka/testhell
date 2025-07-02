@@ -1,0 +1,61 @@
+{
+    "sinks": [
+        {
+            "name": "GetContractVersions",
+            "fetch": {
+                "configuration": {
+                    "name": "ContractVersionsDataSource"
+                }
+            }
+        },
+        {
+            "name": "AllocateInvestProfit",
+            "class": {
+                "className": "Adacta.AdInsure.RGSL.PAS.API.Shared.InvestmentProfit.Services.IInvestmentProfitApplicationService, Adacta.AdInsure.RGSL.PAS.API",
+                "methodName": "AllocateInvestmentProfit"
+            }
+        },
+        {
+            "name": "CancelInvestProfitAllocations",
+            "class": {
+                "className": "Adacta.AdInsure.RGSL.PAS.API.Shared.InvestmentProfit.Services.IInvestmentProfitApplicationService, Adacta.AdInsure.RGSL.PAS.API",
+                "methodName": "CancellAllDocumentAllocations"
+            }
+        },
+        {
+            "name": "GetInstallements",
+            "fetch": {
+                "configuration": {
+                    "name": "PeriodInstallmentsDataSource"
+                }
+            }
+        },
+        {
+            "name": "GetPartiesData",
+            "fetch": {
+                "configuration": {
+                    "name": "GeneralPartyDataSource"
+                }
+            }
+        },
+        {
+            "name": "GetExchangeRate",
+            "class": {
+                "className": "Adacta.AdInsure.RGSL.Common.API.Shared.Services.IRgslCurrencyConverterService, Adacta.AdInsure.RGSL.Common.API",
+                "methodName": "Convert"
+            }
+        },
+        {
+            "name": "GetRelatedPaymentOrders",
+            "fetch": {
+                "configuration": {
+                    "name": "PODocumentSearchDataSource"
+                }
+            }
+        }
+    ],
+    "responses": [
+        200,
+        422
+    ]
+}

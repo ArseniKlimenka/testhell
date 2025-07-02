@@ -1,0 +1,154 @@
+{
+    "entityType": "UniversalDocument",
+    "dimensions": {
+        "universalDocumentType": "LifeInsuranceAttachmentVerification"
+    },
+    "validFrom": "2000-01-01",
+    "attachments": [],
+    "ui": {
+        "layout": "DocumentLayoutMainAndSummaryOnly",
+        "composition": {
+            "MainContent": "MainContent",
+            "SummaryContent": "SummaryContent"
+        }
+    },
+    "states": [
+        {
+            "name": "Draft",
+            "actors": [
+                {
+                    "actor": "Agent",
+                    "uiSchema": "MainContent",
+                    "transitions": [],
+                    "operations": [],
+                    "relations": []
+                },
+                {
+                    "actor": "GeneralBackOffice",
+                    "uiSchema": "MainContent",
+                    "transitions": [
+                        "Draft_to_Cancelled",
+                        "Draft_to_Issued"
+                    ],
+                    "operations": [
+                        "Save"
+                    ],
+                    "relations": []
+                },
+                {
+                    "actor": "System",
+                    "uiSchema": "MainContent",
+                    "transitions": [
+                        "Draft_to_Cancelled_System",
+                        "Draft_to_Issued_System"
+                    ],
+                    "operations": [
+                        "Save"
+                    ],
+                    "relations": []
+                }
+            ]
+        },
+        {
+            "name": "Issued",
+            "actors": [
+                {
+                    "actor": "Agent",
+                    "uiSchema": "MainContent",
+                    "transitions": [],
+                    "operations": [],
+                    "relations": []
+                },
+                {
+                    "actor": "GeneralBackOffice",
+                    "uiSchema": "MainContent",
+                    "transitions": [
+                        "Issued_to_Draft"
+                    ],
+                    "operations": [],
+                    "relations": []
+                },
+                {
+                    "actor": "System",
+                    "uiSchema": "MainContent",
+                    "transitions": [
+                        "Issued_to_Draft_System"
+                    ],
+                    "operations": [],
+                    "relations": []
+                }
+            ]
+        },
+        {
+            "name": "Cancelled",
+            "actors": [
+                {
+                    "actor": "Agent",
+                    "uiSchema": "MainContent",
+                    "transitions": [
+                        "Cancelled_to_Draft"
+                    ],
+                    "operations": [
+                        "Save"
+                    ],
+                    "relations": []
+                },
+                {
+                    "actor": "GeneralBackOffice",
+                    "uiSchema": "MainContent",
+                    "transitions": [
+                        "Cancelled_to_Draft",
+                        "Cancelled_to_Draft_Operations"
+                    ],
+                    "operations": [
+                        "Save"
+                    ],
+                    "relations": []
+                },
+                {
+                    "actor": "System",
+                    "uiSchema": "MainContent",
+                    "transitions": [
+                        "Cancelled_to_Draft_System"
+                    ],
+                    "operations": [
+                        "Save"
+                    ],
+                    "relations": []
+                }
+            ]
+        }
+    ],
+    "transitions": {
+        "Draft_to_Issued": {
+            "transitionEffects": {
+                "enrich": [
+                    "[SetOperationsUsername]"
+                ]
+            }
+        },
+        "Draft_to_Cancelled": {
+            "transitionEffects": {
+                "enrich": [
+                    "[SetOperationsUsername]"
+                ]
+            }
+        },
+        "Cancelled_to_Draft": {
+            "transitionEffects": {
+                "enrich": [
+                    "[SetSellerUsername]"
+                ]
+            }
+        },
+        "Cancelled_to_Draft_System": {
+            "transitionEffects": {
+                "enrich": [
+                    "[ClearComments]"
+                ]
+            }
+        }
+    },
+    "version": "1",
+    "components": []
+}

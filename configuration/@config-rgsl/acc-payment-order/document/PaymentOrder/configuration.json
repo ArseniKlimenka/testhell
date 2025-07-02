@@ -1,0 +1,377 @@
+{
+    "dimensions": {},
+    "entityType": "PaymentOrder",
+    "ui": {
+        "layout": "DocumentLayoutMainAndSummaryOnly",
+        "composition": {
+            "MainContent": "MainContent",
+            "SummaryContent": "SummaryContent"
+        }
+    },
+    "states": [
+        {
+            "name": "Draft",
+            "actors": [
+                {
+                    "actor": "PaymentOrderAdministrator",
+                    "transitions": [
+                        "Draft_to_WaitingForApproval",
+                        "Draft_to_Cancelled"
+                    ],
+                    "operations": [
+                        "Save"
+                    ]
+                },
+                {
+                    "actor": "PaymentOrderSpecialist",
+                    "transitions": [],
+                    "operations": [],
+                    "attachmentsRestrictions": [
+                        {
+                            "attachmentType": "commissionAct",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "Misc",
+                            "permissions": [
+                                "Read"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "actor": "PaymentOrderViewer",
+                    "transitions": [],
+                    "operations": []
+                },
+                {
+                    "actor": "System",
+                    "transitions": [
+                        "Draft_to_Approved",
+                        "Draft_to_Approved_NoErrors",
+                        "Draft_to_WaitingForApproval_NoErrors"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "WaitingForApproval",
+            "actors": [
+                {
+                    "transitions": [
+                        "WaitingForApproval_to_Draft",
+                        "WaitingForApproval_to_Approved"
+                    ],
+                    "actor": "PaymentOrderAdministrator"
+                },
+                {
+                    "transitions": [],
+                    "actor": "PaymentOrderSpecialist",
+                    "attachmentsRestrictions": [
+                        {
+                            "attachmentType": "commissionAct",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "Misc",
+                            "permissions": [
+                                "Read"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "actor": "PaymentOrderViewer",
+                    "transitions": [],
+                    "operations": []
+                },
+                {
+                    "actor": "System",
+                    "transitions": [
+                        "WaitingForApproval_to_Approved_NoErrors"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Cancelled",
+            "actors": [
+                {
+                    "actor": "PaymentOrderAdministrator"
+                },
+                {
+                    "actor": "PaymentOrderSpecialist",
+                    "attachmentsRestrictions": [
+                        {
+                            "attachmentType": "commissionAct",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "Misc",
+                            "permissions": [
+                                "Read"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "actor": "PaymentOrderViewer",
+                    "transitions": [],
+                    "operations": []
+                }
+            ]
+        },
+        {
+            "name": "Approved",
+            "actors": [
+                {
+                    "actor": "PaymentOrderAdministrator",
+                    "attachmentsRestrictions": [
+                        {
+                            "attachmentType": "commissionAct",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "Misc",
+                            "permissions": [
+                                "Read"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "actor": "PaymentOrderSpecialist",
+                    "attachmentsRestrictions": [
+                        {
+                            "attachmentType": "commissionAct",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "Misc",
+                            "permissions": [
+                                "Read"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "actor": "System",
+                    "transitions": [
+                        "Approved_to_Paid",
+                        "Approved_to_Paid_NoErrors",
+                        "Approved_to_PaymentError"
+                    ]
+                },
+                {
+                    "actor": "PaymentOrderViewer",
+                    "transitions": [],
+                    "operations": []
+                }
+            ]
+        },
+        {
+            "name": "PaymentError",
+            "actors": [
+                {
+                    "transitions": [
+                        "PaymentError_to_WaitingForApproval"
+                    ],
+                    "actor": "PaymentOrderAdministrator"
+                },
+                {
+                    "transitions": [],
+                    "actor": "PaymentOrderSpecialist",
+                    "attachmentsRestrictions": [
+                        {
+                            "attachmentType": "commissionAct",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "Misc",
+                            "permissions": [
+                                "Read"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "actor": "PaymentOrderViewer",
+                    "transitions": [],
+                    "operations": []
+                }
+            ]
+        },
+        {
+            "name": "UpdateRelatedEntitiesError",
+            "actors": [
+                {
+                    "transitions": [
+                        "UpdateRelatedEntitiesError_to_Paid"
+                    ],
+                    "actor": "PaymentOrderAdministrator"
+                },
+                {
+                    "transitions": [],
+                    "actor": "PaymentOrderSpecialist",
+                    "attachmentsRestrictions": [
+                        {
+                            "attachmentType": "commissionAct",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "Misc",
+                            "permissions": [
+                                "Read"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "actor": "PaymentOrderViewer",
+                    "transitions": [],
+                    "operations": []
+                }
+            ]
+        },
+        {
+            "name": "Paid",
+            "actors": [
+                {
+                    "actor": "PaymentOrderAdministrator",
+                    "attachmentsRestrictions": [
+                        {
+                            "attachmentType": "commissionAct",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "Misc",
+                            "permissions": [
+                                "Read"
+                            ]
+                        }
+                    ],
+                    "relations": []
+                },
+                {
+                    "actor": "PaymentOrderSpecialist",
+                    "attachmentsRestrictions": [
+                        {
+                            "attachmentType": "commissionAct",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "Misc",
+                            "permissions": [
+                                "Read"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "actor": "System",
+                    "transitions": [
+                        "Paid_to_PaidCancelledNetting",
+                        "Paid_to_UpdateRelatedEntitiesError",
+                        "Paid_to_Cancelled_NoErrors"
+                    ],
+                    "operations": [
+                        "Save"
+                    ]
+                },
+                {
+                    "actor": "PaymentOrderViewer",
+                    "transitions": [],
+                    "operations": []
+                }
+            ]
+        },
+        {
+            "name": "PaidCancelledNetting",
+            "actors": [
+                {
+                    "actor": "PaymentOrderAdministrator",
+                    "attachmentsRestrictions": [
+                        {
+                            "attachmentType": "commissionAct",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "Misc",
+                            "permissions": [
+                                "Read"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "actor": "PaymentOrderSpecialist",
+                    "attachmentsRestrictions": [
+                        {
+                            "attachmentType": "commissionAct",
+                            "permissions": [
+                                "Read"
+                            ]
+                        },
+                        {
+                            "attachmentType": "Misc",
+                            "permissions": [
+                                "Read"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "actor": "System",
+                    "transitions": [
+                        "PaidCancelledNetting_to_Paid",
+                        "PaidCancelledNetting_to_Paid_NoErrors"
+                    ]
+                },
+                {
+                    "actor": "PaymentOrderViewer",
+                    "transitions": [],
+                    "operations": []
+                }
+            ]
+        }
+    ],
+    "version": "1",
+    "validFrom": "2020-01-01",
+    "attachments": [
+        {
+            "attachmentType": "commissionAct",
+            "flow": "Incoming"
+        },
+        {
+            "attachmentType": "Misc",
+            "flow": "Incoming"
+        }
+    ],
+    "components": [
+        "CurrencyCodeDropdown",
+        "PaymentOrderAmounts",
+        "PaymentOrderInformation",
+        "PaymentOrderNetting",
+        "RecipientInformation"
+    ]
+}

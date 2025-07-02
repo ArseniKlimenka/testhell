@@ -1,0 +1,82 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "Life Insurance",
+    "description": "Data schema describing Inquiry",
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+        "productCodes": {
+            "type": "array",
+            "uniqueItems": true,
+            "description": "",
+            "aiTitle": "productCodes"
+        },
+        "strategyCode": {
+            "type": "string",
+            "aiTitle": "strategyCode"
+        },
+        "issueDateMin": {
+            "type": "string",
+            "aiFormat": "date",
+            "description": "issueDateMin"
+        },
+        "issueDateMax": {
+            "type": "string",
+            "aiFormat": "date",
+            "description": "issueDateMax"
+        },
+        "strategyDescriptionFull": {
+            "type": "string",
+            "aiTitle": "strategyDescriptionFull"
+        },
+        "purchaseDate": {
+            "type": "string",
+            "aiFormat": "date",
+            "aiTitle": "purchaseDate"
+        },
+        "dischargeDate": {
+            "type": "string",
+            "aiFormat": "date",
+            "aiTitle": "dischargeDate"
+        },
+        "didBeginDate": {
+            "type": "string",
+            "aiFormat": "date",
+            "aiTitle": "didBeginDate"
+        },
+        "didEndDate": {
+            "type": "string",
+            "aiFormat": "date",
+            "aiTitle": "didEndDate"
+        },
+        "windowStartDate": {
+            "type": "string",
+            "aiFormat": "date",
+            "aiTitle": "windowStartDate"
+        },
+        "windowEndDate": {
+            "type": "string",
+            "aiFormat": "date",
+            "aiTitle": "windowEndDate"
+        },
+        "couponPeriods": {
+            "type": "array",
+            "aiTitle": "couponPeriods",
+            "additionalProperties": false,
+            "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                    "beginDate": {
+                        "type": "string",
+                        "description": "beginDate"
+                    },
+                    "endDate": {
+                        "type": "string",
+                        "description": "endDate"
+                    }    
+                }
+            }
+        }
+    }
+}

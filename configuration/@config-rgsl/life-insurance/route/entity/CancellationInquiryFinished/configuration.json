@@ -1,0 +1,41 @@
+{
+    "entityType": "UniversalDocument",
+    "condition": {
+        "events": [
+            "StatusChanged"
+        ],
+        "configuration": {
+            "names": [
+                "CancellationInquiry"
+            ]
+        },
+        "documentStates": [
+            "Issued",
+            "Rejected",
+            "Cancelled"
+        ]
+    },
+    "sinks": [
+        {
+            "name": "GetExistingInquiries",
+            "fetch": {
+                "configuration": {
+                    "name": "CancellationInquiriesDataSource"
+                }
+            }
+        },
+        {
+            "name": "UpdateCanellationState",
+            "documentTransition": {
+                "transition": {}
+            }
+        },
+        {
+            "name": "InquiryFinishedNotification",
+            "notification": {
+                "notificationName": "InquiryFinishedNotification"
+            }
+        }
+    ],
+    "version": "1"
+}

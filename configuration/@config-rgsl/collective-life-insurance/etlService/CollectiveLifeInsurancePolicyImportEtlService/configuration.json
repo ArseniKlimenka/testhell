@@ -1,0 +1,88 @@
+{
+    "allowParallelExecution": true,
+    "mainDataSource": "ImportStagingDataSource",
+    "additionalDataSources": [
+        "GetContractFullDataDataSource"
+    ],
+    "initialisationSinks": [
+        {
+            "name": "ClearInsuredList",
+            "class": {
+                "className": "Adacta.AdInsure.RGSL.PAS.API.Shared.Contract.Services.ICollectiveContractService, Adacta.AdInsure.RGSL.PAS.API",
+                "methodName": "ClearInsuredList"
+            }
+        },
+        {
+            "name": "ClearRiskList",
+            "class": {
+                "className": "Adacta.AdInsure.RGSL.PAS.API.Shared.Contract.Services.ICollectiveContractService, Adacta.AdInsure.RGSL.PAS.API",
+                "methodName": "ClearRiskList"
+            }
+        }
+    ],
+    "sinks": [
+        {
+            "name": "WriteInsured",
+            "class": {
+                "className": "Adacta.AdInsure.RGSL.PAS.API.Shared.Contract.Services.ICollectiveContractService, Adacta.AdInsure.RGSL.PAS.API",
+                "methodName": "WriteInsured"
+            }
+        },
+        {
+            "name": "WriteSuccessStatus",
+            "database": {
+                "tables": [
+                    "BFX.IMPORT_RECORD_STATUS"
+                ]
+            }
+        }
+    ],
+    "completionSinks": [
+        {
+            "name": "GetInsuredCount",
+            "fetch": {
+                "configuration": {
+                    "name": "CollectivePolicyInsuredListCountDataSource"
+                }
+            }
+        },
+        {
+            "name": "SetInsuredCount",
+            "document": {
+                "configuration": {
+                    "name": "CollectiveLifeInsurancePolicy",
+                    "version": "1"
+                },
+                "allowUpdating": {
+                    "inStates": [
+                        "Draft"
+                    ]
+                },
+                "allowOnValidationErrors": {
+                    "all": true
+                }
+            }
+        },
+        {
+            "name": "FinishedImporting",
+            "documentTransition": {
+                "transition": {
+                    "transitionName": "FinishImporting",
+                    "configurationName": "CollectiveLifeInsurancePolicyImport",
+                    "configurationVersion": "1"
+                }
+            }
+        }
+    ],
+    "errorSinks": [
+        {
+            "name": "WriteErrorStatus",
+            "database": {
+                "tables": [
+                    "BFX.IMPORT_RECORD_STATUS"
+                ]
+            }
+        }
+    ],
+    "version": "1"
+}

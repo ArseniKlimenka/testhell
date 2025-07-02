@@ -1,0 +1,14 @@
+select
+	u.USERNAME,
+	eh.CHANGED_ON as CREATE_DATE,
+	eh.OLD_STATE,
+	eh.NEW_STATE
+from
+	bfx.UNIVERSAL_DOCUMENT ud
+	inner join bfx.ENTITY_HISTORY eh on eh.ENTITY_ID = ud.UNIVERSAL_DOCUMENT_ID
+	inner join org.APPLICATION_USER u on u.APPLICATION_USER_ID = eh.CHANGE_CAUSED_BY
+where 1=1
+	and ud.UNIVERSAL_DOCUMENT_NUMBER = @actNo
+	and TRANSITION is not null
+	and 'Generating' not in (coalesce(eh.OLD_STATE, ''), coalesce(eh.NEW_STATE, ''))
+order by eh.HISTORY_VERSION

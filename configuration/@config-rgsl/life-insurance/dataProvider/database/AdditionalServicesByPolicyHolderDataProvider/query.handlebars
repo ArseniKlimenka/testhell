@@ -1,0 +1,15 @@
+﻿with contract_numbers as (
+select ph.contract_number
+  from pas_impl.policy_hub ph
+       join pas_impl.policy_sat_latest psl on psl.policy_hkey = ph.policy_hkey
+ where 1=1
+   and psl.holder_code = @policyHolderPartyCode
+   {{#if parameters.number}}
+   and ph.contract_number = @number
+   {{/if}}
+)
+select cn.contract_number as number,
+       json_value(aserv.value, '$.serviceCode') as service_code
+  from contract_numbers cn
+       join pas.contract c on c.contract_number = cn.contract_number
+       cross apply openjson(json_query(c.body, '$.additionalServices')) aserv

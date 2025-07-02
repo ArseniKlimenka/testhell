@@ -1,0 +1,72 @@
+{
+    "type": "HeaderContentLayout",
+    "fixedPosition": true,
+    "elements": [
+        {
+            "type": "Group",
+            "width": 2,
+            "stackContent": "Left",
+            "elements": [
+                {
+                    "type": "Component",
+                    "name": "HeaderTitle",
+                    "value": {
+                        "$ref": "#"
+                    }
+                },
+                {
+                    "type": "OutputText",
+                    "skipTranslate": true,
+                    "value": {
+                        "$ref": "#/properties/Code"
+                    },
+                    "textStyle": {
+                        "uppercase": true,
+                        "textSize": "Normal",
+                        "textColor": "Blue"
+                    },
+                    "elementId": "ai-info-control",
+                    "defaultValue": ""
+                }
+            ]
+        },
+        {
+            "type": "Group",
+            "width": 2,
+            "stackContent": "Right",
+            "elements": [
+                {
+                    "type": "Actor",
+                    "value": {
+                        "$ref": "#/properties/WorkUnitActor"
+                    },
+                    "elementId": "ai-actor-selection-control"
+                },
+                {
+                    "type": "Printouts",
+                    "icon": {
+                        "name": "Print",
+                        "size": "Medium"
+                    },
+                    "elementId": "printoutSelect",
+                    "printouts": "AvailablePrintouts",
+                    "value": {
+                        "$ref": "#"
+                    },
+                    "rule": {
+                        "effect": "SHOW",
+                        "condition": {
+                            "type": "FUNC",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ],
+                            "ruleFunction": "showPrintouts"
+                        }
+                    }
+                }
+            ]
+        }
+    ]
+}

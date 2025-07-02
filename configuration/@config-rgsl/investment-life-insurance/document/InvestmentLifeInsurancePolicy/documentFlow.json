@@ -1,0 +1,189 @@
+{
+    "processType": "Policy",
+    "actors": [
+        "Agent",
+        "Operations",
+        "Claims",
+        "Viewer",
+        "System"
+    ],
+    "initialState": "Draft",
+    "states": [
+        {
+            "name": "Draft",
+            "operations": ["Save"]
+        },
+        {
+            "name": "Active",
+            "operations": []
+        },
+        {
+            "name": "Activated",
+            "isTerminal": true,
+            "appliesVersion": true,
+            "operations": []
+        },
+        {
+            "name": "Cancelled",
+            "isTerminal": true,
+            "discardsVersion": true,
+            "operations": []
+        },
+        {
+            "name": "CancelledByAmendment",
+            "isTerminal": true,
+            "appliesVersion": true,
+            "operations": []
+        },
+        {
+            "name": "Completed",
+            "isTerminal": true,
+            "discardsVersion": true,
+            "operations": []
+        }
+    ],
+    "transitions": [
+        {
+            "name": "Draft_to_Active",
+            "from": "Draft",
+            "to": "Active",
+            "exclusiveToAssignedUser": true,
+            "allowOnValidationErrors": {
+                "all": false
+            },
+            "whenBlocked": "DisplayNormally",
+            "actionToRunBefore": "checkIssueForm"
+        },
+        {
+            "name": "Draft_to_Active_Operations",
+            "from": "Draft",
+            "to": "Active",
+            "exclusiveToAssignedUser": false,
+            "allowOnValidationErrors": {
+                "all": false
+            },
+            "whenBlocked": "DisplayNormally",
+            "actionToRunBefore": "checkIssueForm"
+        },
+        {
+            "name": "Draft_to_Active_System",
+            "from": "Draft",
+            "to": "Active",
+            "exclusiveToAssignedUser": false,
+            "allowOnValidationErrors": {
+                "all": false
+            },
+            "whenBlocked": "Hide"
+        },
+        {
+            "name": "Draft_to_Cancelled",
+            "from": "Draft",
+            "to": "Cancelled",
+            "exclusiveToAssignedUser": true,
+            "allowOnValidationErrors": {
+                "all": true
+            }
+        },
+        {
+            "name": "Active_to_Cancelled",
+            "from": "Active",
+            "to": "Cancelled",
+            "exclusiveToAssignedUser": true,
+            "allowOnValidationErrors": {
+                "all": true
+            }
+        },
+        {
+            "name": "Active_to_Cancelled_Operations",
+            "from": "Active",
+            "to": "Cancelled",
+            "exclusiveToAssignedUser": false,
+            "allowOnValidationErrors": {
+                "all": true
+            }
+        },
+        {
+            "name": "Active_to_Activated",
+            "from": "Active",
+            "to": "Activated",
+            "exclusiveToAssignedUser": false,
+            "allowOnValidationErrors": {
+                "all": true
+            }
+        },
+        {
+            "name": "Activated_to_CancelledByAmendment",
+            "from": "Activated",
+            "to": "CancelledByAmendment",
+            "exclusiveToAssignedUser": false,
+            "allowOnValidationErrors": {
+                "all": true
+            },
+            "requiredConfirmedConstraints": {
+                "all": false
+            }
+        },
+        {
+            "name": "CancelledByAmendment_to_Activated",
+            "from": "CancelledByAmendment",
+            "to": "Activated",
+            "exclusiveToAssignedUser": false,
+            "allowOnValidationErrors": {
+                "all": true
+            },
+            "requiredConfirmedConstraints": {
+                "all": false
+            },
+            "actionToRunBefore": "checkAvailableLimit"
+        },
+        {
+            "name": "Cancelled_to_Draft",
+            "from": "Cancelled",
+            "to": "Draft",
+            "exclusiveToAssignedUser": false,
+            "allowOnValidationErrors": {
+                "all": true
+            },
+            "whenBlocked": "Hide",
+            "actionToRunBefore": "checkAvailableLimit"
+        },
+        {
+            "name": "Cancelled_to_Active",
+            "from": "Cancelled",
+            "to": "Active",
+            "exclusiveToAssignedUser": false,
+            "allowOnValidationErrors": {
+                "all": true
+            },
+            "actionToRunBefore": "checkAvailableLimit"
+        },
+        {
+            "name": "Activated_to_Cancelled",
+            "from": "Activated",
+            "to": "Cancelled",
+            "exclusiveToAssignedUser": false,
+            "allowOnValidationErrors": {
+                "all": true
+            }
+        },
+        {
+            "name": "Activated_to_Completed",
+            "from": "Activated",
+            "to": "Completed",
+            "whenBlocked": "DisplayNormally",
+            "exclusiveToAssignedUser": false,
+            "allowOnValidationErrors": {
+                "all": true
+            }
+        },
+        {
+            "name": "Completed_to_Activated",
+            "from": "Completed",
+            "to": "Activated",
+            "exclusiveToAssignedUser": false,
+            "allowOnValidationErrors": {
+                "all": true
+            }
+        }
+    ]
+}

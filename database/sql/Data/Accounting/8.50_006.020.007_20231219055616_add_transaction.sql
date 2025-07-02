@@ -1,0 +1,17 @@
+insert into ACC.CT_DOCUMENT_TYPE (DOCUMENT_TYPE_ID, DESCRIPTION)
+values (1029, 'PaymentOrder - Allocation Fix');
+
+delete from acc_impl.TRANSACTION_DEFINITION where TRANSACTION_DEFINITION_NO in ('3.5.5')
+go
+insert into acc_impl.TRANSACTION_DEFINITION (TRANSACTION_DEFINITION_NO, DOCUMENT_TYPE_ID, [DESCRIPTION], TRANSACTION_TYPE_ID, [SIGN], IS_PREVIOUS_PERIOD, IS_LIFE, AGENT_TYPE)
+values
+('3.5.5', 1029, null, 4, null, null, null, null)
+go
+
+delete from acc_impl.TRANSACTION_DEFINITION_STEP where TRANSACTION_DEFINITION_NO in ('3.5.5')
+go
+insert into acc_impl.TRANSACTION_DEFINITION_STEP (TRANSACTION_DEFINITION_NO, IS_DEBIT, PAIR_NO, PAIR_SEQ_NO, GL_ACCOUNT_ID, ATTRIBUTE_SET_ID, [SIGN])
+values
+('3.5.5' , 1, 1, 1, (select GL_ACCOUNT_ID from acc.GL_ACCOUNT where GL_ACCOUNT_NO = '48029'), null,  1),
+('3.5.5' , 0, 1, 2, (select GL_ACCOUNT_ID from acc.GL_ACCOUNT where GL_ACCOUNT_NO = '48028'), null,  1)
+go

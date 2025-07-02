@@ -1,0 +1,42 @@
+module.exports = function resultMapping(input) {
+
+    return {
+        allocationId: input.ALLOCATION_ID,
+        documentTypeId: input.DOCUMENT_TYPE_ID,
+        allocationDate: input.ALLOCATION_DATE,
+        isCancelled: input.CANCELLED,
+        entityType: input.ENTITY_TYPE,
+        configurationName: input.CONFIGURATION_NAME,
+        refDocumentNo: input.DOCUMENT_NO,
+        policyStartDate: input.POLICY_START_DATE,
+        dueDate: input.DUE_DATE,
+        installmentAmount: input.INSTALLMENT_AMOUNT,
+        installmentOpenAmount: input.INSTALLMENT_OPEN_AMOUNT,
+        installmentStatus: input.INSTALLMENT_STATUS,
+        productDesc: input.PRODUCT_DESC,
+        policyHolderName: input.POLICY_HOLDER_NAME,
+        payAmount: input.PAY_AMOUNT,
+        payRate: input.PAY_RATE,
+        docAmount: input.DOC_AMOUNT,
+        docRate: input.DOC_RATE,
+        exchangeDifference: input.EXCHANGE_DIFFERENCE,
+        payCurrencyCode: input.PAY_CURRENCY_CODE,
+        toleranceOverpayment: input.TOLERANCE_OVERPAYMENT,
+        toleranceUnderpayment: input.TOLERANCE_UNDERPAYMENT,
+        bsiId: input.BANK_STATEMENT_ITEM_ID,
+        bsi: {
+            bsiNo: input.BANK_STATEMENT_ITEM_NO,
+            statusId: input.PAY_STATUS_ID,
+            description: input.PAYMENT_DESCRIPTION,
+            amount: input.PAYMENT_AMOUNT,
+            openAmount: input.PAYMENT_OPEN_AMOUNT,
+            transactionDate: input.TRANSACTION_DATE,
+            paymentDate: input.PAYMENT_DATE,
+            payerName: input.PAYER_NAME,
+            fake: input.FAKE,
+            isMigrated: input.IS_MIGRATED,
+            paymentSourceId: input.PAYMENT_SOURCE_ID,
+            incomeSourceId: input.INCOME_SOURCE_ID
+        },
+    };
+};

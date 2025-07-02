@@ -1,0 +1,52 @@
+{
+    "entityType": "PaymentOrder",
+    "condition": {
+        "events": [
+            "Created"
+        ]
+    },
+    "sinks": [
+        {
+            "ref": "PaymentOrderAssSinkGroup"
+        },
+        {
+            "name": "GetRefPayment",
+            "fetch": {
+                "configuration": {
+                    "name": "BankStatementItemRgslSearchDataSource"
+                }
+            }
+        },
+        {
+            "name": "ReferenceNumber",
+            "database": {
+                "tables": [
+                    "ACC_IMPL.REFERENCE_NUMBER"
+                ]
+            }
+        },
+        {
+            "name": "GetAllocationsToCancel",
+            "fetch": {
+                "configuration": {
+                    "name": "GetAllocationsToCancelDataSource"
+                }
+            }
+        },
+        {
+            "name": "CancelAllocation",
+            "class": {
+                "className": "Adacta.AdInsure.RGSL.Accounting.API.Shared.CashFlow.Allocation.Services.IAllocationServiceAppRGSL, Adacta.AdInsure.RGSL.Accounting.API",
+                "methodName": "Cancel"
+            }
+        },
+        {
+            "name": "AllocatePayment",
+            "class": {
+                "className": "Adacta.AdInsure.RGSL.Accounting.API.Shared.CashFlow.Allocation.Services.IAllocationServiceAppRGSL, Adacta.AdInsure.RGSL.Accounting.API",
+                "methodName": "Allocate"
+            }
+        }
+    ],
+    "version": "1"
+}

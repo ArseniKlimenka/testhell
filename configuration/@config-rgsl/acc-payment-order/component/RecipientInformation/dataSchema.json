@@ -1,0 +1,56 @@
+{
+    "type": "object",
+    "aiValidation": {
+        "rule": "validateParty"
+    },
+    "properties": {
+        "partyCodeName": {
+            "type": "string",
+            "description": "recipient party code name"
+        },
+        "partyFullName": {
+            "type": "string",
+            "description": "recipient party full name"
+        },
+        "innNumber": {
+            "type": "string",
+            "description": "recipient ИНН number"
+        },
+        "partyType": {
+            "$ref": "component:PartyType"
+        },
+        "kppNumber": {
+            "type": "string",
+            "description": "recipient КПП number"
+        },
+        "isNonResident":{
+            "type":"boolean"
+        },
+        "bankAccount": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "bankBIC": {
+                    "type": "string",
+                    "description": "Bank code (BIC)"
+                },
+                "correspondentBankAccount": {
+                    "type": "string",
+                    "description": "Recipient correspondent bank account"
+                },
+                "bankAccountNumber": {
+                    "type": "string",
+                    "description": "Recipient bank account number"
+                },
+                "bankAccountCurrency": {
+                    "type": "string",
+                    "description": "Recipient bank account currency"
+                },
+                "bankName": {
+                    "type": "string",
+                    "description": "Recipient bank name"
+                }
+            }
+        }
+    }
+}

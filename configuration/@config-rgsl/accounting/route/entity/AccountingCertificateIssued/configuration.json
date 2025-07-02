@@ -1,0 +1,26 @@
+{
+    "entityType": "UniversalVersionedDocument",
+    "condition": {
+        "events": [
+            "StatusChanged"
+        ],
+        "configuration": {
+            "names": [
+                "AccountingCertificate",
+                "AccountingCertificateCorrection"
+            ],
+            "dimensions": {}
+        },
+        "transitions": [
+            "Draft_to_Issued",
+            "Checked_to_Issued"
+        ]
+    },
+    "executionOrderWeight": 10,
+    "sinks": [
+        {
+            "ref": "SaveAttachmentSinkGroup"
+        }
+    ],
+    "version": "1"
+}

@@ -1,0 +1,78 @@
+{
+    "type": "Section",
+    "label": "CreditProgram",
+    "isCollapsed": false,
+    "width": 12,
+    "elements": [
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "Input",
+                    "label": "creditProgramId",
+                    "value": {
+                        "$ref": "#/properties/creditProgramId"
+                    },
+                    "filter": "creditProgramFilter",
+                    "width": 3,
+                    "onValueChanged": [
+                        {
+                            "commandType": "executeAction",
+                            "actionName": "onChangeCreditProgramId"
+                        }
+                    ]
+                },
+                {
+                    "type": "Input",
+                    "readOnly": true,
+                    "label": "percentRateImpact",
+                    "value": {
+                        "$ref": "#/properties/percentRateImpact"
+                    },
+                    "width": 3
+                },
+                {
+                    "type": "Input",
+                    "readOnly": true,
+                    "label": "creditProgramVersion",
+                    "value": {
+                        "$ref": "#/properties/creditProgramVersion"
+                    },
+                    "width": 3,
+                    "rule": {
+                        "effect": "HIDE",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "hideCreditProgramVersion",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "type": "Input",
+                    "label": "externalContractId",
+                    "value": {
+                        "$ref": "#/properties/externalContractId"
+                    },
+                    "width": 3,
+                    "rule": {
+                        "effect": "HIDE",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "hideExternalContractId",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    }
+                }
+            ]
+        }
+    ]
+}

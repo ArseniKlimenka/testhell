@@ -1,0 +1,94 @@
+{
+    "type": "Section",
+    "label": "Insurance Rules",
+    "isCollapsed": false,
+    "width": 12,
+    "elements": [
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "Dropdown",
+                    "label": "ruleDescription",
+                    "multiple": false,
+                    "enableClear": false,
+                    "enableCustomValue": false,
+                    "preSelectFirstItem": false,
+                    "source": {
+                        "displayFieldName": "ruleDescription",
+                        "reloadOnOpen": true,
+                        "array": {
+                            "$ref": "#/properties/ClientViewModel/insuranceRules"
+                        }
+                    },
+                    "value": {
+                        "$ref": "#"
+                    },
+                    "onValueChanged": [
+                        {
+                            "commandType": "executeAction",
+                            "actionName": "changeRule"
+                        }
+                    ],
+                    "rule": {
+                        "effect": "ENABLE_INITIAL",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "enableRuleDescription",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "type": "Group",
+            "readOnly": true,
+            "elements": [
+                {
+                    "type": "Input",
+                    "label": "ruleDate",
+                    "value": {
+                        "$ref": "#/properties/ruleDate"
+                    },
+                    "width": 4
+                },
+                {
+                    "type": "Link",
+                    "width": 4,
+                    "targetType": "Url",
+                    "value": {
+                        "mapping": "ruleUrlMapping",
+                        "$ref": "#"
+                    },
+                    "content": {
+                        "text": {
+                            "type": "OutputText",
+                            "defaultValue": "",
+                            "value": {
+                                "mapping": "linkNameMapping",
+                                "$ref": "#"
+                            }
+                        }
+                    },
+                    "rule": {
+                        "effect": "SHOW",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "linkVisibility",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    }
+                }
+            ]
+        }
+    ]
+}

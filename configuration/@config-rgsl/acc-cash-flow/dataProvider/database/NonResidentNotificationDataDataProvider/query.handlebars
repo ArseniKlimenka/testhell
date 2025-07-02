@@ -1,0 +1,45 @@
+select
+	DUE_DATE,
+	CURRENCY_CODE,
+	sum(AMOUNT) as AMOUNT,
+	(
+		SELECT top 1 cer.EXCHANGE_RATE * cer.UNIT
+		FROM bfx.CURRENCY_EXCHANGE_RATE cer
+		WHERE cer.CURRENCY_CODE = t.CURRENCY_CODE
+			AND cer.EXCHANGE_RATE_DATE <= t.DUE_DATE
+		ORDER by cer.EXCHANGE_RATE_DATE DESC
+	) as CURR_RATE
+from
+	(
+		select
+			polh.CONTRACT_NUMBER,
+			ppl.DUE_DATE,
+			ppsl.CURRENCY_CODE,
+			ppsl.AMOUNT
+		from
+			pas_impl.POLICY_HUB polh
+			inner join pas_impl.P_PAYMENT_PLAN_LINK ppl on ppl.POLICY_HKEY = polh.POLICY_HKEY
+			inner join pas_impl.P_PAYMENT_PLAN_SAT_LATEST ppsl on ppsl.P_PAYMENT_PLAN_HKEY = ppl.P_PAYMENT_PLAN_HKEY
+		where 1=1
+			and polh.CONTRACT_NUMBER = @contractNumber
+			AND ppl.DUE_DATE IN (@dueDates)
+		union all
+		select
+			alc.DOCUMENT_NO as CONTRACT_NUMBER,
+			alcp.DUE_DATE,
+			alc.DOC_CURRENCY_CODE as CURRENCY_CODE,
+			0 as AMOUNT
+		FROM
+			acc_impl.ALLOCATION alc
+			inner join acc_impl.ALLOCATION_POLICY alcp on alcp.ALLOCATION_ID = alc.ALLOCATION_ID
+			inner join acc_impl.MATCHING mat on mat.ALLOCATION_ID = alc.ALLOCATION_ID
+			inner join acc_impl.MATCHING_POLICY matp on matp.MATCHING_ID = mat.MATCHING_ID
+		WHERE 1=1
+			and alc.DOCUMENT_NO = @contractNumber
+			AND alcp.DUE_DATE IN (@dueDates)
+	) t
+	inner join pas_impl.POLICY_HUB polh on polh.CONTRACT_NUMBER = t.CONTRACT_NUMBER
+	left join acc_impl.POSTED_PAYMENT_PLAN_SAT_LATEST ppps on ppps.POSTED_PAYMENT_PLAN_HKEY = polh.POLICY_HKEY
+
+GROUP BY DUE_DATE, CURRENCY_CODE, ppps.POSTED_UNTIL_POSTING_DATE
+ORDER BY DUE_DATE, CURRENCY_CODE, ppps.POSTED_UNTIL_POSTING_DATE

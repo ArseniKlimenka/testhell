@@ -1,0 +1,45 @@
+{
+    "allowParallelExecution": true,
+    "mainDataSource": "InquiriesDataSource",
+    "additionalDataSources": [
+
+    ],
+    "initialisationSinks": [
+
+    ],
+    "sinks": [
+        {
+            "name": "UpdateInquiry",
+            "document": {
+                "configuration": {
+                    "name": "LifeInsurancePolicyInquiry",
+                    "version": "1"
+                },
+                "allowUpdating": {
+                    "inStates": [
+                        "Draft"
+                    ]
+                },
+                "allowOnValidationErrors": {
+                    "all": true
+                }
+            }
+        },
+        {
+            "name": "LifeInsurancePolicyInquiryToCancelledState",
+            "documentTransition": {
+                "transition": {
+                    "configurationName": "LifeInsurancePolicyInquiry",
+                    "configurationVersion": "1"
+                }
+            }
+        }
+    ],
+    "completionSinks": [
+
+    ],
+    "errorSinks": [
+        
+    ],
+    "version": "1"
+}

@@ -1,0 +1,38 @@
+{
+    "entityType": "Claim",
+    "condition": {
+        "events": [
+            "StatusChanged"
+        ],
+        "configuration": {
+            "names": [
+                "CollectiveClaim"
+            ]
+        },
+        "documentStates": [
+            "POCreation"
+        ]
+    },
+    "sinks": [
+        {
+            "name": "ExecutePOCreation",
+            "class": {
+                "className": "Adacta.AdInsure.RGSL.Claims.API.Internal.Services.ICollectiveClaimPOServiceExecutor, Adacta.AdInsure.RGSL.Claims.API",
+                "methodName": "ExecutePoCreation"
+            }
+        }
+    ],
+    "completionSinks": [
+        {
+            "name": "FinishPOCreationForClaim",
+            "documentTransition": {
+                "transition": {
+                    "transitionName": "FinishPOCreation",
+                    "configurationName": "Claim",
+                    "configurationVersion": "1"
+                }
+            }
+        }
+    ],
+    "version": "1"
+}

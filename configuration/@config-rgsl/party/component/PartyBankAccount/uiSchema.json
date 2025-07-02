@@ -1,0 +1,405 @@
+{
+    "type": "GridLayout",
+    "numberOfColumns": 4,
+    "elements": [
+        {
+            "type": "Group",
+            "hide": true,
+            "elements": [
+                {
+                    "type": "Lookup",
+                    "label": "bankName",
+                    "commands": [
+                        {
+                            "commandType": "executeOperation",
+                            "operation": "SEARCH",
+                            "errorHandling": "silent",
+                            "data": null
+                        }
+                    ],
+                    "value": {
+                        "$ref": "#"
+                    },
+                    "width": 2,
+                    "dialogButton": {},
+                    "clearButton": {
+                        "clearAction": "bankNameClear"
+                    },
+                    "dialog": {
+                        "viewReference": {
+                            "configurationCodeName": "BankLookup",
+                            "configurationVersion": "1",
+                            "configurationConceptType": "SearchView"
+                        },
+                        "onLoad": "bankNameOnLoad"
+                    },
+                    "onSelected": "bankNameOnSelected",
+                    "selectedDisplayValueUISchema": {
+                        "type": "Input",
+                        "label": "bankName",
+                        "readOnly": true,
+                        "value": {
+                            "$ref": "#/properties/bankName"
+                        }
+                    }
+                },
+                {
+                    "type": "Input",
+                    "readOnly": true,
+                    "label": "bankBic",
+                    "value": {
+                        "$ref": "#/properties/bankBic"
+                    },
+                    "width": 1
+                },
+                {
+                    "type": "Input",
+                    "readOnly": true,
+                    "label": "bankCorrespondentAccount",
+                    "value": {
+                        "$ref": "#/properties/bankCorrespondentAccount"
+                    },
+                    "width": 1
+                }
+            ]
+        },
+        {
+            "type": "Group",
+            "rule": {
+                "condition": {
+                    "type": "FUNC",
+                    "ruleFunction": "isForeignBank",
+                    "value": [
+                        {
+                            "$ref": "#"
+                        }
+                    ]
+                },
+                "effect": "HIDE"
+            },
+            "elements": [
+                {
+                    "type": "Group",
+                    "elements": [
+                        {
+                            "type": "Input",
+                            "isCompact": true,
+                            "label": "isSettlementThroughFTD",
+                            "value": {
+                                "$ref": "#/properties/isSettlementThroughFTD"
+                            },
+                            "width": 1,
+                            "onValueChanged": [
+                                {
+                                    "commandType": "executeAction",
+                                    "actionName": "onChangeSettlementThroughFTD"
+                                }
+                            ],
+                            "rule": {
+                                "condition": {
+                                    "type": "FUNC",
+                                    "value": [
+                                        {
+                                            "$ref": "#"
+                                        }
+                                    ],
+                                    "ruleFunction": "showSettlementThroughFTD"
+                                },
+                                "effect": "SHOW"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "type": "Group",
+                    "elements": [
+                        {
+                            "type": "Group",
+                            "elements": [
+                                {
+                                    "type": "Input",
+                                    "label": "bankBic",
+                                    "value": {
+                                        "$ref": "#/properties/bankBic"
+                                    },
+                                    "width": 1,
+                                    "onValueChanged": [
+                                        {
+                                            "commandType": "executeAction",
+                                            "actionName": "getBankByBIC"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "Input",
+                                    "readOnly": true,
+                                    "label": "bankCorrespondentAccount",
+                                    "value": {
+                                        "$ref": "#/properties/bankCorrespondentAccount"
+                                    },
+                                    "width": 1
+                                },
+                                {
+                                    "type": "Input",
+                                    "label": "bankInn",
+                                    "value": {
+                                        "$ref": "#/properties/bankInn"
+                                    },
+                                    "width": 1
+                                }
+                            ],
+                            "rule": {
+                                "condition": {
+                                    "type": "FUNC",
+                                    "value": [
+                                        {
+                                            "$ref": "#/properties/isSettlementThroughFTD"
+                                        }
+                                    ],
+                                    "ruleFunction": "isSettlementThroughFTD"
+                                },
+                                "effect": "HIDE"
+                            }
+                        },
+                        {
+                            "type": "Group",
+                            "elements": [
+                                {
+                                    "type": "Input",
+                                    "label": "bankBicFTD",
+                                    "value": {
+                                        "$ref": "#/properties/bankBic"
+                                    },
+                                    "width": 1,
+                                    "onValueChanged": [
+                                        {
+                                            "commandType": "executeAction",
+                                            "actionName": "getBankByBIC"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "Input",
+                                    "readOnly": true,
+                                    "label": "bankCorrespondentAccountFTD",
+                                    "value": {
+                                        "$ref": "#/properties/bankCorrespondentAccount"
+                                    },
+                                    "width": 1
+                                },
+                                {
+                                    "type": "Input",
+                                    "label": "personalAccountNumber",
+                                    "value": {
+                                        "$ref": "#/properties/personalAccountNumber"
+                                    },
+                                    "width": 1
+                                }
+                            ],
+                            "rule": {
+                                "condition": {
+                                    "type": "FUNC",
+                                    "value": [
+                                        {
+                                            "$ref": "#/properties/isSettlementThroughFTD"
+                                        }
+                                    ],
+                                    "ruleFunction": "isSettlementThroughFTD"
+                                },
+                                "effect": "SHOW"
+                            }
+                        },
+                        {
+                            "type": "Group",
+                            "elements": [
+                                {
+                                    "type": "Input",
+                                    "readOnly": true,
+                                    "label": "bankName",
+                                    "value": {
+                                        "$ref": "#/properties/bankName"
+                                    },
+                                    "width": 2
+                                },
+                                {
+                                    "type": "Input",
+                                    "readOnly": true,
+                                    "label": "ftdName",
+                                    "value": {
+                                        "$ref": "#/properties/ftdName"
+                                    },
+                                    "width": 2,
+                                    "rule": {
+                                        "condition": {
+                                            "type": "FUNC",
+                                            "value": [
+                                                {
+                                                    "$ref": "#/properties/isSettlementThroughFTD"
+                                                }
+                                            ],
+                                            "ruleFunction": "isSettlementThroughFTD"
+                                        },
+                                        "effect": "SHOW"
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "Group",
+            "rule": {
+                "condition": {
+                    "type": "FUNC",
+                    "ruleFunction": "isRussianBank",
+                    "value": [
+                        {
+                            "$ref": "#"
+                        }
+                    ]
+                },
+                "effect": "HIDE"
+            },
+            "elements": [
+                {
+                    "type": "Input",
+                    "label": "SWIFT",
+                    "value": {
+                        "$ref": "#/properties/SWIFT"
+                    },
+                    "width": 1
+                },
+                {
+                    "type": "Input",
+                    "label": "IBAN",
+                    "value": {
+                        "$ref": "#/properties/IBAN"
+                    },
+                    "width": 1
+                }
+            ]
+        },
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "Input",
+                    "isCompact": true,
+                    "label": "foreignBank",
+                    "value": {
+                        "$ref": "#/properties/foreignBank"
+                    },
+                    "width": 2,
+                    "onValueChanged": [
+                        {
+                            "commandType": "executeAction",
+                            "actionName": "onChangeForeignBank"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "Input",
+                    "label": "number",
+                    "value": {
+                        "$ref": "#/properties/number"
+                    },
+                    "onValueChanged": [
+                        {
+                            "commandType": "executeAction",
+                            "actionName": "onChangeNumber"
+                        }
+                    ],
+                    "width": 1
+                }
+            ],
+            "rule": {
+                "condition": {
+                    "type": "FUNC",
+                    "value": [
+                        {
+                            "$ref": "#/properties/isSettlementThroughFTD"
+                        }
+                    ],
+                    "ruleFunction": "isSettlementThroughFTD"
+                },
+                "effect": "HIDE"
+            }
+        },
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "Input",
+                    "label": "numberFTD",
+                    "value": {
+                        "$ref": "#/properties/number"
+                    },
+                    "onValueChanged": [
+                        {
+                            "commandType": "executeAction",
+                            "actionName": "onChangeNumber"
+                        }
+                    ],
+                    "width": 1
+                }
+            ],
+            "rule": {
+                "condition": {
+                    "type": "FUNC",
+                    "value": [
+                        {
+                            "$ref": "#/properties/isSettlementThroughFTD"
+                        }
+                    ],
+                    "ruleFunction": "isSettlementThroughFTD"
+                },
+                "effect": "SHOW"
+            }
+        },
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "OutputText",
+                    "label": "currency",
+                    "value": {
+                        "$ref": "#"
+                    },
+                    "template": "{{#if currency}}{{expr currency.currencyDesc}} ({{expr currency.currencyCode}}){{/if}}",
+                    "defaultValue": "",
+                    "width": 1
+                },
+                {
+                    "type": "Input",
+                    "control": "DateRange",
+                    "dateFrom": {
+                        "type": "Input",
+                        "label": "openingDate",
+                        "width": 1,
+                        "value": {
+                            "$ref": "#/properties/openingDate"
+                        },
+                        "control": "DatetimePicker"
+                    },
+                    "dateTo": {
+                        "type": "Input",
+                        "label": "closingDate",
+                        "width": 1,
+                        "value": {
+                            "$ref": "#/properties/closingDate"
+                        },
+                        "control": "DatetimePicker"
+                    },
+                    "width": 2
+                }
+            ]
+        }
+    ]
+}

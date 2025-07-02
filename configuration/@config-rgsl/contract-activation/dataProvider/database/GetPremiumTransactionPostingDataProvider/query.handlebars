@@ -1,0 +1,176 @@
+select
+	oa.POLICY_HKEY,
+	oa.FI_OPEN_AMOUNT,
+{{#if parameters.postingDateTo}}
+	@postingDateTo as NEW_POSTED_UNTIL_DATE,
+{{else}}
+	convert(date, coalesce(st.STRING_VALUE, SYSDATETIME())) as NEW_POSTED_UNTIL_DATE,
+{{/if}}
+	ppps.POSTED_UNTIL_POSTING_DATE,
+	pols.INVOICE_ON_ACTIVATION,
+	ppps.LOAD_DATE as LAST_POSTED_PAYMENT_PLAN_LOAD_DATE
+into #POLICY_DATA
+from
+	(
+		select POLICY_HKEY, sum(FI_OPEN_AMOUNT) as FI_OPEN_AMOUNT
+		from
+		(
+			select
+				polh.POLICY_HKEY,
+				t.AMOUNT as FI_OPEN_AMOUNT
+			from
+				pas_impl.POLICY_HUB polh
+				inner join pas_impl.P_PAYMENT_PLAN_LINK ppl on ppl.POLICY_HKEY = polh.POLICY_HKEY
+				inner join pas_impl.P_PAYMENT_PLAN_SAT_LATEST t on t.P_PAYMENT_PLAN_HKEY = ppl.P_PAYMENT_PLAN_HKEY
+			where 1=1
+				and t.IS_FIRST_INSTALLMENT = 1
+{{#if parameters.contractNumbers}}
+				and polh.CONTRACT_NUMBER in (@contractNumbers)
+{{/if}}
+			union all
+			select
+				polh.POLICY_HKEY,
+				-(alc.DOC_AMOUNT + alc.TOLERANCE_DOC_AMOUNT) as FI_OPEN_AMOUNT
+			from
+				acc_impl.ALLOCATION alc
+				inner join acc_impl.ALLOCATION_POLICY alcp on alcp.ALLOCATION_ID = alc.ALLOCATION_ID
+				inner join pas_impl.POLICY_HUB polh on polh.CONTRACT_NUMBER = alc.DOCUMENT_NO
+			where 1=1
+{{#if parameters.contractNumbers}}
+				and alc.DOCUMENT_NO in (@contractNumbers)
+{{/if}}
+				and alcp.IS_FIRST_INSTALLMENT = 1
+		) t
+		group by POLICY_HKEY
+	) oa
+	inner join pas_impl.POLICY_SAT_LATEST pols on pols.POLICY_HKEY = oa.POLICY_HKEY
+	left join acc_impl.POSTED_PAYMENT_PLAN_SAT_LATEST ppps with (UPDLOCK) on ppps.POSTED_PAYMENT_PLAN_HKEY = oa.POLICY_HKEY
+	left join BFX.CT_SETTING st on st.SETTING_ID = 10000
+;
+
+-- set new posting date according to PP
+{{concat 'update'}} pd
+set NEW_POSTED_UNTIL_DATE = case when pd.FI_OPEN_AMOUNT <= 0 or pd.INVOICE_ON_ACTIVATION = 1 then pp.POSTING_DATE end
+from
+	#POLICY_DATA pd
+	inner join (
+		select ppl.POLICY_HKEY, max(pps.POSTING_DATE) as POSTING_DATE
+		from
+			#POLICY_DATA pd
+			inner join pas_impl.P_PAYMENT_PLAN_LINK ppl on ppl.POLICY_HKEY = pd.POLICY_HKEY
+			left join pas_impl.P_PAYMENT_PLAN_SAT_LATEST pps on pps.P_PAYMENT_PLAN_HKEY = ppl.P_PAYMENT_PLAN_HKEY and pps.POSTING_DATE <= pd.NEW_POSTED_UNTIL_DATE
+		group by ppl.POLICY_HKEY
+	) pp on pp.POLICY_HKEY = pd.POLICY_HKEY
+;
+
+select
+	polh.POLICY_HKEY,
+	t.P_PAYMENT_PLAN_HKEY,
+	t.ITEM_NO,
+	t.POSTING_DATE,
+	t.AMOUNT-lag(t.AMOUNT,1,0) over (partition by t.P_PAYMENT_PLAN_HKEY, t.ITEM_NO order by t.LOAD_DATE) DELTA_AMOUNT,
+	t.LOAD_DATE as PAYMENT_PLAN_LOAD_DATE
+into #P_PAYMENT_PLAN_SAT_DELTA
+from
+	pas_impl.P_PAYMENT_PLAN_SAT t
+	inner join pas_impl.P_PAYMENT_PLAN_LINK ppl on ppl.P_PAYMENT_PLAN_HKEY = t.P_PAYMENT_PLAN_HKEY
+	inner join pas_impl.POLICY_HUB polh on polh.POLICY_HKEY = ppl.POLICY_HKEY
+where 1=1
+{{#if parameters.contractNumbers}}
+	and polh.CONTRACT_NUMBER in (@contractNumbers)
+{{/if}}
+;
+
+select *
+into #INVOICE_DATA
+from (
+	--all that needs to be posted
+	select
+		d.POLICY_HKEY,
+		d.P_PAYMENT_PLAN_HKEY,
+		d.PAYMENT_PLAN_LOAD_DATE,
+		d.ITEM_NO,
+		d.DELTA_AMOUNT
+	from
+		#POLICY_DATA pd
+		inner join #P_PAYMENT_PLAN_SAT_DELTA d on d.POLICY_HKEY = pd.POLICY_HKEY
+	where 1=1
+		and pd.NEW_POSTED_UNTIL_DATE is not null
+		and d.POSTING_DATE <= pd.NEW_POSTED_UNTIL_DATE
+	union all
+	--already posted
+	select
+		d.POLICY_HKEY,
+		d.P_PAYMENT_PLAN_HKEY,
+		d.PAYMENT_PLAN_LOAD_DATE,
+		d.ITEM_NO,
+		-d.DELTA_AMOUNT
+	from
+		#POLICY_DATA pd
+		inner join #P_PAYMENT_PLAN_SAT_DELTA d on d.POLICY_HKEY = pd.POLICY_HKEY
+	where 1=1
+		and pd.POSTED_UNTIL_POSTING_DATE >= d.POSTING_DATE
+		and pd.LAST_POSTED_PAYMENT_PLAN_LOAD_DATE >= d.PAYMENT_PLAN_LOAD_DATE
+	) t
+;
+
+select
+	t.POLICY_HKEY,
+	pps.AMENDMENT_NUMBER,
+	max(t.PAYMENT_PLAN_LOAD_DATE) as MAX_PP_LOAD_DATE,
+	t.ITEM_NO,
+	pps.POSTING_DATE,
+	pps.CURRENCY_CODE,
+	sum(t.DELTA_AMOUNT) as AMOUNT
+into #INVOICE_DATA_GROUPED
+from
+	#INVOICE_DATA t
+	inner join pas_impl.P_PAYMENT_PLAN_LINK ppl on ppl.P_PAYMENT_PLAN_HKEY = t.P_PAYMENT_PLAN_HKEY
+	inner join pas_impl.P_PAYMENT_PLAN_SAT_LATEST pps on pps.P_PAYMENT_PLAN_HKEY = t.P_PAYMENT_PLAN_HKEY and pps.ITEM_NO = t.ITEM_NO
+group by
+	t.POLICY_HKEY,
+	pps.AMENDMENT_NUMBER,
+	t.ITEM_NO,
+	pps.POSTING_DATE,
+	pps.CURRENCY_CODE
+having sum(DELTA_AMOUNT) != 0
+;
+
+select
+	coalesce(d.AMENDMENT_NUMBER, polh.CONTRACT_NUMBER) as CONTRACT_NUMBER,
+	polh.CONTRACT_NUMBER as MAIN_CONTRACT_NUMBER,
+	d.MAX_PP_LOAD_DATE,
+	pd.NEW_POSTED_UNTIL_DATE,
+	d.POSTING_DATE as POSTING_DATE,
+    ps.START_DATE as POLICY_START_DATE,
+    ams.VALID_FROM as AMENDMENT_VALID_FROM,
+	d.ITEM_NO,
+	d.AMOUNT,
+	d.CURRENCY_CODE,
+	ps.HOLDER_CODE as POLICY_HOLDER_CODE,
+	ptys.TRADING_PARTNER_CODE,
+	coalesce(aloc.PAID_AMOUNT, 0) as PAID_AMOUNT
+from
+	#POLICY_DATA pd
+	inner join #INVOICE_DATA_GROUPED d on d.POLICY_HKEY = pd.POLICY_HKEY
+	inner join pas_impl.POLICY_HUB polh on polh.POLICY_HKEY = d.POLICY_HKEY
+	inner join pas_impl.POLICY_SAT_LATEST ps on ps.POLICY_HKEY = polh.POLICY_HKEY
+	inner join pty_impl.PARTY_HUB ptyh on ptyh.PARTY_CODE = ps.HOLDER_CODE
+	inner join pty_impl.PARTY_INFO_SAT_LATEST ptys on ptys.PARTY_INFO_HKEY = ptyh.PARTY_HKEY
+	left join pas_impl.AMENDMENT_HUB ah on ah.AMENDMENT_NUMBER = d.AMENDMENT_NUMBER
+	left join pas_impl.AMENDMENT_SAT_LATEST ams on ams.AMENDMENT_HKEY = ah.AMENDMENT_HKEY
+	left join (
+		select al.DOCUMENT_NO, mp.POSTING_DATE, mp.SOURCE_LINE_ID, sum(m.DOC_AMOUNT + m.TOLERANCE_DOC_AMOUNT) as PAID_AMOUNT
+		from ACC_IMPL.ALLOCATION al
+			inner join ACC_IMPL.ALLOCATION_POLICY alocp on al.ALLOCATION_ID = alocp.ALLOCATION_ID
+			inner join ACC_IMPL.MATCHING m on al.ALLOCATION_ID = m.ALLOCATION_ID
+			inner join ACC_IMPL.MATCHING_POLICY mp on m.MATCHING_ID = mp.MATCHING_ID
+		group by al.DOCUMENT_NO, mp.POSTING_DATE, mp.SOURCE_LINE_ID
+	) aloc on aloc.DOCUMENT_NO = polh.CONTRACT_NUMBER and aloc.POSTING_DATE = d.POSTING_DATE and aloc.SOURCE_LINE_ID = d.ITEM_NO
+order by polh.CONTRACT_NUMBER, d.POSTING_DATE, d.ITEM_NO
+;
+
+{{concat 'drop'}} table #INVOICE_DATA_GROUPED{{concat ';'}}
+{{concat 'drop'}} table #INVOICE_DATA{{concat ';'}}
+{{concat 'drop'}} table #P_PAYMENT_PLAN_SAT_DELTA{{concat ';'}}
+{{concat 'drop'}} table #POLICY_DATA{{concat ';'}}

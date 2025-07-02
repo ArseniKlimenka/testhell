@@ -1,0 +1,41 @@
+﻿SELECT
+	c.CONTRACT_NUMBER,
+	pa.CODE_NAME CONTRACT_CONF_CODE_NAME,
+	contractSat.PRODUCT_CODE,
+	contractSat.CURRENCY_CODE,
+	contractSat.END_DATE AS CONTRACT_END_DATE,
+	crgR.GROUP_CODE RISK_GROUP_CODE,
+	riskCode.RISK_CODE,
+	riskStartDate.RISK_START_DATE,
+	riskEndDate.RISK_END_DATE,
+	riskPremium.RISK_PREMIUM,
+	riskInsuredSum.RISK_INSURED_SUM,
+	riskInsuredSumWithoutCashback.RISK_INSURED_SUM_WITHOUT_CASHBACK,
+	riskPerson.RISK_PERSON,
+	periodInsuredSum.RISK_PERIOD_INSURED_SUM,
+	periodStartDate.RISK_PERIOD_START_DATE,
+	periodEndDate.RISK_PERIOD_END_DATE,
+	CASE WHEN RISK_PERSON = 'insuredPerson' then contractSat.INSURED_CODE ELSE contractSat.HOLDER_CODE END AS PARTY_CODE
+FROM pas.CONTRACT c
+LEFT JOIN CFX.PUBLISHED_ARTIFACT pa ON pa.PUBLISHED_ARTIFACT_ID = c.PUBLISHED_ARTIFACT_ID
+LEFT JOIN PAS_IMPL.POLICY_HUB contractHub ON contractHub.CONTRACT_NUMBER = c.CONTRACT_NUMBER
+LEFT JOIN PAS_IMPL.POLICY_SAT_LATEST contractSat ON contractSat.POLICY_HKEY = contractHub.POLICY_HKEY
+LEFT JOIN CFG.PROCESS_STATE procState ON procState.PROCESS_STATE_ID = c.STATE_ID
+CROSS APPLY OPENJSON(JSON_QUERY(c.body, '$.risks')) risks
+CROSS APPLY OPENJSON(risks.[value]) WITH (RISK_CODE NVARCHAR(64) '$.risk.riskCode') riskCode
+CROSS APPLY OPENJSON(risks.[value]) WITH (RISK_START_DATE NVARCHAR(64) '$.startDate') riskStartDate
+CROSS APPLY OPENJSON(risks.[value]) WITH (RISK_END_DATE NVARCHAR(64) '$.endDate') riskEndDate
+CROSS APPLY OPENJSON(risks.[value]) WITH (RISK_PREMIUM NVARCHAR(64) '$.riskPremium') riskPremium
+CROSS APPLY OPENJSON(risks.[value]) WITH (RISK_INSURED_SUM NVARCHAR(64) '$.riskInsuredSum') riskInsuredSum
+CROSS APPLY OPENJSON(risks.[value]) WITH (RISK_INSURED_SUM_WITHOUT_CASHBACK NVARCHAR(64) '$.riskInsuredSumWithoutCashBack') riskInsuredSumWithoutCashBack
+CROSS APPLY OPENJSON(risks.[value]) WITH (RISK_PERSON NVARCHAR(64) '$.risk.riskPerson') riskPerson
+OUTER APPLY OPENJSON(JSON_QUERY(risks.value, '$.riskInsuredSumByPeriod')) riskInsuredSumByPeriod
+OUTER APPLY OPENJSON(riskInsuredSumByPeriod.[value]) WITH (RISK_PERIOD_INSURED_SUM NVARCHAR(64) '$.insuredSum') periodInsuredSum
+OUTER APPLY OPENJSON(riskInsuredSumByPeriod.[value]) WITH (RISK_PERIOD_START_DATE NVARCHAR(64) '$.periodStartDate') periodStartDate
+OUTER APPLY OPENJSON(riskInsuredSumByPeriod.[value]) WITH (RISK_PERIOD_END_DATE NVARCHAR(64) '$.periodEndDate') periodEndDate
+LEFT JOIN PAS_IMPL.CUMULATION_RISK_GROUP_RELATION crgR ON crgR.RISK_CODE = riskCode.RISK_CODE
+LEFT JOIN BFX_IMPL.RISKS r ON r.CODE = riskCode.RISK_CODE
+WHERE 1=1
+AND c.CONTRACT_NUMBER IN (@contractNumbers)
+AND ((contractSat.INSURED_CODE = @insuredPersonCode AND RISK_PERSON = 'insuredPerson') OR (contractSat.HOLDER_CODE = @policyHolderCode AND RISK_PERSON = 'policyHolder'))
+AND (@currentDate >= RISK_START_DATE AND @currentDate <= RISK_END_DATE OR r.PAYMENT_FORM = 'SurrenderValues')

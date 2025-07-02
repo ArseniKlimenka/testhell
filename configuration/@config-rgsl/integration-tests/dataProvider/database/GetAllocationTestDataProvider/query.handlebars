@@ -1,0 +1,45 @@
+select
+	alc.ALLOCATION_ID,
+	alc.CANCELLED,
+	alc.CANCELLED_ALLOCATION_ID,
+	alc.PAY_AMOUNT,
+	alc.DOC_AMOUNT,
+	alc.TOLERANCE_DOC_AMOUNT,
+	alc.PAY_CURRENCY_CODE,
+	alc.DOCUMENT_NO,
+	alc.DOCUMENT_TYPE_ID,
+	alc.DOC_CURRENCY_CODE,
+	(
+		select
+			mat.MATCHING_ID,
+			mat.CANCELLED,
+			mat.CANCELLED_MATCHING_ID,
+			mat.DOC_AMOUNT,
+			mat.TOLERANCE_DOC_AMOUNT,
+			matp.OBJECT_CODE,
+			matp.SOURCE_LINE_ID,
+			matp.IS_LIFE,
+			matp.POST_AMOUNT,
+			matp.IS_POSTED,
+			matp.POSTING_DATE
+		from
+			acc_impl.MATCHING mat
+			inner join acc_impl.MATCHING_POLICY matp on matp.MATCHING_ID = mat.MATCHING_ID
+		where mat.ALLOCATION_ID = alc.ALLOCATION_ID
+		order by mat.MATCHING_ID
+		for json path
+	) as MATCHINGS
+from
+	acc_impl.ALLOCATION alc
+	inner join acc_impl.ALLOCATION_POLICY alcp on alcp.ALLOCATION_ID = alc.ALLOCATION_ID
+where 1=1
+{{#if parameters.bankStatementItemId}}
+	and alc.BANK_STATEMENT_ITEM_ID = @bankStatementItemId
+{{/if}}
+{{#if parameters.contractNumber}}
+	and alc.DOCUMENT_NO = @contractNumber
+{{/if}}
+{{#if parameters.dueDate}}
+	and alcp.DUE_DATE = @dueDate
+{{/if}}
+order by alc.ALLOCATION_ID

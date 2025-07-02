@@ -1,0 +1,51 @@
+{
+    "description": "Test payment order of 'commission act' type",
+    "steps": [
+        {
+            "$ref": "CommissionActStepThrough"
+        },
+        {
+            "code": "ApprovePaymentOrder",
+            "description": "Approve payment order",
+            "requests": [],
+            "executor": {
+                "module": "./steps/02.approvePaymentOrder/executor.js",
+                "function": "executor"
+            },
+            "assert": {
+                "expected": "./steps/02.approvePaymentOrder/expectedResult.json",
+                "module": "./steps/02.approvePaymentOrder/assert.js",
+                "function": "assertPO"
+            }
+        },
+        {
+            "code": "importOutgoingBsi",
+            "actor": "ChiefPaymentDistributor",
+            "description": "Import outgoing BSI",
+            "requests": [
+                {
+                    "code": "Body",
+                    "path": "./steps/03.importOutgoingBsi/bsi.json"
+                }
+            ],
+            "executor": {
+                "module": "./steps/03.importOutgoingBsi/executor.js",
+                "function": "executor"
+            }
+        },
+        {
+            "code": "Auto-allocate",
+            "actor": "ChiefPaymentDistributor",
+            "description": "Payment auto-allocation",
+            "requests": [],
+            "executor": {
+                "module": "./steps/04.autoAllocate/executor.js",
+                "function": "executor"
+            },
+            "assert": {
+                "module": "./steps/04.autoAllocate/assert.js",
+                "function": "assertAllocation"
+            }
+        }
+    ]
+}

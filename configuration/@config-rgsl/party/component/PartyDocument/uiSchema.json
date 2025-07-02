@@ -1,0 +1,143 @@
+{
+    "type": "GridLayout",
+    "numberOfColumns": 4,
+    "elements": [
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "Input",
+                    "label": "docType",
+                    "value": {
+                        "$ref": "#/properties/docType"
+                    },
+                    "control": "Dropdown",
+                    "autocomplete": {
+                        "minTextLength": 0,
+                        "dropDownItemsCount": 25,
+                        "selectItemOnMatch": false
+                    },
+                    "source": {
+                        "dataSource": {
+                            "name": "PartyDocumentTypesDataSource",
+                            "searchFieldPath": "docTypeDesc",
+                            "responseMapping": "docTypeResponseMapping",
+                            "resultCount": 25
+                        },
+                        "displayFieldName": "docTypeDesc"
+                    },
+                    "width": 4,
+                    "onValueChanged": [
+                        {
+                            "commandType": "executeAction",
+                            "actionName": "onChangeDocType"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "Group",
+            "rule": {
+                "effect": "SHOW",
+                "condition": {
+                    "type": "FUNC",
+                    "ruleFunction": "showOtherDocTypeDesc",
+                    "value": [
+                        {
+                            "$ref": "#"
+                        }
+                    ]
+                }
+            },
+            "elements": [
+                {
+                    "type": "Input",
+                    "label": "otherDocTypeDesc",
+                    "value": {
+                        "$ref": "#/properties/otherDocTypeDesc"
+                    },
+                    "width": 4
+                }
+            ]
+        },
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "Input",
+                    "label": "docSeries",
+                    "value": {
+                        "$ref": "#/properties/docSeries"
+                    },
+                    "width": 1
+                },
+                {
+                    "type": "Input",
+                    "label": "docNumber",
+                    "value": {
+                        "$ref": "#/properties/docNumber"
+                    },
+                    "width": 1
+                },
+                {
+                    "type": "Input",
+                    "label": "issueDate",
+                    "width": 1,
+                    "value": {
+                        "$ref": "#/properties/issueDate"
+                    },
+                    "control": "DatetimePicker"
+                },
+                {
+                    "type": "Input",
+                    "label": "expireDate",
+                    "width": 1,
+                    "value": {
+                        "$ref": "#/properties/expireDate"
+                    },
+                    "control": "DatetimePicker",
+                    "rule": {
+                        "effect": "SHOW",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "showExpireDate",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "Input",
+                    "label": "issuerName",
+                    "value": {
+                        "$ref": "#/properties/issuerName"
+                    },
+                    "width": 3
+                },
+                {
+                    "type": "Input",
+                    "label": "issuerCode",
+                    "value": {
+                        "$ref": "#/properties/issuerCode"
+                    },
+                    "width": 1,
+                    "onValueChanged": [
+                        {
+                            "commandType": "executeAction",
+                            "actionName": "issuerCodeFormat"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

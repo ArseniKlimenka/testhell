@@ -1,0 +1,97 @@
+{
+    "entityType": "Contract",
+    "version": "1",
+    "condition": {
+        "events": [
+            "StatusChanged"
+        ],
+        "configuration": {
+            "dimensions": {
+                "contractType": [
+                    "Policy"
+                ]
+            }
+        },
+        "documentStates": [
+            "Active"
+        ]
+    },
+    "executionOrderWeight": 100,
+    "sinks": [
+        {
+            "name": "GetExistingContractAttachment",
+            "class": {
+                "className": "Adacta.AdInsure.Framework.Core.SPI.Attachment.IAttachmentProvider, Adacta.AdInsure.Framework.Core",
+                "methodName": "GetAttachments"
+            }
+        },
+        {
+            "name": "CreateContractPrintoutFile",
+            "executeAs": "System",
+            "printout": {
+                "printoutConfiguration": {
+                    "attachmentTypes": []
+                }
+            }
+        },
+        {
+            "name": "CreateContractAttachment",
+            "executeAs": "System",
+            "createAttachment": {
+                "attachmentType": "contractSigned"
+            }
+        },
+        {
+            "name": "GetExistingKIDAttachment",
+            "class": {
+                "className": "Adacta.AdInsure.Framework.Core.SPI.Attachment.IAttachmentProvider, Adacta.AdInsure.Framework.Core",
+                "methodName": "GetAttachments"
+            }
+        },
+        {
+            "name": "CreateKIDPrintoutFile",
+            "executeAs": "System",
+            "printout": {
+                "printoutConfiguration": {
+                    "attachmentTypes": []
+                }
+            }
+        },
+        {
+            "name": "CreateKIDAttachment",
+            "executeAs": "System",
+            "createAttachment": {
+                "attachmentType": "KIDAttachment"
+            }
+        },
+        {
+            "name": "GetExistingInsuranceRulesAttachment",
+            "class": {
+                "className": "Adacta.AdInsure.Framework.Core.SPI.Attachment.IAttachmentProvider, Adacta.AdInsure.Framework.Core",
+                "methodName": "GetAttachments"
+            }
+        },
+        {
+            "name": "CreateInsuranceRulesPrintoutFile",
+            "executeAs": "System",
+            "printout": {
+                "printoutConfiguration": {
+                    "printoutRelations": []
+                }
+            }
+        },
+        {
+            "name": "CreateInsuranceRulesAttachment",
+            "executeAs": "System",
+            "createAttachment": {
+                "attachmentType": "InsuranceRulesAttachment"
+            }
+        },
+        {
+            "name": "SportPolicyCreatedEmailNotification",
+            "notification": {
+                "notificationName": "SportPolicyCreatedEmailNotification"
+            }
+        }
+    ]
+}

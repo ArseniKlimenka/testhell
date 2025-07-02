@@ -1,0 +1,87 @@
+{
+    "type": "Section",
+    "label": "Main attributes",
+    "scope": "mainAttributes",
+    "width": 12,
+    "elements": [
+        {
+            "type": "Group",
+            "width": 12,
+            "elements": [
+                {
+                    "type": "Input",
+                    "label": "amendmentIssueDate",
+                    "value": {
+                        "$ref": "#/properties/amendmentIssueDate"
+                    },
+                    "width": 3
+                }
+            ]
+        },
+        {
+            "type": "Group",
+            "width": 12,
+            "elements": [
+                {
+                    "type": "Input",
+                    "label": "effectiveDate",
+                    "value": {
+                        "$ref": "#/properties/amendmentEffectiveDate"
+                    },
+                    "width": 3,
+                    "onValueChanged": [
+                        {
+                            "commandType": "executeAction",
+                            "actionName": "onEffectiveDateChange"
+                        }
+                    ]
+                },
+                {
+                    "type": "Input",
+                    "label": "acceptDate",
+                    "value": {
+                        "$ref": "#/properties/acceptDate"
+                    },
+                    "width": 3
+                },
+                {
+                    "type": "Dropdown",
+                    "label": "initiator",
+                    "multiple": false,
+                    "enableClear": true,
+                    "enableCustomValue": false,
+                    "value": {
+                        "$ref": "#/properties/initiator"
+                    },
+                    "width": 4
+                }
+            ]
+        },
+        {
+            "type": "Group",
+            "width": 12,
+            "elements": [
+                {
+                    "type": "Input",
+                    "label": "productConfOnAmendmentDate",
+                    "value": {
+                        "$ref": "#/properties/productConfOnAmendmentDate"
+                    },
+                    "width": 12
+                }
+            ]
+        }
+    ],
+    "rule": {
+        "effect": "ENABLE_INITIAL",
+        "condition": {
+            "type": "FUNC",
+            "ruleFunction": "areMainAttributesEnabled",
+            "value": [
+                {
+                    "$ref": "#"
+                }
+            ]
+        }
+    }
+}

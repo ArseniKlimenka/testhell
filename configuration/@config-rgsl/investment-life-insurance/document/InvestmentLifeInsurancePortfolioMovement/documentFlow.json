@@ -1,0 +1,47 @@
+{
+    "processType": "LifeInsurancePortfolioMovement",
+    "actors": [
+        "Operations",
+        "Viewer",
+        "System"
+    ],
+    "initialState": "Draft",
+    "states": [
+        {
+            "name": "Draft",
+            "operations": [
+                {
+                    "name": "Save"
+                }
+            ]
+        },
+        {
+            "name": "Activated",
+            "appliesVersion": true
+        },
+        {
+            "name": "Cancelled",
+            "operations": [
+                {
+                    "name": "Save"
+                }
+            ],
+            "discardsVersion": true
+        }
+    ],
+    "transitions": [
+        {
+            "name": "Draft_to_Cancelled",
+            "from": "Draft",
+            "to": "Cancelled",
+            "allowOnValidationErrors": {
+                "all": true
+            }
+        },
+        {
+            "name": "Draft_to_Activated",
+            "from": "Draft",
+            "to": "Activated"
+        }
+    ]
+}

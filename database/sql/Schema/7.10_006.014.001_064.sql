@@ -1,0 +1,2 @@
+alter table ACC.GL_ADDITIONAL_ATTRIBUTES add DATE_TO_CHECK_PREV_PERIOD [datetime] null;
+alter table ACC.JR_ADDITIONAL_ATTRIBUTES add DATE_TO_CHECK_PREV_PERIOD [datetime] null;

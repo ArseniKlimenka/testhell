@@ -1,0 +1,1 @@
+update acc.GL_ACCOUNT set GL_ACCOUNT_TYPE_ID = 1005, DESCRIPTION = N'Незавершенные расчеты по операциям страхования и перестрахования' where GL_ACCOUNT_NO = '48029'; --fixed type_id from previous script

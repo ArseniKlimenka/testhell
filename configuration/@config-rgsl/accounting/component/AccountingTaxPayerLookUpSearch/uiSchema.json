@@ -1,0 +1,85 @@
+{
+    "type": "Group",
+    "elements": [
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "Lookup",
+                    "width": 4,
+                    "value": {
+                        "$ref": "#"
+                    },
+                    "dialogButton": {
+                        "icon": {
+                            "name": "User",
+                            "color": "Primary"
+                        }
+                    },
+                    "dialog": {
+                        "viewReference": {
+                            "configurationCodeName": "GeneralPartySearchWithEditView",
+                            "configurationConceptType": "SearchView",
+                            "configurationVersion": "1"
+                        },
+                        "onLoad": "onLoadView",
+                        "size": "ExtraLarge"
+                    },
+                    "onSelected": "partyResultMapping",
+                    "selectedDisplayValueUISchema": {
+                        "type": "Input",
+                        "label": "fullName",
+                        "showAsRequired": true,
+                        "readOnly": true,
+                        "value": {
+                            "$ref": "#/properties/partyFullName"
+                        },
+                        "rule": {
+                            "effect": "DISABLE_INITIAL",
+                            "condition": {
+                                "type": "FUNC",
+                                "ruleFunction": "disableTextBox",
+                                "value": [
+                                    {
+                                        "$ref": "#"
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "rule": {
+                        "effect": "DISABLE_INITIAL",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "disableLookUpInputs",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "type": "Link",
+                    "width": 4,
+                    "targetType": "Url",
+                    "value": {
+                        "mapping": "partyUrlMapping",
+                        "$ref": "#"
+                    },
+                    "content": {
+                        "text": {
+                            "type": "OutputText",
+                            "defaultValue": "",
+                            "value": {
+                                "mapping": "linkNameMapping",
+                                "$ref": "#"
+                            }
+                        }
+                    }
+                }
+            ]
+        }
+    ]
+}

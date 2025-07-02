@@ -1,0 +1,36 @@
+{
+    "entityType": "Contract",
+    "version": "1",
+    "condition": {
+        "events": [
+            "StatusChanged"
+        ],
+        "configuration": {
+            "dimensions": {
+                "contractType": [
+                    "Policy"
+                ]
+            }
+        }
+    },
+    "executionOrderWeight": 100,
+    "sinks": [
+        {
+            "name": "FetchActivities",
+            "fetch": {
+                "configuration": {
+                    "name": "ESActivitiesDataSource"
+                }
+            }
+        },
+        {
+            "name": "UpdateActivities",
+            "message": {
+                "messageChannel": {
+                    "destination": "Core.Entity.SynchroniseSearchIndex",
+                    "policy": "DefaultMessageQueuePolicy"
+                }
+            }
+        }
+    ]
+}

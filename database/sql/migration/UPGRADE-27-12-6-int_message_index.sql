@@ -1,0 +1,6 @@
+if not exists(select * from sys.indexes i where i.name = 'IX_BFX_INTEGRATION_MESSAGE_ERROR_TIMESTAMP_AND_SYS_CREATED_ON')
+begin
+	create nonclustered index IX_BFX_INTEGRATION_MESSAGE_ERROR_TIMESTAMP_AND_SYS_CREATED_ON
+	on BFX.INTEGRATION_MESSAGE_ERROR([TIMESTAMP], SYS_CREATED_ON);
+end
+go

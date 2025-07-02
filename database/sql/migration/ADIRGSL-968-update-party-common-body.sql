@@ -1,0 +1,64 @@
+BEGIN TRY
+BEGIN TRAN
+
+DECLARE @CurrentAttrValues TABLE
+(
+   CODE NVARCHAR(50),
+   INN NVARCHAR(100),
+   KPP NVARCHAR(100)
+);
+
+INSERT INTO @CurrentAttrValues
+
+SELECT r.PARTY_CODE,
+	   r.INN,
+	   r.KPP
+FROM
+(SELECT	p.PARTY_CODE,
+		JSON_VALUE(p.BODY, N'lax $.partyGeneralData.INNKIO') AS INN,
+		JSON_VALUE(p.BODY, N'lax $.partyOrganisationData.KPP') AS KPP 
+FROM 
+PTY.PARTY p) r
+WHERE r.INN IS NOT NULL OR r.KPP IS NOT NULL
+
+DECLARE @PartyCode NVARCHAR(50), @Inn NVARCHAR(100), @Kpp NVARCHAR(100)
+
+DECLARE PARTY_CURSOR CURSOR LOCAL READ_ONLY FORWARD_ONLY
+FOR 
+
+SELECT CODE,
+	   INN,
+	   KPP
+FROM @CurrentAttrValues
+
+OPEN PARTY_CURSOR
+FETCH NEXT FROM PARTY_CURSOR INTO @PartyCode, @Inn, @Kpp
+WHILE @@FETCH_STATUS = 0
+
+BEGIN 
+	
+	UPDATE PTY.PARTY set COMMON_BODY = JSON_MODIFY(
+									   JSON_MODIFY(COMMON_BODY, 
+									   '$.attributes.INNKIO', @Inn),
+									   '$.attributes.KPP', @Kpp) 
+		WHERE PARTY_CODE = @PartyCode
+	
+	FETCH NEXT FROM PARTY_CURSOR INTO @PartyCode, @Inn, @Kpp
+
+END
+
+CLOSE PARTY_CURSOR
+DEALLOCATE PARTY_CURSOR
+
+COMMIT TRAN
+
+END TRY
+
+BEGIN CATCH
+
+    ROLLBACK TRAN
+    DECLARE @ErrorMessage NVARCHAR(4000); DECLARE @ErrorSeverity INT; DECLARE @ErrorState INT;
+    SELECT @ErrorMessage = ERROR_MESSAGE(), @ErrorSeverity = ERROR_SEVERITY(), @ErrorState = 1;
+    RAISERROR (@ErrorMessage, @ErrorSeverity, @ErrorState);
+
+END CATCH

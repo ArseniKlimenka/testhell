@@ -1,0 +1,115 @@
+{
+    "type": "Section",
+    "sectionLevel": 1,
+    "label": "finKnowledgeQuestionnaire",
+    "elementId": "finKnowledgeQuestionnaire2023",
+    "elements": [
+        {
+            "type": "Group",
+            "readOnly": true,
+            "stackContent": "Right",
+            "elements": [
+                {
+                    "type": "Input",
+                    "control": "DatetimePicker",
+                    "label": "lastUpdateDate",
+                    "value": {
+                        "$ref": "#/properties/lastUpdateDate"
+                    },
+                    "width": 4
+                }
+            ]
+        },
+        {
+            "type": "DataGrid",
+            "mode": "Array",
+            "height": "None",
+            "pagination": {
+                "mode": "Regular",
+                "pageSizes": [
+                    5
+                ],
+                "defaultPageSize": 5
+            },
+            "isCollapsed": false,
+            "value": {
+                "$ref": "#/properties/questionnaire"
+            },
+            "actions": [],
+            "columns": [
+                {
+                    "title": "itemText",
+                    "name": "itemText",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "allowMultiLine": true,
+                        "value": {
+                            "$ref": "#/properties/itemText"
+                        }
+                    },
+                    "style": {
+                        "width": "extra-large"
+                    }
+                },
+                {
+                    "title": "itemConfirmation",
+                    "name": "itemConfirmation",
+                    "cellContent": {
+                        "type": "ThreeState",
+                        "dropdownMode": false,
+                        "value": {
+                            "$ref": "#/properties/itemConfirmation"
+                        },
+                        "onValueChanged": [
+                            {
+                                "commandType": "executeAction",
+                                "actionName": "onChangeItemConfirmation2023"
+                            }
+                        ]
+                    },
+                    "style": {
+                        "width": "extra-small"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "Group",
+            "hide": true,
+            "rule": {
+                "effect": "SHOW",
+                "condition": {
+                    "type": "FUNC",
+                    "ruleFunction": "showConfirmation2023",
+                    "value": [
+                        {
+                            "$ref": "#"
+                        }
+                    ]
+                }
+            },
+            "elements": [
+                {
+                    "type": "Input",
+                    "label": "confirmation",
+                    "value": {
+                        "$ref": "#/properties/confirmation"
+                    },
+                    "width": 12
+                }
+            ]
+        }
+    ],
+    "rule": {
+        "effect": "HIDE",
+        "condition": {
+            "type": "FUNC",
+            "ruleFunction": "hideFinKnowledgeQuestionnaire",
+            "value": [
+                {
+                    "$ref": "#"
+                }
+            ]
+        }
+    }
+}

@@ -1,0 +1,47 @@
+{
+    "entityType": "UniversalDocument",
+    "condition": {
+        "events": [
+            "ActivityCreatedEvent"
+        ]
+    },
+    "sinks": [
+        {
+            "name": "GetUniversalDocument",
+            "fetch": {
+                "configuration": {
+                    "name": "UniversalDocumentDataSource"
+                }
+            }
+        },
+        {
+            "name": "GetContractVersions",
+            "fetch": {
+                "configuration": {
+                    "name": "ContractVersionsDataSource"
+                }
+            }
+        },
+        {
+            "name": "GetContractData",
+            "fetch": {
+                "configuration": {
+                    "name": "GetInquiryContractDataDataSource"
+                }
+            }
+        },
+        {
+            "name": "Notification",
+            "notification": {
+                "notificationName": "ActivityCreatedNotification"
+            }
+        },
+        {
+            "name": "UfoNotification",
+            "notification": {
+                "notificationName": "ActivityCreatedUfoNotification"
+            }
+        }
+    ],
+    "version": "1"
+}

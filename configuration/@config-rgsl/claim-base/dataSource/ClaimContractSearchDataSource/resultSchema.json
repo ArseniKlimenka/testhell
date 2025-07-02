@@ -1,0 +1,177 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "properties": {
+        "number": {
+            "type": "string",
+            "aiTitle": "number"
+        },
+        "stateCode": {
+            "type": "string",
+            "aiTitle": "stateCode"
+        },
+        "stateCodeDescription": {
+            "type": "string",
+            "aiTitle": "stateCodeDescription"
+        },
+        "issueDate": {
+            "type": "string",
+            "aiFormat": "date",
+            "aiTitle": "issueDate"
+        },
+        "startDate": {
+            "type": "string",
+            "aiFormat": "date",
+            "aiTitle": "startDate"
+        },
+        "endDate": {
+            "type": "string",
+            "aiFormat": "date",
+            "aiTitle": "endDate"
+        },
+        "policyHolderName": {
+            "type": "string",
+            "aiTitle": "policyHolderName"
+        },
+        "productCode": {
+            "type": "string",
+            "aiTitle": "productCode"
+        },
+        "productDescription": {
+            "type": "string",
+            "aiTitle": "productDescription"
+        },
+        "productGroup": {
+            "type": "string",
+            "aiTitle": "productGroup"
+        },
+        "productGroupDescription": {
+            "type": "string",
+            "aiTitle": "productGroupDescription"
+        },
+        "contractType": {
+            "type": "string",
+            "aiTitle": "contractType"
+        },
+        "contractTypeDescription": {
+            "type": "string",
+            "aiTitle": "contractTypeDescription"
+        },
+        "paymentFrequency": {
+            "type": "string",
+            "aiTitle": "paymentFrequency"
+        },
+        "amount": {
+            "type": "number",
+            "aiTitle": "amount"
+        },
+        "amountWithAllRisks": {
+            "type": "number",
+            "aiTitle": "amountWithAllRisks"
+        },
+        "initiatorName": {
+            "type": "string",
+            "aiTitle": "initiatorName"
+        },
+        "initiatorOrganisationUnitName": {
+            "type": "string",
+            "aiTitle": "initiatorOrganisationUnitName"
+        },
+        "parties": {
+            "type": "object",
+            "properties": {
+                "holder": {
+                    "type": "object",
+                    "properties": {
+                        "personId": {
+                            "type": "string"
+                        },
+                        "personCode": {
+                            "type": "string"
+                        },
+                        "partyType": {
+                            "type": "string"
+                        },
+                        "fullName": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "insuredPersons": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "id": {
+                                "type": "string"
+                            },
+                            "personCode": {
+                                "type": "string"
+                            },
+                            "fullName": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "items": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "currency": {
+                        "type": "string"
+                    },
+                    "attributes": {
+                        "type": "object",
+                        "properties": {
+                            "risks": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "riskCode": {
+                                            "type": "string"
+                                        },
+                                        "riskShortDescription": {
+                                            "type": "string"
+                                        },
+                                        "riskInsuredSum": {
+                                            "type": "number"
+                                        },
+                                        "riskInsuredSumByPeriod": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "insuredSum": {
+                                                        "type": "number"
+                                                    },
+                                                    "startDate": {
+                                                        "type": "string",
+                                                        "format": "date"
+                                                    },
+                                                    "endDate": {
+                                                        "type": "string",
+                                                        "format": "date"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

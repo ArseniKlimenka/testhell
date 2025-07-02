@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="ru-RU" xml:lang="ru-RU" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+	<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+	<title>Договор</title>
+	<link rel="stylesheet" href="assets/styles/style.css">
+</head>
+
+<body>	
+	<!-- Договор-->
+	<div class="signatureHolder break policy">
+		<div class="container">
+
+			<div class="logoDiv">
+				<img src="../component/POImageConst/printout/assets/img/logoHeader.png" alt="Логотип Росгосстрах Жизнь" class="logo">
+			</div>
+			<div class="qrCodeAndInsurerInfo">
+				<div class="qrDiv">
+					<span class="qr_code">
+						{{QR}}
+					</span>
+				</div>
+				<div class="insurerInfoDiv">
+					<p>
+						<strong>Страховщик: </strong>ООО СК «Росгосстрах Жизнь».<br>
+						Лицензии Банка России: {{insurer.license}}, ИНН {{insurer.INN}}, КПП {{insurer.KPP}}<br>
+						<strong>Юридический адрес: </strong>{{insurer.address}}<br>
+						<strong>Реквизиты банка: </strong>{{bankInfo}}<br>
+						<strong>Телефон круглосуточного Контакт-центра: </strong>8 800 100 12 10 (бесплатный номер для
+						звонков по России).
+					</p>
+				</div>
+			</div>
+
+			<div class="container2">
+				<p id="qrInfoTop" class="qrInfo">Для оплаты считайте данный штрих код</p>
+				<p id="qrInfoMiddle" class="qrInfo">в мобильном приложении интернет-банка</p>
+				<p id="policyheadingTop" class="policyheading">ДОГОВОР СТРАХОВАНИЯ № {{policy.number}} от
+					{{policy.issueDate}} г.</p>
+				<p id="policyheadingMiddle" class="policyheading">по программе «{{policy.product}}»</p>
+				<p id="policyheadingButton" class="policyheading">на основании {{policy.rule}}
+					<br>(далее по тексту – Правила).
+				</p>
+			</div>
+
+			<table class="person">
+				<col class="col1">
+				<col class="col2">
+				<col class="col3">
+				<col class="col4">
+				<col class="col5">
+				<col class="col6">
+				<col class="col7">
+				<tr>
+					<td colspan="7" class="policy_item">I. СТРАХОВАТЕЛЬ (ЗАСТРАХОВАННЫЙ ПО ИНДИВИДУАЛЬНОЙ ПРОГРАММЕ)</td>
+				</tr>
+				<tr>
+					<td class="tgrey">Фамилия Имя Отчество:</td>
+					<td class="twhite" colspan="4">{{holder.fullName}}</td>
+					<td class="tgrey">Пол:</td>
+					<td class="twhite center">{{holder.gender}}</td>
+				</tr>
+				<tr>
+					<td class="tgrey">Дата рождения:</td>
+					<td class="twhite center" colspan="2">{{holder.dateOfBirth}}</td>
+					<td class="tgrey" colspan="2">Место рождения:</td>
+					<td class="twhite center" colspan="2">{{holder.birthPlace}}</td>
+				</tr>
+				<tr>
+					<td class="tgrey">Телефон:</td>
+					<td class="twhite center" colspan="2">{{holder.phoneNumber}}</td>
+					<td class="tgrey" colspan="2">Гражданство:</td>
+					<td class="twhite center" colspan="2">{{holder.citizenship}}</td>
+				</tr>
+				<tr>
+					<td class="tgrey">E-mail:</td>
+					<td class="twhite" colspan="6">{{holder.email}}</td>
+				</tr>
+				<tr>
+					<td class="tgrey">Документ, удостоверяющий личность:</td>
+					<td class="twhite" colspan="4">{{holder.document.typeAndSN}}</td>
+					<td class="tgrey">Дата выдачи:</td>
+					<td class="twhite center">{{holder.document.dateOfIssue}}</td>
+				</tr>
+				{{#unless holder.isNotIssuedBy}}
+				<tr>
+					<td class="tgrey">Кем выдан:</td>
+					<td class="twhite" colspan="6">{{holder.document.issuedBy}}</td>
+				</tr>
+				{{/unless}}
+				<tr>
+					<td class="tgrey">Адрес постоянной регистрации:</td>
+					<td class="twhite" colspan="6">{{holder.registrationAddress}}</td>
+				</tr>
+				<tr>
+					<td class="tgrey">Почтовый адрес:</td>
+					<td class="twhite" colspan="6">{{holder.postAddress}}</td>
+				</tr>
+			</table>
+
+			<table>
+				<tr>
+					<td class="policy_item">II. ЗАСТРАХОВАННЫЙ ПО СЕМЕЙНОЙ ПРОГРАММЕ</td>
+				</tr>
+			</table>
+
+			<p class="afterTable">
+				Застрахованными по «Семейной программе» являются:
+
+				<br> - Страхователь и супруг/супруга<span class="footnote">Родство / состояние в браке со Страхователем
+					определяется на дату наступления страхового случая.</span> Страхователя в возрасте от 18 до 70
+				полных лет (включительно) на дату наступления страхового случая,
+
+				<br> - дети<sup>1</sup> Страхователя в возрасте от 1 года до 18 полных лет
+				(включительно) на дату наступления страхового случая, которые на дату заключения настоящего договора
+				страхования (или на дату государственной регистрации акта гражданского состояния<span class="footnote">Для
+					супруга (супруги) Страхователя – запись акта о заключении брака, в которой одним из супругов
+					является Страхователь; для ребенка Страхователя – запись акта о рождении/усыновлении
+					(удочерении) ребенка, в которой родителем/усыновителем (одним из родителей/усыновителей) указан
+					Страхователь.</span> , если она позднее
+				даты заключения договора страхования) соответствуют следующим критериям:
+
+				<br>&nbsp&nbsp1) не являются и не являлись ранее инвалидами / не имеют и не имели ранее присвоенной
+				категории «ребенок-инвалид»;
+
+				<br>&nbsp&nbsp2) не подавали документы на освидетельствование для получения группы инвалидности /
+				присвоения категории «ребенок-инвалид» и не имеют оснований для присвоения группы
+				инвалидности / категории «ребенок-инвалид»;
+
+				<br>&nbsp&nbsp3) не употребляют и не употребляли ранее наркотики, токсичные вещества, не страдают
+				алкоголизмом, не состоят и не состояли ранее на учете в наркологическом диспансере,
+				психоневрологическом, туберкулезном диспансере, центрах профилактики борьбы со СПИДом;
+
+				<br>&nbsp&nbsp4) не имели, не обращались за медицинской помощью по нижеперечисленным заболеваниям и не
+				страдают ими на дату заключения договора страхования:
+
+				<br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp - злокачественные опухоли, включая предраковые;
+
+				<br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp - нервные или психические расстройства или заболевания (например: эпилепсия,
+				паралич, болезнь Паркинсона, наркомания, токсикомания, алкоголизм);
+
+				<br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp - заболевания опорно-двигательного аппарата (например: артрит, артроз, анкилоз,
+				деформация суставов или конечностей, заболевания позвоночника);
+
+				<br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp - заболевания нервной системы, включая центральную нервную систему (мозг, спинной
+
+				<br>&nbsp&nbsp5) не проходят службу в вооруженных силах, не заняты в профессиональной или
+				непрофессиональной авиации, в работах со взрывчатыми и радиоактивными веществами,
+				ионизирующей радиацией (включая ультрафиолетовое излучение, микроволновое излучение),
+				подземных работах, не контактируют с канцерогенными или токсическими веществами или газами,
+				электрическими сетями высокого напряжения, не являются водолазом, пожарным, скалолазом,
+				работником ядерной промышленности, нефтяником (за исключением офисных сотрудников),
+				охранником и профессиональным спортсменом, не работают с оружием;
+
+				<br>&nbsp&nbsp6) не намереваются путешествовать на территории, на которой объявлено чрезвычайное положение
+				или проводятся боевые действия;
+
+				<br>&nbsp&nbsp7) не находятся под следствием и не являются осужденными к лишению свободы.
+
+			</p>
+
+			<table class="risks">
+				<col class="col1">
+				<col class="col2">
+				<col class="col3">
+				<col class="col4">
+				<col class="col5">
+				<col class="col6">
+				<tr>
+					<td class="policy_item" colspan="6">III. СТРАХОВЫЕ РИСКИ, СТРАХОВЫЕ СУММЫ, СТРАХОВАЯ ВЫПЛАТА, СРОК СТРАХОВАНИЯ
+						ПО РИСКУ</td>
+				</tr>
+				<tr>
+					<td class="tgrey center" rowspan="2">Страховые риски</td>
+					<td class="tgrey center" rowspan="2">Страховая сумма, {{currency}}</td>
+					<td class="tgrey center" rowspan="2">Размер {{frequency.risk}} страхового взноса, {{currency}}</td>
+					<td class="tgrey center" rowspan="2">Страховая выплата</td>
+					<td class="tgrey center" colspan="2">Срок страхования по риску</td>
+				</tr>
+				<tr>
+					<td class="tgrey fifthCollum center">с</td>
+					<td class="tgrey sixthcollum center">по</td>
+				</tr>
+				<tr>
+					<td class="twhite" colspan="6">Индивидуальная программа</td>
+				</tr>
+				{{#each riskFirstPart}}
+				<tr>
+					<td class="twhite">{{this.insuranceRisks}}</td>
+					<td class="twhite center">{{this.sumInsured}}</td>
+					<td class="twhite center">{{this.insurancePremium}}</td>
+					<td class="twhite center">{{this.insurancePayment}}</td>
+					<td class="twhite center">{{this.startDate}}</td>
+					<td class="twhite center">{{this.endDate}}</td>
+				</tr>
+				{{/each}}
+				<tr>
+					<td class="twhite" colspan="6">Семейная программа</td>
+				</tr>
+				{{#each riskSecondPart}}
+				<tr>
+					<td class="twhite">{{this.insuranceRisks}}</td>
+					<td class="twhite center">{{this.sumInsured}}</td>
+					<td class="twhite center">{{this.insurancePremium}}</td>
+					<td class="twhite center">{{this.insurancePayment}}</td>
+					<td class="twhite center">{{this.startDate}}</td>
+					<td class="twhite center">{{this.endDate}}</td>
+				</tr>
+				{{/each}}
+			</table>
+
+			<p class="afterTable">
+				При определении страховой суммы в договоре страхования в иностранной валюте страховая выплата
+				производится в рублях по курсу Банка России на дату выплаты. Банковские расходы, связанные с
+				осуществлением страховой выплаты, оплачиваются получателем платежа.
+			</p>
+
+			<table class="premium">
+				<col class="col1">
+				<col class="col2">
+				<tr>
+					<td colspan="2" class="policy_item">IV. СТРАХОВАЯ ПРЕМИЯ, ПОРЯДОК УПЛАТЫ СТРАХОВОЙ ПРЕМИИ</td>
+				</tr>
+				<tr>
+					<td colspan="2">Страховая премия уплачивается в виде страховых взносов в течение срока действия
+						договора страхования.</td>
+				</tr>
+				<tr>
+					<td class="tgrey">Периодичность оплаты страховой премии:</td>
+					<td class="twhite">{{frequency.premium}}</td>
+				</tr>
+				<tr>
+					<td class="textJustify" colspan="2">Размеры страховых взносов и даты их оплаты указаны в Графике
+						уплаты страховых взносов
+						(приложение к договору страхования).</td>
+				</tr>
+			</table>
+
+			<p class="afterTable">
+				В случае если первый страховой взнос не был оплачен (или был оплачен не полностью) в указанный срок,
+				{{#if insuranceTerms.paymentPeriodLastDate}} либо в случае оплаты первого страхового взноса позднее {{insuranceTerms.paymentPeriodLastDate}}, {{/if}}
+				Страховщик вправе считать договор страхования не вступившим в силу и произвести возврат поступивших
+				средств Страхователю.
+				<br>Датой оплаты страхового взноса считается дата списания всей суммы страхового взноса со счета
+				Страхователя (или иного уполномоченного им лица) в счет оплаты договора страхования в случае безналичных
+				расчетов либо дата платежного документа в случае наличных расчетов в соответствии с законодательством
+				Российской Федерации.
+				<br>При определении страховой премии в договоре страхования в иностранной валюте сумма, подлежащая
+				уплате в рублях, определяется по курсу Банка России соответствующей валюты на дату оплаты. Банковские
+				расходы, связанные с оплатой страховой премии, несет Страхователь.
+			</p>
+
+			<table class="insuranceTerms">
+				<col class="col1">
+				<col class="col2">
+				<col class="col3">
+				<tr>
+					<td colspan="3" class="policy_item">V. СРОК ДЕЙСТВИЯ ДОГОВОРА СТРАХОВАНИЯ</td>
+				</tr>
+				<tr>
+					<td class="tgrey">Срок действия договора страхования:</td>
+					<td class="twhite center">{{insuranceTerms.text}}</td>
+					<td class="twhite">Договор страхования вступает в силу с {{insuranceTerms.startDate}} при условии
+						уплаты первого страхового взноса в полном объеме и действует до {{insuranceTerms.endDate}}
+						включительно.</td>
+				</tr>
+			</table>
+
+			<table class="declarationMedical">
+				<col class="col1">
+				<col class="col2">
+				<col class="col3">
+				<tr>
+					<td colspan="3" class="policy_item">VI. ДЕКЛАРАЦИЯ О СОСТОЯНИИ ЗДОРОВЬЯ И ФАКТОРАХ РИСКА
+						ЗАСТРАХОВАННОГО ПО ИНДИВИДУАЛЬНОЙ ПРОГРАММЕ</td>
+				</tr>
+				<tr>
+					<td class="twhite">Настоящим я, {{insured.fullName}},</td>
+					<td class="twhite"><input type="checkbox" checked> подтверждаю, что:</td>
+					<td class="twhite"><input type="checkbox"> не подтверждаю, что:</td>
+				</tr>
+			</table>
+
+			<ul class="declaration">
+				{{#each declarationMedical}}
+				<li>
+					<p>{{this}}</p>
+				</li>
+				{{/each}}
+			</ul>			
+
+			<table class="declarationMain">
+				<tr>
+					<td class="policy_item" colspan="3">VII. ДЕКЛАРАЦИЯ СТРАХОВАТЕЛЯ (ЗАСТРАХОВАННОГО ПО ИНДИВИДУАЛЬНОЙ ПРОГРАММЕ)
+					</td>
+				</tr>
+				<tr>
+					<td class="twhite">Настоящим Страхователь</td>
+					<td class="twhite"><input type="checkbox" checked> подтверждает, что:</td>
+					<td class="twhite"><input type="checkbox"> не подтверждает, что:</td>
+				</tr>
+			</table>
+
+			<ul class="declaration">
+				{{#each declarationMain}}
+				<li>
+					<p>{{this}}</p>
+				</li>
+				{{/each}}
+			</ul>
+
+			<table class="declarationMain">
+				<tr>
+					<td class="policy_item">VIII. ИНЫЕ УСЛОВИЯ</td>
+				</tr>
+			</table>
+
+			<ol class="otherCondition">
+				<li>
+					Стороны приняли решение, что на основании п. 5.2 Правил Страховщик в первые 2 полисных года не 
+					освобождается от обязанности произвести страховую выплату по страховому риску «Смерть Застрахованного 
+					по любой причине», если страховой случай по этому риску наступил в следствие действий, обозначенных 
+					в п. 5.1.3 Правил.
+				</li>	
+				<li>
+					В случае отказа Страхователя (физического лица) от договора страхования в период, предусмотренный
+					договором страхования и действующим законодательством, когда Страхователь имеет право на возврат
+					уплаченной страховой премии (уплаченных страховых взносов), Страховщик осуществляет возврат
+					уплаченной Страхователем суммы в рублях независимо от курса валюты, в которой выражены обязательства
+					по договору страхования. Если страховая премия была уплачена в иной валюте, возврату подлежит сумма
+					денежных средств в валюте, в которой она была уплачена.
+				</li>
+				<li>
+					Если после заключения договора страхования будет выявлено, что Страхователь (Застрахованный) сообщил
+					в настоящем договоре страхования или иных документах, заполняемых при заключении договора
+					страхования, заведомо ложные сведения или предоставил подложные документы, и если эти сведения или
+					документы привели к заключению договора страхования на условиях отличных от тех, на которых он был
+					бы заключен, то Страховщик имеет право отказать в страховой выплате.
+				</li>
+				<li>
+					Стороны пришли к соглашению о том, что факсимильное воспроизведение подписей уполномоченных лиц
+					Страховщика и факсимильный оттиск печати Страховщика признаются сторонами аналогом собственноручной
+					подписи уполномоченных лиц Страховщика и оригинала печати Страховщика.
+				</li>
+				<li>
+					В случае заключения договора страхования в электронном виде в соответствии с Соглашением об
+					электронном документообороте, к которому присоединяется Страхователь, договор страхования, 
+					а также ссылка на Правила на официальном сайте, направляются
+					Страхователю в электронном виде на адрес электронной почты, указанный в настоящем договоре
+					страхования, подписанные со стороны Страховщика усиленной квалифицированной электронной подписью.
+					Согласие Страхователя с условиями договора страхования подтверждается простой электронной подписью
+					Страхователя в соответствии с Соглашением.
+				</li>
+				<li>
+					Неотъемлемой частью настоящего договора страхования являются: 
+					График уплаты страховых взносов, Правила, заявления, составленные и заполненные по просьбе
+					Страховщика Страхователем и лицом, заявляемым на страхование. 
+				</li>
+				{{#if otherCondition.isOtherCondition}}
+				<li>
+					{{otherCondition.policySpecialConditions}}
+				</li>
+				{{/if}}
+			</ol>
+
+			<table class="declarationMain">
+				<tr>
+					<td class="policy_item">IX. ТАБЛИЦА ВЫКУПНЫХ СУММ</td>
+				</tr>
+			</table>
+
+			<p class="afterTable">
+				При расторжении договора страхования выкупная сумма на дату досрочного прекращения договора
+				страхования рассчитывается как выкупная сумма на конец полисного года (полисного периода),
+				соответствующего дате досрочного прекращения договора страхования, за вычетом суммы страховых
+				взносов, которые Страхователь должен был бы уплатить Страховщику в течение оставшейся части
+				полисного года (полисного периода), в котором имеет место досрочное прекращение договора
+				страхования.
+			</p>
+
+
+			<table class="surrenderValues">
+				<col class="col1">
+				<col class="col2">
+				<col class="col3">
+				<col class="col4">
+				<tr>
+					<td class="tgrey center" colspan="3">Полисный год</td>
+					<td class="tgrey center" rowspan="2">Выкупная сумма на конец текущего полисного года, {{currency}}
+					</td>
+				</tr>
+				<tr>
+					<td class="tgrey center">№ п/п</td>
+					<td class="tgrey center">начало</td>
+					<td class="tgrey center">окончание</td>
+				</tr>
+				{{#each surrenderValues}}
+				<tr>
+					<td class="twhite center">{{this.index}}</td>
+					<td class="twhite center">{{this.periodStartDate}}</td>
+					<td class="twhite center">{{this.periodEndDate}}</td>
+					<td class="twhite center">{{this.surrenderValue}}</td>
+				</tr>
+				{{/each}}
+			</table>
+
+			<p class="afterTable">
+				При определении выкупной суммы в договоре страхования в иностранной валюте выплата выкупной суммы
+				переводится в рублях по курсу Банка России на дату выплаты. Банковские расходы, связанные с
+				осуществлением выплаты выкупной суммы, оплачиваются получателем платежа.
+				<br>В случае наличия у Страхователя задолженности по уплате страховых взносов перед Страховщиком, сумма
+				задолженности вычитается из выкупной суммы.
+			</p>
+			
+			<table class="person">
+				<col class="col1">
+				<col class="col2">
+				<col class="col3">
+				<col class="col4">
+				<col class="col5">
+				<col class="col6">
+				<col class="col7">
+				<tr>
+					<td class="policy_item" colspan="7">X. ВЫГОДОПРИОБРЕТАТЕЛИ НА СЛУЧАЙ СМЕРТИ ЗАСТРАХОВАННОГО ПО ИНДИВИДУАЛЬНОЙ ПРОГРАММЕ
+					</td>
+				</tr>
+				{{#if isBeneficiaries}}
+				{{#each beneficiaries}}
+				<tr>
+					<td class="tgrey" colspan="7">Выгодоприобретатель {{this.index}}. Доля {{this.percentage}}%</td>
+				</tr>
+				<tr>
+					<td class="tgrey">Фамилия Имя Отчество, Дата рождения:</td>
+					<td class="twhite" colspan="4">{{this.beneficiar.fullName}}, {{this.beneficiar.dateOfBirth}}</td>
+					<td class="tgrey">Пол:</td>
+					<td class="twhite  center">{{this.beneficiar.gender}}</td>
+				</tr>
+				{{#if this.dateOfBirthPlaceOfBirth}}
+				<tr>
+					<td class="tgrey">Дата рождения:</td>
+					<td class="twhite center">{{this.beneficiar.dateOfBirth}}</td>
+					<td class="tgrey" colspan="2">Место рождения:</td>
+					<td class="twhite" colspan="3">{{this.beneficiar.placeOfBirth}}</td>
+				</tr>
+				{{/if}}
+				{{#if this.phoneEmailCitizenship}}
+				<tr>
+					<td class="tgrey">Телефон:</td>
+					<td class="twhite center">{{this.beneficiar.phoneNumber}}</td>
+					<td class="tgrey">E-mail:</td>
+					<td class="twhite center" colspan="2">{{this.beneficiar.email}}</td>
+					<td class="tgrey">Гражданство:</td>
+					<td class="twhite center">{{this.beneficiar.citizenship}}</td>
+				</tr>
+				{{/if}}
+				{{#if this.isDocument}}
+				<tr>
+					<td class="tgrey">Документ, удостоверяющий личность:</td>
+					<td class="twhite" colspan="4">{{this.beneficiar.document.typeAndSN}}</td>
+					<td class="tgrey">Дата выдачи:</td>
+					<td class="twhite center">{{this.beneficiar.document.dateOfIssue}}</td>
+				</tr>
+				{{#unless this.beneficiar.isNotIssuedBy}}
+				<tr>
+					<td class="tgrey">Кем выдан:</td>
+					<td class="twhite" colspan="6">{{this.beneficiar.document.document.issuedBy}}</td>
+				</tr>
+				{{/unless}}
+				{{/if}}
+				{{#if this.isRegistrationAddress}}
+				<tr>
+					<td class="tgrey">Адрес постоянной регистрации:</td>
+					<td class="twhite" colspan="6">{{this.beneficiar.registrationAddress}}</td>
+				</tr>
+				{{/if}}
+				{{#if this.isPostAddress}}
+				<tr>
+					<td class="tgrey">Почтовый адрес:</td>
+					<td class="twhite" colspan="6">{{this.beneficiar.postAddress}}</td>
+				</tr>
+				{{/if}}
+				{{/each}}
+				{{#if shareSumIsNot1}}
+				<tr>
+					<td class="twhite" colspan="7">В случае если общая доля менее 100%, Выгодоприобретателями на случай
+						смерти
+						Застрахованного по оставшейся доле являются наследники Застрахованного по закону.
+					</td>
+				</tr>
+				{{/if}}
+				{{else}}
+				<tr>
+					<td class="twhite" colspan="7">Наследники по закону
+					</td>
+				</tr>
+				{{/if}}
+			</table>
+
+		</div>
+	</div>
+	<!-- График платежей-->
+	<div class="signatureHolder break">
+
+		<p style="text-align:right; font-family: Arial, sans-serif;
+		font-size: 8pt;">Приложение к договору страхования № {{policy.number}} от {{policy.issueDate}} г.
+		</p>
+		<p style="text-align:right; font-family: Arial, sans-serif;
+		font-size: 8pt;">по программе «{{policy.product}}»</p>
+
+		<div class="paymentPlan">
+			<div class="paymentPlanLabel">
+				График уплаты страховых взносов
+			</div>
+			<table class="premium">
+				<col class="col1">
+				<col class="col2">
+				<tr>
+					<td class="center"><strong>Дата оплаты</strong></td>
+					<td class="center"><strong>Размер платежа (страхового взноса), {{currency}}</strong></td>
+				</tr>
+				{{#each paymentPlan}}
+				<tr>
+					<td class="center">{{this.dateOfPayment}}</td>
+					<td class="center">{{this.insurancePremium}}</td>
+				</tr>
+				{{/each}}
+			</table>
+		</div>
+	</div>
+</body>
+
+</html>

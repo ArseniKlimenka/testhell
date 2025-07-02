@@ -1,0 +1,31 @@
+{
+    "entityType": "Contract",
+    "condition": {
+        "events": [
+            "StatusChanged"
+        ],
+        "configuration": {
+            "names": [
+                "CollectiveLifeInsurancePolicy"
+            ],
+            "dimensions": {}
+        },
+        "documentStates": [
+            "Active"
+        ]
+    },
+    "executionOrderWeight": 100,
+    "sinks": [
+        {
+            "name": "CollectiveLifeInsuranceCreateNaturalPersonEtlServiceSink",
+            "etlService": {
+                "configuration": {
+                    "name": "CollectiveLifeInsuranceCreateNaturalPersonEtlService",
+                    "version": "1"
+                }
+            }
+        }
+    ],
+    "errorSinks": [],
+    "version": "1"
+}

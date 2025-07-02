@@ -1,0 +1,290 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "object",
+    "additionalProperties": true,
+    "aiValidation": {
+        "rule": "validatePaymentAmendmentConditions"
+    },
+    "aiDataEnrichment": [
+        {
+            "name": "GetCancellationRecipientsBankAccounts",
+            "dataSource": "GetPartiesByCriteriaDataSource"
+        },
+        {
+            "name": "SetDefaultRecipientsBankAccounts",
+            "dataSource": "GetPartiesByCriteriaDataSource"
+        },
+        {
+            "name": "SetPolicyParties",
+            "integrationService": {
+                "name": "GetPolicyPartiesDataForCancellation",
+                "version": "1"
+            }
+        },
+        {
+            "name": "GetPolicyDates",
+            "dataSource": "GeneralContractSearchDataSource"
+        },
+        {
+            "name": "GetKPKValidationStatus",
+            "dataSource": "KPKValidationDataSource"
+        },
+        {
+            "name": "SetCancellationtAmounts",
+            "dataSource": "CancellationCalcDataSource"
+        }
+    ],
+    "properties": {
+        "paymentLinesManualCorrection": {
+            "type": "boolean",
+            "aiTitle": "paymentLinesManualCorrection"
+        },
+        "paymentLines": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                    "paymentLineType"
+                ],
+                "properties": {
+                    "paymentLineType": {
+                        "type": "string",
+                        "enum": [
+                            "surrenderValue",
+                            "investProfit",
+                            "PIT",
+                            "paymentRefund",
+                            "creditRefund",
+                            "debt",
+                            "obligations",
+                            "PITRefund",
+                            "partialPremiumRefund"
+                        ],
+                        "aiTitle": "paymentLineType"
+                    },
+                    "paymentLineSum": {
+                        "type": "number",
+                        "minimum": 0,
+                        "aiTitle": "paymentLineSum"
+                    },
+                    "paymentLineSumInRub": {
+                        "type": "number",
+                        "minimum": 0,
+                        "aiTitle": "paymentLineSumInRub"
+                    },
+                    "allocationsIdsToCancel": {
+                        "type": "array",
+                        "items": {
+                            "type": "integer"
+                        }
+                    },
+                    "paymentLineSumByRisks": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "additionalProperties": false,
+                            "properties": {
+                                "riskCode": {
+                                    "type": "string"
+                                },
+                                "riskSum": {
+                                    "type": "number"
+                                }
+                            }
+                        }
+                    },
+                    "weight": {
+                        "type": "integer"
+                    }
+                }
+            }
+        },
+        "shouldUseNetting": {
+            "type": "boolean"
+        },
+        "canellationRecipients": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                    "partyId": {
+                        "type": "string"
+                    },
+                    "partyCode": {
+                        "type": "string",
+                        "aiTitle": "partyCode"
+                    },
+                    "partyType": {
+                        "type": "string"
+                    },
+                    "fullName": {
+                        "type": "string",
+                        "aiTitle": "recipientName"
+                    },
+                    "recipientReason": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "properties": {
+                            "code": {
+                                "type": "string"
+                            },
+                            "description": {
+                                "type": "string"
+                            }
+                        },
+                        "aiTitle": "recipientReason"
+                    },
+                    "recipientPaymentType": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "properties": {
+                            "code": {
+                                "type": "string"
+                            },
+                            "description": {
+                                "type": "string"
+                            }
+                        },
+                        "aiTitle": "recipientPaymentType"
+                    },
+                    "amountToPayPercetage": {
+                        "type": "number",
+                        "minimum": 0,
+                        "maximum": 1
+                    },
+                    "calculateFromAmount": {
+                        "type": "boolean"
+                    },
+                    "amountToPay": {
+                        "type": "number",
+                        "minimum": 0,
+                        "aiTitle": "amountToPay"
+                    },
+                    "amountToPayInRubCurrency": {
+                        "type": "number",
+                        "minimum": 0,
+                        "aiTitle": "amountToPayRub"
+                    },
+                    "pitAmount": {
+                        "type": "number",
+                        "minimum": 0,
+                        "aiTitle": "pitAmount"
+                    },
+                    "pitAmountInRubCurrency": {
+                        "type": "number",
+                        "minimum": 0,
+                        "aiTitle": "pitAmountInRubCurrency"
+                    },
+                    "isManualPit": {
+                        "type": "boolean"
+                    },
+                    "isPaid": {
+                        "type": "boolean"
+                    },
+                    "assignedPaymentOrderNumber": {
+                        "type": "string"
+                    },
+                    "assignedPitPaymentOrderNumber": {
+                        "type": "string"
+                    },
+                    "bankAccount": {
+                        "type": "object",
+                        "properties": {
+                            "bankId": {
+                                "type": "string",
+                                "aiTitle": "bankId"
+                            },
+                            "bankName": {
+                                "type": "string",
+                                "aiTitle": "bankName"
+                            },
+                            "bankBic": {
+                                "type": "string",
+                                "aiTitle": "bankBic"
+                            },
+                            "bankCorrespondentAccount": {
+                                "type": "string",
+                                "aiTitle": "bankCorrespondentAccount"
+                            },
+                            "SWIFT": {
+                                "type": "string",
+                                "aiTitle": "SWIFT"
+                            },
+                            "IBAN": {
+                                "type": "string",
+                                "aiTitle": "IBAN"
+                            },
+                            "foreignBank": {
+                                "type": "boolean",
+                                "aiTitle": "foreignBank"
+                            },
+                            "currency": {
+                                "type": "object",
+                                "additionalProperties": false,
+                                "aiTitle": "currency",
+                                "properties": {
+                                    "currencyCode": {
+                                        "type": "string",
+                                        "aiTitle": "currencyCode"
+                                    },
+                                    "currencyDesc": {
+                                        "type": "string",
+                                        "aiTitle": "currencyDesc"
+                                    },
+                                    "currencyNumericCode": {
+                                        "type": "string",
+                                        "aiTitle": "currencyNumericCode"
+                                    }
+                                }
+                            },
+                            "number": {
+                                "type": "string",
+                                "aiTitle": "number"
+                            },
+                            "openingDate": {
+                                "type": "string",
+                                "aiFormat": "date",
+                                "aiTitle": "openingDate",
+                                "aiMeaning": "past"
+                            },
+                            "closingDate": {
+                                "type": "string",
+                                "aiFormat": "date",
+                                "aiTitle": "closingDate",
+                                "aiMeaning": "future"
+                            },
+                            "bankInn": {
+                                "type": "string",
+                                "aiTitle": "bankInn"
+                            }
+                        }
+                    }
+                },
+                "required": [
+                    "partyId",
+                    "partyCode",
+                    "fullName",
+                    "recipientReason",
+                    "recipientPaymentType"
+                ]
+            }
+        },
+        "exchangeRate": {
+            "type": "number"
+        },
+        "fixedExchangeRate": {
+            "type": "number"
+        },
+        "fixedExchangeRateOriginalValue": {
+            "type": "number"
+        },
+        "useFixedExchangeRate": {
+            "type": "boolean"
+        },
+        "editFixedExchangeRate": {
+            "type": "boolean"
+        }
+    }
+}

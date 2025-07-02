@@ -1,0 +1,4 @@
+delete from bfx_impl.products where code = N'E792DATAB'; insert into bfx_impl.products values ('AA773A8B-8D42-477B-93D8-61BB9490127F', N'E792DATAB',N'endowment',N'Стратегия на пять Гарант 5RUB',N'НСЖ', 'migrated', null);
+delete from bfx_impl.products where code = N'I795VTBP'; insert into bfx_impl.products values ('2B597F0A-A7A8-4F48-A9C1-4BC0B59A6863', N'I795VTBP',N'investment',N'Драйвер Гарантия БондРепак 3RUB',N'НСЖ', 'migrated', null);
+delete from bfx_impl.products where code = N'I848VTBP'; insert into bfx_impl.products values ('BC94529B-A188-4FB3-92B7-F938ED9218E2', N'I848VTBP',N'investment',N'Ключевой выбор Ультра 5RUB',N'ИСЖ', 'migrated', null);
+delete from bfx_impl.products where code = N'I867InnResheniya'; insert into bfx_impl.products values ('B6B8AEA5-0100-4C90-BFDE-A0B6CB51F21E', N'I867InnResheniya',N'investment',N'Драйвер Гарантия БондРепак 13RUB',N'НСЖ', 'migrated', null);

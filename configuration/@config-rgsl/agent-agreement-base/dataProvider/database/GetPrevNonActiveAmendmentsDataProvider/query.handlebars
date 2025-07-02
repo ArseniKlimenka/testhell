@@ -1,0 +1,5 @@
+select sub.AGENT_AGREEMENT_NUMBER from pas.AGENT_AGREEMENT main
+join PAS.AGENT_AGREEMENT sub on main.AGENT_AGREEMENT_ID = sub.ORIGINAL_DOCUMENT_ID
+where main.AGENT_AGREEMENT_NUMBER = @originalAaNumber
+and sub.AGENT_AGREEMENT_NUMBER not in (@originalAaNumber, @currentAmendmentNumber)
+and sub.VERSION_STATE is null

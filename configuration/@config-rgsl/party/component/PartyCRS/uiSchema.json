@@ -1,0 +1,32 @@
+{
+    "type": "Section",
+    "label": "Party CRS Data",
+    "collapsing": {
+        "initial": false,
+        "enabled": true
+    },
+    "width": 12,
+    "elements": [
+        {
+            "type": "Input",
+            "label": "statusCheckDate",
+            "control": "DatetimePicker",
+            "value": {
+                "$ref": "#/properties/statusCheckDate"
+            },
+            "width": 4
+        }
+    ],
+    "rule": {
+        "effect": "SHOW",
+        "condition": {
+            "type": "FUNC",
+            "ruleFunction": "showCRS",
+            "value": [
+                {
+                    "$ref": "#"
+                }
+            ]
+        }
+    }
+}

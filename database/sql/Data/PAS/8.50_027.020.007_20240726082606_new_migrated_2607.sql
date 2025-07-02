@@ -1,0 +1,5 @@
+delete from bfx_impl.products where code = N'I619VTBP'; insert into bfx_impl.products values ('FBEE8BDA-CA00-42F0-9134-5CCED531D627', N'I619VTBP',N'investment',N'Драйвер БондРепак 1 RUB',N'НСЖ',N'migrated', NULL);
+delete from bfx_impl.products where code = N'I665PFAConsulting'; insert into bfx_impl.products values ('C1AE0E9D-F85D-44C6-98D0-AA55301DB7E2', N'I665PFAConsulting',N'investment',N'Драйвер Гарантия БондРепак 5RUB',N'НСЖ',N'migrated', NULL);
+delete from bfx_impl.products where code = N'E792RGSL'; insert into bfx_impl.products values ('896C98E8-1B00-4B45-B9F1-579714DF8809', N'E792RGSL',N'endowment',N'Стратегия на пять Гарант 5RUB',N'НСЖ',N'migrated', NULL);
+delete from bfx_impl.products where code = N'I795OAS'; insert into bfx_impl.products values ('2800CBDF-9D70-4A0A-9D39-A7A61DF9A024', N'I795OAS',N'investment',N'Драйвер Гарантия БондРепак 3RUB',N'НСЖ',N'migrated', NULL);
+delete from bfx_impl.products where code = N'I838VTBP'; insert into bfx_impl.products values ('C01DCF00-80D8-40EC-95E4-26605C0272CF', N'I838VTBP',N'investment',N'Драйвер Гарантия Ультра БондРепак 1RUB',N'НСЖ',N'migrated', NULL);

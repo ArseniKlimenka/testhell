@@ -1,0 +1,45 @@
+{
+    "type": "Section",
+    "label": "Promotions",
+    "isCollapsed": false,
+    "readOnly": true,
+    "width": 12,
+    "elements": [
+        {
+            "type": "Input",
+            "label": "hasPromotion",
+            "value": {
+                "$ref": "#/properties/hasPromotion"
+            },
+            "width": 4
+        },
+        {
+            "type": "Input",
+            "label": "promotionDescription",
+            "value": {
+                "$ref": "#/properties/promotionDescription"
+            },
+            "width": 4
+        },
+        {
+            "type": "Input",
+            "label": "comment",
+            "value": {
+                "$ref": "#/properties/comment"
+            },
+            "width": 4
+        }
+    ],
+    "rule": {
+        "effect": "SHOW",
+        "condition": {
+            "type": "FUNC",
+            "ruleFunction": "isBackOfficeUser",
+            "value": [
+                {
+                    "$ref": "#"
+                }
+            ]
+        }
+    }
+}

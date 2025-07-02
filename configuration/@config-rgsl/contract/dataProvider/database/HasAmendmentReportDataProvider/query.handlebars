@@ -1,0 +1,28 @@
+﻿select
+  plh.CONTRACT_NUMBER,
+  pls.ISSUE_DATE,
+  aps.HAS_AMENDMENT,
+  aps.HAS_AMENDMENT_DATE
+from
+  PAS_IMPL.POLICY_HUB plh,
+  PAS_IMPL.POLICY_SAT_LATEST pls,
+  BFX_IMPL.ADDITIONAL_PARAMETERS_POLICY_LINK app,
+  BFX_IMPL.ADDITIONAL_PARAMETERS_SAT_LATEST aps
+where plh.POLICY_HKEY = pls.POLICY_HKEY
+  and plh.POLICY_HKEY = app.POLICY_HKEY
+  and app.ADDITIONAL_PARAMETERS_HKEY = aps.ADDITIONAL_PARAMETERS_HKEY
+  {{#if parameters.contractNumber}}
+  and plh.CONTRACT_NUMBER = @contractNumber
+  {{/if}}
+  {{#if parameters.issueDateFrom}}
+  and pls.ISSUE_DATE >= @issueDateFrom
+  {{/if}}
+  {{#if parameters.issueDateTo}}
+  and pls.ISSUE_DATE <= @issueDateTo
+  {{/if}}
+  {{#if parameters.productCode}}
+  and pls.PRODUCT_CODE = @productCode
+  {{/if}}
+  {{#if parameters.partnerCode}}
+  and pls.PARTNER_CODE = @partnerCode
+  {{/if}}

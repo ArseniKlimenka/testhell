@@ -1,0 +1,59 @@
+{
+    "input": {
+        "criteria": {
+            "freeText": "someText",
+            "code": "1234",
+            "name": "someName",
+            "skipSystemCalendars": true,
+            "skipUserCalendars": true,
+            "isActive": true,
+            "isDefault": false
+        },
+        "sort": [
+            {
+                "fieldName": "",
+                "descending": true
+            }
+        ]
+    },
+    "expectedResult": {
+        "query": {
+            "bool": {
+                "must": [
+                    {
+                        "prefix": "someText"
+                    },
+                    {
+                        "match": {
+                            "code": "1234"
+                        }
+                    },
+                    {
+                        "prefix": {
+                            "body.name": "someName"
+                        }
+                    },
+                    {
+                        "exists": {
+                            "field": "body.applicationUserId"
+                        }
+                    },
+                    {
+                        "match": {
+                            "body.isActive": true
+                        }
+                    }
+                ],
+                "mustNot": [
+                    {
+                        "exists": {
+                            "field": "body.applicationUserId"
+                        }
+                    }
+                ],
+                "should": []
+            }
+        },
+        "sort": []
+    }
+}

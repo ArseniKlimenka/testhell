@@ -1,0 +1,113 @@
+{
+    "type": "GridLayout",
+    "numberOfColumns": 12,
+    "elements": [
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "Input",
+                    "label": "strategyName",
+                    "value": {
+                        "$ref": "#/properties/strategy"
+                    },
+                    "control": "Dropdown",
+                    "autocomplete": {
+                        "minTextLength": 0,
+                        "dropItemsCount": 1000,
+                        "selectItemOnMatch": false,
+                        "matchCaseInsensitive": false
+                    },
+                    "source": {
+                        "dataSource": {
+                            "name": "EquityStrategyDataSource",
+                            "reloadOnOpen": true,
+                            "searchFieldPath": "strategyName",
+                            "requestMapping": "equityStrategyRequestMapping",
+                            "responseMapping": "equityStrategyResponseMapping",
+                            "resultCount": 1000
+                        },
+                        "displayValueTemplate": "{{expr strategyName}} ({{expr isin}})"
+                    },
+                    "width": 6,
+                    "filter": "strategyFilter",
+                    "onValueChanged": [
+                        {
+                            "commandType": "executeAction",
+                            "actionName": "onChangeStrategy"
+                        }
+                    ]
+                },
+                {
+                    "type": "Input",
+                    "label": "payOffType",
+                    "value": {
+                        "$ref": "#/properties/payOffType"
+                    },
+                    "control": "Dropdown",
+                    "source": {
+                        "dataSource": {
+                            "name": "EquityPayOffTypeDataSource",
+                            "reloadOnOpen": true,
+                            "searchFieldPath": "payOffType",
+                            "responseMapping": "equityPayOffTypeResponseMapping",
+                            "resultCount": 1000
+                        }
+                    },
+                    "width": 3,
+                    "onValueChanged": [
+                        {
+                            "commandType": "executeAction",
+                            "actionName": "onChangePayOffType"
+                        }
+                    ]
+                },
+                {
+                    "type": "Input",
+                    "readOnly": true,
+                    "label": "isin",
+                    "value": {
+                        "$ref": "#/properties/strategy/properties/isin"
+                    },
+                    "width": 3
+                }
+            ]
+        },
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "Input",
+                    "label": "share",
+                    "decimalPlaces": 2,
+                    "clearValueOutOfRange": true,
+                    "control": "Percentage",
+                    "value": {
+                        "$ref": "#/properties/share"
+                    },
+                    "width": 3,
+                    "onValueChanged": [
+                        {
+                            "commandType": "executeAction",
+                            "actionName": "onChangeShare"
+                        }
+                    ]
+                },
+                {
+                    "type": "Input",
+                    "label": "sum",
+                    "value": {
+                        "$ref": "#/properties/sum"
+                    },
+                    "width": 3,
+                    "onValueChanged": [
+                        {
+                            "commandType": "executeAction",
+                            "actionName": "onChangeSum"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

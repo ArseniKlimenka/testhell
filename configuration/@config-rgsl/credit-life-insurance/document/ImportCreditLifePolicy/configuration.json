@@ -1,0 +1,91 @@
+{
+    "entityType": "ImportDocument",
+    "states": [
+        {
+            "name": "Draft",
+            "actors": [
+                {
+                    "actor": "Operations",
+                    "uiSchema": "UiSchema",
+                    "operations": [
+                        "Save"
+                    ],
+                    "transitions": [
+                        "StartLoading"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Loading",
+            "actors": [
+                {
+                    "actor": "Operations",
+                    "uiSchema": "UiSchema",
+                    "operations": [],
+                    "transitions": []
+                }
+            ]
+        },
+        {
+            "name": "Loaded",
+            "actors": [
+                {
+                    "actor": "Operations",
+                    "uiSchema": "UiSchema",
+                    "operations": [],
+                    "transitions": [
+                        "StartImporting",
+                        "CancelLoaded"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Importing",
+            "actors": [
+                {
+                    "actor": "Operations",
+                    "uiSchema": "UiSchema",
+                    "operations": [],
+                    "transitions": []
+                },
+                {
+                    "actor": "System",
+                    "uiSchema": "UiSchema",
+                    "operations": [],
+                    "transitions": [
+                        "FinishImporting"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Imported",
+            "actors": [
+                {
+                    "actor": "Operations",
+                    "uiSchema": "UiSchema",
+                    "operations": []
+                }
+            ]
+        },
+        {
+            "name": "Cancelled",
+            "actors": [
+                {
+                    "actor": "Operations",
+                    "uiSchema": "UiSchema",
+                    "operations": []
+                }
+            ]
+        }
+    ],
+    "version": "1",
+    "components": [
+        "DocumentFooter",
+        "DocumentHeader",
+        "FileUpload"
+    ],
+    "validFrom": "2000-01-01"
+}

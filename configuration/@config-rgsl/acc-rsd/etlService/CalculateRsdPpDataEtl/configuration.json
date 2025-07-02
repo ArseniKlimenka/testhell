@@ -1,0 +1,48 @@
+{
+    "mainDataSource": "GetRsdPaymentPlanCandidatesDataSource",
+    "useBackgroundTaskWorker": true,
+    "sinks": [
+        {
+            "name": "FetchPaymentPlanDataFromPolicy",
+            "fetch": {
+                "configuration": {
+                    "name": "GetRsdPaymentPlanDataFromPolicyDataSource"
+                }
+            }
+        },
+        {
+            "name": "FetchLastData",
+            "fetch": {
+                "configuration": {
+                    "name": "GetRsdPaymentPlanDataDataSource"
+                }
+            }
+        },
+        {
+            "name": "ProcessDocument",
+            "class": {
+                "className": "Adacta.AdInsure.RGSL.Common.API.Shared.Services.ISequenceGeneratorRGSL, Adacta.AdInsure.RGSL.Common.API",
+                "methodName": "GenerateSequenceValues"
+            }
+        },
+        {
+            "name": "WriteASS",
+            "database": {
+                "tables": [
+                    "ACC_IMPL.RSD_JOB_PP_DATA"
+                ]
+            }
+        }
+    ],
+    "completionSinks": [
+        {
+            "name": "WriteLog",
+            "database": {
+                "tables": [
+                    "ACC_IMPL.RSD_JOB_LOG"
+                ]
+            }
+        }
+    ],
+    "version": "1"
+}

@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="ru-RU" xml:lang="ru-RU" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+	<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+	<title>Договор</title>
+	<link rel="stylesheet" href="assets/styles/style.css">
+	{{{exampleLabel}}}
+	{{{bottomRightContentHolder}}}
+	{{{bottomRightContentBoth}}}
+	{{{bottomLeftContentHolder}}}
+	{{{bottomLeftContentBoth}}}
+</head>
+
+<body>
+
+	<!-- для загрузки динамических изображений в хранилище печатки. -->
+	{{#if alwaysFalse}}
+		{{> ../../../life-insurance/component/TempSignatureContainer/printout/template.html }}
+	{{/if}}
+
+	{{#if alwaysFalse}}
+		{{> ../../../life-insurance/component/CommonAppendixImageContainer/printout/template.html }}
+	{{/if}}
+
+	{{#if alwaysFalse}}
+		{{> ../../component/InvestmentAppendixImageContainer/printout/template.html }}
+	{{/if}}
+
+	<div class="policySignature">
+		<div class="container">
+
+			<div class="logoDiv">
+				<img src="../component/POImageConst/printout/assets/img/logoHeader.png" alt="Логотип Росгосстрах Жизнь" class="logo">
+			</div>
+			<div class="qrCodeAndInsurerInfo">
+				<div class="qrDiv">
+					<span class="qr_code">
+						{{QR}}
+					</span>
+				</div>
+				<div class="insurerInfoDiv">
+					<p>
+						<strong>Страховщик: </strong>ООО СК «Росгосстрах Жизнь».<br>
+						Лицензии Банка России: {{insurer.license}}, ИНН {{insurer.INN}}, КПП {{insurer.KPP}}<br>
+						<strong>Юридический адрес: </strong>{{insurer.address}}<br>
+						<strong>Реквизиты банка: </strong>{{bankInfo}}<br>
+						<strong>Телефон круглосуточного Контакт-центра: </strong>8 800 100 12 10 (бесплатный номер для
+						звонков по России).
+					</p>
+				</div>
+			</div>
+
+			<div class="container2">
+				<p id="qrInfoTop" class="qrInfo">Для оплаты считайте данный штрих код</p>
+				<p id="qrInfoMiddle" class="qrInfo">в мобильном приложении интернет-банка</p>
+				<p id="policyheadingTop" class="policyheading">ДОГОВОР СТРАХОВАНИЯ № {{policy.number}} от
+					{{policy.issueDate}} г.</p>
+				<p id="policyheadingMiddle" class="policyheading">по программе «{{policy.product}}»</p>
+				<p id="policyheadingButton" class="policyheading">на основании {{policy.rule}} (далее по тексту –
+					Правила).
+				</p>
+			</div>
+
+			<div class="policy_item">
+				I. СТРАХОВАТЕЛЬ
+			</div>
+
+			<table class="person">
+				<col class="col1">
+				<col class="col2">
+				<col class="col3">
+				<col class="col4">
+				<col class="col5">
+				<col class="col6">
+				<col class="col7">
+				<tr>
+					<td class="tgrey">Фамилия Имя Отчество:</td>
+					<td class="twhite" colspan="4">{{holder.fullName}}</td>
+					<td class="tgrey">Пол:</td>
+					<td class="twhite center">{{holder.gender}}</td>
+				</tr>
+				<tr>
+					<td class="tgrey">Дата рождения:</td>
+					<td class="twhite center" colspan="2">{{holder.dateOfBirth}}</td>
+					<td class="tgrey" colspan="2">Место рождения:</td>
+					<td class="twhite center" colspan="2">{{holder.birthPlace}}</td>
+				</tr>
+				<tr>
+					<td class="tgrey">Телефон:</td>
+					<td class="twhite center" colspan="2">{{holder.phoneNumber}}</td>
+					<td class="tgrey" colspan="2">Гражданство:</td>
+					<td class="twhite center" colspan="2">{{holder.citizenship}}</td>
+				</tr>
+				<tr>
+					<td class="tgrey">E-mail:</td>
+					<td class="twhite" colspan="6">{{holder.email}}</td>
+				</tr>
+				<tr>
+					<td class="tgrey">Документ, удостоверяющий личность:</td>
+					<td class="twhite" colspan="4">{{holder.document.typeAndSN}}</td>
+					<td class="tgrey">Дата выдачи:</td>
+					<td class="twhite center">{{holder.document.dateOfIssue}}</td>
+				</tr>
+				{{#unless holder.isNotIssuedBy}}
+				<tr>
+					<td class="tgrey">Кем выдан:</td>
+					<td class="twhite" colspan="6">{{holder.document.issuedBy}}</td>
+				</tr>
+				{{/unless}}
+				<tr>
+					<td class="tgrey">Адрес постоянной регистрации:</td>
+					<td class="twhite" colspan="6">{{holder.registrationAddress}}</td>
+				</tr>
+				<tr>
+					<td class="tgrey">Почтовый адрес:</td>
+					<td class="twhite" colspan="6">{{holder.postAddress}}</td>
+				</tr>
+			</table>
+
+			<div class="policy_item">
+				II. ЗАСТРАХОВАННЫЙ
+			</div>
+
+			<table class="person">
+				<col class="col1">
+				<col class="col2">
+				<col class="col3">
+				<col class="col4">
+				<col class="col5">
+				<col class="col6">
+				<col class="col7">
+				<tr>
+					<td class="tgrey">Фамилия Имя Отчество:</td>
+					<td class="twhite" colspan="4">{{insured.fullName}}</td>
+					<td class="tgrey">Пол:</td>
+					<td class="twhite  center">{{insured.gender}}</td>
+				</tr>
+				<tr>
+					<td class="tgrey">Дата рождения:</td>
+					<td class="twhite center" colspan="2">{{insured.dateOfBirth}}</td>
+					<td class="tgrey" colspan="2">Место рождения:</td>
+					<td class="twhite center" colspan="2">{{insured.birthPlace}}</td>
+				</tr>
+				<tr>
+					<td class="tgrey">Телефон:</td>
+					<td class="twhite center" colspan="2">{{insured.phoneNumber}}</td>
+					<td class="tgrey" colspan="2">Гражданство:</td>
+					<td class="twhite center" colspan="2">{{insured.citizenship}}</td>
+				</tr>
+				<tr>
+					<td class="tgrey">E-mail:</td>
+					<td class="twhite" colspan="6">{{insured.email}}</td>
+				</tr>
+				<tr>
+					<td class="tgrey">Документ, удостоверяющий личность:</td>
+					<td class="twhite" colspan="4">{{insured.document.typeAndSN}}</td>
+					<td class="tgrey">Дата выдачи:</td>
+					<td class="twhite center">{{insured.document.dateOfIssue}}</td>
+				</tr>
+				{{#unless insured.isNotIssuedBy}}
+				<tr>
+					<td class="tgrey">Кем выдан:</td>
+					<td class="twhite" colspan="6">{{insured.document.issuedBy}}</td>
+				</tr>
+				{{/unless}}
+				<tr>
+					<td class="tgrey">Адрес постоянной регистрации:</td>
+					<td class="twhite" colspan="6">{{insured.registrationAddress}}</td>
+				</tr>
+				<tr>
+					<td class="tgrey">Почтовый адрес:</td>
+					<td class="twhite" colspan="6">{{insured.postAddress}}</td>
+				</tr>
+			</table>
+
+			<div class="policy_item">
+				III. ВЫГОДОПРИОБРЕТАТЕЛИ НА СЛУЧАЙ СМЕРТИ ЗАСТРАХОВАННОГО
+			</div>
+
+			{{#if isBeneficiaries}}
+			<table class="person">
+				<col class="col1">
+				<col class="col2">
+				<col class="col3">
+				<col class="col4">
+				<col class="col5">
+				<col class="col6">
+				<col class="col7">
+				{{#each beneficiaries}}
+				<tr>
+					<td class="tgrey" colspan="7">Выгодоприобретатель {{this.index}}. Доля {{this.percentage}}%</td>
+				</tr>
+				<tr>
+					<td class="tgrey">Фамилия Имя Отчество, Дата рождения:</td>
+					<td class="twhite" colspan="4">{{this.beneficiar.fullName}}, {{this.beneficiar.dateOfBirth}}</td>
+					<td class="tgrey">Пол:</td>
+					<td class="twhite  center">{{this.beneficiar.gender}}</td>
+				</tr>
+				{{#if this.dateOfBirthPlaceOfBirth}}
+				<tr>
+					<td class="tgrey">Дата рождения:</td>
+					<td class="twhite center">{{this.beneficiar.dateOfBirth}}</td>
+					<td class="tgrey" colspan="2">Место рождения:</td>
+					<td class="twhite" colspan="3">{{this.beneficiar.placeOfBirth}}</td>
+				</tr>
+				{{/if}}
+				{{#if this.phoneEmailCitizenship}}
+				<tr>
+					<td class="tgrey">Телефон:</td>
+					<td class="twhite center">{{this.beneficiar.phoneNumber}}</td>
+					<td class="tgrey">E-mail:</td>
+					<td class="twhite center" colspan="2">{{this.beneficiar.email}}</td>
+					<td class="tgrey">Гражданство:</td>
+					<td class="twhite center">{{this.beneficiar.citizenship}}</td>
+				</tr>
+				{{/if}}
+				{{#if this.isDocument}}
+				<tr>
+					<td class="tgrey">Документ, удостоверяющий личность:</td>
+					<td class="twhite" colspan="4">{{this.beneficiar.document.typeAndSN}}</td>
+					<td class="tgrey">Дата выдачи:</td>
+					<td class="twhite center">{{this.beneficiar.document.dateOfIssue}}</td>
+				</tr>
+				{{#unless this.beneficiar.isNotIssuedBy}}
+				<tr>
+					<td class="tgrey">Кем выдан:</td>
+					<td class="twhite" colspan="6">{{this.beneficiar.document.document.issuedBy}}</td>
+				</tr>
+				{{/unless}}
+				{{/if}}
+				{{#if this.isRegistrationAddress}}
+				<tr>
+					<td class="tgrey">Адрес постоянной регистрации:</td>
+					<td class="twhite" colspan="6">{{this.beneficiar.registrationAddress}}</td>
+				</tr>
+				{{/if}}
+				{{#if this.isPostAddress}}
+				<tr>
+					<td class="tgrey">Почтовый адрес:</td>
+					<td class="twhite" colspan="6">{{this.beneficiar.postAddress}}</td>
+				</tr>
+				{{/if}}
+				{{/each}}
+			</table>
+			{{#if shareSumIsNot1}}
+			<p class="afterTable">
+				В случае если общая доля менее 100%, Выгодоприобретателями на случай смерти Застрахованного по
+				оставшейся доле являются наследники Застрахованного по закону.
+			</p>
+			{{/if}}
+			{{else}}
+			<p class="afterTable">
+				Наследники по закону
+			</p>
+			{{/if}}
+
+
+			<div class="policy_item">
+				IV. СТРАХОВЫЕ РИСКИ, СТРАХОВЫЕ СУММЫ, СТРАХОВАЯ ПРЕМИЯ, СРОК ДЕЙСТВИЯ ДОГОВОРА СТРАХОВАНИЯ
+			</div>
+
+			<table class="risks">
+				<col class="col1">
+				<col class="col2">
+				<col class="col3">
+				<tr>
+					<td class="tgrey center">Страховые риски</td>
+					<td class="tgrey center">Страховая сумма, {{currency}}</td>
+					<td class="tgrey center">Страховая премия, {{currency}}</td>
+				</tr>
+				<tr>
+					<td class="invisible" colspan="2"></td>
+					<td class="twhite center boldtext" rowspan="{{numberOfrisk}}">{{risk.premium.sum}}</td>
+				</tr>
+				{{#each risk.mandatory}}
+				<tr>
+					<td class="twhite">{{this.insuranceRisks}}</td>
+					<td class="twhite center">{{this.sumInsured}}</td>
+				</tr>
+				{{/each}}
+				{{#each risk.additional}}
+				<tr>
+					<td class="twhite">{{this.insuranceRisks}}</td>
+					<td class="twhite center">{{this.sumInsured}}</td>
+				</tr>
+				{{/each}}
+			</table>
+
+			<p class="afterTable" id="marginTopAndButton">
+				В случае заключения договора страхования в валюте отличной от рублей, страховая премия оплачивается в
+				рублях
+				по курсу Банка России на дату уплаты. Все банковские расходы, связанные с уплатой страховой премии,
+				несет
+				Страхователь.
+			</p>
+
+			<table class="insuranceTerms">
+				<col class="col1">
+				<col class="col2">
+				<col class="col3">
+				<tr>
+					<td class="tgrey" colspan="2">Страховая премия уплачивается единовременно в полном объеме не позднее:
+					</td>
+					<td class="twhite">{{experationDate}}</td>
+				</tr>
+				<tr>
+					<td class="twhite textJustify" colspan="3">В случае если страховая премия не была оплачена (или была
+						оплачена не
+						полностью) в указанный срок, 
+						{{#if insuranceTerms.paymentPeriodLastDate}} либо в случае оплаты страховой премии позднее {{insuranceTerms.paymentPeriodLastDate}}, {{/if}}
+						Страховщик вправе считать договор
+						страхования не вступившим в силу и произвести возврат поступивших средств Страхователю.</td>
+				</tr>
+				<tr>
+					<td class="tgrey">Срок действия договора страхования:</td>
+					<td class="twhite center">{{insuranceTerms.text}}</td>
+					<td class="twhite textJustify">Договор страхования вступает в силу с {{insuranceTerms.startDate}}
+						при
+						условии уплаты страховой премии в полном объеме до этой даты и действует до
+						{{insuranceTerms.endDate}} включительно.
+					</td>
+				</tr>
+			</table>
+
+			<div class="policy_item">
+				V. ВЫКУПНЫЕ СУММЫ
+			</div>
+
+			<table class="surrenderValues">
+				<col class="col1">
+				<col class="col2">
+				<col class="col3">
+				<tr>
+					<td class="tgrey center" colspan="2">Период действия договора страхования</td>
+					<td class="tgrey center" rowspan="2">Выкупная сумма, {{currency}}</td>
+				</tr>
+				<tr>
+					<td class="tgrey center">начало</td>
+					<td class="tgrey center">окончание</td>
+				</tr>
+				{{#each surrenderValues}}
+				<tr>
+					<td class="twhite center">{{this.periodStartDate}}</td>
+					<td class="twhite center">{{this.periodEndDate}}</td>
+					<td class="twhite center">{{this.surrenderValue}}</td>
+				</tr>
+				{{/each}}
+			</table>
+
+			<p class="afterTable">
+				Банковские расходы, связанные с осуществлением страховой выплаты и выплаты выкупной суммы, оплачиваются
+				получателем платежа.
+			</p>
+
+			<div class="policy_item">
+				VI. ДЕКЛАРАЦИЯ О СОСТОЯНИИ ЗДОРОВЬЯ И
+				ФАКТОРАХ РИСКА ЗАСТРАХОВАННОГО
+			</div>
+
+			<table class="declarationMedical">
+				<col class="col1">
+				<col class="col2">
+				<col class="col3">
+				<tr>
+					<td class="twhite">Настоящим я, {{insured.fullName}},</td>
+					<td class="twhite"><input type="checkbox" checked> подтверждаю, что:</td>
+					<td class="twhite"><input type="checkbox"> не подтверждаю, что:</td>
+				</tr>
+			</table>
+
+			<ul class="declaration">
+				{{#each declarationMedical}}
+				<li>
+					<p>{{this}}</p>
+				</li>
+				{{/each}}
+			</ul>
+
+
+			<div class="policy_item">
+				VII. ДЕКЛАРАЦИЯ СТРАХОВАТЕЛЯ И ЗАСТРАХОВАННОГО
+			</div>
+
+			<table class="declarationMain">
+				<tr>
+					<td class="twhite">Настоящим Страхователь и Застрахованный</td>
+					<td class="twhite"><input type="checkbox" checked> подтверждают, что:</td>
+					<td class="twhite"><input type="checkbox"> не подтверждают, что:</td>
+				</tr>
+			</table>
+
+			<ul class="declaration">
+				{{#each declarationMain}}
+				<li>
+					<p>{{this}}</p>
+				</li>
+				{{/each}}
+			</ul>
+
+			<div class="policy_item">
+				VIII. ИНЫЕ УСЛОВИЯ
+			</div>
+
+			<ol class="otherCondition">
+				<li>
+					В случае отказа Страхователя (физического лица) от договора страхования в период, предусмотренный
+					договором страхования и действующим законодательством, когда Страхователь имеет право на возврат
+					уплаченной страховой премии (уплаченных страховых взносов), Страховщик осуществляет возврат
+					уплаченной Страхователем суммы в рублях независимо от курса валюты, в которой выражены обязательства
+					по договору страхования. Если страховая премия была уплачена в иной валюте, возврату подлежит сумма
+					денежных средств в валюте, в которой она была уплачена.
+				</li>
+				<li>
+					Если после заключения договора страхования будет выявлено, что Страхователь/Застрахованный сообщил в
+					настоящем договоре или иных документах, заполняемых при заключении договора страхования заведомо
+					ложные сведения или предоставил подложные документы, и если эти сведения или документы привели к
+					заключению договора страхования на условиях, отличных от тех, на которых он был бы заключен, то
+					Страховщик имеет право отказать в страховой выплате.
+				</li>
+				<li>
+					Стороны пришли к соглашению о том, что факсимильное воспроизведение подписей уполномоченных лиц
+					Страховщика и факсимильный оттиск печати Страховщика признаются сторонами аналогом собственноручной
+					подписи уполномоченных лиц Страховщика и оригинала печати Страховщика.
+				</li>
+				<li>
+					В случае заключения договора страхования в электронном виде в соответствии с Соглашением об
+					электронном документообороте, к которому присоединяется Страхователь, договор страхования, включая
+					Инвестиционную декларацию (Приложение №1 к договору страхования), Информация о договоре
+					добровольного страхования, в том числе о его условиях и рисках, связанных с его исполнением, а также
+					ссылка на Правила на официальном сайте, направляются Страхователю в электронном виде на адрес
+					электронной почты, указанный в настоящем договоре страхования, подписанные со стороны Страховщика
+					усиленной квалифицированной электронной подписью. Согласие Страхователя с условиями договора
+					страхования подтверждается простой электронной подписью Страхователя в соответствии с Соглашением.
+				</li>
+				<li>
+					Неотъемлемой частью договора страхования являются: Информация о договоре добровольного страхования,
+					в том числе о его условиях и рисках, связанных с его исполнением, Инвестиционная декларация
+					(Приложение №1 к договору страхования), заявления, составленные и заполненные по просьбе Страховщика
+					Страхователем, а также Правила, с которыми Страхователь ознакомился на сайте Страховщика. Отдельные
+					условия договора страхования разъяснены в Информации о договоре добровольного страхования, в том
+					числе о его условиях и рисках, связанных с его исполнением и в Инвестиционной декларации (Приложение
+					№1 к договору страхования).
+				</li>
+				{{#if otherCondition.isOtherCondition}}
+				<li>
+					{{otherCondition.policySpecialConditions}}
+				</li>
+				{{/if}}
+			</ol>
+
+		</div>
+	</div>
+
+</body>
+
+</html>

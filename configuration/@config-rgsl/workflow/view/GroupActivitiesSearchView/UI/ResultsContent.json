@@ -1,0 +1,166 @@
+{
+    "type": "Group",
+    "elements": [
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "Component",
+                    "name": "ActivitiesTable",
+                    "value": {
+                        "$ref": "#"
+                    }
+                }
+            ],
+            "rule": {
+                "effect": "HIDE",
+                "condition": {
+                    "type": "FUNC",
+                    "ruleFunction": "isShowVerification",
+                    "value": [
+                        {
+                            "$ref": "#/properties/request/properties/data/properties/criteria/properties/showVerification"
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "Component",
+                    "name": "ActivitiesTableVerification",
+                    "value": {
+                        "$ref": "#"
+                    }
+                }
+            ],
+            "rule": {
+                "effect": "SHOW",
+                "condition": {
+                    "type": "FUNC",
+                    "ruleFunction": "isShowVerification",
+                    "value": [
+                        {
+                            "$ref": "#/properties/request/properties/data/properties/criteria/properties/showVerification"
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "Component",
+                    "name": "ActivitiesTableExportButton",
+                    "value": {
+                        "$ref": "#"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "Button",
+                    "stackContent": "Left",
+                    "rule": {
+                        "effect": "SHOW",
+                        "condition": {
+                            "type": "LEAF",
+                            "inValues": [
+                                "unassigned-tasks"
+                            ],
+                            "value": {
+                                "$ref": "#/properties/viewContext/properties/businessMode"
+                            }
+                        }
+                    },
+                    "value": {
+                        "$ref": "#"
+                    },
+                    "onClick": [
+                        {
+                            "commandType": "executeAction",
+                            "actionName": "assignActivityToMyself"
+                        }
+                    ],
+                    "label": "AssignToMyself",
+                    "width": 1
+                },
+                {
+                    "type": "Group",
+                    "stackContent": "Right",
+                    "elements": [
+                        {
+                            "type": "Input",
+                            "readOnly": true,
+                            "value": {
+                                "$ref": "#/properties/viewContext/properties/userToAssign/properties/displayName"
+                            },
+                            "width": 1
+                        },
+                        {
+                            "type": "Lookup",
+                            "label": "Users in group lookup",
+                            "value": {
+                                "$ref": "#"
+                            },
+                            "dialogButton": {},
+                            "dialog": {
+                                "viewReference": {
+                                    "configurationCodeName": "ApplicationUserInGroupSearchView",
+                                    "configurationVersion": "1",
+                                    "configurationConceptType": "SearchView"
+                                },
+                                "onLoad": "onLoadUsersInGroup"
+                            },
+                            "onSelected": "onSelectedUsersInGroup"
+                        },
+                        {
+                            "type": "Button",
+                            "value": {
+                                "$ref": "#/properties/response/properties/data"
+                            },
+                            "onClick": [
+                                {
+                                    "commandType": "executeAction",
+                                    "actionName": "assignActivity"
+                                }
+                            ],
+                            "rule": {
+                                "effect": "ENABLE_INITIAL",
+                                "condition": {
+                                    "type": "FUNC",
+                                    "ruleFunction": "enableAssignActivityButton",
+                                    "value": [
+                                        {
+                                            "$ref": "#"
+                                        }
+                                    ]
+                                }
+                            },
+                            "label": "Assign"
+                        }
+                    ],
+                    "rule": {
+                        "effect": "SHOW",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "checkAssignEnabled",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    },
+                    "width": 3
+                }
+            ]
+        }
+    ]
+}

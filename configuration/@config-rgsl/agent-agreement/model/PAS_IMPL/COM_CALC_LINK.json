@@ -1,0 +1,39 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema",
+    "title": "Commission Rules",
+    "description": "Sub account",
+    "type": "object",
+    "aiReferences": [
+        "PAS_IMPL.AA_HUB",
+        "ORG_IMPL.SERVICE_PROVIDER_HUB",
+        "PAS_IMPL.POLICY_HUB"
+    ],
+    "properties": {
+        "COM_CALC_NUMBER": {
+            "title": "Commission calculation number",
+            "type": "string",
+            "aiType": "varchar(50)"
+        },
+        "ENTRY": {
+            "title": "Commission entry id",
+            "description": "Entry code, usually composed from insurance class  or  tariff unit + commission entry type code (part of business key)",
+            "type": "string",
+            "aiType": "varchar(50)"
+        },
+        "VALID_ON" : {
+            "title": "The date of a commission calculation",
+            "type": "string",
+            "aiType": "date"
+        },
+        "EXECUTION_ID": {
+            "title": "Service execution id",
+            "type": "number",
+            "aiType": "bigint"
+        },
+        "PARTICIPANT_NO": {
+            "title": "Participant number in the calculation(We need this property because, in case of 2 or more split participants, the link object will not be unique)",
+            "type": "integer",
+            "aiType": "int"
+        }
+    }
+}

@@ -1,0 +1,41 @@
+select
+	rsdh.RSD_NUMBER,
+	(
+		select sum(ris.RSD_AMOUNT)
+		from
+			acc_impl.RSD_ITEM_LINK ril
+			inner join acc_impl.RSD_ITEM_SAT_LATEST ris on ris.RSD_ITEM_HKEY = ril.RSD_ITEM_HKEY
+		where ril.RSD_HKEY = rsdh.RSD_HKEY
+	) as RSD_AMOUNT,
+	ps.CODE_NAME as STATE_CODE,
+	lastChanged.CHANGED_ON as STATE_CHANGED_ON,
+	usr.USERNAME as STATE_CHANGED_BY,
+	rsds.CREATED_DATE
+from
+	acc_impl.RSD_HUB rsdh
+	inner join bfx.UNIVERSAL_DOCUMENT doc on doc.UNIVERSAL_DOCUMENT_NUMBER = rsdh.RSD_NUMBER
+	inner join cfg.PROCESS_STATE ps on ps.PROCESS_STATE_ID = doc.STATE_ID
+	inner join cfx.PUBLISHED_ARTIFACT art on art.PUBLISHED_ARTIFACT_ID = doc.PUBLISHED_ARTIFACT_ID
+	inner join acc_impl.RSD_SAT_LATEST rsds on rsds.RSD_HKEY = rsdh.RSD_HKEY
+	outer apply
+	(
+		select top 1 h.* from bfx.ENTITY_HISTORY h where h.STATE_CHANGED = 1 and h.ENTITY_ID = doc.UNIVERSAL_DOCUMENT_ID
+		order by h.CHANGED_ON desc
+	) lastChanged
+	left join org.APPLICATION_USER usr on usr.APPLICATION_USER_ID = lastChanged.CHANGED_BY
+where 1=1
+{{#if parameters.rsdNumber}}
+	and rsdh.RSD_NUMBER = @rsdNumber
+{{/if}}
+{{#if parameters.stateCodes}}
+	and ps.CODE_NAME in (@stateCodes)
+{{/if}}
+{{#if parameters.createdDateFrom}}
+	and rsds.CREATED_DATE >= @createdDateFrom
+{{/if}}
+{{#if parameters.createdDateTo}}
+	and rsds.CREATED_DATE <= @createdDateTo
+{{/if}}
+{{#if parameters.contractNumber}}
+	and exists (select * from acc_impl.RSD_ITEM_LINK ril where ril.RSD_HKEY = rsdh.RSD_HKEY and ril.CONTRACT_NUMBER = @contractNumber)
+{{/if}}

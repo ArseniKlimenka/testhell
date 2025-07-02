@@ -1,0 +1,266 @@
+{
+    "type": "Group",
+    "formProperties": {
+        "events": {
+            "onLoad": "onLoadGeneralPartySearchView"
+        }
+    },
+    "elements": [
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "Input",
+                    "elementId": "generalPartyFreeText",
+                    "label": "freeText",
+                    "value": {
+                        "$ref": "#/properties/request/properties/data/properties/criteria/properties/freeText"
+                    },
+                    "width": 2
+                },
+                {
+                    "type": "Input",
+                    "label": "partyType",
+                    "showAsRequired": true,
+                    "width": 1,
+                    "value": {
+                        "$ref": "#/properties/request/properties/data/properties/criteria/properties/partyType"
+                    },
+                    "rule": {
+                        "effect": "DISABLE_INITIAL",
+                        "condition": {
+                            "type": "LEAF",
+                            "expectedValue": true,
+                            "value": {
+                                "$ref": "#/properties/viewContext/properties/lockPartyType"
+                            }
+                        }
+                    }
+                },
+                {
+                    "type": "Input",
+                    "hide": false,
+                    "label": "code",
+                    "width": 1,
+                    "value": {
+                        "$ref": "#/properties/request/properties/data/properties/criteria/properties/code"
+                    },
+                    "rule": {
+                        "effect": "SHOW",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "showPartyCode",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "GroupSeparator"
+                },
+                {
+                    "type": "Section",
+                    "sectionLevel": 2,
+                    "label": "NaturalPerson",
+                    "elements": [
+                        {
+                            "type": "Group",
+                            "elements": [
+                                {
+                                    "type": "Input",
+                                    "width": 1,
+                                    "label": "lastName",
+                                    "showAsRequired": true,
+                                    "value": {
+                                        "$ref": "#/properties/request/properties/data/properties/criteria/properties/lastName"
+                                    },
+                                    "onValueChanged": [
+                                        {
+                                            "commandType": "executeAction",
+                                            "actionName": "correctLetters"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "Input",
+                                    "width": 1,
+                                    "label": "firstName",
+                                    "showAsRequired": true,
+                                    "value": {
+                                        "$ref": "#/properties/request/properties/data/properties/criteria/properties/firstName"
+                                    },
+                                    "onValueChanged": [
+                                        {
+                                            "commandType": "executeAction",
+                                            "actionName": "correctLetters"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "Input",
+                                    "width": 1,
+                                    "label": "middleName",
+                                    "value": {
+                                        "$ref": "#/properties/request/properties/data/properties/criteria/properties/middleName"
+                                    },
+                                    "onValueChanged": [
+                                        {
+                                            "commandType": "executeAction",
+                                            "actionName": "correctLetters"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Group",
+                            "elements": [
+                                {
+                                    "type": "Input",
+                                    "width": 1,
+                                    "label": "docTypeCode",
+                                    "value": {
+                                        "$ref": "#/properties/request/properties/data/properties/criteria/properties/docTypeCode"
+                                    }
+                                },
+                                {
+                                    "type": "Input",
+                                    "width": 1,
+                                    "label": "docSeries",
+                                    "showAsRequiredFunction": "docSeriesShowAsRequired",
+                                    "value": {
+                                        "$ref": "#/properties/request/properties/data/properties/criteria/properties/docSeries"
+                                    }
+                                },
+                                {
+                                    "type": "Input",
+                                    "width": 1,
+                                    "label": "docNumber",
+                                    "showAsRequiredFunction": "docNumberShowAsRequired",
+                                    "value": {
+                                        "$ref": "#/properties/request/properties/data/properties/criteria/properties/docNumber"
+                                    }
+                                },
+                                {
+                                    "type": "Input",
+                                    "width": 1,
+                                    "label": "isDocClassIdentity",
+                                    "value": {
+                                        "$ref": "#/properties/request/properties/data/properties/criteria/properties/isDocClassIdentity"
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Group",
+                            "elements": [
+                                {
+                                    "type": "Input",
+                                    "width": 1,
+                                    "label": "personGender",
+                                    "value": {
+                                        "$ref": "#/properties/request/properties/data/properties/criteria/properties/personGender"
+                                    }
+                                },
+                                {
+                                    "type": "Input",
+                                    "control": "DatetimePicker",
+                                    "showAsRequired": true,
+                                    "width": 1,
+                                    "label": "dateOfBirth",
+                                    "value": {
+                                        "$ref": "#/properties/request/properties/data/properties/criteria/properties/dateOfBirth"
+                                    }
+                                },
+                                {
+                                    "type": "Input",
+                                    "width": 1,
+                                    "label": "showDuplicates",
+                                    "value": {
+                                        "$ref": "#/properties/request/properties/data/properties/criteria/properties/showDuplicates"
+                                    },
+                                    "rule": {
+                                        "effect": "SHOW",
+                                        "condition": {
+                                            "type": "FUNC",
+                                            "ruleFunction": "showDuplicateFilter",
+                                            "value": [
+                                                {
+                                                    "$ref": "#"
+                                                }
+                                            ]
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "rule": {
+                "effect": "SHOW",
+                "condition": {
+                    "type": "LEAF",
+                    "value": {
+                        "$ref": "#/properties/request/properties/data/properties/criteria/properties/partyType"
+                    },
+                    "expectedValue": "NaturalPerson"
+                }
+            }
+        },
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "GroupSeparator"
+                },
+                {
+                    "type": "Section",
+                    "sectionLevel": 2,
+                    "label": "LegalEntity",
+                    "elements": [
+                        {
+                            "type": "Group",
+                            "elements": [
+                                {
+                                    "type": "Input",
+                                    "width": 1,
+                                    "label": "fullName",
+                                    "value": {
+                                        "$ref": "#/properties/request/properties/data/properties/criteria/properties/fullName"
+                                    }
+                                },
+                                {
+                                    "type": "Input",
+                                    "width": 1,
+                                    "label": "OGRNOGRNIP",
+                                    "value": {
+                                        "$ref": "#/properties/request/properties/data/properties/criteria/properties/OGRNOGRNIP"
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "rule": {
+                "effect": "SHOW",
+                "condition": {
+                    "type": "LEAF",
+                    "value": {
+                        "$ref": "#/properties/request/properties/data/properties/criteria/properties/partyType"
+                    },
+                    "expectedValue": "LegalEntity"
+                }
+            }
+        }
+    ]
+}

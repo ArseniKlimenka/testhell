@@ -1,0 +1,431 @@
+{
+    "type": "Group",
+    "formProperties": {
+        "events": {
+            "onLoad": "onLoad",
+            "afterSave": "onAfterSave"
+        }
+    },
+    "elements": [
+        {
+            "type": "Section",
+            "sectionLevel": 2,
+            "label": "CurrentAgent",
+            "collapsing": {
+                "initial": false,
+                "enabled": false
+            },
+            "elements": [
+                {
+                    "type": "Group",
+                    "elements": [
+                        {
+                            "type": "GridLayout",
+                            "numberOfColumns": 6,
+                            "elements": [
+                                {
+                                    "type": "Lookup",
+                                    "value": {
+                                        "$ref": "#"
+                                    },
+                                    "label": "AaServiceProviderCodeFrom",
+                                    "readOnly": true,
+                                    "rule": {
+                                        "effect": "ENABLE_INITIAL",
+                                        "condition": {
+                                            "type": "FUNC",
+                                            "ruleFunction": "enablePtDocEditing",
+                                            "value": [
+                                                {
+                                                    "$ref": "#"
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    "dialogButton": {
+                                        "icon": {
+                                            "name": "User",
+                                            "color": "BackgroundColor",
+                                            "size": "Medium"
+                                        }
+                                    },
+                                    "clearButton": {
+                                        "clearAction": "aaServiceProviderCodeFromClearButton",
+                                        "icon": {
+                                            "name": "Times",
+                                            "size": "Medium",
+                                            "color": "BackgroundColor"
+                                        }
+                                    },
+                                    "width": 2,
+                                    "dialog": {
+                                        "viewReference": {
+                                            "configurationCodeName": "ServiceProviderSearchView",
+                                            "configurationConceptType": "SearchView",
+                                            "configurationVersion": "1"
+                                        }
+                                    },
+                                    "onSelected": "aaServiceProviderCodeSearchResultAssignmentFrom",
+                                    "selectedDisplayValueUISchema": {
+                                        "type": "Input",
+                                        "label": "AgentAgreementServiceProviderName",
+                                        "readOnly": true,
+                                        "value": {
+                                            "$ref": "#/properties/Body/properties/aaServiceProviderNameFrom"
+                                        }
+                                    }
+                                },
+                                {
+                                    "type": "Lookup",
+                                    "elementId": "aaNumberFrom",
+                                    "value": {
+                                        "$ref": "#"
+                                    },
+                                    "readOnly": true,
+                                    "width": 2,
+                                    "rule": {
+                                        "effect": "ENABLE_INITIAL",
+                                        "condition": {
+                                            "type": "FUNC",
+                                            "ruleFunction": "enablePtDocEditing",
+                                            "value": [
+                                                {
+                                                    "$ref": "#"
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    "dialogButton": {
+                                        "icon": {
+                                            "name": "Search",
+                                            "color": "BackgroundColor",
+                                            "size": "Medium"
+                                        }
+                                    },
+                                    "dialog": {
+                                        "viewReference": {
+                                            "configurationCodeName": "AADocumentSearchView",
+                                            "configurationVersion": "1",
+                                            "configurationConceptType": "SearchView"
+                                        },
+                                        "onLoad": "onLoadAADocumentFromSearchView",
+                                        "inputParameters": {
+                                            "uiContext": {
+                                                "selectionMode": "Single"
+                                            }
+                                        }
+                                    },
+                                    "clearButton": {
+                                        "clearAction": "aaNumberFromClearButton",
+                                        "icon": {
+                                            "name": "Times",
+                                            "size": "Small",
+                                            "color": "BackgroundColor"
+                                        }
+                                    },
+                                    "onSelected": "aaNumberSearchResultAssignmentFrom",
+                                    "selectedDisplayValueUISchema": {
+                                        "type": "Input",
+                                        "label": "AANumberFrom",
+                                        "readOnly": true,
+                                        "value": {
+                                            "$ref": "#/properties/Body/properties/aaNameFrom"
+                                        }
+                                    }
+                                },
+                                {
+                                    "type": "Input",
+                                    "label": "AgentTabNumberFrom",
+                                    "readOnly": true,
+                                    "value": {
+                                        "$ref": "#/properties/Body/properties/agentTabNumberFrom"
+                                    },
+                                    "width": 2
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "Section",
+            "sectionLevel": 2,
+            "label": "NewAgent",
+            "collapsing": {
+                "initial": false,
+                "enabled": false
+            },
+            "elements": [
+                {
+                    "type": "Group",
+                    "elements": [
+                        {
+                            "type": "GridLayout",
+                            "numberOfColumns": 6,
+                            "elements": [
+                                {
+                                    "type": "Lookup",
+                                    "value": {
+                                        "$ref": "#"
+                                    },
+                                    "label": "AaServiceProviderCodeTo",
+                                    "readOnly": true,
+                                    "rule": {
+                                        "effect": "ENABLE_INITIAL",
+                                        "condition": {
+                                            "type": "FUNC",
+                                            "ruleFunction": "enablePtDocEditing",
+                                            "value": [
+                                                {
+                                                    "$ref": "#"
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    "dialogButton": {
+                                        "icon": {
+                                            "name": "User",
+                                            "color": "BackgroundColor",
+                                            "size": "Medium"
+                                        }
+                                    },
+                                    "clearButton": {
+                                        "clearAction": "aaServiceProviderCodeToClearButton",
+                                        "icon": {
+                                            "name": "Times",
+                                            "size": "Medium",
+                                            "color": "BackgroundColor"
+                                        }
+                                    },
+                                    "width": 2,
+                                    "dialog": {
+                                        "viewReference": {
+                                            "configurationCodeName": "ServiceProviderSearchView",
+                                            "configurationConceptType": "SearchView",
+                                            "configurationVersion": "1"
+                                        }
+                                    },
+                                    "onSelected": "aaServiceProviderCodeSearchResultAssignmentTo",
+                                    "selectedDisplayValueUISchema": {
+                                        "type": "Input",
+                                        "label": "AgentAgreementServiceProviderName",
+                                        "readOnly": true,
+                                        "value": {
+                                            "$ref": "#/properties/Body/properties/aaServiceProviderNameTo"
+                                        }
+                                    }
+                                },
+                                {
+                                    "type": "Lookup",
+                                    "elementId": "aaNumberTo",
+                                    "value": {
+                                        "$ref": "#"
+                                    },
+                                    "readOnly": true,
+                                    "width": 2,
+                                    "rule": {
+                                        "effect": "ENABLE_INITIAL",
+                                        "condition": {
+                                            "type": "FUNC",
+                                            "ruleFunction": "enablePtDocEditing",
+                                            "value": [
+                                                {
+                                                    "$ref": "#"
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    "dialogButton": {
+                                        "icon": {
+                                            "name": "Search",
+                                            "color": "BackgroundColor",
+                                            "size": "Medium"
+                                        }
+                                    },
+                                    "dialog": {
+                                        "viewReference": {
+                                            "configurationCodeName": "AADocumentSearchView",
+                                            "configurationVersion": "1",
+                                            "configurationConceptType": "SearchView"
+                                        },
+                                        "onLoad": "onLoadAADocumentToSearchView",
+                                        "inputParameters": {
+                                            "uiContext": {
+                                                "selectionMode": "Single"
+                                            }
+                                        }
+                                    },
+                                    "clearButton": {
+                                        "clearAction": "aaNumberToClearButton",
+                                        "icon": {
+                                            "name": "Times",
+                                            "size": "Small",
+                                            "color": "BackgroundColor"
+                                        }
+                                    },
+                                    "onSelected": "aaNumberSearchResultAssignmentTo",
+                                    "selectedDisplayValueUISchema": {
+                                        "type": "Input",
+                                        "label": "AANumberTo",
+                                        "readOnly": true,
+                                        "value": {
+                                            "$ref": "#/properties/Body/properties/aaNameTo"
+                                        }
+                                    }
+                                },
+                                {
+                                    "type": "Input",
+                                    "label": "AgentTabNumberTo",
+                                    "readOnly": true,
+                                    "value": {
+                                        "$ref": "#/properties/Body/properties/agentTabNumberTo"
+                                    },
+                                    "width": 2
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "Lookup",
+                    "value": {
+                        "$ref": "#"
+                    },
+                    "label": "sadNumberFrom",
+                    "readOnly": true,
+                    "rule": {
+                        "effect": "ENABLE_INITIAL",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "enableSadEditing",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    },
+                    "dialogButton": {
+                        "icon": {
+                            "name": "Search",
+                            "color": "BackgroundColor",
+                            "size": "Medium"
+                        }
+                    },
+                    "clearButton": {
+                        "clearAction": "sadNumberFromClearButton",
+                        "icon": {
+                            "name": "Times",
+                            "size": "Medium",
+                            "color": "BackgroundColor"
+                        }
+                    },
+                    "width": 2,
+                    "dialog": {
+                        "viewReference": {
+                            "configurationCodeName": "ServiceProviderSearchView",
+                            "configurationConceptType": "SearchView",
+                            "configurationVersion": "1"
+                        },
+                        "onLoad": "sadSelectFromOnLoad"
+                    },
+                    "onSelected": "sadNumberSearchResultAssignmentFrom",
+                    "selectedDisplayValueUISchema": {
+                        "type": "Input",
+                        "label": "sadNumberFrom",
+                        "readOnly": true,
+                        "value": {
+                            "$ref": "#/properties/Body/properties/sadNumberFrom"
+                        }
+                    }
+                },
+                {
+                    "type": "Lookup",
+                    "value": {
+                        "$ref": "#"
+                    },
+                    "label": "sadNumberTo",
+                    "readOnly": true,
+                    "rule": {
+                        "effect": "ENABLE_INITIAL",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "enableSadEditing",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    },
+                    "dialogButton": {
+                        "icon": {
+                            "name": "Search",
+                            "color": "BackgroundColor",
+                            "size": "Medium"
+                        }
+                    },
+                    "clearButton": {
+                        "clearAction": "sadNumberToClearButton",
+                        "icon": {
+                            "name": "Times",
+                            "size": "Medium",
+                            "color": "BackgroundColor"
+                        }
+                    },
+                    "width": 2,
+                    "dialog": {
+                        "viewReference": {
+                            "configurationCodeName": "ServiceProviderSearchView",
+                            "configurationConceptType": "SearchView",
+                            "configurationVersion": "1"
+                        },
+                        "onLoad": "sadSelectFromOnLoad"
+                    },
+                    "onSelected": "sadNumberSearchResultAssignmentTo",
+                    "selectedDisplayValueUISchema": {
+                        "type": "Input",
+                        "label": "sadNumberTo",
+                        "readOnly": true,
+                        "value": {
+                            "$ref": "#/properties/Body/properties/sadNumberTo"
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "Input",
+                    "control": "DatetimePicker",
+                    "label": "IssueDate",
+                    "readOnly": false,
+                    "value": {
+                        "$ref": "#/properties/Body/properties/issueDate"
+                    },
+                    "width": 2,
+                    "rule": {
+                        "effect": "ENABLE_INITIAL",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "enablePtDocEditing",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    }
+                }
+            ]
+        }
+    ]
+}

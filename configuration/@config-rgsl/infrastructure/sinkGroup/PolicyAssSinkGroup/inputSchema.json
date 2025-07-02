@@ -1,0 +1,38 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema",
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+        "contractNumber"
+    ],
+    "properties": {
+        "contractNumber": {
+            "type": "string"
+        },
+        "stateCode": {
+            "type": "string"
+        },
+        "policyData": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+                "amendmentContractNumber",
+                "seqNumber",
+                "snapshotBody"
+            ],
+            "properties": {
+                "amendmentContractNumber": {
+                    "type": "string"
+                },
+                "seqNumber": {
+                    "type": "integer",
+                    "aiType": "int"
+                },
+                "snapshotBody": {
+                    "type": "object",
+                    "additionalProperties": true
+                }
+            }
+        }
+    }
+}

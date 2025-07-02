@@ -1,0 +1,119 @@
+WITH {{parameters.ruleTableAlias}} as (
+	SELECT
+		[AA_BASE_COMM_HKEY]
+			, [LOAD_DATE]
+			, [RECORD_SOURCE]
+			, [HASH_DIFF]
+			, [RULE_NUM]
+			, [START_DATE]
+			, [END_DATE]
+			, [REGISTRATOR_NUMBER]
+			, [PRODUCT_VALUE_REF_ID]
+			, [PRODUCT_INVERSION]
+			, [INSURANCE_YEAR_FROM]
+            , [INSURANCE_YEAR_TO]
+			, [INSURANCE_CURRENCY]
+			, [INSURANCE_CURRENCY_INVERSION]
+			, [INSURANCE_TERM_FROM]
+			, [INSURANCE_TERM_INCLUDE_FROM]
+			, [INSURANCE_TERM_TO]
+			, [INSURANCE_TERM_INCLUDE_TO]
+			, [PREMIUM_PERIOD_FROM]
+			, [PREMIUM_PERIOD_INCLUDE_FROM]
+			, [PREMIUM_PERIOD_TO]
+			, [PREMIUM_PERIOD_INCLUDE_TO]
+			, [PREM_PERIOD_VALUE_REF_ID]
+			, [MIN_RATE]
+			, [MAX_RATE]
+			, [MAX_RATE_LIMIT]
+			, [RATE]
+			, [EXPENSES_RATE]
+			, [NATURAL_PERSON_RATE]
+			, [SOLE_PROPRIATOR_RATE]
+			, [AMOUNT]
+			, [DISABLE_DISCOUNT]
+			, [DISABLE_MANUAL_CORRECTION]
+			, [ALWAYS_USE_MAX_RATE]
+			, [CREDIT_PROGRAM_VALUE_REF_ID]
+			, [CREDIT_PROGRAM_INVERSION]
+			, [VARIANT_VALUE_REF_ID]
+        	, [VARIANT_INVERSION]
+			, [MANUAL_RULE]
+		FROM (
+		SELECT
+			[AA_BASE_COMM_HKEY]
+			, [LOAD_DATE]
+			, [RECORD_SOURCE]
+			, [HASH_DIFF]
+			, [RULE_NUM]
+			, [START_DATE]
+			, [END_DATE]
+			, [REGISTRATOR_NUMBER]
+			, [PRODUCT_VALUE_REF_ID]
+			, [PRODUCT_INVERSION]
+			, [INSURANCE_YEAR_FROM]
+            , [INSURANCE_YEAR_TO]
+			, [INSURANCE_CURRENCY]
+			, [INSURANCE_CURRENCY_INVERSION]
+			, [INSURANCE_TERM_FROM]
+			, [INSURANCE_TERM_INCLUDE_FROM]
+			, [INSURANCE_TERM_TO]
+			, [INSURANCE_TERM_INCLUDE_TO]
+			, [PREMIUM_PERIOD_FROM]
+			, [PREMIUM_PERIOD_INCLUDE_FROM]
+			, [PREMIUM_PERIOD_TO]
+			, [PREMIUM_PERIOD_INCLUDE_TO]
+			, [PREM_PERIOD_VALUE_REF_ID]
+			, [MIN_RATE]
+			, [MAX_RATE]
+			, [MAX_RATE_LIMIT]
+			, [RATE]
+			, [EXPENSES_RATE]
+			, [NATURAL_PERSON_RATE]
+			, [SOLE_PROPRIATOR_RATE]
+			, [AMOUNT]
+			, [DISABLE_DISCOUNT]
+			, [DISABLE_MANUAL_CORRECTION]
+			, [ALWAYS_USE_MAX_RATE]
+			, [CREDIT_PROGRAM_VALUE_REF_ID]
+			, [CREDIT_PROGRAM_INVERSION]
+			, [VARIANT_VALUE_REF_ID]
+        	, [VARIANT_INVERSION]
+			, [MANUAL_RULE]
+			, RANK() OVER (PARTITION BY AA_BASE_COMM_HKEY, RULE_NUM ORDER BY LOAD_DATE DESC) rank
+			FROM [PAS_IMPL].[AA_BASE_COMM_SAT]
+		) commRule
+	WHERE commRule.rank = 1
+)
+
+SELECT
+	{{parameters.ruleTableAlias}}.RULE_NUM
+	,{{parameters.ruleTableAlias}}.START_DATE
+	,{{parameters.ruleTableAlias}}.END_DATE
+	,{{parameters.ruleTableAlias}}.REGISTRATOR_NUMBER
+	,{{parameters.ruleTableAlias}}.MIN_RATE
+	,{{parameters.ruleTableAlias}}.MAX_RATE
+	,{{parameters.ruleTableAlias}}.MAX_RATE_LIMIT
+	,{{parameters.ruleTableAlias}}.RATE
+	,{{parameters.ruleTableAlias}}.EXPENSES_RATE
+	,{{parameters.ruleTableAlias}}.NATURAL_PERSON_RATE
+	,{{parameters.ruleTableAlias}}.SOLE_PROPRIATOR_RATE
+	,{{parameters.ruleTableAlias}}.AMOUNT
+	,{{parameters.ruleTableAlias}}.DISABLE_DISCOUNT
+	,{{parameters.ruleTableAlias}}.DISABLE_MANUAL_CORRECTION
+	,{{parameters.ruleTableAlias}}.ALWAYS_USE_MAX_RATE
+	,{{parameters.ruleTableAlias}}.MANUAL_RULE
+	{{#each parameters.selectTerms}}
+	{{this}}
+	{{/each}}
+FROM
+	{{parameters.ruleTableAlias}}
+INNER JOIN PAS_IMPL.AA_COMM_LINK link ON {{parameters.ruleTableAlias}}.AA_BASE_COMM_HKEY = link.AA_COMM_HKEY
+INNER JOIN PAS_IMPL.AA_HUB hub ON link.AA_HKEY = hub.AA_HKEY
+WHERE
+	hub.AA_NUMBER = @originDocumentNumber
+	AND {{parameters.ruleTableAlias}}.START_DATE <= @calculationDate
+	AND (@calculationDate <= {{parameters.ruleTableAlias}}.END_DATE OR {{parameters.ruleTableAlias}}.END_DATE IS NULL)
+	{{#each parameters.whereTerms}}
+	{{{this}}}
+	{{/each}}

@@ -1,0 +1,28 @@
+{
+    "entityType": "UniversalDocument",
+    "condition": {
+        "events": [
+            "StatusChanged"
+        ],
+        "configuration": {
+            "names": [
+                "Endowment"
+            ]
+        },
+        "documentStates": [
+            "POCreation"
+        ]
+    },
+    "sinks": [
+        {
+            "name": "ExecutePOCreation",
+            "etlService": {
+                "configuration": {
+                    "name": "CreateEndowmentPaymentOrdersEtlService",
+                    "version": "1"
+                }
+            }
+        }
+    ],
+    "version": "1"
+}

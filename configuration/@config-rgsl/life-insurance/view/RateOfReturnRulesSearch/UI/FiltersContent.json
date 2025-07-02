@@ -1,0 +1,81 @@
+{
+    "type": "Group",
+    "formProperties": {
+        "events": {
+            "onLoad": "onLoadRateOfReturnRulesSearchView"
+        }
+    },
+    "elements": [
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "Input",
+                    "label": "productCode",
+                    "width": 1,
+                    "value": {
+                        "$ref": "#/properties/request/properties/data/properties/criteria/properties/productCode"
+                    },
+                    "elementId": "productCodeId"
+                },
+                {
+                    "type": "Input",
+                    "label": "issueDate",
+                    "width": 1,
+                    "value": {
+                        "$ref": "#/properties/request/properties/data/properties/criteria/properties/issueDate"
+                    },
+                    "elementId": "issueDateId",
+                    "control": "DatetimePicker"
+                }
+            ]
+        },
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "Input",
+                    "label": "insuranceTerms",
+                    "width": 1,
+                    "value": {
+                        "$ref": "#/properties/request/properties/data/properties/criteria/properties/insuranceTerms"
+                    },
+                    "elementId": "insuranceTermsId"
+                },
+                {
+                    "type": "Input",
+                    "label": "currencyCode",
+                    "width": 1,
+                    "value": {
+                        "$ref": "#/properties/request/properties/data/properties/criteria/properties/currencyCode"
+                    },
+                    "elementId": "currencyCodeId"
+                },
+                {
+                    "type": "Input",
+                    "label": "guaranteedIncome",
+                    "width": 1,
+                    "value": {
+                        "$ref": "#/properties/request/properties/data/properties/criteria/properties/guaranteedIncome"
+                    },
+                    "elementId": "guaranteedIncomeId"
+                },
+                {
+                    "type": "Input",
+                    "label": "version",
+                    "width": 1,
+                    "value": {
+                        "$ref": "#/properties/request/properties/data/properties/criteria/properties/version"
+                    },
+                    "onValueChanged": [
+                        {
+                            "commandType": "executeAction",
+                            "actionName": "onChangeVersion"
+                        }
+                    ],
+                    "elementId": "versionId"
+                }
+            ]
+        }
+    ]
+}

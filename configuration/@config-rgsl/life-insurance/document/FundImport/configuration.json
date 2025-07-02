@@ -1,0 +1,231 @@
+{
+    "entityType": "ImportDocument",
+    "dimensions": {
+        "validationSettings": "stopImportWithErrors"
+    },
+    "states": [
+        {
+            "name": "Draft",
+            "actors": [
+                {
+                    "actor": "FundImportSpecialist",
+                    "uiSchema": "Draft",
+                    "operations": [
+                        "Save"
+                    ],
+                    "transitions": [
+                        "StartLoading"
+                    ]
+                },
+                {
+                    "actor": "Administrator",
+                    "uiSchema": "Draft",
+                    "operations": [
+                        "Save"
+                    ],
+                    "transitions": [
+                        "StartLoading"
+                    ]
+                },
+                {
+                    "actor": "System",
+                    "uiSchema": "Draft",
+                    "operations": [
+                        "Save"
+                    ],
+                    "transitions": [
+                        "StartLoading"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Loading",
+            "actors": [
+                {
+                    "actor": "FundImportSpecialist",
+                    "uiSchema": "Loading",
+                    "operations": [],
+                    "transitions": []
+                },
+                {
+                    "actor": "Administrator",
+                    "uiSchema": "Loading",
+                    "operations": [],
+                    "transitions": []
+                },
+                {
+                    "actor": "System",
+                    "uiSchema": "Loading",
+                    "operations": [],
+                    "transitions": []
+                }
+            ]
+        },
+        {
+            "name": "ReloadSetup",
+            "actors": [
+                {
+                    "actor": "FundImportSpecialist",
+                    "uiSchema": "Reloading",
+                    "operations": [
+                        "Save"
+                    ],
+                    "transitions": [
+                        "StartReloading"
+                    ]
+                },
+                {
+                    "actor": "Administrator",
+                    "uiSchema": "Reloading",
+                    "operations": [
+                        "Save"
+                    ],
+                    "transitions": [
+                        "StartReloading"
+                    ]
+                },
+                {
+                    "actor": "System",
+                    "uiSchema": "Reloading",
+                    "operations": [
+                        "Save"
+                    ],
+                    "transitions": [
+                        "StartReloading"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Loaded",
+            "actors": [
+                {
+                    "actor": "FundImportSpecialist",
+                    "uiSchema": "Loading",
+                    "operations": [],
+                    "transitions": [
+                    ]
+                },
+                {
+                    "actor": "Administrator",
+                    "uiSchema": "Loading",
+                    "operations": [],
+                    "transitions": [
+                    ]
+                },
+                {
+                    "actor": "System",
+                    "uiSchema": "Loading",
+                    "operations": [],
+                    "transitions": [
+                        "StartValidating"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Validating",
+            "actors": [
+                {
+                    "actor": "FundImportSpecialist",
+                    "uiSchema": "Loading",
+                    "operations": [],
+                    "transitions": []
+                },
+                {
+                    "actor": "Administrator",
+                    "uiSchema": "Loading",
+                    "operations": [],
+                    "transitions": [
+                        "StartImporting",
+                        "FinishValidatingWithError"
+                    ]
+                },
+                {
+                    "actor": "System",
+                    "uiSchema": "Loading",
+                    "operations": [],
+                    "transitions": [
+                        "StartImporting",
+                        "FinishValidatingWithError"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Importing",
+            "actors": [
+                {
+                    "actor": "FundImportSpecialist",
+                    "uiSchema": "Importing",
+                    "operations": [],
+                    "transitions": []
+                },
+                {
+                    "actor": "Administrator",
+                    "uiSchema": "Importing",
+                    "operations": [],
+                    "transitions": [
+                        "FinishImporting"
+                    ]
+                },
+                {
+                    "actor": "System",
+                    "uiSchema": "Importing",
+                    "operations": [],
+                    "transitions": [
+                        "FinishImporting"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "ValidationError",
+            "actors": [
+                {
+                    "actor": "FundImportSpecialist",
+                    "uiSchema": "Loading",
+                    "operations": []
+                },
+                {
+                    "actor": "Administrator",
+                    "uiSchema": "Loading",
+                    "operations": []
+                },
+                {
+                    "actor": "System",
+                    "uiSchema": "Loading",
+                    "operations": []
+                }
+            ]
+        },
+        {
+            "name": "Imported",
+            "actors": [
+                {
+                    "actor": "FundImportSpecialist",
+                    "uiSchema": "Importing",
+                    "operations": []
+                },
+                {
+                    "actor": "Administrator",
+                    "uiSchema": "Importing",
+                    "operations": []
+                },
+                {
+                    "actor": "System",
+                    "uiSchema": "Importing",
+                    "operations": []
+                }
+            ]
+        }
+    ],
+    "version": "1",
+    "components": [
+        "DocumentFooter",
+        "DocumentHeader",
+        "FileUpload"
+    ],
+    "validFrom": "2000-01-01"
+}

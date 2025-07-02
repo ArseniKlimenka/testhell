@@ -1,0 +1,31 @@
+'use strict';
+
+const DateTimeUtils = require('@config-rgsl/infrastructure/lib/DateTimeUtils');
+const { getRateOfReturnRulesLastVersion } = require('@config-rgsl/life-insurance/lib/rateOfReturnRulesHelper');
+
+module.exports = async function onLoadRateOfReturnRulesSearchView(input, ambientProperties) {
+
+    try {
+
+        this.view.startBlockingUI();
+
+        const viewContext = input.context.viewContext;
+        const criteria = {
+            issueDate: DateTimeUtils.formatDate(new Date())
+        };
+        const searchRequest = { data: { criteria: criteria } };
+
+        const lastVersion = await getRateOfReturnRulesLastVersion(ambientProperties);
+        criteria.version = lastVersion;
+
+        this.view.setSearchRequest(searchRequest);
+        this.view.search();
+
+        this.view.stopBlockingUI();
+    }
+
+    catch (error) {
+        this.view.stopBlockingUI();
+        throw error;
+    }
+};

@@ -1,0 +1,153 @@
+{
+    "id": "VersionedDocumentLayout",
+    "type": "Group",
+    "elements": [
+        {
+            "type": "GridLayout",
+            "numberOfColumns": 4,
+            "elements": [
+                {
+                    "type": "Group",
+                    "rule": {
+                        "effect": "HIDE",
+                        "condition": {
+                            "type": "FUNC",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ],
+                            "ruleFunction": "hideSideContentLayout"
+                        }
+                    },
+                    "elements": [
+                        {
+                            "type": "Component",
+                            "name": "VersionedDocumentHeader",
+                            "value": {
+                                "$ref": "#"
+                            }
+                        },
+                        {
+                            "type": "GridLayout",
+                            "numberOfColumns": 12,
+                            "width": 3,
+                            "fillAvailableSpace": true,
+                            "elements": [
+                                {
+                                    "type": "Group",
+                                    "elements": [
+                                        {
+                                            "type": "ContentPlaceholder",
+                                            "name": "MainContent"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "type": "SideContentLayout",
+                            "fixedPosition": true,
+                            "numberOfColumns": 2,
+                            "width": 1,
+                            "elements": [
+                                {
+                                    "type": "GridLayout",
+                                    "numberOfColumns": 2,
+                                    "elements": [
+                                        {
+                                            "type": "TabLayout",
+                                            "elementId": "SideContent",
+                                            "elements": [
+                                                {
+                                                    "type": "Tab",
+                                                    "tabType": "error",
+                                                    "elementId": "tab-Notifications",
+                                                    "icon": {
+                                                        "name": "Bell",
+                                                        "size": "Large"
+                                                    },
+                                                    "additionalInfo": {
+                                                        "display": "ValidationErrorsCount"
+                                                    },
+                                                    "elements": [
+                                                        {
+                                                            "type": "ValidationSummary",
+                                                            "elementId": "RequiredPropertiesValidations"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "type": "Tab",
+                                                    "elementId": "tab-Audit Info",
+                                                    "icon": {
+                                                        "name": "Clipboard-Check",
+                                                        "size": "Large"
+                                                    },
+                                                    "elements": [
+                                                        {
+                                                            "type": "Component",
+                                                            "name": "AuditInfoME",
+                                                            "value": {
+                                                                "$ref": "#"
+                                                            }
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "type": "Tab",
+                                                    "elementId": "tab-Summary",
+                                                    "icon": {
+                                                        "name": "Bars",
+                                                        "size": "Large"
+                                                    },
+                                                    "elements": [
+                                                        {
+                                                            "type": "ContentPlaceholder",
+                                                            "name": "SummaryContent"
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Component",
+                            "name": "DocumentFooter",
+                            "value": {
+                                "$ref": "#"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "type": "Group",
+                    "rule": {
+                        "effect": "SHOW",
+                        "condition": {
+                            "type": "FUNC",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ],
+                            "ruleFunction": "hideSideContentLayout"
+                        }
+                    },
+                    "elements": [
+                        {
+                            "type": "Component",
+                            "name": "AttachmentsSection",
+                            "value": {
+                                "$ref": "#"
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

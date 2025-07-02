@@ -1,0 +1,29 @@
+{
+    "entityType": "AgentAgreement",
+    "condition": {
+        "events": [
+            "StatusChanged"
+        ],
+        "configuration": {
+            "names": [
+                "AACancellationAmendment"
+            ],
+            "dimensions": {
+                "agentAgreementType": [
+                    "CancellationAmendment"
+                ]
+            }
+        },
+        "documentStates": [
+            "Annulled"
+        ]
+    },
+    "sinks": [
+        {
+            "name": "ChangeAAStateToActivated",
+            "documentTransition": {
+            }
+        }
+    ],
+    "version": "1"
+}

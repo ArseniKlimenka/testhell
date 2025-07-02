@@ -1,0 +1,169 @@
+{
+    "entityType": "ImportDocument",
+    "states": [
+        {
+            "name": "Draft",
+            "actors": [
+                {
+                    "actor": "ChiefPaymentDistributor",
+                    "uiSchema": "LoadFile",
+                    "operations": [
+                        "Save"
+                    ],
+                    "transitions": [
+                        "StartLoading"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Loading",
+            "actors": [
+                {
+                    "actor": "ChiefPaymentDistributor",
+                    "uiSchema": "LoadFile",
+                    "operations": [],
+                    "transitions": []
+                }
+            ]
+        },
+        {
+            "name": "Loaded",
+            "actors": [
+                {
+                    "actor": "ChiefPaymentDistributor",
+                    "uiSchema": "LoadFile",
+                    "operations": [],
+                    "transitions": [
+                        "StartImporting"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Importing",
+            "actors": [
+                {
+                    "actor": "ChiefPaymentDistributor",
+                    "uiSchema": "LoadFile",
+                    "operations": [],
+                    "transitions": []
+                },
+                {
+                    "actor": "System",
+                    "uiSchema": "LoadFile",
+                    "operations": [
+                        "Save"
+                    ],
+                    "transitions": [
+                        "FinishImporting"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Imported",
+            "actors": [
+                {
+                    "actor": "ChiefPaymentDistributor",
+                    "uiSchema": "MatchToBankStatement",
+                    "operations": [
+                        "Save"
+                    ],
+                    "transitions": [
+                        "Imported_to_Allocation"
+                    ]
+                },
+                {
+                    "actor": "EmployeeUFO",
+                    "uiSchema": "MatchToBankStatement",
+                    "operations": [
+                        "Save"
+                    ],
+                    "transitions": [
+                        "Imported_to_Allocation"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Allocation",
+            "actors": [
+                {
+                    "actor": "ChiefPaymentDistributor",
+                    "uiSchema": "MatchToBankStatement",
+                    "operations": [],
+                    "transitions": []
+                }
+            ]
+        },
+        {
+            "name": "Allocated",
+            "actors": [
+                {
+                    "actor": "ChiefPaymentDistributor",
+                    "uiSchema": "Allocated",
+                    "operations": [],
+                    "transitions": [
+                        "Allocated_to_Generating"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "RegistryAllocationError",
+            "actors": [
+                {
+                    "actor": "ChiefPaymentDistributor",
+                    "uiSchema": "Allocated",
+                    "operations": [],
+                    "transitions": [
+                        "RegistryAllocationError_to_Allocation"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Generating",
+            "actors": [
+                {
+                    "actor": "ChiefPaymentDistributor",
+                    "uiSchema": "Allocated",
+                    "operations": [],
+                    "transitions": []
+                }
+            ]
+        },
+        {
+            "name": "Generated",
+            "actors": [
+                {
+                    "actor": "ChiefPaymentDistributor",
+                    "uiSchema": "Allocated",
+                    "operations": [],
+                    "transitions": []
+                }
+            ]
+        },
+        {
+            "name": "RegistryGenerationError",
+            "actors": [
+                {
+                    "actor": "ChiefPaymentDistributor",
+                    "uiSchema": "Allocated",
+                    "operations": [],
+                    "transitions": [
+                        "RegistryGenerationError_to_Generating"
+                    ]
+                }
+            ]
+        }
+    ],
+    "version": "1",
+    "components": [
+        "DocumentFooter",
+        "DocumentHeader",
+        "FileUpload"
+    ],
+    "validFrom": "2000-01-01"
+}

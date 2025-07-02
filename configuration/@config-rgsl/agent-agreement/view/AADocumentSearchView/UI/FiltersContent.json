@@ -1,0 +1,232 @@
+{
+    "type": "Group",
+    "formProperties": {
+        "events": {
+            "onLoad": "onLoadAADocumentSearchView"
+        }
+    },
+    "width": 4,
+    "elements": [
+        {
+            "type": "GridLayout",
+            "numberOfColumns": 6,
+            "elements": [
+                {
+                    "type": "Group",
+                    "width": 6,
+                    "elements": [
+                        {
+                            "type": "Input",
+                            "label": "externalNumber",
+                            "value": {
+                                "$ref": "#/properties/request/properties/data/properties/criteria/properties/externalNumber"
+                            },
+                            "width": 2,
+                            "name": "externalNumber"
+                        },
+                        {
+                            "type": "Lookup",
+                            "elementId": "agentSearchLookup",
+                            "dialogButton": {},
+                            "clearButton": {
+                                "clearAction": "clearAgent"
+                            },
+                            "dialog": {
+                                "viewReference": {
+                                    "configurationCodeName": "ServiceProviderSearchView",
+                                    "configurationConceptType": "SearchView",
+                                    "configurationVersion": "1"
+                                }
+                            },
+                            "onSelected": "agentResultMapping",
+                            "selectedDisplayValueUISchema": {
+                                "type": "Input",
+                                "label": "agent",
+                                "readOnly": true,
+                                "value": {
+                                    "$ref": "#/properties/request/properties/data/properties/criteria/properties/agentName"
+                                }
+                            },
+                            "width": 2
+                        },
+                        {
+                            "type": "Dropdown",
+                            "multiple": true,
+                            "label": "documentStates",
+                            "value": {
+                                "$ref": "#/properties/request/properties/data/properties/criteria/properties/documentStates"
+                            },
+                            "width": 2,
+                            "name": "documentStates",
+                            "preSelectFirstItem": true
+                        }
+                    ]
+                },
+                {
+                    "type": "Group",
+                    "elements": [
+                        {
+                            "type": "Input",
+                            "label": "documentNumber",
+                            "value": {
+                                "$ref": "#/properties/request/properties/data/properties/criteria/properties/documentNumber"
+                            },
+                            "width": 2,
+                            "name": "documentNumber"
+                        },
+                        {
+                            "type": "Input",
+                            "control": "DateRange",
+                            "dateFrom": {
+                                "type": "Input",
+                                "label": "startDate",
+                                "width": 2,
+                                "value": {
+                                    "$ref": "#/properties/request/properties/data/properties/criteria/properties/startDate"
+                                },
+                                "control": "DatetimePicker",
+                                "name": "startDate"
+                            },
+                            "dateTo": {
+                                "type": "Input",
+                                "label": "endDate",
+                                "width": 2,
+                                "value": {
+                                    "$ref": "#/properties/request/properties/data/properties/criteria/properties/endDate"
+                                },
+                                "control": "DatetimePicker",
+                                "name": "endDate"
+                            },
+                            "width": 2
+                        }
+                    ]
+                },
+                {
+                    "type": "Group",
+                    "elements": [
+                        {
+                            "elementId": "agentPersonalNumber",
+                            "type": "Input",
+                            "label": "agentPersonalNumber",
+                            "value": {
+                                "$ref": "#/properties/request/properties/data/properties/criteria/properties/agentPersonalNumber"
+                            },
+                            "width": 2,
+                            "name": "agentPersonalNumber"
+                        },
+                        {
+                            "elementId": "agentPartyType",
+                            "type": "Input",
+                            "control": "Dropdown",
+                            "label": "agentPartyType",
+                            "value": {
+                                "$ref": "#/properties/request/properties/data/properties/criteria/properties/agentPartyType"
+                            },
+                            "width": 2,
+                            "name": "agentPartyType"
+                        },
+                        {
+                            "type": "Input",
+                            "label": "salesChannel",
+                            "value": {
+                                "$ref": "#/properties/request/properties/data/properties/criteria/properties/salesChannelCode"
+                            },
+                            "autocomplete": {
+                                "minTextLength": 2
+                            },
+                            "control": "Dropdown",
+                            "source": {
+                                "dataSource": {
+                                    "name": "SalesChannelDataSource",
+                                    "reloadOnOpen": true,
+                                    "searchFieldPath": "description",
+                                    "requestMapping": "salesChannelRequestMapping",
+                                    "responseMapping": "salesChannelResponseMapping"
+                                },
+                                "displayFieldName": "displayName",
+                                "valueFieldName": "value"
+                            },
+                            "width": 2
+                        }
+                    ]
+                },
+                {
+                    "type": "Group",
+                    "elements": [
+                        {
+                            "elementId": "agency",
+                            "type": "Input",
+                            "label": "agencyCode",
+                            "value": {
+                                "$ref": "#/properties/request/properties/data/properties/criteria/properties/agency"
+                            },
+                            "width": 2,
+                            "autocomplete": {
+                                "minTextLength": 1,
+                                "dropDownItemsCount": 10
+                            },
+                            "control": "Dropdown",
+                            "source": {
+                                "dataSource": {
+                                    "name": "AgencyInfoDataSource",
+                                    "reloadOnOpen": true,
+                                    "searchFieldPath": "description",
+                                    "requestMapping": "agencyRequestMapping",
+                                    "responseMapping": "agencyResponseMapping"
+                                },
+                                "displayFieldName": "displayName",
+                                "valueFieldName": "value"
+                            },
+                            "name": "agency"
+                        },
+                        {
+                            "elementId": "agentTypeCode",
+                            "type": "Input",
+                            "label": "agentTypeCode",
+                            "value": {
+                                "$ref": "#/properties/request/properties/data/properties/criteria/properties/cbAgentType"
+                            },
+                            "width": 2,
+                            "autocomplete": {
+                                "minTextLength": 1
+                            },
+                            "control": "Dropdown",
+                            "source": {
+                                "dataSource": {
+                                    "name": "CbAgentTypeDataSource",
+                                    "reloadOnOpen": true,
+                                    "searchFieldPath": "description",
+                                    "requestMapping": "cbAgentTypeRequestMapping",
+                                    "responseMapping": "cbAgentTypeResponseMapping"
+                                },
+                                "displayFieldName": "displayName",
+                                "valueFieldName": "value"
+                            },
+                            "name": "agentTypeCode"
+                        },
+                        {
+                            "elementId": "orderNumber",
+                            "type": "Input",
+                            "label": "orderNumber",
+                            "value": {
+                                "$ref": "#/properties/request/properties/data/properties/criteria/properties/orderNumber"
+                            },
+                            "width": 1,
+                            "name": "orderNumber"
+                        },
+                        {
+                            "elementId": "mvzNumber",
+                            "type": "Input",
+                            "label": "mvzNumber",
+                            "value": {
+                                "$ref": "#/properties/request/properties/data/properties/criteria/properties/mvzNumber"
+                            },
+                            "width": 1,
+                            "name": "mvzNumber"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

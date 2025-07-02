@@ -1,0 +1,27 @@
+ConfigurationType	ConfigurationName	ItemType	TranslationKey	Expression	Translation_ru-RU	Translation_en-US
+DataSchema	Beneficiary	field-title	Beneficiary generated id	Beneficiary generated id	Id выгодоприобретателя	Beneficiary generated id
+DataSchema	Beneficiary	field-title	share	share	Доля	share
+DataSchema	Beneficiary	field-title	relationType	relationType	Родственная связь	relationType
+UiSchema	Beneficiary	ui-label	share	share	Доля	share
+UiSchema	Beneficiary	ui-label	relationType	relationType	Родственная связь	relationType
+DataSchema	Beneficiary	field-title	partyFullName	partyFullName	ФИО	partyFullName
+UiSchema	Beneficiary	ui-label	partyFullName	partyFullName	ФИО	partyFullName
+UiSchema	Beneficiary	ui-label	relationTypeDesc	relationTypeDesc	Родственная связь с Застрахованным	relationTypeDesc
+DataSchema	Beneficiary	field-title	dateOfBirth	dateOfBirth	Дата рождения	dateOfBirth
+UiSchema	Beneficiary	ui-label	dateOfBirth	dateOfBirth	Дата рождения	dateOfBirth
+Rule	BeneficiaryValidateBeneficiary	rule	validation@dobBeneficiary	validateBeneficiary	E: Дата рождения не должна быть раньше 1901 года и позже текущей даты	E: validation@dobBeneficiary
+Rule	BeneficiaryValidateBeneficiary	rule	validation@dobBeneficiaryEmpty	validateBeneficiary	E: Необходимо заполнить Дата рождения.	E: validation@dobBeneficiaryEmpty
+Rule	BeneficiaryValidateBeneficiary	rule	validation@shareEmpty	validateBeneficiary	E: Необходимо заполнить Доля.	E: validation@shareEmpty
+Rule	BeneficiaryValidateBeneficiary	rule	validation@relationTypeEmpty	validateBeneficiary	E: Необходимо заполнить Родственная связь.	E: validation@relationTypeEmpty
+UiSchema	Beneficiary	ui-label	personGender	personGender	Пол	personGender
+DataSchema	Beneficiary	field-title	personGender	personGender	Пол	personGender
+DataSchema	Beneficiary	enum	personGender@Male	Male	Мужской	personGender@Male
+DataSchema	Beneficiary	enum	personGender@Female	Female	Женский	personGender@Female
+Rule	BeneficiaryValidateBeneficiary	rule	validation@personGender	validateBeneficiary	E: Необходимо заполнить Пол	E: validation@personGender
+DataSchema	Beneficiary	field-title	beneficiaryCategory	beneficiaryCategory	Категория	beneficiaryCategory
+DataSchema	Beneficiary	enum	beneficiaryCategory@Standard	Standard	Стандарт	Standard
+DataSchema	Beneficiary	enum	beneficiaryCategory@NonAdult	NonAdult	Несовершеннолетнее лицо	NonAdult
+UiSchema	Beneficiary	ui-label	beneficiaryCategory	beneficiaryCategory	Категория	beneficiaryCategory
+Rule	BeneficiaryValidateBeneficiary	rule	validation@shareBeneficiaryNonAdult	validateBeneficiary	E: Доля выгодоприобретателя для категории «Несовершеннолетнее лицо» должна быть равна 100%	E: validation@shareBeneficiaryNonAdult
+Rule	BeneficiaryValidateBeneficiary	rule	validation@dobBeneficiaryNonAdult	validateBeneficiary	E: Возраст выгодоприобретателя для категории «Несовершеннолетнее лицо» на дату оформления не должен достигать 18 и более лет	E: validation@dobBeneficiaryNonAdult
+DataSchema	Beneficiary	field-title	description	description	Описание выгодоприобретателя	beneficiary description

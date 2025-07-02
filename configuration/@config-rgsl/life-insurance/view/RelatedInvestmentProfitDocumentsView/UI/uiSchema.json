@@ -1,0 +1,80 @@
+{
+    "id": "RelatedInvestmentProfitDocumentsViewUiSchema",
+    "type": "Group",
+    "elements": [
+        {
+            "type": "GridLayout",
+            "numberOfColumns": 4,
+            "elements": [
+                {
+                    "type": "Group",
+                    "elements": [
+                        {
+                            "type": "DataGrid",
+                            "orderBy": "Description",
+                            "mode": "DataSource",
+                            "header": {
+                                "showReloadButton": true,
+                                "showNumberOfResults": true
+                            },
+                            "pagination": {
+                                "mode": "Regular",
+                                "pageSizes": [
+                                    5,
+                                    10,
+                                    15
+                                ]
+                            },
+                            "selection": {
+                                "mode": "None"
+                            },
+                            "height": "None",
+                            "columns": [
+                                {
+                                    "sortable": false,
+                                    "title": "InvestmentProfit payment type description",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "value": {
+                                            "$ref": "#/properties/resultData/properties/investmentProfitPaymentTypeDescription"
+                                        }
+                                    }
+                                },
+                                {
+                                    "sortable": false,
+                                    "title": "InvestmentProfit rate",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "value": {
+                                            "$ref": "#/properties/resultData/properties/investmentProfitRate"
+                                        }
+                                    }
+                                },
+                                {
+                                    "sortable": false,
+                                    "title": "InvestmentProfit calculation date",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "value": {
+                                            "$ref": "#/properties/resultData/properties/investmentProfitCalculationDate"
+                                        }
+                                    }
+                                },
+                                {
+                                    "sortable": false,
+                                    "title": "recordState",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "value": {
+                                            "$ref": "#/properties/resultData/properties/recordState"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

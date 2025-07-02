@@ -1,0 +1,30 @@
+﻿SELECT 
+	JSON_VALUE(ud.BODY, '$.bankAccount.bankBic') BIC,
+	JSON_VALUE(ud.BODY, '$.bankAccount.bankCorrespondentAccount') CORR_ACCOUNT,
+	JSON_VALUE(ud.BODY, '$.bankAccount.number') ACCOUNT_NUMBER,
+	(SELECT
+		SUM(allocation.PAY_AMOUNT)
+	FROM ACC_IMPL.ALLOCATION allocation
+	LEFT JOIN ACC_IMPL.BANK_STATEMENT_ITEM bankStatementItem ON bankStatementItem.BANK_STATEMENT_ITEM_ID = allocation.BANK_STATEMENT_ITEM_ID
+	LEFT JOIN PAS_IMPL.POLICY_HUB policyHub ON policyHub.CONTRACT_NUMBER = allocation.DOCUMENT_NO
+	WHERE policyHub.CONTRACT_NUMBER = JSON_VALUE(ud.BODY, '$.contract.number')
+	AND CANCELLED_ALLOCATION_ID IS NULL AND CANCELLED = 0) PAY_AMOUNT_SUM,
+	SUBSTRING(JSON_VALUE(ud.BODY, '$.contract.number'), 0, CHARINDEX('-', JSON_VALUE(ud.BODY, '$.contract.number'))) AS CONTRACT_SERIES,
+    SUBSTRING(JSON_VALUE(ud.BODY, '$.contract.number'), CHARINDEX('-', JSON_VALUE(ud.BODY, '$.contract.number'))  + 1, LEN(JSON_VALUE(ud.BODY, '$.contract.number'))) AS CONTRACT_NUMBER,
+    JSON_VALUE(ud.BODY, '$.issueDate') CLOSE_DATE
+FROM BFX.UNIVERSAL_DOCUMENT ud
+LEFT JOIN CFX.PUBLISHED_ARTIFACT pa ON pa.PUBLISHED_ARTIFACT_ID = ud.PUBLISHED_ARTIFACT_ID
+LEFT JOIN CFG.PROCESS_STATE ps ON ps.PROCESS_STATE_ID = ud.STATE_ID
+WHERE
+    1 = 1
+AND pa.CODE_NAME = 'LifeInsuranceRequest'
+AND ps.CODE_NAME = 'Issued'
+AND JSON_VALUE(ud.BODY, '$.typeOfRequest') = 'Cancellation'
+AND JSON_VALUE(ud.BODY, '$.amendmentReason') = 'byClientCoolOff'
+{{#if parameters.requestIssuedDateFrom}}
+    AND CONVERT(date, ud.SYS_UPDATED_ON) >= @requestIssuedDateFrom
+{{/if}}
+{{#if parameters.requestIssuedDateTo}}
+    AND CONVERT(date, ud.SYS_UPDATED_ON) <= @requestIssuedDateTo
+{{/if}}
+ORDER BY ud.UNIVERSAL_DOCUMENT_NUMBER

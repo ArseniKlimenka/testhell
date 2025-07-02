@@ -1,0 +1,11 @@
+﻿select 
+  clm.CLAIM_STATE
+from 
+  CLM_IMPL.CLM_SAT_LATEST clm,
+  CLM_IMPL.CLM_RISK_SAT_LATEST lss,
+  BFX_IMPL.RISKS rsk
+where clm.CONTRACT_NUMBER = @contractNumber
+  and clm.CLM_HKEY = lss.CLM_RISK_HKEY
+  and lss.IS_DELETED = 0
+  and lss.CODE = rsk.CODE
+  and rsk.RISKS_GROUP = 'Death'

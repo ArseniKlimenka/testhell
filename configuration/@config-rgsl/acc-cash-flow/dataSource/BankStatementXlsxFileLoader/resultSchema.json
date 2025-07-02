@@ -1,0 +1,112 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema",
+    "description": "Result schema for BankStatementFileLoader data source.",
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+        "$recordKey": {
+            "type": "string"
+        },
+        "data": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "items": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "bankStatementItemNo": {
+                            "type": "string"
+                        },
+                        "incomeSourceId": {
+                            "type": "integer"
+                        },
+                        "direction": {
+                            "description": "1 - incoming. 2 - outgoing.",
+                            "type": "integer"
+                        },
+                        "paymentDescription": {
+                            "type": "string"
+                        },
+                        "originalPaymentDescription": {
+                            "type": "string"
+                        },
+                        "currencyCode": {
+                            "type": "string"
+                        },
+                        "amount": {
+                            "type": "number"
+                        },
+                        "paymentDate": {
+                            "type": "string",
+                            "aiFormat": "date"
+                        },
+                        "transactionDate": {
+                            "description": "Date of receipt of the bank statement.",
+                            "type": "string",
+                            "aiFormat": "date"
+                        },
+                        "isRegistry": {
+                            "description": "Flag indicates that this is an aggregated payment and should be first split into small payments.",
+                            "type": "boolean"
+                        },
+                        "isAcquiring": {
+                            "type": "boolean"
+                        },
+                        "nonAcceptance": {
+                            "type": "boolean"
+                        },
+                        "toleranceType": {
+                            "type": "integer"
+                        },
+                        "debtor": {
+                            "description": "Payer.",
+                            "type": "object",
+                            "additionalProperties": false,
+                            "properties": {
+                                "name": {
+                                    "type": "string"
+                                },
+                                "type": {
+                                    "type": "string"
+                                },
+                                "bankAccountNo": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "creditor": {
+                            "description": "Payee.",
+                            "type": "object",
+                            "additionalProperties": false,
+                            "properties": {
+                                "name": {
+                                    "type": "string"
+                                },
+                                "type": {
+                                    "type": "string"
+                                },
+                                "bankAccountNo": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "paymentSourceId": {
+                            "type": "integer"
+                        },
+                        "isMigrated": {
+                            "type": "boolean"
+                        },
+                        "rgslGuid": {
+                            "type": "string"
+                        },
+                        "rgslDocumentTypeId": {
+                            "description": "1 - receipt. 2 - write-off.",
+                            "type": "integer"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

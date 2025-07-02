@@ -1,0 +1,1 @@
+delete from bfx_impl.products where code = N'I855InnResheniya'; insert into bfx_impl.products values ('D6B61838-E075-44B8-8EEA-A30C973E3D0E', N'I855InnResheniya',N'investment',N'Драйвер Гарант Плюс 9RUB',N'ИСЖ', N'migrated', null);

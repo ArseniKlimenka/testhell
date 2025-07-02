@@ -1,0 +1,24 @@
+﻿select distinct
+    u.APPLICATION_USER_ID,
+    u.USERNAME,
+    u.LOGIN_TYPE,
+    cp.VALUE as PARTY_CODE,
+    cd.VALUE as DISPLAY_NAME,
+    ca.VALUE as IS_ACTIVE,
+    cExpireDate.VALUE as EXPIRE_DATE
+from
+	ORG.APPLICATION_USER u
+	left join ORG.APPLICATION_USER_CLAIM cp on cp.APPLICATION_USER_ID = u.APPLICATION_USER_ID and cp.CLAIM_TYPE = 'PartyCode'
+	left join ORG.APPLICATION_USER_CLAIM cd on cd.APPLICATION_USER_ID = u.APPLICATION_USER_ID and cd.CLAIM_TYPE = 'DisplayName'
+	left join ORG.APPLICATION_USER_CLAIM ca on ca.APPLICATION_USER_ID = u.APPLICATION_USER_ID and ca.CLAIM_TYPE = 'IsUserActive'
+	left join ORG.APPLICATION_USER_CLAIM cExpireDate on cExpireDate.APPLICATION_USER_ID = u.APPLICATION_USER_ID and cExpireDate.CLAIM_TYPE = 'ExpireDate'
+	left join ORG.APPLICATION_USER_GROUP_ASSIGNMENT ga on ga.APPLICATION_USER_ID = u.APPLICATION_USER_ID
+	left join ORG.APPLICATION_USER_GROUP g on g.APPLICATION_USER_GROUP_ID = ga.APPLICATION_USER_GROUP_ID
+where 1=1
+    and u.LOGIN_TYPE not in ('System', 'UserFederation')
+    {{#if parameters.username}} and UPPER(u.USERNAME) like UPPER(@username) {{/if}}
+    {{#if parameters.userGroupCode}} and g.APPLICATION_USER_GROUP_CODE = @userGroupCode {{/if}}
+    {{#if parameters.general}} and (UPPER(u.USERNAME) like UPPER(@general) or UPPER(cp.VALUE) like UPPER(@general) or UPPER(cd.VALUE) like UPPER(@general)) {{/if}}
+    {{#if parameters.isActive}} and ca.VALUE = @isActive {{/if}}
+    {{#if parameters.expireDateFrom}} and cExpireDate.VALUE >= @expireDateFrom {{/if}}
+    {{#if parameters.expireDateTo}} and cExpireDate.VALUE <= @expireDateTo {{/if}}

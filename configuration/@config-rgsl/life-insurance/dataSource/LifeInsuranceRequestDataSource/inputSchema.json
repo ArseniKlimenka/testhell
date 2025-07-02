@@ -1,0 +1,75 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "object",
+    "properties": {
+        "criteria": {
+            "type": "object",
+            "properties": {
+                "requestNumber": {
+                    "type": "string"
+                },
+                "requestState": {
+                    "$ref": "component:RequestState"
+                },
+                "requestType": {
+                    "$ref": "component:RequestType"
+                },
+                "requestAmendmentReason": {
+                    "$ref": "component:AmendmentReason"
+                },
+                "contractNumber": {
+                    "type": "string"
+                },
+                "contractState": {
+                    "$ref": "component:ContractState"
+                },
+                "contractProductGroup": {
+                    "$ref": "component:ProductGroup"
+                },
+                "contractProductCode": {
+                    "type": "string"
+                },
+                "contractAmount": {
+                    "type": "number",
+                    "aiTitle": "amount"
+                },
+                "product": {
+                    "type": "object",
+                    "properties": {
+                        "productCode": {
+                            "type": "string"
+                        },
+                        "productGroup": {
+                            "type": "string"
+                        },
+                        "productDescription": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "requestApplicantCode": {
+                    "type": "string"
+                },
+                "contractIssueDateFrom": {
+                    "type": "string",
+                    "aiFormat": "date"
+                },
+                "contractIssueDateTo": {
+                    "type": "string",
+                    "aiFormat": "date"
+                },
+                "requestIssueDateFrom": {
+                    "type": "string",
+                    "aiFormat": "date"
+                },
+                "requestIssueDateTo": {
+                    "type": "string",
+                    "aiFormat": "date"
+                }
+            }
+        },
+        "sort": {
+            "type": "array"
+        }
+    }
+}

@@ -1,0 +1,56 @@
+{
+    "processType": "MedLifeInsuranceReactivation",
+    "actors": [
+        "Operations",
+        "Viewer",
+        "System"
+    ],
+    "initialState": "Draft",
+    "states": [
+        {
+            "name": "Draft",
+            "operations": [
+                {
+                    "name": "Save"
+                }
+            ]
+        },
+        {
+            "name": "Activated",
+            "operations": [],
+            "appliesVersion": true
+        },
+        {
+            "name": "Cancelled",
+            "operations": [],
+            "discardsVersion": true
+        }
+    ],
+    "transitions": [
+        {
+            "name": "Draft_to_Activated",
+            "from": "Draft",
+            "to": "Activated",
+            "exclusiveToAssignedUser": false,
+            "allowOnValidationErrors": {
+                "all": false
+            },
+            "requiredConfirmedConstraints": {
+                "all": false
+            },
+            "whenBlocked": "DisplayNormally"
+        },
+        {
+            "name": "Draft_to_Cancelled",
+            "from": "Draft",
+            "to": "Cancelled",
+            "exclusiveToAssignedUser": false,
+            "allowOnValidationErrors": {
+                "all": true
+            },
+            "requiredConfirmedConstraints": {
+                "all": false
+            }
+        }
+    ]
+}

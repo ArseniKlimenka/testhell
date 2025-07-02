@@ -1,0 +1,55 @@
+{
+    "type": "Group",
+    "label": "SportTypes",
+    "sectionLevel": 2,
+    "width": 5,
+    "value": {
+        "$ref": "#"
+    },
+    "elements": [
+        {
+            "type": "Dropdown",
+            "label": "sportTypes",
+            "value": {
+                "$ref": "#/properties/selectedTypes"
+            },
+            "multiple": true,
+            "autocomplete": {
+                "minTextLength": 1,
+                "dropDownItemsCount": 1000,
+                "selectItemOnMatch": false
+            },
+            "source": {
+                "array": {
+                    "$ref": "#/properties/availableTypes"
+                },
+                "displayValueTemplate": "{{expr name}}"
+            },
+            "filter": "filterSportTypes",
+            "rule": {
+                "effect": "ENABLE_INITIAL",
+                "condition": {
+                    "type": "FUNC",
+                    "ruleFunction": "enableSportTypes",
+                    "value": [
+                        {
+                            "$ref": "#"
+                        }
+                    ]
+                }
+            }
+        }
+    ],
+    "rule": {
+        "effect": "SHOW",
+        "condition": {
+            "type": "FUNC",
+            "ruleFunction": "showSportTypes",
+            "value": [
+                {
+                    "$ref": "#"
+                }
+            ]
+        }
+    }
+}

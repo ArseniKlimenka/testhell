@@ -1,0 +1,113 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema",
+    "type": "object",
+    "additionalProperties": true,
+    "properties": {
+        "contractNumber": {
+            "type": "string"
+        },
+        "contractPartnerCode": {
+            "type": "string"
+        },
+        "productConfigurationVersion": {
+            "type": "integer"
+        },
+        "productCode": {
+            "type": "string"
+        },
+        "issueDate": {
+            "type": "string",
+            "aiFormat": "date"
+        },
+        "curator": {
+            "type": "string"
+        },
+        "initiator": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "userId": {
+                    "type": "string"
+                },
+                "userName": {
+                    "type": "string"
+                },
+                "partyFullName": {
+                    "type": "string"
+                },
+                "partyCode": {
+                    "type": "string"
+                },
+                "employeeCode": {
+                    "type": "string"
+                },
+                "organisationUnitCode": {
+                    "type": "string"
+                },
+                "organisationUnitName": {
+                    "type": "string"
+                }
+            }
+        },
+        "availableOrgUnits": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                    "code": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "orgUnit": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "code": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                }
+            }
+        },
+        "commissionContract": {
+            "type": "object",
+            "properties": {
+                "number": {
+                    "type": "string"
+                },
+                "agentName": {
+                    "type": "string"
+                },
+                "agentServiceProviderCode": {
+                    "type": "string"
+                },
+                "effectiveFrom": {
+                    "type": "string",
+                    "aiFormat": "date"
+                },
+                "effectiveTo": {
+                    "type": "string",
+                    "aiFormat": "date"
+                }
+            }
+        },
+        "agentAgreement": {
+            "type": "object",
+            "properties": {
+                "number": {
+                    "type": "string"
+                },
+                "displayNumber": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,28 @@
+{
+    "entityType": "Claim",
+    "condition": {
+        "events": [
+            "StatusChanged"
+        ],
+        "configuration": {
+            "names": [
+                "Claim"
+            ]
+        },
+        "documentStates": [
+            "POCreation"
+        ]
+    },
+    "sinks": [
+        {
+            "name": "ExecutePOCreation",
+            "etlService": {
+                "configuration": {
+                    "name": "CreateClaimPaymentOrdersEtlService",
+                    "version": "1"
+                }
+            }
+        }
+    ],
+    "version": "1"
+}

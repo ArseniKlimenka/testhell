@@ -1,0 +1,262 @@
+{
+    "type": "Group",
+    "metadata": {
+        "autogenerate": false
+    },
+    "width": 12,
+    "elements": [
+        {
+            "type": "Section",
+            "collapsing": {
+                "enabled": true
+            },
+            "label": "BasicAssetProperties",
+            "metadata": {
+                "autogenerate": false
+            },
+            "sectionLevel": 1,
+            "width": 12,
+            "elements": [
+                {
+                    "type": "Group",
+                    "metadata": {
+                        "autogenerate": false
+                    },
+                    "width": 12,
+                    "elements": [
+                        {
+                            "type": "DataGrid",
+                            "actions": [
+                                "Add",
+                                "Edit",
+                                "Delete",
+                                "Details"
+                            ],
+                            "columns": [
+                                {
+                                    "title": "AssetType",
+                                    "name": "AssetType",
+                                    "sortable": true,
+                                    "filter": {},
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "defaultValue": "",
+                                        "value": {
+                                            "$ref": "#/properties/asset/properties/activeType"
+                                        }
+                                    }
+                                },
+                                {
+                                    "title": "Term",
+                                    "name": "Term",
+                                    "sortable": true,
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "defaultValue": "",
+                                        "value": {
+                                            "$ref": "#/properties/asset/properties/term"
+                                        }
+                                    }
+                                },
+                                {
+                                    "title": "PaperShortName",
+                                    "name": "PaperShortName",
+                                    "sortable": true,
+                                    "filter": {},
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "defaultValue": "",
+                                        "value": {
+                                            "$ref": "#/properties/asset/properties/paperShortName"
+                                        }
+                                    }
+                                },
+                                {
+                                    "title": "ISIN",
+                                    "name": "ISIN",
+                                    "sortable": true,
+                                    "filter": {},
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "defaultValue": "",
+                                        "value": {
+                                            "$ref": "#/properties/asset/properties/idIsin"
+                                        }
+                                    }
+                                },
+                                {
+                                    "title": "Currency",
+                                    "name": "Currency",
+                                    "sortable": true,
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "defaultValue": "",
+                                        "value": {
+                                            "$ref": "#/properties/asset/properties/currencyCode"
+                                        }
+                                    }
+                                },
+                                {
+                                    "title": "Information resource",
+                                    "name": "Information resource",
+                                    "sortable": true,
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "defaultValue": "",
+                                        "value": {
+                                            "$ref": "#/properties/asset/properties/informationResource"
+                                        }
+                                    }
+                                }
+                            ],
+                            "detailsTemplates": {
+                                "edit": {
+                                    "content": {
+                                        "type": "GridLayout",
+                                        "numberOfColumns": 4,
+                                        "elements": [
+                                            {
+                                                "type": "Dropdown",
+                                                "label": "Search",
+                                                "autocomplete": {
+                                                    "minTextLength": 0,
+                                                    "dropItemsCount": 1000,
+                                                    "selectItemOnMatch": false,
+                                                    "matchCaseInsensitive": false
+                                                },
+                                                "source": {
+                                                    "dataSource": {
+                                                        "name": "AssetGeneralSearchDataSource",
+                                                        "searchFieldPath": "assetNumber",
+                                                        "resultCount": 1000,
+                                                        "requestMapping": "basicAssetPropertiesRequestMapping",
+                                                        "responseMapping": "basicAssetPropertiesResponseMapping"
+                                                    },
+                                                    "ignoreItemsExistValidation": true,
+                                                    "displayValueTemplate": "{{expr paperShortName}} ({{expr idIsin}})"
+                                                },
+                                                "useParentScope": true,
+                                                "value": {
+                                                    "$ref": "#/properties/asset"
+                                                },
+                                                "width": 3
+                                            },
+                                            {
+                                                "type": "Input",
+                                                "control": "String",
+                                                "label": "ISIN",
+                                                "metadata": {
+                                                    "autogenerate": true
+                                                },
+                                                "readOnly": true,
+                                                "useParentScope": false,
+                                                "value": {
+                                                    "$ref": "#/properties/asset/properties/idIsin"
+                                                },
+                                                "width": 1
+                                            }
+                                        ]
+                                    }
+                                }
+                            },
+                            "edit": {
+                                "mode": "Detached"
+                            },
+                            "header": {
+                                "showNumberOfResults": true,
+                                "showPaginator": true
+                            },
+                            "labelType": "H2",
+                            "metadata": {
+                                "autogenerate": true
+                            },
+                            "mode": "Array",
+                            "pagination": {
+                                "mode": "Regular"
+                            },
+                            "selection": {
+                                "mode": "Single"
+                            },
+                            "useParentScope": true,
+                            "value": {
+                                "$ref": "#/properties/assetProperties"
+                            },
+                            "width": 12
+                        },
+                        {
+                            "type": "GridLayout",
+                            "numberOfColumns": 12,
+                            "width": 12,
+                            "elements": [
+                                {
+                                    "type": "Input",
+                                    "elementId": "manualRate",
+                                    "label": "manualRate",
+                                    "source": {
+                                        "dataSource": {
+                                            "name": "GetRateOfReturnRulesEquityActivesDataSource",
+
+                                            "searchFieldPath": "manualRate",
+                                            "requestMapping": "manualRateRequestMapping",
+                                            "responseMapping": "manualRateResponseMapping"
+                                        },
+                                        "reloadOnOpen": true,
+                                        "ignoreItemsExistValidation": true,
+                                        "displayFieldName": "displayName",
+                                        "valueFieldName": "value"
+                                    },
+                                    "onValueChanged": [
+                                        {
+                                            "commandType": "executeAction",
+                                            "actionName": "manualRateOnChange"
+                                        }
+                                    ],
+                                    "control": "Dropdown",
+                                    "value": {
+                                        "$ref": "#/properties/rateOfReturnEquityActives"
+                                    },
+                                    "showAsRequired": true,
+                                    "width": 4
+                                },
+                                {
+                                    "type": "Input",
+                                    "control": "Number",
+                                    "decimalPlaces": 4,
+                                    "label": "investmentFrequency",
+                                    "value": {
+                                        "$ref": "#/properties/rateOfReturnEquityActives/properties/investmentFrequency"
+                                    },
+                                    "width": 4,
+                                    "readOnly": true
+                                },
+                                {
+                                    "type": "Input",
+                                    "control": "Number",
+                                    "decimalPlaces": 4,
+                                    "label": "assetUnitsCountOnClient",
+                                    "value": {
+                                        "$ref": "#/properties/assetUnitsCountOnClient"
+                                    },
+                                    "width": 4,
+                                    "readOnly": true
+                                }
+                            ]
+                        }
+                    ],
+                    "rule": {
+                        "effect": "ENABLE_INITIAL",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "enableBasicAssetProperties",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    }
+                }
+            ]
+        }
+    ]
+}

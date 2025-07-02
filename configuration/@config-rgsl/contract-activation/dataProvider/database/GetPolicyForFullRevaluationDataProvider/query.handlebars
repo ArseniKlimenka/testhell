@@ -1,0 +1,10 @@
+select
+	c.CONTRACT_NUMBER
+from
+	pas.CONTRACT c
+	inner join pas_impl.POLICY_HUB polh on polh.CONTRACT_NUMBER = c.CONTRACT_NUMBER
+	inner join pas_impl.POLICY_SAT_LATEST pols on pols.POLICY_HKEY = polh.POLICY_HKEY
+	inner join cfg.PROCESS_STATE ps on ps.PROCESS_STATE_ID = c.STATE_ID
+where 1=1
+	and ps.CODE_NAME in ('Active', 'Activated')
+	and pols.CURRENCY_CODE != 'RUB'

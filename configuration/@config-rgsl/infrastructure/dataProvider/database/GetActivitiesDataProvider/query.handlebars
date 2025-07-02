@@ -1,0 +1,354 @@
+﻿WITH substitutedUserActivity AS
+(
+    SELECT
+        mainUser.APPLICATION_USER_ID,
+        mainUser.USERNAME,
+        a.ACTIVITY_ID
+    FROM BFX.ACTIVITY a
+    INNER JOIN ORG.APPLICATION_USER_GROUP ag on ag.APPLICATION_USER_GROUP_CODE = a.USER_GROUP_CODE
+    INNER JOIN ORG.APPLICATION_USER_GROUP_ASSIGNMENT au ON au.APPLICATION_USER_ID = a.ASSIGNED_USER_ID AND au.APPLICATION_USER_GROUP_ID = ag.APPLICATION_USER_GROUP_ID
+    INNER JOIN ORG.APPLICATION_USER mainUser on mainUser.APPLICATION_USER_ID = au.SUBSTITUTE_USER_ID
+    WHERE
+{{#if parameters.substitutedUsersIds}}
+        au.APPLICATION_USER_ID IN (@substitutedUsersIds)
+{{else}}
+        1 <> 1
+{{/if}}
+)
+{{#if parameters.showVerification}}
+, verification_data as
+(
+select vh.verification_number,
+       vsl.state as verification_state,
+       vsl.seller_username,
+       vsl.operations_username,
+       psl.partner_code,
+       psl.partner_name,
+       ph.CONTRACT_NUMBER,
+       pa.code_name as CONTRACT_CONF_CODE_NAME,
+       psl.issue_date,
+       psl.start_date,
+       psl.end_date,
+       psl.payment_frequency_code,
+       pf.description as payment_frequency_name,
+       psl.product_code,
+       p.description as product_name,
+       p.product_group as product_group_code,
+       ps.CODE_NAME as contract_state,
+       psl.holder_name,
+       psl.holder_age,
+       psl.holder_birth_date
+  from pas_impl.verification_hub vh,
+       pas_impl.verification_sat_latest vsl,
+       pas_impl.policy_verification_link pvl,
+       pas_impl.policy_hub ph,
+       pas_impl.policy_sat_latest psl,
+       pas.CONTRACT c,
+       cfg.PROCESS_STATE ps,
+       bfx_impl.products p,
+       bfx_impl.payment_frequency pf,
+       bfx.entity_ref er,
+       cfx.published_artifact pa
+ where vh.verification_hkey = vsl.verification_hkey
+   and vh.verification_hkey = pvl.verification_hkey
+   and ph.policy_hkey = pvl.policy_hkey
+   and ph.policy_hkey = psl.policy_hkey
+   and c.CONTRACT_NUMBER = ph.CONTRACT_NUMBER
+   and ps.PROCESS_STATE_ID = c.STATE_ID
+   and psl.product_code = p.code
+   and psl.payment_frequency_code = pf.code
+   and er.business_key = ph.CONTRACT_NUMBER
+   and er.published_artifact_id = pa.published_artifact_id
+)
+{{/if}}
+SELECT
+    {{#unless parameters.noCriteria}}
+    {{#unless parameters.showVerification}}
+        CASE
+            WHEN pa.CODE_NAME = 'Claim' THEN claimSat.CONTRACT_NUMBER
+            WHEN pa.CODE_NAME = 'LifeInsuranceRequest' THEN requestSat.CONTRACT_NUMBER
+            WHEN pa.CODE_NAME = 'LifeInsuranceInquiry' OR pa.CODE_NAME = 'LifeInsurancePolicyInquiry' OR pa.CODE_NAME = 'CancellationInquiry' THEN inquirySat.CONTRACT_NUMBER
+            WHEN pa.CODE_NAME = 'Endowment' THEN endowmentSat.CONTRACT_NUMBER
+            WHEN pa.CODE_NAME like '%Cancellation%' OR pa.CODE_NAME like '%FinChange%' OR pa.CODE_NAME like '%TechnicalAmendment%' THEN amend.CONTRACT_NUMBER
+            WHEN pa.CODE_NAME like '%LifeInsuranceQuote' THEN erP.BUSINESS_KEY
+			WHEN pa.CODE_NAME like '%LifeInsurancePolicy' THEN cPh.CONTRACT_NUMBER
+            WHEN pa.CODE_NAME = 'EndowmentInquiry' THEN endowmentInquirySat.CONTRACT_NUMBER
+            ELSE NULL
+        END
+        AS CONTRACT_NUMBER,
+
+        CASE
+            WHEN pa.CODE_NAME = 'Claim' THEN claimSat.CONTRACT_CONF_CODE_NAME
+            WHEN pa.CODE_NAME = 'LifeInsuranceRequest' THEN requestSat.CONTRACT_CONF_CODE_NAME
+            WHEN pa.CODE_NAME = 'LifeInsuranceInquiry' OR pa.CODE_NAME = 'LifeInsurancePolicyInquiry' OR pa.CODE_NAME = 'CancellationInquiry' THEN inquirySat.CONTRACT_CONF_CODE_NAME
+            WHEN pa.CODE_NAME = 'Endowment' THEN endowmentSat.CONTRACT_CONF_CODE_NAME
+            WHEN pa.CODE_NAME like '%Cancellation%' OR pa.CODE_NAME like '%FinChange%' OR pa.CODE_NAME like '%TechnicalAmendment%' THEN amendPa.CODE_NAME
+            WHEN pa.CODE_NAME like '%LifeInsuranceQuote' THEN erPaP.CODE_NAME
+            WHEN pa.CODE_NAME like '%LifeInsurancePolicy' THEN cPa.CODE_NAME
+            WHEN pa.CODE_NAME = 'EndowmentInquiry' THEN endowmentInquirySat.CONTRACT_CONF_CODE_NAME
+            ELSE pa.CODE_NAME
+        END
+        AS CONTRACT_CONF_CODE_NAME,
+
+        CASE
+            WHEN pa.CODE_NAME = 'Claim' THEN claimSat.CONTRACT_HOLDER_NAME
+            WHEN pa.CODE_NAME = 'LifeInsuranceRequest' THEN requestSat.CONTRACT_HOLDER_NAME
+            WHEN pa.CODE_NAME = 'LifeInsuranceInquiry' OR pa.CODE_NAME = 'LifeInsurancePolicyInquiry' OR pa.CODE_NAME = 'CancellationInquiry' THEN inquirySat.CONTRACT_HOLDER_NAME
+            WHEN pa.CODE_NAME = 'Endowment' THEN endowmentSat.CONTRACT_HOLDER_NAME
+            WHEN pa.CODE_NAME like '%Cancellation%' OR pa.CODE_NAME like '%FinChange%' OR pa.CODE_NAME like '%TechnicalAmendment%' THEN amendPs.HOLDER_NAME
+            WHEN pa.CODE_NAME like '%LifeInsuranceQuote' THEN qPs.HOLDER_NAME
+            WHEN pa.CODE_NAME like '%LifeInsurancePolicy' THEN cPs.HOLDER_NAME
+            WHEN pa.CODE_NAME = 'EndowmentInquiry' THEN endowmentInquirySat.CONTRACT_HOLDER_NAME
+            ELSE NULL
+        END
+        AS CONTRACT_HOLDER_NAME,
+
+        CASE
+            WHEN pa.CODE_NAME = 'Claim' THEN claimSat.CONTRACT_INSURED_NAME
+            WHEN pa.CODE_NAME like '%LifeInsuranceQuote' THEN qPs.INSURED_NAME
+            WHEN pa.CODE_NAME like '%LifeInsurancePolicy' THEN cPs.INSURED_NAME
+            ELSE NULL
+        END
+        AS CONTRACT_INSURED_NAME,
+
+        pa.CODE_NAME as ENTITY_CODE_NAME,
+    {{/unless}}
+    {{/unless}}
+    a.ACTIVITY_ID,
+    e.ENTITY_ID,
+    e.BUSINESS_KEY AS BUSINESS_NUMBER,
+    ct.CODE_NAME AS CONCEPT_TYPE,
+    ps.CODE_NAME AS DOCUMENT_STATE,
+    a.ACTIVITY_TYPE,
+    a.MANUAL_ACTIVITY_TYPE,
+    a.ACTIVITY_STATUS,
+    a.ASSIGNED_USER_ID AS ASSIGNEE_ID,
+    o1.USERNAME AS ASSIGNEE_NAME,
+    a.CREATED_ON,
+    o2.USERNAME AS CREATED_BY,
+    a.CLOSED_ON,
+    o3.USERNAME AS CLOSED_BY,
+    a.USER_GROUP_CODE,
+    a.DEADLINE,
+    e.SUMMARY,
+    et.VERSIONABLE,
+    a.PRIORITY_CODE,
+    a.PRIORITY_WEIGHT,
+    a.EFFORT_CODE,
+    a.EFFORT_IN_MINUTES,
+    a.COMMENT,
+    r.RANK
+{{#if parameters.showVerification}}
+    , vd.partner_name
+    , vd.CONTRACT_NUMBER
+    , vd.CONTRACT_CONF_CODE_NAME
+    , vd.issue_date
+    , vd.start_date
+    , vd.end_date
+    , vd.payment_frequency_name
+    , vd.product_code
+    , vd.product_name
+    , vd.product_group_code
+    , vd.contract_state
+    , vd.holder_name
+    , vd.holder_age
+    , vd.holder_birth_date
+{{/if}}
+FROM
+    BFX.ACTIVITY a
+LEFT JOIN BFX.ENTITY_REF e ON a.ENTITY_REF_ID = e.ENTITY_REF_ID
+LEFT JOIN CFX.PUBLISHED_ARTIFACT pa on pa.PUBLISHED_ARTIFACT_ID = e.PUBLISHED_ARTIFACT_ID
+LEFT JOIN CFG.CONCEPT_TYPE ct ON ct.CONCEPT_TYPE_ID = pa.CONCEPT_TYPE_ID
+LEFT JOIN ORG.APPLICATION_USER o1 ON o1.APPLICATION_USER_ID = a.ASSIGNED_USER_ID
+LEFT JOIN ORG.APPLICATION_USER o2 ON o2.APPLICATION_USER_ID = a.CREATION_CAUSED_BY
+LEFT JOIN ORG.APPLICATION_USER o3 ON o3.APPLICATION_USER_ID = a.CLOSING_CAUSED_BY
+LEFT JOIN CFG.PROCESS_STATE ps ON ps.PROCESS_STATE_ID = a.DOCUMENT_STATE
+LEFT JOIN CFG.ENTITY_TYPE et ON et.ENTITY_TYPE_ID = e.ENTITY_TYPE_ID
+LEFT JOIN BFX.ACTIVITY_RANK r on r.ACTIVITY_ID = a.ACTIVITY_ID
+{{#unless parameters.noCriteria}}
+{{#unless parameters.showVerification}}
+    LEFT JOIN PAS.CONTRACT c ON c.CONTRACT_ID = e.ENTITY_ID
+    LEFT JOIN CFX.PUBLISHED_ARTIFACT cPa on cPa.PUBLISHED_ARTIFACT_ID = c.PUBLISHED_ARTIFACT_ID
+    LEFT JOIN PAS_IMPL.POLICY_HUB cPh ON cPh.CONTRACT_NUMBER = c.CONTRACT_NUMBER
+    LEFT JOIN PAS_IMPL.POLICY_SAT_LATEST cPs ON cPs.POLICY_HKEY = cPh.POLICY_HKEY
+    LEFT JOIN PAS_IMPL.QUOTE_HUB qPh ON qPh.CONTRACT_NUMBER = c.CONTRACT_NUMBER
+    LEFT JOIN PAS_IMPL.QUOTE_SAT_LATEST qPs ON qPs.QUOTE_HKEY = qPh.QUOTE_HKEY
+    LEFT JOIN BFX.ENTITY_REF erQ ON erQ.BUSINESS_KEY = c.CONTRACT_NUMBER
+    LEFT JOIN bfx.ENTITY_REF erP ON erP.PARENT_ID = erQ.ENTITY_ID and erp.ENTITY_TYPE_ID = erQ.ENTITY_TYPE_ID
+    LEFT JOIN CFX.PUBLISHED_ARTIFACT erPaP on erPaP.PUBLISHED_ARTIFACT_ID = erP.PUBLISHED_ARTIFACT_ID
+
+    LEFT JOIN BFX.UNIVERSAL_DOCUMENT ud ON ud.UNIVERSAL_DOCUMENT_ID = e.ENTITY_ID
+    LEFT JOIN PAS_IMPL.INQUIRY_HUB inquiryHub ON inquiryHub.INQUIRY_NUMBER = ud.UNIVERSAL_DOCUMENT_NUMBER
+    LEFT JOIN PAS_IMPL.INQUIRY_SAT_LATEST inquirySat ON inquirySat.INQUIRY_HKEY = inquiryHub.INQUIRY_HKEY
+    LEFT JOIN UNI_IMPL.RQT_HUB requestHub ON requestHub.REQUEST_NUMBER = ud.UNIVERSAL_DOCUMENT_NUMBER
+    LEFT JOIN UNI_IMPL.RQT_SAT_LATEST requestSat ON requestSat.RQT_HKEY = requestHub.RQT_HKEY
+    LEFT JOIN EWT_IMPL.EWT_HUB endowmentHub ON endowmentHub.ENDOWMENT_NUMBER = ud.UNIVERSAL_DOCUMENT_NUMBER
+    LEFT JOIN EWT_IMPL.EWT_SAT_LATEST endowmentSat ON endowmentSat.EWT_HKEY = endowmentHub.EWT_HKEY
+
+    LEFT JOIN EWT_IMPL.ENDOWMENT_INQUIRY_HUB endowmentInquiryHub ON endowmentInquiryHub.INQUIRY_NUMBER = ud.UNIVERSAL_DOCUMENT_NUMBER
+    LEFT JOIN EWT_IMPL.ENDOWMENT_INQUIRY_SAT endowmentInquirySat ON endowmentInquirySat.ENDOWMENT_INQUIRY_HKEY = endowmentInquiryHub.ENDOWMENT_INQUIRY_HKEY
+
+    LEFT JOIN CLM.CLAIM claim ON claim.CLAIM_ID = e.ENTITY_ID
+    LEFT JOIN CLM_IMPL.CLM_HUB claimHub ON claimHub.CLAIM_NUMBER = claim.CLAIM_NUMBER
+    LEFT JOIN CLM_IMPL.CLM_SAT_LATEST claimSat ON claimSat.CLM_HKEY = claimHub.CLM_HKEY
+
+    LEFT JOIN PAS.CONTRACT amend ON amend.CONTRACT_ID = c.ORIGINAL_DOCUMENT_ID AND c.SEQ_NUMBER != 0
+    LEFT JOIN CFX.PUBLISHED_ARTIFACT amendPa on amendPa.PUBLISHED_ARTIFACT_ID = amend.PUBLISHED_ARTIFACT_ID
+    LEFT JOIN PAS_IMPL.POLICY_HUB amendPh ON amendPh.CONTRACT_NUMBER = amend.CONTRACT_NUMBER
+    LEFT JOIN PAS_IMPL.POLICY_SAT_LATEST amendPs ON amendPs.POLICY_HKEY = amendPh.POLICY_HKEY
+{{/unless}}
+{{/unless}}
+{{#if parameters.showVerification}}
+    INNER HASH JOIN verification_data vd on vd.verification_number = e.business_key
+{{/if}}
+WHERE
+    1 = 1
+{{#if parameters.entityId}}
+    AND e.ENTITY_ID = @entityId
+{{/if}}
+
+{{#if parameters.businessNumber}}
+    AND e.BUSINESS_KEY = @businessNumber
+{{/if}}
+
+{{#if parameters.businessNumbers}}
+    AND e.BUSINESS_KEY in (@businessNumbers)
+{{/if}}
+
+{{#if parameters.documentState}}
+    AND ps.CODE_NAME = @documentState
+{{/if}}
+
+{{#if parameters.groupCode}}
+    AND a.USER_GROUP_CODE = @groupCode
+{{/if}}
+
+{{#if parameters.createdOnTo}}
+    AND a.CREATED_ON <= @createdOnTo
+{{/if}}
+
+{{#if parameters.createdOnFrom}}
+    AND a.CREATED_ON >= @createdOnFrom
+{{/if}}
+
+{{#if parameters.closedOnTo}}
+    AND a.CLOSED_ON <= @closedOnTo
+{{/if}}
+
+{{#if parameters.closedOnFrom}}
+    AND a.CLOSED_ON >= @closedOnFrom
+{{/if}}
+
+{{#if parameters.deadlineTo}}
+    AND a.DEADLINE <= @deadlineTo
+{{/if}}
+
+{{#if parameters.deadlineFrom}}
+    AND a.DEADLINE >= @deadlineFrom
+{{/if}}
+
+{{#if parameters.activityStatus}}
+    AND a.ACTIVITY_STATUS = @activityStatus
+{{/if}}
+
+{{#if parameters.activityType}}
+    AND a.ACTIVITY_TYPE = @activityType
+{{/if}}
+
+{{#if parameters.hasAssigneeId}}
+    AND a.ASSIGNED_USER_ID IS NOT NULL
+{{/if}}
+
+{{#if parameters.doesNotHaveAssigneeId}}
+    AND a.ASSIGNED_USER_ID IS NULL
+{{/if}}
+
+{{#if parameters.assigneeId}}
+    AND (a.ASSIGNED_USER_ID = @assigneeId OR A.ACTIVITY_ID IN (
+            SELECT ACTIVITY_ID FROM substitutedUserActivity WHERE APPLICATION_USER_ID = @assigneeId
+        )
+    )
+{{/if}}
+
+{{#if parameters.userId}}
+    AND a.USER_GROUP_CODE in (
+        SELECT g.APPLICATION_USER_GROUP_CODE
+        FROM org.APPLICATION_USER u
+        INNER JOIN org.APPLICATION_USER_GROUP_ASSIGNMENT ug on u.APPLICATION_USER_ID = ug.APPLICATION_USER_ID
+        INNER JOIN org.APPLICATION_USER_GROUP g on g.APPLICATION_USER_GROUP_ID = ug.APPLICATION_USER_GROUP_ID
+        WHERE u.APPLICATION_USER_ID = @userId
+    )
+{{/if}}
+
+{{#unless parameters.noCriteria}}
+{{#unless parameters.showVerification}}
+    {{#if parameters.contractNumbers}}
+        AND (requestSat.CONTRACT_NUMBER IN (@contractNumbers)
+            OR claimSat.CONTRACT_NUMBER IN (@contractNumbers)
+            OR inquirySat.CONTRACT_NUMBER IN (@contractNumbers)
+            OR endowmentSat.CONTRACT_NUMBER IN (@contractNumbers)
+            OR amend.CONTRACT_NUMBER IN (@contractNumbers)
+        )
+    {{/if}}
+    {{#if parameters.holderName}}
+    	AND (cPs.HOLDER_NAME LIKE (@holderName)
+            OR qPs.HOLDER_NAME LIKE (@holderName)
+            OR requestSat.CONTRACT_HOLDER_NAME LIKE (@holderName)
+            OR claimSat.CONTRACT_HOLDER_NAME LIKE (@holderName)
+            OR inquirySat.CONTRACT_HOLDER_NAME LIKE (@holderName)
+            OR endowmentSat.CONTRACT_HOLDER_NAME LIKE (@holderName)
+            OR amendPs.HOLDER_NAME LIKE (@holderName)
+        )
+    {{/if}}
+    {{#if parameters.insuredName}}
+        AND (claimSat.CONTRACT_INSURED_NAME LIKE (@insuredName)
+    	    OR cPs.INSURED_NAME LIKE (@insuredName)
+            OR qPs.INSURED_NAME LIKE (@insuredName)
+        )
+    {{/if}}
+    AND pa.CODE_NAME != 'LifeInsuranceAttachmentVerification'
+{{/unless}}
+{{/unless}}
+
+{{#if parameters.showVerification}}
+    {{#if parameters.holderName}}
+        and vd.holder_name like @holderName
+    {{/if}}
+    {{#if parameters.holderAgeFrom}}
+        and vd.holder_age >= @holderAgeFrom
+    {{/if}}
+    {{#if parameters.holderAgeTo}}
+        and vd.holder_age <= @holderAgeTo
+    {{/if}}
+    {{#if parameters.contractNumber}}
+        and vd.CONTRACT_NUMBER like @contractNumber
+    {{/if}}
+    {{#if parameters.contractNumbers}}
+        and vd.CONTRACT_NUMBER in (@contractNumbers)
+    {{/if}}
+    {{#if parameters.issueDateFrom}}
+        and vd.issue_date >= @issueDateFrom
+    {{/if}}
+    {{#if parameters.issueDateTo}}
+        and vd.issue_date <= @issueDateTo
+    {{/if}}
+    {{#if parameters.paymentFrequencyCode}}
+        and vd.payment_frequency_code = @paymentFrequencyCode
+    {{/if}}
+    {{#if parameters.productCode}}
+        and vd.product_code = @productCode
+    {{/if}}
+    {{#if parameters.productCodes}}
+        and vd.product_code in (@productCodes)
+    {{/if}}
+    {{#if parameters.partnerCode}}
+        and vd.partner_code = @partnerCode
+    {{/if}}
+    {{#if parameters.attachmentVerificationState}}
+        and vd.verification_state = @attachmentVerificationState
+    {{/if}}
+    {{#if parameters.contractStates}}
+        and vd.contract_state in (@contractStates)
+    {{/if}}
+{{/if}}
+

@@ -1,0 +1,87 @@
+{{concat 'create'}} table #INSTALLMENT_DETAILS
+(
+	CONTRACT_NUMBER nvarchar(64),
+	DUE_DATE date,
+	POSTING_DATE date,
+	DEADLINE_DATE date,
+	OBJECT_CODE nvarchar(128),
+	ITEM_NO nvarchar(50),
+	AMOUNT decimal(15, 2),
+	OPEN_AMOUNT decimal(15, 2),
+	OPEN_AMOUNT_NO_RSD decimal(15, 2)
+);
+
+{{concat 'insert'}} into #INSTALLMENT_DETAILS(CONTRACT_NUMBER, DUE_DATE, POSTING_DATE, DEADLINE_DATE, OBJECT_CODE, ITEM_NO, AMOUNT, OPEN_AMOUNT, OPEN_AMOUNT_NO_RSD)
+select
+	polh.CONTRACT_NUMBER,
+	ppl.DUE_DATE,
+	ppsl.POSTING_DATE,
+	ppsl.DEADLINE_DATE,
+	ppsl.OBJECT_CODE,
+	ppsl.ITEM_NO,
+	ppsl.AMOUNT,
+	ppsl.AMOUNT as OPEN_AMOUNT,
+	ppsl.AMOUNT as OPEN_AMOUNT_NO_RSD
+from
+	pas_impl.POLICY_HUB polh
+	inner join pas_impl.P_PAYMENT_PLAN_LINK ppl on ppl.POLICY_HKEY = polh.POLICY_HKEY
+	inner join pas_impl.P_PAYMENT_PLAN_SAT ppsl on ppsl.P_PAYMENT_PLAN_HKEY = ppl.P_PAYMENT_PLAN_HKEY
+	left join BFX_IMPL.RISKS risk on risk.CODE = ppsl.ITEM_NO
+	left join BFX_IMPL.RISK_TYPE rt on rt.RISK_TYPE = risk.[TYPE]
+where 1=1
+	and ppsl.LOAD_DATE = (
+		select max(f.LOAD_DATE)
+		from pas_impl.P_PAYMENT_PLAN_SAT f
+		where f.P_PAYMENT_PLAN_HKEY = ppsl.P_PAYMENT_PLAN_HKEY
+			and f.LOAD_DATE < DATEADD(day, 1, @onDate)
+	)
+{{#if parameters.contractNumber}}
+	and polh.CONTRACT_NUMBER = @contractNumber
+{{/if}}
+{{#if parameters.contractNumbers}}
+	and polh.CONTRACT_NUMBER in (@contractNumbers)
+{{/if}}
+;
+
+{{concat 'insert'}} into #INSTALLMENT_DETAILS(CONTRACT_NUMBER, DUE_DATE, POSTING_DATE, DEADLINE_DATE, OBJECT_CODE, ITEM_NO, AMOUNT, OPEN_AMOUNT, OPEN_AMOUNT_NO_RSD)
+select
+	alc.DOCUMENT_NO as CONTRACT_NUMBER,
+	alcp.DUE_DATE,
+	matp.POSTING_DATE,
+	null as DEADLINE_DATE,
+	matp.OBJECT_CODE,
+	matp.SOURCE_LINE_ID as ITEM_NO,
+	0 as AMOUNT,
+	-(mat.DOC_AMOUNT + mat.TOLERANCE_DOC_AMOUNT) as OPEN_AMOUNT,
+	case when bsi.PAYMENT_SOURCE_ID = 4 then 0 else -(mat.DOC_AMOUNT + mat.TOLERANCE_DOC_AMOUNT) end as OPEN_AMOUNT_NO_RSD
+from
+	ACC_IMPL.ALLOCATION alc
+	inner join acc_impl.BANK_STATEMENT_ITEM bsi on bsi.BANK_STATEMENT_ITEM_ID = alc.BANK_STATEMENT_ITEM_ID
+	inner join ACC_IMPL.ALLOCATION_POLICY alcp on alcp.ALLOCATION_ID = alc.ALLOCATION_ID
+	inner join ACC_IMPL.MATCHING mat on mat.ALLOCATION_ID = alc.ALLOCATION_ID
+	inner join ACC_IMPL.MATCHING_POLICY matp on matp.MATCHING_ID = mat.MATCHING_ID
+where 1=1
+	and mat.CREATE_DATE < DATEADD(day, 1, @onDate)
+{{#if parameters.contractNumber}}
+	and alc.DOCUMENT_NO = @contractNumber
+{{/if}}
+{{#if parameters.contractNumbers}}
+	and alc.DOCUMENT_NO in (@contractNumbers)
+{{/if}}
+;
+
+select
+	CONTRACT_NUMBER,
+	DUE_DATE,
+	POSTING_DATE,
+	max(DEADLINE_DATE) as DEADLINE_DATE,
+	OBJECT_CODE,
+	ITEM_NO,
+	sum(AMOUNT) as AMOUNT,
+	sum(OPEN_AMOUNT) as OPEN_AMOUNT,
+	sum(OPEN_AMOUNT_NO_RSD) as OPEN_AMOUNT_NO_RSD
+from #INSTALLMENT_DETAILS
+group by CONTRACT_NUMBER, DUE_DATE, POSTING_DATE, OBJECT_CODE, ITEM_NO
+;
+
+{{concat 'drop'}} table #INSTALLMENT_DETAILS{{concat ';'}}

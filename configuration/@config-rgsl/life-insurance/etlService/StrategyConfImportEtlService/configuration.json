@@ -1,0 +1,48 @@
+{
+    "mainDataSource": "ImportStagingDataSource",
+    "allowParallelExecution": true,
+    "additionalDataSources": [
+        "GetStrategyConfDataSource"
+    ],
+    "sinks": [
+        {
+            "name": "WriteSuccessStatus",
+            "database": {
+                "tables": [
+                    "BFX.IMPORT_RECORD_STATUS"
+                ]
+            }
+        },
+        {
+            "name": "WriteToStrategyConfTable",
+            "database": {
+                "tables": [
+                    "BFX_IMPL.STRATEGY_CONF"
+                ]
+            }
+        }
+    ],
+    "errorSinks": [
+        {
+            "name": "WriteErrorStatus",
+            "database": {
+                "tables": [
+                    "BFX.IMPORT_RECORD_STATUS"
+                ]
+            }
+        }
+    ],
+    "completionSinks": [
+        {
+            "name": "FinishedImporting",
+            "documentTransition": {
+                "transition": {
+                    "transitionName": "FinishImporting",
+                    "configurationName": "StrategyConfImport",
+                    "configurationVersion": "1"
+                }
+            }
+        }
+    ],
+    "version": "1"
+}

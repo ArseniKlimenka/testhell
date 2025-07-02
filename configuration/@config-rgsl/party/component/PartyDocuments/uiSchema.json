@@ -1,0 +1,105 @@
+{
+    "type": "GridLayout",
+    "numberOfColumns": 4,
+    "elements": [
+        {
+            "type": "DataGrid",
+            "mode": "Array",
+            "label": "PartyDocuments",
+            "labelType": "H1",
+            "pagination": {
+                "mode": "Regular",
+                "pageSizes": [
+                    5,
+                    10,
+                    15
+                ],
+                "defaultPageSize": 5
+            },
+            "isCollapsed": false,
+            "value": {
+                "$ref": "#"
+            },
+            "actions": [
+                "Add",
+                "Edit",
+                "Delete"
+            ],
+            "edit": {
+                "mode": "Detached",
+                "onBeforeGridAction": "documentOnBeforeGridAction",
+                "onAfterGridAction": "documentOnAfterGridAction"
+            },
+            "checkIfRowActionIsAllowed": "arrayCheckRowOperationHandler",
+            "height": "Small",
+            "columns": [
+                {
+                    "title": "docTypeDesc",
+                    "name": "docTypeDesc",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/docType/properties/docTypeDesc"
+                        }
+                    }
+                },
+                {
+                    "title": "docSeries",
+                    "name": "docSeries",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/docSeries"
+                        }
+                    }
+                },
+                {
+                    "title": "docNumber",
+                    "name": "docNumber",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/docNumber"
+                        }
+                    }
+                },
+                {
+                    "title": "issueDate",
+                    "name": "issueDate",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/issueDate"
+                        }
+                    }
+                },
+                {
+                    "title": "expireDate",
+                    "name": "expireDate",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/expireDate"
+                        }
+                    }
+                }
+            ],
+            "detailsTemplates": {
+                "edit": {
+                    "content": {
+                        "type": "Component",
+                        "name": "PartyDocument",
+                        "value": {
+                            "$ref": "#"
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}

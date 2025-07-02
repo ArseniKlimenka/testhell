@@ -1,0 +1,3 @@
+UPDATE BFX_IMPL.INCOME_SOURCE
+   SET DESCRIPTION = N'Выплаты соц. характера'
+ WHERE CODE = N'4'

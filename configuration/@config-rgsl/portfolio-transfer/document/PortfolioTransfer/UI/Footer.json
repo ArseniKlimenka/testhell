@@ -1,0 +1,35 @@
+{
+    "type": "GridLayout",
+    "numberOfColumns": 3,
+    "elements": [
+        {
+            "type": "Group",
+            "stackContent": "Left",
+            "width": 2,
+            "elements": [
+                {
+                    "type": "Button",
+                    "label": "exportReport",
+                    "onClick": "exportReport",
+                    "icon": {
+                        "name": "Print",
+                        "color": "BackgroundColor",
+                        "size": "Small"
+                    }
+                }
+            ],
+            "rule": {
+                "effect": "ENABLE_INITIAL",
+                "condition": {
+                    "type": "FUNC",
+                    "ruleFunction": "canExportReport",
+                    "value": [
+                        {
+                            "$ref": "#"
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}

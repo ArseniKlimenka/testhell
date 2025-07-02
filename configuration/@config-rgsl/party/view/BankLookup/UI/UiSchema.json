@@ -1,0 +1,195 @@
+{
+    "type": "Group",
+    "elements": [
+        {
+            "type": "GridLayout",
+            "numberOfColumns": 12,
+            "elements": [
+                {
+                    "type": "Component",
+                    "name": "GeneralViewHeader",
+                    "value": {
+                        "$ref": "#"
+                    }
+                },
+                {
+                    "type": "Section",
+                    "label": "",
+                    "elements": [
+                        {
+                            "type": "Group",
+                            "elements": [
+                                {
+                                    "type": "Input",
+                                    "label": "name",
+                                    "value": {
+                                        "$ref": "#/properties/request/properties/data/properties/criteria/properties/name"
+                                    },
+                                    "width": 4,
+                                    "onValueChanged": [
+                                        {
+                                            "commandType": "executeOperation",
+                                            "operation": "SEARCH",
+                                            "errorHandling": "silent",
+                                            "data": null
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "Input",
+                                    "label": "bic",
+                                    "value": {
+                                        "$ref": "#/properties/request/properties/data/properties/criteria/properties/bic"
+                                    },
+                                    "width": 4,
+                                    "onValueChanged": [
+                                        {
+                                            "commandType": "executeOperation",
+                                            "operation": "SEARCH",
+                                            "errorHandling": "silent",
+                                            "data": null
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "Input",
+                                    "label": "correspondentAccount",
+                                    "value": {
+                                        "$ref": "#/properties/request/properties/data/properties/criteria/properties/correspondentAccount"
+                                    },
+                                    "width": 4,
+                                    "onValueChanged": [
+                                        {
+                                            "commandType": "executeOperation",
+                                            "operation": "SEARCH",
+                                            "errorHandling": "silent",
+                                            "data": null
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "Group",
+                    "elements": [
+                        {
+                            "type": "Group",
+                            "width": 6,
+                            "stackContent": "Left",
+                            "elements": [
+                                {
+                                    "type": "Button",
+                                    "value": {
+                                        "$ref": "#/properties/response/properties/data"
+                                    },
+                                    "onClick": [
+                                        {
+                                            "commandType": "executeOperation",
+                                            "operation": "SEARCH"
+                                        }
+                                    ],
+                                    "submitOnEnter": true,
+                                    "icon": {
+                                        "name": "Search",
+                                        "color": "BackgroundColor",
+                                        "size": "Small"
+                                    },
+                                    "label": "Search"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Group",
+                            "width": 6,
+                            "stackContent": "Right",
+                            "elements": [
+                                {
+                                    "type": "Button",
+                                    "label": "Clear",
+                                    "onClick": [
+                                        {
+                                            "commandType": "raiseEvent",
+                                            "eventName": "ClearFilter"
+                                        }
+                                    ],
+                                    "icon": {
+                                        "name": "Times",
+                                        "color": "BackgroundColor",
+                                        "size": "Small"
+                                    },
+                                    "value": {
+                                        "$ref": "#/properties/response/properties/data"
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "Group",
+                    "elements": [
+                        {
+                            "type": "DataGrid",
+                            "orderBy": "Code",
+                            "mode": "DataSource",
+                            "pagination": {
+                                "mode": "Regular",
+                                "pageSizes": [
+                                    5,
+                                    10,
+                                    15
+                                ]
+                            },
+                            "selection": {
+                                "mode": "Single",
+                                "enableRowSelection": true,
+                                "showCheckBox": true
+                            },
+                            "height": "None",
+                            "columns": [
+                                {
+                                    "sortable": true,
+                                    "title": "name",
+                                    "name": "name",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "defaultValue": "",
+                                        "value": {
+                                            "$ref": "#/properties/resultData/properties/name"
+                                        }
+                                    }
+                                },
+                                {
+                                    "sortable": true,
+                                    "title": "bic",
+                                    "name": "bic",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "defaultValue": "",
+                                        "value": {
+                                            "$ref": "#/properties/resultData/properties/bic"
+                                        }
+                                    }
+                                },
+                                {
+                                    "sortable": true,
+                                    "title": "correspondentAccount",
+                                    "name": "correspondentAccount",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "defaultValue": "",
+                                        "value": {
+                                            "$ref": "#/properties/resultData/properties/correspondentAccount"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,28 @@
+{
+    "entityType": "UniversalVersionedDocument",
+    "condition": {
+        "events": [
+            "Created"
+        ],
+        "configuration": {
+            "names": [
+                "AccountingCertificate",
+                "AccountingCertificateCorrection"
+            ]
+        }
+    },
+    "executionOrderWeight": 10,
+    "sinks": [
+        {
+            "name": "ChangeStateToChecked",
+            "documentTransition": {
+                "transition": {
+                    "transitionName": "Draft_To_Checked",
+                    "configurationName": "AccountingCertificate",
+                    "configurationVersion": "1"
+                }
+            }
+        }
+    ],
+    "version": "1"
+}

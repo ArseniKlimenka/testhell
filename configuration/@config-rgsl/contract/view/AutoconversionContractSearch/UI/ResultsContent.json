@@ -1,0 +1,116 @@
+{
+    "type": "Group",
+    "elements": [
+        {
+            "type": "DataGrid",
+            "elementId": "generalContractSearchTable",
+            "mode": "DataSource",
+            "pagination": {
+                "mode": "Regular",
+                "pageSizes": [
+                    5,
+                    10,
+                    15
+                ]
+            },
+            "selection": {
+                "mode": "Single",
+                "enableRowSelection": true,
+                "showCheckBox": true
+            },
+            "columns": [
+                {
+                    "title": "contractNumber",
+                    "name": "contractNumber",
+                    "cellContent": {
+                        "type": "Link",
+                        "targetType": "Url",
+                        "openInNewTab": false,
+                        "value": {
+                            "mapping": "urlMapping",
+                            "$ref": "#"
+                        },
+                        "content": {
+                            "text": {
+                                "type": "OutputText",
+                                "textProperties": [
+                                    "bold"
+                                ],
+                                "template": "{{expr contractNumber}}",
+                                "value": {
+                                    "$ref": "#/properties/resultData/properties"
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "title": "executedOn",
+                    "name": "executedOn",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "template": "{{#if executedOn}}{{expr executedOn 'dt:dd.MM.yyyy HH::mm::ss'}}{{/if}}",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/resultData"
+                        }
+                    }
+                },
+                {
+                    "title": "errorMessageDescription",
+                    "name": "executedOn",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/errorMessageDescription"
+                        }
+                    }
+                },
+                {
+                    "title": "errorMessage",
+                    "name": "errorMessage",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/errorMessage"
+                        }
+                    }
+                },
+                {
+                    "title": "errorCode",
+                    "name": "errorCode",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/errorCode"
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "type": "GridLayout",
+            "numberOfColumns": 4,
+            "elements": [
+                {
+                    "type": "Group",
+                    "stackContent": "Left",
+                    "width": 1,
+                    "elements": [
+                        {
+                            "type": "Button",
+                            "label": "Export",
+                            "submitOnEnter": true,
+                            "onClick": [
+                                {
+                                    "commandType": "executeOperation",
+                                    "operation": "EXPORT"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

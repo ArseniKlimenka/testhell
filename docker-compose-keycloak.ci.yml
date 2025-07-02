@@ -1,0 +1,102 @@
+services:
+
+  client:
+    environment:
+      ADINSURE_CLIENT_apiBaseUrl: "http://server:60000/"
+      ADINSURE_CLIENT_authConfig__issuer: "http://keycloak:8080/realms/adinsure"
+      ADINSURE_CLIENT_authConfig__redirectUri: "http://client/entry/login-redirect?"
+      ADINSURE_CLIENT_authConfig__postLogoutRedirectUri: "http://client/entry"
+      ADINSURE_CLIENT_authConfig__silentRefreshRedirectUri: "http://client/oauth-silent-refresh.html"
+      ADINSURE_CLIENT_serverMessagesSettings__serverUrl: "http://signalr:60006/api/server-side-messages"
+
+  server:
+    build:
+      context: ./extensions/server/
+      dockerfile: ./../../docker/Dockerfile.server
+      args:
+        - AZURE_CLIENT_ID
+        - AZURE_CLIENT_SECRET
+    environment:
+      ADINSURE_appSettings__AdInsure__Settings__OAuthIdentity__ValidIssuers__0: "http://keycloak:8080/realms/adinsure"
+      ADINSURE_environmentVariables__serverBaseUrl: "http://server:60000"
+      ADINSURE_environmentVariables__clientBaseUrl: "http://client"
+
+  db:
+    deploy:
+      resources:
+        limits:
+          memory: 10g
+
+  db-migrate:
+    build:
+      context: ./database/
+      dockerfile: ./../docker/Dockerfile.db-migrate
+      args:
+        - AZURE_CLIENT_ID
+        - AZURE_CLIENT_SECRET
+
+  publish:
+    deploy:
+      resources:
+        limits:
+          cpus: '2'
+          memory: 3g
+    image: registryru.adacta-fintech.ru/adinsure/mono/ops/build:35-latest-node18
+    platform: linux
+    profiles: ["publish"]
+    environment:
+      ADI_ENVIRONMENT: ${ADI_ENVIRONMENT}
+      CI: $CI
+      ADACTA_GITLABRU_TOKEN: "${ADACTA_GITLABRU_TOKEN}"
+      MOCHA_COLORS: "TRUE"
+    volumes:
+      - ./:/repo
+    depends_on:
+      server:
+        condition: service_healthy
+    command: [ "pwsh", "-wd", "./repo", "-Command", "./.build/ci/external/Invoke-Publish.ps1 -TargetEnvironment ${ADI_ENVIRONMENT}"]
+
+  api-tests:
+    image: registryru.adacta-fintech.ru/adinsure/mono/ops/build:35-latest-node18
+    platform: linux
+    deploy:
+      resources:
+        limits:
+          memory: 8g
+    profiles: ["api-tests"]
+    environment:
+      ADI_ENVIRONMENT: ${ADI_ENVIRONMENT}
+      API_TESTS_CUSTOM_COMMAND: ${API_TESTS_CUSTOM_COMMAND}
+      ADACTA_GITLABRU_TOKEN: "${ADACTA_GITLABRU_TOKEN}"
+      MOCHA_COLORS: "TRUE"
+      CI_PIPELINE_SOURCE: ${CI_PIPELINE_SOURCE}
+      CI_COMMIT_REF_SLUG: ${CI_COMMIT_REF_SLUG}
+      CI_COMMIT_REF_NAME: ${CI_COMMIT_REF_NAME}
+      CI_JOB_URL: ${CI_JOB_URL}
+      CI: $CI
+    volumes:
+      - ./:/repo
+    command: [ "pwsh", "-wd", "./repo", "-Command", "./.build/ci/external/Invoke-ApiTestsV2.ps1 -Environment ${ADI_ENVIRONMENT} -CustomCommand '${API_TESTS_CUSTOM_COMMAND}'"]
+
+  ui-tests:
+    deploy:
+      resources:
+        limits:
+          cpus: '10'
+          memory: 3g
+    image: registryru.adacta-fintech.ru/adinsure/mono/ops/build:35-latest-node18
+    platform: linux
+    profiles: ["ui-tests"]
+    environment:
+      ADI_ENVIRONMENT: ${ADI_ENVIRONMENT}
+      CI: $CI
+      BROWSER: ${BROWSER}
+      REPORT_PORTAL_PROJECT: ${REPORT_PORTAL_PROJECT}
+      REPORT_PORTAL_TOKEN: ${REPORT_PORTAL_TOKEN}
+      REPORT_PORTAL_URL: ${REPORT_PORTAL_URL}
+      CI_PIPELINE_SOURCE: ${CI_PIPELINE_SOURCE}
+      ADACTA_GITLABRU_TOKEN: "${ADACTA_GITLABRU_TOKEN}"
+      MOCHA_COLORS: "TRUE"
+    volumes:
+      - ./:/repo
+    command: [ "pwsh", "-wd", "./repo", "-Command", "yarn run import-test-data -e ${ADI_ENVIRONMENT} && ./.build/ci/external/Invoke-UITests.ps1 -Label ${ADI_ENVIRONMENT} -Environment ${ADI_ENVIRONMENT} -ReportPortalProject ${REPORT_PORTAL_PROJECT} -Browser ${BROWSER}"]

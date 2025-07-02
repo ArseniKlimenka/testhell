@@ -1,0 +1,84 @@
+{
+    // WebApi base Url
+    "apiBaseUrl": "https://adinsure-prpd-server.rgsl.ru/",
+    "authConfig": {
+        // Url of the Identity Provider
+        "issuer": "https://adinsure-prpd-auth.rgsl.ru",
+        // URL of the SPA to redirect the user to after login
+        "redirectUri": "https://adinsure-prpd.rgsl.ru/entry/login-redirect?",
+        // The SPA's id. The SPA is registerd with this id at the auth-server
+        "clientId": "web-client-vnext",
+        // set the scope for the permissions the client should request
+        "scope": "openid profile email roles adinsure",
+        // URL of the SPA to redirect the user to after logout
+        "postLogoutRedirectUri": "https://adinsure-prpd.rgsl.ru/entry",
+        // URL of the SPA to redirect the user after silent refresh
+        "silentRefreshRedirectUri": "https://adinsure-prpd.rgsl.ru/oauth-silent-refresh.html",
+        // ± 10 mins window
+        "clockSkewInSec": 600
+    },
+    "cultureSettings": {
+        "defaultLanguage": "ru-RU",
+        "implementationVersion": "1.0.0",
+        "supportedLocales": [
+            {
+                "name": "CLIENT_CORE.##ENGLISH",
+                "key": "en",
+                "adTranslatorKey": "en-US-VSK=en-US",
+                "valueFormatSettings": {
+                    "decimalPlaces": 2,
+                    "useGroup": true,
+                    "dateFormat": "dd.MM.yyyy",
+                    "dateTimeFormat": "dd.MM.yyyy HH:mm",
+                    "timeFormat": "HH:mm",
+                    "firstDayOfWeek": "mo"
+                }
+            },
+            {
+                "name": "CLIENT_CORE.##RUSSIAN",
+                "key": "ru",
+                "adTranslatorKey": "ru-Ru-VSK=ru-RU",
+                "valueFormatSettings": {
+                    "decimalPlaces": 2,
+                    "useGroup": true,
+                    "dateFormat": "dd.MM.yyyy",
+                    "dateTimeFormat": "dd.MM.yyyy HH:mm",
+                    "timeFormat": "HH:mm",
+                    "firstDayOfWeek": "mo"
+                }
+            }
+        ],
+        "supportedLanguages": [
+            {
+                "name": "CLIENT_CORE.##ENGLISH",
+                "key": "en-US"
+            },
+            {
+                "name": "CLIENT_CORE.##RUSSIAN",
+                "key": "ru-RU"
+            }
+        ]
+    },
+    "visualizationSettings": {
+        "themeSettings": {
+            "supportedThemes": [
+                {
+                    "name": "Carmine Red Default",
+                    "fileName": "ai-carmine-red"
+                },
+                {
+                    "name": "Blue Grey",
+                    "fileName": "ai-blue-grey"
+                }
+            ]
+        }
+    },
+    "serverMessagesSettings": {
+        "enabled": true,
+        "serverUrl": "https://adinsure-prpd-signalr.rgsl.ru/api/server-side-messages",
+        "connectRetries": 5,
+        "connectRetryTimeout": 5000
+    },
+    "testMode": false,
+    "maxRequestSize": 50000000
+}

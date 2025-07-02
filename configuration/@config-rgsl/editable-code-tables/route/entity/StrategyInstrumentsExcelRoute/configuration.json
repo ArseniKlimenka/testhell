@@ -1,0 +1,29 @@
+{
+    "entityType": "ImportDocument",
+    "condition": {
+        "events": [
+            "StatusChanged"
+        ],
+        "configuration": {
+            "names": [
+                "StrategyInstrumentsExcelImport"
+            ],
+            "dimensions": {}
+        },
+        "transitions": [
+            "StartImporting"
+        ]
+    },
+    "sinks": [
+        {
+            "name": "StrategyInstrumentsExcel",
+            "etlService": {
+                "configuration": {
+                    "name": "StrategyInstrumentsExcelETL",
+                    "version": "1"
+                }
+            }
+        }
+    ],
+    "version": "1"
+}

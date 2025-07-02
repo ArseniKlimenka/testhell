@@ -1,0 +1,228 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "Life Insurance",
+    "description": "Data schema describing Risk",
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+        "risk"
+    ],
+    "aiDataEnrichment": [
+        {
+            "name": "setRiskDetailsEnrichment",
+            "dataSource": "RiskDetailsDataSource"
+        }
+    ],
+    "aiValidation": {
+        "rule": "validateRisk"
+    },
+    "properties": {
+        "risk": {
+            "type": "object",
+            "aiTitle": "risk",
+            "additionalProperties": false,
+            "properties": {
+                "riskCode": {
+                    "type": "string",
+                    "aiTitle": "riskCode"
+                },
+                "riskType": {
+                    "type": "string",
+                    "aiTitle": "riskType"
+                },
+                "isLife": {
+                    "type": "boolean"
+                },
+                "withoutProduct": {
+                    "type": "boolean"
+                },
+                "riskShortDescription": {
+                    "type": "string",
+                    "aiTitle": "riskShortDescription"
+                },
+                "isReplaceable": {
+                    "type": "boolean",
+                    "aiTitle": "isReplaceable"
+                },
+                "riskFullDescription": {
+                    "type": "string",
+                    "aiTitle": "riskFullDescription"
+                },
+                "conditionsFunction": {
+                    "type": "string",
+                    "aiTitle": "conditionsFunction"
+                },
+                "riskOrder": {
+                    "type": "integer"
+                },
+                "riskProgram": {
+                    "type": "string",
+                    "enum": [
+                        "main",
+                        "additional"
+                    ]
+                },
+                "riskPerson": {
+                    "type": "string",
+                    "enum": [
+                        "insuredPerson",
+                        "policyHolder"
+                    ]
+                },
+                "risksGroup": {
+                    "type": "string",
+                    "aiTitle": "risksGroup"
+                }
+            }
+        },
+        "manualRiskProgram": {
+            "type": "string",
+            "enum": [
+                "main",
+                "additional"
+            ]
+        },
+        "manualRiskPerson": {
+            "type": "string",
+            "enum": [
+                "insuredPerson",
+                "policyHolder"
+            ]
+        },
+        "manualPeriodsCalc": {
+            "type": "boolean"
+        },
+        "riskInsuredSum": {
+            "type": "number",
+            "aiTitle": "riskInsuredSum"
+        },
+        "riskInsuredSumWithoutCashBack": {
+            "type": "number",
+            "aiTitle": "riskInsuredSumWithoutCashBack"
+        },
+        "isUnifiedInsuranceAmount": {
+            "type": "boolean",
+            "aiTitle": "isUnifiedInsuranceAmount"
+        },
+        "isLimitedInsuranceAmount": {
+            "type": "boolean",
+            "aiTitle": "isLimitedInsuranceAmount"
+        },
+        "riskInsuredSumByPeriod": {
+            "type": "array",
+            "aiTitle": "riskInsuredSum",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "periodNumber": {
+                        "type": "integer",
+                        "aiTitle": "riskInsuredSum"
+                    },
+                    "insuredSum": {
+                        "type": "number",
+                        "aiTitle": "riskInsuredSum"
+                    },
+                    "periodStartDate": {
+                        "type": "string",
+                        "aiFormat": "date",
+                        "aiTitle": "riskInsuredSum"
+                    },
+                    "periodEndDate": {
+                        "type": "string",
+                        "aiFormat": "date",
+                        "aiTitle": "riskInsuredSum"
+                    }
+                }
+            }
+        },
+        "riskPremium": {
+            "type": "number",
+            "aiTitle": "riskPremium"
+        },
+        "startDate": {
+            "type": "string",
+            "aiFormat": "date",
+            "aiTitle": "startDate"
+        },
+        "endDate": {
+            "type": "string",
+            "aiFormat": "date",
+            "aiTitle": "endDate"
+        },
+        "replacementInfo": {
+            "type": "object",
+            "aiTitle": "replacementInfo",
+            "properties": {
+                "isReplaceable": {
+                    "type": "boolean",
+                    "aiTitle": "isReplaceable"
+                },
+                "parentRiskCode": {
+                    "type": "string",
+                    "aiTitle": "parentRiskCode"
+                }
+            }
+        },
+        "isAdditional": {
+            "type": "boolean"
+        },
+        "underwriterRatio": {
+            "type": "number",
+            "aiTitle": "underwriterRatio"
+        },
+        "underwriterPremium": {
+            "type": "number",
+            "aiTitle": "underwriterPremium"
+        },
+        "underwriterRatioWithoutTariffication": {
+            "type": "number",
+            "aiTitle": "underwriterRatioWithoutTariffication",
+            "enum": [
+                1.00,
+                1.25,
+                1.50,
+                1.75,
+                2.00,
+                2.25,
+                2.50,
+                2.75,
+                3.00,
+                3.25,
+                3.50,
+                3.75,
+                4.00,
+                4.25,
+                4.50,
+                4.75,
+                5.00,
+                5.25,
+                5.50,
+                5.75,
+                6.00,
+                6.25,
+                6.50,
+                6.75,
+                7.00,
+                7.25,
+                7.50,
+                7.75,
+                8.00,
+                8.25,
+                8.50,
+                8.75,
+                9.00,
+                9.25,
+                9.50,
+                9.75,
+                10.00
+            ]
+        },
+        "underwriterPremiumWithoutTariffication": {
+            "type": "number",
+            "aiTitle": "underwriterPremiumWithoutTariffication"
+        },
+        "underwriterPremiumPaymentFrequency": {
+            "type": "number"
+        }
+    }
+}

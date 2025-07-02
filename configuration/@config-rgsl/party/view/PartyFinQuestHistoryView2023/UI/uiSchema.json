@@ -1,0 +1,101 @@
+{
+    "type": "DataGrid",
+    "mode": "DataSource",
+    "header": {
+        "showReloadButton": true,
+        "showNumberOfResults": true
+    },
+    "pagination": {
+        "mode": "Regular",
+        "defaultPageSize": 5,
+        "pageSizes": [
+            5,
+            10,
+            15
+        ]
+    },
+    "selection": {
+        "mode": "None"
+    },
+    "initialSort": {
+        "sortBy": "sysUpdatedOn",
+        "sortOrder": "Desc"
+    },
+    "height": "None",
+    "columns": [
+        {
+            "sortable": true,
+            "title": "sysUpdatedOn",
+            "name": "sysUpdatedOn",
+            "cellContent": {
+                "type": "OutputText",
+                "template": "{{expr sysUpdatedOn 'dt'}}",
+                "defaultValue": "",
+                "value": {
+                    "$ref": "#/properties/resultData"
+                }
+            }
+        },
+        {
+            "sortable": false,
+            "title": "Question1",
+            "name": "Question1",
+            "cellContent": {
+                "type": "OutputText",
+                "defaultValue": "",
+                "value": {
+                    "$ref": "#/properties/resultData/question1"
+                }
+            }
+        },
+        {
+            "sortable": false,
+            "title": "Question2",
+            "name": "Question2",
+            "cellContent": {
+                "type": "OutputText",
+                "defaultValue": "",
+                "value": {
+                    "$ref": "#/properties/resultData/question2"
+                }
+            }
+        },
+        {
+            "sortable": false,
+            "title": "Question3",
+            "name": "Question3",
+            "cellContent": {
+                "type": "OutputText",
+                "defaultValue": "",
+                "value": {
+                    "$ref": "#/properties/resultData/question3"
+                }
+            }
+        },
+        {
+            "sortable": false,
+            "title": "Question4",
+            "name": "Question4",
+            "cellContent": {
+                "type": "OutputText",
+                "defaultValue": "",
+                "value": {
+                    "$ref": "#/properties/resultData/question4"
+                }
+            }
+        },
+        {
+            "sortable": false,
+            "title": "sysUpdatedBy",
+            "name": "sysUpdatedBy",
+            "cellContent": {
+                "type": "OutputText",
+                "template": "{{expr sysUpdatedBy }}",
+                "defaultValue": "",
+                "value": {
+                    "$ref": "#/properties/resultData"
+                }
+            }
+        }
+    ]
+}

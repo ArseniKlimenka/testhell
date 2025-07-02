@@ -1,0 +1,70 @@
+{
+    "type": "DataGrid",
+    "mode": "DataSource",
+    "orderBy": "UserId",
+    "pagination": {
+        "mode": "Regular",
+        "pageSizes": [
+            5,
+            10,
+            15
+        ]
+    },
+    "selection": {
+        "mode": "Single",
+        "enableRowSelection": true,
+        "showCheckBox": true
+    },
+    "height": "None",
+    "columns": [
+        {
+            "sortable": false,
+            "name": "Username",
+            "title": "Username",
+            "cellContent": {
+                "type": "Link",
+                "targetType": "Entity",
+                "value": {
+                    "mapping": "urlMapping",
+                    "$ref": "#"
+                },
+                "content": {
+                    "text": {
+                        "type": "OutputText",
+                        "template": "{{expr username}}",
+                        "textProperties": [
+                            "bold"
+                        ],
+                        "value": {
+                            "$ref": "#/properties/resultData"
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "sortable": false,
+            "name": "PartyName",
+            "title": "Party name",
+            "cellContent": {
+                "type": "OutputText",
+                "defaultValue": "",
+                "value": {
+                    "$ref": "#/properties/resultData/properties/displayName"
+                }
+            }
+        },
+        {
+            "sortable": false,
+            "name": "PartyCode",
+            "title": "Party code",
+            "cellContent": {
+                "type": "OutputText",
+                "defaultValue": "",
+                "value": {
+                    "$ref": "#/properties/resultData/properties/partyCode"
+                }
+            }
+        }
+    ]
+}

@@ -1,0 +1,81 @@
+{
+    "MessagingInfrastructure": {
+        "transactionalOutboxPolling": {
+            "pollingPeriod": 20000,
+            "maxNumberOfDequeuedMessagesInOneCycle": 100,
+            "dequeueReservationInterval": 240000
+        },
+        "messageBusses": {
+            "Default": {
+                "namespace": "AdInsure",
+                "transport": {
+                    "provider": "NMSActiveMQ",
+                    "connectionString": "Endpoint=failover:(tcp://adins-prpd-mq-01:61616)?transport.startupMaxReconnectAttempts=3&transport.timeout=1000;Username=user;Password=user"
+                },
+                "consumer": {
+                    "concurrency": 1,
+                    "deduplicationHistorySize": 1000,
+                    "retry": {
+                        "count": 3,
+                        "interval": 30000,
+                        "backoffMultiplier": 1
+                    }
+                },
+                "producer": {
+                    "retry": {
+                        "count": 3,
+                        "interval": 30000,
+                        "backoffMultiplier": 1
+                    }
+                }
+            }
+        },
+        "messageChannels": {
+            "RGSL.Accounting.CashFlow.BSI.Index": {
+                "topology": "PointToPoint",
+                "producer": {
+                    "outbox": {
+                        "outboxType": "InMemory"
+                    }
+                }
+            },
+            "RGSL.Accounting.CashFlow.Allocation.AllocationFinished": {
+                "topology": "PointToPoint",
+                "producer": {
+                    "outbox": {
+                        "outboxType": "InMemory"
+                    }
+                }
+            },
+            "Core.Etl.Execute": {
+                "topology": "PointToPoint",
+                "producer": {
+                    "outbox": {
+                        "outboxType": "Database"
+                    }
+                },
+                "consumer": {
+                    "concurrency": 4,
+                    "prefetchSize": 10,
+                    "partitions": {
+                        "migration": {
+                            "concurrency": 8,
+                            "prefetchSize": 1
+                        }
+                    }
+                }
+            },
+            "Core.Entity.SynchroniseSearchIndex": {
+                "topology": "PointToPoint",
+                "producer": {
+                    "outbox": {
+                        "outboxType": "InMemory"
+                    }
+                },
+                "consumer": {
+                    "concurrency": 4
+                }
+            }
+        }
+    }
+}

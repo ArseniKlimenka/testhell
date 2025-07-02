@@ -1,0 +1,96 @@
+{
+    "formProperties": {
+        "events": {
+            "onLoad": "initView"
+        }
+    },
+    "type": "DataGrid",
+    "value": {
+        "$ref": "#/properties/Body/properties/paymentPlan"
+    },
+    "mode": "Array",
+    "pagination": {
+        "mode": "Regular",
+        "pageSizes": [
+            10,
+            50,
+            100
+        ],
+        "defaultPageSize": 10
+    },
+    "header": {
+        "showReloadButton": false,
+        "showNumberOfResults": true
+    },
+    "selection": {
+        "mode": "None"
+    },
+    "actions": [
+        "Edit"
+    ],
+    "edit": {
+        "mode": "Detached",
+        "onBeforeGridAction": "onBeforeGridAction"
+    },
+    "height": "None",
+    "columns": [
+        {
+            "sortable": false,
+            "title": "paymentPeriodStart",
+            "cellContent": {
+                "type": "OutputText",
+                "value": {
+                    "$ref": "#/properties/paymentPeriodStart"
+                }
+            }
+        },
+        {
+            "sortable": false,
+            "title": "paymentPeriodEnd",
+            "cellContent": {
+                "type": "OutputText",
+                "value": {
+                    "$ref": "#/properties/paymentPeriodEnd"
+                }
+            }
+        },
+        {
+            "sortable": false,
+            "title": "paymentExpirationDate",
+            "cellContent": {
+                "type": "OutputText",
+                "value": {
+                    "$ref": "#/properties/paymentExpirationDate"
+                }
+            }
+        },
+        {
+            "sortable": false,
+            "title": "paymentGraceDateProlongation",
+            "cellContent": {
+                "type": "OutputText",
+                "defaultValue": "",
+                "value": {
+                    "$ref": "#/properties/paymentGraceDateProlongation"
+                }
+            }
+        }
+    ],
+    "detailsTemplates": {
+        "edit": {
+            "content": {
+                "type": "Group",
+                "elements": [
+                    {
+                        "type": "Input",
+                        "label": "paymentGraceDateProlongation",
+                        "value": {
+                            "$ref": "#/properties/paymentGraceDateProlongation"
+                        },
+                        "width": 3
+                    }
+                ]
+            }
+        }
+    }
+}

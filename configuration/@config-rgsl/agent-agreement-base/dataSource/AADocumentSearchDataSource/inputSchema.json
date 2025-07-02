@@ -1,0 +1,124 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+        "criteria": {
+            "type": "object",
+            "aiValidation": {
+                "rule": "searchCriteriaValidation"
+            },
+            "additionalProperties": false,
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "documentType": {
+                    "type": "string"
+                },
+                "documentNumber": {
+                    "type": "string"
+                },
+                "documentCode": {
+                    "type": "string"
+                },
+                "manualNumber": {
+                    "type": "string"
+                },
+                "externalNumber": {
+                    "type": "string"
+                },
+                "startDate": {
+                    "type": "string",
+                    "format": "date",
+                    "aiFormat": "date"
+                },
+                "endDate": {
+                    "type": "string",
+                    "format": "date",
+                    "aiFormat": "date"
+                },
+                "effectiveFrom": {
+                    "type": "string",
+                    "format": "date",
+                    "aiFormat": "date"
+                },
+                "effectiveTo": {
+                    "type": "string",
+                    "format": "date",
+                    "aiFormat": "date"
+                },
+                "conclusionDate": {
+                    "type": "string",
+                    "format": "date",
+                    "aiFormat": "date"
+                },
+                "documentStates": {
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "enum": [
+                            "Activated",
+                            "Draft",
+                            "PortfolioMovement",
+                            "Cancelled",
+                            "Annulled"
+                        ]
+                    }
+                },
+                "agentServiceProviderCode": {
+                    "type": "string"
+                },
+                "agentName": {
+                    "type": "string"
+                },
+                "agentPersonalNumber": {
+                    "type": "string"
+                },
+                "agentPartyType": {
+                    "$ref": "component:AAPartyType"
+                },
+                "salesChannelCode": {
+                    "type": "string"
+                },
+                "onlyNotCancelled": {
+                    "type": "boolean"
+                },
+                "productCode": {
+                    "type": "string"
+                },
+                "orderNumber": {
+                    "type": "string"
+                },
+                "mvzNumber": {
+                    "type": "string"
+                },
+                "cbAgentType": {
+                    "type": "object",
+                    "properties": {
+                        "code": {
+                            "type": "string"
+                        },
+                        "description": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "agency": {
+                    "type": "object",
+                    "properties": {
+                        "code": {
+                            "type": "string"
+                        },
+                        "description": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "sort": {
+            "type": "array"
+        }
+    }
+}

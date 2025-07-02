@@ -1,0 +1,18 @@
+﻿SELECT ID
+      ,NAME
+      ,CODE
+      ,DESCRIPTION
+FROM BFX_IMPL.GUARANTEED_INCOME gi
+WHERE 1 = 1
+{{#if parameters.code}}
+      AND gi.CODE = @code
+{{/if}}
+{{#if parameters.codes}}
+      AND gi.CODE IN (@codes)
+{{/if}}
+{{#if parameters.description}}
+      AND gi.DESCRIPTION LIKE @description
+{{/if}}
+{{#if parameters.searchText}}
+      AND (gi.DESCRIPTION LIKE @searchText OR gi.CODE LIKE @searchText OR gi.NAME LIKE @searchText)
+{{/if}}

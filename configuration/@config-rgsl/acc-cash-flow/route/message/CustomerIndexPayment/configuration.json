@@ -1,0 +1,23 @@
+{
+    "condition": {
+        "messageChannel": {
+            "policy": "DefaultMessageQueuePolicy",
+            "destination": "RGSL.Accounting.CashFlow.BSI.Index"
+        }
+    },
+    "additionalDataSources": [],
+    "sinks": [
+        {
+            "name": "FetchBankStatement",
+            "fetch": {
+                "configuration": {
+                    "name": "BankStatementItemDatabaseDataSource"
+                }
+            }
+        },
+        {
+            "ref": "ReindexBankStatementItemSinkGroup"
+        }
+    ],
+    "version": "1"
+}

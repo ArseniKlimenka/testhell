@@ -1,0 +1,187 @@
+{
+    "id": "MTPLParkQuoteVehiclesImportLoadFromExcelUiSchema",
+    "type": "Group",
+    "elements": [
+        {
+            "type": "GridLayout",
+            "numberOfColumns": 12,
+            "elements": [
+                {
+                    "type": "Group",
+                    "elements": [
+                        {
+                            "elementId": "import-table",
+                            "type": "DataGrid",
+                            "orderBy": "fullName",
+                            "mode": "DataSource",
+                            "header": {
+                                "showReloadButton": true,
+                                "showNumberOfResults": true
+                            },
+                            "pagination": {
+                                "mode": "Regular",
+                                "pageSizes": [
+                                    5,
+                                    10,
+                                    15
+                                ]
+                            },
+                            "selection": {
+                                "mode": "None"
+                            },
+                            "height": "None",
+                            "columns": [
+                                {
+                                    "sortable": false,
+                                    "title": "importRowNumber",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "defaultValue": " ",
+                                        "value": {
+                                            "$ref": "#/properties/resultData/properties/data/properties/importRowNumber"
+                                        }
+                                    },
+                                    "name": "importRowNumber"
+                                },
+                                {
+                                    "sortable": false,
+                                    "title": "fullName",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "defaultValue": " ",
+                                        "value": {
+                                            "$ref": "#/properties/resultData/properties/data/properties/fullName"
+                                        }
+                                    },
+                                    "name": "fullName"
+                                },
+                                {
+                                    "sortable": false,
+                                    "title": "surName",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "defaultValue": " ",
+                                        "value": {
+                                            "$ref": "#/properties/resultData/properties/data/properties/surName"
+                                        }
+                                    },
+                                    "name": "surName"
+                                },
+                                {
+                                    "sortable": false,
+                                    "title": "firstName",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "defaultValue": " ",
+                                        "value": {
+                                            "$ref": "#/properties/resultData/properties/data/properties/firstName"
+                                        }
+                                    },
+                                    "name": "firstName"
+                                },
+                                {
+                                    "sortable": false,
+                                    "title": "middleName",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "value": {
+                                            "$ref": "#/properties/resultData/properties/data/properties/middleName"
+                                        }
+                                    },
+                                    "name": "middleName"
+                                },
+                                {
+                                    "sortable": false,
+                                    "title": "birthDay",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "template": "{{expr birthDay 'd'}}",
+                                        "defaultValue": " ",
+                                        "value": {
+                                            "$ref": "#/properties/resultData/properties/data/properties"
+                                        }
+                                    },
+                                    "name": "birthDay"
+                                },
+                                {
+                                    "sortable": false,
+                                    "title": "gender",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "defaultValue": " ",
+                                        "value": {
+                                            "$ref": "#/properties/resultData/properties/data/properties/gender"
+                                        }
+                                    },
+                                    "name": "gender"
+                                },
+                                {
+                                    "sortable": false,
+                                    "title": "mobile",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "defaultValue": " ",
+                                        "value": {
+                                            "$ref": "#/properties/resultData/properties/data/properties/mobile"
+                                        }
+                                    },
+                                    "name": "mobile"
+                                },
+                                {
+                                    "sortable": false,
+                                    "title": "amount",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "defaultValue": " ",
+                                        "value": {
+                                            "$ref": "#/properties/resultData/properties/data/properties/amount"
+                                        }
+                                    },
+                                    "rule": {
+                                        "effect": "HIDE",
+                                        "condition": {
+                                            "type": "FUNC",
+                                            "expectedValue": true,
+                                            "ruleFunction": "hideAmount",
+                                            "value": [
+                                                {
+                                                    "$ref": "#"
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    "name": "amount"
+                                },
+                                {
+                                    "sortable": false,
+                                    "title": "premium",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "defaultValue": " ",
+                                        "value": {
+                                            "$ref": "#/properties/resultData/properties/data/properties/premium"
+                                        }
+                                    },
+                                    "rule": {
+                                        "effect": "HIDE",
+                                        "condition": {
+                                            "type": "FUNC",
+                                            "expectedValue": true,
+                                            "ruleFunction": "hidePremium",
+                                            "value": [
+                                                {
+                                                    "$ref": "#"
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    "name": "premium"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

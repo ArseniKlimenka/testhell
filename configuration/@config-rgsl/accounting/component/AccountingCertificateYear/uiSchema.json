@@ -1,0 +1,30 @@
+{
+    "type": "Input",
+    "label": "Accounting year",
+    "elementId": "accountingYearId",
+    "value": {
+        "$ref": "#"
+    },
+    "autocomplete": {
+        "minTextLength": 1
+    },
+    "control": "Dropdown",
+    "source": {
+        "reloadOnOpen": true,
+        "dataSource": {
+            "name": "AccountingYearDataSource",
+            "searchFieldPath": "description",
+            "requestMapping": "accountingYearRequestMapping",
+            "responseMapping": "accountingYearResponseMapping"
+        },
+        "displayFieldName": "displayName",
+        "valueFieldName": "value"
+    },
+    "onValueChanged": [
+        {
+            "commandType": "executeAction",
+            "actionName": "onChangeAccountingYear"
+        }
+    ],
+    "width": 3
+}

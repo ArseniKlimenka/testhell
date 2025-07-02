@@ -1,0 +1,88 @@
+{
+    "description": "Test full commission act lifecycle",
+    "steps": [
+        {
+            "$ref": "AdjustAccountingPeriods",
+            "context": {
+                "firstOpenPeriod": "2022-01-01"
+            }
+        },
+        {
+            "$ref": "AdjustCurrentDate",
+            "context": {
+                "currentDate": "2022-01-01"
+            }
+        },
+        {
+            "$ref": "CreateALIPolicyDemo",
+            "context": {
+                "policyStartDate": "2022-01-01",
+                "paymentFrequencyCode": "1",
+                "riskPremium": 100000
+            }
+        },
+        {
+            "$ref": "CreatePaymentAndAllocate",
+            "context": {
+                "payAmount": 100000,
+                "referenceNo": "{{$.contractNumber}}",
+                "paymentDetails": {
+                    "amount": 100000,
+                    "postingDate": "2022-01-01",
+                    "transactionDate": "2022-01-02"
+                }
+            }
+        },
+        {
+            "$ref": "CreateCommissionActForPolicy",
+            "context": {
+                "referenceNoToInclude": "{{$.contractNumber}}"
+            },
+            "assert": {
+                "expected": "./steps/createCommissionAct/expectedResult.json",
+                "module": "./steps/createCommissionAct/assert.js",
+                "function": "assertAct"
+            }
+        },
+        {
+            "code": "ApproveCommissionAct",
+            "description": "Approve commission act",
+            "actor": "AdminCommissionAct",
+            "requests": [],
+            "executor": {
+                "module": "./steps/04.approveCommAct/executor.js",
+                "function": "executor"
+            }
+        },
+        {
+            "code": "ValidatePaymentOrder",
+            "description": "Validate payment order",
+            "requests": [],
+            "executor": {
+                "module": "./steps/05.validatePaymentOrder/executor.js",
+                "function": "executor"
+            },
+            "assert": {
+                "expected": "./steps/05.validatePaymentOrder/expectedResult.json",
+                "module": "./steps/05.validatePaymentOrder/assert.js",
+                "function": "assertPO"
+            }
+        },
+        {
+            "code": "ValidateTransactions",
+            "description": "Validate transactions",
+            "requests": [],
+            "assert": {
+                "expected": "./steps/06.validateTransactions/expectedResult.json",
+                "module": "../../lib/accounting/assert.js",
+                "function": "assertTransactions"
+            }
+        },
+        {
+            "$ref": "AdjustCurrentDate",
+            "context": {
+                "currentDate": null
+            }
+        }
+    ]
+}

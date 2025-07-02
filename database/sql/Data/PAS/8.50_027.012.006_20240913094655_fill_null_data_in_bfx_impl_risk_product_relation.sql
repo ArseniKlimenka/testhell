@@ -1,0 +1,1 @@
+update bfx_impl.RISK_PRODUCT_RELATION  set RISK_PROGRAM = 'main', RISK_PERSON = 'insuredPerson' where RISK_PERSON   is NULL and RISK_PROGRAM is NULL

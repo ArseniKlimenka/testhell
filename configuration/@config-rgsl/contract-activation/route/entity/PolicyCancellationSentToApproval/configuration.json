@@ -1,0 +1,38 @@
+{
+    "entityType": "Contract",
+    "condition": {
+        "events": [
+            "StatusChanged"
+        ],
+        "configuration": {
+            "dimensions": {
+                "contractType": [
+                    "Amendment"
+                ],
+                "amendmentType": [
+                    "Cancellation"
+                ]
+            }
+        },
+        "documentStates": [
+            "AwaitingApproval"
+        ]
+    },
+    "sinks": [
+        {
+            "name": "GetParticipantsData",
+            "fetch": {
+                "configuration": {
+                    "name": "GeneralPartyDataSource"
+                }
+            }
+        },
+        {
+            "name": "CreateCancellationInquiries",
+            "executeAs": "System",
+            "document": {
+            }
+        }
+    ],
+    "version": "1"
+}

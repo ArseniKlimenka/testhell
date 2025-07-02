@@ -1,0 +1,14 @@
+select distinct ps.LOAD_DATE as DEAL_DATE,
+    asat.ID_ISIN as ID_ISIN,
+    ph.CONTRACT_NUMBER as CONTRACT_NUMBER,
+    pas.ASSET_UNITS_COUNT as ASSET_UNITS_COUNT,
+    ps.STATE,
+    asat.ASSET_UNIT_PRICE as ASSET_UNIT_PRICE
+from PAS_IMPL.POLICY_SAT ps
+    join PAS_IMPL.POLICY_ASSET_SAT pas on ps.POLICY_HKEY = pas.POLICY_ASSET_HKEY
+    join PAS_IMPL.POLICY_HUB ph on ph.POLICY_HKEY = ps.POLICY_HKEY
+    join PAS_IMPL.ASSET_HUB ah on ah.ASSET_NUMBER = pas.ASSET_NUMBER
+    join PAS_IMPL.ASSET_SAT asat on asat.ASSET_HKEY = ah.ASSET_HKEY
+where ID_ISIN is not NULL and (ps.STATE = 'Activated' or ps.STATE = 'CancelledByAmendment' or ps.STATE = 'Cancelled' or
+        ps.STATE = 'Completed')
+    and ps.LOAD_DATE >= @beginDate and ps.LOAD_DATE <= @endDate

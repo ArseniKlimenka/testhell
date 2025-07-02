@@ -1,0 +1,46 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "Life Insurance",
+    "description": "Data schema describing Policy Holder information",
+    "type": "object",
+    "additionalProperties": false,
+    "aiDataEnrichment": [
+        {
+            "name": "PartyPersonEnrichment",
+            "dataSource": "GetPartyDataSource"
+        }
+    ],
+    "properties": {
+        "partyId": {
+            "type": "string",
+            "aiTitle": "partyId"
+        },
+        "partyCode": {
+            "type": "string",
+            "aiTitle": "partyCode"
+        },
+        "partyType": {
+            "type": "string",
+            "aiTitle": "partyType"
+        },
+        "partyFullName": {
+            "type": "string",
+            "aiTitle": "partyFullName"
+        },
+        "partyBody": {
+            "type": "object",
+            "additionalProperties": true
+        },
+        "dateOfBirth": {
+            "type": "string",
+            "aiFormat": "date"
+        },
+        "personGender": {
+            "type": "string",
+            "enum": [
+                "Male",
+                "Female"
+            ]
+        }
+    }
+}

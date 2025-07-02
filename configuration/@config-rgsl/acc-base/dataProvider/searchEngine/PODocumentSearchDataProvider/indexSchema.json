@@ -1,0 +1,155 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema",
+    "type": "object",
+    "properties": {
+        "recipient": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "string",
+                    "mapping": {
+                        "path": "#/properties/attributes/properties/recipientInformation/properties/partyCodeName"
+                    }
+                },
+                "name": {
+                    "type": "string",
+                    "mapping": {
+                        "path": "#/properties/attributes/properties/recipientInformation/properties/partyFullName"
+                    }
+                }
+            }
+        },
+        "paymentOrderDate": {
+            "type": "string",
+            "format": "date",
+            "mapping": {
+                "path": "#/properties/attributes/properties/paymentOrderInformation/properties/paymentOrderDate"
+            }
+        },
+        "referenceNumber": {
+            "type": "string",
+            "mapping": {
+                "path": "#/properties/attributes/properties/paymentOrderInformation/properties/referenceNumber"
+            }
+        },
+        "contractNumber": {
+            "type": "string",
+            "mapping": {
+                "path": "#/properties/attributes/properties/paymentOrderInformation/properties/contractNumber"
+            }
+        },
+        "contractAmendmentNumber": {
+            "type": "string",
+            "mapping": {
+                "path": "#/properties/attributes/properties/paymentOrderInformation/properties/contractAmendmentNumber"
+            }
+        },
+        "paymentOrderType": {
+            "type": "string",
+            "mapping": {
+                "path": "#/properties/attributes/properties/paymentOrderInformation/properties/paymentOrderType"
+            }
+        },
+        "paymentOrderSubType": {
+            "type": "string",
+            "mapping": {
+                "path": "#/properties/attributes/properties/paymentOrderInformation/properties/paymentOrderSubType"
+            }
+        },
+        "paymentOrderAmounts": {
+            "type": "object",
+            "properties": {
+                "paymentOrderCurrencyCode": {
+                    "type": "string",
+                    "mapping": {
+                        "path": "#/properties/attributes/properties/paymentOrderAmounts/properties/paymentOrderCurrencyCode"
+                    }
+                },
+                "totalPaymentAmount": {
+                    "type": "number",
+                    "mapping": {
+                        "path": "#/properties/attributes/properties/paymentOrderAmounts/properties/totalPaymentAmount"
+                    }
+                },
+                "paymentCurrencyCode": {
+                    "type": "string",
+                    "mapping": {
+                        "path": "#/properties/attributes/properties/paymentOrderAmounts/properties/paymentCurrencyCode"
+                    }
+                },
+                "paymentDescription": {
+                    "type": "string",
+                    "mapping": {
+                        "path": "#/properties/attributes/properties/paymentOrderAmounts/properties/paymentDescription"
+                    }
+                },
+                "fixedExchangeRate": {
+                    "type": "number",
+                    "mapping": {
+                        "path": "#/properties/attributes/properties/paymentOrderAmounts/properties/fixedExchangeRate"
+                    }
+                },
+                "useFixedExchangeRate": {
+                    "type": "boolean",
+                    "mapping": {
+                        "path": "#/properties/attributes/properties/paymentOrderAmounts/properties/useFixedExchangeRate"
+                    }
+                }
+            }
+        },
+        "isCoolOffPeriod": {
+            "type": "boolean",
+            "mapping": {
+                "path": "#/properties/attributes/properties/paymentOrderInformation/properties/isCoolOffPeriod"
+            }
+        },
+        "insuranceAct": {
+            "type": "object",
+            "properties": {
+                "actNumber": {
+                    "type": "string",
+                    "mapping": {
+                        "path": "#/properties/attributes/properties/paymentOrderInformation/properties/insuranceAct/properties/actNumber"
+                    }
+                },
+                "actDate": {
+                    "type": "string",
+                    "format": "date",
+                    "mapping": {
+                        "path": "#/properties/attributes/properties/paymentOrderInformation/properties/insuranceAct/properties/actDate"
+                    }
+                }
+            }
+        },
+        "isManual": {
+            "type": "boolean",
+            "mapping": {
+                "path": "#/properties/attributes/properties/paymentOrderInformation/properties/isManual"
+            }
+        },
+        "isCanelledNetting": {
+            "type": "boolean",
+            "mapping": {
+                "path": "#/properties/attributes/properties/paymentOrderInformation/properties/isCanelledNetting"
+            }
+        },
+        "isCreatedFromNetting": {
+            "type": "boolean",
+            "mapping": {
+                "path": "#/properties/attributes/properties/paymentOrderInformation/properties/isCreatedFromNetting"
+            }
+        },
+        "originalPaymentOrderNumber": {
+            "type": "string",
+            "mapping": {
+                "path": "#/properties/attributes/properties/paymentOrderInformation/properties/originalPaymentOrderNumber"
+            }
+        },
+        "parentPaymentOrderNumber": {
+            "type": "string",
+            "mapping": {
+                "path": "#/properties/attributes/properties/paymentOrderInformation/properties/parentPaymentOrderNumber"
+            }
+        }
+    }
+}

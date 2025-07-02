@@ -1,0 +1,48 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "object",
+    "properties": {
+        "criteria": {
+            "type": "object",
+            "aiValidation": {
+                "rule": "searchCriteriaValidation"
+            },
+            "additionalProperties": false,
+            "properties": {
+                "poNo": {
+                    "type": "string"
+                },
+                "recipientCode": {
+                    "type": "string"
+                },
+                "currencyCode": {
+                    "type": "string"
+                },
+                "poDateFrom": {
+                    "type": "string",
+                    "aiFormat": "date"
+                },
+                "poDateTo": {
+                    "type": "string",
+                    "aiFormat": "date"
+                }
+            }
+        },
+        "sort": {
+            "type": "array",
+            "additionalProperties": false,
+            "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                    "descending": {
+                        "type": "boolean"
+                    },
+                    "fieldName": {
+                        "type": "string"
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,206 @@
+{
+    "processType": "LifeInsuranceInquiry",
+    "actors": [
+        "Agent",
+        "GeneralBackOffice",
+        "Operations",
+        "System"
+    ],
+    "initialState": "Draft",
+    "states": [
+        {
+            "name": "Draft",
+            "operations": [
+                {
+                    "name": "Save"
+                }
+            ]
+        },
+        {
+            "name": "OnReview",
+            "operations": [
+                {
+                    "name": "Save"
+                }
+            ]
+        },
+        {
+            "name": "Issued",
+            "operations": []
+        },
+        {
+            "name": "CreateAmendment",
+            "operations": [
+                {
+                    "name": "Save"
+                }
+            ]
+        },
+        {
+            "name": "CreateFinancialAmendment",
+            "operations": []
+        },
+        {
+            "name": "CreateFinancialPolicyHolderChangeAmendment",
+            "operations": []
+        },
+        {
+            "name": "CreateNonFinancialAmendment",
+            "operations": []
+        },
+        {
+            "name": "AmendmentsCreated",
+            "operations": []
+        },
+        {
+            "name": "AmendmentsCancelled",
+            "operations": []
+        },
+        {
+            "name": "Correction",
+            "operations": [
+                {
+                    "name": "Save"
+                }
+            ]
+        },
+        {
+            "name": "CancelWithoutPayment",
+            "operations": []
+        },
+        {
+            "name": "RefusalToTerminateByPolicyholder",
+            "operations": []
+        },
+        {
+            "name": "Cancelled",
+            "operations": []
+        }
+    ],
+    "transitions": [
+        {
+            "name": "Draft_to_OnReview",
+            "from": "Draft",
+            "to": "OnReview",
+            "exclusiveToAssignedUser": true,
+            "whenBlocked": "DisplayNormally"
+        },
+        {
+            "name": "Draft_to_Cancelled",
+            "from": "Draft",
+            "to": "Cancelled",
+            "exclusiveToAssignedUser": true,
+            "whenBlocked": "DisplayNormally",
+            "allowOnValidationErrors": {
+                "all": true
+            }
+        },
+        {
+            "name": "OnReview_to_Cancelled",
+            "from": "OnReview",
+            "to": "Cancelled",
+            "whenBlocked": "DisplayNormally",
+            "allowOnValidationErrors": {
+                "all": true
+            }
+        },
+        {
+            "name": "OnReview_to_Issued",
+            "from": "OnReview",
+            "to": "Issued",
+            "whenBlocked": "Greyout"
+        },
+        {
+            "name": "Issued_to_AmendmentsCreated",
+            "from": "Issued",
+            "to": "AmendmentsCreated",
+            "whenBlocked": "Greyout"
+        },
+        {
+            "name": "OnReview_to_Correction",
+            "from": "OnReview",
+            "to": "Correction",
+            "whenBlocked": "DisplayNormally"
+        },
+        {
+            "name": "OnReview_to_CancelWithoutPayment",
+            "from": "OnReview",
+            "to": "CancelWithoutPayment",
+            "whenBlocked": "Greyout"
+        },
+        {
+            "name": "OnReview_to_RefusalToTerminateByPolicyholder",
+            "from": "OnReview",
+            "to": "RefusalToTerminateByPolicyholder",
+            "whenBlocked": "Greyout"
+        },
+        {
+            "name": "OnReview_to_CreateAmendment",
+            "from": "OnReview",
+            "to": "CreateAmendment",
+            "broadcastEvent": {
+                "serverSideEvents": true
+            },
+            "whenBlocked": "Greyout"
+        },
+        {
+            "name": "CreateAmendment_to_CreateFinancialAmendment",
+            "from": "CreateAmendment",
+            "to": "CreateFinancialAmendment",
+            "whenBlocked": "Greyout"
+        },
+        {
+            "name": "CreateAmendment_to_CreateFinancialPolicyHolderChangeAmendment",
+            "from": "CreateAmendment",
+            "to": "CreateFinancialPolicyHolderChangeAmendment",
+            "whenBlocked": "Greyout"
+        },
+        {
+            "name": "CreateAmendment_to_CreateNonFinancialAmendment",
+            "from": "CreateAmendment",
+            "to": "CreateNonFinancialAmendment",
+            "broadcastEvent": {
+                "serverSideEvents": true
+            },
+            "whenBlocked": "Greyout"
+        },
+        {
+            "name": "CreateNonFinancialAmendment_to_CreateAmendment",
+            "from": "CreateNonFinancialAmendment",
+            "to": "CreateAmendment",
+            "broadcastEvent": {
+                "serverSideEvents": true
+            },
+            "whenBlocked": "DisplayNormally",
+            "automatic": true
+        },
+        {
+            "name": "CreateAmendment_to_AmendmentsCreated",
+            "from": "CreateAmendment",
+            "to": "AmendmentsCreated",
+            "broadcastEvent": {
+                "serverSideEvents": true
+            },
+            "whenBlocked": "Greyout"
+        },
+        {
+            "name": "CreateAmendment_to_AmendmentsCancelled",
+            "from": "CreateAmendment",
+            "to": "AmendmentsCancelled",
+            "whenBlocked": "DisplayNormally"
+        },
+        {
+            "name": "AmendmentsCancelled_to_CreateAmendment",
+            "from": "AmendmentsCancelled",
+            "to": "CreateAmendment",
+            "whenBlocked": "DisplayNormally"
+        },
+        {
+            "name": "Correction_to_OnReview",
+            "from": "Correction",
+            "to": "OnReview",
+            "exclusiveToAssignedUser": true,
+            "whenBlocked": "DisplayNormally"
+        }
+    ]
+}

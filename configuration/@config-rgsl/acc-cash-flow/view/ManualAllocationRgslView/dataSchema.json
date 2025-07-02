@@ -1,0 +1,71 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema",
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+        "bankStatementItem": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "no": {
+                    "type": "string"
+                },
+                "openAmount": {
+                    "type": "number"
+                },
+                "paymentDate": {
+                    "type": "string",
+                    "aiFormat": "date"
+                },
+                "currencyCode": {
+                    "type": "string"
+                }
+            }
+        },
+        "document": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "documentNo": {
+                    "type": "string"
+                },
+                "documentType": {
+                    "type": "integer",
+                    "enum": [
+                        1,
+                        3
+                    ]
+                },
+                "currencyCode": {
+                    "type": "string"
+                }
+            }
+        },
+        "crossRate": {
+            "type": "number"
+        },
+        "docAmountToAllocate": {
+            "type": "number"
+        },
+        "payAmountToAllocate": {
+            "type": "number"
+        },
+        "exchangeRateDate": {
+            "type": "string"
+        },
+        "exchangeRate": {
+            "type": "number"
+        },
+        "toleranceType": {
+            "type": "integer",
+            "enum": [
+                0,
+                1,
+                2
+            ]
+        }
+    }
+}

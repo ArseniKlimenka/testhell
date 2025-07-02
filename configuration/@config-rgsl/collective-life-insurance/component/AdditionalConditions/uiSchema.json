@@ -1,0 +1,74 @@
+{
+    "type": "Section",
+    "label": "Additional Conditions",
+    "isCollapsed": false,
+    "width": 12,
+    "elements": [
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "Input",
+                    "label": "gracePeriod",
+                    "value": {
+                        "$ref": "#/properties/gracePeriod"
+                    },
+                    "width": 4
+                },
+                {
+                    "type": "Input",
+                    "label": "firstInstallmentDeadlineDate",
+                    "value": {
+                        "$ref": "#/properties/firstInstallmentDeadlineDate"
+                    },
+                    "width": 4
+                },
+                {
+                    "type": "Input",
+                    "label": "coverageDuration",
+                    "value": {
+                        "$ref": "#/properties/coverageDuration"
+                    },
+                    "width": 4
+                }
+            ],
+            "rule": {
+                "effect": "ENABLE_INITIAL",
+                "condition": {
+                    "type": "FUNC",
+                    "ruleFunction": "enableAdditionalConditions",
+                    "value": [
+                        {
+                            "$ref": "#"
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "Input",
+                    "label": "coverageArea",
+                    "value": {
+                        "$ref": "#/properties/coverageArea"
+                    },
+                    "width": 12
+                }
+            ],
+            "rule": {
+                "effect": "ENABLE_INITIAL",
+                "condition": {
+                    "type": "FUNC",
+                    "ruleFunction": "enableAdditionalConditions",
+                    "value": [
+                        {
+                            "$ref": "#"
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}

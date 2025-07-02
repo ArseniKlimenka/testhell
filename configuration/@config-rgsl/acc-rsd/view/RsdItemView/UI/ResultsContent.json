@@ -1,0 +1,162 @@
+{
+    "type": "Group",
+    "elements": [
+        {
+            "type": "DataGrid",
+            "value": {
+                "$ref": "#/properties/response/properties/data"
+            },
+            "mode": "DataSource",
+            "pagination": {
+                "mode": "Regular",
+                "pageSizes": [
+                    10,
+                    25,
+                    50,
+                    100
+                ]
+            },
+            "selection": {
+                "mode": "Multi",
+                "enableRowSelection": false,
+                "showCheckBox": true,
+                "onSelectionChanged": [
+                    {
+                        "commandType": "raiseEvent",
+                        "eventName": "Selected"
+                    }
+                ]
+            },
+            "height": "None",
+            "columns": [
+                {
+                    "sortable": true,
+                    "title": "ContractNumber",
+                    "cellContent": {
+                        "type": "Link",
+                        "label": "Link to contract",
+                        "targetType": "Entity",
+                        "value": {
+                            "mapping": "linkToContractOverview",
+                            "$ref": "#"
+                        },
+                        "width": 1,
+                        "openInNewTab": true,
+                        "content": {
+                            "text": {
+                                "type": "OutputText",
+                                "value": {
+                                    "$ref": "#/properties/resultData/properties/contractNumber"
+                                }
+                            }
+                        }
+                    },
+                    "name": "contractNumber"
+                },
+                {
+                    "title": "Holder name",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/holderName"
+                        }
+                    },
+                    "name": "holderName"
+                },
+                {
+                    "title": "Item no",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/itemNo"
+                        }
+                    },
+                    "name": "itemNo"
+                },
+                {
+                    "sortable": true,
+                    "title": "Due date",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/dueDate"
+                        }
+                    },
+                    "name": "dueDate"
+                },
+                {
+                    "sortable": true,
+                    "title": "Open amount",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "template": "{{#style 'right'}}{{expr openAmount 'n:2'}}{{/style}}",
+                        "value": {
+                            "$ref": "#/properties/resultData"
+                        }
+                    },
+                    "name": "openAmount"
+                },
+                {
+                    "sortable": true,
+                    "title": "Deadline date",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/deadlineDate"
+                        }
+                    },
+                    "name": "deadlineDate"
+                },
+                {
+                    "sortable": true,
+                    "title": "Overdue days",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "template": "{{#style 'right'}}{{expr overdueDays}}{{/style}}",
+                        "value": {
+                            "$ref": "#/properties/resultData"
+                        }
+                    },
+                    "name": "overdueDays"
+                },
+                {
+                    "sortable": true,
+                    "title": "RSD rate",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "template": "{{#style 'right'}}{{expr rsdRate 'p'}}{{/style}}",
+                        "value": {
+                            "$ref": "#/properties/resultData"
+                        }
+                    },
+                    "name": "rsdRate"
+                },
+                {
+                    "sortable": true,
+                    "title": "RSD amount",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "template": "{{#style 'right'}}{{expr rsdAmount 'n:2'}}{{/style}}",
+                        "value": {
+                            "$ref": "#/properties/resultData"
+                        }
+                    },
+                    "name": "rsdAmount"
+                },
+                {
+                    "sortable": true,
+                    "title": "RSD amount (Manual)",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "template": "{{#style 'right'}}{{expr rsdAmountManual 'n:2'}}{{/style}}",
+                        "value": {
+                            "$ref": "#/properties/resultData"
+                        }
+                    },
+                    "name": "rsdAmountManual"
+                }
+            ],
+            "elementId": "TableViewId"
+        }
+    ]
+}

@@ -1,0 +1,29 @@
+﻿select ulba.basic_asset_id as strategy_code,
+       ulba.marketing_asset_name as strategy_name,
+       '' as pay_off_description,
+       ulprf.pip_category as pip_category,
+       ut.tool_type as pay_off_type,
+       ut.isin as isin,
+       ut.coupon_rate as couponRate,
+       ut.repayment_date as repaymentDate,
+       ut.emitent as emitent
+  from bfx_impl.products p
+       join pas_impl.ul_products ulp on ulp.product_id = p.id
+       join pas_impl.ul_product_version ulpv on ulpv.product_version_id = ulp.product_version_id
+       join pas_impl.ul_risk_fund_group ulrfg on ulrfg.risk_fund_group_id = ulpv.risk_fund_group_id
+       join pas_impl.ul_risk_fund ulrf on ulrf.risk_fund_group_id = ulrfg.risk_fund_group_id
+       join pas_impl.ul_pip_rf ulprf on ulprf.pip_rf_id = ulrf.pip_rf_id
+       join pas_impl.ul_pay_off upo on upo.pay_off_id = ulprf.pay_off_id
+       join pas_impl.ul_basic_assets_group ubag on ubag.basic_assets_group_id = ulprf.basic_assets_group_id
+       join pas_impl.ul_basic_assets ulba on ulba.basic_assets_group_id = ubag.basic_assets_group_id
+       join pas_impl.ul_tools ut on ulba.tool_id = ut.tool_id
+ where 1=1
+  {{#if parameters.productCode}}
+   and p.code = @productCode
+  {{/if}}
+	{{#if parameters.payOffType}}
+   and ut.tool_type = @payOffType
+  {{/if}}
+	{{#if parameters.isins}}
+   and ut.isin in (@isins)
+  {{/if}}

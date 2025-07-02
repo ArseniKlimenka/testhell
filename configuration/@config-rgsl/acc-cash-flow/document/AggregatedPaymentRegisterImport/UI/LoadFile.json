@@ -1,0 +1,145 @@
+{
+    "id": "AggregatedPaymentLoadFile",
+    "type": "GridLayout",
+    "numberOfColumns": 4,
+    "formProperties": {
+        "events": {
+            "onLoad": "onLoadFileLoadAction"
+        }
+    },
+    "elements": [
+        {
+            "type": "Component",
+            "name": "DocumentHeader",
+            "value": {
+                "$ref": "#"
+            }
+        },
+        {
+            "type": "Group",
+            "width": 4,
+            "elements": [
+                {
+                    "type": "GridLayout",
+                    "numberOfColumns": 4,
+                    "fillAvailableSpace": true,
+                    "width": 3,
+                    "elements": [
+                        {
+                            "type": "Group",
+                            "elements": [
+                                {
+                                    "type": "TabLayout",
+                                    "options": {
+                                        "fixedPosition": false,
+                                        "scrollableTabs": true
+                                    },
+                                    "elements": [
+                                        {
+                                            "type": "Tab",
+                                            "elementId": "aggregatedPaymentTab",
+                                            "elements": [
+                                                {
+                                                    "type": "Section",
+                                                    "label": "ImportInfo",
+                                                    "elements": [
+                                                        {
+                                                            "type": "Group",
+                                                            "elements": [
+                                                                {
+                                                                    "type": "FileUpload",
+                                                                    "label": "FileSelection",
+                                                                    "description": "FileSelectionDescription",
+                                                                    "value": {
+                                                                        "$ref": "#/properties/Body/properties/file"
+                                                                    },
+                                                                    "width": 1
+                                                                },
+                                                                {
+                                                                    "type": "Input",
+                                                                    "multiple": false,
+                                                                    "control": "Dropdown",
+                                                                    "label": "RegistryFileFormat",
+                                                                    "value": {
+                                                                        "$ref": "#/properties/Body/properties/sourceFileFormat"
+                                                                    },
+                                                                    "width": 1
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "sectionLevel": 1
+                                                }
+                                            ],
+                                            "title": "Upload data"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "SideContentLayout",
+                    "fixedPosition": true,
+                    "width": 1,
+                    "elements": [
+                        {
+                            "type": "GridLayout",
+                            "numberOfColumns": 2,
+                            "elements": [
+                                {
+                                    "type": "TabLayout",
+                                    "elements": [
+                                        {
+                                            "type": "Tab",
+                                            "icon": {
+                                                "name": "Clipboard-Check",
+                                                "size": "Large"
+                                            },
+                                            "elements": [
+                                                {
+                                                    "type": "Component",
+                                                    "name": "AuditInfo",
+                                                    "value": {
+                                                        "$ref": "#/properties/AuditInfo"
+                                                    }
+                                                }
+                                            ],
+                                            "elementId": "tab-Audit Info"
+                                        },
+                                        {
+                                            "type": "Tab",
+                                            "icon": {
+                                                "name": "Bell",
+                                                "size": "Large"
+                                            },
+                                            "tabType": "error",
+                                            "elements": [
+                                                {
+                                                    "type": "ValidationSummary",
+                                                    "elementId": "RequiredPropertiesValidations"
+                                                }
+                                            ],
+                                            "elementId": "tab-Notifications",
+                                            "additionalInfo": {
+                                                "display": "ValidationErrorsCount"
+                                            }
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "Component",
+            "name": "DocumentFooter",
+            "value": {
+                "$ref": "#"
+            }
+        }
+    ]
+}

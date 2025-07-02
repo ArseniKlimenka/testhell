@@ -1,0 +1,85 @@
+{
+    "type": "Group",
+    "width": 12,
+    "elements": [
+        {
+            "type": "Section",
+            "label": "Main attributes",
+            "scope": "mainAttributes",
+            "width": 12,
+            "elements": [
+                {
+                    "type": "Group",
+                    "width": 12,
+                    "elements": [
+                        {
+                            "type": "Input",
+                            "label": "manualDocumentNumber",
+                            "value": {
+                                "$ref": "#/properties/manualDocumentNumber"
+                            },
+                            "width": 6
+                        },
+                        {
+                            "type": "Input",
+                            "label": "shouldBeSigned",
+                            "value": {
+                                "$ref": "#/properties/shouldBeSigned"
+                            },
+                            "width": 6
+                        }
+                    ]
+                },
+                {
+                    "type": "Group",
+                    "width": 12,
+                    "elements": [
+                        {
+                            "type": "Component",
+                            "name": "AADocumentAmendmentValidity",
+                            "value": {
+                                "$ref": "#/properties/validity"
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "Section",
+            "label": "additionalAttributes",
+            "scope": "additionalAttributes",
+            "width": 12,
+            "elements": [
+                {
+                    "type": "Group",
+                    "width": 12,
+                    "elements": [
+                        {
+                            "type": "TextArea",
+                            "enableResize": true,
+                            "numberOfRows": 5,
+                            "label": "changesNote",
+                            "value": {
+                                "$ref": "#/properties/changesNote"
+                            },
+                            "width": 12,
+                            "rule": {
+                                "effect": "ENABLE_INITIAL",
+                                "condition": {
+                                    "type": "FUNC",
+                                    "ruleFunction": "isChangesNoteEnabled",
+                                    "value": [
+                                        {
+                                            "$ref": "#"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

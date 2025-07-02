@@ -1,0 +1,240 @@
+{
+    "id": "AAAmednmentListViewUiSchema",
+    "type": "Group",
+    "elements": [
+        {
+            "type": "GridLayout",
+            "numberOfColumns": 12,
+            "elements": [
+                {
+                    "type": "Group",
+                    "elements": [
+                        {
+                            "type": "DataGrid",
+                            "defaultPageSize": 10,
+                            "mode": "DataSource",
+                            "header": {
+                                "showReloadButton": true,
+                                "showNumberOfResults": false
+                            },
+                            "pagination": {
+                                "mode": "Regular",
+                                "pageSizes": [
+                                    5,
+                                    10,
+                                    15
+                                ]
+                            },
+                            "actions": [
+                                "Details"
+                            ],
+                            "selection": {
+                                "mode": "None"
+                            },
+                            "height": "None",
+                            "columns": [
+                                {
+                                    "sortable": false,
+                                    "title": "documentNumber",
+                                    "name": "documentNumber",
+                                    "cellContent": {
+                                        "type": "Link",
+                                        "readOnly": true,
+                                        "targetType": "Url",
+                                        "label": "documentNumber",
+                                        "value": {
+                                            "mapping": "amendmentUriMapping",
+                                            "$ref": "#"
+                                        },
+                                        "width": 5,
+                                        "content": {
+                                            "text": {
+                                                "type": "OutputText",
+                                                "value": {
+                                                    "$ref": "#/properties/resultData/properties/documentNumber"
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                {
+                                    "sortable": false,
+                                    "title": "sequenceNumber",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "value": {
+                                            "$ref": "#/properties/resultData/properties/sequenceNumber"
+                                        }
+                                    }
+                                },
+                                {
+                                    "sortable": false,
+                                    "title": "manualDocumentNumber",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "value": {
+                                            "$ref": "#/properties/resultData/properties/manualDocumentNumber"
+                                        }
+                                    }
+                                },
+                                {
+                                    "sortable": false,
+                                    "title": "documentType",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "value": {
+                                            "$ref": "#/properties/resultData/properties/documentType"
+                                        }
+                                    }
+                                },
+                                {
+                                    "sortable": false,
+                                    "title": "createdOn",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "value": {
+                                            "$ref": "#/properties/resultData/properties/createdOn"
+                                        }
+                                    }
+                                },
+                                {
+                                    "sortable": false,
+                                    "title": "createdBy",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "value": {
+                                            "$ref": "#/properties/resultData/properties/createdBy"
+                                        }
+                                    }
+                                },
+                                {
+                                    "sortable": false,
+                                    "title": "state",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "value": {
+                                            "$ref": "#/properties/resultData/properties/state"
+                                        }
+                                    }
+                                },
+                                {
+                                    "sortable": false,
+                                    "title": "changesNoteShort",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "value": {
+                                            "$ref": "#/properties/resultData/properties/changesNoteShort"
+                                        }
+                                    }
+                                }
+                            ],
+                            "detailsTemplates": {
+                                "view": {
+                                    "content": {
+                                        "type": "GridLayout",
+                                        "fillAvailableSpace": true,
+                                        "numberOfColumns": 12,
+                                        "elements": [
+                                            {
+                                                "type": "Group",
+                                                "width": 12,
+                                                "elements": [
+                                                    {
+                                                        "type": "Input",
+                                                        "width": 3,
+                                                        "label": "documentNumber",
+                                                        "readOnly": true,
+                                                        "value": {
+                                                            "$ref": "#/properties/resultData/properties/documentNumber"
+                                                        }
+                                                    },
+                                                    {
+                                                        "type": "Input",
+                                                        "width": 3,
+                                                        "label": "sequenceNumber",
+                                                        "readOnly": true,
+                                                        "value": {
+                                                            "$ref": "#/properties/resultData/properties/sequenceNumber"
+                                                        }
+                                                    },
+                                                    {
+                                                        "type": "Input",
+                                                        "width": 3,
+                                                        "label": "manualDocumentNumber",
+                                                        "readOnly": true,
+                                                        "value": {
+                                                            "$ref": "#/properties/resultData/properties/manualDocumentNumber"
+                                                        }
+                                                    },
+                                                    {
+                                                        "type": "Input",
+                                                        "width": 3,
+                                                        "label": "documentType",
+                                                        "readOnly": true,
+                                                        "value": {
+                                                            "$ref": "#/properties/resultData/properties/documentType"
+                                                        }
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "type": "Group",
+                                                "width": 12,
+                                                "elements": [
+                                                    {
+                                                        "type": "DatetimePicker",
+                                                        "label": "createdOn",
+                                                        "readOnly": true,
+                                                        "value": {
+                                                            "$ref": "#/properties/resultData/properties/createdOn"
+                                                        },
+                                                        "width": 3
+                                                    },
+                                                    {
+                                                        "type": "Input",
+                                                        "width": 3,
+                                                        "label": "createdBy",
+                                                        "readOnly": true,
+                                                        "value": {
+                                                            "$ref": "#/properties/resultData/properties/createdBy"
+                                                        }
+                                                    },
+                                                    {
+                                                        "type": "Input",
+                                                        "width": 3,
+                                                        "label": "state",
+                                                        "readOnly": true,
+                                                        "value": {
+                                                            "$ref": "#/properties/resultData/properties/state"
+                                                        }
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "type": "Group",
+                                                "width": 12,
+                                                "elements": [
+                                                    {
+                                                        "type": "TextArea",
+                                                        "enableResize": true,
+                                                        "readOnly": true,
+                                                        "numberOfRows": 5,
+                                                        "label": "changesNoteFull",
+                                                        "value": {
+                                                            "$ref": "#/properties/resultData/properties/changesNoteFull"
+                                                        },
+                                                        "width": 12
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,50 @@
+
+insert into acc.CT_BUSINESS_EVENT_TYPE (BUSINESS_EVENT_TYPE_ID, DESCRIPTION)
+values (1000, 'Commission posting');
+
+insert into ACC.CT_DOCUMENT_TYPE (DOCUMENT_TYPE_ID, DESCRIPTION, PAYABLE)
+values (1002, 'Invoiced commission', 1),
+       (1003, 'Commission act', 1);
+
+INSERT INTO ACC.CT_GL_ACCOUNT_TYPE (GL_ACCOUNT_TYPE_ID, DESCRIPTION, IS_DEBIT, ATTRIBUTE_SET_ID, FROM_PAYMENT)
+VALUES (1002, N'Agent commission', 0, null, 0), --48022
+       (1003, N'Acquisition costs (commission)', 1, 2, 0); --71412, 71414
+GO
+
+update acc.GL_ACCOUNT set GL_ACCOUNT_TYPE_ID = 1002 where GL_ACCOUNT_NO = '48022';
+update acc.GL_ACCOUNT set GL_ACCOUNT_TYPE_ID = 1003 where GL_ACCOUNT_NO = '71412';
+update acc.GL_ACCOUNT set GL_ACCOUNT_TYPE_ID = 1003 where GL_ACCOUNT_NO = '71414';
+
+
+INSERT INTO ACC.CT_DOCUMENT_TYPE (DOCUMENT_TYPE_ID, DESCRIPTION, ACCOUNT_TYPE_ID, PAYABLE)
+VALUES (1001, N'Tolerance payment', null, 1);
+update acc.BA_ENTRY             set DOCUMENT_TYPE_ID = 1001 where DOCUMENT_TYPE_ID = 100001;
+update acc.GL_SUBLEDGER_ENTRY   set DOCUMENT_TYPE_ID = 1001 where DOCUMENT_TYPE_ID = 100001;
+update ACC.JR_JOURNAL           set DOCUMENT_TYPE_ID = 1001 where DOCUMENT_TYPE_ID = 100001;
+delete from acc.CT_DOCUMENT_TYPE where DOCUMENT_TYPE_ID = 100001;
+GO
+
+INSERT INTO ACC.CT_GL_POSTING_SCHEME(POSTING_SCHEME_ID, SCHEME_NAME, SCHEME_TYPE_ID, JOURNAL_TYPE_ID, VALUE_SIGN, BA_ACCOUNT_TYPE_ID, INTERNAL, SOURCE_DOC_TYPE_ID, OPENED_BY_ENTRY_TYPE_ID, VALIDITY_START, VALIDITY_END, EXPLICIT, ITEM_TYPE_ID)
+VALUES (53, 'Invoiced commission', 1, 3, null, null, 0, 1002, null, '19000101', '9999-12-31', 0, null)
+
+INSERT INTO ACC.GL_POSTING_SCHEME(POSTING_SCHEME_ID, SEQ_NUMBER, IS_DEBIT, GL_ACCOUNT_TYPE_ID, SIGN, VALUE_FIELD_ID, NET_VALUE_FIELD_ID, PAIR_NO, PAIR_SEQ_NO)
+VALUES (53, 1, 1, 1003, 1, 3, 1, 1, 1),
+       (53, 2, 0, 1002, 1, 3, 1, 1, 2)
+
+INSERT INTO ACC.CT_GL_POSTING_SCHEME(POSTING_SCHEME_ID, SCHEME_NAME, SCHEME_TYPE_ID, JOURNAL_TYPE_ID, VALUE_SIGN, BA_ACCOUNT_TYPE_ID, INTERNAL, SOURCE_DOC_TYPE_ID, OPENED_BY_ENTRY_TYPE_ID, VALIDITY_START, VALIDITY_END, EXPLICIT, ITEM_TYPE_ID)
+VALUES (54, 'Commission act', 1, 3, null, null, 0, 1003, null, '19000101', '9999-12-31', 0, null);
+
+INSERT INTO ACC.GL_POSTING_SCHEME(POSTING_SCHEME_ID, SEQ_NUMBER, IS_DEBIT, GL_ACCOUNT_TYPE_ID, SIGN, VALUE_FIELD_ID, NET_VALUE_FIELD_ID, PAIR_NO, PAIR_SEQ_NO)
+VALUES (54, 1, 1, 1003, 1, 3, 1, 1, 1),
+       (54, 2, 0, 1002, 1, 3, 1, 1, 2);
+
+INSERT INTO ACC.GL_POSTING_PROFILE(GL_ACCOUNT_TYPE_ID, ATTRIBUTE_VALUE_SET_ID, GL_ACCOUNT_ID, ATTRIBUTE_SET_ID, PREVIOUS_PERIOD, BA_ACCOUNT_TYPE_ID, PAYMENT_DOCUMENT_TYPE_ID, ANALYTICS_ATTRIBUTE_SET_ID, VALIDITY_START, VALIDITY_END, INVOICE_DOCUMENT_TYPE_ID)
+VALUES (1003, (select attribute_value_set_id from acc.attribute_value_set where AVS_PURPOSE_ID=3 and IS_LIFE=0), (select gl_account_id from acc.gl_account where gl_account_no='71414'), null, NULL, null, null, null, '19000101', '99991231', null),
+       (1003, (select attribute_value_set_id from acc.attribute_value_set where AVS_PURPOSE_ID=3 and IS_LIFE=1), (select gl_account_id from acc.gl_account where gl_account_no='71412'), null, NULL, null, null, null, '19000101', '99991231', null),
+       (1002, null, (select gl_account_id from acc.gl_account where gl_account_no='48022'), null, NULL, null, null, null, '19000101', '99991231', null);
+
+insert into ACC_IMPL.OFR_RULE (GL_ACCOUNT_ID, PREVIOUS_PERIOD, DOCUMENT_TYPE_ID, OFR_ID)
+    values ((select GL_ACCOUNT_ID from acc.GL_ACCOUNT where GL_ACCOUNT_NO = '71412'), 0, null, (select OFR_ID from ACC_IMPL.CT_OFR where OFR_CODE = '26101')),
+           ((select GL_ACCOUNT_ID from acc.GL_ACCOUNT where GL_ACCOUNT_NO = '71412'), 1, null, (select OFR_ID from ACC_IMPL.CT_OFR where OFR_CODE = '26109')),
+           ((select GL_ACCOUNT_ID from acc.GL_ACCOUNT where GL_ACCOUNT_NO = '71414'), 0, null, (select OFR_ID from ACC_IMPL.CT_OFR where OFR_CODE = '27101')),
+           ((select GL_ACCOUNT_ID from acc.GL_ACCOUNT where GL_ACCOUNT_NO = '71414'), 1, null, (select OFR_ID from ACC_IMPL.CT_OFR where OFR_CODE = '27109'));

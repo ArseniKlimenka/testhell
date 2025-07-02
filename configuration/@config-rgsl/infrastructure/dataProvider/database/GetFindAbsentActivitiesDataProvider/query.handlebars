@@ -1,0 +1,15 @@
+﻿select
+	etl.SYS_CREATED_ON,
+	JSON_VALUE(etl.BODY, '$.createdOnFrom') as DATE_FROM,
+	JSON_VALUE(etl.BODY, '$.createdOnTo') as DATE_TO,
+	case
+		when etl.STATUS = 0 then N'Создан'
+		when etl.STATUS = 1 then N'В процессе'
+		when etl.STATUS = 2 then N'Завершён'
+		else N'Ошибка'
+	end as STATE_DESCRIPTION,
+	(select top 100 '[' + (select STRING_AGG('"' + cast(faa.ACTIVITY_ID as nvarchar(32)) + '"', ', ')) + ']' from bfx_impl.FIND_ABSENT_ACTIVITIES faa where faa.ETL_EXECUTION_STATUS_ID = etl.ETL_EXECUTION_STATUS_ID) as ABSENT_ACTIVITIES
+from
+	bfx.ETL_EXECUTION_STATUS etl
+where etl.CONFIGURATION_NAME = 'FindAbsentActivitiesETL'
+order by etl.SYS_CREATED_ON desc

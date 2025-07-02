@@ -1,0 +1,108 @@
+{
+    "type": "Group",
+    "elements": [
+        {
+            "type": "GridLayout",
+            "numberOfColumns": 12,
+            "elements": [
+                {
+                    "type": "Group",
+                    "elements": [
+                        {
+                            "type": "DataGrid",
+                            "orderBy": "documentNumber",
+                            "value": {
+                                "$ref": "#"
+                            },
+                            "mode": "DataSource",
+                            "header": {
+                                "showReloadButton": true,
+                                "showNumberOfResults": true
+                            },
+                            "pagination": {
+                                "mode": "InMemory",
+                                "pageSizes": [
+                                    5,
+                                    10,
+                                    15
+                                ]
+                            },
+                            "selection": {
+                                "mode": "None"
+                            },
+                            "height": "None",
+                            "columns": [
+                                {
+                                    "sortable": false,
+                                    "title": "Type of Document",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "value": {
+                                            "$ref": "#/properties/resultData/properties/documentType"
+                                        }
+                                    }
+                                },
+                                {
+                                    "sortable": false,
+                                    "title": "Insurance product",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "value": {
+                                            "$ref": "#/properties/resultData/properties/productDescription"
+                                        }
+                                    }
+                                },
+                                {
+                                    "sortable": false,
+                                    "title": "Document number",
+                                    "cellContent": {
+                                        "type": "Link",
+                                        "label": "Document number",
+                                        "targetType": "Entity",
+                                        "value": {
+                                            "mapping": "PrepareDocumentLink",
+                                            "$ref": "#/properties/resultData/properties/"
+                                        },
+                                        "content": {
+                                            "text": {
+                                                "type": "OutputText",
+                                                "textProperties": [
+                                                    "bold"
+                                                ],
+                                                "template": "{{expr contractNumber}}",
+                                                "value": {
+                                                    "$ref": "#"
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                {
+                                    "sortable": false,
+                                    "title": "Created On",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "template": "{{expr createdOn 'dt'}}",
+                                        "value": {
+                                            "$ref": "#/properties/resultData"
+                                        }
+                                    }
+                                },
+                                {
+                                    "sortable": false,
+                                    "title": "Document state",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "value": {
+                                            "$ref": "#/properties/resultData/properties/documentState"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

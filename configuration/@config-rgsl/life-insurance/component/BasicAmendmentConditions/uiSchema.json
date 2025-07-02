@@ -1,0 +1,411 @@
+{
+    "type": "Section",
+    "label": "BasicAmendmentConditions",
+    "isCollapsed": false,
+    "width": 12,
+    "rule": {
+        "effect": "DISABLE_INITIAL",
+        "condition": {
+            "type": "FUNC",
+            "ruleFunction": "disableSection",
+            "value": [
+                {
+                    "$ref": "#"
+                }
+            ]
+        }
+    },
+    "elements": [
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "Input",
+                    "label": "policyNumber",
+                    "readOnly": true,
+                    "value": {
+                        "$ref": "#/properties/policyData/properties/policyNumber"
+                    },
+                    "width": 3
+                },
+                {
+                    "type": "Link",
+                    "width": 3,
+                    "targetType": "Url",
+                    "value": {
+                        "mapping": "contractUrlMapping",
+                        "$ref": "#"
+                    },
+                    "content": {
+                        "text": {
+                            "type": "OutputText",
+                            "defaultValue": "",
+                            "value": {
+                                "mapping": "linkNameMapping",
+                                "$ref": "#"
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "Input",
+                    "label": "policyProductGroup",
+                    "readOnly": true,
+                    "value": {
+                        "$ref": "#/properties/policyData/properties/policyProductGroup"
+                    },
+                    "width": 3
+                },
+                {
+                    "type": "Input",
+                    "label": "insuranceProductName",
+                    "readOnly": true,
+                    "value": {
+                        "$ref": "#/properties/policyData/properties/insuranceProductName"
+                    },
+                    "width": 3
+                }
+            ]
+        },
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "Input",
+                    "label": "policyHolderFullName",
+                    "readOnly": true,
+                    "value": {
+                        "$ref": "#/properties/policyData/properties/policyHolderFullName"
+                    },
+                    "width": 3
+                },
+                {
+                    "type": "Input",
+                    "label": "policyIssueDate",
+                    "readOnly": true,
+                    "value": {
+                        "$ref": "#/properties/policyData/properties/policyIssueDate"
+                    },
+                    "width": 3
+                },
+                {
+                    "type": "Input",
+                    "label": "policyStartDate",
+                    "readOnly": true,
+                    "value": {
+                        "$ref": "#/properties/policyData/properties/policyStartDate"
+                    },
+                    "width": 3
+                },
+                {
+                    "type": "Input",
+                    "label": "policyEndDate",
+                    "readOnly": true,
+                    "value": {
+                        "$ref": "#/properties/policyData/properties/policyEndDate"
+                    },
+                    "width": 3
+                }
+            ]
+        },
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "Input",
+                    "label": "contractCurrencyName",
+                    "readOnly": true,
+                    "value": {
+                        "$ref": "#/properties/policyData/properties/contractCurrencyName"
+                    },
+                    "width": 2
+                },
+                {
+                    "type": "Input",
+                    "label": "exchangeRate",
+                    "value": {
+                        "$ref": "#/aiAdditionalContext/paymentAmendmentConditions/properties/exchangeRate2"
+                    },
+                    "width": 2,
+                    "readOnly": true
+                },
+                {
+                    "type": "Input",
+                    "label": "fixedExchangeRate",
+                    "value": {
+                        "$ref": "#/aiAdditionalContext/paymentAmendmentConditions/properties/fixedExchangeRate"
+                    },
+                    "width": 2,
+                    "rule": {
+                        "effect": "ENABLE_INITIAL",
+                        "condition": {
+                            "type": "LEAF",
+                            "expectedValue": true,
+                            "value": {
+                                "$ref": "#/aiAdditionalContext/paymentAmendmentConditions/properties/editFixedExchangeRate"
+                            }
+                        }
+                    }
+                },
+                {
+                    "type": "Input",
+                    "label": "useFixedExchangeRate",
+                    "value": {
+                        "$ref": "#/aiAdditionalContext/paymentAmendmentConditions/properties/useFixedExchangeRate"
+                    },
+                    "width": 3
+                },
+                {
+                    "type": "Input",
+                    "label": "editFixedExchangeRate",
+                    "value": {
+                        "$ref": "#/aiAdditionalContext/paymentAmendmentConditions/properties/editFixedExchangeRate"
+                    },
+                    "width": 3,
+                    "onValueChanged": [
+                        {
+                            "commandType": "executeAction",
+                            "actionName": "onEditFixedEchangeRateChanged"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "Lookup",
+                    "label": "applicant",
+                    "value": {
+                        "$ref": "#"
+                    },
+                    "width": 4,
+                    "dialogButton": {},
+                    "clearButton": {
+                        "clearAction": "clearApplicant"
+                    },
+                    "dialog": {
+                        "viewReference": {
+                            "configurationCodeName": "GeneralPartySearchWithEditView",
+                            "configurationVersion": "1",
+                            "configurationConceptType": "SearchView"
+                        },
+                        "onLoad": "applicantLookupOnLoad"
+                    },
+                    "onSelected": "applicantResultMapping",
+                    "selectedDisplayValueUISchema": {
+                        "type": "Input",
+                        "label": "applicant",
+                        "readOnly": true,
+                        "value": {
+                            "$ref": "#/properties/applicant/properties/fullName"
+                        }
+                    }
+                },
+                {
+                    "type": "Input",
+                    "label": "receiveMethod",
+                    "value": {
+                        "$ref": "#/properties/receiveMethod"
+                    },
+                    "width": 3
+                }
+            ]
+        },
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "Input",
+                    "label": "applicationSignDate",
+                    "value": {
+                        "$ref": "#/properties/applicationSignDate"
+                    },
+                    "width": 3,
+                    "onValueChanged": [
+                        {
+                            "commandType": "executeAction",
+                            "actionName": "onSignDateChanged"
+                        },
+                        {
+                            "commandType": "executeAction",
+                            "actionName": "onAmendmentReasonChanged"
+                        },
+                        {
+                            "commandType": "executeAction",
+                            "actionName": "onAmountRealtedDataChanged"
+                        }
+                    ]
+                },
+                {
+                    "type": "Input",
+                    "label": "applicationReceiveDate",
+                    "value": {
+                        "$ref": "#/properties/applicationReceiveDate"
+                    },
+                    "width": 3,
+                    "onValueChanged": [
+                        {
+                            "commandType": "executeAction",
+                            "actionName": "onApplicationReceiveDate"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "Input",
+                    "label": "amendmentSubType",
+                    "value": {
+                        "$ref": "#/properties/amendmentSubType"
+                    },
+                    "width": 4,
+                    "onValueChanged": [
+                        {
+                            "commandType": "executeAction",
+                            "actionName": "onAmendmentSubTypeChanged"
+                        },
+                        {
+                            "commandType": "executeAction",
+                            "actionName": "onAmountRealtedDataChanged"
+                        }
+                    ]
+                },
+                {
+                    "type": "Input",
+                    "label": "amendmentReason",
+                    "value": {
+                        "$ref": "#/properties/amendmentReason"
+                    },
+                    "width": 4,
+                    "filter": "filterAmendmentReason",
+                    "onValueChanged": [
+                        {
+                            "commandType": "executeAction",
+                            "actionName": "onAmendmentReasonChanged"
+                        },
+                        {
+                            "commandType": "executeAction",
+                            "actionName": "onAmountRealtedDataChanged"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "Input",
+                    "label": "validFrom",
+                    "value": {
+                        "$ref": "#/properties/validFrom"
+                    },
+                    "width": 3,
+                    "onValueChanged": [
+                        {
+                            "commandType": "executeAction",
+                            "actionName": "onAmountRealtedDataChanged"
+                        }
+                    ],
+                    "rule": {
+                        "effect": "DISABLE_INITIAL",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "disableValidFrom",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "type": "Input",
+                    "label": "fullPackageReceiveDate",
+                    "value": {
+                        "$ref": "#/properties/fullPackageReceiveDate"
+                    },
+                    "width": 3,
+                    "rule": {
+                        "effect": "DISABLE_INITIAL",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "disableFullPackageReceived",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "type": "TextArea",
+                    "enableResize": true,
+                    "numberOfRows": 5,
+                    "label": "rejectionText",
+                    "value": {
+                        "$ref": "#/properties/rejectionText"
+                    },
+                    "width": 12,
+                    "rule": {
+                        "effect": "ENABLE_INITIAL",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "canEnterRejectionText",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "type": "Group",
+            "rule": {
+                "effect": "SHOW",
+                "condition": {
+                    "type": "FUNC",
+                    "value": [
+                        {
+                            "$ref": "#"
+                        }
+                    ],
+                    "ruleFunction": "showAdditionalDates"
+                }
+            },
+            "elements": [
+                {
+                    "type": "Input",
+                    "label": "outputDate",
+                    "value": {
+                        "$ref": "#/properties/outputDate"
+                    },
+                    "width": 3
+                },
+                {
+                    "type": "Input",
+                    "label": "signDate",
+                    "value": {
+                        "$ref": "#/properties/signDate"
+                    },
+                    "width": 3
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,2 @@
+alter table ACC_IMPL.BANK_STATEMENT_ITEM add ORIGINAL_PAYMENT_DESCRIPTION nvarchar(256) null
+go

@@ -1,0 +1,433 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema",
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+        "policyIssueDateStart",
+        "policyIssueDateEnd",
+        "commRate"
+    ],
+    "aiDeepRequired": [
+        "/partner/partnerCode",
+        "/agentAgreement/externalNumber",
+        "/insuranceTermFrom/insuranceTermsYearCode",
+        "/insuranceTermTo/insuranceTermsYearCode",
+        "/currency/currencyCode"
+    ],
+    "properties": {
+        "ruleNum": {
+            "type": "number",
+            "aiType": "int"
+        },
+        "enterValuesDate": {
+            "type": "string",
+            "aiFormat": "date-time",
+            "aiTitle": "lastUpdateDate"
+        },
+        "partner": {
+            "type": "object",
+            "additionalProperties": false,
+            "aiTitle": "partner",
+            "properties": {
+                "partnerCode": {
+                    "type": "string",
+                    "aiTitle": "partnerCode"
+                },
+                "partnerDescription": {
+                    "type": "string",
+                    "aiTitle": "partnerDescription"
+                },
+                "partnerShortDescription": {
+                    "type": "string"
+                },
+                "partnerBusinessCode": {
+                    "type": "string"
+                }
+            }
+        },
+        "insuranceProduct": {
+            "type": "object",
+            "additionalProperties": false,
+            "aiTitle": "insuranceProduct",
+            "properties": {
+                "productCode": {
+                    "type": "string",
+                    "aiTitle": "productCode"
+                },
+                "productDescription": {
+                    "type": "string",
+                    "aiTitle": "productDescription"
+                },
+                "productDescriptionWithCode": {
+                    "type": "string",
+                    "aiTitle": "productDescriptionWithCode"
+                },
+                "productGroup": {
+                    "type": "string",
+                    "aiTitle": "productGroup"
+                },
+                "salesSegment": {
+                    "type": "string",
+                    "aiTitle": "productGroup"
+                },
+                "isMigrated": {
+                    "type": "boolean",
+                    "aiTitle": "isMigrated"
+                }
+            }
+        },
+        "agentAgreement": {
+            "type": "object",
+            "additionalProperties": false,
+            "aiTitle": "agentAgreement",
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "number": {
+                    "type": "string"
+                },
+                "externalNumber": {
+                    "type": "string",
+                    "aiTitle": "externalNumber"
+                },
+                "manualNumber": {
+                    "type": "string"
+                },
+                "partnerBusinessCode": {
+                    "type": "string"
+                },
+                "partnerPartyCode": {
+                    "type": "string"
+                },
+                "aaName": {
+                    "type": "string"
+                }
+            }
+        },
+        "commRate": {
+            "type": "number",
+            "aiType": "decimal(15,2)",
+            "minimum:": 0,
+            "aiTitle": "commRate"
+        },
+        "policyIssueDateStart": {
+            "type": "string",
+            "aiFormat": "date",
+            "aiTitle": "policyIssueDateStart"
+        },
+        "policyIssueDateEnd": {
+            "type": "string",
+            "aiFormat": "date",
+            "aiTitle": "policyIssueDateEnd"
+        },
+        "basicInvestmentParameters": {
+            "type": "object",
+            "additionalProperties": false,
+            "aiTitle": "basicInvestmentParameters",
+            "properties": {
+                "strategyCode": {
+                    "type": "string",
+                    "aiTitle": "strategyCode"
+                },
+                "strategyDescription": {
+                    "type": "string",
+                    "aiTitle": "strategyDescription"
+                },
+                "issueDateFrom": {
+                    "type": "string",
+                    "aiFormat": "date",
+                    "aiTitle": "issueDateFrom"
+                },
+                "issueDateTo": {
+                    "type": "string",
+                    "aiFormat": "date",
+                    "aiTitle": "issueDateTo"
+                },
+                "currencyCode": {
+                    "type": "string",
+                    "aiTitle": "currencyCode"
+                }
+            }
+        },
+        "insuranceTermFrom": {
+            "type": "object",
+            "additionalProperties": false,
+            "aiTitle": "insuranceTermFrom",
+            "properties": {
+                "insuranceTermsYearName": {
+                    "type": "string",
+                    "aiTitle": "insuranceTermsYearName"
+                },
+                "insuranceTermsYearCode": {
+                    "type": "string",
+                    "aiTitle": "insuranceTermsYearCode"
+                },
+                "insuranceTermsYearDescription": {
+                    "type": "string",
+                    "aiTitle": "insuranceTermsYearDescription"
+                }
+            }
+        },
+        "insuranceTermTo": {
+            "type": "object",
+            "additionalProperties": false,
+            "aiTitle": "insuranceTermTo",
+            "properties": {
+                "insuranceTermsYearName": {
+                    "type": "string",
+                    "aiTitle": "insuranceTermsYearName"
+                },
+                "insuranceTermsYearCode": {
+                    "type": "string",
+                    "aiTitle": "insuranceTermsYearCode"
+                },
+                "insuranceTermsYearDescription": {
+                    "type": "string",
+                    "aiTitle": "insuranceTermsYearDescription"
+                }
+            }
+        },
+        "currency": {
+            "type": "object",
+            "additionalProperties": false,
+            "aiTitle": "currency",
+            "properties": {
+                "currencyCode": {
+                    "type": "string",
+                    "aiTitle": "currencyCode"
+                },
+                "currencyDesc": {
+                    "type": "string",
+                    "aiTitle": "currencyDesc"
+                },
+                "currencyNumericCode": {
+                    "type": "string",
+                    "aiTitle": "currencyNumericCode"
+                }
+            }
+        },
+        "paymentFrequency": {
+            "type": "object",
+            "aiTitle": "paymentFrequency",
+            "properties": {
+                "paymentFrequencyCode": {
+                    "type": "string",
+                    "aiTitle": "paymentFrequencyCode"
+                },
+                "paymentFrequencyDescription": {
+                    "type": "string",
+                    "aiTitle": "paymentFrequencyDescription"
+                }
+            }
+        },
+        "guaranteedIncome": {
+            "type": "object",
+            "aiTitle": "guaranteedIncome",
+            "properties": {
+                "guaranteedIncomeCode": {
+                    "type": "string",
+                    "aiTitle": "guaranteedIncomeCode"
+                },
+                "guaranteedIncomeDescription": {
+                    "type": "string",
+                    "aiTitle": "guaranteedIncomeDescription"
+                }
+            }
+        },
+        "ratesOfReturn": {
+            "$ref": "component:RatesOfReturn"
+        },
+        "strategyConfiguration": {
+            "type": "object",
+            "properties": {
+                "strategyCode": {
+                    "type": "string"
+                },
+                "issueDateFrom": {
+                    "type": "string",
+                    "aiFormat": "date"
+                },
+                "issueDateTo": {
+                    "type": "string",
+                    "aiFormat": "date"
+                },
+                "currencyCode": {
+                    "type": "string"
+                },
+                "strategyDescriptionFull": {
+                    "type": "string"
+                },
+                "payOffDescription": {
+                    "type": "string"
+                },
+                "baseActiveDescription": {
+                    "type": "string"
+                },
+                "participationCoeff": {
+                    "type": "number"
+                },
+                "participationCoeffByPeriods": {
+                    "type": "string"
+                },
+                "optionPrice": {
+                    "type": "number"
+                },
+                "barrier": {
+                    "type": "string"
+                },
+                "barrierAutoCall": {
+                    "type": "string"
+                },
+                "emitent": {
+                    "type": "string"
+                },
+                "fixRate": {
+                    "type": "number"
+                },
+                "intialShare": {
+                    "type": "number"
+                },
+                "hedgeCost": {
+                    "type": "number"
+                },
+                "spreadBA": {
+                    "type": "number"
+                },
+                "payOffShortDescription": {
+                    "type": "string"
+                },
+                "toolType": {
+                    "type": "string"
+                },
+                "measureToolNominal": {
+                    "type": "number"
+                },
+                "calculatingAgent": {
+                    "type": "string"
+                },
+                "priceOfMeasureTool": {
+                    "type": "number"
+                },
+                "partOfPremiumForTool": {
+                    "type": "number"
+                },
+                "discount": {
+                    "type": "number"
+                }
+            }
+        },
+        "segment": {
+            "$ref": "component:SegmentStateComponent",
+            "aiTitle": "segment"
+        },
+        "isin": {
+            "type": "string",
+            "aiTitle": "isin"
+        },
+        "rko": {
+            "type": "number",
+            "aiType": "decimal(15,2)",
+            "minimum:": 0,
+            "aiTitle": "rko"
+        },
+        "motivationFromMargin": {
+            "type": "number",
+            "aiType": "decimal(15,2)",
+            "minimum:": 0,
+            "aiTitle": "motivationFromMargin"
+        },
+        "motivationFromProductEconomic": {
+            "type": "number",
+            "aiType": "decimal(15,2)",
+            "minimum:": 0,
+            "aiTitle": "motivationFromProductEconomic"
+        },
+        "skMargin": {
+            "type": "number",
+            "aiType": "decimal(15,3)",
+            "minimum:": 0,
+            "aiTitle": "skMargin"
+        },
+        "fundingRateSwaps": {
+            "type": "number",
+            "aiType": "decimal(15,2)",
+            "minimum:": 0,
+            "aiTitle": "fundingRateSwaps"
+        },
+        "laps": {
+            "type": "number",
+            "aiType": "decimal(15,2)",
+            "minimum:": 0,
+            "aiTitle": "laps"
+        },
+        "hedge": {
+            "type": "number",
+            "aiType": "decimal(15,2)",
+            "aiTitle": "hedge"
+        },
+        "clientID": {
+            "type": "number",
+            "aiType": "decimal(15,2)",
+            "minimum:": 0,
+            "aiTitle": "clientID"
+        },
+        "shareRF": {
+            "type": "number",
+            "aiType": "decimal(15,2)",
+            "minimum:": 0,
+            "aiTitle": "shareRF"
+        },
+        "shareGF": {
+            "type": "number",
+            "aiType": "decimal(15,2)",
+            "minimum:": 0,
+            "aiTitle": "shareGF"
+        },
+        "rvd": {
+            "type": "number",
+            "aiType": "decimal(15,2)",
+            "minimum:": 0,
+            "aiTitle": "rvd"
+        },
+        "fundingVersionSubFundID": {
+            "type": "integer",
+            "aiTitle": "fundingVersionSubFundID"
+        },
+        "memorandumPkDate": {
+            "type": "string",
+            "aiFormat": "date",
+            "aiTitle": "memorandumPkDate"
+        },
+        "pkNumber": {
+            "type": "integer",
+            "aiTitle": "pkNumber"
+        },
+        "analyticalAdjustment": {
+            "type": "number",
+            "aiType": "decimal(15,2)",
+            "minimum:": 0,
+            "aiTitle": "analyticalAdjustment"
+        },
+        "expectedReturnPercentAK": {
+            "type": "number",
+            "aiType": "decimal(15,2)",
+            "minimum:": 0,
+            "aiTitle": "expectedReturnPercentAK"
+        },
+        "insurance": {
+            "type": "number",
+            "aiType": "decimal(15,2)",
+            "minimum:": 0,
+            "aiTitle": "insurance"
+        },
+        "riskTransferProduct": {
+            "type": "string",
+            "aiTitle": "riskTransferProduct"
+        },
+        "comments": {
+            "type": "string",
+            "aiTitle": "comments"
+        }
+    }
+}

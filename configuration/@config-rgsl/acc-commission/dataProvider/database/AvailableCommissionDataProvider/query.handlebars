@@ -1,0 +1,70 @@
+with
+comm as (
+	select
+		 polCommL.SERVICE_PROVIDER_HKEY
+		,polCommL.AA_HKEY
+{{#if parameters.isDocCorrect}}
+		,polsl.POLICY_HKEY
+		,count(vs.STATE) - sum(case vs.STATE when 'Issued' then 1 else 0 end) NOT_ISSUED
+		,max(case when (polsl.ISSUE_FORM_CODE = 'offer' or prod.PRODUCT_GROUP = 'credit') then 0 else 1 end) NEED_TO_CHECK
+{{/if}}
+	from
+		acc_impl.PAYABLE_COMMISSION pc
+		inner join pas_impl.POLICY_COMMISSION_LINK polCommL on polCommL.POLICY_COMMISSION_HKEY = pc.POLICY_COMMISSION_HKEY
+{{#if (or parameters.transactionDateFrom parameters.transactionDateTo)}}
+		inner join acc_impl.MATCHING mat on mat.MATCHING_ID = pc.MATCHING_ID
+		inner join acc_impl.ALLOCATION alc on alc.ALLOCATION_ID = mat.ALLOCATION_ID
+		inner join acc_impl.BANK_STATEMENT_ITEM bsi on bsi.BANK_STATEMENT_ITEM_ID = alc.BANK_STATEMENT_ITEM_ID
+{{/if}}
+{{#if parameters.aaServiceProviderCode}}
+		inner join org_impl.SERVICE_PROVIDER_HUB sph on sph.SERVICE_PROVIDER_HKEY = polCommL.SERVICE_PROVIDER_HKEY
+{{/if}}
+{{#if parameters.isDocCorrect}}
+		inner join pas_impl.POLICY_SAT_LATEST polsl on polsl.POLICY_HKEY = polCommL.POLICY_HKEY
+		inner join bfx_impl.PRODUCTS prod on prod.CODE = polsl.product_code
+		inner join pas_impl.POLICY_VERIFICATION_LINK pvl on pvl.POLICY_HKEY = polsl.POLICY_HKEY
+		inner join pas_impl.VERIFICATION_SAT_LATEST vs on vs.VERIFICATION_HKEY = pvl.VERIFICATION_HKEY
+{{/if}}
+	where 1=1
+		and not exists (select * from acc_impl.CA_ACT_ITEM_PC aipc where aipc.PAYABLE_COMMISSION_ID = pc.PAYABLE_COMMISSION_ID and aipc.CANCELLED = 0)
+		and pc.CANCELLED = 0
+		and pc.CANCELLED_PC_ID is null
+{{#if parameters.transactionDateFrom}}
+		and bsi.TRANSACTION_DATE >= @transactionDateFrom
+{{/if}}
+{{#if parameters.transactionDateTo}}
+		and bsi.TRANSACTION_DATE <= @transactionDateTo
+{{/if}}
+{{#if parameters.aaServiceProviderCode}}
+		and sph.SERVICE_PROVIDER_CODE = @aaServiceProviderCode
+{{/if}}
+	group by
+		 polCommL.SERVICE_PROVIDER_HKEY
+		,polCommL.AA_HKEY
+{{#if parameters.isDocCorrect}}
+		,polsl.POLICY_HKEY
+{{/if}}
+)
+select
+	ptys.CONFIGURATION_CODE_NAME PARTY_CONFIGURATION,
+	ptys.FULL_NAME AGENT_FULL_NAME,
+	ptys.SHORT_NAME AGENT_SHORT_NAME,
+	aas.EXTERNAL_NUMBER as AA_EXTERNAL_NUMBER
+from
+	comm
+	inner join org_impl.SERVICE_PROVIDER_INFO_SAT_LATEST spis on spis.SERVICE_PROVIDER_INFO_HKEY = comm.SERVICE_PROVIDER_HKEY
+	inner join pty_impl.PARTY_HUB ptyh on ptyh.PARTY_CODE = spis.PARTY_CODE
+	inner join pty_impl.PARTY_INFO_SAT_LATEST ptys on ptys.PARTY_INFO_HKEY = ptyh.PARTY_HKEY
+	inner join pas_impl.AA_SAT_LATEST aas on aas.AA_HKEY = comm.AA_HKEY
+where 1=1
+{{#if parameters.aaNumber}}
+	and aas.EXTERNAL_NUMBER = @aaNumber
+{{/if}}
+{{#if parameters.isDocCorrect}}
+	and (comm.NOT_ISSUED = 0 or comm.NEED_TO_CHECK = 0)
+{{/if}}
+group by
+	ptys.CONFIGURATION_CODE_NAME,
+	ptys.FULL_NAME,
+	ptys.SHORT_NAME,
+	aas.EXTERNAL_NUMBER

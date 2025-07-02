@@ -1,0 +1,75 @@
+{
+    "entityType": "UniversalDocument",
+    "dimensions": {
+        "productCode": "AgentVerification",
+        "universalDocumentType": "AgentVerification"
+    },
+    "attachments": [],
+    "ui": {
+        "layout": "VersionedDocumentLayout",
+        "composition": {
+            "SummaryContent": "SummaryContent",
+            "MainContent": "MainContent"
+        }
+    },
+    "states": [
+        {
+            "name": "Draft",
+            "actors": [
+                {
+                    "actor": "AgentVerificationEditor",
+                    "uiSchema": "MainContent",
+                    "operations": [
+                        "Save"
+                    ],
+                    "transitions": [
+                        "Draft_to_Executed",
+                        "Draft_to_Cancelled"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Executed",
+            "actors": [
+                {
+                    "actor": "AgentVerificationEditor",
+                    "uiSchema": "MainContent",
+                    "transitions": [
+                        "Executed_to_Cancelled"
+                    ]
+                },
+                {
+                    "actor": "AgentVerificationViewer",
+                    "uiSchema": "MainContent",
+                    "operations": [
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Cancelled",
+            "actors": [
+                {
+                    "actor": "AgentVerificationEditor",
+                    "uiSchema": "MainContent",
+                    "operations": [
+                    ]
+                },
+                {
+                    "actor": "AgentVerificationViewer",
+                    "uiSchema": "MainContent",
+                    "operations": [
+                    ]
+                }
+            ]
+        }
+    ],
+    "version": "1",
+    "components": [
+        "DocumentFooter",
+        "DocumentHeader",
+        "FileUpload"
+    ],
+    "validFrom": "2000-01-01"
+}

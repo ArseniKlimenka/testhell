@@ -1,0 +1,128 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+        "criteria": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "rgslGuid": {
+                    "type": "string"
+                },
+                "debtorName": {
+                    "type": "string"
+                },
+                "debtorAccountNo": {
+                    "type": "string"
+                },
+                "creditorName": {
+                    "type": "string"
+                },
+                "importDocumentId": {
+                    "type": "string"
+                },
+                "bankStatementItemId": {
+                    "type": "integer"
+                },
+                "bankStatementItemNo": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "transactionDateFrom": {
+                    "type": "string",
+                    "aiFormat": "date"
+                },
+                "transactionDateTo": {
+                    "type": "string",
+                    "aiFormat": "date"
+                },
+                "paymentDateFrom": {
+                    "type": "string",
+                    "aiFormat": "date"
+                },
+                "paymentDateTo": {
+                    "type": "string",
+                    "aiFormat": "date"
+                },
+                "createDateFrom": {
+                    "type": "string",
+                    "aiFormat": "date"
+                },
+                "createDateTo": {
+                    "type": "string",
+                    "aiFormat": "date"
+                },
+                "amount": {
+                    "type": "number"
+                },
+                "amountFrom": {
+                    "type": "number"
+                },
+                "amountTo": {
+                    "type": "number"
+                },
+                "openAmountFrom": {
+                    "type": "number"
+                },
+                "openAmountTo": {
+                    "type": "number"
+                },
+                "currencyCode": {
+                    "type": "string"
+                },
+                "paymentStatusIds": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "component:PaymentStatusComponent"
+                    }
+                },
+                "isRegistry": {
+                    "type": "boolean"
+                },
+                "referenceNo": {
+                    "type": "string"
+                },
+                "segment": {
+                    "type": "string"
+                },
+                "registryFileFormat": {
+                    "$ref": "component:RegistryFileFormatComponent"
+                },
+                "direction": {
+                    "$ref": "component:DirectionComponent"
+                },
+                "paymentSourceIds": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "component:BankStatementItemSourceIdComponent"
+                    }
+                },
+                "incomeSourceId": {
+                    "$ref": "component:BankStatementItemIncomeSourceIdComponent"
+                },
+                "hasRefunds": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "sort": {
+            "type": "array",
+            "additionalProperties": false,
+            "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                    "descending": {
+                        "type": "boolean"
+                    },
+                    "fieldName": {
+                        "type": "string"
+                    }
+                }
+            }
+        }
+    }
+}

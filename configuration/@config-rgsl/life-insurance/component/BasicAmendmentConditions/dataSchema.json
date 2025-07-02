@@ -1,0 +1,146 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "object",
+    "additionalProperties": false,
+    "aiValidation": {
+        "rule": "validateBasicAmendmentConditions"
+    },
+    "required": [
+        "amendmentSubType",
+        "amendmentReason",
+        "applicationSignDate",
+        "applicationReceiveDate",
+        "validFrom",
+        "applicant"
+    ],
+    "properties": {
+        "amendmentSubType": {
+            "type": "string",
+            "enum": [
+                "byCompanyDecision",
+                "byClientDecision",
+                "byCourtDecision",
+                "byCommissionDecision"
+            ],
+            "aiTitle": "amendmentSubType"
+        },
+        "amendmentReason": {
+            "$ref": "component:AmendmentReason"
+        },
+        "applicant": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "partyCode": {
+                    "type": "string"
+                },
+                "partyType": {
+                    "type": "string"
+                },
+                "fullName": {
+                    "type": "string",
+                    "aiTitle": "applicantFullName"
+                }
+            },
+            "required": [
+                "fullName"
+            ]
+        },
+        "receiveMethod": {
+            "type": "string",
+            "enum": [
+                "email",
+                "office",
+                "personalCabinet",
+                "post",
+                "partner"
+            ],
+            "aiTitle": "receiveMethod"
+        },
+        "applicationSignDate": {
+            "type": "string",
+            "aiFormat": "date",
+            "aiTitle": "applicationSignDate"
+        },
+        "applicationReceiveDate": {
+            "type": "string",
+            "aiFormat": "date",
+            "aiTitle": "applicationReceiveDate"
+        },
+        "applicationOperationsReceiveDate": {
+            "type": "string",
+            "aiFormat": "date",
+            "aiTitle": "applicationOperationsReceiveDate"
+        },
+        "applicationOperationsWorkStartDate": {
+            "type": "string",
+            "aiFormat": "date",
+            "aiTitle": "applicationOperationsWorkStartDate"
+        },
+        "issueDate": {
+            "type": "string",
+            "aiFormat": "date",
+            "aiTitle": "issueDate"
+        },
+        "validFrom": {
+            "type": "string",
+            "aiFormat": "date",
+            "aiTitle": "validFrom"
+        },
+        "fullPackageReceiveDate": {
+            "type": "string",
+            "aiFormat": "date",
+            "aiTitle": "fullPackageReceiveDate"
+        },
+        "outputDate": {
+            "type": "string",
+            "aiFormat": "date",
+            "aiTitle": "outputDate"
+        },
+        "signDate": {
+            "type": "string",
+            "aiFormat": "date",
+            "aiTitle": "signDate"
+        },
+        "rejectionText": {
+            "type": "string"
+        },
+        "policyData": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "policyNumber": {
+                    "type": "string"
+                },
+                "policyProductGroup": {
+                    "type": "string"
+                },
+                "insuranceProductName": {
+                    "type": "string"
+                },
+                "contractCurrencyName": {
+                    "type": "string"
+                },
+                "policyHolderFullName": {
+                    "type": "string"
+                },
+                "policyIssueDate": {
+                    "type": "string",
+                    "aiFormat": "date"
+                },
+                "policyStartDate": {
+                    "type": "string",
+                    "aiFormat": "date"
+                },
+                "policyEndDate": {
+                    "type": "string",
+                    "aiFormat": "date"
+                },
+                "actualCoolOffDate": {
+                    "type": "string",
+                    "aiFormat": "date"
+                }
+            }
+        }
+    }
+}

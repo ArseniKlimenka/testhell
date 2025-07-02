@@ -1,0 +1,69 @@
+{
+    "entityType": "Contract",
+    "condition": {
+        "events": [
+            "StatusChanged"
+        ],
+        "configuration": {
+            "dimensions": {
+                "contractType": [
+                    "Amendment"
+                ]
+            }
+        },
+        "documentStates": [
+            "Activated",
+            "POCreation"
+        ]
+    },
+    "executionOrderWeight": 10,
+    "sinks": [
+        {
+            "name": "CancelPolicy",
+            "documentTransition": {}
+        },
+        {
+            "name": "ReactivatePolicy",
+            "documentTransition": {
+            }
+        },
+        {
+            "ref": "PaymentPlanSinkGroup"
+        },
+        {
+            "ref": "PostPremiumIncreaseTransactionsSinkGroup"
+        },
+        {
+            "ref": "RevaluationSinkGroup"
+        },
+        {
+            "ref": "CalculateInvoicedCommissionSinkGroup"
+        },
+        {
+            "name": "PostTransaction",
+            "class": {
+                "className": "Adacta.AdInsure.RGSL.Accounting.API.Shared.Subledger.Services.IPostingServiceRgsl, Adacta.AdInsure.RGSL.Accounting.API",
+                "methodName": "PostTransaction"
+            }
+        },
+        {
+            "name": "DeactivateCancellationPaymentOrders",
+            "etlService": {
+                "configuration": {
+                    "name": "DeactivatePOAfterPolicyReactivation",
+                    "version": "1"
+                }
+            }
+        },
+        {
+            "name": "ExecutePOCreation",
+            "etlService": {
+                "configuration": {
+                    "name": "CreateCancellationPaymentOrdersEtlService",
+                    "version": "1"
+                }
+            }
+        }
+    ],
+    "version": "1"
+}

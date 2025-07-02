@@ -1,0 +1,289 @@
+with ACT_ITEM as
+(
+	select
+		ai.ACT_ID,
+		{{#if parameters.groupByContract}}null as ACT_ITEM_ID,{{else}}ai.ACT_ITEM_ID,{{/if}}
+		JSON_QUERY('[' + (select STRING_AGG(ai.ACT_ITEM_ID, ', ')) + ']') as ACT_ITEM_IDS,
+		ai.REFERENCE_NO,
+		ai.STATUS_ID,
+		ai.DOC_CURRENCY_CODE,
+		{{#if parameters.groupByContract}}cast(null as nvarchar(50)) as SOURCE_LINE_ID,{{else}}ai.SOURCE_LINE_ID,{{/if}}
+		ai.DUE_DATE,
+		max(ai.PAYMENT_TRANSACTION_DATE) as PAYMENT_TRANSACTION_DATE,
+		sum(ai.PAYMENT_DOC_AMOUNT) as PAYMENT_DOC_AMOUNT,
+		sum(ai.PAYMENT_LC_AMOUNT) as PAYMENT_LC_AMOUNT,
+		ai.DOC_COMM_RATE,
+		sum(ai.INV_COMM_DOC_AMOUNT) as INV_COMM_DOC_AMOUNT,
+		SUM(ai.INV_COMM_LC_AMOUNT) as INV_COMM_LC_AMOUNT,
+		round(sum(ai.PAYMENT_DOC_AMOUNT * ai.AA_COMM_RATE), 2) as AA_COMM_DOC_AMOUNT_CALC,
+		round(sum(ai.PAYMENT_LC_AMOUNT * ai.AA_COMM_RATE), 2) as AA_COMM_LC_AMOUNT_CALC,
+		round(sum(ai.PAYMENT_LC_AMOUNT * coalesce(ai.DOC_COMM_RATE, ai.AA_COMM_RATE)), 2) as AA_DOC_COMM_LC_AMOUNT_CALC,
+		case when SUM(ai.LC_COMM_AMOUNT_MANUAL) != 0 then SUM(coalesce(ai.LC_COMM_AMOUNT_MANUAL, ai.LC_COMM_AMOUNT_FINAL)) end as LC_COMM_AMOUNT_MANUAL,
+		ai.INV_COMM_FINAL_RATE,
+		ai.AA_COMM_RATE,
+		coalesce(ai.DOC_COMM_RATE, ai.AA_COMM_RATE) as AA_DOC_COMM_RATE,
+		ai.COMM_RATE_MANUAL,
+		ai.COMM_RATE_FINAL,
+		sum(ai.LC_COMM_AMOUNT_CALC) as LC_COMM_AMOUNT_CALC,
+		sum(ai.LC_COMM_AMOUNT_EXTRA) as LC_COMM_AMOUNT_EXTRA,
+		sum(ai.LC_COMM_AMOUNT_FINAL) as LC_COMM_AMOUNT_FINAL,
+		sum(ai.LC_VAT_AMOUNT) as VAT_LC,
+		ai.EXPENSES_RATE_FINAL as EXPENSES_RATE,
+		sum(ai.EXPENSES_AMOUNT) as EXPENSES_AMOUNT,
+		ai.NATURAL_PERSON_RATE_FINAL as NATURAL_PERSON_RATE,
+		sum(ai.NATURAL_PERSON_AMOUNT) as NATURAL_PERSON_AMOUNT,
+		ai.SOLE_PROPRIATOR_RATE_FINAL as SOLE_PROPRIATOR_RATE,
+		sum(ai.SOLE_PROPRIATOR_AMOUNT) as SOLE_PROPRIATOR_AMOUNT,
+		ai.NOTES,
+		case when coalesce(sum(pcFree.DOC_BASE_AMOUNT), 0) = 0 then 1 else 2 end as HAS_NO_CHANGES,
+		ai.JSON_DATA
+	from
+		acc_impl.CA_ACT_ITEM ai
+		inner join acc_impl.CA_ACT act on act.ACT_ID = ai.ACT_ID
+		outer apply (
+			select top 1 * from acc_impl.CA_ACT_HISTORY
+			where ACT_ID = ai.ACT_ID and (STATUS_ID_TO IN (5, 8))
+			order by ACT_HISTORY_ID DESC
+		) actH
+		outer apply (
+			select alc.DOCUMENT_NO, alcp.DUE_DATE, matp.SOURCE_LINE_ID,
+				sum(pc.DOC_BASE_AMOUNT) as DOC_BASE_AMOUNT
+				--aipc.ACT_ID, aipc.ACT_ITEM_ID
+			from
+				acc_impl.ALLOCATION alc
+				inner join acc_impl.ALLOCATION_POLICY alcp on alcp.ALLOCATION_ID = alc.ALLOCATION_ID
+				inner join acc_impl.MATCHING mat on mat.ALLOCATION_ID = alc.ALLOCATION_ID
+				inner join acc_impl.MATCHING_POLICY matp on matp.MATCHING_ID = mat.MATCHING_ID
+				inner join acc_impl.PAYABLE_COMMISSION pc on pc.MATCHING_ID = mat.MATCHING_ID and (pc.CREATE_DATE <= actH.CREATE_DATE or actH.CREATE_DATE IS NULL)
+				--acc_impl.CA_ACT_ITEM_PC aipc
+			where alc.DOCUMENT_NO = ai.REFERENCE_NO and alcp.DUE_DATE = ai.DUE_DATE and matp.SOURCE_LINE_ID = ai.SOURCE_LINE_ID
+				and not exists (select * from acc_impl.CA_ACT_ITEM_PC where (ACT_ID = ai.ACT_ID or CANCELLED = 0) and PAYABLE_COMMISSION_ID = pc.PAYABLE_COMMISSION_ID)
+			group by alc.DOCUMENT_NO, alcp.DUE_DATE, matp.OBJECT_CODE, matp.SOURCE_LINE_ID
+		) pcFree
+	where 1=1
+		and (ai.LC_COMM_AMOUNT_CALC != 0 or ai.LC_COMM_AMOUNT_EXTRA != 0 or ai.IS_TECHNICAL = 1)
+	{{#if parameters.actId}}
+		and ai.act_id = @actId
+	{{/if}}
+	{{#if parameters.documentNumbers}}
+		and ai.REFERENCE_NO in (@documentNumbers)
+	{{/if}}
+	{{#if parameters.statusIds}}
+		and ai.STATUS_ID in (@statusIds)
+	{{/if}}
+	{{#if parameters.docCurrencyCode}}
+		and ai.DOC_CURRENCY_CODE = @docCurrencyCode
+	{{/if}}
+	{{#if parameters.sourceLineId}}
+		and ai.SOURCE_LINE_ID = @sourceLineId
+	{{/if}}
+	{{#if parameters.dueDate}}
+		and ai.DUE_DATE = @dueDate
+	{{/if}}
+	{{#if parameters.paymentTransactionDate}}
+		and ai.PAYMENT_TRANSACTION_DATE = @paymentTransactionDate
+	{{/if}}
+	{{#if parameters.paymentDocAmount}}
+		and ai.PAYMENT_DOC_AMOUNT = @paymentDocAmount
+	{{/if}}
+	{{#if parameters.paymentLcAmount}}
+		and ai.PAYMENT_LC_AMOUNT = @paymentLcAmount
+	{{/if}}
+	{{#if parameters.invCommLcAmount}}
+		and ai.INV_COMM_LC_AMOUNT = @invCommLcAmount
+	{{/if}}
+	{{#if parameters.aaCommRate}}
+		and ai.AA_COMM_RATE = @aaCommRate
+	{{/if}}
+	{{#if parameters.aaDocCommRate}}
+		and coalesce(ai.DOC_COMM_RATE, ai.AA_COMM_RATE) = @aaDocCommRate
+	{{/if}}
+	{{#if parameters.commRateManual}}
+		and ai.COMM_RATE_MANUAL = @commRateManual
+	{{/if}}
+	{{#if parameters.commRateFinal}}
+		and ai.COMM_RATE_FINAL = @commRateFinal
+	{{/if}}
+	{{#if parameters.lcCommAmountFinal}}
+		and ai.LC_COMM_AMOUNT_FINAL = @lcCommAmountFinal
+	{{/if}}
+	GROUP BY
+		ai.ACT_ID,
+	{{#unless parameters.groupByContract}}
+		ai.ACT_ITEM_ID,
+		ai.SOURCE_LINE_ID,
+	{{/unless}}
+		ai.REFERENCE_NO,
+		ai.STATUS_ID,
+		ai.DOC_CURRENCY_CODE,
+		ai.DUE_DATE,
+		ai.DOC_COMM_RATE,
+		ai.INV_COMM_FINAL_RATE,
+		ai.AA_COMM_RATE,
+		ai.COMM_RATE_MANUAL,
+		ai.COMM_RATE_FINAL,
+		ai.EXPENSES_RATE_FINAL,
+		ai.NATURAL_PERSON_RATE_FINAL,
+		ai.SOLE_PROPRIATOR_RATE_FINAL,
+		ai.NOTES,
+		ai.JSON_DATA
+)
+SELECT
+	ai.ACT_ID,
+	ai.ACT_ITEM_ID,
+	ai.ACT_ITEM_IDS,
+	ai.REFERENCE_NO,
+	ai.STATUS_ID,
+	polps.CODE_NAME as STATE,
+	art.CODE_NAME,
+	ai.DOC_CURRENCY_CODE,
+	ai.SOURCE_LINE_ID,
+	ai.DUE_DATE,
+	ai.PAYMENT_TRANSACTION_DATE,
+	ai.PAYMENT_DOC_AMOUNT,
+	ai.PAYMENT_LC_AMOUNT,
+	ai.DOC_COMM_RATE,
+	ai.INV_COMM_DOC_AMOUNT,
+	ai.INV_COMM_LC_AMOUNT,
+	ai.AA_COMM_DOC_AMOUNT_CALC,
+	ai.AA_COMM_LC_AMOUNT_CALC,
+	ai.AA_DOC_COMM_LC_AMOUNT_CALC,
+	ai.LC_COMM_AMOUNT_MANUAL,
+	ai.INV_COMM_FINAL_RATE,
+	ai.AA_COMM_RATE,
+	ai.AA_DOC_COMM_RATE,
+	ai.COMM_RATE_MANUAL,
+	ai.COMM_RATE_FINAL,
+	ai.LC_COMM_AMOUNT_CALC,
+	ai.LC_COMM_AMOUNT_EXTRA,
+	ai.LC_COMM_AMOUNT_FINAL,
+	ai.VAT_LC,
+	coalesce(act.HISTORICAL_AGENT_AGREEMENT, act.AGENT_AGREEMENT_NUMBER) as AGENT_AGREEMENT_NUMBER,
+	act.ACT_NO,
+	v.STATE as VERIFICATION_STATE,
+	cancellationAm.ISSUE_DATE as CANCELLATION_ISSUE_DATE,
+	cancellationAm.CREATED_ON as CANCELLATION_CREATED_ON,
+	cancellationAm.AMENDMENT_REASON,
+	act.REPORTING_PERIOD_FROM,
+	act.REPORTING_PERIOD_TO,
+	act.ISSUE_DATE,
+	ps.CODE_NAME as ACT_STATE_CODE,
+	ai.EXPENSES_RATE,
+	ai.EXPENSES_AMOUNT,
+	ai.NATURAL_PERSON_RATE,
+	ai.NATURAL_PERSON_AMOUNT,
+	ai.SOLE_PROPRIATOR_RATE,
+	ai.SOLE_PROPRIATOR_AMOUNT,
+	coalesce(ai.NOTES, act.NOTES) as NOTES,
+	ai.HAS_NO_CHANGES,
+	case when ai.DOC_COMM_RATE IS NOT NULL then N'Да' else N'Нет' end as IS_MANUAL_RATE,
+	ai.JSON_DATA,
+	comission.MANUAL_RULE,
+	comission.MANUAL_RULE_DESCRIPTION
+from
+	ACT_ITEM ai
+	inner join acc_impl.CA_ACT act on act.ACT_ID = ai.ACT_ID
+	inner join bfx.UNIVERSAL_DOCUMENT ud on ud.UNIVERSAL_DOCUMENT_NUMBER = act.ACT_NO
+	inner join cfg.PROCESS_STATE ps on ps.PROCESS_STATE_ID = ud.STATE_ID
+	inner join pas.CONTRACT c on c.CONTRACT_NUMBER = ai.REFERENCE_NO
+	inner join cfg.PROCESS_STATE polps on polps.PROCESS_STATE_ID = c.STATE_ID
+	inner join pas_impl.POLICY_HUB polh on polh.CONTRACT_NUMBER = ai.REFERENCE_NO
+	inner join pas_impl.POLICY_SAT_LATEST polsl on polsl.POLICY_HKEY = polh.POLICY_HKEY
+	left join CFX.PUBLISHED_ARTIFACT art on art.PUBLISHED_ARTIFACT_ID = c.PUBLISHED_ARTIFACT_ID
+	left join
+	(
+		select pvl.POLICY_HKEY, max(vs.STATE) as STATE
+		from
+			pas_impl.POLICY_VERIFICATION_LINK pvl
+			inner join pas_impl.VERIFICATION_HUB vh on vh.VERIFICATION_HKEY = pvl.VERIFICATION_HKEY
+			inner join pas_impl.VERIFICATION_SAT_LATEST vs on vs.VERIFICATION_HKEY = pvl.VERIFICATION_HKEY
+		group by pvl.POLICY_HKEY
+	) v on v.POLICY_HKEY = polh.POLICY_HKEY
+	left join (
+		select pal.POLICY_HKEY, max(ams.ISSUE_DATE) as ISSUE_DATE, cast(max(cc.SYS_CREATED_ON) as date) as CREATED_ON, ams.AMENDMENT_REASON
+		from
+			pas_impl.POLICY_AMENDMENT_LINK pal
+			inner join pas_impl.AMENDMENT_SAT_LATEST ams on ams.AMENDMENT_HKEY = pal.AMENDMENT_HKEY
+			inner join pas_impl.AMENDMENT_HUB pah on pah.AMENDMENT_HKEY = pal.AMENDMENT_HKEY
+			inner join pas.contract cc on cc.CONTRACT_NUMBER = pah.AMENDMENT_NUMBER
+			inner join cfg.PROCESS_STATE amState on amState.PROCESS_STATE_ID = cc.STATE_ID
+		where 1=1
+			and ams.AMENDMENT_TYPE = 'Cancellation'
+			and amState.CODE_NAME in ('Activated', 'Paid')
+		group by pal.POLICY_HKEY, ams.AMENDMENT_REASON
+	) cancellationAm on cancellationAm.POLICY_HKEY = polh.POLICY_HKEY
+	left join (
+		select distinct CONTRACT_NUMBER, MANUAL_RULE, MANUAL_RULE_DESCRIPTION from PAS_IMPL.POLICY_COMMISSION_SAT pcs
+		join PAS_IMPL.POLICY_COMMISSION_LINK pcl on pcs.POLICY_COMMISSION_HKEY = pcl.POLICY_COMMISSION_HKEY
+		join PAS_IMPL.POLICY_HUB ph on ph.POLICY_HKEY = pcl.POLICY_HKEY
+		join PAS_IMPL.AA_HUB aah on aah.AA_NUMBER = pcs.AA_AMENDMENT_NUMBER
+		join pas_impl.AA_COMM_LINK acl on acl.AA_HKEY = aah.AA_HKEY
+		join pas_impl.AA_BASE_COMM_SAT abcs on abcs.AA_BASE_COMM_HKEY = acl.AA_COMM_HKEY
+	) comission on  comission.CONTRACT_NUMBER = ai.REFERENCE_NO and comission.MANUAL_RULE = polsl.MANUAL_RULE
+where 1=1
+{{#if parameters.polHolderName}}
+	and polsl.HOLDER_NAME = @polHolderName
+{{/if}}
+{{#if parameters.polStartDateFrom}}
+	and polsl.START_DATE >= @polStartDateFrom
+{{/if}}
+{{#if parameters.polStartDateTo}}
+	and polsl.START_DATE <= @polStartDateTo
+{{/if}}
+{{#if parameters.polEndDateFrom}}
+	and polsl.END_DATE >= @polEndDateFrom
+{{/if}}
+{{#if parameters.polEndDateTo}}
+	and polsl.END_DATE <= @polEndDateTo
+{{/if}}
+{{#if parameters.stateCode}}
+	and polps.CODE_NAME = @stateCode
+{{/if}}
+{{#if parameters.productCode}}
+	and polsl.PRODUCT_CODE = @productCode
+{{/if}}
+{{#if parameters.paymentPeriod}}
+	and case when polsl.PAYMENT_FREQUENCY_CODE = '1' then 1 else CAST(ROUND(DATEDIFF(day, polsl.START_DATE, polsl.END_DATE) / 365.25, 0, 1) as INT) + 1 end = @paymentPeriod
+{{/if}}
+{{#if parameters.insuranceYear}}
+	and CAST(ROUND(DATEDIFF(day, polsl.START_DATE, ai.DUE_DATE) / 365.25, 0, 1) as INT) + 1 = @insuranceYear
+{{/if}}
+{{#if parameters.paymentFrequencyCode}}
+	and polsl.PAYMENT_FREQUENCY_CODE = @paymentFrequencyCode
+{{/if}}
+{{#if parameters.paymentFrequency2Code}}
+	and case when polsl.PAYMENT_FREQUENCY_CODE = '1' then '1' else '2' end = @paymentFrequency2Code
+{{/if}}
+{{#if parameters.installmentType}}
+	and case when ai.DUE_DATE = polsl.START_DATE then 1 else 0 end = @installmentType
+{{/if}}
+{{#if parameters.actNo}}
+	and act.ACT_NO = @actNo
+{{/if}}
+{{#if parameters.actStateCodes}}
+	and ps.CODE_NAME in (@actStateCodes)
+{{/if}}
+{{#if parameters.actTypeId}}
+	and act.ACT_TYPE_ID = @actTypeId
+{{/if}}
+{{#if parameters.reportingDateFrom}}
+	and act.REPORTING_PERIOD_TO >= @reportingDateFrom
+{{/if}}
+{{#if parameters.reportingDateTo}}
+	and act.REPORTING_PERIOD_TO <= @reportingDateTo
+{{/if}}
+{{#if parameters.issueDateFrom}}
+	and act.ISSUE_DATE >= @issueDateFrom
+{{/if}}
+{{#if parameters.issueDateTo}}
+	and act.ISSUE_DATE <= @issueDateTo
+{{/if}}
+{{#if parameters.notes}}
+	and act.NOTES = @notes
+{{/if}}
+{{#if parameters.hasNoChanges}}
+	and case when ai.HAS_NO_CHANGES = 1 then 1 else 2 end = @hasNoChanges
+{{/if}}
+{{#unless parameters.hasNoChanges}}
+	and (ai.HAS_NO_CHANGES = 1 or ai.HAS_NO_CHANGES = 2)
+{{/unless}}

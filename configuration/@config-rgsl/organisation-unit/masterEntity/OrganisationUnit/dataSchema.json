@@ -1,0 +1,89 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "OrganisationUnit",
+    "description": "Schema describing organisation unit",
+    "type": "object",
+    "additionalProperties": false,
+    "aiValidation": {
+        "rule": "validateOrganisationUnit"
+    },
+    "aiDataEnrichment": [
+        {
+            "name": "CheckDuplicateOrgCodeByPartnerEnrichment",
+            "dataSource": "OrganisationUnitsByCodeDataSource"
+        }
+    ],
+    "required": [
+        "name",
+        "fullName",
+        "code"
+    ],
+    "aiAudit": {
+        "scope": "General"
+    },
+    "properties": {
+        "name": {
+            "type": "string",
+            "aiTitle": "name"
+        },
+        "fullName": {
+            "type": "string",
+            "aiTitle": "fullName"
+        },
+        "code": {
+            "type": "string",
+            "aiTitle": "code"
+        },
+        "parentName": {
+            "type": "string"
+        },
+        "parentCode": {
+            "type": "string"
+        },
+        "partnerName": {
+            "type": "string"
+        },
+        "partnerCode": {
+            "type": "string"
+        },
+        "partyAddresses": {
+            "$ref": "component:PartyAddresses"
+        },
+        "coach": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "employeeCode": {
+                    "type": "string"
+                },
+                "employeeFullName": {
+                    "type": "string"
+                }
+            }
+        },
+        "territorialChief": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "employeeCode": {
+                    "type": "string"
+                },
+                "employeeFullName": {
+                    "type": "string"
+                }
+            }
+        },
+        "regionalChief": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "employeeCode": {
+                    "type": "string"
+                },
+                "employeeFullName": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,114 @@
+{
+    "type": "Group",
+    "elements": [
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "DataGrid",
+                    "elementId": "SocialTaxDeductionArray",
+                    "mode": "Array",
+                    "labelType": "H1",
+                    "label": "socialTaxDeduction",
+                    "height": "None",
+                    "isCollapsed": false,
+                    "value": {
+                        "$ref": "#"
+                    },
+                    "actions": [],
+                    "columns": [
+                        {
+                            "title": "itemText",
+                            "name": "itemText",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "allowMultiLine": true,
+                                "value": {
+                                    "$ref": "#/properties/itemText"
+                                }
+                            },
+                            "style": {
+                                "width": "extra-small"
+                            }
+                        },
+                        {
+                            "title": "isAgree",
+                            "name": "isAgree",
+                            "cellContent": {
+                                "type": "Input",
+                                "value": {
+                                    "$ref": "#/properties/isAgree"
+                                },
+                                "rule": {
+                                    "effect": "DISABLE_INITIAL",
+                                    "condition": {
+                                        "type": "FUNC",
+                                        "ruleFunction": "disableSocialTaxDeduction",
+                                        "value": [
+                                            {
+                                                "$ref": "#"
+                                            }
+                                        ]
+                                    }
+                                }
+                            },
+                            "style": {
+                                "width": "extra-small"
+                            }
+                        },
+                        {
+                            "title": "isDenied",
+                            "name": "isDenied",
+                            "cellContent": {
+                                "type": "Input",
+                                "value": {
+                                    "$ref": "#/properties/isDenied"
+                                },
+                                "rule": {
+                                    "effect": "DISABLE_INITIAL",
+                                    "condition": {
+                                        "type": "FUNC",
+                                        "ruleFunction": "disableSocialTaxDeduction",
+                                        "value": [
+                                            {
+                                                "$ref": "#"
+                                            }
+                                        ]
+                                    }
+                                }
+                            },
+                            "style": {
+                                "width": "extra-small"
+                            }
+                        },
+                        {
+                            "title": "isUndecided",
+                            "name": "isUndecided",
+                            "cellContent": {
+                                "type": "Input",
+                                "value": {
+                                    "$ref": "#/properties/isUndecided"
+                                },
+                                "rule": {
+                                    "effect": "DISABLE_INITIAL",
+                                    "condition": {
+                                        "type": "FUNC",
+                                        "ruleFunction": "disableSocialTaxDeduction",
+                                        "value": [
+                                            {
+                                                "$ref": "#"
+                                            }
+                                        ]
+                                    }
+                                }
+                            },
+                            "style": {
+                                "width": "extra-small"
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

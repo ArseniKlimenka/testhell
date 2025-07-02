@@ -1,0 +1,64 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema",
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+        "kpkServiceResult": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                    "participantPartyName": {
+                        "type": "string"
+                    },
+                    "participantTypeName": {
+                        "type": "string"
+                    },
+                    "passportExists": {
+                        "type": "boolean"
+                    },
+                    "passportValidationResult": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "properties": {
+                            "invalidAgePassport14": {
+                                "type": "boolean"
+                            },
+                            "invalidAgePassport20": {
+                                "type": "boolean"
+                            },
+                            "invalidAgePassport45": {
+                                "type": "boolean"
+                            }
+                        }
+                    },
+                    "ContractorPartyCode": {
+                        "type": "integer"
+                    },
+                    "CheckResultData": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "properties": {
+                            "Agreement": {
+                                "type": "string"
+                            },
+                            "Reason": {
+                                "type": "string"
+                            },
+                            "Reject": {
+                                "type": "string"
+                            },
+                            "Error": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "hasNonResident": {
+            "type": "boolean"
+        }
+    }
+}

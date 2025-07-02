@@ -1,0 +1,33 @@
+if not exists (select * from sys.objects where object_id = object_id(N'[ACC_IMPL].[GET_NEW_BS_LOG_HUB]') and type in (N'U'))
+begin
+	CREATE TABLE [ACC_IMPL].[GET_NEW_BS_LOG_HUB]
+    (
+		[GET_NEW_BS_LOG_HKEY] [char](32) NOT NULL,
+		[LOAD_DATE] [datetime2](7) NOT NULL,
+		[RECORD_SOURCE] [varchar](50) NOT NULL,
+		[ETL_EXECUTION_STATUS_ID] [uniqueidentifier] NULL,
+		[RGSL_GUID] [uniqueidentifier] NULL,
+		CONSTRAINT [PK_ACC_IMPL_GET_NEW_BS_LOG_HUB] PRIMARY KEY NONCLUSTERED ([GET_NEW_BS_LOG_HKEY]),
+		CONSTRAINT [UQ_GET_NEW_BS_LOG_HUB] UNIQUE CLUSTERED ([ETL_EXECUTION_STATUS_ID], [RGSL_GUID])
+	);
+
+	CREATE TABLE [ACC_IMPL].[GET_NEW_BS_LOG_SAT]
+	(
+		[GET_NEW_BS_LOG_HKEY] [char](32) NOT NULL,
+		[LOAD_DATE] [datetime2](7) NOT NULL,
+		[RECORD_SOURCE] [varchar](50) NOT NULL,
+		[HASH_DIFF] [char](32) NOT NULL,
+		[GUID_ALREADY_EXISTS] [bit] NULL,
+		[RESPONSE] [nvarchar](max) NULL,
+		[RESPONSE_SUCCESSFUL] [bit] NULL,
+		CONSTRAINT [PK_ACC_IMPL_GET_NEW_BS_LOG_SAT] PRIMARY KEY NONCLUSTERED ([GET_NEW_BS_LOG_HKEY], [LOAD_DATE])
+	);
+end
+go
+
+IF COL_LENGTH('ACC_IMPL.GET_NEW_BS_LOG_SAT','SKIP_PAYMENT') IS NULL
+BEGIN
+	EXEC(N'alter table acc_impl.GET_NEW_BS_LOG_SAT add SKIP_PAYMENT bit null');
+	EXEC(N'update acc_impl.GET_NEW_BS_LOG_SAT set SKIP_PAYMENT = 0');
+	EXEC(N'alter table acc_impl.GET_NEW_BS_LOG_SAT alter column SKIP_PAYMENT bit not null');
+END

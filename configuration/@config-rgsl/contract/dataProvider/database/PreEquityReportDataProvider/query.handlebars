@@ -1,0 +1,83 @@
+﻿{{concat 'drop'}} table if exists #product_conf_actual{{concat ';'}}
+{{concat 'drop'}} table if exists #equity_contracts{{concat ';'}}
+
+select pc.product_code,
+       pc.issue_date_from,
+       pc.issue_date_to,
+       pc.cool_off_period_days
+  into #product_conf_actual
+  from bfx_impl.product_conf pc
+ where pc.conf_version = (select max(conf_version) max_version from bfx_impl.product_conf);
+
+select c.contract_number,
+       c.body,
+       c.state_id,
+       c.contract_id,
+       c.original_document_id,
+       pa.code_name
+  into #equity_contracts
+  from pas.contract c
+       join cfx.published_artifact pa on pa.published_artifact_id = c.published_artifact_id and pa.code_name in ('EquityLifeInsurancePolicy', 'EquityLifeInsuranceCancellation', 'EquityLifeInsuranceNonFinChange');
+
+select eqC.contract_number,
+       case
+          when c.contract_number = eqC.contract_number
+          then null
+          else c.contract_number
+        end as amendment_number,
+       json_value(eqC.body, '$.basicConditions.issueDate') as contract_issue_date,
+       case
+          when c.contract_number = eqC.contract_number
+          then null
+          else convert(nvarchar(max), eh.changed_on, 23)
+        end as amendment_issue_date,
+       cps.code_name as contract_state,
+       c.code_name as amendment_type,
+       json_value(eqC.body, '$.policyTerms.endDate') as contract_end_date,
+       json_value(eqC.body, '$.policyHolder.partyData.partyCode') as policy_holder_code,
+       cast(json_value(eqC.body, '$.risks[0].riskPremium') as decimal(15,2)) + isnull(cast(json_value(eqC.body, '$.additionalInvestmentParameters.coolOffDID') as decimal(15,2)), 0) as endowment_premium,
+       dateadd(day, pc.cool_off_period_days, json_value(eqC.body, '$.basicConditions.issueDate')) as cool_off_period_end_date,
+       json_value(eqC.body, '$.additionalInvestmentParameters.investmentStartDate') as cool_off_period_end_date_plus1,
+       case
+          when c.contract_number = eqC.contract_number
+          then json_value(eqC.body, '$.additionalInvestmentParameters.investmentEndDate')
+          else json_value(c.body, '$.amendmentData.nonFinChangeAmendmentData.additionalInvestmentParameters.investmentEndDate')
+       end as cool_off_period_end_date_plus5,
+       upv.unit_initial_cost as unit_initial_cost,
+       case
+          when c.contract_number = eqC.contract_number
+          then null
+          else json_value(c.body, '$.basicAmendmentConditions.validFrom')
+       end as cancellation_date,
+       json_value(es.value, '$.strategy.strategyName') as strategy_name,
+       json_value(es.value, '$.strategy.isin') as isin,
+       json_value(es.value, '$.share') as share,
+       case
+          when json_value(eqC.body, '$.additionalInvestmentParameters.rateOfReturnEquityActives.mf') is not null
+          then json_value(eqC.body, '$.additionalInvestmentParameters.rateOfReturnEquityActives.mf')
+          else json_value(eqC.body, '$.additionalInvestmentParameters.mf')
+       end as mf
+  from #equity_contracts c
+       join cfg.process_state cps on cps.process_state_id = c.state_id
+       join bfx.entity_history eh on c.contract_id = eh.entity_id
+         and eh.new_state IN ('Activated','AwaitingDissolution')
+         and eh.changed_on >= dateadd(day, -1, @preEquityReportDate)
+         and eh.changed_on <= @preEquityReportDate
+       join #equity_contracts eqC on c.original_document_id = eqC.contract_id
+       join #product_conf_actual pc on pc.product_code = json_value(eqC.body, '$.mainInsuranceConditions.insuranceProduct.productCode')
+         and pc.issue_date_from <= json_value(eqC.body, '$.basicConditions.issueDate')
+         and pc.issue_date_to >= json_value(eqC.body, '$.basicConditions.issueDate')
+       cross apply openjson(json_query(c.body, '$.equityStrategies')) es
+       join bfx_impl.products p on p.code = json_value(eqC.body, '$.mainInsuranceConditions.insuranceProduct.productCode')
+       join pas_impl.ul_products up on up.product_id = p.id
+       join pas_impl.ul_product_version upv on upv.product_version_id = up.product_version_id
+       left join pas_impl.amendment_hub amh ON amh.amendment_number = c.contract_number
+       left join pas_impl.change_type_sat_latest cts ON cts.change_type_hkey = amh.amendment_hkey
+	   left join pas_impl.amendment_sat_latest ams ON ams.amendment_hkey = amh.amendment_hkey
+  where
+   c.contract_number = eqC.contract_number
+		OR (c.contract_number != eqC.contract_number AND cts.change_type IN (@changeTypes))
+		OR (c.contract_number != eqC.contract_number AND ams.amendment_reason = 'byClientNonCoolOff' AND cps.code_name <> 'Cancelled');
+
+{{concat 'drop'}} table if exists #product_conf_actual{{concat ';'}}
+{{concat 'drop'}} table if exists #equity_contracts{{concat ';'}}

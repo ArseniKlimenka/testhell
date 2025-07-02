@@ -1,0 +1,18 @@
+﻿SELECT
+    r.CODE,
+    r.TYPE,
+    t.IS_LIFE,
+    r.SHORT_DESCRIPTION,
+    r.FULL_DESCRIPTION,
+    r.RISKS_GROUP,
+	r.PAYMENT_FORM
+FROM
+    BFX_IMPL.RISKS r
+    JOIN BFX_IMPL.RISK_TYPE t on t.RISK_TYPE = r.TYPE
+WHERE r.CODE IN (@riskCodes)
+{{#if parameters.selectBeneficiariesRisksOnly}}
+     AND ISNULL(r.PAYMENT_FORM,'') <> 'WOP'
+{{/if}}
+{{#if parameters.selectEndowmentRisksOnly}}
+     AND r.RISKS_GROUP in ('Endowment', 'Endowment_date')
+{{/if}}

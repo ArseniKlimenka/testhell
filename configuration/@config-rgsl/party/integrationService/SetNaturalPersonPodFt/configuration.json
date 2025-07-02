@@ -1,0 +1,26 @@
+{
+    "sinks": [
+        {
+            "name": "GetParty",
+            "fetch": {
+                "configuration": {
+                    "name": "GetPartyDataSource"
+                }
+            }
+        },
+        {
+            "name": "SetNaturalPersonPodFt",
+            "executeAs": "SkipValidationIS",
+            "masterEntity": {
+                "configuration": {
+                    "name": "NaturalPerson"
+                },
+                "allowUpdating": true
+            }
+        }
+    ],
+    "responses": [
+        200,
+        422
+    ]
+}

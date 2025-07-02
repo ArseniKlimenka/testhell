@@ -1,0 +1,44 @@
+{
+    "sinks": [
+        {
+            "name": "GenerateExecutionId",
+            "sequence": {
+                "sequenceName": "BFX_IMPL.CONTRACT_MODIFICATION_EXEC_ID",
+                "createNewSequenceName": true
+            }
+        },
+        {
+            "name": "GetContractInfo",
+            "class": {
+                "className": "Adacta.AdInsure.RGSL.PAS.API.Shared.Contract.Services.IContractServiceRGSL, Adacta.AdInsure.RGSL.PAS.API",
+                "methodName": "GetContractSysDataByNumber"
+            }
+        },
+        {
+            "name": "ExecuteContractUpdate",
+            "class": {
+                "className": "Adacta.AdInsure.RGSL.PAS.API.Shared.Contract.Services.IContractServiceRGSL, Adacta.AdInsure.RGSL.PAS.API",
+                "methodName": "UpdateContractManually"
+            }
+        },
+        {
+            "name": "WriteExecutionHistory",
+            "database": {
+                "tables": [
+                    "BFX_IMPL.CONTRACT_MODIFICATION_HISTORY"
+                ]
+            }
+        },
+        {
+            "name": "ReindexContract",
+            "class": {
+                "className": "Adacta.AdInsure.RGSL.Framework.API.EntitySearch.Services.IElasticSearchIndexerServiceRGSL, Adacta.AdInsure.RGSL.Framework.API",
+                "methodName": "IndexDocument"
+            }
+        }
+    ],
+    "responses": [
+        200,
+        422
+    ]
+}

@@ -1,0 +1,94 @@
+{
+    "id": "RelatedClaimsUiSchema",
+    "type": "Group",
+    "elements": [
+        {
+            "type": "GridLayout",
+            "numberOfColumns": 12,
+            "elements": [
+                {
+                    "type": "Group",
+                    "elements": [
+                        {
+                            "type": "DataGrid",
+                            "defaultPageSize": 10,
+                            "mode": "DataSource",
+                            "header": {
+                                "showReloadButton": true,
+                                "showNumberOfResults": false
+                            },
+                            "pagination": {
+                                "mode": "Regular",
+                                "pageSizes": [
+                                    5,
+                                    10,
+                                    15
+                                ]
+                            },
+                            "selection": {
+                                "mode": "None"
+                            },
+                            "height": "None",
+                            "columns": [
+                                {
+                                    "sortable": false,
+                                    "title": "Claim number",
+                                    "name": "Claim number",
+                                    "cellContent": {
+                                        "type": "Link",
+                                        "readOnly": true,
+                                        "targetType": "Url",
+                                        "label": "Claim number",
+                                        "value": {
+                                            "mapping": "claimNumberUriMapping",
+                                            "$ref": "#"
+                                        },
+                                        "width": 5,
+                                        "content": {
+                                            "text": {
+                                                "type": "OutputText",
+                                                "value": {
+                                                    "$ref": "#/properties/resultData/properties/claimNumber"
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                {
+                                    "sortable": false,
+                                    "title": "Contract number",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "value": {
+                                            "$ref": "#/properties/resultData/properties/contractNumber"
+                                        }
+                                    }
+                                },
+                                {
+                                    "sortable": false,
+                                    "title": "State",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "value": {
+                                            "$ref": "#/properties/resultData/properties/documentState"
+                                        }
+                                    }
+                                },
+                                {
+                                    "sortable": false,
+                                    "title": "Insured event date",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "value": {
+                                            "$ref": "#/properties/resultData/properties/insuredEvent/properties/insuredEventDate"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,43 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "object",
+    "additionalProperties": false,
+    "aiValidation": {
+        "rule": "validateEquityDidPayment"
+    },
+    "aiDataEnrichment": [
+        {
+            "name": "EquityDidPaymentEnrichment",
+            "integrationService": {
+                "name": "EquityDidPaymentEnrichmentService",
+                "version": "1"
+            }
+        }
+    ],
+    "properties": {
+        "investmentAccountValue": {
+            "type": "number",
+            "aiTitle": "investmentAccountValue"
+        },
+        "availableSum": {
+            "type": "number",
+            "aiTitle": "availableSum"
+        },
+        "requiredSum": {
+            "type": "number",
+            "aiTitle": "requiredSum"
+        },
+        "pit": {
+            "type": "number",
+            "aiTitle": "pit"
+        },
+        "investmentAccountShare": {
+            "type": "number",
+            "aiTitle": "investmentAccountShare"
+        },
+        "finalSum": {
+            "type": "number",
+            "aiTitle": "finalSum"
+        }
+    }
+}

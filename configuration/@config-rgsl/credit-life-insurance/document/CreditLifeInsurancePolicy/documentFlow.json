@@ -1,0 +1,169 @@
+{
+    "processType": "Policy",
+    "actors": [
+        "Agent",
+        "Underwriter",
+        "Viewer",
+        "Operations",
+        "Claims",
+        "System"
+    ],
+    "initialState": "Draft",
+    "states": [
+        {
+            "name": "Draft",
+            "operations": []
+        },
+        {
+            "name": "Active",
+            "operations": []
+        },
+        {
+            "name": "Activated",
+            "operations": [],
+            "isTerminal": true,
+            "appliesVersion": true
+        },
+        {
+            "name": "Cancelled",
+            "operations": [],
+            "isTerminal": true,
+            "discardsVersion": true
+        },
+        {
+            "name": "CancelledByAmendment",
+            "operations": [],
+            "isTerminal": true,
+            "appliesVersion": true
+        },
+        {
+            "name": "Completed",
+            "isTerminal": true,
+            "discardsVersion": true,
+            "operations": []
+        }
+    ],
+    "transitions": [
+        {
+            "name": "Draft_to_Active",
+            "from": "Draft",
+            "to": "Active",
+            "exclusiveToAssignedUser": true,
+            "allowOnValidationErrors": {
+                "all": false
+            },
+            "whenBlocked": "DisplayNormally"
+        },
+        {
+            "name": "Draft_to_Active_Operations",
+            "from": "Draft",
+            "to": "Active",
+            "exclusiveToAssignedUser": false,
+            "allowOnValidationErrors": {
+                "all": false
+            },
+            "whenBlocked": "DisplayNormally"
+        },
+        {
+            "name": "Draft_to_Active_System",
+            "from": "Draft",
+            "to": "Active",
+            "exclusiveToAssignedUser": false,
+            "allowOnValidationErrors": {
+                "all": false
+            },
+            "whenBlocked": "Hide"
+        },
+        {
+            "name": "Draft_to_Cancelled",
+            "from": "Draft",
+            "to": "Cancelled",
+            "exclusiveToAssignedUser": true,
+            "allowOnValidationErrors": {
+                "all": true
+            }
+        },
+        {
+            "name": "Active_to_Activated",
+            "from": "Active",
+            "to": "Activated",
+            "exclusiveToAssignedUser": false,
+            "allowOnValidationErrors": {
+                "all": true
+            }
+        },
+        {
+            "name": "Active_to_Cancelled",
+            "from": "Active",
+            "to": "Cancelled",
+            "exclusiveToAssignedUser": true,
+            "allowOnValidationErrors": {
+                "all": true
+            }
+        },
+        {
+            "name": "Active_to_Cancelled_Operations",
+            "from": "Active",
+            "to": "Cancelled",
+            "exclusiveToAssignedUser": false,
+            "allowOnValidationErrors": {
+                "all": true
+            }
+        },
+        {
+            "name": "Activated_to_CancelledByAmendment",
+            "from": "Activated",
+            "to": "CancelledByAmendment",
+            "exclusiveToAssignedUser": false,
+            "allowOnValidationErrors": {
+                "all": true
+            }
+        },
+        {
+            "name": "CancelledByAmendment_to_Activated",
+            "from": "CancelledByAmendment",
+            "to": "Activated",
+            "exclusiveToAssignedUser": false,
+            "allowOnValidationErrors": {
+                "all": true
+            }
+        },
+        {
+            "name": "Cancelled_to_Active",
+            "from": "Cancelled",
+            "to": "Active",
+            "exclusiveToAssignedUser": false,
+            "allowOnValidationErrors": {
+                "all": true
+            }
+        },
+        {
+            "name": "Activated_to_Cancelled",
+            "from": "Activated",
+            "to": "Cancelled",
+            "exclusiveToAssignedUser": false,
+            "allowOnValidationErrors": {
+                "all": true
+            }
+        },
+        {
+            "name": "Activated_to_Completed",
+            "from": "Activated",
+            "to": "Completed",
+            "whenBlocked": "DisplayNormally",
+            "exclusiveToAssignedUser": false,
+            "allowOnValidationErrors": {
+                "all": true
+            }
+        },
+        {
+            "name": "Completed_to_Activated",
+            "from": "Completed",
+            "to": "Activated",
+            "exclusiveToAssignedUser": false,
+            "allowOnValidationErrors": {
+                "all": true
+            }
+        }
+    ]
+}

@@ -1,0 +1,488 @@
+{
+    "type": "GridLayout",
+    "numberOfColumns": 12,
+    "elements": [
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "Group",
+                    "elements": [
+                        {
+                            "type": "Input",
+                            "elementId": "policyRiskDropdown",
+                            "hide": true,
+                            "label": "additionalRisks",
+                            "value": {
+                                "$ref": "#/properties/risk"
+                            },
+                            "control": "Dropdown",
+                            "autocomplete": {
+                                "minTextLength": 1,
+                                "dropDownItemsCount": 30
+                            },
+                            "source": {
+                                "dataSource": {
+                                    "name": "RiskProductRelationDataSource",
+                                    "reloadOnOpen": true,
+                                    "searchFieldPath": "riskFullDescription",
+                                    "requestMapping": "additionalRiskRequestMapping",
+                                    "responseMapping": "riskResponseMapping",
+                                    "resultCount": 30
+                                },
+                                "displayFieldName": "displayName",
+                                "valueFieldName": "value",
+                                "displayValueTemplate": "{{expr riskShortDescription}} ({{expr riskCode}})"
+                            },
+                            "width": 6,
+                            "onValueChanged": [
+                                {
+                                    "commandType": "executeAction",
+                                    "actionName": "onAdditionalRiskChanged"
+                                }
+                            ],
+                            "rule": {
+                                "effect": "SHOW",
+                                "condition": {
+                                    "type": "FUNC",
+                                    "ruleFunction": "showAdditionalRisk",
+                                    "value": [
+                                        {
+                                            "$ref": "#"
+                                        }
+                                    ]
+                                }
+                            }
+                        },
+                        {
+                            "type": "Input",
+                            "hide": true,
+                            "label": "replacementRisks",
+                            "value": {
+                                "$ref": "#/properties/risk"
+                            },
+                            "control": "Dropdown",
+                            "source": {
+                                "dataSource": {
+                                    "name": "RiskProductRelationDataSource",
+                                    "searchFieldPath": "riskFullDescription",
+                                    "requestMapping": "replacementRiskRequestMapping",
+                                    "responseMapping": "riskResponseMapping",
+                                    "resultCount": 15
+                                },
+                                "displayFieldName": "displayName",
+                                "valueFieldName": "value"
+                            },
+                            "width": 6,
+                            "rule": {
+                                "effect": "SHOW",
+                                "condition": {
+                                    "type": "FUNC",
+                                    "ruleFunction": "showRreplacementRisk",
+                                    "value": [
+                                        {
+                                            "$ref": "#"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    ]
+                },
+                {
+                    "type": "Group",
+                    "rule": {
+                        "effect": "SHOW",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "shouldShowRiskEditFields",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    },
+                    "elements": [
+                        {
+                            "type": "Input",
+                            "label": "riskInsuredSum",
+                            "value": {
+                                "$ref": "#/properties/riskInsuredSum"
+                            },
+                            "width": 3,
+                            "rule": {
+                                "effect": "SHOW",
+                                "condition": {
+                                    "type": "FUNC",
+                                    "ruleFunction": "showInsuredSum",
+                                    "value": [
+                                        {
+                                            "$ref": "#"
+                                        }
+                                    ]
+                                }
+                            }
+                        },
+                        {
+                            "type": "Input",
+                            "label": "riskPremium",
+                            "value": {
+                                "$ref": "#/properties/riskPremium"
+                            },
+                            "width": 3,
+                            "rule": {
+                                "effect": "SHOW",
+                                "condition": {
+                                    "type": "FUNC",
+                                    "ruleFunction": "showRiskPremium",
+                                    "value": [
+                                        {
+                                            "$ref": "#"
+                                        }
+                                    ]
+                                }
+                            }
+                        },
+                        {
+                            "type": "Input",
+                            "label": "isUnifiedInsuranceAmount",
+                            "value": {
+                                "$ref": "#/properties/isUnifiedInsuranceAmount"
+                            },
+                            "width": 3,
+                            "onValueChanged": [
+                                {
+                                    "commandType": "executeAction",
+                                    "actionName": "onUnifiedInsuranceAmountValueChanged"
+                                }
+                            ],
+                            "rule": {
+                                "effect": "SHOW",
+                                "condition": {
+                                    "type": "FUNC",
+                                    "ruleFunction": "showInsuranceAmountRestrictions",
+                                    "value": [
+                                        {
+                                            "$ref": "#"
+                                        }
+                                    ]
+                                }
+                            }
+                        },
+                        {
+                            "type": "Input",
+                            "label": "isLimitedInsuranceAmount",
+                            "value": {
+                                "$ref": "#/properties/isLimitedInsuranceAmount"
+                            },
+                            "width": 3,
+                            "onValueChanged": [
+                                {
+                                    "commandType": "executeAction",
+                                    "actionName": "onLimitedInsuranceAmountValueChanged"
+                                }
+                            ],
+                            "rule": {
+                                "effect": "SHOW",
+                                "condition": {
+                                    "type": "FUNC",
+                                    "ruleFunction": "showInsuranceAmountRestrictions",
+                                    "value": [
+                                        {
+                                            "$ref": "#"
+                                        }
+                                    ]
+                                }
+                            }
+                        },
+                        {
+                            "type": "Input",
+                            "label": "underwriterRatio",
+                            "value": {
+                                "$ref": "#/properties/underwriterRatio"
+                            },
+                            "width": 3,
+                            "rule": {
+                                "effect": "SHOW",
+                                "condition": {
+                                    "type": "FUNC",
+                                    "ruleFunction": "showUnderwriterRatio",
+                                    "value": [
+                                        {
+                                            "$ref": "#"
+                                        }
+                                    ]
+                                }
+                            }
+                        },
+                        {
+                            "type": "Input",
+                            "label": "underwriterPremium",
+                            "value": {
+                                "$ref": "#/properties/underwriterPremium"
+                            },
+                            "onValueChanged": [
+                                {
+                                    "commandType": "executeAction",
+                                    "actionName": "onUnderwriterPremiumValueChanged"
+                                }
+                            ],
+                            "width": 3,
+                            "rule": {
+                                "effect": "SHOW",
+                                "condition": {
+                                    "type": "FUNC",
+                                    "ruleFunction": "showUnderwriterPremium",
+                                    "value": [
+                                        {
+                                            "$ref": "#"
+                                        }
+                                    ]
+                                }
+                            }
+                        },
+                        {
+                            "type": "Input",
+                            "label": "underwriterRatioWithoutTariffication",
+                            "value": {
+                                "$ref": "#/properties/underwriterRatioWithoutTariffication"
+                            },
+                            "width": 3,
+                            "rule": {
+                                "effect": "SHOW",
+                                "condition": {
+                                    "type": "FUNC",
+                                    "ruleFunction": "showUnderwriterRatioWithoutTariffication",
+                                    "value": [
+                                        {
+                                            "$ref": "#"
+                                        }
+                                    ]
+                                }
+                            }
+                        },
+                        {
+                            "type": "Input",
+                            "label": "underwriterPremiumWithoutTariffication",
+                            "value": {
+                                "$ref": "#/properties/underwriterPremiumWithoutTariffication"
+                            },
+                            "width": 3,
+                            "rule": {
+                                "effect": "SHOW",
+                                "condition": {
+                                    "type": "FUNC",
+                                    "ruleFunction": "showUnderwriterPremiumWithoutTariffication",
+                                    "value": [
+                                        {
+                                            "$ref": "#"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    ]
+                },
+                {
+                    "type": "Group",
+                    "elements": [
+                        {
+                            "type": "Input",
+                            "label": "startDate",
+                            "value": {
+                                "$ref": "#/properties/startDate"
+                            },
+                            "width": 3,
+                            "rule": {
+                                "effect": "SHOW",
+                                "condition": {
+                                    "type": "FUNC",
+                                    "ruleFunction": "shouldShowRiskStartDateEditField",
+                                    "value": [
+                                        {
+                                            "$ref": "#"
+                                        }
+                                    ]
+                                }
+                            }
+                        },
+                        {
+                            "type": "Input",
+                            "label": "endDate",
+                            "value": {
+                                "$ref": "#/properties/endDate"
+                            },
+                            "width": 3,
+                            "rule": {
+                                "effect": "SHOW",
+                                "condition": {
+                                    "type": "FUNC",
+                                    "ruleFunction": "shouldShowRiskEndDateEditField",
+                                    "value": [
+                                        {
+                                            "$ref": "#"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    ]
+                },
+                {
+                    "type": "Group",
+                    "elements": [
+                        {
+                            "type": "Dropdown",
+                            "label": "riskProgram",
+                            "value": {
+                                "$ref": "#/properties/manualRiskProgram"
+                            },
+                            "width": 3,
+                            "rule": {
+                                "effect": "SHOW",
+                                "condition": {
+                                    "type": "FUNC",
+                                    "ruleFunction": "shouldShowRiskProductRelatedFileds",
+                                    "value": [
+                                        {
+                                            "$ref": "#"
+                                        }
+                                    ]
+                                }
+                            }
+                        },
+                        {
+                            "type": "Dropdown",
+                            "label": "riskPerson",
+                            "value": {
+                                "$ref": "#/properties/manualRiskPerson"
+                            },
+                            "width": 3,
+                            "rule": {
+                                "effect": "SHOW",
+                                "condition": {
+                                    "type": "FUNC",
+                                    "ruleFunction": "shouldShowRiskProductRelatedFileds",
+                                    "value": [
+                                        {
+                                            "$ref": "#"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    ]
+                },
+                {
+                    "type": "Group",
+                    "elements": [
+                        {
+                            "type": "Input",
+                            "label": "manualPeriodsCalc",
+                            "value": {
+                                "$ref": "#/properties/manualPeriodsCalc"
+                            },
+                            "width": 3,
+                            "rule": {
+                                "effect": "SHOW",
+                                "condition": {
+                                    "type": "FUNC",
+                                    "ruleFunction": "shouldAllowToManuallyCalcPeriods",
+                                    "value": [
+                                        {
+                                            "$ref": "#"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    ]
+                },
+                {
+                    "type": "DataGrid",
+                    "hide": true,
+                    "mode": "Array",
+                    "labelType": "H2",
+                    "label": "riskInsuredSumByPeriod",
+                    "isCollapsed": false,
+                    "value": {
+                        "$ref": "#/properties/riskInsuredSumByPeriod"
+                    },
+                    "actions": [
+                        "Edit"
+                    ],
+                    "checkIfRowActionIsAllowed": "enableEditRiskPeriodsSum",
+                    "edit": {
+                        "mode": "Detached",
+                        "inline": "SingleRow"
+                    },
+                    "columns": [
+                        {
+                            "title": "periodNumber",
+                            "name": "periodNumber",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "defaultValue": "",
+                                "value": {
+                                    "$ref": "#/properties/periodNumber"
+                                }
+                            }
+                        },
+                        {
+                            "title": "periodStartDate",
+                            "name": "periodStartDate",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "defaultValue": "",
+                                "value": {
+                                    "$ref": "#/properties/periodStartDate"
+                                }
+                            }
+                        },
+                        {
+                            "title": "periodEndDate",
+                            "name": "periodEndDate",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "defaultValue": "",
+                                "value": {
+                                    "$ref": "#/properties/periodEndDate"
+                                }
+                            }
+                        },
+                        {
+                            "title": "insuredSum",
+                            "name": "insuredSum",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "defaultValue": "",
+                                "value": {
+                                    "$ref": "#/properties/insuredSum"
+                                }
+                            },
+                            "editCellContent": {
+                                "type": "Input",
+                                "value": {
+                                    "$ref": "#/properties/insuredSum"
+                                }
+                            }
+                        }
+                    ],
+                    "rule": {
+                        "effect": "SHOW",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "showRiskInsuredSumByPeriod",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    }
+                }
+            ]
+        }
+    ]
+}

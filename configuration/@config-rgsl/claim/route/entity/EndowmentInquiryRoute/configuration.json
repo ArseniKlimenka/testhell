@@ -1,0 +1,31 @@
+{
+    "entityType": "UniversalDocument",
+    "condition": {
+        "events": [
+            "Created",
+            "StatusChanged"
+        ],
+        "configuration": {
+            "names": [],
+            "dimensions": {
+                "universalDocumentType": [
+                    "EndowmentInquiry"
+                ]
+            }
+        }
+    },
+    "sinks": [
+        {
+            "name": "Inquiry",
+            "database": {
+                "tables": [
+                    "EWT_IMPL.ENDOWMENT_INQUIRY_HUB",
+                    "EWT_IMPL.ENDOWMENT_INQUIRY_SAT",
+                    "EWT_IMPL.ENDOWMENT_INQUIRY_REASON_SAT",
+                    "EWT_IMPL.EWT_INQUIRY_LINK"
+                ]
+            }
+        }
+    ],
+    "version": "1"
+}

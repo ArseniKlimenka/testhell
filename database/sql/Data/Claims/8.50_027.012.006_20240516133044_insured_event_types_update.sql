@@ -1,0 +1,2 @@
+INSERT INTO BFX_IMPL.INSURED_EVENT_REASON (CODE, DESCRIPTION, TYPE_CODE) VALUES ('608', N'Оплата оказанных медицинских услуг по договору добровольного медицинского страхования', '600')
+INSERT INTO BFX_IMPL.DISEASE_CLASS (CODE, DESCRIPTION, PARENT_CODE) VALUES ('DEFAULT-1', N'Оплата оказанных медицинских услуг по договору добровольного медицинского страхования', NULL)

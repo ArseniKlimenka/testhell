@@ -1,0 +1,146 @@
+{
+    "type": "GridLayout",
+    "numberOfColumns": 4,
+    "elements": [
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "GridLayout",
+                    "numberOfColumns": 4,
+                    "elements": [
+                        {
+                            "type": "HeaderContentLayout",
+                            "elements": [
+                                {
+                                    "type": "OutputText",
+                                    "skipTranslate": true,
+                                    "width": 3,
+                                    "stackContent": "Left",
+                                    "value": {
+                                        "$ref": "#"
+                                    },
+                                    "textStyle": {
+                                        "uppercase": true,
+                                        "textSize": "Normal",
+                                        "width": 1,
+                                        "textColor": "Black"
+                                    },
+                                    "template": "{{#style 'bold'}}{{#i18n}}{{expr ConfigurationCodeName}}@Title{{/i18n}}{{/style}}"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "Section",
+            "sectionLevel": 1,
+            "label": "BankStatementServices",
+            "elements": [
+                {
+                    "type": "Section",
+                    "sectionLevel": 2,
+                    "label": "BankStatementsImportService",
+                    "elements": [
+                        {
+                            "type": "Group",
+                            "width": 4,
+                            "elements": [
+                                {
+                                    "type": "Input",
+                                    "label": "Payment GUID",
+                                    "value": {
+                                        "$ref": "#/properties/Body/properties/rgslGuid"
+                                    },
+                                    "width": 2
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Group",
+                            "width": 4,
+                            "elements": [
+                                {
+                                    "type": "Button",
+                                    "value": {
+                                        "$ref": "#"
+                                    },
+                                    "width": 1,
+                                    "onClick": [
+                                        {
+                                            "commandType": "executeAction",
+                                            "actionName": "executeGetNewBankStatementsRgslEtlService"
+                                        }
+                                    ],
+                                    "label": "Execute"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "GroupSeparator"
+                },
+                {
+                    "type": "Section",
+                    "sectionLevel": 2,
+                    "label": "AutoAllocatePaymentsService",
+                    "elements": [
+                        {
+                            "type": "Group",
+                            "width": 4,
+                            "elements": [
+                                {
+                                    "type": "Button",
+                                    "value": {
+                                        "$ref": "#"
+                                    },
+                                    "width": 1,
+                                    "onClick": [
+                                        {
+                                            "commandType": "executeAction",
+                                            "actionName": "executeAutoAllocatePaymentsEtlService"
+                                        }
+                                    ],
+                                    "label": "Execute"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "GroupSeparator"
+                },
+                {
+                    "type": "Section",
+                    "sectionLevel": 2,
+                    "label": "ActiveContractsForOperationService",
+                    "elements": [
+                        {
+                            "type": "Group",
+                            "width": 4,
+                            "elements": [
+                                {
+                                    "type": "Button",
+                                    "value": {
+                                        "$ref": "#"
+                                    },
+                                    "width": 1,
+                                    "onClick": [
+                                        {
+                                            "commandType": "executeAction",
+                                            "actionName": "executeActiveContractsForOperationEtlService"
+                                        }
+                                    ],
+                                    "label": "Execute"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

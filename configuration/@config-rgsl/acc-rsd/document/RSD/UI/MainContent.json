@@ -1,0 +1,157 @@
+{
+    "id": "RSD.main-schema.json",
+    "type": "Group",
+    "formProperties": {
+        "events": {
+            "onLoad": "onLoad",
+            "beforeSave": "beforeSave"
+        }
+    },
+    "elements": [
+        {
+            "type": "GridLayout",
+            "fillAvailableSpace": true,
+            "title": "endowment",
+            "fixedButton": true,
+            "numberOfColumns": 6,
+            "elements": [
+                {
+                    "type": "TabLayout",
+                    "options": {
+                        "menuAlligment": "Horizontal",
+                        "menuMode": "Single"
+                    },
+                    "elements": [
+                        {
+                            "type": "Tab",
+                            "elementId": "tabMain",
+                            "scope": "title",
+                            "title": "Main",
+                            "elements": [
+                                {
+                                    "type": "Group",
+                                    "width": 6,
+                                    "elements": [
+                                        {
+                                            "type": "Input",
+                                            "label": "CreatedDate",
+                                            "value": {
+                                                "$ref": "#/properties/Body/properties/createdDate"
+                                            },
+                                            "width": 1
+                                        },
+                                        {
+                                            "type": "Input",
+                                            "label": "Notes",
+                                            "value": {
+                                                "$ref": "#/properties/Body/properties/notes"
+                                            },
+                                            "width": 5
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "Group",
+                                    "width": 6,
+                                    "stackContent": "Left",
+                                    "elements": [
+                                        {
+                                            "type": "Button",
+                                            "label": "AutoPopulate",
+                                            "onClick": "autoPopulate",
+                                            "readOnly": true,
+                                            "icon": {
+                                                "name": "Search-Plus",
+                                                "color": "BackgroundColor",
+                                                "size": "Small"
+                                            },
+                                            "rule": {
+                                                "effect": "ENABLE_INITIAL",
+                                                "condition": {
+                                                    "type": "FUNC",
+                                                    "ruleFunction": "enableAutoPopulate",
+                                                    "value": [
+                                                        {
+                                                            "$ref": "#"
+                                                        }
+                                                    ]
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "type": "Button",
+                                            "label": "exportReport",
+                                            "onClick": "exportReport",
+                                            "icon": {
+                                                "name": "Print",
+                                                "color": "BackgroundColor",
+                                                "size": "Small"
+                                            }
+                                        },
+                                        {
+                                            "type": "Button",
+                                            "label": "printReport",
+                                            "onClick": "printReport",
+                                            "icon": {
+                                                "name": "Print",
+                                                "color": "BackgroundColor",
+                                                "size": "Small"
+                                            }
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "Group",
+                                    "width": 6,
+                                    "elements": [
+                                        {
+                                            "type": "InlineView",
+                                            "showContainerActions": false,
+                                            "views": [
+                                                {
+                                                    "viewReference": {
+                                                        "configurationCodeName": "RsdItemView",
+                                                        "configurationVersion": "1",
+                                                        "configurationConceptType": "SearchView"
+                                                    },
+                                                    "onViewInitialized": "initItemInlineView",
+                                                    "viewType": "Search"
+                                                }
+                                            ],
+                                            "hide": true,
+                                            "elementId": "rsdItemInlineView"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Component",
+                            "name": "AttachmentsTab",
+                            "value": {
+                                "$ref": "#"
+                            }
+                        },
+                        {
+                            "type": "Tab",
+                            "elementId": "tabHistory",
+                            "title": "History",
+                            "elements": [
+                                {
+                                    "type": "Component",
+                                    "metadata": {
+                                        "autogenerate": true
+                                    },
+                                    "name": "DocumentStateHistory",
+                                    "value": {
+                                        "$ref": "#"
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

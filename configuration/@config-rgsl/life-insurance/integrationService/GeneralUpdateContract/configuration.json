@@ -1,0 +1,40 @@
+{
+    "additionalDataSources": [
+        "GetProductConfigurationDataSource"
+    ],
+    "sinks": [
+        {
+            "name": "GenerateExecutionId",
+            "sequence": {
+                "sequenceName": "BFX_IMPL.CONTRACT_MODIFICATION_EXEC_ID",
+                "createNewSequenceName": true
+            }
+        },
+        {
+            "name": "GetContractVersions",
+            "fetch": {
+                "configuration": {
+                    "name": "ContractVersionsDataSource"
+                }
+            }
+        },
+        {
+            "name": "UpdateContractVersions",
+            "executeAs": "System",
+            "document": {
+            }
+        },
+        {
+            "name": "WriteExecutionHistory",
+            "database": {
+                "tables": [
+                    "BFX_IMPL.CONTRACT_MODIFICATION_HISTORY"
+                ]
+            }
+        }
+    ],
+    "responses": [
+        200,
+        422
+    ]
+}

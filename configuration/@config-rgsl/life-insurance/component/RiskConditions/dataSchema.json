@@ -1,0 +1,92 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "Life Insurance",
+    "description": "Data schema describing Risk Conditions",
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+        "insredAgeOnStartDate": {
+            "type": "number",
+            "aiTitle": "insredAgeOnStartDate"
+        },
+        "insredAgeOnEndDate": {
+            "type": "number",
+            "aiTitle": "insredAgeOnEndDate"
+        },
+        "phAgeOnStartDate": {
+            "type": "number"
+        },
+        "phAgeOnEndDate": {
+            "type": "number"
+        },
+        "contractIssueDate": {
+            "type": "string",
+            "aiFormat": "date"
+        },
+        "contractSartDate": {
+            "type": "string",
+            "aiFormat": "date",
+            "aiTitle": "contractSartDate"
+        },
+        "contractEndDate": {
+            "type": "string",
+            "aiFormat": "date",
+            "aiTitle": "contractEndDate"
+        },
+        "paymentType": {
+            "type": "string",
+            "aiTitle": "paymentType"
+        },
+        "isInsuredPolicyHolder": {
+            "type": "boolean",
+            "aiTitle": "isInsuredPolicyHolder"
+        },
+        "productCode": {
+            "type": "string",
+            "aiTitle": "productCode"
+        },
+        "manualCorrection": {
+            "type": "boolean"
+        },
+        "creditSumNet": {
+            "type": "number"
+        },
+        "creditProgramId": {
+            "type": "string"
+        },
+        "risksPackages": {
+            "type": "object",
+            "additionalProperties": true
+        },
+        "isHardcoreDeletedRisk": {
+            "type": "boolean"
+        },
+        "isNeedRecalc": {
+            "type": "boolean"
+        },
+        "manualRiskDeletion": {
+            "type": "boolean"
+        },
+        "replaceDisabilityAnyReason": {
+            "type": "boolean"
+        },
+        "replaceDisabilityECOF": {
+            "type": "boolean"
+        },
+        "correctionWithoutCalc": {
+            "type": "boolean"
+        },
+        "restoreAllRisks": {
+            "type": "boolean"
+        },
+        "risks": {
+            "$ref": "component:Risks"
+        },
+        "deletedRisks": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        }
+    }
+}

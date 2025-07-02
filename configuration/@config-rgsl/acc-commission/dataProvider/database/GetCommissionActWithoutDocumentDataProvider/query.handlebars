@@ -1,0 +1,10 @@
+select
+	act.ACT_ID,
+	act.ACT_NO
+from
+	acc_impl.CA_ACT act
+where 1=1
+	and not exists (select * from bfx.UNIVERSAL_DOCUMENT ud where ud.UNIVERSAL_DOCUMENT_NUMBER = act.ACT_NO)
+{{#if parameters.actNo}}
+	and act.ACT_NO = @actNo
+{{/if}}

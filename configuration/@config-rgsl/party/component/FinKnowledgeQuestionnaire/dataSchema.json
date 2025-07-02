@@ -1,0 +1,39 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "object",
+    "additionalProperties": false,
+    "aiValidation": {
+        "rule": "validateFinKnowledgeQuestionnaire"
+    },
+    "properties": {
+        "questionnaire": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                    "itemNumber": {
+                        "type": "integer",
+                        "aiTitle": "itemNumber"
+                    },
+                    "itemText": {
+                        "type": "string"
+                    },
+                    "itemConfirmation": {
+                        "type": "boolean"
+                    },
+                    "itemConfirmationComment": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "confirmation": {
+            "type": "boolean"
+        },
+        "lastUpdateDate": {
+            "type": "string",
+            "aiFormat": "date"
+        }
+    }
+}

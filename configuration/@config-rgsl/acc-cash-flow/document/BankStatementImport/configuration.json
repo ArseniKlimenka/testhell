@@ -1,0 +1,106 @@
+{
+    "entityType": "ImportDocument",
+    "states": [
+        {
+            "name": "Draft",
+            "actors": [
+                {
+                    "actor": "ChiefPaymentDistributor",
+                    "uiSchema": "Draft",
+                    "operations": [
+                        "Save"
+                    ],
+                    "transitions": [
+                        "StartLoading"
+                    ]
+                },
+                {
+                    "actor": "System",
+                    "uiSchema": "Draft",
+                    "operations": [
+                        "Save"
+                    ],
+                    "transitions": [
+                        "StartLoading"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Loading",
+            "actors": [
+                {
+                    "actor": "ChiefPaymentDistributor",
+                    "uiSchema": "Loading",
+                    "operations": [],
+                    "transitions": []
+                }
+            ]
+        },
+        {
+            "name": "ReloadSetup",
+            "actors": [
+                {
+                    "actor": "ChiefPaymentDistributor",
+                    "uiSchema": "Reloading",
+                    "operations": [
+                        "Save"
+                    ],
+                    "transitions": [
+                        "StartReloading"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Loaded",
+            "actors": [
+                {
+                    "actor": "ChiefPaymentDistributor",
+                    "uiSchema": "Loading",
+                    "operations": [],
+                    "transitions": [
+                        "Reload",
+                        "StartImporting"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Importing",
+            "actors": [
+                {
+                    "actor": "ChiefPaymentDistributor",
+                    "uiSchema": "Importing",
+                    "operations": [],
+                    "transitions": []
+                },
+                {
+                    "actor": "System",
+                    "uiSchema": "Importing",
+                    "operations": [],
+                    "transitions": [
+                        "FinishImporting"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Imported",
+            "actors": [
+                {
+                    "actor": "ChiefPaymentDistributor",
+                    "uiSchema": "Importing",
+                    "operations": []
+                }
+            ]
+        }
+    ],
+    "version": "1",
+    "components": [
+        "DocumentFooter",
+        "DocumentHeader",
+        "FileUpload"
+    ],
+    "validFrom": "2000-01-01"
+}

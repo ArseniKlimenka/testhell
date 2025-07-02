@@ -1,0 +1,181 @@
+{
+    "entityType": "ImportDocument",
+    "states": [
+        {
+            "name": "Draft",
+            "actors": [
+                {
+                    "actor": "General",
+                    "uiSchema": "Draft",
+                    "operations": [
+                        "Save"
+                    ],
+                    "transitions": [
+                        "StartLoading"
+                    ]
+                },
+                {
+                    "actor": "Administrator",
+                    "uiSchema": "Draft",
+                    "operations": [
+                        "Save"
+                    ],
+                    "transitions": [
+                        "StartLoading"
+                    ]
+                },
+                {
+                    "actor": "System",
+                    "uiSchema": "Draft",
+                    "operations": [
+                        "Save"
+                    ],
+                    "transitions": [
+                        "StartLoading"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Loading",
+            "actors": [
+                {
+                    "actor": "General",
+                    "uiSchema": "Loading",
+                    "operations": [],
+                    "transitions": []
+                },
+                {
+                    "actor": "Administrator",
+                    "uiSchema": "Loading",
+                    "operations": [],
+                    "transitions": []
+                },
+                {
+                    "actor": "System",
+                    "uiSchema": "Loading",
+                    "operations": [],
+                    "transitions": []
+                }
+            ]
+        },
+        {
+            "name": "ReloadSetup",
+            "actors": [
+                {
+                    "actor": "General",
+                    "uiSchema": "Reloading",
+                    "operations": [
+                        "Save"
+                    ],
+                    "transitions": [
+                        "StartReloading"
+                    ]
+                },
+                {
+                    "actor": "Administrator",
+                    "uiSchema": "Reloading",
+                    "operations": [
+                        "Save"
+                    ],
+                    "transitions": [
+                        "StartReloading"
+                    ]
+                },
+                {
+                    "actor": "System",
+                    "uiSchema": "Reloading",
+                    "operations": [
+                        "Save"
+                    ],
+                    "transitions": [
+                        "StartReloading"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Loaded",
+            "actors": [
+                {
+                    "actor": "General",
+                    "uiSchema": "Loading",
+                    "operations": [],
+                    "transitions": [
+                        "StartImporting"
+                    ]
+                },
+                {
+                    "actor": "Administrator",
+                    "uiSchema": "Loading",
+                    "operations": [],
+                    "transitions": [
+                        "StartImporting"
+                    ]
+                },
+                {
+                    "actor": "System",
+                    "uiSchema": "Loading",
+                    "operations": [],
+                    "transitions": [
+                        "StartImporting"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Importing",
+            "actors": [
+                {
+                    "actor": "General",
+                    "uiSchema": "Importing",
+                    "operations": [],
+                    "transitions": []
+                },
+                {
+                    "actor": "Administrator",
+                    "uiSchema": "Importing",
+                    "operations": [],
+                    "transitions": [
+                        "FinishImporting"
+                    ]
+                },
+                {
+                    "actor": "System",
+                    "uiSchema": "Importing",
+                    "operations": [],
+                    "transitions": [
+                        "FinishImporting"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Imported",
+            "actors": [
+                {
+                    "actor": "General",
+                    "uiSchema": "Importing",
+                    "operations": []
+                },
+                {
+                    "actor": "Administrator",
+                    "uiSchema": "Importing",
+                    "operations": []
+                },
+                {
+                    "actor": "System",
+                    "uiSchema": "Importing",
+                    "operations": []
+                }
+            ]
+        }
+    ],
+    "version": "1",
+    "components": [
+        "DocumentFooter",
+        "DocumentHeader",
+        "FileUpload"
+    ],
+    "validFrom": "2000-01-01"
+}

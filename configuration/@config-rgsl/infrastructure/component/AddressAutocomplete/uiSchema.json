@@ -1,0 +1,40 @@
+{
+    "type": "GridLayout",
+    "numberOfColumns": 12,
+    "fillAvailableSpace": true,
+    "elements": [
+        {
+            "type": "Input",
+            "control": "Dropdown",
+            "label": "fullAddress",
+            "elementId": "AddressAutocomplete",
+            "enableClear": true,
+            "enableCustomValue": false,
+            "editableSearchTerm": true,
+            "autocomplete": {
+                "minTextLength": 3,
+                "matchCaseInsensitive": true,
+                "selectItemOnMatch": false,
+                "dropDownItemsCount": 15
+            },
+            "source": {
+                "dataSource": {
+                    "name": "DadataDataSource",
+                    "requestMapping": "addressSearchRequestMapping",
+                    "responseMapping": "addressSearchResponseMapping",
+                    "searchFieldPath": "query"
+                },
+                "displayFieldName": "value"
+            },
+            "onValueChanged": [
+                {
+                    "commandType": "executeAction",
+                    "actionName": "populateAddressDetails"
+                }
+            ],
+            "value": {
+                "$ref": "#"
+            }
+        }
+    ]
+}

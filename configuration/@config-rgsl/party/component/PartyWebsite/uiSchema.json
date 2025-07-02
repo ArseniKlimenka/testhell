@@ -1,0 +1,49 @@
+{
+    "type": "Group",
+    "label": "Party website",
+    "width": 12,
+    "elements": [
+        {
+            "type": "Group",
+            "width": 12,
+            "elements": [
+                {
+                    "type": "ThreeState",
+                    "label": "hasWebsite",
+                    "dropdownMode": false,
+                    "labelPosition": "Right",
+                    "value": {
+                        "$ref": "#/properties/hasWebsite"
+                    },
+                    "onValueChanged": [
+                        {
+                            "commandType": "executeAction",
+                            "actionName": "onChangeHasWebsite"
+                        }
+                    ],
+                    "width": 3
+                },
+                {
+                    "type": "Input",
+                    "label": "websiteAddress",
+                    "value": {
+                        "$ref": "#/properties/websiteAddress"
+                    },
+                    "rule": {
+                        "effect": "ENABLE_INITIAL",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "enableWebsiteAddress",
+                            "value": [
+                                {
+                                    "$ref": "#/properties/hasWebsite"
+                                }
+                            ]
+                        }
+                    },
+                    "width": 5
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,229 @@
+{
+    "type": "Group",
+    "elements": [
+        {
+            "id": "MainContent",
+            "type": "Group",
+            "formProperties": {
+                "events": {
+                    "onLoad": "DeduplicationDocumentOnLoad"
+                }
+            },
+            "elements": [
+                {
+                    "type": "TabLayout",
+                    "elementId": "TabLayout",
+                    "options": {
+                        "fixedPosition": true,
+                        "scrollableTabs": false,
+                        "buttonsForSwitchingTabs": true
+                    },
+                    "elements": [
+                        {
+                            "type": "Tab",
+                            "elementId": "tabDeduplicationConditions",
+                            "title": "tabDeduplicationConditions",
+                            "elements": [
+                                {
+                                    "type": "GridLayout",
+                                    "title": "Deduplication",
+                                    "numberOfColumns": 4,
+                                    "elements": [
+                                        {
+                                            "type": "Group",
+                                            "elements": [
+                                                {
+                                                    "type": "Lookup",
+                                                    "width": 1,
+                                                    "value": {
+                                                        "$ref": "#/properties/Body/properties/masterParty"
+                                                    },
+                                                    "dialogButton": {
+                                                        "icon": {
+                                                            "name": "User",
+                                                            "color": "Primary"
+                                                        }
+                                                    },
+                                                    "dialog": {
+                                                        "viewReference": {
+                                                            "configurationCodeName": "GeneralPartySearchView",
+                                                            "configurationConceptType": "SearchView",
+                                                            "configurationVersion": "1"
+                                                        },
+                                                        "onLoad": "onLoadGeneralPartySearchView",
+                                                        "size": "ExtraLarge"
+                                                    },
+                                                    "onSelected": "masterPartyResultMapping",
+                                                    "selectedDisplayValueUISchema": {
+                                                        "type": "Input",
+                                                        "label": "masterPartyFullName",
+                                                        "showAsRequired": true,
+                                                        "readOnly": true,
+                                                        "value": {
+                                                            "$ref": "#/properties/Body/properties/masterParty/properties/partyFullName"
+                                                        }
+                                                    }
+                                                },
+                                                {
+                                                    "type": "Input",
+                                                    "label": "masterPartyPartyCode",
+                                                    "readOnly": true,
+                                                    "width": 1,
+                                                    "value": {
+                                                        "$ref": "#/properties/Body/properties/masterParty/properties/partyCode"
+                                                    }
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "type": "Group",
+                                            "elements": [
+                                                {
+                                                    "type": "Lookup",
+                                                    "width": 1,
+                                                    "value": {
+                                                        "$ref": "#/properties/Body/properties/duplicateParty"
+                                                    },
+                                                    "dialogButton": {
+                                                        "icon": {
+                                                            "name": "User",
+                                                            "color": "Primary"
+                                                        }
+                                                    },
+                                                    "dialog": {
+                                                        "viewReference": {
+                                                            "configurationCodeName": "GeneralPartySearchView",
+                                                            "configurationConceptType": "SearchView",
+                                                            "configurationVersion": "1"
+                                                        },
+                                                        "onLoad": "onLoadGeneralPartySearchView",
+                                                        "size": "ExtraLarge"
+                                                    },
+                                                    "onSelected": "duplicatePartyResultMapping",
+                                                    "selectedDisplayValueUISchema": {
+                                                        "type": "Input",
+                                                        "label": "duplicatePartyFullName",
+                                                        "showAsRequired": true,
+                                                        "readOnly": true,
+                                                        "value": {
+                                                            "$ref": "#/properties/Body/properties/duplicateParty/properties/partyFullName"
+                                                        }
+                                                    }
+                                                },
+                                                {
+                                                    "type": "Input",
+                                                    "label": "duplicatePartyPartyCode",
+                                                    "readOnly": true,
+                                                    "width": 1,
+                                                    "value": {
+                                                        "$ref": "#/properties/Body/properties/duplicateParty/properties/partyCode"
+                                                    }
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "type": "Group",
+                                            "elements": [
+                                                {
+                                                    "type": "Button",
+                                                    "value": {
+                                                        "$ref": "#"
+                                                    },
+                                                    "onClick": [
+                                                        {
+                                                            "commandType": "executeAction",
+                                                            "actionName": "executeDeduplication"
+                                                        }
+                                                    ],
+                                                    "label": "executeDeduplication",
+                                                    "width": 1
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "type": "Group",
+                                            "width": 2,
+                                            "elements": [
+                                                {
+                                                    "type": "DataGrid",
+                                                    "elementId": "updatedDocumentsTable",
+                                                    "mode": "Array",
+                                                    "pagination": {
+                                                        "mode": "Regular",
+                                                        "pageSizes": [
+                                                            50
+                                                        ]
+                                                    },
+                                                    "selection": {
+                                                        "mode": "None"
+                                                    },
+                                                    "height": "None",
+                                                    "value": {
+                                                        "$ref": "#/properties/Body/properties/updatedDocuments"
+                                                    },
+                                                    "columns": [
+                                                        {
+                                                            "sortable": false,
+                                                            "title": "DocumentNumber",
+                                                            "name": "DocumentNumber",
+                                                            "cellContent": {
+                                                                "type": "Link",
+                                                                "label": "DocumentNumber",
+                                                                "targetType": "Entity",
+                                                                "value": {
+                                                                    "mapping": "PrepareDocumentLink",
+                                                                    "$ref": "#"
+                                                                },
+                                                                "content": {
+                                                                    "text": {
+                                                                        "type": "OutputText",
+                                                                        "textProperties": [
+                                                                            "bold"
+                                                                        ],
+                                                                        "template": "{{expr NUMBER}}",
+                                                                        "value": {
+                                                                            "$ref": "#"
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        },
+                                                        {
+                                                            "sortable": false,
+                                                            "title": "DocumentConfigurationCodeName",
+                                                            "name": "DocumentConfigurationCodeName",
+                                                            "cellContent": {
+                                                                "type": "OutputText",
+                                                                "template": "{{expr DOC_NAME}}",
+                                                                "value": {
+                                                                    "$ref": "#"
+                                                                }
+                                                            }
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "rule": {
+        "effect": "HIDE",
+        "condition": {
+            "type": "FUNC",
+            "expectedValue": true,
+            "ruleFunction": "hideDeduplication",
+            "value": [
+                {
+                    "$ref": "#"
+                }
+            ]
+        }
+    }
+}

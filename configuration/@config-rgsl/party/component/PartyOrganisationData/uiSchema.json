@@ -1,0 +1,483 @@
+{
+    "type": "GridLayout",
+    "numberOfColumns": 12,
+    "elements": [
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "Section",
+                    "label": "Party Organisation Data",
+                    "collapsing": {
+                        "initial": false,
+                        "enabled": true
+                    },
+                    "elements": [
+                        {
+                            "type": "Group",
+                            "width": 12,
+                            "elements": [
+                                {
+                                    "type": "Input",
+                                    "elementId": "fullOrgName",
+                                    "label": "fullOrgName",
+                                    "value": {
+                                        "$ref": "#/properties/fullOrgName"
+                                    },
+                                    "width": 8
+                                },
+                                {
+                                    "type": "Input",
+                                    "elementId": "shortOrgName",
+                                    "label": "shortOrgName",
+                                    "value": {
+                                        "$ref": "#/properties/shortOrgName"
+                                    },
+                                    "width": 4
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Group",
+                            "width": 12,
+                            "elements": [
+                                {
+                                    "type": "Input",
+                                    "elementId": "fullOrgNameEng",
+                                    "label": "fullOrgNameEng",
+                                    "value": {
+                                        "$ref": "#/properties/fullOrgNameEng"
+                                    },
+                                    "width": 8
+                                },
+                                {
+                                    "type": "Input",
+                                    "elementId": "shortOrgNameEng",
+                                    "label": "shortOrgNameEng",
+                                    "value": {
+                                        "$ref": "#/properties/shortOrgNameEng"
+                                    },
+                                    "width": 4
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Group",
+                            "width": 12,
+                            "elements": [
+                                {
+                                    "type": "Input",
+                                    "elementId": "organisationalForm",
+                                    "enableCustomValue": true,
+                                    "label": "organisationalForm",
+                                    "value": {
+                                        "$ref": "#/properties/organisationalForm"
+                                    },
+                                    "control": "Dropdown",
+                                    "autocomplete": {
+                                        "minTextLength": 1,
+                                        "dropDownItemsCount": 10,
+                                        "selectItemOnMatch": false
+                                    },
+                                    "source": {
+                                        "dataSource": {
+                                            "name": "PartyOrganisationalFormDataSource",
+                                            "searchFieldPath": "organisationalFormSearchText",
+                                            "requestMapping": "organisationalFormRequestMapping",
+                                            "responseMapping": "organisationalFormResponseMapping",
+                                            "resultCount": 10
+                                        },
+                                        "displayFieldName": "organisationalFormDesc"
+                                    },
+                                    "onValueChanged": [
+                                        {
+                                            "commandType": "executeAction",
+                                            "actionName": "onChangeOrganisationalForm"
+                                        }
+                                    ],
+                                    "width": 4
+                                },
+                                {
+                                    "type": "Input",
+                                    "elementId": "KPP",
+                                    "label": "KPP",
+                                    "value": {
+                                        "$ref": "#/properties/KPP"
+                                    },
+                                    "width": 4
+                                },
+                                {
+                                    "type": "Input",
+                                    "elementId": "numberOfEmployee",
+                                    "label": "numberOfEmployee",
+                                    "value": {
+                                        "$ref": "#/properties/numberOfEmployee"
+                                    },
+                                    "width": 4
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Group",
+                            "width": 12,
+                            "elements": [
+                                {
+                                    "type": "Component",
+                                    "name": "PartyWebsite",
+                                    "value": {
+                                        "$ref": "#/properties/site"
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "type": "GroupSeparator"
+                        },
+                        {
+                            "type": "Group",
+                            "width": 12,
+                            "elements": [
+                                {
+                                    "type": "Group",
+                                    "width": 12,
+                                    "elements": [
+                                        {
+                                            "type": "Input",
+                                            "elementId": "soleExecutiveAuthority",
+                                            "width": 6,
+                                            "label": "soleExecutiveAuthority",
+                                            "value": {
+                                                "$ref": "#/properties/isSoleExecutiveAuthority"
+                                            },
+                                            "onValueChanged": [
+                                                {
+                                                    "commandType": "executeAction",
+                                                    "actionName": "onChangeSoleExecutiveAuthority"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "type": "Input",
+                                            "elementId": "isPersonRepresentative",
+                                            "width": 6,
+                                            "label": "isPersonRepresentative",
+                                            "value": {
+                                                "$ref": "#/properties/isPersonRepresentative"
+                                            },
+                                            "onValueChanged": [
+                                                {
+                                                    "commandType": "executeAction",
+                                                    "actionName": "onChangePersonRepresentative"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "Group",
+                                    "width": 12,
+                                    "elements": [
+                                        {
+                                            "type": "Group",
+                                            "width": 6,
+                                            "elements": [
+                                                {
+                                                    "type": "Component",
+                                                    "readOnly": false,
+                                                    "name": "PartyLookUpSearch",
+                                                    "value": {
+                                                        "$ref": "#/properties/soleExecutiveAuthority"
+                                                    }
+                                                }
+                                            ],
+                                            "rule": {
+                                                "effect": "SHOW",
+                                                "condition": {
+                                                    "type": "LEAF",
+                                                    "expectedValue": true,
+                                                    "value": {
+                                                        "$ref": "#/properties/isSoleExecutiveAuthority"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "type": "Group",
+                                            "width": 6,
+                                            "elements": [
+                                                {
+                                                    "type": "Component",
+                                                    "name": "PartyLookUpSearch",
+                                                    "value": {
+                                                        "$ref": "#/properties/personRepresentative"
+                                                    }
+                                                }
+                                            ],
+                                            "rule": {
+                                                "effect": "SHOW",
+                                                "condition": {
+                                                    "type": "LEAF",
+                                                    "expectedValue": true,
+                                                    "value": {
+                                                        "$ref": "#/properties/isPersonRepresentative"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "type": "GroupSeparator"
+                        },
+                        {
+                            "type": "Group",
+                            "elements": [
+                                {
+                                    "type": "Input",
+                                    "elementId": "isDefault",
+                                    "label": "isDefault",
+                                    "readOnly": true,
+                                    "isCompact": true,
+                                    "value": {
+                                        "$ref": "#/properties/isDefault"
+                                    },
+                                    "width": 12
+                                },
+                                {
+                                    "type": "Group",
+                                    "elementId": "riskManagerAttributes",
+                                    "elements": [
+                                        {
+                                            "type": "Input",
+                                            "elementId": "unfulfilledObligationCB",
+                                            "label": "unfulfilledObligationCB",
+                                            "description": "unfulfilledObligationCBDesc",
+                                            "isCompact": true,
+                                            "value": {
+                                                "$ref": "#/properties/unfulfilledObligationCB"
+                                            },
+                                            "onValueChanged": [
+                                                {
+                                                    "commandType": "executeAction",
+                                                    "actionName": "setIsDefault"
+                                                }
+                                            ],
+                                            "width": 12
+                                        },
+                                        {
+                                            "type": "Input",
+                                            "elementId": "unfulfilledObligationCBComment",
+                                            "control": "TextArea",
+                                            "enableResize": true,
+                                            "numberOfRows": 2,
+                                            "label": "unfulfilledObligationCBComment",
+                                            "value": {
+                                                "$ref": "#/properties/unfulfilledObligationCBComment"
+                                            },
+                                            "rule": {
+                                                "effect": "SHOW",
+                                                "condition": {
+                                                    "type": "FUNC",
+                                                    "ruleFunction": "showDefaultComment",
+                                                    "value": [
+                                                        {
+                                                            "$ref": "#/properties/unfulfilledObligationCB"
+                                                        }
+                                                    ]
+                                                }
+                                            },
+                                            "width": 12
+                                        },
+                                        {
+                                            "type": "Input",
+                                            "elementId": "licenseRevoked",
+                                            "label": "licenseRevoked",
+                                            "description": "licenseRevokedDesc",
+                                            "isCompact": true,
+                                            "value": {
+                                                "$ref": "#/properties/licenseRevoked"
+                                            },
+                                            "onValueChanged": [
+                                                {
+                                                    "commandType": "executeAction",
+                                                    "actionName": "setIsDefault"
+                                                }
+                                            ],
+                                            "width": 12
+                                        },
+                                        {
+                                            "type": "Input",
+                                            "elementId": "licenseRevokedComment",
+                                            "control": "TextArea",
+                                            "enableResize": true,
+                                            "numberOfRows": 2,
+                                            "label": "licenseRevokedComment",
+                                            "value": {
+                                                "$ref": "#/properties/licenseRevokedComment"
+                                            },
+                                            "rule": {
+                                                "effect": "SHOW",
+                                                "condition": {
+                                                    "type": "FUNC",
+                                                    "ruleFunction": "showDefaultComment",
+                                                    "value": [
+                                                        {
+                                                            "$ref": "#/properties/licenseRevoked"
+                                                        }
+                                                    ]
+                                                }
+                                            },
+                                            "width": 12
+                                        },
+                                        {
+                                            "type": "Input",
+                                            "elementId": "bankruptcyProcedure",
+                                            "label": "bankruptcyProcedure",
+                                            "description": "bankruptcyProcedureDesc",
+                                            "isCompact": true,
+                                            "value": {
+                                                "$ref": "#/properties/bankruptcyProcedure"
+                                            },
+                                            "onValueChanged": [
+                                                {
+                                                    "commandType": "executeAction",
+                                                    "actionName": "setIsDefault"
+                                                }
+                                            ],
+                                            "width": 12
+                                        },
+                                        {
+                                            "type": "Input",
+                                            "elementId": "bankruptcyProcedureComment",
+                                            "control": "TextArea",
+                                            "enableResize": true,
+                                            "numberOfRows": 2,
+                                            "label": "bankruptcyProcedureComment",
+                                            "value": {
+                                                "$ref": "#/properties/bankruptcyProcedureComment"
+                                            },
+                                            "rule": {
+                                                "effect": "SHOW",
+                                                "condition": {
+                                                    "type": "FUNC",
+                                                    "ruleFunction": "showDefaultComment",
+                                                    "value": [
+                                                        {
+                                                            "$ref": "#/properties/bankruptcyProcedure"
+                                                        }
+                                                    ]
+                                                }
+                                            },
+                                            "width": 12
+                                        },
+                                        {
+                                            "type": "Input",
+                                            "elementId": "unfulfilledObligationByGuarantee",
+                                            "label": "unfulfilledObligationByGuarantee",
+                                            "description": "unfulfilledObligationByGuaranteeDesc",
+                                            "isCompact": true,
+                                            "value": {
+                                                "$ref": "#/properties/unfulfilledObligationByGuarantee"
+                                            },
+                                            "onValueChanged": [
+                                                {
+                                                    "commandType": "executeAction",
+                                                    "actionName": "setIsDefault"
+                                                }
+                                            ],
+                                            "width": 12
+                                        },
+                                        {
+                                            "type": "Input",
+                                            "elementId": "unfulfilledObligationByGuaranteeComment",
+                                            "control": "TextArea",
+                                            "enableResize": true,
+                                            "numberOfRows": 2,
+                                            "label": "unfulfilledObligationByGuaranteeComment",
+                                            "value": {
+                                                "$ref": "#/properties/unfulfilledObligationByGuaranteeComment"
+                                            },
+                                            "rule": {
+                                                "effect": "SHOW",
+                                                "condition": {
+                                                    "type": "FUNC",
+                                                    "ruleFunction": "showDefaultComment",
+                                                    "value": [
+                                                        {
+                                                            "$ref": "#/properties/unfulfilledObligationByGuarantee"
+                                                        }
+                                                    ]
+                                                }
+                                            },
+                                            "width": 12
+                                        },
+                                        {
+                                            "type": "Input",
+                                            "elementId": "anotherSign",
+                                            "label": "anotherSign",
+                                            "isCompact": true,
+                                            "value": {
+                                                "$ref": "#/properties/anotherSign"
+                                            },
+                                            "onValueChanged": [
+                                                {
+                                                    "commandType": "executeAction",
+                                                    "actionName": "setIsDefault"
+                                                }
+                                            ],
+                                            "width": 12
+                                        },
+                                        {
+                                            "type": "Input",
+                                            "elementId": "anotherSignComment",
+                                            "control": "TextArea",
+                                            "enableResize": true,
+                                            "numberOfRows": 2,
+                                            "label": "anotherSignComment",
+                                            "value": {
+                                                "$ref": "#/properties/anotherSignComment"
+                                            },
+                                            "rule": {
+                                                "effect": "SHOW",
+                                                "condition": {
+                                                    "type": "FUNC",
+                                                    "ruleFunction": "showDefaultComment",
+                                                    "value": [
+                                                        {
+                                                            "$ref": "#/properties/anotherSign"
+                                                        }
+                                                    ]
+                                                }
+                                            },
+                                            "width": 12
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "Section",
+                    "label": "Party Registration Data",
+                    "collapsing": {
+                        "initial": false,
+                        "enabled": true
+                    },
+                    "elements": [
+                        {
+                            "type": "Component",
+                            "elementId": "PartyOGRN",
+                            "name": "PartyOGRN",
+                            "value": {
+                                "$ref": "#/properties/partyOGRN"
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

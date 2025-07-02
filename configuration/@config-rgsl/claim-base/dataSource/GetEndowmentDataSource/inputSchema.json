@@ -1,0 +1,122 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+        "criteria": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "documentCode": {
+                    "type": "string"
+                },
+                "contractNumber": {
+                    "type": "string"
+                },
+                "riskCode": {
+                    "type": "string"
+                },
+                "documentState": {
+                    "type": "string",
+                    "enum": [
+                        "OperationsApproval",
+                        "OperationsDirectorApproval",
+                        "InsuranceMethodologyApproval",
+                        "ActuaryApproval",
+                        "AccountingApproval",
+                        "ComplianceApproval",
+                        "SecurityApproval",
+                        "LegalApproval",
+                        "CallCenterApproval",
+                        "PartnerSalesSupportApproval",
+                        "ClientServiceApproval",
+                        "RequestToClient",
+                        "DeputyDirectorAproval",
+                        "SentToPayment",
+                        "Paid",
+                        "Rejected",
+                        "Cancelled"
+                    ]
+                },
+                "eventType": {
+                    "type": "object",
+                    "properties": {
+                        "code": {
+                            "type": "string"
+                        },
+                        "description": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "eventReason": {
+                    "type": "object",
+                    "properties": {
+                        "code": {
+                            "type": "string"
+                        },
+                        "description": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "eventDateFrom": {
+                    "type": "string",
+                    "format": "date",
+                    "aiFormat": "date"
+                },
+                "eventDateTo": {
+                    "type": "string",
+                    "format": "date",
+                    "aiFormat": "date"
+                },
+                "statementReceivedDateFrom": {
+                    "type": "string",
+                    "format": "date",
+                    "aiFormat": "date"
+                },
+                "statementReceivedDateTo": {
+                    "type": "string",
+                    "format": "date",
+                    "aiFormat": "date"
+                },
+                "statementApplicationDateFrom": {
+                    "type": "string",
+                    "format": "date",
+                    "aiFormat": "date"
+                },
+                "statementApplicationDateTo": {
+                    "type": "string",
+                    "format": "date",
+                    "aiFormat": "date"
+                },
+                "productGroup": {
+                    "$ref": "component:ProductGroup"
+                },
+                "product": {
+                    "type": "object",
+                    "properties": {
+                        "productCode": {
+                            "type": "string"
+                        },
+                        "productDescription": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "policyHolderCode": {
+                    "type":"string"
+                },
+                "policyHolderType": {
+                    "type":"string"
+                },                
+                "policyHolderName": {
+                    "type":"string"
+                }   
+            }
+        },
+        "sort": {
+            "type": "array"
+        }
+    }
+}

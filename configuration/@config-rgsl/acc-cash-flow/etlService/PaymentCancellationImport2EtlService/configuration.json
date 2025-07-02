@@ -1,0 +1,51 @@
+{
+    "mainDataSource": "GetPaymentCancellationAllocationDataSource",
+    "additionalDataSources": [
+        "GetPaymentCancellationDataSource"
+    ],
+    "sinks": [
+        {
+            "name": "CancelPayment",
+            "class": {
+                "className": "Adacta.AdInsure.RGSL.Accounting.API.Shared.CashFlow.BankStatement.Services.IBankStatementServiceAppRGSL, Adacta.AdInsure.RGSL.Accounting.API",
+                "methodName": "Cancel"
+            }
+        },
+        {
+            "name": "WriteSuccessStatus",
+            "database": {
+                "tables": [
+                    "ACC_IMPL.PAYMENT_CANCELLATION_ITEM_SAT"
+                ]
+            }
+        }
+    ],
+    "completionSinks": [
+        {
+            "name": "CheckFailedDocuments",
+            "fetch": {
+                "configuration": {
+                    "name": "GetPaymentCancellationAllocationDataSource"
+                }
+            }
+        },
+        {
+            "name": "FinishedCancellation",
+            "executeAs": "System",
+            "documentTransition": {
+                "transition": {}
+            }
+        }
+    ],
+    "errorSinks": [
+        {
+            "name": "WriteErrorStatus",
+            "database": {
+                "tables": [
+                    "ACC_IMPL.PAYMENT_CANCELLATION_ITEM_SAT"
+                ]
+            }
+        }
+    ],
+    "version": "1"
+}

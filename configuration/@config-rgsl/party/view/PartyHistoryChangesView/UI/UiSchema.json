@@ -1,0 +1,177 @@
+{
+    "formProperties": {
+        "events": {
+            "onLoad": "updatePartyHistory"
+        }
+    },
+    "type": "Group",
+    "width": 12,
+    "elements": [
+        {
+            "type": "DataGrid",
+            "elementId": "partyHistoryGrid",
+            "customCSSStyle": {
+                "--data-grid-th-td-checkbox-vertical-align": "top"
+            },
+            "mode": "Array",
+            "value": {
+                "$ref": "#/properties/Body/properties/partyHistory"
+            },
+            "header": {
+                "showReloadButton": false,
+                "showNumberOfResults": true
+            },
+            "pagination": {
+                "mode": "Regular",
+                "defaultPageSize": 50,
+                "pageSizes": [
+                    50,
+                    100,
+                    200
+                ]
+            },
+            "selection": {
+                "mode": "None"
+            },
+            "height": "None",
+            "columns": [
+                {
+                    "sortable": true,
+                    "title": "sysUpdatedOn",
+                    "name": "sysUpdatedOn",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "template": "{{expr sysUpdatedOn 'dt'}}",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "attributeRu",
+                    "name": "attributeRu",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "allowMultiLine": true,
+                        "template": "{{expr attributeRu }}",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#"
+                        },
+                        "rule": {
+                            "effect": "STYLE",
+                            "condition": {
+                                "type": "FUNC",
+                                "style": {
+                                    "width": "170px"
+                                },
+                                "value": [
+                                    {
+                                        "$ref": "#"
+                                    }
+                                ],
+                                "ruleFunction": "applyDocumentStyle"
+                            }
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "oldValue",
+                    "name": "oldValue",
+                    "elementId": "oldValueId",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "allowMultiLine": true,
+                        "template": "{{#style 'whitespace'}}{{#forEach 'oldValue'}}{{expr item }}\\n{{/forEach}}{{/style}}",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#"
+                        },
+                        "rule": {
+                            "effect": "STYLE",
+                            "condition": {
+                                "type": "FUNC",
+                                "style": {
+                                    "min-width": "200px"
+                                },
+                                "value": [
+                                    {
+                                        "$ref": "#"
+                                    }
+                                ],
+                                "ruleFunction": "applyDocumentStyle"
+                            }
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "newValue",
+                    "name": "newValue",
+                    "elementId": "newValueId",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "allowMultiLine": true,
+                        "template": "{{#style 'whitespace'}}{{#forEach 'newValue'}}{{expr item }}\\n{{/forEach}}{{/style}}",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#"
+                        },
+                        "rule": {
+                            "effect": "STYLE",
+                            "condition": {
+                                "type": "FUNC",
+                                "style": {
+                                    "min-width": "200px"
+                                },
+                                "value": [
+                                    {
+                                        "$ref": "#"
+                                    }
+                                ],
+                                "ruleFunction": "applyDocumentStyle"
+                            }
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "sysUpdatedByUserName",
+                    "name": "sysUpdatedByUserName",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "template": "{{expr sysUpdatedByUserName }}",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#"
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "type": "Button",
+            "label": "UpdatePartyHistory",
+            "elementId": "UpdatePartyHistoryButtonId",
+            "onClick": "updatePartyHistory",
+            "icon": {
+                "name": "rotate-right",
+                "color": "BackgroundColor",
+                "size": "Small"
+            },
+            "eventHandlers": [
+                {
+                    "eventName": "PARTY_HISTORY_TAB_SELECTED",
+                    "senders": [],
+                    "commands": {
+                        "commandType": "executeAction",
+                        "actionName": "updatePartyHistory"
+                    }
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,188 @@
+{
+    "type": "Section",
+    "labelType": "H1",
+    "label": "EquityStrategies",
+    "width": 12,
+    "elements": [
+        {
+            "type": "DataGrid",
+            "mode": "Array",
+            "isCollapsed": false,
+            "pagination": {
+                "mode": "Regular",
+                "pageSizes": [
+                    5,
+                    10,
+                    15
+                ],
+                "defaultPageSize": 15
+            },
+            "value": {
+                "$ref": "#"
+            },
+            "actions": [
+                "Add",
+                "Edit",
+                "Delete",
+                "Details"
+            ],
+            "edit": {
+                "mode": "Detached",
+                "showCancelConfirmationDialog": false,
+                "onBeforeGridAction": "equityStrategiesOnBeforeGridAction"
+            },
+            "columns": [
+                {
+                    "title": "payOffType",
+                    "name": "payOffType",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/strategy/properties/payOffType"
+                        }
+                    },
+                    "footerContent": {
+                        "type": "OutputText",
+                        "literalValue": "restOfSum",
+                        "colspan": 3
+                    }
+                },
+                {
+                    "title": "strategyName",
+                    "name": "strategyName",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/strategy/properties/strategyName"
+                        }
+                    }
+                },
+                {
+                    "title": "isin",
+                    "name": "isin",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/strategy/properties/isin"
+                        }
+                    }
+                },
+                {
+                    "title": "share",
+                    "name": "share",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "defaultValue": "",
+                        "template": "{{#style 'right'}}{{expr share 'p:2'}}{{/style}}",
+                        "value": {
+                            "$ref": "#"
+                        }
+                    },
+                    "footerContent": {
+                        "type": "OutputText",
+                        "defaultValue": "",
+                        "template": "{{#style 'right'}}{{expr restOfShare 'p:2'}}{{/style}}",
+                        "value": {
+                            "mapping": "shareFooterContent",
+                            "$ref": "#"
+                        }
+                    }
+                },
+                {
+                    "title": "sum",
+                    "name": "sum",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/sum"
+                        }
+                    },
+                    "footerContent": {
+                        "type": "OutputText",
+                        "defaultValue": "",
+                        "template": "{{#style 'right'}}{{expr restOfSum 'n:2'}}{{/style}}",
+                        "value": {
+                            "mapping": "sumFooterContent",
+                            "$ref": "#"
+                        }
+                    }
+                },
+                {
+                    "title": "couponRate",
+                    "name": "couponRate",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "defaultValue": "",
+                        "template": "{{expr couponRate 'p:2'}}",
+                        "value": {
+                            "$ref": "#/properties/strategy"
+                        }
+                    },
+                    "footerContent": {
+                        "type": "OutputText",
+                        "defaultValue": "",
+                        "value": {
+                            "mapping": "footerContentNothing",
+                            "$ref": "#"
+                        }
+                    }
+                },
+                {
+                    "title": "repaymentDate",
+                    "name": "repaymentDate",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/strategy/properties/repaymentDate"
+                        }
+                    },
+                    "footerContent": {
+                        "type": "OutputText",
+                        "defaultValue": "",
+                        "value": {
+                            "mapping": "footerContentNothing",
+                            "$ref": "#"
+                        }
+                    }
+                }
+            ],
+            "detailsTemplates": {
+                "edit": {
+                    "content": {
+                        "type": "Component",
+                        "name": "EquityStrategy",
+                        "value": {
+                            "$ref": "#"
+                        }
+                    }
+                },
+                "view": {
+                    "content": {
+                        "type": "Component",
+                        "name": "EquityStrategy",
+                        "value": {
+                            "$ref": "#"
+                        }
+                    }
+                }
+            },
+            "rule": {
+                "effect": "ENABLE_INITIAL",
+                "condition": {
+                    "type": "FUNC",
+                    "ruleFunction": "enableEquityStrategies",
+                    "value": [
+                        {
+                            "$ref": "#"
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}

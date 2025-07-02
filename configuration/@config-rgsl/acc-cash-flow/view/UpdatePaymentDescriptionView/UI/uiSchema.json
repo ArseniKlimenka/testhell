@@ -1,0 +1,77 @@
+{
+    "id": "UpdatePaymentDescriptionViewUiSchema",
+    "type": "GridLayout",
+    "formProperties": {
+        "events": {
+            "onLoad": "onLoadDocument"
+        }
+    },
+    "numberOfColumns": 4,
+    "elements": [
+        {
+            "type": "HeaderContentLayout",
+            "elements": [
+                {
+                    "type": "OutputText",
+                    "skipTranslate": true,
+                    "value": {
+                        "$ref": "#"
+                    },
+                    "textStyle": {
+                        "uppercase": true,
+                        "textSize": "Normal",
+                        "width": 4,
+                        "textColor": "Black"
+                    },
+                    "template": "{{#style 'bold'}}{{#i18n}}{{expr ConfigurationCodeName}}@Title{{/i18n}}{{/style}}"
+                }
+            ]
+        },
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "Input",
+                    "label": "New payment description",
+                    "value": {
+                        "$ref": "#/properties/Body/properties/paymentDescription"
+                    },
+                    "width": 4
+                }
+            ]
+        },
+        {
+            "type": "Group",
+            "width": 2,
+            "stackContent": "Left",
+            "elements": [
+                {
+                    "type": "Button",
+                    "onClick": [
+                        {
+                            "commandType": "executeAction",
+                            "actionName": "updatePaymentDescriptionOfSelected"
+                        }
+                    ],
+                    "submitOnEnter": true,
+                    "label": "Confirm"
+                },
+                {
+                    "type": "Button",
+                    "onClick": [
+                        {
+                            "commandType": "executeAction",
+                            "actionName": "closePayDescriptionDialog"
+                        }
+                    ],
+                    "icon": {
+                        "name": "Times",
+                        "color": "BackgroundColor",
+                        "size": "Small"
+                    },
+                    "label": "Close"
+                }
+            ]
+        }
+    ]
+}

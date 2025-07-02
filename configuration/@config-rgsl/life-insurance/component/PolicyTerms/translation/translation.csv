@@ -1,0 +1,30 @@
+ConfigurationType	ConfigurationName	ItemType	TranslationKey	Expression	Translation_en-US	Translation_ru-RU
+DataSchema	PolicyTerms	field-title	startDate	startDate	startDate	Дата начала действия
+DataSchema	PolicyTerms	field-title	endDate	endDate	endDate	Дата окончания действия
+DataSchema	PolicyTerms	field-title	effectiveDate	effectiveDate	effectiveDate	Дата вступления в силу
+DataSchema	PolicyTerms	field-title	paymentPeriodStartDate	paymentPeriodStartDate	paymentPeriodStartDate	Дата начала периода оплаты
+DataSchema	PolicyTerms	field-title	paymentPeriodEndDate	paymentPeriodEndDate	paymentPeriodEndDate	Дата окончания периода оплаты
+DataSchema	PolicyTerms	field-title	accumulationPeriodStartDate	accumulationPeriodStartDate	accumulationPeriodStartDate	Дата начала периода накопления
+DataSchema	PolicyTerms	field-title	accumulationPeriodEndDate	accumulationPeriodEndDate	accumulationPeriodEndDate	Дата окончания периода накопления
+DataSchema	PolicyTerms	field-title	payOutStartDate	payOutStartDate	payOutStartDate	Дата начала выплат
+DataSchema	PolicyTerms	field-title	payOutEndDate	payOutEndDate	payOutEndDate	Дата окончания выплат
+DataSchema	PolicyTerms	field-title	paymentPeriodString	paymentPeriodString	paymentPeriodString	Срок действия
+UiSchema	PolicyTerms	ui-label	Policy Term	Policy Term	Policy Term	Сроки действия
+UiSchema	PolicyTerms	ui-label	startDate	startDate	startDate	Дата начала действия
+UiSchema	PolicyTerms	ui-label	endDate	endDate	endDate	Дата окончания действия
+UiSchema	PolicyTerms	ui-label	effectiveDate	effectiveDate	effectiveDate	Дата вступления в силу
+UiSchema	PolicyTerms	ui-label	paymentPeriodStartDate	paymentPeriodStartDate	paymentPeriodStartDate	Дата начала периода оплаты
+UiSchema	PolicyTerms	ui-label	paymentPeriodEndDate	paymentPeriodEndDate	paymentPeriodEndDate	Дата окончания периода оплаты
+UiSchema	PolicyTerms	ui-label	accumulationPeriodStartDate	accumulationPeriodStartDate	accumulationPeriodStartDate	Дата начала периода накопления
+UiSchema	PolicyTerms	ui-label	accumulationPeriodEndDate	accumulationPeriodEndDate	accumulationPeriodEndDate	Дата окончания периода накопления
+UiSchema	PolicyTerms	ui-label	payOutStartDate	payOutStartDate	payOutStartDate	Дата начала выплат
+UiSchema	PolicyTerms	ui-label	payOutEndDate	payOutEndDate	payOutEndDate	Дата окончания выплат
+UiSchema	PolicyTerms	ui-label	Payment period string	Payment period string	Payment period string	Срок действия
+Rule	PolicyTermsValidationPolicyTerms	rule	validation@endDateShouldBeMoreStartDate	validationPolicyTerms	E: endDateShouldBeMoreStartDate	E: Дата окончания действия должна быть больше даты начала действия
+Rule	PolicyTermsValidationPolicyTerms	rule	validation@startDateIsEmpty	validationPolicyTerms	E: startDateIsEmpty	E: Необходимо указать дату начала действия
+Rule	PolicyTermsValidationPolicyTerms	rule	validation@endDateIsEmpty	validationPolicyTerms	E: endDateIsEmpty	E: Необходимо указать дату окончания действия
+DataSchema	PolicyTerms	field-title	manualCorrection	manualCorrection	manualCorrection	Ручная корректировка
+UiSchema	PolicyTerms	ui-label	Manual correction	Manual correction	Manual correction	Ручная корректировка
+DataSchema	PolicyTerms	field-title	paymentPeriodLastDate	paymentPeriodLastDate	paymentPeriodLastDate	Крайний срок оплаты
+UiSchema	PolicyTerms	ui-label	paymentPeriodLastDate	paymentPeriodLastDate	paymentPeriodLastDate	Крайний срок оплаты
+Rule	PolicyTermsValidationPolicyTerms	rule	validation@paymentPeriodLastDateShouldBeMoreStartDate	validationPolicyTerms	E: paymentPeriodLastDateShouldBeMoreStartDate	E: Крайний срок оплаты не может быть раньше даты начала действия

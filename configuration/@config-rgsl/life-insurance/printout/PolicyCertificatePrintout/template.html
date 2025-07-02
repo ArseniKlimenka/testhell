@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="ru-RU" xml:lang="ru-RU" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+	<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+	<title>Полис-сертификат</title>
+	<link rel="stylesheet" href="assets/styles/style.css">
+	{{{bottomRightContentBoth}}}
+	{{{bottomLeftContentBoth}}}
+</head>
+
+<body>
+	
+	<!-- для загрузки динамических изображений в хранилище печатки. -->
+	{{#if alwaysFalse}}
+		{{> ../../../life-insurance/component/TempSignatureContainer/printout/template.html }}
+	{{/if}}
+	
+	<div class="policySignature">
+
+		{{#if isWCEN3OAS}}
+		<p class="left">
+			<strong>Страховщик: </strong>ООО СК «Росгосстрах Жизнь», Лицензии Банка России: {{insurer.license}}, ИНН
+			{{insurer.INN}}, КПП {{insurer.KPP}}, юридический адрес: {{insurer.address}}<br>
+			Телефон круглосуточного Контакт-центра: 8 800 100 12 10 (бесплатный номер для звонков по России).
+		</p>
+		{{else}}
+		<p class="left">
+			<strong>Страховщик: </strong>ООО СК «Росгосстрах Жизнь», Лицензии Банка России: {{insurer.license}}, ИНН
+			{{insurer.INN}}, КПП {{insurer.KPP}},<br>
+			<b>Юридический адрес:</b> {{insurer.address}}<br>
+			<b>Телефон круглосуточного Контакт-центра:</b> 8 800 100 12 10 (бесплатный номер для звонков по России).
+		</p>
+		{{/if}}
+
+
+
+		<p class="center"><strong>СТРАХОВОЙ ПОЛИС К ДОГОВОРУ СТРАХОВАНИЯ № {{policy.number}} от {{policy.issueDate}}
+				г.</strong><br>по программе «{{policy.product}}» на основании {{policy.rule}} (далее по тексту –
+			Правила).
+		</p>
+
+
+		<div class="policy_item">
+			СТРАХОВАТЕЛЬ (СОВПАДАЕТ С ЗАСТРАХОВАННЫМ{{#if isEBMPFBFKO}} ПО ИНДИВИДУАЛЬНОЙ ПРОГРАММЕ{{/if}})
+		</div>
+
+		<table class="person">
+			<col class="col1">
+			<col class="col2">
+			<col class="col3">
+			<col class="col4">
+			<col class="col5">
+			<col class="col6">
+			<col class="col7">
+			<col class="col8">
+			<tr>
+				<td class="tgrey">Фамилия Имя Отчество:</td>
+				<td class="twhite" colspan="5">{{holder.fullName}}</td>
+				<td class="tgrey">Пол:</td>
+				<td class="twhite center">{{holder.gender}}</td>
+			</tr>
+			<tr>
+				<td class="tgrey">Дата рождения:</td>
+				<td class="twhite center" colspan="3">{{holder.dateOfBirth}}</td>
+				<td class="tgrey" colspan="2">Место рождения:</td>
+				<td class="twhite center" colspan="2">{{holder.birthPlace}}</td>
+			</tr>
+			{{#if isIDG2ZENIT}}
+			<tr>
+				<td class="tgrey">Телефон:</td>
+				<td class="twhite center">{{holder.phoneNumber}}</td>
+				<td class="tgrey">E-mail:</td>
+				<td class="twhite" colspan="3">{{holder.email}}</td>
+				<td class="tgrey">Гражданство:</td>
+				<td class="twhite center">{{holder.citizenship}}</td>
+			</tr>
+			<tr>
+				<td class="tgrey">Документ, удостоверяющий личность:</td>
+				<td class="twhite" colspan="5">{{holder.document.typeAndSN}}</td>
+				<td class="tgrey">Дата выдачи:</td>
+				<td class="twhite center">{{holder.document.dateOfIssue}}</td>
+			</tr>
+			{{else}}
+			<tr>
+				<td class="tgrey">Телефон:</td>
+				<td class="twhite center" colspan="3">{{holder.phoneNumber}}</td>
+				<td class="tgrey" colspan="2">Гражданство:</td>
+				<td class="twhite center" colspan="2">{{holder.citizenship}}</td>
+			</tr>
+			<tr>
+				<td class="tgrey">E-mail:</td>
+				<td class="twhite" colspan="7">{{holder.email}}</td>
+			</tr>
+			{{/if}}
+			{{#unless holder.isNotIssuedBy}}
+			<tr>
+				<td class="tgrey">Кем выдан:</td>
+				<td class="twhite" colspan="7">{{holder.document.issuedBy}}</td>
+			</tr>
+			{{/unless}}
+			<tr>
+				<td class="tgrey">Адрес постоянной регистрации:</td>
+				<td class="twhite" colspan="7">{{holder.registrationAddress}}</td>
+			</tr>
+			<tr>
+				<td class="tgrey">Почтовый адрес:</td>
+				<td class="twhite" colspan="7">{{holder.postAddress}}</td>
+			</tr>
+		</table>
+
+		{{#if isEBMPFBFKO}}
+		<div class="policy_item">
+			ЗАСТРАХОВАННЫЙ ПО СЕМЕЙНОЙ ПРОГРАММЕ
+		</div>
+
+		<p class="afterTable">
+			Застрахованными по «Семейной программе» являются:
+
+			<br> - Страхователь и супруг/супруга<span class="footnote">Родство / состояние в браке со Страхователем
+				определяется на дату наступления страхового случая.</span> Страхователя в возрасте от 18 до 70
+			полных лет (включительно) на дату наступления страхового случая,
+
+			<br> - дети<sup>1</sup> Страхователя в возрасте от 1 года до 18 полных лет
+			(включительно) на дату наступления страхового случая, которые на дату заключения настоящего договора
+			страхования (или на дату государственной регистрации акта гражданского состояния<span class="footnote">Для
+				супруга (супруги) Страхователя – запись акта о заключении брака, в которой одним из супругов
+				является Страхователь; для ребенка Страхователя – запись акта о рождении/усыновлении
+				(удочерении) ребенка, в которой родителем/усыновителем (одним из родителей/усыновителей) указан
+				Страхователь.</span> , если она позднее
+			даты заключения договора страхования) соответствуют следующим критериям:
+
+			<br>&nbsp&nbsp1) не являются и не являлись ранее инвалидами / не имеют и не имели ранее присвоенной
+			категории «ребенок-инвалид»;
+
+			<br>&nbsp&nbsp2) не подавали документы на освидетельствование для получения группы инвалидности /
+			присвоения категории «ребенок-инвалид» и не имеют оснований для присвоения группы
+			инвалидности / категории «ребенок-инвалид»;
+
+			<br>&nbsp&nbsp3) не употребляют и не употребляли ранее наркотики, токсичные вещества, не страдают
+			алкоголизмом, не состоят и не состояли ранее на учете в наркологическом диспансере,
+			психоневрологическом, туберкулезном диспансере, центрах профилактики борьбы со СПИДом;
+
+			<br>&nbsp&nbsp4) не имели, не обращались за медицинской помощью по нижеперечисленным заболеваниям и не
+			страдают ими на дату заключения договора страхования:
+
+			<br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp - злокачественные опухоли, включая предраковые;
+
+			<br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp - нервные или психические расстройства или заболевания
+			(например: эпилепсия,
+			паралич, болезнь Паркинсона, наркомания, токсикомания, алкоголизм);
+
+			<br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp - заболевания опорно-двигательного аппарата (например: артрит,
+			артроз, анкилоз,
+			деформация суставов или конечностей, заболевания позвоночника);
+
+			<br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp - заболевания нервной системы, включая центральную нервную
+			систему (мозг, спинной
+
+			<br>&nbsp&nbsp5) не проходят службу в вооруженных силах, не заняты в профессиональной или
+			непрофессиональной авиации, в работах со взрывчатыми и радиоактивными веществами,
+			ионизирующей радиацией (включая ультрафиолетовое излучение, микроволновое излучение),
+			подземных работах, не контактируют с канцерогенными или токсическими веществами или газами,
+			электрическими сетями высокого напряжения, не являются водолазом, пожарным, скалолазом,
+			работником ядерной промышленности, нефтяником (за исключением офисных сотрудников),
+			охранником и профессиональным спортсменом, не работают с оружием;
+
+			<br>&nbsp&nbsp6) не намереваются путешествовать на территории, на которой объявлено чрезвычайное положение
+			или проводятся боевые действия;
+
+			<br>&nbsp&nbsp7) не находятся под следствием и не являются осужденными к лишению свободы.
+
+		</p>
+		{{/if}}
+		<div class="policy_item">
+			СТРАХОВЫЕ РИСКИ, СТРАХОВЫЕ СУММЫ, СРОК ДЕЙСТВИЯ ДОГОВОРА СТРАХОВАНИЯ
+		</div>
+		{{#if isEBMPFBFKO}}
+		<table class="risks">
+			<col class="col1">
+			<col class="col2">
+			<tr>
+				<td class="tgrey center"><strong>Страховые риски</strong></td>
+				<td class="tgrey center"><strong>Страховая сумма, {{currency}}</strong></td>
+			</tr>
+			<tr>
+				<td class="twhite" colspan="2">Индивидуальная программа</td>
+			</tr>
+			{{#each riskFirstPart}}
+			<tr>
+				<td class="twhite">{{this.insuranceRisks}}</td>
+				<td class="twhite center">{{this.sumInsured}}</td>
+			</tr>
+			{{/each}}
+			<tr>
+				<td class="twhite" colspan="2">Семейная программа</td>
+			</tr>
+			{{#each riskSecondPart}}
+			<tr>
+				<td class="twhite">{{this.insuranceRisks}}</td>
+				<td class="twhite center">{{this.sumInsured}}</td>
+			</tr>
+			{{/each}}
+		</table>
+		{{/if}}
+		{{#if isFinReserv}}
+		<table class="risks">
+			<col class="col1">
+			<col class="col2">
+			<tr>
+				<td class="tgrey center">Страховые риски</td>
+				<td class="tgrey center">Страховая сумма, {{currency}}</td>
+			</tr>
+			<tr>
+				<td class colspan="2">Основная программа:</td>
+			</tr>
+			{{#each riskFinReserv.mainRisks}}
+			<tr>
+				<td class="twhite">{{this.insuranceRisks}}</td>
+				<td class="twhite center">{{this.sumInsured}}</td>
+			</tr>
+			{{/each}}
+			{{#if riskFinReserv.isSelectedPackages}}
+			<tr>
+				<td class colspan="2">Дополнительная программа:</td>
+			</tr>
+			{{#if riskFinReserv.isPackage1}}
+			<tr>
+				<td class colspan="2">Пакет 1</td>
+			</tr>
+			{{#each riskFinReserv.package1}}
+			<tr>
+				<td class="twhite">{{this.insuranceRisks}}</td>
+				<td class="twhite center">{{this.sumInsured}}</td>
+			</tr>
+			{{/each}}
+			{{/if}}
+			{{#if riskFinReserv.isPackage2}}
+			<tr>
+				<td class colspan="2">Пакет 2</td>
+			</tr>
+			{{#each riskFinReserv.package2}}
+			<tr>
+				<td class="twhite">{{this.insuranceRisks}}</td>
+				<td class="twhite center">{{this.sumInsured}}</td>
+			</tr>
+			{{/each}}
+			{{/if}}
+			{{#if riskFinReserv.isPackage3}}
+			<tr>
+				<td class colspan="2">Пакет 3</td>
+			</tr>
+			{{#each riskFinReserv.package3}}
+			<tr>
+				<td class="twhite">{{this.insuranceRisks}}</td>
+				<td class="twhite center">{{this.sumInsured}}</td>
+			</tr>
+			{{/each}}
+			{{/if}}
+			{{/if}}
+		</table>
+		{{/if}}
+		{{#if isWCENOAS}}
+		<table class="risksWCENOAS">
+			<col class="col1">
+			<col class="col2">
+			<!--<col class="col3">-->
+			<!--<col class="col4">-->
+			<col class="col5">
+			<col class="col6">
+			<tr>
+				<td class="tgrey center" rowspan="2">Страховые риски</td>
+				<td class="tgrey center" rowspan="2">Страховая сумма, {{currency}}</td>
+				<!--<td class="tgrey center" rowspan=2>Размер {{frequency.risk}} страхового взноса, {{currency}}</td>-->
+				<!--<td class="tgrey center" rowspan=2>Страховая выплата</td>-->
+				<td class="tgrey center" colspan="2">Срок страхования по риску</td>
+			</tr>
+			<tr>
+				<td class="tgrey fifthCollum center">с</td>
+				<td class="tgrey sixthcollum center">по</td>
+			</tr>
+			<tr>
+				<td class="twhite" colspan="4">
+					Основная программа:
+				</td>
+			</tr>
+
+			{{#if risk2row.DLP46204M}}
+				<tr>
+					<td class="twhite" rowspan="2">Смерть Застрахованного по любой причине</td>
+					<td class="twhite center">{{risk2row.DLP46204M_FirstTwoYears.sumInsured}}</td>
+					<td class="twhite center">{{risk2row.DLP46204M_FirstTwoYears.startDate}}</td>
+					<td class="twhite center">{{risk2row.DLP46204M_FirstTwoYears.endDate}}</td>
+				</tr>
+				<tr>
+					<td class="twhite center">{{risk2row.DLP46204M_ForLife.sumInsured}}</td>
+					<td class="twhite center">{{risk2row.DLP46204M_ForLife.startDate}}</td>
+					<td class="twhite center">{{risk2row.DLP46204M_ForLife.endDate}}</td>
+				</tr>
+			{{else}}
+				<tr>
+					<td class="twhite" rowspan="2">Смерть Застрахованного по любой причине</td>
+					<td class="twhite center">{{risk2row.DLPVV46204.sumInsured}}</td>
+					<td class="twhite center">{{risk2row.DLPVV46204.startDate}}</td>
+					<td class="twhite center">{{risk2row.DLPVV46204.endDate}}</td>
+				</tr>
+				<tr>
+					<td class="twhite center">{{risk2row.DLP46204.sumInsured}}</td>
+					<td class="twhite center">{{risk2row.DLP46204.startDate}}</td>
+					<td class="twhite center">{{risk2row.DLP46204.endDate}}</td>
+				</tr>
+			{{/if}}
+
+			{{#if risk2row.DDTP46204}}
+				<tr>
+					<td class="twhite">Смерть Застрахованного в результате дорожно-транспортного происшествия</td>
+					<td class="twhite center">{{risk2row.DDTP46204.sumInsured}}</td>
+					<td class="twhite center">{{risk2row.DDTP46204.startDate}}</td>
+					<td class="twhite center">{{risk2row.DDTP46204.endDate}}</td>
+				</tr>
+			{{/if}}
+
+			{{#if risk.isAdditional}}
+			<tr>
+				<td class="twhite" colspan="4">
+					Дополнительная программа:
+				</td>
+			</tr>
+			{{#each risk.additional}}
+			<tr>
+				<td class="twhite">{{this.insuranceRisks}}</td>
+				<td class="twhite center">{{this.sumInsured}}</td>
+				<!--<td class="twhite center">{{this.insurancePremium}}</td>-->
+				<!--<td class="twhite center">{{this.insurancePayment}}</td>-->
+				<td class="twhite center">{{this.startDate}}</td>
+				<td class="twhite center">{{this.endDate}}</td>
+			</tr>
+			{{/each}}
+			{{/if}}
+		</table>
+		{{/if}}
+		{{#if isNotSpesial}}
+			{{#if isECOF2ZENIT}}
+			<table class="risksWCENOAS">
+				<col class="col1">
+				<col class="col2">
+				<!--<col class="col3">-->
+				<!--<col class="col4">-->
+				<col class="col5">
+				<col class="col6">
+				<tr>
+					<td class="tgrey center" rowspan="2">Страховые риски</td>
+					<td class="tgrey center" rowspan="2">Страховая сумма, {{currency}}</td>
+					<!--<td class="tgrey center" rowspan=2>Размер {{frequency.risk}} страхового взноса, {{currency}}</td>-->
+					<!--<td class="tgrey center" rowspan=2>Страховая выплата</td>-->
+					<td class="tgrey center" colspan="2">Срок страхования по риску</td>
+				</tr>
+				<tr>
+					<td class="tgrey fifthCollum center">с</td>
+					<td class="tgrey sixthcollum center">по</td>
+				</tr>
+				<tr>
+					<td class="twhite" colspan="4">
+						Основная программа:
+					</td>
+				</tr>
+				{{#each riskFinReserv.mainRisks}}
+				<tr>
+					<td class="twhite">{{this.insuranceRisks}}</td>
+					<td class="twhite center">{{this.sumInsured}}</td>
+					<td class="twhite center">{{this.startDate}}</td>
+					<td class="twhite center">{{this.endDate}}</td>
+				</tr>
+				{{/each}}
+				{{#if riskFinReserv.isSelectedPackages}}
+				<tr>
+					<td class colspan="4">Дополнительная программа:</td>
+				</tr>
+				{{#if riskFinReserv.isPackage1}}
+				<tr>
+					<td class colspan="4">Пакет 1</td>
+				</tr>
+				{{#each riskFinReserv.package1}}
+				<tr>
+					<td class="twhite">{{this.insuranceRisks}}</td>
+					<td class="twhite center">{{this.sumInsured}}</td>
+					<td class="twhite center">{{this.startDate}}</td>
+					<td class="twhite center">{{this.endDate}}</td>
+				</tr>
+				{{/each}}
+				{{/if}}
+				{{#if riskFinReserv.isPackage2}}
+				<tr>
+					<td class colspan="4">Пакет 2</td>
+				</tr>
+				{{#each riskFinReserv.package2}}
+				<tr>
+					<td class="twhite">{{this.insuranceRisks}}</td>
+					<td class="twhite center">{{this.sumInsured}}</td>
+					<td class="twhite center">{{this.startDate}}</td>
+					<td class="twhite center">{{this.endDate}}</td>
+				</tr>
+				{{/each}}
+				{{/if}}
+				{{#if riskFinReserv.isPackage3}}
+				<tr>
+					<td class colspan="4">Пакет 3</td>
+				</tr>
+				{{#each riskFinReserv.package3}}
+				<tr>
+					<td class="twhite">{{this.insuranceRisks}}</td>
+					<td class="twhite center">{{this.sumInsured}}</td>
+					<td class="twhite center">{{this.startDate}}</td>
+					<td class="twhite center">{{this.endDate}}</td>
+				</tr>
+				{{/each}}
+				{{/if}}
+				{{#if riskFinReserv.isPackage4}}
+				<tr>
+					<td class colspan="4">Пакет 4</td>
+				</tr>
+				{{#each riskFinReserv.package4}}
+				<tr>
+					<td class="twhite">{{this.insuranceRisks}}</td>
+					<td class="twhite center">{{this.sumInsured}}</td>
+					<td class="twhite center">{{this.startDate}}</td>
+					<td class="twhite center">{{this.endDate}}</td>
+				</tr>
+				{{/each}}
+				{{/if}}
+				{{/if}}
+			</table>
+			{{else}}
+		<table class="risks">
+			<col class="col1">
+			<col class="col2">
+			<tr>
+				<td class="tgrey center"><strong>Страховые риски</strong></td>
+				<td class="tgrey center"><strong>Страховая сумма, {{currency}}</strong></td>
+			</tr>
+			{{#each risk.mandatory}}
+			<tr>
+				<td class="twhite">{{this.insuranceRisks}}</td>
+				<td class="twhite center">{{this.sumInsured}}</td>
+			</tr>
+			{{/each}}
+			{{#each risk.additional}}
+			<tr>
+				<td class="twhite">{{this.insuranceRisks}}</td>
+				<td class="twhite center">{{this.sumInsured}}</td>
+			</tr>
+			{{/each}}
+		</table>
+			{{/if}}
+		{{/if}}
+		<p class="insuranceSumDefinition afterTable" id="marginTopAndButton">
+			При определении страховой суммы в договоре страхования в иностранной валюте страховая выплата производится в
+			рублях по курсу Банка России на дату выплаты. Банковские расходы, связанные с осуществлением страховой
+			выплаты получателем платежа.
+		</p>
+
+		<table class="insuranceTerms">
+			<col class="col1">
+			{{#if isWCENOAS}}
+			<tr>
+				<td class="policy_itemWCENOAS" colspan="3">СРОК ДЕЙСТВИЯ ДОГОВОРА СТРАХОВАНИЯ</td>
+			</tr>
+			{{/if}}
+			<col class="col2">
+			<col class="col3">
+			<tr>
+				<td class="tgrey"><strong>Срок действия договора страхования:</strong></td>
+				<td class="twhite center">{{#if isWCENOAS}}пожизненно{{else}}{{insuranceTerms.text}}{{/if}}</td>
+				<td class="twhite textJustify">{{#if isIDGZENIT}}
+					Договор страхования вступает в силу с {{insuranceTerms.startDate}} и действует до {{insuranceTerms.endDate}} включительно.
+					{{else}}
+					{{#if isEBMGZENIT}}
+					Договор страхования вступает в силу с {{insuranceTerms.startDate}} и действует до {{insuranceTerms.endDate}} включительно.
+					{{else}}
+					{{#if isIDGRETVTB}}
+					Договор страхования вступает в силу с {{insuranceTerms.startDate}} и действует до {{insuranceTerms.endDate}} включительно.
+					{{else}}
+					Договор страхования вступает в силу с {{insuranceTerms.startDate}} при
+					условии уплаты
+					{{#if notLump}}
+					первого страхового взноса
+					{{else}}
+					страховой премии
+					{{/if}}
+					в полном объеме {{#if isWCENOAS}}до этой даты.{{else}}и действует до {{insuranceTerms.endDate}}
+					включительно.{{/if}}
+					{{/if}}
+					{{/if}}
+					{{/if}}
+				</td>
+			</tr>
+		</table>
+		{{#unless isIDG1ZENIT}}
+		{{#unless isHideHeaderInsuranceSumsByDLP}}
+		<div class="policy_item">
+			СТРАХОВЫЕ СУММЫ ПО РИСКУ «СМЕРТЬ ЗАСТРАХОВАННОГО ПО ЛЮБОЙ ПРИЧИНЕ»
+		</div>
+		{{/unless}}
+
+		{{#if isBasisGarant2}}
+		<table class="surrenderValues">
+			<col class="col1">
+			<col class="col2">
+			<col class="col3">
+			<tr>
+				<td class="tgrey center" colspan="2">Период действия договора страхования</td>
+				<td class="tgrey center" rowspan="2">Страховая сумма, {{currency}}</td>
+			</tr>
+			<tr>
+				<td class="tgrey center">начало</td>
+				<td class="tgrey center">окончание</td>
+			</tr>
+			{{#each surrenderValues}}
+			<tr>
+				<td class="twhite center">{{this.periodStartDate}}</td>
+				<td class="twhite center">{{this.periodEndDate}}</td>
+				<td class="twhite center">{{this.riskSum}}</td>
+			</tr>
+			{{/each}}
+		</table>
+		<p class="insuranceSumDefinition afterTable" id="marginTopAndButton">
+			При определении страховой суммы в договоре страхования в иностранной валюте страховая выплата производится в
+			рублях по курсу Банка России на дату выплаты. Банковские расходы, связанные с осуществлением страховой
+			выплаты получателем платежа.
+		</p>
+		{{/if}}
+		{{/unless}}
+
+		{{#if isWCENOAS}}
+		<table class="declaration">
+			<col class="col1">
+			<tr>
+				<td class="policy_itemWCENOAS">ДЕКЛАРАЦИЯ СТРАХОВАТЕЛЯ:
+				</td>
+			</tr>
+			<tr>
+				<td class="twhite">
+					<p class="grid1 noMargin">
+						<span>Настоящим Страхователь</span>
+						<span><input type="checkbox" checked class="policy_input"> подтверждаю, что:</span>
+						<span><input type="checkbox" class="policy_input"> не подтверждаю, что:</span>
+					</p>
+				</td>
+			</tr>
+		</table>
+		{{else}}
+		<div class="policy_item">
+			ДЕКЛАРАЦИЯ СТРАХОВАТЕЛЯ:
+		</div>
+
+		<table class="declarationMedical">
+			<col class="col1">
+			<col class="col2">
+			<col class="col3">
+			<tr>
+				<td class="twhite">Настоящим Страхователь{{#unless isEBMPFBFKOorEBMPYBFKO}},{{/unless}}</td>
+				<td class="twhite"><input type="checkbox" checked> подтвержда{{#if isEBMPFBFKOorEBMPYBFKO}}ет{{else}}ю{{/if}}, что:</td>
+				<td class="twhite"><input type="checkbox"> не подтвержда{{#if isEBMPFBFKOorEBMPYBFKO}}ет{{else}}ю{{/if}}, что:</td>
+			</tr>
+		</table>
+		{{/if}}
+		<p class="afterTable">
+			1) Страхователь с Правилами, расположенными на официальном сайте Страховщика (www.rgsl.ru), ознакомлен и
+			согласен.<br>
+			2) Страхователь присоединяется к Соглашению об электронном документообороте (в редакции действующей на дату
+			заключения настоящего договора страхования) (далее – Соглашение) в соответствии со статьей 428 Гражданского
+			кодекса Российской Федерации. Страхователь подтверждает, что ознакомился с условиями Соглашения,
+			расположенного
+			на официальном сайте Страховщика (www.rgsl.ru), понимает текст данного Соглашения, выражает свое согласие с
+			ним
+			и обязуется выполнять. В рамках данного Соглашения страховая документация по договору страхования
+			направляется
+			Страхователю в электронном виде на адрес электронной почты, указанный в настоящем страховом полисе.<br>
+			3) Страхователь дает свое согласие на получение Обществом с ограниченной ответственностью Страховая компания
+			«Росгосстрах Жизнь» (121059, г. Москва, вн.тер.г. муниципальный округ Дорогомилово, ул. Киевская, д. 7,
+			к. 1) в
+			целях исполнения договора страхования и перестрахования: медицинской информации от любого врача
+			(медицинского
+			учреждения), у которого он когда-либо консультировался и/или лечился, а также будет обращаться в
+			последующем; на
+			получение необходимой информации в правоохранительных, медицинских и других органах (учреждениях) для
+			проверки
+			предоставленной информации, а также для выяснения всех обстоятельств наступления страхового случая; на
+			получение
+			любой информации от страховых компаний, к которым он обращался с заявлениями на страхование жизни, данное
+			согласие дано без ограничения срока действия. На основании положений Федерального закона от 21.11.2011 №
+			323-ФЗ
+			«Об основах охраны здоровья граждан Российской Федерации» Страхователь разрешает медицинским и иным
+			учреждениям
+			предоставлять информацию о состоянии его здоровья, о фактах обращения за оказанием медицинской помощи,
+			диагнозе,
+			иных сведений, полученных при его медицинском обследовании и лечении, составляющие врачебную тайну, в том
+			числе
+			предоставление соответствующих копий документов, по запросу Страховщика.<br>
+		</p>
+
+		<div class="policy_item">
+			ИНЫЕ УСЛОВИЯ:
+		</div>
+
+		<p class="afterTable">
+			1) Если после заключения договора страхования будет выявлено, что Страхователь сообщил в настоящем договоре
+			или
+			иных документах, заполняемых при заключении договора страхования заведомо ложные сведения или предоставил
+			подложные документы, и если эти сведения или документы привели к заключению договора страхования на условиях
+			отличных от тех, на которых он был бы заключен, то Страховщик имеет право отказать в страховой выплате.<br>
+			2) Стороны пришли к соглашению о том, что факсимильное воспроизведение подписей уполномоченных лиц
+			Страховщика и
+			факсимильный оттиск печати Страховщика признаются сторонами аналогом собственноручной подписи уполномоченных
+			лиц
+			Страховщика и оригинала печати Страховщика.<br>
+			{{#if isBasisInvestOrActiv}}
+				3) Неотъемлемой частью договора страхования являются: Информация о договоре добровольного страхования, в том
+				числе о его условиях и рисках, связанных с его исполнением, Инвестиционная декларация (Приложение №1 к
+				договору страхования), заявления, составленные и заполненные по просьбе Страховщика Страхователем, а также
+				Правила, с которыми Страхователь ознакомился на сайте Страховщика. Отдельные условия договора страхования
+				разъяснены в Информации о договоре добровольного страхования, в том числе о его условиях и рисках, связанных
+				с его исполнением и в Инвестиционной декларации (Приложение №1 к договору страхования).
+			{{else}}
+				3) Неотъемлемой частью договора страхования являются: 
+				заявления, составленные и заполненные по просьбе Страховщика Страхователем, 
+				а также Правила, с которыми Страхователь ознакомился на сайте Страховщика.<br>
+			{{/if}}
+		</p>
+
+	</div>
+</body>
+
+</html>

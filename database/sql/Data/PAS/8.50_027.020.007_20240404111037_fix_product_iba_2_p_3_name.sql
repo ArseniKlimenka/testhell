@@ -1,0 +1,3 @@
+update BFX_IMPL.PRODUCTS
+set DESCRIPTION = N'Базис Актив Премиум'
+where id = '180678AA-0481-49B1-9937-504B8EDEA1FB'

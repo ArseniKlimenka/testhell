@@ -1,0 +1,183 @@
+{
+    "type": "object",
+    "additionalProperties": false,
+    "aiValidation": {
+        "rule": "validateCommission"
+    },
+    "aiDataEnrichment": [
+        {
+            "name": "EnrichAADocument",
+            "dataSource": "AADocumentSearchDataSource"
+        },
+        {
+            "name": "CalculateCommission",
+            "dataSource": "PolicyCommissionDataSource"
+        }
+    ],
+    "properties": {
+        "agentAgreement": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "number": {
+                    "type": "string"
+                },
+                "manualNumber": {
+                    "type": "string"
+                },
+                "externalNumber": {
+                    "type": "string"
+                },
+                "formatedNumber": {
+                    "type": "string"
+                },
+                "amendmentNumber": {
+                    "type": "string"
+                },
+                "isTechnical": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "budgetRule": {
+            "type": "object",
+            "properties": {
+                "rule": {
+                    "type": "object",
+                    "properties": {
+                        "code": {
+                            "type": "string"
+                        },
+                        "description": {
+                            "type": "string"
+                        }
+                    },
+                    "aiTitle": "budgetRule"
+                },
+                "algorithm": {
+                    "type": "object",
+                    "properties": {
+                        "code": {
+                            "type": "string"
+                        },
+                        "description": {
+                            "type": "string"
+                        }
+                    },
+                    "aiTitle": "ruleAlgoritm"
+                },
+                "isManual": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "policyCommissionItems": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                    "insuredObjectCode": {
+                        "type": "string"
+                    },
+                    "insuredObjectDescription": {
+                        "type": "string"
+                    },
+                    "policyItemCode": {
+                        "type": "string"
+                    },
+                    "policyItemDescription": {
+                        "type": "string"
+                    },
+                    "periodNumber": {
+                        "type": "integer"
+                    },
+                    "periodStartDate": {
+                        "type": "string",
+                        "aiType": "date"
+                    },
+                    "periodEndDate": {
+                        "type": "string",
+                        "aiType": "date"
+                    },
+                    "calculatedRate": {
+                        "type": "number"
+                    },
+                    "calculatedExpensesRate": {
+                        "type": "number"
+                    },
+                    "calculatedNatuaralPersonRate": {
+                        "type": "number"
+                    },
+                    "calculatedSolePropriatorRate": {
+                        "type": "number"
+                    },
+                    "calculatedAmount": {
+                        "type": "number"
+                    },
+                    "manualRate": {
+                        "type": "number"
+                    },
+                    "manualExpensesRate": {
+                        "type": "number"
+                    },
+                    "manualNatuaralPersonRate": {
+                        "type": "number"
+                    },
+                    "manualSolePropriatorRate": {
+                        "type": "number"
+                    },
+                    "minRate": {
+                        "type": "number"
+                    },
+                    "maxRate": {
+                        "type": "number"
+                    },
+                    "manualAmount": {
+                        "type": "number"
+                    },
+                    "calculationDate": {
+                        "type": "string",
+                        "aiFormat": "local-date-time"
+                    },
+                    "manualRule": {
+                        "type": "string"
+                    },
+                    "isChanged":{
+                        "type": "boolean"
+                    }
+                }
+            }
+        },
+        "tempData": {
+            "type": "object",
+            "additionalProperties": true,
+            "properties": {
+                "manualRate": {
+                    "type": "number"
+                },
+                "manualAmount": {
+                    "type": "number"
+                },
+                "manualExpensesRate": {
+                    "type": "number"
+                },
+                "manualNatuaralPersonRate": {
+                    "type": "number"
+                },
+                "manualSolePropriatorRate": {
+                    "type": "number"
+                }
+            }
+        },
+        "skipCommItemsValidation": {
+            "type": "boolean"
+        },
+        "manualRule": {
+            "type": "string"
+        }
+    }
+}

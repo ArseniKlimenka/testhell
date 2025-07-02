@@ -1,0 +1,170 @@
+{
+    "type": "GridLayout",
+    "numberOfColumns": 4,
+    "elements": [
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "Input",
+                    "label": "phoneType",
+                    "value": {
+                        "$ref": "#/properties/phoneType"
+                    },
+                    "control": "Dropdown",
+                    "autocomplete": {
+                        "minTextLength": 0,
+                        "dropDownItemsCount": 15,
+                        "selectItemOnMatch": false
+                    },
+                    "source": {
+                        "dataSource": {
+                            "name": "PartyPhoneTypesDataSource",
+                            "searchFieldPath": "phoneTypeDesc",
+                            "responseMapping": "phoneTypeResponseMapping",
+                            "resultCount": 15
+                        },
+                        "displayFieldName": "phoneTypeDesc"
+                    },
+                    "width": 1
+                },
+                {
+                    "type": "Input",
+                    "label": "countryCode",
+                    "value": {
+                        "$ref": "#/properties/countryCode"
+                    },
+                    "control": "Dropdown",
+                    "autocomplete": {
+                        "minTextLength": 0,
+                        "dropDownItemsCount": 10,
+                        "selectItemOnMatch": false
+                    },
+                    "source": {
+                        "dataSource": {
+                            "name": "PartyCountryPhoneCodeDataSource",
+                            "searchFieldPath": "countryPhoneCodeSearchText",
+                            "responseMapping": "partyCountryPhoneCodeResponseMapping",
+                            "resultCount": 10
+                        },
+                        "displayValueTemplate": "{{expr countryPhoneCode}} ({{expr countryShortName}})"
+                    },
+                    "width": 1,
+                    "onValueChanged": [
+                        {
+                            "commandType": "executeAction",
+                            "actionName": "fullNumberOnValueChanged"
+                        }
+                    ]
+                },
+                {
+                    "type": "Input",
+                    "label": "fullNumber",
+                    "value": {
+                        "$ref": "#/properties/fullNumber"
+                    },
+                    "width": 1,
+                    "onValueChanged": [
+                        {
+                            "commandType": "executeAction",
+                            "actionName": "fullNumberOnValueChanged"
+                        }
+                    ]
+                },
+                {
+                    "type": "Input",
+                    "readOnly": true,
+                    "label": "fullNumberFormatted",
+                    "value": {
+                        "$ref": "#/properties/fullNumberFormatted"
+                    },
+                    "width": 1
+                }
+            ]
+        },
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "Input",
+                    "label": "isPreferable",
+                    "isCompact": true,
+                    "value": {
+                        "$ref": "#/properties/isPreferable"
+                    },
+                    "width": 1
+                },
+                {
+                    "type": "Group",
+                    "width": 3,
+                    "rule": {
+                        "effect": "SHOW",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "isBackOfficeUser",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    },
+                    "elements": [
+                        {
+                            "type": "Input",
+                            "label": "isAdditional",
+                            "isCompact": true,
+                            "value": {
+                                "$ref": "#/properties/isAdditional"
+                            },
+                            "width": 1
+                        },
+                        {
+                            "type": "Input",
+                            "label": "isNonActual",
+                            "isCompact": true,
+                            "value": {
+                                "$ref": "#/properties/isNonActual"
+                            },
+                            "width": 1
+                        },
+                        {
+                            "type": "Input",
+                            "label": "isForNewsletters",
+                            "isCompact": true,
+                            "value": {
+                                "$ref": "#/properties/isForNewsletters"
+                            },
+                            "width": 1
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "Group",
+            "rule": {
+                "effect": "SHOW",
+                "condition": {
+                    "type": "FUNC",
+                    "ruleFunction": "isBackOfficeUser",
+                    "value": [
+                        {
+                            "$ref": "#"
+                        }
+                    ]
+                }
+            },
+            "elements": [
+                {
+                    "type": "Input",
+                    "label": "comments",
+                    "value": {
+                        "$ref": "#/properties/comments"
+                    },
+                    "width": 4
+                }
+            ]
+        }
+    ]
+}

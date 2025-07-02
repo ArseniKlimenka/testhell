@@ -1,0 +1,48 @@
+{
+    "sinks": [
+        {
+            "name": "CreateAccountingCertificate",
+            "executeAs": "AccountingCertificateEditor",
+            "document": {
+                "configuration": {
+                    "name": "AccountingCertificate"
+                },
+                "allowUpdating": {
+                    "inStates": [
+                        "Draft"
+                    ]
+                },
+                "enrichFields": [
+                    "/accountingCertificateEnrichments"
+                ]
+            }
+        },
+        {
+            "name": "GetLastLinkedAmendment",
+            "fetch": {
+                "configuration": {
+                    "name": "GetAccountingCertificateLastLinkedAmendmentDataSource"
+                }
+            }
+        },
+        {
+            "name": "GetAccoutingCertificateData",
+            "fetch": {
+                "configuration": {
+                    "name": "GetAccountingCertificateBodyDataSource"
+                }
+            }
+        },
+        {
+            "name": "CreateAccountingCertificateCorrection",
+            "executeAs": "AccountingCertificateEditor",
+            "documentRelation": {
+                "relation": {}
+            }
+        }
+    ],
+    "responses": [
+        200,
+        422
+    ]
+}

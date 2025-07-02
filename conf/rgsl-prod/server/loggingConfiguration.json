@@ -1,0 +1,104 @@
+{
+    "NLog": {
+        /*
+        Note: Will be used for importing directly to ES, and application insights
+        "extensions": [
+            { "assembly": "NLog.Targets.ElasticSearch" },
+            { "assembly": "Microsoft.ApplicationInsights.NLogTarget" }
+        ],
+        */
+        "autoReload": true,
+        "variables": {
+            "logRoot": "/logs",
+            "defaultLayout": "${longdate} [${level:uppercase=true:padding=5:fixedlength=true}] ${tracing:TraceId} ${scopeproperty:username} ${logger:shortName=true} ${replace:inner=${message}:searchFor=(?i)(?<=Password[=\\:])(.*?)(?=(\\;|$| )):replaceWith=******:regex=true} ${onexception:${exception:format=tostring}}",
+            "maxSize": "104857600",
+            "maxFiles": "500",
+            "logLevel": "Info"
+        },
+        "targets": {
+            "async": true,
+            "adInsureLogFile": { "type": "File", "layout": "${defaultLayout}", "maxArchiveFiles": "${maxFiles}", "archiveAboveSize": "${maxSize}", "fileName": "${logRoot}/adInsure.log" },
+            "auditTrailLogger": { "type": "File", "layout": "${defaultLayout}", "maxArchiveFiles": "${maxFiles}", "archiveAboveSize": "${maxSize}", "fileName": "${logRoot}/AuditTrailLogger.log" },
+            "json": {
+                "type": "Null",
+                //"type": "Console",
+                "layout": {
+                    "type": "JsonLayout",
+                    "includeAllProperties": true,
+                    "attributes": [
+                        { "name": "time", "layout": "${longdate}" },
+                        { "name": "level", "layout": "${level:uppercase=true}" },
+                        { "name": "logger", "layout": "${logger}" },
+                        { "name": "correlationId", "layout": "${tracing:TraceId}" },
+                        { "name": "username", "layout": "${scopeproperty:username}" },
+                        { "name": "message", "escapeUnicode": "false", "layout": "${replace:inner=${message}:searchFor=(?i)(?<=Password[=\\:])(.*?)(?=(\\;|$| )):replaceWith=******:regex=true}" },
+                        {
+                            "name": "context",
+                            "encode": false,
+                            "escapeUnicode": "false",
+                            "layout": { "type": "JsonLayout", "includeScopeProperties": true, "includeAllProperties": true }
+                        },
+                        { "name": "exception", "escapeUnicode": "false", "layout": "${exception:format=tostring}" }
+                    ]
+                }
+            },
+            "scriptingEngineCallLog": {
+                "type": "File",
+                "filename": "${logRoot}/scriptingEngineCallLog.json",
+                "layout": {
+                    "type": "JsonLayout",
+                    "includeAllProperties": true,
+                    "attributes": [
+                        { "name": "time", "layout": "${longdate}" },
+                        { "name": "level", "layout": "${level:uppercase=true}" },
+                        { "name": "correlationId", "layout": "${tracing:TraceId}" },
+                        { "name": "username", "layout": "${scopeproperty:username}" },
+                        { "name": "message", "escapeUnicode": "false", "layout": "${message}" },
+                        { "name": "entityType", "layout": "${scopeproperty:entityType}" },
+                        { "name": "etlConfigurationName", "layout": "${scopeproperty:etlConfigurationName}" },
+                        { "name": "etlConfigurationVersion", "layout": "${scopeproperty:etlConfigurationVersion}" },
+                        { "name": "routeConfigurationName", "layout": "${scopeproperty:routeConfigurationName}" },
+                        { "name": "integrationServiceConfigurationName", "layout": "${scopeproperty:integrationServiceConfigurationName}" },
+                        { "name": "integrationServiceConfigurationVersion", "layout": "${scopeproperty:integrationServiceConfigurationVersion}" },
+                        { "name": "sinkName", "layout": "${scopeproperty:sinkName}" },
+                        { "name": "sinkType", "layout": "${scopeproperty:sinkType}" },
+                        { "name": "entityConfigurationName", "layout": "${scopeproperty:entityConfigurationName}" },
+                        { "name": "entityConfigurationVersion", "layout": "${scopeproperty:entityConfigurationVersion}" },
+                        { "name": "relationName", "layout": "${scopeproperty:relationName}" },
+                        { "name": "transitionName", "layout": "${scopeproperty:transitionName}" },
+                        { "name": "configurationName", "layout": "${scopeproperty:configurationName}" },
+                        { "name": "configurationVersion", "layout": "${scopeproperty:configurationVersion}" },
+                        { "name": "dataFormatterName", "layout": "${scopeproperty:dataFormatterName}" },
+                        { "name": "businessIdentifier", "layout": "${scopeproperty:businessIdentifier}" },
+                        { "name": "recordId", "layout": "${scopeproperty:recordId}" },
+                        { "name": "recordVersion", "layout": "${scopeproperty:recordVersion}" },
+                        { "name": "dataSourceConfigurationName", "layout": "${scopeproperty:dataSourceConfigurationName}" },
+                        { "name": "functionName", "layout": "${scopeproperty:functionName}" },
+                        { "name": "scriptingEngineCallCorrelationId", "layout": "${scopeproperty:engineCallCorrelationId}" },
+                        { "name": "exception", "escapeUnicode": "false", "layout": "${exception:format=tostring}" }
+                    ]
+                }
+            },
+            "DadataIntegration": { "type": "File", "layout": "${defaultLayout}", "maxArchiveFiles": "${maxFiles}", "archiveAboveSize": "${maxSize}", "fileName": "${logRoot}/DadataIntegration.log" },
+            "XmlRequestService": { "type": "File", "layout": "${defaultLayout}", "maxArchiveFiles": "${maxFiles}", "archiveAboveSize": "${maxSize}", "fileName": "${logRoot}/XmlRequestService.log" },
+            "SmsSecurityCodeManagement" : { "type": "File", "layout": "${defaultLayout}", "maxArchiveFiles": "${maxFiles}", "archiveAboveSize": "${maxSize}", "fileName": "${logRoot}/SmsSecurityCodeManagement.log" },
+            "DigitalSignature": { "type": "File", "layout": "${defaultLayout}", "maxArchiveFiles": "${maxFiles}", "archiveAboveSize": "${maxSize}", "fileName": "${logRoot}/DigitalSignature.log" },
+            "KPKIntegration": { "type": "File", "layout": "${defaultLayout}", "maxArchiveFiles": "${maxFiles}", "archiveAboveSize": "${maxSize}", "fileName": "${logRoot}/KPKIntegration.log" },
+            "NonResidentAllocationFinishedLogger": { "type": "File", "layout": "${defaultLayout}", "maxArchiveFiles": "${maxFiles}", "archiveAboveSize": "${maxSize}", "fileName": "${logRoot}/NonResidentAllocationFinishedLogger.log" },
+            "AccountingCertificateLogger": { "type": "File", "layout": "${defaultLayout}", "maxArchiveFiles": "${maxFiles}", "archiveAboveSize": "${maxSize}", "fileName": "${logRoot}/AccountingCertificateLogger.log" }
+        },
+        "rules": [
+            { "logger": "AuditTrailLogger", "minLevel": "Trace", "writeTo": "auditTrailLogger,json" },
+            { "logger": "AuditTrailESIndexerLogger", "minLevel": "Warn", "writeTo": "auditTrailLogger,json" },
+            { "logger": "ScriptingEngineCallLogger", "minLevel": "Trace", "writeTo": "scriptingEngineCallLog", "final": true },
+            { "logger": "DadataIntegration", "minLevel": "Debug", "finalMinLevel": "Debug", "writeTo": "DadataIntegration,json", "final": true },
+            { "logger": "XmlRequestService", "minLevel": "Debug", "finalMinLevel": "Debug", "writeTo": "XmlRequestService", "final": true },
+            { "logger": "SmsSecurityCodeManagement", "minLevel": "Trace", "finalMinLevel": "Trace", "writeTo": "SmsSecurityCodeManagement", "final": true },
+            { "logger": "DigitalSignature", "minLevel": "${logLevel}", "finalMinLevel": "${logLevel}", "writeTo": "DigitalSignature", "final": true },
+            { "logger": "KPKIntegration", "minLevel": "Debug", "finalMinLevel": "Debug", "writeTo": "KPKIntegration", "final": true },
+            { "logger": "*.NonResidentAllocationFinishedLogger", "minLevel": "Debug", "finalMinLevel": "Debug", "writeTo": "NonResidentAllocationFinishedLogger", "final": true },
+            { "logger": "*.AccountingCertificateLogger", "minLevel": "Debug", "finalMinLevel": "Debug", "writeTo": "AccountingCertificateLogger", "final": true },
+            { "logger": "*", "minLevel": "${logLevel}", "finalMinLevel": "${logLevel}", "writeTo": "adInsureLogFile,json", "final": false }
+        ]
+    }
+}

@@ -1,0 +1,173 @@
+{
+    "type": "Group",
+    "width": 12,
+    "elements": [
+        {
+            "type": "Group",
+            "width": 12,
+            "elements": [
+                {
+                    "type": "Lookup",
+                    "value": {
+                        "$ref": "#/properties/agent"
+                    },
+                    "dialogButton": {},
+                    "clearButton": {
+                        "clearAction": "clearAgent"
+                    },
+                    "dialog": {
+                        "viewReference": {
+                            "configurationCodeName": "ServiceProviderSearchView",
+                            "configurationConceptType": "SearchView",
+                            "configurationVersion": "1"
+                        }
+                    },
+                    "onSelected": "agentOnSelected",
+                    "selectedDisplayValueUISchema": {
+                        "type": "Input",
+                        "label": "agent",
+                        "readOnly": true,
+                        "value": {
+                            "$ref": "#/properties/agent/properties/fullName"
+                        }
+                    },
+                    "width": 4,
+                    "rule": {
+                        "effect": "DISABLE_INITIAL",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "agentReadOnly",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "type": "Link",
+                    "width": 4,
+                    "targetType": "Url",
+                    "value": {
+                        "mapping": "partyUrlMapping",
+                        "$ref": "#"
+                    },
+                    "content": {
+                        "text": {
+                            "type": "OutputText",
+                            "defaultValue": "",
+                            "value": {
+                                "mapping": "linkNameMapping",
+                                "$ref": "#"
+                            }
+                        }
+                    }
+                },
+                {
+                    "type": "Link",
+                    "width": 4,
+                    "targetType": "Url",
+                    "value": {
+                        "mapping": "partnerNameURLMapping",
+                        "$ref": "#"
+                    },
+                    "content": {
+                        "text": {
+                            "type": "OutputText",
+                            "defaultValue": "",
+                            "value": {
+                                "mapping": "linkPartnerNameMapping",
+                                "$ref": "#"
+                            }
+                        }
+                    }
+                },
+                {
+                    "type": "Group",
+                    "width": 12,
+                    "elements": [
+                        {
+                            "type": "Input",
+                            "label": "agentPartyType",
+                            "readOnly": true,
+                            "value": {
+                                "$ref": "#/properties/agent/properties/partyType"
+                            },
+                            "width": 4
+                        },
+                        {
+                            "type": "Input",
+                            "label": "agentServiceProviderType",
+                            "readOnly": true,
+                            "value": {
+                                "$ref": "#/properties/agent/properties/serviceProviderType"
+                            },
+                            "width": 4
+                        },
+                        {
+                            "type": "Input",
+                            "label": "agentpersonalNumber",
+                            "value": {
+                                "$ref": "#/properties/agent/properties/personalNumber"
+                            },
+                            "width": 4,
+                            "rule": {
+                                "effect": "DISABLE_INITIAL",
+                                "condition": {
+                                    "type": "FUNC",
+                                    "ruleFunction": "agentPersNumberReadOnly",
+                                    "value": [
+                                        {
+                                            "$ref": "#"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    ]
+                },
+                {
+                    "type": "Group",
+                    "width": 12,
+                    "elements": [
+                        {
+                            "type": "Button",
+                            "value": {
+                                "$ref": "#"
+                            },
+                            "width": 4,
+                            "onClick": [
+                                {
+                                    "commandType": "executeAction",
+                                    "actionName": "refreshParticipantsData"
+                                }
+                            ],
+                            "label": "refreshParticipantsData"
+                        },
+                        {
+                            "type": "Input",
+                            "label": "bankAccount",
+                            "elementId": "agentBankAccountId",
+                            "value": {
+                                "$ref": "#/properties/agent/properties/bankAccount"
+                            },
+                            "autocomplete": {
+                                "minTextLength": 1,
+                                "dropDownItemsCount": 10
+                            },
+                            "control": "Dropdown",
+                            "source": {
+                                "array": {
+                                    "$ref": "#/properties/agent/properties/partyBody/properties/partyBankAccounts"
+                                },
+                                "displayValueTemplate": "{{expr number}}"
+                            },
+                            "width": 4
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

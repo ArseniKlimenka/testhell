@@ -1,0 +1,47 @@
+{
+    "targetDocument": "InsuredEvent",
+    "targetDocumentVersion": "1",
+    "targetState": "Draft",
+    "relationType": "Sibling",
+    "allowOnValidationErrors": {
+        "all": true
+    },
+    "requiredConfirmedConstraints": {
+        "all": false
+    },
+    "exclusiveToAssignedUser": false,
+    "enrichment": {
+        "fields": [
+            "[GetPolicyDates]",
+            "[GetRelatedClaims]"
+        ]
+    },
+    "sourceDocument": "MedLifeInsurancePolicy",
+    "sourceDocumentVersion": "1",
+    "sourceDocumentStates": [
+        {
+            "name": "Active",
+            "actors": [
+                "Claims"
+            ]
+        },
+        {
+            "name": "Activated",
+            "actors": [
+                "Claims"
+            ]
+        },
+        {
+            "name": "CancelledByAmendment",
+            "actors": [
+                "Claims"
+            ]
+        },
+        {
+            "name": "Completed",
+            "actors": [
+                "Claims"
+            ]
+        }
+    ]
+}

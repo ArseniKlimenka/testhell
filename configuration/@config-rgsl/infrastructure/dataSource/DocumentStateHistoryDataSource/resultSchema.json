@@ -1,0 +1,31 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "description": "Activities returned by data provider.",
+    "properties": {
+        "validFrom": {
+            "type": "string",
+            "aiFormat": "date-time",
+            "description": "Date-time of change to document's state."
+        },
+        "transition": {
+            "type": "string",
+            "description": "Name of the transition that changed the state (used to track the '$Create' 'transition' - to rename it to 'Draft')"
+        },
+        "stateCode": {
+            "type": "string",
+            "description": "Code of document state."
+        },
+        "state": {
+            "type": "string",
+            "description": "Name of document state."
+        },
+        "changedByUser": {
+            "type": "string",
+            "description": "Full name of the user that caused a transition to said state."
+        },
+        "changedByUserId": {
+            "type": "string",
+            "description": "Id of the user that caused a transition to said state."
+        }
+    }
+}

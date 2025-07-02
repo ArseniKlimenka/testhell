@@ -1,0 +1,220 @@
+/*
+  Here is listed standard set of configuration entries.
+  For more info please navigate to https://docs.adinsure.com/administration/configure/adinsure-settings/#Server
+*/
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Trace"
+    }
+  },
+  "appSettings": {
+    "dbDataAccess": {
+      "readSync": true,
+      "writeSync": true
+    },
+    "AdInsure": {
+      "NotificationChannels": {
+        "email": {
+          "type": "email",
+          "host": "mail.rgsl.ru",
+          "port": 25,
+          "useSSL": false,
+          "sender": {
+            "name": "rgsl.test",
+            "email": "rgsl.test@rgsl.ru"
+          }
+        },
+        "Adinsure": {
+          "type": "Adinsure"
+        }
+      },
+      "Healthcheck": {
+        "Enabled": "true",
+        "Database": {
+          "PoorPerformanceThreshold": "2000"
+        }
+      },
+      "Monitoring": {
+        "Enabled": "true"
+      },
+      "MessageBroker": {
+        /* Integration of AdInsure with ActiveMQ */
+        /*  Uri: ActiveMQ Broker URI */
+        "Uri": "activemq:tcp://adins-prpd-mq-01:61616",
+        "Username": "user",
+        //Username: ActiveMQ Username
+        /*  Password: ActiveMQ Password */
+        "Password": "t@sa+xJ^[@-wm#"
+      },
+      "Settings": {
+        "MaxRequestBodySize": 50000000,
+        "scriptingEnginePools": {
+          "all": {
+            "startEngines": 2,
+            "maxEngines": 70,
+            "MaxOldSpaceSize": 4096,
+            "logEveryEngineCall": false
+          }
+        },
+        "AuditTrail": {
+          /* Whether to use audit logging or not */
+          // "EnableAuditing": true,
+          /* Name of the elastic search index used to store audit log */
+          // "AuditLogESIndexName": "auditlog"
+        },
+        "Extensions": {
+          "FileSystemRootFolder": "extensions"
+        },
+        "Core": {
+          "LocalCurrencyCode": "RUB"
+        },
+        "General": {
+          "DocumentManagement": {
+            "FileStorageRoot": "\\\\Adins-prpd-app1\\uploadpreprod\\"
+          },
+          "Language": "ru-RU"
+        },
+        "SearchEngine": {
+          /*
+                        Integration of AdInsure with ElasticSearch
+                        URL: cluster URI
+                        IndexPrefix: index prefix
+                        User: Username of the search user
+                        Password: Password of the search user
+                        NOTE: Username and password are only viable if the cluster has security enabled (xpack.security.enabled flag)
+                    */
+          "IndexPrefix": "adinsure_index",
+          "URL": "http://adins-prpd-app1.life.rgs.local:9200,http://adins-prpd-es01.life.rgs.local:9200",
+          //"User": "elastic",
+          //"SPassword": "adinsure",
+          //"SniffOnStartup": true
+        },
+        "Log": {
+          /* Location of Logs for AdInsure */
+          "LogRoot": "C:\\Logs",
+          /* Logging level for AdInsure */
+          "LogLevel": "DEBUG"
+        },
+        "PrintoutRenderer": {
+          "DebugLevel": "None",
+          "Url": "http://adins-test-pdf.life.rgs.local:9423/service/rest",
+          "ExternalAssetsFolder": "C:\\AdInsure\\pre-prod",
+          "StaticAssetsServerBaseUrl": "http://adins-prpd-app1:60010/"
+        },
+        "OAuthIdentity": {
+          /* Endpoint Url to IdentityServer used for Authorization. Identity endpoint url: Url path (always add "/identity" at the end) */
+          "IdentityEndpointUrl": "https://adinsure-prpd-auth.rgsl.ru",
+          "RequiredScopes": "adinsure",
+          "Audience": "https://adinsure-prpd-auth.rgsl.ru/resources"
+        },
+        "RGSL": {
+          "Integration": {
+            "Dadata": {
+              "EnableDadataService": "true",
+              "Uri": "https://suggestions.dadata.ru/suggestions/api/4_1/rs/suggest/address/",
+              "Token": "6c9443ebae312fa155dc9f59b34bba891c5ebe5d"
+            },
+            "Cbr": {
+              "CurrencyExchangeRatesUrl": "http://www.cbr.ru/scripts/XML_daily.asp",
+              "WebServiceDailyInfoCbrUrl": "https://www.cbr.ru/DailyInfoWebServ/DailyInfo.asmx",
+              "BanksImportPath": "\\import\\banks.xml",
+              // set below option to true for use ProxyCredentialAddressPort for Cbr requests
+              "UseProxy": "false"
+            },
+            "KPK": {
+              "UserName": "ADINSURE",
+              "Password": "wl#df9rUuW",
+              "Uri": "https://life-1cw-04/1C_KPK_LIFE2021_PRD/ws/Kpk.1cws"
+            },
+            "BlackList": {
+              "EnableBlackListService": "true",
+              "Login": "ADINSURE",
+              "Password": "wl#df9rUuW",
+              "Url": "https://life-1cw-04/1C_KPK_LIFE2021_PRD/ws/bl.1cws"
+            },
+            "DigitalSignature": {
+              "Uri": "http://esbcam-qua-01:18080/restSignPDF/upload-file"
+            },
+            "SecuritySmsNotification": {
+              "Uri": "https://gate30.edna.ru:13228/rgsl/connector4/send",
+              "SecurityCodeExpirationInMinutes": "30",
+              "SecurityCodeCooldownInMinutes": "5",
+              "SmsServiceLogin": "rgsl4",
+              "SmsServicePassword": "5tUu3qwz"
+            },
+            "AuthService": {
+              "Scope": "adinsure",
+              "ClientId": "services",
+              "ClientSecret": "EA8C35E8-5875-493E-B6A8-6687A0C178EB"
+            },
+            "Rosfinmonitoring": {
+              "FormatVersion": "2.0",
+              "SoftwareVersion": "ПорталРФМ 01",
+              "CorrespondentId": "2000039473",
+              "OutputFolder": "\\\\lifefs01\\DATA01\\ADINSURE\\RosFinMon\\PREDPROD\\"
+            },
+            "GetContractDataCustomService": {
+              "EnableLogging": false
+            },
+            "SendEvent": {
+              "EnableLogging": false
+            },
+            "Fns": {
+              "FormatVersion": "5.01",
+              "OutputFolder": "\\\\lifefs01\\DATA01\\ADINSURE\\NalogXML\\PREDPROD\\"
+            },
+            "NalogPDF":{
+              "OutputFolder": "\\\\lifefs01.life.rgs.local\\Data01$\\NALOGPDF\\PREDPROD\\"
+            }
+          }
+        },
+        "AssetServer": {
+          "PublicUpload": {
+            "Url": "http://adins-prpd-app1:60010/"
+          }
+        },
+        "FileUploadRestrictions": {
+          "CheckFileType": true,
+          "CheckFileTypeByContent": true,
+          "AllowedFileTypes": [
+            {
+              "FileType": "JPEG",
+              "Extensions": ["jpeg", "jpe", "jpg"]
+            },
+            {
+              "FileType": "PNG"
+            },
+            {
+              "FileType": "TIFF"
+            },
+            {
+              "FileType": "MyOffice",
+              "Extensions": ["odt", "xodt", "ods", "xods"]
+            },
+            {
+              "FileType": "Mail",
+              "Extensions": ["msg", "eml"]
+            },
+            {
+              "FileType": "XML"
+            },
+            {
+              "FileType": "Microsoft Office Document",
+              "Extensions": ["doc", "docx", "xls", "xlsx", "xlsb", "rtf"]
+            },
+            {
+              "FileType": "PDF"
+            },
+            {
+              "FileType": "TXT"
+            },
+            {
+              "FileType": "CSV"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,77 @@
+{
+    "id": "FailedImports",
+    "type": "Group",
+    "elements": [
+        {
+            "type": "GridLayout",
+            "numberOfColumns": 4,
+            "elements": [
+                {
+                    "type": "Section",
+                    "label": "Failed imports",
+                    "sectionLevel": 1,
+                    "elements": [
+                        {
+                            "type": "ExportDataButton",
+                            "label": "Export",
+                            "width": 1
+                        },
+                        {
+                            "type": "DataGrid",
+                            "header": {
+                                "showReloadButton": true,
+                                "showNumberOfResults": false
+                            },
+                            "orderBy": "Description",
+                            "mode": "DataSource",
+                            "pagination": {
+                                "mode": "Regular",
+                                "pageSizes": [
+                                    5,
+                                    10,
+                                    15
+                                ]
+                            },
+                            "selection": {
+                                "mode": "None"
+                            },
+                            "height": "None",
+                            "columns": [
+                                {
+                                    "sortable": false,
+                                    "title": "RecordKey",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "value": {
+                                            "$ref": "#/properties/resultData/properties/recordKey"
+                                        }
+                                    }
+                                },
+                                {
+                                    "sortable": false,
+                                    "title": "ErrorType",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "value": {
+                                            "$ref": "#/properties/resultData/properties/errors/properties/errorType"
+                                        }
+                                    }
+                                },
+                                {
+                                    "sortable": false,
+                                    "title": "ErrorMessage",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "value": {
+                                            "$ref": "#/properties/resultData/properties/errors/properties/errorMessage"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

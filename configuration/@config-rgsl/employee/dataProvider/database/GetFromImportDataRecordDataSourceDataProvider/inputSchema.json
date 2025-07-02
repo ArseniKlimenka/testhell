@@ -1,0 +1,32 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "object",
+    "properties": {
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "importDocumentId": {
+                    "type": "string",
+                    "title": "Import document id",
+                    "aiFormat": "guid"
+                },
+                "importDocumentNumber": {
+                    "type": "string",
+                    "title": "Import document number"
+                }
+            },
+            "oneOf":[
+                {
+                    "required": [
+                        "importDocumentId"
+                    ]
+                },
+                {
+                    "required": [
+                        "importDocumentNumber"
+                    ]
+                }
+            ]
+        }
+    }
+}

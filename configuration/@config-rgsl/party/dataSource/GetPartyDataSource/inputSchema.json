@@ -1,0 +1,67 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "description": "Party data source input schema",
+    "type": "object",
+    "required": [
+        "criteria"
+    ],
+    "properties": {
+        "criteria": {
+            "type": "object",
+            "additionalProperties": false,
+            "anyOf": [
+                {
+                    "required": [
+                        "partyId"
+                    ]
+                },
+                {
+                    "required": [
+                        "partyCode"
+                    ]
+                },
+                {
+                    "required": [
+                        "partyCodes"
+                    ],
+                    "properties": {
+                        "partyCodes": {
+                            "type": "array",
+                            "minItems": 1
+                        }
+                    }
+                },
+                {
+                    "required": [
+                        "traderPartnerCode"
+                    ]
+                }
+            ],
+            "properties": {
+                "partyId": {
+                    "type": "string",
+                    "description": "Party Id"
+                },
+                "partyCode": {
+                    "type": "string",
+                    "description": "Party code"
+                },
+                "partyCodes": {
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "description": "Party code"
+                    }
+                },
+                "traderPartnerCode": {
+                    "type": "string",
+                    "description": "Trader partner code"
+                },
+                "showDuplicates": {
+                    "type": "boolean",
+                    "description": "Show party duplicates"
+                }
+            }
+        }
+    }
+}

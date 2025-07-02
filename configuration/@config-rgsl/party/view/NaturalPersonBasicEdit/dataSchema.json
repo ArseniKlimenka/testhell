@@ -1,0 +1,84 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "NaturalPerson",
+    "description": "Basic schema for natural person edit",
+    "type": "object",
+    "additionalProperties": false,
+    "aiValidation": {
+        "rule": "validationParty"
+    },
+    "properties": {
+        "IsSaved": {
+            "type": "boolean"
+        },
+        "ETag": {
+            "type": "string"
+        },
+        "Id": {
+            "type": "string"
+        },
+        "Code": {
+            "type": "string"
+        },
+        "data": {
+            "type": "object",
+            "properties": {
+                "partyRoleOfPerson": {
+                    "$ref": "component:PartyRoleOfPerson"
+                },
+                "partyGeneralData": {
+                    "$ref": "component:PartyGeneralData"
+                },
+                "partyPersonData": {
+                    "allOf": [
+                        {
+                            "$ref": "component:PartyPersonData"
+                        },
+                        {
+                            "aiAdditionalContext": {
+                                "name": "partyRole",
+                                "$data": "1/partyRoleOfPerson/partyRole"
+                            }
+                        }
+                    ]
+                },
+                "partyCRS": {
+                    "$ref": "component:PartyCRS"
+                },
+                "partyFatca": {
+                    "$ref": "component:PartyFatca"
+                },
+                "partyAddresses": {
+                    "$ref": "component:PartyAddresses"
+                },
+                "partyDocuments": {
+                    "$ref": "component:PartyDocuments"
+                },
+                "partyPhones": {
+                    "$ref": "component:PartyPhones"
+                },
+                "partyEmails": {
+                    "$ref": "component:PartyEmails"
+                },
+                "partyEmailsAdditionalInfo": {
+                    "$ref": "component:PartyEmailsAdditionalInfo"
+                },
+                "beneficiaryOwnerQuestionnaire": {
+                    "$ref": "component:BeneficiaryOwnerQuestionnaire"
+                },
+                "partyBankAccounts": {
+                    "$ref": "component:PartyBankAccounts"
+                },
+                "finKnowledgeQuestionnaire": {
+                    "$ref": "component:FinKnowledgeQuestionnaire"
+                },
+                "finKnowledgeQuestionnaire2023": {
+                    "$ref": "component:FinKnowledgeQuestionnaire2023"
+                },
+                "finKnowledgeQuestionnaire2024": {
+                    "$ref": "component:FinKnowledgeQuestionnaire2024"
+                }
+            }
+        }
+    }
+}

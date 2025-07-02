@@ -1,0 +1,91 @@
+{
+    "id": "UsersExcelImportSuccess",
+    "type": "Group",
+    "elements": [
+        {
+            "type": "GridLayout",
+            "numberOfColumns": 4,
+            "elements": [
+                {
+                    "type": "Group",
+                    "elements": [
+                        {
+                            "type": "DataGrid",
+                            "labelType": "H1",
+                            "label": "Imported data",
+                            "header": {
+                                "showReloadButton": true,
+                                "showNumberOfResults": true
+                            },
+                            "mode": "DataSource",
+                            "pagination": {
+                                "mode": "Regular",
+                                "pageSizes": [
+                                    10,
+                                    20,
+                                    50
+                                ]
+                            },
+                            "selection": {
+                                "mode": "None"
+                            },
+                            "height": "None",
+                            "columns": [
+                                {
+                                    "sortable": false,
+                                    "title": "Import Document Id",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "value": {
+                                            "$ref": "#/properties/resultData/properties/importDocumentId"
+                                        }
+                                    }
+                                },
+                                {
+                                    "sortable": false,
+                                    "title": "Source Id",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "value": {
+                                            "$ref": "#/properties/resultData/properties/sourceId"
+                                        }
+                                    }
+                                },
+                                {
+                                    "sortable": false,
+                                    "title": "Record Key",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "value": {
+                                            "$ref": "#/properties/resultData/properties/recordKey"
+                                        }
+                                    }
+                                },
+                                {
+                                    "sortable": false,
+                                    "title": "Result Entity Id",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "value": {
+                                            "$ref": "#/properties/resultData/properties/resultEntityId"
+                                        }
+                                    }
+                                },
+                                {
+                                    "sortable": false,
+                                    "title": "createdCertificateNumber",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "value": {
+                                            "$ref": "#/properties/resultData/properties/resultSummary/createdCertificateNumber"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

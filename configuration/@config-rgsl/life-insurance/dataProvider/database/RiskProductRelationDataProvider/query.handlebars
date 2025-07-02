@@ -1,0 +1,37 @@
+﻿SELECT
+    r.CODE,
+    r.TYPE,
+    t.IS_LIFE,
+    r.SHORT_DESCRIPTION,
+    r.FULL_DESCRIPTION,
+    r.PAYMENT_FORM,
+    r.RISKS_GROUP,
+    rp.IS_REPLACEABLE,
+    rp.CONDITIONS_FUNCTION,
+    rp.RISK_ORDER,
+    rp.RISK_PROGRAM,
+    rp.RISK_PERSON,
+    rp.PRODUCT_CODE,
+    CASE WHEN rp.ID IS NOT NULL THEN 0 ELSE 1 END AS IS_WITHOUT_PRODUCT
+FROM
+    BFX_IMPL.RISKS r
+    left join BFX_IMPL.RISK_PRODUCT_RELATION rp ON r.CODE = rp.RISK_CODE
+    left join BFX_IMPL.RISK_TYPE t on t.RISK_TYPE = r.TYPE
+WHERE 1=1
+{{#unless parameters.fullRiskOutput}}
+    AND rp.ID IS NOT NULL
+    AND t.RISK_TYPE IS NOT NULL
+    AND rp.PRODUCT_CODE = @productCode
+{{/unless}}
+{{#if parameters.relationType}}
+    AND rp.RELATION_TYPE_CODE = @relationType
+{{/if}}
+{{#if parameters.parentRisk}}
+    AND (rp.PARENT_RISK = @parentRisk OR rp.RISK_CODE = @parentRisk)
+{{/if}}
+{{#if parameters.additionalBeneficiariesOnly}}
+    AND ISNULL(r.PAYMENT_FORM,'') <> 'WOP' AND ISNULL(r.RISKS_GROUP,'') <> 'Death'
+{{/if}}
+{{#if parameters.searchText}}
+    AND (r.SHORT_DESCRIPTION LIKE (@searchText) OR r.CODE LIKE (@searchText) OR rp.PRODUCT_CODE LIKE (@searchText))
+{{/if}}

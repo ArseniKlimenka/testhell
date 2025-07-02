@@ -1,0 +1,98 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "Application user",
+    "description": "Schema describing application users",
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+        "isUserBlocked": {
+            "type": "boolean",
+            "description": "If user is blocked"
+        },
+        "general": {
+            "$ref": "component:ApplicationUserDetails"
+        },
+        "groups": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "description": "Group ID"
+                    },
+                    "code": {
+                        "type": "string",
+                        "description": "Group code"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "Group name"
+                    },
+                    "nameLocalized": {
+                        "type": "string",
+                        "default": "",
+                        "aiLocalized": {
+                            "configurationName": "masterEntity/ApplicationUserGroup",
+                            "field": "name",
+                            "itemType": "localized-field",
+                            "scope": "1/code"
+                        }
+                    },
+                    "roles": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "id": {
+                                    "type": "string"
+                                },
+                                "codeName": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "isGroupManager": {
+                        "type": "boolean",
+                        "description": "Flag that indicates if the user can assign activities within the group"
+                    },
+                    "substituteUserId": {
+                        "type": "string",
+                        "description": "Substitute user Id"
+                    },
+                    "substituteUserDisplayName": {
+                        "type": "string",
+                        "description": "Substitute user DisplayName"
+                    }
+                },
+                "additionalProperties": false
+            }
+        },
+        "roles": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "description": "Application role ID"
+                    },
+                    "codeName": {
+                        "type": "string",
+                        "description": "Application role code name"
+                    },
+                    "userGroupNames": {
+                        "type": "string",
+                        "description": "Comma separated names of the groups from which the role indirectly is assigned to the user"
+                    },
+                    "isAssignedFromGroup": {
+                        "type": "boolean",
+                        "description": "Tells wether the role is assigned from a group"
+                    }
+                },
+                "additionalProperties": false
+            }
+        }
+    }
+}

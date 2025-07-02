@@ -1,0 +1,179 @@
+<style type="text/css">
+    @page :-ro-nth(n of claimCheckDivGroup) {
+        /* Page Sizes */
+        size: A4 portrait;
+        /* Page Layout */
+        margin: 0mm 0mm 0mm 0mm;
+        padding: 0mm 0mm 0mm 0mm;
+    }
+
+    .claimCheckDiv {
+        page: claimCheckDivGroup;
+        padding: 0 0 0 0;
+        max-width: 744px;
+        min-width: 744px;
+        max-height: 647px;
+        min-height: 647px;
+        display: grid;
+        grid-template-columns: 1fr 4fr;
+        grid-template-rows: repeat(2, 1fr);
+        justify-items: stretch;
+        font-family: Arial, sans-serif;
+        font-size: 10pt;
+    }
+
+    .claimCheckDiv .leftDiv,
+    .rightDiv {
+        text-align: center;
+        border: 1px solid black;
+    }
+
+    .leftDiv {
+        width: 100%;
+        height: 100%;
+        display: grid;
+        grid-template-rows: 10% 70% 20%;
+    }
+
+    .leftDiv div {
+        text-align: center;
+        vertical-align: bottom;
+        justify-self: center;
+        align-self: end;
+    }
+
+    .rightDiv {
+        width: 100%;
+        height: 100%;
+        display: grid;
+        grid-template-rows: 55% 30% 15%;
+    }
+
+    .rightDiv :nth-child(1) {
+        text-align: start;
+    }
+
+    .rightDiv :nth-child(3) {
+        text-align: start;
+        padding-top: 8pt;
+    }
+
+    .rightDiv p {
+        padding-top: 0;
+        padding-bottom: 0;
+        padding-left: 15px;
+        margin: 5px;
+
+    }
+
+    .rightDiv table {
+        table-layout: fixed;
+        width: 100%;
+        border-collapse: collapse;
+        border: 2px solid black;
+    }
+
+    .rightDiv table .col1 {
+        width: 55%;
+    }
+
+    .rightDiv table .col2 {
+        width: 20%;
+    }
+
+    .rightDiv table td {
+        padding-top: 10pt;
+        padding-bottom: 10pt;
+        padding-left: 8pt;
+        padding-right: 8pt;
+        text-align: center;
+    }
+
+    .rightDiv table td,
+    th {
+        border: 1px solid black;
+    }
+
+    .rightDiv hr {
+        padding-top: 0;
+        padding-bottom: 0;
+        margin: 0;
+    }
+</style>
+
+<section>
+    <div class="claimCheckDiv OASreceipt">
+        <div class="leftDiv">
+            <div>ИЗВЕЩЕНИЕ</div>
+            <div>Кассир</div>
+        </div>
+        <div class="rightDiv">
+            <div>
+                <p>Наименование получателя ООО СК «Росгосстрах Жизнь»</p>
+                <p>ИНН 7743504307</p>
+                <p>{{bankInfo}}.</p>
+                <p>Плательщик (Ф.И.О., адрес)</p>
+                <hr>
+                <p>{{invoiceForPayment.holderFullName}}</p>
+                <hr>
+                <p>{{invoiceForPayment.holderRegistrationAddress}}</p>
+            </div>
+            <div>
+                <table>
+                    <col class="col1">
+                    <col class="col2">
+                    <col class="col3">
+                    <tr>
+                        <td>Назначение платежа</td>
+                        <td>Дата</td>
+                        <td>Сумма</td>
+                    </tr>
+                    <tr>
+                        <td>Оплата услуг страхования по договору <br>№ {{invoiceForPayment.policyNumber}}</td>
+                        <td>{{invoiceForPayment.policyIssueDate}}</td>
+                        <td>{{invoiceForPayment.paymentPlanInsurancePremium}} руб.</td>
+                    </tr>
+                </table>
+            </div>
+            <div>
+                <p>Подпись плательщика</p>
+            </div>
+        </div>
+        <div class="leftDiv">
+            <div>КВИТАНЦИЯ</div>
+            <div>Кассир</div>
+        </div>
+        <div class="rightDiv">
+            <div>
+                <p>Наименование получателя ООО СК «Росгосстрах Жизнь»</p>
+                <p>ИНН 7743504307</p>
+                <p>{{bankInfo}}.</p>
+                <p>Плательщик (Ф.И.О., адрес)</p>
+                <hr>
+                <p>{{invoiceForPayment.holderFullName}}</p>
+                <hr>
+                <p>{{invoiceForPayment.holderRegistrationAddress}}</p>
+            </div>
+            <div>
+                <table>
+                    <col class="col1">
+                    <col class="col2">
+                    <col class="col3">
+                    <tr>
+                        <td>Назначение платежа</td>
+                        <td>Дата</td>
+                        <td>Сумма</td>
+                    </tr>
+                    <tr>
+                        <td>Оплата услуг страхования по договору <br>№ {{invoiceForPayment.policyNumber}}</td>
+                        <td>{{invoiceForPayment.policyIssueDate}}</td>
+                        <td>{{invoiceForPayment.paymentPlanInsurancePremium}} руб.</td>
+                    </tr>
+                </table>
+            </div>
+            <div>
+                <p>Подпись плательщика</p>
+            </div>
+        </div>
+    </div>
+</section>

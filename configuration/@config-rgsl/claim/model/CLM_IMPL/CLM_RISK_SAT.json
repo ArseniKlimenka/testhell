@@ -1,0 +1,53 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema",
+    "type": "object",
+    "description": "Claim risks",
+    "aiReference": "CLM_IMPL.CLM_HUB",
+    "aiAdditionalKeys": [
+        "CODE"
+    ],
+    "aiDeletionMode": {
+        "mode": "flag",
+        "columnName": "IS_DELETED"
+    },
+    "aiGeneratedViews": {
+        "latestState": true
+    },
+    "properties": {
+        "CODE": {
+            "title": "Claim risk code",
+            "type": "string",
+            "aiType": "nvarchar(50)"
+        },
+        "DESCRIPTION": {
+            "title": "Claim risk description",
+            "type": "string",
+            "aiType": "nvarchar(150)"
+        },
+        "INSURED_SUM": {
+            "title": "Claim risk insured sum",
+            "type": "number",
+            "aiType": "decimal(15,7)"
+        },
+        "BUSINESS_LINE": {
+            "title": "Claim risk business line",
+            "type": "string",
+            "aiType": "nvarchar(150)"
+        },
+        "DISABILITY_GROUP": {
+            "title": "Claim risk disability group",
+            "type": "string",
+            "aiType": "nvarchar(10)"
+        },
+        "NUM_OF_PAID_DAYS": {
+            "type": "integer",
+            "title": "Claim risk missed business days",
+            "aiType": "int"
+        },
+        "IS_DELETED": {
+            "title": "Is claim injury deleted",
+            "type": "boolean",
+            "aiType": "boolean"
+        }
+    }
+}

@@ -1,0 +1,331 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema",
+    "type": "object",
+    "properties": {
+        "manualNumber": {
+            "type": "string",
+            "mapping": {
+                "path": "#/properties/attributes/properties/mainAttributes/properties/manualDocumentNumber"
+            }
+        },
+        "externalNumber": {
+            "type": "string",
+            "mapping": {
+                "path": "#/properties/attributes/properties/mainAttributes/properties/externalDocumentNumber"
+            }
+        },
+        "startDate": {
+            "type": "string",
+            "format": "date",
+            "mapping": {
+                "path": "#/properties/validFrom"
+            }
+        },
+        "endDate": {
+            "type": "string",
+            "format": "date",
+            "mapping": {
+                "path": "#/properties/validTo"
+            }
+        },
+        "conclusionDate": {
+            "type": "string",
+            "format": "date",
+            "mapping": {
+                "path": "#/properties/issueDate"
+            }
+        },
+        "cancellationDate": {
+            "type": "string",
+            "format": "date",
+            "mapping": {
+                "path": "#/properties/attributes/properties/cancellationAmendmentData/properties/cancellationDate"
+            }
+        },
+        "organizationalUnit": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "string",
+                    "mapping": {
+                        "path": "#/properties/attributes/properties/organisation/properties/organisationUnit/properties/code"
+                    }
+                },
+                "name": {
+                    "type": "string",
+                    "mapping": {
+                        "path": "#/properties/attributes/properties/organisation/properties/organisationUnit/name"
+                    }
+                }
+            }
+        },
+        "participants": {
+            "type": "object",
+            "properties": {
+                "agent": {
+                    "type": "object",
+                    "properties": {
+                        "serviceProviderCode": {
+                            "type": "string",
+                            "mapping": {
+                                "path": "#/properties/attributes/properties/participants/properties/agent/properties/serviceProviderCode"
+                            }
+                        },
+                        "serviceProviderType": {
+                            "type": "string",
+                            "mapping": {
+                                "path": "#/properties/attributes/properties/participants/properties/agent/properties/serviceProviderType"
+                            }
+                        },
+                        "partyCode": {
+                            "type": "string",
+                            "mapping": {
+                                "path": "#/properties/attributes/properties/participants/properties/agent/properties/partyCode"
+                            }
+                        },
+                        "partyType": {
+                            "type": "string",
+                            "mapping": {
+                                "path": "#/properties/attributes/properties/participants/properties/agent/properties/partyType"
+                            }
+                        },
+                        "fullName": {
+                            "type": "string",
+                            "mapping": {
+                                "path": "#/properties/attributes/properties/participants/properties/agent/properties/fullName"
+                            }
+                        },
+                        "personalNumber": {
+                            "type": "string",
+                            "mapping": {
+                                "path": "#/properties/attributes/properties/participants/properties/agent/properties/personalNumber"
+                            }
+                        },
+                        "shortOrgName": {
+                            "type": "string",
+                            "relatedEntity": {
+                                "name": "agentRef",
+                                "scope": "partyOrganisationData.shortOrgName"
+                            }
+                        },
+                        "partyBody": {
+                            "type": "object",
+                            "properties": {
+                                "partyGeneralData": {
+                                    "type": "object",
+                                    "properties": {
+                                        "INNKIO": {
+                                            "type": "string",
+                                            "mapping": {
+                                                "path": "#/properties/attributes/properties/participants/properties/agent/properties/partyBody/properties/partyGeneralData/properties/INNKIO"
+                                            }
+                                        }
+                                    }
+                                },
+                                "partyOrganisationData": {
+                                    "type": "object",
+                                    "properties": {
+                                        "site": {
+                                            "type": "object",
+                                            "properties": {
+                                                "websiteAddress": {
+                                                    "type": "string",
+                                                    "mapping": {
+                                                        "path": "#/properties/attributes/properties/participants/properties/agent/properties/partyBody/properties/partyOrganisationData/properties/site/properties/websiteAddress"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                "partyPersonData": {
+                                    "type": "object",
+                                    "properties": {
+                                        "SNILS": {
+                                            "type": "string",
+                                            "mapping": {
+                                                "path": "#/properties/attributes/properties/participants/properties/agent/properties/partyBody/properties/partyPersonData/properties/SNILS"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "salesChannel": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "string",
+                    "mapping": {
+                        "path": "#/properties/attributes/properties/mainAttributes/properties/salesChannel/properties/code"
+                    }
+                },
+                "description": {
+                    "type": "string",
+                    "mapping": {
+                        "path": "#/properties/attributes/properties/mainAttributes/properties/salesChannel/properties/description"
+                    }
+                }
+            }
+        },
+        "isDocCorrect": {
+            "type": "boolean",
+            "mapping": {
+                "path": "#/properties/attributes/properties/additionalAttributes/properties/isDocCorrect"
+            }
+        },
+        "isTechnical": {
+            "type": "boolean",
+            "mapping": {
+                "path": "#/properties/attributes/properties/mainAttributes/properties/isTechnical"
+            }
+        },
+        "isPersonalBusiness": {
+            "type": "boolean",
+            "mapping": {
+                "path": "#/properties/attributes/properties/mainAttributes/properties/isPersonalBusiness"
+            }
+        },
+        "salesClassification": {
+            "type": "string",
+            "mapping": {
+                "path": "#/properties/attributes/properties/mainAttributes/properties/salesClassification"
+            }
+        },
+        "attributes": {
+            "type": "object",
+            "properties": {
+                "mainAttributes": {
+                    "type": "object",
+                    "properties": {
+                        "agency": {
+                            "type": "object",
+                            "properties": {
+                                "code": {
+                                    "type": "string",
+                                    "mapping": {
+                                        "path": "#/properties/attributes/properties/mainAttributes/properties/agency/properties/code"
+                                    }
+                                },
+                                "description": {
+                                    "type": "string",
+                                    "mapping": {
+                                        "path": "#/properties/attributes/properties/mainAttributes/properties/agency/properties/description"
+                                    }
+                                }
+                            }
+                        },
+                        "cbAgentType": {
+                            "type": "object",
+                            "properties": {
+                                "code": {
+                                    "type": "string",
+                                    "mapping": {
+                                        "path": "#/properties/attributes/properties/mainAttributes/properties/cbAgentType/properties/code"
+                                    }
+                                },
+                                "description": {
+                                    "type": "string",
+                                    "mapping": {
+                                        "path": "#/properties/attributes/properties/mainAttributes/properties/cbAgentType/properties/description"
+                                    }
+                                }
+                            }
+                        },
+                        "orderNumber": {
+                            "type": "string",
+                            "mapping": {
+                                "path": "#/properties/attributes/properties/mainAttributes/properties/orderNumber"
+                            }
+                        },
+                        "organisation": {
+                            "type": "object",
+                            "properties": {
+                                "mvzNumber": {
+                                    "type": "string",
+                                    "mapping": {
+                                        "path": "#/properties/attributes/properties/organisation/properties/mvzNumber"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "additionalAttributes": {
+                    "type": "object",
+                    "properties": {
+                        "useNds": {
+                            "type": "boolean",
+                            "mapping": {
+                                "path": "#/properties/attributes/properties/additionalAttributes/properties/useNds"
+                            }
+                        },
+                        "vatRates": {
+                            "type": "array",
+                            "mapping": {
+                                "path": "#/properties/attributes/properties/additionalAttributes/properties/vatRates"
+                            },
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "startDate": {
+                                        "type": "string",
+                                        "format": "date"
+                                    },
+                                    "vatRate": {
+                                        "type": "number"
+                                    }
+                                }
+                            } 
+                        }
+                    }
+                }
+            }
+        },
+        "commissionRules": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "ruleNum": {
+                        "type": "number"
+                    },
+                    "insuranceProduct": {
+                        "type": "object",
+                        "properties": {
+                            "values": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "description": {
+                                            "type": "string"
+                                        },
+                                        "code": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            },
+                            "isInverted": {
+                                "type": "boolean"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "relatedEntities": {
+        "agentRef": {
+            "href": "api/party/public/parties-rgsl/common-data/body/{code}",
+            "parameters": {
+                "code": "#/properties/attributes/properties/participants/properties/agent/properties/partyCode"
+            }
+        }
+    }
+}

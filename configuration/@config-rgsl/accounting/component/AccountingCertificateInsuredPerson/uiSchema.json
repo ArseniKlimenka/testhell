@@ -1,0 +1,149 @@
+{
+    "type": "Section",
+    "elementId": "AccountingCertificateInsuredPerson",
+    "label": "Accounting certificate insured person",
+    "width": 12,
+    "collapsing": {
+        "initial": false,
+        "enabled": true
+    },
+    "elements": [
+        {
+            "type": "Group",
+            "width": 12,
+            "elements": [
+                {
+                    "type": "Input",
+                    "label": "Is tax payer insured person",
+                    "value": {
+                        "$ref": "#/properties/isTaxPayerInsuredPerson"
+                    },
+                    "onValueChanged": [
+                        {
+                            "commandType": "executeAction",
+                            "actionName": "onChangeIsTaxPayerInsuredPerson"
+                        }
+                    ],
+                    "width": 6
+                }
+            ]
+        },
+        {
+            "type": "Group",
+            "width": 12,
+            "elements": [
+                {
+                    "type": "Group",
+                    "width": 12,
+                    "elements": [
+                        {
+                            "type": "Input",
+                            "label": "Insured person last name",
+                            "readOnly": true,
+                            "value": {
+                                "$ref": "#/properties/lastName"
+                            },
+                            "width": 4
+                        },
+                        {
+                            "type": "Input",
+                            "label": "Insured person first name",
+                            "readOnly": true,
+                            "value": {
+                                "$ref": "#/properties/firstName"
+                            },
+                            "width": 4
+                        },
+                        {
+                            "type": "Input",
+                            "label": "Insured person middle name",
+                            "readOnly": true,
+                            "value": {
+                                "$ref": "#/properties/middleName"
+                            },
+                            "width": 4
+                        }
+                    ]
+                },
+                {
+                    "type": "Group",
+                    "width": 12,
+                    "elements": [
+                        {
+                            "type": "Input",
+                            "label": "Insured person INN",
+                            "readOnly": true,
+                            "value": {
+                                "$ref": "#/properties/INNKIO"
+                            },
+                            "width": 4
+                        },
+                        {
+                            "type": "Input",
+                            "label": "Insured person date of birth",
+                            "readOnly": true,
+                            "value": {
+                                "$ref": "#/properties/dateOfBirth"
+                            },
+                            "width": 4
+                        }
+                    ]
+                },
+                {
+                    "type": "Group",
+                    "width": 12,
+                    "elements": [
+                        {
+                            "type": "Input",
+                            "label": "Insured person document code view",
+                            "readOnly": true,
+                            "value": {
+                                "$ref": "#/properties/documentCodeView"
+                            },
+                            "width": 3
+                        },
+                        {
+                            "type": "Input",
+                            "label": "Insured person document series",
+                            "readOnly": true,
+                            "value": {
+                                "$ref": "#/properties/docSeries"
+                            },
+                            "width": 3
+                        },
+                        {
+                            "type": "Input",
+                            "label": "Insured person document number",
+                            "readOnly": true,
+                            "value": {
+                                "$ref": "#/properties/docNumber"
+                            },
+                            "width": 3
+                        },
+                        {
+                            "type": "Input",
+                            "label": "Insured person document issue date",
+                            "readOnly": true,
+                            "value": {
+                                "$ref": "#/properties/issueDate"
+                            },
+                            "width": 3
+                        }
+                    ]
+                }
+            ],
+            "rule": {
+                "effect": "DISABLE_INITIAL",
+                "condition": {
+                    "type": "FUNC",
+                    "ruleFunction": "lockInsuredPersonData",
+                    "value": [
+                        {
+                            "$ref": "#"
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}

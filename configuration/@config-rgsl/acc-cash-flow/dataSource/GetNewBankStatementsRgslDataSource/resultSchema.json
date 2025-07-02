@@ -1,0 +1,67 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "additionalProperties": false,
+    "type": "object",
+    "properties": {
+        "guid": {
+            "type": "string",
+            "description": "BS universal identifier"
+        },
+        "no": {
+            "type": "string"
+        },
+        "incomeSourceId": {
+            "type": "integer"
+        },
+        "direction": {
+            "description": "1 - incoming. 2 - outgoing.",
+            "type": "integer"
+        },
+        "paymentDescription": {
+            "type": "string"
+        },
+        "currencyId": {
+            "type": "integer"
+        },
+        "amount": {
+            "type": "number"
+        },
+        "paymentDate": {
+            "type": "string",
+            "aiFormat": "date"
+        },
+        "transactionDate": {
+            "description": "Date of receipt of the bank statement.",
+            "type": "string",
+            "aiFormat": "date"
+        },
+        "tolerance": {
+            "type": "integer"
+        },
+        "debtor": {
+            "description": "Payer.",
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "type": {
+                    "type": "string"
+                },
+                "bankAccountNo": {
+                    "type": "string"
+                }
+            }
+        },
+        "documentTypeId": {
+            "description": "1 - receipt. 2 - write-off.",
+            "type": "integer"
+        },
+        "documentDate": {
+            "description": "Date of document.",
+            "type": "string",
+            "aiFormat": "date"
+        }
+    }
+}

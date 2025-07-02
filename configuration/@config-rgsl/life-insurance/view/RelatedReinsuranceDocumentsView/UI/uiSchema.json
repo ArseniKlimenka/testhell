@@ -1,0 +1,95 @@
+{
+    "id": "RelatedReinsuranceDocumentsViewUiSchema",
+    "type": "Group",
+    "elements": [
+        {
+            "type": "GridLayout",
+            "numberOfColumns": 4,
+            "elements": [
+                {
+                    "type": "Group",
+                    "elements": [
+                        {
+                            "type": "DataGrid",
+                            "orderBy": "Description",
+                            "mode": "DataSource",
+                            "header": {
+                                "showReloadButton": true,
+                                "showNumberOfResults": true
+                            },
+                            "pagination": {
+                                "mode": "Regular",
+                                "pageSizes": [
+                                    5,
+                                    10,
+                                    15
+                                ]
+                            },
+                            "selection": {
+                                "mode": "None"
+                            },
+                            "height": "None",
+                            "columns": [
+                                {
+                                    "sortable": false,
+                                    "title": "Reinsurance number",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "value": {
+                                            "$ref": "#/properties/resultData/properties/reinsuranceNumber"
+                                        }
+                                    }
+                                },
+                                {
+                                    "sortable": false,
+                                    "title": "Reinsurer share",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "value": {
+                                            "$ref": "#/properties/resultData/properties/reinsurerShare"
+                                        }
+                                    }
+                                },
+                                {
+                                    "sortable": false,
+                                    "title": "Policy year number",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "value": {
+                                            "$ref": "#/properties/resultData/properties/policyYearNumber"
+                                        }
+                                    }
+                                },
+                                {
+                                    "sortable": false,
+                                    "title": "Reinsurer code",
+                                    "cellContent": {
+                                        "type": "Link",
+                                        "label": "Reinsurer code",
+                                        "targetType": "Entity",
+                                        "value": {
+                                            "mapping": "PreparePartnerLink",
+                                            "$ref": "#/properties/resultData/properties/"
+                                        },
+                                        "content": {
+                                            "text": {
+                                                "type": "OutputText",
+                                                "textProperties": [
+                                                    "bold"
+                                                ],
+                                                "template": "{{#if fullName}}{{expr fullName}}{{else}}{{expr reinsurerCode}}{{/if}}",
+                                                "value": {
+                                                    "$ref": "#"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,239 @@
+{
+    "id": "application-user-details.ui-schema.json",
+    "type": "Section",
+    "label": "User information",
+    "sectionLevel": 1,
+    "collapsing": {
+        "enabled": true,
+        "initial": false
+    },
+    "elements": [
+        {
+            "type": "GridLayout",
+            "numberOfColumns": 2,
+            "width": 12,
+            "elements": [
+                {
+                    "type": "Input",
+                    "value": {
+                        "$ref": "#/properties/username"
+                    },
+                    "readOnly": true,
+                    "rule": {
+                        "effect": "ENABLE_INITIAL",
+                        "condition": {
+                            "type": "LEAF",
+                            "expectedValue": true,
+                            "value": {
+                                "$ref": "#/properties/isNewUser"
+                            }
+                        }
+                    },
+                    "width": 1,
+                    "label": "Username"
+                },
+                {
+                    "type": "OutputText",
+                    "value": {
+                        "$ref": "#/properties/loginType"
+                    },
+                    "textStyle": {
+                        "uppercase": true,
+                        "textSize": "Normal",
+                        "textColor": "Blue"
+                    },
+                    "width": 1,
+                    "label": "Login type"
+                },
+                {
+                    "type": "Lookup",
+                    "value": {
+                        "$ref": "#/properties/claims"
+                    },
+                    "width": 1,
+                    "dialogButton": {},
+                    "dialog": {
+                        "viewReference": {
+                            "configurationCodeName": "GeneralPartySearchView",
+                            "configurationConceptType": "SearchView",
+                            "configurationVersion": "1"
+                        }
+                    },
+                    "clearButton": {
+                        "clearAction": "partyClear"
+                    },
+                    "readOnly": true,
+                    "rule": {
+                        "effect": "ENABLE_INITIAL",
+                        "condition": {
+                            "type": "LEAF",
+                            "expectedValue": true,
+                            "value": {
+                                "$ref": "#/properties/allowEdit"
+                            }
+                        }
+                    },
+                    "onSelected": "partyResultMapping",
+                    "selectedDisplayValueUISchema": {
+                        "type": "Input",
+                        "readOnly": true,
+                        "label": "Display Name",
+                        "value": {
+                            "$ref": "#/properties/claims/properties/DisplayName"
+                        }
+                    }
+                },
+                {
+                    "type": "OutputText",
+                    "value": {
+                        "$ref": "#/properties/claims/properties/PartyCode"
+                    },
+                    "textStyle": {
+                        "textSize": "Normal",
+                        "textColor": "Blue"
+                    },
+                    "width": 1,
+                    "label": "Party code"
+                },
+                {
+                    "type": "Input",
+                    "label": "Account Type",
+                    "control": "Dropdown",
+                    "value": {
+                        "$ref": "#/properties/claims/properties/AccountType"
+                    },
+                    "readOnly": true,
+                    "rule": {
+                        "effect": "ENABLE_INITIAL",
+                        "condition": {
+                            "type": "LEAF",
+                            "expectedValue": true,
+                            "value": {
+                                "$ref": "#/properties/allowEdit"
+                            }
+                        }
+                    },
+                    "width": 1
+                },
+                {
+                    "type": "OutputText",
+                    "value": {
+                        "$ref": "#/properties/claims/properties/ExpireDate"
+                    },
+                    "textStyle": {
+                        "textSize": "Normal",
+                        "textColor": "Blue"
+                    },
+                    "width": 1,
+                    "label": "Expire Date"
+                },
+                {
+                    "type": "Input",
+                    "label": "Email",
+                    "value": {
+                        "$ref": "#/properties/claims/properties/Email"
+                    },
+                    "readOnly": true,
+                    "rule": {
+                        "effect": "ENABLE_INITIAL",
+                        "condition": {
+                            "type": "LEAF",
+                            "expectedValue": true,
+                            "value": {
+                                "$ref": "#/properties/allowEdit"
+                            }
+                        }
+                    },
+                    "width": 1
+                },
+                {
+                    "type": "Group",
+                    "width": 2,
+                    "elements": [
+                        {
+                            "type": "Input",
+                            "label": "Password",
+                            "isPassword": true,
+                            "value": {
+                                "$ref": "#/properties/password"
+                            },
+                            "width": 1
+                        },
+                        {
+                            "type": "Input",
+                            "label": "Confirm password",
+                            "isPassword": true,
+                            "value": {
+                                "$ref": "#/properties/confirmPassword"
+                            },
+                            "width": 1
+                        }
+                    ]
+                },
+                {
+                    "type": "Input",
+                    "label": "Is user active",
+                    "value": {
+                        "$ref": "#/properties/claims/properties/IsUserActive"
+                    },
+                    "width": 1,
+                    "readOnly": true,
+                    "rule": {
+                        "effect": "ENABLE_INITIAL",
+                        "condition": {
+                            "type": "LEAF",
+                            "expectedValue": true,
+                            "value": {
+                                "$ref": "#/properties/allowEdit"
+                            }
+                        }
+                    }
+                },
+                {
+                    "type": "Link",
+                    "targetType": "Url",
+                    "openInNewTab": true,
+                    "hideLabel": true,
+                    "value": {
+                        "$ref": "#/properties/editUrl"
+                    },
+                    "content": {
+                        "icon": {
+                            "type": "Icon",
+                            "iconStyle": {
+                                "name": "Edit",
+                                "size": "Large",
+                                "color": "Primary"
+                            }
+                        },
+                        "text": {
+                            "type": "OutputText",
+                            "literalValue": "Edit user profile",
+                            "metadata": {
+                                "autogenerate": true
+                            },
+                            "textStyle": {
+                                "textColor": "Blue",
+                                "textSize": "Normal"
+                            },
+                            "useParentScope": true,
+                            "width": 1
+                        }
+                    },
+                    "rule": {
+                        "condition": {
+                            "type": "LEAF",
+                            "value": {
+                                "$ref": "#/properties/editUrl"
+                            },
+                            "expectedValue": ""
+                        },
+                        "effect": "HIDE"
+                    },
+                    "width": 1,
+                    "hide": false
+                }
+            ]
+        }
+    ]
+}

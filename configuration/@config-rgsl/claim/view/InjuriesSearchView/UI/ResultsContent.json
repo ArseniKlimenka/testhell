@@ -1,0 +1,45 @@
+{
+    "type": "Group",
+    "elements": [
+        {
+            "type": "DataGrid",
+            "elementId": "serchResultTable",
+            "mode": "DataSource",
+            "pagination": {
+                "mode": "Regular",
+                "pageSizes": [
+                    5,
+                    10,
+                    15
+                ]
+            },
+            "selection": {
+                "mode": "Single",
+                "enableRowSelection": true,
+                "showCheckBox": true
+            },
+            "columns": [
+                {
+                    "sortable": false,
+                    "title": "injuryCode",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/code"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "injuryDescription",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/description"
+                        }
+                    }
+                }
+            ]
+        }
+    ]
+}

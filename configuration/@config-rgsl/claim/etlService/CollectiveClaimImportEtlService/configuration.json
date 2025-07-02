@@ -1,0 +1,49 @@
+{
+    "allowParallelExecution": true,
+    "mainDataSource": "CollectiveClaimImportDataDataSource",
+    "additionalDataSources": [
+        "CollectivePolicyInsuredDataSource"
+    ],
+    "sinks": [
+        {
+            "name": "WriteRecipient",
+            "class": {
+                "className": "Adacta.AdInsure.RGSL.Claims.API.Internal.Services.ICollectiveClaimService, Adacta.AdInsure.RGSL.Claims.API",
+                "methodName": "SaveSingleRecipientToClaim"
+            }
+        },
+        {
+            "name": "WriteSuccessStatus",
+            "database": {
+                "tables": [
+                    "BFX.IMPORT_RECORD_STATUS"
+                ]
+            }
+        }
+    ],
+    "completionSinks": [
+        {
+            "name": "SetClaimImportFinishedState",
+            "documentTransition": {
+                "transition": {}
+            }
+        },
+        {
+            "name": "SetImportDocumentImportFinishedState",
+            "documentTransition": {
+                "transition": {}
+            }
+        }
+    ],
+    "errorSinks": [
+        {
+            "name": "WriteErrorStatus",
+            "database": {
+                "tables": [
+                    "BFX.IMPORT_RECORD_STATUS"
+                ]
+            }
+        }
+    ],
+    "version": "1"
+}

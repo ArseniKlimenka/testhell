@@ -1,0 +1,36 @@
+{
+    "mainDataSource": "GetAccountingCertificateDataSource",
+    "sinks": [
+        {
+            "name": "ChangeStateToChecked",
+            "documentTransition": {
+                "transition": {
+                    "transitionName": "Draft_To_Checked",
+                    "configurationName": "AccountingCertificate",
+                    "configurationVersion": "1"
+                }
+            }
+        },
+        {
+            "name": "ChangeStateToIssued",
+            "documentTransition": {
+                "transition": {
+                    "transitionName": "Checked_To_Issued",
+                    "configurationName": "AccountingCertificate",
+                    "configurationVersion": "1"
+                }
+            }
+        }
+    ],
+    "errorSinks": [
+        {
+            "name": "WriteSinkError",
+            "database": {
+                "tables": [
+                    "BFX_IMPL.SINK_ERROR"
+                ]
+            }
+        }
+    ],
+    "version": "1"
+}

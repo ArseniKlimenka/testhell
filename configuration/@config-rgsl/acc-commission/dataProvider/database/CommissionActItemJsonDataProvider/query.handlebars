@@ -1,0 +1,123 @@
+select
+	ai.ACT_ID,
+	ai.ACT_ITEM_ID,
+	ai.JSON_DATA as SAVED_JSON_DATA,
+	polsl.HOLDER_NAME,
+	polsl.START_DATE as POL_START_DATE,
+	polsl.END_DATE as POL_END_DATE,
+	polps.CODE_NAME as STATE,
+	art.CODE_NAME,
+	polsl.PRODUCT_CODE,
+	prod.DESCRIPTION as PRODUCT_DESC,
+	cp.PROGRAM_VERSION,
+	cast(round(datediff(day, polsl.START_DATE, polsl.END_DATE) / 365.25, 0, 1) as INT) + 1 as INSURED_YEARS_COUNT,
+	case when polsl.PAYMENT_FREQUENCY_CODE = '1' then 1 else cast(round(datediff(day, polsl.START_DATE, polsl.END_DATE) / 365.25, 0, 1) as INT) + 1 end as PAYMENT_PERIOD,
+	cast(round(datediff(day, polsl.START_DATE, ai.DUE_DATE) / 365.25, 0, 1) as INT) + 1 as INSURANCE_YEAR,
+	polsl.PAYMENT_FREQUENCY_CODE,
+	case when polsl.PAYMENT_FREQUENCY_CODE = '1' then '1' else '2' end as PAYMENT_FREQUENCY2_CODE,
+	case when ai.DUE_DATE = polsl.START_DATE then 1 else 2 end as INSTALLMENT_TYPE,
+	(select top 1 r.BUSINESS_LINE from BFX_IMPL.RISKS r where r.CODE = ai.SOURCE_LINE_ID) as BUSINESS_LINE,
+	aas.EXTERNAL_NUMBER as AA_EXTERNAL_NUMBER,
+	case when ptyis.CONFIGURATION_CODE_NAME = 'LegalEntity' then ptyis.SHORT_NAME else ptyis.FULL_NAME end as AGENT_NAME,
+	polsl.RISK_PREMIUM,
+	polsl.RISK_PREMIUM * (case when polsl.PAYMENT_FREQUENCY_CODE = '3' then 2 when polsl.PAYMENT_FREQUENCY_CODE = '4' then 4 when polsl.PAYMENT_FREQUENCY_CODE = '5' then 12 else 1 end) as RISK_PREMIUM_YEAR,
+	v.STATE as VERIFICATION_STATE,
+	cancellationAm.ISSUE_DATE as CANCELLATION_ISSUE_DATE,
+	cancellationAm.CREATED_ON as CANCELLATION_CREATED_ON,
+    cancellationAm.AMENDMENT_REASON,
+	spsas.SAD_NUMBER as SUB_AGENT_SAD_NUMBER,
+	case when in_sps.RECEIVE_TYPE = '43' then N'ФЛ' when in_sps.RECEIVE_TYPE = '44' then N'ИП' else NULL end as SUB_AGENT_TYPE,
+	branch.NAME as SUB_AGENT_BRANCH_NAME,
+	branch.REGION as SUB_AGENT_BRANCH_REGION,
+	prod.PRODUCT_GROUP,
+	inOus.CODE as INITIATOR_ORGUNIT_CODE,
+	case when coalesce(pcFree.DOC_BASE_AMOUNT, 0) = 0 then 1 else 2 end as HAS_NO_CHANGES,
+	case when paisMain.SHARE is not null
+		and paisSplit.SHARE is not null
+	then N'Да' else N'Нет' end as SUB_AGENT_AMOUNTS,
+	paisMain.SHARE / paisSplit.SHARE as SUB_AGENT_SPLIT_PROPORTION,
+	paisSplit.SHARE as SUB_AGENT_SPLIT_SHARE,
+	paisSplit.SHARE * ai.PAYMENT_LC_AMOUNT as SUB_AGENT_SPLIT_AMOUNT
+from
+	acc_impl.CA_ACT_ITEM ai
+	inner join acc_impl.CA_ACT act on act.ACT_ID = ai.ACT_ID
+	inner join pas.CONTRACT c on c.CONTRACT_NUMBER = ai.REFERENCE_NO
+	inner join cfg.PROCESS_STATE polps on polps.PROCESS_STATE_ID = c.STATE_ID
+	left join pas_impl.POLICY_HUB polh on polh.CONTRACT_NUMBER = ai.REFERENCE_NO
+	left join pas_impl.POLICY_SAT_LATEST polsl on polsl.POLICY_HKEY = polh.POLICY_HKEY
+	left join bfx_impl.PRODUCTS prod on prod.code = polsl.PRODUCT_CODE
+	left join org_impl.SERVICE_PROVIDER_HUB in_sph on in_sph.SERVICE_PROVIDER_CODE = polsl.INITIATOR_EMPLOYEE_CODE
+	left join org_impl.SERVICE_PROVIDER_INFO_SAT_LATEST in_sps on in_sps.SERVICE_PROVIDER_INFO_HKEY = in_sph.SERVICE_PROVIDER_HKEY
+	left join org_impl.ORGANISATION_UNIT_HUB ouh on ouh.ORGANISATION_UNIT_CODE = polsl.INITIATOR_ORGUNIT_CODE
+	left join org_impl.ORGANISATION_UNIT_INFO_SAT_LATEST inOus on inOus.ORGANISATION_UNIT_INFO_HKEY = ouh.ORGANISATION_UNIT_HKEY
+	outer apply (
+		select top 1 * from acc_impl.CA_ACT_HISTORY
+		where ACT_ID = ai.ACT_ID and (STATUS_ID_TO IN (5, 8))
+		order by ACT_HISTORY_ID DESC
+	) actH
+	outer apply (
+		select alc.DOCUMENT_NO, alcp.DUE_DATE, matp.SOURCE_LINE_ID,
+			sum(pc.DOC_BASE_AMOUNT) as DOC_BASE_AMOUNT
+			--aipc.ACT_ID, aipc.ACT_ITEM_ID
+		from
+			acc_impl.ALLOCATION alc
+			inner join acc_impl.ALLOCATION_POLICY alcp on alcp.ALLOCATION_ID = alc.ALLOCATION_ID
+			inner join acc_impl.MATCHING mat on mat.ALLOCATION_ID = alc.ALLOCATION_ID
+			inner join acc_impl.MATCHING_POLICY matp on matp.MATCHING_ID = mat.MATCHING_ID
+			inner join acc_impl.PAYABLE_COMMISSION pc on pc.MATCHING_ID = mat.MATCHING_ID and (pc.CREATE_DATE <= actH.CREATE_DATE or actH.CREATE_DATE IS NULL)
+			--acc_impl.CA_ACT_ITEM_PC aipc
+		where alc.DOCUMENT_NO = ai.REFERENCE_NO and alcp.DUE_DATE = ai.DUE_DATE and matp.SOURCE_LINE_ID = ai.SOURCE_LINE_ID
+			and not exists (select * from acc_impl.CA_ACT_ITEM_PC where (ACT_ID = ai.ACT_ID or CANCELLED = 0) and PAYABLE_COMMISSION_ID = pc.PAYABLE_COMMISSION_ID)
+		group by alc.DOCUMENT_NO, alcp.DUE_DATE, matp.OBJECT_CODE, matp.SOURCE_LINE_ID
+	) pcFree
+	left join pas_impl.POLICY_ADDITIONAL_INITIATOR_LINK pailMain
+		inner join pas_impl.POLICY_ADDITIONAL_INITIATOR_SAT paisMain on
+			paisMain.POLICY_ADDITIONAL_INITIATOR_HKEY = pailMain.POLICY_ADDITIONAL_INITIATOR_HKEY
+			and paisMain.INITIATOR_TYPE = 'Main'
+			and paisMain.IS_DELETED = 0
+		on pailMain.POLICY_HKEY = polh.POLICY_HKEY
+	left join pas_impl.POLICY_ADDITIONAL_INITIATOR_LINK pailSplit
+		inner join pas_impl.POLICY_ADDITIONAL_INITIATOR_SAT paisSplit on
+			paisSplit.POLICY_ADDITIONAL_INITIATOR_HKEY = pailSplit.POLICY_ADDITIONAL_INITIATOR_HKEY
+			and paisSplit.INITIATOR_TYPE = 'Split'
+			and paisSplit.IS_DELETED = 0
+		on pailSplit.POLICY_HKEY = polh.POLICY_HKEY
+	left join ORG_IMPL.SP_SUB_AGENT_SAT_LATEST spsas on spsas.SP_SUB_AGENT_HKEY = in_sph.SERVICE_PROVIDER_HKEY
+	left join bfx_impl.RGS_BRANCHES branch on branch.ID = spsas.BRANCH_ID
+	left join BFX_IMPL.CREDIT_PROGRAM cp on cp.CODE = polsl.CREDIT_PROGRAM_ID
+	left join CFX.PUBLISHED_ARTIFACT art on art.PUBLISHED_ARTIFACT_ID = c.PUBLISHED_ARTIFACT_ID
+	left join pas_impl.AA_HUB aah on aah.AA_NUMBER = act.AGENT_AGREEMENT_NUMBER
+	left join pas_impl.AA_SAT_LATEST aas on aas.AA_HKEY = aah.AA_HKEY
+	left join org_impl.SERVICE_PROVIDER_HUB sph on sph.SERVICE_PROVIDER_CODE = act.AGENT_SERVICE_PROVIDER_CODE
+	left join org_impl.SERVICE_PROVIDER_INFO_SAT_LATEST sps on sps.SERVICE_PROVIDER_INFO_HKEY = sph.SERVICE_PROVIDER_HKEY
+	left join pty_impl.PARTY_HUB ptyh on ptyh.PARTY_CODE = sps.PARTY_CODE
+	left join pty_impl.PARTY_INFO_SAT_LATEST ptyis on ptyis.PARTY_INFO_HKEY = ptyh.PARTY_HKEY
+	left join
+	(
+		select pvl.POLICY_HKEY, max(vs.STATE) as STATE
+		from
+			pas_impl.POLICY_VERIFICATION_LINK pvl
+			inner join pas_impl.VERIFICATION_HUB vh on vh.VERIFICATION_HKEY = pvl.VERIFICATION_HKEY
+			inner join pas_impl.VERIFICATION_SAT_LATEST vs on vs.VERIFICATION_HKEY = pvl.VERIFICATION_HKEY
+		group by pvl.POLICY_HKEY
+	) v on v.POLICY_HKEY = polh.POLICY_HKEY
+	left join (
+		select pal.POLICY_HKEY, max(ams.ISSUE_DATE) as ISSUE_DATE, cast(max(cc.SYS_CREATED_ON) as date) as CREATED_ON, ams.AMENDMENT_REASON
+		from
+			pas_impl.POLICY_AMENDMENT_LINK pal
+			inner join pas_impl.AMENDMENT_SAT_LATEST ams on ams.AMENDMENT_HKEY = pal.AMENDMENT_HKEY
+			inner join pas_impl.AMENDMENT_HUB pah on pah.AMENDMENT_HKEY = pal.AMENDMENT_HKEY
+			inner join pas.contract cc on cc.CONTRACT_NUMBER = pah.AMENDMENT_NUMBER
+			inner join cfg.PROCESS_STATE amState on amState.PROCESS_STATE_ID = cc.STATE_ID
+		where 1=1
+			and ams.AMENDMENT_TYPE = 'Cancellation'
+			and amState.CODE_NAME = 'Activated'
+		group by pal.POLICY_HKEY, ams.AMENDMENT_REASON
+	) cancellationAm on cancellationAm.POLICY_HKEY = polh.POLICY_HKEY
+where 1=1
+{{#if parameters.actNo}}
+	and act.ACT_NO = @actNo
+{{/if}}
+{{#if parameters.actItemIds}}
+	and ai.ACT_ITEM_ID in (@actItemIds)
+{{/if}}

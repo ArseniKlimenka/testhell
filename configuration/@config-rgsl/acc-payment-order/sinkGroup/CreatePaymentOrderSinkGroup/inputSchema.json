@@ -1,0 +1,55 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+        "paymentOrderType",
+        "referenceNumber"
+    ],
+    "properties": {
+        "paymentOrderType": {
+            "$ref": "component:PaymentOrderType"
+        },
+        "paymentOrderSubtype": {
+            "$ref": "component:PaymentOrderSubtype"
+        },
+        "referenceNumber": {
+            "type": "string",
+            "description": "Reference document number used as basis for payment order. (it can be claim, payment, contract, commission act)"
+        },
+        "cancellationNumber": {
+            "type": "string",
+            "description": "Number of cancellation amendment"
+        },
+        "commissionActId": {
+            "type": "number",
+            "description": "Id of commission act"
+        },
+        "manualAmount": {
+            "type": "number"
+        },
+        "beneficiaryCode": {
+            "type": "string",
+            "description": "Claim beneficiary code"
+        },
+        "beneficiaryReasonCode": {
+            "type": "string",
+            "description": "Claim beneficiary reason code"
+        },
+        "beneficiaryPaymentTypeCode": {
+            "type": "string"
+        },
+        "shoudlUpdateRefDoc": {
+            "type": "boolean"
+        },
+        "cancellationRecipientCode": {
+            "type": "string"
+        },
+        "cnlRecipientPaymentTypeCode": {
+            "type": "string"
+        },
+        "comments": {
+            "type": "string"
+        }
+    }
+}

@@ -1,0 +1,121 @@
+{
+    "type": "HeaderContentLayout",
+    "fixedPosition": true,
+    "elements": [
+        {
+            "type": "Group",
+            "width": 3,
+            "stackContent": "Left",
+            "elements": [
+                {
+                    "type": "Component",
+                    "name": "HeaderTitle",
+                    "value": {
+                        "$ref": "#"
+                    }
+                },
+                {
+                    "type": "OutputText",
+                    "skipTranslate": true,
+                    "defaultValue": "",
+                    "value": {
+                        "$ref": "#/properties/Number"
+                    },
+                    "textStyle": {
+                        "uppercase": true,
+                        "textSize": "Normal",
+                        "textColor": "Blue"
+                    },
+                    "elementId": "ai-info-control"
+                },
+                {
+                    "type": "OutputText",
+                    "elementId": "documentStateId",
+                    "value": {
+                        "$ref": "#/properties/State"
+                    },
+                    "textStyle": {
+                        "uppercase": true,
+                        "textSize": "Normal",
+                        "textColor": "Blue"
+                    },
+                    "template": "&nbsp;{{#style 'bold'}}({{#i18n}}states@{{expr Description}}{{/i18n}}){{/style}}"
+                }
+            ]
+        },
+        {
+            "type": "Group",
+            "width": 1,
+            "stackContent": "Right",
+            "elements": [
+                {
+                    "type": "LockedControl",
+                    "elementId": "ai-locked-control",
+                    "operations": "AvailableOperations",
+                    "tooltip": {
+                        "title": "Readonly document",
+                        "description": "This document is read-only and it is not possible to save any changes."
+                    },
+                    "value": {
+                        "$ref": "#"
+                    }
+                },
+                {
+                    "type": "Actor",
+                    "value": {
+                        "$ref": "#/properties/WorkUnitActor"
+                    },
+                    "elementId": "ai-actor-selection-control"
+                },
+                {
+                    "type": "TransitionsRelations",
+                    "transitions": "AvailableTransitions",
+                    "relations": "AvailableRelations",
+                    "value": {
+                        "$ref": "#"
+                    },
+                    "elementId": "ai-transitions-relations-control",
+                    "rule": {
+                        "effect": "HIDE",
+                        "condition": {
+                            "type": "FUNC",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ],
+                            "ruleFunction": "hideTransitionsRelationsControl"
+                        }
+                    }
+                },
+                {
+                    "type": "Printouts",
+                    "icon": {
+                        "name": "Print",
+                        "size": "Medium"
+                    },
+                    "printouts": "AvailablePrintouts",
+                    "entityIdentifiers": [
+                        "Number"
+                    ],
+                    "value": {
+                        "$ref": "#"
+                    },
+                    "elementId": "ai-printouts-control",
+                    "rule": {
+                        "effect": "HIDE",
+                        "condition": {
+                            "type": "FUNC",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ],
+                            "ruleFunction": "hidePrintoutsControl"
+                        }
+                    }
+                }
+            ]
+        }
+    ]
+}

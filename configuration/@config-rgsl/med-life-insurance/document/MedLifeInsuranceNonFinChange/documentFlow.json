@@ -1,0 +1,326 @@
+{
+    "processType": "MedLifeInsuranceNonFinChange",
+    "actors": [
+        "Operations",
+        "Methodology",
+        "Actuary",
+        "Legal",
+        "Security",
+        "Underwriting",
+        "PartnerSalesSupport",
+        "ClientServiceCenter",
+        "CallCenter",
+        "Viewer",
+        "System"
+    ],
+    "initialState": "OperationsApproval",
+    "states": [
+        {
+            "name": "OperationsApproval",
+            "operations": [
+                {
+                    "name": "Save",
+                    "exclusiveToAssignedUser": true
+                }
+            ]
+        },
+        {
+            "name": "Rejected",
+            "operations": [],
+            "discardsVersion": true
+        },
+        {
+            "name": "RejectedByClient",
+            "operations": [],
+            "discardsVersion": true
+        },
+        {
+            "name": "Cancelled",
+            "operations": [],
+            "discardsVersion": true
+        },
+        {
+            "name": "InsuranceMethodologyApproval",
+            "operations": [
+                {
+                    "name": "Save",
+                    "exclusiveToAssignedUser": true
+                }
+            ]
+        },
+        {
+            "name": "ActuaryApproval",
+            "operations": [
+                {
+                    "name": "Save",
+                    "exclusiveToAssignedUser": true
+                }
+            ]
+        },
+        {
+            "name": "LegalApproval",
+            "operations": [
+                {
+                    "name": "Save",
+                    "exclusiveToAssignedUser": true
+                }
+            ]
+        },
+        {
+            "name": "SecurityApproval",
+            "operations": [
+                {
+                    "name": "Save",
+                    "exclusiveToAssignedUser": true
+                }
+            ]
+        },
+        {
+            "name": "UnderwriterApproval",
+            "operations": [
+                {
+                    "name": "Save",
+                    "exclusiveToAssignedUser": true
+                }
+            ]
+        },
+        {
+            "name": "CallCenterApproval",
+            "operations": []
+        },
+        {
+            "name": "PartnerSalesSupportApproval",
+            "operations": []
+        },
+        {
+            "name": "CustomerServiceApproval",
+            "operations": []
+        },
+        {
+            "name": "RequestToClient",
+            "operations": [
+                {
+                    "name": "Save",
+                    "exclusiveToAssignedUser": true
+                }
+            ]
+        },
+        {
+            "name": "Activated",
+            "appliesVersion": true
+        },
+        {
+            "name": "AwaitingRequestAnswers",
+            "operations": []
+        }
+    ],
+    "transitions": [
+        {
+            "name": "OperationsApproval_to_Cancelled",
+            "from": "OperationsApproval",
+            "to": "Cancelled",
+            "allowOnValidationErrors": {
+                "all": true
+            },
+            "exclusiveToAssignedUser": true
+        },
+        {
+            "name": "OperationsApproval_to_Rejected",
+            "from": "OperationsApproval",
+            "to": "Rejected",
+            "allowOnValidationErrors": {
+                "all": true
+            },
+            "exclusiveToAssignedUser": true
+        },
+        {
+            "name": "OperationsApproval_to_RejectedByClient",
+            "from": "OperationsApproval",
+            "to": "RejectedByClient",
+            "allowOnValidationErrors": {
+                "all": true
+            },
+            "exclusiveToAssignedUser": true
+        },
+        {
+            "name": "OperationsApproval_to_InsuranceMethodologyApproval",
+            "from": "OperationsApproval",
+            "to": "InsuranceMethodologyApproval",
+            "allowOnValidationErrors": {
+                "all": false
+            },
+            "exclusiveToAssignedUser": true
+        },
+        {
+            "name": "InsuranceMethodologyApproval_to_OperationsApproval",
+            "from": "InsuranceMethodologyApproval",
+            "to": "OperationsApproval",
+            "allowOnValidationErrors": {
+                "all": false
+            },
+            "exclusiveToAssignedUser": true
+        },
+        {
+            "name": "OperationsApproval_to_ActuaryApproval",
+            "from": "OperationsApproval",
+            "to": "ActuaryApproval",
+            "allowOnValidationErrors": {
+                "all": false
+            },
+            "exclusiveToAssignedUser": true
+        },
+        {
+            "name": "ActuaryApproval_to_OperationsApproval",
+            "from": "ActuaryApproval",
+            "to": "OperationsApproval",
+            "allowOnValidationErrors": {
+                "all": false
+            },
+            "exclusiveToAssignedUser": true
+        },
+        {
+            "name": "OperationsApproval_to_LegalApproval",
+            "from": "OperationsApproval",
+            "to": "LegalApproval",
+            "allowOnValidationErrors": {
+                "all": false
+            },
+            "exclusiveToAssignedUser": true
+        },
+        {
+            "name": "LegalApproval_to_OperationsApproval",
+            "from": "LegalApproval",
+            "to": "OperationsApproval",
+            "allowOnValidationErrors": {
+                "all": false
+            },
+            "exclusiveToAssignedUser": true
+        },
+        {
+            "name": "OperationsApproval_to_SecurityApproval",
+            "from": "OperationsApproval",
+            "to": "SecurityApproval",
+            "allowOnValidationErrors": {
+                "all": false
+            },
+            "exclusiveToAssignedUser": true
+        },
+        {
+            "name": "SecurityApproval_to_OperationsApproval",
+            "from": "SecurityApproval",
+            "to": "OperationsApproval",
+            "allowOnValidationErrors": {
+                "all": false
+            },
+            "exclusiveToAssignedUser": true
+        },
+        {
+            "name": "OperationsApproval_to_UnderwriterApproval",
+            "from": "OperationsApproval",
+            "to": "UnderwriterApproval",
+            "allowOnValidationErrors": {
+                "all": false
+            },
+            "exclusiveToAssignedUser": true
+        },
+        {
+            "name": "UnderwriterApproval_to_OperationsApproval",
+            "from": "UnderwriterApproval",
+            "to": "OperationsApproval",
+            "allowOnValidationErrors": {
+                "all": false
+            },
+            "exclusiveToAssignedUser": true
+        },
+        {
+            "name": "OperationsApproval_to_CallCenterApproval",
+            "from": "OperationsApproval",
+            "to": "CallCenterApproval",
+            "allowOnValidationErrors": {
+                "all": false
+            },
+            "exclusiveToAssignedUser": true
+        },
+        {
+            "name": "CallCenterApproval_to_RequestToClient",
+            "from": "CallCenterApproval",
+            "to": "RequestToClient",
+            "allowOnValidationErrors": {
+                "all": false
+            },
+            "exclusiveToAssignedUser": true
+        },
+        {
+            "name": "OperationsApproval_to_PartnerSalesSupportApproval",
+            "from": "OperationsApproval",
+            "to": "PartnerSalesSupportApproval",
+            "allowOnValidationErrors": {
+                "all": false
+            },
+            "exclusiveToAssignedUser": true
+        },
+        {
+            "name": "PartnerSalesSupportApproval_to_RequestToClient",
+            "from": "PartnerSalesSupportApproval",
+            "to": "RequestToClient",
+            "allowOnValidationErrors": {
+                "all": false
+            },
+            "exclusiveToAssignedUser": true
+        },
+        {
+            "name": "OperationsApproval_to_CustomerServiceApproval",
+            "from": "OperationsApproval",
+            "to": "CustomerServiceApproval",
+            "allowOnValidationErrors": {
+                "all": false
+            },
+            "exclusiveToAssignedUser": true
+        },
+        {
+            "name": "CustomerServiceApproval_to_RequestToClient",
+            "from": "CustomerServiceApproval",
+            "to": "RequestToClient",
+            "allowOnValidationErrors": {
+                "all": false
+            },
+            "exclusiveToAssignedUser": true
+        },
+        {
+            "name": "RequestToClient_to_OperationsApproval",
+            "from": "RequestToClient",
+            "to": "OperationsApproval",
+            "allowOnValidationErrors": {
+                "all": false
+            },
+            "exclusiveToAssignedUser": true
+        },
+        {
+            "name": "OperationsApproval_to_Activated",
+            "from": "OperationsApproval",
+            "to": "Activated",
+            "allowOnValidationErrors": {
+                "all": false
+            },
+            "exclusiveToAssignedUser": true,
+            "actionToRunBefore": "setAmendmentIssueDate"
+        },
+        {
+            "name": "OperationsApproval_to_AwaitingRequestAnswers",
+            "from": "OperationsApproval",
+            "to": "AwaitingRequestAnswers",
+            "allowOnValidationErrors": {
+                "all": false
+            },
+            "exclusiveToAssignedUser": true
+        },
+        {
+            "name": "AwaitingRequestAnswers_to_OperationsApproval",
+            "from": "AwaitingRequestAnswers",
+            "to": "OperationsApproval",
+            "allowOnValidationErrors": {
+                "all": false
+            }
+        }
+    ]
+}

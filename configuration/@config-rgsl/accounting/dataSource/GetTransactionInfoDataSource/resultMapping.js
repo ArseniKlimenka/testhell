@@ -1,0 +1,43 @@
+module.exports = function resultMapping(input) {
+
+    return {
+        pairNo: input.PAIR_NO,
+        isDebit: input.IS_DEBIT,
+        postDate: input.POST_DATE,
+        eventDate: input.EVENT_DATE,
+        glAccountNo: input.GL_ACCOUNT_NO,
+        sourceDocumentNo: input.SOURCE_DOCUMENT_NO,
+        periodDesc: input.PERIOD_DESC,
+        sourceCurrencyCode: input.SOURCE_CURRENCY_CODE,
+        sourceAmount: input.SOURCE_AMOUNT,
+        accountingGrossAmount: input.ACCOUNTING_GROSS_AMOUNT,
+        accountingAmountBt: input.ACCOUNTING_AMOUNT_BT,
+        contractNo: input.CONTRACT_NO,
+        mainContractNo: input.MAIN_CONTRACT_NO,
+        riskCode: input.RISK_CODE,
+        balanceUnit: input.BALANCE_UNIT,
+        transactionCode_1: input.TRANSACTION_CODE_1,
+        transactionCode_2: input.TRANSACTION_CODE_2,
+        transactionTypeDesc: input.TRANSACTION_TYPE_DESC,
+        ofrCode: input.OFR_CODE,
+        sapGlAccountNo: input.SAP_GL_ACCOUNT_NO,
+        register: input.REGISTER,
+        costCenter: input.COST_CENTER,
+        tradingPartner: input.TRADING_PARTNER,
+        documentNo: input.DOCUMENT_NO,
+        cancelledDocumentNo: input.CANCELLED_DOCUMENT_NO,
+        aaOrderNo: input.AA_ORDER_NO,
+        xref2: input.XREF2,
+        personalAccountNumber: input.PERSONAL_ACCOUNT_NUMBER,
+        businessLine: input.BUSINESS_LINE,
+        cedentsCountry: input.CEDENTS_COUNTRY,
+        localDimension_1: input.LOCAL_DIMENSION_1,
+        localDimension_2: input.LOCAL_DIMENSION_2,
+        localDimension_3_code: input.LOCAL_DIMENSION_3_CODE,
+        partyCode: input.PARTY_CODE,
+        transactionDocumentTypeCode: input.TRANSACTION_DOCUMENT_TYPE_CODE,
+        isLife: input.IS_LIFE,
+        commissionRate: input.COMMISSION_RATE
+    };
+};
+

@@ -1,0 +1,199 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "Party",
+    "description": "Data schema describing general party information",
+    "type": "object",
+    "additionalProperties": false,
+    "aiValidation": {
+        "rule": "validationPartyGeneralData"
+    },
+    "aiDataEnrichment": [
+        {
+            "name": "setCountryByResident"
+        },
+        {
+            "name": "enrichPartyDuplicates",
+            "dataSource": "GetPartyDuplicatesDataSource"
+        },
+        {
+            "name": "NonResidentEnrichment"
+        }
+    ],
+    "properties": {
+        "isNonResident": {
+            "type": "boolean",
+            "aiTitle": "isNonResident"
+        },
+        "isPodFt": {
+            "type": "boolean",
+            "aiTitle": "isPodFt"
+        },
+        "isNotificationSent": {
+            "type": "boolean",
+            "aiTitle": "isNotificationSent"
+        },
+        "registrationCountry": {
+            "aiTitle": "registrationCountry",
+            "$ref": "component:PartyCountry"
+        },
+        "taxResidence": {
+            "aiTitle": "taxResidence",
+            "$ref": "component:PartyCountry"
+        },
+        "INNKIO": {
+            "type": "string",
+            "aiTitle": "INNKIO"
+        },
+        "OKPO": {
+            "type": "string",
+            "aiTitle": "OKPO"
+        },
+        "OKVED": {
+            "type": "string",
+            "aiTitle": "OKVED"
+        },
+        "nonResidentCode": {
+            "type": "string",
+            "aiTitle": "nonResidentCode"
+        },
+        "TIN": {
+            "type": "string",
+            "aiTitle": "TIN"
+        },
+        "TINAbsenceReason": {
+            "type": "string",
+            "aiTitle": "TINAbsenceReason"
+        },
+        "noTIN": {
+            "type": "boolean",
+            "aiTitle": "noTIN"
+        },
+        "tradingPartnerCode": {
+            "type": "integer",
+            "aiTitle": "tradingPartnerCode"
+        },
+        "beneficiaryOwner": {
+            "type": "object",
+            "properties": {
+                "beneficiaryOwnerDesc": {
+                    "type": "string",
+                    "aiTitle": "beneficiaryOwnerDesc"
+                },
+                "beneficiaryOwnerCode": {
+                    "type": "string",
+                    "aiTitle": "beneficiaryOwnerCode"
+                }
+            },
+            "aiTitle": "beneficiaryOwner"
+        },
+        "anotherNaturalPersons": {
+            "type": "array",
+            "additionalProperties": false,
+            "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                    "anotherNaturalPerson": {
+                        "$ref": "component:PartyLookUpSearch",
+                        "aiTitle": "anotherNaturalPerson"
+                    },
+                    "fraction": {
+                        "type": "number",
+                        "aiTitle": "fraction"
+                    }
+                }
+            },
+            "aiTitle": "anotherNaturalPersons"
+        },
+        "riskEstimation": {
+            "type": "string",
+            "aiTitle": "riskEstimation"
+        },
+        "relationGoal": {
+            "type": "string",
+            "enum": [
+                "insurance",
+                "otherwise"
+            ],
+            "aiTitle": "relationGoal"
+        },
+        "suggestedRelationType": {
+            "type": "string",
+            "enum": [
+                "longTerm",
+                "shortTerm"
+            ],
+            "aiTitle": "suggestedRelationType"
+        },
+        "goalOfFinancialActivity": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "goalOfFinancialActivityDesc": {
+                    "type": "string",
+                    "aiTitle": "goalOfFinancialActivityDesc"
+                }
+            },
+            "aiTitle": "goalOfFinancialActivity"
+        },
+        "descriptionForGoalOfFinancialActivity": {
+            "type": "string",
+            "aiTitle": "descriptionForGoalOfFinancialActivity"
+        },
+        "financialState": {
+            "type": "string",
+            "enum": [
+                "sustainable",
+                "unstable"
+            ],
+            "aiTitle": "financialState"
+        },
+        "businessReputation": {
+            "type": "string",
+            "enum": [
+                "positive",
+                "negative"
+            ],
+            "aiTitle": "businessReputation"
+        },
+        "incomeSource": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "incomeSourceDesc": {
+                    "type": "string",
+                    "aiTitle": "incomeSourceDesc"
+                }
+            },
+            "aiTitle": "incomeSource"
+        },
+        "descriptionForIncomeSource": {
+            "type": "string",
+            "aiTitle": "descriptionForIncomeSource"
+        },
+        "duplicatesCount": {
+            "type": "integer",
+            "description": "Used in enrichment to catch duplicates on work by API",
+            "aiTitle": "duplicatesCount"
+        },
+        "duplicateMasterNumber": {
+            "type": "string",
+            "description": "Used in deduplicates script",
+            "aiTitle": "duplicateMasterNumber"
+        },
+        "documentsValidationDate": {
+            "type": "string",
+            "aiFormat": "date",
+            "aiTitle": "documentsValidationDate"
+        },
+        "lastUpdateDate": {
+            "type": "string",
+            "aiFormat": "date",
+            "aiTitle": "lastUpdateDate"
+        },
+        "innerBankId": {
+            "type": "string",
+            "aiTitle": "innerBankId"
+        }
+    }
+}

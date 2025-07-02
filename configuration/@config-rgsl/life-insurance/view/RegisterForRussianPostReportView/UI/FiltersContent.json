@@ -1,0 +1,46 @@
+{
+    "type": "Section",
+    "sectionLevel": 1,
+    "label": "RegisterForRussianPostReport",
+    "width": 6,
+    "elements": [
+        {
+            "type": "Input",
+            "control": "DateRange",
+            "dateFrom": {
+                "type": "Input",
+                "label": "russianPostRegisterInclusionDateFrom",
+                "width": 1,
+                "value": {
+                    "$ref": "#/properties/request/properties/data/properties/criteria/properties/russianPostRegisterInclusionDateFrom"
+                },
+                "control": "DatetimePicker"
+            },
+            "dateTo": {
+                "type": "Input",
+                "label": "russianPostRegisterInclusionDateTo",
+                "width": 1,
+                "value": {
+                    "$ref": "#/properties/request/properties/data/properties/criteria/properties/russianPostRegisterInclusionDateTo"
+                },
+                "control": "DatetimePicker"
+            },
+            "width": 2
+        },
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "Button",
+                    "label": "ExportRegisterForRussianPostReport",
+                    "onClick": [
+                        {
+                            "commandType": "executeAction",
+                            "actionName": "exportRegisterForRussianPostReport"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

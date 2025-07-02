@@ -1,0 +1,98 @@
+{
+    "type": "Group",
+    "elements": [
+        {
+            "type": "GridLayout",
+            "numberOfColumns": 12,
+            "elements": [
+                {
+                    "type": "Group",
+                    "elements": [
+                        {
+                            "type": "DataGrid",
+                            "orderBy": "Description",
+                            "value": {
+                                "$ref": "#"
+                            },
+                            "mode": "DataSource",
+                            "header": {
+                                "showReloadButton": true,
+                                "showNumberOfResults": true
+                            },
+                            "pagination": {
+                                "mode": "Regular",
+                                "pageSizes": [
+                                    5,
+                                    10,
+                                    15
+                                ]
+                            },
+                            "selection": {
+                                "mode": "None"
+                            },
+                            "height": "None",
+                            "columns": [
+                                {
+                                    "sortable": false,
+                                    "title": "Type of Document",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "value": {
+                                            "$ref": "#/properties/resultData/properties/related/properties/translatedCodeName"
+                                        }
+                                    }
+                                },
+                                {
+                                    "sortable": false,
+                                    "title": "Document number",
+                                    "cellContent": {
+                                        "type": "Link",
+                                        "label": "Document number",
+                                        "targetType": "Entity",
+                                        "value": {
+                                            "mapping": "PrepareDocumentLink",
+                                            "$ref": "#/properties/resultData/properties/related/properties/"
+                                        },
+                                        "content": {
+                                            "text": {
+                                                "type": "OutputText",
+                                                "textProperties": [
+                                                    "bold"
+                                                ],
+                                                "template": "{{expr documentNumber}}",
+                                                "value": {
+                                                    "$ref": "#"
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                {
+                                    "sortable": false,
+                                    "title": "Created On",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "template": "{{expr createdOn 'dt'}}",
+                                        "value": {
+                                            "$ref": "#/properties/resultData/properties/related"
+                                        }
+                                    }
+                                },
+                                {
+                                    "sortable": false,
+                                    "title": "Document state",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "value": {
+                                            "$ref": "#/properties/resultData/properties/related/properties/documentState"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

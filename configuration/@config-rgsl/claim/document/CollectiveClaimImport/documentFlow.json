@@ -1,0 +1,76 @@
+{
+    "processType": "DataImport",
+    "initialState": "Draft",
+    "actors": [
+        "ClaimManager",
+        "System"
+    ],
+    "states": [
+        {
+            "name": "Draft",
+            "operations": [
+                "Save"
+            ]
+        },
+        {
+            "name": "Loading",
+            "operations": []
+        },
+        {
+            "name": "ReloadSetup",
+            "operations": [
+                "Save"
+            ]
+        },
+        {
+            "name": "Loaded",
+            "operations": []
+        },
+        {
+            "name": "Importing",
+            "operations": []
+        },
+        {
+            "name": "Imported",
+            "operations": []
+        }
+    ],
+    "transitions": [
+        {
+            "name": "StartLoading",
+            "from": "Draft",
+            "to": "Loading"
+        },
+        {
+            "name": "FinishLoading",
+            "from": "Loading",
+            "to": "Loaded",
+            "broadcastEvent": {
+                "serverSideEvents": true
+            }
+        },
+        {
+            "name": "StartReloading",
+            "from": "ReloadSetup",
+            "to": "Loading"
+        },
+        {
+            "name": "StartImporting",
+            "from": "Loaded",
+            "to": "Importing"
+        },
+        {
+            "name": "Reload",
+            "from": "Loaded",
+            "to": "ReloadSetup"
+        },
+        {
+            "name": "FinishImporting",
+            "from": "Importing",
+            "to": "Imported",
+            "broadcastEvent": {
+                "serverSideEvents": true
+            }
+        }
+    ]
+}

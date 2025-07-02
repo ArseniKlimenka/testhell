@@ -1,0 +1,3 @@
+update bfx_impl.DECLARATION_MAIN
+set DEPARTAMENT = 'compliance'
+where id = 'C5C90EED-E8F0-400F-A48D-597DB963A436'

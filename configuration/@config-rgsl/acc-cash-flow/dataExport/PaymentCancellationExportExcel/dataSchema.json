@@ -1,0 +1,76 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema",
+    "description": "CommissionActRgslExportExcel result data",
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+        "totalInstallmentAmount": {
+            "type": "number"
+        },
+        "totalInstallmentOpenAmount": {
+            "type": "number"
+        },
+        "totalPayAmount": {
+            "type": "number"
+        },
+        "totalDocAmount": {
+            "type": "number"
+        },
+        "lines": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "allocationDate": {
+                        "type": "string",
+                        "aiFormat": "date"
+                    },
+                    "allocationId": {
+                        "type": "integer"
+                    },
+                    "bsiNo": {
+                        "type": "string"
+                    },
+                    "bsiDescription": {
+                        "type": "string"
+                    },
+                    "installmentAmount": {
+                        "type": "number"
+                    },
+                    "installmentOpenAmount": {
+                        "type": "number"
+                    },
+                    "installmentStatus": {
+                        "$ref": "component:InstallmentStatusComponent"
+                    },
+                    "paymentStatusId": {
+                        "$ref": "component:PaymentStatusComponent"
+                    },
+                    "transactionDate": {
+                        "type": "string",
+                        "aiFormat": "date"
+                    },
+                    "paymentDate": {
+                        "type": "string",
+                        "aiFormat": "date"
+                    },
+                    "payAmount": {
+                        "type": "number"
+                    },
+                    "docAmount": {
+                        "type": "number"
+                    },
+                    "exchangeDifference": {
+                        "type": "number"
+                    },
+                    "payCurrencyCode": {
+                        "type": "string"
+                    },
+                    "payerName": {
+                        "type": "string"
+                    }
+                }
+            }
+        }
+    }
+}

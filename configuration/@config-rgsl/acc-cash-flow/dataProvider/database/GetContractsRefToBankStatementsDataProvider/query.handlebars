@@ -1,0 +1,28 @@
+SELECT DISTINCT
+    pr.REFERENCE_NO as CONTRACT_NUMBER,
+    pa.CODE_NAME as CONFIGURATION_CODE_NAME,
+    pa.PUBLISHED_VERSION as CONFIGURATION_VERSION
+FROM
+    ACC_IMPL.BANK_STATEMENT_ITEM bsi
+    inner join ACC_IMPL.PAYMENT_REFERENCE pr on pr.BANK_STATEMENT_ITEM_ID = bsi.BANK_STATEMENT_ITEM_ID
+	inner join PAS.CONTRACT c on c.CONTRACT_NUMBER = pr.REFERENCE_NO
+	inner join cfg.PROCESS_STATE ps on ps.PROCESS_STATE_ID = c.STATE_ID
+    inner join PAS_IMPL.POLICY_HUB ph on ph.CONTRACT_NUMBER = c.CONTRACT_NUMBER
+    inner join PAS_IMPL.POLICY_SAT_LATEST psat on psat.POLICY_HKEY = ph.POLICY_HKEY
+    inner join CFX.PUBLISHED_ARTIFACT pa on pa.PUBLISHED_ARTIFACT_ID = c.PUBLISHED_ARTIFACT_ID
+WHERE 1=1
+{{#if parameters.paymentStatusIds}}
+    and bsi.STATUS_ID in (@paymentStatusIds)
+{{/if}}
+{{#if parameters.direction}}
+    and bsi.DIRECTION = @direction
+{{/if}}
+{{#if parameters.transactionDateFrom}}
+    and bsi.TRANSACTION_DATE >= @transactionDateFrom
+{{/if}}
+{{#if parameters.currentStatus}}
+    and ps.CODE_NAME = @currentStatus
+{{/if}}
+{{#if parameters.issueFormCode}}
+    and psat.ISSUE_FORM_CODE in (@issueFormCode)
+{{/if}}

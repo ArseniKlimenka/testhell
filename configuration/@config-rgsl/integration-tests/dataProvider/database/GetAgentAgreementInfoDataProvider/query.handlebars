@@ -1,0 +1,37 @@
+select
+	aa.AGENT_AGREEMENT_ID,
+	aah.AA_NUMBER,
+	iaas.MANUAL_NUMBER,
+	iaas.EXTERNAL_NUMBER,
+	aas.LOAD_DATE as AA_LOAD_DATE,
+	iaas.MVZ_NUMBER,
+	iaas.CONCLUSION_DATE,
+	aas.AGENT as AGENT_CODE,
+	spis.PARTY_CODE as AGENT_PARTY_CODE
+from
+	pas_impl.AA_HUB aah
+	inner join pas_impl.AA_BASE_SAT_LATEST aas on aas.AA_BASE_HKEY = aah.AA_HKEY
+	inner join pas_impl.AA_SAT_LATEST iaas on iaas.AA_HKEY = aah.AA_HKEY
+	inner join pas.AGENT_AGREEMENT aa on aa.AGENT_AGREEMENT_NUMBER = aah.AA_NUMBER
+	inner join cfg.PROCESS_STATE ps on ps.PROCESS_STATE_ID = aa.STATE_ID
+	inner join org_impl.SERVICE_PROVIDER_HUB sph on sph.SERVICE_PROVIDER_CODE = aas.AGENT
+	inner join org_impl.SERVICE_PROVIDER_INFO_SAT_LATEST spis on spis.SERVICE_PROVIDER_INFO_HKEY = sph.SERVICE_PROVIDER_HKEY
+where 1=1
+{{#if parameters.fetchOriginal}}
+	and aa.AGENT_AGREEMENT_ID = aa.ORIGINAL_DOCUMENT_ID
+{{/if}}
+{{#if parameters.documentState}}
+	and ps.CODE_NAME = @documentState
+{{/if}}
+{{#if parameters.agentAgreementId}}
+	and aah.AA_NUMBER = @agentAgreementId
+{{/if}}
+{{#if parameters.agentAgreementNumber}}
+	and aah.AA_NUMBER = @agentAgreementNumber
+{{/if}}
+{{#if parameters.manualNumber}}
+	and iaas.MANUAL_NUMBER = @manualNumber
+{{/if}}
+{{#if parameters.externalNumber}}
+	and iaas.EXTERNAL_NUMBER = @externalNumber
+{{/if}}

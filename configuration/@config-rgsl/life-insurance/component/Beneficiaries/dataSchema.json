@@ -1,0 +1,39 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "Beneficiaries",
+    "type": "object",
+    "additionalProperties": false,
+    "aiValidation": {
+        "rule": "validateBeneficiaries"
+    },
+    "aiDataEnrichment": [
+        {
+            "name": "setHeritors"
+        },
+        {
+            "name": "setBeneficiariesInsured",
+            "dataSource": "GetPartyDataSource"
+        },
+        {
+            "name": "setStandardCategory"
+        }
+    ],
+    "properties": {
+        "isHeritors": {
+            "type": "boolean"
+        },
+        "isNotHeritors": {
+            "type": "boolean"
+        },
+        "beneficiaries": {
+            "type": "array",
+            "items": {
+                "$ref": "component:Beneficiary"
+            }
+        },
+        "specialConditions": {
+            "type": "string",
+            "aiTitle": "specialConditions"
+        }
+    }
+}

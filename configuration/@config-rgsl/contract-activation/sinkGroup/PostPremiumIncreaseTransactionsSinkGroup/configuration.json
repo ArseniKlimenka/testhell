@@ -1,0 +1,27 @@
+{
+    "sinks": [
+        {
+            "name": "FetchPostingData",
+            "fetch": {
+                "configuration": {
+                    "name": "GetPremiumTransactionPostingDataSource"
+                }
+            }
+        },
+        {
+            "name": "UpdatePostedUntilDate",
+            "database": {
+                "tables": [
+                    "ACC_IMPL.POSTED_PAYMENT_PLAN_SAT"
+                ]
+            }
+        },
+        {
+            "name": "PostTransaction",
+            "class": {
+                "className": "Adacta.AdInsure.RGSL.Accounting.API.Shared.Subledger.Services.IPostingServiceRgsl, Adacta.AdInsure.RGSL.Accounting.API",
+                "methodName": "PostTransaction"
+            }
+        }
+    ]
+}

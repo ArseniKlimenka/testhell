@@ -1,0 +1,520 @@
+{
+    "dimensions": {
+        "contractType": "Quote",
+        "productGroup": "med"
+    },
+    "entityType": "Contract",
+    "attachments": [
+        {
+            "attachmentType": "other",
+            "flow": "Incoming"
+        },
+        {
+            "attachmentType": "application",
+            "flow": "Incoming"
+        },
+        {
+            "attachmentType": "contractProject",
+            "flow": "Incoming"
+        },
+        {
+            "attachmentType": "contractSigned",
+            "flow": "Incoming"
+        },
+        {
+            "attachmentType": "cancellationApplication",
+            "flow": "Incoming"
+        },
+        {
+            "attachmentType": "changeApplication",
+            "flow": "Incoming"
+        },
+        {
+            "attachmentType": "returnPayments",
+            "flow": "Incoming"
+        },
+        {
+            "attachmentType": "amendment",
+            "flow": "Incoming"
+        },
+        {
+            "attachmentType": "infoLetter",
+            "flow": "Incoming"
+        },
+        {
+            "attachmentType": "issue",
+            "flow": "Incoming"
+        },
+        {
+            "attachmentType": "issueAnswer",
+            "flow": "Incoming"
+        },
+        {
+            "attachmentType": "incomeConfirmation",
+            "flow": "Incoming"
+        },
+        {
+            "attachmentType": "questionary",
+            "flow": "Incoming"
+        },
+        {
+            "attachmentType": "medicalDocuments",
+            "flow": "Incoming"
+        },
+        {
+            "attachmentType": "heritageDocuments",
+            "flow": "Incoming"
+        },
+        {
+            "attachmentType": "a7",
+            "flow": "Incoming"
+        },
+        {
+            "attachmentType": "attorney",
+            "flow": "Incoming"
+        },
+        {
+            "attachmentType": "servicesMemo",
+            "flow": "Incoming"
+        },
+        {
+            "attachmentType": "paymentsSummary",
+            "flow": "Incoming"
+        },
+        {
+            "attachmentType": "bankNotification",
+            "flow": "Incoming"
+        },
+        {
+            "attachmentType": "ApplicationPaymentInvestProfit",
+            "flow": "Incoming"
+        },
+        {
+            "attachmentType": "ApplicationCancellationInvestProfit",
+            "flow": "Incoming"
+        },
+        {
+            "attachmentType": "ApplicationInsuranceClaim",
+            "flow": "Incoming"
+        },
+        {
+            "attachmentType": "ApplicationMed",
+            "flow": "Incoming"
+        },
+        {
+            "attachmentType": "KIDAttachment",
+            "flow": "Incoming"
+        },
+        {
+            "attachmentType": "formSeventyPlus",
+            "flow": "Incoming"
+        },
+        {
+            "attachmentType": "managingDirectorUPIP",
+            "flow": "Incoming"
+        },
+        {
+            "attachmentType": "managingDirectorDRPK",
+            "flow": "Incoming"
+        }
+    ],
+    "validFrom": "2000-01-01",
+    "ui": {
+        "layout": "VersionedDocumentLayout",
+        "composition": {
+            "SummaryContent": "SummaryContent",
+            "MainContent": "MainContent"
+        }
+    },
+    "states": [
+        {
+            "name": "Draft",
+            "actors": [
+                {
+                    "actor": "Agent",
+                    "transitions": [
+                        "Draft_to_Cancelled",
+                        "Draft_to_OnReview"
+                    ],
+                    "uiSchema": "MainContent",
+                    "operations": [
+                        "Save"
+                    ],
+                    "relations": [],
+                    "allowComments": true
+                },
+                {
+                    "actor": "Operations",
+                    "transitions": [
+                        "Draft_to_Cancelled",
+                        "Draft_to_OnReview"
+                    ],
+                    "uiSchema": "MainContent",
+                    "operations": [
+                        "Save"
+                    ],
+                    "relations": []
+                },
+                {
+                    "actor": "UKSP",
+                    "transitions": [],
+                    "uiSchema": "MainContent",
+                    "operations": []
+                },
+                {
+                    "actor": "Underwriter",
+                    "transitions": [],
+                    "uiSchema": "MainContent",
+                    "operations": []
+                },
+                {
+                    "actor": "Viewer",
+                    "transitions": [],
+                    "uiSchema": "MainContent",
+                    "operations": []
+                },
+                {
+                    "actor": "System",
+                    "transitions": [
+                        "Draft_to_Approved",
+                        "Draft_to_Cancelled",
+                        "Draft_to_OnReview",
+                        "Draft_to_Issued"
+                    ],
+                    "uiSchema": "MainContent",
+                    "operations": [
+                        "Save"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "InfoRequest",
+            "actors": [
+                {
+                    "actor": "Agent",
+                    "transitions": [
+                        "InfoRequest_to_OnReview",
+                        "InfoRequest_to_Cancelled"
+                    ],
+                    "uiSchema": "MainContent",
+                    "operations": [],
+                    "relations": [],
+                    "allowComments": true
+                },
+                {
+                    "actor": "Operations",
+                    "transitions": [
+                        "InfoRequest_to_OnReview",
+                        "InfoRequest_to_Cancelled"
+                    ],
+                    "uiSchema": "MainContent",
+                    "operations": [],
+                    "relations": []
+                },
+                {
+                    "actor": "UKSP",
+                    "transitions": [],
+                    "uiSchema": "MainContent",
+                    "operations": []
+                },
+                {
+                    "actor": "Underwriter",
+                    "transitions": [],
+                    "uiSchema": "MainContent",
+                    "operations": []
+                },
+                {
+                    "actor": "Viewer",
+                    "transitions": [],
+                    "uiSchema": "MainContent",
+                    "operations": []
+                }
+            ]
+        },
+        {
+            "name": "OnReview",
+            "actors": [
+                {
+                    "actor": "Agent",
+                    "transitions": [],
+                    "uiSchema": "MainContent",
+                    "operations": [],
+                    "relations": []
+                },
+                {
+                    "actor": "Operations",
+                    "transitions": [],
+                    "uiSchema": "MainContent",
+                    "operations": [
+                        "Save"
+                    ],
+                    "relations": []
+                },
+                {
+                    "actor": "UKSP",
+                    "transitions": [
+                        "OnReview_to_Approved",
+                        "OnReview_to_Rejected",
+                        "OnReview_to_InfoRequest"
+                    ],
+                    "uiSchema": "MainContent",
+                    "operations": [],
+                    "allowComments": true
+                },
+                {
+                    "actor": "Underwriter",
+                    "transitions": [
+                        "OnReview_to_Approved",
+                        "OnReview_to_Rejected",
+                        "OnReview_to_InfoRequest",
+                        "OnReview_to_ChangeUnderwritingGroup"
+                    ],
+                    "uiSchema": "MainContent",
+                    "operations": [
+                        "Save"
+                    ],
+                    "allowComments": true
+                },
+                {
+                    "actor": "Viewer",
+                    "transitions": [],
+                    "uiSchema": "MainContent",
+                    "operations": []
+                }
+            ]
+        },
+        {
+            "name": "Approved",
+            "actors": [
+                {
+                    "actor": "Agent",
+                    "transitions": [
+                        "Approved_to_Cancelled"
+                    ],
+                    "uiSchema": "MainContent",
+                    "operations": [],
+                    "relations": []
+                },
+                {
+                    "actor": "Operations",
+                    "transitions": [
+                        "Approved_to_Cancelled"
+                    ],
+                    "uiSchema": "MainContent",
+                    "operations": [],
+                    "relations": []
+                },
+                {
+                    "actor": "UKSP",
+                    "transitions": [],
+                    "uiSchema": "MainContent",
+                    "operations": []
+                },
+                {
+                    "actor": "Underwriter",
+                    "transitions": [],
+                    "uiSchema": "MainContent",
+                    "operations": []
+                },
+                {
+                    "actor": "Viewer",
+                    "transitions": [],
+                    "uiSchema": "MainContent",
+                    "operations": []
+                }
+            ]
+        },
+        {
+            "name": "Rejected",
+            "actors": [
+                {
+                    "actor": "Agent",
+                    "transitions": [
+                        "Rejected_to_Cancelled"
+                    ],
+                    "uiSchema": "MainContent",
+                    "operations": [],
+                    "relations": []
+                },
+                {
+                    "actor": "Operations",
+                    "transitions": [
+                        "Rejected_to_Cancelled",
+                        "Rejected_to_Draft"
+                    ],
+                    "uiSchema": "MainContent",
+                    "operations": [],
+                    "relations": []
+                },
+                {
+                    "actor": "UKSP",
+                    "transitions": [],
+                    "uiSchema": "MainContent",
+                    "operations": []
+                },
+                {
+                    "actor": "Underwriter",
+                    "transitions": [],
+                    "uiSchema": "MainContent",
+                    "operations": []
+                },
+                {
+                    "actor": "Viewer",
+                    "transitions": [],
+                    "uiSchema": "MainContent",
+                    "operations": []
+                }
+            ]
+        },
+        {
+            "name": "Issued",
+            "actors": [
+                {
+                    "actor": "Agent",
+                    "operations": [],
+                    "uiSchema": "MainContent",
+                    "relations": []
+                },
+                {
+                    "actor": "Operations",
+                    "transitions": [],
+                    "uiSchema": "MainContent",
+                    "operations": [],
+                    "relations": []
+                },
+                {
+                    "actor": "UKSP",
+                    "transitions": [],
+                    "uiSchema": "MainContent",
+                    "operations": []
+                },
+                {
+                    "actor": "Underwriter",
+                    "transitions": [],
+                    "uiSchema": "MainContent",
+                    "operations": []
+                },
+                {
+                    "actor": "Viewer",
+                    "transitions": [],
+                    "uiSchema": "MainContent",
+                    "operations": []
+                }
+            ]
+        },
+        {
+            "name": "Cancelled",
+            "actors": [
+                {
+                    "actor": "Agent",
+                    "transitions": [],
+                    "uiSchema": "MainContent",
+                    "operations": [],
+                    "relations": []
+                },
+                {
+                    "actor": "Operations",
+                    "transitions": [
+                        "Cancelled_to_Draft"
+                    ],
+                    "uiSchema": "MainContent",
+                    "operations": [],
+                    "relations": []
+                },
+                {
+                    "actor": "UKSP",
+                    "transitions": [],
+                    "uiSchema": "MainContent",
+                    "operations": []
+                },
+                {
+                    "actor": "Underwriter",
+                    "transitions": [],
+                    "uiSchema": "MainContent",
+                    "operations": []
+                },
+                {
+                    "actor": "Viewer",
+                    "transitions": [],
+                    "uiSchema": "MainContent",
+                    "operations": []
+                }
+            ]
+        },
+        {
+            "name": "ChangeUnderwritingGroup",
+            "actors": [
+                {
+                    "actor": "Underwriter",
+                    "transitions": [
+                        "ChangeUnderwritingGroup_to_OnReview"
+                    ],
+                    "uiSchema": "MainContent",
+                    "operations": [
+                        "Save"
+                    ],
+                    "allowComments": true
+                }
+            ]
+        }
+    ],
+    "transitions": {
+        "Draft_to_OnReview": {
+            "transitionEffects": {
+                "enrich": [
+                    "/attachmentsPackage"
+                ]
+            }
+        },
+        "InfoRequest_to_OnReview": {
+            "transitionEffects": {
+                "enrich": [
+                    "/attachmentsPackage"
+                ]
+            }
+        },
+        "OnReview_to_InfoRequest": {
+            "transitionEffects": {
+                "enrich": [
+                    "/technicalInformation"
+                ]
+            }
+        },
+        "OnReview_to_Rejected": {
+            "transitionEffects": {
+                "enrich": [
+                    "/technicalInformation"
+                ]
+            }
+        }
+    },
+    "version": "1",
+    "components": [
+        "AdditionalServices",
+        "GiftServices",
+        "AttachmentData",
+        "BasicConditions",
+        "BasicInvestmentParameters",
+        "Beneficiaries",
+        "InsuranceRules",
+        "InsuredPerson",
+        "IssueForm",
+        "PaymentPlan",
+        "PolicyHolder",
+        "PolicyTerms",
+        "Promotions",
+        "Risks",
+        "SurrenderValues",
+        "UWTriggers",
+        "MainInsuranceConditions",
+        "InquiriesList",
+        "InsurerComment",
+        "DeclarationMedicalConfirmation",
+        "DeclarationMedical",
+        "DeclarationMainConfirmation",
+        "DeclarationMain",
+        "UWTriggersConditions",
+        "MigrationAttributes"
+    ]
+}

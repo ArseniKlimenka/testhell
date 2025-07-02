@@ -1,0 +1,9 @@
+delete from bfx_impl.INVESTMENT_STRATEGY
+where id = '611DED0A-13A5-468E-AF23-EDE5D606E7AC'
+insert into bfx_impl.INVESTMENT_STRATEGY
+(ID, CODE, DESCRIPTION)
+values
+('611DED0A-13A5-468E-AF23-EDE5D606E7AC', N'mainChoice', N'Ключевой выбор')
+update bfx_impl.INVESTMENT_STRATEGY 
+set DESCRIPTION = N'Ключевой выбор'
+where id = '611DED0A-13A5-468E-AF23-EDE5D606E7AC'

@@ -1,0 +1,41 @@
+{
+    "type": "object",
+    "additionalProperties": false,
+    "aiValidation": {
+        "rule": "mainAttributesValidation"
+    },
+    "properties": {
+        "initiator": {
+            "type": "string",
+            "enum": [
+                "insurer",
+                "applicant"
+            ]
+        },
+        "changeReason": {
+            "type": "string",
+            "enum": [
+                "bugFix",
+                "decision",
+                "other"
+            ]
+        },
+        "changeTypes": {
+            "type": "array",
+            "items": {
+                "$ref": "component:PolicyChangeAmendmenTypes"
+            }          
+        },
+        "amendmentIssueDate": {
+            "type": "string",
+            "aiFormat": "date"
+        },
+        "amendmentEffectiveDate": {
+            "type": "string",
+            "aiFormat": "date"
+        },
+        "personalDataChangeType": {
+            "$ref": "component:PersonalDataChangeTypes"
+        }
+    }
+}

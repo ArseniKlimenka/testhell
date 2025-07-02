@@ -1,0 +1,119 @@
+{
+    "sinks": [
+        {
+            "name": "GetContractData",
+            "fetch": {
+                "configuration": {
+                    "name": "GeneralContractSearchDataSource"
+                }
+            }
+        },
+        {
+            "name": "CheckIsMigratedPolicy",
+            "fetch": {
+                "configuration": {
+                    "name": "GetContractFullDataDataSource"
+                }
+            }
+        },
+        {
+            "name": "GetDescription",
+            "fetch": {
+                "configuration": {
+                    "name": "CertificateDescriptionDataSource"
+                }
+            }
+        },
+        {
+            "name": "GetContractTypeDescription",
+            "fetch": {
+                "configuration": {
+                    "name": "AccountingContractTypeDataSource"
+                }
+            }
+        },
+        {
+            "name": "GetDuplicates",
+            "fetch": {
+                "configuration": {
+                    "name": "GetAccountingCertificateDataSource"
+                }
+            }
+        },
+        {
+            "name": "GetAccountingYear",
+            "fetch": {
+                "configuration": {
+                    "name": "AccountingYearDataSource"
+                }
+            }
+        },
+        {
+            "name": "GetInsuredPersonData",
+            "fetch": {
+                "configuration": {
+                    "name": "GetPartyDataSource"
+                }
+            }
+        },
+        {
+            "name": "GetInsuredPersonDocumentCodeView",
+            "fetch": {
+                "configuration": {
+                    "name": "AccountingDocumentTypeCodeViewDataSource"
+                }
+            }
+        },
+        {
+            "name": "GetTaxPayerData",
+            "fetch": {
+                "configuration": {
+                    "name": "GetPartyDataSource"
+                }
+            }
+        },
+        {
+            "name": "GetTaxPayerDocumentCodeView",
+            "fetch": {
+                "configuration": {
+                    "name": "AccountingDocumentTypeCodeViewDataSource"
+                }
+            }
+        },
+        {
+            "name": "GetIssueData",
+            "fetch": {
+                "configuration": {
+                    "name": "GetPartyDataSource"
+                }
+            }
+        },
+        {
+            "name": "GetPaymentContract",
+            "fetch": {
+                "configuration": {
+                    "name": "AccountingAmountOfPremiumsPaidDataSource"
+                }
+            }
+        },
+        {
+            "name": "EnrichDocument",
+            "executeAs": "System",
+            "document": {
+                "allowUpdating": {
+                    "inStates": [
+                        "Draft"
+                    ]
+                },
+                "allowOnValidationErrors": {
+                    "all": false
+                },
+                "evaluateOnly": true
+            }
+        }
+    ],
+    "responses": [
+        200,
+        422
+    ]
+}

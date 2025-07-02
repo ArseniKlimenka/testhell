@@ -1,0 +1,13 @@
+if object_id(N'PAS_IMPL.POLICY_ASSET_SAT', N'U') is not null
+	drop table PAS_IMPL.POLICY_ASSET_SAT;
+go
+
+CREATE TABLE [PAS_IMPL].[POLICY_ASSET_SAT](
+	[POLICY_ASSET_HKEY] [char](32) NOT NULL,
+	[LOAD_DATE] [datetime2](7) NOT NULL,
+	[RECORD_SOURCE] [varchar](50) NOT NULL,
+	[HASH_DIFF] [char](32) NOT NULL,
+    [ASSET_NUMBER] [nvarchar](50) NOT NULL,
+	[ASSET_UNITS_COUNT] [decimal](15,4) NULL,
+    [IS_DELETED] bit
+)

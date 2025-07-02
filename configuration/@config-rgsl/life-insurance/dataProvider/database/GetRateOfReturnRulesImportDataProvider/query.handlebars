@@ -1,0 +1,54 @@
+﻿SELECT EXCEL_ROW_NUMBER
+      ,PRODUCT_CODE
+      ,STRATEGY_CODE
+      ,ISSUE_DATE_FROM
+      ,ISSUE_DATE_TO
+      ,ISSUE_DATE_STR
+      ,INSURANCE_TERMS
+      ,CURRENCY_CODE
+      ,GUARANTEED_INCOME
+      ,VARIANT
+      ,RATE_OF_RETURN
+      ,CASHBACK
+      ,RKO
+      ,PARTICIPATION_COEFF
+      ,MANUAL_RATE
+      ,IMPORT_DOCUMENT_ID
+      ,CONF_VERSION
+      ,LOADED_BY
+      ,LOAD_DATE
+FROM BFX_IMPL.RATE_OF_RETURN rr
+WHERE 1 = 1
+{{#if parameters.productCode}}
+	AND rr.PRODUCT_CODE = @productCode
+{{/if}}
+{{#if parameters.strategyCode}}
+	AND rr.STRATEGY_CODE = @strategyCode
+{{/if}}
+{{#if parameters.issueDate}}
+	AND @issueDate >= rr.ISSUE_DATE_FROM AND @issueDate <= rr.ISSUE_DATE_TO
+{{/if}}
+{{#if parameters.issueDateFrom}}
+	AND rr.ISSUE_DATE_FROM >= @issueDate
+{{/if}}
+{{#if parameters.issueDateTo}}
+	AND @issueDate <= rr.ISSUE_DATE_TO
+{{/if}}
+{{#if parameters.insuranceTerms}}
+	AND rr.INSURANCE_TERMS = @insuranceTerms
+{{/if}}
+{{#if parameters.currencyCode}}
+	AND rr.CURRENCY_CODE = @currencyCode
+{{/if}}
+{{#if parameters.guaranteedIncome}}
+	AND rr.GUARANTEED_INCOME = @guaranteedIncome
+{{/if}}
+{{#if parameters.importDocumentId}}
+	AND rr.IMPORT_DOCUMENT_ID = @importDocumentId
+{{/if}}
+{{#if parameters.maxVersion}}
+	AND rr.CONF_VERSION = (SELECT MAX(CONF_VERSION) MAX_VERSION FROM BFX_IMPL.RATE_OF_RETURN)
+{{/if}}
+{{#if parameters.version}}
+	AND rr.CONF_VERSION = @version
+{{/if}}

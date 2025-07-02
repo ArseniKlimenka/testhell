@@ -1,0 +1,59 @@
+{
+    "entityType": "Contract",
+    "condition": {
+        "events": [
+            "StatusChanged"
+        ],
+        "configuration": {
+            "names": [
+                "CollectiveLifeInsurancePolicy"
+            ],
+            "dimensions": {}
+        },
+        "documentStates": [
+            "InquiryCreating"
+        ]
+    },
+    "sinks": [
+        {
+            "name": "SetReviewNumber",
+            "document": {
+                "configuration": {
+                    "name": "CollectiveLifeInsurancePolicy",
+                    "version": "1"
+                },
+                "allowUpdating": {
+                    "inStates": [
+                        "InquiryCreating"
+                    ]
+                },
+                "allowOnValidationErrors": {
+                    "all": true
+                }
+            }
+        },
+        {
+            "name": "CreateInquiries",
+            "document": {
+                "configuration": {
+                    "name": "LifeInsurancePolicyInquiry",
+                    "version": "1"
+                },
+                "allowOnValidationErrors": {
+                    "all": true
+                }
+            }
+        },
+        {
+            "name": "TransitionCollectiveLifeInsurancePolicyToOnReviewState",
+            "documentTransition": {
+                "transition": {
+                    "configurationName": "CollectiveLifeInsurancePolicy",
+                    "configurationVersion": "1"
+                }
+            }
+        }
+    ],
+    "errorSinks": [],
+    "version": "1"
+}

@@ -1,0 +1,138 @@
+{
+    "type": "GridLayout",
+    "numberOfColumns": 4,
+    "elements": [
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "Input",
+                    "label": "residenceCountry",
+                    "value": {
+                        "$ref": "#/properties/residenceCountry"
+                    },
+                    "control": "Dropdown",
+                    "autocomplete": {
+                        "minTextLength": 0,
+                        "dropDownItemsCount": 1000,
+                        "selectItemOnMatch": false
+                    },
+                    "source": {
+                        "dataSource": {
+                            "name": "PartyCountryDataSource",
+                            "searchFieldPath": "countrySearchText",
+                            "responseMapping": "residenceCountryResponseMapping",
+                            "resultCount": 1000
+                        },
+                        "displayFieldName": "countryShortName"
+                    },
+                    "width": 1
+                },
+                {
+                    "type": "Input",
+                    "label": "docType",
+                    "value": {
+                        "$ref": "#/properties/docType"
+                    },
+                    "control": "Dropdown",
+                    "autocomplete": {
+                        "minTextLength": 0,
+                        "dropDownItemsCount": 25,
+                        "selectItemOnMatch": false
+                    },
+                    "source": {
+                        "dataSource": {
+                            "name": "PartyDocumentTypesDataSource",
+                            "searchFieldPath": "docTypeDesc",
+                            "responseMapping": "docTypeResponseMapping",
+                            "resultCount": 25
+                        },
+                        "displayFieldName": "docTypeDesc"
+                    },
+                    "filter": "docTypeFilter",
+                    "width": 3,
+                    "onValueChanged": [
+                        {
+                            "commandType": "executeAction",
+                            "actionName": "docTypeValueChanged"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "Group",
+            "rule": {
+                "effect": "SHOW",
+                "condition": {
+                    "type": "FUNC",
+                    "ruleFunction": "showOtherDocTypeDesc",
+                    "value": [
+                        {
+                            "$ref": "#"
+                        }
+                    ]
+                }
+            },
+            "elements": [
+                {
+                    "type": "Input",
+                    "label": "otherDocTypeDesc",
+                    "value": {
+                        "$ref": "#/properties/otherDocTypeDesc"
+                    },
+                    "width": 4
+                }
+            ]
+        },
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "Input",
+                    "control": "DateRange",
+                    "dateFrom": {
+                        "type": "Input",
+                        "label": "startDate",
+                        "width": 1,
+                        "value": {
+                            "$ref": "#/properties/startDate"
+                        },
+                        "control": "DatetimePicker",
+                        "onValueChanged": [
+                            {
+                                "commandType": "executeAction",
+                                "actionName": "rangeDatesValueChanged"
+                            }
+                        ]
+                    },
+                    "dateTo": {
+                        "type": "Input",
+                        "label": "endDate",
+                        "width": 1,
+                        "value": {
+                            "$ref": "#/properties/endDate"
+                        },
+                        "control": "DatetimePicker",
+                        "onValueChanged": [
+                            {
+                                "commandType": "executeAction",
+                                "actionName": "rangeDatesValueChanged"
+                            }
+                        ]
+                    },
+                    "width": 2
+                },
+                {
+                    "type": "Input",
+                    "label": "daysCount",
+                    "value": {
+                        "$ref": "#/properties/daysCount"
+                    },
+                    "readOnly": true,
+                    "width": 1
+                }
+            ]
+        }
+    ]
+}

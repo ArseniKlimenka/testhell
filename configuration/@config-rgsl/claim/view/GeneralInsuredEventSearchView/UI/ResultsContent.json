@@ -1,0 +1,79 @@
+{
+    "type": "Group",
+    "elements": [
+        {
+            "type": "DataGrid",
+            "elementId": "serchResultTable",
+            "mode": "DataSource",
+            "pagination": {
+                "mode": "Regular",
+                "pageSizes": [
+                    5,
+                    10,
+                    15
+                ]
+            },
+            "selection": {
+                "mode": "Single",
+                "enableRowSelection": true,
+                "showCheckBox": true
+            },
+            "columns": [
+                {
+                    "sortable": false,
+                    "title": "documentNumber",
+                    "name": "documentNumber",
+                    "cellContent": {
+                        "type": "Link",
+                        "readOnly": true,
+                        "targetType": "Url",
+                        "label": "documentNumber",
+                        "value": {
+                            "mapping": "inusredEventUriMapping",
+                            "$ref": "#"
+                        },
+                        "width": 5,
+                        "content": {
+                            "text": {
+                                "type": "OutputText",
+                                "value": {
+                                    "$ref": "#/properties/resultData/properties/documentNumber"
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "Contract number",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/contractNumber"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "State",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/documentState"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "Insured event date",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/insuredEventDate"
+                        }
+                    }
+                }
+            ]
+        }
+    ]
+}

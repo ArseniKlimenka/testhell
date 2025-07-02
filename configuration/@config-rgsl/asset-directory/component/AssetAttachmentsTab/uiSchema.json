@@ -1,0 +1,67 @@
+{
+    "type": "Tab",
+    "elementId": "assetAttachmentsTabId",
+    "onTabEnter": "tabAttachmentsEnter",
+    "title": "Attachments",
+    "elements": [
+        {
+            "type": "Component",
+            "name": "AttachmentsSection",
+            "value": {
+                "$ref": "#"
+            }
+        },
+        {
+            "type": "OutputText",
+            "hideLabel": true,
+            "literalValue": "assetPlacementAgreement",
+            "width": 12,
+            "rule": {
+                "effect": "HIDE",
+                "condition": {
+                    "type": "FUNC",
+                    "ruleFunction": "hideAssetPlacementAgreement",
+                    "value": [
+                        {
+                            "$ref": "#"
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "type": "AttachmentUpload",
+            "elementId": "assetPlacementAgreement",
+            "label": "assetPlacementAgreement",
+            "width": 5,
+            "commands": "fileUploadSpecial",
+            "value": {
+                "$ref": "#/properties/assetPlacementAgreement"
+            },
+            "rule": {
+                "effect": "HIDE",
+                "condition": {
+                    "type": "FUNC",
+                    "ruleFunction": "hideAssetPlacementAgreement",
+                    "value": [
+                        {
+                            "$ref": "#"
+                        }
+                    ]
+                }
+            }
+        }
+    ],
+    "rule": {
+        "effect": "SHOW",
+        "condition": {
+            "type": "FUNC",
+            "ruleFunction": "showAttachmentsTab",
+            "value": [
+                {
+                    "$ref": "#"
+                }
+            ]
+        }
+    }
+}

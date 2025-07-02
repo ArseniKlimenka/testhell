@@ -1,0 +1,122 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "additionalProperties": false,
+    "properties": {
+        "allocationId": {
+            "type": "integer"
+        },
+        "documentTypeId": {
+            "type": "integer"
+        },
+        "allocationDate": {
+            "type": "string",
+            "aiFormat": "date"
+        },
+        "isCancelled": {
+            "type": "boolean"
+        },
+        "entityType": {
+            "type": "string"
+        },
+        "configurationName": {
+            "type": "string"
+        },
+        "refDocumentNo": {
+            "type": "string"
+        },
+        "policyStartDate": {
+            "type": "string",
+            "aiFormat": "date"
+        },
+        "dueDate": {
+            "type": "string",
+            "aiFormat": "date"
+        },
+        "installmentAmount": {
+            "type": "number"
+        },
+        "installmentOpenAmount": {
+            "type": "number"
+        },
+        "installmentStatus": {
+            "$ref": "component:InstallmentStatusComponent"
+        },
+        "productDesc": {
+            "type": "string"
+        },
+        "policyHolderName": {
+            "type": "string"
+        },
+        "payAmount": {
+            "type": "number"
+        },
+        "payRate": {
+            "type": "number"
+        },
+        "docAmount": {
+            "type": "number"
+        },
+        "docRate": {
+            "type": "number"
+        },
+        "exchangeDifference": {
+            "type": "number"
+        },
+        "payCurrencyCode": {
+            "type": "string"
+        },
+        "toleranceOverpayment": {
+            "type": "number"
+        },
+        "toleranceUnderpayment": {
+            "type": "number"
+        },
+        "bsiId": {
+            "type":"integer"
+        },
+        "bsi": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "bsiNo": {
+                    "type": "string"
+                },
+                "statusId": {
+                    "$ref": "component:PaymentStatusComponent"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "transactionDate": {
+                    "type": "string",
+                    "aiFormat": "date"
+                },
+                "amount": {
+                    "type": "number"
+                },
+                "openAmount": {
+                    "type": "number"
+                },
+                "paymentDate": {
+                    "type": "string",
+                    "aiFormat": "date"
+                },
+                "payerName": {
+                    "type": "string"
+                },
+                "fake": {
+                    "type": "boolean"
+                },
+                "isMigrated": {
+                    "type": "boolean"
+                },
+                "paymentSourceId": {
+                    "type": "number"
+                },
+                "incomeSourceId": {
+                    "type": "number"
+                }
+            }
+        }
+    }
+}

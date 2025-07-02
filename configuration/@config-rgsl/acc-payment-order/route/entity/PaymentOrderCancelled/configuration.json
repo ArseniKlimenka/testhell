@@ -1,0 +1,37 @@
+{
+    "entityType": "PaymentOrder",
+    "condition": {
+        "events": [
+            "StatusChanged"
+        ],
+        "documentStates": [
+            "Cancelled"
+        ]
+    },
+    "sinks": [
+        {
+            "name": "GetRefPayment",
+            "fetch": {
+                "configuration": {
+                    "name": "BankStatementItemRgslSearchDataSource"
+                }
+            }
+        },
+        {
+            "name": "GetAllocations",
+            "fetch": {
+                "configuration": {
+                    "name": "AllocationDataSource"
+                }
+            }
+        },
+        {
+            "name": "CancelAllocations",
+            "class": {
+                "className": "Adacta.AdInsure.RGSL.Accounting.API.Shared.CashFlow.Allocation.Services.IAllocationServiceAppRGSL, Adacta.AdInsure.RGSL.Accounting.API",
+                "methodName": "Cancel"
+            }
+        }
+    ],
+    "version": "1"
+}

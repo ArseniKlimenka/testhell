@@ -1,0 +1,3403 @@
+<!DOCTYPE html>
+<html lang="ru-RU" xml:lang="ru-RU" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+	<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+	<title>Договор</title>
+	<link rel="stylesheet" href="assets/styles/style.css">
+	{{{exampleLabel}}}
+	{{{bottomRightContentHolder}}}
+	{{{bottomRightContentBoth}}}
+	{{{bottomLeftContentHolder}}}
+	{{{bottomLeftContentBoth}}}
+	{{{reducePrintoutPagesTotalNumber}}}
+	{{{setKidPrintoutTopRunningTitle}}}
+	{{{setPolicyPrintoutRunningTitleIfKidExist}}}
+	{{{setKidPrintoutBottomRunningTitleFirstPage}}}
+	{{{setKidPrintoutBottomRunningTitleSecondPage}}}
+	{{{setKidPrintoutBottomRunningTitleThirdPage}}}
+
+</head><body>
+
+	<!-- Ключевой информационный документ - KID Printout Body -->
+	{{#if isKidPrintout}}
+		{{> ../../../life-insurance/component/KIDPrintoutBody/printout/template.html }}
+	{{/if}}
+
+	<!-- для загрузки динамических изображений в хранилище печатки. -->
+	{{#if alwaysFalse}}
+		{{> ../../../life-insurance/component/TempSignatureContainer/printout/template.html }}
+	{{/if}}
+
+	{{#if alwaysFalse}}
+		{{> ../../../life-insurance/component/CommonAppendixImageContainer/printout/template.html }}
+	{{/if}}
+
+	{{#if alwaysFalse}}
+		{{> ../../component/AccumulatedAppendixImageContainer/printout/template.html }}
+	{{/if}}
+
+	<!-- Памятка ВСС-->
+	{{#unless isKidPrintout}}
+	<div class="memory">
+
+		<div class="headermemo">
+			<p class="greymemo">ПАМЯТКА К ДОГОВОРУ СТРАХОВАНИЯ ЖИЗНИ</p>
+			<p class="whitememo">по программе «{{policy.product}}» № {{policy.number}} от {{policy.issueDate}} г.</p>
+		</div>
+
+		<div class="mainmemo">
+			<p>
+				Уважаемый Клиент, благодарим Вас за выбор ООО СК «Росгосстрах Жизнь» (далее – «Страховая компания»). Мы
+				надеемся, что наше сотрудничество будет приятным и долговременным. Для этого хотим обратить Ваше
+				внимание на важные условия договора страхования жизни (далее – «договор страхования» или «договор»),
+				заключенного на основании {{policy.rule}} (далее – «Правила страхования»):
+			</p>
+
+			<ul>
+				<li>
+					Договор страхования не является банковским вкладом и не входит в систему гарантирования Агентства по
+					страхованию вкладов в соответствии с Федеральным законом от 23.12.2003 №177-ФЗ «О страховании
+					вкладов
+					в банках Российской Федерации».
+				</li>
+				<li>
+					Договор страхования не предусматривает участия Страхователя в инвестиционном доходе Страховщика.
+				</li>
+				<li>
+					Договор страхования носит долгосрочный характер и предусматривает обязательства Страхователя по
+					оплате страховой премии (страховых взносов). Порядок и сроки уплаты страховой премии устанавливаются
+					договором страхования.
+				</li>
+				<li>
+					Обязательства по договору несет Страховая компания, а не {{typeOfPartner}}, при посредничестве
+					которого заключен договор страхования.
+				</li>
+			</ul>
+
+			<p class="boldmemo">
+				Расторжение договора страхования
+			</p>
+
+			<ul>
+				<li>
+					В случае досрочного прекращения договора страхования, Страхователю выплачивается выкупная сумма,
+					размер которой может быть меньше суммы уплаченных взносов. Размеры выкупной суммы и порядок ее
+					определения указаны в договоре и в Правилах страхования.
+				</li>
+				<li>
+					Расторжение договора страхования осуществляется на основании письменного заявления Страхователя.
+				</li>
+				<li>
+					Обращаем внимание, что Страхователь вправе отказаться от договора страхования в течение 30
+					(тридцати) календарных дней со дня его заключения при отсутствии в данном периоде событий,
+					имеющих признаки страхового случая. Оплаченная страховая премия в полном размере возвращается
+					Страхователю в течение 10 (десяти) рабочих дней.<span class="footnote">Указание Банка России от
+						20.11.2015 №3854-У «О минимальных (стандартных)
+						требованиях к условиям и порядку осуществления отдельных видов добровольного страхования»</span>
+				</li>
+			</ul>
+
+			<p class="boldmemo">
+				Порядок подачи заявления об отказе от договора страхования
+			</p>
+
+			<p>
+				Заявление можно подать одним из следующих способов по Вашему выбору:
+			</p>
+
+			<ul>
+				<li>
+					По почте на адрес Страховой компании: {{insurer.address2}}.
+				</li>
+				<li>
+					Путём личного обращения по месту приёма заявлений. С информацией о способах и местах приема
+					заявлений вы можете ознакомиться на официальном сайте Страховой компании (www.rgsl.ru).
+				</li>
+			</ul>
+
+			<p class="boldmemo">
+				При подаче заявления необходимо предоставить следующие документы:
+			</p>
+
+			<ol>
+				<li>
+					<strong>Заявление на расторжение</strong> (при личном визите форма для заполнения будет
+					предоставлена сотрудником Страховой компании).
+				</li>
+				<li>
+					<strong>Документ, удостоверяющий личность заявителя</strong> (в т. ч. применительно к паспорту
+					гражданина РФ, страницы с указанием места жительства).
+				</li>
+				<li>
+					<strong>Надлежащим образом оформленный документ, подтверждающий полномочия представителя</strong>
+					(при обращении представителей).
+				</li>
+			</ol>
+
+			<p>
+				Просим заполнять документы разборчивым почерком, лучше всего печатными буквами – так оператор сможет
+				быстрее обработать Ваше заявление.
+			</p>
+		</div>
+	</div>
+	{{/unless}}
+
+	<div class="policyPage">
+		<!-- Договор-->
+		<div class="policySignature ">
+			<div class="container">
+
+				<div class="logoDiv">
+					<img src="../component/POImageConst/printout/assets/img/logoHeader.png" alt="Логотип Росгосстрах Жизнь" class="logo">
+				</div>
+				<div class="qrCodeAndInsurerInfo">
+					<div class="qrDiv">
+						<span class="qr_code">
+							{{QR}}
+						</span>
+					</div>
+					{{#if isECOFVTB}}
+					<div class="insurerInfoDiv">
+						<p>
+							<strong>Страховщик: </strong>ООО СК «Росгосстрах Жизнь», лицензии Банка России: {{insurer.license}},<br>
+							ИНН {{insurer.INN}}, КПП {{insurer.KPP}}<br>
+							<strong>Юридический адрес: </strong>{{insurer.address}}<br>
+							<strong>Реквизиты банка: </strong>{{bankInfo}}<br>
+							<strong>Телефон круглосуточного Контакт-центра: </strong>8 800 100 12 10 (бесплатный номер для
+							звонков по России)
+						</p>
+					</div>
+					{{else}}
+					<div class="insurerInfoDiv">
+						<p>
+							<strong>Страховщик: </strong>ООО СК «Росгосстрах Жизнь».<br>
+							Лицензии Банка России: {{insurer.license}}, ИНН {{insurer.INN}}, КПП {{insurer.KPP}}.<br>
+							<strong>Юридический адрес: </strong>{{insurer.address}}.<br>
+							<strong>Реквизиты банка: </strong>{{bankInfo}}.<br>
+							<strong>Телефон круглосуточного Контакт-центра: </strong>8 800 100 12 10 (бесплатный номер для
+							звонков по России).
+						</p>
+					</div>
+					{{/if}}
+				</div>
+
+				<div class="container2">
+					<p id="qrInfoTop" class="qrInfo">Для оплаты считайте данный штрих код</p>
+					<p id="qrInfoMiddle" class="qrInfo">в мобильном приложении интернет-банка</p>
+					<p id="policyheadingTop" class="policyheading">ДОГОВОР СТРАХОВАНИЯ № {{policy.number}} от
+						{{policy.issueDate}} г.</p>
+					<p id="policyheadingMiddle" class="policyheading">по программе «{{policy.product}}»</p>
+					<p id="policyheadingButton" class="policyheading">на основании {{policy.rule}}{{#unless isAfter20230725}}
+						(далее по тексту – Правила).{{else}}<br>(далее по тексту – Правила).{{/unless}}</p>
+				</div>
+
+				<div class="policy_item">
+					I. СТРАХОВАТЕЛЬ
+				</div>
+
+				{{#if isECOFVTB}}
+				<table class="personVTB">
+					<col class="col1">
+					<col class="col2">
+					<col class="col3">
+					<col class="col4">
+					<col class="col5">
+					<col class="col6">
+					<col class="col7">
+					<col class="col8">
+					<tr>
+						<td class="tgrey">Фамилия Имя Отчество:</td>
+						<td class="twhite" colspan=5>{{holder.fullName}}</td>
+						<td class="tgrey">Пол:</td>
+						<td class="twhite center">{{holder.gender}}</td>
+					</tr>
+					<tr>
+						<td class="tgrey">Дата рождения:</td>
+						<td class="twhite center">{{holder.dateOfBirth}}</td>
+						<td class="tgrey" colspan=2>Место рождения:</td>
+						<td class="twhite center" colspan=4>{{holder.birthPlace}}</td>
+					</tr>
+					<tr>
+						<td class="tgrey">Телефон:</td>
+						<td class="twhite center">{{holder.phoneNumber}}</td>
+						<td class="tgrey">E-mail:</td>
+						<td class="twhite center" colspan="3">{{holder.email}}</td>
+						<td class="tgrey" >Гражданство:</td>
+						<td class="twhite center" >{{holder.citizenship}}</td>
+					</tr>
+					<tr>
+						<td class="tgrey">Документ, удостоверяющий личность:</td>
+						<td class="twhite" colspan=5>{{holder.document.typeAndSN}}</td>
+						<td class="tgrey">Дата выдачи:</td>
+						<td class="twhite center">{{holder.document.dateOfIssue}}</td>
+					</tr>
+					{{#unless holder.isNotIssuedBy}}
+					<tr>
+						<td class="tgrey">Кем выдан:</td>
+						<td class="twhite" colspan=7>{{holder.document.issuedBy}}</td>
+					</tr>
+					{{/unless}}
+					<tr>
+						<td class="tgrey">Адрес постоянной регистрации:</td>
+						<td class="twhite" colspan=7>{{holder.registrationAddress}}</td>
+					</tr>
+					<tr>
+						<td class="tgrey">Почтовый адрес:</td>
+						<td class="twhite" colspan=7>{{holder.postAddress}}</td>
+					</tr>
+				</table>
+				{{else}}
+				<table class="person">
+					<col class="col1">
+					<col class="col2">
+					<col class="col3">
+					<col class="col4">
+					<col class="col5">
+					<col class="col6">
+					<col class="col7">
+					<tr>
+						<td class="tgrey">Фамилия Имя Отчество:</td>
+						<td class="twhite" colspan="4">{{holder.fullName}}</td>
+						<td class="tgrey">Пол:</td>
+						<td class="twhite center">{{holder.gender}}</td>
+					</tr>
+					<tr>
+						<td class="tgrey">Дата рождения:</td>
+						<td class="twhite center" colspan="2">{{holder.dateOfBirth}}</td>
+						<td class="tgrey" colspan="2">Место рождения:</td>
+						<td class="twhite center" colspan="2">{{holder.birthPlace}}</td>
+					</tr>
+					<tr>
+						<td class="tgrey">Телефон:</td>
+						<td class="twhite center" colspan="2">{{holder.phoneNumber}}</td>
+						<td class="tgrey" colspan="2">Гражданство:</td>
+						<td class="twhite center" colspan="2">{{holder.citizenship}}</td>
+					</tr>
+					<tr>
+						<td class="tgrey">E-mail:</td>
+						<td class="twhite" colspan="6">{{holder.email}}</td>
+					</tr>
+					<tr>
+						<td class="tgrey">Документ, удостоверяющий личность:</td>
+						<td class="twhite" colspan="4">{{holder.document.typeAndSN}}</td>
+						<td class="tgrey">Дата выдачи:</td>
+						<td class="twhite center">{{holder.document.dateOfIssue}}</td>
+					</tr>
+					{{#unless holder.isNotIssuedBy}}
+					<tr>
+						<td class="tgrey">Кем выдан:</td>
+						<td class="twhite" colspan="6">{{holder.document.issuedBy}}</td>
+					</tr>
+					{{/unless}}
+					<tr>
+						<td class="tgrey">Адрес постоянной регистрации:</td>
+						<td class="twhite" colspan="6">{{holder.registrationAddress}}</td>
+					</tr>
+					<tr>
+						<td class="tgrey">Почтовый адрес:</td>
+						<td class="twhite" colspan="6">{{holder.postAddress}}</td>
+					</tr>
+				</table>
+				{{/if}}
+
+				<div class="policy_item">
+					II. ЗАСТРАХОВАННЫЙ
+				</div>
+
+				{{#if isECOFVTB}}
+				<table class="personVTB">
+					<col class="col1">
+					<col class="col2">
+					<col class="col3">
+					<col class="col4">
+					<col class="col5">
+					<col class="col6">
+					<col class="col7">
+					<col class="col8">
+					<tr>
+						<td class="tgrey">Фамилия Имя Отчество:</td>
+						<td class="twhite" colspan=5>{{insured.fullName}}</td>
+						<td class="tgrey">Пол:</td>
+						<td class="twhite  center">{{insured.gender}}</td>
+					</tr>
+					<tr>
+						<td class="tgrey">Дата рождения:</td>
+						<td class="twhite center" >{{insured.dateOfBirth}}</td>
+						<td class="tgrey" colspan=2>Место рождения:</td>
+						<td class="twhite center" colspan=4>{{insured.birthPlace}}</td>
+					</tr>
+					<tr>
+						<td class="tgrey">Телефон:</td>
+						<td class="twhite center">{{insured.phoneNumber}}</td>
+						<td class="tgrey">E-mail:</td>
+						<td class="twhite center" colspan="3">{{insured.email}}</td>
+						<td class="tgrey" >Гражданство:</td>
+						<td class="twhite center" >{{insured.citizenship}}</td>
+					</tr>
+					<tr>
+						<td class="tgrey">Документ, удостоверяющий личность:</td>
+						<td class="twhite" colspan=5>{{insured.document.typeAndSN}}</td>
+						<td class="tgrey">Дата выдачи:</td>
+						<td class="twhite center">{{insured.document.dateOfIssue}}</td>
+					</tr>
+					{{#unless insured.isNotIssuedBy}}
+					<tr>
+						<td class="tgrey">Кем выдан:</td>
+						<td class="twhite" colspan=7>{{insured.document.issuedBy}}</td>
+					</tr>
+					{{/unless}}
+					<tr>
+						<td class="tgrey">Адрес постоянной регистрации:</td>
+						<td class="twhite" colspan=7>{{insured.registrationAddress}}</td>
+					</tr>
+					<tr>
+						<td class="tgrey">Почтовый адрес:</td>
+						<td class="twhite" colspan=7>{{insured.postAddress}}</td>
+					</tr>
+				</table>
+				{{else}}
+				<table class="person">
+					<col class="col1">
+					<col class="col2">
+					<col class="col3">
+					<col class="col4">
+					<col class="col5">
+					<col class="col6">
+					<col class="col7">
+					<tr>
+						<td class="tgrey">Фамилия Имя Отчество:</td>
+						<td class="twhite" colspan="4">{{insured.fullName}}</td>
+						<td class="tgrey">Пол:</td>
+						<td class="twhite  center">{{insured.gender}}</td>
+					</tr>
+					<tr>
+						<td class="tgrey">Дата рождения:</td>
+						<td class="twhite center" colspan="2">{{insured.dateOfBirth}}</td>
+						<td class="tgrey" colspan="2">Место рождения:</td>
+						<td class="twhite center" colspan="2">{{insured.birthPlace}}</td>
+					</tr>
+					<tr>
+						<td class="tgrey">Телефон:</td>
+						<td class="twhite center" colspan="2">{{insured.phoneNumber}}</td>
+						<td class="tgrey" colspan="2">Гражданство:</td>
+						<td class="twhite center" colspan="2">{{insured.citizenship}}</td>
+					</tr>
+					<tr>
+						<td class="tgrey">E-mail:</td>
+						<td class="twhite" colspan="6">{{insured.email}}</td>
+					</tr>
+					<tr>
+						<td class="tgrey">Документ, удостоверяющий личность:</td>
+						<td class="twhite" colspan="4">{{insured.document.typeAndSN}}</td>
+						<td class="tgrey">Дата выдачи:</td>
+						<td class="twhite center">{{insured.document.dateOfIssue}}</td>
+					</tr>
+					{{#unless insured.isNotIssuedBy}}
+					<tr>
+						<td class="tgrey">Кем выдан:</td>
+						<td class="twhite" colspan="6">{{insured.document.issuedBy}}</td>
+					</tr>
+					{{/unless}}
+					<tr>
+						<td class="tgrey">Адрес постоянной регистрации:</td>
+						<td class="twhite" colspan="6">{{insured.registrationAddress}}</td>
+					</tr>
+					<tr>
+						<td class="tgrey">Почтовый адрес:</td>
+						<td class="twhite" colspan="6">{{insured.postAddress}}</td>
+					</tr>
+				</table>
+				{{/if}}
+
+				<div class="policy_item">
+					III. СТРАХОВЫЕ РИСКИ, СТРАХОВЫЕ СУММЫ,
+					СТРАХОВАЯ ВЫПЛАТА, СРОК СТРАХОВАНИЯ ПО РИСКУ
+				</div>
+
+				<table class="risks">
+					<col class="col1">
+					<col class="col2">
+					<col class="col3">
+					<col class="col4">
+					<col class="col5">
+					<col class="col6">
+					<tr>
+						<td class="tgrey center" rowspan="2">Страховые риски</td>
+						<td class="tgrey center" rowspan="2">Страховая сумма, {{currency}}</td>
+						<td class="tgrey center" rowspan="2">Размер {{frequency.risk}} страхового взноса, {{currency}}</td>
+						<td class="tgrey center" rowspan="2">Страховая выплата</td>
+						<td class="tgrey center" colspan="2">Срок страхования по риску</td>
+					</tr>
+					<tr>
+						<td class="tgrey fifthCollum center">с</td>
+						<td class="tgrey sixthcollum center">по</td>
+					</tr>
+					<tr>
+						<td class colspan="6">Основная программа:</td>
+					</tr>
+					{{#each riskFinReserv.mainRisks}}
+					<tr>
+						<td class="twhite">{{this.insuranceRisks}}</td>
+						<td class="twhite center">{{this.sumInsured}}</td>
+						<td class="twhite center">{{this.insurancePremium}}</td>
+						<td class="twhite center">{{this.insurancePayment}}</td>
+						<td class="twhite center">{{this.startDate}}</td>
+						<td class="twhite center">{{this.endDate}}</td>
+					</tr>
+					{{/each}}
+					{{#if riskFinReserv.isSelectedPackages}}
+					<tr>
+						<td class colspan="6">Дополнительная программа:</td>
+					</tr>
+					{{#if riskFinReserv.isPackage1}}
+					<tr>
+						<td class colspan="6">Пакет 1</td>
+					</tr>
+					{{#each riskFinReserv.package1}}
+					<tr>
+						<td class="twhite">{{this.insuranceRisks}}</td>
+						<td class="twhite center">{{this.sumInsured}}</td>
+						<td class="twhite center">{{this.insurancePremium}}</td>
+						<td class="twhite center">{{this.insurancePayment}}</td>
+						<td class="twhite center">{{this.startDate}}</td>
+						<td class="twhite center">{{this.endDate}}</td>
+					</tr>
+					{{/each}}
+					{{/if}}
+					{{#if riskFinReserv.isPackage2}}
+					<tr>
+						<td class colspan="6">Пакет 2</td>
+					</tr>
+					{{#each riskFinReserv.package2}}
+					<tr>
+						<td class="twhite">{{this.insuranceRisks}}</td>
+						<td class="twhite center">{{this.sumInsured}}</td>
+						<td class="twhite center">{{this.insurancePremium}}</td>
+						<td class="twhite center">{{this.insurancePayment}}</td>
+						<td class="twhite center">{{this.startDate}}</td>
+						<td class="twhite center">{{this.endDate}}</td>
+					</tr>
+					{{/each}}
+					{{/if}}
+					{{#if riskFinReserv.isPackage3}}
+					<tr>
+						<td class colspan="6">Пакет 3</td>
+					</tr>
+					{{#each riskFinReserv.package3}}
+					<tr>
+						<td class="twhite">{{this.insuranceRisks}}</td>
+						<td class="twhite center">{{this.sumInsured}}</td>
+						<td class="twhite center">{{this.insurancePremium}}</td>
+						<td class="twhite center">{{this.insurancePayment}}</td>
+						<td class="twhite center">{{this.startDate}}</td>
+						<td class="twhite center">{{this.endDate}}</td>
+					</tr>
+					{{/each}}
+					{{/if}}
+					{{#if riskFinReserv.isPackage4}}
+					<tr>
+						<td class colspan="6">Пакет 4</td>
+					</tr>
+					{{#each riskFinReserv.package4}}
+					<tr>
+						<td class="twhite">{{this.insuranceRisks}}</td>
+						<td class="twhite center">{{this.sumInsured}}</td>
+						<td class="twhite center">{{this.insurancePremium}}</td>
+						<td class="twhite center">{{this.insurancePayment}}</td>
+						<td class="twhite center">{{this.startDate}}</td>
+						<td class="twhite center">{{this.endDate}}</td>
+					</tr>
+					{{/each}}
+					{{/if}}
+					{{/if}}
+				</table>
+
+				<p class="afterTable">
+					При определении страховой суммы в договоре страхования в иностранной валюте страховая
+					выплата производится в рублях по курсу Банка России на дату выплаты. Банковские расходы, связанные с
+					осуществлением страховой
+					выплаты, оплачиваются получателем платежа.
+				</p>
+
+				<div class="policy_item">
+					IV. СТРАХОВАЯ ПРЕМИЯ, ПОРЯДОК УПЛАТЫ СТРАХОВОЙ ПРЕМИИ
+				</div>
+				<table class="premium">
+					<col class="col1">
+					<col class="col2">
+					<tr>
+						<td colspan="2">Страховая премия уплачивается в виде страховых взносов в течение срока действия
+							договора страхования.</td>
+					</tr>
+					<tr>
+						<td class="tgrey">Периодичность оплаты страховой премии:</td>
+						<td class="twhite">{{frequency.premium}}</td>
+					</tr>
+					<tr>
+						<td colspan="2">Размеры страховых взносов и даты их оплаты указаны в Графике уплаты страховых взносов
+							(приложение к договору страхования).</td>
+					</tr>
+				</table>
+
+				{{#if isECOFVTB}}
+				{{#if isTextVTBAfterDecember}}
+				<p class="afterTable">
+					В случае если первый страховой взнос не был оплачен (или был оплачен не полностью) в указанный срок,
+					{{#if insuranceTerms.paymentPeriodLastDate}} либо в случае оплаты первого страхового взноса позднее {{insuranceTerms.paymentPeriodLastDate}}, {{/if}}
+					Страховщик вправе считать договор страхования не вступившим в силу и произвести возврат поступивших средств Страхователю.
+					<br>Стороны признают, что события, имеющие признаки страхового и наступившие до уплаты страховой премии в полном объеме, не признаются страховым случаем и страховая выплата по ним не осуществляется (пункт 2 статьи 957 Гражданского кодекса Российской Федерации).
+				</p>
+				{{else}}
+				<p class="afterTable">
+					В случае если первый страховой взнос не был оплачен (или был оплачен не полностью) в указанный срок,
+					{{#if insuranceTerms.paymentPeriodLastDate}} либо в случае оплаты первого страхового взноса позднее {{insuranceTerms.paymentPeriodLastDate}}, {{/if}}
+					Страховщик вправе считать договор страхования не вступившим в силу и произвести возврат поступивших
+					средств Страхователю.
+					<br>Датой оплаты страхового взноса считается дата списания всей суммы страхового взноса со счета
+					Страхователя (или иного уполномоченного им лица) в счет оплаты договора страхования в случае безналичных
+					расчетов, либо дата платежного документа в случае наличных расчетов в соответствии с законодательством
+					Российской Федерации.
+				</p>
+				{{/if}}
+				{{else}}
+				<p class="afterTable">
+					В случае если первый страховой взнос не был оплачен (или был оплачен не полностью) в указанный срок,
+					{{#if insuranceTerms.paymentPeriodLastDate}} либо в случае оплаты первого страхового взноса позднее {{insuranceTerms.paymentPeriodLastDate}}, {{/if}}
+					Страховщик вправе считать договор страхования не вступившим в силу и произвести возврат поступивших
+					средств Страхователю.
+					<br>Датой оплаты страхового взноса считается дата списания всей суммы страхового взноса со счета
+					Страхователя (или иного уполномоченного им лица) в счет оплаты договора страхования в случае безналичных
+					расчетов либо дата платежного документа в случае наличных расчетов в соответствии с законодательством
+					Российской Федерации.
+				</p>
+				{{/if}}
+
+				<p class="afterTable">
+					При определении страховой премии в договоре страхования в иностранной валюте сумма, подлежащая уплате в
+					рублях, определяется по курсу Банка России соответствующей валюты на дату оплаты. Банковские расходы,
+					связанные с оплатой страховой премии, несет Страхователь.
+				</p>
+
+				<div class="policy_item">
+					V. СРОК ДЕЙСТВИЯ ДОГОВОРА СТРАХОВАНИЯ
+				</div>
+
+				<table class="insuranceTerms">
+					<col class="col1">
+					<col class="col2">
+					<col class="col3">
+					<tr>
+						<td class="tgrey">Срок действия договора страхования:</td>
+						<td class="twhite center">{{insuranceTerms.text}}</td>
+						<td class="twhite">Договор страхования вступает в силу с {{insuranceTerms.startDate}}{{#unless isTextVTBAfterDecember}} при условии
+							уплаты первого страхового взноса в
+							полном объеме{{/unless}} и действует до {{insuranceTerms.endDate}} включительно.</td>
+					</tr>
+				</table>
+
+				<div class="policy_item">
+					VI. ДЕКЛАРАЦИЯ О СОСТОЯНИИ ЗДОРОВЬЯ И
+					ФАКТОРАХ РИСКА ЗАСТРАХОВАННОГО
+				</div>
+
+				<table class="declarationMedical">
+					<col class="col1">
+					<col class="col2">
+					<col class="col3">
+					<tr>
+						<td class="twhite">Настоящим я, {{insured.fullName}},</td>
+						<td class="twhite"><input type="checkbox" checked> подтверждаю, что:</td>
+						<td class="twhite"><input type="checkbox"> не подтверждаю, что:</td>
+					</tr>
+				</table>
+
+				<ul class="declaration">
+					{{#each declarationMedical}}
+					<li>
+						<p>{{this}}</p>
+					</li>
+					{{/each}}
+				</ul>
+
+
+				<div class="policy_item">
+					VII. ДЕКЛАРАЦИЯ СТРАХОВАТЕЛЯ И ЗАСТРАХОВАННОГО
+				</div>
+
+				<table class="declarationMain">
+					<tr>
+						<td class="twhite">Настоящим Страхователь и Застрахованный</td>
+						<td class="twhite"><input type="checkbox" checked> подтверждают, что:</td>
+						<td class="twhite"><input type="checkbox"> не подтверждают, что:</td>
+					</tr>
+				</table>
+
+				<ul class="declaration">
+					{{#each declarationMain}}
+					<li>
+						<p>{{this}}</p>
+					</li>
+					{{/each}}
+				</ul>
+
+				<div class="policy_item">
+					VIII. ИНЫЕ УСЛОВИЯ
+				</div>
+
+				<ol class="otherCondition">
+					{{#unless isECOFVTB}}
+					{{#unless isAfter20230725}}
+					<li>
+						Стороны приняли решение, что на основании п. 5.2 Правил Страховщик в первые 2 полисных года не
+						освобождается от обязанности произвести страховую выплату по страховому риску «Смерть Застрахованного
+						по любой причине», если страховой случай по этому риску наступил в следствие действий, обозначенных
+						в п. 5.1.3 Правил.
+					</li>
+					{{/unless}}
+					{{/unless}}
+					<li>
+						В случае отказа Страхователя (физического лица) от договора страхования в период, предусмотренный
+						договором страхования и действующим законодательством, когда Страхователь имеет право на возврат
+						уплаченной страховой премии (уплаченных страховых взносов), Страховщик осуществляет возврат
+						уплаченной Страхователем суммы в рублях независимо от курса валюты, в которой выражены обязательства
+						по договору страхования. Если страховая премия была уплачена в иной валюте, возврату подлежит сумма
+						денежных средств в валюте, в которой она была уплачена.
+					</li>
+					<li>
+						Если после заключения договора страхования будет выявлено, что Страхователь (Застрахованный) сообщил
+						в настоящем договоре страхования или иных документах, заполняемых при заключении договора
+						страхования, заведомо ложные сведения или предоставил подложные документы, и если эти сведения или
+						документы привели к заключению договора страхования на условиях, отличных от тех, на которых он был
+						бы заключен, то Страховщик имеет право отказать в страховой выплате.
+					</li>
+					<li>
+						Стороны пришли к соглашению о том, что факсимильное воспроизведение подписей уполномоченных лиц
+						Страховщика и факсимильный оттиск печати Страховщика признаются сторонами аналогом собственноручной
+						подписи уполномоченных лиц Страховщика и оригинала печати Страховщика.
+					</li>
+					<li>
+						В случае заключения договора страхования в электронном виде в соответствии с Соглашением об
+						электронном документообороте, к которому присоединяется Страхователь{{#if isAfter20230725}},
+						подписанный со стороны Страховщика усиленной квалифицированной электронной подписью договор
+						страхования направляется Страхователю в электронном виде на адрес электронной почты, указанный
+						в настоящем договоре страхования.{{else}}, договор страхования,
+						{{#unless isKidPrintout}}включая Памятку к договору страхования, {{/unless}}
+						а также ссылка на Правила на официальном сайте, направляются
+						Страхователю в электронном виде на адрес электронной почты, указанный в настоящем договоре
+						страхования, подписанные со стороны Страховщика усиленной квалифицированной электронной подписью.{{/if}}
+						Согласие Страхователя с условиями договора страхования подтверждается простой электронной подписью
+						Страхователя в соответствии с Соглашением.
+					</li>
+					{{#if isECOFVTB}}
+					<li>
+						Неотъемлемой частью настоящего договора страхования являются: График уплаты страховых взносов,
+						{{#unless isKidPrintout}}Памятка к договору страхования жизни, {{/unless}}
+						Правила,
+						{{#if DMS10}}
+						{{#if riskFinReserv.isMedRussia}}Программа ДМС «Диагностирование и лечение критического заболевания» №10, {{/if}}
+						{{else}}
+						{{#if riskFinReserv.isMedRussia}}Программа ДМС «Диагностирование и лечение критического заболевания» №5, {{/if}}
+						{{/if}}
+						заявления, составленные и заполненные по просьбе Страховщика Страхователем и лицом, заявляемым на страхование.
+					</li>
+					{{else}}
+					<li>
+						Неотъемлемой частью настоящего договора страхования являются:{{#if isAfter20230725}} График уплаты страховых взносов,{{/if}}
+						{{#unless isKidPrintout}}Памятка к договору страхования жизни, {{/unless}}
+						Правила,
+						{{#if riskFinReserv.isMedRussia}}Программа ДМС «Диагностирование и лечение критического заболевания» №2, {{/if}}
+						{{#if riskFinReserv.isMedWorld}}Программа ДМС «Диагностирование и лечение критического заболевания» №4, {{/if}}
+						заявления, составленные и заполненные по просьбе Страховщика Страхователем и лицом, заявляемым на страхование.
+						{{#unless isKidPrintout}}
+							Отдельные условия настоящего договора страхования разъяснены в Памятке к договору страхования жизни.
+						{{/unless}}
+					</li>
+					{{/if}}
+					{{#if otherCondition.isOtherCondition}}
+					<li>
+						{{otherCondition.policySpecialConditions}}
+					</li>
+					{{/if}}
+				</ol>
+
+				<div class="policy_item">
+					IX. ТАБЛИЦА ВЫКУПНЫХ СУММ
+				</div>
+
+				<p class="afterTable">
+					При расторжении договора страхования выкупная сумма на дату досрочного прекращения договора страхования
+					рассчитывается как выкупная сумма на конец полисного года (полисного периода), соответствующего дате
+					досрочного прекращения договора страхования, за вычетом суммы страховых взносов, которые Страхователь
+					должен был бы уплатить Страховщику в течение оставшейся части полисного года (полисного периода), в
+					котором имеет место досрочное прекращение договора страхования.
+				</p>
+
+				<table class="surrenderValues">
+					<col class="col1">
+					<col class="col2">
+					<col class="col3">
+					<col class="col4">
+					<tr>
+						<td class="tgrey center" colspan="3">Полисный год</td>
+						<td class="tgrey center" rowspan="2">Выкупная сумма на конец текущего полисного года, {{currency}}
+						</td>
+					</tr>
+					<tr>
+						<td class="tgrey center">№ п/п</td>
+						<td class="tgrey center">начало</td>
+						<td class="tgrey center">окончание</td>
+					</tr>
+					{{#each surrenderValues}}
+					<tr>
+						<td class="twhite center">{{this.index}}</td>
+						<td class="twhite center">{{this.periodStartDate}}</td>
+						<td class="twhite center">{{this.periodEndDate}}</td>
+						<td class="twhite center">{{this.surrenderValue}}</td>
+					</tr>
+					{{/each}}
+				</table>
+
+				<p class="afterTable">
+					При определении выкупной суммы в договоре страхования в иностранной валюте выплата выкупной суммы
+					переводится в рублях по курсу Банка России на дату выплаты. Банковские расходы, связанные с
+					осуществлением выплаты выкупной суммы, оплачиваются получателем платежа.
+					<br>В случае наличия у Страхователя задолженности по уплате страховых взносов перед Страховщиком, сумма
+					задолженности вычитается из выкупной суммы
+
+				</p>
+
+				<div class="policy_item">
+					X. ВЫГОДОПРИОБРЕТАТЕЛИ НА СЛУЧАЙ СМЕРТИ ЗАСТРАХОВАННОГО
+				</div>
+
+				{{#if isBeneficiaries}}
+				<table class="person">
+					<col class="col1">
+					<col class="col2">
+					<col class="col3">
+					<col class="col4">
+					<col class="col5">
+					<col class="col6">
+					<col class="col7">
+					{{#each beneficiaries}}
+					<tr>
+						<td class="tgrey" colspan="7">Выгодоприобретатель {{this.index}}. Доля {{this.percentage}}%</td>
+					</tr>
+					<tr>
+						<td class="tgrey">Фамилия Имя Отчество, Дата рождения:</td>
+						<td class="twhite" colspan="4">{{this.beneficiar.fullName}}, {{this.beneficiar.dateOfBirth}}</td>
+						<td class="tgrey">Пол:</td>
+						<td class="twhite  center">{{this.beneficiar.gender}}</td>
+					</tr>
+					{{#if this.dateOfBirthPlaceOfBirth}}
+					<tr>
+						<td class="tgrey">Дата рождения:</td>
+						<td class="twhite center">{{this.beneficiar.dateOfBirth}}</td>
+						<td class="tgrey" colspan="2">Место рождения:</td>
+						<td class="twhite" colspan="3">{{this.beneficiar.placeOfBirth}}</td>
+					</tr>
+					{{/if}}
+					{{#if this.phoneEmailCitizenship}}
+					<tr>
+						<td class="tgrey">Телефон:</td>
+						<td class="twhite center">{{this.beneficiar.phoneNumber}}</td>
+						<td class="tgrey">E-mail:</td>
+						<td class="twhite center" colspan="2">{{this.beneficiar.email}}</td>
+						<td class="tgrey">Гражданство:</td>
+						<td class="twhite center">{{this.beneficiar.citizenship}}</td>
+					</tr>
+					{{/if}}
+					{{#if this.isDocument}}
+					<tr>
+						<td class="tgrey">Документ, удостоверяющий личность:</td>
+						<td class="twhite" colspan="4">{{this.beneficiar.document.typeAndSN}}</td>
+						<td class="tgrey">Дата выдачи:</td>
+						<td class="twhite center">{{this.beneficiar.document.dateOfIssue}}</td>
+					</tr>
+					{{#unless this.beneficiar.isNotIssuedBy}}
+					<tr>
+						<td class="tgrey">Кем выдан:</td>
+						<td class="twhite" colspan="6">{{this.beneficiar.document.document.issuedBy}}</td>
+					</tr>
+					{{/unless}}
+					{{/if}}
+					{{#if this.isRegistrationAddress}}
+					<tr>
+						<td class="tgrey">Адрес постоянной регистрации:</td>
+						<td class="twhite" colspan="6">{{this.beneficiar.registrationAddress}}</td>
+					</tr>
+					{{/if}}
+					{{#if this.isPostAddress}}
+					<tr>
+						<td class="tgrey">Почтовый адрес:</td>
+						<td class="twhite" colspan="6">{{this.beneficiar.postAddress}}</td>
+					</tr>
+					{{/if}}
+					{{/each}}
+				</table>
+				{{#if shareSumIsNot1}}
+				<p class="afterTable">
+					В случае если общая доля менее 100%, Выгодоприобретателями на случай смерти Застрахованного по
+					оставшейся доле являются наследники Застрахованного по закону.
+				</p>
+				{{/if}}
+				{{else}}
+				<p class="afterTable">
+					Наследники по закону
+				</p>
+				{{/if}}
+
+			</div>
+		</div>
+		<!-- График платежей-->
+		<div class="policySignature break">
+
+			<p class="alignRight">Приложение к договору страхования № {{policy.number}} от {{policy.issueDate}} г.
+			</p>
+			<p class="alignRight">по программе «{{policy.product}}»</p>
+
+			<div class="paymentPlan">
+				<div class="paymentPlanLabel">
+					График уплаты страховых взносов
+				</div>
+				<table class="premium">
+					<col class="col1">
+					<col class="col2">
+					<tr>
+						<td class="center"><strong>Дата оплаты</strong></td>
+						<td class="center"><strong>Размер платежа (страхового взноса), {{currency}}</strong></td>
+					</tr>
+					{{#each paymentPlan}}
+					<tr>
+						<td class="center">{{this.dateOfPayment}}</td>
+						<td class="center">{{this.insurancePremium}}</td>
+					</tr>
+					{{/each}}
+				</table>
+			</div>
+
+		</div>
+
+		{{#if isECOFVTBDMS}}
+			{{#if riskFinReserv.isMedRussia}}
+		<div class="signatureHolder">
+			<div class="containerAdd">
+
+				<p class="breakPage break">Приложение к договору страхования № {{policy.number}} от {{policy.issueDate}} г.
+				</p>
+				<p class="breakPage">по программе «{{policy.product}}»</p>
+
+				<div class="dms">
+					<p class="boldText bigSize">ПРОГРАММА ДОБРОВОЛЬНОГО МЕДИЦИНСКОГО СТРАХОВАНИЯ</p>
+					<p class="boldText bigSize">«ДИАГНОСТИРОВАНИЕ И ЛЕЧЕНИЕ КРИТИЧЕСКОГО ЗАБОЛЕВАНИЯ» №5</p>
+					<p>(далее – Программа)</p>
+				</div>
+
+				<div class="mainTextVTB">
+					<p class="boldText bigSize">1. ОБЩИЕ ПОЛОЖЕНИЯ</p>
+					<p>1.1.	В рамках настоящей Программы Страховщик организует Застрахованному при наступлении страхового
+						случая и оплачивает медицинские и/или иные услуги (далее также – Услуги) в объеме, предусмотренном
+						Программой.</p>
+					<p>1.2.	Страховым случаем является документально подтвержденное обращение Застрахованного в медицинскую
+						и/или иную организацию, из числа предусмотренных настоящей Программой, для получения медицинских или
+						иных услуг, предусмотренных настоящей Программой, вследствие расстройства здоровья Застрахованного,
+						повлекшего возникновение расходов у Застрахованного по оплате оказанных ему услуг.</p>
+					<p>Страховщик несет обязательства по страховым случаям, возникшим в течение срока страхования, за исключением
+						периода ожидания. Страховщик оплачивает расходы по организации и оказанию Застрахованному медицинских и/или
+						иных услуг, которые возникли в течение срока страхования, за исключением периода ожидания. В случае если
+						организация и/или оказание медицинских и/или иных услуг осуществляется Застрахованному после окончания
+						срока страхования, Страховщик несет обязательства только по оплате оказанных Застрахованному Услуг в
+						период не превышающий 30 (тридцати) календарных последовательных дней после окончания срока страхования.</p>
+					<p>Программой предусмотрена организация и оплата следующих медицинских услуг, связанным со следующими впервые
+						установленными и диагностированными<span class="footnote">Датой диагностирования заболевания является дата
+						установления медицинским специалистом, имеющим необходимую квалификацию, заключительного диагноза заболевания,
+						основанного на результатах проведенного обследования Застрахованного.
+						<br>
+						Дата установления и диагностирования злокачественного новообразования указывается в выписке из канцер-регистра
+						или «Извещении о больном с впервые в жизни установленным диагнозом злокачественного новообразования» (форма 090/У).
+						</span> в течение срока страхования, за исключением периода ожидания, заболеваниями (состояниями):</p>
+					<p class="boldText">1.2.1.	Лечение злокачественного онкологического заболевания</p>
+					<p>Злокачественное онкологическое новообразование – наличие у Застрахованного новообразования из злокачественных
+						клеток, характеризующегося неконтролируемым ростом и способностью к метастазированию (распространению
+						злокачественных клеток из первичного очага), к инвазии и деструкции здоровых и окружающих опухоль тканей,
+						за исключением:</p>
+					<ul>
+						<li>
+							-	злокачественные новообразования, которые диагностированы как дисплазия шейки матки CIN 1-3, или
+								новообразования, которые гистологически диагностированы как предраковые;
+						</li>
+						<li>
+							-	злокачественная меланома, максимальная толщина которой в соответствии с гистологическим заключением
+							менее 1 мм или которая не превышает уровень развития Т3N(0)М(0) по классификации TNМ (класс A1 согласно
+							классификации AJCC, 2002);
+						</li>
+						<li>
+							-	заболевания кожи следующих типов:
+						</li>
+						<li>
+							<ol>
+								<li>
+									а)	гиперкератоз и базально-клеточная карцинома,
+								</li>
+								<li>
+									б)	плоскоклеточная карцинома при отсутствии прорастания в другие ткани;
+								</li>
+							<ol>
+						</li>
+						<li>
+							-	злокачественные новообразования на фоне вируса иммунодефицита человека (ВИЧ) или синдрома приобретенного
+							иммунодефицита (СПИД), а также ассоциированные с ВИЧ-инфекцией или СПИДом;
+						</li>
+						<li>
+							-	рак предстательной железы, который диагностирован гистологически как имеющий до T2 N0 M0 (включая) по
+							классификации TNM или развившийся до 6 баллов (включая) по шкале Глисона;
+						</li>
+						<li>
+							-	хронический лимфолейкоз (ХЛЛ) (ICD 91.10).
+						</li>
+					</ul>
+					<p>Диагноз должен быть установлен врачом-онкологом и подтвержден результатами гистологических или, в случае
+						системных раковых заболеваний, цитологических исследований.</p>
+
+					<p class="boldText">1.2.2.	Кардиохирургия</p>
+					<p>Кардиохирургия (операции на сердце) – хирургическая операция по рекомендации кардиолога, направленная
+						на восстановление кровотока в артериях сердца путем обхода места сужения (закупорки) одной или нескольких
+						коронарных артерий с помощью обходных трансплантатов (шунтов); или направленная на замену или лечение одного
+						или нескольких сердечных клапанов, а также ангиопластика, стентирование, хирургическое лечение нарушений
+						ритма сердца, за исключением:</p>
+					<ul>
+						<li>
+							-	катетеризация сердца (в т. ч. ангиография) не классифицируется как операция на сердце.
+						</li>
+					</ul>
+					<p>Диагноз, в связи с которым требуется кардиохирургия, должен быть установлен врачом-кардиологом и подтвержден
+						результатами визуальных тестов.</p>
+
+					<p class="boldText">1.2.3.	Нейрохирургия</p>
+					<p>Нейрохирургия – любое плановое хирургическое вмешательство, рекомендованное нейрохирургом, на головном мозге
+						или прочих внутричерепных структурах, а также хирургические вмешательства при доброкачественных опухолях
+						спинного мозга и его оболочек, за исключением:</p>
+					<ul>
+						<li>
+						-	хирургические вмешательства, проводимые в связи с заболеваниями, вызванными травматическими повреждениями,
+						другими заболеваниями спинного мозга и его оболочек, помимо доброкачественных опухолей, а также врожденными
+						дефектами.
+						</li>
+					</ul>
+					<p>Диагноз, в связи с которым требуется нейрохирургия, должен быть установлен врачом-нейрохирургом и подтвержден
+						данными магнитно-резонансной томографии (МРТ) или компьютерной томографии (КТ).</p>
+
+					<p class="boldText">1.2.4.	Реабилитация</p>
+					<p>Состояние здоровья Застрахованного, требующее согласно заключению сертифицированного медицинского специалиста,
+						подтвержденного Страховщиком, прохождения Застрахованным реабилитационной программы, которая способна привести
+						к положительным результатам после наступления одного из следующих событий:</p>
+					<ul>
+						<li>
+							1)	заболевания и травмы головного мозга:
+						</li>
+						<li>
+							<ol>
+								<li>а)	геморрагический или ишемический инсульт,</li>
+								<li>б)	резекция внутричерепной опухоли,</li>
+								<li>в)	энцефалит, менингит,</li>
+								<li>г)	аноксическое повреждение головного мозга;</li>
+							</ol>
+						</li>
+						<li>
+							2)	заболевания и травмы спинного мозга и позвоночника:
+						</li>
+						<li>
+							<ol>
+								<li>а)	повреждение спинного мозга в результате травмы, опухоли, инфекции или
+									заболевания сосудов,</li>
+								<li>б)	заболевание и травма позвоночника;</li>
+							</ol>
+						</li>
+						<li>
+							3)	потребность в ортопедическом лечении:
+						</li>
+						<li>
+							<ol>
+								<li>а)	ампутация конечности,</li>
+								<li>б)	операция в связи с опухолью кости,</li>
+								<li>в)	операция в связи со сложным переломом.</li>
+							</ol>
+						</li>
+					<ul>
+					<p>Центр реабилитации – медицинское учреждение, официально признанное реабилитационной клиникой.</p>
+					<p>Реабилитационная программа – программа лечения у врача (врача-терапевта) – специалиста по реабилитации, которая
+						позволит Застрахованному максимально реализовать потенциальное качество жизни после событий, предусмотренных
+						настоящим пунктом Программы.</p>
+
+				</div>
+
+				<div class="mainTextVTB">
+					<p class="boldText bigSize">2.	ОБЪЕМ МЕДИЦИНСКИХ И ИНЫХ УСЛУГ, ПРЕДОСТАВЛЯЕМЫХ В РАМКАХ ПРОГРАММЫ</p>
+					<p>2.1.	В соответствии с настоящей Программой при получении Застрахованным медицинских услуг,
+						указанных в п.п. 1.2.1 – 1.2.3 Программы (лечение злокачественного онкологического заболевания,
+						кардиохирургия, нейрохирургия), Страховщик организует и оплачивает следующие Услуги:</p>
+					<p>2.1.1.	Оплата билета эконом-класса для Застрахованного и одного сопровождающего лица, встреча
+						в аэропорту и перевозка на машине скорой помощи (в случае медицинской необходимости) или на такси
+						до отеля или в медицинское учреждение, где будет проводиться лечение.</p>
+					<p>2.1.2.	Оплата проживания Застрахованного и одного сопровождающего лица в гостинице (3 или 4 звезды),
+						включая завтрак и услуги, включенные в стоимость номера. При этом выбор отеля производится с учетом
+						доступности и близости к медицинскому учреждению, где будет проводиться лечение, или лечащему врачу.</p>
+					<p>2.1.3.	Транспортировка в медицинскую организацию: транспортировка Застрахованного и сопровождающего
+						на такси из отеля и обратно при необходимости нескольких посещений медицинских организаций во время
+						прохождения обследования.</p>
+					<p>2.1.4.	Лечение, проводимое по поводу диагностированного заболевания, включая медицинскую помощь в
+						амбулаторных условиях, в условиях дневного стационара, в стационарных условиях:</p>
+					<ul>
+						<li>
+							-	консультации врачей-специалистов;
+						</li>
+						<li>
+							-	диагностические медицинские вмешательства, выполняемые медицинскими
+							организациями по выбору Страховщика в том числе лабораторные исследования,
+							визуализирующие исследования, эндоскопические исследования, функциональная диагностика;
+						</li>
+						<li>
+							-	лечебные медицинские вмешательства в пределах страховой суммы (кроме имплантаций),
+							включающие хирургическое лечение, химиотерапию, лучевую терапию, иные методы лечения,
+							научно обоснованные, и применяемые в рамках оказания медицинской помощи медицинскими
+							организациями по выбору Страховщика;
+						</li>
+						<li>
+							-	имплантация молочных желез, необходимая в целях реконструктивного лечения, включая
+							стоимость имплантатов на сумму не более лимита страховой суммы, установленного настоящей
+							Программой;
+						</li>
+						<li>
+							-	лекарственные средства, применяемые при лечении в стационарных условиях, в условиях
+							дневного стационара и при амбулаторном лечении.
+						</li>
+					</ul>
+					<p>2.2.	В соответствии с настоящей Программой при получении Застрахованным медицинских услуг,
+						указанных в п. 1.2.4 Программы (реабилитация), Страховщик обязуется возместить центру
+						реабилитации стоимость следующих Услуг:</p>
+					<ul>
+						<li>
+							-	проживание в реабилитационном учреждении, включая питание, уход за пациентом,
+							медицинские осмотры, помощь в реабилитации, физиотерапия, трудотерапия, восстановление
+							речи и другие услуги по реабилитации, оказанные реабилитационным учреждением по
+							усмотрению реабилитолога;
+						</li>
+						<li>
+							-	дополнительные медицинские проверки, назначенные по усмотрению врача-реабилитолога,
+							включая проверки с использованием методов визуализации, ЭКГ и ЭЭГ;
+						</li>
+						<li>
+							-	лекарства в период реабилитации, назначаемые исключительно с целью реабилитации
+							или для предотвращения воздействия фоновых заболеваний на результаты реабилитационных
+							мероприятий;
+						</li>
+						<li>
+							-	итоговый отчет по результатам реабилитационной программы и, при необходимости,
+							последующее наблюдение.
+						</li>
+					</ul>
+
+				</div>
+
+
+				<div class="mainTextVTB">
+					<p class="boldText bigSize">3.	ПРАВИЛА И ПОРЯДОК ОРГАНИЗАЦИИ ОКАЗАНИЯ УСЛУГ</p>
+					<p>3.1.	Настоящей Программой предусмотрен период ожидания – 90 (девяносто) календарных дней с даты
+						начала срока страхования по страховому риску.</p>
+					<p>Медицинские и/или иные услуги, оказанные Застрахованному в период ожидания и/или оказанные в связи
+						с заболеваниями (состояниями), которые были диагностированы или симптомы которых проявились в
+						течение периода ожидания, не оплачиваются Страховщиком и не признаются страховым случаем.</p>
+					<p>3.2.	Продолжительность реабилитационной программы может составлять не более 90 (девяноста) дней.
+						Реабилитационная программа назначается в выбранном Страховщиком центре реабилитации и координируется
+						исключительно Страховщиком или с его предварительного согласия.</p>
+					<p>3.3.	Организация медицинских и/или иных услуг осуществляется Страховщиком либо Ассистанской компанией,
+						с которой у Страховщика имеется договор на оказание услуг. Медицинские и/или иные услуги оказываются
+						Застрахованному в медицинских и/или иных организациях по выбору Страховщика.</p>
+					<p>3.4.	Высокотехнологическая медицинская помощь, предусмотренная настоящей Программой, организовывается,
+						в том числе, с привлечением федеральных квот.</p>
+					<p>3.5.	Медицинские и/или иные услуги, предусмотренные настоящей Программой, не предоставляются лицу,
+						который не является Застрахованным по договору страхования, в том числе в случае установления факта
+						передачи Застрахованным страховых документов другому лицу для получения таким лицом медицинских
+						и/или иных услуг, предусмотренных Программой.</p>
+					<p>3.6.	Для получения Услуг по настоящей Программе Застрахованному требуется предоставить письменное
+						согласие на обработку его персональных данных, в том числе медицинских, а также добровольное
+						информированное согласие на медицинские вмешательства и передачу информации организации,
+						оказывающей Услуги. В случае отказа Застрахованного от предоставления письменного согласия на
+						обработку его персональных данных, в том числе медицинских, а также добровольного информированного
+						согласия на медицинские вмешательства и передачу информации, услуги Застрахованному не могут быть оказаны.</p>
+				</div>
+
+				<div class="mainTextVTB">
+					<p class="boldText bigSize">4. ТЕРРИТОРИЯ</p>
+					<p>4.1.	Страхование действует на территории адресов оказания медицинских и/или иных услуг в
+						Российской Федерации.</p>
+				</div>
+
+				<div class="mainTextVTB">
+					<p class="boldText bigSize">5. СТРАХОВАЯ СУММА</p>
+					<p>5.1.	Годовой лимит страховой суммы по Услугам, указанным в п.п. 1.2.1 – 1.2.3 Программы (лечение
+						злокачественного онкологического заболевания, кардиохирургия, нейрохирургия) – эквивалент 12 000 000
+						(двенадцати миллионов) рублей, при условии:</p>
+					<ul>
+						<li>
+							-	лимит по оплате имплантации молочных желез, необходимой в целях реконструктивного лечения молочных
+							желез, включая стоимость имплантатов – эквивалент 900 000 (девятисот тысяч) рублей.
+						</li>
+					</ul>
+					<p>5.2.	Годовой лимит страховой суммы по Услугам, указанным в п. 1.2.4 Программы (реабилитация) – эквивалент
+						400 000 (четырехсот тысяч) рублей.</p>
+					<p>5.3.	Страховая сумма (страховой лимит) по Программе является уменьшаемой (агрегатной) страховой суммой,
+						рассчитываемой как разность страховой суммы на начало каждого года страхования и суммы страхового возмещения,
+						осуществленного Страховщиком в период действия каждого года страхования. Если агрегатная страховая сумма
+						исчерпана полностью, обязательства Страховщика по Программе считаются исполненными, страховой риск, указанный
+						в п. 4.1.26 Правил, прекращает свое действие, а уплаченная страховая премия по данному риску не подлежит возврату.</p>
+				</div>
+
+			</div>
+		</div>
+			{{/if}}
+		{{else}}
+		<!-- Приложения ДМС 10-->
+		{{#if DMS10}}
+			{{#if riskFinReserv.isMedRussia}}
+		<div class="signatureHolder">
+					<div class="containerAdd">
+		
+						<p class="breakPage break">Приложение к договору страхования № {{policy.number}} от {{policy.issueDate}} г.</p>
+						<p class="breakPage">по программе «{{policy.product}}»</p>
+		
+						<div class="dms">
+							<p class="boldText bigSize">ПРОГРАММА ДОБРОВОЛЬНОГО МЕДИЦИНСКОГО СТРАХОВАНИЯ</p>
+							<p class="boldText bigSize">«ДИАГНОСТИРОВАНИЕ И ЛЕЧЕНИЕ КРИТИЧЕСКОГО ЗАБОЛЕВАНИЯ» №10</p>
+							<p>(далее – Программа)</p>
+						</div>
+		
+						<!-- 1.ОБЩИЕ ПОЛОЖЕНИЯ -->
+						<div class="mainTextDMS">
+							<p class="boldText bigSize">1. ОБЩИЕ ПОЛОЖЕНИЯ</p>
+							<p> 1.1. В рамках настоящей Программы Страховщик организует Застрахованному при наступлении страхового
+								случая и оплачивает медицинские и/или иные услуги (далее также - Услуги) в объеме, предусмотренном Программой.<br></p>
+							<p>1.2. Страховым случаем является документально подтвержденное обращение Застрахованного в
+								медицинскую и/или иную организацию, из числа предусмотренных настоящей Программой, для получения
+								медицинских или иных услуг, предусмотренных настоящей Программой, вследствие расстройства здоровья Застрахованного,
+								повлекшего возникновение расходов у Застрахованного по оплате оказанных ему услуг.</p>
+							<p>Страховщик несет обязательства по страховым случаям, возникшим в течение срока страхования, за исключением периода ожидания.
+								Страховщик оплачивает расходы по организации и оказанию Застрахованному медицинских и/или иных услуг, которые возникли в
+								течение срока страхования, за исключением периода ожидания. В случае если организация и/или оказание медицинских и/или иных
+								услуг осуществляется Застрахованному после окончания срока страхования, Страховщик несет обязательства только по оплате
+								оказанных Застрахованному Услуг в период не превышающий 30 (тридцати) календарных последовательных дней после окончания срока страхования.</p>
+							<p>Программой предусмотрена организация и оплата медицинских или иных услуг, связанных со следующими впервые установленными и диагностированными<span class="footnote">Датой диагностирования заболевания является дата установления медицинским специалистом, имеющим необходимую квалификацию, заключительного диагноза заболевания, основанного на результатах проведенного обследования Застрахованного. <br> Дата установления и диагностирования злокачественного новообразования указывается в выписке из канцер-регистра или «Извещении о больном с впервые в жизни установленным диагнозом злокачественного новообразования» (форма 090/У).</span>
+								в течение срока страхования, за исключением периода ожидания, заболеваниями (состояниями):</p>
+							<p>1.2.1 <b>Лечение злокачественного новообразования.</b>
+								Злокачественное онкологическое новообразование - наличие у Застрахованного новообразования из злокачественных клеток, характеризующегося
+								неконтролируемым ростом и способностью к метастазированию (распространению злокачественных клеток из первичного очага), к инвазии и
+								деструкции здоровых и окружающих опухоль тканей, за исключением:</p>
+								<ul>
+									<li>−	злокачественные новообразования, которые диагностированы как дисплазия шейки матки CIN 1-3, или новообразования,
+										которые гистологически диагностированы как предраковые;</li>
+									<li>−	злокачественная меланома, максимальная толщина которой в соответствии с гистологическим заключением менее 1 мм или
+										которая не превышает уровень развития Т3N(0)М(0) по классификации TNМ (класс A1 согласно классификации AJCC, 2002);</li>
+									<li>−	заболевания кожи следующих типов:
+										<ul class="secondLevel">
+											<li>а) гиперкератоз и базально-клеточная карцинома,</li>
+											<li>б) плоскоклеточная карцинома при отсутствии прорастания в другие ткани;</li>
+										</ul>
+									</li>
+									<li>−	злокачественные новообразования на фоне вируса иммунодефицита человека (ВИЧ) или синдрома приобретенного
+										иммунодефицита (СПИД), а также ассоциированные с ВИЧ-инфекцией или СПИДом;</li>
+									<li>−	рак предстательной железы, который диагностирован гистологически как имеющий до T2 N0 M0 (включая) по
+										классификации TNM или развившийся до 6 баллов (включая) по шкале Глисона</li>
+									<li>−	хронический лимфолейкоз (ХЛЛ) (ICD 91.10).</li>
+								</ul>
+							<p>Диагноз должен быть установлен врачом-онкологом и подтвержден результатами гистологических или, в случае системных раковых заболеваний, цитологических исследований.</p>
+							<p>1.2.2 <b>Кардиохирургия</b></p>
+							<p>Кардиохирургия (операции на сердце) – хирургическая операция по рекомендации кардиолога, направленная на восстановление кровотока в артериях сердца путем обхода
+								места сужения (закупорки) одной или нескольких коронарных артерий с помощью обходных трансплантатов (шунтов); или направленная на замену или лечение
+								одного или нескольких сердечных клапанов, а также ангиопластика, стентирование, хирургическое лечение нарушений ритма сердца, за исключением:</p>
+							<ul>
+								<li>−	катетеризация сердца (в т. ч. ангиография) не классифицируется как операция на сердце.</li>
+							</ul>
+							<p>Диагноз, в связи с которым требуется кардиохирургия, должен быть установлен врачом-кардиологом, утвержденным Страховщиком, и подтвержден результатами визуальных тестов.</p>
+							<p>1.2.3 <b>Нейрохирургия</b></p>
+							<p>Нейрохирургия – любое плановое хирургическое вмешательство, рекомендованное нейрохирургом, на головном мозге или прочих внутричерепных структурах, а также хирургические вмешательства при
+								доброкачественных опухолях спинного мозга и его мембран, за исключением:</p>
+							<ul>
+								<li>−	хирургические вмешательства, проводимые в связи с заболеваниями, вызванными травматическими повреждениями, другими заболеваниями спинного мозга и
+									его оболочек, помимо доброкачественных опухолей, а также врожденными дефектами.</li>
+							</ul>
+							<p>Диагноз, в связи с которым требуется нейрохирургия, должен быть установлен врачом-нейрохирургом и подтвержден данными магнитно-резонансной томографии
+								(МРТ) или компьютерной томографии (КТ).</p>
+							<p>1.2.4 <b>Паллиативная помощь при неизлечимом онкологическом заболевании</b></p>
+							<p>Паллиативная помощь – медицинская помощь, направленная на облегчение тяжести симптомов рака. Целью паллиативной помощи при неизлечимом онкологическом
+								заболевании является облегчение страданий онкологического пациента и улучшение качества его жизни.</p>
+							<p>1.2.5 <b>Трансплантация</b></p>
+							<p>Трансплантация – хирургическая ампутация или удаление у Застрахованного легкого, сердца, почки, поджелудочной железы, печени, кишечника, яичника или их
+								комбинации и имплантация целого органа или его части, полученного от другого человека, на место удаленного органа или трансплантация костного мозга,
+								полученного от донора, Застрахованному.</p>
+							<p>Необходимость трансплантации должна возникнуть в течение срока страхования и быть подтверждена медицинским специалистом, согласованным со Страховщиком,
+								с учетом следующих условий:</p>
+							<ul>
+								<li>−	два врача-специалиста в соответствующей области медицины определят необходимость трансплантации на основании принятых медицинских критериев;</li>
+								<li>−	трансплантация будет выполняться в признанной больнице, имеющей разрешение компетентных органов той страны, где будет производиться трансплантация;</li>
+								<li>−	трансплантация не является экспериментальным лечением и/или лечением с целью исследования или расследования и/или включают лечение стволовыми клетками;</li>
+								<li>−	трансплантация будет производиться в соответствии с принятыми этическими нормами той страны, где будет выполняться трансплантация;</li>
+								<li>−	появился орган, подходящий для трансплантации Застрахованному, и определена больница, которая взяла на себя выполнение трансплантации
+									в пределах ответственности, указанных в договоре страхования.</li>
+							</ul>
+							<p>1.2.6 <b>Реабилитация</b></p>
+							<p>Состояние здоровья Застрахованного, требующее согласно заключению сертифицированного медицинского специалиста, подтвержденного Страховщиком, прохождения
+								Застрахованным реабилитационной программы, которая способна привести к положительным результатам после наступления одного из следующих событий:</p>
+							<ul>
+								<li>1)	заболевания и травмы головного мозга:
+									<ul class="secondLevel">
+										<li>а)	геморрагический или ишемический инсульт,</li>
+										<li>б)	резекция внутричерепной опухоли,</li>
+										<li>в)	энцефалит, менингит,</li>
+										<li>г)	аноксическое повреждение головного мозга;</li>
+									</ul>
+								</li>
+								<li>2)	заболевания и травмы спинного мозга и позвоночника:
+									<ul class="secondLevel">
+										<li>а)	повреждение спинного мозга в результате травмы, опухоли, инфекции или заболевания сосудов,</li>
+										<li>б)	заболевание и травма позвоночника;</li>
+									</ul>
+								</li>
+								<li>3)	потребность в ортопедическом лечении:
+									<ul class="secondLevel">
+										<li>а)	ампутация конечности,</li>
+										<li>б)	операция в связи с опухолью кости,</li>
+										<li>в)	операция в связи со сложным переломом.</li>
+									</ul>
+								</li>
+							</ul>
+							<p>Центр реабилитации – медицинское учреждение, официально признанное реабилитационной клиникой.</p>
+							<p>Реабилитационная программа – программа лечения у врача (врача-терапевта) – специалиста по реабилитации, которая позволит
+								Застрахованному максимально реализовать потенциальное качество жизни после событий, предусмотренных настоящим пунктом Программы.</p>
+						</div>
+		
+						<!-- 2.ОБЪЕМ МЕДИЦИНСКИХ И ИНЫХ УСЛУГ, ПРЕДОСТАВЛЯЕМЫХ В РАМКАХ ПРОГРАММЫ -->
+						<div class="mainTextDMS">
+							<p><b>2.	ОБЪЕМ МЕДИЦИНСКИХ И ИНЫХ УСЛУГ, ПРЕДОСТАВЛЯЕМЫХ В РАМКАХ ПРОГРАММЫ</b></p>
+							<p>2.1.	В соответствии с настоящей Программой при получении Застрахованным медицинских услуг, указанных в п.п. 1.2.1 – 1.2.4
+								Программы (лечение злокачественного новообразования, кардиохирургия, нейрохирургия, паллиативная помощь при неизлечимом онкологическом заболевании),
+								Страховщик организует и оплачивает следующие Услуги:</p>
+							<p>2.1.1 Оплата билета бизнес-класса для Застрахованного и одного сопровождающего лица, встреча в аэропорту и перевозка на машине скорой помощи
+								(в случае медицинской необходимости) или на такси до отеля или в медицинское учреждение, где будет проводиться лечение.</p>
+							<p>2.1.2 Оплата проживания Застрахованного и одного сопровождающего лица в гостинице (5 звезд), включая завтрак и услуги, включенные в стоимость номера.
+								При этом выбор отеля производится с учетом доступности и близости к медицинскому учреждению, где будет проводиться лечение, или лечащему врачу.</p>
+							<p>2.1.3 Транспортировка в медицинскую организацию: транспортировка Застрахованного и сопровождающего на такси из отеля и обратно при необходимости
+								нескольких посещений медицинских организаций во время прохождения обследования.</p>
+							<p>2.1.4 Услуги по репатриации в случае смерти Застрахованного во время медицинского лечения за рубежом в рамках настоящей Программы:
+								транспортировка останков Застрахованного до аэропорта, ближайшего к месту постоянного проживания Застрахованного.</p>
+							<p>2.1.5 Помощь в получении визы с целью прохождения лечения в страну назначения для Застрахованного и одного сопровождающего,
+								при этом визовый сбор оплачивает сам Застрахованный.</p>
+							<p>2.1.6	Услуги устного и письменного перевода для Застрахованного в выбранном медицинском учреждении на период лечения.</p>
+							<p>2.1.7	Лечение, проводимое по поводу диагностированного заболевания, включая медицинскую помощь в амбулаторных условиях,
+								в условиях дневного стационара, в стационарных условиях:</p>
+								<ul>
+									<li>−	осмотры врачами, в том числе врачами-специалистами;</li>
+									<li>−	диагностические медицинские вмешательства, выполняемые медицинскими организациями по выбору Страховщика в том числе
+										лабораторные исследования, визуализирующие исследования, эндоскопические исследования, функциональная диагностика;</li>
+									<li>−	лечебные медицинские вмешательства в пределах страховой суммы (кроме имплантаций), включающие хирургическое лечение, химиотерапию,
+										лучевую терапию, иные методы лечения, научно обоснованные, и применяемые в рамках оказания медицинской помощи медицинскими организациями по выбору Страховщика;</li>
+									<li>−	имплантация молочных желез, необходимая в целях реконструктивного лечения, включая стоимость имплантатов на сумму не более лимита
+										страховой суммы, установленного настоящей Программой;</li>
+									<li>−	лекарственные средства, применяемые при лечении в стационарных условиях, в условиях дневного стационара и при амбулаторном лечении.</li>
+								</ul>
+							<p>2.2.	В соответствии с настоящей Программой при получении Застрахованным медицинских услуг, указанных в п. 1.2.5 Программы (трансплантация),
+								Страховщик оплачивает непосредственно поставщику услуг следующие Услуги, которые будут признаны затратами, связанными с трансплантацией:</p>
+							<p>2.2.1	Затраты на медицинскую диагностику и медицинское лечение, предоставленные Застрахованному в рамках госпитализации в заранее согласованной больнице,
+								в которой проводилась трансплантация или медицинское лечение, в соответствии с покрытием Программы.</p>
+							<p>2.2.2	Оплата медицинской бригады, выполнявшей хирургическое вмешательство, и затраты на операционную, возникшие в связи с трансплантацией
+								или медицинским лечением, в соответствии с покрытием Программы.</p>
+							<p>2.2.3	Оплата госпитализации в больнице, с которой заключено соглашение (до 30 (тридцати) календарных дней перед выполнением трансплантации
+								или за медицинское лечение, в соответствии с покрытием Программы, до 335 (трехсот тридцати пяти) календарных дней после выполнения трансплантации),
+								включая оплату за медицинские обследования, лабораторные анализы, лекарственные средства во время всего периода госпитализации.</p>
+							<p>2.2.4	Затраты, возникшие в связи с транспортировкой самолетом тела Застрахованного в страну его проживания, в случае смерти
+								Застрахованного во время получения медицинской помощи, в соответствии с покрытием Программы, в пределах лимита страховой суммы,
+								установленной настоящей Программой, в пределах лимита страховой суммы, установленной настоящей Программой.</p>
+							<p>2.2.5	Следующие сопутствующие расходы, в пределах лимита страховой суммы, установленной настоящей Программой:</p>
+							<ul>
+								<li>−	расходы на поиск органа для трансплантации, его хранение и транспортировка к месту трансплантации;</li>
+								<li>−	расходы на поездку и возвращение домой – авиабилет бизнес-класса в оба конца для Застрахованного и одного сопровождающего;</li>
+								<li>−	расходы на специальную медицинскую транспортировку и расходы на перевозку наземным транспортом из аэропорта до больницы, если
+									Застрахованный, по мнению врача Страховщика, не может по медицинским причинам осуществить перелет на регулярном коммерческом рейсе;</li>
+								<li>−	расходы на проживание для Застрахованного и одного сопровождающего;</li>
+								<li>−	расходы на командировку врача-специалиста в страну нахождения Застрахованного для выполнения трансплантации в случае обусловленной
+									необходимости по одному страховому случаю.</li>
+							</ul>
+							<p>2.3.	В соответствии с настоящей Программой при получении Застрахованным медицинских услуг, указанных в п. 1.2.6 Программы (реабилитация),
+								Страховщик обязуется возместить центру реабилитации стоимость следующих Услуг:</p>
+								<ul>
+									<li>−	проживание в реабилитационном учреждении включая питание, уход за пациентом, медицинские осмотры, помощь в реабилитации и физиотерапия,
+										трудотерапия, восстановление речи и другие услуги по реабилитации, оказанные реабилитационным учреждением по усмотрению врача-реабилитолога;</li>
+									<li>−	дополнительные медицинские проверки, назначенные по усмотрению врача-реабилитолога, включая проверки с использованием методов визуализации, ЭКГ и ЭЭГ;</li>
+									<li>−	лекарства в период реабилитации, назначаемые исключительно с целью реабилитации или для предотвращения воздействия фоновых заболеваний на результаты реабилитационных мероприятий;</li>
+									<li>−	итоговый отчет по результатам реабилитационной программы и, при необходимости, также последующее наблюдение.</li>
+								</ul>
+		
+						</div>
+		
+						<!-- 3.	ПРАВИЛА И ПОРЯДОК ОРГАНИЗАЦИИ ОКАЗАНИЯ УСЛУГ -->
+						<div class="mainTextDMS">
+							<p class="boldText bigSize">3.ПРАВИЛА И ПОРЯДОК ОРГАНИЗАЦИИ ОКАЗАНИЯ УСЛУГ</p>
+							<p>3.1.	Настоящей Программой предусмотрен период ожидания – 90 (девяносто) календарных дней для заболеваний (состояний),
+								в отношении которых оказываются Услуги, указанные в п.п. 1.2.1 – 1.2.4, 1.2.6 Программы, и 180 (сто восемьдесят)
+								календарных дней для заболеваний (состояний), в отношении которых оказываются Услуги, указанные в п. 1.2.5 Программы, с
+								даты начала срока страхования по страховому риску.</p>
+							<p>Медицинские и/или иные услуги, оказанные Застрахованному в период ожидания и/или оказанные в связи с заболеваниями (состояниями),
+								которые были диагностированы или симптомы которых проявились в течение периода ожидания, не оплачиваются Страховщиком и не признаются страховым случаем.</p>
+							<p>3.2.	Страховщик берет на себя обязательство осуществить оплату организации и оказания медицинских и иных услуг, связанных с одной трансплантацией в течение 1 (одного) полисного года, в случае повторной трансплантации она будет считаться отдельным страховым случаем. Обязательство Страховщика распространяется на оплату организации и оказания медицинских и иных услуг, связанных с не более чем 5 (пятью) трансплантациями в течение всего срока страхования.</p>
+							<p>3.3.	Продолжительность реабилитационной программы может составлять не более 90 (девяноста) дней. Реабилитационная программа назначается в выбранном Страховщиком центре реабилитации и координируется исключительно Страховщиком или с его предварительного согласия.</p>
+							<p>3.4.	Организация медицинских и/или иных услуг осуществляется Страховщиком либо Ассистанской компанией, с которой у Страховщика имеется договор на оказание услуг. Медицинские и/или иные услуги оказываются Застрахованному в медицинских и/или иных организациях по выбору Страховщика.</p>
+							<p>3.5.	Высокотехнологическая медицинская помощь, предусмотренная настоящей Программой, организовывается, в том числе, с привлечением федеральных квот.</p>
+							<p>3.6.	Медицинские и/или иные услуги, предусмотренные настоящей Программой, не предоставляются лицу, который не является Застрахованным по договору страхования, в том числе в случае установления факта передачи Застрахованным страховых документов другому лицу для получения таким лицом медицинских и/или иных услуг, предусмотренных Программой.</p>
+							<p>3.7.	Для получения Услуг по настоящей Программе Застрахованному требуется предоставить письменное согласие на обработку его персональных данных, в том числе медицинских, а также добровольное информированное согласие на медицинские вмешательства и передачу информации организации, оказывающей Услуги. В случае отказа Застрахованного от предоставления письменного согласия на обработку его персональных данных, в том числе медицинских, а также добровольного информированного согласия на медицинские вмешательства и передачу информации, услуги Застрахованному не могут быть оказаны.</p>
+						</div>
+		
+						<!-- 4.	ТЕРРИТОРИЯ СТРАХОВАНИЯ -->
+						<div class="mainTextDMS">
+							<p class="boldText bigSize">4.	ТЕРРИТОРИЯ СТРАХОВАНИЯ</p>
+							<p>4.1.	Страхование действует на территории адресов оказания медицинских и/или иных услуг в Российской Федерации, в части оказания услуг по трансплантации и по получению второго медицинского мнения страхование действует на территории адресов оказания медицинских и/или иных услуг по всему миру.</p>
+						</div>
+		
+						<!-- 5.	СТРАХОВАЯ СУММА -->
+						<div class="mainTextDMS">
+							<p class="boldText bigSize">5.	СТРАХОВАЯ СУММА</p>
+							<p>5.1.	Годовой лимит страховой суммы по Услугам, указанным в. п.п. 1.2.1 – 1.2.4 Программы – эквивалент 60 000 000 (шестидесяти миллионов) рублей, при условии:</p>
+							<ul>
+								<li>−	лимит по оплате имплантации молочных желез, необходимой в целях реконструктивного лечения молочных желез, включая стоимость имплантатов – эквивалент 900 000 (девятисот тысяч) рублей.</li>
+							</ul>
+							<p>5.2.	Годовой лимит страховой суммы по Услугам, указанным в. п. 1.2.5 Программы – эквивалент 60 000 000 (шестидесяти миллионов) рублей, при условии:</p>
+							<ul>
+								<li>−	лимит по оплате расходов за перевозку самолетом тела Застрахованного в страну его проживания, в случае смерти Застрахованного во время его пребывания на лечении – эквивалент 623 000 (шестисот двадцати трех тысяч) рублей;</li>
+								<li>−	лимит по оплате расходов на поиск органа для трансплантации, его хранение и перевозку – эквивалент 2 225 000 (двух миллионов двухсот двадцати пяти тысяч) рублей;</li>
+								<li>−	лимит по оплате расходов поездку и возвращение домой – эквивалент 445 000 (четырехсот сорока пяти тысяч) рублей;</li>
+								<li>−	лимит по оплате расходов на специальную медицинскую транспортировку и расходов на перевозку наземным транспортом из аэропорта до больницы – эквивалент 2 225 000 (двух миллионов двухсот двадцати пяти тысяч) рублей;</li>
+								<li>−	лимит по оплате расходов на проживание для Застрахованного и одного сопровождающего – эквивалент 4 895 000,00 (четырех миллионов восьмисот девяноста пяти тысяч) рублей;</li>
+								<li>−	лимит по оплате расходов на командировку врача-специалиста в страну нахождения Застрахованного для выполнения трансплантации – эквивалент 10 680 000 (десяти миллионов шестисот восьмидесяти тысяч) рублей.</li>
+							</ul>
+							<p>5.3.	Годовой лимит страховой суммы по Услугам, указанным в. п. 1.2.6 Программы – эквивалент 400 000 (четырехсот тысяч) рублей.</p>
+							<p>5.4.	Годовой лимит страховой суммы, указанный в п.п. 5.1 – 5.3 Программы, является уменьшаемым (агрегатным). Размер страховой выплаты за каждый год страхования (полисный год) по страховым случаям, предусмотренным Программой, не может превышать 100% годового лимита страховой суммы.</p>
+						</div>
+					</div>
+		</div>
+			{{/if}}
+		{{else}}
+		<!-- Приложения ДМС 2-->
+			{{#if riskFinReserv.isMedRussia}}
+		<div class="signatureHolder">
+			<div class="containerAdd">
+
+				<p class="breakPage break">Приложение к договору страхования № {{policy.number}} от {{policy.issueDate}} г.
+				</p>
+				<p class="breakPage">по программе «{{policy.product}}»</p>
+
+				<div class="dms">
+					<p class="boldText bigSize">ПРОГРАММА ДОБРОВОЛЬНОГО МЕДИЦИНСКОГО СТРАХОВАНИЯ</p>
+					<p class="boldText bigSize">«ДИАГНОСТИРОВАНИЕ И ЛЕЧЕНИЕ КРИТИЧЕСКОГО ЗАБОЛЕВАНИЯ» №2</p>
+					<p>(далее – Программа)</p>
+				</div>
+
+				<div class="mainText">
+					<p class="boldText bigSize">1. ОБЩИЕ ПОЛОЖЕНИЯ</p>
+					<p>В рамках настоящей Программы Страховщик организует Застрахованному и оплачивает медицинские и/или
+						иные услуги в объеме, предусмотренном Программой при наступлении страхового случая по следующему
+						страховому риску, указанному в п. 4.1.26 Правил:<br>
+						Обращение Застрахованного за предоставлением медицинских или иных услуг, предусмотренных Программой
+						ДМС «Диагностирование и лечение критического заболевания», вследствие расстройства здоровья или
+						состояния Застрахованного, требующих получения таких услуг.<br>
+						1.1. В целях настоящей программы используются следующие определения и термины:
+						<br><strong>Период ожидания</strong> – период времени с даты вступления договора страхования в силу
+						в течение которого медицинские услуги, оказанные Застрахованному, не возмещаются Страховщиком, а
+						любые заболевания, которые были диагностированы либо симптомы которых проявились в указанный период,
+						не признаются страховым случаем. Период ожидания не применяется при непрерывной пролонгации договора
+						страхования на новый период без изменения Застрахованного.
+						<br><strong>Центр реабилитации</strong> – медицинское учреждение, официально признанное
+						реабилитационной клиникой.
+						<br><strong>Реабилитационная программа</strong> – программа лечения у врача (врача-терапевта) –
+						специалиста по реабилитации, которая позволит Застрахованному максимально реализовать потенциальное
+						качество жизни после событий, предусмотренных п. 2.2.4 Программы. Продолжительность реабилитационной
+						программы может составлять не более 90 (девяноста) дней. Реабилитационная программа назначается в
+						выбранном Страховщиком центре реабилитации и координируется исключительно Страховщиком или с его
+						предварительного согласия.
+					</p>
+				</div>
+
+				<div class="mainText">
+					<p class="boldText bigSize">2. СТРАХОВЫЕ СЛУЧАИ</p>
+					<p>2.1. <strong>Страховым случаем</strong> является обращение Застрахованного в течение срока
+						страхования за исключением периода ожидания за организацией и оказанием медицинских и иных услуг,
+						предусмотренных Программой, вследствие расстройства здоровья Застрахованного или состояния
+						Застрахованного, требующих организации и оказания таких услуг, повлекшее возникновение обязательства
+						Страховщика по организации оказания Застрахованному таких услуг и их оплате.</p>
+					<p>2.2. В рамка настоящей Программы предусмотрены следующие заболевания и состояния, при которых
+						предоставляются медицинские и иные услуги:</p>
+					<p><strong>2.2.1. Лечение злокачественного онкологического заболевания</strong><br>
+						Злокачественное онкологическое новообразование – наличие у Застрахованного новообразования из
+						злокачественных клеток, характеризующееся неконтролируемым ростом, способностью к метастазированию
+						(распространению злокачественных клеток из первичного очага), к инвазии и деструкции здоровых и
+						окружающих опухоль тканей, диагностированное впервые в течение срока действия договора страхования,
+						согласно заключению сертифицированного медицинского специалиста (врача-специалиста), и которое было
+						признано Страховщиком в качестве страхового случая. Диагноз должен подтверждаться результатами
+						гистологических или – в случае системных раковых заболеваний – цитологических исследований.<br>
+						<u>Исключаются из страхового покрытия:</u>
+					</p>
+					<ul>
+						<li>
+							Злокачественные новообразования, которые диагностированы как дисплазия шейки матки CIN 1-3, или
+							новообразования, которые гистологически диагностированы как предраковые.
+						</li>
+						<li>
+							Злокачественная меланома, максимальная толщина которой в соответствии с гистологическим
+							заключением менее 1 мм или которая не превышает уровень развития Т3N(0)М(0) по классификации TNМ
+							(класс A1 согласно классификации AJCC, 2002).
+						</li>
+						<li>
+							Заболевания кожи следующих типов:
+							<ol>
+								<li>
+									Гиперкератоз и базально-клеточная карцинома;
+								</li>
+								<li>
+									Плоскоклеточная карцинома при отсутствии прорастания в другие ткани.
+								</li>
+							</ol>
+						</li>
+						<li>
+							Злокачественные новообразования на фоне вируса иммунодефицита человека (ВИЧ) или синдрома
+							приобретенного иммунодефицита (СПИД), а также ассоциированные с ВИЧ-инфекцией или СПИДом.
+						</li>
+						<li>
+							Рак предстательной железы, который диагностирован гистологически как имеющий до T2 N0 M0
+							(включая) по классификации TNM или развившийся до 6 баллов (включая) по шкале Глисона.
+						</li>
+						<li>
+							Хронический лимфолейкоз (ХЛЛ) (ICD 91.10).
+						</li>
+					</ul>
+					<p><strong>2.2.2. Кардиохирургия</strong><br>
+						Кардиохирургия (операции на сердце) – хирургическая операция по рекомендации кардиолога,
+						направленная на восстановление кровотока в артериях сердца путем обхода места сужения (закупорки)
+						одной или нескольких коронарных артерий с помощью обходных трансплантатов (шунтов); или направленная
+						на замену или лечение одного или нескольких сердечных клапанов; а также ангиопластика,
+						стентирование, хирургическое лечение нарушений ритма сердца. Диагноз, в связи с которым требуется
+						кардиохирургия, должен возникнуть в период действия договора страхования и быть подтвержден
+						результатами визуальных тестов.<br>
+						<u>Исключаются из страхового покрытия:</u>
+					</p>
+					<ul>
+						<li>
+							Катетеризация сердца (в т. ч. ангиография) не классифицируется как операция на сердце.
+						</li>
+					</ul>
+					<p><strong>2.2.3. Нейрохирургия</strong><br>
+						Нейрохирургия – любое плановое хирургическое вмешательство, рекомендованное нейрохирургом, на
+						головном мозге или прочих внутричерепных структурах, а также хирургические вмешательства при
+						доброкачественных опухолях спинного мозга и его мембран. Диагноз, в связи с которым требуется
+						нейрохирургия, должен возникнуть в период действия договора страхования и быть подтвержден данными
+						магнитно-резонансной томографии (МРТ) или компьютерной томографии (КТ).<br>
+						<u>Исключаются из страхового покрытия:</u>
+					</p>
+					<ul>
+						<li>
+							Хирургические вмешательства, проводимые в связи с заболеваниями, вызванными травматическими
+							повреждениями, другими заболеваниями спинного мозга и его оболочек, помимо доброкачественных
+							опухолей, а также врожденными дефектами.
+						</li>
+					</ul>
+					<p><strong>2.2.4. Реабилитация</strong><br>
+						Состояние здоровья Застрахованного, которое было впервые диагностировано впервые в период действия
+						договора страхования и требующее согласно заключению сертифицированного медицинского специалиста,
+						подтвержденного Страховщиком, прохождения Застрахованным реабилитационной программы, которая
+						способна привести к положительным результатам после наступления одного из следующих событий:</p>
+					<p>2.2.4.1. заболевания и травмы головного мозга:</p>
+					<ul>
+						<li>
+							геморрагический или ишемический инсульт;
+						</li>
+						<li>
+							резекция внутричерепной опухоли;
+						</li>
+						<li>
+							энцефалит, менингит;
+						</li>
+						<li>
+							аноксическое повреждение головного мозга;
+						</li>
+					</ul>
+					<p>2.2.4.2. заболевания и травмы спинного мозга и позвоночника:</p>
+					<ul>
+						<li>
+							повреждение спинного мозга в результате травмы, опухоли, инфекции или заболевания сосудов;
+						</li>
+						<li>
+							заболевание и травма позвоночника;
+						</li>
+					</ul>
+					<p>2.2.4.3. потребность в ортопедическом лечении:</p>
+					<ul>
+						<li>
+							ампутация конечности;
+						</li>
+						<li>
+							операция в связи с опухолью кости;
+						</li>
+						<li>
+							операция в связи со сложным переломом.
+						</li>
+					</ul>
+					<p><strong>2.2.5. Второе экспертное медицинское мнение</strong><br>
+						2.2.5.1. Второе экспертное медицинское мнение (далее – Второе мнение или Экспертное заключение)
+						представляет собой повторное медицинское заключение, вынесенное по итогам рассмотрения и оценки
+						медицинских документов/информации, предоставленных Застрахованным, врачом-специалистом в отношении
+						заболевания Застрахованного, которое диагностировано Застрахованному в течение срока действия
+						договора страхования и относится к одной из следующих областей медицины:<br>
+					</p>
+					<ul>
+						<li>
+							онкология;
+						</li>
+						<li>
+							кардиология;
+						</li>
+						<li>
+							неврология;
+						</li>
+						<li>
+							нефрология;
+						</li>
+						<li>
+							ортопедия.
+						</li>
+					</ul>
+					<p>
+						Второе мнение является консультацией и не заменяет необходимости посещения Застрахованным
+						врача-специалиста и выполнения, в случае назначения, необходимых/предписанных медицинских
+						манипуляций. Риск невыполнения соответствующих назначений/рекомендаций как до получения Второго
+						мнения, так и после его получения несет Застрахованный.
+					</p>
+					<p>
+						Второе мнение базируется на основании анализа медицинской информации, предоставленной
+						Застрахованным, включающей первичное заключение врача-специалиста о наличии заболевания,
+						предусмотренного в п. 2.2.5.1 Программы (далее – Первое мнение), и любых медицинских
+						документов/информации, затребованных медицинским персоналом в целях оказания услуги Второго мнения.
+					</p>
+					<p>
+						В случае отсутствия Первого мнения (первого заключения о состоянии здоровья Застрахованного,
+						выданное врачом-специалистом) Второе мнение не оказывается.
+					</p>
+					<p>
+						Предоставление необходимых документов/информации является обязанностью Застрахованного, который
+						несет
+						риск неполучения либо получения неполного/некорректного Второго мнения в случае непредставления /
+						неполного представления либо предоставления в искаженном виде затребованных медицинских
+						документов/информации.
+					</p>
+					<p>
+						Второе мнение должно быть подписано врачом-специалистом / медицинским учреждением (далее – Эксперт),
+						получившим от компетентных официальных органов страны, в которой они осуществляют медицинскую
+						практику, разрешение на работу в качестве специалиста в определенной области медицины и имеющим
+						необходимую квалификацию в области медицины, в которой требуется вынести дополнительное заключение.
+					</p>
+					<p>
+						Содержание Второго мнения определяется согласованным Экспертом самостоятельно. При этом в таком
+						заключении обязательно должно быть выражено мнение относительно правильности диагноза, поставленного
+						в Первом мнении, или мотивированное мнение относительно его спорности, а также дополнительные
+						рекомендации по лечению и/или профилактике (при необходимости) либо указание на корректность
+						рекомендаций, полученных Застрахованным ранее.
+					</p>
+					<p>
+						Второе мнение выносится без обязательного физического обследования Застрахованного
+						врачом-специалистом.
+					</p>
+					<p>
+						Конкретный Эксперт согласовывается между Застрахованным, обратившимся за получением Второго мнения,
+						и Ассистанской компанией, которая обязуется рассмотреть запрос и медицинские документы
+						Застрахованного и рекомендовать услуги соответствующего врача-специалиста. При необходимости
+						Ассистанская компания упорядочивает и осуществляет перевод предоставленных документов/информации и
+						готовит запрос на получение Второго мнения.
+					</p>
+					<p>
+						В рамках настоящей Программы Застрахованный имеет право обратиться 2 (два) раза в течение срока
+						действия договора страхования, но не чаще чем 1 (один) раз в полисный год, для получения Второго
+						мнения или дополнительного мнения иного врача-специалиста в данной области по одному и тому же
+						заболеванию либо по иному заболеванию, указанному в п. 2.2.5.1 Программы).
+					</p>
+					<p>
+						После получения 2 (двух) заключений в течение срока страхования обязательства Страховщика перед
+						Застрахованным по предоставления в рамках предоставления Второго мнения считаются исполненными в
+						полном объеме. Застрахованный не вправе больше обращаться за дополнительным мнением в течение
+						действия договора страхования.
+					</p>
+					<p>
+						2.2.5.2. Страховщик самостоятельно или с привлечением третьих лиц в сроки, указанные ниже,
+						организует оказание (или отказывает в оказании) медицинских услуг, предусмотренных п. 2.2.5
+						Программы, у выбранного Страховщиком (привлеченным третьим лицом) врача-специалиста или запрашивает
+						необходимые документы/сведения. В последнем случае срок организации оказания услуг (или отказа в
+						оказании услуг) соразмерно увеличивается.
+					</p>
+					<p>
+						Срок оказания услуги в рамках получения Второго мнения составляет:
+					</p>
+					<ul>
+						<li>
+							14 (четырнадцать) рабочих дней со дня предоставления Застрахованным всей необходимой медицинской
+							информации, кроме указанного ниже случая;
+						</li>
+						<li>
+							30 (тридцать) рабочих дней со дня предоставления Застрахованным необходимой медицинской
+							информации в случаях, требующих участия нескольких врачей-специалистов или проведения
+							дополнительных консультаций для составления Экспертного заключения.
+						</li>
+					</ul>
+					<p>
+						2.2.5.3. Обязательства Страховщика и Ассистанской компании и/или любого лица, действующего от их
+						имени и/или по их поручению перед Застрахованным, заканчиваются с направлением Застрахованному
+						соответствующего Экспертного заключения.
+					</p>
+					<p>
+						2.2.5.4. Второе мнение составляется на основании медицинских документов и информации,
+						предоставленных Застрахованным, который несет ответственность за их корректность и актуальность.
+					</p>
+					<p>
+						2.2.5.5. Застрахованному рекомендуется проконсультироваться с личным врачом-специалистом по поводу
+						подготовки необходимых документов/информации − таким образом, чтобы она содержала все медицинские
+						факты и все сведения, способные повлиять на Экспертное заключение.
+					</p>
+					<p>
+						2.2.5.6. Страховщик обязуется контролировать деятельность Ассистанской компании в течение всего
+						срока страхования.
+					</p>
+					<p>2.3. В рамках страхового покрытия, предусмотренного в п.п. 2.2.1 - 2.2.5 Программы период ожидания
+						равен 90 (девяносто) дней с даты заключения договора страхования / включения страхового риска,
+						указанного в п. 4.1.26 Правил, в договор страхования.
+					</p>
+				</div>
+
+				<div class="mainText">
+					<p class="boldText bigSize">3. МЕДИЦИНСКИЕ И ИНЫЕ УСЛУГИ</p>
+					<p>3.1. В соответствии с настоящей Программой Страховщик оплачивает следующие медицинские и иные услуги
+						при наступлении страхового случая, предусмотренного в п.п. 2.2.1 - 2.2.3 Программы (лечение
+						злокачественного онкологического заболевания, кардиохирургия, нейрохирургия):</p>
+					<p>3.1.1. Оплата билета эконом-класса для Застрахованного и одного сопровождающего лица, встреча в
+						аэропорту и перевозка на машине скорой помощи (в случае медицинской необходимости) или на такси до
+						отеля или в медицинское учреждение, где будет проводиться лечение.</p>
+					<p>3.1.2. Оплата проживания Застрахованного и одного сопровождающего лица в гостинице (3 или 4 звезды),
+						включая завтрак и услуги, включенные в стоимость номера для Застрахованного и его сопровождающего
+						лица. При этом выбор отеля производится с учетом доступности и близости к медицинскому учреждению,
+						где будет проводиться лечение, или лечащему врачу.</p>
+					<p>3.1.3. Транспортировка в медицинскую организацию: транспортировка Застрахованного и сопровождающего
+						на такси из отеля и обратно при необходимости нескольких посещений медицинских организаций во время
+						прохождения обследования.</p>
+					<p>3.1.4. Лечение, проводимое по поводу диагностированного заболевания при наступлении страхового
+						случая, которая может включать медицинскую помощь в амбулаторных условиях, в условиях дневного
+						стационара, в стационарных условиях:</p>
+					<ul>
+						<li>
+							консультации врачей-специалистов;
+						</li>
+						<li>
+							диагностические медицинские вмешательства, выполняемые медицинскими организациями по выбору
+							Страховщика в том числе лабораторные исследования, визуализирующие исследования, эндоскопические
+							исследования, функциональная диагностика;
+						</li>
+						<li>
+							лечебные медицинские вмешательства в пределах страховой суммы (кроме имплантаций), включающие
+							хирургическое лечение, химиотерапию, лучевую терапию, иные методы лечения, научно обоснованные,
+							и применяемые в рамках оказания медицинской помощи медицинскими организациями по выбору
+							Страховщика;
+						</li>
+						<li>
+							имплантация, необходимая в целях реконструктивного лечения, включая стоимость имплантатов на
+							сумму не более эквивалента 900 000 (девятьсот тысяч) рублей в год на один страховой случай;
+						</li>
+						<li>
+							лекарственные средства, применяемые при лечении в стационарных условиях, в условиях дневного
+							стационара и при амбулаторном лечении.
+						</li>
+					</ul>
+					<p>3.2. В случае истечения срока действия договора страхования при незавершенном медицинском лечении
+						расходы на лечение в стационаре подлежат оплате Страховщиком с лимитом на лечение, которое было
+						проведено и счет за которое был выставлен в течение 30 (тридцати) дней с момента истечения срока
+						действия договора страхования. Если обращение по страховому случаю было подано и утверждено
+						Страховщиком в течение срока действия договора страхования, Страховщик несет обязательства по оплате
+						лечения на срок не более 30 (тридцати) последовательных дней после истечения срока действия договора
+						страхования.</p>
+					<p>3.3. В соответствии с настоящей Программой Страховщик обязуется возместить центру реабилитации,
+						стоимость прохождения реабилитационной программы в пределах предусмотренной Программой страховой
+						суммы при наступлении страхового случая, указанного в п. 2.2.4 Программы (реабилитация):</p>
+					<ul>
+						<li>
+							проживание в реабилитационном учреждении включая питание, уход за пациентом, медицинские
+							осмотры, помощь в реабилитации и физиотерапия, трудотерапия, восстановление речи и другие услуги
+							по реабилитации, оказанные реабилитационным учреждением по усмотрению реабилитолога;
+						</li>
+						<li>
+							дополнительные медицинские проверки, назначенные по усмотрению реабилитолога, включая проверки с
+							использованием методов визуализации, ЭКГ и ЭЭГ;
+						</li>
+						<li>
+							лекарства в период реабилитации, назначаемые исключительно с целью реабилитации или для
+							предотвращения воздействия фоновых заболеваний на результаты реабилитационных мероприятий;
+						</li>
+						<li>
+							итоговый отчет по результатам реабилитационной программы и, при необходимости, также последующее
+							наблюдение.
+						</li>
+					</ul>
+				</div>
+
+				<div class="mainText">
+					<p class="boldText bigSize">4. ТЕРРИТОРИЯ</p>
+					<p>4.1. Территория страхового покрытия: страховое покрытие действует 24 (двадцать четыре) часа в сутки,
+						365 (триста шестьдесят пять) дней в году, на территории Российской Федерации.</p>
+					<p>4.2. Территория оказания услуг при организации лечения – Российская Федерация.</p>
+				</div>
+
+				<div class="mainText">
+					<p class="boldText bigSize">5. СТРАХОВАЯ СУММА</p>
+					<p>5.1. Годовой лимит ответственности Страховщика по Программе – эквивалент 12 000 000 (двенадцать
+						миллионов) рублей по событиям, предусмотренным в п.п. 2.2.1 - 2.2.3 Программы (лечение
+						злокачественного онкологического заболевания, кардиохирургия, нейрохирургия).</p>
+					<p>5.2. Годовой лимит ответственности Страховщика по Программе – эквивалент 400 000 (четыреста тысяч)
+						рублей по событию, предусмотренному в п. 2.2.4 Программы (реабилитация).</p>
+					<p>5.3. Страховая сумма (страховой лимит) по Программе является уменьшаемой (агрегатной) страховой
+						суммой, рассчитываемой как разность страховой суммы на начало каждого года страхования и суммы
+						страхового возмещения, осуществленного Страховщиком в период действия каждого года страхования. Если
+						агрегатная страховая сумма исчерпана полностью, обязательства Страховщика по договору страхования
+						считаются исполненными, при этом страховой риск, указанный в п. 4.1.26 Правил, прекращает свое
+						действие, а уплаченная страховая премия по данному риску не подлежит возврату.</p>
+				</div>
+
+				<div class="mainText">
+					<p class="boldText bigSize">6. ИСКЛЮЧЕНИЯ ИЗ ПРОГРАММЫ СТРАХОВАНИЯ</p>
+					<p>6.1. В рамках страхования по настоящей Программе не подлежат оплате следующие услуги:</p>
+					<p>6.1.1. Услуги, оказанные по поводу заболеваний или медицинские услуги не предусмотренные в Программе.
+					</p>
+					<p>6.1.2. Услуги, оказанные вне сроков действия договора страхования, кроме случаев, прямо
+						предусмотренных Программой.</p>
+					<p>6.1.3. Услуги, необходимость оказаний которых возникла в связи с нарушением Застрахованным
+						рекомендаций лечащего врача, правил и распорядка при нахождении на лечении в медицинских
+						организациях.</p>
+					<p>6.1.4. Услуги, прямо не предусмотренные настоящей Программой;</p>
+					<p>6.1.5. Психохирургия;</p>
+					<p>6.1.6. Лечение врожденных нарушений нормального развития головного мозга и черепной коробки;</p>
+					<p>6.1.7. Лечение врожденных пороков развития спинного мозга и позвоночника.</p>
+					<p>6.1.8. Хирургические операции по трансплантации органов или любого вида трансплантации костного мозга
+						в следующих случаях:</p>
+					<ul>
+						<li>
+							если трансплантация таких органов и/или их долей не предусмотрена настоящей Программой;
+						</li>
+						<li>
+							если потребность в трансплантации органов возникла вследствие алкогольной болезни печени;
+						</li>
+						<li>
+							если трансплантация органов является аутологической (реципиент трансплантата является донором
+							для самого себя), за исключением трансплантации костного мозга;
+						</li>
+						<li>
+							если при трансплантации органов Застрахованный является донором по отношению к третьему лицу;
+						</li>
+						<li>
+							при трансплантации органов, которая включает в себя лечение стволовыми клетками (кроме
+							трансплантации костного мозга);
+						</li>
+					</ul>
+					<p>6.1.9. Медицинские и иные услуги, выполняемых в эстетических и/или косметических целях, включая, но
+						не ограничиваясь, операцию по коррекции миопии (близорукости), и бариатрические операции, включающие
+						в себя, но не ограничивающиеся операциями, направленными на уменьшение объема желудка или кишечника,
+						кроме операции по реконструкции груди после резекции/удаления молочной железы, проведенной в рамках
+						программы страхования и в соответствии с ее условиями.</p>
+					<p>6.1.10. Услуги, выполняемые по поводу всех форм поражений сердечных клапанов в результате
+						эндокардита, вызванного венерическими заболеваниями (инфекциями, передающимися преимущественно
+						половым путем).</p>
+					<p>6.1.11. Услуги, оказываемые в связи с родовыми травмами и/или врождёнными пороками развития.</p>
+					<p>6.2 В рамках настоящей Программы не признается страховым случаем и, следовательно, Страховщик не
+						оплачивает или не организует оказание и не производит оплату медицинских и иных услуг в случае
+						обращения Застрахованного для организации и оказания медицинских и иных услуг:</p>
+					<p>6.2.1. которые не предусмотрены Программой;</p>
+					<p>6.2.2. при заболеваниях и состояниях, не предусмотренных настоящей Программой и/или которые возникли
+						до окончания периода ожидания или после расторжения договора страхования;</p>
+					<p>6.2.3. предусмотренных настоящей Программой, но в отношении лица, не являющегося Застрахованным по
+						договору страхования, в том числе в случае установления факта передачи Застрахованным лицом договора
+						страхования и/или иных документов другому лицу для получения таким лицом медицинских и иных услуг,
+						предусмотренных настоящей Программой;</p>
+					<p>6.2.4. не назначенных Застрахованному лечащим врачом либо не являющихся необходимыми с медицинской
+						точки зрения для диагностирования или лечения диагностированного заболевания;</p>
+					<p>6.2.5. в связи с заболеваниями и состояниями, которые являются прямым или косвенным следствием
+						синдрома приобретенного иммунодефицита (СПИД) или носительства вируса иммунодефицита человека (ВИЧ);
+					</p>
+					<p>6.2.6. в связи с расстройством здоровья, в том числе в связи с травматическим повреждением,
+						наступившим в результате занятий Застрахованным спортом на профессиональном уровне;</p>
+					<p>6.2.7. в связи с расстройством здоровья Застрахованного, наступившим в местах лишения свободы,
+						содержания под стражей;</p>
+					<p>6.2.8. в связи с расстройством здоровья, наступившим в результате профессиональной деятельности
+						Застрахованного непосредственно связанной с химическими веществами и газами, (включая асбест,
+						растворители, бензол, хлористый винил, бериллий, никель, соединения хрома, радон, пестициды, пыль с
+						оксидом кремния, диоксины), со взрывчатыми веществами, с ионизирующей радиацией, включая
+						ультрафиолет, с микроволновым излучением, с высоковольтными электрическими сетями;</p>
+					<p>6.2.9. в связи с расстройством здоровья, наступившим во время или в результате управления
+						Застрахованным транспортным средством в состоянии алкогольного, наркотического или токсического
+						опьянения;</p>
+					<p>6.2.10. в связи с расстройством здоровья, наступившим в результате совершения Застрахованным
+						противоправных деяний, а также в результате совершения или подготовки террористического акта;</p>
+					<p>6.2.11. в связи с расстройством здоровья, наступившим в результате умышленного причинения
+						Застрахованным себе телесных повреждений, в т. ч. попытки самоубийства; а также в связи с
+						причинением Застрахованным себе телесных повреждений, в т. ч. попытки самоубийства, связанных с
+						психическими заболеваниями или расстройствами поведения;</p>
+					<p>6.2.12. связанных с применением экспериментальных методов лечения, не допущенных к использованию в
+						Российской Федерации;</p>
+					<p>6.2.13. в связи с злокачественным новообразованием, протекающим на фоне ВИЧ-инфекции или СПИД
+						(включая Саркому Капоши);</p>
+					<p>6.2.14. в связи со службой Застрахованного в различных вооруженных силах, в том числе, но не
+						ограничиваясь: службы в армии, полиции, пожарной бригаде, тюремных службах;</p>
+					<p>6.2.15. в связи с ранее существовавшими заболеваниями и состояниями, диагностированными или о которых
+						было известно Застрахованному до даты начала действия договора страхования, если лечение,
+						предусмотренное настоящей Программой, было рекомендовано или запланировано до момента заключения
+						договора страхования;</p>
+					<p>6.2.16. в связи с получением Застрахованным медицинских и иных услуг в медицинских и иных
+						организациях, не предусмотренных в Программе или выбор которых не был согласован со Страховщиком;
+					</p>
+					<p>6.2.17. в связи с заболеваниями и медицинскими состояниями, возникшими в результате занятия
+						Застрахованным следующими экстремальными видами спорта, сопряженными с повышенным риском для жизни и
+						здоровья: автоспорт, мотоспорт, альпинизм, спелеология, бокс и любые другие виды боевых единоборств,
+						экстремальные виды велоспорта (включая маунтинбайк), фридайвинг, скайсерфинг, дайвинг (глубина
+						погружения более 25 метров), кайтинг, бейсджампинг, экстремальные водные виды спорта (в том числе,
+						аквабайк, водные лыжи), парашютный спорт, парапланеризм, дельтапланеризм, конный спорт;</p>
+					<p>6.2.18. в связи с родовыми травмами и/или врождёнными пороками развития любого вида.</p>
+				</div>
+			</div>
+		</div>
+			{{/if}}
+		<!-- Приложения ДМС 4-->
+			{{#if riskFinReserv.isMedWorld}}
+		<div class="signatureHolder">
+			<div class="containerAdd">
+
+				<p class="breakPage break">Приложение к договору страхования № {{policy.number}} от {{policy.issueDate}} г.
+				</p>
+				<p class="breakPage">по программе «{{policy.product}}»</p>
+
+				<div class="dms">
+					<p class="boldText bigSize">ПРОГРАММА ДОБРОВОЛЬНОГО МЕДИЦИНСКОГО СТРАХОВАНИЯ</p>
+					<p class="boldText bigSize">«ДИАГНОСТИРОВАНИЕ И ЛЕЧЕНИЕ КРИТИЧЕСКОГО ЗАБОЛЕВАНИЯ» №4</p>
+					<p>(далее – Программа)</p>
+				</div>
+
+				<div class="mainText">
+					<p class="boldText bigSize">1. ОБЩИЕ ПОЛОЖЕНИЯ</p>
+					<p>В рамках настоящей Программы Страховщик организует Застрахованному и оплачивает медицинские и/или
+						иные услуги в объеме, предусмотренном Программой при наступлении страхового случая по следующему
+						страховому риску, указанному в п. 4.1.26 Правил:<br>
+						ООбращение Застрахованного за предоставлением медицинских или иных услуг, предусмотренных Программой
+						ДМС «Диагностирование и лечение критического заболевания», вследствие расстройства здоровья или
+						состояния Застрахованного, требующих получения таких услуг.<br>
+						1.1. В целях настоящей программы используются следующие определения и термины:
+						<br><strong>Период ожидания</strong> – период времени с даты вступления договора страхования в силу
+						в течение которого медицинские услуги, оказанные Застрахованному, не возмещаются Страховщиком, а
+						любые заболевания, которые были диагностированы либо симптомы которых проявились в указанный период,
+						не признаются страховым случаем. Период ожидания не применяется при непрерывной пролонгации договора
+						страхования на новый период без изменения Застрахованного.
+						<br><strong>Центр реабилитации</strong> – медицинское учреждение, официально признанное
+						реабилитационной клиникой.
+						<br><strong>Реабилитационная программа</strong> – программа лечения у врача (врача-терапевта) –
+						специалиста по реабилитации, которая позволит Застрахованному максимально реализовать потенциальное
+						качество жизни после событий, предусмотренных п. 2.2.4 Программы. Продолжительность реабилитационной
+						программы может составлять не более 90 (девяноста) дней. Реабилитационная программа назначается в
+						выбранном Страховщиком центре реабилитации и координируется исключительно Страховщиком или с его
+						предварительного согласия.
+					</p>
+				</div>
+
+				<div class="mainText">
+					<p class="boldText bigSize">2. СТРАХОВЫЕ СЛУЧАИ</p>
+					<p>2.1. <strong>Страховым случаем</strong> является обращение Застрахованного в течение срока
+						страхования за исключением периода ожидания за организацией и оказанием медицинских и иных услуг,
+						предусмотренных Программой, вследствие расстройства здоровья Застрахованного или состояния
+						Застрахованного, требующих организации и оказания таких услуг, повлекшее возникновение обязательства
+						Страховщика по организации оказания Застрахованному таких услуг и их оплате.</p>
+					<p>2.2. В рамка настоящей Программы предусмотрены следующие заболевания и состояния, при которых
+						предоставляются медицинские и иные услуги:</p>
+					<p><strong>2.2.1. Лечение злокачественного онкологического заболевания</strong><br>
+						Злокачественное онкологическое новообразование – наличие у Застрахованного новообразования из
+						злокачественных клеток, характеризующееся неконтролируемым ростом, способностью к метастазированию
+						(распространению злокачественных клеток из первичного очага), к инвазии и деструкции здоровых и
+						окружающих опухоль тканей, диагностированное впервые в течение срока действия договора страхования,
+						согласно заключению сертифицированного медицинского специалиста (врача-специалиста), и которое было
+						признано Страховщиком в качестве страхового случая. Диагноз должен подтверждаться результатами
+						гистологических или – в случае системных раковых заболеваний – цитологических исследований.<br>
+						<u>Исключаются из страхового покрытия:</u>
+					</p>
+					<ul>
+						<li>
+							Злокачественные новообразования, которые диагностированы как дисплазия шейки матки CIN 1-3, или
+							новообразования, которые гистологически диагностированы как предраковые.
+						</li>
+						<li>
+							Злокачественная меланома, максимальная толщина которой в соответствии с гистологическим
+							заключением менее 1 мм или которая не превышает уровень развития Т3N(0)М(0) по классификации TNМ
+							(класс A1 согласно классификации AJCC, 2002).
+						</li>
+						<li>
+							Заболевания кожи следующих типов:
+							<ol>
+								<li>
+									Гиперкератоз и базально-клеточная карцинома;
+								</li>
+								<li>
+									Плоскоклеточная карцинома при отсутствии прорастания в другие ткани.
+								</li>
+							</ol>
+						</li>
+						<li>
+							Злокачественные новообразования на фоне вируса иммунодефицита человека (ВИЧ) или синдрома
+							приобретенного иммунодефицита (СПИД), а также ассоциированные с ВИЧ-инфекцией или СПИДом.
+						</li>
+						<li>
+							Рак предстательной железы, который диагностирован гистологически как имеющий до T2 N0 M0
+							(включая) по классификации TNM или развившийся до 6 баллов (включая) по шкале Глисона.
+						</li>
+						<li>
+							Хронический лимфолейкоз (ХЛЛ) (ICD 91.10).
+						</li>
+					</ul>
+					<p><strong>2.2.2. Кардиохирургия</strong><br>
+						Кардиохирургия (операции на сердце) – хирургическая операция по рекомендации кардиолога,
+						направленная на восстановление кровотока в артериях сердца путем обхода места сужения (закупорки)
+						одной или нескольких коронарных артерий с помощью обходных трансплантатов (шунтов); или направленная
+						на замену или лечение одного или нескольких сердечных клапанов; а также ангиопластика,
+						стентирование, хирургическое лечение нарушений ритма сердца. Диагноз, в связи с которым требуется
+						кардиохирургия, должен возникнуть в период действия договора страхования и быть подтвержден
+						результатами визуальных тестов.<br>
+						<u>Исключаются из страхового покрытия:</u>
+					</p>
+					<ul>
+						<li>
+							Катетеризация сердца (в т. ч. ангиография) не классифицируется как операция на сердце.
+						</li>
+					</ul>
+					<p><strong>2.2.3. Нейрохирургия</strong><br>
+						Нейрохирургия – любое плановое хирургическое вмешательство, рекомендованное нейрохирургом, на
+						головном мозге или прочих внутричерепных структурах, а также хирургические вмешательства при
+						доброкачественных опухолях спинного мозга и его мембран. Диагноз, в связи с которым требуется
+						нейрохирургия, должен возникнуть в период действия договора страхования и быть подтвержден данными
+						магнитно-резонансной томографии (МРТ) или компьютерной томографии (КТ).<br>
+						<u>Исключаются из страхового покрытия:</u>
+					</p>
+					<ul>
+						<li>
+							Хирургические вмешательства, проводимые в связи с заболеваниями, вызванными травматическими
+							повреждениями, другими заболеваниями спинного мозга и его оболочек, помимо доброкачественных
+							опухолей, а также врожденными дефектами.
+						</li>
+					</ul>
+					<p><strong>2.2.4. Реабилитация</strong><br>
+						Состояние здоровья Застрахованного, которое было впервые диагностировано впервые в период действия
+						договора страхования и требующее согласно заключению сертифицированного медицинского специалиста,
+						подтвержденного Страховщиком, прохождения Застрахованным реабилитационной программы, которая
+						способна привести к положительным результатам после наступления одного из следующих событий:</p>
+					<p>2.2.4.1. заболевания и травмы головного мозга:</p>
+					<ul>
+						<li>
+							геморрагический или ишемический инсульт;
+						</li>
+						<li>
+							резекция внутричерепной опухоли;
+						</li>
+						<li>
+							энцефалит, менингит;
+						</li>
+						<li>
+							аноксическое повреждение головного мозга;
+						</li>
+					</ul>
+					<p>2.2.4.2. заболевания и травмы спинного мозга и позвоночника:</p>
+					<ul>
+						<li>
+							повреждение спинного мозга в результате травмы, опухоли, инфекции или заболевания сосудов;
+						</li>
+						<li>
+							заболевание и травма позвоночника;
+						</li>
+					</ul>
+					<p>2.2.4.3. потребность в ортопедическом лечении:</p>
+					<ul>
+						<li>
+							ампутация конечности;
+						</li>
+						<li>
+							операция в связи с опухолью кости;
+						</li>
+						<li>
+							операция в связи со сложным переломом.
+						</li>
+					</ul>
+					<p><strong>2.2.5. Второе экспертное медицинское мнение</strong><br>
+						2.2.5.1. Второе экспертное медицинское мнение (далее – Второе мнение или Экспертное заключение)
+						представляет собой повторное медицинское заключение, вынесенное по итогам рассмотрения и оценки
+						медицинских документов/информации, предоставленных Застрахованным, врачом-специалистом в отношении
+						заболевания Застрахованного, которое диагностировано Застрахованному в течение срока действия
+						договора страхования и относится к одной из следующих областей медицины:<br>
+					</p>
+					<ul>
+						<li>
+							онкология;
+						</li>
+						<li>
+							кардиология;
+						</li>
+						<li>
+							неврология;
+						</li>
+						<li>
+							нефрология;
+						</li>
+						<li>
+							ортопедия.
+						</li>
+					</ul>
+					<p>
+						Второе мнение является консультацией и не заменяет необходимости посещения Застрахованным
+						врача-специалиста и выполнения, в случае назначения, необходимых/предписанных медицинских
+						манипуляций. Риск невыполнения соответствующих назначений/рекомендаций как до получения Второго
+						мнения, так и после его получения несет Застрахованный.
+					</p>
+					<p>
+						Второе мнение базируется на основании анализа медицинской информации, предоставленной
+						Застрахованным, включающей первичное заключение врача-специалиста о наличии заболевания,
+						предусмотренного в п. 2.2.5.1 Программы (далее – Первое мнение), и любых медицинских
+						документов/информации, затребованных медицинским персоналом в целях оказания услуги Второго мнения.
+					</p>
+					<p>
+						В случае отсутствия Первого мнения (первого заключения о состоянии здоровья Застрахованного,
+						выданное врачом-специалистом) Второе мнение не оказывается.
+					</p>
+					<p>
+						Предоставление необходимых документов/информации является обязанностью Застрахованного, который
+						несет
+						риск неполучения либо получения неполного/некорректного Второго мнения в случае непредставления /
+						неполного представления либо предоставления в искаженном виде затребованных медицинских
+						документов/информации.
+					</p>
+					<p>
+						Второе мнение должно быть подписано врачом-специалистом / медицинским учреждением (далее – Эксперт),
+						получившим от компетентных официальных органов страны, в которой они осуществляют медицинскую
+						практику, разрешение на работу в качестве специалиста в определенной области медицины и имеющим
+						необходимую квалификацию в области медицины, в которой требуется вынести дополнительное заключение.
+					</p>
+					<p>
+						Содержание Второго мнения определяется согласованным Экспертом самостоятельно. При этом в таком
+						заключении обязательно должно быть выражено мнение относительно правильности диагноза, поставленного
+						в Первом мнении, или мотивированное мнение относительно его спорности, а также дополнительные
+						рекомендации по лечению и/или профилактике (при необходимости) либо указание на корректность
+						рекомендаций, полученных Застрахованным ранее.
+					</p>
+					<p>
+						Второе мнение выносится без обязательного физического обследования Застрахованного
+						врачом-специалистом.
+					</p>
+					<p>
+						Конкретный Эксперт согласовывается между Застрахованным, обратившимся за получением Второго мнения,
+						и Ассистанской компанией, которая обязуется рассмотреть запрос и медицинские документы
+						Застрахованного и рекомендовать услуги соответствующего врача-специалиста. При необходимости
+						Ассистанская компания упорядочивает и осуществляет перевод предоставленных документов/информации и
+						готовит запрос на получение Второго мнения.
+					</p>
+					<p>
+						В рамках настоящей Программы Застрахованный имеет право обратиться 2 (два) раза в течение срока
+						действия договора страхования, но не чаще чем 1 (один) раз в полисный год, для получения Второго
+						мнения или дополнительного мнения иного врача-специалиста в данной области по одному и тому же
+						заболеванию либо по иному заболеванию, указанному в п. 2.2.5.1 Программы).
+					</p>
+					<p>
+						После получения 2 (двух) заключений в течение срока страхования обязательства Страховщика перед
+						Застрахованным по предоставления в рамках предоставления Второго мнения считаются исполненными в
+						полном объеме. Застрахованный не вправе больше обращаться за дополнительным мнением в течение
+						действия договора страхования.
+					</p>
+					<p>
+						2.2.5.2. Страховщик самостоятельно или с привлечением третьих лиц в сроки, указанные ниже,
+						организует оказание (или отказывает в оказании) медицинских услуг, предусмотренных п. 2.2.5
+						Программы, у выбранного Страховщиком (привлеченным третьим лицом) врача-специалиста или запрашивает
+						необходимые документы/сведения. В последнем случае срок организации оказания услуг (или отказа в
+						оказании услуг) соразмерно увеличивается.
+					</p>
+					<p>
+						Срок оказания услуги в рамках получения Второго мнения составляет:
+					</p>
+					<ul>
+						<li>
+							14 (четырнадцать) рабочих дней со дня предоставления Застрахованным всей необходимой медицинской
+							информации, кроме указанного ниже случая;
+						</li>
+						<li>
+							30 (тридцать) рабочих дней со дня предоставления Застрахованным необходимой медицинской
+							информации в случаях, требующих участия нескольких врачей-специалистов или проведения
+							дополнительных консультаций для составления Экспертного заключения.
+						</li>
+					</ul>
+					<p>
+						2.2.5.3. Обязательства Страховщика и Ассистанской компании и/или любого лица, действующего от их
+						имени и/или по их поручению перед Застрахованным, заканчиваются с направлением Застрахованному
+						соответствующего Экспертного заключения.
+					</p>
+					<p>
+						2.2.5.4. Второе мнение составляется на основании медицинских документов и информации,
+						предоставленных Застрахованным, который несет ответственность за их корректность и актуальность.
+					</p>
+					<p>
+						2.2.5.5. Застрахованному рекомендуется проконсультироваться с личным врачом-специалистом по поводу
+						подготовки необходимых документов/информации − таким образом, чтобы она содержала все медицинские
+						факты и все сведения, способные повлиять на Экспертное заключение.
+					</p>
+					<p>
+						2.2.5.6. Страховщик обязуется контролировать деятельность Ассистанской компании в течение всего
+						срока страхования.
+					</p>
+					<p>2.3. В рамках страхового покрытия, предусмотренного в п.п. 2.2.1 - 2.2.5 Программы период ожидания
+						равен 90 (девяносто) дней с даты заключения договора страхования / включения страхового риска,
+						указанного в п. 4.1.26 Правил, в договор страхования.
+					</p>
+				</div>
+
+				<div class="mainText">
+					<p class="boldText bigSize">3. МЕДИЦИНСКИЕ И ИНЫЕ УСЛУГИ</p>
+					<p>3.1. В соответствии с настоящей Программой Страховщик оплачивает следующие медицинские и иные услуги
+						при наступлении страхового случая, предусмотренного в п.п. 2.2.1 - 2.2.3 Программы (лечение
+						злокачественного онкологического заболевания, кардиохирургия, нейрохирургия):</p>
+					<p>3.1.1. Оплата билета эконом-класса для Застрахованного и одного сопровождающего лица, встреча в
+						аэропорту и перевозка на машине скорой помощи (в случае медицинской необходимости) или на такси до
+						отеля или в медицинское учреждение, где будет проводиться лечение.</p>
+					<p>3.1.2. Оплата проживания Застрахованного и одного сопровождающего лица в гостинице (3 или 4 звезды),
+						включая завтрак и услуги, включенные в стоимость номера для Застрахованного и его сопровождающего
+						лица. При этом выбор отеля производится с учетом доступности и близости к медицинскому учреждению,
+						где будет проводиться лечение, или лечащему врачу.</p>
+					<p>3.1.3. Транспортировка в медицинскую организацию: транспортировка Застрахованного и сопровождающего
+						на такси из отеля и обратно при необходимости нескольких посещений медицинских организаций во время
+						прохождения обследования.</p>
+					<p>3.1.4. Лечение, проводимое по поводу диагностированного заболевания при наступлении страхового
+						случая, которая может включать медицинскую помощь в амбулаторных условиях, в условиях дневного
+						стационара, в стационарных условиях:</p>
+					<ul>
+						<li>
+							консультации врачей-специалистов;
+						</li>
+						<li>
+							диагностические медицинские вмешательства, выполняемые медицинскими организациями по выбору
+							Страховщика в том числе лабораторные исследования, визуализирующие исследования, эндоскопические
+							исследования, функциональная диагностика;
+						</li>
+						<li>
+							лечебные медицинские вмешательства в пределах страховой суммы (кроме имплантаций), включающие
+							хирургическое лечение, химиотерапию, лучевую терапию, иные методы лечения, научно обоснованные,
+							и применяемые в рамках оказания медицинской помощи медицинскими организациями по выбору
+							Страховщика;
+						</li>
+						<li>
+							имплантация, необходимая в целях реконструктивного лечения, включая стоимость имплантатов на
+							сумму не более эквивалента 900 000 (девятьсот тысяч) рублей в год на один страховой случай;
+						</li>
+						<li>
+							лекарственные средства, применяемые при лечении в стационарных условиях, в условиях дневного
+							стационара и при амбулаторном лечении.
+						</li>
+					</ul>
+					<p>3.2. В случае истечения срока действия договора страхования при незавершенном медицинском лечении
+						расходы на лечение в стационаре подлежат оплате Страховщиком с лимитом на лечение, которое было
+						проведено и счет за которое был выставлен в течение 30 (тридцати) дней с момента истечения срока
+						действия договора страхования. Если обращение по страховому случаю было подано и утверждено
+						Страховщиком в течение срока действия договора страхования, Страховщик несет обязательства по оплате
+						лечения на срок не более 30 (тридцати) последовательных дней после истечения срока действия договора
+						страхования.</p>
+					<p>3.3. В соответствии с настоящей Программой Страховщик обязуется возместить центру реабилитации,
+						стоимость прохождения реабилитационной программы в пределах предусмотренной Программой страховой
+						суммы при наступлении страхового случая, указанного в п. 2.2.4 Программы (реабилитация):</p>
+					<ul>
+						<li>
+							проживание в реабилитационном учреждении включая питание, уход за пациентом, медицинские
+							осмотры, помощь в реабилитации и физиотерапия, трудотерапия, восстановление речи и другие услуги
+							по реабилитации, оказанные реабилитационным учреждением по усмотрению реабилитолога;
+						</li>
+						<li>
+							дополнительные медицинские проверки, назначенные по усмотрению реабилитолога, включая проверки с
+							использованием методов визуализации, ЭКГ и ЭЭГ;
+						</li>
+						<li>
+							лекарства в период реабилитации, назначаемые исключительно с целью реабилитации или для
+							предотвращения воздействия фоновых заболеваний на результаты реабилитационных мероприятий;
+						</li>
+						<li>
+							итоговый отчет по результатам реабилитационной программы и, при необходимости, также последующее
+							наблюдение.
+						</li>
+					</ul>
+				</div>
+
+				<div class="mainText">
+					<p class="boldText bigSize">4. ТЕРРИТОРИЯ</p>
+					<p>4.1. Территория страхового покрытия: страховое покрытие действует 24 (двадцать четыре) часа в сутки,
+						365 (триста шестьдесят пять) дней в году, на территории Российской Федерации.</p>
+					<p>4.2. Территория оказания услуг при организации лечения – Израиль, Испания, Южная Корея, Российская
+						Федерация. Территория организации лечения по медицинским показаниям – весь мир.</p>
+				</div>
+
+				<div class="mainText">
+					<p class="boldText bigSize">5. СТРАХОВАЯ СУММА</p>
+					<p>5.1. Годовой лимит ответственности Страховщика по Программе – эквивалент 16 600 000 (шестнадцать
+						миллионов шестьсот тысяч) рублей по событиям, предусмотренным в п.п. 2.2.1 - 2.2.3 Программы
+						(лечение злокачественного онкологического заболевания, кардиохирургия, нейрохирургия).</p>
+					<p>5.2. Годовой лимит ответственности Страховщика по Программе – эквивалент 2 350 000 (два миллиона
+						триста пятьдесят тысяч) рублей по событию, предусмотренному в п. 2.2.4 Программы (реабилитация).</p>
+					<p>5.3. Страховая сумма (страховой лимит) по Программе является уменьшаемой (агрегатной) страховой
+						суммой, рассчитываемой как разность страховой суммы на начало каждого года страхования и суммы
+						страхового возмещения, осуществленного Страховщиком в период действия каждого года страхования. Если
+						агрегатная страховая сумма исчерпана полностью, обязательства Страховщика по договору страхования
+						считаются исполненными, при этом страховой риск, указанный в п. 4.1.26 Правил, прекращает свое
+						действие, а уплаченная страховая премия по данному риску не подлежит возврату.</p>
+				</div>
+
+				<div class="mainText">
+					<p class="boldText bigSize">6. ИСКЛЮЧЕНИЯ ИЗ ПРОГРАММЫ СТРАХОВАНИЯ</p>
+					<p>6.1. В рамках страхования по настоящей Программе не подлежат оплате следующие услуги:</p>
+					<p>6.1.1. Услуги, оказанные по поводу заболеваний или медицинские услуги не предусмотренные в Программе.
+					</p>
+					<p>6.1.2. Услуги, оказанные вне сроков действия договора страхования, кроме случаев, прямо
+						предусмотренных Программой.</p>
+					<p>6.1.3. Услуги, необходимость оказаний которых возникла в связи с нарушением Застрахованным
+						рекомендаций лечащего врача, правил и распорядка при нахождении на лечении в медицинских
+						организациях.</p>
+					<p>6.1.4. Услуги, прямо не предусмотренные настоящей Программой;</p>
+					<p>6.1.5. Психохирургия;</p>
+					<p>6.1.6. Лечение врожденных нарушений нормального развития головного мозга и черепной коробки;</p>
+					<p>6.1.7. Лечение врожденных пороков развития спинного мозга и позвоночника.</p>
+					<p>6.1.8. Хирургические операции по трансплантации органов или любого вида трансплантации костного мозга
+						в следующих случаях:</p>
+					<ul>
+						<li>
+							если трансплантация таких органов и/или их долей не предусмотрена настоящей Программой;
+						</li>
+						<li>
+							если потребность в трансплантации органов возникла вследствие алкогольной болезни печени;
+						</li>
+						<li>
+							если трансплантация органов является аутологической (реципиент трансплантата является донором
+							для самого себя), за исключением трансплантации костного мозга;
+						</li>
+						<li>
+							если при трансплантации органов Застрахованный является донором по отношению к третьему лицу;
+						</li>
+						<li>
+							при трансплантации органов, которая включает в себя лечение стволовыми клетками (кроме
+							трансплантации костного мозга);
+						</li>
+					</ul>
+					<p>6.1.9. Медицинские и иные услуги, выполняемых в эстетических и/или косметических целях, включая, но
+						не ограничиваясь, операцию по коррекции миопии (близорукости), и бариатрические операции, включающие
+						в себя, но не ограничивающиеся операциями, направленными на уменьшение объема желудка или кишечника,
+						кроме операции по реконструкции груди после резекции/удаления молочной железы, проведенной в рамках
+						программы страхования и в соответствии с ее условиями.</p>
+					<p>6.1.10. Услуги, выполняемые по поводу всех форм поражений сердечных клапанов в результате
+						эндокардита, вызванного венерическими заболеваниями (инфекциями, передающимися преимущественно
+						половым путем).</p>
+					<p>6.1.11. Услуги, оказываемые в связи с родовыми травмами и/или врождёнными пороками развития.</p>
+					<p>6.2 В рамках настоящей Программы не признается страховым случаем и, следовательно, Страховщик не
+						оплачивает или не организует оказание и не производит оплату медицинских и иных услуг в случае
+						обращения Застрахованного для организации и оказания медицинских и иных услуг:</p>
+					<p>6.2.1. которые не предусмотрены Программой;</p>
+					<p>6.2.2. при заболеваниях и состояниях, не предусмотренных настоящей Программой и/или которые возникли
+						до окончания периода ожидания или после расторжения договора страхования;</p>
+					<p>6.2.3. предусмотренных настоящей Программой, но в отношении лица, не являющегося Застрахованным по
+						договору страхования, в том числе в случае установления факта передачи Застрахованным лицом договора
+						страхования и/или иных документов другому лицу для получения таким лицом медицинских и иных услуг,
+						предусмотренных настоящей Программой;</p>
+					<p>6.2.4. не назначенных Застрахованному лечащим врачом либо не являющихся необходимыми с медицинской
+						точки зрения для диагностирования или лечения диагностированного заболевания;</p>
+					<p>6.2.5. в связи с заболеваниями и состояниями, которые являются прямым или косвенным следствием
+						синдрома приобретенного иммунодефицита (СПИД) или носительства вируса иммунодефицита человека (ВИЧ);
+					</p>
+					<p>6.2.6. в связи с расстройством здоровья, в том числе в связи с травматическим повреждением,
+						наступившим в результате занятий Застрахованным спортом на профессиональном уровне;</p>
+					<p>6.2.7. в связи с расстройством здоровья Застрахованного, наступившим в местах лишения свободы,
+						содержания под стражей;</p>
+					<p>6.2.8. в связи с расстройством здоровья, наступившим в результате профессиональной деятельности
+						Застрахованного непосредственно связанной с химическими веществами и газами, (включая асбест,
+						растворители, бензол, хлористый винил, бериллий, никель, соединения хрома, радон, пестициды, пыль с
+						оксидом кремния, диоксины), со взрывчатыми веществами, с ионизирующей радиацией, включая
+						ультрафиолет, с микроволновым излучением, с высоковольтными электрическими сетями;</p>
+					<p>6.2.9. в связи с расстройством здоровья, наступившим во время или в результате управления
+						Застрахованным транспортным средством в состоянии алкогольного, наркотического или токсического
+						опьянения;</p>
+					<p>6.2.10. в связи с расстройством здоровья, наступившим в результате совершения Застрахованным
+						противоправных деяний, а также в результате совершения или подготовки террористического акта;</p>
+					<p>6.2.11. в связи с расстройством здоровья, наступившим в результате умышленного причинения
+						Застрахованным себе телесных повреждений, в т. ч. попытки самоубийства; а также в связи с
+						причинением Застрахованным себе телесных повреждений, в т. ч. попытки самоубийства, связанных с
+						психическими заболеваниями или расстройствами поведения;</p>
+					<p>6.2.12. связанных с применением экспериментальных методов лечения, не допущенных к использованию в
+						Российской Федерации;</p>
+					<p>6.2.13. в связи с злокачественным новообразованием, протекающим на фоне ВИЧ-инфекции или СПИД
+						(включая Саркому Капоши);</p>
+					<p>6.2.14. в связи со службой Застрахованного в различных вооруженных силах, в том числе, но не
+						ограничиваясь: службы в армии, полиции, пожарной бригаде, тюремных службах;</p>
+					<p>6.2.15. в связи с ранее существовавшими заболеваниями и состояниями, диагностированными или о которых
+						было известно Застрахованному до даты начала действия договора страхования, если лечение,
+						предусмотренное настоящей Программой, было рекомендовано или запланировано до момента заключения
+						договора страхования;</p>
+					<p>6.2.16. в связи с получением Застрахованным медицинских и иных услуг в медицинских и иных
+						организациях, не предусмотренных в Программе или выбор которых не был согласован со Страховщиком;
+					</p>
+					<p>6.2.17. в связи с заболеваниями и медицинскими состояниями, возникшими в результате занятия
+						Застрахованным следующими экстремальными видами спорта, сопряженными с повышенным риском для жизни и
+						здоровья: автоспорт, мотоспорт, альпинизм, спелеология, бокс и любые другие виды боевых единоборств,
+						экстремальные виды велоспорта (включая маунтинбайк), фридайвинг, скайсерфинг, дайвинг (глубина
+						погружения более 25 метров), кайтинг, бейсджампинг, экстремальные водные виды спорта (в том числе,
+						аквабайк, водные лыжи), парашютный спорт, парапланеризм, дельтапланеризм, конный спорт;</p>
+					<p>6.2.18. в связи с родовыми травмами и/или врождёнными пороками развития любого вида.</p>
+				</div>
+			</div>
+		</div>
+			{{/if}}
+		{{/if}}
+		<!-- 65+ -->
+		{{#if holder60plus}}
+		<div class="containerAdd60plus break notice">
+			<p class="textCenter">Уведомление НСЖ</p>
+
+			<p>Я, {{holder.fullName}}, настоящим подтверждаю, что ознакомл{{#if
+				holderGenderMale}}ен{{else}}ена{{/if}} со всеми условиями договора добровольного накопительного страхования
+				жизни СК «Росгосстрах жизнь» (далее – Договор). Я понимаю все условия по оформляемому Договору, а именно:
+			</p>
+			<ol>
+				<li>
+					Договор не является договором банковского вклада. Переданные по данному договору денежные средства не
+					подлежат страхованию вкладов в соответствии с действующим законодательством.
+				</li>
+				<li>
+					Досрочный выход из продукта (за исключением возврата средств в течение 30 календарных дней с даты
+					оформления Договора – «период охлаждения») влечет возможные существенные потери по отношению к
+					первоначально инвестированной сумме.
+				</li>
+				<li>
+					Я понимаю, что в соответствии с условиями Договора, в случае несоблюдения графика уплаты взносов мне
+					не будут возвращены ранее уплаченные взносы в полном объеме. С третьего года страхования выплачивается
+					выкупная сумма, размер которой всегда меньше размера уплаченных страховых взносов.
+				</li>
+			</ol>
+
+			<p>ФИО ____________________________________________</p>
+			<p class="smallText"> (заполняется клиентом собственноручно)</p>
+			<p>Паспорт серия ________ № _______________</p>
+			<p class="smallText"> (заполняется клиентом собственноручно)</p>
+			<p>_____________ / __________________________________________________ /</p>
+			<p class="smallText2">
+				&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp(подпись)&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp(Ф.И.О.
+				полностью, заполняется клиентом собственноручно)</p>
+			<p> «____» ________________ 20___ г.</p>
+			<p class="smallText2">&nbsp&nbsp&nbsp&nbsp(заполняется клиентом собственноручно)</p>
+		</div>
+		{{/if}}
+		<!-- Приложения Согласие на обработку персональных данных-->
+		{{#unless isHideHolderDataAgreement}}
+		<div>
+			<p class="center textBold break">Согласие на обработку персональных данных Страхователя</p>
+			<table class="personalData">
+				<col class="col1">
+				<col class="col2">
+				<col class="col3">
+				<col class="col4">
+				<col class="col5">
+				<col class="col6">
+				<col class="col7">
+				<col class="col8">
+				<col class="col9">
+				<col class="col10">
+				<col class="col11">
+				<col class="col12">
+				<col class="col13">
+				<col class="col14">
+				<col class="col15">
+				<col class="col16">
+				<col class="col17">
+				<col class="col18">
+				<col class="col19">
+				<col class="col20">
+				<col class="col21">
+				<col class="col22">
+				<col class="col23">
+				<col class="col24">
+				<col class="col25">
+				<tr>
+					<td colspan="25" class="textCenter colorSteel">
+						1.ПЕРСОНАЛЬНЫЕ ДАННЫЕ КЛИЕНТА
+					</td>
+				</tr>
+				<tr>
+					<td colspan="5">Фамилия Имя Отчество</td>
+					<td colspan="20">{{holder.fullName}}</td>
+				</tr>
+				<tr>
+					<td>Пол</td>
+					<td colspan="4">
+						{{#if holder.isGenderMale}}<span class="smallCheckbox"><input type="checkbox" checked></span>Мужской<br><span class="smallCheckbox"><input type="checkbox"></span>Женский
+						{{else}}<span class="smallCheckbox"><input type="checkbox"></span>Мужской<br><span class="smallCheckbox" checked><input type="checkbox" checked></span>Женский{{/if}}
+					</td>
+					<td colspan="3">Гражданство</td>
+					<td colspan="6">
+						{{#if holder.isCitizenshipRusssia}}<span class="smallCheckbox"><input type="checkbox" checked></span>РФ<br><span class="smallCheckbox"><input type="checkbox"></span>Иное
+						{{else}}<span class="smallCheckbox"><input type="checkbox"></span>РФ<br><span class="smallCheckbox" checked><input type="checkbox" checked></span>Иное{{/if}}
+					</td>
+					<td colspan="3">Дата рождения</td>
+					<td colspan="3">{{holder.dateOfBirth}}</td>
+					<td colspan="4">Место рождения</td>
+					<td>{{holder.birthPlace}}</td>
+				</tr>
+				<tr>
+					<td rowspan="4" colspan="4">Документ,<br>удостоверяющий<br>личность</td>
+					<td colspan="7">
+						{{#if holder.isRusssiaPassport}}<span class="smallCheckbox"><input type="checkbox" checked></span>паспорт гражданина РФ<br><span class="smallCheckbox"><input type="checkbox"></span>заграничный паспорт гражданина РФ<br>
+						<span class="smallCheckbox"><input type="checkbox"></span>свидетельство о рождении<br><span class="smallCheckbox"><input type="checkbox"></span>Иное{{/if}}
+						{{#if holder.isForeignTravelPassport}}<span class="smallCheckbox"><input type="checkbox"></span>паспорт
+						гражданина РФ<br><span class="smallCheckbox"><input type="checkbox" checked></span>заграничный
+						паспорт
+						гражданина РФ<br>
+						<span class="smallCheckbox"><input type="checkbox"></span>свидетельство о рождении<br><span class="smallCheckbox"><input type="checkbox"></span>Иное{{/if}}
+						{{#if holder.isBirthCertificate}}<span class="smallCheckbox"><input type="checkbox"></span>паспорт
+						гражданина РФ<br><span class="smallCheckbox"><input type="checkbox"></span>заграничный паспорт
+						гражданина РФ<br>
+						<span class="smallCheckbox" checked><input type="checkbox"></span>свидетельство о рождении<br><span class="smallCheckbox"><input type="checkbox"></span>Иное{{/if}}
+						{{#if holder.isOtherDocument}}<span class="smallCheckbox"><input type="checkbox"></span>паспорт
+						гражданина РФ<br><span class="smallCheckbox"><input type="checkbox"></span>заграничный паспорт
+						гражданина РФ<br>
+						<span class="smallCheckbox"><input type="checkbox"></span>свидетельство о рождении<br><span class="smallCheckbox" checked><input type="checkbox"></span>Иное{{/if}}
+					</td>
+					<td colspan="8"></td>
+					<td colspan="3"></td>
+					<td colspan="3"></td>
+				</tr>
+				<tr>
+					<td colspan="7">Серия</td>
+					<td colspan="8">{{holder.docSeries}}</td>
+					<td colspan="3">Номер</td>
+					<td colspan="3">{{holder.docNumber}}</td>
+				</tr>
+				<tr>
+					<td colspan="7">код подразделения (при <br>наличии): </td>
+					<td colspan="8">{{holder.issuerCode}}</td>
+					<td colspan="3">дата выдачи</td>
+					<td colspan="3">{{holder.issueDate}}</td>
+				</tr>
+				<tr>
+					<td colspan="7">орган, выдавший документ:</td>
+					<td colspan="14">{{holder.issuerName}}</td>
+				</tr>
+				<tr>
+					<td colspan="10">Сведения о ранее выданном паспорте гражданина РФ<br>(<span class="colorBlue">заполняется
+							при
+							наличии</span>)</td>
+					<td colspan="5">Серия </td>
+					<td colspan="4"></td>
+					<td colspan="4">Номер</td>
+					<td colspan="2"></td>
+				</tr>
+				<tr>
+					<td rowspan="2" colspan="9">Адрес по месту постоянной регистрации <span class="cursive">(страна,<br>индекс,
+							регион, район, город/населенный пункт,<br>улица, дом, корпус, квартира)</span> </td>
+					<td colspan="4">Дата<br>регистрации</td>
+					<td colspan="12"></td>
+				</tr>
+				<tr>
+					<td colspan="15">{{holder.regFullAddress}}</td>
+				</tr>
+				<tr>
+					<td rowspan="2" colspan="9">Адрес по месту фактического проживания <span class="cursive">(страна,<br>индекс,
+							регион, район, город/населенный пункт,<br>улица, дом, корпус, квартира)</span>
+					</td>
+					<td colspan="16">
+						{{#if holder.isSameAsRegistration}}<span class="smallCheckbox"><input type="checkbox" checked></span>{{else}}<span class="smallCheckbox"><input type="checkbox"></span>{{/if}}
+						совпадает с адресом регистрации по месту жительства
+					</td>
+				</tr>
+				<tr>
+					<td colspan="16">{{holder.factFullAddress}}</td>
+				</tr>
+				<tr>
+					<td colspan="3">Домашний телефон<br>по адресу<br>регистрации</td>
+					<td colspan="4"></td>
+					<td colspan="5">Телефон по месту<br>фактического<br>проживания</td>
+					<td colspan="4"></td>
+					<td colspan="5">Мобильный<br>телефон</td>
+					<td colspan="4">{{holder.phoneNumber}}</td>
+				</tr>
+				<tr>
+					<td colspan="2">e-mail</td>
+					<td colspan="4">{{holder.email}}</td>
+					<td>ИНН (при<br>наличии)</td>
+					<td colspan="9">{{holder.INN}}</td>
+					<td colspan="5">СНИЛС (при<br>наличии)</td>
+					<td colspan="4">{{holder.SNILS}}</td>
+				</tr>
+				<tr>
+					<td colspan="25" class="textCenter colorSteel">
+						2.СОГЛАСИЕ КЛИЕНТА, ПРЕДОСТАВЛЕННОЕ ПАО Банк «ФК Открытие»/ ПАО «Росгосстрах
+						Банк»,<br>НА
+						ВЗАИМОДЕЙСТВИЕ С БЮРО КРЕДИТНЫХ ИСТОРИЙ
+					</td>
+				</tr>
+				<tr>
+					<td colspan="3">Я<br><input type="checkbox"> выражаю<br>согласие<br><input type="checkbox"> не
+						выражаю<br>согласие</td>
+					<td colspan="22">
+						<p>на получение ПАО Банк «ФК Открытие», ПАО «Росгосстрах Банк» (далее совместно – Пользователи
+							кредитной
+							истории, а по отдельности – Пользователь кредитной истории) информации обо мне из любых бюро
+							кредитных
+							историй (одного или нескольких), содержащейся в основной части моей кредитной истории в объеме,
+							порядке
+							и сроки, которые предусмотрены Федеральным законом от 30.12.2004 №218-ФЗ «О кредитных
+							историях».<br>
+							Согласие предоставлено в целях:</p>
+						<p>- проверки Пользователем /-ями кредитной истории сведений, предоставленных мной Пользователю /
+							-ям
+							кредитной истории либо иным компаниям Группы* при приеме на обслуживание и /или при заключении
+							договоров
+							с Пользователем/-ями кредитной истории и/или иными компаниями Группы;<br>
+							- проверки Пользователем /-ями кредитной истории сведений обо мне в процессе оказания мне
+							банковских
+							услуг и/или иных услуг компаний Группы;<br>
+							- проверки Пользователем / -ями кредитной истории сведений при формирования Пользователем/-ями
+							кредитной
+							истории предложений по кредитным, банковским и иным продуктам компаний Группы.
+							Право выбора бюро кредитных историй предоставляется мной Пользователям кредитной истории по их
+							усмотрению и дополнительного согласования со мной не требует.</p>
+						<p>Код субъекта кредитной истории
+							<span class="bigBox">&#9633&#9633&#9633&#9633&#9633&#9633&#9633&#9633&#9633&#9633&#9633&#9633&#9633&#9633</span>
+						</p>
+						<p class="cursive"> (Указать свой код, сформированный посредством комбинации цифровых и буквенных
+							символов в
+							соответствии с пунктом 2.13 Указания Банка России от 31.08.2005 №1610-У «О порядке направления
+							запросов и получения информации из Центрального каталога кредитных историй субъектом кредитной
+							истории и пользователем кредитной истории посредством обращения на официальный сайт Банка России
+							в
+							информационно-телекоммуникационной сети «Интернет». Код (дополнительный код) произвольно
+							формируется заемщиком и должен состоять из букв русского алфавита и цифр или букв латинского
+							алфавита и цифр. Минимальная длина кодов не должна быть менее четырех знаков, максимальная - не
+							должна быть более пятнадцати знаков.</p>
+						<p><sup>*</sup>&nbsp&nbspПод компаниями Группы понимаются: ПАО Банк «ФК Открытие», место нахождения:
+							г.
+							Москва,
+							ул.
+							Летниковская, д.2, стр.4; ПАО «Росгосстрах Банк», место нахождения: 121059, г. Москва, вн. тер.
+							г.
+							муниципальный округ Дорогомилово, ул. Киевская, д. 7, к. 1; АО «НПФ «Открытие», место
+							нахождения: г.
+							Москва; ПАО СК «Росгосстрах», место нахождения: 140002, Московская область, город Люберцы, улица
+							Парковая, дом 3; ООО СК «Росгосстрах Жизнь», место нахождения: 121059, г. Москва, вн.тер.г.
+							муниципальный округ Дорогомилово, ул. Киевская, д. 7, к. 1; АО «Открытие Брокер», место
+							нахождения
+							115114, г. Москва, ул. Летниковская, д. 2, стр. 4; ООО «УК «ОТКРЫТИЕ», место нахождения 115114,
+							Москва,
+							ул. Кожевническая, д. 14, стр. 5</p>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="25" class="textCenter colorSteel">3. СОГЛАСИЕ КЛИЕНТА НА ОБРАБОТКУ ПЕРСОНАЛЬНЫХ
+						ДАННЫХ</td>
+				</tr>
+				<tr>
+					<td colspan="3">Я<br><input type="checkbox"> выражаю<br>согласие<br><input type="checkbox"> не
+						выражаю<br>согласие</td>
+					<td colspan="22">
+						<p>на обработку 1) ПАО Банк «ФК Открытие», место нахождения: г. Москва, ул. Летниковская, д.2,
+							стр.4; 2)
+							ПАО
+							«Росгосстрах Банк», место нахождения: 121059, г. Москва, вн. тер. г. муниципальный округ
+							Дорогомилово,
+							ул.
+							Киевская, д. 7, к. 1; 3) АО «НПФ «Открытие», место нахождения: г. Москва; 4) ПАО СК
+							«Росгосстрах»,
+							место
+							нахождения: 140002, Московская область, город Люберцы, улица Парковая, дом 3; 5) ООО СК
+							«Росгосстрах
+							Жизнь», место нахождения: 121059, г. Москва, вн.тер.г. муниципальный округ Дорогомилово, ул.
+							Киевская,
+							д. 7,
+							к. 1; 6) АО «Открытие Брокер», место нахождения 115114, г. Москва, ул. Летниковская, д. 2, стр.
+							4;
+							7)
+							ООО «УК
+							«ОТКРЫТИЕ», место нахождения 115114, Москва, ул. Кожевническая, д. 14, стр. 5 (далее –
+							Операторы)
+							моих
+							персональных данных (совершение любых действий с использованием средств автоматизации и/ или
+							без, в
+							том
+							числе сбор, запись, систематизацию, накопление, хранение, уточнение (обновление, изменение),
+							извлечение,
+							использование, передачу (распространение, предоставление, доступ), включая трансграничную
+							передачу,
+							обезличивание, блокирование, удаление и уничтожение) в соответствии с требованиями Федерального
+							закона
+							от
+							27.07.2006 №152-ФЗ «О персональных данных». Фотография моего лица (индивидуальные биометрические
+							характеристики моего лица), персональные данные, указанные в настоящем согласии, включая:
+							фамилию,
+							имя,
+							отчество; данные документа, удостоверяющего личность; год, месяц, число и место рождения;
+							гражданство;
+							адрес; контактные телефоны, почтовые адреса, адреса электронной почты и другие сведения,
+							предоставленные
+							мною для заключения договора с любым из Операторов или в период их действия, содержащиеся в
+							заявлениях,
+							письмах, соглашениях и иных документах (полученных Операторами или одним из Операторов также в
+							электронном виде), предоставляются в целях:</p>
+						<p>
+							- сбора и оформления документов для заключения договоров страхования в рамках добровольного
+							страхования физических лиц по программам накопительного и инвестиционного страхования жизни;
+							<br>- получения кредита и исполнения кредитного договора/договора о предоставлении и
+							использовании
+							банковских карт с ПАО Банк «ФК Открытие», ПАО «Росгосстрах Банк»; заключения и исполнения
+							договоров оказания услуг с любым из Операторов;
+							<br>- страхования моих имущественных интересов и имущественных интересов Операторов или одного
+							из
+							Операторов, связанных с риском его убытков, в результате неисполнения (ненадлежащего исполнения)
+							мной договорных обязательств;
+							<br>- получения информации о кредитном договоре/договоре о предоставлении и использовании
+							банковских
+							карт, заключенном с ПАО Банк «ФК Открытие», ПАО «Росгосстрах Банк»/иных договорах оказания услуг
+							лицами, указанными в настоящем согласии;
+							<br>- урегулирования просроченной задолженности перед ПАО Банк «ФК Открытие», ПАО «Росгосстрах
+							Банк»
+							в
+							случае неисполнения или ненадлежащего исполнения мной договорных обязательств;
+							<br>- заключения и исполнения договора уступки (или залога) прав (требований) по кредитному
+							договору/договору о предоставлении и использовании банковских карт, заключенному с ПАО Банка «ФК
+							Открытие», ПАО «Росгосстрах Банк», с любыми третьими лицами (при отсутствии запрета в договоре,
+							заключенном с Клиентом);
+							<br>- получения информации о других продуктах и услугах Операторов;
+							<br>- оценку моей платежеспособности с привлечением Операторами партнеров.
+						</p>
+						<p>
+							Настоящее согласие действует до момента получения письменного заявления Застрахованного лица об
+							отзыве
+							настоящего согласия одним из Операторов или всеми Операторами. Прекращение кредитного
+							договора/договора о предоставлении и использовании банковских карт/ иного договора оказания
+							услуг не
+							прекращает действие согласия. Осведомлен(а), что настоящее согласие может быть отозвано мной при
+							предоставлении Оператору/-ам заявления в простой письменной форме.
+						</p>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="25" class="textCenter colorSteel">4. СОГЛАСИЕ КЛИЕНТА<br>
+						НА ПОЛУЧЕНИЕ КОММЕРЧЕСКИХ ПРЕДЛОЖЕНИЙ</td>
+				</tr>
+				<tr>
+					<td colspan="3">Я<br><input type="checkbox"> выражаю<br>согласие<br><input type="checkbox"> не
+						выражаю<br>согласие</td>
+					<td colspan="22">
+						<p>на получение мною от ООО СК «Росгосстрах Жизнь» и иных компаний Группы информации о продуктах и
+							услугах, коммерческих предложений Банка/ группы Компаний*, в том числе посредством почтовой
+							связи и
+							сетям электросвязи (телефонной, факсимильной, подвижной радиотелефонной связи и прочее) по
+							адресу
+							постоянной регистрации, адресу фактического проживания, адресу электронной почты, на контактные
+							номера
+							телефонов, указанные в настоящем согласии.</p>
+						<p>*&nbsp&nbspПод компаниями Группы понимаются: ПАО Банк «ФК Открытие», место нахождения: г. Москва,
+							ул. Летниковская, д.2, стр.4; ПАО «Росгосстрах Банк», место нахождения: 121059, г. Москва, вн.
+							тер.
+							г.
+							муниципальный округ Дорогомилово, ул. Киевская, д. 7, к. 1; АО «НПФ «Открытие», место
+							нахождения: г.
+							Москва; ПАО СК «Росгосстрах», место нахождения: 140002, Московская область, город Люберцы, улица
+							Парковая, дом 3; ООО СК «Росгосстрах Жизнь», место нахождения: 121059, г. Москва, вн.тер.г.
+							муниципальный
+							округ Дорогомилово, ул. Киевская, д. 7, к. 1; АО «Открытие Брокер», место нахождения 115114, г.
+							Москва, ул.
+							Летниковская, д. 2, стр. 4; ООО «УК «ОТКРЫТИЕ», место нахождения 115114, Москва, ул.
+							Кожевническая,
+							д. 14,
+							стр. 5</p>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="25" class="textCenter colorSteel">КЛИЕНТ</td>
+				</tr>
+				<tr>
+					<td colspan="25" class="paddingTopBottom6">
+						<span class="spanLeft">Подпись __________________/{{holder.signatureName}}</span>
+						<span class="spanRight">{{policy.issueDateDocumentationFormat}}</span>
+					</td>
+				</tr>
+			</table>
+		</div>
+		{{/unless}}
+		{{#unless isPolicyHolder}}
+		<div>
+			<p class="center textBold break">Согласие на обработку персональных данных Застрахованного лица</p>
+			<table class="personalData">
+				<col class="col1">
+				<col class="col2">
+				<col class="col3">
+				<col class="col4">
+				<col class="col5">
+				<col class="col6">
+				<col class="col7">
+				<col class="col8">
+				<col class="col9">
+				<col class="col10">
+				<col class="col11">
+				<col class="col12">
+				<col class="col13">
+				<col class="col14">
+				<col class="col15">
+				<col class="col16">
+				<col class="col17">
+				<col class="col18">
+				<col class="col19">
+				<col class="col20">
+				<col class="col21">
+				<col class="col22">
+				<col class="col23">
+				<col class="col24">
+				<col class="col25">
+				<tr>
+					<td colspan="25" class="textCenter colorSteel">
+						1.ПЕРСОНАЛЬНЫЕ ДАННЫЕ ЗАСТРАХОВАННОГО ЛИЦА
+					</td>
+				</tr>
+				<tr>
+					<td colspan="5">Фамилия Имя Отчество</td>
+					<td colspan="20">{{insured.fullName}}</td>
+				</tr>
+				<tr>
+					<td>Пол</td>
+					<td colspan="4">
+						{{#if insured.isGenderMale}}<span class="smallCheckbox"><input type="checkbox" checked></span>Мужской<br><span class="smallCheckbox"><input type="checkbox"></span>Женский
+						{{else}}<span class="smallCheckbox"><input type="checkbox"></span>Мужской<br><span class="smallCheckbox" checked><input type="checkbox" checked></span>Женский{{/if}}
+					</td>
+					<td colspan="3">Гражданство</td>
+					<td colspan="6">
+						{{#if insured.isCitizenshipRusssia}}<span class="smallCheckbox"><input type="checkbox" checked></span>РФ<br><span class="smallCheckbox"><input type="checkbox"></span>Иное
+						{{else}}<span class="smallCheckbox"><input type="checkbox"></span>РФ<br><span class="smallCheckbox" checked><input type="checkbox" checked></span>Иное{{/if}}
+					</td>
+					<td colspan="3">Дата рождения</td>
+					<td colspan="3">{{insured.dateOfBirth}}</td>
+					<td colspan="4">Место рождения</td>
+					<td>{{insured.birthPlace}}</td>
+				</tr>
+				<tr>
+					<td rowspan="4" colspan="4">Документ,<br>удостоверяющий<br>личность</td>
+					<td colspan="7">
+						{{#if insured.isRusssiaPassport}}<span class="smallCheckbox"><input type="checkbox" checked></span>паспорт гражданина РФ<br><span class="smallCheckbox"><input type="checkbox"></span>заграничный паспорт гражданина РФ<br>
+						<span class="smallCheckbox"><input type="checkbox"></span>свидетельство о рождении<br><span class="smallCheckbox"><input type="checkbox"></span>Иное{{/if}}
+						{{#if insured.isForeignTravelPassport}}<span class="smallCheckbox"><input type="checkbox"></span>паспорт
+						гражданина РФ<br><span class="smallCheckbox"><input type="checkbox" checked></span>заграничный
+						паспорт
+						гражданина РФ<br>
+						<span class="smallCheckbox"><input type="checkbox"></span>свидетельство о рождении<br><span class="smallCheckbox"><input type="checkbox"></span>Иное{{/if}}
+						{{#if insured.isBirthCertificate}}<span class="smallCheckbox"><input type="checkbox"></span>паспорт
+						гражданина РФ<br><span class="smallCheckbox"><input type="checkbox"></span>заграничный паспорт
+						гражданина РФ<br>
+						<span class="smallCheckbox" checked><input type="checkbox"></span>свидетельство о рождении<br><span class="smallCheckbox"><input type="checkbox"></span>Иное{{/if}}
+						{{#if insured.isOtherDocument}}<span class="smallCheckbox"><input type="checkbox"></span>паспорт
+						гражданина РФ<br><span class="smallCheckbox"><input type="checkbox"></span>заграничный паспорт
+						гражданина РФ<br>
+						<span class="smallCheckbox"><input type="checkbox"></span>свидетельство о рождении<br><span class="smallCheckbox" checked><input type="checkbox"></span>Иное{{/if}}
+					</td>
+					<td colspan="8"></td>
+					<td colspan="3"></td>
+					<td colspan="3"></td>
+				</tr>
+				<tr>
+					<td colspan="7">Серия</td>
+					<td colspan="8">{{insured.docSeries}}</td>
+					<td colspan="3">Номер</td>
+					<td colspan="3">{{insured.docNumber}}</td>
+				</tr>
+				<tr>
+					<td colspan="7">код подразделения (при <br>наличии): </td>
+					<td colspan="8">{{insured.issuerCode}}</td>
+					<td colspan="3">дата выдачи</td>
+					<td colspan="3">{{insured.issueDate}}</td>
+				</tr>
+				<tr>
+					<td colspan="7">орган, выдавший документ:</td>
+					<td colspan="14">{{insured.issuerName}}</td>
+				</tr>
+				<tr>
+					<td colspan="10">Сведения о ранее выданном паспорте гражданина РФ<br>(<span class="colorBlue">заполняется
+							при
+							наличии</span>)</td>
+					<td colspan="5">Серия </td>
+					<td colspan="4"></td>
+					<td colspan="4">Номер</td>
+					<td colspan="2"></td>
+				</tr>
+				<tr>
+					<td rowspan="2" colspan="9">Адрес по месту постоянной регистрации <span class="cursive">(страна,<br>индекс,
+							регион, район, город/населенный пункт,<br>улица, дом, корпус, квартира)</span>
+					</td>
+					<td colspan="4">Дата<br>регистрации</td>
+					<td colspan="12"></td>
+				</tr>
+				<tr>
+					<td colspan="15">{{insured.regFullAddress}}</td>
+				</tr>
+				<tr>
+					<td rowspan="2" colspan="9">Адрес по месту фактического проживания <span class="cursive">(страна,<br>индекс,
+							регион, район, город/населенный пункт,<br>улица, дом, корпус, квартира)</span>
+					</td>
+					<td colspan="16">
+						{{#if insured.isSameAsRegistration}}<span class="smallCheckbox"><input type="checkbox" checked></span>{{else}}<span class="smallCheckbox"><input type="checkbox"></span>{{/if}}
+						совпадает с адресом регистрации по месту жительства
+					</td>
+				</tr>
+				<tr>
+					<td colspan="16">{{insured.factFullAddress}}</td>
+				</tr>
+				<tr>
+					<td colspan="3">Домашний телефон<br>по адресу<br>регистрации</td>
+					<td colspan="4"></td>
+					<td colspan="5">Телефон по месту<br>фактического<br>проживания</td>
+					<td colspan="4"></td>
+					<td colspan="5">Мобильный<br>телефон</td>
+					<td colspan="4">{{insured.phoneNumber}}</td>
+				</tr>
+				<tr>
+					<td colspan="2">e-mail</td>
+					<td colspan="4">{{insured.email}}</td>
+					<td>ИНН (при<br>наличии)</td>
+					<td colspan="9">{{insured.INN}}</td>
+					<td colspan="5">СНИЛС (при<br>наличии)</td>
+					<td colspan="4">{{insured.SNILS}}</td>
+				</tr>
+				<tr>
+					<td colspan="25" class="textCenter colorSteel">
+						2.СОГЛАСИЕ ЗАСТРАХОВАННОГО ЛИЦА, ПРЕДОСТАВЛЕННОЕ ПАО Банк «ФК Открытие»/ ПАО «Росгосстрах
+						Банк»,<br>НА
+						ВЗАИМОДЕЙСТВИЕ С БЮРО КРЕДИТНЫХ ИСТОРИЙ
+					</td>
+				</tr>
+				<tr>
+					<td colspan="3">Я<br><input type="checkbox"> выражаю<br>согласие<br><input type="checkbox"> не
+						выражаю<br>согласие</td>
+					<td colspan="22">
+						<p>на получение ПАО Банк «ФК Открытие», ПАО «Росгосстрах Банк» (далее совместно – Пользователи
+							кредитной
+							истории, а по отдельности – Пользователь кредитной истории) информации обо мне из любых бюро
+							кредитных
+							историй (одного или нескольких), содержащейся в основной части моей кредитной истории в объеме,
+							порядке
+							и сроки, которые предусмотрены Федеральным законом от 30.12.2004 №218-ФЗ «О кредитных
+							историях».<br>
+							Согласие предоставлено в целях:</p>
+						<p>- проверки Пользователем /-ями кредитной истории сведений, предоставленных мной Пользователю /
+							-ям
+							кредитной истории либо иным компаниям Группы* при приеме на обслуживание и /или при заключении
+							договоров
+							с Пользователем/-ями кредитной истории и/или иными компаниями Группы;<br>
+							- проверки Пользователем /-ями кредитной истории сведений обо мне в процессе оказания мне
+							банковских
+							услуг и/или иных услуг компаний Группы;<br>
+							- проверки Пользователем / -ями кредитной истории сведений при формирования Пользователем/-ями
+							кредитной
+							истории предложений по кредитным, банковским и иным продуктам компаний Группы.
+							Право выбора бюро кредитных историй предоставляется мной Пользователям кредитной истории по их
+							усмотрению и дополнительного согласования со мной не требует.</p>
+						<p>Код субъекта кредитной истории
+							<span class="bigBox">&#9633&#9633&#9633&#9633&#9633&#9633&#9633&#9633&#9633&#9633&#9633&#9633&#9633&#9633</span>
+						</p>
+						<p class="cursive"> (Указать свой код, сформированный посредством комбинации цифровых и буквенных
+							символов в
+							соответствии с пунктом 2.13 Указания Банка России от 31.08.2005 №1610-У «О порядке направления
+							запросов и получения информации из Центрального каталога кредитных историй субъектом кредитной
+							истории и пользователем кредитной истории посредством обращения на официальный сайт Банка России
+							в
+							информационно-телекоммуникационной сети «Интернет». Код (дополнительный код) произвольно
+							формируется заемщиком и должен состоять из букв русского алфавита и цифр или букв латинского
+							алфавита и цифр. Минимальная длина кодов не должна быть менее четырех знаков, максимальная - не
+							должна быть более пятнадцати знаков.</p>
+						<p><sup>*</sup>&nbsp&nbspПод компаниями Группы понимаются: ПАО Банк «ФК Открытие», место нахождения:
+							г.
+							Москва,
+							ул.
+							Летниковская, д.2, стр.4; ПАО «Росгосстрах Банк», место нахождения: 121059, г. Москва, вн. тер.
+							г.
+							муниципальный округ Дорогомилово, ул. Киевская, д. 7, к. 1; АО «НПФ «Открытие», место
+							нахождения: г.
+							Москва; ПАО СК «Росгосстрах», место нахождения: 140002, Московская область, город Люберцы, улица
+							Парковая, дом 3; ООО СК «Росгосстрах Жизнь», место нахождения: 121059, г. Москва, вн.тер.г.
+							муниципальный округ Дорогомилово, ул. Киевская, д. 7, к. 1; АО «Открытие Брокер», место
+							нахождения
+							115114, г. Москва, ул. Летниковская, д. 2, стр. 4; ООО «УК «ОТКРЫТИЕ», место нахождения 115114,
+							Москва,
+							ул. Кожевническая, д. 14, стр. 5</p>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="25" class="textCenter colorSteel">3. СОГЛАСИЕ ЗАСТРАХОВАННОГО ЛИЦА НА ОБРАБОТКУ ПЕРСОНАЛЬНЫХ
+						ДАННЫХ</td>
+				</tr>
+				<tr>
+					<td colspan="3">Я<br><input type="checkbox"> выражаю<br>согласие<br><input type="checkbox"> не
+						выражаю<br>согласие</td>
+					<td colspan="22">
+						<p>на обработку 1) ПАО Банк «ФК Открытие», место нахождения: г. Москва, ул. Летниковская, д.2,
+							стр.4; 2)
+							ПАО
+							«Росгосстрах Банк», место нахождения: 121059, г. Москва, вн. тер. г. муниципальный округ
+							Дорогомилово,
+							ул.
+							Киевская, д. 7, к. 1; 3) АО «НПФ «Открытие», место нахождения: г. Москва; 4) ПАО СК
+							«Росгосстрах»,
+							место
+							нахождения: 140002, Московская область, город Люберцы, улица Парковая, дом 3; 5) ООО СК
+							«Росгосстрах
+							Жизнь», место нахождения: 121059, г. Москва, вн.тер.г. муниципальный округ Дорогомилово, ул.
+							Киевская,
+							д. 7,
+							к. 1; 6) АО «Открытие Брокер», место нахождения 115114, г. Москва, ул. Летниковская, д. 2, стр.
+							4;
+							7)
+							ООО «УК
+							«ОТКРЫТИЕ», место нахождения 115114, Москва, ул. Кожевническая, д. 14, стр. 5 (далее –
+							Операторы)
+							моих
+							персональных данных (совершение любых действий с использованием средств автоматизации и/ или
+							без, в
+							том
+							числе сбор, запись, систематизацию, накопление, хранение, уточнение (обновление, изменение),
+							извлечение,
+							использование, передачу (распространение, предоставление, доступ), включая трансграничную
+							передачу,
+							обезличивание, блокирование, удаление и уничтожение) в соответствии с требованиями Федерального
+							закона
+							от
+							27.07.2006 №152-ФЗ «О персональных данных». Фотография моего лица (индивидуальные биометрические
+							характеристики моего лица), персональные данные, указанные в настоящем согласии, включая:
+							фамилию,
+							имя,
+							отчество; данные документа, удостоверяющего личность; год, месяц, число и место рождения;
+							гражданство;
+							адрес; контактные телефоны, почтовые адреса, адреса электронной почты и другие сведения,
+							предоставленные
+							мною для заключения договора с любым из Операторов или в период их действия, содержащиеся в
+							заявлениях,
+							письмах, соглашениях и иных документах (полученных Операторами или одним из Операторов также в
+							электронном виде), предоставляются в целях:</p>
+						<p>
+							- сбора и оформления документов для заключения договоров страхования в рамках добровольного
+							страхования физических лиц по программам накопительного и инвестиционного страхования жизни;
+							<br>- получения кредита и исполнения кредитного договора/договора о предоставлении и
+							использовании
+							банковских карт с ПАО Банк «ФК Открытие», ПАО «Росгосстрах Банк»; заключения и исполнения
+							договоров оказания услуг с любым из Операторов;
+							<br>- страхования моих имущественных интересов и имущественных интересов Операторов или одного
+							из
+							Операторов, связанных с риском его убытков, в результате неисполнения (ненадлежащего исполнения)
+							мной договорных обязательств;
+							<br>- получения информации о кредитном договоре/договоре о предоставлении и использовании
+							банковских
+							карт, заключенном с ПАО Банк «ФК Открытие», ПАО «Росгосстрах Банк»/иных договорах оказания услуг
+							лицами, указанными в настоящем согласии;
+							<br>- урегулирования просроченной задолженности перед ПАО Банк «ФК Открытие», ПАО «Росгосстрах
+							Банк»
+							в
+							случае неисполнения или ненадлежащего исполнения мной договорных обязательств;
+							<br>- заключения и исполнения договора уступки (или залога) прав (требований) по кредитному
+							договору/договору о предоставлении и использовании банковских карт, заключенному с ПАО Банка «ФК
+							Открытие», ПАО «Росгосстрах Банк», с любыми третьими лицами (при отсутствии запрета в договоре,
+							заключенном с Клиентом);
+							<br>- получения информации о других продуктах и услугах Операторов;
+							<br>- оценку моей платежеспособности с привлечением Операторами партнеров.
+						</p>
+						<p>
+							Настоящее согласие действует до момента получения письменного заявления Застрахованного лица об
+							отзыве
+							настоящего согласия одним из Операторов или всеми Операторами. Прекращение кредитного
+							договора/договора о предоставлении и использовании банковских карт/ иного договора оказания
+							услуг не
+							прекращает действие согласия. Осведомлен(а), что настоящее согласие может быть отозвано мной при
+							предоставлении Оператору/-ам заявления в простой письменной форме.
+						</p>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="25" class="textCenter colorSteel">4. СОГЛАСИЕ ЗАСТРАХОВАННОГО ЛИЦА<br>
+						НА ПОЛУЧЕНИЕ КОММЕРЧЕСКИХ ПРЕДЛОЖЕНИЙ</td>
+				</tr>
+				<tr>
+					<td colspan="3">Я<br><input type="checkbox"> выражаю<br>согласие<br><input type="checkbox"> не
+						выражаю<br>согласие</td>
+					<td colspan="22">
+						<p>на получение мною от ООО СК «Росгосстрах Жизнь» и иных компаний Группы информации о продуктах и
+							услугах, коммерческих предложений Банка/ группы Компаний*, в том числе посредством почтовой
+							связи и
+							сетям электросвязи (телефонной, факсимильной, подвижной радиотелефонной связи и прочее) по
+							адресу
+							постоянной регистрации, адресу фактического проживания, адресу электронной почты, на контактные
+							номера
+							телефонов, указанные в настоящем согласии.</p>
+						<p>*&nbsp&nbspПод компаниями Группы понимаются: ПАО Банк «ФК Открытие», место нахождения: г. Москва,
+							ул. Летниковская, д.2, стр.4; ПАО «Росгосстрах Банк», место нахождения: 121059, г. Москва, вн.
+							тер.
+							г.
+							муниципальный округ Дорогомилово, ул. Киевская, д. 7, к. 1; АО «НПФ «Открытие», место
+							нахождения: г.
+							Москва; ПАО СК «Росгосстрах», место нахождения: 140002, Московская область, город Люберцы, улица
+							Парковая, дом 3; ООО СК «Росгосстрах Жизнь», место нахождения: 121059, г. Москва, вн.тер.г.
+							муниципальный
+							округ Дорогомилово, ул. Киевская, д. 7, к. 1; АО «Открытие Брокер», место нахождения 115114, г.
+							Москва, ул.
+							Летниковская, д. 2, стр. 4; ООО «УК «ОТКРЫТИЕ», место нахождения 115114, Москва, ул.
+							Кожевническая,
+							д. 14,
+							стр. 5</p>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="25" class="textCenter colorSteel">ЗАСТРАХОВАННОЕ ЛИЦО</td>
+				</tr>
+				<tr>
+					<td colspan="25" class="paddingTopBottom6">
+						<span class="spanLeft">Подпись __________________/{{insured.signatureName}}</span>
+						<span class="spanRight">{{policy.issueDateDocumentationFormat}}</span>
+					</td>
+				</tr>
+			</table>
+		</div>
+		{{/unless}}
+		<!-- Приложения Уведомление от БФКО-->
+		{{#unless isHideFinServiceNotify}}
+		<div class="noticeBFKO">
+			<p class="break right smallText">Приложение к Приказу<br>от 04.02.2019 №122</p>
+			<p class="right boldText marginTop">Форма У-109-2</p>
+			<p class="textCenter">Уведомление<br>граждан при предложении им финансовых услуг в ПАО Банк «ФК Открытие»</p>
+			<p class="right">{{holderInfo.issueDate}}</p>
+			<p class="mainText">
+				Я, {{holder.fullName}}, настоящим подтверждаю, что ПАО Банк «ФК Открытие» предоставил мне сведения о том,
+				что:
+			</p>
+			<ol>
+				<li>
+					инвестиционное или накопительное страхование жизни оказывается компанией ООО СК «Росгосстрах Жизнь»;
+				</li>
+				<li>
+					условия договора и действия, которые будут совершены в рамках оказания услуги, определены формой
+					Правил страхования, размещенной на сайте в сети Интернет по адресу www.rgsl.ru;
+				</li>
+				<li>
+					размер вознаграждения (комиссии), которое будет взиматься ООО СК «Росгосстрах Жизнь», в рамках
+					оказания услуги определен в соответствии с документом, указанным выше в пункте 2 настоящего
+					Уведомления;
+				</li>
+				<li>
+					риски, связанные с оказанием услуги, определены документом, указанным выше в пункте 2 настоящего
+					Уведомления. Инвестирование в финансовые инструменты связано с определенным риском, заявления
+					любых лиц о возможном увеличении в будущем стоимости инвестированных средств могут рассматриваться
+					не иначе как предположения. Результаты инвестирования в прошлом не определяют и не являются гарантией
+					доходности инвестирования в будущем.
+				</li>
+			</ol>
+			<p class="mainText">Также настоящим подтверждаю, что уведомлен о нижеследующем:</p>
+			<table>
+				<col class="col1">
+				<col class="col2">
+				<tr>
+					<td>
+						<input type="checkbox" checked>
+					</td>
+					<td>
+						денежные средства по указанным в настоящем Уведомлении продуктам либо услугам не застрахованы в
+						соответствии с Федеральным законом от 23.12.2003 г. №177-ФЗ «О страховании вкладов в банках
+						Российской
+						Федерации»;
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<input type="checkbox" checked>
+					</td>
+					<td>
+						ПАО Банк «ФК Открытие» не является поставщиком указанных продуктов либо услуг;
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<input type="checkbox" checked>
+					</td>
+					<td>
+						ПАО Банк «ФК Открытие» не является инвестиционным советником и не оказывает услуги по
+						инвестиционному
+						консультированию, как этот термин определен в статье 6.1. Федерального закона от 22.04.1996 N 39-ФЗ
+						«О
+						рынке ценных бумаг», и/или иные какие-либо подобные услуги. Информация подготовлена и
+						предоставляется
+						ПАО Банк «ФК Открытие» обезличено для определенной категории и/или для всех клиентов, потенциальных
+						клиентов и контрагентов ООО СК «Росгосстрах Жизнь». В рамках предоставления данной информации ПАО
+						Банк «ФК Открытие» не представляет каких-либо консультаций, рекомендаций, советов или анализа в
+						отношении каких-либо ценных бумаг, сделок с ними и (или) заключения договоров, являющихся
+						производными
+						финансовыми инструментами, представляемая ПАО Банк «ФК Открытие» информация не является
+						индивидуальной инвестиционной консультацией.
+					</td>
+				</tr>
+			</table>
+
+			{{#if holderInfo.bool}}
+			<p class="mainText">Также настоящим подтверждаю, что:</p>
+			<ul>
+				{{#if holderInfo.isEmail}}
+				<li class="circle">
+					e-mail – {{holderInfo.email}} является адресом электронной почты, который используется мною; документы и
+					сообщения, направленные на указанный адрес электронной почты либо полученные с этого адреса
+					электронной почты, будут, соответственно, получены либо отправлены мною; об изменении
+					используемого мною e-mail обязуюсь сообщать незамедлительно{{#if holder.phoneNumber}};{{else}}.{{/if}}
+				</li>
+				{{/if}}
+				{{#if holderInfo.isPhoneNumber}}
+				<li class="circle">
+					телефонный номер {{holderInfo.phoneNumber}} является номером телефона, который используется мною;
+					sms-сообщения,
+					отправленные с указанного номера либо направленные на этот номер телефона, будут,
+					соответственно, отправлены либо прочитаны мною; об изменении номера используемого мною
+					телефона обязуюсь сообщать незамедлительно
+				</li>
+				{{/if}}
+			</ul>
+			{{/if}}
+			<p>
+				<span class="spanLeft">{{holder.fullName}}</span><span class="spanRight">____________________</span>
+			</p>
+			<p>
+				<span class="spanRight">(подпись гражданина)</span>
+			</p>
+		</div>
+		{{/unless}}
+		{{/if}}
+
+		<!-- Приложения Уведомление от ВТБ-->
+		{{#if isVTBBankDocument}}
+		<div class="signatureNone break">
+			<div class="VTBNotice">
+				<p class="textCenter boldText">
+					ИНФОРМАЦИЯ, ПРЕДОСТАВЛЯЕМАЯ БАНКОМ ВТБ (ПУБЛИЧНЫМ<br>
+					АКЦИОНЕРНЫМ ОБЩЕСТВОМ), ДЕЙСТВУЮЩИМ ОТ ИМЕНИ СТРАХОВОЙ<br>
+					ОРГАНИЗАЦИИ  ООО СК «РОСГОССТРАХ ЖИЗНЬ», ПРИ ЗАКЛЮЧЕНИИ С<br>
+					ФИЗИЧЕСКИМ ЛИЦОМ ДОГОВОРА ДОБРОВОЛЬНОГО СТРАХОВАНИЯ ЖИЗНИ
+				</p>
+				<p class="textCenter boldText">№ {{policy.number}} от {{policy.issueDate}} г.</p>
+				<table class="VTBTable">
+					<col class="col1">
+					<col class="col2">
+					<col class="col3">
+					<col class="col4">
+					<tr>
+						<td class="boldText textCenter">
+							N п/п
+						</td>
+						<td class="boldText textCenter">
+							Вид информации
+						</td>
+						<td class="boldText textCenter">
+							Содержание предоставляемой информации
+						</td>
+						<td class="boldText textCenter">
+							Подпись физического лица, подтверждающая его ознакомление с информацией
+						</td>
+					</tr>
+					<tr>
+						<td class="boldText textCenter">1</td>
+						<td class="boldText textCenter">2</td>
+						<td class="boldText textCenter">3</td>
+						<td class="boldText textCenter">4</td>
+					</tr>
+					<tr>
+						<td rowspan=3 class="textCenter">1</td>
+						<td rowspan=3>
+							Информация о договоре добровольного страхования жизни (далее - договор добровольного страхования)
+						</td>
+						<td>
+							1.1 Переданные по договору добровольного страхования денежные средства не подлежат страхованию в
+							соответствии с Федеральным законом от 23 декабря 2003 года N 177-ФЗ «О страховании вкладов в банках
+							Российской Федерации»
+						</td>
+						<td class="textCenter">
+							<p class="borderCheck"></p>
+							<p>С информацией ознакомлен</p>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							1.2 Отсутствует гарантия получения доходности*
+						</td>
+						<td class="textCenter">
+							<p class="borderCheck"></p>
+							<p>С информацией ознакомлен</p>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							1.3 Договор добровольного страхования не является договором банковского вклада (банковского счета)
+						</td>
+						<td class="textCenter">
+							<p class="borderCheck"></p>
+							<p>С информацией ознакомлен</p>
+						</td>
+					</tr>
+				</table>
+
+				<p class="textJustify">
+					*По договору добровольного страхования доход фиксирован и обеспечивается положительной разницей	между размером страховой суммы по риску «ДОЖИТИЕ» и размером уплаченной страховой премии.
+				</p>
+				<p class="textJustify">
+					Основные положения договора добровольного страхования указаны в Ключевом информационном документе об условиях
+					договора добровольного страхования, в том числе о его условиях и рисках, связанных с его исполнением.
+				</p>
+			</div>
+		</div>
+		{{/if}}
+		{{#if isECOF2ZENIT}}
+		<section>
+			<div class="zenitMargin zenitNotice">
+				<div class="logoDiv">
+					<img src="../../../life-insurance/component/POImageConst/printout/assets/img/bankZenithLogo.png"
+						alt="Логотип Банк ЗЕНИТ" class="logo">
+				</div>
+
+				<p class="textRight backgroundMarine">www.zenit.ru</p>
+
+				<p class="textCenter boldText">
+					Информация, предоставляемая ПАО Банк ЗЕНИТ, действующим от имени страховой организации при заключении с
+					физическим лицом договора добровольного страхования жизни
+				</p>
+				<div class="containerNewDoc">
+					Я, <span class="line">{{holder.fullName}}</span> <br>
+					<span style="font-style: italic;">(фамилия, имя, отчество (при наличии) полностью)</span>
+				</div>
+				<p class="textJustifyNewDoc">
+					(далее – Страхователь{{#if isPolicyHolder}} /Застрахованный{{/if}}), настоящим
+					подтверждаю, что ПАО Банк
+					ЗЕНИТ предоставило мне информацию о договоре накопительного страхования жизни страховой компании ООО СК
+					«Росгосстрах Жизнь» (далее – Страховщик):
+				</p>
+				
+
+				<table class="zenithTable">
+					<col class="col1">
+					<col class="col2">
+					<col class="col3">
+					<col class="col4">
+					<tr>
+						<td class="boldText textCenter">
+							N п/п
+						</td>
+						<td class="boldText textCenter">
+							Вид информации
+						</td>
+						<td class="boldText textCenter">
+							Содержание предоставляемой информации
+						</td>
+						<td class="boldText textCenter">
+							Подпись физического лица, подтверждающая его ознакомление с информацией
+						</td>
+					</tr>
+					<tr>
+						<td class="boldText textCenter">1</td>
+						<td class="boldText textCenter">2</td>
+						<td class="boldText textCenter">3</td>
+						<td class="boldText textCenter">4</td>
+					</tr>
+					<tr>
+						<td rowspan=7 class="textCenter">1</td>
+						<td rowspan=7>
+							Информация о договоре добровольного страхования жизни на случай смерти, дожития до определенного возраста или срока либо
+							наступления иного события (далее – договор добровольного страхования, договор)
+						</td>
+						<td>
+							1.1 Переданные по договору добровольного страхования денежные средства не подлежат
+							страхованию
+							в соответствии с Федеральным законом от 23 декабря 2003 года № 177-ФЗ «О страховании
+							вкладов в
+							банках Российской Федерации»
+						</td>
+						<td class="textCenter">
+							<p class="borderCheck"></p>
+							<p>С информацией ознакомлен(-а)</p>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							1.2 Отсутствует гарантия получения доходности
+						</td>
+						<td class="textCenter">
+							<p class="borderCheck"></p>
+							<p>С информацией ознакомлен(-а)</p>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							1.3 Договор добровольного страхования не является договором банковского вклада (банковского счета)
+						</td>
+						<td class="textCenter">
+							<p class="borderCheck"></p>
+							<p>С информацией ознакомлен(-а)</p>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							1.4 Договор носит долгосрочный характер и предусматривает обязательства Страхователя по
+							оплате
+							страховых взносов (страховой премии). Порядок и сроки уплаты страховой премии
+							устанавливаются
+							договором
+						</td>
+						<td class="textCenter">
+							<p class="borderCheck"></p>
+							<p>С информацией ознакомлен(-а)</p>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							1.5. В течение первых 30 календарных дней со дня заключения договора добровольного страхования действует «период охлаждения», в течение которого Страхователь вправе досрочно расторгнуть договор и получить возврат уплаченной страховой премии в полном объеме (кроме случаев, если по договору уже производились страховые выплаты, либо у Страховщика имеются заявления Застрахованного лица (Выгодоприобретателя) о наступлении страхового случая по договору в течение «периода охлаждения» в порядке, предусмотренном Указанием Банка России от 20.11.2015 № 3854-У «О минимальных (стандартных) требованиях к условиям и порядку осуществления отдельных видов добровольного страхования». Возврат уплаченной страховой премии осуществляется Страховщиком
+						</td>
+						<td class="textCenter">
+							<p class="borderCheck"></p>
+							<p>С информацией ознакомлен(-а)</p>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							1.6 При досрочном прекращении договора добровольного страхования по истечении «периода охлаждения»
+							Страховщик выплачивает Страхователю выкупную сумму в размере, определяемом согласно
+							договору, в зависимости от периода страхования, на который приходится дата досрочного
+							прекращения договора. При этом размер выкупной суммы может быть меньше суммы уплаченной
+							страховой премии по договору
+						</td>
+						<td class="textCenter">
+							<p class="borderCheck"></p>
+							<p>С информацией ознакомлен(-а)</p>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							1.7 Вложение в базовый актив всех имеющихся у потребителя услуги (продукта) (Страхователя) денежных средств либо их большей части может привести к утрате всех его накоплений
+						</td>
+						<td class="textCenter">
+							<p class="borderCheck"></p>
+							<p>С информацией ознакомлен(-а)</p>
+						</td>
+					</tr>
+				</table>
+				<p class="textLeft">{{policy.issueDateDocumentationFormat}} г.</p>
+			</div>
+		</section>
+		{{/if}}
+	</div>
+</body>
+
+</html>

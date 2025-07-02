@@ -1,0 +1,40 @@
+{
+    "type": "object",
+    "additionalProperties": false,
+    "aiValidation": {
+        "rule": "validation"
+    },
+    "properties": {
+        "useNds": {
+            "type": "boolean",
+            "aiTitle": "useNds"
+        },
+        "vatRates": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                    "vatRate"
+                ],
+                "properties": {
+                    "startDate": {
+                        "type": "string",
+                        "aiFormat": "date",
+                        "aiTitle": "startDate"
+                    },
+                    "vatRate": {
+                        "type": "number",
+                        "aiTitle": "vatRate",
+                        "minimum": 0,
+                        "maximum": 1
+                    }
+                }
+            }
+        },
+        "isDocCorrect": {
+            "type": "boolean",
+            "aiTitle": "isDocCorrect"
+        }
+    }
+}

@@ -1,0 +1,28 @@
+{
+    "entityType": "UniversalMasterEntity",
+    "condition": {
+        "events": [
+            "Created",
+            "Updated"
+        ],
+        "configuration": {
+            "names": [
+                "ContractEntity"
+            ]
+        }
+    },
+    "sinks": [
+        {
+            "name": "SaveContractAdditionalParametersData",
+            "database": {
+                "tables": [
+                    "BFX_IMPL.ADDITIONAL_PARAMETERS_HUB",
+                    "BFX_IMPL.ADDITIONAL_PARAMETERS_SAT",
+                    "BFX_IMPL.ADDITIONAL_PARAMETERS_QUOTE_LINK",
+                    "BFX_IMPL.ADDITIONAL_PARAMETERS_POLICY_LINK"
+                ]
+            }
+        }
+    ],
+    "version": "1"
+}

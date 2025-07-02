@@ -1,0 +1,28 @@
+delete from bfx_impl.investment_strategy where code = N'advancedMicrotechnologies'; insert into bfx_impl.investment_strategy VALUES('63AC1FBD-9B59-4259-96AF-024A5327508C', N'advancedMicrotechnologies', N'Передовые микротехнологии');
+delete from bfx_impl.investment_strategy where code = N'advancedMicrotechnologies2'; insert into bfx_impl.investment_strategy VALUES('52AE1D84-4C9B-449C-B895-40B3ACA10B18', N'advancedMicrotechnologies2', N'Передовые микротехнологии 2.0');
+delete from bfx_impl.investment_strategy where code = N'itGiants'; insert into bfx_impl.investment_strategy VALUES('F40FD1C9-9283-4F29-B0B8-49523EE5FF98', N'itGiants', N'ИТгиганты');
+
+
+delete from bfx_impl.products where code = N'I496BFKOP'; insert into bfx_impl.products VALUES ('4A164C63-D316-4DCF-A817-001FA6B7DCE6', N'I496BFKOP', N'investment', N'БФКО НОТА АвтоОтзыв USD3', N'ИСЖ');
+delete from bfx_impl.products where code = N'I500SAS'; insert into bfx_impl.products VALUES ('098AB8D8-BDD6-407F-8D85-009D821C9AFD', N'I500SAS', N'investment', N'БФКО Драйвер Лидеры сектора 3.0 USD5', N'ИСЖ');
+delete from bfx_impl.products where code = N'I501SAS'; insert into bfx_impl.products VALUES ('85CB09F4-AA85-4DC3-B1C7-0C973CBA90C3', N'I501SAS', N'investment', N'БФКО Драйвер Лидеры сектора 3.0 RUB7', N'ИСЖ');
+delete from bfx_impl.products where code = N'I334SAS'; insert into bfx_impl.products VALUES ('54461FFF-0842-427B-AB30-0F076D256FA4', N'I334SAS', N'investment', N'Драйвер Здравоохранение 100% RUB 5', N'ИСЖ');
+delete from bfx_impl.products where code = N'I544BFKOP'; insert into bfx_impl.products VALUES ('A0EDF557-DAE5-403B-B74B-14FAA72FB411', N'I544BFKOP', N'investment', N'БФКО Кибербезопасность Автоколл USD3', N'ИСЖ');
+delete from bfx_impl.products where code = N'I194SAS'; insert into bfx_impl.products VALUES ('5E17C599-F4F9-44F6-BE21-25E693CBF422', N'I194SAS', N'investment', N'Инвест.страхование жизни - Глобальная безопасность', N'ИСЖ');
+delete from bfx_impl.products where code = N'I512BFKOP'; insert into bfx_impl.products VALUES ('1FAEA2C0-3FB8-4188-BD66-40F7541A7C95', N'I512BFKOP', N'investment', N'БФКО PB Нота с автоотзывом RUB5', N'ИСЖ');
+delete from bfx_impl.products where code = N'I262SAS'; insert into bfx_impl.products VALUES ('6ADFB7B7-6E92-4F12-A364-43B5583FA4F6', N'I262SAS', N'investment', N'Инвест. страхование жизни – Диверсиф. фонды RUR', N'ИСЖ');
+delete from bfx_impl.products where code = N'I369BFKOP'; insert into bfx_impl.products VALUES ('C54797A4-C689-482E-B346-470D843D2703', N'I369BFKOP', N'investment', N'БФКО Драйвер Лидеры роста 2.0 3 RUB', N'ИСЖ');
+delete from bfx_impl.products where code = N'I499SAS'; insert into bfx_impl.products VALUES ('1B169DC3-C772-463F-9803-5A8EE648D0B3', N'I499SAS', N'investment', N'БФКО Драйвер Лидеры сектора 3.0 RUB5', N'ИСЖ');
+delete from bfx_impl.products where code = N'I386BFKOP'; insert into bfx_impl.products VALUES ('9C371438-09BE-4036-81B9-5BFC1C72A9DB', N'I386BFKOP', N'investment', N'БФКО Pr ИСЖ Нота - IT Гиганты - RUB 5', N'ИСЖ');
+delete from bfx_impl.products where code = N'I562SAS'; insert into bfx_impl.products VALUES ('540429EC-90B9-4130-B5C1-6A6C538F5A84', N'I562SAS', N'investment', N'БФКО Драйвер Плюс USD2', N'ИСЖ');
+delete from bfx_impl.products where code = N'I444PrimSocBank'; insert into bfx_impl.products VALUES ('CC941542-1E32-4D81-8B17-715A9E92A474', N'I444PrimSocBank', N'investment', N'ИСЖ - Рег. премия – Курс на доходность Apple RUB5', N'ИСЖ');
+delete from bfx_impl.products where code = N'I335SAS'; insert into bfx_impl.products VALUES ('7BE89B0A-827C-4A05-8722-7AD2F9BE1815', N'I335SAS', N'investment', N'Драйвер Здравоохранение 115% RUB 5', N'ИСЖ');
+delete from bfx_impl.products where code = N'I562BFKOP'; insert into bfx_impl.products VALUES ('42530C00-6728-4D18-A967-9408BB41EE86', N'I562BFKOP', N'investment', N'БФКО Драйвер Плюс USD2', N'ИСЖ');
+delete from bfx_impl.products where code = N'I557BFKOP'; insert into bfx_impl.products VALUES ('89E62F1B-AADA-4145-9489-AAC80027D6F4', N'I557BFKOP', N'investment', N'БФКО ДрайверП Кибербезопасность RUB3', N'ИСЖ');
+delete from bfx_impl.products where code = N'I504CUP'; insert into bfx_impl.products VALUES ('D08EA71F-523D-41F2-AA43-B05AAC0A4D51', N'I504CUP', N'investment', N'ЦУП Драйвер Лидеры сектора 3.0.  RUB3', N'ИСЖ');
+delete from bfx_impl.products where code = N'I445PrimSocBank'; insert into bfx_impl.products VALUES ('31C10519-8A83-4BF8-BBD4-B13C940A5AD2', N'I445PrimSocBank', N'investment', N'ИСЖ - Рег. премия – Курс на доходность FedEx RUB5', N'ИСЖ');
+delete from bfx_impl.products where code = N'I393SAS'; insert into bfx_impl.products VALUES ('FB7C29C7-B493-438B-BB25-C7B3D27ABBB1', N'I393SAS', N'investment', N'САC Драйвер  Потреб. Сектор 3 РУБ', N'ИСЖ');
+delete from bfx_impl.products where code = N'I394SAS'; insert into bfx_impl.products VALUES ('163650EB-1616-442B-81DD-CB5038C1E815', N'I394SAS', N'investment', N'САC Драйвер Лидеры Сектора 2.0 RUB5', N'ИСЖ');
+delete from bfx_impl.products where code = N'I437PrimSocBank'; insert into bfx_impl.products VALUES ('1B6C85D2-4583-48CD-AD5F-CB604E96A4FB', N'I437PrimSocBank', N'investment', N'ПримСоц  Лидеры Сектора 2.0 USD5', N'ИСЖ');
+delete from bfx_impl.products where code = N'I596UCBPrivate'; insert into bfx_impl.products VALUES ('A63B7184-7CE2-4C8C-AE29-CC03EC0C40CD', N'I596UCBPrivate', N'investment', N'ЮКБ Инвест Растущий Актив 3,5RUB', N'ИСЖ');
+delete from bfx_impl.products where code = N'I336SAS'; insert into bfx_impl.products VALUES ('551E2A22-7518-4680-9C23-D72AB6AB6427', N'I336SAS', N'investment', N'Драйвер Здравоохранение 100% USD 5', N'ИСЖ');

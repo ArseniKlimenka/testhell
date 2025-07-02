@@ -1,0 +1,100 @@
+{
+    "id": "UpdateActItemCommRateViewUiSchema",
+    "type": "Group",
+    "elements": [
+        {
+            "type": "GridLayout",
+            "numberOfColumns": 2,
+            "elements": [
+                {
+                    "type": "HeaderContentLayout",
+                    "elements": [
+                        {
+                            "type": "Group",
+                            "width": 4,
+                            "stackContent": "Left",
+                            "elements": [
+                                {
+                                    "type": "OutputText",
+                                    "skipTranslate": true,
+                                    "value": {
+                                        "$ref": "#"
+                                    },
+                                    "textStyle": {
+                                        "uppercase": true,
+                                        "textSize": "Normal",
+                                        "width": 2,
+                                        "textColor": "Black"
+                                    },
+                                    "template": "{{#style 'bold'}}{{#i18n}}{{expr ConfigurationCodeName}}@Title{{/i18n}}{{/style}}"
+                                }
+                            ],
+                            "label": ""
+                        }
+                    ]
+                },
+                {
+                    "type": "Group",
+                    "elements": [
+                        {
+                            "type": "Input",
+                            "control": "Dropdown",
+                            "label": "ActStateCode",
+                            "filter": "filterActStateCodes",
+                            "value": {
+                                "$ref": "#/properties/Body/properties/actStateCode"
+                            },
+                            "width": 1
+                        }
+                    ]
+                },
+                {
+                    "type": "FooterContentLayout",
+                    "elements": [
+                        {
+                            "type": "Group",
+                            "stackContent": "Right",
+                            "width": 2,
+                            "elements": [
+                                {
+                                    "type": "Button",
+                                    "backgroundColor": "Primary",
+                                    "labelColor": "Primary",
+                                    "fill": "Outline",
+                                    "onClick": [
+                                        {
+                                            "commandType": "executeAction",
+                                            "actionName": "cancel"
+                                        }
+                                    ],
+                                    "icon": {
+                                        "name": "Times",
+                                        "color": "Primary",
+                                        "size": "Small"
+                                    },
+                                    "label": "Cancel"
+                                },
+                                {
+                                    "type": "Button",
+                                    "onClick": [
+                                        {
+                                            "commandType": "executeAction",
+                                            "actionName": "confirm"
+                                        }
+                                    ],
+                                    "icon": {
+                                        "name": "Check",
+                                        "color": "BackgroundColor",
+                                        "size": "Small"
+                                    },
+                                    "submitOnEnter": true,
+                                    "label": "Confirm"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

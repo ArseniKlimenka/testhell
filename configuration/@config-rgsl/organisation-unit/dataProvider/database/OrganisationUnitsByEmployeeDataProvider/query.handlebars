@@ -1,0 +1,5 @@
+﻿select ouh.organisation_unit_code
+  from org_impl.organisation_unit_hub ouh,
+       org_impl.organisation_unit_info_sat_latest ouis
+ where ouh.organisation_unit_hkey = ouis.organisation_unit_info_hkey
+   and (ouis.coach_code = @employeeCode or ouis.territorial_chief_code = @employeeCode or ouis.regional_chief_code = @employeeCode)

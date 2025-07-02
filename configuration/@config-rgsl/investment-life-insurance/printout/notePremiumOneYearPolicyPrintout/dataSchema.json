@@ -1,0 +1,388 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "DataSchemaForMGPolicyPrintout",
+    "description": "Schema for printing policy",
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+        "QR": {
+            "type": "string",
+            "description": "QR Code"
+        },
+        "insurer": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "license": {
+                    "type": "string"
+                },
+                "INN": {
+                    "type": "string"
+                },
+                "KPP": {
+                    "type": "string"
+                },
+                "address": {
+                    "type": "string"
+                }
+            }
+        },
+        "bankInfo": {
+            "type": "string"
+        },
+        "policy": {
+            "type": "object",
+            "properties": {
+                "number": {
+                    "type": "string"
+                },
+                "issueDate": {
+                    "type": "string"
+                },
+                "product": {
+                    "type": "string"
+                },
+                "rule": {
+                    "type": "string"
+                }
+            }
+        },
+        "isPremial": {
+            "type": "boolean"
+        },
+        "currency": {
+            "type": "string"
+        },
+        "experationDate": {
+            "type": "string"
+        },
+        "isPolicyHolder": {
+            "type": "boolean"
+        },
+        "holder": {
+            "type": "object",
+            "properties": {
+                "fullName": {
+                    "type": "string"
+                },
+                "gender": {
+                    "type": "string"
+                },
+                "dateOfBirth": {
+                    "type": "string"
+                },
+                "birthPlace": {
+                    "type": "string"
+                },
+                "phoneNumber": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "citizenship": {
+                    "type": "string"
+                },
+                "registrationAddress": {
+                    "type": "string"
+                },
+                "postAddress": {
+                    "type": "string"
+                },
+                "document": {
+                    "type": "object",
+                    "properties": {
+                        "typeAndSN": {
+                            "type": "string"
+                        },
+                        "dateOfIssue": {
+                            "type": "string"
+                        },
+                        "issuedBy": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "insured": {
+            "type": "object",
+            "properties": {
+                "fullName": {
+                    "type": "string"
+                },
+                "gender": {
+                    "type": "string"
+                },
+                "dateOfBirth": {
+                    "type": "string"
+                },
+                "birthPlace": {
+                    "type": "string"
+                },
+                "phoneNumber": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "citizenship": {
+                    "type": "string"
+                },
+                "registrationAddress": {
+                    "type": "string"
+                },
+                "postAddress": {
+                    "type": "string"
+                },
+                "document": {
+                    "type": "object",
+                    "properties": {
+                        "typeAndSN": {
+                            "type": "string"
+                        },
+                        "dateOfIssue": {
+                            "type": "string"
+                        },
+                        "issuedBy": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "frequency": {
+            "type": "object",
+            "properties": {
+                "risk": {
+                    "type": "string"
+                },
+                "premium": {
+                    "type": "string"
+                }
+            }
+        },
+        "notLump": {
+            "type": "boolean"
+        },
+        "risk": {
+            "type": "object",
+            "properties": {
+                "risk": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "insuranceRisks": {
+                            "type": "string"
+                        },
+                        "sumInsured": {
+                            "type": "string"
+                        },
+                        "insurancePremium": {
+                            "type": "string"
+                        },
+                        "insurancePayment": {
+                            "type": "string"
+                        },
+                        "startDate": {
+                            "type": "string"
+                        },
+                        "endDate": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "mandatory": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "insuranceRisks": {
+                            "type": "string"
+                        },
+                        "sumInsured": {
+                            "type": "string"
+                        },
+                        "insurancePremium": {
+                            "type": "string"
+                        },
+                        "insurancePayment": {
+                            "type": "string"
+                        },
+                        "startDate": {
+                            "type": "string"
+                        },
+                        "endDate": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "premium": {
+                    "type": "object",
+                    "properties": {
+                        "sum": {
+                            "type": "string"
+                        },
+                        "mandatory": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "isAdditional": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "insuranceTerms": {
+            "type": "object",
+            "properties": {
+                "text": {
+                    "type": "number"
+                },
+                "startDate": {
+                    "type": "number"
+                },
+                "endDate": {
+                    "type": "number"
+                }
+            }
+        },
+        "declarationMedical": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        },
+        "declarationMain": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        },
+        "otherCondition": {
+            "type": "object",
+            "isOtherCondition": {
+                "type": "boolean"
+            },
+            "policySpecialConditions": {
+                "type": "string"
+            }
+        }
+    },
+    "surrenderValues": {
+        "type": "array",
+        "items": {
+            "type": "object",
+            "index": {
+                "type": "number"
+            },
+            "periodStartDate": {
+                "type": "string"
+            },
+            "periodEndDate": {
+                "type": "string"
+            },
+            "surrenderValue": {
+                "type": "string"
+            }
+        }
+    },
+    "isBeneficiaries": {
+        "type": "boolean"
+    },
+    "beneficiaries": {
+        "type": "array",
+        "items": {
+            "type": "object",
+            "index": {
+                "type": "number"
+            },
+            "percentage": {
+                "type": "number"
+            },
+            "beneficiar": {
+                "type": "object",
+                "properties": {
+                    "fullName": {
+                        "type": "string"
+                    },
+                    "gender": {
+                        "type": "string"
+                    },
+                    "dateOfBirth": {
+                        "type": "string"
+                    },
+                    "birthPlace": {
+                        "type": "string"
+                    },
+                    "phoneNumber": {
+                        "type": "string"
+                    },
+                    "email": {
+                        "type": "string"
+                    },
+                    "citizenship": {
+                        "type": "string"
+                    },
+                    "registrationAddress": {
+                        "type": "string"
+                    },
+                    "postAddress": {
+                        "type": "string"
+                    },
+                    "document": {
+                        "type": "object",
+                        "properties": {
+                            "typeAndSN": {
+                                "type": "string"
+                            },
+                            "dateOfIssue": {
+                                "type": "string"
+                            },
+                            "issuedBy": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            },            
+            "phoneEmailCitizenship": {
+                "type": "boolean"
+            },
+            "isDocument": {
+                "type": "boolean"
+            },
+            "isRegistrationAddress": {
+                "type": "boolean"
+            },
+            "isPostAddress": {
+                "type": "boolean"
+            }
+        }
+    },
+    "paymentPlan": {
+        "type": "array",
+        "items": {
+            "type": "object",
+            "index": {
+                "type": "number"
+            },
+            "dateOfPayment": {
+                "type": "string"
+            },
+            "insurancePremium": {
+                "type": "string"
+            },
+            "insurancePremiumMainProgramm": {
+                "type": "string"
+            },
+            "periodStartDate": {
+                "type": "string"
+            },
+            "periodEndDate": {
+                "type": "string"
+            }
+        }
+    }
+}

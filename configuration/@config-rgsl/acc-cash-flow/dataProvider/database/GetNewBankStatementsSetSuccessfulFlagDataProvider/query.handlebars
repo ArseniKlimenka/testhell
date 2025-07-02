@@ -1,0 +1,13 @@
+select
+	hub.ETL_EXECUTION_STATUS_ID,
+	hub.RGSL_GUID,
+	sat.GUID_ALREADY_EXISTS,
+	sat.SKIP_PAYMENT
+from
+	ACC_IMPL.GET_NEW_BS_LOG_HUB hub
+	inner join ACC_IMPL.GET_NEW_BS_LOG_SAT_LATEST sat on sat.GET_NEW_BS_LOG_HKEY = hub.GET_NEW_BS_LOG_HKEY
+where 1=1
+	and sat.RESPONSE_SUCCESSFUL != 1
+{{#if parameters.rgslGuid}}
+    and hub.RGSL_GUID = @rgslGuid
+{{/if}}

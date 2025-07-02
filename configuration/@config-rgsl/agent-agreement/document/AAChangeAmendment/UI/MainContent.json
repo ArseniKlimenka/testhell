@@ -1,0 +1,219 @@
+{
+    "id": "UiSchemaAgent.json",
+    "type": "Group",
+    "formProperties": {
+        "events": {
+            "onLoad": "onLoadDocumentAction",
+            "beforeSave": "beforeSaveDocumentAction"
+        }
+    },
+    "elements": [
+        {
+            "type": "GridLayout",
+            "fillAvailableSpace": true,
+            "title": "AA Technical Amendment",
+            "fixedButton": true,
+            "numberOfColumns": 12,
+            "elements": [
+                {
+                    "type": "TabLayout",
+                    "options": {
+                        "menuAlligment": "Horizontal",
+                        "menuMode": "Single"
+                    },
+                    "elements": [
+                        {
+                            "type": "Tab",
+                            "elementId": "AmendmentData",
+                            "scope": "amendment",
+                            "title": "amendment",
+                            "elements": [
+                                {
+                                    "type": "Component",
+                                    "name": "AAChangeAmendmentData",
+                                    "value": {
+                                        "$ref": "#/properties/Body/properties/amendmentData/properties/changeAmendmentData"
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Tab",
+                            "elementId": "AADetails",
+                            "scope": "aadetails",
+                            "title": "AADetails",
+                            "elements": [
+                                {
+                                    "type": "Section",
+                                    "label": "Main attributes",
+                                    "scope": "mainAttributes",
+                                    "width": 12,
+                                    "elements": [
+                                        {
+                                            "type": "Component",
+                                            "name": "AADocumentMainAttributes",
+                                            "value": {
+                                                "$ref": "#/properties/Body/properties/mainAttributes"
+                                            }
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "Section",
+                                    "label": "Validity",
+                                    "scope": "validity",
+                                    "width": 12,
+                                    "elements": [
+                                        {
+                                            "type": "Component",
+                                            "name": "AADocumentValidity",
+                                            "value": {
+                                                "$ref": "#/properties/Body/properties/validity"
+                                            }
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "Section",
+                                    "label": "Organisation",
+                                    "scope": "organisation",
+                                    "width": 12,
+                                    "elements": [
+                                        {
+                                            "type": "Component",
+                                            "name": "AADocumentOrganisation",
+                                            "value": {
+                                                "$ref": "#/properties/Body/properties/organisation"
+                                            }
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "Section",
+                                    "label": "Participants",
+                                    "scope": "participants",
+                                    "width": 12,
+                                    "elements": [
+                                        {
+                                            "type": "Component",
+                                            "name": "AADocumentParticipants",
+                                            "value": {
+                                                "$ref": "#/properties/Body/properties/participants"
+                                            }
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "Section",
+                                    "label": "Additional attributes",
+                                    "scope": "additionalAttributes",
+                                    "width": 12,
+                                    "elements": [
+                                        {
+                                            "type": "Component",
+                                            "name": "AADocumentAdditionlaAttributes",
+                                            "value": {
+                                                "$ref": "#/properties/Body/properties/additionalAttributes"
+                                            }
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Tab",
+                            "elementId": "AACommissionRules",
+                            "scope": "CommissionRules",
+                            "title": "CommissionRules",
+                            "elements": [
+                                {
+                                    "type": "Section",
+                                    "label": "Commission rules",
+                                    "scope": "CommissionRules",
+                                    "width": 12,
+                                    "elements": [
+                                        {
+                                            "type": "Component",
+                                            "name": "AACommissionRules",
+                                            "value": {
+                                                "$ref": "#/properties/Body/properties/commissionRules"
+                                            }
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Tab",
+                            "scope": "title",
+                            "elementId": "budgetRuleTabId",
+                            "title": "budgetRuleTab",
+                            "elements": [
+                                {
+                                    "type": "Group",
+                                    "width": 12,
+                                    "elements": [
+                                        {
+                                            "type": "Section",
+                                            "label": "budgetRuleInfo",
+                                            "scope": "budgetRule",
+                                            "width": 12,
+                                            "elements": [
+                                                {
+                                                    "type": "Component",
+                                                    "name": "AADocumentBudgetRule",
+                                                    "value": {
+                                                        "$ref": "#/properties/Body/properties/budgetRule"
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Tab",
+                            "elementId": "statusTab",
+                            "title": "documentStatus",
+                            "elements": [
+                                {
+                                    "type": "Section",
+                                    "label": "",
+                                    "width": 12,
+                                    "elements": [
+                                        {
+                                            "type": "Group",
+                                            "elements": [
+                                                {
+                                                    "type": "InlineView",
+                                                    "showContainerActions": false,
+                                                    "views": [
+                                                        {
+                                                            "viewReference": {
+                                                                "configurationCodeName": "AADocumentStateHistoryView",
+                                                                "configurationVersion": "1",
+                                                                "configurationConceptType": "SearchView"
+                                                            },
+                                                            "onViewInitialized": "initDocumentStateHistory",
+                                                            "viewType": "Search"
+                                                        }
+                                                    ],
+                                                    "value": {
+                                                        "$ref": "#"
+                                                    },
+                                                    "hide": false,
+                                                    "elementId": "StatusView"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

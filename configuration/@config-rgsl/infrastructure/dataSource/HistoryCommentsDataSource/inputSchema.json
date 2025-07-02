@@ -1,0 +1,35 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "description": "Related documents data source input schema",
+    "type": "object",
+    "properties": {
+        "criteria": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "origDocumentNumber": {
+                    "type": "string",
+                    "description": "Number of contract document."
+                },
+                "userGroup": {
+                    "type": "string",
+                    "description": "Application user group."
+                }
+            }
+        },
+        "sort": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "descending": {
+                        "type": "boolean"
+                    },
+                    "fieldName": {
+                        "type": "string"
+                    }
+                }
+            }
+        }
+    }
+}

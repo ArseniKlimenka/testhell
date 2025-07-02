@@ -1,0 +1,777 @@
+{
+    "entityType": "UniversalDocument",
+    "dimensions": {
+    },
+    "hideFromDashboard": false,
+    "ui": {
+        "layout": "DocumentLayoutMainAndSummaryOnly",
+        "composition": {
+            "SummaryContent": "SummaryContent",
+            "MainContent": "MainContent"
+        }
+    },
+    "validFrom": "2000-01-01",
+    "states": [
+        {
+            "name": "OperationsApproval",
+            "actors": [
+                {
+                    "actor": "Operations",
+                    "uiSchema": "MainContent",
+                    "operations": [
+                        "Save"
+                    ],
+                    "transitions": [
+                        "OperationsApproval_to_AwaitingInquiries",
+                        "OperationsApproval_to_AwaitingApproval",
+                        "OperationsApproval_to_AwaitingEndowmentDate",
+                        "OperationsApproval_to_POCreation",
+                        "OperationsApprovalToRejected",
+                        "OperationsApprovalToCancelled"
+                    ]
+                },
+                {
+                    "actor": "Accounting",
+                    "uiSchema": "MainContent",
+                    "transitions": [],
+                    "operations": [
+                        "Save"
+                    ],
+                    "relations": []
+                },
+                {
+                    "actor": "ViewEndowment",
+                    "uiSchema": "MainContent",
+                    "operations": [
+                    ],
+                    "transitions": [
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "AwaitingInquiries",
+            "actors": [
+                {
+                    "actor": "Operations",
+                    "uiSchema": "MainContent",
+                    "operations": [
+                        "Save"
+                    ],
+                    "transitions": [
+                        "AwaitingInquiries_to_OperationsApproval"
+                    ]
+                },
+                {
+                    "actor": "Accounting",
+                    "uiSchema": "MainContent",
+                    "transitions": [],
+                    "operations": [
+                        "Save"
+                    ],
+                    "relations": []
+                },
+                {
+                    "actor": "ViewEndowment",
+                    "uiSchema": "MainContent",
+                    "operations": [
+                    ],
+                    "transitions": [
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "AwaitingApproval",
+            "actors": [
+                {
+                    "actor": "Operations",
+                    "uiSchema": "MainContent",
+                    "operations": [
+                    ],
+                    "transitions": [
+                        "AwaitingApproval_to_OperationsApproval"
+                    ]
+                },
+                {
+                    "actor": "ViewEndowment",
+                    "uiSchema": "MainContent",
+                    "operations": [
+                    ],
+                    "transitions": [
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "AwaitingEndowmentDate",
+            "actors": [
+                {
+                    "actor": "Operations",
+                    "uiSchema": "MainContent",
+                    "operations": [
+                    ],
+                    "transitions": [
+                        "AwaitingEndowmentDate_to_OperationsApproval"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "OperationsDirectorApproval",
+            "actors": [
+                {
+                    "actor": "OperationsDirector",
+                    "uiSchema": "MainContent",
+                    "operations": [
+                        "Save"
+                    ],
+                    "transitions": [
+                        "OperationsDirectorApprovalToOperationsApproval",
+                        "OperationsDirectorApprovalToDeputyDirectorAproval",
+                        "OperationsDirectorApprovalToRejected",
+                        "OperationsDirectorApprovalToCancelled",
+                        "OperationsDirectorApprovalToSentToPayment"
+                    ]
+                },
+                {
+                    "actor": "Accounting",
+                    "uiSchema": "MainContent",
+                    "transitions": [],
+                    "operations": [
+                        "Save"
+                    ],
+                    "relations": []
+                },
+                {
+                    "actor": "ViewEndowment",
+                    "uiSchema": "MainContent",
+                    "operations": [
+                    ],
+                    "transitions": [
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "InsuranceMethodologyApproval",
+            "actors": [
+                {
+                    "actor": "Methodology",
+                    "uiSchema": "MainContent",
+                    "operations": [
+                        "Save"
+                    ],
+                    "transitions": [
+                        "InsuranceMethodologyApprovalToOperationsApproval"
+                    ]
+                },
+                {
+                    "actor": "Accounting",
+                    "uiSchema": "MainContent",
+                    "transitions": [],
+                    "operations": [
+                        "Save"
+                    ],
+                    "relations": []
+                },
+                {
+                    "actor": "ViewEndowment",
+                    "uiSchema": "MainContent",
+                    "operations": [
+                    ],
+                    "transitions": [
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "ActuaryApproval",
+            "actors": [
+                {
+                    "actor": "Actuary",
+                    "uiSchema": "MainContent",
+                    "operations": [
+                        "Save"
+                    ],
+                    "transitions": [
+                        "ActuaryApprovalToOperationsApproval"
+                    ]
+                },
+                {
+                    "actor": "Accounting",
+                    "uiSchema": "MainContent",
+                    "transitions": [],
+                    "operations": [
+                        "Save"
+                    ],
+                    "relations": []
+                },
+                {
+                    "actor": "ViewEndowment",
+                    "uiSchema": "MainContent",
+                    "operations": [
+                    ],
+                    "transitions": [
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "AccountingApproval",
+            "actors": [
+                {
+                    "actor": "Accounting",
+                    "uiSchema": "MainContent",
+                    "operations": [
+                        "Save"
+                    ],
+                    "transitions": [
+                        "AccountingApprovalToOperationsApproval"
+                    ]
+                },
+                {
+                    "actor": "ViewEndowment",
+                    "uiSchema": "MainContent",
+                    "operations": [
+                    ],
+                    "transitions": [
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "ComplianceApproval",
+            "actors": [
+                {
+                    "actor": "Compliance",
+                    "uiSchema": "MainContent",
+                    "operations": [
+                        "Save"
+                    ],
+                    "transitions": [
+                        "ComplianceApprovalToOperationsApproval"
+                    ]
+                },
+                {
+                    "actor": "Accounting",
+                    "uiSchema": "MainContent",
+                    "transitions": [],
+                    "operations": [
+                        "Save"
+                    ],
+                    "relations": []
+                },
+                {
+                    "actor": "ViewEndowment",
+                    "uiSchema": "MainContent",
+                    "operations": [
+                    ],
+                    "transitions": [
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "SecurityApproval",
+            "actors": [
+                {
+                    "actor": "Security",
+                    "uiSchema": "MainContent",
+                    "operations": [
+                        "Save"
+                    ],
+                    "transitions": [
+                        "SecurityApprovalToOperationsApproval"
+                    ]
+                },
+                {
+                    "actor": "Accounting",
+                    "uiSchema": "MainContent",
+                    "transitions": [],
+                    "operations": [
+                        "Save"
+                    ],
+                    "relations": []
+                },
+                {
+                    "actor": "ViewEndowment",
+                    "uiSchema": "MainContent",
+                    "operations": [
+                    ],
+                    "transitions": [
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "LegalApproval",
+            "actors": [
+                {
+                    "actor": "Legal",
+                    "uiSchema": "MainContent",
+                    "operations": [
+                        "Save"
+                    ],
+                    "transitions": [
+                        "LegalApprovalToOperationsApproval"
+                    ]
+                },
+                {
+                    "actor": "Accounting",
+                    "uiSchema": "MainContent",
+                    "transitions": [],
+                    "operations": [
+                        "Save"
+                    ],
+                    "relations": []
+                },
+                {
+                    "actor": "ViewEndowment",
+                    "uiSchema": "MainContent",
+                    "operations": [
+                    ],
+                    "transitions": [
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "CallCenterApproval",
+            "actors": [
+                {
+                    "actor": "CallCenter",
+                    "uiSchema": "MainContent",
+                    "operations": [
+                        "Save"
+                    ],
+                    "transitions": [
+                        "CallCenterApprovalToRequestToClient"
+                    ]
+                },
+                {
+                    "actor": "Accounting",
+                    "uiSchema": "MainContent",
+                    "transitions": [],
+                    "operations": [
+                        "Save"
+                    ],
+                    "relations": []
+                },
+                {
+                    "actor": "ViewEndowment",
+                    "uiSchema": "MainContent",
+                    "operations": [
+                    ],
+                    "transitions": [
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "PartnerSalesSupportApproval",
+            "actors": [
+                {
+                    "actor": "PartnerSalesSupport",
+                    "uiSchema": "MainContent",
+                    "operations": [
+                        "Save"
+                    ],
+                    "transitions": [
+                        "PartnerSalesSupportApprovalToRequestToClient"
+                    ]
+                },
+                {
+                    "actor": "Accounting",
+                    "uiSchema": "MainContent",
+                    "transitions": [],
+                    "operations": [
+                        "Save"
+                    ],
+                    "relations": []
+                },
+                {
+                    "actor": "ViewEndowment",
+                    "uiSchema": "MainContent",
+                    "operations": [
+                    ],
+                    "transitions": [
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "ClientServiceApproval",
+            "actors": [
+                {
+                    "actor": "ClientServiceCenter",
+                    "uiSchema": "MainContent",
+                    "operations": [
+                        "Save"
+                    ],
+                    "transitions": [
+                        "ClientServiceApprovalToRequestToClient"
+                    ]
+                },
+                {
+                    "actor": "Accounting",
+                    "uiSchema": "MainContent",
+                    "transitions": [],
+                    "operations": [
+                        "Save"
+                    ],
+                    "relations": []
+                },
+                {
+                    "actor": "ViewEndowment",
+                    "uiSchema": "MainContent",
+                    "operations": [
+                    ],
+                    "transitions": [
+                        "ClientServiceApprovalToRequestToClient"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "RequestToClient",
+            "actors": [
+                {
+                    "actor": "CallCenter",
+                    "uiSchema": "MainContent",
+                    "operations": [
+                        "Save"
+                    ],
+                    "transitions": [
+                        "RequestToClientToOperationsApproval"
+                    ]
+                },
+                {
+                    "actor": "PartnerSalesSupport",
+                    "uiSchema": "MainContent",
+                    "operations": [
+                        "Save"
+                    ],
+                    "transitions": [
+                        "RequestToClientToOperationsApproval"
+                    ]
+                },
+                {
+                    "actor": "ClientServiceCenter",
+                    "uiSchema": "MainContent",
+                    "operations": [
+                        "Save"
+                    ],
+                    "transitions": [
+                        "RequestToClientToOperationsApproval"
+                    ]
+                },
+                {
+                    "actor": "Accounting",
+                    "uiSchema": "MainContent",
+                    "transitions": [],
+                    "operations": [
+                        "Save"
+                    ],
+                    "relations": []
+                },
+                {
+                    "actor": "ViewEndowment",
+                    "uiSchema": "MainContent",
+                    "operations": [
+                    ],
+                    "transitions": [
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "DeputyDirectorApproval",
+            "actors": [
+                {
+                    "actor": "DeputyDirector",
+                    "uiSchema": "MainContent",
+                    "operations": [
+                        "Save"
+                    ],
+                    "transitions": [
+                        "DeputyDirectorAprovalToOperationsDirectorApproval",
+                        "DeputyDirectorAprovalToRejected",
+                        "DeputyDirectorAprovalToSentToPayment"
+                    ]
+                },
+                {
+                    "actor": "Accounting",
+                    "uiSchema": "MainContent",
+                    "transitions": [],
+                    "operations": [
+                        "Save"
+                    ],
+                    "relations": []
+                },
+                {
+                    "actor": "ViewEndowment",
+                    "uiSchema": "MainContent",
+                    "operations": [
+                    ],
+                    "transitions": [
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "POCreation",
+            "actors": [
+                {
+                    "actor": "EndowmentAdministrator",
+                    "uiSchema": "MainContent",
+                    "operations": [],
+                    "transitions": [
+                        "FinishPOCreation"
+                    ]
+                },
+                {
+                    "actor": "ViewEndowment",
+                    "uiSchema": "MainContent",
+                    "operations": [
+                    ],
+                    "transitions": [
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "SentToPayment",
+            "actors": [
+                {
+                    "actor": "Operations",
+                    "uiSchema": "MainContent",
+                    "operations": [
+                        "Save"
+                    ],
+                    "transitions": [
+                    ]
+                },
+                {
+                    "actor": "ViewEndowment",
+                    "uiSchema": "MainContent",
+                    "operations": [
+                    ],
+                    "transitions": [
+                    ]
+                },
+                {
+                    "actor": "EndowmentAdministrator",
+                    "uiSchema": "MainContent",
+                    "operations": [],
+                    "transitions": [
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "PartiallyPaid",
+            "actors": [
+                {
+                    "actor": "Operations",
+                    "uiSchema": "MainContent",
+                    "operations": [
+                        "Save"
+                    ],
+                    "transitions": [
+                    ]
+                },
+                {
+                    "actor": "ViewEndowment",
+                    "uiSchema": "MainContent",
+                    "operations": [
+                    ],
+                    "transitions": [
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Paid",
+            "actors": [
+                {
+                    "actor": "Operations",
+                    "uiSchema": "MainContent",
+                    "operations": [
+                    ],
+                    "transitions": [
+                    ]
+                },
+                {
+                    "actor": "ViewEndowment",
+                    "uiSchema": "MainContent",
+                    "operations": [
+                    ],
+                    "transitions": [
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Cancelled",
+            "actors": [
+                {
+                    "actor": "ViewEndowment",
+                    "uiSchema": "MainContent",
+                    "operations": [
+                    ],
+                    "transitions": [
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Rejected",
+            "actors": [
+                {
+                    "actor": "ViewEndowment",
+                    "uiSchema": "MainContent",
+                    "operations": [
+                    ],
+                    "transitions": [
+                    ]
+                }
+            ]
+        }
+    ],
+    "components": [
+    ],
+    "transitions": {
+        "OperationsApproval_to_AwaitingInquiries": {
+            "transitionEffects": {
+                "enrich": [
+                    "[SetEndowmentAmounts]"
+                ]
+            }
+        },
+        "OperationsApproval_to_AwaitingApproval": {
+            "transitionEffects": {
+                "enrich": [
+                    "[SetEndowmentAmounts]"
+                ]
+            }
+        },
+        "OperationsApproval_to_AwaitingEndowmentDate": {
+            "transitionEffects": {
+                "enrich": [
+                    "[SetEndowmentAmounts]"
+                ]
+            }
+        },
+        "OperationsApproval_to_POCreation": {
+            "transitionEffects": {
+                "enrich": [
+                    "[SetEndowmentAmounts]"
+                ]
+            }
+        },
+        "OperationsDirectorApprovalToOperationsApproval": {
+            "transitionEffects": {
+                "enrich": [
+                    "[SetEndowmentAmounts]"
+                ]
+            }
+        },
+        "OperationsDirectorApprovalToDeputyDirectorAproval": {
+            "transitionEffects": {
+                "enrich": [
+                    "[SetEndowmentAmounts]"
+                ]
+            }
+        },
+        "OperationsDirectorApprovalToSentToPayment": {
+            "transitionEffects": {
+                "enrich": [
+                    "[SetEndowmentAmounts]"
+                ]
+            }
+        },
+        "DeputyDirectorAprovalToOperationsDirectorApproval": {
+            "transitionEffects": {
+                "enrich": [
+                    "[SetEndowmentAmounts]"
+                ]
+            }
+        },
+        "DeputyDirectorAprovalToSentToPayment": {
+            "transitionEffects": {
+                "enrich": [
+                    "[SetEndowmentAmounts]"
+                ]
+            }
+        },
+        "AwaitingInquiries_to_OperationsApproval": {
+            "transitionEffects": {
+                "enrich": [
+                    "[SetEndowmentAmounts]"
+                ]
+            }
+        },
+        "AwaitingApproval_to_OperationsApproval": {
+            "transitionEffects": {
+                "enrich": [
+                    "[SetEndowmentAmounts]"
+                ]
+            }
+        },
+        "AwaitingEndowmentDate_to_OperationsApproval": {
+            "transitionEffects": {
+                "enrich": [
+                    "[SetEndowmentAmounts]"
+                ]
+            }
+        }
+    },
+    "attachments": [
+        {
+            "attachmentType": "edowmentApplication",
+            "flow": "Incoming"
+        },
+        {
+            "attachmentType": "insuredAliveConfirmation",
+            "flow": "Incoming"
+        },
+        {
+            "attachmentType": "paymentRecipientPassport",
+            "flow": "Incoming"
+        },
+        {
+            "attachmentType": "guardianshipConfirmation",
+            "flow": "Incoming"
+        },
+        {
+            "attachmentType": "paymentPowerOfAttorney",
+            "flow": "Incoming"
+        },
+        {
+            "attachmentType": "rightToInheritance",
+            "flow": "Incoming"
+        },
+        {
+            "attachmentType": "heirsCertificate",
+            "flow": "Incoming"
+        },
+        {
+            "attachmentType": "proofOfRelationship",
+            "flow": "Incoming"
+        },
+        {
+            "attachmentType": "policyCopyWithAmendments",
+            "flow": "Incoming"
+        },
+        {
+            "attachmentType": "investimentPaymentAmendment",
+            "flow": "Incoming"
+        },
+        {
+            "attachmentType": "other",
+            "flow": "Incoming"
+        }
+    ],
+    "version": "1"
+}

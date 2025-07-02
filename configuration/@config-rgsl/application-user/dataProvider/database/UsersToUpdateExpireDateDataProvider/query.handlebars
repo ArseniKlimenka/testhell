@@ -1,0 +1,52 @@
+﻿with org_unit_top (organisation_unit_id, organisation_unit_code, top_parent_code)
+as
+(
+	select
+		oup.organisation_unit_id,
+		oup.organisation_unit_code,
+		oup.organisation_unit_code as top_parent_code
+	from org.organisation_unit oup
+	where oup.parent_id is null
+	union all
+	select
+		ou.organisation_unit_id,
+		ou.organisation_unit_code,
+		c.top_parent_code as top_parent_code
+	from
+		org.organisation_unit ou,
+		org_unit_top c
+	where ou.parent_id = c.organisation_unit_id
+)
+SELECT
+	AU.APPLICATION_USER_ID,
+	AU.EXTERNAL_ID,
+	cast(coalesce(aucExpDate.VALUE, '1970-01-01') as date) as EXPIRE_DATE,
+	cast(max(coalesce(aabsLatest.END_DATE, '2100-01-01')) as date) as AA_END_DATE
+from
+	org.APPLICATION_USER AU
+	inner join org.APPLICATION_USER_CLAIM AUCP on AUCP.APPLICATION_USER_ID = AU.APPLICATION_USER_ID and AUCP.CLAIM_TYPE = N'PartyCode'
+	left join org.SERVICE_PROVIDER SP on SP.PARTY_CODE = AUCP.VALUE
+	left join org_impl.SERVICE_PROVIDER_HUB SPH on SPH.SERVICE_PROVIDER_CODE = SP.SERVICE_PROVIDER_CODE
+	left join org_impl.SERVICE_PROVIDER_INFO_SAT_LATEST SPISL on SPISL.SERVICE_PROVIDER_INFO_HKEY = SPH.SERVICE_PROVIDER_HKEY
+	left join ORG_UNIT_TOP on ORG_UNIT_TOP.ORGANISATION_UNIT_CODE = SPISL.ORGANISATION_UNIT_CODE
+	left join org_impl.ORGANISATION_UNIT_HUB TOP_OUH on TOP_OUH.ORGANISATION_UNIT_CODE = ORG_UNIT_TOP.TOP_PARENT_CODE
+	left join org_impl.ORGANISATION_UNIT_INFO_SAT_LATEST TOP_OUISL on TOP_OUISL.ORGANISATION_UNIT_INFO_HKEY = TOP_OUH.ORGANISATION_UNIT_HKEY
+	left join org_impl.SERVICE_PROVIDER_HUB TOP_SPH on TOP_SPH.SERVICE_PROVIDER_CODE = TOP_OUISL.PARTNER_CODE
+	--
+	left join org.APPLICATION_USER_CLAIM aucExpDate on aucExpDate.APPLICATION_USER_ID = AU.APPLICATION_USER_ID and aucExpDate.CLAIM_TYPE = N'ExpireDate'
+	--
+	outer apply (
+		select top 1 aa.* from
+			pas_impl.AA_PARTICIPANT_LINK aapl
+			inner join pas_impl.AA_HUB aah on aah.AA_HKEY = aapl.AA_HKEY
+			inner join pas.AGENT_AGREEMENT aa on aa.AGENT_AGREEMENT_NUMBER = aah.AA_NUMBER
+		where 1=1
+			and (aa.VERSION_STATE is null or aa.VERSION_STATE = 'Applied')
+			and aapl.SERVICE_PROVIDER_HKEY = TOP_SPH.SERVICE_PROVIDER_HKEY
+		order by aa.SEQ_NUMBER desc
+	) aaLatest
+	left join pas_impl.AA_HUB aahLatest on aahLatest.AA_NUMBER = aaLatest.AGENT_AGREEMENT_NUMBER
+	left join pas_impl.AA_BASE_SAT_LATEST aabsLatest on aabsLatest.AA_BASE_HKEY = aahLatest.AA_HKEY
+where AU.EXTERNAL_ID is not null
+group by AU.APPLICATION_USER_ID, AU.EXTERNAL_ID, aucExpDate.VALUE
+having cast(coalesce(aucExpDate.VALUE, '1970-01-01') as date) != cast(coalesce(max(aabsLatest.END_DATE), '2100-01-01') as date)

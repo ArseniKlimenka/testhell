@@ -1,0 +1,108 @@
+{
+    "mainDataSource": "ImportStagingDataSource",
+    "aggregate": false,
+    "allowParallelExecution": false,
+    "allowMultipleTransactions": true,
+    "sinks": [
+        {
+            "name": "FindPolicy",
+            "fetch": {
+                "configuration": {
+                    "name": "ContractVersionsDataSource"
+                }
+            }
+        },
+        {
+            "name": "GetLatestProductConfigurationVersion",
+            "fetch": {
+                "configuration": {
+                    "name": "GetProductConfigurationDataSource"
+                }
+            }
+        },
+        {
+            "name": "GetNaturalPerson",
+            "fetch": {
+                "configuration": {
+                    "name": "GetPartyDataSource"
+                }
+            }
+        },
+        {
+            "name": "UpdateNaturalPerson",
+            "masterEntity": {
+                "configuration": {
+                    "name": "NaturalPerson",
+                    "version": "1"
+                },
+                "allowUpdating": true
+            }
+        },
+        {
+            "name": "GetUpdatedNaturalPerson",
+            "fetch": {
+                "configuration": {
+                    "name": "GetPartyDataSource"
+                }
+            }
+        },
+        {
+            "name": "GetActualCoolOffEndDate",
+            "class": {
+                "className": "Adacta.AdInsure.Organisation.API.WorkCalendar.Services.IWorkCalendarService, Adacta.AdInsure.Organisation.API",
+                "methodName": "GetAvailabilityForWorkCalendar"
+            }
+        },
+        {
+            "name": "CreateCancellation",
+            "documentRelation": {
+                "relation": {}
+            }
+        },
+        {
+            "name": "GetCancellation",
+            "fetch": {
+                "configuration": {
+                    "name": "ContractVersionsDataSource"
+                }
+            }
+        },
+        {
+            "name": "ActivateCancellation",
+            "documentTransition": {
+                "transition": {}
+            }
+        },
+        {
+            "name": "WriteSuccessStatus",
+            "database": {
+                "tables": [
+                    "BFX.IMPORT_RECORD_STATUS"
+                ]
+            }
+        }
+    ],
+    "completionSinks": [
+        {
+            "name": "FinishedImporting",
+            "documentTransition": {
+                "transition": {
+                    "transitionName": "FinishImporting",
+                    "configurationName": "ImportCreditLifeCoolOff",
+                    "configurationVersion": "1"
+                }
+            }
+        }
+    ],
+    "errorSinks": [
+        {
+            "name": "WriteErrorStatus",
+            "database": {
+                "tables": [
+                    "BFX.IMPORT_RECORD_STATUS"
+                ]
+            }
+        }
+    ],
+    "version": "1"
+}

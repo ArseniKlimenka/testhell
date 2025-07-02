@@ -1,0 +1,45 @@
+{
+    "mainDataSource": "GetNSODataSource",
+    "aggregate": false,
+    "allowParallelExecution": false,
+    "initialisationSinks": [
+        {
+            "name": "StartSetNSOEtlService",
+            "class": {
+                "className": "Adacta.AdInsure.RGSL.PAS.API.Shared.Contract.Services.ICollectiveContractService, Adacta.AdInsure.RGSL.PAS.API",
+                "methodName": "WriteTestLog"
+            }
+        }
+    ],
+    "sinks": [
+        {
+            "name": "UpdateSubAgent",
+            "masterEntity": {
+                "configuration": {
+                    "name": "Employee",
+                    "version": "1"
+                },
+                "allowUpdating": true
+            }
+        }
+    ],
+    "completionSinks": [
+        {
+            "name": "FinishSetNSOEtlService",
+            "class": {
+                "className": "Adacta.AdInsure.RGSL.PAS.API.Shared.Contract.Services.ICollectiveContractService, Adacta.AdInsure.RGSL.PAS.API",
+                "methodName": "WriteTestLog"
+            }
+        },
+        {
+            "name": "setSadNumbers",
+            "etlService": {
+                "configuration": {
+                    "name": "SetSadNumbersEtlService",
+                    "version": "1"
+                }
+            }
+        }
+    ],
+    "version": "1"
+}

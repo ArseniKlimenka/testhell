@@ -1,0 +1,30 @@
+{
+    "entityType": "UniversalDocument",
+    "condition": {
+        "events": [
+            "Created",
+            "Updated",
+            "StatusChanged"
+        ],
+        "configuration": {
+            "names": [],
+            "dimensions": {
+                "universalDocumentType": [
+                    "LifeInsuranceStrategyInstruments"
+                ]
+            }
+        }
+    },
+    "sinks": [
+        {
+            "name": "WriteStrategyInstruments",
+            "database": {
+                "tables": [
+                    "PAS_IMPL.STRATEGY_INSTRUMENTS_HUB",
+                    "PAS_IMPL.STRATEGY_INSTRUMENTS_SAT"
+                ]
+            }
+        }
+    ],
+    "version": "1"
+}

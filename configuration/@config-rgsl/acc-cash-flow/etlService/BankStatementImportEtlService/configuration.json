@@ -1,0 +1,58 @@
+{
+    "mainDataSource": "ImportStagingDataSource",
+    "allowMultipleTransactions": true,
+    "sinks": [
+        {
+            "name": "ImportRequestRGSL",
+            "class": {
+                "className": "Adacta.AdInsure.RGSL.Accounting.API.Shared.CashFlow.BankStatement.Services.IBankStatementServiceAppRGSL, Adacta.AdInsure.RGSL.Accounting.API",
+                "methodName": "Create"
+            }
+        },
+        {
+            "name": "RefreshIsRegistry",
+            "class": {
+                "className": "Adacta.AdInsure.RGSL.Accounting.API.Shared.CashFlow.BankStatement.Services.IBankStatementServiceAppRGSL, Adacta.AdInsure.RGSL.Accounting.API",
+                "methodName": "RefreshIsRegistry"
+            }
+        },
+        {
+            "name": "AutoAllocateRGSL",
+            "class": {
+                "className": "Adacta.AdInsure.RGSL.Accounting.API.Shared.CashFlow.Allocation.Services.IAutoAllocationServiceAppRGSL, Adacta.AdInsure.RGSL.Accounting.API",
+                "methodName": "AutoAllocate"
+            }
+        },
+        {
+            "name": "WriteSuccessStatus",
+            "database": {
+                "tables": [
+                    "BFX.IMPORT_RECORD_STATUS"
+                ]
+            }
+        }
+    ],
+    "completionSinks": [
+        {
+            "name": "FinishedImporting",
+            "documentTransition": {
+                "transition": {
+                    "transitionName": "FinishImporting",
+                    "configurationName": "BankStatementImport",
+                    "configurationVersion": "1"
+                }
+            }
+        }
+    ],
+    "errorSinks": [
+        {
+            "name": "WriteErrorStatus",
+            "database": {
+                "tables": [
+                    "BFX.IMPORT_RECORD_STATUS"
+                ]
+            }
+        }
+    ],
+    "version": "1"
+}

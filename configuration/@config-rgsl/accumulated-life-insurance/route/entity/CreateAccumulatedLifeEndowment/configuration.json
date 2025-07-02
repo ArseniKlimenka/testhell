@@ -1,0 +1,38 @@
+{
+    "entityType": "Contract",
+    "condition": {
+        "events": [
+            "Created",
+            "StatusChanged"
+        ],
+        "configuration": {
+            "names": [
+                "AccumulatedLifeInsurancePolicy"
+            ]
+        },
+        "documentStates": [
+            "Completed"
+        ]
+    },
+    "sinks": [
+        {
+            "name": "GetRisks",
+            "fetch": {
+                "configuration": {
+                    "name": "RiskContractDataSource"
+                }
+            }
+        },
+        {
+            "name": "CreateEndowment",
+            "documentRelation": {
+                "relation": {
+                    "relationName": "CreateEndowment",
+                    "configurationName": "AccumulatedLifeInsurancePolicy",
+                    "configurationVersion": "1"
+                }
+            }
+        }
+    ],
+    "version": "1"
+}

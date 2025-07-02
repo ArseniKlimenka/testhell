@@ -1,0 +1,152 @@
+{
+    "id": "CreateContractViewUiSchema",
+    "type": "GridLayout",
+    "numberOfColumns": 4,
+    "elements": [
+        {
+            "type": "Component",
+            "name": "OverviewHeader",
+            "value": {
+                "$ref": "#"
+            }
+        },
+        {
+            "type": "Input",
+            "numberOfRows": 12,
+            "label": "Request",
+            "enableResize": true,
+            "value": {
+                "$ref": "#/properties/Body/properties/request"
+            },
+            "control": "TextArea"
+        },
+        {
+            "type": "Group",
+            "width": 4,
+            "elements": [
+                {
+                    "type": "Group",
+                    "width": 3,
+                    "stackContent": "Left",
+                    "elements": [
+                        {
+                            "type": "Button",
+                            "value": {
+                                "$ref": "#"
+                            },
+                            "onClick": [
+                                {
+                                    "commandType": "executeAction",
+                                    "actionName": "createContract"
+                                }
+                            ],
+                            "label": "Create"
+                        }
+                    ]
+                },
+                {
+                    "type": "Group",
+                    "stackContent": "Right",
+                    "width": 1,
+                    "elements": [
+                        {
+                            "type": "Button",
+                            "label": "Clear",
+                            "backgroundColor": "Primary",
+                            "fill": "Outline",
+                            "labelColor": "Primary",
+                            "value": {
+                                "$ref": "#"
+                            },
+                            "onClick": [
+                                {
+                                    "commandType": "executeAction",
+                                    "actionName": "clearRequest"
+                                }
+                            ],
+                            "icon": {
+                                "name": "Times",
+                                "color": "Primary",
+                                "size": "Small"
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "DataGrid",
+            "label": "ErrorsList",
+            "labelType": "H1",
+            "value": {
+                "$ref": "#/properties/Body/properties/validationErrors"
+            },
+            "mode": "Array",
+            "height": "None",
+            "columns": [
+                {
+                    "title": "Code",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/code"
+                        }
+                    },
+                    "name": "code"
+                },
+                {
+                    "title": "Message",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "allowMultiLine": true,
+                        "value": {
+                            "$ref": "#/properties/message"
+                        }
+                    },
+                    "name": "message"
+                },
+                {
+                    "title": "DataPath",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/dataPath"
+                        }
+                    },
+                    "name": "dataPath"
+                }
+            ]
+        },
+        {
+            "type": "Link",
+            "label": "Link to contract",
+            "targetType": "Entity",
+            "value": {
+                "mapping": "linkToContractOverview",
+                "$ref": "#"
+            },
+            "width": 1,
+            "openInNewTab": true,
+            "content": {
+                "text": {
+                    "type": "OutputText",
+                    "value": {
+                        "$ref": "#/properties/Body/properties/createdPolicyNumber"
+                    }
+                }
+            },
+            "rule": {
+                "effect": "SHOW",
+                "condition": {
+                    "type": "FUNC",
+                    "ruleFunction": "showLink",
+                    "value": [
+                        {
+                            "$ref": "#"
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}

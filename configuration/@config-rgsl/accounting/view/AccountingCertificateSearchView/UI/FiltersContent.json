@@ -1,0 +1,181 @@
+{
+    "type": "Group",
+    "elements": [
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "Input",
+                    "label": "Accounting certificate number",
+                    "value": {
+                        "$ref": "#/properties/request/properties/data/properties/criteria/properties/accountingCertificateNumber"
+                    },
+                    "width": 1
+                },
+                {
+                    "type": "Input",
+                    "label": "Accounting state code",
+                    "width": 1,
+                    "value": {
+                        "$ref": "#/properties/request/properties/data/properties/criteria/properties/accountingCertificateState"
+                    }
+                },
+                {
+                    "type": "Input",
+                    "control": "DateRange",
+                    "dateFrom": {
+                        "type": "Input",
+                        "label": "Request date from",
+                        "width": 1,
+                        "value": {
+                            "$ref": "#/properties/request/properties/data/properties/criteria/properties/requestDateFrom"
+                        },
+                        "control": "DatetimePicker"
+                    },
+                    "dateTo": {
+                        "type": "Input",
+                        "label": "Request date to",
+                        "width": 1,
+                        "value": {
+                            "$ref": "#/properties/request/properties/data/properties/criteria/properties/requestDateTo"
+                        },
+                        "control": "DatetimePicker"
+                    },
+                    "width": 2
+                }
+            ]
+        },
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "Input",
+                    "label": "contractNumber",
+                    "value": {
+                        "$ref": "#/properties/request/properties/data/properties/criteria/properties/contractNumber"
+                    },
+                    "width": 1
+                },
+                {
+                    "type": "Lookup",
+                    "label": "holder",
+                    "value": {
+                        "$ref": "#"
+                    },
+                    "width": 1,
+                    "dialogButton": {},
+                    "clearButton": {
+                        "clearAction": "holderClearAction"
+                    },
+                    "dialog": {
+                        "viewReference": {
+                            "configurationCodeName": "GeneralPartySearchView",
+                            "configurationVersion": "1",
+                            "configurationConceptType": "SearchView"
+                        }
+                    },
+                    "onSelected": "holderOnSelected",
+                    "selectedDisplayValueTemplate": "{{expr resultData.fullName}}"
+                },
+                {
+                    "type": "Lookup",
+                    "label": "insured",
+                    "value": {
+                        "$ref": "#"
+                    },
+                    "width": 1,
+                    "dialogButton": {},
+                    "clearButton": {
+                        "clearAction": "insuredClearAction"
+                    },
+                    "dialog": {
+                        "viewReference": {
+                            "configurationCodeName": "GeneralPartySearchView",
+                            "configurationVersion": "1",
+                            "configurationConceptType": "SearchView"
+                        }
+                    },
+                    "onSelected": "insuredOnSelected",
+                    "selectedDisplayValueTemplate": "{{expr resultData.fullName}}"
+                },
+                {
+                    "type": "Input",
+                    "label": "isInsurerSendDataToFns",
+                    "value": {
+                        "$ref": "#/properties/request/properties/data/properties/criteria/properties/isInsurerSendDataToFns"
+                    },
+                    "width": 1
+                }
+            ]
+        },
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "Input",
+                    "label": "Applicant full name",
+                    "value": {
+                        "$ref": "#/properties/request/properties/data/properties/criteria/properties/applicantFullName"
+                    },
+                    "width": 1
+                },
+                {
+                    "type": "Input",
+                    "label": "Accounting year",
+                    "width": 1,
+                    "value": {
+                        "$ref": "#/properties/request/properties/data/properties/criteria/properties/accountingYear"
+                    }
+                },
+                {
+                    "type": "Input",
+                    "label": "Correction number",
+                    "value": {
+                        "$ref": "#/properties/request/properties/data/properties/criteria/properties/correctionNumber"
+                    },
+                    "width": 1
+                },
+                {
+                    "type": "Input",
+                    "label": "Certificate issue date",
+                    "width": 1,
+                    "value": {
+                        "$ref": "#/properties/request/properties/data/properties/criteria/properties/certificateIssueDate"
+                    },
+                    "control": "DatetimePicker"
+                }
+            ]
+        },
+        {
+            "type": "Group",
+            "stackContent": "Right",
+            "elements": [
+                {
+                    "type": "Dropdown",
+                    "label": "Tax certificate format",
+                    "value": {
+                        "$ref": "#/properties/request/properties/data/properties/criteria/properties/taxCertificateFormat"
+                    },
+                    "width": 1
+                },
+                {
+                    "type": "Input",
+                    "label": "Income source",
+                    "value": {
+                        "$ref": "#/properties/request/properties/data/properties/criteria/properties/incomeSource"
+                    },
+                    "width": 1
+                },
+                {
+                    "type": "Input",
+                    "label": "Certificate create date",
+                    "width": 1,
+                    "value": {
+                        "$ref": "#/properties/request/properties/data/properties/criteria/properties/certificateCreateDate"
+                    },
+                    "control": "DatetimePicker"
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,39 @@
+{
+    "entityType": "Contract",
+    "condition": {
+        "events": [
+            "StatusChanged"
+        ],
+        "configuration": {
+            "names": [
+                "CollectiveLifeInsurancePolicy"
+            ],
+            "dimensions": {}
+        },
+        "documentStates": [
+            "InquiryCancelling"
+        ]
+    },
+    "sinks": [
+        {
+            "name": "CollectiveLifeInsuranceCancelInquiryEtlServiceSink",
+            "etlService": {
+                "configuration": {
+                    "name": "CollectiveLifeInsuranceCancelInquiryEtlService",
+                    "version": "1"
+                }
+            }
+        },
+        {
+            "name": "TransitionCollectiveLifeInsurancePolicyToDraftState",
+            "documentTransition": {
+                "transition": {
+                    "configurationName": "CollectiveLifeInsurancePolicy",
+                    "configurationVersion": "1"
+                }
+            }
+        }
+    ],
+    "errorSinks": [],
+    "version": "1"
+}

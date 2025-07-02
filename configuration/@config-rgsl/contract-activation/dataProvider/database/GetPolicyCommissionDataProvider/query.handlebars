@@ -1,0 +1,14 @@
+﻿select
+	polh.CONTRACT_NUMBER,
+	pcs.OBJECT_CODE,
+	pcs.ITEM_CODE,
+	pcs.PERIOD_NUMBER,
+	pcs.MANUAL_RATE
+from
+	pas_impl.POLICY_HUB polh
+	inner join acc_impl.POSTED_PAYMENT_PLAN_SAT_LATEST ppps on ppps.POSTED_PAYMENT_PLAN_HKEY = polh.POLICY_HKEY
+	inner join pas_impl.POLICY_COMMISSION_LINK pcl on pcl.POLICY_HKEY = polh.POLICY_HKEY
+	inner join pas_impl.POLICY_COMMISSION_SAT_LATEST pcs on pcs.POLICY_COMMISSION_HKEY = pcl.POLICY_COMMISSION_HKEY
+where 1=1
+	and pcs.START_DATE <= ppps.POSTED_UNTIL_POSTING_DATE
+	and polh.CONTRACT_NUMBER in (@contractNumbers)

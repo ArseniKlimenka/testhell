@@ -1,0 +1,30 @@
+{
+    "processType": "DeduplicationDocument",
+    "actors": [
+        "Administrator",
+        "GeneralBackOffice"
+    ],
+    "initialState": "Draft",
+    "states": [
+        {
+            "name": "Draft",
+            "operations": [
+                {
+                    "name": "Save"
+                }
+            ]
+        },
+        {
+            "name": "Issued",
+            "operations": []
+        }
+    ],
+    "transitions": [
+        {
+            "name": "Draft_to_Issued",
+            "from": "Draft",
+            "to": "Issued",
+            "whenBlocked": "Hide"
+        }
+    ]
+}

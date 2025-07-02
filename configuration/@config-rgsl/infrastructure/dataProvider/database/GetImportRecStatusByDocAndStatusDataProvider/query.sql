@@ -1,0 +1,17 @@
+﻿select *
+from
+(
+	select TOP 1000000
+		IMPORT_DOCUMENT_ID,
+		SOURCE_ID,
+		RECORD_KEY,
+		STATUS,
+		ERRORS,
+		RESULT_ENTITY_ID,
+		RESULT_SUMMARY
+	from
+		BFX.IMPORT_RECORD_STATUS
+	where
+		IMPORT_DOCUMENT_ID = @importDocumentId
+		and STATUS = @status
+) t

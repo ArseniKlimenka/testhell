@@ -1,0 +1,71 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+        "contractNumber": {
+            "type": "string"
+        },
+        "amendmentNumber": {
+            "type": "string"
+        },
+        "amendmentConfName": {
+            "type": "string"
+        },   
+        "amendmentIssueDate": {
+            "type": "string",
+            "aiFormat": "date"
+        },
+        "cancellationReason": {
+            "type": "string"
+        },
+        "policyCurrency": {
+            "type": "string"
+        },
+        "recipientPartyCode": {
+            "type": "string"
+        },
+        "recipientAmountDocCurrency": {
+            "type": "number"
+        },
+        "recipientAmountRubCurrency": {
+            "type": "number"
+        },
+        "recipientPitAmountDocCurrency": {
+            "type": "number"
+        },
+        "recipientPitAmountRubCurrency": {
+            "type": "number"
+        },
+        "recipientAmountPercentage": {
+            "type": "number"
+        },
+        "paymentLines": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                    "paymentType": {
+                        "type": "string"
+                    },
+                    "paymentSum": {
+                        "type": "string"
+                    },
+                    "paymentSumInRub": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "fixedExchangeRate": {
+            "type": "number"
+        },
+        "useFixedExchangeRate": {
+            "type": "boolean"
+        },
+        "paymentBankAccountNumber": {
+            "type": "string"
+        }
+    }
+}

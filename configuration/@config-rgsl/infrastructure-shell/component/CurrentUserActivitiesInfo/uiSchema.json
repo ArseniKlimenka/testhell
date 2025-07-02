@@ -1,0 +1,37 @@
+{
+    "type": "Group",
+    "formProperties": {
+        "events": {
+            "onLoad": "CurrentUserActivitiesInfoOnLoad"
+        }
+    },
+    "elements": [
+        {
+            "type": "OutputText",
+            "hideLabel": true,
+            "textProperties": [
+                "bold"
+            ],
+            "textStyle": {
+                "textSize": "Large"
+            },
+            "template": "{{expr part1}}{{#style 'color-danger'}}{{expr part2}}{{/style}}{{expr part3}}",
+            "value": {
+                "mapping": "ActivitiesInfoTextMapping",
+                "$ref": "#"
+            },
+            "rule": {
+                "effect": "SHOW",
+                "condition": {
+                    "type": "FUNC",
+                    "ruleFunction": "ShowActivitiesInfoText",
+                    "value": [
+                        {
+                            "$ref": "#"
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}

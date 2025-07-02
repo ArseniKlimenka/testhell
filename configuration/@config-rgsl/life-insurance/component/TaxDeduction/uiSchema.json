@@ -1,0 +1,225 @@
+{
+    "type": "Tab",
+    "elementId": "tabTaxDeduction",
+    "title": "taxDeduction",
+    "elements": [
+        {
+            "type": "Section",
+            "label": "taxDeductionSection",
+            "scope": "taxDeduction",
+            "width": 12,
+            "elements": [
+                {
+                    "type": "Group",
+                    "width": 12,
+                    "elements": [
+                        {
+                            "type": "Group",
+                            "elements": [
+                                {
+                                    "type": "DataGrid",
+                                    "elementId": "taxDeductionTable",
+                                    "mode": "Array",
+                                    "actions": [
+                                        "Edit"
+                                    ],
+                                    "edit": {
+                                        "mode": "Detached"
+                                    },
+                                    "height": "None",
+                                    "value": {
+                                        "$ref": "#/properties/Body/properties/taxDeductionItems"
+                                    },
+                                    "columns": [
+                                        {
+                                            "sortable": false,
+                                            "title": "taxDeductionYear",
+                                            "cellContent": {
+                                                "type": "OutputText",
+                                                "defaultValue": "",
+                                                "value": {
+                                                    "$ref": "#/properties/year"
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "sortable": false,
+                                            "title": "hasTaxDeductionCertificate",
+                                            "cellContent": {
+                                                "type": "OutputText",
+                                                "defaultValue": "",
+                                                "value": {
+                                                    "$ref": "#/properties/hasCertificate"
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "sortable": false,
+                                            "title": "isTaxDeductionClaimed",
+                                            "cellContent": {
+                                                "type": "OutputText",
+                                                "defaultValue": "",
+                                                "value": {
+                                                    "$ref": "#/properties/isClaimed"
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "sortable": false,
+                                            "title": "taxDeductionAmount",
+                                            "cellContent": {
+                                                "type": "OutputText",
+                                                "defaultValue": "",
+                                                "value": {
+                                                    "$ref": "#/properties/amount"
+                                                }
+                                            }
+                                        }
+                                    ],
+                                    "detailsTemplates": {
+                                        "edit": {
+                                            "content": {
+                                                "type": "Group",
+                                                "elements": [
+                                                    {
+                                                        "type": "GridLayout",
+                                                        "fillAvailableSpace": true,
+                                                        "numberOfColumns": 12,
+                                                        "elements": [
+                                                            {
+                                                                "type": "Group",
+                                                                "elements": [
+                                                                    {
+                                                                        "type": "Input",
+                                                                        "label": "hasTaxDeductionCertificate",
+                                                                        "value": {
+                                                                            "$ref": "#/properties/hasCertificate"
+                                                                        },
+                                                                        "width": 3,
+                                                                        "onValueChanged": [
+                                                                            {
+                                                                                "commandType": "executeAction",
+                                                                                "actionName": "onHasTaxDeductionCertificateChanged"
+                                                                            }
+                                                                        ]
+                                                                    },
+                                                                    {
+                                                                        "type": "Dropdown",
+                                                                        "filter": "isTaxDeductionClaimedFilter",
+                                                                        "label": "isTaxDeductionClaimed",
+                                                                        "value": {
+                                                                            "$ref": "#/properties/isClaimed"
+                                                                        },
+                                                                        "width": 3,
+                                                                        "onValueChanged": [
+                                                                            {
+                                                                                "commandType": "executeAction",
+                                                                                "actionName": "onIsTaxDeductionClaimedChanged"
+                                                                            }
+                                                                        ]
+                                                                    },
+                                                                    {
+                                                                        "type": "Input",
+                                                                        "label": "taxDeductionAmount",
+                                                                        "value": {
+                                                                            "$ref": "#/properties/amount"
+                                                                        },
+                                                                        "width": 3,
+                                                                        "rule": {
+                                                                            "effect": "ENABLE_INITIAL",
+                                                                            "condition": {
+                                                                                "type": "FUNC",
+                                                                                "ruleFunction": "enableTaxDeductionAmount",
+                                                                                "value": [
+                                                                                    {
+                                                                                        "$ref": "#"
+                                                                                    }
+                                                                                ]
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                ]
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        },
+                                        "view": {
+                                            "content": {
+                                                "type": "Group",
+                                                "elements": [
+                                                    {
+                                                        "type": "GridLayout",
+                                                        "fillAvailableSpace": true,
+                                                        "numberOfColumns": 12,
+                                                        "elements": [
+                                                            {
+                                                                "type": "Group",
+                                                                "elements": [
+                                                                    {
+                                                                        "type": "Input",
+                                                                        "label": "taxDeductionYear",
+                                                                        "value": {
+                                                                            "$ref": "#/properties/year"
+                                                                        },
+                                                                        "control": "Dropdown",
+                                                                        "width": 3,
+                                                                        "readOnly": true
+                                                                    },
+                                                                    {
+                                                                        "type": "Input",
+                                                                        "label": "hasTaxDeductionCertificate",
+                                                                        "value": {
+                                                                            "$ref": "#/properties/hasCertificate"
+                                                                        },
+                                                                        "width": 3,
+                                                                        "readOnly": true
+                                                                    },
+                                                                    {
+                                                                        "type": "Input",
+                                                                        "label": "isTaxDeductionClaimed",
+                                                                        "value": {
+                                                                            "$ref": "#/properties/isClaimed"
+                                                                        },
+                                                                        "width": 3,
+                                                                        "readOnly": true
+                                                                    },
+                                                                    {
+                                                                        "type": "Input",
+                                                                        "label": "taxDeductionAmount",
+                                                                        "value": {
+                                                                            "$ref": "#/properties/amount"
+                                                                        },
+                                                                        "width": 3,
+                                                                        "readOnly": true
+                                                                    }
+                                                                ]
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    },
+                                    "rule": {
+                                        "effect": "ENABLE_INITIAL",
+                                        "condition": {
+                                            "type": "FUNC",
+                                            "ruleFunction": "enableTaxDeductionTable",
+                                            "value": [
+                                                {
+                                                    "$ref": "#"
+                                                }
+                                            ]
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

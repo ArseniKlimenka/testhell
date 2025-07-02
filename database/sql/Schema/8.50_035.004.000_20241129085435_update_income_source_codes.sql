@@ -1,0 +1,9 @@
+drop table acc_impl.CT_BSI_REGISTRY_SOURCE
+go
+
+insert into acc_impl.CT_BSI_SOURCE_ACCOUNT(ACCOUNT_NO, INCOME_SOURCE_ID, DESCRIPTION)
+values
+('40701810400000000396', 92, N'1C: Райффайзенбанк'),
+('40701810480310000075', 78, N'1С: АкБарс'),
+('40701810587360000126', 91, N'1С: Росбанк')
+go

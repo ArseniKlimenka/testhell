@@ -1,0 +1,154 @@
+{
+    "id": "RelatedFundAssetsDocumentsViewUiSchema",
+    "type": "Group",
+    "elements": [
+        {
+            "type": "GridLayout",
+            "numberOfColumns": 4,
+            "elements": [
+                {
+                    "type": "Group",
+                    "elements": [
+                        {
+                            "type": "DataGrid",
+                            "orderBy": "Description",
+                            "mode": "DataSource",
+                            "header": {
+                                "showReloadButton": true,
+                                "showNumberOfResults": true
+                            },
+                            "pagination": {
+                                "mode": "Regular",
+                                "pageSizes": [
+                                    5,
+                                    10,
+                                    15
+                                ]
+                            },
+                            "selection": {
+                                "mode": "None"
+                            },
+                            "height": "None",
+                            "columns": [
+                                {
+                                    "sortable": true,
+                                    "title": "assetType",
+                                    "name": "assetType",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "value": {
+                                            "$ref": "#/properties/resultData/properties/assetType"
+                                        }
+                                    }
+                                },
+                                {
+                                    "sortable": true,
+                                    "title": "assetName",
+                                    "name": "assetName",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "value": {
+                                            "$ref": "#/properties/resultData/properties/assetName"
+                                        }
+                                    }
+                                },
+                                {
+                                    "sortable": true,
+                                    "title": "isin",
+                                    "name": "isin",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "value": {
+                                            "$ref": "#/properties/resultData/properties/isin"
+                                        }
+                                    }
+                                },
+                                {
+                                    "sortable": true,
+                                    "title": "assetCurrentShare",
+                                    "name": "assetCurrentShare",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "template": "{{expr assetCurrentShare 'p:2'}}",
+                                        "value": {
+                                            "$ref": "#/properties/resultData"
+                                        }
+                                    }
+                                },
+                                {
+                                    "sortable": true,
+                                    "title": "assetPurchasePriceAvg",
+                                    "name": "assetPurchasePriceAvg",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "template": "{{expr assetPurchasePriceAvg 'n:5:true'}}",
+                                        "value": {
+                                            "$ref": "#/properties/resultData"
+                                        }
+                                    }
+                                },
+                                {
+                                    "sortable": true,
+                                    "title": "stockPurchasedNumber",
+                                    "name": "stockPurchasedNumber",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "template": "{{expr stockPurchasedNumber 'n:0:false'}}",
+                                        "value": {
+                                            "$ref": "#/properties/resultData"
+                                        }
+                                    }
+                                },
+                                {
+                                    "sortable": true,
+                                    "title": "assetAmountOnPurchaseTime",
+                                    "name": "assetAmountOnPurchaseTime",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "value": {
+                                            "$ref": "#/properties/resultData/properties/assetAmountOnPurchaseTime"
+                                        }
+                                    }
+                                },
+                                {
+                                    "sortable": true,
+                                    "title": "assetPriceOnGenerationReportDate",
+                                    "name": "assetPriceOnGenerationReportDate",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "value": {
+                                            "$ref": "#/properties/resultData/properties/assetPriceOnGenerationReportDate"
+                                        }
+                                    }
+                                },
+                                {
+                                    "sortable": true,
+                                    "title": "assetsAmountOnGenerationReportDate",
+                                    "name": "assetsAmountOnGenerationReportDate",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "value": {
+                                            "$ref": "#/properties/resultData/properties/assetsAmountOnGenerationReportDate"
+                                        }
+                                    }
+                                },
+                                {
+                                    "sortable": true,
+                                    "title": "couponRate",
+                                    "name": "couponRate",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "template": "{{expr couponRate 'p:2'}}",
+                                        "value": {
+                                            "$ref": "#/properties/resultData"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

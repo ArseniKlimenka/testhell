@@ -1,0 +1,183 @@
+{
+    "id": "BankStatementImportDraft",
+    "type": "GridLayout",
+    "numberOfColumns": 4,
+    "formProperties": {
+        "events": {
+            "onLoad": "onLoadFileLoadAction",
+            "beforeSave": "onLoadFileSaveAction"
+        }
+    },
+    "elements": [
+        {
+            "type": "Component",
+            "name": "DocumentHeader",
+            "value": {
+                "$ref": "#"
+            }
+        },
+        {
+            "type": "Group",
+            "width": 4,
+            "elements": [
+                {
+                    "type": "GridLayout",
+                    "numberOfColumns": 4,
+                    "fillAvailableSpace": true,
+                    "width": 3,
+                    "elements": [
+                        {
+                            "type": "Group",
+                            "elements": [
+                                {
+                                    "type": "TabLayout",
+                                    "options": {
+                                        "fixedPosition": false,
+                                        "scrollableTabs": true
+                                    },
+                                    "elements": [
+                                        {
+                                            "type": "Tab",
+                                            "elementId": "bankStatementTab",
+                                            "elements": [
+                                                {
+                                                    "type": "Section",
+                                                    "label": "ImportInfo",
+                                                    "elements": [
+                                                        {
+                                                            "type": "Group",
+                                                            "elements": [
+                                                                {
+                                                                    "type": "FileUpload",
+                                                                    "label": "FileSelection",
+                                                                    "description": "FileSelectionDescription",
+                                                                    "value": {
+                                                                        "$ref": "#/properties/Body/properties/file"
+                                                                    },
+                                                                    "width": 1
+                                                                },
+                                                                {
+                                                                    "type": "Input",
+                                                                    "label": "SourceFileFormat",
+                                                                    "control": "Dropdown",
+                                                                    "enableClear": false,
+                                                                    "source": {
+                                                                        "valueFieldName": "fileFormat",
+                                                                        "displayFieldName": "formatName",
+                                                                        "reloadOnOpen": true,
+                                                                        "array": {
+                                                                            "$ref": "#/properties/ClientViewModel/sourceFileFormatData"
+                                                                        }
+                                                                    },
+                                                                    "value": {
+                                                                        "$ref": "#/properties/ClientViewModel/properties/sourceFileFormat"
+                                                                    },
+                                                                    "width": 1
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "sectionLevel": 1
+                                                }
+                                            ],
+                                            "title": "Upload data"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "SideContentLayout",
+                    "fixedPosition": true,
+                    "width": 1,
+                    "elements": [
+                        {
+                            "type": "GridLayout",
+                            "numberOfColumns": 2,
+                            "elements": [
+                                {
+                                    "type": "TabLayout",
+                                    "elements": [
+                                        {
+                                            "type": "Tab",
+                                            "icon": {
+                                                "name": "Bars",
+                                                "size": "Large"
+                                            },
+                                            "elements": [
+                                                {
+                                                    "type": "OutputText",
+                                                    "label": "Bank statement document number",
+                                                    "skipTranslate": true,
+                                                    "value": {
+                                                        "$ref": "#/properties/Number"
+                                                    },
+                                                    "width": 2
+                                                },
+                                                {
+                                                    "type": "OutputText",
+                                                    "label": "Date",
+                                                    "skipTranslate": true,
+                                                    "template": "{{expr date 'd'}}",
+                                                    "value": {
+                                                        "$ref": "#/properties/Body/properties/summary/properties"
+                                                    },
+                                                    "width": 2
+                                                }
+                                            ],
+                                            "elementId": "tab-Summary"
+                                        },
+                                        {
+                                            "type": "Tab",
+                                            "icon": {
+                                                "name": "Clipboard-Check",
+                                                "size": "Large"
+                                            },
+                                            "elements": [
+                                                {
+                                                    "type": "Component",
+                                                    "name": "AuditInfo",
+                                                    "value": {
+                                                        "$ref": "#/properties/AuditInfo"
+                                                    }
+                                                }
+                                            ],
+                                            "elementId": "tab-Audit Info"
+                                        },
+                                        {
+                                            "type": "Tab",
+                                            "icon": {
+                                                "name": "Bell",
+                                                "size": "Large"
+                                            },
+                                            "tabType": "error",
+                                            "elements": [
+                                                {
+                                                    "type": "ValidationSummary",
+                                                    "elementId": "RequiredPropertiesValidations"
+                                                }
+                                            ],
+                                            "elementId": "tab-Notifications",
+                                            "additionalInfo": {
+                                                "display": "ValidationErrorsCount"
+                                            }
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "Component",
+            "name": "DocumentFooter",
+            "value": {
+                "$ref": "#"
+            }
+        }
+    ]
+}

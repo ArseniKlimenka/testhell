@@ -1,0 +1,33 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema",
+    "type": "object",
+    "properties": {
+        "claimNumber": {
+            "type": "string"
+        },
+        "file": {
+            "type": "object",
+            "properties": {
+                "fileId": {
+                    "type": "string"
+                },
+                "fileName": {
+                    "type": "string",
+                    "aiTitle": "fileName"
+                }
+            },
+            "required": [
+                "fileId",
+                "fileName"
+            ],
+            "additionalProperties": false
+        },
+        "template": {
+            "$ref": "component:FileUpload"
+        }
+    },
+    "required": [
+        "file"
+    ],
+    "additionalProperties": false
+}

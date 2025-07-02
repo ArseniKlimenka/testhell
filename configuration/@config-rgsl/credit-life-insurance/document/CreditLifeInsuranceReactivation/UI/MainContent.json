@@ -1,0 +1,88 @@
+{
+    "id": "MainContent",
+    "type": "Group",
+    "formProperties": {
+        "events": {
+            "onLoad": "LifeAmendmentReactivationOnLoad"
+        }
+    },
+    "elements": [
+        {
+            "type": "TabLayout",
+            "elementId": "TabLayout",
+            "options": {
+                "fixedPosition": true,
+                "scrollableTabs": false,
+                "buttonsForSwitchingTabs": true
+            },
+            "elements": [
+                {
+                    "type": "Tab",
+                    "elementId": "tabAmendmentConditions",
+                    "title": "tabAmendmentConditions",
+                    "elements": [
+                        {
+                            "type": "Component",
+                            "metadata": {
+                                "autogenerate": true
+                            },
+                            "name": "ReactivationAmendmentConditions",
+                            "value": {
+                                "$ref": "#/properties/Body/properties/basicAmendmentConditions"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "type": "Tab",
+                    "elementId": "tabHistory",
+                    "title": "History",
+                    "elements": [
+                        {
+                            "type": "Component",
+                            "metadata": {
+                                "autogenerate": true
+                            },
+                            "name": "DocumentActivityHistory",
+                            "value": {
+                                "$ref": "#"
+                            }
+                        },
+                        {
+                            "type": "Component",
+                            "metadata": {
+                                "autogenerate": true
+                            },
+                            "name": "DocumentStateHistory",
+                            "value": {
+                                "$ref": "#"
+                            }
+                        },
+                        {
+                            "type": "Component",
+                            "metadata": {
+                                "autogenerate": true
+                            },
+                            "name": "RelatedDocuments",
+                            "value": {
+                                "$ref": "#"
+                            }
+                        }
+                    ],
+                    "rule": {
+                        "effect": "SHOW",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "tabHistoryVisibility",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    }
+                }
+            ]
+        }
+    ]
+}

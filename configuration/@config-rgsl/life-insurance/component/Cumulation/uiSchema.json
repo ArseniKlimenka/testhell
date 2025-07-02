@@ -1,0 +1,81 @@
+{
+    "type": "Tab",
+    "elementId": "tabCumulation",
+    "title": "Cumulation",
+    "elements": [
+        {
+            "type": "Section",
+            "sectionLevel": 1,
+            "label": "CumulationInsuredPerson",
+            "elements": [
+                {
+                    "type": "InlineView",
+                    "showContainerActions": false,
+                    "views": [
+                        {
+                            "viewReference": {
+                                "configurationCodeName": "CumulationView",
+                                "configurationConceptType": "SearchView",
+                                "configurationVersion": "1"
+                            },
+                            "onViewInitialized": "onViewInitializedInsuredPerson"
+                        }
+                    ],
+                    "value": {
+                        "$ref": "#"
+                    },
+                    "hide": false
+                }
+            ]
+        },
+        {
+            "type": "Section",
+            "sectionLevel": 1,
+            "label": "CumulationPolicyHolder",
+            "elements": [
+                {
+                    "type": "InlineView",
+                    "showContainerActions": false,
+                    "views": [
+                        {
+                            "viewReference": {
+                                "configurationCodeName": "CumulationView",
+                                "configurationConceptType": "SearchView",
+                                "configurationVersion": "1"
+                            },
+                            "onViewInitialized": "onViewInitializedPolicyHolder"
+                        }
+                    ],
+                    "value": {
+                        "$ref": "#"
+                    },
+                    "hide": false
+                }
+            ],
+            "rule": {
+                "effect": "SHOW",
+                "condition": {
+                    "type": "FUNC",
+                    "ruleFunction": "showCumulationForPolicyHolder",
+                    "value": [
+                        {
+                            "$ref": "#"
+                        }
+                    ]
+                }
+            }
+        }
+    ],
+    "rule": {
+        "effect": "SHOW",
+        "condition": {
+            "type": "FUNC",
+            "ruleFunction": "showCumulation",
+            "value": [
+                {
+                    "$ref": "#"
+                }
+            ]
+        }
+    }
+}

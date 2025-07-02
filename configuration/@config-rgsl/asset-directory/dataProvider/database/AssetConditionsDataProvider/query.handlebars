@@ -1,0 +1,28 @@
+SELECT 
+    cpv.PRODUCT_CODE, 
+    csl.PARTNER_CODE, 
+    csl.LIMIT
+FROM BFX.UNIVERSAL_VERSIONED_DOCUMENT ud
+INNER JOIN PAS_IMPL.ASSET_HUB hub 
+    ON hub.ASSET_NUMBER = ud.UNIVERSAL_VERSIONED_DOCUMENT_NUMBER
+INNER JOIN PAS_IMPL.ASSET_CONDITION_LINK cl
+    ON cl.ASSET_HKEY = hub.ASSET_HKEY
+INNER JOIN PAS_IMPL.ASSET_SAT_LATEST sat
+    ON sat.ASSET_HKEY = hub.ASSET_HKEY
+INNER JOIN PAS_IMPL.ASSET_CONDITION_SAT_LATEST csl
+    ON csl.ASSET_CONDITION_HKEY = cl.ASSET_CONDITION_HKEY
+INNER JOIN PAS_IMPL.ASSET_CONDITION_PRODUCT_VALUE cpv
+    ON cpv.CONDITION_PRODUCT_REF_ID = csl.CONDITION_PRODUCT_REF_ID
+WHERE 1=1
+{{#if parameters.assetNumber}}
+    AND hub.ASSET_NUMBER = @assetNumber
+{{/if}}
+{{#if parameters.idIsin}}
+    AND sat.ID_ISIN = @idIsin
+{{/if}}
+{{#if parameters.idIsinArr}}
+    AND sat.ID_ISIN IN (@idIsinArr)
+{{/if}}
+{{#if parameters.productCode}}
+    AND cpv.PRODUCT_CODE = @productCode
+{{/if}}

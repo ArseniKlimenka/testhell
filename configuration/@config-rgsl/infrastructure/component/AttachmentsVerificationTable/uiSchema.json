@@ -1,0 +1,73 @@
+{
+    "type": "DataGrid",
+    "mode": "Array",
+    "value": {
+        "$ref": "#"
+    },
+    "pagination": {
+        "mode": "Regular",
+        "defaultPageSize": 15,
+        "pageSizes": [
+            5,
+            10,
+            15
+        ]
+    },
+    "labelType": "H1",
+    "label": "attachmentsVerification",
+    "height": "Small",
+    "columns": [
+        {
+            "sortable": false,
+            "title": "verificationDocumentNumber",
+            "cellContent": {
+                "type": "Link",
+                "targetType": "Entity",
+                "value": {
+                    "mapping": "urlMapping",
+                    "$ref": "#"
+                },
+                "content": {
+                    "text": {
+                        "type": "OutputText",
+                        "textProperties": [
+                            "bold"
+                        ],
+                        "value": {
+                            "$ref": "#/properties/verificationDocumentNumber"
+                        }
+                    }
+                }
+            },
+            "style": {
+                "width": "medium"
+            }
+        },
+        {
+            "title": "verificationState",
+            "cellContent": {
+                "type": "OutputText",
+                "value": {
+                    "$ref": "#/properties/verificationState"
+                }
+            },
+            "style": {
+                "width": "medium"
+            }
+        },
+        {
+            "title": "verificationDate",
+            "cellContent": {
+                "type": "OutputText",
+                "defaultValue": "",
+                "template": "{{expr verificationDate 'dt'}}",
+                "value": {
+                    "$ref": "#"
+                }
+            },
+            "style": {
+                "width": "medium"
+            }
+        }
+    ]
+}

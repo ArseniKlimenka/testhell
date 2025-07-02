@@ -1,0 +1,264 @@
+{
+    "type": "Section",
+    "label": "paymentPlan",
+    "isCollapsed": false,
+    "formProperties": {
+        "events": {
+            "onLoad": "loadPaymentPlanToGridEvent",
+            "afterSave": "loadPaymentPlanToGridEvent"
+        }
+    },
+    "elements": [
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "Button",
+                    "value": {
+                        "$ref": "#"
+                    },
+                    "width": 4,
+                    "onClick": [
+                        {
+                            "commandType": "executeAction",
+                            "actionName": "loadPaymentPlanToGridEvent"
+                        }
+                    ],
+                    "label": "loadPaymentPlanToGrid",
+                    "rule": {
+                        "effect": "DISABLE_INITIAL",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "isCalculationDisabled",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "type": "Button",
+                    "value": {
+                        "$ref": "#"
+                    },
+                    "width": 4,
+                    "onClick": [
+                        {
+                            "commandType": "executeAction",
+                            "actionName": "paymentGraceDateProlongation"
+                        }
+                    ],
+                    "label": "paymentGraceDateProlongation",
+                    "rule": {
+                        "effect": "ENABLE_INITIAL",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "isPaymentGraceDateProlongationEnable",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "DataGrid",
+                    "mode": "Array",
+                    "pagination": {
+                        "mode": "Regular",
+                        "pageSizes": [
+                            100,
+                            200,
+                            300
+                        ],
+                        "defaultPageSize": 100
+                    },
+                    "isCollapsed": false,
+                    "filterAction": "filterPaymentPlanItems",
+                    "value": {
+                        "mapping": "mapPaymentPlanToGrid",
+                        "$ref": "#"
+                    },
+                    "actions": [],
+                    "edit": {
+                        "mode": "Detached"
+                    },
+                    "height": "None",
+                    "columns": [
+                        {
+                            "title": "paymentPeriodStart",
+                            "name": "paymentPeriodStart",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "defaultValue": "",
+                                "value": {
+                                    "$ref": "#/properties/paymentPeriodStart"
+                                }
+                            }
+                        },
+                        {
+                            "title": "paymentPeriodEnd",
+                            "name": "paymentPeriodEnd",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "defaultValue": "",
+                                "value": {
+                                    "$ref": "#/properties/paymentPeriodEnd"
+                                }
+                            }
+                        },
+                        {
+                            "title": "paymentExpirationDate",
+                            "name": "paymentExpirationDate",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "defaultValue": "",
+                                "value": {
+                                    "$ref": "#/properties/paymentExpirationDate"
+                                }
+                            }
+                        },
+                        {
+                            "title": "payer",
+                            "name": "payer",
+                            "cellContent": {
+                                "type": "Link",
+                                "targetType": "Url",
+                                "title": "Link to inquiry",
+                                "value": {
+                                    "mapping": "LinkToPayerUrlMapping",
+                                    "$ref": "#"
+                                },
+                                "content": {
+                                    "text": {
+                                        "type": "OutputText",
+                                        "textProperties": [
+                                            "bold"
+                                        ],
+                                        "defaultValue": "",
+                                        "value": {
+                                            "$ref": "#/properties/payer"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "title": "paymentSum",
+                            "name": "paymentSum",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "defaultValue": "",
+                                "value": {
+                                    "$ref": "#/properties/paymentSum"
+                                }
+                            }
+                        },
+                        {
+                            "title": "currency",
+                            "name": "currency",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "defaultValue": "",
+                                "value": {
+                                    "$ref": "#/properties/currency"
+                                }
+                            }
+                        },
+                        {
+                            "title": "fullPayed",
+                            "name": "fullPayed",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "defaultValue": "",
+                                "value": {
+                                    "$ref": "#/properties/fullPayed"
+                                }
+                            }
+                        },
+                        {
+                            "title": "underpaymentSum",
+                            "name": "underpaymentSum",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "defaultValue": "",
+                                "template": "{{#style 'right'}}{{expr underpaymentSum 'n:2'}}{{/style}}",
+                                "value": {
+                                    "$ref": "#"
+                                }
+                            }
+                        },
+                        {
+                            "title": "overpaymentSum",
+                            "name": "overpaymentSum",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "defaultValue": "",
+                                "template": "{{#style 'right'}}{{expr overpaymentSum 'n:2'}}{{/style}}",
+                                "value": {
+                                    "$ref": "#"
+                                }
+                            }
+                        },
+                        {
+                            "title": "commissionRate",
+                            "name": "commissionRate",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "defaultValue": "",
+                                "template": "{{expr commissionRate 'p'}}",
+                                "value": {
+                                    "$ref": "#"
+                                }
+                            },
+                            "rule": {
+                                "effect": "SHOW",
+                                "condition": {
+                                    "type": "FUNC",
+                                    "ruleFunction": "isBackOfficeUser",
+                                    "value": [
+                                        {
+                                            "$ref": "#"
+                                        }
+                                    ]
+                                }
+                            }
+                        },
+                        {
+                            "title": "commissionSum",
+                            "name": "commissionSum",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "defaultValue": "",
+                                "template": "{{#style 'right'}}{{expr commissionSum 'n:2'}}{{/style}}",
+                                "value": {
+                                    "$ref": "#"
+                                }
+                            },
+                            "rule": {
+                                "effect": "SHOW",
+                                "condition": {
+                                    "type": "FUNC",
+                                    "ruleFunction": "isBackOfficeUser",
+                                    "value": [
+                                        {
+                                            "$ref": "#"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

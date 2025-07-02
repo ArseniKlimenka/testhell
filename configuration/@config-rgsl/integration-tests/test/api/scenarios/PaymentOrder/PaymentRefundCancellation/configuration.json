@@ -1,0 +1,49 @@
+{
+    "description": "BSI refund with payment order",
+    "steps": [
+        {
+            "code": "importIncomingBsi",
+            "actor": "ChiefPaymentDistributor",
+            "description": "Import incoming BSI",
+            "requests": [
+                {
+                    "code": "Body",
+                    "path": "./steps/01.importIncomingBsi/bsi.json"
+                }
+            ],
+            "executor": {
+                "module": "./steps/01.importIncomingBsi/executor.js",
+                "function": "executor"
+            }
+        },
+        {
+            "code": "RefundBsi",
+            "actor": "PaymentOrderAdministrator",
+            "description": "Refund BSI",
+            "requests": [],
+            "executor": {
+                "module": "./steps/02.refundBsi/executor.js",
+                "function": "executor"
+            },
+            "assert": {
+                "expected": "./steps/02.refundBsi/expectedResult.json",
+                "module": "./steps/02.refundBsi/assert.js",
+                "function": "assertPO"
+            }
+        },
+        {
+            "code": "CancelPaymentOrder",
+            "actor": "ChiefPaymentDistributor",
+            "description": "Cancel payment order",
+            "requests": [ ],
+            "executor": {
+                "module": "./steps/03.cancelPaymentOrder/executor.js",
+                "function": "executor"
+            },
+            "assert": {
+                "module": "./steps/03.cancelPaymentOrder/assert.js",
+                "function": "assertPO"
+            }
+        }
+    ]
+}

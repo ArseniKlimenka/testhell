@@ -1,0 +1,54 @@
+﻿SELECT
+      FOUND_CODES,
+      PARTY_CODES,
+      LIST_NUMBER,
+      LIST_DATE,
+      CREATION_DATE,
+      LIST_NAME,
+      AGENT_VERIFICATION_NUMBER AS DOCUMENT_NUMBER,
+      STATUS
+FROM (
+      SELECT
+            avs.FOUND_CODES,
+            avs.PARTY_CODES,
+            avs.LIST_NUMBER,
+            avs.LIST_DATE,
+            avs.CREATION_DATE,
+            avs.LIST_NAME,
+            avh.AGENT_VERIFICATION_NUMBER,
+            ps.DESCRIPTION AS STATUS,
+            ROW_NUMBER() OVER (PARTITION BY avs.LIST_NAME, avs.CREATION_DATE ORDER BY avh.AGENT_VERIFICATION_NUMBER) AS rn
+      FROM UNI_IMPL.AGENT_VERIFICATION_SAT avs
+      JOIN UNI_IMPL.AGENT_VERIFICATION_HUB avh ON avs.AGENT_VERIFICATION_HKEY = avh.AGENT_VERIFICATION_HKEY
+      JOIN BFX.UNIVERSAL_DOCUMENT ud ON ud.UNIVERSAL_DOCUMENT_NUMBER = avh.AGENT_VERIFICATION_NUMBER
+      JOIN CFG.PROCESS_STATE ps on ps.PROCESS_STATE_ID = ud.STATE_ID
+      WHERE 1 = 1
+            {{#if parameters.documentNumber}}
+            AND avh.AGENT_VERIFICATION_NUMBER LIKE @documentNumber
+            {{/if}}
+            {{#if parameters.listName}}
+            AND LIST_NAME = @listName
+            {{/if}}
+            {{#if parameters.listNames}}
+            AND LIST_NAME IN (@listNames)
+            {{/if}}
+            {{#if parameters.partyCodes}}
+            AND PARTY_CODES LIKE @partyCodes
+            {{/if}}
+            {{#if parameters.foundCodes}}
+            AND FOUND_CODES LIKE @foundCodes
+            {{/if}}
+            {{#if parameters.creationDate}}
+            AND CREATION_DATE = @creationDate
+            {{/if}}
+            {{#if parameters.listDate}}
+            AND LIST_DATE = @listDate
+            {{/if}}
+            {{#if parameters.isNotCancelled}}
+            AND ps.DESCRIPTION <> 'Cancelled'
+            {{/if}}
+            {{#if parameters.isNotDraft}}
+            AND ps.DESCRIPTION <> 'Draft'
+            {{/if}}
+            ) AS Subquery
+WHERE rn = 1

@@ -1,0 +1,127 @@
+{
+    "id": "StrategyConfigurationViewUiSchema",
+    "type": "Group",
+    "formProperties": {
+        "events": {
+            "onLoad": "onLoad"
+        }
+    },
+    "elements": [
+        {
+            "type": "DataGrid",
+            "label": "StrategyConfiguration",
+            "labelType": "H1",
+            "paginationMode": "regular",
+            "value": {
+                "$ref": "#/properties/Body"
+            },
+            "mode": "Array",
+            "pagination": {
+                "mode": "Regular",
+                "pageSizes": [
+                    15,
+                    30,
+                    50
+                ],
+                "defaultPageSize": 15
+            },
+            "actions": [
+                "Add",
+                "Edit",
+                "Delete",
+                "Details"
+            ],
+            "edit": {
+                "mode": "Detached",
+                "onAfterGridAction": "onAfterGridAction"
+            },
+            "showDeleteConfirmation": true,
+            "height": "None",
+            "alternateRowColors": true,
+            "columns": [
+                {
+                    "sortable": true,
+                    "title": "productCodes",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/strategyConfiguration/properties/productCodes"
+                        }
+                    },
+                    "name": "productCodes"
+                },
+                {
+                    "sortable": true,
+                    "title": "strategyCode",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/strategyConfiguration/properties/strategyCode"
+                        }
+                    },
+                    "name": "strategyCode"
+                },
+                {
+                    "sortable": true,
+                    "title": "issueDateMin",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/strategyConfiguration/properties/issueDateMin"
+                        }
+                    },
+                    "name": "issueDateMin"
+                },
+                {
+                    "sortable": true,
+                    "title": "issueDateMax",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/strategyConfiguration/properties/issueDateMax"
+                        }
+                    },
+                    "name": "issueDateMax"
+                }
+            ],
+            "detailsTemplates": {
+                "edit": {
+                    "content": {
+                        "type": "GridLayout",
+                        "numberOfColumns": 4,
+                        "elements": [
+                            {
+                                "type": "Component",
+                                "name": "StrategyConfiguration",
+                                "metadata": {
+                                    "autogenerate": true
+                                },
+                                "value": {
+                                    "$ref": "#/properties/strategyConfiguration"
+                                }
+                            }
+                        ]
+                    }
+                },
+                "view": {
+                    "content": {
+                        "type": "GridLayout",
+                        "numberOfColumns": 4,
+                        "elements": [
+                            {
+                                "type": "Component",
+                                "name": "StrategyConfiguration",
+                                "metadata": {
+                                    "autogenerate": true
+                                },
+                                "value": {
+                                    "$ref": "#/properties/strategyConfiguration"
+                                }
+                            }
+                        ]
+                    }
+                }
+            }
+        }
+    ]
+}

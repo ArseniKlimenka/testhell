@@ -1,0 +1,58 @@
+{
+    "type": "Section",
+    "label": "InsurerComment",
+    "width": 12,
+    "collapsing": {
+        "initial": false,
+        "enabled": true
+    },
+    "readOnly": true,
+    "elements": [
+        {
+            "type": "Input",
+            "label": "commentUnderwriting",
+            "control": "TextArea",
+            "enableResize": true,
+            "numberOfRows": 3,
+            "value": {
+                "$ref": "#/properties/commentUnderwriting"
+            },
+            "rule": {
+                "effect": "ENABLE_INITIAL",
+                "condition": {
+                    "type": "FUNC",
+                    "ruleFunction": "EnableActionCommentUnderwriting",
+                    "value": [
+                        {
+                            "$ref": "#"
+                        }
+                    ]
+                }
+            },
+            "width": 12
+        },
+        {
+            "type": "Input",
+            "label": "policySpecialConditions",
+            "control": "TextArea",
+            "enableResize": true,
+            "numberOfRows": 3,
+            "value": {
+                "$ref": "#/properties/policySpecialConditions"
+            },
+            "rule": {
+                "effect": "ENABLE_INITIAL",
+                "condition": {
+                    "type": "FUNC",
+                    "ruleFunction": "EnableActionCommentUnderwriting",
+                    "value": [
+                        {
+                            "$ref": "#"
+                        }
+                    ]
+                }
+            },
+            "width": 12
+        }
+    ]
+}

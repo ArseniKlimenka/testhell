@@ -1,0 +1,56 @@
+{
+    "processType": "AccidentLifeInsuranceTechnicalAmendment",
+    "actors": [
+        "Viewer",
+        "System",
+        "Operations"
+    ],
+    "initialState": "Draft",
+    "states": [
+        {
+            "name": "Draft",
+            "operations": [
+                {
+                    "name": "Save",
+                    "exclusiveToAssignedUser": false
+                }
+            ],
+            "appliesVersion": false
+        },
+        {
+            "name": "Activated",
+            "operations": [
+
+            ],
+            "appliesVersion": true
+        },
+        {
+            "name": "Cancelled",
+            "operations": [
+
+            ],
+            "discardsVersion": true
+        }
+    ],
+    "transitions": [
+        {
+            "name": "Draft_to_Activated",
+            "from": "Draft",
+            "to": "Activated",
+            "exclusiveToAssignedUser": false,
+            "allowOnValidationErrors": {
+                "all": false
+            },
+            "whenBlocked": "Hide"
+        },
+        {
+            "name": "Draft_to_Cancelled",
+            "from": "Draft",
+            "to": "Cancelled",
+            "exclusiveToAssignedUser": false,
+            "allowOnValidationErrors": {
+                "all": true
+            }
+        }
+    ]
+}

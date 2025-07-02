@@ -1,0 +1,27 @@
+﻿SELECT
+	c.CONTRACT_NUMBER,
+	al.EXECUTED_ON,
+	al.ERROR_MESSAGE,
+	al.ERROR_CODE,
+	al.ERROR_MESSAGE_DESCRIPTION,
+    art.CODE_NAME as ARTIFACT_CODE_NAME
+FROM
+	PAS.CONTRACT c
+	JOIN BFX_IMPL.AUTOCONVERSION_LOG al ON c.CONTRACT_NUMBER = al.CONTRACT_NUMBER
+    LEFT JOIN cfx.published_artifact art ON c.published_artifact_id = art.published_artifact_id
+WHERE
+	1 = 1
+	{{#if parameters.contractNumber}}
+		AND c.CONTRACT_NUMBER LIKE '%' + @contractNumber + '%'
+	{{/if}}
+	{{#if parameters.executedOnFrom}}
+		AND CONVERT(DATE, al.EXECUTED_ON) >= @executedOnFrom 
+	{{/if}}
+	{{#if parameters.executedOnTo}}
+		AND CONVERT(DATE, al.EXECUTED_ON) <= @executedOnTo 
+	{{/if}}
+
+
+	
+
+	

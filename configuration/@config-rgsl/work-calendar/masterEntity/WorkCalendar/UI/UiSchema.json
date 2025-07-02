@@ -1,0 +1,677 @@
+{
+    "id": "calendar-edit.ui-schema.json",
+    "type": "GridLayout",
+    "title": "Work calendar",
+    "numberOfColumns": 4,
+    "formProperties": {
+        "events": {
+            "onLoad": "loadParentCalendarRules",
+            "afterSave": "loadParentCalendarRulesAndRefreshCalendar"
+        }
+    },
+    "elements": [
+        {
+            "type": "Component",
+            "name": "MasterEntityHeader",
+            "value": {
+                "$ref": "#"
+            }
+        },
+        {
+            "type": "GridLayout",
+            "numberOfColumns": 4,
+            "width": 3,
+            "fillAvailableSpace": true,
+            "elements": [
+                {
+                    "type": "GridLayout",
+                    "numberOfColumns": 4,
+                    "elements": [
+                        {
+                            "elementId": "view-calendar-section",
+                            "type": "Section",
+                            "label": "Calendar Overview",
+                            "elements": [
+                                {
+                                    "type": "CalendarOverview",
+                                    "rulesFunction": "retrieveCalendarRulesForMonth",
+                                    "days": "monday-sunday",
+                                    "width": 4
+                                }
+                            ],
+                            "sectionLevel": 1
+                        },
+                        {
+                            "elementId": "calendar-settings",
+                            "type": "Section",
+                            "label": "Calendar Settings",
+                            "elements": [
+                                {
+                                    "type": "Group",
+                                    "elements": [
+                                        {
+                                            "type": "Group",
+                                            "elements": [
+                                                {
+                                                    "type": "Input",
+                                                    "label": "Calendar name",
+                                                    "value": {
+                                                        "$ref": "#/properties/Body/properties/name"
+                                                    },
+                                                    "width": 1
+                                                },
+                                                {
+                                                    "type": "Group",
+                                                    "width": 1,
+                                                    "elements": [
+                                                        {
+                                                            "type": "Input",
+                                                            "label": "Time zone",
+                                                            "showAsRequired": true,
+                                                            "value": {
+                                                                "$ref": "#/properties/Body/properties/timeZone"
+                                                            },
+                                                            "width": 1,
+                                                            "rule": {
+                                                                "effect": "SHOW",
+                                                                "condition": {
+                                                                    "type": "FUNC",
+                                                                    "ruleFunction": "isTimeZoneRequired",
+                                                                    "value": [
+                                                                        {
+                                                                            "$ref": "#/properties/Body/properties/parentCalendarCode"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            }
+                                                        },
+                                                        {
+                                                            "type": "Input",
+                                                            "label": "Time zone",
+                                                            "showAsRequired": false,
+                                                            "value": {
+                                                                "$ref": "#/properties/Body/properties/timeZone"
+                                                            },
+                                                            "width": 1,
+                                                            "rule": {
+                                                                "effect": "HIDE",
+                                                                "condition": {
+                                                                    "type": "FUNC",
+                                                                    "ruleFunction": "isTimeZoneRequired",
+                                                                    "value": [
+                                                                        {
+                                                                            "$ref": "#/properties/Body/properties/parentCalendarCode"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            }
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "elementId": "calendar-search",
+                                                    "type": "Lookup",
+                                                    "inputParameters": {
+                                                        "uiContext": "Single"
+                                                    },
+                                                    "value": {
+                                                        "$ref": "#/properties/Body/properties/parentCalendarCode"
+                                                    },
+                                                    "width": 1,
+                                                    "dialogButton": {},
+                                                    "clearButton": {
+                                                        "clearAction": "clearParentWorkCalendar"
+                                                    },
+                                                    "dialog": {
+                                                        "onLoad": "parentCalendarInputMapping",
+                                                        "beforeConfirmationAction": "checkLookupResultSelected",
+                                                        "viewReference": {
+                                                            "configurationCodeName": "WorkCalendarSearchView",
+                                                            "configurationConceptType": "SearchView",
+                                                            "configurationVersion": "1"
+                                                        }
+                                                    },
+                                                    "onSelected": "workCalendarLookupResultMapping",
+                                                    "selectedDisplayValueUISchema": {
+                                                        "type": "OutputText",
+                                                        "skipTranslate": true,
+                                                        "label": "Based on calendar",
+                                                        "value": {
+                                                            "$ref": "#/properties/Body/properties/parentCalendarCode"
+                                                        }
+                                                    }
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "type": "Group",
+                                            "elements": [
+                                                {
+                                                    "elementId": "calendar-search-table",
+                                                    "type": "DataGrid",
+                                                    "mode": "Array",
+                                                    "filterAction": "filterForGeneralRules",
+                                                    "value": {
+                                                        "$ref": "#/properties/Body/properties/rules"
+                                                    },
+                                                    "labelType": "H2",
+                                                    "pagination": {
+                                                        "mode": "Regular",
+                                                        "pageSizes": [
+                                                            10,
+                                                            15,
+                                                            20
+                                                        ],
+                                                        "defaultPageSize": 10
+                                                    },
+                                                    "actions": [
+                                                        "Add",
+                                                        "Edit",
+                                                        "Delete"
+                                                    ],
+                                                    "edit": {
+                                                        "mode": "Detached",
+                                                        "onPrepareAddedRow": "prepareNewGeneralRule",
+                                                        "onAfterGridAction": "clearUnusedRepetitionProperties"
+                                                    },
+                                                    "checkIfRowActionIsAllowed": "disableOperationsOnInheritedRules",
+                                                    "height": "None",
+                                                    "columns": [
+                                                        {
+                                                            "title": "Description",
+                                                            "cellContent": {
+                                                                "type": "OutputText",
+                                                                "defaultValue": "",
+                                                                "skipTranslate": true,
+                                                                "value": {
+                                                                    "$ref": "#/properties/description"
+                                                                }
+                                                            }
+                                                        },
+                                                        {
+                                                            "title": "Is workday",
+                                                            "cellContent": {
+                                                                "type": "Icon",
+                                                                "iconStyleFunction": "getIsWorkdayIcon",
+                                                                "value": {
+                                                                    "$ref": "#/properties/isWork"
+                                                                }
+                                                            }
+                                                        },
+                                                        {
+                                                            "title": "Date from",
+                                                            "cellContent": {
+                                                                "type": "OutputText",
+                                                                "defaultValue": "",
+                                                                "template": "{{expr dateFrom 'd'}}",
+                                                                "value": {
+                                                                    "$ref": "#"
+                                                                }
+                                                            }
+                                                        },
+                                                        {
+                                                            "title": "Date to",
+                                                            "cellContent": {
+                                                                "type": "OutputText",
+                                                                "defaultValue": "",
+                                                                "template": "{{expr dateTo 'd'}}",
+                                                                "value": {
+                                                                    "$ref": "#"
+                                                                }
+                                                            }
+                                                        },
+                                                        {
+                                                            "title": "Repetition",
+                                                            "cellContent": {
+                                                                "type": "OutputText",
+                                                                "defaultValue": "",
+                                                                "value": {
+                                                                    "mapping": "getRepetitionMessage",
+                                                                    "$ref": "#"
+                                                                }
+                                                            }
+                                                        },
+                                                        {
+                                                            "title": "Source calendar",
+                                                            "cellContent": {
+                                                                "type": "OutputText",
+                                                                "defaultValue": "",
+                                                                "skipTranslate": true,
+                                                                "value": {
+                                                                    "$ref": "#/properties/sourceCalendarCode"
+                                                                }
+                                                            }
+                                                        }
+                                                    ],
+                                                    "detailsTemplates": {
+                                                        "edit": {
+                                                            "content": {
+                                                                "type": "GridLayout",
+                                                                "numberOfColumns": 4,
+                                                                "elements": [
+                                                                    {
+                                                                        "type": "Group",
+                                                                        "elements": [
+                                                                            {
+                                                                                "type": "Input",
+                                                                                "label": "Description",
+                                                                                "value": {
+                                                                                    "$ref": "#/properties/description"
+                                                                                },
+                                                                                "width": 2
+                                                                            },
+                                                                            {
+                                                                                "type": "Input",
+                                                                                "control": "DateRange",
+                                                                                "dateFrom": {
+                                                                                    "type": "Input",
+                                                                                    "label": "Date from",
+                                                                                    "width": 1,
+                                                                                    "value": {
+                                                                                        "$ref": "#/properties/dateFrom"
+                                                                                    },
+                                                                                    "control": "DatetimePicker"
+                                                                                },
+                                                                                "dateTo": {
+                                                                                    "type": "Input",
+                                                                                    "label": "Date to",
+                                                                                    "width": 1,
+                                                                                    "value": {
+                                                                                        "$ref": "#/properties/dateTo"
+                                                                                    },
+                                                                                    "control": "DatetimePicker"
+                                                                                },
+                                                                                "width": 2
+                                                                            }
+                                                                        ]
+                                                                    },
+                                                                    {
+                                                                        "type": "Group",
+                                                                        "elements": [
+                                                                            {
+                                                                                "elementId": "isworkday-checkbox",
+                                                                                "type": "Input",
+                                                                                "label": "Is workday",
+                                                                                "value": {
+                                                                                    "$ref": "#/properties/isWork"
+                                                                                },
+                                                                                "control": "Boolean",
+                                                                                "width": 1,
+                                                                                "onValueChanged": [
+                                                                                    {
+                                                                                        "commandType": "executeAction",
+                                                                                        "actionName": "setDefaultCapacity"
+                                                                                    }
+                                                                                ]
+                                                                            }
+                                                                        ]
+                                                                    },
+                                                                    {
+                                                                        "elementId": "settings-repetition-subsection",
+                                                                        "type": "Section",
+                                                                        "sectionLevel": 2,
+                                                                        "label": "Repetition",
+                                                                        "elements": [
+                                                                            {
+                                                                                "type": "Group",
+                                                                                "elements": [
+                                                                                    {
+                                                                                        "type": "Input",
+                                                                                        "label": "Pattern",
+                                                                                        "value": {
+                                                                                            "$ref": "#/properties/repetition/properties/pattern"
+                                                                                        },
+                                                                                        "width": 1
+                                                                                    },
+                                                                                    {
+                                                                                        "type": "Group",
+                                                                                        "width": 1,
+                                                                                        "elements": [
+                                                                                            {
+                                                                                                "type": "Input",
+                                                                                                "label": "Day of week",
+                                                                                                "value": {
+                                                                                                    "$ref": "#/properties/repetition/properties/dayOfWeek"
+                                                                                                },
+                                                                                                "rule": {
+                                                                                                    "effect": "SHOW",
+                                                                                                    "condition": {
+                                                                                                        "type": "LEAF",
+                                                                                                        "expectedValue": "weekly",
+                                                                                                        "value": {
+                                                                                                            "$ref": "#/properties/repetition/properties/pattern"
+                                                                                                        }
+                                                                                                    }
+                                                                                                }
+                                                                                            },
+                                                                                            {
+                                                                                                "type": "Input",
+                                                                                                "label": "Event date",
+                                                                                                "value": {
+                                                                                                    "$ref": "#/properties/repetition/properties/eventDate"
+                                                                                                },
+                                                                                                "control": "DatetimePicker",
+                                                                                                "rule": {
+                                                                                                    "effect": "SHOW",
+                                                                                                    "condition": {
+                                                                                                        "type": "LEAF",
+                                                                                                        "expectedValue": "yearly",
+                                                                                                        "value": {
+                                                                                                            "$ref": "#/properties/repetition/properties/pattern"
+                                                                                                        }
+                                                                                                    }
+                                                                                                }
+                                                                                            }
+                                                                                        ]
+                                                                                    }
+                                                                                ]
+                                                                            }
+                                                                        ]
+                                                                    }
+                                                                ]
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ],
+                            "sectionLevel": 1
+                        },
+                        {
+                            "elementId": "exception-section",
+                            "type": "Section",
+                            "label": "Exceptions",
+                            "elements": [
+                                {
+                                    "type": "Group",
+                                    "elements": [
+                                        {
+                                            "type": "Group",
+                                            "elements": [
+                                                {
+                                                    "elementId": "exception-search-table",
+                                                    "type": "DataGrid",
+                                                    "mode": "Array",
+                                                    "filterAction": "filterForExceptionRules",
+                                                    "value": {
+                                                        "$ref": "#/properties/Body/properties/rules"
+                                                    },
+                                                    "labelType": "H2",
+                                                    "pagination": {
+                                                        "mode": "Regular",
+                                                        "pageSizes": [
+                                                            10,
+                                                            15,
+                                                            20
+                                                        ],
+                                                        "defaultPageSize": 10
+                                                    },
+                                                    "actions": [
+                                                        "Add",
+                                                        "Edit",
+                                                        "Delete"
+                                                    ],
+                                                    "edit": {
+                                                        "mode": "Detached",
+                                                        "onPrepareAddedRow": "prepareNewExceptionRule",
+                                                        "onAfterGridAction": "clearUnusedRepetitionProperties"
+                                                    },
+                                                    "checkIfRowActionIsAllowed": "disableOperationsOnInheritedRules",
+                                                    "height": "None",
+                                                    "columns": [
+                                                        {
+                                                            "title": "Description",
+                                                            "cellContent": {
+                                                                "type": "OutputText",
+                                                                "defaultValue": "",
+                                                                "skipTranslate": true,
+                                                                "value": {
+                                                                    "$ref": "#/properties/description"
+                                                                }
+                                                            }
+                                                        },
+                                                        {
+                                                            "title": "Is workday",
+                                                            "cellContent": {
+                                                                "type": "Icon",
+                                                                "iconStyleFunction": "getIsWorkdayIcon",
+                                                                "value": {
+                                                                    "$ref": "#/properties/isWork"
+                                                                }
+                                                            }
+                                                        },
+                                                        {
+                                                            "title": "Date from",
+                                                            "cellContent": {
+                                                                "type": "OutputText",
+                                                                "defaultValue": "",
+                                                                "template": "{{expr dateFrom 'd'}}",
+                                                                "value": {
+                                                                    "$ref": "#"
+                                                                }
+                                                            }
+                                                        },
+                                                        {
+                                                            "title": "Date to",
+                                                            "cellContent": {
+                                                                "type": "OutputText",
+                                                                "defaultValue": "",
+                                                                "template": "{{expr dateTo 'd'}}",
+                                                                "value": {
+                                                                    "$ref": "#"
+                                                                }
+                                                            }
+                                                        },
+                                                        {
+                                                            "title": "Repetition",
+                                                            "cellContent": {
+                                                                "type": "OutputText",
+                                                                "defaultValue": "",
+                                                                "value": {
+                                                                    "mapping": "getRepetitionMessage",
+                                                                    "$ref": "#"
+                                                                }
+                                                            }
+                                                        },
+                                                        {
+                                                            "title": "Source calendar",
+                                                            "cellContent": {
+                                                                "type": "OutputText",
+                                                                "defaultValue": "",
+                                                                "skipTranslate": true,
+                                                                "value": {
+                                                                    "$ref": "#/properties/sourceCalendarCode"
+                                                                }
+                                                            }
+                                                        }
+                                                    ],
+                                                    "detailsTemplates": {
+                                                        "edit": {
+                                                            "content": {
+                                                                "type": "GridLayout",
+                                                                "numberOfColumns": 4,
+                                                                "elements": [
+                                                                    {
+                                                                        "elementId": "exception-param",
+                                                                        "type": "Group",
+                                                                        "elements": [
+                                                                            {
+                                                                                "type": "Input",
+                                                                                "label": "Description",
+                                                                                "value": {
+                                                                                    "$ref": "#/properties/description"
+                                                                                },
+                                                                                "width": 2
+                                                                            },
+                                                                            {
+                                                                                "type": "Input",
+                                                                                "control": "DateRange",
+                                                                                "dateFrom": {
+                                                                                    "type": "Input",
+                                                                                    "label": "Date from",
+                                                                                    "width": 1,
+                                                                                    "value": {
+                                                                                        "$ref": "#/properties/dateFrom"
+                                                                                    },
+                                                                                    "control": "DatetimePicker"
+                                                                                },
+                                                                                "dateTo": {
+                                                                                    "type": "Input",
+                                                                                    "label": "Date to",
+                                                                                    "width": 1,
+                                                                                    "value": {
+                                                                                        "$ref": "#/properties/dateTo"
+                                                                                    },
+                                                                                    "control": "DatetimePicker"
+                                                                                },
+                                                                                "width": 2
+                                                                            }
+                                                                        ]
+                                                                    },
+                                                                    {
+                                                                        "type": "Group",
+                                                                        "elements": [
+                                                                            {
+                                                                                "elementId": "workday-checkbox",
+                                                                                "type": "Input",
+                                                                                "label": "Is workday",
+                                                                                "value": {
+                                                                                    "$ref": "#/properties/isWork"
+                                                                                },
+                                                                                "control": "Boolean",
+                                                                                "width": 1,
+                                                                                "onValueChanged": [
+                                                                                    {
+                                                                                        "commandType": "executeAction",
+                                                                                        "actionName": "setDefaultCapacity"
+                                                                                    }
+                                                                                ]
+                                                                            }
+                                                                        ]
+                                                                    },
+                                                                    {
+                                                                        "elementId": "exception-repetition-subsection",
+                                                                        "type": "Section",
+                                                                        "sectionLevel": 2,
+                                                                        "label": "Repetition",
+                                                                        "elements": [
+                                                                            {
+                                                                                "type": "Group",
+                                                                                "elements": [
+                                                                                    {
+                                                                                        "type": "Input",
+                                                                                        "label": "Pattern",
+                                                                                        "value": {
+                                                                                            "$ref": "#/properties/repetition/properties/pattern"
+                                                                                        },
+                                                                                        "width": 1
+                                                                                    },
+                                                                                    {
+                                                                                        "type": "Group",
+                                                                                        "width": 1,
+                                                                                        "elements": [
+                                                                                            {
+                                                                                                "type": "Input",
+                                                                                                "label": "Day of week",
+                                                                                                "value": {
+                                                                                                    "$ref": "#/properties/repetition/properties/dayOfWeek"
+                                                                                                },
+                                                                                                "rule": {
+                                                                                                    "effect": "SHOW",
+                                                                                                    "condition": {
+                                                                                                        "type": "LEAF",
+                                                                                                        "expectedValue": "weekly",
+                                                                                                        "value": {
+                                                                                                            "$ref": "#/properties/repetition/properties/pattern"
+                                                                                                        }
+                                                                                                    }
+                                                                                                }
+                                                                                            },
+                                                                                            {
+                                                                                                "type": "Input",
+                                                                                                "label": "Event date",
+                                                                                                "value": {
+                                                                                                    "$ref": "#/properties/repetition/properties/eventDate"
+                                                                                                },
+                                                                                                "control": "DatetimePicker",
+                                                                                                "rule": {
+                                                                                                    "effect": "SHOW",
+                                                                                                    "condition": {
+                                                                                                        "type": "LEAF",
+                                                                                                        "expectedValue": "yearly",
+                                                                                                        "value": {
+                                                                                                            "$ref": "#/properties/repetition/properties/pattern"
+                                                                                                        }
+                                                                                                    }
+                                                                                                }
+                                                                                            }
+                                                                                        ]
+                                                                                    }
+                                                                                ]
+                                                                            }
+                                                                        ]
+                                                                    }
+                                                                ]
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ],
+                            "sectionLevel": 1
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "SideContentLayout",
+            "fixedPosition": true,
+            "width": 1,
+            "elements": [
+                {
+                    "type": "GridLayout",
+                    "numberOfColumns": 2,
+                    "elements": [
+                        {
+                            "type": "TabLayout",
+                            "elements": [
+                                {
+                                    "type": "Tab",
+                                    "tabType": "error",
+                                    "additionalInfo": {
+                                        "display": "ValidationErrorsCount"
+                                    },
+                                    "elements": [
+                                        {
+                                            "type": "ValidationSummary",
+                                            "elementId": "RequiredPropertiesValidations"
+                                        }
+                                    ],
+                                    "elementId": "tab-error",
+                                    "icon": {
+                                        "name": "Bell",
+                                        "size": "Large"
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "Component",
+            "name": "MasterEntityFooter",
+            "value": {
+                "$ref": "#"
+            }
+        }
+    ]
+}

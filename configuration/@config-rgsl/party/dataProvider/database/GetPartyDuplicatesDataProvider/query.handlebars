@@ -1,0 +1,37 @@
+with potential_duplicates as
+(
+select hub.party_code,
+       sat.*
+  from pty_impl.party_hub hub,
+       pty_impl.party_info_sat_latest sat
+ where hub.party_hkey = sat.party_info_hkey
+{{#if parameters.isNaturalPerson}} 
+   and sat.last_name = @lastName
+   and sat.first_name = @firstName
+   and sat.date_of_birth = @dateOfBirth   
+   {{#if parameters.middleNameExists}} 
+   and (sat.middle_name = @middleName or sat.middle_name is null)
+   {{/if}}
+{{/if}}
+{{#if parameters.isLegalEntity}}
+   and sat.ogrnogrnip = @OGRNOGRNIP
+{{/if}}
+{{#if parameters.currentPartyCode}}
+   and not hub.party_code = @currentPartyCode
+{{/if}}
+)
+{{#if parameters.isNaturalPerson}}
+, documents as
+(
+select json_value(docs.value, '$.docSeries') as doc_series,
+       json_value(docs.value, '$.docNumber') as doc_number
+  from openjson(json_query(@documents)) docs
+)
+select count(*) as duplicates_count
+  from potential_duplicates pd
+       join pty_impl.party_documents_sat_latest dsat on dsat.party_documents_hkey = pd.party_info_hkey and dsat.is_deleted = 0
+       join documents docs on docs.doc_series = dsat.doc_series and docs.doc_number = dsat.doc_number
+{{else}}
+select count(*) as duplicates_count
+  from potential_duplicates
+{{/if}}

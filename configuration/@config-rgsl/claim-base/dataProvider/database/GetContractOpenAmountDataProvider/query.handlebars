@@ -1,0 +1,30 @@
+﻿select
+	CONTRACT_NUMBER,
+	DUE_DATE,
+	sum(AMOUNT) as AMOUNT,
+	sum(OPEN_AMOUNT) as OPEN_AMOUNT,
+	rank() over (partition by CONTRACT_NUMBER ORDER BY DUE_DATE ASC) as PERIOD_NUMBER
+from
+(
+	select
+		polh.CONTRACT_NUMBER,
+		ppl.DUE_DATE,
+		ppsl.AMOUNT,
+		ppsl.AMOUNT as OPEN_AMOUNT
+	from
+		pas_impl.POLICY_HUB polh
+		inner join pas_impl.P_PAYMENT_PLAN_LINK ppl on ppl.POLICY_HKEY = polh.POLICY_HKEY
+		inner join pas_impl.P_PAYMENT_PLAN_SAT_LATEST ppsl on ppsl.P_PAYMENT_PLAN_HKEY = ppl.P_PAYMENT_PLAN_HKEY
+	union all
+	select
+		alc.DOCUMENT_NO as CONTRACT_NUMBER,
+		palc.DUE_DATE,
+		0 as AMOUNT,
+		-(alc.DOC_AMOUNT + alc.TOLERANCE_DOC_AMOUNT) as OPEN_AMOUNT
+	from
+		acc_impl.ALLOCATION alc
+		inner join acc_impl.ALLOCATION_POLICY palc on palc.ALLOCATION_ID = alc.ALLOCATION_ID
+) t
+where CONTRACT_NUMBER = @contractNumber
+and DUE_DATE <= @atDate
+group by CONTRACT_NUMBER, DUE_DATE

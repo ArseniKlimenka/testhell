@@ -1,0 +1,102 @@
+{
+    "type": "Group",
+    "elements": [
+        {
+            "type": "DataGrid",
+            "value": {
+                "$ref": "#/properties/response/properties/data"
+            },
+            "mode": "DataSource",
+            "pagination": {
+                "mode": "Regular",
+                "pageSizes": [
+                    10,
+                    25,
+                    50,
+                    100
+                ]
+            },
+            "selection": {
+                "mode": "Multi",
+                "enableRowSelection": true,
+                "showCheckBox": true,
+                "onSelectionChanged": [
+                    {
+                        "commandType": "raiseEvent",
+                        "eventName": "Selected"
+                    }
+                ]
+            },
+            "height": "None",
+            "columns": [
+                {
+                    "sortable": true,
+                    "title": "Asset number",
+                    "cellContent": {
+                        "type": "Link",
+                        "value": {
+                            "mapping": "assetUrlMapping",
+                            "$ref": "#"
+                        },
+                        "targetType": "Entity",
+                        "width": 1,
+                        "content": {
+                            "text": {
+                                "type": "OutputText",
+                                "value": {
+                                    "$ref": "#/properties/resultData/properties/number"
+                                }
+                            }
+                        }
+                    },
+                    "name": "assetNumber"
+                },
+                {
+                    "sortable": true,
+                    "title": "Asset state description",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/state"
+                        }
+                    },
+                    "name": "stateDescription"
+                },
+                {
+                    "sortable": true,
+                    "title": "activeType",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/activeType"
+                        }
+                    },
+                    "name": "activeType"
+                },
+                {
+                    "sortable": true,
+                    "title": "idIsin",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/idIsin"
+                        }
+                    },
+                    "name": "stateDescridIsiniption"
+                },
+                {
+                    "sortable": true,
+                    "title": "paperShortName",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/paperShortName"
+                        }
+                    },
+                    "name": "paperShortName"
+                }
+            ],
+            "elementId": "TableViewId"
+        }
+    ]
+}

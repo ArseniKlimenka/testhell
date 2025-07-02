@@ -1,0 +1,51 @@
+{
+    "steps": [
+        {
+            "$ref": "AdjustAccountingPeriods",
+            "context": {
+                "firstOpenPeriod": "2022-01-01"
+            }
+        },
+        {
+            "$ref": "AdjustCurrentDate",
+            "context": {
+                "currentDate": "2022-01-01"
+            }
+        },
+        {
+            "code": "importIncomingBsi",
+            "actor": "ChiefPaymentDistributor",
+            "description": "Import incoming BSI",
+            "requests": [],
+            "executor": {
+                "module": "./steps/getNewBsi/executor.js",
+                "function": "executor"
+            },
+            "assert": {
+                "expected": "./steps/getNewBsi/expectedResult.json",
+                "module": "./steps/getNewBsi/assert.js",
+                "function": "assertBsi"
+            }
+        },
+        {
+            "code": "ValidateTransactions_1",
+            "description": "Validate transactions 1",
+            "requests": [],
+            "assert": {
+                "expected": "./steps/validateTransactions/expectedResult_1.json",
+                "module": "../../lib/accounting/assert.js",
+                "function": "assertTransactions"
+            },
+            "context": {
+                "transactionsRequest": {
+                    "bankStatementItemIds": [
+                        "{{$.bsi.bankStatementItemId}}"
+                    ]
+                }
+            }
+        },
+        {
+            "$ref": "AdjustCurrentDate"
+        }
+    ]
+}

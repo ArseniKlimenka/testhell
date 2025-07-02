@@ -1,0 +1,150 @@
+{
+    "type": "Group",
+    "elements": [
+        {
+            "type": "GridLayout",
+            "numberOfColumns": 12,
+            "elements": [
+                {
+                    "type": "Group",
+                    "elements": [
+                        {
+                            "type": "DataGrid",
+                            "value": {
+                                "$ref": "#"
+                            },
+                            "mode": "DataSource",
+                            "header": {
+                                "showReloadButton": true,
+                                "showNumberOfResults": true
+                            },
+                            "pagination": {
+                                "mode": "Regular",
+                                "pageSizes": [
+                                    5,
+                                    10,
+                                    15
+                                ]
+                            },
+                            "selection": {
+                                "mode": "None"
+                            },
+                            "height": "None",
+                            "columns": [
+                                {
+                                    "sortable": false,
+                                    "title": "publishedArtifactName",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "value": {
+                                            "$ref": "#/properties/resultData/properties/publishedArtifactName"
+                                        }
+                                    }
+                                },
+                                {
+                                    "sortable": false,
+                                    "title": "contractNumber",
+                                    "cellContent": {
+                                        "type": "Link",
+                                        "label": "contractNumber",
+                                        "targetType": "Entity",
+                                        "value": {
+                                            "mapping": "PrepareDocumentLink",
+                                            "$ref": "#/properties/resultData"
+                                        },
+                                        "content": {
+                                            "text": {
+                                                "type": "OutputText",
+                                                "textProperties": [
+                                                    "bold"
+                                                ],
+                                                "template": "{{expr contractNumber}}",
+                                                "value": {
+                                                    "$ref": "#"
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                {
+                                    "sortable": false,
+                                    "title": "processStateName",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "value": {
+                                            "$ref": "#/properties/resultData/properties/processStateName"
+                                        }
+                                    }
+                                },
+                                {
+                                    "sortable": false,
+                                    "title": "sysCreatedOn",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "template": "{{expr sysCreatedOn 'dt'}}",
+                                        "value": {
+                                            "$ref": "#/properties/resultData"
+                                        }
+                                    }
+                                },
+                                {
+                                    "sortable": false,
+                                    "title": "sysCreatedBy",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "value": {
+                                            "$ref": "#/properties/resultData/properties/sysCreatedBy"
+                                        }
+                                    }
+                                },
+                                {
+                                    "sortable": false,
+                                    "title": "sysUpdatedOn",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "template": "{{expr sysUpdatedOn 'dt'}}",
+                                        "value": {
+                                            "$ref": "#/properties/resultData"
+                                        }
+                                    }
+                                },
+                                {
+                                    "sortable": false,
+                                    "title": "sysUpdatedBy",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "value": {
+                                            "$ref": "#/properties/resultData/properties/sysUpdatedBy"
+                                        }
+                                    }
+                                },
+                                {
+                                    "sortable": false,
+                                    "title": "validFrom",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "template": "{{expr validFrom 'd'}}",
+                                        "value": {
+                                            "$ref": "#/properties/resultData"
+                                        }
+                                    }
+                                },
+                                {
+                                    "sortable": false,
+                                    "title": "comment",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "defaultValue": "",
+                                        "value": {
+                                            "$ref": "#/properties/resultData/properties/comment"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

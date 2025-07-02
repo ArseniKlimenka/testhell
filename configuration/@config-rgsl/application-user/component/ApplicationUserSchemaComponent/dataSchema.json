@@ -1,0 +1,63 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema",
+    "title": "Account type",
+    "description": "Accounting type enum.",
+    "additionalProperties": true,
+    "type": "object",
+    "required": [
+        "Username"
+    ],
+    "properties": {
+        "Username": {
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9\\._\\-@]+$"
+        },
+        "Password": {
+            "type": "string"
+        },
+        "LoginType": {
+            "type": "string"
+        },
+        "Claims": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "PartyCode": {
+                    "type": "string"
+                },
+                "DisplayName": {
+                    "type": "string"
+                },
+                "Email": {
+                    "type": "string"
+                },
+                "IsUserActive": {
+                    "type": "string"
+                },
+                "ExpireDate": {
+                    "type": "string",
+                    "aiFormat": "date"
+                },
+                "AccountType": {
+                    "$ref": "component:AccountType"
+                }
+            }
+        },
+        "UserGroups": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "additionalProperties": true
+            }
+        },
+        "UserRoles": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        },
+        "ExternalId": {
+            "type": "string"
+        }
+    }
+}

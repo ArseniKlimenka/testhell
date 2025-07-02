@@ -1,0 +1,540 @@
+{
+    "type": "Group",
+    "elements": [
+        {
+            "type": "DataGrid",
+            "elementId": "EconomicParametersSearchTable",
+            "mode": "DataSource",
+            "pagination": {
+                "mode": "Regular",
+                "pageSizes": [
+                    10,
+                    50,
+                    100
+                ]
+            },
+            "selection": {
+                "mode": "None"
+            },
+            "columns": [
+                {
+                    "title": "number",
+                    "cellContent": {
+                        "type": "Link",
+                        "targetType": "Entity",
+                        "value": {
+                            "mapping": "linkToDocumentOverview",
+                            "$ref": "#"
+                        },
+                        "width": 1,
+                        "openInNewTab": true,
+                        "content": {
+                            "text": {
+                                "type": "OutputText",
+                                "value": {
+                                    "$ref": "#/properties/resultData/properties/documentNumber"
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "sortable": true,
+                    "title": "enterValuesDate",
+                    "name": "enterValuesDate",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/enterValuesDate"
+                        }
+                    }
+                },
+                {
+                    "sortable": true,
+                    "title": "partner",
+                    "name": "partner",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "allowMultiLine": true,
+                        "defaultValue": "",
+                        "template": "{{#if partnerBusinessCode}}{{expr partnerDescription}} ({{expr partnerBusinessCode}}){{/if}}",
+                        "value": {
+                            "$ref": "#/properties/resultData"
+                        },
+                        "width": 4
+                    }
+                },
+                {
+                    "sortable": true,
+                    "title": "agentAgreement",
+                    "name": "agentAgreement",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "allowMultiLine": true,
+                        "defaultValue": "",
+                        "template": "{{#if agentAgreementExternalNumber}}{{#if agentAgreementManualNumber}}{{expr agentAgreementManualNumber}}{{else}}{{expr agentAgreementExternalNumber}}{{/if}}/{{expr agentAgreementExternalNumber}}{{/if}}",
+                        "value": {
+                            "$ref": "#/properties/resultData"
+                        },
+                        "width": 4
+                    }
+                },
+                {
+                    "sortable": true,
+                    "title": "commRate",
+                    "name": "commRate",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "defaultValue": "",
+                        "template": "{{expr agentAgreementCommRate 'p'}}",
+                        "value": {
+                            "$ref": "#/properties/resultData"
+                        }
+                    }
+                },
+                {
+                    "sortable": true,
+                    "title": "insuranceProduct",
+                    "name": "insuranceProduct",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "allowMultiLine": true,
+                        "defaultValue": "",
+                        "template": "{{#if productCode}}{{expr productDescription}} ({{expr productCode}}){{/if}}",
+                        "value": {
+                            "$ref": "#/properties/resultData"
+                        },
+                        "width": 4
+                    }
+                },
+                {
+                    "sortable": true,
+                    "title": "policyIssueDateStart",
+                    "name": "policyIssueDateStart",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/policyIssueDateStart"
+                        }
+                    }
+                },
+                {
+                    "sortable": true,
+                    "title": "policyIssueDateEnd",
+                    "name": "policyIssueDateEnd",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/policyIssueDateEnd"
+                        }
+                    }
+                },
+                {
+                    "sortable": true,
+                    "title": "strategyDescription",
+                    "name": "basicInvestmentParameters",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/bipStrategyDescription"
+                        }
+                    }
+                },
+                {
+                    "sortable": true,
+                    "title": "insuranceTermFrom",
+                    "name": "insuranceTermFrom",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "allowMultiLine": true,
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/insuranceTermFrom"
+                        },
+                        "width": 4
+                    }
+                },
+                {
+                    "sortable": true,
+                    "title": "insuranceTermTo",
+                    "name": "insuranceTermTo",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "allowMultiLine": true,
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/insuranceTermTo"
+                        },
+                        "width": 4
+                    }
+                },
+                {
+                    "sortable": true,
+                    "title": "currency",
+                    "name": "currency",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "allowMultiLine": true,
+                        "defaultValue": "",
+                        "template": "{{#if currencyNumericCode}}{{expr currencyDescription}} ({{expr currencyNumericCode}}){{/if}}",
+                        "value": {
+                            "$ref": "#/properties/resultData"
+                        },
+                        "width": 4
+                    }
+                },
+                {
+                    "sortable": true,
+                    "title": "paymentFrequency",
+                    "name": "paymentFrequency",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/paymentFrequencyDescription"
+                        }
+                    }
+                },
+                {
+                    "sortable": true,
+                    "title": "ratesOfReturn",
+                    "name": "ratesOfReturn",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "defaultValue": "",
+                        "template": "{{expr rorRateOfReturn 'p:2'}}",
+                        "value": {
+                            "$ref": "#/properties/resultData"
+                        }
+                    }
+                },
+                {
+                    "sortable": true,
+                    "title": "optionPrice",
+                    "name": "optionPrice",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/scOptionPrice"
+                        }
+                    }
+                },
+                {
+                    "sortable": true,
+                    "title": "fixRate",
+                    "name": "fixRate",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/scFixRate"
+                        }
+                    }
+                },
+                {
+                    "sortable": true,
+                    "title": "participationCoeff",
+                    "name": "participationCoeff",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/scParticipationCoeff"
+                        }
+                    }
+                },
+                {
+                    "sortable": true,
+                    "title": "segment",
+                    "name": "segment",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/segment"
+                        }
+                    }
+                },
+                {
+                    "sortable": true,
+                    "title": "isin",
+                    "name": "isin",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/isin"
+                        }
+                    }
+                },
+                {
+                    "sortable": true,
+                    "title": "rko",
+                    "name": "rko",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/rko"
+                        }
+                    }
+                },
+                {
+                    "sortable": true,
+                    "title": "motivationFromMargin",
+                    "name": "motivationFromMargin",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/motivationFromMargin"
+                        }
+                    }
+                },
+                {
+                    "sortable": true,
+                    "title": "motivationFromProductEconomic",
+                    "name": "motivationFromProductEconomic",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/motivationFromProductEconomic"
+                        }
+                    }
+                },
+                {
+                    "sortable": true,
+                    "title": "skMargin",
+                    "name": "skMargin",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "decimalPlaces": 3,
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/skMargin"
+                        }
+                    }
+                },
+                {
+                    "sortable": true,
+                    "title": "fundingRateSwaps",
+                    "name": "fundingRateSwaps",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/fundingRateSwaps"
+                        }
+                    }
+                },
+                {
+                    "sortable": true,
+                    "title": "laps",
+                    "name": "laps",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/laps"
+                        }
+                    }
+                },
+                {
+                    "sortable": true,
+                    "title": "hedge",
+                    "name": "hedge",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/hedge"
+                        }
+                    }
+                },
+                {
+                    "sortable": true,
+                    "title": "clientID",
+                    "name": "clientID",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/clientID"
+                        }
+                    }
+                },
+                {
+                    "sortable": true,
+                    "title": "shareRF",
+                    "name": "shareRF",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/shareRF"
+                        }
+                    }
+                },
+                {
+                    "sortable": true,
+                    "title": "shareGF",
+                    "name": "shareGF",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/shareGF"
+                        }
+                    }
+                },
+                {
+                    "sortable": true,
+                    "title": "rvd",
+                    "name": "rvd",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/rvd"
+                        }
+                    }
+                },
+                {
+                    "sortable": true,
+                    "title": "fundingVersionSubFundID",
+                    "name": "fundingVersionSubFundID",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/fundingVersionSubFundID"
+                        }
+                    }
+                },
+                {
+                    "sortable": true,
+                    "title": "memorandumPkDate",
+                    "name": "memorandumPkDate",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/memorandumPkDate"
+                        }
+                    }
+                },
+                {
+                    "sortable": true,
+                    "title": "pkNumber",
+                    "name": "pkNumber",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/pkNumber"
+                        }
+                    }
+                },
+                {
+                    "sortable": true,
+                    "title": "analyticalAdjustment",
+                    "name": "analyticalAdjustment",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/analyticalAdjustment"
+                        }
+                    }
+                },
+                {
+                    "sortable": true,
+                    "title": "expectedReturnPercentAK",
+                    "name": "expectedReturnPercentAK",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/expectedReturnPercentAK"
+                        }
+                    }
+                },
+                {
+                    "sortable": true,
+                    "title": "insurance",
+                    "name": "insurance",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/insurance"
+                        }
+                    }
+                },
+                {
+                    "sortable": true,
+                    "title": "riskTransferProduct",
+                    "name": "riskTransferProduct",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/riskTransferProduct"
+                        }
+                    }
+                },
+                {
+                    "sortable": true,
+                    "title": "comments",
+                    "name": "comments",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/comments"
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "type": "GridLayout",
+            "numberOfColumns": 3,
+            "elements": [
+                {
+                    "type": "Group",
+                    "stackContent": "Left",
+                    "width": 2,
+                    "elements": [
+                        {
+                            "type": "Button",
+                            "label": "Export last economic parameters",
+                            "onClick": [
+                                {
+                                    "commandType": "executeAction",
+                                    "actionName": "exportLastEconomicParameters"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Button",
+                            "label": "Export filtered economic parameters",
+                            "onClick": [
+                                {
+                                    "commandType": "executeAction",
+                                    "actionName": "exportFilteredEconomicParameters"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

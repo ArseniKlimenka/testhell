@@ -1,0 +1,40 @@
+{
+    "sinks": [
+        {
+            "name": "GetReservedByAsset",
+            "fetch": {
+                "configuration": {
+                    "name": "AssetLimitDataSource"
+                }
+            }
+        },
+        {
+            "name": "GetReservedByContract",
+            "fetch": {
+                "configuration": {
+                    "name": "AssetLimitDataSource"
+                }
+            }
+        },
+        {
+            "name": "ReleaseReservedLimit",
+            "database": {
+                "tables": [
+                    "PAS_IMPL.ASSET_LIMITS_ACCOUNTING"
+                ]
+            }
+        },
+        {
+            "name": "ReserveAssetLimit",
+            "database": {
+                "tables": [
+                    "PAS_IMPL.ASSET_LIMITS_ACCOUNTING"
+                ]
+            }
+        }
+    ],
+    "responses": [
+        200,
+        422
+    ]
+}

@@ -1,0 +1,122 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema",
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+        "actTypeId",
+        "actIssueDate",
+        "aaServiceProviderName",
+        "aaName",
+        "periodTo",
+        "reportingPeriodFrom",
+        "reportingPeriodTo"
+    ],
+    "aiDataEnrichment": [
+        {
+            "name": "UpdatePayDate"
+        }
+    ],
+    "aiAudit": {
+        "scope": "General"
+    },
+    "properties": {
+        "actId": {
+            "type": "integer"
+        },
+        "actNo": {
+            "type": "string"
+        },
+        "actTypeId": {
+            "aiTitle": "actTypeId",
+            "$ref": "component:ActTypeComponent"
+        },
+        "currencyCode": {
+            "type": "string"
+        },
+        "actIssueDate": {
+            "type": "string",
+            "aiFormat": "date",
+            "aiTitle": "actIssueDate"
+        },
+        "payDate": {
+            "type": "string",
+            "aiFormat": "date"
+        },
+        "aaServiceProviderCode": {
+            "type": "string"
+        },
+        "aaServiceProviderName": {
+            "type": "string",
+            "aiTitle": "aaServiceProviderName"
+        },
+        "aaNumber": {
+            "type": "string"
+        },
+        "aaName": {
+            "type": "string",
+            "aiTitle": "aaName"
+        },
+        "agentPersonalNumber": {
+            "type": "string"
+        },
+        "agentBusinessCode": {
+            "type": "string"
+        },
+        "products": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "includedGroup": {
+                    "$ref": "component:ProductGroup"
+                },
+                "included": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "excludedGroup": {
+                    "$ref": "component:ProductGroup"
+                },
+                "excluded": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "periodFrom": {
+            "type": "string",
+            "aiFormat": "date"
+        },
+        "periodTo": {
+            "type": "string",
+            "aiFormat": "date",
+            "aiTitle": "periodTo"
+        },
+        "reportingPeriodFrom": {
+            "type": "string",
+            "aiFormat": "date",
+            "aiTitle": "reportingPeriodFrom"
+        },
+        "reportingPeriodTo": {
+            "type": "string",
+            "aiFormat": "date",
+            "aiTitle": "reportingPeriodTo"
+        },
+        "originalReceiptDate": {
+            "type": "string",
+            "aiFormat": "date"
+        },
+        "notes": {
+            "type": "string"
+        },
+        "isDocCorrect": {
+            "type": "boolean"
+        },
+        "groupByContract": {
+            "type": "boolean"
+        }
+    }
+}

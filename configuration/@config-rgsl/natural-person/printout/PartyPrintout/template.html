@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="ru-RU" xml:lang="ru-RU" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+    <title>Анкета ФЛ</title>
+    <style>
+        table {
+            width: 98%;
+            border-collapse: collapse;
+            margin-bottom: 15px;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid black;
+        }
+
+        th,
+        td {
+            text-align: left;
+        }
+
+        body {
+            max-width: 100%;
+            min-height: 100%;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 10pt;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+
+        }
+
+        .borderless {
+            border: 0px;
+            margin: 0px;
+            padding: 0px;
+        }
+
+        .section {
+            margin: 5px;
+        }
+
+        .outer {
+            padding: 5px;
+        }
+
+        .whiteTextAndGrayBackground {
+            color: white;
+            background-color: grey;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+
+    </div>
+
+    <table class="naturalPerson">
+        <tr>
+            <td class="whiteTextAndGrayBackground">
+                <b>АНКЕТА ФИЗИЧЕСКОГО ЛИЦА</b>
+            </td>
+        </tr>
+
+        <tr>
+            <td class="whiteTextAndGrayBackground">
+                <b>ID клиента: {{entityCode}}</b>
+        </tr>
+        </tr>
+
+        <tr>
+            <td>
+                <b>{{partyRole}}</b>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <b>Ф.И.О. {{body.partyPersonData.lastName}} {{body.partyPersonData.firstName}}
+                    {{body.partyPersonData.middleName}}</b>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <table class="borderless">
+                    <tr>
+                        <td class="borderless" width="33%"> <b> Пол: </b> {{gender}} </td>
+                        <td class="borderless" width="33%"> <b> Дата рождения: </b> {{dateOfBirth}}
+                        </td>
+                        <td class="borderless" width="33%"> <b> Место рождения: </b> {{body.partyPersonData.birthPlace}}
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <table class="borderless">
+                    <tr>
+                        <td class="borderless" width="33%"> <b> Страна рождения: </b>
+                            {{birthplace}} </td>
+                        <td class="borderless" width="33%"> <b> Гражданство: </b>
+                            {{citizenship}} </td>
+                        {{#if body.partyPersonData.isStatelessPerson}}
+                        <td class="borderless" width="33%"> <label> <b> Лицо без гражданства </b> <input type="checkbox"
+                                    checked> </label> </td>
+                        {{/if}}
+                        {{#unless body.partyPersonData.isStatelessPerson}}
+                        <td class="borderless" width="33%"> <label> <b> Лицо без гражданства </b> <input
+                                    type="checkbox"> </label> </td>
+                        {{/unless}}
+                    </tr>
+                </table>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <table class="borderless">
+                    <tr>
+                        <td class="borderless" width="33%"> <b> СНИЛС: </b> {{body.partyPersonData.SNILS}} </td>
+                        <td class="borderless" width="67%"> <b> Сегмент:</b>
+                            {{body.partyPersonData.segment.segmentDesc}} </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <table class="borderless">
+                    <tr>
+                        {{#if body.partyPersonData.isPublicOfficial}}
+                        <td class="borderless" width="33%"> <label> <b> ПДЛ: </b> <input type="checkbox" checked>
+                            </label> </td>
+                        {{/if}}
+                        {{#unless body.partyPersonData.isPublicOfficial}}
+                        <td class="borderless" width="33%"> <label> <b> ПДЛ: </b> <input type="checkbox"> </label> </td>
+                        {{/unless}}
+                        <td class="borderless" width="67%"> <b> Должностное лицо: </b>
+                            {{body.partyPersonData.executivePerson.executivePersonDesc}} </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <b>Категория: </b>{{naturalPersonCategory}}
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <table class="borderless" width="33%">
+                    <tr>
+                        {{#if body.partyPersonData.site.hasWebsite}}
+                        <td class="borderless" width="33%"> <label> <b> Официальный сайт: </b> <input type="checkbox"
+                                    checked> </label> </td>
+                        {{/if}}
+                        {{#unless body.partyPersonData.site.hasWebsite}}
+                        <td class="borderless" width="33%"> <label> <b> Официальный сайт: </b> <input type="checkbox">
+                            </label> </td>
+                        {{/unless}}
+
+                        <td class="borderless" width="67%"> Адрес сайта: {{body.partyPersonData.site.websiteAddress}}
+                        </td>
+                    </tr>
+
+                </table>
+            </td>
+        </tr>
+
+        {{#if soleProprietorHistory}}
+        <tr class="outer">
+            <td class="outer">
+
+                <div class="section">
+                    Сведения об индивидуальном предпринимателе
+                    <table style="margin-left: 50px;">
+                        <thead>
+                            <tr>
+                                <th>ОГРН/ОГРНИП</th>
+                                <th>ДАТА ГОСУДАРСТВЕННОЙ РЕГИСТРАЦИИ</th>
+                                <th>ДАТА ВНЕСЕНИЯ ЗАПИСИ О ПРЕКРАЩЕНИИ ДЕЯТЕЛЬНОСТИ</th>
+                            </tr>
+                        </thead>
+
+                        {{#each soleProprietorHistory}}
+                        <tr>
+                            <td>{{this.partyOGRN.OGRNOGRNIP}}</td>
+                            <td>{{this.partyOGRN.dateOfStateRegistration}}</td>
+                            <td>{{this.partyOGRN.dateOfRecordingTermination}}</td>
+                        </tr>
+                        {{/each}}
+                    </table>
+                </div>
+            </td>
+        </tr>
+        {{/if}}
+
+
+        <tr class="outer">
+            <td class="outer">
+                <div class="section">
+                    {{#if body.partyPersonData.partyLicenses}}
+                    <label> Наличие лицензии на право осуществления деятельности, подлежащей лицензированию <input
+                            type="checkbox" checked> </label>
+                    {{/if}}
+
+                    {{#unless body.partyPersonData.partyLicenses}}
+                    <label> Наличие лицензии на право осуществления деятельности, подлежащей лицензированию <input
+                            type="checkbox"> </label>
+                    {{/unless}}
+
+                    {{#if body.partyPersonData.partyLicenses}}
+                    <table>
+                        <tr>
+                            <th>НОМЕР ЛИЦЕНЗИИ/РАЗРЕШЕНИЯ</th>
+                            <th>НАИМЕНОВАНИЕ ОРГАНА, ВЫДАВШЕГО ЛИЦЕНЗИЮ (РАЗРЕШЕНИЕ)</th>
+                            <th>ДАТА ВЫДАЧИ ЛИЦЕНЗИИ (РАЗРЕШЕНИЯ)</th>
+                        </tr>
+
+                        {{#each partyLicenses}}
+                        <tr>
+                            <td>{{this.licenseNumber}}</td>
+                            <td>{{this.licensingAuthority}}</td>
+                            <td>{{this.dateOfIssueOfLicense}}</td>
+                        </tr>
+                        {{/each}}
+
+                    </table>
+                    {{/if}}
+                </div>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <table class="borderless">
+                    <tr>
+                        {{#if body.partyGeneralData.isNonResident}}
+                        <td class="borderless" width="33%"> <label> <b> Нерезидент РФ: </b> <input type="checkbox"
+                                    checked> </label> </td>
+                        {{/if}}
+                        {{#unless body.partyGeneralData.isNonResident}}
+                        <td class="borderless" width="33%"> <label> <b> Нерезидент РФ: </b> <input type="checkbox">
+                            </label> </td>
+                        {{/unless}}
+
+                        {{#if body.partyGeneralData.isPodFt}}
+                        <td class="borderless" width="67%"> <label> <b> ПОД/ФТ/ФРОМУ </b> <input type="checkbox"
+                                    checked> </label> </td>
+                        {{/if}}
+                        {{#unless body.partyGeneralData.isPodFt}}
+                        <td class="borderless" width="67%"> <label> <b> ПОД/ФТ/ФРОМУ </b> <input type="checkbox">
+                            </label> </td>
+                        {{/unless}}
+                    </tr>
+                </table>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <table class="borderless">
+                    <tr>
+                        <td class="borderless" width="33%"> Страна регистрации:
+                            {{registrationCountry}}</td>
+                        <td class="borderless" width="67%"> Страна налогового резидентства:
+                            {{residencyCountry}}</td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <table class="borderless">
+                    <tr>
+                        <td class="borderless" width="33%"> ИНН:
+                            {{body.partyGeneralData.INNKIO}}</td>
+                        <td class="borderless" width="33%"> ОКПО:
+                            {{body.partyGeneralData.OKPO}}</td>
+                        <td class="borderless" width="33%"> ОКВЭД:
+                            {{body.partyGeneralData.OKVED}}</td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <table class="borderless">
+                    <tr>
+                        <td class="borderless" width="33%"> Оценка риска:
+                            {{body.partyGeneralData.riskEstimation}}</td>
+                        <td class="borderless" width="67%"> Цель установки отношений:
+                            {{relationGoal}}</td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <table class="borderless">
+                    <tr>
+                        <td class="borderless" width="33%"> Предполагаемый характер отношений:
+                            {{suggestedRelationType}}</td>
+                        <td class="borderless" width="67%"> Финансовое положение:
+                            {{financialState}}</td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <table class="borderless">
+                    <tr>
+                        <td class="borderless" width="33%"> Деловая репутация:
+                            {{businessReputation}}</td>
+                        <td class="borderless" width="67%"> Код Trading partner:
+                            {{body.partyGeneralData.tradingPartnerCode}}</td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Цель финансово-хозяйственной деятельности:
+                {{body.partyGeneralData.goalOfFinancialActivity.goalOfFinancialActivityDesc}}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Источник происхождения денежных средств: {{body.partyGeneralData.incomeSource.incomeSourceDesc}}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Бенефициарный владелец: {{body.partyGeneralData.beneficiaryOwner.beneficiaryOwnerDesc}}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Дата обновления ПД клиента по 115 ФЗ: {{lastUpdateDate}}
+            </td>
+        </tr>
+
+        {{#if partyAddresses}}
+        <tr class="outer">
+            <td class="outer">
+                <div class="section">
+                    Адреса
+                    <table>
+                        <tr>
+                            <th>ТИП АДРЕСА</th>
+                            <th>ПОЛНЫЙ АДРЕС</th>
+                            <th>АКТУАЛЕН С</th>
+                            <th>АКТУАЛЕН ПО</th>
+                        </tr>
+
+                        {{#each partyAddresses}}
+                        <tr>
+                            <td>{{this.addressType.addressTypeDesc}}</td>
+                            <td>{{this.fullAddress.value}}</td>
+                            <td>{{this.actualFrom}}</td>
+                            <td>{{this.actualTo}}</td>
+                        </tr>
+                        {{/each}}
+                    </table>
+                </div>
+            </td>
+        </tr>
+        {{/if}}
+
+        {{#if partyDocuments}}
+        <tr class="outer">
+            <td class="outer">
+                <div class="section">
+                    Документы
+                    <table>
+                        <tr>
+                            <th>ТИП</th>
+                            <th>СЕРИЯ</th>
+                            <th>НОМЕР</th>
+                            <th>ДАТА ВЫДАЧИ</th>
+                            <th>ДАТА ОКОНЧАНИЯ СРОКА ДЕЙСТВИЯ</th>
+                        </tr>
+
+                        {{#each partyDocuments}}
+                        <tr>
+                            <td>{{this.docType.docTypeDesc}}</td>
+                            <td>{{this.docSeries}}</td>
+                            <td>{{this.docNumber}}</td>
+                            <td>{{this.issueDate}}</td>
+                            <td>{{this.expireDate}}</td>
+                        </tr>
+                        {{/each}}
+                    </table>
+                    Выдан: {{issuerName}}<br />
+                    Код подразделения: {{issuerCode}}
+                </div>
+            </td>
+        </tr>
+        {{/if}}
+
+        {{#if partyPhones}}
+        <tr class="outer">
+            <td class="outer">
+                <div class="section">
+                    Телефоны
+                    <table>
+                        <tr>
+                            <th>ТИП</th>
+                            <th>НОМЕР</th>
+                            <th>ПРЕДПОЧТИТЕЛЬНО</th>
+                            <th>ДЛЯ ИНФОРМАЦИОННОЙ РАССЫЛКИ</th>
+                            <th>НЕАКТУАЛЬНЫЙ</th>
+                        </tr>
+
+                        {{#each partyPhones}}
+                        <tr>
+                            <td>{{this.phoneType.phoneTypeDesc}}</td>
+                            <td>{{this.fullNumberFormatted}}</td>
+                            <td>{{this.isPreferable}}</td>
+                            <td>{{this.isForNewsletters}}</td>
+                            <td>{{this.isNonActual}}</td>
+                        </tr>
+                        {{/each}}
+
+                    </table>
+                </div>
+            </td>
+        </tr>
+        {{/if}}
+
+        {{#if partyEmails}}
+        <tr class="outer">
+            <td class="outer">
+                <div class="section">
+                    E-mail
+                    <table>
+                        <tr>
+                            <th>E-MAIL</th>
+                            <th>ПРЕДПОЧТИТЕЛЬНО</th>
+                            <th>ДЛЯ ИНФОРМАЦИОННОЙ РАССЫЛКИ</th>
+                        </tr>
+
+                        {{#each partyEmails}}
+                        <tr>
+                            <td>{{this.email}}</td>
+                            <td>{{this.isPreferable}}</td>
+                            <td>{{this.isForNewsletters}}</td>
+                        </tr>
+                        {{/each}}
+
+                    </table>
+
+                    <label> Нет E-mail <input type="checkbox"> </label>
+                </div>
+            </td>
+        </tr>
+        {{/if}}
+
+        {{#if noEmail}}
+        <tr class="outer">
+            <td class="outer">
+                <div class="section">
+                    <label> Нет E-mail <input type="checkbox" checked> </label>
+                </div>
+            </td>
+        </tr>
+        {{/if}}
+
+        {{#if partyBankAccounts}}
+        <tr class="outer">
+            <td class="outer">
+                <div class="section">
+                    Банковские счета
+                    <table>
+                        <tr>
+                            <th>БАНК</th>
+                            <th>ВАЛЮТА</th>
+                            <th>НОМЕР СЧЕТА</th>
+                            <th>ДАТА ОТКРЫТИЯ</th>
+                            <th>ДАТА ЗАКРЫТИЯ</th>
+                        </tr>
+
+                        {{#each partyBankAccounts}}
+                        <tr>
+                            <td>{{this.bankName}}</td>
+                            <td>{{this.currency.currencyDesc}}</td>
+                            <td>{{this.number}}</td>
+                            <td>{{this.openingDate}}</td>
+                            <td>{{this.closingDate}}</td>
+                        </tr>
+                        {{/each}}
+
+                    </table>
+                </div>
+            </td>
+        </tr>
+        {{/if}}
+
+        <tr class="outer">
+            <td class="outer">
+                <div width="100%">
+                    <b>Анкета фин. грамотности</b>
+                    <b>Дата актуализации: </b>{{finKnowledgeLastUpdateDate}}
+                    <table width="100%">
+                        {{#each body.finKnowledgeQuestionnaire2024.questionnaire}}
+                        <tr>
+                            <td>{{this.itemText}}</td>
+
+                            {{#if this.itemConfirmation}}
+                            <td width="15%">ДА</td>
+                            <td width="15%"> </td>
+                            {{/if}}
+
+                            {{#unless this.itemConfirmation}}
+                            <td width="15%"> </td>
+                            <td width="15%">НЕТ</td>
+                            {{/unless}}
+                        </tr>
+                        {{/each}}
+                    </table>
+                </div>
+            </td>
+        </tr>
+
+        {{#if partyTaxResidencies}}
+        <tr class="outer">
+            <td class="outer">
+                <div class="section">
+                    Периоды налогового резидентства
+                    <table>
+                        <tr>
+                            <th>СТРАНА ПРЕБЫВАНИЯ</th>
+                            <th>ДОКУМЕНТ, ПОДТВЕРЖДАЮЩИЙ ПРЕБЫВАНИЕ</th>
+                            <th>СРОК ПРЕБЫВАНИЯ, С</th>
+                            <th>СРОК ПРЕБЫВАНИЯ, ПО</th>
+                            <th>КОЛИЧЕСТВО</th>
+                        </tr>
+
+                        {{#each partyTaxResidencies}}
+                        <tr>
+                            <td>{{this.residenceCountry.countryShortName}}</td>
+                            <td>{{this.docType.docTypeDesc}}</td>
+                            <td>{{this.startDate}}</td>
+                            <td>{{this.endDate}}</td>
+                            <td>{{this.daysCount}}</td>
+                        </tr>
+                        {{/each}}
+                    </table>
+                </div>
+            </td>
+        </tr>
+        {{/if}}
+
+        <tr>l
+            <td>
+                Список лиц, исключаемых из списка 3-х лиц по отношению к данному контрагенту:
+                <p>{{patryExcludedPersons}}</p>
+            </td>
+        </tr>
+
+        {{#if partyFinQuest}}
+        <tr class="outer">
+            <td class="outer">
+                <div class="section">
+                    <div>История изменения Анкеты финансовой грамотности:</div>
+                    <table>
+                        <tr>
+                            <th>ДАТА УСТАНОВКИ</th>
+                            <th>ОТВЕТ 1</th>
+                            <th>ОТВЕТ 2</th>
+                            <th>ОТВЕТ 3</th>
+                            <th>ОТВЕТ 4</th>
+                            <th>ОТВЕТ 5</th>
+                            <th>ПОЛЬЗОВАТЕЛЬ</th>
+                        </tr>
+
+                        {{#each partyFinQuest}}
+                        <tr>
+                            <td>{{this.sysUpdatedOn}}</td>
+                            <td>{{this.question1}}</td>
+                            <td>{{this.question2}}</td>
+                            <td>{{this.question3}}</td>
+                            <td>{{this.question4}}</td>
+                            <td>{{this.question5}}</td>
+                            <td>{{this.sysUpdatedBy}}</td>
+                        </tr>
+                        {{/each}}
+                    </table>
+                </div>
+            </td>
+        </tr>
+        {{/if}}
+
+        {{#if partyFinQuest2023}}
+        <tr class="outer">
+            <td class="outer">
+                <div class="section">
+                    <b>История изменения Анкеты финансовой грамотности (активной до 01.11.2024):</b>
+                    <table>
+                        <tr>
+                            <th>ДАТА УСТАНОВКИ</th>
+                            <th>ОТВЕТ 1</th>
+                            <th>ОТВЕТ 2</th>
+                            <th>ОТВЕТ 3</th>
+                            <th>ОТВЕТ 4</th>
+                            <th>ОТВЕТ 5</th>
+                            <th>ПОЛЬЗОВАТЕЛЬ</th>
+                        </tr>
+
+                        {{#each partyFinQuest2023}}
+                        <tr>
+                            <td>{{this.sysUpdatedOn}}</td>
+                            <td>{{this.question1}}</td>
+                            <td>{{this.question2}}</td>
+                            <td>{{this.question3}}</td>
+                            <td>{{this.question4}}</td>
+                            <td>{{this.question5}}</td>
+                            <td>{{this.sysUpdatedBy}}</td>
+                        </tr>
+                        {{/each}}
+                    </table>
+                </div>
+            </td>
+        </tr>
+        {{/if}}
+
+        {{#if deduplicationInfo}}
+        <tr class="outer">
+            <td class="outer">
+                <div class="section">
+                    <b>Дедуплицированные контрагенты:</b>
+                    <table>
+                        <tr>
+                            <th>ФИО</th>
+                            <th>КОД</th>
+                        </tr>
+
+                        {{#each deduplicationInfo}}
+                        <tr>
+                            <td>{{this.partyFullName}}</td>
+                            <td>{{this.partyCode}}</td>
+                        </tr>
+                        {{/each}}
+                    </table>
+                </div>
+            </td>
+        </tr>
+        {{/if}}
+
+        {{#if partyHistory}}
+        <tr class="outer">
+            <td class="outer">
+                <div class="section">
+                    <b>История изменений:</b>
+                    <table>
+                        <tr>
+                            <th>ДАТА ИЗМЕНЕНИЙ</th>
+                            <th>НАИМЕНОВАНИЕ АТРИБУТА/ЧЕК БОКСА</th>
+                            <th>СТАРОЕ ЗНАЧЕНИЕ</th>
+                            <th>НОВОЕ ЗНАЧЕНИЕ</th>
+                            <th>ИМЯ ПОЛЬЗОВАТЕЛЯ</th>
+                        </tr>
+
+                        {{#each partyHistory}}
+                        <tr>
+                            <td>{{this.sysUpdatedOn}}</td>
+                            <td>{{this.attributeRu}}</td>
+                            <td>{{this.oldValue}}</td>
+                            <td>{{this.newValue}}</td>
+                            <td>{{this.sysUpdatedByUserName}}</td>
+                        </tr>
+                        {{/each}}
+                    </table>
+                </div>
+            </td>
+        </tr>
+        {{/if}}
+
+        <tr class="outer">
+            <td class="outer">
+                <div class="section">
+                    <b>Результат проверок 1 С КПК:</b>
+                    <div>
+                        Перечень террористов/экстремистов
+                    </div>
+                    <table>
+
+                        <tr>
+                            <th>ДАТА ПЕРЕЧНЯ</th>
+                            <th>ДАТА И ВРЕМЯ СВЕРКИ</th>
+                            <th>СОВПАДЕНИЕ</th>
+                        </tr>
+
+                        {{#each terroristsExtremists}}
+                        <tr>
+                            <td>{{this.listDate}}</td>
+                            <td>{{this.creationDate}}</td>
+                            <td>{{this.isContains}}</td>
+                        </tr>
+                        {{/each}}
+                    </table>
+                    <div>
+                        Перечень ООН
+                    </div>
+                    <table>
+
+                        <tr>
+                            <th>ДАТА ПЕРЕЧНЯ</th>
+                            <th>ДАТА И ВРЕМЯ СВЕРКИ</th>
+                            <th>СОВПАДЕНИЕ</th>
+                        </tr>
+
+                        {{#each unitedNationsListPersons}}
+                        <tr>
+                            <td>{{this.listDate}}</td>
+                            <td>{{this.creationDate}}</td>
+                            <td>{{this.isContains}}</td>
+                        </tr>
+                        {{/each}}
+                    </table>
+                    <div>
+                        Перечень МВК
+                    </div>
+                    <table>
+
+                        <tr>
+                            <th>ДАТА ПЕРЕЧНЯ</th>
+                            <th>ДАТА И ВРЕМЯ СВЕРКИ</th>
+                            <th>СОВПАДЕНИЕ</th>
+                        </tr>
+
+                        {{#each MVKPersons}}
+                        <tr>
+                            <td>{{this.listDate}}</td>
+                            <td>{{this.creationDate}}</td>
+                            <td>{{this.isContains}}</td>
+                        </tr>
+                        {{/each}}
+                    </table>
+                    <div>
+                        Перечень 281-ФЗ (Перечень контрсанкционных лиц)
+                    </div>
+                    <table>
+
+                        <tr>
+                            <th>ДАТА ПЕРЕЧНЯ</th>
+                            <th>ДАТА И ВРЕМЯ СВЕРКИ</th>
+                            <th>СОВПАДЕНИЕ</th>
+                        </tr>
+
+                        {{#each list281}}
+                        <tr>
+                            <td>{{this.listDate}}</td>
+                            <td>{{this.creationDate}}</td>
+                            <td>{{this.isContains}}</td>
+                        </tr>
+                        {{/each}}
+                    </table>
+                    <div>
+                        Перечень 272-ФЗ
+                    </div>
+                    <table>
+
+                        <tr>
+                            <th>ДАТА ПЕРЕЧНЯ</th>
+                            <th>ДАТА И ВРЕМЯ СВЕРКИ</th>
+                            <th>СОВПАДЕНИЕ</th>
+                        </tr>
+
+                        {{#each list272}}
+                        <tr>
+                            <td>{{this.listDate}}</td>
+                            <td>{{this.creationDate}}</td>
+                            <td>{{this.isContains}}</td>
+                        </tr>
+                        {{/each}}
+                    </table>
+                </div>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <div class="section">
+                    <p><b>Дата начала отношений с клиентом:</b> {{naturalPersonCardCreationDate}}</p>
+                </div>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <div class="section">
+                    <b>Дата прекращения отношений с клиентом:</b>
+                </div>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <div class="section">
+                    <p><b>Дата оформления анкеты:</b> {{documentCreationDate}}</p>
+                </div>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <div class="section">
+                    <b>{{userFIO}}/ заполнение (обновление) осуществлено с использованием автоматизированных систем</b>
+                </div>
+            </td>
+        </tr>
+
+    </table>
+</body>
+
+</html>

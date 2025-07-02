@@ -1,0 +1,68 @@
+'use strict';
+
+module.exports = function resultMapping(input) {
+
+    const output = {};
+
+    output.documentNumber = input.UNIVERSAL_VERSIONED_DOCUMENT_NUMBER;
+    output.productCode = input.PRODUCT_CODE;
+    output.productDescription = input.DESCRIPTION;
+    output.ruleNum = input.RULE_NUM;
+    output.policyIssueDateStart = input.ISSUE_DATE_START;
+    output.policyIssueDateEnd = input.ISSUE_DATE_END;
+    output.insuranceTermFrom = input.INSURANCE_TERM_FROM;
+    output.insuranceTermTo = input.INSURANCE_TERM_TO;
+    output.partnerCode = input.PARTNER_CODE;
+    output.partnerBusinessCode = input.PARTNER_BUSINESS_CODE;
+    output.partnerDescription = input.FULL_NAME;
+    output.agentAgreementId = input.AGENT_AGREEMENT_ID;
+    output.agentAgreementNumber = input.AGENT_AGREEMENT_NUMBER;
+    output.agentAgreementExternalNumber = input.AGENT_AGREEMENT_EXT_NUMBER;
+    output.agentAgreementManualNumber = input.AGENT_AGREEMENT_MANUAL_NUMBER;
+    output.agentAgreementCommRate = input.AGENT_AGREEMENT_COMM_RATE;
+    output.currencyNumericCode = input.CURRENCY_CODE;
+    output.paymentFrequencyCode = input.PAYMENT_FREQUENCY_CODE;
+    output.currencyDescription = input.CURRENCY_DESCRIPTION;
+    output.paymentFrequencyCode = input.PAYMENT_FREQUENCY_CODE;
+    output.guaranteedIncomeCode = input.GUARANTEE_INCOME_CODE;
+    output.bipStrategyCode = input.BIP_STRATEGY_CODE;
+    output.bipStrategyDescription = input.BIP_STRATEGY_DESCRIPTION;
+    output.rorIssueDateFrom = input.ROR_ISSUE_DATE_FROM;
+    output.rorIssueDateTo = input.ROR_ISSUE_DATE_TO;
+    output.rorStrategyCode = input.ROR_STRATEGY_CODE;
+    output.rorInsuranceTerms = input.ROR_INSURANCE_TERMS;
+    output.rorCurrencyCode = input.ROR_CURRENCY_CODE;
+    output.rorGuaranteedIncome = input.ROR_GUARANTEE_INCOME_CODE;
+    output.rorRateOfReturn = input.ROR_RATE_OF_RETURN;
+    output.scIssueDateFrom = input.SC_ISSUE_DATE_FROM;
+    output.scIssueDateTo = input.SC_ISSUE_DATE_TO;
+    output.scOptionPrice = input.SC_OPTION_PRICE;
+    output.scFixRate = input.SC_FIX_RATE;
+    output.scParticipationCoeff = input.SC_PARTICIPATION_COEFF;
+    output.scCurrencyCode = input.SC_CURRENCY_CODE;
+    output.segment = input.SEGMENT;
+    output.isin = input.ISIN;
+    output.rko = input.RKO;
+    output.motivationFromMargin = input.MOTIVATION_FROM_MARGIN;
+    output.motivationFromProductEconomic = input.MOTIVATION_FROM_PRODUCT_ECONOMIC;
+    output.skMargin = input.SK_MARGIN;
+    output.fundingRateSwaps = input.FUNDING_RATE_SWAPS;
+    output.laps = input.LAPS;
+    output.hedge = input.HEDGE;
+    output.clientID = input.CLIENT_ID;
+    output.shareRF = input.SHARE_RF;
+    output.shareGF = input.SHARE_GF;
+    output.rvd = input.RVD;
+    output.fundingVersionSubFundID = input.FUNDING_VER_SUB_FUND_ID;
+    output.memorandumPkDate = input.MEMORANDUM_PK_DATE;
+    output.pkNumber = input.PK_NUMBER;
+    output.analyticalAdjustment = input.ANALYTICAL_ADJUSTMENT;
+    output.expectedReturnPercentAK = input.EXPECTED_RETURN_PERCENT_AK;
+    output.insurance = input.INSURANCE;
+    output.riskTransferProduct = input.RISK_TRANSFER_PRODUCT;
+    output.comments = input.COMMENTS;
+    output.enterValuesDate = input.LOAD_DATE;
+    output.paymentFrequencyDescription = input.PAYMENT_FREQUENCY_DESCRIPTION;
+
+    return output;
+};

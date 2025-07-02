@@ -1,0 +1,23 @@
+select
+	CONTRACT_NUMBER,
+	REVALUATION_DATA_ID,
+	LOAD_DATE,
+	DUE_DATE,
+	OBJECT_CODE,
+	ITEM_NO,
+	AMOUNT,
+	OPEN_AMOUNT,
+	EXCHANGE_RATE,
+	REVALUATION_AMOUNT
+from acc_impl.REVALUATION_DATA t
+where 1=1
+	and t.REVALUATION_TYPE_ID = @revaluationTypeId
+	and t.LOAD_DATE = (
+		select max(f.LOAD_DATE)
+		from acc_impl.REVALUATION_DATA f
+		where 1=1
+			and f.CONTRACT_NUMBER = t.CONTRACT_NUMBER
+			and f.DUE_DATE = t.DUE_DATE
+			and f.ITEM_NO = t.ITEM_NO
+	)
+	and t.CONTRACT_NUMBER in (@contractNumbers)

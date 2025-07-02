@@ -1,0 +1,108 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+        "criteria": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "documentCode": {
+                    "type": "string"
+                },
+                "contractNumber": {
+                    "type": "string"
+                },
+                "riskCode": {
+                    "type": "string"
+                },
+                "documentState": {
+                    "type": "string",
+                    "enum": [
+                        "OperationsApproval",
+                        "OperationsDirectorApproval",
+                        "InsuranceMethodologyApproval",
+                        "ActuaryApproval",
+                        "AccountingApproval",
+                        "ComplianceApproval",
+                        "SecurityApproval",
+                        "LegalApproval",
+                        "CallCenterApproval",
+                        "PartnerSalesSupportApproval",
+                        "ClientServiceApproval",
+                        "RequestToClient",
+                        "DeputyDirectorAproval",
+                        "POCreation",
+                        "SentToPayment",
+                        "Paid",
+                        "Rejected",
+                        "Cancelled"
+                    ]
+                },
+                "applicantCode": {
+                    "type": "string"
+                },
+                "applicantFullName": {
+                    "type": "string"
+                },
+                "eventType": {
+                    "type": "string"
+                },
+                "eventReason": {
+                    "type": "string"
+                },
+                "eventDateFrom": {
+                    "type": "string",
+                    "format": "date",
+                    "aiFormat": "date"
+                },
+                "eventDateTo": {
+                    "type": "string",
+                    "format": "date",
+                    "aiFormat": "date"
+                },
+                "eventDate": {
+                    "type": "string",
+                    "format": "date",
+                    "aiFormat": "date"
+                },
+                "statementReceivedDateFrom": {
+                    "type": "string",
+                    "format": "date",
+                    "aiFormat": "date"
+                },
+                "statementReceivedDateTo": {
+                    "type": "string",
+                    "format": "date",
+                    "aiFormat": "date"
+                },
+
+                "statementApplicationDateFrom": {
+                    "type": "string",
+                    "format": "date",
+                    "aiFormat": "date"
+                },
+                "statementApplicationDateTo": {
+                    "type": "string",
+                    "format": "date",
+                    "aiFormat": "date"
+                },
+                "beneficiaryCode": {
+                    "type": "string"
+                },
+                "onlyPaid": {
+                    "type": "boolean"
+                },
+                "onlyNotPaid": {
+                    "type": "boolean"
+                },      
+                "onlyNotCancelled": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "sort": {
+            "type": "array"
+        }
+    }
+}

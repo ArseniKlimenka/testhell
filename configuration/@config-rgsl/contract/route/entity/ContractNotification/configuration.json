@@ -1,0 +1,33 @@
+{
+    "entityType": "Contract",
+    "version": "1",
+    "condition": {
+        "events": [
+            "StatusChanged",
+            "Created"
+        ],
+        "configuration": {
+            "dimensions": {
+                "contractType": [
+                    "Policy"
+                ]
+            }
+        },
+        "documentStates": [
+            "Draft",
+            "Active"
+        ]
+    },
+    "executionOrderWeight": 100,
+    "sinks": [
+        {
+            "ref": "SendContractInfoEmailSinkGroup"
+        },
+        {
+            "ref": "SendContractVerificationSmsSinkGroup"
+        },
+        {
+            "ref": "SendOfferInfoEmailSinkGroup"
+        }
+    ]
+}

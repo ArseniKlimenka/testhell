@@ -1,0 +1,210 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+        "criteria": {
+            "type": "object",
+            "aiTitle": "criteria",
+            "additionalProperties": false,
+            "anyOf": [
+                {
+                    "required": [
+                        "actId"
+                    ]
+                },
+                {
+                    "required": [
+                        "actNo"
+                    ]
+                },
+                {
+                    "required": [
+                        "documentNumber"
+                    ]
+                },
+                {
+                    "required": [
+                        "documentNumbers"
+                    ],
+                    "properties": {
+                        "documentNumbers": {
+                            "type": "array",
+                            "minItems": 1
+                        }
+                    }
+                },
+                {
+                    "required": [
+                        "documentNumbersStr"
+                    ]
+                }
+            ],
+            "properties": {
+                "actId": {
+                    "type": "integer",
+                    "aiTitle": "actId"
+                },
+                "actItemId": {
+                    "type": "integer"
+                },
+                "documentNumber": {
+                    "type": "string",
+                    "aiTitle": "documentNumber"
+                },
+                "documentNumbers": {
+                    "type": "array",
+                    "aiTitle": "documentNumbers",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "documentNumbersStr": {
+                    "type": "string",
+                    "aiTitle": "documentNumbersStr"
+                },
+                "stateCode": {
+                    "$ref": "component:ContractState"
+                },
+                "statusIds": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "component:ActItemStatusComponent"
+                    }
+                },
+                "actTypeId": {
+                    "$ref": "component:ActTypeComponent"
+                },
+                "polHolderName": {
+                    "type": "string"
+                },
+                "polStartDateFrom": {
+                    "type": "string",
+                    "aiFormat": "date"
+                },
+                "polStartDateTo": {
+                    "type": "string",
+                    "aiFormat": "date"
+                },
+                "polEndDateFrom": {
+                    "type": "string",
+                    "aiFormat": "date"
+                },
+                "polEndDateTo": {
+                    "type": "string",
+                    "aiFormat": "date"
+                },
+                "docCurrencyCode": {
+                    "$ref": "component:CurrencyCodeComponent"
+                },
+                "productCode": {
+                    "type": "string"
+                },
+                "sourceLineId": {
+                    "type": "string"
+                },
+                "insuredYearsCount": {
+                    "type": "integer"
+                },
+                "paymentPeriod": {
+                    "type": "integer"
+                },
+                "insuranceYear": {
+                    "type": "integer"
+                },
+                "dueDate": {
+                    "type": "string",
+                    "aiFormat": "date"
+                },
+                "installmentDocAmount": {
+                    "type": "number"
+                },
+                "installmentLcAmount": {
+                    "type": "number"
+                },
+                "paymentFrequencyCode": {
+                    "$ref": "component:PaymentFrequencyCode"
+                },
+                "paymentTransactionDate": {
+                    "type": "string",
+                    "aiFormat": "date"
+                },
+                "paymentFrequency2Code": {
+                    "$ref": "component:PaymentFrequency2Code"
+                },
+                "installmentType": {
+                    "$ref": "component:InstallmentTypeComponent"
+                },
+                "paymentLcAmount": {
+                    "type": "number"
+                },
+                "invCommLcAmount": {
+                    "type": "number"
+                },
+                "aaDocCommRate": {
+                    "type": "number"
+                },
+                "commRateManual": {
+                    "type": "number"
+                },
+                "commRateFinal": {
+                    "type": "number"
+                },
+                "lcCommAmountFinal": {
+                    "type": "number"
+                },
+                "groupByContract": {
+                    "type": "boolean"
+                },
+                "actNo": {
+                    "type": "string",
+                    "aiTitle": "actNo"
+                },
+                "actStateCodes": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "component:ActStateComponent"
+                    }
+                },
+                "reportingDateFrom": {
+                    "type": "string",
+                    "aiFormat": "date"
+                },
+                "reportingDateTo": {
+                    "type": "string",
+                    "aiFormat": "date"
+                },
+                "issueDateFrom": {
+                    "type": "string",
+                    "aiFormat": "date"
+                },
+                "issueDateTo": {
+                    "type": "string",
+                    "aiFormat": "date"
+                },
+                "notes": {
+                    "type": "string"
+                },
+                "hasNoChanges": {
+                    "$ref": "component:ActHasNoChangesComponent"
+                }
+            }
+        },
+        "sort": {
+            "type": "array",
+            "additionalProperties": false,
+            "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                    "descending": {
+                        "type": "boolean"
+                    },
+                    "fieldName": {
+                        "type": "string"
+                    }
+                }
+            }
+        }
+    }
+}

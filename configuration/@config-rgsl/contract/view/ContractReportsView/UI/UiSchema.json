@@ -1,0 +1,546 @@
+{
+    "id": "ContractReportsViewUiSchema.json",
+    "type": "Group",
+    "formProperties": {
+        "events": {
+            "onLoad": "initView"
+        }
+    },
+    "elements": [
+        {
+            "type": "GridLayout",
+            "numberOfColumns": 12,
+            "elements": [
+                {
+                    "type": "Component",
+                    "name": "GeneralViewHeader",
+                    "value": {
+                        "$ref": "#"
+                    }
+                },
+                {
+                    "type": "Section",
+                    "sectionLevel": 1,
+                    "label": "InvestReport",
+                    "width": 12,
+                    "elements": [
+                        {
+                            "type": "Group",
+                            "elements": [
+                                {
+                                    "type": "Button",
+                                    "label": "ExportInvestReport",
+                                    "onClick": [
+                                        {
+                                            "commandType": "executeAction",
+                                            "actionName": "exportInvestReport"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "Section",
+                    "sectionLevel": 1,
+                    "label": "NoteReport",
+                    "width": 12,
+                    "elements": [
+                        {
+                            "type": "Group",
+                            "elements": [
+                                {
+                                    "type": "Dropdown",
+                                    "label": "insuranceProduct",
+                                    "value": {
+                                        "$ref": "#/properties/Body/properties/productCode"
+                                    },
+                                    "preSelectFirstItem": false,
+                                    "source": {
+                                        "valueFieldName": "productCode",
+                                        "displayFieldName": "productDescription",
+                                        "reloadOnOpen": true,
+                                        "array": {
+                                            "$ref": "#/properties/Body/properties/insuranceProducts"
+                                        }
+                                    },
+                                    "onValueChanged": [
+                                        {
+                                            "commandType": "executeAction",
+                                            "actionName": "onChangeInsuranceProduct"
+                                        }
+                                    ],
+                                    "width": 4
+                                },
+                                {
+                                    "type": "Dropdown",
+                                    "label": "strategyCode",
+                                    "value": {
+                                        "$ref": "#/properties/Body/properties/strategyCode"
+                                    },
+                                    "preSelectFirstItem": false,
+                                    "source": {
+                                        "valueFieldName": "strategyCode",
+                                        "displayFieldName": "strategyDescription",
+                                        "reloadOnOpen": true,
+                                        "array": {
+                                            "$ref": "#/properties/Body/properties/strategies"
+                                        }
+                                    },
+                                    "width": 4
+                                },
+                                {
+                                    "type": "Input",
+                                    "label": "purchaseDate",
+                                    "value": {
+                                        "$ref": "#/properties/Body/properties/purchaseDate"
+                                    },
+                                    "width": 4
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Group",
+                            "elements": [
+                                {
+                                    "type": "Button",
+                                    "label": "ExportNoteReport",
+                                    "onClick": [
+                                        {
+                                            "commandType": "executeAction",
+                                            "actionName": "exportNoteReport"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "Section",
+                    "label": "AutoconversioReport",
+                    "elements": [
+                        {
+                            "type": "InlineView",
+                            "showContainerActions": false,
+                            "views": [
+                                {
+                                    "viewReference": {
+                                        "configurationCodeName": "AutoconversionContractSearch",
+                                        "configurationVersion": "1",
+                                        "configurationConceptType": "SearchView"
+                                    },
+                                    "viewType": "Search"
+                                }
+                            ]
+                        }
+                    ],
+                    "value": {
+                        "$ref": "#"
+                    }
+                },
+                {
+                    "type": "Section",
+                    "sectionLevel": 1,
+                    "label": "PreEquityReport",
+                    "width": 12,
+                    "elements": [
+                        {
+                            "type": "Group",
+                            "elements": [
+                                {
+                                    "type": "Input",
+                                    "label": "preEquityReportDate",
+                                    "value": {
+                                        "$ref": "#/properties/Body/properties/preEquityReportDate"
+                                    },
+                                    "width": 2
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Group",
+                            "elements": [
+                                {
+                                    "type": "Button",
+                                    "label": "ExportPreEquityReport",
+                                    "onClick": [
+                                        {
+                                            "commandType": "executeAction",
+                                            "actionName": "exportPreEquityReport"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "Section",
+                    "sectionLevel": 1,
+                    "label": "PreEquityRegistry",
+                    "width": 12,
+                    "elements": [
+                        {
+                            "type": "Group",
+                            "elements": [
+                                {
+                                    "type": "Input",
+                                    "label": "preEquityRegistryDate",
+                                    "value": {
+                                        "$ref": "#/properties/Body/properties/preEquityRegistryDate"
+                                    },
+                                    "width": 2
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Group",
+                            "elements": [
+                                {
+                                    "type": "Button",
+                                    "label": "ExportPreEquityRegistry",
+                                    "onClick": [
+                                        {
+                                            "commandType": "executeAction",
+                                            "actionName": "exportPreEquityRegistry"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "Section",
+                    "sectionLevel": 1,
+                    "label": "PreEquityDebitingRegistry",
+                    "width": 12,
+                    "elements": [
+                        {
+                            "type": "Group",
+                            "elements": [
+                                {
+                                    "type": "Input",
+                                    "label": "preEquityDebitingRegistryDate",
+                                    "value": {
+                                        "$ref": "#/properties/Body/properties/preEquityDebitingRegistryDate"
+                                    },
+                                    "width": 2
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Group",
+                            "elements": [
+                                {
+                                    "type": "Button",
+                                    "label": "ExportPreEquityDebitingRegistry",
+                                    "onClick": [
+                                        {
+                                            "commandType": "executeAction",
+                                            "actionName": "exportPreEquityDebitingRegistry"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "Section",
+                    "sectionLevel": 1,
+                    "label": "EconomicParametersReport",
+                    "width": 12,
+                    "elements": [
+                        {
+                            "type": "Group",
+                            "elements": [
+                                {
+                                    "type": "Input",
+                                    "control": "DateRange",
+                                    "dateFrom": {
+                                        "type": "Input",
+                                        "label": "issueDateFrom",
+                                        "width": 2,
+                                        "value": {
+                                            "$ref": "#/properties/Body/properties/issueDateFrom"
+                                        },
+                                        "control": "DatetimePicker"
+                                    },
+                                    "dateTo": {
+                                        "type": "Input",
+                                        "label": "issueDateTo",
+                                        "width": 2,
+                                        "value": {
+                                            "$ref": "#/properties/Body/properties/issueDateTo"
+                                        },
+                                        "control": "DatetimePicker"
+                                    },
+                                    "width": 4
+                                },
+                                {
+                                    "type": "Input",
+                                    "label": "productGroupDescription",
+                                    "width": 4,
+                                    "value": {
+                                        "$ref": "#/properties/Body/properties/productGroups"
+                                    },
+                                    "control": "Dropdown",
+                                    "multiple": true
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Group",
+                            "elements": [
+                                {
+                                    "type": "Button",
+                                    "label": "ExportEconomicParametersReport",
+                                    "onClick": [
+                                        {
+                                            "commandType": "executeAction",
+                                            "actionName": "exportEconomicParametersReport"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "Section",
+                    "sectionLevel": 1,
+                    "label": "PaymentIntermediateApplicationReport",
+                    "width": 12,
+                    "elements": [
+                        {
+                            "type": "Group",
+                            "elements": [
+                                {
+                                    "type": "Input",
+                                    "label": "contractNumber",
+                                    "value": {
+                                        "$ref": "#/properties/Body/properties/paymentIntermediateApplicationReportСontractNumber"
+                                    },
+                                    "width": 2
+                                },
+                                {
+                                    "type": "Input",
+                                    "control": "DateRange",
+                                    "dateFrom": {
+                                        "type": "Input",
+                                        "label": "issueDateFrom",
+                                        "width": 2,
+                                        "value": {
+                                            "$ref": "#/properties/Body/properties/paymentIntermediateApplicationReportIssueDateFrom"
+                                        },
+                                        "control": "DatetimePicker"
+                                    },
+                                    "dateTo": {
+                                        "type": "Input",
+                                        "label": "issueDateTo",
+                                        "width": 2,
+                                        "value": {
+                                            "$ref": "#/properties/Body/properties/paymentIntermediateApplicationReportIssueDateTo"
+                                        },
+                                        "control": "DatetimePicker"
+                                    },
+                                    "width": 4
+                                },
+                                {
+                                    "type": "Dropdown",
+                                    "label": "insuranceProduct",
+                                    "value": {
+                                        "$ref": "#/properties/Body/properties/paymentIntermediateApplicationReportProductCode"
+                                    },
+                                    "preSelectFirstItem": false,
+                                    "source": {
+                                        "valueFieldName": "productCode",
+                                        "displayFieldName": "productDescription",
+                                        "reloadOnOpen": true,
+                                        "array": {
+                                            "$ref": "#/properties/Body/properties/allInsuranceProducts"
+                                        }
+                                    },
+                                    "width": 3
+                                },
+                                {
+                                    "type": "Lookup",
+                                    "elementId": "partner",
+                                    "readOnly": false,
+                                    "label": "partner",
+                                    "commands": [
+                                        {
+                                            "commandType": "executeOperation",
+                                            "operation": "SEARCH",
+                                            "errorHandling": "silent",
+                                            "data": null
+                                        }
+                                    ],
+                                    "value": {
+                                        "$ref": "#"
+                                    },
+                                    "width": 3,
+                                    "dialogButton": {},
+                                    "clearButton": {
+                                        "clearAction": "paymentIntermediateApplicationReportPartnerClear"
+                                    },
+                                    "dialog": {
+                                        "viewReference": {
+                                            "configurationCodeName": "ServiceProviderSearchView",
+                                            "configurationVersion": "1",
+                                            "configurationConceptType": "SearchView"
+                                        },
+                                        "onLoad": "partnerOnLoad"
+                                    },
+                                    "onSelected": "paymentIntermediateApplicationReportOnSelected",
+                                    "selectedDisplayValueUISchema": {
+                                        "type": "Input",
+                                        "label": "partner",
+                                        "readOnly": true,
+                                        "value": {
+                                            "$ref": "#/properties/Body/properties/paymentIntermediateApplicationReportPartner/properties/partnerDescription"
+                                        }
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Group",
+                            "elements": [
+                                {
+                                    "type": "Button",
+                                    "label": "ExportPaymentIntermediateApplicationReport",
+                                    "onClick": [
+                                        {
+                                            "commandType": "executeAction",
+                                            "actionName": "exportPaymentIntermediateApplicationReport"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+
+                {
+                    "type": "Section",
+                    "sectionLevel": 1,
+                    "label": "HasAmendmentReport",
+                    "width": 12,
+                    "elements": [
+                        {
+                            "type": "Group",
+                            "elements": [
+                                {
+                                    "type": "Input",
+                                    "label": "contractNumber",
+                                    "value": {
+                                        "$ref": "#/properties/Body/properties/hasAmendmentReportСontractNumber"
+                                    },
+                                    "width": 2
+                                },
+                                {
+                                    "type": "Input",
+                                    "control": "DateRange",
+                                    "dateFrom": {
+                                        "type": "Input",
+                                        "label": "issueDateFrom",
+                                        "width": 2,
+                                        "value": {
+                                            "$ref": "#/properties/Body/properties/hasAmendmentReportIssueDateFrom"
+                                        },
+                                        "control": "DatetimePicker"
+                                    },
+                                    "dateTo": {
+                                        "type": "Input",
+                                        "label": "issueDateTo",
+                                        "width": 2,
+                                        "value": {
+                                            "$ref": "#/properties/Body/properties/hasAmendmentReportIssueDateTo"
+                                        },
+                                        "control": "DatetimePicker"
+                                    },
+                                    "width": 4
+                                },
+                                {
+                                    "type": "Dropdown",
+                                    "label": "insuranceProduct",
+                                    "value": {
+                                        "$ref": "#/properties/Body/properties/hasAmendmentReportProductCode"
+                                    },
+                                    "preSelectFirstItem": false,
+                                    "source": {
+                                        "valueFieldName": "productCode",
+                                        "displayFieldName": "productDescription",
+                                        "reloadOnOpen": true,
+                                        "array": {
+                                            "$ref": "#/properties/Body/properties/allInsuranceProducts"
+                                        }
+                                    },
+                                    "width": 3
+                                },
+                                {
+                                    "type": "Lookup",
+                                    "elementId": "partner",
+                                    "readOnly": false,
+                                    "label": "partner",
+                                    "commands": [
+                                        {
+                                            "commandType": "executeOperation",
+                                            "operation": "SEARCH",
+                                            "errorHandling": "silent",
+                                            "data": null
+                                        }
+                                    ],
+                                    "value": {
+                                        "$ref": "#"
+                                    },
+                                    "width": 3,
+                                    "dialogButton": {},
+                                    "clearButton": {
+                                        "clearAction": "hasAmendmentReportPartnerClear"
+                                    },
+                                    "dialog": {
+                                        "viewReference": {
+                                            "configurationCodeName": "ServiceProviderSearchView",
+                                            "configurationVersion": "1",
+                                            "configurationConceptType": "SearchView"
+                                        },
+                                        "onLoad": "partnerOnLoad"
+                                    },
+                                    "onSelected": "hasAmendmentReportPartnerOnSelected",
+                                    "selectedDisplayValueUISchema": {
+                                        "type": "Input",
+                                        "label": "partner",
+                                        "readOnly": true,
+                                        "value": {
+                                            "$ref": "#/properties/Body/properties/hasAmendmentReportPartner/properties/partnerDescription"
+                                        }
+                                    }
+                                }                
+                            ]
+                        },
+                        {
+                            "type": "Group",
+                            "elements": [
+                                {
+                                    "type": "Button",
+                                    "label": "ExportHasAmendmentReport",
+                                    "onClick": [
+                                        {
+                                            "commandType": "executeAction",
+                                            "actionName": "exportHasAmendmentReport"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

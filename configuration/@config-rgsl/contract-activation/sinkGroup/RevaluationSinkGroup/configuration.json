@@ -1,0 +1,57 @@
+{
+    "sinks": [
+        {
+            "name": "GetPolicyInfo",
+            "fetch": {
+                "configuration": {
+                    "name": "GetPolicyInfoDataSource"
+                }
+            }
+        },
+        {
+            "name": "GetPolicyPaymentPlan",
+            "fetch": {
+                "configuration": {
+                    "name": "GetPaymentPlanDataSource"
+                }
+            }
+        },
+        {
+            "name": "GetPolicyRevaluation",
+            "fetch": {
+                "configuration": {
+                    "name": "GetRevaluationDataDataSource"
+                }
+            }
+        },
+        {
+            "name": "GetExchangeRate",
+            "class": {
+                "className": "Adacta.AdInsure.RGSL.Common.API.Shared.Services.IRgslCurrencyConverterService, Adacta.AdInsure.RGSL.Common.API",
+                "methodName": "Convert"
+            }
+        },
+        {
+            "name": "ProcessDocument",
+            "class": {
+                "className": "Adacta.AdInsure.RGSL.Common.API.Shared.Services.ISequenceGeneratorRGSL, Adacta.AdInsure.RGSL.Common.API",
+                "methodName": "GenerateSequenceValues"
+            }
+        },
+        {
+            "name": "WriteASS",
+            "database": {
+                "tables": [
+                    "ACC_IMPL.REVALUATION_DATA"
+                ]
+            }
+        },
+        {
+            "name": "PostTransaction",
+            "class": {
+                "className": "Adacta.AdInsure.RGSL.Accounting.API.Shared.Subledger.Services.IPostingServiceRgsl, Adacta.AdInsure.RGSL.Accounting.API",
+                "methodName": "PostTransaction"
+            }
+        }
+    ]
+}

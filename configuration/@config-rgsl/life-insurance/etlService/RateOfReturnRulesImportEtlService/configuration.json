@@ -1,0 +1,48 @@
+{
+    "mainDataSource": "ImportStagingDataSource",
+    "allowParallelExecution": true,
+    "additionalDataSources": [
+        "GetRateOfReturnRulesDataSource"
+    ],
+    "sinks": [
+        {
+            "name": "WriteSuccessStatus",
+            "database": {
+                "tables": [
+                    "BFX.IMPORT_RECORD_STATUS"
+                ]
+            }
+        },
+        {
+            "name": "WriteToRateOfReturnRulesTable",
+            "database": {
+                "tables": [
+                    "BFX_IMPL.RATE_OF_RETURN"
+                ]
+            }
+        }
+    ],
+    "errorSinks": [
+        {
+            "name": "WriteErrorStatus",
+            "database": {
+                "tables": [
+                    "BFX.IMPORT_RECORD_STATUS"
+                ]
+            }
+        }
+    ],
+    "completionSinks": [
+        {
+            "name": "FinishedImporting",
+            "documentTransition": {
+                "transition": {
+                    "transitionName": "FinishImporting",
+                    "configurationName": "RateOfReturnRulesImport",
+                    "configurationVersion": "1"
+                }
+            }
+        }
+    ],
+    "version": "1"
+}

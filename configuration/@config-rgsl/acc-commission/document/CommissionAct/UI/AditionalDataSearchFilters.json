@@ -1,0 +1,104 @@
+{
+    "type": "Group",
+    "whenLocked": "Disable",
+    "elements": [
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "Input",
+                    "elementId": "IncludedProductGroup",
+                    "control": "Dropdown",
+                    "label": "IncludedProductGroup",
+                    "value": {
+                        "$ref": "#/properties/Body/properties/products/properties/includedGroup"
+                    },
+                    "onValueChanged": [
+                        {
+                            "commandType": "executeAction",
+                            "actionName": "onChangeIncludedProductGroup"
+                        }
+                    ],
+                    "width": 1
+                },
+                {
+                    "type": "Input",
+                    "label": "IncludedProducts",
+                    "value": {
+                        "$ref": "#/properties/Body/properties/products/properties/included"
+                    },
+                    "autocomplete": {
+                        "minTextLength": 1,
+                        "dropDownItemsCount": 10
+                    },
+                    "control": "Dropdown",
+                    "multiple": true,
+                    "source": {
+                        "array": {
+                            "$ref": "#/properties/ClientViewModel/properties/allProducts",
+                            "isAbsolutePath": true
+                        },
+                        "displayFieldName": "productDescription",
+                        "valueFieldName": "productCode"
+                    },
+                    "filter": "includedProductFilter",
+                    "width": 1
+                },
+                {
+                    "type": "Input",
+                    "elementId": "ExcludedProductGroup",
+                    "control": "Dropdown",
+                    "label": "ExcludedProductGroup",
+                    "value": {
+                        "$ref": "#/properties/Body/properties/products/properties/excludedGroup"
+                    },
+                    "onValueChanged": [
+                        {
+                            "commandType": "executeAction",
+                            "actionName": "onChangeExcludedProductGroup"
+                        }
+                    ],
+                    "width": 1
+                },
+                {
+                    "type": "Input",
+                    "label": "ExcludedProducts",
+                    "elementId": "excludedProductsElementId",
+                    "value": {
+                        "$ref": "#/properties/Body/properties/products/properties/excluded"
+                    },
+                    "autocomplete": {
+                        "minTextLength": 1,
+                        "dropDownItemsCount": 10
+                    },
+                    "control": "Dropdown",
+                    "multiple": true,
+                    "source": {
+                        "array": {
+                            "$ref": "#/properties/ClientViewModel/properties/allProducts",
+                            "isAbsolutePath": true
+                        },
+                        "displayFieldName": "productDescription",
+                        "valueFieldName": "productCode"
+                    },
+                    "filter": "excludedProductFilter",
+                    "onValueChanged": [
+                        {
+                            "commandType": "executeAction",
+                            "actionName": "onChangeExcludedProduct"
+                        }
+                    ],
+                    "width": 1
+                },
+                {
+                    "type": "Input",
+                    "label": "isDocCorrect",
+                    "value": {
+                        "$ref": "#/properties/Body/properties/isDocCorrect"
+                    },
+                    "width": 1
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,165 @@
+SELECT
+	act.ACT_ID,
+	act.ACT_NO,
+	cast(ud.UNIVERSAL_DOCUMENT_ID AS nvarchar(50)) + ':' + cast(ud.SYS_VERSION as nvarchar(50)) as ETAG,
+	act.ISSUE_DATE,
+	act.PAY_DATE,
+	ps.CODE_NAME as STATE_CODE,
+	act.AGENT_SERVICE_PROVIDER_CODE,
+	act.AGENT_AGREEMENT_NUMBER,
+	act.PERIOD_FROM,
+	act.PERIOD_TO,
+	act.REPORTING_PERIOD_FROM,
+	act.REPORTING_PERIOD_TO,
+	act.PREMIUM_AMOUNT_LC,
+	act.COMM_AMOUNT_LC,
+	act.VAT_AMOUNT_LC,
+	act.ITEMS_COUNT,
+	act.NOTES,
+	act.ORIGINAL_RECEIPT_DATE,
+	act.LAST_UPDATED,
+
+	spis.CONFIGURATION_CODE_NAME as PROVIDER_CONFIGURATION,
+	spis.PARTNER_TYPE,
+	pis.CONFIGURATION_CODE_NAME as PARTY_CONFIGURATION,
+	pis.NATURAL_PERSON_CATEGORY,
+	case
+		when pis.CONFIGURATION_CODE_NAME = 'LegalEntity' then pis.SHORT_NAME
+		when pis.CONFIGURATION_CODE_NAME = 'NaturalPerson' then pis.FULL_NAME
+		else null
+		end as AGENT_FULL_NAME,
+
+	aas.MVZ_NUMBER as ATTR_MVZ,
+	aas.ORDER_NUMBER as ATTR_ORDER,
+	aas.EXTERNAL_NUMBER as AA_EXTERNAL_NUMBER,
+	aas.IS_PERSONAL_BUSINESS as AA_IS_PERSONAL_BUSINESS,
+	ct.AA_AT_DESCRIPTION,
+
+	u.USERNAME,
+	ud.SYS_CREATED_ON as CREATE_DATE
+from
+	acc_impl.CA_ACT act
+	inner join bfx.UNIVERSAL_DOCUMENT ud on ud.UNIVERSAL_DOCUMENT_NUMBER = act.ACT_NO
+	inner join cfx.PUBLISHED_ARTIFACT pa on pa.PUBLISHED_ARTIFACT_ID = ud.PUBLISHED_ARTIFACT_ID and pa.CODE_NAME = 'CommissionAct'
+	inner join cfg.PROCESS_STATE ps on ps.PROCESS_STATE_ID = ud.STATE_ID
+	inner join ORG_IMPL.SERVICE_PROVIDER_HUB sph on sph.SERVICE_PROVIDER_CODE = act.AGENT_SERVICE_PROVIDER_CODE
+	inner join ORG_IMPL.SERVICE_PROVIDER_INFO_SAT_LATEST spis on spis.SERVICE_PROVIDER_INFO_HKEY = sph.SERVICE_PROVIDER_HKEY
+	inner join PTY_IMPL.PARTY_HUB ph on ph.PARTY_CODE = spis.PARTY_CODE
+	inner join PTY_IMPL.PARTY_INFO_SAT_LATEST pis on pis.PARTY_INFO_HKEY = ph.PARTY_HKEY
+
+	inner join PAS_IMPL.AA_HUB aah on aah.AA_NUMBER = act.AGENT_AGREEMENT_NUMBER
+	inner join PAS_IMPL.AA_SAT_LATEST aas on aas.AA_HKEY = aah.AA_HKEY
+	inner join (
+		select cti.CODE, JSON_VALUE(cti.BODY, '$.description') as AA_AT_DESCRIPTION
+		from
+		BFX.CODE_TABLE_ITEM cti
+			inner join CFX.PUBLISHED_ARTIFACT pa on cti.PUBLISHED_ARTIFACT_ID = pa.PUBLISHED_ARTIFACT_ID
+		where pa.CODE_NAME = 'CbAgentType'
+	) ct on ct.CODE = aas.CB_AGENT_TYPE_CODE
+
+	inner join org.APPLICATION_USER u on u.APPLICATION_USER_ID = ud.SYS_CREATED_BY_ID
+WHERE 1=1
+{{#if parameters.actId}}
+      and act.ACT_ID = @actId
+{{/if}}
+{{#if parameters.lineContractNo}}
+      and EXISTS (
+            SELECT 1 FROM ACC_IMPL.CA_ACT_ITEM ai
+            WHERE 1=1
+                  and ai.ACT_ID = act.ACT_ID
+                  and ai.REFERENCE_NO = @lineContractNo)
+{{/if}}
+{{#if parameters.lineBusinessLine}}
+      and EXISTS (
+            SELECT 1 FROM ACC_IMPL.CA_ACT_ITEM ai
+                  join BFX_IMPL.RISKS r on r.CODE = ai.SOURCE_LINE_ID
+            WHERE 1=1
+                  and ai.ACT_ID = act.ACT_ID
+                  and r.BUSINESS_LINE = @lineBusinessLine)
+{{/if}}
+{{#if parameters.lineProductGroup}}
+      and EXISTS (
+            SELECT 1 FROM ACC_IMPL.CA_ACT_ITEM ai
+                  join BFX_IMPL.RISKS r on r.CODE = ai.SOURCE_LINE_ID
+                  join BFX_IMPL.RISK_PRODUCT_RELATION rpl on rpl.RISK_CODE = r.CODE
+                  join BFX_IMPL.PRODUCTS p on p.CODE = rpl.PRODUCT_CODE
+            WHERE 1=1
+                  and ai.ACT_ID = act.ACT_ID
+                  and p.PRODUCT_GROUP  = @lineProductGroup)
+{{/if}}
+{{#if parameters.lineProducts}}
+      and EXISTS (
+            SELECT 1 FROM ACC_IMPL.CA_ACT_ITEM ai
+                  join BFX_IMPL.RISKS r on r.CODE = ai.SOURCE_LINE_ID
+                  join BFX_IMPL.RISK_PRODUCT_RELATION rpl on rpl.RISK_CODE = r.CODE
+            WHERE 1=1
+                  and ai.ACT_ID = act.ACT_ID
+                  and rpl.PRODUCT_CODE in (@lineProducts))
+{{/if}}
+{{#if parameters.actNo}}
+	and act.ACT_NO = @actNo
+{{/if}}
+{{#if parameters.actStateCodes}}
+	and ps.CODE_NAME in (@actStateCodes)
+{{/if}}
+{{#if parameters.aaServiceProviderCode}}
+	and act.AGENT_SERVICE_PROVIDER_CODE = @aaServiceProviderCode
+{{/if}}
+{{#if parameters.aaNumbers}}
+	and act.AGENT_AGREEMENT_NUMBER in (@aaNumbers)
+{{/if}}
+{{#if parameters.actTypeId}}
+	and act.ACT_TYPE_ID in (@actTypeId)
+{{/if}}
+{{#if parameters.reportingDateFrom}}
+	and act.REPORTING_PERIOD_TO >= @reportingDateFrom
+{{/if}}
+{{#if parameters.reportingDateTo}}
+	and act.REPORTING_PERIOD_TO <= @reportingDateTo
+{{/if}}
+{{#if parameters.issueDateFrom}}
+	and act.ISSUE_DATE >= @issueDateFrom
+{{/if}}
+{{#if parameters.issueDateTo}}
+	and act.ISSUE_DATE <= @issueDateTo
+{{/if}}
+{{#if parameters.actPayDateFrom}}
+	and act.PAY_DATE >= @actPayDateFrom
+{{/if}}
+{{#if parameters.actPayDateTo}}
+	and act.PAY_DATE <= @actPayDateTo
+{{/if}}
+{{#if parameters.notes}}
+	and act.NOTES <= @notes
+{{/if}}
+{{#if parameters.lineInstallmentDateFrom}}
+      and EXISTS (
+            SELECT 1 FROM ACC_IMPL.CA_ACT_ITEM ai
+            WHERE 1=1
+                  and ai.ACT_ID = act.ACT_ID
+                  and ai.DUE_DATE >= @lineInstallmentDateFrom)
+{{/if}}
+{{#if parameters.lineInstallmentDateTo}}
+      and EXISTS (
+            SELECT 1 FROM ACC_IMPL.CA_ACT_ITEM ai
+            WHERE 1=1
+                  and ai.ACT_ID = act.ACT_ID
+                  and ai.DUE_DATE <= @lineInstallmentDateTo)
+{{/if}}
+{{#if parameters.linePaymentDateFrom}}
+      and EXISTS (
+            SELECT 1 FROM ACC_IMPL.CA_ACT_ITEM ai
+            WHERE 1=1
+                  and ai.ACT_ID = act.ACT_ID
+                  and ai.PAYMENT_TRANSACTION_DATE >= @linePaymentDateFrom)
+{{/if}}
+{{#if parameters.linePaymentDateTo}}
+      and EXISTS (
+            SELECT 1 FROM ACC_IMPL.CA_ACT_ITEM ai
+            WHERE 1=1
+                  and ai.ACT_ID = act.ACT_ID
+                  and ai.PAYMENT_TRANSACTION_DATE <= @linePaymentDateFrom)
+{{/if}}
+{{#if parameters.hasCommAmountLc}}
+	and act.COMM_AMOUNT_LC <> 0
+{{/if}}

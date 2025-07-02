@@ -1,0 +1,76 @@
+{
+    "type": "Group",
+    "width": 12,
+    "elements": [
+        {
+            "type": "Group",
+            "width": 12,
+            "elements": [
+                {
+                    "type": "Lookup",
+                    "value": {
+                        "$ref": "#/properties/organisationUnit"
+                    },
+                    "dialogButton": {},
+                    "clearButton": {
+                        "clearAction": "clearOrgUnit"
+                    },
+                    "dialog": {
+                        "viewReference": {
+                            "configurationCodeName": "OrganisationUnitImplLookup",
+                            "configurationConceptType": "SearchView",
+                            "configurationVersion": "1"
+                        },
+                        "onLoad": "organisationUnitOnLoad"
+                    },
+                    "onSelected": "organisationUnitOnSelected",
+                    "selectedDisplayValueUISchema": {
+                        "type": "Input",
+                        "label": "organisationUnit",
+                        "readOnly": true,
+                        "value": {
+                            "$ref": "#/properties/organisationUnit/properties/name"
+                        }
+                    },
+                    "width": 4
+                },
+                {
+                    "type": "Input",
+                    "label": "mvzNumber",
+                    "value": {
+                        "$ref": "#/properties/mvzNumber"
+                    },
+                    "width": 4
+                },
+                {
+                    "type": "Input",
+                    "label": "skkNumber",
+                    "value": {
+                        "$ref": "#/properties/skkNumber"
+                    },
+                    "width": 4
+                }
+            ]
+        },
+        {
+            "type": "Group",
+            "width": 12,
+            "elements": [
+                {
+                    "type": "Button",
+                    "value": {
+                        "$ref": "#/properties/organisationUnit"
+                    },
+                    "width": 4,
+                    "onClick": [
+                        {
+                            "commandType": "executeAction",
+                            "actionName": "refreshOrganisationData"
+                        }
+                    ],
+                    "label": "refreshOrganisationData"
+                }
+            ]
+        }
+    ]
+}

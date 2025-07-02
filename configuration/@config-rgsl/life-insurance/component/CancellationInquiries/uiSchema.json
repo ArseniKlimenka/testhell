@@ -1,0 +1,255 @@
+{
+    "type": "Section",
+    "label": "Basic Conditions",
+    "width": 12,
+    "collapsing": {
+        "initial": false,
+        "enabled": true
+    },
+    "elements": [
+        {
+            "type": "Group",
+            "width": 12,
+            "elements": [
+                {
+                    "type": "Group",
+                    "width": 12,
+                    "elements": [
+                        {
+                            "type": "DataGrid",
+                            "orderBy": "universalDocumentNumber",
+                            "value": {
+                                "$ref": "#/properties/Body/properties/tempTechnicalData/properties/inquiries"
+                            },
+                            "mode": "Array",
+                            "header": {
+                                "showReloadButton": true,
+                                "showNumberOfResults": true
+                            },
+                            "pagination": {
+                                "mode": "Regular",
+                                "pageSizes": [
+                                    5,
+                                    10,
+                                    15
+                                ]
+                            },
+                            "selection": {
+                                "mode": "None"
+                            },
+                            "height": "None",
+                            "columns": [
+                                {
+                                    "title": "inquiryNumber",
+                                    "cellContent": {
+                                        "type": "Link",
+                                        "targetType": "Url",
+                                        "title": "inquiryNumber",
+                                        "value": {
+                                            "mapping": "inquiryUrlMapping",
+                                            "$ref": "#"
+                                        },
+                                        "content": {
+                                            "text": {
+                                                "type": "OutputText",
+                                                "textProperties": [
+                                                    "bold"
+                                                ],
+                                                "value": {
+                                                    "$ref": "#/properties/inquiryNumber"
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                {
+                                    "title": "createdOn",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "value": {
+                                            "$ref": "#/properties/createdOn"
+                                        }
+                                    }
+                                },
+                                {
+                                    "title": "updatedOn",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "value": {
+                                            "$ref": "#/properties/updatedOn"
+                                        }
+                                    }
+                                },
+                                {
+                                    "title": "state",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "value": {
+                                            "$ref": "#/properties/state"
+                                        }
+                                    }
+                                },
+                                {
+                                    "title": "departmentCode",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "value": {
+                                            "$ref": "#/properties/departmentCodeDescription"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "Group",
+                    "width": 12,
+                    "elements": [
+                        {
+                            "type": "Input",
+                            "label": "department",
+                            "source": {
+                                "dataSource": {
+                                    "name": "GetApplicationUserGroupsDataSource",
+                                    "reloadOnOpen": true,
+                                    "searchFieldPath": "nameLocalized",
+                                    "responseMapping": "departmentResponseMapping",
+                                    "resultCount": 1000
+                                },
+                                "displayFieldName": "nameLocalized"
+                            },
+                            "control": "Dropdown",
+                            "value": {
+                                "$ref": "#/properties/ClientViewModel/properties/inquiriesData/properties/department"
+                            },
+                            "width": 4,
+                            "onValueChanging": "setCurrentIsDirtyViewState",
+                            "onValueChanged": [
+                                {
+                                    "commandType": "executeAction",
+                                    "actionName": "setViewClearIfWasNotDirty"
+                                },
+                                {
+                                    "commandType": "executeAction",
+                                    "actionName": "checkDepartment"
+                                }
+                            ],
+                            "rule": {
+                                "effect": "DISABLE_INITIAL",
+                                "condition": {
+                                    "type": "FUNC",
+                                    "value": [
+                                        {
+                                            "$ref": "#"
+                                        }
+                                    ],
+                                    "ruleFunction": "disableInquiries"
+                                }
+                            }
+                        }
+                    ]
+                },
+                {
+                    "type": "Input",
+                    "label": "inquiryReasons",
+                    "multiple": true,
+                    "value": {
+                        "$ref": "#/properties/ClientViewModel/properties/inquiriesData/properties/inquiryReasons"
+                    },
+                    "autocomplete": {
+                        "minTextLength": 1,
+                        "dropDownItemsCount": 30
+                    },
+                    "control": "Dropdown",
+                    "source": {
+                        "dataSource": {
+                            "reloadOnOpen": true,
+                            "name": "InquiryReasonDataSource",
+                            "searchFieldPath": "description",
+                            "requestMapping": "inquiryReasonRequestMapping",
+                            "responseMapping": "inquiryReasonResponseMapping",
+                            "resultCount": 30
+                        },
+                        "displayFieldName": "displayName",
+                        "valueFieldName": "value"
+                    },
+                    "width": 6,
+                    "onValueChanged": [
+                        {
+                            "commandType": "executeAction",
+                            "actionName": "setViewClearIfWasNotDirty"
+                        }
+                    ],
+                    "rule": {
+                        "effect": "DISABLE_INITIAL",
+                        "condition": {
+                            "type": "FUNC",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ],
+                            "ruleFunction": "disableInquiryReason"
+                        }
+                    }
+                },
+                {
+                    "type": "Group",
+                    "width": 12,
+                    "elements": [
+                        {
+                            "type": "Input",
+                            "label": "Text of Inquiry",
+                            "control": "TextArea",
+                            "enableResize": true,
+                            "numberOfRows": 5,
+                            "value": {
+                                "$ref": "#/properties/ClientViewModel/properties/inquiriesData/properties/textOfInquiry"
+                            },
+                            "width": 12,
+                            "onValueChanging": "setCurrentIsDirtyViewState",
+                            "onValueChanged": [
+                                {
+                                    "commandType": "executeAction",
+                                    "actionName": "setViewClearIfWasNotDirty"
+                                }
+                            ],
+                            "rule": {
+                                "effect": "DISABLE_INITIAL",
+                                "condition": {
+                                    "type": "FUNC",
+                                    "value": [
+                                        {
+                                            "$ref": "#"
+                                        }
+                                    ],
+                                    "ruleFunction": "disableTextOfInquiry"
+                                }
+                            }
+                        },
+                        {
+                            "type": "Button",
+                            "isCompact": true,
+                            "label": "Enter Inquiry",
+                            "width": 4,
+                            "onClick": "createInquiry",
+                            "rule": {
+                                "effect": "DISABLE_INITIAL",
+                                "condition": {
+                                    "type": "FUNC",
+                                    "value": [
+                                        {
+                                            "$ref": "#"
+                                        }
+                                    ],
+                                    "ruleFunction": "disableInquiries"
+                                }
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

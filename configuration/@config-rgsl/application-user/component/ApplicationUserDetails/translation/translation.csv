@@ -1,0 +1,40 @@
+ConfigurationType	ConfigurationName	ItemType	TranslationKey	Expression	Translation_en-US	Translation_ru-RU
+ClientAction	ApplicationUserDetailsPartyResultMapping	ui-message	PartyHasAnotherUser	partyResultMapping	This party already has an application user assigned!	Уже есть пользователь связанный с выбранным контрагентом!
+ClientAction	ApplicationUserDetailsPartyResultMapping	ui-message	PartyHasNoEmployee	partyResultMapping	PartyHasNoEmployee	Выбранный контрагент должен быть связан с сотрудником!
+DataSchema	ApplicationUserDetails	enum	applicationUserLoginType@AzureADAuthentication	AzureADAuthentication	Azure AD Authentication	Аутентификация Azure AD
+DataSchema	ApplicationUserDetails	enum	applicationUserLoginType@SCIM	SCIM	SCIM	SCIM
+DataSchema	ApplicationUserDetails	enum	applicationUserLoginType@UsernamePassword	UsernamePassword	Username Password	Имя пользователя Пароль
+DataSchema	ApplicationUserDetails	enum	applicationUserLoginType@WindowsAuthentication	WindowsAuthentication	Windows Authentication	Проверка подлинности Windows
+DataSchema	ApplicationUserDetails	field-title	Email	Email	Email	Электронная почта
+DataSchema	ApplicationUserDetails	field-title	ExpireDate	ExpireDate	ExpireDate	Дата окончания действия
+DataSchema	ApplicationUserDetails	field-title	Login Type	Login Type	Login Type	Тип входа в систему
+DataSchema	ApplicationUserDetails	field-title	Username	Username	Username	Имя пользователя
+Rule	ApplicationUserDetailsEmailValidation	rule	validation@ApplicationUserDetailsEmailValidation	emailValidation	E: Email is not valid.	E: Email не является допустимым.
+Rule	ApplicationUserDetailsPasswordComplexity	rule	validation@PasswordComplexityRules	passwordComplexity	E: Password does not follow complexity rules. Password must meet 4 following complexity rules: at least 1 uppercase character, at least 1 lowercase character, at least 1 digit, at least 1 special character.	E: Пароль не соответствует правилам сложности. Пароль должен соответствовать следующим 4 правилам сложности: как минимум 1 заглавный символ латинского алфавита (от A до Z), как минимум 1 строчный символ латинского алфавита (от a до z), как минимум 1 цифра (от 0 до 9), как минимум 1 специальный символ (~!@#$%^&*_-+=`|(){}[]:;"'<>,.?/).
+Rule	ApplicationUserDetailsPasswordComplexity	rule	validation@PasswordCyrillicCharacter	passwordComplexity	E: PasswordCyrillicCharacter	E: Пароль не может содержать буквы кириллицы
+Rule	ApplicationUserDetailsPasswordComplexity	rule	validation@PasswordLength	passwordComplexity	E: Password needs to be at least ${minLength} characters!	E: Пароль должен состоять минимум из ${minLength} символов!
+Rule	ApplicationUserDetailsPasswordComplexity	rule	validation@PasswordMandatory	passwordComplexity	E: Password is mandatory!	E: Пароль обязателен!
+Rule	ApplicationUserDetailsPasswordComplexity	rule	validation@PasswordSimpleSequences	passwordComplexity	E: Password simple sequences	E: Пароль не может содержать простые последовательности/повторения (последовательные цифры в количестве 4 и более цифр: *0123*, *12345*, *234567* и т.д., последовательные по алфавиту буквы одного регистра в количестве 4 и более букв: *abcd*, *bcdef*, *cdefgh* и т.д.)
+Rule	ApplicationUserDetailsPasswordComplexity	rule	validation@PasswordUsername	passwordComplexity	E: Password needs to be not the same as username!	E: Пароль не может совпадать с логином или с его частью!
+Rule	ApplicationUserDetailsPasswordConfirmation	rule	validation@PasswordsDoNotMatch	passwordConfirmation	E: Passwords do not match!	E: Пароли не соответствуют!
+Rule	ApplicationUserDetailsValidateApplicationUserView	rule	validation@commonPaswordRequirements1	validateApplicationUserView	commonPaswordRequirements1	Пароль должен содержать не менее ${entity.minLength} символов, в том числе:
+Rule	ApplicationUserDetailsValidateApplicationUserView	rule	validation@commonPaswordRequirements2	validateApplicationUserView	commonPaswordRequirements2	- прописные буквы латинского алфавита (от A до Z);
+Rule	ApplicationUserDetailsValidateApplicationUserView	rule	validation@commonPaswordRequirements3	validateApplicationUserView	commonPaswordRequirements3	- строчные буквы латинского алфавита (от a до z);
+Rule	ApplicationUserDetailsValidateApplicationUserView	rule	validation@commonPaswordRequirements4	validateApplicationUserView	commonPaswordRequirements4	- цифры (от 0 до 9);
+Rule	ApplicationUserDetailsValidateApplicationUserView	rule	validation@commonPaswordRequirements5	validateApplicationUserView	commonPaswordRequirements5	- специальные символы (~!@#$%^&*_-+=`|(){}[]:;""'<>,.?/).
+Rule	ApplicationUserDetailsValidateApplicationUserView	rule	validation@commonPaswordRequirements6	validateApplicationUserView	commonPaswordRequirements6	Также пароль:
+Rule	ApplicationUserDetailsValidateApplicationUserView	rule	validation@commonPaswordRequirements7	validateApplicationUserView	commonPaswordRequirements7	- не может содержать буквы кириллицы;
+Rule	ApplicationUserDetailsValidateApplicationUserView	rule	validation@commonPaswordRequirements8	validateApplicationUserView	commonPaswordRequirements8	- не может совпадать с логином или с его частью (4 и более последовательных символа);
+Rule	ApplicationUserDetailsValidateApplicationUserView	rule	validation@commonPaswordRequirements9	validateApplicationUserView	commonPaswordRequirements9	- не может содержать простые последовательности/повторения (последовательные цифры в количестве 4 и более цифр: *0123*, *12345*, *234567* и т.д., последовательные по алфавиту буквы одного регистра в количестве 4 и более букв: *abcd*, *bcdef*, *cdefgh* и т.д.).
+UiSchema	ApplicationUserDetails	ui-label	Account Type	Account Type	Account Type	Тип УЗ
+UiSchema	ApplicationUserDetails	ui-label	Confirm password	Confirm password	Confirm Password	Подтвердите Пароль
+UiSchema	ApplicationUserDetails	ui-label	Display Name	Display Name	Display Name	Отображаемое имя
+UiSchema	ApplicationUserDetails	ui-label	Edit user profile	Edit user profile	Edit User Profile	Редактировать профиль пользователя
+UiSchema	ApplicationUserDetails	ui-label	Email	Email	Email	Электронная почта
+UiSchema	ApplicationUserDetails	ui-label	Expire Date	Expire Date	Expire Date	Дата окончания действия
+UiSchema	ApplicationUserDetails	ui-label	Is user active	Is user active	Is User Active	Активен ли пользователь
+UiSchema	ApplicationUserDetails	ui-label	Login type	Login type	Login Type	Тип входа в систему
+UiSchema	ApplicationUserDetails	ui-label	Party code	Party code	Party Code	Код контрагента
+UiSchema	ApplicationUserDetails	ui-label	Password	Password	Password	Пароль
+UiSchema	ApplicationUserDetails	ui-label	User information	User information	User Information	Информация о пользователе
+UiSchema	ApplicationUserDetails	ui-label	Username	Username	Username	Имя пользователя

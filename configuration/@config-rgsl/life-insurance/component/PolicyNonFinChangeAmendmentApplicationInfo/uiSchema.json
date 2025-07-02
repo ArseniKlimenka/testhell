@@ -1,0 +1,133 @@
+{
+    "type": "Section",
+    "label": "applicationInfo",
+    "scope": "applicationInfo",
+    "width": 12,
+    "elements": [
+        {
+            "type": "Group",
+            "width": 12,
+            "elements": [
+                {
+                    "type": "Lookup",
+                    "label": "applicant",
+                    "value": {
+                        "$ref": "#"
+                    },
+                    "width": 3,
+                    "dialogButton": {},
+                    "clearButton": {
+                        "clearAction": "clearApplicant"
+                    },
+                    "dialog": {
+                        "viewReference": {
+                            "configurationCodeName": "GeneralPartySearchWithEditView",
+                            "configurationVersion": "1",
+                            "configurationConceptType": "SearchView"
+                        },
+                        "onLoad": "onLoadView",
+                        "size": "ExtraLarge"
+                    },
+                    "onSelected": "applicantResultMapping",
+                    "selectedDisplayValueUISchema": {
+                        "type": "Input",
+                        "label": "applicant",
+                        "readOnly": true,
+                        "value": {
+                            "$ref": "#/properties/applicant/properties/fullName"
+                        },
+                        "rule": {
+                            "effect": "DISABLE_INITIAL",
+                            "condition": {
+                                "type": "FUNC",
+                                "ruleFunction": "fieldAlwaysDisabled",
+                                "value": [
+                                    {
+                                        "$ref": "#"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                },
+                {
+                    "type": "Input",
+                    "elementId": "receiveMethod",
+                    "multiple": false,
+                    "control": "Dropdown",
+                    "label": "receiveMethod",
+                    "value": {
+                        "$ref": "#/properties/receiveMethod"
+                    },
+                    "width": 3
+                },
+                {
+                    "type": "Input",
+                    "label": "requestIssueDate",
+                    "value": {
+                        "$ref": "#/properties/requestIssueDate"
+                    },
+                    "width": 3,
+                    "onValueChanged": [
+                        {
+                            "commandType": "executeAction",
+                            "actionName": "onRequestIssueDateChaged"
+                        }
+                    ]
+                },
+                {
+                    "type": "Input",
+                    "label": "applicationDate",
+                    "value": {
+                        "$ref": "#/properties/applicationDate"
+                    },
+                    "width": 3
+                }
+            ]
+        },
+        {
+            "type": "Group",
+            "width": 12,
+            "elements": [
+                {
+                    "type": "Input",
+                    "label": "registrationDate",
+                    "value": {
+                        "$ref": "#/properties/registrationDate"
+                    },
+                    "width": 3
+                },
+                {
+                    "type": "Link",
+                    "width": 2,
+                    "targetType": "Url",
+                    "value": {
+                        "mapping": "urlMapping",
+                        "$ref": "#"
+                    },
+                    "content": {
+                        "text": {
+                            "type": "OutputText",
+                            "defaultValue": "",
+                            "value": {
+                                "mapping": "getRequestLinkText"
+                            }
+                        }
+                    }
+                }
+            ]
+        }
+    ],
+    "rule": {
+        "effect": "ENABLE_INITIAL",
+        "condition": {
+            "type": "FUNC",
+            "ruleFunction": "isAplicationInfoEnabled",
+            "value": [
+                {
+                    "$ref": "#"
+                }
+            ]
+        }
+    }
+}

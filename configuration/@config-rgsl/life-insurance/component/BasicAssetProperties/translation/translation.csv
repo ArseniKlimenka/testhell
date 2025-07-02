@@ -1,0 +1,22 @@
+ConfigurationType	ConfigurationName	ItemType	TranslationKey	Expression	Translation_en-US	Translation_ru-RU
+UiSchema	BasicAssetProperties	ui-label	BasicAssetProperties	BasicAssetProperties	Basic Asset Properties	Базовые параметры Актива
+UiSchema	BasicAssetProperties	ui-label	AssetType	AssetType	Asset Type	Тип актива
+UiSchema	BasicAssetProperties	ui-label	ISIN	ISIN	ISIN	ISIN
+UiSchema	BasicAssetProperties	ui-label	Search	Search	Search	Поиск
+Rule	BasicAssetPropertiesValidateAssetProperties	rule	validation@BasicAssetPropertiesEmpty	validateAssetProperties	Basic asset properties is empty	Необходимо заполнить Базовые параметры Актива
+Rule	BasicAssetPropertiesValidateAssetProperties	rule	validation@BasicAssetPropertiesContainsDuplicates	validateAssetProperties	Basic asset properties contains duplicates	Базовые параметры Актива содержат дубликаты
+UiSchema	BasicAssetProperties	ui-label	manualRate	manualRate	manualRate	Комиссионное вознаграждение
+UiSchema	BasicAssetProperties	ui-label	investmentFrequency	investmentFrequency	investmentFrequency	Инвестиционная часть
+UiSchema	BasicAssetProperties	ui-label	assetUnitsCountOnClient	assetUnitsCountOnClient	assetUnitsCountOnClient	Количество единиц актива у клиента
+DataSchema	BasicAssetProperties	field-title	rateOfReturnEquityActives	rateOfReturnEquityActives	rateOfReturnEquityActives	Дополнительные параметры инвестирования
+DataSchema	BasicAssetProperties	field-title	assetUnitsCountOnClient	assetUnitsCountOnClient	assetUnitsCountOnClient	Количество единиц актива у клиента
+DataSchema	BasicAssetProperties	field-title	riskPremium	riskPremium	riskPremium	Размер взноса
+Rule	BasicAssetPropertiesValidateAssetProperties	rule	validation@BasicAssetPropertiesOverflow	validateAssetProperties	BasicAssetPropertiesOverflow	Может быть выбран только один актив
+Rule	BasicAssetPropertiesValidateAssetProperties	rule	validation@AvailableLimitForRegistration	validateAssetProperties	N: Available limit for registration ${availableLimitRub}	N: Доступный лимит для оформления заявки ${availableLimitRub}
+Rule	BasicAssetPropertiesValidateAssetProperties	rule	validation@NotAvailableLimitForRegistration	validateAssetProperties	E: Not available limit for registration ${availableLimitRub}	E: Невозможно оформить договор, сумма доступного лимита ${availableLimitRub}
+UiSchema	BasicAssetProperties	ui-label	Term	Term	Term	Срок актива
+UiSchema	BasicAssetProperties	ui-label	PaperShortName	PaperShortName	PaperShortName	Наименование Актива
+UiSchema	BasicAssetProperties	ui-label	Currency	Currency	Currency	Валюта
+UiSchema	BasicAssetProperties	ui-label	Information resource	Information resource	Information resource	Информационный ресурс
+Rule	BasicAssetPropertiesValidateBasicAssetProperties	rule	validation@ManualRateIsEmpty	validateBasicAssetProperties	E: ManualRateIsEmpty	E: Комиссионное вознаграждение не заполнено
+Rule	BasicAssetPropertiesValidateAssetProperties	rule	validation@AssetTermNotEqualsPolicyTerm	validateAssetProperties	E: AssetTermNotEqualsPolicyTerm	E: Срок Актива не соответствует условиям договора

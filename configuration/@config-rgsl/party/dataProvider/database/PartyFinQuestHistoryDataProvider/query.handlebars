@@ -1,0 +1,67 @@
+with ph as
+(
+select party_code, body, sys_updated_on, sys_updated_by_id from pty.party_history
+union all
+select party_code, body, sys_updated_on, sys_updated_by_id from pty_impl.party_history_arch
+), fin_quest_history as
+(
+select ph.sys_updated_on,
+       {{#if parameters.finKnowledgeQuestionnaire2024}}
+              json_value(ph.body, '$.finKnowledgeQuestionnaire2024.questionnaire[0].itemConfirmation') as question1,
+              lag(json_value(ph.body, '$.finKnowledgeQuestionnaire2024.questionnaire[0].itemConfirmation')) over (order by ph.sys_updated_on) as previous_question1,
+              json_value(ph.body, '$.finKnowledgeQuestionnaire2024.questionnaire[1].itemConfirmation') as question2,
+              lag(json_value(ph.body, '$.finKnowledgeQuestionnaire2024.questionnaire[1].itemConfirmation')) over (order by ph.sys_updated_on) as previous_question2,
+              json_value(ph.body, '$.finKnowledgeQuestionnaire2024.questionnaire[2].itemConfirmation') as question3,
+              lag(json_value(ph.body, '$.finKnowledgeQuestionnaire2024.questionnaire[2].itemConfirmation')) over (order by ph.sys_updated_on) as previous_question3,
+              json_value(ph.body, '$.finKnowledgeQuestionnaire2024.questionnaire[3].itemConfirmation') as question4,
+              lag(json_value(ph.body, '$.finKnowledgeQuestionnaire2024.questionnaire[3].itemConfirmation')) over (order by ph.sys_updated_on) as previous_question4,
+              json_value(ph.body, '$.finKnowledgeQuestionnaire2024.questionnaire[4].itemConfirmation') as question5,
+              lag(json_value(ph.body, '$.finKnowledgeQuestionnaire2024.questionnaire[4].itemConfirmation')) over (order by ph.sys_updated_on) as previous_question5,
+       {{else}}
+              {{#if parameters.finKnowledgeQuestionnaire2023}}
+                     json_value(ph.body, '$.finKnowledgeQuestionnaire2023.questionnaire[0].itemConfirmation') as question1,
+                     lag(json_value(ph.body, '$.finKnowledgeQuestionnaire2023.questionnaire[0].itemConfirmation')) over (order by ph.sys_updated_on) as previous_question1,
+                     json_value(ph.body, '$.finKnowledgeQuestionnaire2023.questionnaire[1].itemConfirmation') as question2,
+                     lag(json_value(ph.body, '$.finKnowledgeQuestionnaire2023.questionnaire[1].itemConfirmation')) over (order by ph.sys_updated_on) as previous_question2,
+                     json_value(ph.body, '$.finKnowledgeQuestionnaire2023.questionnaire[2].itemConfirmation') as question3,
+                     lag(json_value(ph.body, '$.finKnowledgeQuestionnaire2023.questionnaire[2].itemConfirmation')) over (order by ph.sys_updated_on) as previous_question3,
+                     json_value(ph.body, '$.finKnowledgeQuestionnaire2023.questionnaire[3].itemConfirmation') as question4,
+                     lag(json_value(ph.body, '$.finKnowledgeQuestionnaire2023.questionnaire[3].itemConfirmation')) over (order by ph.sys_updated_on) as previous_question4,
+                     json_value(ph.body, '$.finKnowledgeQuestionnaire2023.questionnaire[4].itemConfirmation') as question5,
+                     lag(json_value(ph.body, '$.finKnowledgeQuestionnaire2023.questionnaire[4].itemConfirmation')) over (order by ph.sys_updated_on) as previous_question5,
+              {{else}}
+                     json_value(ph.body, '$.finKnowledgeQuestionnaire.questionnaire[0].itemConfirmation') as question1,
+                     lag(json_value(ph.body, '$.finKnowledgeQuestionnaire.questionnaire[0].itemConfirmation')) over (order by ph.sys_updated_on) as previous_question1,
+                     json_value(ph.body, '$.finKnowledgeQuestionnaire.questionnaire[1].itemConfirmation') as question2,
+                     lag(json_value(ph.body, '$.finKnowledgeQuestionnaire.questionnaire[1].itemConfirmation')) over (order by ph.sys_updated_on) as previous_question2,
+                     json_value(ph.body, '$.finKnowledgeQuestionnaire.questionnaire[2].itemConfirmation') as question3,
+                     lag(json_value(ph.body, '$.finKnowledgeQuestionnaire.questionnaire[2].itemConfirmation')) over (order by ph.sys_updated_on) as previous_question3,
+                     json_value(ph.body, '$.finKnowledgeQuestionnaire.questionnaire[3].itemConfirmation') as question4,
+                     lag(json_value(ph.body, '$.finKnowledgeQuestionnaire.questionnaire[3].itemConfirmation')) over (order by ph.sys_updated_on) as previous_question4,
+                     json_value(ph.body, '$.finKnowledgeQuestionnaire.questionnaire[4].itemConfirmation') as question5,
+                     lag(json_value(ph.body, '$.finKnowledgeQuestionnaire.questionnaire[4].itemConfirmation')) over (order by ph.sys_updated_on) as previous_question5,
+              {{/if}}
+       {{/if}}
+       auc.value as sys_updated_by
+  from ph,
+       org.application_user au,
+       org.application_user_claim auc
+ where ph.sys_updated_by_id = au.application_user_id
+   and au.application_user_id = auc.application_user_id
+   and auc.claim_type = 'DisplayName'
+   and party_code = @partyCode
+)
+select sys_updated_on,
+       question1,
+       question2,
+       question3,
+       question4,
+       question5,
+       sys_updated_by
+  from fin_quest_history
+ where not (    isnull(question1, 'z') = isnull(previous_question1, 'z')
+            and isnull(question2, 'z') = isnull(previous_question2, 'z')
+            and isnull(question3, 'z') = isnull(previous_question3, 'z')
+            and isnull(question4, 'z') = isnull(previous_question4, 'z')
+            and isnull(question5, 'z') = isnull(previous_question5, 'z')
+           )

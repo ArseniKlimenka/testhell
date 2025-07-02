@@ -1,0 +1,58 @@
+{
+    "baseExample": "../examples/example01.json",
+    "applicationContext": {
+        "originatingUser": {
+            "id": "4addfcab-f948-4a4e-9681-8416518988fb",
+            "username": "Administrator",
+            "displayName": "System",
+            "serviceProviders": {
+                "employees": [
+                    {
+                        "code": "12345",
+                        "body": {
+                            "branchId": "bc9a560f-e49e-11e2-89e8-0017a477083a",
+                            "branchName": "Тамбовский филиал"
+                        }
+                    }
+                ]
+            }
+        }
+    },
+    "expectedResult": {
+        "PAS_IMPL.COM_CALC_LINK": [
+            {
+                "AA_NUMBER": "Test AA",
+                "SERVICE_PROVIDER_CODE": "2",
+                "CONTRACT_NUMBER": "T",
+                "PARTICIPANT_NO": 0,
+                "ENTRY": "T",
+                "VALID_ON": "2014-01-01"
+            }
+        ],
+        "PAS_IMPL.COM_CALC_SAT": [
+            {
+                "AA_NUMBER": "Test AA",
+                "CALCULATION_CONTEXT": "{\"insuranceRule\":\"T\",\"insuranceProduct\":\"T\",\"insuranceCurrency\":\"T\",\"insuranceYear\":1,\"insuranceTerm\":1,\"premiumPeriod\":1,\"premiumPeriodType\":\"T\"}",
+                "SUCCESS": true,
+                "REGISTRATOR_NUMBER": "T",
+                "START_DATE": "2002-02-01",
+                "END_DATE": "2022-02-01",
+                "RULE_NUM": 0,
+                "MIN_RATE": 1,
+                "MAX_RATE": 30,
+                "MAX_RATE_LIMIT": 40,
+                "RATE": 23,                
+                "DISABLE_DISCOUNT": false,
+                "DISABLE_MANUAL_CORRECTION": false,
+                "ALWAYS_USE_MAX_RATE": false
+            }
+        ],
+        "PAS_IMPL.COM_CALC_EXECUTION_STATUS": [
+            {
+                "TRIGGERED_BY": "4addfcab-f948-4a4e-9681-8416518988fb",
+                "STATUS": 2,
+                "TYPE": "CommissionCalculation"
+            }
+        ]
+    }
+}

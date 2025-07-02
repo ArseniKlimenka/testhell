@@ -1,0 +1,62 @@
+{
+    "type": "Group",
+    "formProperties": {
+        "events": {
+            "onLoad": "onLoadGroupMembersWithAvailabilitiesView"
+        }
+    },
+    "elements": [
+        {
+            "type": "GridLayout",
+            "numberOfColumns": 4,
+            "elements": [
+                {
+                    "type": "DataGrid",
+                    "value": {
+                        "$ref": "#/properties/Body"
+                    },
+                    "mode": "Array",
+                    "pagination": {
+                        "mode": "Regular",
+                        "defaultPageSize": 15,
+                        "pageSizes": [
+                            5,
+                            10,
+                            15
+                        ]
+                    },
+                    "selection": {
+                        "mode": "None",
+                        "enableRowSelection": false,
+                        "showCheckBox": false
+                    },
+                    "height": "None",
+                    "columns": [
+                        {
+                            "title": "User",
+                            "sortable": true,
+                            "name": "username",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "value": {
+                                    "$ref": "#/properties/username"
+                                }
+                            }
+                        },
+                        {
+                            "title": "Number of Activities",
+                            "sortable": true,
+                            "name": "numberOfActivities",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "value": {
+                                    "$ref": "#/properties/numberOfActivities"
+                                }
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

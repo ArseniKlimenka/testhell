@@ -1,0 +1,9 @@
+﻿select
+    u.APPLICATION_USER_ID,
+    u.EXTERNAL_ID
+from
+	org.APPLICATION_USER u
+	inner join org.APPLICATION_USER_CLAIM aucIsActive on aucIsActive.APPLICATION_USER_ID = u.APPLICATION_USER_ID and aucIsActive.CLAIM_TYPE = N'IsUserActive' and aucIsActive.VALUE = 'true'
+	inner join org.APPLICATION_USER_CLAIM cExpireDate on cExpireDate.APPLICATION_USER_ID = u.APPLICATION_USER_ID and cExpireDate.CLAIM_TYPE = 'ExpireDate'
+where 1=1
+	and cExpireDate.VALUE < CONVERT(NVARCHAR(10), SYSDATETIME(), 23)

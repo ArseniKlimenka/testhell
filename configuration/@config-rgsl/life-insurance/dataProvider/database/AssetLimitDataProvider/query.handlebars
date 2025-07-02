@@ -1,0 +1,14 @@
+select
+  isnull(sum(AMOUNT), 0) AMOUNT
+from
+  PAS_IMPL.ASSET_LIMITS_ACCOUNTING
+where 1 = 1
+  {{#if parameters.contractNumber}}
+  and CONTRACT_NUMBER = @contractNumber
+  {{/if}}
+  {{#if parameters.isin}}
+  and ISIN = @isin
+  {{/if}}
+  {{#if parameters.excludeContractNumber}}
+  and CONTRACT_NUMBER != @excludeContractNumber
+  {{/if}}

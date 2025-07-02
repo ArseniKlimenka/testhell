@@ -1,0 +1,42 @@
+{
+    "targetDocument": "AccumulatedLifeInsurancePolicy",
+    "targetDocumentVersion": "1",
+    "targetState": "Draft",
+    "relationType": "Child",
+    "actors": [
+        "Agent",
+        "Operations"
+    ],
+    "allowOnValidationErrors": {
+        "all": false
+    },
+    "requiredConfirmedConstraints": {
+        "all": true
+    },
+    "enrichment": {
+        "all": false
+    },
+    "copyAttachments": {
+        "all": true
+    },
+    "exclusiveToAssignedUser": true,
+    "actionToRunBefore": "checkKPK",
+    "sourceDocument": "AccumulatedLifeInsuranceQuote",
+    "sourceDocumentVersion": "1",
+    "sourceDocumentStates": [
+        {
+            "name": "Draft",
+            "actors": [
+                "Agent",
+                "Operations"
+            ]
+        },
+        {
+            "name": "Approved",
+            "actors": [
+                "Agent",
+                "Operations"
+            ]
+        }
+    ]
+}

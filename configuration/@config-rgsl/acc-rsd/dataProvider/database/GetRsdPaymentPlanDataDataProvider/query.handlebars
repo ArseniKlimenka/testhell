@@ -1,0 +1,46 @@
+select
+	t.CONTRACT_NUMBER,
+	t.DUE_DATE,
+	t.OBJECT_CODE,
+	t.ITEM_NO,
+	t.POSTING_DATE,
+	t.DEADLINE_DATE,
+	{{#if parameters.onDate}}datediff(day, t.DEADLINE_DATE, @onDate){{else}}null{{/if}} as OVERDUE_DAYS,
+	t.AMOUNT,
+	t.OPEN_AMOUNT,
+	t.OPEN_AMOUNT_NO_RSD,
+	{{#if parameters.onDate}}coalesce(odr.RATE, 0){{else}}null{{/if}} as RSD_RATE
+from
+	acc_impl.RSD_JOB_PP_DATA t
+	inner join pas.CONTRACT c on c.CONTRACT_NUMBER = t.CONTRACT_NUMBER
+	inner join cfg.PROCESS_STATE ps on ps.PROCESS_STATE_ID = c.STATE_ID
+	inner join pas_impl.POLICY_HUB polh on polh.CONTRACT_NUMBER = t.CONTRACT_NUMBER
+	inner join pas_impl.POLICY_SAT_LATEST pols on pols.POLICY_HKEY = polh.POLICY_HKEY
+{{#if parameters.onDate}}
+	left join acc_impl.OVERDUE_DAYS_RATE odr on datediff(day, t.DEADLINE_DATE, @onDate) between odr.DAYS_FROM and odr.DAYS_TO
+{{/if}}
+where 1=1
+	and (ps.CODE_NAME = 'Activated' or (ps.CODE_NAME = 'Active' and pols.INVOICE_ON_ACTIVATION = 1))
+	and t.OPEN_AMOUNT_NO_RSD != 0
+{{#if parameters.onDate}}
+	and t.DEADLINE_DATE < @onDate
+{{/if}}
+	and t.LOAD_DATE = (
+		select max(f.LOAD_DATE)
+		from acc_impl.RSD_JOB_PP_DATA f
+		where 1=1
+			and f.CONTRACT_NUMBER = t.CONTRACT_NUMBER
+			and f.DUE_DATE = t.DUE_DATE
+{{#unless parameters.takeLatest}}
+{{#if parameters.onDate}}
+			and f.LOAD_DATE <= @onDate
+{{/if}}
+{{/unless}}
+	)
+{{#if parameters.contractNumber}}
+	and t.CONTRACT_NUMBER = @contractNumber
+{{/if}}
+{{#if parameters.contractNumbers}}
+	and t.CONTRACT_NUMBER in (@contractNumbers)
+{{/if}}
+order by CONTRACT_NUMBER, DUE_DATE, OBJECT_CODE, ITEM_NO

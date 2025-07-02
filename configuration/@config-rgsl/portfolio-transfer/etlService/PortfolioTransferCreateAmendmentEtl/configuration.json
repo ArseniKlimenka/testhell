@@ -1,0 +1,44 @@
+{
+    "mainDataSource": "GetPortfolioDocumentContractsDataSource",
+    "additionalDataSources": [
+        "PortfolioTransferSearchRgslDataSource"
+    ],
+    "useBackgroundTaskWorker": true,
+    "restartable": true,
+    "enableAutomaticRecovery": true,
+    "sinks": [
+        {
+            "ref": "UpdatePortfolioTransferContractSinkGroup"
+        },
+        {
+            "name": "ChangeState",
+            "database": {
+                "tables": [
+                    "ACC_IMPL.PORTFOLIO_TRANSFER_DOCUMENT_SAT"
+                ]
+            }
+        }
+    ],
+    "completionSinks": [
+        {
+            "name": "StartNextEtl",
+            "etlService": {
+                "configuration": {
+                    "name": "PortfolioTransferAllocationEtl",
+                    "version": "1"
+                }
+            }
+        }
+    ],
+    "errorSinks": [
+        {
+            "name": "WriteErrorMessage",
+            "database": {
+                "tables": [
+                    "ACC_IMPL.PORTFOLIO_TRANSFER_DOCUMENT_SAT"
+                ]
+            }
+        }
+    ],
+    "version": "1"
+}

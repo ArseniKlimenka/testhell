@@ -1,0 +1,29 @@
+﻿SELECT 
+
+	sp.SERVICE_PROVIDER_ID, 
+	sp.SERVICE_PROVIDER_CODE, 
+	sp.BODY, 
+	sp.COMMON_BODY, 
+	sp.PARTY_CODE, 
+	spis.PARTNER_CODE,
+	spis.PARTNER_TYPE 
+	
+FROM ORG.SERVICE_PROVIDER sp
+
+JOIN CFX.PUBLISHED_ARTIFACT pa ON pa.PUBLISHED_ARTIFACT_ID = sp.PUBLISHED_ARTIFACT_ID
+JOIN ORG_IMPL.SERVICE_PROVIDER_HUB sph on sph.SERVICE_PROVIDER_CODE = sp.SERVICE_PROVIDER_CODE
+JOIN ORG_IMPL.SERVICE_PROVIDER_INFO_SAT_LATEST spis on spis.SERVICE_PROVIDER_INFO_HKEY = sph.SERVICE_PROVIDER_HKEY
+
+WHERE 1 = 1
+
+	{{#if parameters.configurationCodeName}}
+		AND pa.CODE_NAME = @configurationCodeName
+	{{/if}}
+
+	{{#if parameters.serviceProviderCode}}
+		AND sp.SERVICE_PROVIDER_CODE = @serviceProviderCode
+	{{/if}}
+
+	{{#if parameters.partnerCode}}
+		AND spis.PARTNER_CODE = @partnerCode
+	{{/if}}

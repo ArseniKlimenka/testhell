@@ -1,0 +1,81 @@
+{
+    "type": "GridLayout",
+    "numberOfColumns": 3,
+    "width": 12,
+    "elements": [
+        {
+            "type": "DataGrid",
+            "mode": "Array",
+            "label": "SoleProprietorHistory",
+            "labelType": "H1",
+            "pagination": {
+                "mode": "Regular",
+                "pageSizes": [
+                    5,
+                    10,
+                    15
+                ],
+                "defaultPageSize": 5
+            },
+            "value": {
+                "$ref": "#"
+            },
+            "actions": [
+                "Add",
+                "Edit",
+                "Delete"
+            ],
+            "edit": {
+                "mode": "Detached",
+                "onBeforeGridAction": "soleProprietorHistoryOnBeforeGridAction"
+            },
+            "height": "Small",
+            "columns": [
+                {
+                    "title": "OGRNIP",
+                    "name": "OGRNOGRNIP",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/partyOGRN/properties/OGRNOGRNIP"
+                        }
+                    }
+                },
+                {
+                    "title": "dateOfStateRegistration",
+                    "name": "dateOfStateRegistration",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/partyOGRN/properties/dateOfStateRegistration"
+                        }
+                    }
+                },
+                {
+                    "title": "dateOfRecordingTermination",
+                    "name": "dateOfRecordingTermination",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/partyOGRN/properties/dateOfRecordingTermination"
+                        }
+                    }
+                }
+            ],
+            "detailsTemplates": {
+                "edit": {
+                    "content": {
+                        "type": "Component",
+                        "name": "SoleProprietorData",
+                        "value": {
+                            "$ref": "#"
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}

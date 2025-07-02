@@ -1,0 +1,128 @@
+{
+    "type": "Group",
+    "formProperties": {
+        "events": {
+            "onLoad": "onLoadServiceProviderSearchView"
+        }
+    },
+    "elements": [
+        {
+            "type": "Input",
+            "elementId": "serviceProviderFreeText",
+            "label": "General search",
+            "value": {
+                "$ref": "#/properties/request/properties/data/properties/criteria/properties/freeText"
+            },
+            "width": 2
+        },
+        {
+            "type": "Input",
+            "label": "Service provide type",
+            "value": {
+                "$ref": "#/properties/request/properties/data/properties/criteria/properties/serviceProviderType"
+            },
+            "width": 2,
+            "rule": {
+                "effect": "DISABLE_INITIAL",
+                "condition": {
+                    "type": "LEAF",
+                    "expectedValue": true,
+                    "value": {
+                        "$ref": "#/properties/viewContext/properties/lockServiceProviderType"
+                    }
+                }
+            }
+        },
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "GroupSeparator"
+                },
+                {
+                    "type": "Section",
+                    "sectionLevel": 2,
+                    "label": "Employee",
+                    "elements": [
+                        {
+                            "type": "Lookup",
+                            "elementId": "organisationUnitLookup",
+                            "label": "organisationUnit",
+                            "commands": [
+                                {
+                                    "commandType": "executeOperation",
+                                    "operation": "SEARCH",
+                                    "errorHandling": "silent",
+                                    "data": null
+                                }
+                            ],
+                            "value": {
+                                "$ref": "#"
+                            },
+                            "width": 1,
+                            "dialogButton": {},
+                            "clearButton": {
+                                "clearAction": "organisationUnitClear"
+                            },
+                            "dialog": {
+                                "viewReference": {
+                                    "configurationCodeName": "OrganisationUnitImplLookup",
+                                    "configurationVersion": "1",
+                                    "configurationConceptType": "SearchView"
+                                },
+                                "onLoad": "organisationUnitOnLoad"
+                            },
+                            "onSelected": "organisationUnitOnSelected",
+                            "selectedDisplayValueUISchema": {
+                                "type": "Input",
+                                "label": "organisationUnit",
+                                "readOnly": true,
+                                "value": {
+                                    "$ref": "#/properties/request/properties/data/properties/criteria/properties/organisationUnitName"
+                                }
+                            }
+                        },
+                        {
+                            "type": "Input",
+                            "label": "includeChildren",
+                            "isCompact": false,
+                            "value": {
+                                "$ref": "#/properties/request/properties/data/properties/criteria/properties/includeChildren"
+                            },
+                            "width": 1
+                        },
+                        {
+                            "type": "Input",
+                            "label": "isPersonalManager",
+                            "isCompact": false,
+                            "value": {
+                                "$ref": "#/properties/request/properties/data/properties/criteria/properties/isPersonalManager"
+                            },
+                            "width": 1
+                        }
+                    ],
+                    "rule": {
+                        "effect": "DISABLE_INITIAL",
+                        "condition": {
+                            "type": "LEAF",
+                            "expectedValue": true,
+                            "value": {
+                                "$ref": "#/properties/viewContext/properties/lockOrganisationUnit"
+                            }
+                        }
+                    }
+                }
+            ],
+            "rule": {
+                "effect": "SHOW",
+                "condition": {
+                    "type": "LEAF",
+                    "value": {
+                        "$ref": "#/properties/request/properties/data/properties/criteria/properties/serviceProviderType"
+                    },
+                    "expectedValue": "Employee"
+                }
+            }
+        }
+    ]
+}

@@ -1,0 +1,268 @@
+{
+    "type": "GridLayout",
+    "numberOfColumns": 12,
+    "elements": [
+        {
+            "type": "Section",
+            "label": "Input parameters",
+            "sectionLevel": 1,
+            "elements": [
+                {
+                    "type": "Input",
+                    "label": "Product",
+                    "multiple": true,
+                    "value": {
+                        "$ref": "#/properties/productCodes"
+                    },
+                    "control": "Dropdown",
+                    "width": 3,
+                    "autocomplete": {
+                        "minTextLength": 0,
+                        "dropDownItemsCount": 15,
+                        "selectItemOnMatch": false
+                    },
+                    "source": {
+                        "dataSource": {
+                            "name": "ProductsDataSource",
+                            "searchFieldPath": "description",
+                            "requestMapping": "productRequestMapping",
+                            "responseMapping": "productResponseMapping"
+                        },
+                        "displayFieldName": "productDescription",
+                        "valueFieldName": "productCode"
+                    }
+                },
+                {
+                    "type": "Input",
+                    "label": "Strategy",
+                    "multiple": false,
+                    "value": {
+                        "$ref": "#/properties/strategyCode"
+                    },
+                    "control": "Dropdown",
+                    "width": 3,
+                    "autocomplete": {
+                        "minTextLength": 0,
+                        "dropDownItemsCount": 1000,
+                        "selectItemOnMatch": false
+                    },
+                    "source": {
+                        "dataSource": {
+                            "name": "InvestmentStrategyDataSource",
+                            "searchFieldPath": "investmentStrategyDescription",
+                            "responseMapping": "investmentStrategyResponseMapping",
+                            "resultCount": 1000
+                        },
+                        "displayFieldName": "investmentStrategyDescription",
+                        "valueFieldName": "investmentStrategyCode"
+                    }
+                },
+                {
+                    "type": "Input",
+                    "label": "issueDateMin",
+                    "width": 3,
+                    "value": {
+                        "$ref": "#/properties/issueDateMin"
+                    }
+                },
+                {
+                    "type": "Input",
+                    "label": "issueDateMax",
+                    "width": 3,
+                    "value": {
+                        "$ref": "#/properties/issueDateMax"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "Section",
+            "label": "Output parameters",
+            "sectionLevel": 1,
+            "elements": [
+                {
+                    "type": "Group",
+                    "elements": [
+                        {
+                            "type": "Input",
+                            "width": 4,
+                            "label": "strategyDescriptionFull",
+                            "value": {
+                                "$ref": "#/properties/strategyDescriptionFull"
+                            }
+                        },
+                        {
+                            "type": "Input",
+                            "width": 4,
+                            "label": "payOffDescription",
+                            "value": {
+                                "$ref": "#/properties/payOffDescription"
+                            }
+                        },
+                        {
+                            "type": "Input",
+                            "width": 4,
+                            "label": "baseActiveDescription",
+                            "value": {
+                                "$ref": "#/properties/baseActiveDescription"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "type": "Group",
+                    "elements": [
+                        {
+                            "type": "Input",
+                            "width": 4,
+                            "label": "participationCoeff",
+                            "value": {
+                                "$ref": "#/properties/participationCoeff"
+                            }
+                        },
+                        {
+                            "type": "Input",
+                            "width": 4,
+                            "label": "participationCoeffByPeriods",
+                            "value": {
+                                "$ref": "#/properties/participationCoeffByPeriods"
+                            }
+                        },
+                        {
+                            "type": "Input",
+                            "width": 4,
+                            "label": "optionPrice",
+                            "value": {
+                                "$ref": "#/properties/optionPrice"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "type": "Group",
+                    "elements": [
+                        {
+                            "type": "Input",
+                            "width": 4,
+                            "label": "barrier",
+                            "value": {
+                                "$ref": "#/properties/barrier"
+                            }
+                        },
+                        {
+                            "type": "Input",
+                            "width": 4,
+                            "label": "barrierAutoCall",
+                            "value": {
+                                "$ref": "#/properties/barrierAutoCall"
+                            }
+                        },
+                        {
+                            "type": "Input",
+                            "width": 4,
+                            "label": "emitent",
+                            "value": {
+                                "$ref": "#/properties/emitent"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "type": "Group",
+                    "elements": [
+                        {
+                            "type": "Input",
+                            "width": 4,
+                            "label": "fixRate",
+                            "value": {
+                                "$ref": "#/properties/fixRate"
+                            }
+                        },
+                        {
+                            "type": "Input",
+                            "width": 4,
+                            "label": "intialShare",
+                            "value": {
+                                "$ref": "#/properties/intialShare"
+                            }
+                        },
+                        {
+                            "type": "Input",
+                            "width": 4,
+                            "label": "hedgeCost",
+                            "value": {
+                                "$ref": "#/properties/hedgeCost"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "type": "Group",
+                    "elements": [
+                        {
+                            "type": "Input",
+                            "width": 4,
+                            "label": "spreadBA",
+                            "value": {
+                                "$ref": "#/properties/spreadBA"
+                            }
+                        },
+                        {
+                            "type": "Input",
+                            "width": 4,
+                            "label": "payOffShortDescription",
+                            "value": {
+                                "$ref": "#/properties/payOffShortDescription"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "type": "Group",
+                    "elements": [
+                        {
+                            "type": "Input",
+                            "width": 4,
+                            "label": "toolType",
+                            "value": {
+                                "$ref": "#/properties/toolType"
+                            }
+                        },
+                        {
+                            "type": "Input",
+                            "width": 4,
+                            "label": "measureToolNominal",
+                            "value": {
+                                "$ref": "#/properties/measureToolNominal"
+                            }
+                        },
+                        {
+                            "type": "Input",
+                            "width": 4,
+                            "label": "calculatingAgent",
+                            "value": {
+                                "$ref": "#/properties/calculatingAgent"
+                            }
+                        },
+                        {
+                            "type": "Input",
+                            "width": 4,
+                            "label": "priceOfMeasureTool",
+                            "value": {
+                                "$ref": "#/properties/priceOfMeasureTool"
+                            }
+                        },
+                        {
+                            "type": "Input",
+                            "width": 4,
+                            "label": "partOfPremiumForTool",
+                            "value": {
+                                "$ref": "#/properties/partOfPremiumForTool"
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,21 @@
+﻿select
+  agr.CONTRACT_NUMBER,
+  art.CODE_NAME CONFIGURATION_NAME,
+  pst.CODE_NAME STATE_NAME
+from
+  PAS.CONTRACT agr
+    inner join
+  CFX.PUBLISHED_ARTIFACT art
+    on agr.PUBLISHED_ARTIFACT_ID = art.PUBLISHED_ARTIFACT_ID
+    inner join
+  CFG.PROCESS_STATE pst
+    on agr.STATE_ID = pst.PROCESS_STATE_ID
+    left outer join
+  PAS_IMPL.POLICY_HUB hub
+    on agr.CONTRACT_NUMBER = hub.CONTRACT_NUMBER
+where hub.CONTRACT_NUMBER is null
+  and art.CODE_NAME like '%Policy'
+  and pst.CODE_NAME in ('Active', 'Activated')
+order by
+  agr.CONTRACT_NUMBER,
+  agr.SEQ_NUMBER

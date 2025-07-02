@@ -1,0 +1,49 @@
+{
+    "entityType": "Contract",
+    "condition": {
+        "events": [
+            "Created",
+            "Updated"
+        ],
+        "configuration": {
+            "names": [],
+            "dimensions": {
+                "contractType": [
+                    "Amendment"
+                ]
+            }
+        }
+    },
+    "executionOrderWeight": 0,
+    "sinks": [
+        {
+            "name": "Amendment",
+            "database": {
+                "tables": [
+                    "PAS_IMPL.AMENDMENT_HUB",
+                    "PAS_IMPL.AMENDMENT_SAT",
+                    "PAS_IMPL.POLICY_AMENDMENT_LINK",
+                    "PAS_IMPL.AMENDMENT_LINES_SAT",
+                    "PAS_IMPL.CHANGE_AMENDMENT_SAT",
+                    "PAS_IMPL.CHANGE_APPLICANT_LINK",
+                    "PAS_IMPL.CHANGE_APPLICANT_SAT",
+                    "PAS_IMPL.PERS_DATA_CHANGE_SAT",
+                    "PAS_IMPL.CHANGE_TYPE_SAT",
+                    "PAS_IMPL.CNL_AMENDMENT_SAT",
+                    "PAS_IMPL.CNL_APPLICANT_LINK",
+                    "PAS_IMPL.CNL_APPLICANT_SAT",
+                    "PAS_IMPL.CNL_RECIPIENT_LINK",
+                    "PAS_IMPL.CNL_RECIPIENT_SAT"
+                ]
+            }
+        },
+        {
+            "name": "CheckCancellationPayment",
+            "class": {
+                "className": "Adacta.AdInsure.RGSL.PAS.API.Internal.Contracts.IContractTransitionService, Adacta.AdInsure.RGSL.PAS.API",
+                "methodName": "MakeTransition"
+            }
+        }
+    ],
+    "version": "1"
+}

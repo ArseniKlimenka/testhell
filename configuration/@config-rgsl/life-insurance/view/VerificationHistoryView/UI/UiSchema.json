@@ -1,0 +1,84 @@
+{
+    "type": "DataGrid",
+    "mode": "DataSource",
+    "header": {
+        "showReloadButton": true,
+        "showNumberOfResults": true
+    },
+    "pagination": {
+        "mode": "Regular",
+        "defaultPageSize": 15,
+        "pageSizes": [
+            5,
+            10,
+            15
+        ]
+    },
+    "selection": {
+        "mode": "None"
+    },
+    "height": "None",
+    "columns": [
+        {
+            "title": "verificationStatus",
+            "name": "verificationStatus",
+            "sortable": true,
+            "cellContent": {
+                "type": "OutputText",
+                "defaultValue": "",
+                "value": {
+                    "$ref": "#/properties/resultData/properties/verificationStatus"
+                }
+            }
+        },
+        {
+            "title": "verificationErrors",
+            "name": "verificationErrors",
+            "sortable": true,
+            "cellContent": {
+                "type": "OutputText",
+                "defaultValue": "",
+                "value": {
+                    "$ref": "#/properties/resultData/properties/verificationErrors"
+                }
+            }
+        },
+        {
+            "title": "comments",
+            "name": "comments",
+            "sortable": true,
+            "cellContent": {
+                "type": "OutputText",
+                "defaultValue": "",
+                "value": {
+                    "$ref": "#/properties/resultData/properties/comments"
+                }
+            }
+        },
+        {
+            "title": "createdDate",
+            "name": "createdDate",
+            "sortable": true,
+            "cellContent": {
+                "type": "OutputText",
+                "template": "{{expr createdDate 'dt'}}",
+                "defaultValue": "",
+                "value": {
+                    "$ref": "#/properties/resultData"
+                }
+            }
+        },
+        {
+            "title": "username",
+            "name": "username",
+            "sortable": true,
+            "cellContent": {
+                "type": "OutputText",
+                "defaultValue": "",
+                "value": {
+                    "$ref": "#/properties/resultData/properties/username"
+                }
+            }
+        }
+    ]
+}

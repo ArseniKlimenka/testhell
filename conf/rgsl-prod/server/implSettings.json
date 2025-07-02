@@ -1,0 +1,215 @@
+{
+    "Logging": {
+        "LogLevel": {
+            "Default": "Trace"
+        }
+    },
+    "appSettings": {
+        "dbDataAccess": {
+            "readSync": "true",
+            "writeSync": "true"
+        },
+        "AdInsure": {
+            "NotificationChannels": {
+                "email": {
+                    "type": "email",
+                    "host": "mail.rgsl.ru",
+                    "port": 25,
+                    //          "username": "rgsl",
+                    //          "password": "********",
+                    "useSSL": false,
+                    "sender": {
+                        "name": "RGSL",
+                        "email": "rgsl@rgsl.ru"
+                    }
+                },
+                "Adinsure": {
+                    "type": "Adinsure"
+                }
+            },
+            "Healthcheck": {
+                "Enabled": "true",
+                "Database": {
+                    "PoorPerformanceThreshold": "2000"
+                }
+            },
+            "Monitoring": {
+                "Enabled": "true"
+            },
+            "MessageBroker": {
+                /* Integration of AdInsure with ActiveMQ */
+                /*  Uri: ActiveMQ Broker URI */
+                "Uri": "activemq:tcp://adins-prd-mq-01:61616",
+                /* "Username": "user" */
+                "Username": "ActiveMQ",
+                /*  Password: ActiveMQ Password */
+                "Password": "GP]RfsAQAfPP-e"
+            },
+            "Settings": {
+                "MaxRequestBodySize": 50000000,
+                "scriptingEnginePools": {
+                    "all": {
+                        "startEngines": 2,
+                        "maxEngines": 100,
+                        "MaxOldSpaceSize": 4096
+                        //	ScriptingEngineCallLogger
+                        //	"logEveryEngineCall": true
+                    }
+                },
+                "AuditTrail": {
+                    /* Whether to use audit logging or not */
+                    // "EnableAuditing": true,
+                    /* Name of the search engine index used to store audit log */
+                    // "AuditLogSearchEngineIndexName": "auditlog"
+                },
+                "Extensions": {
+                    "FileSystemRootFolder": "extensions"
+                },
+                "Core": {
+                    "LocalCurrencyCode": "RUB"
+                },
+                "General": {
+                    "DocumentManagement": {
+                        "FileStorageRoot": "\\\\lifefs02\\adinsuploads\\"
+                    },
+                    "Language": "ru-RU",
+                    "SendAllExceptionsToClients": false
+                },
+                "SearchEngine": {
+                    /*
+                        Integration of AdInsure with ElasticSearch
+                        URL: cluster URI
+                        IndexPrefix: index prefix
+                        User: Username of the search user
+                        Password: Password of the search user
+                        NOTE: Username and password are only viable if the cluster has security enabled (xpack.security.enabled flag)
+                    */
+                    "IndexPrefix": "adinsure_index",
+                    "URL": "http://adins-prd-app02.life.rgs.local:9200,http://adins-prd-es04.life.rgs.local:9200"
+                    //"User": "elastic",
+                    //"SPassword": "adinsure",
+                    //"SniffOnStartup": true
+                },
+                "Log": {
+                    "LogRoot": "E:\\Logs"
+                    // "LogLevel": "DEBUG"
+                },
+                "OAuthIdentity": {
+                    "IdentityEndpointUrl": "https://adinsure-auth.rgsl.ru",
+                    "RequiredScopes": "adinsure",
+                    "Audience": "https://adinsure-auth.rgsl.ru/resources"
+                },
+                "PrintoutRenderer": {
+                    "DebugLevel": "None",
+                    "Url": "http://adins-prd-app03.life.rgs.local:9423/service/rest",
+                    "ExternalAssetsFolder": "C:\\AdInsure\\prod",
+                    "StaticAssetsServerBaseUrl": "http://adins-prd-app01.life.rgs.local:60010/"
+                },
+                "RGSL": {
+                    "Integration": {
+                        "Dadata": {
+                            "EnableDadataService": "true",
+                            "Uri": "https://suggestions.dadata.ru/suggestions/api/4_1/rs/suggest/address/",
+                            "Token": "6c9443ebae312fa155dc9f59b34bba891c5ebe5d"
+                        },
+                        "Cbr": {
+                            "CurrencyExchangeRatesUrl": "http://www.cbr.ru/scripts/XML_daily.asp",
+                            "WebServiceDailyInfoCbrUrl": "https://www.cbr.ru/DailyInfoWebServ/DailyInfo.asmx",
+                            "BanksImportPath": "\\import\\banks.xml",
+                            // set below option to true for use ProxyCredentialAddressPort for Cbr requests
+                            "UseProxy": "false"
+                        },
+                        "KPK": {
+                            "UserName": "ADINSURE",
+                            "Uri": "https://life-1cw-04/1C_KPK_LIFE2021_PRD/ws/Kpk.1cws"
+                        },
+                        "BlackList": {
+                            "EnableBlackListService": "false",
+                            "Login": "ADINSURE",
+                            "Url": "https://life-1cw-04/1C_KPK_LIFE2021_PRD/ws/bl.1cws"
+                        },
+                        "DigitalSignature": {
+                            "Uri": "http://esbcam-prd-02:18080/restSignPDF/upload-file"
+                        },
+                        "SecuritySmsNotification": {
+                            "Uri": "https://gate30.edna.ru:13228/rgsl/connector4/send",
+                            "SecurityCodeExpirationInMinutes": "30",
+                            "SecurityCodeCooldownInMinutes": "5",
+                            "SmsServiceLogin": "rgsl4",
+                            "SmsServicePassword": "5tUu3qwz"
+                        },
+                        "AuthService": {
+                            "Scope": "adinsure",
+                            "ClientId": "services",
+                            "ClientSecret": "EA8C35E8-5875-493E-B6A8-6687A0C178EB"
+                        },
+                        "Rosfinmonitoring": {
+                            "FormatVersion": "2.0",
+                            "SoftwareVersion": "ПорталРФМ 01",
+                            "CorrespondentId": "2000039473",
+                            "OutputFolder": "\\\\lifefs01\\DATA01\\ADINSURE\\RosFinMon\\PROD\\"
+                        },
+                        "GetContractDataCustomService": {
+                            "EnableLogging": false
+                        },
+                        "SendEvent": {
+                            "EnableLogging": true
+                        },
+                        "Fns": {
+                            "FormatVersion": "5.01",
+                            "OutputFolder": "\\\\lifefs01\\DATA01\\ADINSURE\\NalogXML\\PROD\\"
+                        },
+                        "NalogPDF":{
+                            "OutputFolder": "\\\\lifefs01.life.rgs.local\\Data01$\\NALOGPDF\\PROD\\"
+                        }
+                    }
+                },
+                "AssetServer": {
+                    "PublicUpload": {
+                        "Url": "http://adins-prd-app01:60010/"
+                    }
+                },
+                "FileUploadRestrictions": {
+                    "CheckFileType": true,
+                    "CheckFileTypeByContent": true,
+                    "AllowedFileTypes": [
+                        {
+                            "FileType": "JPEG",
+                            "Extensions": ["jpeg", "jpe", "jpg"]
+                        },
+                        {
+                            "FileType": "PNG"
+                        },
+                        {
+                            "FileType": "TIFF"
+                        },
+                        {
+                            "FileType": "MyOffice",
+                            "Extensions": ["odt", "xodt", "ods", "xods"]
+                        },
+                        {
+                            "FileType": "Mail",
+                            "Extensions": ["msg", "eml"]
+                        },
+                        {
+                            "FileType": "XML"
+                        },
+                        {
+                            "FileType": "Microsoft Office Document",
+                            "Extensions": ["doc", "docx", "xls", "xlsx", "xlsb", "rtf"]
+                        },
+                        {
+                            "FileType": "PDF"
+                        },
+                        {
+                            "FileType": "TXT"
+                        },
+                        {
+                            "FileType": "CSV"
+                        }
+                    ]
+                }
+            }
+        }
+    }
+}

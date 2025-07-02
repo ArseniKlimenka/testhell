@@ -1,0 +1,95 @@
+{
+    "entityType": "ImportDocument",
+    "states": [
+        {
+            "name": "Draft",
+            "actors": [
+                {
+                    "actor": "General",
+                    "uiSchema": "UiSchemaDraft",
+                    "operations": [
+                        "Save"
+                    ],
+                    "transitions": [
+                        "StartLoading"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Loading",
+            "actors": [
+                {
+                    "actor": "General",
+                    "uiSchema": "UiSchemaLoad",
+                    "operations": [],
+                    "transitions": []
+                }
+            ]
+        },
+        {
+            "name": "ReloadSetup",
+            "actors": [
+                {
+                    "actor": "General",
+                    "uiSchema": "UiSchemaLoad",
+                    "operations": [
+                        "Save"
+                    ],
+                    "transitions": [
+                        "StartReloading"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Loaded",
+            "actors": [
+                {
+                    "actor": "General",
+                    "uiSchema": "UiSchemaLoad",
+                    "operations": [],
+                    "transitions": [
+                        "Reload",
+                        "StartImporting"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Importing",
+            "actors": [
+                {
+                    "actor": "General",
+                    "uiSchema": "UiSchemaImport",
+                    "operations": [],
+                    "transitions": []
+                },
+                {
+                    "actor": "System",
+                    "uiSchema": "UiSchemaImport",
+                    "operations": [],
+                    "transitions": [
+                        "FinishImporting"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Imported",
+            "actors": [
+                {
+                    "actor": "General",
+                    "uiSchema": "UiSchemaImport",
+                    "operations": []
+                }
+            ]
+        }
+    ],
+    "version": "1",
+    "components": [
+        "DocumentFooter",
+        "DocumentHeader"
+    ],
+    "validFrom": "2000-01-01"
+}

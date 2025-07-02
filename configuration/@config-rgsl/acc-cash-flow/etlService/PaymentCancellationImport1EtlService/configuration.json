@@ -1,0 +1,52 @@
+{
+    "mainDataSource": "AllocationDataSource",
+    "additionalDataSources": [
+        "GetPaymentCancellationDataSource"
+    ],
+    "sinks": [
+        {
+            "name": "CancelAllocation",
+            "class": {
+                "className": "Adacta.AdInsure.RGSL.Accounting.API.Shared.CashFlow.Allocation.Services.IAllocationServiceAppRGSL, Adacta.AdInsure.RGSL.Accounting.API",
+                "methodName": "Cancel"
+            }
+        },
+        {
+            "name": "ResetError",
+            "database": {
+                "tables": [
+                    "ACC_IMPL.PAYMENT_CANCELLATION_ALLOCATION_SAT"
+                ]
+            }
+        }
+    ],
+    "completionSinks": [
+        {
+            "name": "TriggerEtlServiceSink",
+            "etlService": {
+                "configuration": {
+                    "name": "PaymentCancellationImport2EtlService",
+                    "version": "1"
+                }
+            }
+        },
+        {
+            "name": "FinishedCancellation",
+            "executeAs": "System",
+            "documentTransition": {
+                "transition": {}
+            }
+        }
+    ],
+    "errorSinks": [
+        {
+            "name": "SaveError",
+            "database": {
+                "tables": [
+                    "ACC_IMPL.PAYMENT_CANCELLATION_ALLOCATION_SAT"
+                ]
+            }
+        }
+    ],
+    "version": "1"
+}

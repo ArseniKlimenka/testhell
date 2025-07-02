@@ -1,0 +1,53 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "object",
+    "properties": {
+        "criteria": {
+            "type": "object",
+            "properties": {
+                "importDocumentId": {
+                    "type": "string",
+                    "description": "Import document id"
+                },
+                "importDocumentNumber": {
+                    "type": "string",
+                    "description": "Import document number"
+                },
+                "attributesToString": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Parse objects and arrays to string in output data"
+                }
+            },
+            "oneOf": [
+                {
+                    "required": [
+                        "importDocumentId"
+                    ]
+                },
+                {
+                    "required": [
+                        "importDocumentNumber"
+                    ]
+                }
+            ]
+        },
+        "sort": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                    "descending": {
+                        "type": "boolean"
+                    },
+                    "fieldName": {
+                        "type": "string"
+                    }
+                }
+            }
+        }
+    }
+}

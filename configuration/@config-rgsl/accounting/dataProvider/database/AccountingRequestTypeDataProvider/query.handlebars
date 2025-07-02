@@ -1,0 +1,15 @@
+﻿SELECT 
+	rt.REQUEST_TYPE_CODE,
+	rt.REQUEST_TYPE_DESCRIPTION
+FROM ACC_IMPL.REQUEST_TYPE rt
+WHERE 1 = 1
+{{#if parameters.code}}
+AND rt.REQUEST_TYPE_CODE = @code
+{{/if}}
+{{#if parameters.codes}}
+AND rt.REQUEST_TYPE_CODE IN (@codes)
+{{/if}}
+{{#if parameters.description}}
+AND rt.REQUEST_TYPE_DESCRIPTION LIKE @description
+{{/if}}
+ORDER BY rt.REQUEST_TYPE_CODE ASC

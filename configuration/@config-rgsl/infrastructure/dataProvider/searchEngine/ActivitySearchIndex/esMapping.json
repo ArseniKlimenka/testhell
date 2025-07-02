@@ -1,0 +1,407 @@
+{
+    "settings": {
+        "analysis": {
+            "analyzer": {
+                "whitespace_analyzer": {
+                    "type": "custom",
+                    "tokenizer": "whitespace",
+                    "filter": [
+                        "lowercase"
+                    ]
+                }
+            }
+        }
+    },
+    "mappings": {
+        "dynamic": "strict",
+        "dynamic_templates": [
+            {
+                "additional_attributes_template": {
+                    "path_match": "additionalAttributes.*",
+                    "mapping": {
+                        "type": "object",
+                        "dynamic": "strict",
+                        "properties": {
+                            "valueCode": {
+                                "type": "keyword"
+                            },
+                            "value": {
+                                "type": "text"
+                            },
+                            "fullTextSearchableValue": {
+                                "type": "text",
+                                "copy_to": [
+                                    "_summary"
+                                ]
+                            }
+                        }
+                    }
+                }
+            }
+        ],
+        "properties": {
+            "_summary": {
+                "type": "text",
+                "store": true,
+                "analyzer": "whitespace_analyzer"
+            },
+            "id": {
+                "type": "text"
+            },
+            "number": {
+                "type": "keyword",
+                "copy_to": [
+                    "_summary"
+                ]
+            },
+            "metadata": {
+                "dynamic": "strict",
+                "properties": {
+                    "configuration": {
+                        "dynamic": "strict",
+                        "properties": {
+                            "name": {
+                                "type": "text"
+                            },
+                            "version": {
+                                "type": "keyword"
+                            },
+                            "dimensions": {
+                                "dynamic": true,
+                                "type": "object"
+                            }
+                        }
+                    },
+                    "entityType": {
+                        "type": "keyword"
+                    },
+                    "entityStereotype": {
+                        "type": "keyword"
+                    },
+                    "createdOn": {
+                        "type": "date"
+                    },
+                    "updatedOn": {
+                        "type": "date"
+                    },
+                    "closedOn": {
+                        "type": "date"
+                    },
+                    "version": {
+                        "type": "integer"
+                    },
+                    "createdBy": {
+                        "dynamic": "strict",
+                        "properties": {
+                            "id": {
+                                "type": "keyword"
+                            },
+                            "username": {
+                                "type": "text"
+                            },
+                            "displayName": {
+                                "type": "text"
+                            },
+                            "partyCode": {
+                                "type": "keyword"
+                            }
+                        }
+                    },
+                    "updatedBy": {
+                        "dynamic": "strict",
+                        "properties": {
+                            "id": {
+                                "type": "keyword"
+                            },
+                            "username": {
+                                "type": "text"
+                            },
+                            "displayName": {
+                                "type": "text"
+                            },
+                            "partyCode": {
+                                "type": "keyword"
+                            }
+                        }
+                    },
+                    "closedBy": {
+                        "dynamic": "strict",
+                        "properties": {
+                            "id": {
+                                "type": "keyword"
+                            },
+                            "username": {
+                                "type": "text"
+                            },
+                            "displayName": {
+                                "type": "text"
+                            },
+                            "partyCode": {
+                                "type": "keyword"
+                            }
+                        }
+                    }
+                }
+            },
+            "body": {
+                "dynamic": "strict",
+                "properties": {
+                    "entityReferenceId": {
+                        "type": "keyword"
+                    },
+                    "activityType": {
+                        "type": "keyword"
+                    },
+                    "manualActivityType": {
+                        "dynamic": "strict",
+                        "properties": {
+                            "code": {
+                                "type": "keyword"
+                            }
+                        }
+                    },
+                    "priority": {
+                        "dynamic": "strict",
+                        "properties": {
+                            "code": {
+                                "type": "keyword"
+                            },
+                            "weight": {
+                                "type": "integer"
+                            }
+                        }
+                    },
+                    "activityStatus": {
+                        "type": "keyword"
+                    },
+                    "parentActivityId": {
+                        "type": "keyword"
+                    },
+                    "userGroup": {
+                        "dynamic": "strict",
+                        "properties": {
+                            "code": {
+                                "type": "keyword"
+                            },
+                            "name": {
+                                "type": "text"
+                            }
+                        }
+                    },
+                    "dueDate": {
+                        "type": "date"
+                    },
+                    "comment": {
+                        "type": "text"
+                    },
+                    "documentState": {
+                        "type": "keyword"
+                    },
+                    "previousDocumentState": {
+                        "type": "keyword"
+                    },
+                    "effortCode": {
+                        "type": "keyword"
+                    },
+                    "effortInMinutes": {
+                        "type": "integer"
+                    },
+                    "lastAssignedOn": {
+                        "type": "date"
+                    },
+                    "assignee": {
+                        "dynamic": "strict",
+                        "properties": {
+                            "id": {
+                                "type": "keyword"
+                            },
+                            "username": {
+                                "type": "keyword"
+                            },
+                            "displayName": {
+                                "type": "text"
+                            },
+                            "partyCode": {
+                                "type": "keyword"
+                            }
+                        }
+                    },
+                    "lastAssignedBy": {
+                        "dynamic": "strict",
+                        "properties": {
+                            "id": {
+                                "type": "keyword"
+                            },
+                            "username": {
+                                "type": "text"
+                            },
+                            "displayName": {
+                                "type": "text"
+                            },
+                            "partyCode": {
+                                "type": "keyword"
+                            }
+                        }
+                    },
+                    "creationCausedBy": {
+                        "dynamic": "strict",
+                        "properties": {
+                            "id": {
+                                "type": "keyword"
+                            },
+                            "username": {
+                                "type": "text"
+                            },
+                            "displayName": {
+                                "type": "text"
+                            },
+                            "partyCode": {
+                                "type": "keyword"
+                            }
+                        }
+                    },
+                    "closingCausedBy": {
+                        "dynamic": "strict",
+                        "properties": {
+                            "id": {
+                                "type": "keyword"
+                            },
+                            "username": {
+                                "type": "text"
+                            },
+                            "displayName": {
+                                "type": "text"
+                            },
+                            "partyCode": {
+                                "type": "keyword"
+                            }
+                        }
+                    },
+                    "verificationData": {
+                        "dynamic": "strict",
+                        "properties": {
+                            "body": {
+                                "dynamic": true,
+                                "properties": {
+                                    "number": {
+                                        "type": "keyword"
+                                    },
+                                    "configurationCodeName": {
+                                        "type": "keyword"
+                                    },
+                                    "policyHolderFullName": {
+                                        "type": "text"
+                                    },
+                                    "policyHolderCode": {
+                                        "type": "keyword"
+                                    },
+                                    "isPolicyHolder": {
+                                        "type": "boolean"
+                                    },
+                                    "insuredPersonFullName": {
+                                        "type": "text"
+                                    },
+                                    "insuredPersonCode": {
+                                        "type": "keyword"
+                                    },
+                                    "sellerUsername": {
+                                        "type": "text"
+                                    },
+                                    "operationsUsername": {
+                                        "type": "text"
+                                    },
+                                    "partnerBusinessCode": {
+                                        "type": "text"
+                                    }
+                                }
+                            },
+                            "extraData": {
+                                "dynamic": "strict",
+                                "properties": {
+                                    "verificationState": {
+                                        "type": "keyword"
+                                    },
+                                    "partnerCode": {
+                                        "type": "keyword"
+                                    },
+                                    "partnerName": {
+                                        "type": "text"
+                                    },
+                                    "issueDate": {
+                                        "type": "date"
+                                    },
+                                    "startDate": {
+                                        "type": "date"
+                                    },
+                                    "endDate": {
+                                        "type": "date"
+                                    },
+                                    "paymentFrequencyCode": {
+                                        "type": "keyword"
+                                    },
+                                    "paymentFrequencyName": {
+                                        "type": "keyword"
+                                    },
+                                    "productCode": {
+                                        "type": "keyword"
+                                    },
+                                    "productName": {
+                                        "type": "keyword"
+                                    },
+                                    "productGroupCode": {
+                                        "type": "keyword"
+                                    },
+                                    "contractState": {
+                                        "type": "keyword"
+                                    },
+                                    "holderName": {
+                                        "type": "keyword"
+                                    },
+                                    "holderAge": {
+                                        "type": "integer"
+                                    },
+                                    "holderBirthDate": {
+                                        "type": "date"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "contractData": {
+                        "dynamic": "strict",
+                        "properties": {
+                            "number": {
+                                "type": "keyword"
+                            },
+                            "configurationName": {
+                                "type": "keyword"
+                            },
+                            "holderFullName": {
+                                "type": "keyword"
+                            },
+                            "holderPersonCode": {
+                                "type": "keyword"
+                            },
+                            "holderPartyType": {
+                                "type": "keyword"
+                            },
+                            "insuredPersonFullName": {
+                                "type": "keyword"
+                            },
+                            "insuredPersonPersonCode": {
+                                "type": "keyword"
+                            },
+                            "insuredPersonPartyType": {
+                                "type": "keyword"
+                            }
+                        }
+                    },
+                    "additionalAttributes": {
+                        "dynamic": true,
+                        "type": "object"
+                    }
+                }
+            }
+        }
+    }
+}

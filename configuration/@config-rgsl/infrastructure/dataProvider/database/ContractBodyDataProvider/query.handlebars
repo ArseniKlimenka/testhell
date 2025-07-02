@@ -1,0 +1,27 @@
+﻿select top 1
+	c.CONTRACT_NUMBER,
+	ps.CODE_NAME as CONTRACT_STATE,
+	am.CONTRACT_NUMBER as AMENDMENT_CONTRACT_NUMBER,
+	amPs.CODE_NAME as AMENDMENT_CONTRACT_STATE,
+	am.SEQ_NUMBER,
+	art.CODE_NAME as CONFIGURATION_CODE_NAME,
+	am.SNAPSHOT_BODY,
+	art.DIMENSIONS
+from
+	pas.CONTRACT c
+	inner join pas.CONTRACT am on am.ORIGINAL_DOCUMENT_ID = c.CONTRACT_ID
+	inner join cfg.PROCESS_STATE ps ON ps.PROCESS_STATE_ID = am.STATE_ID
+	inner join cfg.PROCESS_STATE amPs ON amPs.PROCESS_STATE_ID = c.STATE_ID
+	inner join cfx.PUBLISHED_ARTIFACT art on am.PUBLISHED_ARTIFACT_ID = art.PUBLISHED_ARTIFACT_ID
+where 1=1
+	and (
+		am.SEQ_NUMBER = 0
+		or
+		( 1=1
+			and (am.VERSION_STATE = 'Applied' or am.VERSION_STATE is null)
+			and ps.CODE_NAME not in ('Draft')
+		)
+	)
+	and ps.CODE_NAME not in ('Draft')
+	and c.CONTRACT_NUMBER = @contractNumber
+order by am.SEQ_NUMBER desc

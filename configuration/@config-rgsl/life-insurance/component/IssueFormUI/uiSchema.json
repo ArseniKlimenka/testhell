@@ -1,0 +1,102 @@
+{
+    "type": "Section",
+    "label": "issueForm",
+    "isCollapsed": false,
+    "width": 12,
+    "elements": [
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "Input",
+                    "label": "issueForm",
+                    "value": {
+                        "$ref": "#/properties/code"
+                    },
+                    "source": {
+                        "dataSource": {
+                            "name": "IssueFormDataSource",
+                            "reloadOnOpen": true,
+                            "searchFieldPath": "issueFormDescription",
+                            "responseMapping": "issueFormResponseMapping"
+                        },
+                        "displayFieldName": "issueFormDescription"
+                    },
+                    "onValueChanged": [
+                        {
+                            "commandType": "executeAction",
+                            "actionName": "onIssueFormCodeChanged"
+                        }
+                    ],
+                    "control": "Dropdown",
+                    "width": 4,
+                    "rule": {
+                        "effect": "STYLE",
+                        "condition": {
+                            "type": "FUNC",
+                            "style": {
+                                "background-color": "lemonchiffon"
+                            },
+                            "value": [
+                                {
+                                    "$ref": "#/properties/ClientViewModel"
+                                }
+                            ],
+                            "ruleFunction": "onChangeProductStyle"
+                        }
+                    }
+                }
+            ],
+            "rule": {
+                "effect": "ENABLE_INITIAL",
+                "condition": {
+                    "type": "FUNC",
+                    "ruleFunction": "enableIssueForm",
+                    "value": [
+                        {
+                            "$ref": "#"
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "Input",
+                    "label": "futureContractNumber",
+                    "value": {
+                        "$ref": "/aiAdditionalContext/body/technicalInformation/futureContractNumber"
+                    },
+                    "width": 4,
+                    "readOnly": true,
+                    "rule": {
+                        "effect": "SHOW",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "showFutureContractNumber",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    }
+                }
+            ]
+        }
+    ],
+    "rule": {
+        "effect": "SHOW",
+        "condition": {
+            "type": "FUNC",
+            "ruleFunction": "showIssueForm",
+            "value": [
+                {
+                    "$ref": "#"
+                }
+            ]
+        }
+    }
+}

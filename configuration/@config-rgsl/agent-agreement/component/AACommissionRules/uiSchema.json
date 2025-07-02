@@ -1,0 +1,1425 @@
+{
+    "type": "Group",
+    "width": 12,
+    "elements": [
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "DataGrid",
+                    "elementId": "commRulesTable",
+                    "mode": "Array",
+                    "pagination": {
+                        "mode": "Regular",
+                        "pageSizes": [
+                            50
+                        ]
+                    },
+                    "actions": [
+                        "Add",
+                        "Edit",
+                        "Delete",
+                        "Details"
+                    ],
+                    "onInit": "updateGridLines",
+                    "edit": {
+                        "mode": "Detached",
+                        "onAfterGridAction": "updateGridLines",
+                        "onPrepareAddedRow": "setDefaultGridLineValues"
+                    },
+                    "selection": {
+                        "mode": "Multi",
+                        "enableRowSelection": true,
+                        "showCheckBox": true
+                    },
+                    "height": "None",
+                    "value": {
+                        "$ref": "#"
+                    },
+                    "sortingDataAction": "commRulesSortingAction",
+                    "customCSSStyle": {
+                        "--data-grid-ai-grid-buttons-text-align": "left"
+                    },
+                    "columns": [
+                        {
+                            "title": "",
+                            "cellContent": {
+                                "type": "GridButtonGroup",
+                                "elements": [
+                                    {
+                                        "type": "Button",
+                                        "label": "copyRow",
+                                        "onClick": "copyRow",
+                                        "icon": {
+                                            "name": "Clone"
+                                        },
+                                        "value": {
+                                            "$ref": "#"
+                                        },
+                                        "rule": {
+                                            "effect": "ENABLE_INITIAL",
+                                            "condition": {
+                                                "type": "FUNC",
+                                                "ruleFunction": "canCopyRow",
+                                                "value": [
+                                                    {
+                                                        "$ref": "#"
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "sortable": true,
+                            "title": "ruleNum",
+                            "name": "ruleNum",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "defaultValue": "",
+                                "allowMultiLine": true,
+                                "template": "{{expr ruleNum 'i'}}",
+                                "value": {
+                                    "$ref": "#"
+                                },
+                                "rule": {
+                                    "effect": "STYLE",
+                                    "condition": {
+                                        "type": "FUNC",
+                                        "style": {
+                                            "resize": "horizontal",
+                                            "overflow": "auto"
+                                        },
+                                        "value": [
+                                            {
+                                                "$ref": "#"
+                                            }
+                                        ],
+                                        "ruleFunction": "resizeDiv"
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "sortable": true,
+                            "title": "startDate",
+                            "name": "startDate",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "defaultValue": "",
+                                "value": {
+                                    "$ref": "#/properties/startDate"
+                                },
+                                "rule": {
+                                    "effect": "STYLE",
+                                    "condition": {
+                                        "type": "FUNC",
+                                        "style": {
+                                            "resize": "horizontal",
+                                            "overflow": "auto"
+                                        },
+                                        "value": [
+                                            {
+                                                "$ref": "#"
+                                            }
+                                        ],
+                                        "ruleFunction": "resizeDiv"
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "sortable": true,
+                            "title": "endDate",
+                            "name": "endDate",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "defaultValue": "",
+                                "value": {
+                                    "$ref": "#/properties/endDate"
+                                },
+                                "rule": {
+                                    "effect": "STYLE",
+                                    "condition": {
+                                        "type": "FUNC",
+                                        "style": {
+                                            "resize": "horizontal",
+                                            "overflow": "auto"
+                                        },
+                                        "value": [
+                                            {
+                                                "$ref": "#"
+                                            }
+                                        ],
+                                        "ruleFunction": "resizeDiv"
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "sortable": true,
+                            "title": "products",
+                            "name": "insuranceProduct",
+                            "filter": {
+                                "customAction": "onCommRulesProductFilterChange"
+                            },
+                            "cellContent": {
+                                "type": "OutputText",
+                                "allowMultiLine": true,
+                                "defaultValue": "",
+                                "value": {
+                                    "mapping": "getProductsString",
+                                    "$ref": "#/properties/insuranceProduct"
+                                },
+                                "rule": {
+                                    "effect": "STYLE",
+                                    "condition": {
+                                        "type": "FUNC",
+                                        "style": {
+                                            "resize": "horizontal",
+                                            "overflow": "auto"
+                                        },
+                                        "value": [
+                                            {
+                                                "$ref": "#"
+                                            }
+                                        ],
+                                        "ruleFunction": "resizeDiv"
+                                    }
+                                }
+                            },
+                            "style": {
+                                "width": "extra-large"
+                            }
+                        },
+                        {
+                            "sortable": true,
+                            "title": "creditProgram",
+                            "name": "creditProgram",
+                            "filter": {
+                                "customAction": "onCommRulesCreditProgramFilterChange"
+                            },
+                            "cellContent": {
+                                "type": "OutputText",
+                                "allowMultiLine": true,
+                                "defaultValue": "",
+                                "value": {
+                                    "mapping": "getCreditProgramString",
+                                    "$ref": "#/properties/creditProgram"
+                                },
+                                "rule": {
+                                    "effect": "STYLE",
+                                    "condition": {
+                                        "type": "FUNC",
+                                        "style": {
+                                            "resize": "horizontal",
+                                            "overflow": "auto"
+                                        },
+                                        "value": [
+                                            {
+                                                "$ref": "#"
+                                            }
+                                        ],
+                                        "ruleFunction": "resizeDiv"
+                                    }
+                                }
+                            },
+                            "style": {
+                                "width": "medium"
+                            }
+                        },
+                        {
+                            "sortable": true,
+                            "title": "manualRule",
+                            "name": "manualRule",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "defaultValue": "",
+                                "value": {
+                                    "$ref": "#/properties/manualRule"
+                                },
+                                "rule": {
+                                    "effect": "STYLE",
+                                    "condition": {
+                                        "type": "FUNC",
+                                        "style": {
+                                            "resize": "horizontal",
+                                            "overflow": "auto"
+                                        },
+                                        "value": [
+                                            {
+                                                "$ref": "#"
+                                            }
+                                        ],
+                                        "ruleFunction": "resizeDiv"
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "sortable": true,
+                            "title": "manualRuleDescription",
+                            "name": "manualRuleDescription",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "defaultValue": "",
+                                "value": {
+                                    "$ref": "#/properties/manualRuleDescription"
+                                },
+                                "rule": {
+                                    "effect": "STYLE",
+                                    "condition": {
+                                        "type": "FUNC",
+                                        "style": {
+                                            "resize": "horizontal",
+                                            "overflow": "auto"
+                                        },
+                                        "value": [
+                                            {
+                                                "$ref": "#"
+                                            }
+                                        ],
+                                        "ruleFunction": "resizeDiv"
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "sortable": true,
+                            "title": "insuranceCurrency",
+                            "name": "insuranceCurrency",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "allowMultiLine": true,
+                                "defaultValue": "",
+                                "value": {
+                                    "$ref": "#/properties/insuranceCurrency/properties/value/properties/code"
+                                }
+                            }
+                        },
+                        {
+                            "sortable": true,
+                            "title": "insuranceYearFrom",
+                            "name": "insuranceYearFrom",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "defaultValue": "",
+                                "value": {
+                                    "$ref": "#/properties/insuranceYear/properties/value/properties/from"
+                                },
+                                "rule": {
+                                    "effect": "STYLE",
+                                    "condition": {
+                                        "type": "FUNC",
+                                        "style": {
+                                            "resize": "horizontal",
+                                            "overflow": "auto"
+                                        },
+                                        "value": [
+                                            {
+                                                "$ref": "#"
+                                            }
+                                        ],
+                                        "ruleFunction": "resizeDiv"
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "sortable": true,
+                            "title": "insuranceYearTo",
+                            "name": "insuranceYearTo",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "defaultValue": "",
+                                "value": {
+                                    "$ref": "#/properties/insuranceYear/properties/value/properties/to"
+                                },
+                                "rule": {
+                                    "effect": "STYLE",
+                                    "condition": {
+                                        "type": "FUNC",
+                                        "style": {
+                                            "resize": "horizontal",
+                                            "overflow": "auto"
+                                        },
+                                        "value": [
+                                            {
+                                                "$ref": "#"
+                                            }
+                                        ],
+                                        "ruleFunction": "resizeDiv"
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "sortable": true,
+                            "title": "insuranceTermFrom",
+                            "name": "insuranceTermFrom",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "defaultValue": "",
+                                "value": {
+                                    "$ref": "#/properties/insuranceTerm/properties/value/properties/from"
+                                },
+                                "rule": {
+                                    "effect": "STYLE",
+                                    "condition": {
+                                        "type": "FUNC",
+                                        "style": {
+                                            "resize": "horizontal",
+                                            "overflow": "auto"
+                                        },
+                                        "value": [
+                                            {
+                                                "$ref": "#"
+                                            }
+                                        ],
+                                        "ruleFunction": "resizeDiv"
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "sortable": true,
+                            "title": "insuranceTermTo",
+                            "name": "insuranceTermTo",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "defaultValue": "",
+                                "value": {
+                                    "$ref": "#/properties/insuranceTerm/properties/value/properties/to"
+                                },
+                                "rule": {
+                                    "effect": "STYLE",
+                                    "condition": {
+                                        "type": "FUNC",
+                                        "style": {
+                                            "resize": "horizontal",
+                                            "overflow": "auto"
+                                        },
+                                        "value": [
+                                            {
+                                                "$ref": "#"
+                                            }
+                                        ],
+                                        "ruleFunction": "resizeDiv"
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "sortable": true,
+                            "title": "premiumPeriodFrom",
+                            "name": "premiumPeriodFrom",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "defaultValue": "",
+                                "value": {
+                                    "$ref": "#/properties/premiumPeriod/properties/value/properties/from"
+                                },
+                                "rule": {
+                                    "effect": "STYLE",
+                                    "condition": {
+                                        "type": "FUNC",
+                                        "style": {
+                                            "resize": "horizontal",
+                                            "overflow": "auto"
+                                        },
+                                        "value": [
+                                            {
+                                                "$ref": "#"
+                                            }
+                                        ],
+                                        "ruleFunction": "resizeDiv"
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "sortable": true,
+                            "title": "premiumPeriodTo",
+                            "name": "premiumPeriodTo",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "defaultValue": "",
+                                "value": {
+                                    "$ref": "#/properties/premiumPeriod/properties/value/properties/to"
+                                },
+                                "rule": {
+                                    "effect": "STYLE",
+                                    "condition": {
+                                        "type": "FUNC",
+                                        "style": {
+                                            "resize": "horizontal",
+                                            "overflow": "auto"
+                                        },
+                                        "value": [
+                                            {
+                                                "$ref": "#"
+                                            }
+                                        ],
+                                        "ruleFunction": "resizeDiv"
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "sortable": true,
+                            "title": "premiumPeriodType",
+                            "name": "premiumPeriodType",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "allowMultiLine": true,
+                                "defaultValue": "",
+                                "value": {
+                                    "mapping": "getPremiumPeriodTypeString",
+                                    "$ref": "#/properties/premiumPeriodType"
+                                },
+                                "rule": {
+                                    "effect": "STYLE",
+                                    "condition": {
+                                        "type": "FUNC",
+                                        "style": {
+                                            "resize": "horizontal",
+                                            "overflow": "auto"
+                                        },
+                                        "value": [
+                                            {
+                                                "$ref": "#"
+                                            }
+                                        ],
+                                        "ruleFunction": "resizeDiv"
+                                    }
+                                }
+                            },
+                            "style": {
+                                "width": "medium"
+                            }
+                        },
+                        {
+                            "sortable": true,
+                            "title": "rate",
+                            "name": "rate",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "defaultValue": "",
+                                "template": "{{expr rate 'p'}}",
+                                "value": {
+                                    "$ref": "#"
+                                },
+                                "rule": {
+                                    "effect": "STYLE",
+                                    "condition": {
+                                        "type": "FUNC",
+                                        "style": {
+                                            "resize": "horizontal",
+                                            "overflow": "auto"
+                                        },
+                                        "value": [
+                                            {
+                                                "$ref": "#"
+                                            }
+                                        ],
+                                        "ruleFunction": "resizeDiv"
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "sortable": true,
+                            "title": "expensesRate",
+                            "name": "expensesRate",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "defaultValue": "",
+                                "template": "{{expr expensesRate 'p'}}",
+                                "value": {
+                                    "$ref": "#"
+                                },
+                                "rule": {
+                                    "effect": "STYLE",
+                                    "condition": {
+                                        "type": "FUNC",
+                                        "style": {
+                                            "resize": "horizontal",
+                                            "overflow": "auto"
+                                        },
+                                        "value": [
+                                            {
+                                                "$ref": "#"
+                                            }
+                                        ],
+                                        "ruleFunction": "resizeDiv"
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "sortable": true,
+                            "title": "natuaralPersonRate",
+                            "name": "natuaralPersonRate",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "defaultValue": "",
+                                "template": "{{expr natuaralPersonRate 'p'}}",
+                                "value": {
+                                    "$ref": "#"
+                                },
+                                "rule": {
+                                    "effect": "STYLE",
+                                    "condition": {
+                                        "type": "FUNC",
+                                        "style": {
+                                            "resize": "horizontal",
+                                            "overflow": "auto"
+                                        },
+                                        "value": [
+                                            {
+                                                "$ref": "#"
+                                            }
+                                        ],
+                                        "ruleFunction": "resizeDiv"
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "sortable": true,
+                            "title": "solePropriatorRate",
+                            "name": "solePropriatorRate",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "defaultValue": "",
+                                "template": "{{expr solePropriatorRate 'p'}}",
+                                "value": {
+                                    "$ref": "#"
+                                },
+                                "rule": {
+                                    "effect": "STYLE",
+                                    "condition": {
+                                        "type": "FUNC",
+                                        "style": {
+                                            "resize": "horizontal",
+                                            "overflow": "auto"
+                                        },
+                                        "value": [
+                                            {
+                                                "$ref": "#"
+                                            }
+                                        ],
+                                        "ruleFunction": "resizeDiv"
+                                    }
+                                }
+                            }
+                        }
+                    ],
+                    "detailsTemplates": {
+                        "showDetailsBelowRow": false,
+                        "removeScrollOnEditForm": true,
+                        "edit": {
+                            "content": {
+                                "type": "Group",
+                                "elements": [
+                                    {
+                                        "type": "GridLayout",
+                                        "fillAvailableSpace": true,
+                                        "numberOfColumns": 12,
+                                        "elements": [
+                                            {
+                                                "type": "Group",
+                                                "width": 12,
+                                                "elements": [
+                                                    {
+                                                        "type": "Input",
+                                                        "control": "DateRange",
+                                                        "dateFrom": {
+                                                            "type": "Input",
+                                                            "label": "ruleStartDate",
+                                                            "width": 1,
+                                                            "value": {
+                                                                "$ref": "#/properties/startDate"
+                                                            },
+                                                            "control": "DatetimePicker"
+                                                        },
+                                                        "dateTo": {
+                                                            "type": "Input",
+                                                            "label": "ruleEndDate",
+                                                            "width": 1,
+                                                            "value": {
+                                                                "$ref": "#/properties/endDate"
+                                                            },
+                                                            "control": "DatetimePicker"
+                                                        },
+                                                        "width": 6
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "type": "Group",
+                                                "elements": [
+                                                    {
+                                                        "type": "Group",
+                                                        "width": 12,
+                                                        "elements": [
+                                                            {
+                                                                "type": "Input",
+                                                                "label": "insuranceProduct",
+                                                                "value": {
+                                                                    "$ref": "#/properties/insuranceProduct/properties/values"
+                                                                },
+                                                                "autocomplete": {
+                                                                    "minTextLength": 1,
+                                                                    "dropDownItemsCount": 5
+                                                                },
+                                                                "control": "Dropdown",
+                                                                "multiple": true,
+                                                                "source": {
+                                                                    "dataSource": {
+                                                                        "name": "ProductsFilterDataSource",
+                                                                        "reloadOnOpen": true,
+                                                                        "searchFieldPath": "description",
+                                                                        "requestMapping": "insuranceProductRequestMapping",
+                                                                        "responseMapping": "insuranceProductResponseMapping"
+                                                                    },
+                                                                    "displayValueTemplate": "{{expr description}} ({{expr code}})"
+                                                                },
+                                                                "width": 6,
+                                                                "onValueChanged": [
+                                                                    {
+                                                                        "commandType": "executeAction",
+                                                                        "actionName": "onChangeProduct"
+                                                                    }
+                                                                ]
+                                                            },
+                                                            {
+                                                                "type": "Input",
+                                                                "label": "creditProgram",
+                                                                "value": {
+                                                                    "$ref": "#/properties/creditProgram/properties/values"
+                                                                },
+                                                                "autocomplete": {
+                                                                    "minTextLength": 1,
+                                                                    "dropDownItemsCount": 5
+                                                                },
+                                                                "control": "Dropdown",
+                                                                "multiple": true,
+                                                                "source": {
+                                                                    "dataSource": {
+                                                                        "name": "CreditProgramsDataSource",
+                                                                        "reloadOnOpen": true,
+                                                                        "searchFieldPath": "description",
+                                                                        "requestMapping": "creditProgramRequestMapping",
+                                                                        "responseMapping": "creditProgramResponseMapping"
+                                                                    },
+                                                                    "displayFieldName": "displayName",
+                                                                    "valueFieldName": "value"
+                                                                },
+                                                                "width": 4
+                                                            },
+                                                            {
+                                                                "type": "Component",
+                                                                "name": "CurrencyCodeDropdown",
+                                                                "value": {
+                                                                    "$ref": "#/properties/insuranceCurrency/properties/value/properties/code"
+                                                                }
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "type": "Group",
+                                                        "elements": [
+                                                            {
+                                                                "type": "Group",
+                                                                "width": 12,
+                                                                "elements": [
+                                                                    {
+                                                                        "type": "Input",
+                                                                        "label": "variant",
+                                                                        "value": {
+                                                                            "$ref": "#/properties/variant/properties/values"
+                                                                        },
+                                                                        "autocomplete": {
+                                                                            "minTextLength": 1,
+                                                                            "dropDownItemsCount": 5
+                                                                        },
+                                                                        "control": "Dropdown",
+                                                                        "multiple": true,
+                                                                        "source": {
+                                                                            "dataSource": {
+                                                                                "name": "VariantDataSource",
+                                                                                "reloadOnOpen": true,
+                                                                                "searchFieldPath": "description",
+                                                                                "requestMapping": "variantRequestMapping",
+                                                                                "responseMapping": "variantResponseMapping"
+                                                                            },
+                                                                            "displayFieldName": "displayName",
+                                                                            "valueFieldName": "value"
+                                                                        },
+                                                                        "width": 3,
+                                                                        "onValueChanged": [
+                                                                            {
+                                                                                "commandType": "executeAction",
+                                                                                "actionName": "onChangeVariant"
+                                                                            }
+                                                                        ]
+                                                                    },
+                                                                    {
+                                                                        "type": "Input",
+                                                                        "width": 3,
+                                                                        "label": "manualRule",
+                                                                        "value": {
+                                                                            "$ref": "#/properties/manualRule"
+                                                                        }
+                                                                    },
+                                                                    {
+                                                                        "type": "Input",
+                                                                        "width": 3,
+                                                                        "label": "manualRuleDescription",
+                                                                        "value": {
+                                                                            "$ref": "#/properties/manualRuleDescription"
+                                                                        }
+                                                                    }
+                                                                ]
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "type": "Group",
+                                                        "width": 12,
+                                                        "elements": [
+                                                            {
+                                                                "type": "Input",
+                                                                "width": 3,
+                                                                "label": "insuranceYearFrom",
+                                                                "value": {
+                                                                    "$ref": "#/properties/insuranceYear/properties/value/properties/from"
+                                                                }
+                                                            },
+                                                            {
+                                                                "type": "Input",
+                                                                "width": 3,
+                                                                "label": "insuranceYearTo",
+                                                                "value": {
+                                                                    "$ref": "#/properties/insuranceYear/properties/value/properties/to"
+                                                                }
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "type": "Group",
+                                                        "width": 12,
+                                                        "elements": [
+                                                            {
+                                                                "type": "Input",
+                                                                "width": 3,
+                                                                "label": "insuranceTermFrom",
+                                                                "value": {
+                                                                    "$ref": "#/properties/insuranceTerm/properties/value/properties/from"
+                                                                }
+                                                            },
+                                                            {
+                                                                "type": "Input",
+                                                                "width": 3,
+                                                                "label": "insuranceTermTo",
+                                                                "value": {
+                                                                    "$ref": "#/properties/insuranceTerm/properties/value/properties/to"
+                                                                }
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "type": "Group",
+                                                        "width": 12,
+                                                        "elements": [
+                                                            {
+                                                                "type": "Input",
+                                                                "width": 3,
+                                                                "label": "premiumPeriodFrom",
+                                                                "value": {
+                                                                    "$ref": "#/properties/premiumPeriod/properties/value/properties/from"
+                                                                }
+                                                            },
+                                                            {
+                                                                "type": "Input",
+                                                                "width": 3,
+                                                                "label": "premiumPeriodTo",
+                                                                "value": {
+                                                                    "$ref": "#/properties/premiumPeriod/properties/value/properties/to"
+                                                                }
+                                                            },
+                                                            {
+                                                                "type": "Input",
+                                                                "label": "premiumPeriodType",
+                                                                "value": {
+                                                                    "$ref": "#/properties/premiumPeriodType/properties/values"
+                                                                },
+                                                                "autocomplete": {
+                                                                    "minTextLength": 1
+                                                                },
+                                                                "control": "Dropdown",
+                                                                "multiple": true,
+                                                                "source": {
+                                                                    "dataSource": {
+                                                                        "name": "PaymentFrequencyDataSource",
+                                                                        "reloadOnOpen": true,
+                                                                        "searchFieldPath": "description",
+                                                                        "requestMapping": "paymentFrequencyRequestMapping",
+                                                                        "responseMapping": "paymentFrequencyResponseMapping"
+                                                                    },
+                                                                    "displayFieldName": "description"
+                                                                },
+                                                                "width": 4
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "type": "Group",
+                                                        "width": 12,
+                                                        "elements": []
+                                                    },
+                                                    {
+                                                        "type": "Group",
+                                                        "width": 12,
+                                                        "elements": [
+                                                            {
+                                                                "type": "Input",
+                                                                "control": "Percentage",
+                                                                "width": 2,
+                                                                "label": "rate",
+                                                                "value": {
+                                                                    "$ref": "#/properties/rate"
+                                                                }
+                                                            },
+                                                            {
+                                                                "type": "Input",
+                                                                "control": "Percentage",
+                                                                "width": 2,
+                                                                "label": "expensesRate",
+                                                                "value": {
+                                                                    "$ref": "#/properties/expensesRate"
+                                                                }
+                                                            },
+                                                            {
+                                                                "type": "Input",
+                                                                "control": "Percentage",
+                                                                "width": 2,
+                                                                "label": "natuaralPersonRate",
+                                                                "value": {
+                                                                    "$ref": "#/properties/natuaralPersonRate"
+                                                                }
+                                                            },
+                                                            {
+                                                                "type": "Input",
+                                                                "control": "Percentage",
+                                                                "width": 2,
+                                                                "label": "solePropriatorRate",
+                                                                "value": {
+                                                                    "$ref": "#/properties/solePropriatorRate"
+                                                                }
+                                                            },
+                                                            {
+                                                                "type": "Input",
+                                                                "width": 2,
+                                                                "label": "amount",
+                                                                "value": {
+                                                                    "$ref": "#/properties/amount"
+                                                                },
+                                                                "rule": {
+                                                                    "effect": "HIDE",
+                                                                    "condition": {
+                                                                        "type": "FUNC",
+                                                                        "value": [
+                                                                            {
+                                                                                "$ref": "#"
+                                                                            }
+                                                                        ],
+                                                                        "ruleFunction": "hideElementsGroup"
+                                                                    }
+                                                                }
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "type": "Group",
+                                                        "width": 12,
+                                                        "elements": [
+                                                            {
+                                                                "type": "Input",
+                                                                "width": 3,
+                                                                "label": "isManualCorrectionDisabled",
+                                                                "value": {
+                                                                    "$ref": "#/properties/isManualCorrectionDisabled"
+                                                                },
+                                                                "rule": {
+                                                                    "effect": "HIDE",
+                                                                    "condition": {
+                                                                        "type": "FUNC",
+                                                                        "value": [
+                                                                            {
+                                                                                "$ref": "#"
+                                                                            }
+                                                                        ],
+                                                                        "ruleFunction": "hideElementsGroup"
+                                                                    }
+                                                                }
+                                                            },
+                                                            {
+                                                                "type": "Input",
+                                                                "width": 3,
+                                                                "label": "alwaysUseMaxRate",
+                                                                "value": {
+                                                                    "$ref": "#/properties/alwaysUseMaxRate"
+                                                                },
+                                                                "rule": {
+                                                                    "effect": "HIDE",
+                                                                    "condition": {
+                                                                        "type": "FUNC",
+                                                                        "value": [
+                                                                            {
+                                                                                "$ref": "#"
+                                                                            }
+                                                                        ],
+                                                                        "ruleFunction": "hideElementsGroup"
+                                                                    }
+                                                                }
+                                                            },
+                                                            {
+                                                                "type": "Input",
+                                                                "width": 3,
+                                                                "label": "isDiscountDisabled",
+                                                                "value": {
+                                                                    "$ref": "#/properties/isDiscountDisabled"
+                                                                },
+                                                                "rule": {
+                                                                    "effect": "HIDE",
+                                                                    "condition": {
+                                                                        "type": "FUNC",
+                                                                        "value": [
+                                                                            {
+                                                                                "$ref": "#"
+                                                                            }
+                                                                        ],
+                                                                        "ruleFunction": "hideElementsGroup"
+                                                                    }
+                                                                }
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        },
+                        "view": {
+                            "content": {
+                                "type": "Group",
+                                "elements": [
+                                    {
+                                        "type": "GridLayout",
+                                        "fillAvailableSpace": true,
+                                        "numberOfColumns": 12,
+                                        "elements": [
+                                            {
+                                                "type": "Group",
+                                                "elements": [
+                                                    {
+                                                        "type": "Group",
+                                                        "width": 12,
+                                                        "elements": [
+                                                            {
+                                                                "type": "Input",
+                                                                "width": 3,
+                                                                "label": "variant",
+                                                                "value": {
+                                                                    "$ref": "#/properties/variant/properties/values"
+                                                                }
+                                                            },
+                                                            {
+                                                                "type": "Input",
+                                                                "width": 3,
+                                                                "label": "manualRule",
+                                                                "value": {
+                                                                    "$ref": "#/properties/manualRule"
+                                                                }
+                                                            },
+                                                            {
+                                                                "type": "Input",
+                                                                "width": 3,
+                                                                "label": "manualRuleDescription",
+                                                                "value": {
+                                                                    "$ref": "#/properties/manualRuleDescription"
+                                                                }
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "type": "Group",
+                                                        "width": 12,
+                                                        "elements": [
+                                                            {
+                                                                "type": "Input",
+                                                                "readOnly": true,
+                                                                "label": "insuranceProduct",
+                                                                "value": {
+                                                                    "$ref": "#/properties/insuranceProduct/properties/values"
+                                                                },
+                                                                "autocomplete": {
+                                                                    "minTextLength": 1,
+                                                                    "dropDownItemsCount": 5
+                                                                },
+                                                                "control": "Dropdown",
+                                                                "multiple": true,
+                                                                "source": {
+                                                                    "dataSource": {
+                                                                        "name": "ProductsFilterDataSource",
+                                                                        "reloadOnOpen": true,
+                                                                        "searchFieldPath": "description",
+                                                                        "requestMapping": "insuranceProductRequestMapping",
+                                                                        "responseMapping": "insuranceProductResponseMapping"
+                                                                    },
+                                                                    "displayValueTemplate": "{{expr description}} ({{expr code}})"
+                                                                },
+                                                                "width": 6
+                                                            },
+                                                            {
+                                                                "type": "Input",
+                                                                "readOnly": true,
+                                                                "width": -1,
+                                                                "label": "isInverted",
+                                                                "value": {
+                                                                    "$ref": "#/properties/insuranceProduct/properties/isInverted"
+                                                                },
+                                                                "rule": {
+                                                                    "effect": "HIDE",
+                                                                    "condition": {
+                                                                        "type": "FUNC",
+                                                                        "value": [
+                                                                            {
+                                                                                "$ref": "#"
+                                                                            }
+                                                                        ],
+                                                                        "ruleFunction": "hideElementsGroup"
+                                                                    }
+                                                                }
+                                                            },
+                                                            {
+                                                                "type": "Input",
+                                                                "label": "creditProgram",
+                                                                "value": {
+                                                                    "$ref": "#/properties/creditProgram/properties/values"
+                                                                },
+                                                                "autocomplete": {
+                                                                    "minTextLength": 1,
+                                                                    "dropDownItemsCount": 5
+                                                                },
+                                                                "control": "Dropdown",
+                                                                "multiple": true,
+                                                                "source": {
+                                                                    "dataSource": {
+                                                                        "name": "CreditProgramsDataSource",
+                                                                        "reloadOnOpen": true,
+                                                                        "searchFieldPath": "description",
+                                                                        "requestMapping": "creditProgramRequestMapping",
+                                                                        "responseMapping": "creditProgramResponseMapping"
+                                                                    },
+                                                                    "displayFieldName": "displayName",
+                                                                    "valueFieldName": "value"
+                                                                },
+                                                                "width": 4
+                                                            },
+                                                            {
+                                                                "type": "Component",
+                                                                "name": "CurrencyCodeDropdown",
+                                                                "readOnly": true,
+                                                                "value": {
+                                                                    "$ref": "#/properties/insuranceCurrency/properties/value/properties/code"
+                                                                }
+                                                            },
+                                                            {
+                                                                "type": "Input",
+                                                                "readOnly": true,
+                                                                "width": -1,
+                                                                "label": "isInverted",
+                                                                "value": {
+                                                                    "$ref": "#/properties/insuranceCurrency/properties/isInverted"
+                                                                },
+                                                                "rule": {
+                                                                    "effect": "HIDE",
+                                                                    "condition": {
+                                                                        "type": "FUNC",
+                                                                        "value": [
+                                                                            {
+                                                                                "$ref": "#"
+                                                                            }
+                                                                        ],
+                                                                        "ruleFunction": "hideElementsGroup"
+                                                                    }
+                                                                }
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "type": "Group",
+                                                        "width": 12,
+                                                        "elements": [
+                                                            {
+                                                                "type": "Input",
+                                                                "readOnly": true,
+                                                                "width": 3,
+                                                                "label": "insuranceYearFrom",
+                                                                "value": {
+                                                                    "$ref": "#/properties/insuranceYear/properties/value/properties/from"
+                                                                }
+                                                            },
+                                                            {
+                                                                "type": "Input",
+                                                                "readOnly": true,
+                                                                "width": 3,
+                                                                "label": "insuranceYearTo",
+                                                                "value": {
+                                                                    "$ref": "#/properties/insuranceYear/properties/value/properties/to"
+                                                                }
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "type": "Group",
+                                                        "width": 12,
+                                                        "elements": [
+                                                            {
+                                                                "type": "Input",
+                                                                "readOnly": true,
+                                                                "width": 3,
+                                                                "label": "insuranceTermFrom",
+                                                                "value": {
+                                                                    "$ref": "#/properties/insuranceTerm/properties/value/properties/from"
+                                                                }
+                                                            },
+                                                            {
+                                                                "type": "Input",
+                                                                "readOnly": true,
+                                                                "width": 3,
+                                                                "label": "insuranceTermTo",
+                                                                "value": {
+                                                                    "$ref": "#/properties/insuranceTerm/properties/value/properties/to"
+                                                                }
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "type": "Group",
+                                                        "width": 12,
+                                                        "elements": [
+                                                            {
+                                                                "type": "Input",
+                                                                "readOnly": true,
+                                                                "width": 3,
+                                                                "label": "premiumPeriodFrom",
+                                                                "value": {
+                                                                    "$ref": "#/properties/premiumPeriod/properties/value/properties/from"
+                                                                }
+                                                            },
+                                                            {
+                                                                "type": "Input",
+                                                                "readOnly": true,
+                                                                "width": 3,
+                                                                "label": "premiumPeriodTo",
+                                                                "value": {
+                                                                    "$ref": "#/properties/premiumPeriod/properties/value/properties/to"
+                                                                }
+                                                            },
+                                                            {
+                                                                "type": "Input",
+                                                                "readOnly": true,
+                                                                "label": "premiumPeriodType",
+                                                                "value": {
+                                                                    "$ref": "#/properties/premiumPeriodType/properties/values"
+                                                                },
+                                                                "autocomplete": {
+                                                                    "minTextLength": 1
+                                                                },
+                                                                "control": "Dropdown",
+                                                                "multiple": true,
+                                                                "source": {
+                                                                    "dataSource": {
+                                                                        "name": "PaymentFrequencyDataSource",
+                                                                        "reloadOnOpen": true,
+                                                                        "searchFieldPath": "description",
+                                                                        "requestMapping": "paymentFrequencyRequestMapping",
+                                                                        "responseMapping": "paymentFrequencyResponseMapping"
+                                                                    },
+                                                                    "displayFieldName": "description"
+                                                                },
+                                                                "width": 4
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "type": "Group",
+            "width": 12,
+            "elements": [
+                {
+                    "type": "Button",
+                    "value": {
+                        "$ref": "#"
+                    },
+                    "width": 3,
+                    "onClick": [
+                        {
+                            "commandType": "executeAction",
+                            "actionName": "copyCommRules"
+                        }
+                    ],
+                    "label": "copyCommRules"
+                },
+                {
+                    "type": "Button",
+                    "value": {
+                        "$ref": "#"
+                    },
+                    "width": 3,
+                    "onClick": [
+                        {
+                            "commandType": "executeAction",
+                            "actionName": "deleteCommRules"
+                        }
+                    ],
+                    "label": "deleteCommRules"
+                }
+            ]
+        },
+        {
+            "type": "Group",
+            "width": 12,
+            "elements": [
+                {
+                    "type": "Input",
+                    "control": "DateRange",
+                    "dateFrom": {
+                        "type": "Input",
+                        "label": "ruleStartDate",
+                        "width": 1,
+                        "value": {
+                            "$ref": "#/aiAdditionalContext/aaCommissionRulesClient/properties/commRuleStartDate"
+                        },
+                        "control": "DatetimePicker"
+                    },
+                    "dateTo": {
+                        "type": "Input",
+                        "label": "ruleEndDate",
+                        "width": 1,
+                        "value": {
+                            "$ref": "#/aiAdditionalContext/aaCommissionRulesClient/properties/commRuleEndDate"
+                        },
+                        "control": "DatetimePicker"
+                    },
+                    "width": 4
+                },
+                {
+                    "type": "Button",
+                    "value": {
+                        "$ref": "#"
+                    },
+                    "width": 3,
+                    "onClick": [
+                        {
+                            "commandType": "executeAction",
+                            "actionName": "setCommRulesDates"
+                        }
+                    ],
+                    "label": "setCommRulesDate"
+                }
+            ]
+        },
+        {
+            "type": "Group",
+            "width": 12,
+            "elements": [
+                {
+                    "type": "FileUpload",
+                    "label": "File",
+                    "elementId": "commRulesUploader",
+                    "displayFieldName": "fileName",
+                    "availableFileTypes": "xlsx",
+                    "hideDownload": true,
+                    "value": {
+                        "$ref": "#/aiAdditionalContext/aaCommissionRulesClient/properties/commRulesFile"
+                    },
+                    "width": 3,
+                    "eventHandlers": [
+                        {
+                            "eventName": "FileUploaded",
+                            "commands": [
+                                {
+                                    "commandType": "executeAction",
+                                    "actionName": "uploadedHandler"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "Button",
+                    "value": {
+                        "$ref": "#"
+                    },
+                    "width": 3,
+                    "onClick": [
+                        {
+                            "commandType": "executeAction",
+                            "actionName": "fillCommRulesFromFile"
+                        }
+                    ],
+                    "label": "fillCommRulesFromFile"
+                }
+            ]
+        },
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "Button",
+                    "value": {
+                        "$ref": "#/properties/"
+                    },
+                    "onClick": [
+                        {
+                            "commandType": "executeAction",
+                            "actionName": "exportComissionRules"
+                        }
+                    ],
+                    "label": "Export",
+                    "rule": {
+                        "effect": "ENABLE_INITIAL",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "exportButtonEnableState",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    }
+                }
+            ]
+        }
+    ]
+}

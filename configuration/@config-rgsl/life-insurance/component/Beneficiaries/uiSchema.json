@@ -1,0 +1,285 @@
+{
+    "type": "Section",
+    "label": "Beneficiaries",
+    "labelType": "H1",
+    "collapsing": {
+        "initial": false,
+        "enabled": true
+    },
+    "width": 12,
+    "elements": [
+        {
+            "type": "Section",
+            "sectionLevel": 2,
+            "label": "heritors",
+            "elements": [
+                {
+                    "type": "Group",
+                    "elements": [
+                        {
+                            "type": "Input",
+                            "elementId": "beneficiariesIsHeritors",
+                            "isCompact": true,
+                            "label": "isHeritors",
+                            "value": {
+                                "$ref": "#/properties/isHeritors"
+                            },
+                            "width": 2,
+                            "onValueChanged": [
+                                {
+                                    "commandType": "executeAction",
+                                    "actionName": "onChangeIsHeritors"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Input",
+                            "elementId": "beneficiariesIsNotHeritors",
+                            "isCompact": true,
+                            "label": "isNotHeritors",
+                            "value": {
+                                "$ref": "#/properties/isNotHeritors"
+                            },
+                            "width": 2,
+                            "onValueChanged": [
+                                {
+                                    "commandType": "executeAction",
+                                    "actionName": "onChangeIsNotHeritors"
+                                }
+                            ]
+                        }
+                    ],
+                    "rule": {
+                        "effect": "DISABLE_INITIAL",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "disableHeritorsChoice",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    }
+                }
+            ],
+            "rule": {
+                "effect": "HIDE",
+                "condition": {
+                    "type": "FUNC",
+                    "ruleFunction": "hideHeritorsSection",
+                    "value": [
+                        {
+                            "$ref": "#"
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "type": "Group",
+            "rule": {
+                "effect": "SHOW",
+                "condition": {
+                    "type": "FUNC",
+                    "ruleFunction": "showArray",
+                    "value": [
+                        {
+                            "$ref": "#"
+                        }
+                    ]
+                }
+            },
+            "elements": [
+                {
+                    "type": "OutputText",
+                    "hideLabel": true,
+                    "allowMultiLine": true,
+                    "textStyle": {
+                        "textSize": "Small"
+                    },
+                    "template": "{{#style 'italic'}}{{#i18n}}BeneficiariesFullDescription{{/i18n}}{{/style}}",
+                    "value": {
+                        "$ref": "#"
+                    },
+                    "rule": {
+                        "effect": "HIDE",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "hideBeneficiariesFullDescription",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    },
+                    "width": 12
+                },
+                {
+                    "type": "DataGrid",
+                    "mode": "Array",
+                    "checkIfRowActionIsAllowed": "checkIfRowActionIsAllowed",
+                    "checkIfAddButtonVisible": "checkIfAddButtonVisible",
+                    "showDeleteConfirmation": true,
+                    "pagination": {
+                        "mode": "Regular",
+                        "pageSizes": [
+                            5,
+                            10,
+                            15
+                        ],
+                        "defaultPageSize": 5
+                    },
+                    "isCollapsed": false,
+                    "value": {
+                        "$ref": "#/properties/beneficiaries"
+                    },
+                    "actions": [
+                        "Add",
+                        "Edit",
+                        "Delete"
+                    ],
+                    "edit": {
+                        "mode": "Detached",
+                        "onBeforeGridAction": "beneficiariesOnBeforeGridAction"
+                    },
+                    "height": "Small",
+                    "rule": {
+                        "effect": "ENABLE_INITIAL",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "enableArray",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    },
+                    "columns": [
+                        {
+                            "title": "beneficiary",
+                            "name": "beneficiary",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "defaultValue": "",
+                                "value": {
+                                    "$ref": "#/properties/partyFullName"
+                                }
+                            }
+                        },
+                        {
+                            "title": "share",
+                            "name": "share",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "defaultValue": "",
+                                "template": "{{expr share 'p:2'}}",
+                                "value": {
+                                    "$ref": "#"
+                                }
+                            }
+                        },
+                        {
+                            "title": "relationType",
+                            "name": "relationType",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "defaultValue": "",
+                                "value": {
+                                    "$ref": "#/properties/relationType"
+                                }
+                            }
+                        },
+                        {
+                            "title": "dateOfBirth",
+                            "name": "dateOfBirth",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "defaultValue": "",
+                                "value": {
+                                    "$ref": "#/properties/dateOfBirth"
+                                }
+                            }
+                        },
+                        {
+                            "title": "beneficiaryCategory",
+                            "name": "beneficiaryCategory",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "defaultValue": "",
+                                "value": {
+                                    "$ref": "#/properties/beneficiaryCategory"
+                                }
+                            }
+                        }
+                    ],
+                    "detailsTemplates": {
+                        "edit": {
+                            "content": {
+                                "type": "Component",
+                                "name": "Beneficiary",
+                                "value": {
+                                    "$ref": "#"
+                                }
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "Input",
+                    "elementId": "beneficiariesHeritorsSpecialConditions",
+                    "control": "TextArea",
+                    "enableResize": true,
+                    "label": "specialConditions",
+                    "value": {
+                        "$ref": "#/properties/specialConditions"
+                    },
+                    "width": 12,
+                    "rule": {
+                        "effect": "SHOW",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "isBackOfficeUser",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    }
+                }
+            ],
+            "rule": {
+                "effect": "DISABLE_INITIAL",
+                "condition": {
+                    "type": "FUNC",
+                    "ruleFunction": "hasFutureNumberForAgent",
+                    "value": [
+                        {
+                            "$ref": "#"
+                        }
+                    ]
+                }
+            }
+        }
+    ],
+    "rule": {
+        "effect": "HIDE",
+        "condition": {
+            "type": "FUNC",
+            "value": [
+                {
+                    "$ref": "#"
+                }
+            ],
+            "ruleFunction": "hideBeneficiaries"
+        }
+    }
+}

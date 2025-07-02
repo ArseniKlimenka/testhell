@@ -1,0 +1,37 @@
+{
+    "type": "Section",
+    "sectionLevel": 1,
+    "label": "RelatedRequestAmendments",
+    "elements": [
+        {
+            "type": "InlineView",
+            "showContainerActions": false,
+            "views": [
+                {
+                    "viewReference": {
+                        "configurationCodeName": "RelatedRequestAmendmentsView",
+                        "configurationConceptType": "SearchView",
+                        "configurationVersion": "1"
+                    },
+                    "onViewInitialized": "onViewInitialized"
+                }
+            ],
+            "value": {
+                "$ref": "#"
+            },
+            "hide": false
+        }
+    ],
+    "rule": {
+        "effect": "SHOW",
+        "condition": {
+            "type": "FUNC",
+            "ruleFunction": "showRelatedRequestAmendments",
+            "value": [
+                {
+                    "$ref": "#"
+                }
+            ]
+        }
+    }
+}

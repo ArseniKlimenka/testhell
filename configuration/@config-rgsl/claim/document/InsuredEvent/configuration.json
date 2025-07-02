@@ -1,0 +1,102 @@
+{
+    "entityType": "UniversalDocument",
+    "dimensions": {},
+    "hideFromDashboard": false,
+    "ui": {
+        "layout": "DocumentLayoutMainAndSummaryOnly",
+        "composition": {
+            "SummaryContent": "SummaryContent",
+            "MainContent": "MainContent"
+        }
+    },
+    "validFrom": "2000-01-01",
+    "states": [
+        {
+            "name": "Draft",
+            "actors": [
+                {
+                    "actor": "ClaimManager",
+                    "uiSchema": "MainContent",
+                    "operations": [
+                        "Save"
+                    ],
+                    "transitions": [
+                        "DraftToConfirmed",
+                        "DraftToCancelled"
+                    ]
+                },
+                {
+                    "actor": "Operations",
+                    "uiSchema": "MainContent",
+                    "operations": [
+                        "Save"
+                    ],
+                    "transitions": [
+                        "DraftToConfirmed",
+                        "DraftToCancelled"
+                    ]
+                },
+                {
+                    "actor": "ViewClaim",
+                    "uiSchema": "MainContent",
+                    "operations": [],
+                    "transitions": []
+                }
+            ]
+        },
+        {
+            "name": "Confirmed",
+            "actors": [
+                {
+                    "actor": "ClaimManager",
+                    "uiSchema": "MainContent",
+                    "operations": [],
+                    "transitions": [
+                        "ConfirmedToCancelled"
+                    ],
+                    "relations": []
+                },
+                {
+                    "actor": "Operations",
+                    "uiSchema": "MainContent",
+                    "operations": [],
+                    "transitions": [
+                        "ConfirmedToCancelled"
+                    ],
+                    "relations": []
+                },
+                {
+                    "actor": "ViewClaim",
+                    "uiSchema": "MainContent",
+                    "operations": [],
+                    "transitions": []
+                }
+            ]
+        },
+        {
+            "name": "Cancelled",
+            "actors": [
+                {
+                    "actor": "ClaimManager",
+                    "uiSchema": "MainContent",
+                    "operations": [],
+                    "transitions": []
+                },
+                {
+                    "actor": "Operations",
+                    "uiSchema": "MainContent",
+                    "operations": [],
+                    "transitions": []
+                },
+                {
+                    "actor": "ViewClaim",
+                    "uiSchema": "MainContent",
+                    "operations": [],
+                    "transitions": []
+                }
+            ]
+        }
+    ],
+    "components": [],
+    "version": "1"
+}

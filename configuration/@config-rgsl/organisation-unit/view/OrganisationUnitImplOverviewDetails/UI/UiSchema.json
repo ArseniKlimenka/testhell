@@ -1,0 +1,47 @@
+{
+    "type": "GridLayout",
+    "numberOfColumns": 4,
+    "elements": [
+        {
+            "type": "Section",
+            "sectionLevel": 1,
+            "label": "Details",
+            "collapsing": {
+                "enabled": false
+            },
+            "elements": [
+                {
+                    "type": "Link",
+                    "readOnly": true,
+                    "targetType": "Url",
+                    "value": {
+                        "mapping": "nameURLMapping",
+                        "$ref": "#"
+                    },
+                    "content": {
+                        "text": {
+                            "type": "OutputText",
+                            "defaultValue": "",
+                            "value": {
+                                "mapping": "nameMapping"
+                            }
+                        }
+                    },
+                    "width": 1
+                }
+            ],
+            "rule": {
+                "effect": "SHOW",
+                "condition": {
+                    "type": "FUNC",
+                    "ruleFunction": "showDetails",
+                    "value": [
+                        {
+                            "$ref": "#"
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}

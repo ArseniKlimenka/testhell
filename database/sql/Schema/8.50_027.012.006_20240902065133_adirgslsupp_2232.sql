@@ -1,0 +1,9 @@
+IF EXISTS (select * from sys.objects where object_id = object_id(N'[BFX_IMPL].[SEND_EVENT]') and type in (N'U'))
+BEGIN
+    IF COL_LENGTH('BFX_IMPL.SEND_EVENT','SEND_EVENT_ADDITIONAL_DATA') IS NULL
+    BEGIN
+        ALTER TABLE BFX_IMPL.SEND_EVENT
+        ADD SEND_EVENT_ADDITIONAL_DATA NVARCHAR(MAX) NULL
+    END
+END
+GO

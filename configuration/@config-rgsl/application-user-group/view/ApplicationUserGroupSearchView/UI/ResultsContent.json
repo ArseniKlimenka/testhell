@@ -1,0 +1,120 @@
+{
+    "type": "Group",
+    "elements": [
+        {
+            "type": "DataGrid",
+            "mode": "DataSource",
+            "orderBy": "code",
+            "pagination": {
+                "mode": "Regular",
+                "pageSizes": [
+                    5,
+                    10,
+                    15
+                ]
+            },
+            "height": "None",
+            "columns": [
+                {
+                    "sortable": true,
+                    "title": "User group code",
+                    "cellContent": {
+                        "type": "Link",
+                        "targetType": "Entity",
+                        "value": {
+                            "mapping": "urlMapping",
+                            "$ref": "#"
+                        },
+                        "content": {
+                            "text": {
+                                "type": "OutputText",
+                                "template": "{{expr code}}",
+                                "textProperties": [
+                                    "bold"
+                                ],
+                                "value": {
+                                    "$ref": "#/properties/resultData"
+                                }
+                            }
+                        }
+                    },
+                    "name": "code"
+                },
+                {
+                    "sortable": true,
+                    "title": "Name",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/nameLocalized"
+                        }
+                    },
+                    "name": "Name"
+                }
+            ],
+            "rule": {
+                "effect": "SHOW",
+                "condition": {
+                    "type": "LEAF",
+                    "value": {
+                        "$ref": "#/properties/viewContext/properties/isSearch"
+                    },
+                    "expectedValue": true
+                }
+            }
+        },
+        {
+            "type": "DataGrid",
+            "mode": "DataSource",
+            "orderBy": "code",
+            "pagination": {
+                "mode": "Regular",
+                "pageSizes": [
+                    5,
+                    10,
+                    15
+                ]
+            },
+            "selection": {
+                "mode": "Single",
+                "enableRowSelection": true,
+                "showCheckBox": true
+            },
+            "height": "None",
+            "columns": [
+                {
+                    "sortable": true,
+                    "title": "User group code",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/code"
+                        }
+                    },
+                    "name": "code"
+                },
+                {
+                    "sortable": true,
+                    "title": "Name",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/nameLocalized"
+                        }
+                    },
+                    "name": "name"
+                }
+            ],
+            "rule": {
+                "effect": "SHOW",
+                "condition": {
+                    "type": "LEAF",
+                    "value": {
+                        "$ref": "#/properties/viewContext/properties/isLookup"
+                    },
+                    "expectedValue": true
+                }
+            }
+        }
+    ]
+}

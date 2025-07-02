@@ -1,0 +1,18 @@
+﻿SELECT r.CODE, r.TYPE, r.SHORT_DESCRIPTION, r.FULL_DESCRIPTION, r.BUSINESS_LINE, t.IS_LIFE, r.RISKS_GROUP
+FROM BFX_IMPL.RISKS r
+inner join BFX_IMPL.RISK_TYPE t on r.TYPE = t.RISK_TYPE
+WHERE 1 = 1
+{{#if parameters.code}}
+AND CODE = @code
+{{/if}}
+{{#if parameters.codes}}
+AND CODE in (@codes)
+{{/if}}
+{{#if parameters.riskShortDescription}}
+AND r.SHORT_DESCRIPTION like @riskShortDescription
+{{/if}}
+{{#if parameters.riskGroup}}
+AND r.RISKS_GROUP = @riskGroup
+{{/if}}
+
+

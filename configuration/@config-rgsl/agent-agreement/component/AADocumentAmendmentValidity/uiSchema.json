@@ -1,0 +1,49 @@
+{
+    "type": "Group",
+    "width": 12,
+    "elements": [
+        {
+            "type": "Group",
+            "width": 12,
+            "elements": [
+                {
+                    "type": "DatetimePicker",
+                    "label": "conclusionDate",
+                    "value": {
+                        "$ref": "#/properties/conclusionDate"
+                    },
+                    "width": 3
+                },
+                {
+                    "type": "Input",
+                    "control": "DateRange",
+                    "dateFrom": {
+                        "type": "Input",
+                        "label": "startDate",
+                        "width": 1,
+                        "value": {
+                            "$ref": "#/properties/startDate"
+                        },
+                        "control": "DatetimePicker",
+                        "onValueChanged": [
+                            {
+                                "commandType": "executeAction",
+                                "actionName": "onStartDateChanged"
+                            }
+                        ]
+                    },
+                    "dateTo": {
+                        "type": "Input",
+                        "label": "endDate",
+                        "width": 1,
+                        "value": {
+                            "$ref": "#/properties/endDate"
+                        },
+                        "control": "DatetimePicker"
+                    },
+                    "width": 6
+                }
+            ]
+        }
+    ]
+}

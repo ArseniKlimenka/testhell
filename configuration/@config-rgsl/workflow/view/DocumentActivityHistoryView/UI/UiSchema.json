@@ -1,0 +1,101 @@
+{
+    "type": "DataGrid",
+    "mode": "DataSource",
+    "header": {
+        "showReloadButton": true,
+        "showNumberOfResults": true
+    },
+    "pagination": {
+        "mode": "Regular",
+        "defaultPageSize": 15,
+        "pageSizes": [
+            5,
+            10,
+            15
+        ]
+    },
+    "selection": {
+        "mode": "None"
+    },
+    "initialSort": {
+        "sortBy": "createdDate",
+        "sortOrder": "Desc"
+    },
+    "height": "None",
+    "columns": [
+        {
+            "title": "documentStateLocalized",
+            "name": "documentStateLocalized",
+            "sortable": false,
+            "cellContent": {
+                "type": "OutputText",
+                "defaultValue": "",
+                "value": {
+                    "$ref": "#/properties/resultData/properties/documentStateLocalized"
+                }
+            }
+        },
+        {
+            "title": "groupName",
+            "name": "groupName",
+            "sortable": false,
+            "cellContent": {
+                "type": "OutputText",
+                "defaultValue": "",
+                "value": {
+                    "$ref": "#/properties/resultData/properties/groupName"
+                }
+            }
+        },
+        {
+            "title": "assigneeName",
+            "name": "assigneeName",
+            "sortable": false,
+            "cellContent": {
+                "type": "OutputText",
+                "defaultValue": "",
+                "value": {
+                    "$ref": "#/properties/resultData/properties/assigneeName"
+                }
+            }
+        },
+        {
+            "title": "activityStatus",
+            "name": "activityStatus",
+            "sortable": false,
+            "cellContent": {
+                "type": "OutputText",
+                "defaultValue": "",
+                "value": {
+                    "$ref": "#/properties/resultData/properties/activityStatus"
+                }
+            }
+        },
+        {
+            "title": "createdDate",
+            "name": "createdDate",
+            "sortable": false,
+            "cellContent": {
+                "type": "OutputText",
+                "template": "{{expr createdDate 'dt'}}",
+                "defaultValue": "",
+                "value": {
+                    "$ref": "#/properties/resultData"
+                }
+            }
+        },
+        {
+            "title": "closedDate",
+            "name": "closedDate",
+            "sortable": false,
+            "cellContent": {
+                "type": "OutputText",
+                "template": "{{expr closedDate 'dt'}}",
+                "defaultValue": "",
+                "value": {
+                    "$ref": "#/properties/resultData"
+                }
+            }
+        }
+    ]
+}

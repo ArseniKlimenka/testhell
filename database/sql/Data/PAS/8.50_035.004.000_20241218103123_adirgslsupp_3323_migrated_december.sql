@@ -1,0 +1,2 @@
+delete from bfx_impl.products where code = N'I802OAS'; insert into bfx_impl.products values ('974CC3C0-ED5C-4C31-A549-359F30E98659', N'I802OAS',N'investment',N'Драйвер Гарантия БондРепакА 5RUB',N'НСЖ', N'migrated', null);
+delete from bfx_impl.products where code = N'I866VTBP'; insert into bfx_impl.products values ('2427CA27-CEB6-4E10-818E-835428580C9F', N'I866VTBP',N'investment',N'Драйвер Гарантия Ультра БондРепак 1EUR',N'НСЖ', N'migrated', null);

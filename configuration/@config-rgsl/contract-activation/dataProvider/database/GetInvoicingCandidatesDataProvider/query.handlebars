@@ -1,0 +1,58 @@
+﻿select t.CONTRACT_NUMBER
+from
+	(
+		select
+			polh.POLICY_HKEY,
+			polh.CONTRACT_NUMBER,
+			max(pps.POSTING_DATE) as POSTING_DATE,
+			case when amounts.INSTALLMENT_AMOUNT = amounts.PAID_AMOUNT and amounts.PAID_AMOUNT != 0 then 1 else 0 end as IS_FIRST_INSTALLMENT_PAID
+		from
+			pas_impl.POLICY_HUB polh
+			inner join pas.CONTRACT pol on pol.CONTRACT_NUMBER = polh.CONTRACT_NUMBER
+			inner join cfg.PROCESS_STATE ps on ps.PROCESS_STATE_ID = pol.STATE_ID
+			cross apply (
+				select sum(INSTALLMENT_AMOUNT) as INSTALLMENT_AMOUNT, sum(PAID_AMOUNT) as PAID_AMOUNT
+				from (
+					select t.AMOUNT as INSTALLMENT_AMOUNT, 0 as PAID_AMOUNT
+					from
+						pas_impl.P_PAYMENT_PLAN_LINK l
+						inner join pas_impl.P_PAYMENT_PLAN_SAT_LATEST t on l.P_PAYMENT_PLAN_HKEY = t.P_PAYMENT_PLAN_HKEY
+					where 1=1
+						and l.POLICY_HKEY = polh.POLICY_HKEY
+						and t.IS_FIRST_INSTALLMENT = 1
+					union all
+                    select 0 as INSTALLMENT_AMOUNT, alc.DOC_AMOUNT + alc.TOLERANCE_DOC_AMOUNT as PAID_AMOUNT
+					from
+						acc_impl.REFERENCE_NUMBER rn
+						inner join acc_impl.ALLOCATION alc on alc.DOCUMENT_NO = rn.REFERENCE_NO
+						inner join acc_impl.ALLOCATION_POLICY alcp on alcp.ALLOCATION_ID = alc.ALLOCATION_ID
+					where 1=1
+						and rn.DOCUMENT_NO = polh.CONTRACT_NUMBER
+						and alcp.IS_FIRST_INSTALLMENT = 1
+				) fakeName
+			) amounts
+			inner join pas_impl.P_PAYMENT_PLAN_LINK l on polh.POLICY_HKEY = l.POLICY_HKEY
+			inner join pas_impl.P_PAYMENT_PLAN_SAT pps on l.P_PAYMENT_PLAN_HKEY = pps.P_PAYMENT_PLAN_HKEY
+	where 1=1
+		and ps.CODE_NAME = 'Activated'
+{{#if parameters.contractNumbers}}
+		and polh.CONTRACT_NUMBER in (@contractNumbers)
+{{/if}}
+{{#if parameters.postingDateTo}}
+		and (pps.POSTING_DATE <= @postingDateTo)
+{{else}}
+		and (pps.POSTING_DATE <= convert(date, SYSDATETIME()))
+{{/if}}
+	group by
+		polh.POLICY_HKEY,
+		polh.CONTRACT_NUMBER,
+		case when amounts.INSTALLMENT_AMOUNT = amounts.PAID_AMOUNT and amounts.PAID_AMOUNT != 0 then 1 else 0 end
+	) t
+	inner join pas_impl.POLICY_SAT_LATEST pols on pols.POLICY_HKEY = t.POLICY_HKEY
+	left join acc_impl.POSTED_PAYMENT_PLAN_SAT_LATEST postedPP on postedPP.POSTED_PAYMENT_PLAN_HKEY = t.POLICY_HKEY
+where 1=2
+	or (pols.INVOICE_ON_ACTIVATION = 1 and postedPP.POSTED_UNTIL_POSTING_DATE is null)
+	or (t.IS_FIRST_INSTALLMENT_PAID = 1 and postedPP.POSTED_UNTIL_POSTING_DATE is null)
+	or (t.IS_FIRST_INSTALLMENT_PAID = 0 and postedPP.POSTED_UNTIL_POSTING_DATE is not null)
+	--or (postedPP.LAST_LOAD_DATE is null or t.LOAD_DATE > postedPP.LAST_LOAD_DATE) -- when newer data everything newer must be checked
+	or (t.POSTING_DATE > postedPP.POSTED_UNTIL_POSTING_DATE) -- later due dates should be included

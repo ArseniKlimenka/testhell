@@ -1,0 +1,37 @@
+{
+  "name": "@config-rgsl/infrastructure",
+  "version": "1.0.0",
+  "description": "Infrastructure libraries",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "node ../../../node_modules/@adinsure-tools/test-runner -t unit -e local",
+    "test-debug": "node --inspect-brk ../../../node_modules/@adinsure-tools/test-runner -t unit -e local",
+    "test-validate": "node ../../../node_modules/@adinsure-tools/test-runner -t validation -e ../../../test/validate/test-main.js -c {{@config-rgsl::infrastructure::(?:.*)}}$",
+    "test-validate-debug": "node --inspect-brk ../../../node_modules/@adinsure-tools/test-runner -t validation -e ../../../test/validate/test-main.js -c {{@config-rgsl::infrastructure::(?:.*)}}$",
+    "build": "npm run build:validate-schemas & npm run build:build & npm run build:check-es-mapping & npm run build:config-items & npm run build:translate",
+    "build:check-es-mapping": "node ../../../node_modules/@adinsure-tools/studio-services/dist/scripts/check-es-mapping.js -w ../../../ -r ./",
+    "publish": "npm run build & npm run publish:import-config-items & npm run publish:import-translation & npm run publish:import-authorization & npm run publish:import-document-access-authorization & npm run publish:publish & npm run publish:import-data & npm run publish:import-group-authorization"
+  },
+  "keywords": [
+    "infrastructure",
+    "configuration"
+  ],
+  "adInsure": {
+    "projectNameDisplay": "Infrastructure",
+    "ownershipScope": "infrastructure",
+    "domain": "SupportingProcesses"
+  },
+  "dependencies": {
+    "@config-system/application-user": "43.4.0",
+    "@config-system/code-tables": "43.4.0",
+    "@config-system/infrastructure": "43.4.0",
+    "@config-system/workflow": "43.4.0",
+    "@config-rgsl/agent-agreement": "1.0.0",
+    "@config-rgsl/life-insurance": "1.0.0",
+    "@config-rgsl/party": "1.0.0",
+    "@config-rgsl/service-provider": "1.0.0"
+  }
+}

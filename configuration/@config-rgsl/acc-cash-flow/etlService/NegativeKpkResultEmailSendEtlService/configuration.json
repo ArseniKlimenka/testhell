@@ -1,0 +1,78 @@
+{
+    "mainDataSource": "GetNotificationReadySendEventDataSource",
+    "useBackgroundTaskWorker": true,
+    "restartable": true,
+    "enableAutomaticRecovery": true,
+    "sinks": [
+        {
+            "name": "GetContractData",
+            "fetch": {
+                "configuration": {
+                    "name": "GeneralContractSearchDataSource"
+                }
+            }
+        },
+        {
+            "name": "GetAllocationsData",
+            "fetch": {
+                "configuration": {
+                    "name": "AllocationNotPageableDataSource"
+                }
+            }
+        },
+        {
+            "name": "GetPartyPersonalData",
+            "fetch": {
+                "configuration": {
+                    "name": "GetPartyDataSource"
+                }
+            }
+        },
+        {
+            "name": "GetProductIfrsPortfolio",
+            "fetch": {
+                "configuration": {
+                    "name": "ProductsDataSource"
+                }
+            }
+        },
+        {
+            "name": "GetAttachments",
+            "fetch": {
+                "configuration": {
+                    "name": "EntitiesAttachmentDataSource"
+                }
+            }
+        },
+        {
+            "name": "GetOptionalAttachmentsContractNo",
+            "fetch": {
+                "configuration": {
+                    "name": "GetPaymentOrderContractReferenceNumberByBankStatementItemIdDataSource"
+                }
+            }
+        },
+        {
+            "name": "GetOptionalAttachments",
+            "fetch": {
+                "configuration": {
+                    "name": "AttachmentsByContractNumberDataSource"
+                }
+            }
+        },
+        {
+            "name": "SendSuccessNotification",
+            "notification": {
+                "notificationName": "GetNegativeKpkEtl"
+            }
+        },
+        {
+            "name": "ChangeSendEventStatus",
+            "class": {
+                "className": "Adacta.AdInsure.RGSL.PAS.API.Integration.SendEvent.Services.ISendEventService, Adacta.AdInsure.RGSL.PAS.API",
+                "methodName": "SendEventStatusChange"
+            }
+        }
+    ],
+    "version": "1"
+}

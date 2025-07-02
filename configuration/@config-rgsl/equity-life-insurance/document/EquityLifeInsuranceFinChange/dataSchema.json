@@ -1,0 +1,240 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema",
+    "type": "object",
+    "additionalProperties": false,
+    "aiDataEnrichment": [
+        {
+            "name": "SetCalculationDate",
+            "integrationService": {
+                "name": "GetAvailabilityForWorkCalendarEnrichmentService",
+                "version": "1"
+            }
+        }
+    ],
+    "aiAudit": {
+        "scope": "General"
+    },
+    "properties": {
+        "additionalServices": {
+            "$ref": "component:AdditionalServices"
+        },
+        "basicConditions": {
+            "$ref": "component:BasicConditions"
+        },
+        "beneficiaries": {
+            "$ref": "component:Beneficiaries"
+        },
+        "additionalBeneficiaries": {
+            "$ref": "component:AdditionalBeneficiaries"
+        },
+        "insuranceRules": {
+            "$ref": "component:InsuranceRules"
+        },
+        "insuredPerson": {
+            "$ref": "component:InsuredPerson"
+        },
+        "issueForm": {
+            "allOf": [
+                {
+                    "$ref": "component:IssueForm"
+                },
+                {
+                    "aiAdditionalContext": {
+                        "name": "policyHolder",
+                        "$data": "/policyHolder",
+                        "source": "Body"
+                    }
+                },
+                {
+                    "aiAdditionalContext": {
+                        "name": "insuredPerson",
+                        "$data": "/insuredPerson",
+                        "source": "Body"
+                    }
+                },
+                {
+                    "aiAdditionalContext": {
+                        "name": "futureContractNumber",
+                        "$data": "/technicalInformation/futureContractNumber",
+                        "source": "Body"
+                    }
+                }
+            ]
+        },
+        "paymentPlan": {
+            "$ref": "component:PaymentPlan"
+        },
+        "policyHolder": {
+            "$ref": "component:PolicyHolder"
+        },
+        "policyTerms": {
+            "$ref": "component:PolicyTerms"
+        },
+        "promotions": {
+            "$ref": "component:Promotions"
+        },
+        "risks": {
+            "$ref": "component:Risks"
+        },
+        "risksPackages": {
+            "$ref": "component:RisksPackages"
+        },
+        "risksCorrection": {
+            "$ref": "component:RisksCorrection"
+        },
+        "giftServices": {
+            "$ref": "component:GiftServices"
+        },
+        "riskConditions": {
+            "$ref": "component:RiskConditions"
+        },
+        "surrenderValues": {
+            "$ref": "component:SurrenderValues"
+        },
+        "uwTriggers": {
+            "$ref": "component:UWTriggers"
+        },
+        "mainInsuranceConditions": {
+            "$ref": "component:MainInsuranceConditions"
+        },
+        "insurerComment": {
+            "$ref": "component:InsurerComment"
+        },
+        "initiator": {
+            "$ref": "component:Initiator"
+        },
+        "additionalInitiators": {
+            "$ref": "component:AdditionalInitiators"
+        },
+        "technicalInformation": {
+            "$ref": "component:TechnicalInformation"
+        },
+        "declarationMedicalConfirmation": {
+            "$ref": "component:DeclarationMedicalConfirmation"
+        },
+        "declarationMedical": {
+            "$ref": "component:DeclarationMedical"
+        },
+        "declarationMainConfirmation": {
+            "$ref": "component:DeclarationMainConfirmation"
+        },
+        "declarationMain": {
+            "$ref": "component:DeclarationMain"
+        },
+        "declarationMedicalConfirmationPolicyHolder": {
+            "$ref": "component:DeclarationMedicalConfirmationPolicyHolder"
+        },
+        "declarationMedicalPolicyHolder": {
+            "$ref": "component:DeclarationMedicalPolicyHolder"
+        },
+        "triggersConditions": {
+            "$ref": "component:UWTriggersConditions"
+        },
+        "inquiriesList": {
+            "$ref": "component:InquiriesList"
+        },
+        "attachmentsPackage": {
+            "$ref": "component:AttachmentsPackage"
+        },
+        "allocationInformation": {
+            "$ref": "component:AllocationInformation"
+        },
+        "amendmentData": {
+            "type": "object",
+            "additionalProperties": true,
+            "properties": {
+                "amendmentAttachmentsPackage": {
+                    "$ref": "component:AmendmentAttachmentsPackage"
+                },
+                "finChangeAmendmentData": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+                        "mainAttributes": {
+                            "$ref": "component:PolicyFinChangeAmendmentMainAttrs"
+                        },
+                        "applicationInfo": {
+                            "$ref": "component:PolicyFinChangeAmendmentApplicationInfo"
+                        },
+                        "amendmentInfo": {
+                            "$ref": "component:PolicyChangeAmendmentInfo"
+                        },
+                        "technicalData": {
+                            "type": "object",
+                            "additionalProperties": true,
+                            "properties": {}
+                        },
+                        "calculationDate": {
+                            "type": "string",
+                            "aiTitle": "calculationDate",
+                            "aiFormat": "date"
+                        },
+                        "equityDidPayment": {
+                            "$ref": "component:EquityDidPayment"
+                        }
+                    }
+                }
+            }
+        },
+        "commission": {
+            "$ref": "component:PolicyCommission"
+        },
+        "equityStrategies": {
+            "$ref": "component:EquityStrategies"
+        },
+        "cumulation": {
+            "$ref": "component:Cumulation"
+        },
+        "isAutoconversionAmendment": {
+            "type": "boolean",
+            "aiTitle": "isAutoconversionAmendment"
+        },
+        "productConfiguration": {
+            "$ref": "component:ProductConfiguration"
+        },
+        "policyEnrichments": {
+            "$ref": "component:PolicyEnrichments"
+        },
+        "selectedClaimRisks": {
+            "$ref": "component:SelectedClaimRisks"
+        },
+        "additionalInvestmentParameters": {
+            "allOf": [
+                {
+                    "$ref": "component:AdditionalInvestmentParameters"
+                },
+                {
+                    "aiAdditionalContext": {
+                        "name": "productCode",
+                        "$data": "/mainInsuranceConditions/insuranceProduct/productCode",
+                        "source": "Body"
+                    }
+                },
+                {
+                    "aiAdditionalContext": {
+                        "name": "issueDate",
+                        "$data": "/basicConditions/issueDate",
+                        "source": "Body"
+                    }
+                },
+                {
+                    "aiAdditionalContext": {
+                        "name": "insuranceTerms",
+                        "$data": "/basicConditions/insuranceTerms",
+                        "source": "Body"
+                    }
+                },
+                {
+                    "aiAdditionalContext": {
+                        "name": "rateOfReturnRulesEquityActives",
+                        "$data": "/rateOfReturnRulesEquityActives",
+                        "source": "ClientViewModel"
+                    }
+                }
+            ]
+        },
+        "consent": {
+            "$ref": "component:Consent"
+        }
+    }
+}

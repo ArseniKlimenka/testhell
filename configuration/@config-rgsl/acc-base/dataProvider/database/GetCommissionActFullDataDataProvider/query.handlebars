@@ -1,0 +1,11 @@
+﻿select
+	e.UNIVERSAL_DOCUMENT_NUMBER AS COMMISSION_ACT_NUMBER,
+	ps.CODE_NAME as STATE_CODE,
+	e.BODY 
+from
+	bfx.UNIVERSAL_DOCUMENT e
+	inner join cfx.PUBLISHED_ARTIFACT art on art.PUBLISHED_ARTIFACT_ID = e.PUBLISHED_ARTIFACT_ID
+	inner join cfg.PROCESS_STATE ps on ps.PROCESS_STATE_ID = e.STATE_ID
+where 1=1
+	and art.CODE_NAME = 'CommissionAct'
+	and e.UNIVERSAL_DOCUMENT_NUMBER = @commissionActNumber

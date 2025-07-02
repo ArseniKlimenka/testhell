@@ -1,0 +1,154 @@
+{
+    "id": "RsdPopulateFromFileViewUiSchema",
+    "type": "Group",
+    "formProperties": {
+        "events": {
+            "onLoad": "onLoadDocument"
+        }
+    },
+    "elements": [
+        {
+            "type": "GridLayout",
+            "numberOfColumns": 2,
+            "elements": [
+                {
+                    "type": "HeaderContentLayout",
+                    "elements": [
+                        {
+                            "type": "Group",
+                            "width": 4,
+                            "elements": [
+                                {
+                                    "type": "OutputText",
+                                    "skipTranslate": true,
+                                    "eventHandlers": [
+                                        {
+                                            "eventName": "FileDeleted",
+                                            "commands": [
+                                                {
+                                                    "commandType": "executeAction",
+                                                    "actionName": "fileDeleted"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "eventName": "FileUploaded",
+                                            "commands": [
+                                                {
+                                                    "commandType": "executeAction",
+                                                    "actionName": "fileUploaded"
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "value": {
+                                        "$ref": "#"
+                                    },
+                                    "textStyle": {
+                                        "uppercase": true,
+                                        "textSize": "Normal",
+                                        "width": 2,
+                                        "textColor": "Black"
+                                    },
+                                    "template": "{{#style 'bold'}}{{#i18n}}{{expr ConfigurationCodeName}}@Title{{/i18n}}{{/style}}"
+                                }
+                            ],
+                            "label": ""
+                        }
+                    ]
+                },
+                {
+                    "type": "Group",
+                    "elements": [
+                        {
+                            "type": "Group",
+                            "elements": [
+                                {
+                                    "type": "FileUpload",
+                                    "label": "PupulateWithFile",
+                                    "availableFileTypes": "xlsx",
+                                    "value": {
+                                        "$ref": "#/properties/Body/properties/file"
+                                    },
+                                    "width": 1
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Group",
+                            "elements": [
+                                {
+                                    "type": "OutputText",
+                                    "label": "ItemCount",
+                                    "value": {
+                                        "$ref": "#/properties/Body/properties/itemCount"
+                                    },
+                                    "width": 1
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "FooterContentLayout",
+                    "elements": [
+                        {
+                            "type": "Group",
+                            "stackContent": "Right",
+                            "width": 2,
+                            "elements": [
+                                {
+                                    "type": "Button",
+                                    "backgroundColor": "Primary",
+                                    "labelColor": "Primary",
+                                    "fill": "Outline",
+                                    "onClick": [
+                                        {
+                                            "commandType": "executeAction",
+                                            "actionName": "cancel"
+                                        }
+                                    ],
+                                    "icon": {
+                                        "name": "Times",
+                                        "color": "Primary",
+                                        "size": "Small"
+                                    },
+                                    "label": "Cancel"
+                                },
+                                {
+                                    "type": "Button",
+                                    "onClick": [
+                                        {
+                                            "commandType": "executeAction",
+                                            "actionName": "upload"
+                                        }
+                                    ],
+                                    "icon": {
+                                        "name": "Upload",
+                                        "color": "BackgroundColor",
+                                        "size": "Small"
+                                    },
+                                    "readOnly": true,
+                                    "submitOnEnter": true,
+                                    "label": "Upload",
+                                    "rule": {
+                                        "effect": "ENABLE_INITIAL",
+                                        "condition": {
+                                            "type": "FUNC",
+                                            "ruleFunction": "canUpload",
+                                            "value": [
+                                                {
+                                                    "$ref": "#"
+                                                }
+                                            ]
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

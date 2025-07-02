@@ -1,0 +1,11 @@
+update BFX_IMPL.DECLARATION_MAIN
+set DEPARTAMENT = 'compliance'
+where PRODUCT_CODE IN('IBA2P3VTB','IBA2P5VTB','IBA2V3VTB','IBA2V5VTB') AND ITEM_NUMBER = 2
+
+update BFX_IMPL.PRODUCTS
+set DESCRIPTION = 'Базис Актив Ультра 2.0 (3 года)'
+where CODE = 'IBA2V3VTB'
+
+update BFX_IMPL.PRODUCTS
+set DESCRIPTION = 'Базис Актив Ультра 2.0 (5 лет)'
+where CODE = 'IBA2V5VTB'

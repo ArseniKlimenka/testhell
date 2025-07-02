@@ -1,0 +1,1 @@
+delete from bfx_impl.products where code = N'E310ITBBank'; insert into bfx_impl.products VALUES ('7FC4F1DC-AA2C-4660-8755-DBD889C1CCDC', N'E310ITBBank', N'endowment', N'ТКБ Премиум RUB', N'НСЖ');

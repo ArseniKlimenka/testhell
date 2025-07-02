@@ -1,0 +1,41 @@
+select *
+from
+(
+select TOP 1000000
+    r.IMPORT_DOCUMENT_ID,
+    r.IMPORT_DOCUMENT_NUMBER,
+    r.SOURCE_ID,
+    r.RECORD_KEY,
+    r.DATA,
+    r.LOAD_DATE,
+	r.EXCEL_ROW_NUMBER
+from
+(
+    select
+        idr.IMPORT_DOCUMENT_ID,
+        er.BUSINESS_KEY as IMPORT_DOCUMENT_NUMBER,
+        idr.SOURCE_ID,
+        idr.RECORD_KEY,
+        idr.DATA,
+        idr.LOAD_DATE,
+        ROW_NUMBER() OVER (PARTITION BY idr.RECORD_KEY order by idr.LOAD_DATE desc) as RecordKeyRowNumber,
+        ROW_NUMBER() OVER (PARTITION BY idr.DATA order by idr.LOAD_DATE desc) as DataRowNumber,
+        JSON_VALUE(idr.DATA, '$.excelRowNumber') as EXCEL_ROW_NUMBER
+    from
+        BFX.IMPORT_DATA_RECORD idr
+    left join
+        BFX.ENTITY_REF er on er.ENTITY_ID = idr.IMPORT_DOCUMENT_ID
+    {{#if parameters.importDocumentNumber}}
+    left join
+        CFG.ENTITY_TYPE et on et.ENTITY_TYPE_ID = et.ENTITY_TYPE_ID
+    {{/if}}
+    where
+        {{#if parameters.importDocumentNumber}}
+        er.BUSINESS_KEY = @importDocumentNumber
+        and et.CODE_NAME = 'ImportDocument'
+        {{else}}
+        idr.IMPORT_DOCUMENT_ID = @importDocumentId
+        {{/if}}
+) r
+where r.RecordKeyRowNumber = 1 and r.DataRowNumber = 1
+) t

@@ -1,0 +1,279 @@
+{
+    "id": "basicLegalEntity.ui-schema.json",
+    "type": "GridLayout",
+    "numberOfColumns": 4,
+    "formProperties": {
+        "events": {
+            "onLoad": "onLoad"
+        }
+    },
+    "elements": [
+        {
+            "type": "HeaderContentLayout",
+            "elements": [
+                {
+                    "type": "Group",
+                    "width": 2,
+                    "stackContent": "Left",
+                    "elements": [
+                        {
+                            "type": "OutputText",
+                            "skipTranslate": true,
+                            "template": "{{#style 'bold'}}{{#i18n}}{{expr ConfigurationCodeName}}@Title{{/i18n}}:{{/style}}",
+                            "value": {
+                                "$ref": "#"
+                            },
+                            "textStyle": {
+                                "uppercase": true,
+                                "textSize": "Normal",
+                                "textColor": "Black"
+                            }
+                        },
+                        {
+                            "type": "OutputText",
+                            "skipTranslate": true,
+                            "value": {
+                                "$ref": "#/properties/Body/properties/Code"
+                            },
+                            "textStyle": {
+                                "uppercase": true,
+                                "textSize": "Normal",
+                                "textColor": "Blue"
+                            },
+                            "elementId": "ai-info-control",
+                            "defaultValue": ""
+                        }
+                    ]
+                },
+                {
+                    "type": "Group",
+                    "width": 2,
+                    "stackContent": "Right",
+                    "elements": [
+                        {
+                            "type": "Button",
+                            "value": {
+                                "$ref": "#"
+                            },
+                            "onClick": [
+                                {
+                                    "commandType": "executeAction",
+                                    "actionName": "closeDialog"
+                                }
+                            ],
+                            "backgroundColor": "BackgroundColor",
+                            "label": "Cancel",
+                            "labelColor": "Primary",
+                            "elementId": "closeDialogButton",
+                            "rule": {
+                                "effect": "SHOW",
+                                "condition": {
+                                    "type": "LEAF",
+                                    "value": {
+                                        "$ref": "#/properties/viewContext/properties/isPopUp"
+                                    },
+                                    "expectedValue": true
+                                }
+                            }
+                        },
+                        {
+                            "type": "Button",
+                            "value": {
+                                "$ref": "#"
+                            },
+                            "onClick": [
+                                {
+                                    "commandType": "executeAction",
+                                    "actionName": "savePerson"
+                                }
+                            ],
+                            "label": "Save",
+                            "elementId": "savePersonButton"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "GridLayout",
+            "numberOfColumns": 12,
+            "width": 3,
+            "fillAvailableSpace": true,
+            "elements": [
+                {
+                    "type": "TabLayout",
+                    "elementId": "MainContent",
+                    "options": {
+                        "fixedPosition": true,
+                        "scrollableTabs": false,
+                        "buttonsForSwitchingTabs": false
+                    },
+                    "elements": [
+                        {
+                            "type": "Tab",
+                            "elementId": "MainTab",
+                            "title": "MainTab",
+                            "elements": [
+                                {
+                                    "type": "Component",
+                                    "metadata": {
+                                        "autogenerate": true
+                                    },
+                                    "name": "PartyOrganisationData",
+                                    "value": {
+                                        "$ref": "#/properties/Body/properties/data/properties/partyOrganisationData"
+                                    }
+                                },
+                                {
+                                    "type": "Component",
+                                    "metadata": {
+                                        "autogenerate": true
+                                    },
+                                    "name": "PartyLicensesAdditionalInfo",
+                                    "value": {
+                                        "$ref": "#/properties/Body/properties/data/properties/partyLicensesAdditionalInfo"
+                                    }
+                                },
+                                {
+                                    "type": "Component",
+                                    "metadata": {
+                                        "autogenerate": true
+                                    },
+                                    "name": "PartyLicenses",
+                                    "value": {
+                                        "$ref": "#/properties/Body/properties/data/properties/partyLicenses"
+                                    }
+                                },
+                                {
+                                    "type": "Component",
+                                    "metadata": {
+                                        "autogenerate": true
+                                    },
+                                    "name": "PartyGeneralData",
+                                    "value": {
+                                        "$ref": "#/properties/Body/properties/data/properties/partyGeneralData"
+                                    }
+                                },
+                                {
+                                    "type": "Component",
+                                    "metadata": {
+                                        "autogenerate": true
+                                    },
+                                    "name": "PartyCRS",
+                                    "value": {
+                                        "$ref": "#/properties/Body/properties/data/properties/partyCRS"
+                                    }
+                                },
+                                {
+                                    "type": "Component",
+                                    "metadata": {
+                                        "autogenerate": true
+                                    },
+                                    "name": "PartyFatca",
+                                    "value": {
+                                        "$ref": "#/properties/Body/properties/data/properties/partyFatca"
+                                    }
+                                },
+                                {
+                                    "type": "Component",
+                                    "metadata": {
+                                        "autogenerate": true
+                                    },
+                                    "name": "PartyAddresses",
+                                    "value": {
+                                        "$ref": "#/properties/Body/properties/data/properties/partyAddresses"
+                                    }
+                                },
+                                {
+                                    "type": "Component",
+                                    "metadata": {
+                                        "autogenerate": true
+                                    },
+                                    "name": "PartyPhones",
+                                    "value": {
+                                        "$ref": "#/properties/Body/properties/data/properties/partyPhones"
+                                    }
+                                },
+                                {
+                                    "type": "Component",
+                                    "metadata": {
+                                        "autogenerate": true
+                                    },
+                                    "name": "PartyEmails",
+                                    "value": {
+                                        "$ref": "#/properties/Body/properties/data/properties/partyEmails"
+                                    }
+                                },
+                                {
+                                    "type": "Component",
+                                    "metadata": {
+                                        "autogenerate": true
+                                    },
+                                    "name": "PartyEmailsAdditionalInfo",
+                                    "value": {
+                                        "$ref": "#/properties/Body/properties/data/properties/partyEmailsAdditionalInfo"
+                                    }
+                                },
+                                {
+                                    "type": "Component",
+                                    "metadata": {
+                                        "autogenerate": true
+                                    },
+                                    "name": "PartyBankAccounts",
+                                    "value": {
+                                        "$ref": "#/properties/Body/properties/data/properties/partyBankAccounts"
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Component",
+                            "metadata": {
+                                "autogenerate": true
+                            },
+                            "name": "AttachmentsTab",
+                            "value": {
+                                "$ref": "#"
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "SideContentLayout",
+            "width": 1,
+            "elements": [
+                {
+                    "type": "GridLayout",
+                    "numberOfColumns": 2,
+                    "elements": [
+                        {
+                            "type": "TabLayout",
+                            "elements": [
+                                {
+                                    "type": "Tab",
+                                    "tabType": "error",
+                                    "additionalInfo": {
+                                        "display": "ValidationErrorsCount"
+                                    },
+                                    "elements": [
+                                        {
+                                            "type": "ValidationSummary",
+                                            "elementId": "RequiredPropertiesValidations"
+                                        }
+                                    ],
+                                    "elementId": "tab-error",
+                                    "icon": {
+                                        "name": "Bell",
+                                        "size": "Large"
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

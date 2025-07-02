@@ -1,0 +1,287 @@
+{
+    "type": "Group",
+    "elements": [
+        {
+            "type": "DataGrid",
+            "elementId": "generalRequestSearchTable",
+            "mode": "DataSource",
+            "pagination": {
+                "mode": "Regular",
+                "pageSizes": [
+                    5,
+                    10,
+                    15
+                ]
+            },
+            "selection": {
+                "mode": "Single",
+                "enableRowSelection": true,
+                "showCheckBox": true
+            },
+            "columns": [
+                {
+                    "title": "requestNumber",
+                    "name": "requestNumber",
+                    "sortable": false,
+                    "cellContent": {
+                        "type": "Link",
+                        "targetType": "Url",
+                        "openInNewTab": false,
+                        "value": {
+                            "mapping": "requestUrlMapping",
+                            "$ref": "#"
+                        },
+                        "content": {
+                            "text": {
+                                "type": "OutputText",
+                                "textProperties": [
+                                    "bold"
+                                ],
+                                "template": "{{expr requestNumber}}",
+                                "value": {
+                                    "$ref": "#/properties/resultData"
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "title": "requestState",
+                    "name": "requestState",
+                    "sortable": false,
+                    "cellContent": {
+                        "type": "OutputText",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/requestStateDescription"
+                        }
+                    }
+                },
+                {
+                    "title": "requestType",
+                    "name": "requestType",
+                    "sortable": false,
+                    "cellContent": {
+                        "type": "OutputText",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/requestTypeDescription"
+                        }
+                    }
+                },
+                {
+                    "title": "requestAmendmentReason",
+                    "name": "requestAmendmentReason",
+                    "sortable": false,
+                    "cellContent": {
+                        "type": "OutputText",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/requestAmendmentReasonDescription"
+                        }
+                    }
+                },
+                {
+                    "title": "contractNumber",
+                    "name": "contractNumber",
+                    "sortable": false,
+                    "cellContent": {
+                        "type": "Link",
+                        "targetType": "Url",
+                        "openInNewTab": false,
+                        "value": {
+                            "mapping": "contractUrlMapping",
+                            "$ref": "#"
+                        },
+                        "content": {
+                            "text": {
+                                "type": "OutputText",
+                                "textProperties": [
+                                    "bold"
+                                ],
+                                "template": "{{expr contractNumber}}",
+                                "value": {
+                                    "$ref": "#/properties/resultData"
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "title": "contractState",
+                    "name": "contractState",
+                    "sortable": false,
+                    "cellContent": {
+                        "type": "OutputText",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/contractStateDescription"
+                        }
+                    }
+                },
+                {
+                    "title": "contractHolderName",
+                    "name": "contractHolderName",
+                    "sortable": false,
+                    "cellContent": {
+                        "type": "OutputText",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/contractHolderName"
+                        }
+                    }
+                },
+                {
+                    "title": "requestApplicant",
+                    "name": "requestApplicant",
+                    "sortable": false,
+                    "cellContent": {
+                        "type": "OutputText",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/requestApplicant"
+                        }
+                    }
+                },
+                {
+                    "title": "contractProductCode",
+                    "name": "contractProductCode",
+                    "sortable": false,
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "mapping": "productCodeMapping",
+                            "$ref": "#"
+                        }
+                    }
+                },
+                {
+                    "title": "contractProductGroup",
+                    "name": "contractProductGroup",
+                    "sortable": false,
+                    "cellContent": {
+                        "type": "OutputText",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/contractProductGroupDescription"
+                        }
+                    }
+                },
+                {
+                    "title": "contractIssueDate",
+                    "name": "contractIssueDate",
+                    "sortable": false,
+                    "cellContent": {
+                        "type": "OutputText",
+                        "template": "{{#if contractIssueDate}}{{expr contractIssueDate 'd'}}{{/if}}",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/resultData"
+                        }
+                    }
+                },
+                {
+                    "title": "requestIssueDate",
+                    "name": "requestIssueDate",
+                    "sortable": false,
+                    "cellContent": {
+                        "type": "OutputText",
+                        "template": "{{#if requestIssueDate}}{{expr requestIssueDate 'd'}}{{/if}}",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/resultData"
+                        }
+                    }
+                },
+                {
+                    "title": "contractRiskPremium",
+                    "name": "contractRiskPremium",
+                    "sortable": false,
+                    "cellContent": {
+                        "type": "OutputText",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/contractRiskPremium"
+                        }
+                    }
+                },
+                {
+                    "title": "contractPartnerName",
+                    "name": "contractPartnerName",
+                    "sortable": false,
+                    "cellContent": {
+                        "type": "OutputText",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/contractPartnerName"
+                        }
+                    }
+                },
+                {
+                    "title": "requestBankName",
+                    "name": "requestBankName",
+                    "sortable": false,
+                    "cellContent": {
+                        "type": "OutputText",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/requestBankName"
+                        }
+                    }
+                },
+                {
+                    "title": "requestBankNumber",
+                    "name": "requestBankNumber",
+                    "sortable": false,
+                    "cellContent": {
+                        "type": "OutputText",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/requestBankNumber"
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "type": "Group",
+            "width": 4,
+            "stackContent": "Left",
+            "elements": [
+                {
+                    "type": "Button",
+                    "label": "Export Report",
+                    "onClick": [
+                        {
+                            "commandType": "executeAction",
+                            "actionName": "exportReport"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "Group",
+            "width": 4,
+            "stackContent": "Right",
+            "elements": [
+                {
+                    "type": "Button",
+                    "label": "Export",
+                    "submitOnEnter": true,
+                    "onClick": [
+                        {
+                            "commandType": "executeOperation",
+                            "operation": "EXPORT"
+                        }
+                    ],
+                    "icon": {
+                        "name": "Search",
+                        "color": "BackgroundColor",
+                        "size": "Small"
+                    }
+                }
+            ]
+        }
+    ]
+}

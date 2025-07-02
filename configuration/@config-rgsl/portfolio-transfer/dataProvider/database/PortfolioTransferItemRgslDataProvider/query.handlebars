@@ -1,0 +1,125 @@
+WITH CTE AS (
+SELECT
+polh.CONTRACT_NUMBER,
+	DUE_DATE,
+	t.START_DATE,
+	t.HOLDER_NAME,
+	t.PRODUCT_DESC,
+    t.CODE_NAME,
+	sum(AMOUNT) as AMOUNT,
+	sum(OPEN_AMOUNT) as OPEN_AMOUNT
+from
+	(
+		select
+			polh.CONTRACT_NUMBER,
+			ppl.DUE_DATE,
+			x.START_DATE,
+			x.HOLDER_NAME,
+			x.PRODUCT_DESC,
+            x.CODE_NAME,
+			ppsl.AMOUNT,
+			ppsl.AMOUNT as OPEN_AMOUNT
+		from
+			pas_impl.POLICY_HUB polh
+			inner join pas_impl.P_PAYMENT_PLAN_LINK ppl on ppl.POLICY_HKEY = polh.POLICY_HKEY
+			inner join pas_impl.P_PAYMENT_PLAN_SAT_LATEST ppsl on ppsl.P_PAYMENT_PLAN_HKEY = ppl.P_PAYMENT_PLAN_HKEY
+			left join acc_impl.POSTED_PAYMENT_PLAN_SAT_LATEST ppps on ppps.POSTED_PAYMENT_PLAN_HKEY = polh.POLICY_HKEY
+			INNER JOIN (
+				SELECT DISTINCT
+					polh.CONTRACT_NUMBER,
+					polsl.START_DATE,
+					polsl.HOLDER_NAME,
+					prod.DESCRIPTION as PRODUCT_DESC,
+					art.CODE_NAME
+				FROM pas_impl.POLICY_HUB polh
+					inner join pas_impl.POLICY_SAT_LATEST polsl on polsl.POLICY_HKEY = polh.POLICY_HKEY
+					inner join bfx_impl.PRODUCTS prod on prod.code = polsl.PRODUCT_CODE
+					INNER JOIN [PAS_IMPL].[POLICY_COMMISSION_LINK] pcl ON pcl.POLICY_HKEY = polsl.POLICY_HKEY
+					INNER JOIN PAS_IMPL.POLICY_COMMISSION_SAT_LATEST pcsl ON pcsl.POLICY_COMMISSION_HKEY = pcl.POLICY_COMMISSION_HKEY
+					INNER JOIN PAS_IMPL.AA_HUB aah ON aah.AA_HKEY = pcl.AA_HKEY
+					INNER JOIN org_impl.SERVICE_PROVIDER_HUB sph ON sph.SERVICE_PROVIDER_CODE = polsl.INITIATOR_EMPLOYEE_CODE
+					INNER JOIN [ORG_IMPL].[SP_SUB_AGENT_SAT_LATEST] ssasl ON ssasl.SP_SUB_AGENT_HKEY = sph.SERVICE_PROVIDER_HKEY
+                    inner join pas.CONTRACT c on c.CONTRACT_NUMBER = polh.CONTRACT_NUMBER
+					LEFT join CFX.PUBLISHED_ARTIFACT art on art.PUBLISHED_ARTIFACT_ID = c.PUBLISHED_ARTIFACT_ID
+				WHERE 1=1
+                {{#if parameters.aaNumberFrom}}
+	                and aah.AA_NUMBER= @aaNumberFrom
+                {{/if}}
+                {{#if parameters.sadNumber}}
+	                and ssasl.SAD_NUMBER = @sadNumber
+                {{/if}}
+                {{#if parameters.contractNumber}}
+	                and polh.CONTRACT_NUMBER = @contractNumber
+                {{/if}}
+                AND COALESCE(pcsl.IS_DELETED, 0) = 0
+			) x ON x.CONTRACT_NUMBER = polh.CONTRACT_NUMBER
+		where 1=1
+		union all
+		select
+			alc.DOCUMENT_NO as CONTRACT_NUMBER,
+			alcp.DUE_DATE,
+			x.START_DATE,
+			x.HOLDER_NAME,
+			x.PRODUCT_DESC,
+            x.CODE_NAME,
+			0 as AMOUNT,
+			-(mat.DOC_AMOUNT + mat.TOLERANCE_DOC_AMOUNT) as OPEN_AMOUNT
+		from
+			acc_impl.ALLOCATION alc
+			inner join acc_impl.ALLOCATION_POLICY alcp on alcp.ALLOCATION_ID = alc.ALLOCATION_ID
+			inner join acc_impl.MATCHING mat on mat.ALLOCATION_ID = alc.ALLOCATION_ID
+			inner join acc_impl.MATCHING_POLICY matp on matp.MATCHING_ID = mat.MATCHING_ID
+			INNER JOIN (
+				SELECT DISTINCT
+					polh.CONTRACT_NUMBER,
+					polsl.START_DATE,
+					--ai.DUE_DATE,
+					polsl.HOLDER_NAME,
+					prod.DESCRIPTION as PRODUCT_DESC,
+					art.CODE_NAME
+				FROM pas_impl.POLICY_HUB polh
+					inner join pas_impl.POLICY_SAT_LATEST polsl on polsl.POLICY_HKEY = polh.POLICY_HKEY
+					inner join bfx_impl.PRODUCTS prod on prod.code = polsl.PRODUCT_CODE
+					INNER JOIN [PAS_IMPL].[POLICY_COMMISSION_LINK] pcl ON pcl.POLICY_HKEY = polsl.POLICY_HKEY
+					INNER JOIN PAS_IMPL.POLICY_COMMISSION_SAT_LATEST pcsl ON pcsl.POLICY_COMMISSION_HKEY = pcl.POLICY_COMMISSION_HKEY
+					INNER JOIN PAS_IMPL.AA_HUB aah ON aah.AA_HKEY = pcl.AA_HKEY
+					INNER JOIN org_impl.SERVICE_PROVIDER_HUB sph ON sph.SERVICE_PROVIDER_CODE = polsl.INITIATOR_EMPLOYEE_CODE
+					INNER JOIN [ORG_IMPL].[SP_SUB_AGENT_SAT_LATEST] ssasl ON ssasl.SP_SUB_AGENT_HKEY = sph.SERVICE_PROVIDER_HKEY
+                    inner join pas.CONTRACT c on c.CONTRACT_NUMBER = polh.CONTRACT_NUMBER
+					LEFT join CFX.PUBLISHED_ARTIFACT art on art.PUBLISHED_ARTIFACT_ID = c.PUBLISHED_ARTIFACT_ID
+				WHERE 1=1
+                {{#if parameters.aaNumberFrom}}
+	                and aah.AA_NUMBER= @aaNumberFrom
+                {{/if}}
+                {{#if parameters.sadNumber}}
+	                and ssasl.SAD_NUMBER = @sadNumber
+                {{/if}}
+                {{#if parameters.contractNumber}}
+	                and polh.CONTRACT_NUMBER = @contractNumber
+                {{/if}}
+                AND COALESCE(pcsl.IS_DELETED, 0) = 0
+			) x ON x.CONTRACT_NUMBER = alc.DOCUMENT_NO
+		where 1=1
+	) t
+	inner join pas_impl.POLICY_HUB polh on polh.CONTRACT_NUMBER = t.CONTRACT_NUMBER
+	WHERE t.OPEN_AMOUNT > 0
+group BY polh.CONTRACT_NUMBER, DUE_DATE, t.START_DATE, t.HOLDER_NAME, t.PRODUCT_DESC, t.CODE_NAME
+)
+SELECT DISTINCT
+	c.CONTRACT_NUMBER,
+	c.DUE_DATE,
+	c.START_DATE,
+	c.HOLDER_NAME,
+	c.PRODUCT_DESC,
+    c.CODE_NAME
+FROM CTE c
+LEFT JOIN ACC_IMPL.PORTFOLIO_TRANSFER_ITEM_LINK l
+	ON l.CONTRACT_NUMBER = c.CONTRACT_NUMBER
+LEFT JOIN ACC_IMPL.PORTFOLIO_TRANSFER_ITEM_SAT_LATEST sat
+	ON l.PORTFOLIO_TRANSFER_ITEM_HKEY = sat.PORTFOLIO_TRANSFER_ITEM_HKEY
+LEFT JOIN ACC_IMPL.PORTFOLIO_TRANSFER_HUB hub
+	ON hub.PORTFOLIO_TRANSFER_HKEY = l.PORTFOLIO_TRANSFER_HKEY
+WHERE l.CONTRACT_NUMBER IS NULL
+    OR sat.IS_DELETED = 1
+    OR hub.PORTFOLIO_TRANSFER_NUMBER = @ptNumber
+order by CONTRACT_NUMBER, DUE_DATE

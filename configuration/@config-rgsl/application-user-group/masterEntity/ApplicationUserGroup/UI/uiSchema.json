@@ -1,0 +1,127 @@
+{
+    "id": "applicationUserGroup.ui-schema.json",
+    "type": "GridLayout",
+    "title": "Application user group",
+    "numberOfColumns": 4,
+    "elements": [
+        {
+            "type": "HeaderContentLayout",
+            "fixedPosition": true,
+            "elements": [
+                {
+                    "type": "Group",
+                    "width": 2,
+                    "stackContent": "Left",
+                    "elements": [
+                        {
+                            "type": "OutputText",
+                            "skipTranslate": true,
+                            "template": "{{#style 'bold'}}{{#i18n}}{{expr ConfigurationCodeName}}@Title{{/i18n}}:{{/style}}",
+                            "value": {
+                                "$ref": "#"
+                            },
+                            "textStyle": {
+                                "uppercase": true,
+                                "textSize": "Normal",
+                                "textColor": "Black"
+                            }
+                        },
+                        {
+                            "type": "OutputText",
+                            "skipTranslate": true,
+                            "defaultValue": "",
+                            "value": {
+                                "$ref": "#/properties/Code"
+                            },
+                            "textStyle": {
+                                "uppercase": true,
+                                "textSize": "Normal",
+                                "textColor": "Blue"
+                            },
+                            "elementId": "ai-info-control"
+                        }
+                    ]
+                },
+                {
+                    "type": "Group",
+                    "width": 2,
+                    "stackContent": "Right",
+                    "elements": [
+                        {
+                            "type": "LockedControl",
+                            "elementId": "ai-locked-control",
+                            "value": {
+                                "$ref": "#"
+                            }
+                        },
+                        {
+                            "type": "Actor",
+                            "value": {
+                                "$ref": "#/properties/WorkUnitActor"
+                            },
+                            "elementId": "ai-actor-selection-control"
+                        },
+                        {
+                            "type": "Printouts",
+                            "icon": {
+                                "name": "Print",
+                                "size": "Medium"
+                            },
+                            "elementId": "printoutSelect",
+                            "printouts": "AvailablePrintouts",
+                            "value": {
+                                "$ref": "#"
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "GridLayout",
+            "numberOfColumns": 4,
+            "width": 4,
+            "elements": [
+                {
+                    "type": "TabLayout",
+                    "options": {
+                        "fixedPosition": true,
+                        "scrollableTabs": true
+                    },
+                    "elements": [
+                        {
+                            "type": "Tab",
+                            "elements": [
+                                {
+                                    "type": "Group",
+                                    "elements": [
+                                        {
+                                            "type": "Input",
+                                            "readOnly": true,
+                                            "label": "User Group Code",
+                                            "value": {
+                                                "$ref": "#/properties/Code"
+                                            },
+                                            "width": 2
+                                        },
+                                        {
+                                            "type": "Input",
+                                            "readOnly": true,
+                                            "label": "Group name",
+                                            "value": {
+                                                "$ref": "#/properties/Body/properties/name"
+                                            },
+                                            "width": 2
+                                        }
+                                    ]
+                                }
+                            ],
+                            "elementId": "tab-General Information",
+                            "title": "General Information"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

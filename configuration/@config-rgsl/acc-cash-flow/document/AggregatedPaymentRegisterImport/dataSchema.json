@@ -1,0 +1,62 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema",
+    "description": "Document guiding the import of aggregated payments.",
+    "type": "object",
+    "aiDeepRequired": [
+        "/file/fileId",
+        "/file/fileName"
+    ],
+    "properties": {
+        "file": {
+            "$ref": "component:FileUpload"
+        },
+        "sourceFileFormat": {
+            "$ref": "component:RegistryFileFormatComponent"
+        },
+        "bankStatementItems": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer"
+                    },
+                    "no": {
+                        "type": "string"
+                    },
+                    "amount": {
+                        "type": "number"
+                    },
+                    "toleranceType": {
+                        "type": "integer"
+                    }
+                }
+            }
+        },
+        "summary": {
+            "type": "object",
+            "properties": {
+                "numberOfRowsImported": {
+                    "type": "integer"
+                },
+                "totalPaymentAmount": {
+                    "type": "number"
+                },
+                "totalAllocationAmount": {
+                    "type": "number"
+                }
+            }
+        },
+        "errors": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        }
+    },
+    "required": [
+        "file",
+        "sourceFileFormat"
+    ],
+    "additionalProperties": false
+}

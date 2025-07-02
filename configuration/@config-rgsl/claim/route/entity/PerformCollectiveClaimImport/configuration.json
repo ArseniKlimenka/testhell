@@ -1,0 +1,30 @@
+{
+    "entityType": "Claim",
+    "condition": {
+        "events": [
+            "StatusChanged"
+        ],
+        "configuration": {
+            "names": [
+                "CollectiveClaim"
+            ]
+        },
+        "documentStates": [
+            "ClaimImportInProgress"
+        ]
+    },
+    "sinks": [
+        {
+            "name": "CollectiveClaimImportSink",
+            "etlService": {
+                "configuration": {
+                    "name": "CollectiveClaimImportEtlService",
+                    "version": "1"
+                }
+            }
+        }
+    ],
+    "errorSinks": [
+    ],
+    "version": "1"
+}

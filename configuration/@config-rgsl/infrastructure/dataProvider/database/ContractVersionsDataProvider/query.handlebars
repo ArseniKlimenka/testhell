@@ -1,0 +1,62 @@
+﻿select
+   c.contract_id,
+   c.contract_number,
+   oc.contract_number as original_contract_number,
+   c.seq_number,
+   c.body,
+   c.common_body,
+   c.snapshot_body,
+   c.state_id,
+   c.version_state,
+   art.code_name,
+   art.dimensions,
+   c.sys_created_on,
+   ps.code_name contract_state,
+   json_value(c.body, '$.mainInsuranceConditions.insuranceProduct.productDescription') product_description
+from
+	pas.contract c
+	inner join pas.contract oc on oc.CONTRACT_ID = c.ORIGINAL_DOCUMENT_ID
+   join cfx.published_artifact art on c.published_artifact_id = art.published_artifact_id
+   join cfg.process_state ps ON ps.process_state_id = c.state_id
+where 1=1
+{{#if parameters.originalDocumentId}}
+   and c.original_document_id in (select cc.original_document_id from pas.contract cc where cc.contract_id = @originalDocumentId)
+{{/if}}
+{{#if parameters.contractNumber}}
+   and c.original_document_id in (
+      select cc.original_document_id
+      from pas.contract cc
+      {{#if parameters.policyOnly}}
+      join pas_impl.policy_hub ph ON ph.contract_number = cc.contract_number
+      {{/if}}
+      where cc.contract_number = @contractNumber)
+{{/if}}
+{{#if parameters.contractNumberStrict}}
+   and c.contract_number = @contractNumberStrict
+{{/if}}
+{{#if parameters.contractNumbersStrict}}
+   and c.contract_number in (@contractNumbersStrict)
+{{/if}}
+{{#if parameters.seqNumber}}
+   and c.seq_number = @seqNumber
+{{/if}}
+{{#if parameters.seqNumberMax}}
+   and c.seq_number = (
+		select max(cc.seq_number) max_seq_number
+		from pas.contract cc
+		where cc.original_document_id in
+		(select ccIn.original_document_id
+		from pas.contract ccIn
+		where ccIn.contract_number = @contractNumber)
+		and (cc.version_state = 'Applied' or cc.version_state is null)
+   )
+{{/if}}
+{{#if parameters.versionState}}
+   and c.version_state = @versionState
+{{/if}}
+{{#if parameters.versionStateWithNull}}
+   and isnull(c.version_state, @versionStateWithNull) = @versionStateWithNull
+{{/if}}
+{{#if parameters.stateId}}
+   and c.state_id = @stateId
+{{/if}}

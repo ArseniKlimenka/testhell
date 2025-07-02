@@ -1,0 +1,38 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema",
+    "description": "Successfully imported records for an import document.",
+    "properties": {
+        "importDocumentId": {
+            "type": "string",
+            "description": "ID of import document that imported this record.",
+            "aiTitle": "Import Document ID"
+        },
+        "sourceId": {
+            "type": "string",
+            "description": "ID of the source providing this record.",
+            "aiTitle": "Source ID"
+        },
+        "recordKey": {
+            "type": "string",
+            "description": "Key of the record.",
+            "aiTitle": "Record Key"
+        },
+        "errors": {
+            "type": "object",
+            "description": "Errors that happened during the import of this record.",
+            "aiTitle": "Errors",
+            "additionalProperties": true,
+            "aiExportAsBlob": true
+        },
+        "resultSummary": {
+            "type": "object",
+            "description": "Summary of the import.",
+            "additionalProperties": true
+        },
+        "validationResult": {
+            "type": "string",
+            "description": "Validation errors for UI.",
+            "aiTitle": "Validation result"
+        }
+    }
+}

@@ -1,0 +1,94 @@
+{
+    "type": "Group",
+    "title": "Partner",
+    "fillAvailableSpace": true,
+    "formProperties": {
+        "events": {
+            "beforeSave": "onBeforeSave"
+        }
+    },
+    "elements": [
+        {
+            "type": "TabLayout",
+            "elementId": "MainContent",
+            "options": {
+                "fixedPosition": true,
+                "scrollableTabs": false,
+                "buttonsForSwitchingTabs": false
+            },
+            "elements": [
+                {
+                    "type": "Tab",
+                    "elementId": "MainTab",
+                    "title": "MainTab",
+                    "elements": [
+                        {
+                            "type": "Group",
+                            "elements": [
+                                {
+                                    "type": "Input",
+                                    "label": "partnerCode",
+                                    "showAsRequired": true,
+                                    "value": {
+                                        "$ref": "#/properties/Body/properties/partnerCode"
+                                    },
+                                    "width": 4
+                                },
+                                {
+                                    "type": "Input",
+                                    "label": "partnerType",
+                                    "showAsRequired": true,
+                                    "value": {
+                                        "$ref": "#/properties/Body/properties/partnerType"
+                                    },
+                                    "width": 4
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Group",
+                            "elements": [
+                                {
+                                    "type": "Input",
+                                    "readOnly": true,
+                                    "label": "partyCode",
+                                    "value": {
+                                        "$ref": "#/properties/Body/properties/partyCode"
+                                    },
+                                    "width": 4
+                                },
+                                {
+                                    "type": "Lookup",
+                                    "value": {
+                                        "$ref": "#"
+                                    },
+                                    "width": 4,
+                                    "dialogButton": {},
+                                    "dialog": {
+                                        "viewReference": {
+                                            "configurationCodeName": "GeneralPartySearchView",
+                                            "configurationConceptType": "SearchView",
+                                            "configurationVersion": "1"
+                                        }
+                                    },
+                                    "clearButton": {
+                                        "clearAction": "partyClear"
+                                    },
+                                    "onSelected": "partyResultMapping",
+                                    "selectedDisplayValueUISchema": {
+                                        "type": "Input",
+                                        "readOnly": true,
+                                        "label": "partyDisplayName",
+                                        "value": {
+                                            "$ref": "#/properties/Body/properties/partyDisplayName"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

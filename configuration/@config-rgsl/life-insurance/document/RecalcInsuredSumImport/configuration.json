@@ -1,0 +1,79 @@
+{
+    "entityType": "ImportDocument",
+    "states": [
+        {
+            "name": "Draft",
+            "actors": [
+                {
+                    "actor": "RecalcInsuredSum",
+                    "uiSchema": "UiSchemaDraft",
+                    "operations": [
+                        "Save"
+                    ],
+                    "transitions": [
+                        "StartLoading"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Loading",
+            "actors": [
+                {
+                    "actor": "RecalcInsuredSum",
+                    "uiSchema": "UiSchemaLoad",
+                    "operations": [],
+                    "transitions": []
+                }
+            ]
+        },
+        {
+            "name": "Loaded",
+            "actors": [
+                {
+                    "actor": "RecalcInsuredSum",
+                    "uiSchema": "UiSchemaLoad",
+                    "operations": [],
+                    "transitions": [
+                        "StartImporting"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Importing",
+            "actors": [
+                {
+                    "actor": "RecalcInsuredSum",
+                    "uiSchema": "UiSchemaImport",
+                    "operations": [],
+                    "transitions": []
+                },
+                {
+                    "actor": "System",
+                    "uiSchema": "UiSchemaImport",
+                    "operations": [],
+                    "transitions": [
+                        "FinishImporting"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Imported",
+            "actors": [
+                {
+                    "actor": "RecalcInsuredSum",
+                    "uiSchema": "UiSchemaImport",
+                    "operations": []
+                }
+            ]
+        }
+    ],
+    "version": "1",
+    "components": [
+        "DocumentFooter",
+        "DocumentHeader"
+    ],
+    "validFrom": "2000-01-01"
+}

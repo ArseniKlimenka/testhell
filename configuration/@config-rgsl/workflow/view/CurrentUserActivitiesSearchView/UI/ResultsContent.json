@@ -1,0 +1,65 @@
+{
+    "type": "Group",
+    "elements": [
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "Component",
+                    "name": "ActivitiesTable",
+                    "value": {
+                        "$ref": "#"
+                    }
+                }
+            ],
+            "rule": {
+                "effect": "HIDE",
+                "condition": {
+                    "type": "FUNC",
+                    "ruleFunction": "isShowVerification",
+                    "value": [
+                        {
+                            "$ref": "#/properties/request/properties/data/properties/criteria/properties/showVerification"
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "Component",
+                    "name": "ActivitiesTableVerification",
+                    "value": {
+                        "$ref": "#"
+                    }
+                }
+            ],
+            "rule": {
+                "effect": "SHOW",
+                "condition": {
+                    "type": "FUNC",
+                    "ruleFunction": "isShowVerification",
+                    "value": [
+                        {
+                            "$ref": "#/properties/request/properties/data/properties/criteria/properties/showVerification"
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "Component",
+                    "name": "ActivitiesTableExportButton",
+                    "value": {
+                        "$ref": "#"
+                    }
+                }
+            ]
+        }
+    ]
+}

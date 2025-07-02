@@ -1,0 +1,47 @@
+<html>
+
+<head></head>
+
+<body>
+
+    <div>
+
+        <table align="left" width="2000" border="1" cellspacing="4" cellpadding="4" style="border-collapse: collapse; border:1px solid black;">
+
+            <tr align="center" bgcolor="dimgray" style="color: white;">
+                <th align="center">№ п.п.</th>
+                <th align="center">Номер страхового события</th>
+                <th align="center">Номер убытка</th>
+                <th align="center">Номер страхового акта</th>
+                <th align="center">ФИО выгодоприобретателя/застрахованного</th>
+                <th align="center">Дата и время подписание страхового акта</th>
+                <th align="center">Номер РНВ</th>
+                <th align="center">Дата создания РНВ</th>
+                <th align="center">Дата передачи РНВ на выплату</th>
+                <th align="center">Сумма РНВ к выплате</th>
+                <th align="center">Сумма РНВ к взаимозачёту</th>
+            </tr>
+
+            {{#each content.notificationData}}
+                <tr align="center" bgcolor="white" color="black">
+                    <td align="center">{{this.num}}</td>
+                    <td align="center"><a href={{this.ieLink}}>{{this.ieNumber}}</a></td>
+                    <td align="center"><a href={{this.claimLink}}>{{this.claimNumber}}</a></td>
+                    <td align="center">{{this.insuranceAct}}</td>
+                    <td align="center">{{this.baseDocRecipientName}}</td>
+                    <td align="center">{{this.insuranceActSignatureDateTime}}</td>
+                    <td align="center"><a href={{this.paymentOrderLink}}>{{this.paymentOrderNumber}}</a></td>
+                    <td align="center">{{this.paymentOrderCreatedDateTime}}</td>
+                    <td align="center">{{this.paymentOrderToPayDateTime}}</td>
+                    <td align="center">{{this.paymentOrderOriginalTotalAmount}}</td>
+                    <td align="center">{{this.paymentOrderTotalNettedAmount}}</td>
+                </tr>
+            {{/each}}
+
+        </table>
+
+    </div>
+
+</body>
+
+</html>

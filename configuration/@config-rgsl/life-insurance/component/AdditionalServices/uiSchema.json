@@ -1,0 +1,152 @@
+{
+    "type": "Section",
+    "label": "Additional Services",
+    "isCollapsed": false,
+    "width": 12,
+    "elements": [
+        {
+            "type": "DataGrid",
+            "mode": "Array",
+            "pagination": {
+                "mode": "Regular",
+                "pageSizes": [
+                    5,
+                    10,
+                    15
+                ],
+                "defaultPageSize": 5
+            },
+            "value": {
+                "$ref": "#"
+            },
+            "actions": [
+                "Delete"
+            ],
+            "edit": {
+                "mode": "Detached"
+            },
+            "height": "Small",
+            "columns": [
+                {
+                    "title": "serviceName",
+                    "name": "serviceName",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/serviceName"
+                        }
+                    }
+                },
+                {
+                    "title": "startDate",
+                    "name": "startDate",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/startDate"
+                        }
+                    }
+                },
+                {
+                    "title": "endDate",
+                    "name": "endDate",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/endDate"
+                        }
+                    }
+                },
+                {
+                    "title": "serviceParty",
+                    "name": "serviceParty",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/serviceParty"
+                        }
+                    }
+                },
+                {
+                    "title": "serviceFrequency",
+                    "name": "serviceFrequency",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/serviceFrequency"
+                        }
+                    }
+                },
+                {
+                    "title": "specialConditions",
+                    "name": "specialConditions",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/specialConditions"
+                        }
+                    }
+                }
+            ],
+            "rule": {
+                "effect": "ENABLE_INITIAL",
+                "condition": {
+                    "type": "FUNC",
+                    "ruleFunction": "enableAdditionalServices",
+                    "value": [
+                        {
+                            "$ref": "#"
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "type": "Group",
+            "width": 12,
+            "elements": [
+                {
+                    "type": "Button",
+                    "label": "Add",
+                    "width": 2,
+                    "icon": {
+                        "name": "Plus",
+                        "size": "Medium",
+                        "color": "BackgroundColor"
+                    },
+                    "onClick": "addAdditionalService"
+                }
+            ],
+            "rule": {
+                "effect": "SHOW",
+                "condition": {
+                    "type": "FUNC",
+                    "ruleFunction": "showAddAdditionalServiceButton",
+                    "value": [
+                        {
+                            "$ref": "#"
+                        }
+                    ]
+                }
+            }
+        }
+    ],
+    "rule": {
+        "effect": "SHOW",
+        "condition": {
+            "type": "FUNC",
+            "ruleFunction": "isBackOfficeUser",
+            "value": [
+                {
+                    "$ref": "#"
+                }
+            ]
+        }
+    }
+}

@@ -1,0 +1,320 @@
+{
+    "type": "Group",
+    "elements": [
+        {
+            "type": "Group",
+            "rule": {
+                "effect": "HIDE",
+                "condition": {
+                    "type": "FUNC",
+                    "ruleFunction": "showExpandedGrid",
+                    "value": [
+                        {
+                            "$ref": "#"
+                        }
+                    ]
+                }
+            },
+            "elements": [
+                {
+                    "rule": {
+                        "effect": "ENABLE_INITIAL",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "enableDeclarationGrid",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    },
+                    "type": "DataGrid",
+                    "elementId": "DeclarationMedicalArray",
+                    "mode": "Array",
+                    "labelType": "H1",
+                    "height": "None",
+                    "label": "medicalDeclaration",
+                    "pagination": {
+                        "mode": "Regular",
+                        "pageSizes": [
+                            5,
+                            10,
+                            15,
+                            100
+                        ],
+                        "defaultPageSize": 100
+                    },
+                    "isCollapsed": true,
+                    "value": {
+                        "$ref": "#"
+                    },
+                                        "actions": [
+                        "Add",
+                        "Edit",
+                        "Delete"
+                    ],
+                    "edit": {
+                        "mode": "Detached",
+                        "onAfterGridAction": "onAfterDeclarationGridAction"
+                    },
+                    "detailsTemplates": {
+                        "edit": {
+                            "content": {
+                                "type": "GridLayout",
+                                "fillAvailableSpace": true,
+                                "numberOfColumns": 12,
+                                "elements": [
+                                    {
+                                        "label": "itemText",
+                                        "type": "Input",
+                                        "value": {
+                                            "$ref": "#/properties/itemText"
+                                        }
+                                    },
+                                    {
+                                        "label": "departament",
+                                        "type": "Input",
+                                        "value": {
+                                            "$ref": "#/properties/departament"
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "columns": [
+                        {
+                            "title": "itemNumber",
+                            "name": "itemNumber",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "value": {
+                                    "$ref": "#/properties/itemNumber"
+                                }
+                            },
+                            "style": {
+                                "width": "extra-small"
+                            }
+                        },
+                        {
+                            "title": "itemText",
+                            "name": "itemText",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "allowMultiLine": true,
+                                "value": {
+                                    "$ref": "#/properties/itemText"
+                                }
+                            }
+                        },
+                        {
+                            "title": "departament",
+                            "name": "departament",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "value": {
+                                    "$ref": "#/properties/departament"
+                                }
+                            },
+                            "style": {
+                                "width": "extra-small"
+                            },
+                            "rule": {
+                                "effect": "SHOW",
+                                "condition": {
+                                    "type": "FUNC",
+                                    "ruleFunction": "isBackOfficeUser",
+                                    "value": [
+                                        {
+                                            "$ref": "#"
+                                        }
+                                    ]
+                                }
+                            }
+                        },
+                        {
+                            "title": "agreement",
+                            "name": "agreement",
+                            "cellContent": {
+                                "type": "Input",
+                                "value": {
+                                    "$ref": "#/properties/agreement"
+                                },
+                                "rule": {
+                                    "effect": "DISABLE_INITIAL",
+                                    "condition": {
+                                        "type": "FUNC",
+                                        "ruleFunction": "disableAgreement",
+                                        "value": [
+                                            {
+                                                "$ref": "#"
+                                            }
+                                        ]
+                                    }
+                                }
+                            },
+                            "style": {
+                                "width": "extra-small"
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "Group",
+            "rule": {
+                "effect": "SHOW",
+                "condition": {
+                    "type": "FUNC",
+                    "ruleFunction": "showExpandedGrid",
+                    "value": [
+                        {
+                            "$ref": "#"
+                        }
+                    ]
+                }
+            },
+            "elements": [
+                {
+                    "rule": {
+                        "effect": "ENABLE_INITIAL",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "enableDeclarationGrid",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    },
+                    "type": "DataGrid",
+                    "elementId": "DeclarationMedicalArray",
+                    "mode": "Array",
+                    "labelType": "H1",
+                    "height": "None",
+                    "label": "medicalDeclaration",
+                    "pagination": {
+                        "mode": "Regular",
+                        "pageSizes": [
+                            5,
+                            10,
+                            15
+                        ],
+                        "defaultPageSize": 14
+                    },
+                    "isCollapsed": false,
+                    "value": {
+                        "$ref": "#"
+                    },
+                    "actions": [
+                        "Add",
+                        "Edit",
+                        "Delete"
+                    ],
+                    "edit": {
+                        "mode": "Detached",
+                        "onAfterGridAction": "onAfterDeclarationGridAction"
+                    },
+                    "detailsTemplates": {
+                        "edit": {
+                            "content": {
+                                "type": "GridLayout",
+                                "fillAvailableSpace": true,
+                                "numberOfColumns": 12,
+                                "elements": [
+                                    {
+                                        "label": "itemText",
+                                        "type": "Input",
+                                        "value": {
+                                            "$ref": "#/properties/itemText"
+                                        }
+                                    },
+                                    {
+                                        "label": "departament",
+                                        "type": "Input",
+                                        "value": {
+                                            "$ref": "#/properties/departament"
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "columns": [
+                        {
+                            "title": "itemNumber",
+                            "name": "itemNumber",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "value": {
+                                    "$ref": "#/properties/itemNumber"
+                                }
+                            }
+                        },
+                        {
+                            "title": "itemText",
+                            "name": "itemText",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "allowMultiLine": true,
+                                "value": {
+                                    "$ref": "#/properties/itemText"
+                                }
+                            }
+                        },
+                        {
+                            "title": "departament",
+                            "name": "departament",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "value": {
+                                    "$ref": "#/properties/departament"
+                                }
+                            },
+                            "rule": {
+                                "effect": "SHOW",
+                                "condition": {
+                                    "type": "FUNC",
+                                    "ruleFunction": "isBackOfficeUser",
+                                    "value": [
+                                        {
+                                            "$ref": "#"
+                                        }
+                                    ]
+                                }
+                            }
+                        },
+                        {
+                            "title": "agreement",
+                            "name": "agreement",
+                            "cellContent": {
+                                "type": "Input",
+                                "value": {
+                                    "$ref": "#/properties/agreement"
+                                },
+                                "rule": {
+                                    "effect": "DISABLE_INITIAL",
+                                    "condition": {
+                                        "type": "FUNC",
+                                        "ruleFunction": "disableAgreement",
+                                        "value": [
+                                            {
+                                                "$ref": "#"
+                                            }
+                                        ]
+                                    }
+                                }
+                            },
+                            "style": {
+                                "width": "extra-small"
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

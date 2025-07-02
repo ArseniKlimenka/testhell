@@ -1,0 +1,36 @@
+IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[ARCHIVE_INTEGRATION_MESSAGE_ERROR]') AND type IN (N'P', N'RF', N'PC'))
+BEGIN
+DROP PROCEDURE dbo.ARCHIVE_INTEGRATION_MESSAGE_ERROR;
+END
+GO
+
+CREATE PROCEDURE ARCHIVE_INTEGRATION_MESSAGE_ERROR
+AS
+BEGIN TRY
+begin tran
+
+	INSERT INTO BFX_IMPL.INTEGRATION_MESSAGE_ERROR_ARCH
+	SELECT messageError.* FROM BFX.INTEGRATION_MESSAGE_ERROR messageError
+	INNER JOIN BFX.INTEGRATION_MESSAGE_GROUP messageGroup ON messageGroup.MESSAGE_GROUP = messageError.MESSAGE_GROUP
+	WHERE
+		messageGroup.STATUS = 0 AND
+		messageError.TIMESTAMP < messageGroup.LAST_PROCESSED_TIMESTAMP AND
+		messageError.TIMESTAMP < dateadd(month, -1, getdate())
+
+    DELETE messageGroup
+	FROM BFX.INTEGRATION_MESSAGE_ERROR messageError
+	INNER JOIN BFX.INTEGRATION_MESSAGE_GROUP messageGroup ON messageGroup.MESSAGE_GROUP = messageError.MESSAGE_GROUP
+	WHERE
+		messageGroup.STATUS = 0 AND
+		messageError.TIMESTAMP < messageGroup.LAST_PROCESSED_TIMESTAMP AND
+		messageError.TIMESTAMP < dateadd(month, -1, getdate())
+
+commit tran
+END TRY
+BEGIN CATCH
+    ROLLBACK tran
+    DECLARE @ErrorMessage NVARCHAR(4000); DECLARE @ErrorSeverity INT; DECLARE @ErrorState INT;
+    SELECT @ErrorMessage = ERROR_MESSAGE(), @ErrorSeverity = ERROR_SEVERITY(), @ErrorState = 1;
+    RAISERROR (@ErrorMessage, @ErrorSeverity, @ErrorState );
+END CATCH;
+GO

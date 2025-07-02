@@ -1,0 +1,680 @@
+{
+    "id": "MainContent",
+    "type": "Group",
+    "formProperties": {
+        "events": {
+            "beforeSave": "RiskLifeInsurancePolicyBeforeSave",
+            "onLoad": "RiskLifeInsurancePolicyOnLoad"
+        }
+    },
+    "elements": [
+        {
+            "type": "TabLayout",
+            "elementId": "TabLayout",
+            "options": {
+                "fixedPosition": true,
+                "scrollableTabs": false,
+                "buttonsForSwitchingTabs": true
+            },
+            "onInit": "RiskLifeInsurancePolicyTabsVisible",
+            "elements": [
+                {
+                    "type": "Tab",
+                    "elementId": "tabInsuranceConditions",
+                    "title": "Insurance Conditions",
+                    "onTabEnter": "onInsuranceConditionsTabEnter",
+                    "elements": [
+                        {
+                            "type": "Component",
+                            "metadata": {
+                                "autogenerate": true
+                            },
+                            "name": "CreateMedLifeInsuranceQuote",
+                            "value": {
+                                "$ref": "#"
+                            }
+                        },
+                        {
+                            "type": "Component",
+                            "metadata": {
+                                "autogenerate": true
+                            },
+                            "name": "MainInsuranceConditions",
+                            "value": {
+                                "$ref": "#/properties/Body/properties/mainInsuranceConditions"
+                            }
+                        },
+                        {
+                            "type": "Component",
+                            "metadata": {
+                                "autogenerate": true
+                            },
+                            "name": "IssueFormUI",
+                            "value": {
+                                "$ref": "#/properties/Body/properties/issueForm"
+                            }
+                        },
+                        {
+                            "type": "Component",
+                            "metadata": {
+                                "autogenerate": true
+                            },
+                            "name": "EPolicyVerification",
+                            "value": {
+                                "$ref": "#"
+                            }
+                        },
+                        {
+                            "type": "Component",
+                            "metadata": {
+                                "autogenerate": true
+                            },
+                            "name": "BasicConditions",
+                            "value": {
+                                "$ref": "#/properties/Body/properties/basicConditions"
+                            }
+                        },
+                        {
+                            "type": "Component",
+                            "metadata": {
+                                "autogenerate": true
+                            },
+                            "name": "PolicyHolderBasicData",
+                            "value": {
+                                "$ref": "#/properties/Body/properties/policyHolder"
+                            }
+                        },
+                        {
+                            "type": "Component",
+                            "metadata": {
+                                "autogenerate": true
+                            },
+                            "name": "InsuredPersonBasicData",
+                            "value": {
+                                "$ref": "#/properties/Body/properties/insuredPerson"
+                            }
+                        },
+                        {
+                            "type": "Component",
+                            "metadata": {
+                                "autogenerate": true
+                            },
+                            "name": "Risks",
+                            "value": {
+                                "$ref": "#/properties/Body/properties/risks"
+                            }
+                        },
+                        {
+                            "type": "Component",
+                            "metadata": {
+                                "autogenerate": true
+                            },
+                            "name": "RisksPackages",
+                            "value": {
+                                "$ref": "#/properties/Body/properties/risksPackages"
+                            }
+                        },
+                        {
+                            "type": "Component",
+                            "metadata": {
+                                "autogenerate": true
+                            },
+                            "name": "RisksCorrection",
+                            "value": {
+                                "$ref": "#/properties/Body/properties/risksCorrection"
+                            }
+                        },
+                        {
+                            "type": "Component",
+                            "metadata": {
+                                "autogenerate": true
+                            },
+                            "name": "PolicyTerms",
+                            "value": {
+                                "$ref": "#/properties/Body/properties/policyTerms"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "type": "Tab",
+                    "elementId": "tabParticipants",
+                    "title": "Participants",
+                    "onTabEnter": "onParticipantsTabEnter",
+                    "elements": [
+                        {
+                            "type": "Component",
+                            "metadata": {
+                                "autogenerate": true
+                            },
+                            "name": "PolicyHolder",
+                            "value": {
+                                "$ref": "#/properties/Body/properties/policyHolder"
+                            }
+                        },
+                        {
+                            "type": "Component",
+                            "metadata": {
+                                "autogenerate": true
+                            },
+                            "name": "InsuredPerson",
+                            "value": {
+                                "$ref": "#/properties/Body/properties/insuredPerson"
+                            }
+                        },
+                        {
+                            "type": "Component",
+                            "metadata": {
+                                "autogenerate": true
+                            },
+                            "name": "Beneficiaries",
+                            "value": {
+                                "$ref": "#/properties/Body/properties/beneficiaries"
+                            }
+                        },
+                        {
+                            "type": "Component",
+                            "metadata": {
+                                "autogenerate": true
+                            },
+                            "name": "AdditionalBeneficiaries",
+                            "value": {
+                                "$ref": "#/properties/Body/properties/additionalBeneficiaries"
+                            }
+                        },
+                        {
+                            "type": "Component",
+                            "metadata": {
+                                "autogenerate": true
+                            },
+                            "name": "DeclarationMedicalConfirmationUI",
+                            "value": {
+                                "$ref": "#/properties/Body"
+                            }
+                        },
+                        {
+                            "type": "Component",
+                            "metadata": {
+                                "autogenerate": true
+                            },
+                            "name": "DeclarationMainConfirmationUI",
+                            "value": {
+                                "$ref": "#/properties/Body"
+                            }
+                        },
+                        {
+                            "type": "Component",
+                            "metadata": {
+                                "autogenerate": true
+                            },
+                            "name": "DeclarationSportConfirmationUI",
+                            "value": {
+                                "$ref": "#/properties/Body"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "type": "Tab",
+                    "elementId": "tabAdditionalConditions",
+                    "title": "Additional Conditions",
+                    "elements": [
+                        {
+                            "type": "Component",
+                            "metadata": {
+                                "autogenerate": true
+                            },
+                            "name": "IssueForm",
+                            "value": {
+                                "$ref": "#/properties/Body/properties/issueForm"
+                            }
+                        },
+                        {
+                            "type": "Component",
+                            "metadata": {
+                                "autogenerate": true
+                            },
+                            "name": "AdditionalServices",
+                            "value": {
+                                "$ref": "#/properties/Body/properties/additionalServices"
+                            }
+                        },
+                        {
+                            "type": "Component",
+                            "metadata": {
+                                "autogenerate": true
+                            },
+                            "name": "InsuranceRules",
+                            "value": {
+                                "$ref": "#/properties/Body/properties/insuranceRules"
+                            }
+                        },
+                        {
+                            "type": "Component",
+                            "metadata": {
+                                "autogenerate": true
+                            },
+                            "name": "Promotions",
+                            "value": {
+                                "$ref": "#/properties/Body/properties/promotions"
+                            }
+                        },
+                        {
+                            "type": "Component",
+                            "metadata": {
+                                "autogenerate": true
+                            },
+                            "name": "Initiator",
+                            "value": {
+                                "$ref": "#/properties/Body/properties/initiator"
+                            }
+                        },
+                        {
+                            "type": "Component",
+                            "metadata": {
+                                "autogenerate": true
+                            },
+                            "name": "AdditionalInitiators",
+                            "value": {
+                                "$ref": "#/properties/Body/properties/additionalInitiators"
+                            }
+                        },
+                        {
+                            "type": "Component",
+                            "metadata": {
+                                "autogenerate": true
+                            },
+                            "name": "RelatedMedContracts",
+                            "value": {
+                                "$ref": "#"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "type": "Component",
+                    "name": "AttachmentsTab",
+                    "value": {
+                        "$ref": "#"
+                    }
+                },
+                {
+                    "type": "Tab",
+                    "elementId": "tabSurrenderValues",
+                    "scope": "SurrenderValues",
+                    "title": "Surrender Values",
+                    "elements": [
+                        {
+                            "type": "Component",
+                            "metadata": {
+                                "autogenerate": true
+                            },
+                            "name": "SurrenderValues",
+                            "value": {
+                                "$ref": "#/properties/Body/properties/surrenderValues"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "type": "Tab",
+                    "elementId": "tabPaymentPlan",
+                    "title": "PaymentPlan",
+                    "elements": [
+                        {
+                            "type": "Component",
+                            "metadata": {
+                                "autogenerate": true
+                            },
+                            "name": "PaymentPlan",
+                            "value": {
+                                "$ref": "#/properties/Body/properties/paymentPlan"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "type": "Tab",
+                    "elementId": "tabUnderwriting",
+                    "title": "Underwriting",
+                    "elements": [
+                        {
+                            "type": "Component",
+                            "metadata": {
+                                "autogenerate": true
+                            },
+                            "name": "InquiriesList",
+                            "value": {
+                                "$ref": "#/properties/Body/properties/inquiriesList"
+                            }
+                        },
+                        {
+                            "type": "Component",
+                            "metadata": {
+                                "autogenerate": true
+                            },
+                            "name": "UWTriggers",
+                            "value": {
+                                "$ref": "#/properties/Body/properties/uwTriggers"
+                            }
+                        },
+                        {
+                            "type": "Component",
+                            "metadata": {
+                                "autogenerate": true
+                            },
+                            "name": "InsurerComment",
+                            "value": {
+                                "$ref": "#/properties/Body/properties/insurerComment"
+                            }
+                        }
+                    ],
+                    "rule": {
+                        "effect": "SHOW",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "underwritingTabVisibility",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "type": "Tab",
+                    "elementId": "commissionTab",
+                    "title": "commissionTab",
+                    "elements": [
+                        {
+                            "type": "Component",
+                            "metadata": {
+                                "autogenerate": true
+                            },
+                            "name": "PolicyCommission",
+                            "value": {
+                                "$ref": "#/properties/Body/properties/commission"
+                            }
+                        }
+                    ],
+                    "rule": {
+                        "effect": "SHOW",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "historyTabVisibility",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "type": "Tab",
+                    "elementId": "allocations",
+                    "title": "allocations",
+                    "elements": [
+                        {
+                            "type": "Component",
+                            "metadata": {
+                                "autogenerate": true
+                            },
+                            "name": "RelatedAllocationsComponent",
+                            "value": {
+                                "$ref": "#"
+                            }
+                        }
+                    ],
+                    "rule": {
+                        "effect": "SHOW",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "historyTabVisibility",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "type": "Tab",
+                    "elementId": "paymentOrders",
+                    "title": "paymentOrders",
+                    "elements": [
+                        {
+                            "type": "Component",
+                            "metadata": {
+                                "autogenerate": true
+                            },
+                            "name": "RelatedPaymentOrdersComponent",
+                            "value": {
+                                "$ref": "#"
+                            }
+                        }
+                    ],
+                    "rule": {
+                        "effect": "SHOW",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "underwritingTabVisibility",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "type": "Tab",
+                    "elementId": "accountingEntries",
+                    "title": "accountingEntries",
+                    "elements": [
+                        {
+                            "type": "Component",
+                            "metadata": {
+                                "autogenerate": true
+                            },
+                            "name": "RelatedAccountingEntriesComponent",
+                            "value": {
+                                "$ref": "#"
+                            }
+                        }
+                    ],
+                    "rule": {
+                        "effect": "SHOW",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "underwritingTabVisibility",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "type": "Tab",
+                    "elementId": "contractAmendments",
+                    "title": "contractAmendments",
+                    "elements": [
+                        {
+                            "type": "Component",
+                            "metadata": {
+                                "autogenerate": true
+                            },
+                            "name": "ContractAmendments",
+                            "value": {
+                                "$ref": "#"
+                            }
+                        }
+                    ],
+                    "rule": {
+                        "effect": "SHOW",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "underwritingTabVisibility",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "type": "Component",
+                    "metadata": {
+                        "autogenerate": true
+                    },
+                    "name": "ContractAdditionalParameters",
+                    "value": {
+                        "$ref": "#"
+                    }
+                },
+                {
+                    "type": "Tab",
+                    "elementId": "Reinsurance",
+                    "title": "Reinsurance",
+                    "elements": [
+                        {
+                            "type": "Component",
+                            "metadata": {
+                                "autogenerate": true
+                            },
+                            "name": "RelatedReinsuranceDocuments",
+                            "value": {
+                                "$ref": "#"
+                            }
+                        }
+                    ],
+                    "rule": {
+                        "effect": "SHOW",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "reinsuranceTabVisibility",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "type": "Tab",
+                    "elementId": "InvestmentProfit",
+                    "title": "InvestmentProfit",
+                    "elements": [
+                        {
+                            "type": "Component",
+                            "metadata": {
+                                "autogenerate": true
+                            },
+                            "name": "RelatedInvestmentProfitDocuments",
+                            "value": {
+                                "$ref": "#"
+                            }
+                        }
+                    ],
+                    "rule": {
+                        "effect": "SHOW",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "investmentProfitTabVisibility",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "type": "Tab",
+                    "elementId": "tabHistory",
+                    "title": "History",
+                    "elements": [
+                        {
+                            "type": "Component",
+                            "metadata": {
+                                "autogenerate": true
+                            },
+                            "name": "DocumentActivityHistory",
+                            "value": {
+                                "$ref": "#"
+                            }
+                        },
+                        {
+                            "type": "Component",
+                            "metadata": {
+                                "autogenerate": true
+                            },
+                            "name": "DocumentStateHistory",
+                            "value": {
+                                "$ref": "#"
+                            }
+                        },
+                        {
+                            "type": "Component",
+                            "metadata": {
+                                "autogenerate": true
+                            },
+                            "name": "RelatedDocuments",
+                            "value": {
+                                "$ref": "#"
+                            }
+                        },
+                        {
+                            "type": "Component",
+                            "metadata": {
+                                "autogenerate": true
+                            },
+                            "name": "ContractModificationHistory",
+                            "value": {
+                                "$ref": "#"
+                            }
+                        },
+                        {
+                            "type": "Component",
+                            "metadata": {
+                                "autogenerate": true
+                            },
+                            "name": "HistoryComments",
+                            "value": {
+                                "$ref": "#"
+                            }
+                        }
+                    ],
+                    "rule": {
+                        "effect": "SHOW",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "historyTabVisibility",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "type": "Component",
+                    "metadata": {
+                        "autogenerate": true
+                    },
+                    "name": "Cumulation",
+                    "value": {
+                        "$ref": "#"
+                    }
+                }
+            ]
+        }
+    ]
+}

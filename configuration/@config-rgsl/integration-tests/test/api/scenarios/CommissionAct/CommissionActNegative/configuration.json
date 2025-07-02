@@ -1,0 +1,60 @@
+{
+    "steps": [
+        {
+            "$ref": "CommissionActStepThrough"
+        },
+        {
+            "$ref": "CancelAllocation",
+            "context": {
+                "cancelAllocContractNumber": "{{$.contractNumber}}",
+                "cancelAllocDueDate": "2022-01-01"
+            }
+        },
+        {
+            "$ref": "CreateCommissionActForPolicy",
+            "context": {
+                "referenceNoToInclude": "{{$.contractNumber}}"
+            },
+            "assert": {
+                "expected": "./steps/createNegativeCommissionAct/expectedResult.json",
+                "module": "./steps/createNegativeCommissionAct/assert.js",
+                "function": "assertAct"
+            }
+        },
+        {
+            "code": "ApproveCommissionAct",
+            "description": "Approve commission act",
+            "actor": "AdminCommissionAct",
+            "requests": [],
+            "executor": {
+                "module": "./steps/approveCommAct/executor.js",
+                "function": "executor"
+            },
+            "assert": {
+                "module": "./steps/approveCommAct/asserter.js",
+                "function": "asserter"
+            }
+        },
+        {
+            "$ref": "CreatePaymentAndAllocate",
+            "context": {
+                "payAmount": 5000,
+                "referenceNo": "{{$.act.number}}",
+                "paymentDetails": {
+                    "amount": 5000,
+                    "postingDate": "2022-01-01",
+                    "transactionDate": "2022-01-02"
+                }
+            }
+        },
+        {
+            "code": "ValidateNegativeAct",
+            "requests": [],
+            "assert": {
+                "expected": "./steps/validateNegativeAct/expectedResult.json",
+                "module": "./steps/validateNegativeAct/asserter.js",
+                "function": "asserter"
+            }
+        }
+    ]
+}

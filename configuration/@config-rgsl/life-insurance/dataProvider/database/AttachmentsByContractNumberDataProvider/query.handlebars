@@ -1,0 +1,56 @@
+﻿with ids as (
+select contract_id,
+       json_value(body, '$.policyHolder.partyData.partyId') as policyHolderPartyId,
+       json_value(body, '$.insuredPerson.partyData.partyId') as insuredPersonPartyId
+  from pas.contract
+ where contract_number = @contractNumber
+)
+SELECT ids.CONTRACT_ID,
+	   att.ATTACHMENT_ID,
+	   att.ATTACHMENT_TYPE,
+	   att.NAME as ATTACHMENT_NAME,
+	   att.FILE_METADATA_ID,
+	   att.SYS_CREATED_ON,
+	   fm.FILENAME,
+	   fm.MEDIA_TYPE,
+	   fm.TOTAL_SIZE,
+	   'contract' as ENTITY
+FROM ids
+JOIN BFX.ENTITY_REF eref ON eref.ENTITY_ID = ids.CONTRACT_ID
+JOIN BFX.ATTACHMENT_RELATED_ENTITY attref on attref.ENTITY_REF_ID = eref.ENTITY_REF_ID
+JOIN BFX.ATTACHMENT att on att.ATTACHMENT_ID = attref.ATTACHMENT_ID
+JOIN BFX.FILE_METADATA fm on fm.FILE_METADATA_ID = att.FILE_METADATA_ID
+{{#if parameters.includePersons}}
+union all
+SELECT ids.CONTRACT_ID,
+	   att.ATTACHMENT_ID,
+	   att.ATTACHMENT_TYPE,
+	   att.NAME as ATTACHMENT_NAME,
+	   att.FILE_METADATA_ID,
+	   att.SYS_CREATED_ON,
+	   fm.FILENAME,
+	   fm.MEDIA_TYPE,
+	   fm.TOTAL_SIZE,
+	   'policyHolder' as ENTITY
+FROM ids
+JOIN BFX.ENTITY_REF eref ON eref.ENTITY_ID = ids.policyHolderPartyId
+JOIN BFX.ATTACHMENT_RELATED_ENTITY attref on attref.ENTITY_REF_ID = eref.ENTITY_REF_ID
+JOIN BFX.ATTACHMENT att on att.ATTACHMENT_ID = attref.ATTACHMENT_ID
+JOIN BFX.FILE_METADATA fm on fm.FILE_METADATA_ID = att.FILE_METADATA_ID
+union all
+SELECT ids.CONTRACT_ID,
+	   att.ATTACHMENT_ID,
+	   att.ATTACHMENT_TYPE,
+	   att.NAME as ATTACHMENT_NAME,
+	   att.FILE_METADATA_ID,
+	   att.SYS_CREATED_ON,
+	   fm.FILENAME,
+	   fm.MEDIA_TYPE,
+	   fm.TOTAL_SIZE,
+	   'insuredPerson' as ENTITY
+FROM ids
+JOIN BFX.ENTITY_REF eref ON eref.ENTITY_ID = ids.insuredPersonPartyId
+JOIN BFX.ATTACHMENT_RELATED_ENTITY attref on attref.ENTITY_REF_ID = eref.ENTITY_REF_ID
+JOIN BFX.ATTACHMENT att on att.ATTACHMENT_ID = attref.ATTACHMENT_ID
+JOIN BFX.FILE_METADATA fm on fm.FILE_METADATA_ID = att.FILE_METADATA_ID
+{{/if}}

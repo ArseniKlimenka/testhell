@@ -1,0 +1,46 @@
+﻿{{#if parameters.selectUniquePartyCodes}}
+SELECT DISTINCT
+	ptys.FULL_NAME PARTY_FULL_NAME, 
+    pdi.PARTY_CODE
+{{else}}
+SELECT
+    pdi.ID,
+	pdi.PARTY_CODE,
+    ptys.FULL_NAME PARTY_FULL_NAME,
+	pdi.DEDUPL_NUMBER,
+	pdi.UPDATE_ORDER,
+	pdi.IS_PROCESSED,
+	pdi.UPDATED_DOCUMENTS,
+	pdi.ERROR,
+	pdi.DATE
+{{/if}}
+FROM
+    PTY_IMPL.PARTY_DEDUP_INFO pdi
+    LEFT JOIN PTY.PARTY pty ON pty.PARTY_CODE = pdi.PARTY_CODE
+    LEFT JOIN PTY_IMPL.PARTY_HUB ph ON ph.PARTY_CODE = pty.PARTY_CODE
+    LEFT JOIN PTY_IMPL.PARTY_INFO_SAT_LATEST ptys ON ptys.PARTY_INFO_HKEY = ph.PARTY_HKEY
+WHERE 1=1
+{{#if parameters.id}}
+    AND pdi.ID = @id
+{{/if}}
+{{#if parameters.partyCode}}
+    AND pdi.PARTY_CODE = @partyCode
+{{/if}}
+{{#if parameters.deduplNumber}}
+    AND pdi.DEDUPL_NUMBER = @deduplNumber
+{{/if}}
+{{#if parameters.updateOrder}}
+    AND pdi.UPDATE_ORDER = @updateOrder
+{{/if}}
+{{#if parameters.isProcessed}}
+    AND pdi.IS_PROCESSED = @isProcessed
+{{/if}}
+{{#if parameters.updatedDocuments}}
+    AND pdi.UPDATED_DOCUMENTS = @updatedDocuments
+{{/if}}
+{{#if parameters.error}}
+    AND pdi.ERROR = @error
+{{/if}}
+{{#if parameters.date}}
+    AND pdi.DATE = @date
+{{/if}}

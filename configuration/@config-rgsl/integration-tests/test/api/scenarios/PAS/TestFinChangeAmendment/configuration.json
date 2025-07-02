@@ -1,0 +1,95 @@
+{
+    "steps": [
+        {
+            "$ref": "AdjustAccountingPeriods",
+            "context": {
+                "firstOpenPeriod": "2022-01-01"
+            }
+        },
+        {
+            "$ref": "AdjustCurrentDate",
+            "context": {
+                "currentDate": "2022-01-01"
+            }
+        },
+        {
+            "$ref": "CreateALIPolicyDemo",
+            "context": {
+                "paymentFrequencyCode": "1",
+                "invoiceOnActivation": true
+            }
+        },
+        {
+            "code": "ValidateTransactions_1",
+            "description": "Validate transactions 1",
+            "requests": [],
+            "assert": {
+                "expected": "./steps/validateTransactions/expectedResult_1.json",
+                "module": "../../lib/accounting/assert.js",
+                "function": "assertTransactions"
+            }
+        },
+        {
+            "$ref": "CreatePaymentAndAutoAllocate",
+            "description": "Pay the installment",
+            "context": {
+                "amountToAllocate": 100000,
+                "expectedPostAmount": 100000,
+                "transactionDate": "2022-01-01",
+                "referenceNoToAllocate": "{{$.contractNumber}}"
+            }
+        },
+        {
+            "code": "ValidateTransactions_2",
+            "description": "Validate transactions 2",
+            "requests": [],
+            "assert": {
+                "expected": "./steps/validateTransactions/expectedResult_2.json",
+                "module": "../../lib/accounting/assert.js",
+                "function": "assertTransactions"
+            }
+        },
+        {
+            "$ref": "CreaeALIPolicyDemoFinChangeAmendment",
+            "context": {
+                "amendmentEffectiveDate": "2022-01-01",
+                "newPremiumSize": 120000,
+                "amendmentFieldName": "finAmendment1"
+            }
+        },
+        {
+            "code": "ValidateTransactions_3",
+            "description": "Validate transactions 3",
+            "requests": [],
+            "assert": {
+                "expected": "./steps/validateTransactions/expectedResult_3.json",
+                "module": "../../lib/accounting/assert.js",
+                "function": "assertTransactions"
+            }
+        },
+        {
+            "$ref": "CreaeALIPolicyDemoFinChangeAmendment",
+            "context": {
+                "amendmentEffectiveDate": "2022-01-01",
+                "newPremiumSize": 110000,
+                "amendmentFieldName": "finAmendment2"
+            }
+        },
+        {
+            "code": "ValidateTransactions_4",
+            "description": "Validate transactions 4",
+            "requests": [],
+            "assert": {
+                "expected": "./steps/validateTransactions/expectedResult_4.json",
+                "module": "../../lib/accounting/assert.js",
+                "function": "assertTransactions"
+            }
+        },
+        {
+            "$ref": "AdjustCurrentDate",
+            "context": {
+                "currentDate": null
+            }
+        }
+    ]
+}

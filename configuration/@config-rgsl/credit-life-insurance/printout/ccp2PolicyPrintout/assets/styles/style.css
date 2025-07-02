@@ -1,0 +1,571 @@
+@page {
+	/* Page Sizes */
+	size: A4 portrait;
+	/* Page Layout */
+	margin: 0mm 0mm 45mm 0mm;
+	padding: 10mm 7mm 0mm 7mm;
+
+	@bottom-center {
+		position: absolute;
+		bottom: 25px !important;
+		content: counter(page)"/"counter(pages);
+		width: 8%;
+		font-family: Arial, sans-serif;
+		font-size: 8pt;
+	}
+}
+
+@page :-ro-nth(n of smallMarginGroup) {
+	/* Page Sizes */
+	size: A4 portrait;
+	/* Page Layout */
+	margin: 0mm 0mm 0mm 0mm;
+	padding: 10mm 7mm 0mm 7mm;
+
+}
+
+.smallMargin {
+	page: smallMarginGroup;
+}
+
+.signatureHolder {
+	page: signatureHolder;
+}
+
+body {
+	font-family: Arial, sans-serif;
+	font-size: 8pt;
+}
+
+.break {
+	break-before: page;
+}
+
+/* Памятка ВСС */
+.memory {
+	font-family: Arial, sans-serif;
+	font-size: 8pt;
+	text-align: justify;
+}
+
+.headermemo {
+	text-align: center;
+	font-weight: bold;
+	font-size: 8pt;
+	line-height: 0;
+}
+
+.greymemo {
+	background-color: #cac5c5;
+	color: black;
+}
+
+.mainmemo {
+	border: 1px solid black;
+	padding: 0mm 2mm 0mm 2mm;
+}
+
+.mainmemo p {
+	text-align: justify
+}
+
+.mainmemo p.boldmemo {
+	font-weight: bold;
+}
+
+.mainmemo ul li {
+	list-style-type: circle;
+	list-style-position: outside;
+	margin-left: 0px;
+	text-align: justify;
+}
+
+.mainmemo table td {
+	vertical-align: top;
+	text-align: justify;
+}
+
+/* Договор */
+
+.policy .logoDiv {
+	margin-bottom: 20px;
+	top: 0;
+	left: 0;
+}
+
+.policy .logo {
+	min-width: 300px;
+	max-width: 300px;
+}
+
+.policy .qrCodeAndInsurerInfo {
+	display: grid;
+	grid-template-columns: 150px 1fr;
+	grid-template-rows: 1fr;
+	gap: 0 0;
+	grid-auto-flow: row;
+	grid-template-areas: "qrDiv insurerInfoDiv";
+}
+
+.policy .qrDiv {
+	grid-area: qrDiv;
+	padding: 0mm;
+	margin-right: 10px;
+	margin-left: 7px;
+}
+
+.policy .qr_code {
+	width: 150x;
+	height: 150px;
+	-ro-replacedelement: qrcode;
+	-ro-qrcode-errorcorrectionlevel: Q;
+}
+
+.policy .insurerInfoDiv {
+	margin-left: 21px;
+	grid-area: insurerInfoDiv;
+	line-height: 12px;
+	align-self: center;
+}
+
+.policy .container2 {
+	display: grid;
+	grid-auto-flow: column;
+	grid-template-columns: 10% 1fr 10%;
+	grid-template-rows: 10px 10px 10px 10px 10px;
+	gap: 0px 0px;
+	margin-bottom: 26px;
+	grid-template-areas: "qrInfoTop . .""qrInfoMiddle . .""qrInfoButton policyheadingTop ."". policyheadingMiddle .""policyheadingButton policyheadingButton policyheadingButton";
+}
+
+.policy .qrInfo {
+	font-size: 6.5pt;
+	color: rgb(127, 127, 127);
+	margin-left: 7px;
+}
+
+#qrInfoTop {
+	grid-area: qrInfoTop;
+}
+
+#qrInfoMiddle {
+	grid-area: qrInfoMiddle;
+}
+
+#qrInfoButton {
+	grid-area: qrInfoButton;
+}
+
+.policy .policyheading {
+	font-weight: bold;
+	text-align: center;
+	font-weight: 700;
+}
+
+#policyheadingTop {
+	grid-area: policyheadingTop;
+}
+
+#policyheadingMiddle {
+	grid-area: policyheadingMiddle;
+}
+
+#policyheadingButton {
+	grid-area: policyheadingButton;
+}
+
+.policy .qrDiv {
+	grid-area: qrDiv;
+}
+
+.policy table {
+	table-layout: fixed;
+	width: 100%;
+	margin-top: 10pt;
+	margin-bottom: 0;
+	border-collapse: collapse;
+	border: 2px solid black;
+	orphans: 2;
+}
+
+.policy td,
+th {
+	padding-left: 5px;
+	padding-top: 2px;
+	padding-right: 5px;
+	padding-bottom: 2px;
+	border: 1px solid black;
+}
+
+.policy .policy_item {
+	background-color: #3d3a3a;
+	color: white;
+	text-align: left;
+	font-weight: bold;
+	font-size: 8pt;
+	page-break-after: avoid;
+	padding-left: 15px;
+	padding-top: 1px;
+	padding-right: 1px;
+	padding-bottom: 1px;
+}
+
+.policy .invisible {
+	padding: 0;
+	border-bottom-color: white;
+}
+
+.policy .tgrey {
+	background-color: #9e9e9e;
+	;
+}
+
+.policy .twhite {
+	background-color: white;
+}
+
+.policy .center {
+	text-align: center;
+}
+
+.person .col1 {
+	width: 30%;
+}
+
+.person .col2 {
+	width: 20%;
+}
+
+.person .col3 {
+	width: 10%;
+}
+
+.person .col4 {
+	width: 10%;
+}
+
+.person .col5 {
+	width: 4%;
+}
+
+.person .col6 {
+	width: 14%;
+}
+
+.person .col7 {
+	width: 12%;
+}
+
+.afterTable {
+	margin-top: 0;
+	margin-bottom: 0;
+	width: 100%;
+	text-align: justify;
+}
+
+.risks .col1 {
+	width: 40%;
+}
+
+.risks .col2 {
+	width: 30%;
+}
+
+.premium .col1 {
+	width: 40%;
+}
+
+.textJustify {
+	text-align: justify;
+}
+
+.insuranceTerms {
+	page-break-inside: avoid;
+}
+
+.declarationMedical {
+	page-break-inside: avoid;
+}
+
+.declarationMedical .col1 {
+	width: 48%;
+}
+
+.declarationMedical .col2 {
+	width: 26%;
+}
+
+.declarationMain {
+	page-break-inside: avoid;
+}
+
+.declarationMain .col1 {
+	width: 48%;
+}
+
+.declarationMain .col2 {
+	width: 26%;
+}
+
+.policy_input {
+	height: 12px;
+	width: 12px;
+}
+
+.declaration_ul {
+	width: 100%;
+	margin-top: 0;
+	margin-left: 0;
+	padding-left: 0;
+}
+
+.declaration_li {
+	margin-top: 0;
+	margin-bottom: 0;
+	list-style-type: none
+}
+
+.declaration_p {
+	margin-top: 0;
+	margin-bottom: 0;
+	text-align: justify;
+	white-space: pre-line;
+}
+
+.otherCondition {
+	padding-top: 5px;
+	padding-bottom: 0;
+	margin: 0;
+	list-style-type: none;
+	counter-reset: otherConditions;
+}
+
+.otherCondition li:before {
+	content: counter(otherConditions) ') ';
+	counter-increment: otherConditions;
+}
+
+.otherCondition li {
+	margin-left: -40px;
+	text-align: justify;
+}
+
+
+.kid table {
+	table-layout: fixed;
+	width: 100%;
+	margin-top: 10pt;
+	margin-bottom: 0;
+	border-collapse: collapse;
+	border: 1px solid black;
+	font-family: Arial, sans-serif;
+	font-size: 12pt;
+}
+
+.kid td, th {
+	padding-left: 5px;
+	padding-top: 2px;
+	padding-right: 5px;
+	padding-bottom: 2px;
+	border: 0px solid black;
+}
+
+.kid .firstTR {
+	border-collapse: collapse;
+	border: 1px solid black;
+}
+
+.kidTable3 .col1 {
+	width: 70%;
+}
+
+.kidTable3 .col2 {
+	width: 5%;
+}
+
+.kidTable3 .col3 {
+	width: 25%;
+}
+
+.kidTableIndentContent{
+	padding-left: 12.5mm;
+	text-indent: 12.5mm;
+	font-size: 10pt; 
+}
+
+.kidTable3 .kidTable3Header {
+	text-align: center;
+	font-weight: bold;
+	font-size: 10pt; 
+}
+
+.kidTable3 .kidTable3Inside {
+	text-align: left;
+	font-size: 10pt; 
+}
+
+.kidTable3 .kidTable3InsideCenter {
+	text-align: center;
+	font-size: 10pt; 
+}
+
+.kidTable1 .col1 {
+	width: 100%;
+}
+
+.kidTable1 .kidTable1Header {
+	text-align: center;
+	font-weight: bold;
+	font-size: 10pt;
+}
+
+.kidTable1 .kidTable1Inside {
+	text-align: justify;
+	font-size: 10pt;
+	line-height: 1;
+}
+
+.kidTable1 .kidTable1InsideEnd {
+	text-align: justify;
+	font-size: 10pt;
+	padding-top: 1mm;
+	text-indent: 12.5mm;
+	margin-top: 1mm;
+	padding-bottom: 0mm;
+	margin-bottom: 0mm;
+}
+
+.kidTable2 .col1 {
+	width: 60%;
+}
+
+.kidTable2 .col2 {
+	width: 40%;
+}
+
+.kidTable2 .kidTable2Header {
+	text-align: center;
+	font-weight: bold;
+	font-size: 10pt;
+}
+
+.kidTable2 .kidTable2Inside {
+	text-align: left;
+	font-size: 10pt;
+	border-collapse: collapse;
+	border: 1px solid black;
+	text-indent: 12.5mm;
+	line-height: 1;
+}
+
+.kidTable2 .kidTable2InsideCenter {
+	text-align: center;
+	font-size: 10pt;
+	border-collapse: collapse;
+	border: 1px solid black;
+	text-align: justify;
+	text-indent: 12.5mm;
+}
+
+.kidTable22 .col1 {
+	width: 40%;
+}
+
+.kidTable22 .col2 {
+	width: 60%;
+}
+
+.kidTable22 .kidTable22Header {
+	text-align: center;
+	font-weight: bold;
+	font-size: 10pt;
+}
+
+.kidTable22 .kidTable22Inside {
+	text-align: left;
+	font-size: 10pt;
+	border-collapse: collapse;
+	border: 1px solid black;
+	line-height: 1;
+}
+
+.footnote {
+	text-align: justify;
+	font-size: 6pt;
+	font-weight: normal;
+	float: footnote;
+}
+
+.kid .qrDiv {
+	grid-area: qrDiv;
+	padding: 0mm;
+	margin-right: 10px;
+	margin-left: 7px;
+}
+
+.kid .qr_code {
+	width: 100x;
+	height: 100px;
+	-ro-replacedelement: qrcode;
+	-ro-qrcode-errorcorrectionlevel: Q;
+}
+
+.kid .kidHeaderTable {
+	table-layout: fixed;
+	width: 100%;
+	margin-top: 10pt;
+	margin-bottom: 0;
+	border-collapse: collapse;
+	border: 0px solid black;
+}
+
+.kid .kidHeaderTable td, th {
+	padding-left: 5px;
+	padding-top: 5px;
+	padding-right: 5px;
+	padding-bottom: 5px;
+	border: 0px solid black;
+}
+
+.kid .kidHeaderTable .col1 {
+	width: 80%;
+}
+
+.kid .kidHeaderTable .col2 {
+	width: 20%;
+}
+
+.kid .kidHeaderTable .kidHeaderTableHeader {
+	text-align: center;
+	font-size: 12pt;
+}
+
+.kid .kidHeaderTable .kidHeaderTableInside {
+	text-align: left;
+	font-size: 12pt; 
+
+}
+
+/*QR CODE START*/
+.kidQRDiv {
+	grid-area: kidQRDiv;
+	padding: 0;
+	margin: 0;
+}
+
+.kidQRCode {
+	width: 100x;
+	height: 100px;
+	position: fixed;
+	top: 20px;
+	right: 0;
+	-ro-replacedelement: qrcode;
+	-ro-qrcode-errorcorrectionlevel: Q;
+}
+/*QR CODE END*/
+
+.centerFormula {
+	display: flex;
+	align-items: center;
+	justify-content: center
+}

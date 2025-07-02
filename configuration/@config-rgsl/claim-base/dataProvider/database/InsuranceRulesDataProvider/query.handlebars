@@ -1,0 +1,11 @@
+﻿SELECT ir.RULE_CODE,
+	   ir.RULE_DESCRIPTION
+FROM BFX_IMPL.INSURANCE_RULES ir
+WHERE 1 = 1
+{{#if parameters.description}}
+AND ir.RULE_DESCRIPTION LIKE @description
+{{/if}}
+ORDER BY ir.RULE_CODE
+
+
+

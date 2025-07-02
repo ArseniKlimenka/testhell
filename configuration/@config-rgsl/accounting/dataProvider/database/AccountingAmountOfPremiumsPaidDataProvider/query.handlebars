@@ -1,0 +1,67 @@
+﻿select 
+
+		result.DUE_DATE,
+		SUM(result.DOC_AMOUNT) as DOC_AMOUNT,
+		result.CURRENCY_CODE,
+		result.BANK_STATEMENT_ITEM_ID,
+		result.TRANSACTION_DATE,
+		SUM(result.AMOUNT) as AMOUNT,
+		SUM(result.AMOUNT_LIFE) as AMOUNT_LIFE,
+		SUM(result.AMOUNT_LIFE_RUB) as AMOUNT_LIFE_RUB,
+		result.DEBTOR_NAME
+
+from (
+
+	select 
+
+		data.DUE_DATE,
+		data.DOC_AMOUNT as DOC_AMOUNT,
+		ps.CURRENCY_CODE,
+		bsi.BANK_STATEMENT_ITEM_ID,
+		bsi.TRANSACTION_DATE,
+		pp.AMOUNT as AMOUNT,
+		case when t.IS_LIFE = 1 then data.DOC_AMOUNT else 0 end as AMOUNT_LIFE,
+		case when t.IS_LIFE = 1 then data.RUB_AMOUNT else 0 end as AMOUNT_LIFE_RUB,
+		bsi.DEBTOR_NAME
+	from 
+		PAS_IMPL.POLICY_HUB ph
+		inner join PAS_IMPL.POLICY_SAT_LATEST ps on ps.POLICY_HKEY = ph.POLICY_HKEY
+		inner join  (
+		select 
+
+			alcp.DUE_DATE,
+			alc.DOCUMENT_NO,
+			matp.OBJECT_CODE,
+			matp.SOURCE_LINE_ID,
+			alc.BANK_STATEMENT_ITEM_ID,
+			SUM(mat.DOC_AMOUNT) as DOC_AMOUNT,
+			CAST(SUM(mat.DOC_AMOUNT * alc.DOC_RATE) as decimal(18,2)) as RUB_AMOUNT
+
+		from acc_impl.ALLOCATION alc
+		inner join acc_impl.ALLOCATION_POLICY alcp on alcp.ALLOCATION_ID = alc.ALLOCATION_ID
+		inner join acc_impl.MATCHING mat on mat.ALLOCATION_ID = alc.ALLOCATION_ID
+		inner join acc_impl.MATCHING_POLICY matp on matp.MATCHING_ID = mat.MATCHING_ID
+
+	group by alcp.DUE_DATE, alc.BANK_STATEMENT_ITEM_ID, alc.DOCUMENT_NO, matp.OBJECT_CODE, matp.SOURCE_LINE_ID
+	) data on ph.CONTRACT_NUMBER = data.DOCUMENT_NO
+	join (select
+					polh.CONTRACT_NUMBER,
+					ppl.DUE_DATE,
+					ppsl.POSTING_DATE,
+					ppsl.OBJECT_CODE,
+					ppsl.ITEM_NO,
+					ppsl.IS_FIRST_INSTALLMENT,
+					ppsl.AMOUNT,
+					0 as POSTED_MATCHING_AMOUNT,
+					ppsl.AMOUNT as OPEN_AMOUNT
+				from
+					pas_impl.POLICY_HUB polh
+					inner join pas_impl.P_PAYMENT_PLAN_LINK ppl on ppl.POLICY_HKEY = polh.POLICY_HKEY
+					inner join pas_impl.P_PAYMENT_PLAN_SAT_LATEST ppsl on ppsl.P_PAYMENT_PLAN_HKEY = ppl.P_PAYMENT_PLAN_HKEY
+		) pp on pp.CONTRACT_NUMBER = data.DOCUMENT_NO and pp.DUE_DATE = data.DUE_DATE and pp.OBJECT_CODE = data.OBJECT_CODE and pp.ITEM_NO = data.SOURCE_LINE_ID
+	inner join BFX_IMPL.RISKS r on r.CODE = data.SOURCE_LINE_ID
+	inner join BFX_IMPL.RISK_TYPE t on t.RISK_TYPE = r.FNS_TYPE
+	inner join ACC_IMPL.BANK_STATEMENT_ITEM bsi on bsi.BANK_STATEMENT_ITEM_ID = data.BANK_STATEMENT_ITEM_ID
+	where ph.CONTRACT_NUMBER = @contractNumber and (SELECT YEAR(bsi.PAYMENT_DATE)) = @accountingYear
+) result
+group by result.DUE_DATE, result.CURRENCY_CODE, result.BANK_STATEMENT_ITEM_ID, result.TRANSACTION_DATE, result.DEBTOR_NAME

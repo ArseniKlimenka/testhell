@@ -1,0 +1,257 @@
+{
+    "type": "Group",
+    "elements": [
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "DataGrid",
+                    "elementId": "serchResultTable",
+                    "mode": "DataSource",
+                    "pagination": {
+                        "mode": "Regular",
+                        "pageSizes": [
+                            5,
+                            10,
+                            15
+                        ]
+                    },
+                    "selection": {
+                        "mode": "Multi",
+                        "enableRowSelection": true,
+                        "showCheckBox": true,
+                        "onSelectionChanged": [
+                            {
+                                "commandType": "raiseEvent",
+                                "eventName": "Selected"
+                            }
+                        ]
+                    },
+                    "columns": [
+                        {
+                            "sortable": false,
+                            "title": "endowmentNumber",
+                            "name": "endowmentNumber",
+                            "cellContent": {
+                                "type": "Link",
+                                "readOnly": true,
+                                "targetType": "Url",
+                                "label": "endowmentNumber",
+                                "value": {
+                                    "mapping": "endowmentNumberUriMapping",
+                                    "$ref": "#"
+                                },
+                                "content": {
+                                    "text": {
+                                        "type": "OutputText",
+                                        "value": {
+                                            "$ref": "#/properties/resultData/properties/endowmentNumber"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "sortable": false,
+                            "title": "documentState",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "value": {
+                                    "$ref": "#/properties/resultData/properties/documentState"
+                                }
+                            }
+                        },
+                        {
+                            "sortable": false,
+                            "title": "eventType",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "value": {
+                                    "$ref": "#/properties/resultData/properties/eventType"
+                                }
+                            }
+                        },
+                        {
+                            "sortable": false,
+                            "title": "eventReason",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "value": {
+                                    "$ref": "#/properties/resultData/properties/eventReason"
+                                }
+                            }
+                        },
+                        {
+                            "sortable": false,
+                            "title": "riskName",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "value": {
+                                    "$ref": "#/properties/resultData/properties/riskName"
+                                }
+                            }
+                        },
+                        {
+                            "sortable": false,
+                            "title": "statementApplicationDate",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "value": {
+                                    "$ref": "#/properties/resultData/properties/statementApplicationDate"
+                                }
+                            }
+                        },
+                        {
+                            "sortable": false,
+                            "title": "eventDate",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "value": {
+                                    "$ref": "#/properties/resultData/properties/eventDate"
+                                }
+                            }
+                        },
+                        {
+                            "sortable": false,
+                            "title": "contractNumber",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "value": {
+                                    "$ref": "#/properties/resultData/properties/contractNumber"
+                                }
+                            }
+                        },
+                        {
+                            "sortable": false,
+                            "title": "productName",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "value": {
+                                    "$ref": "#/properties/resultData/properties/productName"
+                                }
+                            }
+                        },
+                        {
+                            "sortable": false,
+                            "title": "productGroupName",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "value": {
+                                    "$ref": "#/properties/resultData/properties/productGroupName"
+                                }
+                            }
+                        },
+                        {
+                            "sortable": false,
+                            "title": "policyHolderName",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "value": {
+                                    "$ref": "#/properties/resultData/properties/policyHolderName"
+                                }
+                            }
+                        },
+                        {
+                            "sortable": false,
+                            "title": "amountInDocCurrency",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "value": {
+                                    "$ref": "#/properties/resultData/properties/amountInDocCurrency"
+                                }
+                            }
+                        },
+                        {
+                            "sortable": false,
+                            "title": "docCurrencyCode",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "value": {
+                                    "$ref": "#/properties/resultData/properties/docCurrencyCode"
+                                }
+                            }
+                        },
+                        {
+                            "sortable": false,
+                            "title": "amountInRubCurrency",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "value": {
+                                    "$ref": "#/properties/resultData/properties/amountInRubCurrency"
+                                }
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "GridLayout",
+            "numberOfColumns": 8,
+            "elements": [
+                {
+                    "type": "Group",
+                    "stackContent": "Left",
+                    "elements": [
+                        {
+                            "type": "Button",
+                            "value": {
+                                "$ref": "#"
+                            },
+                            "width": 1,
+                            "onClick": [
+                                {
+                                    "commandType": "executeAction",
+                                    "actionName": "sendOperationsApprovalToOperationsDirectorApproval"
+                                }
+                            ],
+                            "label": "sendOperationsApprovalToOperationsDirectorApproval"
+                        },
+                        {
+                            "type": "Button",
+                            "value": {
+                                "$ref": "#"
+                            },
+                            "width": 1,
+                            "onClick": [
+                                {
+                                    "commandType": "executeAction",
+                                    "actionName": "sendOperationsDirectorApprovalToDeputyDirectorApproval"
+                                }
+                            ],
+                            "label": "sendOperationsDirectorApprovalToDeputyDirectorApproval"
+                        },
+                        {
+                            "type": "Button",
+                            "value": {
+                                "$ref": "#"
+                            },
+                            "width": 1,
+                            "onClick": [
+                                {
+                                    "commandType": "executeAction",
+                                    "actionName": "sendOperationsDirectorApprovalToSentToPayment"
+                                }
+                            ],
+                            "label": "sendOperationsDirectorApprovalToSentToPayment"
+                        },
+                        {
+                            "type": "Button",
+                            "value": {
+                                "$ref": "#"
+                            },
+                            "width": 1,
+                            "onClick": [
+                                {
+                                    "commandType": "executeAction",
+                                    "actionName": "sendDeputyDirectorApprovalToSentToPayment"
+                                }
+                            ],
+                            "label": "sendDeputyDirectorApprovalToSentToPayment"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

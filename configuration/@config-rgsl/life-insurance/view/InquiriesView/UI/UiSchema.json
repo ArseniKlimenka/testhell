@@ -1,0 +1,169 @@
+{
+    "type": "Group",
+    "width": 12,
+    "elements": [
+        {
+            "type": "GridLayout",
+            "numberOfColumns": 12,
+            "elements": [
+                {
+                    "type": "Group",
+                    "elements": [
+                        {
+                            "type": "DataGrid",
+                            "elementId": "inquiriesDataGridId",
+                            "onInit": "onInitInquiriesDataGrid",
+                            "orderBy": "universalDocumentNumber",
+                            "value": {
+                                "$ref": "#"
+                            },
+                            "mode": "DataSource",
+                            "header": {
+                                "showReloadButton": true,
+                                "showNumberOfResults": true
+                            },
+                            "pagination": {
+                                "mode": "Regular",
+                                "pageSizes": [
+                                    5,
+                                    10,
+                                    15
+                                ]
+                            },
+                            "selection": {
+                                "mode": "None"
+                            },
+                            "height": "None",
+                            "columns": [
+                                {
+                                    "title": "inquiryNumber",
+                                    "cellContent": {
+                                        "type": "Link",
+                                        "targetType": "Url",
+                                        "title": "inquiryNumber",
+                                        "value": {
+                                            "mapping": "inquiryUrlMapping",
+                                            "$ref": "#"
+                                        },
+                                        "content": {
+                                            "text": {
+                                                "type": "OutputText",
+                                                "textProperties": [
+                                                    "bold"
+                                                ],
+                                                "value": {
+                                                    "$ref": "#/properties/resultData/properties/inquiryNumber"
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                {
+                                    "title": "createdOn",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "value": {
+                                            "$ref": "#/properties/resultData/properties/createdOn"
+                                        }
+                                    }
+                                },
+                                {
+                                    "title": "updatedOn",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "value": {
+                                            "$ref": "#/properties/resultData/properties/updatedOn"
+                                        }
+                                    }
+                                },
+                                {
+                                    "title": "state",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "value": {
+                                            "$ref": "#/properties/resultData/properties/state"
+                                        }
+                                    }
+                                },
+                                {
+                                    "title": "departmentCode",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "value": {
+                                            "$ref": "#/properties/resultData/properties/departmentCode"
+                                        }
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Group",
+                            "width": 12,
+                            "rule": {
+                                "effect": "SHOW",
+                                "condition": {
+                                    "type": "FUNC",
+                                    "ruleFunction": "ShowInquiryGroup",
+                                    "value": [
+                                        {
+                                            "$ref": "#"
+                                        }
+                                    ]
+                                }
+                            },
+                            "elements": [
+                                {
+                                    "type": "Group",
+                                    "elements": [
+                                        {
+                                            "type": "Input",
+                                            "label": "department",
+                                            "source": {
+                                                "dataSource": {
+                                                    "name": "GetApplicationUserGroupsDataSource",
+                                                    "reloadOnOpen": true,
+                                                    "searchFieldPath": "nameLocalized",
+                                                    "responseMapping": "departmentResponseMapping",
+                                                    "resultCount": 1000
+                                                },
+                                                "displayFieldName": "nameLocalized"
+                                            },
+                                            "control": "Dropdown",
+                                            "value": {
+                                                "$ref": "#/properties/request/properties/data/properties/department"
+                                            },
+                                            "width": 4
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "Input",
+                                    "label": "Text of Inquiry",
+                                    "control": "TextArea",
+                                    "enableResize": true,
+                                    "numberOfRows": 5,
+                                    "value": {
+                                        "$ref": "#/properties/request/properties/data/properties/textOfInquiry"
+                                    },
+                                    "width": 12
+                                },
+                                {
+                                    "type": "Group",
+                                    "elements": [
+                                        {
+                                            "type": "Button",
+                                            "isCompact": true,
+                                            "label": "Enter Inquiry",
+                                            "width": 4,
+                                            "onClick": "ClientActionEnterInquiry"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

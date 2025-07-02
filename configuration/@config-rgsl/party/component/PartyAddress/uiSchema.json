@@ -1,0 +1,356 @@
+{
+    "type": "GridLayout",
+    "numberOfColumns": 12,
+    "elements": [
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "Input",
+                    "label": "addressType",
+                    "value": {
+                        "$ref": "#/properties/addressType"
+                    },
+                    "control": "Dropdown",
+                    "autocomplete": {
+                        "minTextLength": 0,
+                        "dropDownItemsCount": 15,
+                        "selectItemOnMatch": false
+                    },
+                    "source": {
+                        "dataSource": {
+                            "name": "PartyAddressTypesDataSource",
+                            "searchFieldPath": "addressTypeDesc",
+                            "responseMapping": "addressTypeResponseMapping",
+                            "resultCount": 15
+                        },
+                        "displayFieldName": "addressTypeDesc"
+                    },
+                    "filter": "addressTypeFilter",
+                    "width": 6,
+                    "onValueChanged": [
+                        {
+                            "commandType": "executeAction",
+                            "actionName": "onChangeAddressType"
+                        }
+                    ]
+                },
+                {
+                    "type": "Input",
+                    "label": "isManualAddress",
+                    "value": {
+                        "$ref": "#/properties/isManualAddress"
+                    },
+                    "width": 2,
+                    "onValueChanged": [
+                        {
+                            "commandType": "executeAction",
+                            "actionName": "onChangeIsManualAddress"
+                        }
+                    ],
+                    "rule": {
+                        "effect": "SHOW",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "showIsManualAddress",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "type": "Input",
+                    "label": "isForeignAddress",
+                    "value": {
+                        "$ref": "#/properties/isForeignAddress"
+                    },
+                    "width": 2,
+                    "onValueChanged": [
+                        {
+                            "commandType": "executeAction",
+                            "actionName": "onChangeIsForeignAddress"
+                        }
+                    ],
+                    "rule": {
+                        "effect": "SHOW",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "showIsForeignAddress",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "type": "Input",
+                    "label": "isSameAsRegistration",
+                    "value": {
+                        "$ref": "#/properties/isSameAsRegistration"
+                    },
+                    "width": 2,
+                    "rule": {
+                        "effect": "SHOW",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "showIsSameAsRegistration",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "type": "Group",
+            "rule": {
+                "effect": "SHOW",
+                "condition": {
+                    "type": "FUNC",
+                    "ruleFunction": "showManualAddress",
+                    "value": [
+                        {
+                            "$ref": "#"
+                        }
+                    ]
+                }
+            },
+            "elements": [
+                {
+                    "type": "Input",
+                    "label": "manualCountry",
+                    "value": {
+                        "$ref": "#/properties/manualCountry"
+                    },
+                    "control": "Dropdown",
+                    "autocomplete": {
+                        "minTextLength": 0,
+                        "dropDownItemsCount": 1000,
+                        "selectItemOnMatch": false
+                    },
+                    "source": {
+                        "dataSource": {
+                            "name": "PartyCountryDataSource",
+                            "searchFieldPath": "countrySearchText",
+                            "responseMapping": "manualCountryResponseMapping",
+                            "resultCount": 1000
+                        },
+                        "displayFieldName": "countryShortName"
+                    },
+                    "filter": "manualCountryFilter",
+                    "width": 6,
+                    "rule": {
+                        "effect": "SHOW",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "showManualCountry",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "type": "Input",
+                    "label": "fullAddress",
+                    "value": {
+                        "$ref": "#/properties/fullAddress/properties/value"
+                    },
+                    "width": 12
+                }
+            ]
+        },
+        {
+            "type": "Group",
+            "rule": {
+                "effect": "SHOW",
+                "condition": {
+                    "type": "FUNC",
+                    "ruleFunction": "showDetailedAddress",
+                    "value": [
+                        {
+                            "$ref": "#"
+                        }
+                    ]
+                }
+            },
+            "elements": [
+                {
+                    "type": "Group",
+                    "elements": [
+                        {
+                            "type": "Component",
+                            "name": "AddressAutocomplete",
+                            "value": {
+                                "$ref": "#/properties/fullAddress"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "type": "Group",
+                    "elements": [
+                        {
+                            "type": "Input",
+                            "label": "postalCode",
+                            "readOnly": true,
+                            "value": {
+                                "$ref": "#/properties/postalCode"
+                            },
+                            "width": 3
+                        },
+                        {
+                            "type": "Input",
+                            "label": "country",
+                            "readOnly": true,
+                            "value": {
+                                "$ref": "#/properties/country"
+                            },
+                            "width": 3
+                        },
+                        {
+                            "type": "Input",
+                            "label": "region",
+                            "readOnly": true,
+                            "value": {
+                                "$ref": "#/properties/region"
+                            },
+                            "width": 3
+                        },
+                        {
+                            "type": "Input",
+                            "label": "area",
+                            "readOnly": true,
+                            "value": {
+                                "$ref": "#/properties/area"
+                            },
+                            "width": 3
+                        }
+                    ]
+                },
+                {
+                    "type": "Group",
+                    "elements": [
+                        {
+                            "type": "Input",
+                            "label": "city",
+                            "readOnly": true,
+                            "value": {
+                                "$ref": "#/properties/city"
+                            },
+                            "width": 3
+                        },
+                        {
+                            "type": "Input",
+                            "label": "settlement",
+                            "readOnly": true,
+                            "value": {
+                                "$ref": "#/properties/settlement"
+                            },
+                            "width": 3
+                        },
+                        {
+                            "type": "Input",
+                            "label": "street",
+                            "readOnly": true,
+                            "value": {
+                                "$ref": "#/properties/street"
+                            },
+                            "width": 3
+                        },
+                        {
+                            "type": "Input",
+                            "label": "house",
+                            "readOnly": true,
+                            "value": {
+                                "$ref": "#/properties/house"
+                            },
+                            "width": 3
+                        }
+                    ]
+                },
+                {
+                    "type": "Group",
+                    "elements": [
+                        {
+                            "type": "Input",
+                            "label": "houseExtension",
+                            "readOnly": true,
+                            "value": {
+                                "$ref": "#/properties/houseExtension"
+                            },
+                            "width": 3
+                        },
+                        {
+                            "type": "Input",
+                            "label": "flat",
+                            "readOnly": true,
+                            "value": {
+                                "$ref": "#/properties/flat"
+                            },
+                            "width": 3
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "Group",
+            "rule": {
+                "effect": "SHOW",
+                "condition": {
+                    "type": "FUNC",
+                    "ruleFunction": "showAddressDates",
+                    "value": [
+                        {
+                            "$ref": "#"
+                        }
+                    ]
+                }
+            },
+            "elements": [
+                {
+                    "type": "Input",
+                    "label": "comment",
+                    "value": {
+                        "$ref": "#/properties/comment"
+                    },
+                    "width": 6
+                },
+                {
+                    "type": "Input",
+                    "control": "DateRange",
+                    "dateFrom": {
+                        "type": "Input",
+                        "label": "actualFrom",
+                        "width": 3,
+                        "value": {
+                            "$ref": "#/properties/actualFrom"
+                        },
+                        "control": "DatetimePicker"
+                    },
+                    "dateTo": {
+                        "type": "Input",
+                        "label": "actualTo",
+                        "width": 3,
+                        "value": {
+                            "$ref": "#/properties/actualTo"
+                        },
+                        "control": "DatetimePicker"
+                    },
+                    "width": 6
+                }
+            ]
+        }
+    ]
+}

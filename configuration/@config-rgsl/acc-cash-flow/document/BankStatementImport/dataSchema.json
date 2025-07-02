@@ -1,0 +1,53 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema",
+    "description": "Document guiding the import of bank statements.",
+    "type": "object",
+    "aiDeepRequired": [
+        "/file/fileId",
+        "/file/fileName"
+    ],
+    "properties": {
+        "file": {
+            "$ref": "component:FileUpload"
+        },
+        "sourceFileFormat": {
+            "type": "integer"
+        },
+        "summary": {
+            "type": "object",
+            "properties": {
+                "date":{
+                    "type":"string",
+                    "aiFormat": "date"
+                },
+                "documentState":{
+                    "type":"string"
+                },
+                "numberOfRowsImported":{
+                    "type":"number"
+                },
+                "numberOfRowsImportedError":{
+                    "type":"number"
+                },
+                "bankAccountNo":{
+                    "type":"string"
+                },
+                "statementIdentifier":{
+                    "type":"string"
+                },
+                "bankStatementNo":{
+                    "type":"string"
+                },
+                "statementDate":{
+                    "type":"string",
+                    "aiFormat": "date"
+                }
+            }         
+        }
+    },
+    "required": [
+        "file",
+        "sourceFileFormat"
+    ],
+    "additionalProperties": false
+}

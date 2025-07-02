@@ -1,0 +1,85 @@
+{
+    "sinks": [
+        {
+            "name": "GetProductGroup",
+            "fetch": {
+                "configuration": {
+                    "name": "ProductsDataSource"
+                }
+            }
+        },
+        {
+            "name": "FindPartner",
+            "fetch": {
+                "configuration": {
+                    "name": "ServiceProviderPartyDataSource"
+                }
+            }
+        },
+        {
+            "name": "FindParties",
+            "fetch": {
+                "configuration": {
+                    "name": "GetPartiesByCriteriaDataSource"
+                }
+            }
+        },
+        {
+            "name": "GetProductConfiguration",
+            "fetch": {
+                "configuration": {
+                    "name": "GetProductConfigurationDataSource"
+                }
+            }
+        },
+        {
+            "name": "EvaluatePolicy",
+            "executeAs": "System",
+            "document": {
+                "allowOnValidationErrors": {
+                    "all": true
+                },
+                "evaluateOnly": true
+            }
+        },
+        {
+            "name": "CreatePolicy",
+            "executeAs": "System",
+            "document": {}
+        },
+        {
+            "name": "FindPolicy",
+            "fetch": {
+                "configuration": {
+                    "name": "ContractVersionsDataSource"
+                }
+            }
+        },
+        {
+            "ref": "CalculateCommissionSinkGroup"
+        },
+        {
+            "name": "UpdatePolicy",
+            "executeAs": "System",
+            "document": {
+                "allowOnValidationErrors": {
+                    "all": false
+                },
+                "allowUpdating": {
+                    "inStates": [
+                        "Draft"
+                    ]
+                }
+            }
+        },
+        {
+            "name": "SignPolicy",
+            "executeAs": "System",
+            "documentTransition": {}
+        }
+    ],
+    "responses": [
+        200,
+        422
+    ]
+}

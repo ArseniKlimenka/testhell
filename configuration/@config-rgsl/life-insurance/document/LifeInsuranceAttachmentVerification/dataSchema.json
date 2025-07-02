@@ -1,0 +1,95 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema",
+    "type": "object",
+    "additionalProperties": false,
+    "aiDataEnrichment": [
+        {
+            "name": "SetOperationsUsername"
+        },
+        {
+            "name": "SetSellerUsername"
+        },
+        {
+            "name": "ClearComments"
+        }
+    ],
+    "aiAudit": {
+        "scope": "General"
+    },
+    "properties": {
+        "number": {
+            "type": "string",
+            "aiTitle": "number"
+        },
+        "configurationCodeName": {
+            "type": "string",
+            "aiTitle": "configurationCodeName"
+        },
+        "policyHolderFullName": {
+            "type": "string",
+            "aiTitle": "policyHolderFullName"
+        },
+        "policyHolderCode": {
+            "type": "string",
+            "aiTitle": "policyHolderCode"
+        },
+        "policyHolderType": {
+            "type": "string",
+            "aiTitle": "policyHolderType"
+        },
+        "isPolicyHolder": {
+            "type": "boolean",
+            "aiTitle": "isPolicyHolder"
+        },
+        "insuredPersonFullName": {
+            "type": "string",
+            "aiTitle": "insuredPersonFullName"
+        },
+        "insuredPersonCode": {
+            "type": "string",
+            "aiTitle": "insuredPersonCode"
+        },
+        "attachmentErrorComment": {
+            "type": "string",
+            "aiTitle": "attachmentErrorComment"
+        },
+        "attachmentErrorCommentSales": {
+            "type": "string",
+            "aiTitle": "attachmentErrorCommentSales"
+        },
+        "attachmentErrorArray": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                    "attachmentErrorCode": {
+                        "type": "string"
+                    },
+                    "attachmentErrorDescriptionFull": {
+                        "type": "string"
+                    },
+                    "attachmentErrorDescriptionShort": {
+                        "type": "string"
+                    },
+                    "attachmentErrorTypeOfError": {
+                        "type": "string"
+                    },
+                    "attachmentErrorClassOfError": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "sellerUsername": {
+            "type": "string"
+        },
+        "operationsUsername": {
+            "type": "string"
+        },
+        "partnerBusinessCode": {
+            "type": "string"
+        }
+    }
+}

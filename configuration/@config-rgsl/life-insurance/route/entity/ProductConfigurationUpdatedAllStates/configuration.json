@@ -1,0 +1,29 @@
+{
+    "entityType": "UniversalVersionedDocument",
+    "condition": {
+        "events": [
+            "Created",
+            "StatusChanged"
+        ],
+        "configuration": {
+            "names": [
+                "ProductConfiguration",
+                "ProductConfigurationCorrection"
+            ]
+        }
+    },
+    "sinks": [
+        {
+            "name": "SaveProductConfigurationData",
+            "database": {
+                "tables": [
+                    "UNIV_IMPL.ECONOMIC_PARAMETER_HUB",
+                    "UNIV_IMPL.ECONOMIC_PARAMETER_SAT",
+                    "UNIV_IMPL.PRODUCT_CONF_HUB",
+                    "UNIV_IMPL.PRODUCT_CONF_SAT"
+                ]
+            }
+        }
+    ],
+    "version": "1"
+}

@@ -1,0 +1,19 @@
+drop table if exists PAS_IMPL.COLLECTIVE_POLICY
+
+create table PAS_IMPL.COLLECTIVE_POLICY
+(
+  ID uniqueidentifier not null,
+  CONTRACT_NUMBER nvarchar(64),
+  PARTY_CODE nvarchar(64),
+  SURNAME nvarchar(1024),
+  FIRST_NAME nvarchar(1024),
+  MIDDLE_NAME nvarchar(1024),
+  BIRTHDAY date,
+  GENDER bit,
+  MOBILE nvarchar(32),
+  AMOUNT decimal(15,2),
+  PREMIUM decimal(15,2),
+  CONSTRAINT PK_COLLECTIVE_POLICY_ID PRIMARY KEY(ID)
+)
+
+create index IDX_COLLECTIVE_POLICY_CONTRACT_NUMBER ON PAS_IMPL.COLLECTIVE_POLICY (CONTRACT_NUMBER)

@@ -1,0 +1,290 @@
+services:
+
+  client:
+    image: ${CI_REGISTRY_IMAGE}/client:${IMPL_VERSION:-latest}
+    platform: linux
+    deploy:
+      resources:
+        limits:
+          memory: 1g
+    ports:
+      - "60004:80"
+    environment:
+      ADINSURE_CLIENT_apiBaseUrl: "http://localhost:60000/"
+      ADINSURE_CLIENT_authConfig__issuer: "http://localhost:60001/realms/adinsure"
+      ADINSURE_CLIENT_authConfig__redirectUri: "http://localhost:60004/entry/login-redirect?"
+      ADINSURE_CLIENT_authConfig__postLogoutRedirectUri: "http://localhost:60004/entry"
+      ADINSURE_CLIENT_authConfig__silentRefreshRedirectUri: "http://localhost:60004/oauth-silent-refresh.html"
+      ADINSURE_CLIENT_authConfig__requireHttps: "false"
+      ADINSURE_CLIENT_serverMessagesSettings__serverUrl: "http://localhost:60006/api/server-side-messages"
+      ADINSURE_CLIENT_serverMessagesSettings__enabled: "true"
+      DEV_ENV: "true"
+      ADINSURE_maxRequestSize: 50000000
+
+  server:
+    image: ${CI_REGISTRY_IMAGE}/server:${IMPL_VERSION:-latest}
+    platform: linux
+    deploy:
+      resources:
+        limits:
+          memory: 12g
+    ports:
+      - "60000:60000"
+      - "9021:9021"
+    environment:
+      ADINSURE_databases__Main__connectionString: "${CONNECTION_STRING}"
+      ADINSURE_databases__Main__databaseProvider: "${PROVIDER}"
+      ADINSURE_appSettings__AdInsure__Settings__MaxRequestBodySize: 50000000
+      ADINSURE_appSettings__AdInsure__Settings__OAuthIdentity__IdentityEndpointUrl: "http://keycloak:8080/realms/adinsure"
+      ADINSURE_appSettings__AdInsure__Settings__OAuthIdentity__Audience: "adinsure"
+      ADINSURE_appSettings__AdInsure__Settings__OAuthIdentity__ValidIssuers__0: "http://localhost:60001/realms/adinsure"
+      ADINSURE_appSettings__AdInsure__MessageBroker__Uri: "activemq:tcp://amq:61616"
+      ADINSURE_appSettings__AdInsure__Settings__SearchEngine__URL: "http://es:9200"
+      ADINSURE_appSettings__AdInsure__Settings__RGSL__Integration__KPK__Uri: "http://server:60000/api/rgsl/mock-services/check-contractors/simulate"
+      ADINSURE_appSettings__AdInsure__Settings__RGSL__Integration__BlackList__Url: "http://server:60000/api/rgsl/mock-services/check-black-list/simulate"
+      ADINSURE_appSettings__AdInsure__Settings__RGSL__Integration__SAP__CreatePartyUrl: "http://server:60000/api/rgsl/mock-services/sap-create-party/simulate"
+      ADINSURE_appSettings__AdInsure__Settings__RGSL__Integration__SAP__UpdatePartyUrl: "http://server:60000/api/rgsl/mock-services/sap-update-party/simulate"
+      ADINSURE_appSettings__AdInsure__Settings__RGSL__Integration__SAP__CreateContractUrl: "http://server:60000/api/rgsl/mock-services/sap-create-contract/simulate"
+      ADINSURE_appSettings__AdInsure__Settings__RGSL__Integration__DigitalSignature__Uri: "http://server:60000/api/rgsl/mock-services/digital-signature/simulate"
+      ADINSURE_appSettings__AdInsure__Settings__RGSL__Integration__SecuritySmsNotification__Uri: "http://server:60000/api/rgsl/mock-services/sms-notification/simulate"
+      ADINSURE_environmentVariables__identityBaseUrl: "http://keycloak:8080"
+      ADINSURE_environmentVariables__rgsl.getBankStatements.baseAddress: "http://server:60000"
+      ADINSURE_environmentVariables__rgsl.getBankStatements.password: "123"
+      ADINSURE_environmentVariables__rgsl.setSuccessfulFlag.baseAddress: "http://server:60000"
+      ADINSURE_environmentVariables__rgsl.setSuccessfulFlag.password: "123"
+      ADINSURE_environmentVariables__rgsl.sendPaymentOrderRequest.baseAddress: "http://server:60000"
+      ADINSURE_environmentVariables__rgsl.sendPaymentOrderRequest.password: "123"
+      ADINSURE_environmentVariables__rgsl.sendEvent.agima.uri: "http://server:60000/api/rgsl/mock-services/send-event/success-response"
+      ADINSURE_environmentVariables__rgsl.sendEvent.agima.password: "123"
+      ADINSURE_environmentVariables__rgsl.sendEvent.elma.uri: "http://server:60000/api/rgsl/mock-services/send-event/error-response"
+      ADINSURE_environmentVariables__rgsl.sendEvent.elma.password: "123"
+      ADINSURE_environmentVariables__rgsl.sendEvent.efr.uri: "http://server:60000/api/rgsl/mock-services/send-event/error-call"
+      ADINSURE_environmentVariables__rgsl.sendEvent.efr.password: "123"
+      ADINSURE_environmentVariables__rgsl.sendEvent.efr.passPhrase: "1234"
+      ADINSURE_environmentVariables__rgsl.adinsureServices.tokenEndpoint: "http://keycloak:8080/realms/adinsure/connect/token"
+      ADINSURE_appSettings__AdInsure__Settings__PrintoutRenderer__Url: "http://pdf:9423/service/rest"
+      ADINSURE_appSettings__AdInsure__Settings__EnableServerSideMessages: "true"
+      ADINSURE_MessagingInfrastructure__messageBusses__Default__transport__connectionString: Endpoint=failover:(tcp://amq:61616)?transport.startupMaxReconnectAttempts=3&transport.timeout=1000&connection.requestTimeout=1000;Username=user;Password=user
+      ADINSURE_appSettings__AdInsure__NotificationChannels__email__password: "?v9nRDV!\\H2R9)]q-Y}>"
+      ADINSURE_appSettings__AdInsure__MessageBroker__Password: "user"
+      ADINSURE_appSettings__AdInsure__Settings__RGSL__Integration__Dadata__Token: "6c9443ebae312fa155dc9f59b34bba891c5ebe5d"
+      ADINSURE_appSettings__AdInsure__Settings__RGSL__Integration__KPK__Password: ""
+      ADINSURE_appSettings__AdInsure__Settings__RGSL__Integration__BlackList__Password: ""
+      ADINSURE_appSettings__AdInsure__Settings__RGSL__Integration__SAP__Password: "Xc$$Fpw1zZU"
+      ADINSURE_appSettings__AdInsure__Settings__RGSL__Integration__SecuritySmsNotification__SmsServicePassword: "5tUu3qwz"
+      ADINSURE_appSettings__AdInsure__Settings__AssetServer__PublicUpload__Url: "http://sas:80/"
+      ADINSURE_appSettings__AdInsure__Settings__PrintoutRenderer__StaticAssetsServerBaseUrl: "http://sas:80"
+      ADINSURE_appSettings__AdInsure__Monitoring__Enabled: "true"
+      ADINSURE_appSettings__AdInsure__Healthcheck__Enabled: "true"
+      ADINSURE_appSettings__AdInsure__Healthcheck__SignalRHealthCheckEndpoint: "http://signalr:60006/api/server-side-messages"
+    depends_on:
+      db-migrate:
+        condition: service_completed_successfully
+      signalr:
+        condition: service_healthy
+      es:
+        condition: service_started
+      amq:
+        condition: service_started
+      pdf:
+        condition: service_started
+    volumes:
+      #- ./conf/local/server:/app/conf
+      #- ./extensions/server/plugins:/app/extensions/plugins
+      - ./logs:/logs
+      - ./printout-assets:/app/extensions/printout-assets
+
+  server-health-check:
+    image: appropriate/curl
+    command: ["/bin/sh", "-c", "while ! curl --fail http://server:60000/-/health > /dev/null; do sleep 5; done;"]
+    depends_on:
+      server:
+        condition: service_started
+
+  db-migrate:
+    platform: linux
+    image: ${CI_REGISTRY_IMAGE}/db-migrate:${IMPL_VERSION:-latest}
+    deploy:
+      resources:
+        limits:
+          memory: 1g
+    environment:
+      DB_CONNECTION_STRING: "${CONNECTION_STRING}"
+      DB_PROVIDER: "${PROVIDER}"
+    depends_on:
+      - db
+
+  db:
+    image: ${CI_REGISTRY_IMAGE}/mssql:empty
+    platform: linux
+    deploy:
+      resources:
+        limits:
+          memory: 10g
+    ports:
+      - "1433:1433"
+    volumes:
+      - db_data:/var/opt/mssql
+
+  es:
+    image: ${CI_REGISTRY_IMAGE}/elasticsearch:8.4.3
+    platform: linux
+    deploy:
+      resources:
+        limits:
+          memory: 2g
+    environment:
+      - discovery.type=single-node
+      - action.auto_create_index=-adinsure*,+*
+      - xpack.security.enabled=false
+      - logger.level=WARN
+    ports:
+      - "9200:9200"
+    volumes:
+      - es_data:/usr/share/elasticsearch/data
+
+  amq:
+    image: ${CI_REGISTRY_IMAGE}/amq:6-prometheus
+    platform: linux
+    deploy:
+      resources:
+        limits:
+          memory: 1g
+    ports:
+      - "8161:8161"
+      - "61616:61616"
+    volumes:
+      - amq_data:/opt/activemq/data
+
+  pdf:
+    image: ${CI_REGISTRY_IMAGE}/pdfreactor:11.4.0
+    deploy:
+      resources:
+        limits:
+          memory: 1g
+    ports:
+      - "9423:9423"
+    environment:
+      JAVA_OPTIONS: "-Xmx2g -Dcom.realobjects.pdfreactor.webservice.securitySettings.defaults.allowFileSystemAccess=true"
+    volumes:
+      - .\printout-assets:/assets/printout-assets
+
+  signalr:
+    image: ${CI_REGISTRY_IMAGE}/signalr:${IMPL_VERSION:-latest}
+    platform: linux
+    deploy:
+      resources:
+        limits:
+          memory: 1g
+    environment:
+      ADINSURE_SIGNALR_databases__Main__connectionString: "${CONNECTION_STRING}"
+      ADINSURE_SIGNALR_databases__Main__databaseProvider: "${PROVIDER}"
+      ADINSURE_SIGNALR_appSettings__AdInsure__Settings__OAuthIdentity__IdentityEndpointUrl: "http://keycloak:8080/realms/adinsure"
+      ADINSURE_SIGNALR_appSettings__AdInsure__Settings__OAuthIdentity__DiscoveryEndpointUrl: ".well-known/openid-configuration"
+      ADINSURE_SIGNALR_appSettings__AdInsure__Settings__OAuthIdentity__Audience: "adinsure"
+      ADINSURE_SIGNALR_appSettings__AdInsure__Settings__OAuthIdentity__ValidIssuers__0: "http://localhost:60001/realms/adinsure"
+      ADINSURE_SIGNALR_environmentVariables__clientBaseUrl: "http://localhost:60004"
+      ADINSURE_SIGNALR_MessagingInfrastructure__messageBusses__Default__transport__connectionString: Endpoint=failover:(tcp://amq:61616)?transport.startupMaxReconnectAttempts=3&transport.timeout=1000&connection.requestTimeout=1000;Username=user;Password=user
+    ports:
+      - "60006:60006"
+    depends_on:
+      db-migrate:
+        condition: service_completed_successfully
+      amq:
+        condition: service_started
+
+  sas:
+    image: ${CI_REGISTRY_IMAGE}/sas:${IMPL_VERSION:-latest}
+    deploy:
+      resources:
+        limits:
+          memory: 1g
+    ports:
+      - "60010:80"
+    environment:
+      AUTH_USERNAME: "adinsure"
+      AUTH_PASSWORD: "adinsure"
+      CLEANUP_ON_STARTUP: "false"
+    volumes:
+      - sas_data:/opt/webdav-root
+
+  keycloak:
+    image: ${CI_REGISTRY_KC_IMAGE}/keycloak:${KEYCLOAK_VERSION}
+    deploy:
+      resources:
+        limits:
+          cpus: '2'
+          memory: 8g
+    entrypoint:
+      - /opt/keycloak/bin/kc.sh
+      - start-dev
+      - --spi-theme-static-max-age=-1
+      - --spi-theme-cache-themes=false
+      - --spi-theme-cache-templates=false
+      - --debug
+    environment:
+      - TZ=Europe/Moscow
+      - DEBUG_PORT=*:8787
+      - KEYCLOAK_ADMIN
+      - KEYCLOAK_ADMIN_PASSWORD
+      - KC_HOSTNAME
+      - KC_PROXY
+      - KC_HEALTH_ENABLED=true
+      - KC_DB=mssql
+      - KC_DB_USERNAME=keycloak
+      - KC_DB_PASSWORD=adinsure
+      - KC_DB_URL=jdbc:sqlserver://db;databaseName=Keycloak;encrypt=false;trustServerCertificate=true
+      - KC_TRANSACTION_XA_ENABLED=false
+      - KC_LOG_LEVEL=warn
+    ports:
+      - 60001:8080
+      - 8787:8787
+    volumes:
+      - ./keycloak/themes/theme/adinsure:/opt/keycloak/themes/adinsure
+      - ./keycloak/password-blacklists:/opt/keycloak/data/password-blacklists
+
+  keycloak-config:
+    image: adorsys/keycloak-config-cli:latest-${KEYCLOAK_CONFIG_VERSION}
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 1g
+    environment:
+      - KEYCLOAK_URL=http://keycloak:8080/
+      - KEYCLOAK_USER
+      - KEYCLOAK_PASSWORD
+      - KEYCLOAK_DEFAULT_SECRET
+      - IMPORT_FILES=/config/*
+      - IMPORT_VARSUBSTITUTION_ENABLED=true
+      - IMPORT_MANAGED_AUTHENTICATIONFLOW=no-delete
+      - KEYCLOAK_ADINSURE_SCIM_INTEGRATION_PASSWORD
+      - KEYCLOAK_ADINSURE_ADMINISTRATOR_PASSWORD
+      - SCIM_BASE_URL
+      - KEYCLOAK_TEST_FRAMEWORK_SECRET
+    volumes:
+      - ./keycloak/config:/config
+    depends_on:
+      keycloak-health-check:
+        condition: service_completed_successfully
+      server-health-check:
+        condition: service_completed_successfully
+
+  keycloak-health-check:
+    image: appropriate/curl
+    command: ["/bin/sh", "-c", "while ! curl --fail $${KEYCLOAK_BASE_URL}/health/ready > /dev/null; do sleep 5; done;"]
+    environment:
+       - KEYCLOAK_BASE_URL
+    depends_on:
+      keycloak:
+        condition: service_started
+
+volumes:
+  es_data:
+    name: ${COMPOSE_PROJECT_NAME:?}_es_data
+  amq_data:
+    name: ${COMPOSE_PROJECT_NAME:?}_amq_data
+  db_data:
+    name: ${COMPOSE_PROJECT_NAME:?}_db_data
+  sas_data:
+    name: ${COMPOSE_PROJECT_NAME:?}_sas_data

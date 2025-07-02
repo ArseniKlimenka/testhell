@@ -1,0 +1,446 @@
+{
+    "id": "ContractManagementSchema.json",
+    "type": "Group",
+    "elements": [
+        {
+            "type": "GridLayout",
+            "fillAvailableSpace": true,
+            "title": "ContractAdministration",
+            "fixedButton": true,
+            "numberOfColumns": 12,
+            "elements": [
+                {
+                    "type": "TabLayout",
+                    "options": {
+                        "menuAlligment": "Horizontal",
+                        "menuMode": "Single"
+                    },
+                    "elements": [
+                        {
+                            "type": "Tab",
+                            "elementId": "Modification",
+                            "scope": "title",
+                            "title": "Modification",
+                            "elements": [
+                                {
+                                    "type": "Section",
+                                    "label": "InitiatorModification",
+                                    "scope": "InitiatorModification",
+                                    "width": 12,
+                                    "elements": [
+                                        {
+                                            "type": "Group",
+                                            "width": 12,
+                                            "elements": [
+                                                {
+                                                    "type": "Lookup",
+                                                    "label": "Contract",
+                                                    "value": {
+                                                        "$ref": "#"
+                                                    },
+                                                    "width": 4,
+                                                    "dialogButton": {},
+                                                    "clearButton": {
+                                                        "clearAction": "clearSelectedContract"
+                                                    },
+                                                    "readOnly": false,
+                                                    "dialog": {
+                                                        "viewReference": {
+                                                            "configurationCodeName": "ContractAdministrationContractSearchView",
+                                                            "configurationVersion": "1",
+                                                            "configurationConceptType": "SearchView"
+                                                        }
+                                                    },
+                                                    "onSelected": "contractSearchResultMapping",
+                                                    "selectedDisplayValueUISchema": {
+                                                        "type": "Input",
+                                                        "label": "Contract Number",
+                                                        "readOnly": true,
+                                                        "value": {
+                                                            "$ref": "#/properties/Body/properties/contractNumber"
+                                                        }
+                                                    }
+                                                },
+                                                {
+                                                    "type": "Lookup",
+                                                    "value": {
+                                                        "$ref": "#"
+                                                    },
+                                                    "dialogButton": {},
+                                                    "clearButton": {
+                                                        "clearAction": "clearInitiator"
+                                                    },
+                                                    "dialog": {
+                                                        "viewReference": {
+                                                            "configurationCodeName": "ServiceProviderSearchView",
+                                                            "configurationConceptType": "SearchView",
+                                                            "configurationVersion": "1"
+                                                        },
+                                                        "onLoad": "initiatorOnLoad"
+                                                    },
+                                                    "onSelected": "initiatorOnSelected",
+                                                    "selectedDisplayValueUISchema": {
+                                                        "type": "Input",
+                                                        "label": "initiator",
+                                                        "readOnly": true,
+                                                        "value": {
+                                                            "$ref": "#/properties/Body/properties/initiator/properties/partyFullName"
+                                                        }
+                                                    },
+                                                    "width": 4,
+                                                    "rule": {
+                                                        "effect": "ENABLE_INITIAL",
+                                                        "condition": {
+                                                            "type": "FUNC",
+                                                            "ruleFunction": "shouldEnableContractModParams",
+                                                            "value": [
+                                                                {
+                                                                    "$ref": "#"
+                                                                }
+                                                            ]
+                                                        }
+                                                    }
+                                                },
+                                                {
+                                                    "type": "Input",
+                                                    "label": "orgUnit",
+                                                    "value": {
+                                                        "$ref": "#/properties/Body/properties/orgUnit"
+                                                    },
+                                                    "autocomplete": {
+                                                        "minTextLength": 1,
+                                                        "dropDownItemsCount": 10
+                                                    },
+                                                    "control": "Dropdown",
+                                                    "source": {
+                                                        "array": {
+                                                            "$ref": "#/properties/Body/properties/availableOrgUnits"
+                                                        },
+                                                        "displayValueTemplate": "{{expr displayName}} ({{expr officeCode}})",
+                                                        "valueFieldName": "value"
+                                                    },
+                                                    "width": 4,
+                                                    "rule": {
+                                                        "effect": "ENABLE_INITIAL",
+                                                        "condition": {
+                                                            "type": "FUNC",
+                                                            "ruleFunction": "shouldEnableContractModParams",
+                                                            "value": [
+                                                                {
+                                                                    "$ref": "#"
+                                                                }
+                                                            ]
+                                                        }
+                                                    }
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "type": "Group",
+                                            "width": 12,
+                                            "elements": [
+                                                {
+                                                    "type": "Button",
+                                                    "value": {
+                                                        "$ref": "#"
+                                                    },
+                                                    "onClick": [
+                                                        {
+                                                            "commandType": "executeAction",
+                                                            "actionName": "executeInitiatorUpdate"
+                                                        }
+                                                    ],
+                                                    "label": "executeInitiatorUpdate",
+                                                    "width": 2
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "Section",
+                                    "label": "CommissionRecalculation",
+                                    "scope": "CommissionRecalculation",
+                                    "width": 12,
+                                    "elements": [
+                                        {
+                                            "type": "Group",
+                                            "width": 12,
+                                            "elements": [
+                                                {
+                                                    "type": "Lookup",
+                                                    "label": "Contract",
+                                                    "value": {
+                                                        "$ref": "#"
+                                                    },
+                                                    "width": 4,
+                                                    "dialogButton": {},
+                                                    "clearButton": {
+                                                        "clearAction": "clearSelectedCommissionContract"
+                                                    },
+                                                    "readOnly": false,
+                                                    "dialog": {
+                                                        "viewReference": {
+                                                            "configurationCodeName": "ContractAdministrationContractSearchView",
+                                                            "configurationVersion": "1",
+                                                            "configurationConceptType": "SearchView"
+                                                        }
+                                                    },
+                                                    "onSelected": "commissionContractSearchResultMapping",
+                                                    "selectedDisplayValueUISchema": {
+                                                        "type": "Input",
+                                                        "label": "Contract Number",
+                                                        "readOnly": true,
+                                                        "value": {
+                                                            "$ref": "#/properties/Body/properties/commissionContract/properties/number"
+                                                        }
+                                                    }
+                                                },
+                                                {
+                                                    "type": "Lookup",
+                                                    "label": "agentAgreement",
+                                                    "value": {
+                                                        "$ref": "#"
+                                                    },
+                                                    "dialogButton": {},
+                                                    "clearButton": {
+                                                        "clearAction": "clearSelectedAa"
+                                                    },
+                                                    "dialog": {
+                                                        "viewReference": {
+                                                            "configurationCodeName": "ContractAdministrationAADocumentSearchView",
+                                                            "configurationConceptType": "SearchView",
+                                                            "configurationVersion": "1"
+                                                        },
+                                                        "onLoad": "agentAgreementSelectionOnLoad"
+                                                    },
+                                                    "onSelected": "AaSearchResultMapping",
+                                                    "selectedDisplayValueUISchema": {
+                                                        "type": "Input",
+                                                        "label": "agentAgreement",
+                                                        "readOnly": true,
+                                                        "value": {
+                                                            "$ref": "#/properties/Body/properties/agentAgreement/properties/displayNumber"
+                                                        },
+                                                        "rule": {
+                                                            "effect": "ENABLE_INITIAL",
+                                                            "condition": {
+                                                                "type": "FUNC",
+                                                                "ruleFunction": "shouldEnableAaDescription",
+                                                                "value": [
+                                                                    {
+                                                                        "$ref": "#"
+                                                                    }
+                                                                ]
+                                                            }
+                                                        }
+                                                    },
+                                                    "width": 4,
+                                                    "rule": {
+                                                        "effect": "ENABLE_INITIAL",
+                                                        "condition": {
+                                                            "type": "FUNC",
+                                                            "ruleFunction": "shouldEnableAaSelection",
+                                                            "value": [
+                                                                {
+                                                                    "$ref": "#"
+                                                                }
+                                                            ]
+                                                        }
+                                                    }
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "type": "Group",
+                                            "width": 12,
+                                            "elements": [
+                                                {
+                                                    "type": "Button",
+                                                    "value": {
+                                                        "$ref": "#"
+                                                    },
+                                                    "onClick": [
+                                                        {
+                                                            "commandType": "executeAction",
+                                                            "actionName": "executeCommissionRecalculation"
+                                                        }
+                                                    ],
+                                                    "label": "executeCommissionRecalculation",
+                                                    "width": 2
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "Section",
+                                    "label": "CuratorModification",
+                                    "scope": "CuratorModification",
+                                    "width": 12,
+                                    "elements": [
+                                        {
+                                            "type": "Group",
+                                            "width": 12,
+                                            "elements": [
+                                                {
+                                                    "type": "Lookup",
+                                                    "label": "Contract",
+                                                    "value": {
+                                                        "$ref": "#"
+                                                    },
+                                                    "width": 4,
+                                                    "dialogButton": {},
+                                                    "clearButton": {
+                                                        "clearAction": "clearSelectedContract"
+                                                    },
+                                                    "readOnly": false,
+                                                    "dialog": {
+                                                        "viewReference": {
+                                                            "configurationCodeName": "ContractAdministrationContractSearchView",
+                                                            "configurationVersion": "1",
+                                                            "configurationConceptType": "SearchView"
+                                                        }
+                                                    },
+                                                    "onSelected": "contractSearchResultMapping",
+                                                    "selectedDisplayValueUISchema": {
+                                                        "type": "Input",
+                                                        "label": "Contract Number",
+                                                        "readOnly": true,
+                                                        "value": {
+                                                            "$ref": "#/properties/Body/properties/contractNumber"
+                                                        }
+                                                    }
+                                                },
+                                                {
+                                                    "type": "Input",
+                                                    "label": "Curator",
+                                                    "value": {
+                                                        "$ref": "#/properties/Body/properties/curator"
+                                                    },
+                                                    "width": 4,
+                                                    "readOnly": false
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "type": "Group",
+                                            "width": 12,
+                                            "elements": [
+                                                {
+                                                    "type": "Button",
+                                                    "value": {
+                                                        "$ref": "#",
+                                                        "modificationType": "curator"
+                                                    },
+                                                    "onClick": [
+                                                        {
+                                                            "commandType": "executeAction",
+                                                            "actionName": "executeCuratorUpdate"
+                                                        }
+                                                    ],
+                                                    "label": "executeCuratorUpdate",
+                                                    "width": 2
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "Section",
+                                    "label": "ProductConfigurationModification",
+                                    "scope": "ProductConfigurationModification",
+                                    "width": 12,
+                                    "elements": [
+                                        {
+                                            "type": "Group",
+                                            "width": 12,
+                                            "elements": [
+                                                {
+                                                    "type": "Lookup",
+                                                    "label": "Contract",
+                                                    "value": {
+                                                        "$ref": "#"
+                                                    },
+                                                    "width": 4,
+                                                    "dialogButton": {},
+                                                    "clearButton": {
+                                                        "clearAction": "clearSelectedContract"
+                                                    },
+                                                    "readOnly": false,
+                                                    "dialog": {
+                                                        "viewReference": {
+                                                            "configurationCodeName": "ContractSearch",
+                                                            "configurationVersion": "1",
+                                                            "configurationConceptType": "SearchView"
+                                                        }
+                                                    },
+                                                    "onSelected": "contractSearchResultMapping",
+                                                    "selectedDisplayValueUISchema": {
+                                                        "type": "Input",
+                                                        "label": "Contract Number",
+                                                        "readOnly": true,
+                                                        "value": {
+                                                            "$ref": "#/properties/Body/properties/contractNumber"
+                                                        }
+                                                    }
+                                                },
+                                                {
+                                                    "type": "Input",
+                                                    "label": "ProductConfigurationVersion",
+                                                    "value": {
+                                                        "$ref": "#/properties/Body/properties/productConfigurationVersion"
+                                                    },
+                                                    "width": 2,
+                                                    "readOnly": false
+                                                },
+                                                {
+                                                    "type": "OutputText",
+                                                    "label": "ProductCode",
+                                                    "value": {
+                                                        "$ref": "#/properties/Body/properties/productCode"
+                                                    },
+                                                    "width": 2
+                                                },
+                                                {
+                                                    "type": "OutputText",
+                                                    "label": "IssueDate",
+                                                    "template": "{{expr issueDate 'd'}}",
+                                                    "value": {
+                                                        "$ref": "#/properties/Body"
+                                                    },
+                                                    "width": 2
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "type": "Group",
+                                            "width": 12,
+                                            "elements": [
+                                                {
+                                                    "type": "Button",
+                                                    "value": {
+                                                        "$ref": "#",
+                                                        "modificationType": "productConfiguration"
+                                                    },
+                                                    "onClick": [
+                                                        {
+                                                            "commandType": "executeAction",
+                                                            "actionName": "executeProductConfigurationUpdate"
+                                                        }
+                                                    ],
+                                                    "label": "executeProductConfigurationUpdate",
+                                                    "width": 2
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

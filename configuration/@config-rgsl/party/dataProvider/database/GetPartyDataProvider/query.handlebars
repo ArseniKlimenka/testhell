@@ -1,0 +1,34 @@
+select p.PARTY_CODE,
+       p.PARTY_ID,
+       p.COMMON_BODY,
+       p.BODY,
+       pa.CODE_NAME,
+       spsl.TAB_NUMBER
+  from PTY.PARTY p
+{{#if parameters.traderPartnerCode}}
+	inner join pty_impl.PARTY_HUB ph on ph.PARTY_CODE = p.PARTY_CODE
+	inner join pty_impl.PARTY_INFO_SAT_LATEST pis on pis.PARTY_INFO_HKEY = ph.PARTY_HKEY
+{{/if}}
+  join CFX.PUBLISHED_ARTIFACT pa on pa.PUBLISHED_ARTIFACT_ID = p.PUBLISHED_ARTIFACT_ID
+  left join PTY_IMPL.PARTY_HUB ph ON ph.PARTY_CODE = p.PARTY_CODE
+  left join PTY_IMPL.PARTY_INFO_SAT_LATEST ptys ON ptys.PARTY_INFO_HKEY = ph.PARTY_HKEY
+  left join org_impl.service_provider_info_sat_latest spsl
+               on spsl.party_code = p.PARTY_CODE
+ where 1 = 1
+{{#if parameters.partyId}}
+   and p.PARTY_ID = @partyId
+{{/if}}
+{{#if parameters.partyCode}}
+   and p.PARTY_CODE = @partyCode
+{{/if}}
+{{#if parameters.partyCodes}}
+   and p.PARTY_CODE in (@partyCodes)
+{{/if}}
+{{#if parameters.traderPartnerCode}}
+   and pis.TRADING_PARTNER_CODE = @traderPartnerCode
+{{/if}}
+{{#if parameters.showDuplicates}}
+   and ptys.DUPLICATE_MASTER_NUMBER IS NOT NULL
+{{else}}
+   and ptys.DUPLICATE_MASTER_NUMBER IS NULL
+{{/if}}

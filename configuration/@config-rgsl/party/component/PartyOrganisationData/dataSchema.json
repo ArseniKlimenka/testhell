@@ -1,0 +1,117 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "Party",
+    "description": "Data schema describing party organisation information",
+    "type": "object",
+    "additionalProperties": true,
+    "aiValidation": {
+        "rule": "validationPartyOrganisationData"
+    },
+    "aiDeepRequired": [
+        "/fullOrgName"
+    ],
+    "properties": {
+        "fullOrgName": {
+            "type": "string",
+            "aiTitle": "fullOrgName"
+        },
+        "shortOrgName": {
+            "type": "string",
+            "aiTitle": "shortOrgName"
+        },
+        "fullOrgNameEng": {
+            "type": "string",
+            "aiTitle": "fullOrgName"
+        },
+        "shortOrgNameEng": {
+            "type": "string",
+            "aiTitle": "shortOrgName"
+        },
+        "numberOfEmployee": {
+            "type": "integer",
+            "aiTitle": "numberOfEmployee"
+        },
+        "site": {
+            "$ref": "component:PartyWebsite"
+        },
+        "organisationalForm": {
+            "type": "object",
+            "aiTitle": "organisationalForm",
+            "properties": {
+                "organisationalFormDesc": {
+                    "type": "string",
+                    "aiTitle": "organisationalFormDesc"
+                },
+                "organisationalFormCode": {
+                    "type": "string",
+                    "aiTitle": "organisationalFormCode"
+                }
+            }
+        },
+        "partyOGRN": {
+            "$ref": "component:PartyOGRN"
+        },
+        "KPP": {
+            "type": "string",
+            "aiTitle": "KPP"
+        },
+        "isSoleExecutiveAuthority": {
+            "type": "boolean",
+            "aiTitle": "isSoleExecutiveAuthority"
+        },
+        "soleExecutiveAuthority": {
+            "$ref": "component:PartyLookUpSearch"
+        },
+        "isPersonRepresentative": {
+            "type": "boolean",
+            "aiTitle": "isPersonRepresentative"
+        },
+        "personRepresentative": {
+            "$ref": "component:PartyLookUpSearch"
+        },
+        "isDefault": {
+            "type": "boolean",
+            "aiTitle": "isDefault"
+        },
+        "unfulfilledObligationCB": {
+            "type": "boolean",
+            "aiTitle": "unfulfilledObligationCB"
+        },
+        "unfulfilledObligationCBComment": {
+            "type": "string",
+            "aiTitle": "unfulfilledObligationCBComment"
+        },
+        "licenseRevoked": {
+            "type": "boolean",
+            "aiTitle": "licenseRevoked"
+        },
+        "licenseRevokedComment": {
+            "type": "string",
+            "aiTitle": "licenseRevokedComment"
+        },
+        "bankruptcyProcedure": {
+            "type": "boolean",
+            "aiTitle": "bankruptcyProcedure"
+        },
+        "bankruptcyProcedureComment": {
+            "type": "string",
+            "aiTitle": "bankruptcyProcedureComment"
+        },
+        "unfulfilledObligationByGuarantee": {
+            "type": "boolean",
+            "aiTitle": "unfulfilledObligationByGuarantee"
+        },
+        "unfulfilledObligationByGuaranteeComment": {
+            "type": "string",
+            "aiTitle": "unfulfilledObligationByGuaranteeComment"
+        },
+        "anotherSign": {
+            "type": "boolean",
+            "aiTitle": "anotherSign"
+        },
+        "anotherSignComment": {
+            "type": "string",
+            "aiTitle": "anotherSignComment"
+        }
+    }
+}

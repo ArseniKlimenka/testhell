@@ -1,0 +1,414 @@
+{
+    "type": "Section",
+    "label": "Party Person Data",
+    "collapsing": {
+        "initial": false,
+        "enabled": true
+    },
+    "elements": [
+        {
+            "type": "Input",
+            "label": "lastName",
+            "value": {
+                "$ref": "#/properties/lastName"
+            },
+            "width": 4,
+            "onValueChanged": [
+                {
+                    "commandType": "executeAction",
+                    "actionName": "setUppercaseFirstLetter"
+                }
+            ]
+        },
+        {
+            "type": "Input",
+            "label": "firstName",
+            "value": {
+                "$ref": "#/properties/firstName"
+            },
+            "width": 4,
+            "onValueChanged": [
+                {
+                    "commandType": "executeAction",
+                    "actionName": "setUppercaseFirstLetter"
+                }
+            ]
+        },
+        {
+            "type": "Input",
+            "label": "middleName",
+            "value": {
+                "$ref": "#/properties/middleName"
+            },
+            "width": 4,
+            "onValueChanged": [
+                {
+                    "commandType": "executeAction",
+                    "actionName": "setUppercaseFirstLetter"
+                },
+                {
+                    "commandType": "executeAction",
+                    "actionName": "middleNameChanged"
+                }
+            ]
+        },
+        {
+            "type": "Input",
+            "label": "personGender",
+            "value": {
+                "$ref": "#/properties/personGender"
+            },
+            "width": 4,
+            "onValueChanged": [
+                {
+                    "commandType": "executeAction",
+                    "actionName": "personGenderChanged"
+                }
+            ]
+        },
+        {
+            "type": "Input",
+            "control": "DatetimePicker",
+            "label": "dateOfBirth",
+            "value": {
+                "$ref": "#/properties/dateOfBirth"
+            },
+            "width": 4
+        },
+        {
+            "type": "Input",
+            "label": "birthPlace",
+            "description": "birthPlaceDescription",
+            "value": {
+                "$ref": "#/properties/birthPlace"
+            },
+            "width": 4
+        },
+        {
+            "type": "Input",
+            "label": "countryPlace",
+            "value": {
+                "$ref": "#/properties/countryPlace"
+            },
+            "control": "Dropdown",
+            "autocomplete": {
+                "minTextLength": 0,
+                "dropDownItemsCount": 1000,
+                "selectItemOnMatch": false
+            },
+            "source": {
+                "dataSource": {
+                    "name": "PartyCountryDataSource",
+                    "searchFieldPath": "countrySearchText",
+                    "requestMapping": "partyCountryPlaceRequestMapping",
+                    "responseMapping": "partyCountryPlaceResponseMapping",
+                    "resultCount": 1000
+                },
+                "displayFieldName": "countryShortName"
+            },
+            "width": 4
+        },
+        {
+            "type": "Input",
+            "label": "SNILS",
+            "value": {
+                "$ref": "#/properties/SNILS"
+            },
+            "width": 4
+        },
+        {
+            "type": "Input",
+            "label": "segment",
+            "value": {
+                "$ref": "#/properties/segment"
+            },
+            "control": "Dropdown",
+            "source": {
+                "dataSource": {
+                    "name": "PartySegmentDataSource",
+                    "searchFieldPath": "segmentDesc",
+                    "responseMapping": "partySegmentResponseMapping",
+                    "resultCount": 10
+                },
+                "displayFieldName": "segmentDesc"
+            },
+            "width": 4,
+            "rule": {
+                "effect": "SHOW",
+                "condition": {
+                    "type": "FUNC",
+                    "ruleFunction": "isBackOfficeUser",
+                    "value": [
+                        {
+                            "$ref": "#"
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "Input",
+                    "label": "citizenship",
+                    "value": {
+                        "$ref": "#/properties/citizenship"
+                    },
+                    "rule": {
+                        "effect": "DISABLE_INITIAL",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "disableCitizenship",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    },
+                    "control": "Dropdown",
+                    "multiple": true,
+                    "autocomplete": {
+                        "minTextLength": 0,
+                        "dropDownItemsCount": 1000,
+                        "selectItemOnMatch": false
+                    },
+                    "source": {
+                        "dataSource": {
+                            "name": "PartyCountryDataSource",
+                            "searchFieldPath": "countrySearchText",
+                            "responseMapping": "partyCitizenshipResponseMapping",
+                            "resultCount": 1000
+                        },
+                        "displayFieldName": "countryShortName"
+                    },
+                    "onValueChanged": [
+                        {
+                            "commandType": "executeAction",
+                            "actionName": "isCitizenshipChanged"
+                        }
+                    ],
+                    "eventHandlers": [
+                        {
+                            "eventName": "HAS_PARTY_ROLE_CHANGED",
+                            "senders": [
+                                "hasPartyRoleChanged-id"
+                            ],
+                            "commands": {
+                                "commandType": "executeAction",
+                                "actionName": "onHasPartyRoleChanged"
+                            }
+                        }
+                    ],
+                    "width": 4
+                },
+                {
+                    "type": "Input",
+                    "label": "isStatelessPerson",
+                    "description": "isStatelessPersonDescription",
+                    "value": {
+                        "$ref": "#/properties/isStatelessPerson"
+                    },
+                    "width": 4,
+                    "onValueChanged": [
+                        {
+                            "commandType": "executeAction",
+                            "actionName": "isStatelessPerson"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "GroupSeparator"
+        },
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "Input",
+                    "label": "isPublicOfficial",
+                    "description": "isPublicOfficialDescription",
+                    "value": {
+                        "$ref": "#/properties/isPublicOfficial"
+                    },
+                    "width": 4,
+                    "onValueChanged": [
+                        {
+                            "commandType": "executeAction",
+                            "actionName": "isPublicOfficialChanged"
+                        }
+                    ]
+                },
+                {
+                    "type": "Input",
+                    "label": "executivePerson",
+                    "value": {
+                        "$ref": "#/properties/executivePerson"
+                    },
+                    "rule": {
+                        "effect": "ENABLE_INITIAL",
+                        "condition": {
+                            "type": "LEAF",
+                            "expectedValue": true,
+                            "value": {
+                                "$ref": "#/properties/isPublicOfficial"
+                            }
+                        }
+                    },
+                    "control": "Dropdown",
+                    "autocomplete": {
+                        "minTextLength": 0,
+                        "dropDownItemsCount": 25,
+                        "selectItemOnMatch": false
+                    },
+                    "source": {
+                        "dataSource": {
+                            "name": "PartyExecutivePersonDataSource",
+                            "searchFieldPath": "executivePersonSearchText",
+                            "responseMapping": "executivePersonResponseMapping",
+                            "resultCount": 25
+                        },
+                        "displayFieldName": "executivePersonDesc"
+                    },
+                    "width": 4
+                },
+                {
+                    "type": "Input",
+                    "label": "relationType",
+                    "value": {
+                        "$ref": "#/properties/relationType"
+                    },
+                    "rule": {
+                        "effect": "SHOW",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "showRelationType",
+                            "value": [
+                                {
+                                    "$ref": "#/properties/isPublicOfficial"
+                                },
+                                {
+                                    "$ref": "#/properties/executivePerson"
+                                }
+                            ]
+                        }
+                    },
+                    "width": 4
+                }
+            ]
+        },
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "OutputText",
+                    "hideLabel": true,
+                    "allowMultiLine": true,
+                    "textStyle": {
+                        "textSize": "Small"
+                    },
+                    "template": "{{#style 'italic'}}{{#i18n}}isPublicOfficialFullDescription{{/i18n}}{{/style}}",
+                    "value": {
+                        "$ref": "#"
+                    },
+                    "width": 12
+                }
+            ],
+            "rule": {
+                "effect": "SHOW",
+                "condition": {
+                    "type": "LEAF",
+                    "expectedValue": true,
+                    "value": {
+                        "$ref": "#/properties/isPublicOfficial"
+                    }
+                }
+            }
+        },
+        {
+            "type": "GroupSeparator"
+        },
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "Input",
+                    "label": "naturalPersonCategory",
+                    "value": {
+                        "$ref": "#/properties/naturalPersonCategory"
+                    },
+                    "width": 12,
+                    "onValueChanged": [
+                        {
+                            "commandType": "executeAction",
+                            "actionName": "isNaturalPersonCategoryChanged"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "Group",
+            "label": "tableSoleProprietiorHistory",
+            "rule": {
+                "effect": "SHOW",
+                "condition": {
+                    "type": "FUNC",
+                    "ruleFunction": "showSoleProprietorHistory",
+                    "value": [
+                        {
+                            "$ref": "#/properties/naturalPersonCategory"
+                        },
+                        {
+                            "$ref": "#/properties/soleProprietorHistory"
+                        }
+                    ]
+                }
+            },
+            "elements": [
+                {
+                    "type": "Component",
+                    "name": "PartyWebsite",
+                    "value": {
+                        "$ref": "#/properties/site"
+                    }
+                },
+                {
+                    "type": "Component",
+                    "name": "SoleProprietorHistory",
+                    "value": {
+                        "$ref": "#/properties/soleProprietorHistory"
+                    }
+                },
+                {
+                    "type": "Component",
+                    "name": "PartyLicensesAdditionalInfo",
+                    "value": {
+                        "$ref": "#/properties/partyLicensesAdditionalInfo"
+                    }
+                },
+                {
+                    "type": "Component",
+                    "name": "PartyLicenses",
+                    "value": {
+                        "$ref": "#/properties/partyLicenses"
+                    },
+                    "eventHandlers": [
+                        {
+                            "eventName": "HAS_LICENSES_CHANGED",
+                            "senders": [
+                                "hasLicenses-id"
+                            ],
+                            "commands": {
+                                "commandType": "executeAction",
+                                "actionName": "onHasLicensesChanged"
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

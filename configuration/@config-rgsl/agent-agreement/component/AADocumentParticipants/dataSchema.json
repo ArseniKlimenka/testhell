@@ -1,0 +1,51 @@
+{
+    "type": "object",
+    "additionalProperties": false,
+    "aiDataEnrichment": [
+        {
+            "name": "PartyPersonEnrichment",
+            "dataSource": "GetPartyDataSource"
+        }
+    ],
+    "properties": {
+        "agent": {
+            "type": "object",
+            "properties": {
+                "serviceProviderCode": {
+                    "type": "string"
+                },
+                "serviceProviderType": {
+                    "$ref": "component:ServiceProviderEntityType"
+                },
+                "businessCode": {
+                    "type": "string"
+                },
+                "partyCode": {
+                    "type": "string"
+                },
+                "partyType": {
+                    "$ref": "component:PartyType"
+                },
+                "personalNumber": {
+                    "type": "string",
+                    "aiTitle": "Agent personal number"
+                },
+                "fullName": {
+                    "type": "string"
+                },
+                "partyBody": {
+                    "type": "object",
+                    "additionalProperties": true,
+                    "properties": {
+                        "partyBankAccounts": {
+                            "$ref": "component:PartyBankAccounts"
+                        }
+                    }
+                },
+                "bankAccount": {
+                    "$ref": "component:PartyBankAccount"
+                }
+            }
+        }
+    }
+}

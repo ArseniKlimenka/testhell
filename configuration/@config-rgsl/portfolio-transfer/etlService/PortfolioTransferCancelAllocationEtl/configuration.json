@@ -1,0 +1,54 @@
+{
+    "mainDataSource": "GetPortfolioDocumentContractsDataSource",
+    "useBackgroundTaskWorker": true,
+    "restartable": true,
+    "enableAutomaticRecovery": true,
+    "sinks": [
+        {
+            "name": "GetAllocations",
+            "fetch": {
+                "configuration": {
+                    "name": "AllocationDataSource"
+                }
+            }
+        },
+        {
+            "name": "CancelAllocations",
+            "class": {
+                "className": "Adacta.AdInsure.RGSL.Accounting.API.Shared.CashFlow.Allocation.Services.IAllocationServiceAppRGSL, Adacta.AdInsure.RGSL.Accounting.API",
+                "methodName": "Cancel"
+            }
+        },
+        {
+            "name": "SaveCancelledPayments",
+            "database": {
+                "tables": [
+                    "ACC_IMPL.PORTFOLIO_TRANSFER_DOCUMENT_SAT",
+                    "ACC_IMPL.PORTFOLIO_TRANSFER_DOCUMENT_PAYMENT_SAT"
+                ]
+            }
+        }
+    ],
+    "errorSinks": [
+        {
+            "name": "WriteErrorMessage",
+            "database": {
+                "tables": [
+                    "ACC_IMPL.PORTFOLIO_TRANSFER_DOCUMENT_SAT"
+                ]
+            }
+        }
+    ],
+    "completionSinks": [
+        {
+            "name": "StartNextEtl",
+            "etlService": {
+                "configuration": {
+                    "name": "PortfolioTransferCreateAmendmentEtl",
+                    "version": "1"
+                }
+            }
+        }
+    ],
+    "version": "1"
+}

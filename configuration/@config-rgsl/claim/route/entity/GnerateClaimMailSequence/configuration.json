@@ -1,0 +1,42 @@
+{
+    "entityType": "Claim",
+    "condition": {
+        "events": [
+            "StatusChanged"
+        ],
+        "configuration": {
+            "names": [
+                "Claim"
+            ]
+        },
+        "documentStates": [
+            "RequestToClient",
+            "RejectedByCommonReasons",
+            "Rejected"
+        ]
+    },
+    "sinks": [
+        {
+            "name": "GenerateSequence",
+            "sequence": {
+                "createNewSequenceName": true
+            }
+        },
+        {
+            "name": "UpdateClaim",
+            "document": {
+                "configuration": {
+                    "name": "Claim"
+                },
+                "allowUpdating": {
+                    "inStates": [
+                        "RequestToClient",
+                        "RejectedByCommonReasons",
+                        "Rejected"
+                    ]
+                }
+            }
+        }
+    ],
+    "version": "1"
+}

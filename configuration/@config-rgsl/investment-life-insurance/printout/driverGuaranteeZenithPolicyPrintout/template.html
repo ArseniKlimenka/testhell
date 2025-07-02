@@ -1,0 +1,1150 @@
+<!DOCTYPE html>
+<html lang="ru-RU" xml:lang="ru-RU" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+	<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+	<title>Договор</title>
+	<link rel="stylesheet" href="assets/styles/style.css">
+	{{{exampleLabel}}}
+	{{{bottomRightContentHolder}}}
+	{{{bottomRightContentBoth}}}
+	{{{bottomLeftContentHolder}}}
+	{{{bottomLeftContentBoth}}}
+	{{{signatureNone}}}
+	{{{reducePrintoutPagesTotalNumber}}}
+	{{{setKidPrintoutTopRunningTitle}}}
+	{{{setPolicyPrintoutRunningTitleIfKidExist}}}
+	{{{setKidPrintoutBottomRunningTitleFirstPage}}}
+	{{{setKidPrintoutBottomRunningTitleSecondPage}}} 
+	{{{setKidPrintoutBottomRunningTitleThirdPage}}}
+</head>
+
+<body>
+
+	<!-- для загрузки динамических изображений в хранилище печатки. -->
+	{{#if alwaysFalse}}
+		{{> ../../../life-insurance/component/TempSignatureContainer/printout/template.html }}
+	{{/if}}
+
+	{{#if alwaysFalse}}
+		{{> ../../component/InvestmentAppendixImageContainer/printout/template.html }}
+	{{/if}}
+	
+	<!-- Ключевой информационный документ - KID Printout Body -->
+	{{#if isKidPrintout}}
+		{{> ../../../life-insurance/component/KIDPrintoutBody/printout/template.html }}
+	{{/if}}
+
+	{{#if alwaysFalse}}
+		{{> ../../../life-insurance/component/CommonAppendixImageContainer/printout/template.html }}
+	{{/if}}
+
+	<!-- Памятка ВСС-->
+	{{#unless isKidPrintout}}
+	<div class="memory">
+		<div class="headermemo">
+			<p class="greymemo">ПАМЯТКА К ДОГОВОРУ СТРАХОВАНИЯ ЖИЗНИ</p>
+			<p class="whitememo">по программе «{{policy.product}}» № {{policy.number}} от {{policy.issueDate}} г.</p>
+		</div>
+
+		<div class="mainmemo">
+			<p>
+				Уважаемый Клиент, благодарим Вас за выбор ООО СК «Росгосстрах Жизнь» (далее – «Страховая компания»). Мы
+				надеемся, что наше сотрудничество будет приятным и долговременным. Для этого хотим обратить Ваше
+				внимание на важные условия договора страхования жизни (далее – «договор страхования» или «договор»),
+				заключенного на основании {{policy.rule}} (далее – «Правила страхования»):
+			</p>
+
+			<ul>
+				<li>
+					Договор страхования не является банковским вкладом и не входит в систему гарантирования Агентства по
+					страхованию вкладов в соответствии с Федеральным законом от 23.12.2003 №177-ФЗ «О страховании
+					вкладов
+					в банках Российской Федерации».
+				</li>
+				<li>
+					Договор страхования не предусматривает участия Страхователя в инвестиционном доходе Страховщика.
+				</li>
+				<li>
+					Договор страхования носит долгосрочный характер и предусматривает обязательства Страхователя по
+					оплате страховой премии (страховых взносов). Порядок и сроки уплаты страховой премии устанавливаются
+					договором страхования.
+				</li>
+				<li>
+					Обязательства по договору несет Страховая компания, а не {{typeOfPartner}}, при посредничестве
+					которого заключен договор страхования.
+				</li>
+			</ul>
+
+			<p class="boldmemo">
+				<strong>Расторжение договора страхования</strong>
+			</p>
+
+			<ul>
+				<li>
+					В случае досрочного прекращения договора страхования, Страхователю выплачивается выкупная сумма,
+					размер которой может быть меньше суммы уплаченных взносов. Размеры выкупной суммы и порядок ее
+					определения указаны в договоре и в Правилах страхования.
+				</li>
+				<li>
+					Расторжение договора страхования осуществляется на основании письменного заявления Страхователя.
+				</li>
+				<li>
+					Обращаем внимание, что Страхователь вправе отказаться от договора страхования в течение 30
+					(тридцати) календарных дней со дня его заключения при отсутствии в данном периоде событий,
+					имеющих признаки страхового случая. Оплаченная страховая премия в полном размере возвращается
+					Страхователю в течение 10 (десяти) рабочих дней.<span class="footnote">Указание Банка России от
+						20.11.2015 №3854-У «О минимальных (стандартных)
+						требованиях к условиям и порядку осуществления отдельных видов добровольного страхования»</span>
+				</li>
+			</ul>
+
+			<p class="boldmemo">
+				<strong>Порядок подачи заявления об отказе от договора страхования</strong>
+			</p>
+
+			<p>
+				Заявление можно подать одним из следующих способов по Вашему выбору:
+			</p>
+
+			<ul>
+				<li>
+					По почте на адрес Страховой компании: {{insurer.address2}}.
+				</li>
+				<li>
+					Путем личного обращения по месту приема заявлений. С информацией о способах и местах приема
+					заявлений Вы можете ознакомиться на официальном сайте Страховой компании (www.rgsl.ru).
+				</li>
+			</ul>
+
+			<p class="boldmemo">
+				<strong>При подаче заявления необходимо предоставить следующие документы:</strong>
+			</p>
+
+			<ol>
+				<li>
+					<strong>Заявление на расторжение</strong> (при личном визите форма для заполнения будет
+					предоставлена сотрудником Страховой компании).
+				</li>
+				<li>
+					<strong>Документ, удостоверяющий личность заявителя</strong> (в т. ч. применительно к паспорту
+					гражданина РФ, страницы с указанием места жительства).
+				</li>
+				<li>
+					<strong>Надлежащим образом оформленный документ, подтверждающий полномочия представителя</strong>
+					(при обращении представителей).
+				</li>
+			</ol>
+
+			<p>
+				Просим заполнять документы разборчивым почерком, лучше всего печатными буквами – так оператор сможет
+				быстрее обработать Ваше заявление.
+			</p>
+		</div>
+	</div>
+	{{/unless}}
+
+	<div class="policyPage">
+		<!-- Договор -->
+		<div class="policySignature">
+			<div class="container">
+
+				<div class="logoDiv">
+					<img src="../component/POImageConst/printout/assets/img/logoHeader.png" alt="Логотип Росгосстрах Жизнь" class="logo">
+				</div>
+				<div class="qrCodeAndInsurerInfo">
+					<div class="qrDiv">
+						<span class="qr_code">
+							{{QR}}
+						</span>
+					</div>
+					<div class="insurerInfoDiv">
+						<p>
+							<strong>Страховщик: </strong>ООО СК «Росгосстрах Жизнь», лицензии Банка России:
+							{{insurer.license}}. ИНН {{insurer.INN}}, КПП {{insurer.KPP}}<br>
+							<strong>Юридический адрес: </strong>{{insurer.address}}<br>
+							<strong>Реквизиты банка: </strong>{{bankInfo}}<br>
+							<strong>Телефон круглосуточного Контакт-центра: </strong>8 800 100 12 10 (бесплатный номер для
+							звонков по России).
+						</p>
+					</div>
+				</div>
+
+				<div class="container2">
+					<p id="qrInfoTop" class="qrInfo">Для оплаты считайте данный штрих код</p>
+					<p id="qrInfoMiddle" class="qrInfo">в мобильном приложении интернет-банка</p>
+					<p id="policyheadingTop" class="policyheading">ДОГОВОР СТРАХОВАНИЯ № {{policy.number}} от
+						{{policy.issueDate}} г.</p>
+					<p id="policyheadingMiddle" class="policyheading">по программе «{{policy.product}}»</p>
+					<p id="policyheadingButton" class="policyheading">на основании {{policy.rule}} (далее по тексту –
+						Правила).
+					</p>
+				</div>
+
+				<div class="policy_item">
+					I. СТРАХОВАТЕЛЬ
+				</div>
+
+				<table class="person">
+					<col class="col1">
+					<col class="col2">
+					<col class="col3">
+					<col class="col4">
+					<col class="col5">
+					<col class="col6">
+					<col class="col7">
+					<tr>
+						<td class="tgrey">Фамилия Имя Отчество:</td>
+						<td class="twhite" colspan="4">{{holder.fullName}}</td>
+						<td class="tgrey">Пол:</td>
+						<td class="twhite center">{{holder.gender}}</td>
+					</tr>
+					<tr>
+						<td class="tgrey">Дата рождения:</td>
+						<td class="twhite center" colspan="2">{{holder.dateOfBirth}}</td>
+						<td class="tgrey" colspan="2">Место рождения:</td>
+						<td class="twhite center" colspan="2">{{holder.birthPlace}}</td>
+					</tr>
+					<tr>
+						<td class="tgrey">Телефон:</td>
+						<td class="twhite center" colspan="2">{{holder.phoneNumber}}</td>
+						<td class="tgrey" colspan="2">Гражданство:</td>
+						<td class="twhite center" colspan="2">{{holder.citizenship}}</td>
+					</tr>
+					<tr>
+						<td class="tgrey">E-mail:</td>
+						<td class="twhite" colspan="6">{{holder.email}}</td>
+					</tr>
+					<tr>
+						<td class="tgrey">Документ, удостоверяющий личность:</td>
+						<td class="twhite" colspan="4">{{holder.document.typeAndSN}}</td>
+						<td class="tgrey">Дата выдачи:</td>
+						<td class="twhite center">{{holder.document.dateOfIssue}}</td>
+					</tr>
+					{{#unless holder.isNotIssuedBy}}
+					<tr>
+						<td class="tgrey">Кем выдан:</td>
+						<td class="twhite" colspan="6">{{holder.document.issuedBy}}</td>
+					</tr>
+					{{/unless}}
+					<tr>
+						<td class="tgrey">Адрес постоянной регистрации:</td>
+						<td class="twhite" colspan="6">{{holder.registrationAddress}}</td>
+					</tr>
+					<tr>
+						<td class="tgrey">Почтовый адрес:</td>
+						<td class="twhite" colspan="6">{{holder.postAddress}}</td>
+					</tr>
+				</table>
+
+				<div class="policy_item">
+					II. ЗАСТРАХОВАННЫЙ
+				</div>
+
+				<table class="person">
+					<col class="col1">
+					<col class="col2">
+					<col class="col3">
+					<col class="col4">
+					<col class="col5">
+					<col class="col6">
+					<col class="col7">
+					<tr>
+						<td class="tgrey">Фамилия Имя Отчество:</td>
+						<td class="twhite" colspan="4">{{insured.fullName}}</td>
+						<td class="tgrey">Пол:</td>
+						<td class="twhite  center">{{insured.gender}}</td>
+					</tr>
+					<tr>
+						<td class="tgrey">Дата рождения:</td>
+						<td class="twhite center" colspan="2">{{insured.dateOfBirth}}</td>
+						<td class="tgrey" colspan="2">Место рождения:</td>
+						<td class="twhite center" colspan="2">{{insured.birthPlace}}</td>
+					</tr>
+					<tr>
+						<td class="tgrey">Телефон:</td>
+						<td class="twhite center" colspan="2">{{insured.phoneNumber}}</td>
+						<td class="tgrey" colspan="2">Гражданство:</td>
+						<td class="twhite center" colspan="2">{{insured.citizenship}}</td>
+					</tr>
+					<tr>
+						<td class="tgrey">E-mail:</td>
+						<td class="twhite" colspan="6">{{insured.email}}</td>
+					</tr>
+					<tr>
+						<td class="tgrey">Документ, удостоверяющий личность:</td>
+						<td class="twhite" colspan="4">{{insured.document.typeAndSN}}</td>
+						<td class="tgrey">Дата выдачи:</td>
+						<td class="twhite center">{{insured.document.dateOfIssue}}</td>
+					</tr>
+					{{#unless insured.isNotIssuedBy}}
+					<tr>
+						<td class="tgrey">Кем выдан:</td>
+						<td class="twhite" colspan="6">{{insured.document.issuedBy}}</td>
+					</tr>
+					{{/unless}}
+					<tr>
+						<td class="tgrey">Адрес постоянной регистрации:</td>
+						<td class="twhite" colspan="6">{{insured.registrationAddress}}</td>
+					</tr>
+					<tr>
+						<td class="tgrey">Почтовый адрес:</td>
+						<td class="twhite" colspan="6">{{insured.postAddress}}</td>
+					</tr>
+				</table>
+
+				<div class="policy_item">
+					III. ВЫГОДОПРИОБРЕТАТЕЛИ НА СЛУЧАЙ СМЕРТИ ЗАСТРАХОВАННОГО
+				</div>
+
+				{{#if isBeneficiaries}}
+				<table class="person">
+					<col class="col1">
+					<col class="col2">
+					<col class="col3">
+					<col class="col4">
+					<col class="col5">
+					<col class="col6">
+					<col class="col7">
+					{{#each beneficiaries}}
+					<tr>
+						<td class="tgrey" colspan="7">Выгодоприобретатель {{this.index}}. Доля {{this.percentage}}%</td>
+					</tr>
+					<tr>
+						<td class="tgrey">Фамилия Имя Отчество, Дата рождения:</td>
+						<td class="twhite" colspan="4">{{this.beneficiar.fullName}}, {{this.beneficiar.dateOfBirth}}</td>
+						<td class="tgrey">Пол:</td>
+						<td class="twhite  center">{{this.beneficiar.gender}}</td>
+					</tr>
+					{{#if this.dateOfBirthPlaceOfBirth}}
+					<tr>
+						<td class="tgrey">Дата рождения:</td>
+						<td class="twhite center">{{this.beneficiar.dateOfBirth}}</td>
+						<td class="tgrey" colspan="2">Место рождения:</td>
+						<td class="twhite" colspan="3">{{this.beneficiar.placeOfBirth}}</td>
+					</tr>
+					{{/if}}
+					{{#if this.phoneEmailCitizenship}}
+					<tr>
+						<td class="tgrey">Телефон:</td>
+						<td class="twhite center">{{this.beneficiar.phoneNumber}}</td>
+						<td class="tgrey">E-mail:</td>
+						<td class="twhite center" colspan="2">{{this.beneficiar.email}}</td>
+						<td class="tgrey">Гражданство:</td>
+						<td class="twhite center">{{this.beneficiar.citizenship}}</td>
+					</tr>
+					{{/if}}
+					{{#if this.isDocument}}
+					<tr>
+						<td class="tgrey">Документ, удостоверяющий личность:</td>
+						<td class="twhite" colspan="4">{{this.beneficiar.document.typeAndSN}}</td>
+						<td class="tgrey">Дата выдачи:</td>
+						<td class="twhite center">{{this.beneficiar.document.dateOfIssue}}</td>
+					</tr>
+					{{#unless this.beneficiar.isNotIssuedBy}}
+					<tr>
+						<td class="tgrey">Кем выдан:</td>
+						<td class="twhite" colspan="6">{{this.beneficiar.document.document.issuedBy}}</td>
+					</tr>
+					{{/unless}}
+					{{/if}}
+					{{#if this.isRegistrationAddress}}
+					<tr>
+						<td class="tgrey">Адрес постоянной регистрации:</td>
+						<td class="twhite" colspan="6">{{this.beneficiar.registrationAddress}}</td>
+					</tr>
+					{{/if}}
+					{{#if this.isPostAddress}}
+					<tr>
+						<td class="tgrey">Почтовый адрес:</td>
+						<td class="twhite" colspan="6">{{this.beneficiar.postAddress}}</td>
+					</tr>
+					{{/if}}
+					{{/each}}
+				</table>
+				{{#if shareSumIsNot1}}
+				<p class="afterTable">
+					В случае если общая доля менее 100%, Выгодоприобретателями на случай смерти Застрахованного по
+					оставшейся доле являются наследники Застрахованного по закону.
+				</p>
+				{{/if}}
+				{{else}}
+				<p class="afterTable">
+					Наследники по закону
+				</p>
+				{{/if}}
+
+
+				<div class="policy_item">
+					IV. СТРАХОВЫЕ РИСКИ, СТРАХОВЫЕ СУММЫ, СТРАХОВАЯ ПРЕМИЯ, СРОК ДЕЙСТВИЯ ДОГОВОРА СТРАХОВАНИЯ
+				</div>
+
+				{{#if isPremiumSplit}}
+				<table class="risks">
+					<col class="col1">
+					<col class="col2">
+					<col class="col3">
+					<tr>
+						<td class="tgrey center">Страховые риски</td>
+						<td class="tgrey center">Страховая сумма, {{currency}}</td>
+						<td class="tgrey center">Размер единовременного страхового взноса, {{currency}}</td>
+					</tr>
+					{{#each risk.mandatory}}
+					<tr>
+						<td class="twhite">{{this.insuranceRisks}}</td>
+						<td class="twhite center">{{this.sumInsured}}</td>
+						<td class="twhite center">{{this.insurancePremium}}</td>
+					</tr>
+					{{/each}}
+				</table>
+				{{else}}
+				<table class="risks">
+					<col class="col1">
+					<col class="col2">
+					<col class="col3">
+					<tr>
+						<td class="tgrey center">Страховые риски</td>
+						<td class="tgrey center">Страховая сумма, {{currency}}</td>
+						<td class="tgrey center">Страховая премия, {{currency}}</td>
+					</tr>
+					<tr>
+						<td class="invisible" colspan="2"></td>
+						<td class="twhite center boldtext" rowspan="{{numberOfrisk}}">{{risk.premium.sum}}</td>
+					</tr>
+					{{#each risk.mandatory}}
+					<tr>
+						<td class="twhite">{{this.insuranceRisks}}</td>
+						<td class="twhite center">{{this.sumInsured}}</td>
+					</tr>
+					{{/each}}
+				</table>
+				{{/if}}
+
+				<p class="afterTable" id="marginTopAndButton">
+					При определении страховой суммы в договоре страхования в иностранной валюте страховая выплата
+					производится в рублях по курсу Банка России на дату выплаты. Банковские расходы, связанные с
+					осуществлением страховой выплаты, оплачиваются получателем платежа.
+				</p>
+
+				{{#if isPremiumSplit}}
+				<table class="insuranceTerms">
+					<col class="col1">
+					<col class="col2">
+					<col class="col3">
+					<tr>
+						<td class="tgrey" colspan="2">Периодичность оплаты страховой премии:</td>
+						<td class="twhite">единовременно</td>
+					</tr>
+					<tr>
+						<td class="tgrey" colspan="2">Размер страховой премии:</td>
+						<td class="twhite">{{risk.premium.sum}} {{currency}}</td>
+					</tr>
+					<tr>
+						<td class="tgrey" colspan="2">Страховая премия уплачивается:</td>
+						<td class="twhite">{{experationDate}}</td>
+					</tr>
+				</table>
+				{{else}}
+				<table class="insuranceTerms">
+					<col class="col1">
+					<col class="col2">
+					<col class="col3">
+					<tr>
+						<td class="tgrey" colspan="2">Страховая премия уплачивается единовременно в полном объеме не позднее:
+						</td>
+						<td class="twhite">{{experationDate}}</td>
+					</tr>
+				</table>
+				{{/if}}
+
+				{{#if isTextVTBAfterDecember}}
+				<p class="afterTable" id="marginTopAndButton">
+					В случае если страховая премия не была оплачена (или была оплачена не полностью) в указанный срок,
+					{{#if insuranceTerms.paymentPeriodLastDate}} либо в случае оплаты страховой премии позднее {{insuranceTerms.paymentPeriodLastDate}}, {{/if}}
+					Страховщик вправе считать договор страхования не вступившим в силу и произвести возврат поступивших средств Страхователю.
+					<br>Стороны признают, что события, имеющие признаки страхового и наступившие до уплаты страховой премии в полном объеме, не признаются страховым случаем и страховая выплата по ним не осуществляется (пункт 2 статьи 957 Гражданского кодекса Российской Федерации).
+					<br>При определении страховой премии в договоре страхования в иностранной валюте сумма, подлежащая уплате в рублях, определяется по курсу Банка России соответствующей валюты на дату оплаты. Банковские расходы, связанные с оплатой страховой премии, несет Страхователь.
+				</p>
+				{{else}}
+				<p class="afterTable" id="marginTopAndButton">
+					В случае если страховая премия не была оплачена (или была оплачена не полностью) в указанный срок,
+					{{#if insuranceTerms.paymentPeriodLastDate}} либо в случае оплаты страховой премии позднее {{insuranceTerms.paymentPeriodLastDate}}, {{/if}}
+					Страховщик вправе считать договор страхования не вступившим в силу и произвести возврат поступивших
+					средств Страхователю.
+					<br>При определении страховой премии в договоре страхования в иностранной валюте сумма, подлежащая
+					уплате в рублях, определяется по курсу Банка России соответствующей валюты на дату оплаты. Банковские
+					расходы, связанные с оплатой страховой премии, несет Страхователь.
+				</p>
+				{{/if}}
+				<table class="insuranceTerms">
+					<col class="col1">
+					<col class="col2">
+					<col class="col3">
+					<tr>
+						<td class="tgrey">Срок действия договора страхования:</td>
+						<td class="twhite center">{{insuranceTerms.text}}</td>
+						<td class="twhite textJustify">Договор страхования вступает в силу с {{insuranceTerms.startDate}}{{#unless textAfterFourthTable}}
+							при условии уплаты страховой премии в полном объеме{{/unless}} и действует до {{insuranceTerms.endDate}}
+							включительно.
+						</td>
+					</tr>
+				</table>
+
+				<div class="policy_item">
+					V. ВЫКУПНЫЕ СУММЫ
+				</div>
+
+				<table class="surrenderValues">
+					<col class="col1">
+					<col class="col2">
+					<col class="col3">
+					<tr>
+						<td class="tgrey center" colspan="2">Период действия договора страхования</td>
+						<td class="tgrey center" rowspan="2">Выкупная сумма, {{currency}}</td>
+					</tr>
+					<tr>
+						<td class="tgrey center">начало</td>
+						<td class="tgrey center">окончание</td>
+					</tr>
+					{{#each surrenderValues}}
+					<tr>
+						<td class="twhite center">{{this.periodStartDate}}</td>
+						<td class="twhite center">{{this.periodEndDate}}</td>
+						<td class="twhite center">{{this.surrenderValue}}</td>
+					</tr>
+					{{/each}}
+				</table>
+
+				<p class="afterTable">
+					При определении выкупной суммы в договоре страхования в иностранной валюте выплата выкупной суммы
+					переводится в рублях по курсу Банка России на дату выплаты. Банковские расходы, связанные с
+					осуществлением выплаты выкупной суммы, оплачиваются получателем платежа.
+				</p>
+
+				<div class="policy_item">
+					VI. ДЕКЛАРАЦИЯ О СОСТОЯНИИ ЗДОРОВЬЯ И
+					ФАКТОРАХ РИСКА ЗАСТРАХОВАННОГО
+				</div>
+
+				<table class="declarationMedical">
+					<col class="col1">
+					<col class="col2">
+					<col class="col3">
+					<tr>
+						<td class="twhite">Настоящим я, {{insured.fullName}},</td>
+						<td class="twhite"><input type="checkbox" checked> подтверждаю, что:</td>
+						<td class="twhite"><input type="checkbox"> не подтверждаю, что:</td>
+					</tr>
+				</table>
+
+				<ul class="declaration">
+					{{#each declarationMedical}}
+					<li>
+						<p>{{this}}</p>
+					</li>
+					{{/each}}
+				</ul>
+
+
+				<div class="policy_item">
+					VII. ДЕКЛАРАЦИЯ СТРАХОВАТЕЛЯ И ЗАСТРАХОВАННОГО
+				</div>
+
+				<table class="declarationMain">
+					<tr>
+						<td class="twhite">Настоящим Страхователь и Застрахованный</td>
+						<td class="twhite"><input type="checkbox" checked> подтверждают, что:</td>
+						<td class="twhite"><input type="checkbox"> не подтверждают, что:</td>
+					</tr>
+				</table>
+
+				<ul class="declaration">
+					{{#each declarationMain}}
+					<li>
+						<p>{{this}}</p>
+					</li>
+					{{/each}}
+				</ul>
+
+				<div class="policy_item">
+					VIII. ИНЫЕ УСЛОВИЯ
+				</div>
+
+				<ol class="otherCondition">
+					{{#if isIDG1}}
+					<li>
+						В случае отказа Страхователя (физического лица) от договора страхования в период, предусмотренный 
+						договором страхования и действующим законодательством, когда Страхователь имеет право на возврат 
+						уплаченной страховой премии (уплаченных страховых взносов) или её части. возврату подлежит сумма 
+						денежных средств в валюте, в которой она была уплачена. Стороны договорились, что размер страховой 
+						премии или её части, подлежащей возврату в рублях, определяется Страховщиком по курсу Банка России 
+						валюты, в которой выражены обязательства по договору страхования, на дату выплаты.
+					</li>
+					{{else}}
+					{{#if isIDGZENIT}}
+					<li>
+						В случае отказа Страхователя (физического лица) от договора страхования в период, предусмотренный
+						договором страхования и действующим законодательством, когда Страхователь имеет право на возврат
+						уплаченной страховой премии (уплаченных страховых взносов) или её части, возврату подлежит сумма
+						денежных средств в валюте, в которой она была уплачена. Стороны договорились, что размер страховой
+						премии или её части, подлежащей возврату в рублях, определяется Страховщиком по курсу Банка России
+						валюты, в которой выражены обязательства по договору страхования, на дату выплаты.
+					</li>
+					{{else}}
+					<li>
+						В случае отказа Страхователя (физического лица) от договора страхования в период, предусмотренный
+						договором страхования и действующим законодательством, когда Страхователь имеет право на возврат
+						уплаченной страховой премии (уплаченных страховых взносов), Страховщик осуществляет возврат
+						уплаченной Страхователем суммы в рублях независимо от курса валюты, в которой выражены обязательства
+						по договору страхования. Если страховая премия была уплачена в иной валюте, возврату подлежит сумма
+						денежных средств в валюте, в которой она была уплачена.
+					</li>
+					{{/if}}
+					{{/if}}
+					<li>
+						Если после заключения договора страхования будет выявлено, что Страхователь/Застрахованный сообщил в
+						настоящем договоре или иных документах, заполняемых при заключении договора страхования заведомо
+						ложные сведения или предоставил подложные документы, и если эти сведения или документы привели к
+						заключению договора страхования на условиях, отличных от тех, на которых он был бы заключен, то
+						Страховщик имеет право отказать в страховой выплате.
+					</li>
+					<li>
+						Стороны пришли к соглашению о том, что факсимильное воспроизведение подписей уполномоченных лиц
+						Страховщика и факсимильный оттиск печати Страховщика признаются сторонами аналогом собственноручной
+						подписи уполномоченных лиц Страховщика и оригинала печати Страховщика.
+					</li>
+					{{#if isIDGZENIT}}
+					<li>
+						В случае заключения договора страхования в электронном виде в соответствии с Соглашением об 
+						электронном документообороте, к которому присоединяется Страхователь, подписанный со стороны Страховщика 
+						усиленной квалифицированной электронной подписью договор страхования направляется Страхователю в электронном 
+						виде на адрес электронной почты, указанный в настоящем договоре страхования. Согласие Страхователя с условиями 
+						договора страхования подтверждается простой электронной подписью Страхователя в соответствии с Соглашением.
+					</li>
+					{{else}}
+					<li>
+						В случае заключения договора страхования в электронном виде в соответствии с Соглашением об
+						электронном документообороте, к которому присоединяется Страхователь, договор страхования, 
+						{{#unless isKidPrintout}}Памятка к договору страхования жизни, {{/unless}}
+						а также ссылка на Правила на официальном сайте, направляются
+						Страхователю в электронном виде на адрес электронной почты, указанный в настоящем договоре
+						страхования, подписанные со стороны Страховщика усиленной квалифицированной электронной подписью.
+						Согласие Страхователя с условиями договора страхования подтверждается простой электронной подписью
+						Страхователя в соответствии с Соглашением.
+					</li>
+					{{/if}}
+					<li>
+						Неотъемлемой частью договора страхования являются: 
+						{{#unless isKidPrintout}} Памятка к договору страхования жизни, {{/unless}}
+						заявления, составленные и заполненные по просьбе Страховщика Страхователем, а также Правила, с которыми
+						Страхователь ознакомился на сайте Страховщика. 		
+						{{#unless isKidPrintout}} Отдельные условия договора страхования разъяснены в 
+						Памятке к договору страхования жизни. {{/unless}}
+					</li>
+					{{#if otherCondition.isOtherCondition}}
+					<li>
+						{{otherCondition.policySpecialConditions}}
+					</li>
+					{{/if}}
+				</ol>
+				
+			</div>
+		</div>
+
+		{{#if isVTBBankDocument}}
+		<div class="signatureNone break">
+			<div class="VTBNotice">
+				<p class="textCenter boldText">
+					ИНФОРМАЦИЯ, ПРЕДОСТАВЛЯЕМАЯ БАНКОМ ВТБ (ПУБЛИЧНЫМ<br>
+					АКЦИОНЕРНЫМ ОБЩЕСТВОМ), ДЕЙСТВУЮЩИМ ОТ ИМЕНИ СТРАХОВОЙ<br>
+					ОРГАНИЗАЦИИ  ООО СК «РОСГОССТРАХ ЖИЗНЬ», ПРИ ЗАКЛЮЧЕНИИ С<br>
+					ФИЗИЧЕСКИМ ЛИЦОМ ДОГОВОРА ДОБРОВОЛЬНОГО СТРАХОВАНИЯ ЖИЗНИ 
+				</p>
+				<p class="textCenter boldText">№ {{policy.number}} от {{policy.issueDate}} г.</p>
+				<table class="VTBTable">
+					<col class="col1">
+					<col class="col2">
+					<col class="col3">
+					<col class="col4">
+					<tr>
+						<td class="boldText textCenter">
+							N<br>п/п
+						</td>
+						<td class="boldText textCenter">
+							Вид информации
+						</td>
+						<td class="boldText textCenter">
+							Содержание предоставляемой информации
+						</td>
+						<td class="boldText textCenter">
+							Подпись физического лица, подтверждающая его ознакомление с информацией
+						</td>
+					</tr>
+					<tr>
+						<td class="boldText textCenter">1</td>
+						<td class="boldText textCenter">2</td>
+						<td class="boldText textCenter">3</td>
+						<td class="boldText textCenter">4</td>
+					</tr>
+					<tr>
+						<td rowspan=3 class="textCenter">1</td>
+						<td rowspan=3>
+							Информация о договоре добровольного страхования жизни (далее - договор добровольного страхования)
+						</td>
+						<td>
+							1.1 Переданные по договору добровольного страхования денежные средства не подлежат страхованию в
+							соответствии с Федеральным законом от 23 декабря 2003 года N 177-ФЗ «О страховании вкладов в банках
+							Российской Федерации»
+						</td>
+						<td class="textCenter">
+							<p class="borderCheck"></p>
+							<p>С информацией ознакомлен</p>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							1.2 Отсутствует гарантия получения доходности*
+						</td>
+						<td class="textCenter">
+							<p class="borderCheck"></p>
+							<p>С информацией ознакомлен</p>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							1.3 Договор добровольного страхования не является договором банковского вклада (банковского счета)
+						</td>
+						<td class="textCenter">
+							<p class="borderCheck"></p>
+							<p>С информацией ознакомлен</p>
+						</td>
+					</tr>
+				</table>
+
+				<p class="textJustify">
+					*По договору добровольного страхования доход фиксирован и обеспечивается положительной разницей	между размером страховой суммы по риску «ДОЖИТИЕ» и размером уплаченной страховой премии.
+				</p>
+				<p class="textJustify">
+					Основные положения договора добровольного страхования указаны в Ключевом информационном документе об условиях
+					договора добровольного страхования, в том числе о его условиях и рисках, связанных с его исполнением.
+				</p>
+			</div>
+		</div>
+		{{/if}}	
+
+		<!-- Приложения Уведомление от Зенит-->
+		{{#if isZenithPartner}}
+		<section>
+			{{#if isAfter20230321}}
+			<div class="smallMargin zenitNotice">
+				<div class="logoDiv">
+					<img src="../../life-insurance/component/POImageConst/printout/assets/img/bankZenithLogo.png" alt="Логотип Банк ЗЕНИТ" class="logo">
+				</div>
+
+				<p class="textRight backgroundMarine">www.zenit.ru</p>
+
+				<p class="textCenter boldText">
+					Информация, предоставляемая ПАО Банк ЗЕНИТ, действующим от имени страховой организации при заключении с
+					физическим лицом договора добровольного страхования жизни
+				</p>
+
+				<p class="textJustify">
+					Я, {{holder.fullName}} (далее – Страхователь{{#if isPolicyHolder}} / Застрахованный{{/if}}), настоящим
+					подтверждаю, что ПАО Банк
+					ЗЕНИТ предоставило мне информацию о договоре страхования жизни страховой компании ООО СК
+					«Росгосстрах Жизнь» (далее – Страховщик):
+				</p>
+
+				<table class="zenithTable">
+					<col class="col1">
+					<col class="col2">
+					<col class="col3">
+					<col class="col4">
+					<tr>
+						<td class="boldText textCenter">
+							N п/п
+						</td>
+						<td class="boldText textCenter">
+							Вид информации
+						</td>
+						<td class="boldText textCenter">
+							Содержание предоставляемой информации
+						</td>
+						<td class="boldText textCenter">
+							Подпись физического лица, подтверждающая его ознакомление с информацией
+						</td>
+					</tr>
+					<tr>
+						<td class="boldText textCenter">1</td>
+						<td class="boldText textCenter">2</td>
+						<td class="boldText textCenter">3</td>
+						<td class="boldText textCenter">4</td>
+					</tr>
+					<tr>
+						<td rowspan="8" class="textCenter">1</td>
+						<td rowspan="8">
+							Информация о договоре добровольного страхования жизни на случай смерти, дожития 
+							до определенного возраста или срока, либо наступления иного события 
+							(далее - договор добровольного страхования, договор)
+						</td>
+						<td>
+							1.1 Переданные по договору добровольного страхования денежные средства не подлежат
+							страхованию
+							в соответствии с Федеральным законом от 23 декабря 2003 года № 177-ФЗ «О страховании
+							вкладов в
+							банках Российской Федерации»
+						</td>
+						<td class="textCenter">
+							<p class="borderCheck"></p>
+							<p>С информацией ознакомлен</p>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							1.2 Договор добровольного страхования не является договором банковского вклада (банковского
+							счета)
+						</td>
+						<td class="textCenter">
+							<p class="borderCheck"></p>
+							<p>С информацией ознакомлен</p>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							1.3 Размер гарантированной страховой суммы по риску «Дожитие» установлен договором добровольного страхования
+						</td>
+						<td class="textCenter">
+							<p class="borderCheck"></p>
+							<p>С информацией ознакомлен</p>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							1.4 Договор добровольного страхования подразумевает страхование имущественных интересов, связанных со смертью 
+							Застрахованного и с дожитием Застрахованного до определенного возраста или срока либо наступления иного события 
+							в жизни (конкретный перечень страховых рисков определен в договоре). Страховая выплата производится при наступлении 
+							страхового случая, предусмотренного договором
+						</td>
+						<td class="textCenter">
+							<p class="borderCheck"></p>
+							<p>С информацией ознакомлен</p>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							1.5 В течение первых 30 календарных дней со дня
+							заключения договора добровольного страхования действует «период охлаждения», в течение 
+							которого Страхователь вправе досрочно расторгнуть договор и получить возврат 
+							уплаченной страховой премии в полном объеме (кроме случаев, если по договору уже производились 
+							страховые выплаты, либо у Страховщика имеются заявления Застрахованного лица 
+							(выгодоприобретателя) о наступлении страхового случая по договору в течение «периода 
+							охлаждения» в порядке, предусмотренном Указанием Банка России от 20.11.2015 № 3854-У 
+							«О минимальных (стандартных) требованиях к условиям и порядку осуществления	отдельных
+							видов добровольного страхования»). Возврат уплаченной страховой премии осуществляется
+							Страховщиком				
+						</td>
+						<td class="textCenter">
+							<p class="borderCheck"></p>
+							<p>С информацией ознакомлен</p>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							1.6 При досрочном прекращении договора добровольного страхования по истечении «периода охлаждения»
+							Страховщик выплачивает Страхователю выкупную сумму в размере, определяемом согласно
+							договору, в зависимости от периода страхования, на который приходится дата досрочного
+							прекращения договора. При этом размер выкупной суммы может быть меньше суммы уплаченной
+							страховой премии по договору
+						</td>
+						<td class="textCenter">
+							<p class="borderCheck"></p>
+							<p>С информацией ознакомлен</p>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							1.7. В случае смерти Застрахованного лица в течение срока страхования, не являющейся 
+							страховым случаем в соответствии с условиями договора добровольного страхования, 
+							Страховщик выплачивает Страхователю выкупную сумму в размере, определяемом согласно 
+							договору, в зависимости от периода страхования, на который приходится дата досрочного 
+							прекращения договора. При этом размер выкупной суммы может быть меньше суммы уплаченной 
+							страховой премии по договору
+						</td>
+						<td class="textCenter">
+							<p class="borderCheck"></p>
+							<p>С информацией ознакомлен</p>
+						</td>
+					</tr>
+					{{#if isAfter02072025}}
+						<tr>
+							<td>
+								1.8 Вложение в базовый актив всех имеющихся у потребителя услуги (продукта) (Страхователя)
+								денежных средств либо их большей части, может привести к утрате всех его накполений
+							</td>
+							<td class="textCenter">
+								<p class="borderCheck"></p>
+								<p>С информацией ознакомлен</p>
+							</td>
+						</tr>
+					{{/if}}
+				</table>
+
+				<p class="textLeft">{{policy.issueDateDocumentationFormat}} г.</p>
+			</div>
+			{{else}}
+			<div class="smallMargin zenitNotice">
+				<div class="logoDiv">
+					<img src="../../life-insurance/component/POImageConst/printout/assets/img/bankZenithLogo.png" alt="Логотип Банк ЗЕНИТ" class="logo">
+				</div>
+
+				<p class="textRight backgroundMarine">www.zenit.ru</p>
+
+				<p class="textCenter boldText">
+					Информация, предоставляемая ПАО Банк ЗЕНИТ, действующим от имени страховой организации при заключении с
+					физическим лицом договора добровольного страхования жизни с условием выплаты гарантированного дохода по
+					ставке, зафиксированной в договоре добровольного страхования
+				</p>
+
+				<p class="textJustify">
+					Я, {{holder.fullName}} (далее – Страхователь{{#if isPolicyHolder}} / Застрахованный{{/if}}), настоящим
+					подтверждаю, что ПАО Банк
+					ЗЕНИТ предоставило мне информацию о договоре инвестиционного страхования жизни страховой компании ООО СК
+					«Росгосстрах Жизнь» (далее – Страховщик):
+				</p>
+
+				<table class="zenithTable">
+					<col class="col1">
+					<col class="col2">
+					<col class="col3">
+					<col class="col4">
+					<tr>
+						<td class="boldText textCenter">
+							N п/п
+						</td>
+						<td class="boldText textCenter">
+							Вид информации
+						</td>
+						<td class="boldText textCenter">
+							Содержание предоставляемой информации
+						</td>
+						<td class="boldText textCenter">
+							Подпись физического лица, подтверждающая его ознакомление с информацией
+						</td>
+					</tr>
+					<tr>
+						<td class="boldText textCenter">1</td>
+						<td class="boldText textCenter">2</td>
+						<td class="boldText textCenter">3</td>
+						<td class="boldText textCenter">4</td>
+					</tr>
+					<tr>
+						<td rowspan="8" class="textCenter">1</td>
+						<td rowspan="8">
+							Информация о договоре добровольного страхования жизни с условием периодических страховых выплат
+							(ренты, аннуитетов) и (или) с участием страхователя в инвестиционном доходе страховщика (далее -
+							договор добровольного страхования)
+						</td>
+						<td>
+							1.1 Переданные по договору добровольного страхования денежные средства не подлежат
+							страхованию
+							в соответствии с Федеральным законом от 23 декабря 2003 года № 177-ФЗ «О страховании
+							вкладов в
+							банках Российской Федерации»
+						</td>
+						<td class="textCenter">
+							<p class="borderCheck"></p>
+							<p>С информацией ознакомлен</p>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							1.2 Договор добровольного страхования не является договором банковского вклада (банковского
+							счета)
+						</td>
+						<td class="textCenter">
+							<p class="borderCheck"></p>
+							<p>С информацией ознакомлен</p>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							1.3 Размер гарантированного дохода установлен договором добровольного страхования
+						</td>
+						<td class="textCenter">
+							<p class="borderCheck"></p>
+							<p>С информацией ознакомлен</p>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							1.4 Договор добровольного страхования подразумевает страхование имущественных интересов,
+							связанных со смертью Застрахованного и с дожитием Застрахованного до определенного возраста или
+							срока (конкретный перечень страховых случаев определен в договоре). В составе страховой выплаты
+							Страхователю или иному лицу, в пользу которого заключен договор, может быть выплачен
+							дополнительный инвестиционный доход, если иное не предусмотрено условиями договора. Страховая
+							выплата производится при наступлении страхового случая, предусмотренного договором
+						</td>
+						<td class="textCenter">
+							<p class="borderCheck"></p>
+							<p>С информацией ознакомлен</p>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							1.5 В течение первых 14 или 30 календарных дней (в соответствии с условиями
+							договора) со дня
+							заключения договора действует «период охлаждения», в течение которого Страхователь
+							вправе
+							досрочно расторгнуть договор и получить возврат уплаченной страховой премии в полном
+							объеме
+							(кроме случаев, если по договору уже производились страховые выплаты, либо у Страховщика
+							имеются
+							заявления Застрахованного лица (выгодоприобретателя) о наступлении страхового случая по
+							договору
+							в течение «периода охлаждения» в порядке, предусмотренном Указанием Банка России от
+							20.11.2015 №
+							3854-У «О минимальных (стандартных) требованиях к условиям и порядку осуществления
+							отдельных
+							видов добровольного страхования». Возврат уплаченной страховой премии осуществляется
+							Страховщиком
+						</td>
+						<td class="textCenter">
+							<p class="borderCheck"></p>
+							<p>С информацией ознакомлен</p>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							1.6 При досрочном прекращении договора по истечении «периода охлаждения»
+							Страховщик выплачивает Страхователю выкупную сумму в размере, определяемом согласно
+							договору, в зависимости от периода страхования, на который приходится дата досрочного
+							прекращения договора. При этом размер выкупной суммы может быть меньше суммы уплаченной
+							страховой премии по договору.
+						</td>
+						<td class="textCenter">
+							<p class="borderCheck"></p>
+							<p>С информацией ознакомлен</p>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							1.7 В случае смерти Застрахованного лица в течение срока страхования, не являющейся страховым
+							случаем в соответствии с условиями договора, Страховщик выплачивает Страхователю выкупную сумму
+							в размере, определяемом согласно договору, в зависимости от периода страхования, на который
+							приходится дата досрочного прекращения договора. При этом размер выкупной суммы может быть
+							меньше суммы уплаченной страховой премии по договору.
+						</td>
+						<td class="textCenter">
+							<p class="borderCheck"></p>
+							<p>С информацией ознакомлен</p>
+						</td>
+					</tr>
+					{{#if isAfter02072025}}
+						<tr>
+							<td>
+								1.8 Вложение в базовый актив всех имеющихся у потребителя услуги (продукта) (Страхователя)
+								денежных средств либо их большей части, может привести к утрате всех его накполений
+							</td>
+							<td class="textCenter">
+								<p class="borderCheck"></p>
+								<p>С информацией ознакомлен</p>
+							</td>
+						</tr>
+					{{/if}}
+				</table>
+
+				<p class="textLeft">{{policy.issueDateDocumentationFormat}} г.</p>
+			</div>
+			{{/if}}
+		</section>
+		{{/if}}
+
+		{{#if isIDGP1VTB}}
+		{{#if holder70plus}}
+		<div class="Holder70VTBPage">
+			<div class="VTBNotice">
+				<p class="textCenter">
+					Анкета по Комплексной программе страхования «{{policy.product}}» 
+				</p>
+				<table class="VTBTableAnketa">
+					<col class="col1">
+					<col class="col2">
+					<tr>
+						<td class="textCenter">
+							Краткая информация по договору страхования
+						</td>
+						<td class="textCenter">
+							Подтверждение<br>
+							(Страхователь<br>
+							подписывает/ставит галочку)
+						</td>
+					</tr>
+					<tr>
+						<td>
+							Договор страхования <b>не является банковским вкладом</b> и не входит в систему страхования
+							вкладов АСВ* в соответствии с Федеральным законом от 23 декабря 2003 года N 177-ФЗ
+							"О страховании вкладов в банках Российской Федерации".
+						</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>
+							Договором страхования <b>не предусмотрен дополнительный инвестиционный доход</b>. Доход
+							сформирован в размере страховой суммы по риску «Дожитие» и выражается разницей между
+							страховой суммой по риску «Дожитие» к ранее уплаченной премии.
+						</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>
+							При досрочном расторжении договора страхования, возвращается выкупная сумма, за исключением
+							отказа от договора в период охлаждения, при этом <b>выкупная сумма меньше внесенных страховых
+							взносов</b>, размер выкупной суммы установлен договором.<br>
+						</td>
+						<td>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							Страхователь имеет право <b>отказаться от договора страхования с возвратом всех внесенных
+							средств в срок 30</b> (тридцать) календарных дней с даты заключения договора страхования
+							(период охлаждения).<br>
+						</td>
+						<td>
+						</td>
+					</tr>
+				</table>
+		
+				<p>
+					*АСВ - Агентство по страхованию вкладов
+				</p>
+				<p class="boldText">
+					Страхователь: Подписывая настоящую Анкету подтверждаю, что мне полностью объяснены условия
+					страхования, с условиями страхования ознакомлен и согласен.
+				</p>
+		
+				<p>_______________________/_______________________________________________/__________________</p>
+				<div class="subsribe">
+					<span class="smallText">Подпись</span>
+					<span class="smallText">Фамилия, имя, отчество <b>(полностью,<br> заполняется от руки клиента)</b></span>
+					<span class="smallText">Дата</span>
+				</div>
+		
+				<p><b>Представитель Банка</b> (подтверждает):</p>
+				<p><i>Анкета собственноручно заполнена Страхователем</i></p>
+		
+				<p>_______________________/_______________________________________________/__________________</p>
+				<div class="subsribe">
+					<span class="smallText">Подпись</span>
+					<span class="smallText">Фамилия, имя, отчество</span>
+					<span class="smallText">Дата</span>
+				</div>
+			</div>
+		</div>
+		{{/if}}
+		{{/if}}
+	</div>
+
+</body>
+
+</html>

@@ -1,0 +1,40 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema",
+    "type": "object",
+    "additionalProperties": false,
+    "aiValidation": {
+        "rule": "validateReinsurer"
+    },
+    "aiAudit": {
+        "scope": "General"
+    },
+    "properties": {
+        "reinsurerCode": {
+            "type": "string",
+            "aiTitle": "reinsurerCode"
+        },
+        "reinsurerType": {
+            "type": "string",
+            "enum": [
+                "broker",
+                "insuranceCompany"
+            ],
+            "aiTitle": "reinsurerType"
+        },
+        "partyId": {
+            "type": "string"
+        },
+        "partyCode": {
+            "type": "string",
+            "aiTitle": "partyCode"
+        },
+        "partyDisplayName": {
+            "type": "string",
+            "aiTitle": "partyDisplayName"
+        },
+        "partyShortName": {
+            "type": "string",
+            "aiTitle": "partyDisplayName"
+        }
+    }
+}

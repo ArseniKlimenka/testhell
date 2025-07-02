@@ -1,0 +1,7 @@
+UPDATE BFX_IMPL.ADDRESS_TYPE
+   SET DESCRIPTION = N'Адрес фактический (проживания)'
+ WHERE CODE = N'F'
+ 
+ UPDATE BFX_IMPL.ADDRESS_TYPE
+   SET DESCRIPTION = N'Адрес корреспонденции'
+ WHERE CODE = N'P'

@@ -1,0 +1,126 @@
+{
+    "mainDataSource": "ImportStagingDataSource",
+    "aggregate": false,
+    "allowParallelExecution": false,
+    "allowMultipleTransactions": true,
+    "additionalDataSources": [
+        "RGSBranchesDataSource"
+    ],
+    "initialisationSinks": [
+        {
+            "name": "StartSubAgentExcelETL",
+            "class": {
+                "className": "Adacta.AdInsure.RGSL.PAS.API.Shared.Contract.Services.ICollectiveContractService, Adacta.AdInsure.RGSL.PAS.API",
+                "methodName": "WriteTestLog"
+            }
+        }
+    ],
+    "sinks": [
+        {
+            "name": "GetSubAgent",
+            "fetch": {
+                "configuration": {
+                    "name": "SubAgentDataSource"
+                }
+            }
+        },
+        {
+            "name": "UpdateSubAgent",
+            "masterEntity": {
+                "configuration": {
+                    "name": "Employee",
+                    "version": "1"
+                },
+                "allowUpdating": true
+            }
+        },
+        {
+            "name": "GetPartyByCode",
+            "fetch": {
+                "configuration": {
+                    "name": "GetMasterEntityData"
+                }
+            }
+        },
+        {
+            "name": "UpdateParty",
+            "masterEntity": {
+                "configuration": {
+                    "name": "NaturalPerson",
+                    "version": "1"
+                },
+                "allowUpdating": true
+            }
+        },
+        {
+            "name": "GetByUserName",
+            "class": {
+                "className": "Adacta.AdInsure.Organisation.API.Public.Users.Services.IUserManagementService, Adacta.AdInsure.Organisation.API",
+                "methodName": "GetByUsername"
+            }
+        },
+        {
+            "name": "GetKeycloakUser",
+            "api": {
+                "configuration": {
+                    "name": "KeycloakGetUserByIdApiDataProvider"
+                }
+            }
+        },
+        {
+            "name": "UpdateKeycloakUser",
+            "api": {
+                "configuration": {
+                    "name": "KeycloakUpdateUserApiDataProvider"
+                }
+            }
+        },
+        {
+            "name": "WriteSuccessStatus",
+            "database": {
+                "tables": [
+                    "BFX.IMPORT_RECORD_STATUS"
+                ]
+            }
+        }
+    ],
+    "completionSinks": [
+        {
+            "name": "FinishSubAgentExcelETL",
+            "class": {
+                "className": "Adacta.AdInsure.RGSL.PAS.API.Shared.Contract.Services.ICollectiveContractService, Adacta.AdInsure.RGSL.PAS.API",
+                "methodName": "WriteTestLog"
+            }
+        },
+        {
+            "name": "setNSO",
+            "etlService": {
+                "configuration": {
+                    "name": "SetNSOEtlService",
+                    "version": "1"
+                }
+            }
+        },
+        {
+            "name": "FinishedImporting",
+            "documentTransition": {
+                "transition": {
+                    "transitionName": "FinishImporting",
+                    "configurationName": "SubAgentExcelImport",
+                    "configurationVersion": "1"
+                }
+            }
+        }
+    ],
+    "errorSinks": [
+        {
+            "name": "WriteErrorStatus",
+            "database": {
+                "tables": [
+                    "BFX.IMPORT_RECORD_STATUS"
+                ]
+            }
+        }
+    ],
+    "version": "1"
+}

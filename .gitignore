@@ -1,0 +1,114 @@
+# VS
+.vs
+bin
+obj
+plugins/**/*.csproj.user
+
+# build
+build/Cache
+
+# Extensions
+extensions/*/plugins
+Extensions/printout-assets
+
+# External CI
+.build/ci/external/*
+
+# packages
+packages
+
+# generated when deploying a package
+dist/*
+dist*.zip
+tools
+
+# generated files in test
+api-test-report/
+validate-test-report/
+test-results*.xml
+**/api-test-logs.log
+
+logs
+
+# configuration file must be ignored
+/configuration.json
+
+configuration/**/transfer/*.sql
+configuration/**/transfer/*.log
+configuration/**/transfer/**/*.json
+configuration/**/docs/process.md
+configuration/**/docs/*.html
+configuration/**/coverage/*.html
+configuration/**/translation/*translation_missing.csv
+configuration/**/translation/*translation_duplicate.csv
+configuration/**/dataSource/**/requestSchema.json
+configuration/**/dataSource/**/responseSchema.json
+configuration/**/printouts/*/*.js
+configuration/**/printouts/*/examples/*.html
+configuration/**/logs
+
+# Do not ignore mapping.js and rule.js inside printouts
+!configuration/**/printouts/*/mapping.js
+!configuration/**/printouts/*/rule.js
+
+# ASS generated data
+configuration/**/sink/*/mappingSchema.json
+configuration/**/sink/*/sinkDiagram.md
+configuration/**/route/*/testScenarios/*.md
+configuration/**/route/*/testExamples/*.md
+configuration/**/model/diagram/*/diagram.dot
+configuration/**/model/diagram/*/diagram.md
+configuration/**/sinkMappings/*/mappingSchema.json
+configuration/**/sinkMappings/*/sinkDiagram.md
+configuration/**/dataProvider/database/*/query*.js
+
+/configuration.json
+/configuration/**/*-test-report
+
+**/node_modules/
+/.vscode/
+!/.vscode/tasks.json
+!/.vscode/settings.json
+**/coverage/
+**/.nyc_output/
+**/yarn-error.log
+*-test-report/
+printout-assets/
+
+/**/configuration/**/*.dmn.json
+
+# Generated files in 'test'
+ass/test/**/*.md
+test-results*.xml
+/changelogs/preview.md
+
+# Logged output of import-test-data
+import-test-data*.json
+
+# Tooling
+.adi/cache
+!.adi/upgradeTrace.log
+.adi/templatingStore.json
+.adi/userSetting.json
+web-test-framework/
+
+# data provider generated files
+configuration/**/dataProvider/searchEngine/**/indexMapping.js
+
+# ignores subject and content.js which are created from notification
+configuration/**/templates/content.js
+configuration/**/templates/subject.js
+
+# ignores template.js which are generated from printout
+configuration/**/printout/template.js
+
+# Printout files
+
+# Configuration
+configuration/**/printout/*/template.js
+configuration/**/printout/*/template.*-*.js
+configuration/**/printout/*/output/*
+configuration/**/printout/*/examples/*.html
+
+# Keycloak
+keycloak/providers/

@@ -1,0 +1,74 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type":"object",
+    "additionalProperties": false,
+    "properties": {
+        "claimNumber": {
+            "type": "string"
+        },
+        "contractNumber": {
+            "type": "string"
+        },
+        "riskCode": {
+            "type": "string"
+        }, 
+        "riskDescription": {
+            "type": "string"
+        },
+        "statementReceivedDate": {
+            "type": "string",
+            "aiFormat": "date"
+        },
+        "contractCurrency": {
+            "type": "string"
+        },
+        "amountInContractCurrency": {
+            "type": "number"
+        },
+        "amountInRub": {
+            "type": "number"
+        },
+        "beneficiaryPartyCode": {
+            "type": "string"
+        },
+        "shouldUseNetting": {
+            "type": "boolean"
+        }, 
+        "nonAcceptance": {
+            "type": "boolean"
+        },
+        "numberOfNonAcceptancePayment": {
+            "type": "string"
+        },
+        "paymentBankAccountNumber": {
+            "type": "string"
+        },
+        "fixedExchangeRate": {
+            "type": "number"
+        },
+        "useFixedExchangeRate": {
+            "type": "boolean"
+        },
+        "paymentLines": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                    "lineType": {
+                        "type": "string"
+                    },
+                    "lineAmountInContractCurrency": {
+                        "type": "string"
+                    },
+                    "lineAmountInRubCurrency": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "amountToPayPercentage": {
+            "type": "number"
+        }
+    }
+}

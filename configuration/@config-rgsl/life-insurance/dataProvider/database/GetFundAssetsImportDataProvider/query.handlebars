@@ -1,0 +1,72 @@
+﻿{{#if parameters.isRelatedToFundReportDate}}
+WITH F_MAX_REPORTS AS (
+    SELECT TOP 1
+		f.REPORT_DATE, MAX(f.REPORT_DATE_VERSION) MAX_REPORT_DATE_VERSION
+	FROM BFX_IMPL.FUND f
+    WHERE 1 = 1
+    {{#if parameters.documentNumber}}
+        AND f.DOCUMENT_NUMBER = @documentNumber
+    {{/if}}
+    GROUP BY f.REPORT_DATE
+	ORDER BY f.REPORT_DATE DESC
+),
+
+FA_MAX_REPORTS AS (
+    SELECT
+		fa.REPORT_DATE, MAX(fa.REPORT_DATE_VERSION) MAX_REPORT_DATE_VERSION
+	FROM BFX_IMPL.FUND_ASSETS fa
+    WHERE 1 = 1
+    {{#if parameters.documentNumber}}
+        AND fa.DOCUMENT_NUMBER = @documentNumber
+    {{/if}}
+    GROUP BY fa.REPORT_DATE
+)
+{{/if}}
+
+SELECT fa.EXCEL_ROW_NUMBER
+      ,fa.ROW_NUMBER
+      ,fa.DOCUMENT_NUMBER
+      ,fa.ASSET_TYPE
+      ,fa.ASSET_NAME
+      ,fa.ISIN
+      ,fa.ASSET_CURRENT_SHARE
+      ,fa.ASSET_PURCHASE_PRICE_AVG
+      ,fa.STOCK_PURCHASED_NUMBER
+      ,fa.ASSET_AMOUNT_ON_PURCHASE_TIME
+      ,fa.ASSET_PRICE_ON_GENERATION_REPORT_DATE
+      ,fa.ASSETS_AMOUNT_ON_GENERATION_REPORT_DATE
+      ,fa.COUPON_RATE
+      ,fa.ACCUMULATED_COUPON_INCOME
+      ,fa.REPORT_DATE
+      ,fa.REPORT_DATE_VERSION
+      ,fa.IMPORT_DOCUMENT_ID
+      ,fa.CONF_VERSION
+      ,fa.LOADED_BY
+      ,fa.LOAD_DATE
+FROM BFX_IMPL.FUND_ASSETS fa
+{{#if parameters.isRelatedToFundReportDate}}
+JOIN F_MAX_REPORTS fmr ON fmr.REPORT_DATE = fa.REPORT_DATE
+JOIN FA_MAX_REPORTS famr ON famr.MAX_REPORT_DATE_VERSION = fa.REPORT_DATE_VERSION AND famr.REPORT_DATE = fa.REPORT_DATE
+{{/if}}
+WHERE 1 = 1
+{{#if parameters.importDocumentId}}
+	AND fa.IMPORT_DOCUMENT_ID = @importDocumentId
+{{/if}}
+{{#if parameters.documentNumber}}
+	AND fa.DOCUMENT_NUMBER = @documentNumber
+{{/if}}
+{{#if parameters.maxVersion}}
+	AND fa.CONF_VERSION = (SELECT MAX(CONF_VERSION) MAX_VERSION FROM BFX_IMPL.FUND_ASSETS)
+{{/if}}
+{{#if parameters.confVersion}}
+	AND fa.CONF_VERSION = @confVersion
+{{/if}}
+{{#if parameters.reportDate}}
+	AND fa.REPORT_DATE = @reportDate
+{{/if}}
+{{#if parameters.reportDateVersion}}
+	AND fa.REPORT_DATE_VERSION = @reportDateVersion
+{{/if}}
+{{#if parameters.maxReportDateVersion}}
+	AND fa.REPORT_DATE_VERSION = (SELECT MAX(REPORT_DATE_VERSION) MAX_REPORT_DATE_VERSION FROM BFX_IMPL.FUND_ASSETS)
+{{/if}}

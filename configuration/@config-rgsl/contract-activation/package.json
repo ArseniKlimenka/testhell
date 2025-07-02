@@ -1,0 +1,44 @@
+{
+  "name": "@config-rgsl/contract-activation",
+  "version": "1.0.0",
+  "description": "contract activation logic",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs",
+    "lib": "lib",
+    "test": "test"
+  },
+  "scripts": {
+    "test-coverage": "nyc --all --reporter=text-summary --reporter=lcov npm run test",
+    "test": "node ../../../node_modules/@adinsure-tools/test-runner -t unit -e local",
+    "test-debug": "node --inspect-brk ../../../node_modules/@adinsure-tools/test-runner -t unit -e local",
+    "generate-report-api": "node -e \"require('@adinsure-tools/test-framework').generateSummaryReport('../../../api-test-report','API')\"",
+    "test-validate": "node ../../../node_modules/@adinsure-tools/test-runner -t validation -e local -c test-validate-basic-setup.json",
+    "test-validate-debug": "node --inspect-brk ../../../node_modules/@adinsure-tools/test-runner -t validation -e local -c test-validate-basic-setup.json",
+    "test-db-init": "node -e \"require('@adinsure-tools/config-dbtest').createAnalyticalModel('./')\"",
+    "test-db": "node ../../../node_modules/@adinsure-tools/test-runner -t db -e local",
+    "test-db-debug": "node --inspect-brk ../../../node_modules/@adinsure-tools/test-runner -t db -e local",
+    "test-api": "node ../../../node_modules/@adinsure-tools/test-runner -t api -e local",
+    "test-api-debug": "node --inspect-brk ../../../node_modules/@adinsure-tools/test-runner -t api -e local"
+  },
+  "keywords": [
+    "configuration"
+  ],
+  "adInsure": {
+    "projectNameDisplay": "Contract Activation",
+    "parent": "@config-rgsl/contract",
+    "domain": "PolicyAdministrationProcesses",
+    "ownershipScope": "pas"
+  },
+  "dependencies": {
+    "@config-system/infrastructure": "43.4.0",
+    "@config-rgsl/work-calendar": "1.0.0",
+    "@config-rgsl/acc-base": "1.0.0",
+    "@config-rgsl/acc-payment-order": "1.0.0",
+    "@config-rgsl/accounting": "1.0.0",
+    "@config-rgsl/infrastructure": "1.0.0",
+    "@config-rgsl/life-insurance": "1.0.0",
+    "@config-rgsl/party": "1.0.0",
+    "@config-rgsl/agent-agreement-base": "1.0.0"
+  }
+}

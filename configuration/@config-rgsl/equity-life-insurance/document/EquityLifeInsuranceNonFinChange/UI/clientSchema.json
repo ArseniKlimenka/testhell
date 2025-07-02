@@ -1,0 +1,47 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema",
+    "type": "object",
+    "additionalProperties": true,
+    "properties": {
+        "inquiriesData": {
+            "type": "object",
+            "properties": {
+                "department": {
+                    "type": "object",
+                    "properties": {
+                        "code": {
+                            "type": "string"
+                        },
+                        "nameLocalized": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "textOfInquiry": {
+                    "type": "string"
+                },
+                "inquiryReasons": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "properties": {
+                            "code": {
+                                "type": "string"
+                            },
+                            "description": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "rateOfReturnRulesEquityActives": {
+            "type": "array",
+            "items": {
+                "$ref": "component:RateOfReturnEquityActives"
+            }
+        }
+    }
+}

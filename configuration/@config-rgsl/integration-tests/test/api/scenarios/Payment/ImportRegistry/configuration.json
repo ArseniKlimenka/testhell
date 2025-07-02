@@ -1,0 +1,36 @@
+{
+    "steps": [
+        {
+            "$ref": "CreatePayment",
+            "context": {
+                "fieldName": "bigPayment",
+                "data": {
+                    "amount": 100,
+                    "isRegistry": true
+                }
+            }
+        },
+        {
+            "code": "CreateRegistry",
+            "actor": "ChiefPaymentDistributor",
+            "requests": [],
+            "executor": {
+                "module": "./steps/createRegistry/executor.js",
+                "function": "createRegistry"
+            }
+        },
+        {
+            "code": "ValidateSmallPayments",
+            "requests": [],
+            "executor": {
+                "module": "./steps/validateSmallPayments/executor.js",
+                "function": "validateSmallPayments"
+            },
+            "assert": {
+                "expected": "./steps/validateSmallPayments/expectedResult.json",
+                "module": "./steps/validateSmallPayments/assert.js",
+                "function": "assertData"
+            }
+        }
+    ]
+}

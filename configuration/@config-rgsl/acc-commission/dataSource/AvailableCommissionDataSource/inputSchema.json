@@ -1,0 +1,49 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+        "criteria": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "aaServiceProviderCode": {
+                    "type": "string"
+                },
+                "aaServiceProviderName": {
+                    "type": "string"
+                },
+                "aaNumber": {
+                    "type": "string"
+                },
+                "transactionDateFrom": {
+                    "type": "string",
+                    "aiFormat": "date"
+                },
+                "transactionDateTo": {
+                    "type": "string",
+                    "aiFormat": "date"
+                },
+                "isDocCorrect": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "sort": {
+            "type": "array",
+            "additionalProperties": false,
+            "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                    "descending": {
+                        "type": "boolean"
+                    },
+                    "fieldName": {
+                        "type": "string"
+                    }
+                }
+            }
+        }
+    }
+}

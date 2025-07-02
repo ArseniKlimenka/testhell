@@ -1,0 +1,42 @@
+    {
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "additionalProperties": false,
+    "required": [
+        "contractNumber",
+        "stateCode"
+    ],
+    "properties": {
+        "contractNumber": {
+            "type": "string"
+        },
+        "stateCode": {
+            "type": "string"
+        },
+        "error": {
+            "type": "string"
+        },
+        "payments": {
+            "type":"array",
+            "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                    "bankStatementItemId",
+                    "payAmount",
+                    "docAmount"
+                ],
+                "properties": {
+                    "bankStatementItemId": {
+                        "type": "integer"
+                    },
+                    "payAmount": {
+                        "type": "number"
+                    },
+                    "docAmount": {
+                        "type": "number"
+                    }
+                }
+            }
+        }
+    }
+}

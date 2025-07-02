@@ -1,0 +1,53 @@
+{
+    "mainDataSource": "GetPortfolioDocumentContractsDataSource",
+    "useBackgroundTaskWorker": true,
+    "restartable": true,
+    "enableAutomaticRecovery": true,
+    "sinks": [
+        {
+            "name": "Allocate",
+            "class": {
+                "className": "Adacta.AdInsure.RGSL.Accounting.API.Shared.CashFlow.Allocation.Services.IAllocationServiceAppRGSL, Adacta.AdInsure.RGSL.Accounting.API",
+                "methodName": "Cancel"
+            }
+        },
+        {
+            "name": "ChangeState",
+            "database": {
+                "tables": [
+                    "ACC_IMPL.PORTFOLIO_TRANSFER_DOCUMENT_SAT"
+                ]
+            }
+        }
+    ],
+    "completionSinks": [
+        {
+            "name": "CheckFailedDocuments",
+            "fetch": {
+                "configuration": {
+                    "name": "GetPortfolioDocumentContractsDataSource"
+                }
+            }
+        },
+        {
+            "name": "FinishedTransferDocument",
+            "documentTransition": {
+                "transition": {
+                    "configurationName": "PortfolioTransfer",
+                    "configurationVersion": "1"
+                }
+            }
+        }
+    ],
+    "errorSinks": [
+        {
+            "name": "WriteErrorMessage",
+            "database": {
+                "tables": [
+                    "ACC_IMPL.PORTFOLIO_TRANSFER_DOCUMENT_SAT"
+                ]
+            }
+        }
+    ],
+    "version": "1"
+}

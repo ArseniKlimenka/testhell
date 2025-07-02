@@ -1,0 +1,207 @@
+{
+    "type": "Group",
+    "metadata": {
+        "autogenerate": false
+    },
+    "width": 12,
+    "elements": [
+        {
+            "type": "Group",
+            "metadata": {
+                "autogenerate": false
+            },
+            "width": 12,
+            "actions": [
+                "Add",
+                "Edit",
+                "Delete",
+                "Details"
+            ],
+            "elements": [
+                {
+                    "type": "DataGrid",
+                    "columns": [
+                        {
+                            "title": "Partner",
+                            "name": "Partner",
+                            "sortable": true,
+                            "cellContent": {
+                                "type": "OutputText",
+                                "defaultValue": "",
+                                "value": {
+                                    "$ref": "#/properties/partner/properties/partnerDescription"
+                                }
+                            }
+                        },
+                        {
+                            "title": "insuranceProduct",
+                            "name": "insuranceProduct",
+                            "sortable": true,
+                            "cellContent": {
+                                "type": "OutputText",
+                                "defaultValue": "",
+                                "value": {
+                                    "mapping": "getProductsString",
+                                    "$ref": "#/properties/insuranceProduct"
+                                }
+                            }
+                        },
+                        {
+                            "title": "limit",
+                            "name": "limit",
+                            "sortable": true,
+                            "cellContent": {
+                                "type": "OutputText",
+                                "defaultValue": "",
+                                "value": {
+                                    "$ref": "#/properties/limit"
+                                }
+                            }
+                        },
+                        {
+                            "title": "insuranceStartDate",
+                            "name": "insuranceStartDate",
+                            "sortable": true,
+                            "cellContent": {
+                                "type": "OutputText",
+                                "defaultValue": "",
+                                "value": {
+                                    "$ref": "#/properties/insuranceStartDate"
+                                }
+                            }
+                        }
+                    ],
+                    "metadata": {
+                        "autogenerate": true
+                    },
+                    "mode": "Array",
+                    "selection": {
+                        "mode": "None"
+                    },
+                    "useParentScope": true,
+                    "value": {
+                        "$ref": "#"
+                    },
+                    "width": 12,
+                    "edit": {
+                        "mode": "Detached"
+                    },
+                    "actions": [
+                        "Add",
+                        "Edit",
+                        "Delete",
+                        "Details"
+                    ],
+                    "detailsTemplates": {
+                        "edit": {
+                            "content": {
+                                "type": "GridLayout",
+                                "numberOfColumns": 4,
+                                "elements": [
+                                    {
+                                        "type": "Lookup",
+                                        "elementId": "partner",
+                                        "readOnly": false,
+                                        "label": "partner",
+                                        "commands": [
+                                            {
+                                                "commandType": "executeOperation",
+                                                "operation": "SEARCH",
+                                                "errorHandling": "silent",
+                                                "data": null
+                                            }
+                                        ],
+                                        "value": {
+                                            "$ref": "#/properties/partner/properties/partnerDescription"
+                                        },
+                                        "width": 2,
+                                        "clearButton": {
+                                            "clearAction": "partnerClear"
+                                        },
+                                        "dialog": {
+                                            "viewReference": {
+                                                "configurationCodeName": "ServiceProviderSearchView",
+                                                "configurationVersion": "1",
+                                                "configurationConceptType": "SearchView"
+                                            },
+                                            "onLoad": "partnerOnLoad"
+                                        },
+                                        "onSelected": "partnerOnSelected",
+                                        "selectedDisplayValueUISchema": {
+                                            "type": "Input",
+                                            "label": "partner",
+                                            "readOnly": false,
+                                            "value": {
+                                                "$ref": "#/properties/partner/properties/partnerDescription"
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "type": "Input",
+                                        "label": "insuranceProduct",
+                                        "value": {
+                                            "$ref": "#/properties/insuranceProduct"
+                                        },
+                                        "control": "Dropdown",
+                                        "autocomplete": {
+                                            "minTextLength": 0,
+                                            "dropDownItemsCount": 10000,
+                                            "selectItemOnMatch": false
+                                        },
+                                        "source": {
+                                            "dataSource": {
+                                                "name": "ProductsFilterDataSource",
+                                                "searchFieldPath": "description",
+                                                "requestMapping": "productRequestMapping",
+                                                "responseMapping": "productResponseMapping",
+                                                "resultCount": 10000
+                                            },
+                                            "displayValueTemplate": "{{expr productDescription}} ({{expr productCode}})"
+                                        },
+                                        "width": 2,
+                                        "filter": "insuranceProductFilter",
+                                        "elementId": "insuranceProductId",
+                                        "multiple": true
+                                    },
+                                    {
+                                        "type": "Input",
+                                        "control": "Number",
+                                        "decimalPlaces": 2,
+                                        "metadata": {
+                                            "autogenerate": true
+                                        },
+                                        "useParentScope": true,
+                                        "value": {
+                                            "$ref": "#/properties/limit"
+                                        },
+                                        "width": 2,
+                                        "label": "limit"
+                                    },
+                                    {
+                                        "type": "DatetimePicker",
+                                        "metadata": {
+                                            "autogenerate": true
+                                        },
+                                        "useParentScope": true,
+                                        "value": {
+                                            "$ref": "#/properties/insuranceStartDate"
+                                        },
+                                        "width": 2,
+                                        "label": "insuranceStartDate"
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "showDeleteConfirmation": true,
+                    "header": {
+                        "showNumberOfResults": true
+                    },
+                    "pagination": {
+                        "mode": "Regular"
+                    }
+                }
+            ]
+        }
+    ]
+}

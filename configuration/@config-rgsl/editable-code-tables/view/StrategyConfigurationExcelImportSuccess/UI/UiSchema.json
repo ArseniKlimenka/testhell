@@ -1,0 +1,68 @@
+{
+    "id": "UsersExcelImportSuccess",
+    "type": "Group",
+    "elements": [
+        {
+            "type": "GridLayout",
+            "numberOfColumns": 4,
+            "elements": [
+                {
+                    "type": "Section",
+                    "label": "Imported data",
+                    "sectionLevel": 1,
+                    "elements": [
+                        {
+                            "type": "ExportDataButton",
+                            "label": "Export",
+                            "width": 1
+                        },
+                        {
+                            "type": "DataGrid",
+                            "labelType": "H1",
+                            "header": {
+                                "showReloadButton": true,
+                                "showNumberOfResults": true
+                            },
+                            "orderBy": "Description",
+                            "mode": "DataSource",
+                            "pagination": {
+                                "mode": "Regular",
+                                "pageSizes": [
+                                    10,
+                                    20,
+                                    50
+                                ]
+                            },
+                            "selection": {
+                                "mode": "None"
+                            },
+                            "height": "None",
+                            "columns": [
+                                {
+                                    "sortable": false,
+                                    "title": "Import Document Id",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "value": {
+                                            "$ref": "#/properties/resultData/properties/importDocumentId"
+                                        }
+                                    }
+                                },
+                                {
+                                    "sortable": false,
+                                    "title": "Record key",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "value": {
+                                            "$ref": "#/properties/resultData/properties/recordKey"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,29 @@
+SELECT b.ID,
+       b.BIC,
+       b.NAME,
+       b.REGISTRATION_NUMBER,
+       b.CORRESPONDENT_ACCOUNT,
+       b.PARENT_BIC,
+       b.ADDRESS_INDEX,
+       b.REGION,
+       b.AREA_TYPE,
+       b.AREA_NAME,
+       b.ADDRESS_LINE,
+       b.FTD_NAME
+  FROM ORG_IMPL.BANK b
+ WHERE 1=1
+{{#if parameters.id}}
+   AND b.ID = @id
+{{/if}} 
+{{#if parameters.name}}
+   AND b.NAME LIKE @name
+{{/if}}
+{{#if parameters.bic}}
+   AND b.BIC LIKE @bic
+{{/if}}
+{{#if parameters.fullBic}}
+   AND b.BIC = @fullBic
+{{/if}}
+{{#if parameters.correspondentAccount}}
+   AND b.CORRESPONDENT_ACCOUNT LIKE @correspondentAccount
+{{/if}}

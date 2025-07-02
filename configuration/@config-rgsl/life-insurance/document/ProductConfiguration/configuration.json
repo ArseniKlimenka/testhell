@@ -1,0 +1,219 @@
+{
+    "entityType": "UniversalVersionedDocument",
+    "dimensions": {
+        "universalVersionedDocumentGroup": "ProductConfiguration",
+        "universalVersionedDocumentType": "Document"
+    },
+    "validFrom": "2000-01-01",
+    "attachments": [],
+    "ui": {
+        "layout": "VersionedDocumentLayout",
+        "composition": {
+            "MainContent": "MainContent",
+            "SummaryContent": "SummaryContent"
+        }
+    },
+    "states": [
+        {
+            "name": "Draft",
+            "actors": [
+                {
+                    "actor": "System",
+                    "uiSchema": "MainContent",
+                    "operations": [
+                        "Save"
+                    ],
+                    "transitions": [
+                        "Draft_to_Activated",
+                        "Draft_to_Cancelled"
+                    ],
+                    "relations": [],
+                    "allowComments": true
+                },
+                {
+                    "actor": "ProductConfigurationEditor",
+                    "uiSchema": "MainContent",
+                    "operations": [
+                        "Save"
+                    ],
+                    "transitions": [
+                        "Draft_to_Activated",
+                        "Draft_to_Cancelled"
+                    ],
+                    "relations": [],
+                    "allowComments": true
+                },
+                {
+                    "actor": "ProductConfigurationViewer",
+                    "uiSchema": "MainContent",
+                    "operations": [],
+                    "transitions": [],
+                    "relations": [],
+                    "allowComments": false
+                },
+                {
+                    "actor": "EconomicParametersEditor",
+                    "uiSchema": "MainContent",
+                    "operations": [
+                        "Save"
+                    ],
+                    "transitions": [
+                        "Draft_to_Activated",
+                        "Draft_to_Cancelled"
+                    ],
+                    "relations": [],
+                    "allowComments": true
+                },
+                {
+                    "actor": "EconomicParametersViewer",
+                    "uiSchema": "MainContent",
+                    "operations": [],
+                    "transitions": [],
+                    "relations": [],
+                    "allowComments": false
+                }
+            ]
+        },
+        {
+            "name": "Activated",
+            "actors": [
+                {
+                    "actor": "System",
+                    "uiSchema": "MainContent",
+                    "operations": [],
+                    "relations": [],
+                    "transitions": [],
+                    "allowComments": true
+                },
+                {
+                    "actor": "ProductConfigurationEditor",
+                    "uiSchema": "MainContent",
+                    "operations": [],
+                    "relations": [],
+                    "transitions": [],
+                    "allowComments": true
+                },
+                {
+                    "actor": "ProductConfigurationViewer",
+                    "uiSchema": "MainContent",
+                    "operations": [],
+                    "transitions": [],
+                    "relations": [],
+                    "allowComments": false
+                },
+                {
+                    "actor": "EconomicParametersEditor",
+                    "uiSchema": "MainContent",
+                    "operations": [],
+                    "relations": [],
+                    "transitions": [],
+                    "allowComments": true
+                },
+                {
+                    "actor": "EconomicParametersViewer",
+                    "uiSchema": "MainContent",
+                    "operations": [],
+                    "transitions": [],
+                    "relations": [],
+                    "allowComments": false
+                }
+            ]
+        },
+        {
+            "name": "Updating",
+            "actors": [
+                {
+                    "actor": "System",
+                    "uiSchema": "MainContent",
+                    "operations": [],
+                    "relations": [],
+                    "transitions": [
+                        "Updating_to_Activated"
+                    ],
+                    "allowComments": true
+                },
+                {
+                    "actor": "ProductConfigurationEditor",
+                    "uiSchema": "MainContent",
+                    "operations": [],
+                    "relations": [],
+                    "transitions": [
+                        "Updating_to_Activated"
+                    ],
+                    "allowComments": true
+                },
+                {
+                    "actor": "ProductConfigurationViewer",
+                    "uiSchema": "MainContent",
+                    "operations": [],
+                    "transitions": [],
+                    "relations": [],
+                    "allowComments": false
+                },
+                {
+                    "actor": "EconomicParametersEditor",
+                    "uiSchema": "MainContent",
+                    "operations": [],
+                    "relations": [],
+                    "transitions": [
+                        "Updating_to_Activated"
+                    ],
+                    "allowComments": true
+                },
+                {
+                    "actor": "EconomicParametersViewer",
+                    "uiSchema": "MainContent",
+                    "operations": [],
+                    "transitions": [],
+                    "relations": [],
+                    "allowComments": false
+                }
+            ]
+        },
+        {
+            "name": "Cancelled",
+            "actors": [
+                {
+                    "actor": "System",
+                    "uiSchema": "MainContent",
+                    "operations": [],
+                    "relations": [],
+                    "allowComments": true
+                },
+                {
+                    "actor": "ProductConfigurationEditor",
+                    "uiSchema": "MainContent",
+                    "operations": [],
+                    "relations": [],
+                    "allowComments": true
+                },
+                {
+                    "actor": "ProductConfigurationViewer",
+                    "uiSchema": "MainContent",
+                    "operations": [],
+                    "transitions": [],
+                    "relations": [],
+                    "allowComments": false
+                },
+                {
+                    "actor": "EconomicParametersEditor",
+                    "uiSchema": "MainContent",
+                    "operations": [],
+                    "relations": [],
+                    "allowComments": true
+                },
+                {
+                    "actor": "EconomicParametersViewer",
+                    "uiSchema": "MainContent",
+                    "operations": [],
+                    "transitions": [],
+                    "relations": [],
+                    "allowComments": false
+                }
+            ]
+        }
+    ],
+    "version": "1",
+    "transitions": {},
+    "components": []
+}

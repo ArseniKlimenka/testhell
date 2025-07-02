@@ -1,0 +1,50 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "array",
+    "aiDataEnrichment": [
+        {
+            "name": "SetAmendmentInquiries",
+            "dataSource": "CancellationInquiriesDataSource"
+        }
+    ],
+    "aiValidation": {
+        "rule": "validateInquiries"
+    },
+    "onLoad": "onLoadAction"
+    ,
+    "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+            "inquiryNumber": {
+                "type": "string"
+            },
+            "createdOn": {
+                "type": "string",
+            "aiFormat": "date-time"
+            },
+            "updatedOn": {
+                "type": "string",
+            "aiFormat": "date-time"
+            },
+            "createdOnSystemFormat": {
+                "type": "string"
+            },
+            "updatedOnSystemFormat": {
+                "type": "string"
+            },
+            "state": {
+                "type": "string"
+            },
+            "stateCode": {
+                "type": "string"
+            },
+            "departmentCodeDescription": {
+                "type": "string"
+            },
+            "departmentCodeName": {
+                "type": "string"
+            }
+        }
+    }
+}

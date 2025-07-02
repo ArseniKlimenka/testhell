@@ -1,0 +1,13 @@
+select
+	ouh.ORGANISATION_UNIT_CODE,
+	ouis.FULL_NAME
+from
+	ORG_IMPL.ORGANISATION_UNIT_HUB ouh
+	inner join org_impl.ORGANISATION_UNIT_INFO_SAT_LATEST ouis on ouis.ORGANISATION_UNIT_INFO_HKEY = ouh.ORGANISATION_UNIT_HKEY
+where 1=1
+{{#if parameters.organisationUnitCode}}
+	and ouh.ORGANISATION_UNIT_CODE = @organisationUnitCode
+{{/if}}
+{{#if parameters.fullName}}
+	and ouis.FULL_NAME = @fullName
+{{/if}}

@@ -1,0 +1,92 @@
+{
+    "type": "GridLayout",
+    "numberOfColumns": 2,
+    "elements": [
+        {
+            "type": "Group",
+            "width": 1,
+            "elements": [
+                {
+                    "type": "Input",
+                    "control": "TextArea",
+                    "enableResize": true,
+                    "numberOfRows": 12,
+                    "label": "ContractNumbers",
+                    "value": {
+                        "$ref": "#/properties/request/properties/data/properties/criteria/properties/contractNumbersStr"
+                    },
+                    "width": 1
+                }
+            ]
+        },
+        {
+            "type": "GridLayout",
+            "width": 1,
+            "numberOfColumns": 2,
+            "elements": [
+                {
+                    "type": "Lookup",
+                    "width": 1,
+                    "value": {
+                        "$ref": "#"
+                    },
+                    "label": "AgentName",
+                    "dialogButton": {
+                        "icon": {
+                            "name": "User",
+                            "color": "Primary"
+                        }
+                    },
+                    "clearButton": {
+                        "clearAction": "aaServiceProviderCodeClearButton"
+                    },
+                    "dialog": {
+                        "viewReference": {
+                            "configurationCodeName": "ServiceProviderSearchView",
+                            "configurationConceptType": "SearchView",
+                            "configurationVersion": "1"
+                        }
+                    },
+                    "onSelected": "aaServiceProviderCodeSearchResultAssignment",
+                    "selectedDisplayValueUISchema": {
+                        "type": "Input",
+                        "label": "AgentName",
+                        "readOnly": true,
+                        "value": {
+                            "$ref": "#/properties/request/properties/data/properties/criteria/properties/aaServiceProviderCode"
+                        }
+                    }
+                },
+                {
+                    "type": "Lookup",
+                    "elementId": "AANumber",
+                    "width": 1,
+                    "value": {
+                        "$ref": "#"
+                    },
+                    "dialogButton": {},
+                    "dialog": {
+                        "viewReference": {
+                            "configurationCodeName": "AADocumentSearchView",
+                            "configurationVersion": "1",
+                            "configurationConceptType": "SearchView"
+                        },
+                        "onLoad": "aaNumberOnLoadSearchView"
+                    },
+                    "clearButton": {
+                        "clearAction": "aaNumberClearButton"
+                    },
+                    "onSelected": "aaNumberSearchResultAssignment",
+                    "selectedDisplayValueUISchema": {
+                        "type": "Input",
+                        "label": "AANumber",
+                        "readOnly": true,
+                        "value": {
+                            "$ref": "#/properties/request/properties/data/properties/criteria/properties/aaNumber"
+                        }
+                    }
+                }
+            ]
+        }
+    ]
+}

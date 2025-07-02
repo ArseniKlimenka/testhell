@@ -1,0 +1,40 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+        "criteria": {
+            "type": "object",
+            "additionalProperties": false,
+            "anyOf": [
+                {
+                    "required": [
+                        "actNo"
+                    ]
+                },
+                {
+                    "required": [
+                        "actItemIds"
+                    ],
+                    "properties": {
+                        "actItemIds": {
+                            "type": "array",
+                            "minItems": 1
+                        }
+                    }
+                }
+            ],
+            "properties": {
+                "actNo": {
+                    "type": "string"
+                },
+                "actItemIds": {
+                    "type": "array",
+                    "items": {
+                        "type": "integer"
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,39 @@
+{
+    "type": "Group",
+    "elements": [
+        {
+            "type": "Input",
+            "label": "General search",
+            "value": {
+                "$ref": "#/properties/request/properties/data/properties/criteria/properties/general"
+            },
+            "width": 1
+        },
+        {
+            "type": "Input",
+            "label": "Username",
+            "value": {
+                "$ref": "#/properties/request/properties/data/properties/criteria/properties/username"
+            },
+            "width": 1
+        },
+        {
+            "type": "Input",
+            "label": "UserGroup",
+            "value": {
+                "$ref": "#/properties/request/properties/data/properties/criteria/properties/userGroupCode"
+            },
+            "rule": {
+                "effect": "DISABLE_INITIAL",
+                "condition": {
+                    "type": "LEAF",
+                    "expectedValue": true,
+                    "value": {
+                        "$ref": "#/properties/viewContext/properties/lockUserGroupCode"
+                    }
+                }
+            },
+            "width": 1
+        }
+    ]
+}

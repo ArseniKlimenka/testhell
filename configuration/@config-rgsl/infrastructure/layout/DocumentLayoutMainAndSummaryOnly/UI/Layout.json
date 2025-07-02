@@ -1,0 +1,158 @@
+{
+    "id": "DocumentLayoutMainAndSummaryOnly",
+    "type": "Group",
+    "elements": [
+        {
+            "type": "GridLayout",
+            "numberOfColumns": 4,
+            "elements": [
+                {
+                    "type": "Group",
+                    "width": 4,
+                    "elements": [
+                        {
+                            "type": "Group",
+                            "elements": [
+                                {
+                                    "type": "Component",
+                                    "name": "DocumentHeader",
+                                    "value": {
+                                        "$ref": "#"
+                                    }
+                                },
+                                {
+                                    "type": "GridLayout",
+                                    "numberOfColumns": 4,
+                                    "width": 3,
+                                    "fillAvailableSpace": true,
+                                    "elements": [
+                                        {
+                                            "type": "Group",
+                                            "elements": [
+                                                {
+                                                    "type": "ContentPlaceholder",
+                                                    "name": "MainContent"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "SideContentLayout",
+                                    "fixedPosition": true,
+                                    "numberOfColumns": 2,
+                                    "width": 1,
+                                    "elements": [
+                                        {
+                                            "type": "GridLayout",
+                                            "numberOfColumns": 2,
+                                            "elements": [
+                                                {
+                                                    "type": "TabLayout",
+                                                    "elements": [
+                                                        {
+                                                            "type": "Tab",
+                                                            "tabType": "error",
+                                                            "elementId": "tab-Notifications",
+                                                            "icon": {
+                                                                "name": "Bell",
+                                                                "size": "Large"
+                                                            },
+                                                            "additionalInfo": {
+                                                                "display": "ValidationErrorsCount"
+                                                            },
+                                                            "elements": [
+                                                                {
+                                                                    "type": "ValidationSummary",
+                                                                    "elementId": "RequiredPropertiesValidations"
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "type": "Tab",
+                                                            "elementId": "tab-Audit Info",
+                                                            "icon": {
+                                                                "name": "Clipboard-Check",
+                                                                "size": "Large"
+                                                            },
+                                                            "elements": [
+                                                                {
+                                                                    "type": "Component",
+                                                                    "name": "AuditInfoME",
+                                                                    "value": {
+                                                                        "$ref": "#"
+                                                                    }
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "type": "Tab",
+                                                            "elementId": "tab-Summary",
+                                                            "icon": {
+                                                                "name": "Bars",
+                                                                "size": "Large"
+                                                            },
+                                                            "elements": [
+                                                                {
+                                                                    "type": "ContentPlaceholder",
+                                                                    "name": "SummaryContent"
+                                                                }
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "Component",
+                                    "name": "DocumentFooter",
+                                    "value": {
+                                        "$ref": "#"
+                                    }
+                                }
+                            ],
+                            "rule": {
+                                "effect": "HIDE",
+                                "condition": {
+                                    "type": "FUNC",
+                                    "value": [
+                                        {
+                                            "$ref": "#"
+                                        }
+                                    ],
+                                    "ruleFunction": "isExternalView"
+                                }
+                            }
+                        },
+                        {
+                            "type": "Group",
+                            "elements": [
+                                {
+                                    "type": "Component",
+                                    "name": "AttachmentsSection",
+                                    "value": {
+                                        "$ref": "#"
+                                    }
+                                }
+                            ],
+                            "rule": {
+                                "effect": "SHOW",
+                                "condition": {
+                                    "type": "FUNC",
+                                    "value": [
+                                        {
+                                            "$ref": "#"
+                                        }
+                                    ],
+                                    "ruleFunction": "isExternalView"
+                                }
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

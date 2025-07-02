@@ -1,0 +1,60 @@
+{
+    "type": "DataGrid",
+    "mode": "DataSource",
+    "header": {
+        "showReloadButton": true,
+        "showNumberOfResults": true
+    },
+    "pagination": {
+        "mode": "Regular",
+        "defaultPageSize": 10,
+        "pageSizes": [
+            5,
+            10,
+            15
+        ]
+    },
+    "selection": {
+        "mode": "None"
+    },
+    "height": "None",
+    "columns": [
+        {
+            "sortable": false,
+            "title": "validFrom",
+            "name": "validFrom",
+            "cellContent": {
+                "type": "OutputText",
+                "template": "{{expr validFrom 'dt'}}",
+                "defaultValue": "",
+                "value": {
+                    "$ref": "#/properties/resultData"
+                }
+            }
+        },
+        {
+            "sortable": false,
+            "title": "state",
+            "name": "state",
+            "cellContent": {
+                "type": "OutputText",
+                "defaultValue": "",
+                "value": {
+                    "$ref": "#/properties/resultData/properties/state"
+                }
+            }
+        },
+        {
+            "sortable": false,
+            "title": "changedByUser",
+            "name": "changedByUser",
+            "cellContent": {
+                "type": "OutputText",
+                "defaultValue": "",
+                "value": {
+                    "$ref": "#/properties/resultData/properties/changedByUser"
+                }
+            }
+        }
+    ]
+}

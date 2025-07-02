@@ -1,0 +1,41 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema",
+    "type": "object",
+    "description": "Party addresses satellite",
+    "aiReference": "PTY_IMPL.PARTY_HUB",
+    "aiGeneratedViews": {
+        "latestState": true,
+        "validState": false
+    },
+    "aiAdditionalKeys": [
+        "ADDRESS_TYPE_CODE",
+        "ACTUAL_FROM"
+    ],
+    "aiDeletionMode": {
+        "mode": "flag",
+        "columnName": "IS_DELETED"
+    },
+    "properties": {
+        "ADDRESS_TYPE_CODE": {
+            "type": "string",
+            "aiType": "nvarchar(256)"
+        },
+        "FULL_ADDRESS": {
+            "type": "string",
+            "aiType": "nvarchar(max)"
+        },
+        "ACTUAL_FROM": {
+            "type": "string",
+            "aiType": "date"
+        },
+        "ACTUAL_TO": {
+            "type": "string",
+            "aiType": "date"
+        },
+        "IS_DELETED": {
+            "type": "boolean",
+            "title": "isDeleted",
+            "aiType": "boolean"
+        }
+    }
+}

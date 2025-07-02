@@ -1,0 +1,421 @@
+{
+    "type": "GridLayout",
+    "numberOfColumns": 12,
+    "label": "InsuredList",
+    "formProperties": {
+        "events": {
+            "onLoad": "onLoad"
+        }
+    },
+    "elements": [
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "DataGrid",
+                    "mode": "DataSource",
+                    "header": {
+                        "showNumberOfResults": true
+                    },
+                    "actions": [
+                        "Details"
+                    ],
+                    "pagination": {
+                        "mode": "Regular",
+                        "pageSizes": [
+                            5,
+                            10,
+                            15
+                        ]
+                    },
+                    "height": "Medium",
+                    "width": 12,
+                    "columns": [
+                        {
+                            "sortable": false,
+                            "title": "partyCode",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "template": "{{expr partyCode}}",
+                                "defaultValue": " ",
+                                "value": {
+                                    "$ref": "#/properties/resultData/properties"
+                                }
+                            },
+                            "rule": {
+                                "effect": "SHOW",
+                                "condition": {
+                                    "type": "FUNC",
+                                    "ruleFunction": "showOnActives",
+                                    "value": [
+                                        {
+                                            "$ref": "#"
+                                        }
+                                    ]
+                                }
+                            },
+                            "name": "partyCode"
+                        },
+                        {
+                            "sortable": false,
+                            "title": "fullName",
+                            "cellContent": {
+                                "type": "Group",
+                                "elements": [
+                                    {
+                                        "type": "Link",
+                                        "targetType": "Entity",
+                                        "entityData": {
+                                            "entityType": "Party",
+                                            "businessNumber": "{{expr partyCode}}"
+                                        },
+                                        "value": {
+                                            "$ref": "#/properties/resultData/properties"
+                                        },
+                                        "content": {
+                                            "text": {
+                                                "type": "OutputText",
+                                                "value": {
+                                                    "$ref": "#/properties/fullName"
+                                                }
+                                            }
+                                        },
+                                        "rule": {
+                                            "effect": "SHOW",
+                                            "condition": {
+                                                "type": "FUNC",
+                                                "ruleFunction": "showOnActives",
+                                                "value": [
+                                                    {
+                                                        "$ref": "#"
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    },
+                                    {
+                                        "type": "OutputText",
+                                        "template": "{{expr fullName}}",
+                                        "defaultValue": " ",
+                                        "value": {
+                                            "$ref": "#/properties/resultData/properties"
+                                        },
+                                        "rule": {
+                                            "effect": "HIDE",
+                                            "condition": {
+                                                "type": "FUNC",
+                                                "ruleFunction": "showOnActives",
+                                                "value": [
+                                                    {
+                                                        "$ref": "#"
+                                                    }
+                                                ]
+                                            }
+                                        },
+                                        "name": "fullName"
+                                    }
+                                ]
+                            },
+                            "filter": {
+                                "content": {
+                                    "type": "Input",
+                                    "label": "fullNameFilter",
+                                    "value": {
+                                        "$ref": "#/properties/request/properties/data/properties/criteria/properties/fullName"
+                                    },
+                                    "width": 2
+                                }
+                            },
+                            "name": "fullName"
+                        },
+                        {
+                            "sortable": true,
+                            "title": "birthDay",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "template": "{{expr birthDay 'd'}}",
+                                "defaultValue": " ",
+                                "value": {
+                                    "$ref": "#/properties/resultData/properties"
+                                }
+                            },
+                            "name": "birthDay"
+                        },
+                        {
+                            "sortable": false,
+                            "title": "gender",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "template": "{{expr gender}}",
+                                "defaultValue": " ",
+                                "value": {
+                                    "$ref": "#/properties/resultData/properties"
+                                }
+                            },
+                            "name": "gender"
+                        },
+                        {
+                            "sortable": false,
+                            "title": "mobile",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "template": "{{expr mobile}}",
+                                "defaultValue": " ",
+                                "value": {
+                                    "$ref": "#/properties/resultData/properties"
+                                }
+                            },
+                            "rule": {
+                                "effect": "SHOW",
+                                "condition": {
+                                    "type": "FUNC",
+                                    "ruleFunction": "showForWithTarification",
+                                    "value": [
+                                        {
+                                            "$ref": "#"
+                                        }
+                                    ]
+                                }
+                            },
+                            "name": "mobile"
+                        },
+                        {
+                            "sortable": false,
+                            "title": "amount",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "defaultValue": " ",
+                                "value": {
+                                    "$ref": "#/properties/resultData/properties/amount"
+                                }
+                            },
+                            "rule": {
+                                "effect": "SHOW",
+                                "condition": {
+                                    "type": "FUNC",
+                                    "ruleFunction": "showForWithTarification",
+                                    "value": [
+                                        {
+                                            "$ref": "#"
+                                        }
+                                    ]
+                                }
+                            },
+                            "name": "amount"
+                        },
+                        {
+                            "sortable": false,
+                            "title": "premium",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "defaultValue": " ",
+                                "value": {
+                                    "$ref": "#/properties/resultData/properties/premium"
+                                }
+                            },
+                            "rule": {
+                                "effect": "SHOW",
+                                "condition": {
+                                    "type": "FUNC",
+                                    "ruleFunction": "showForWithTarification",
+                                    "value": [
+                                        {
+                                            "$ref": "#"
+                                        }
+                                    ]
+                                }
+                            },
+                            "name": "premium"
+                        },
+                        {
+                            "sortable": false,
+                            "title": "reinsurerCode",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "defaultValue": " ",
+                                "value": {
+                                    "$ref": "#/properties/resultData/properties/reinsurerCode"
+                                }
+                            },
+                            "rule": {
+                                "effect": "HIDE",
+                                "condition": {
+                                    "type": "FUNC",
+                                    "ruleFunction": "showForWithTarification",
+                                    "value": [
+                                        {
+                                            "$ref": "#"
+                                        }
+                                    ]
+                                }
+                            },
+                            "name": "reinsurerCode"
+                        },
+                        {
+                            "sortable": false,
+                            "title": "reinsurerName",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "defaultValue": " ",
+                                "value": {
+                                    "$ref": "#/properties/resultData/properties/reinsurerName"
+                                }
+                            },
+                            "rule": {
+                                "effect": "HIDE",
+                                "condition": {
+                                    "type": "FUNC",
+                                    "ruleFunction": "showForWithTarification",
+                                    "value": [
+                                        {
+                                            "$ref": "#"
+                                        }
+                                    ]
+                                }
+                            },
+                            "name": "reinsurerName"
+                        },
+                        {
+                            "sortable": false,
+                            "title": "reinsurerShare",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "defaultValue": " ",
+                                "value": {
+                                    "$ref": "#/properties/resultData/properties/"
+                                },
+                                "template": "{{expr reinsurerShare 'n:4'}}"
+                            },
+                            "rule": {
+                                "effect": "HIDE",
+                                "condition": {
+                                    "type": "FUNC",
+                                    "ruleFunction": "showForWithTarification",
+                                    "value": [
+                                        {
+                                            "$ref": "#"
+                                        }
+                                    ]
+                                }
+                            },
+                            "name": "reinsurerShare"
+                        }
+                    ],
+                    "detailsTemplates": {
+                        "view": {
+                            "content": {
+                                "type": "GridLayout",
+                                "numberOfColumns": 4,
+                                "elements": [
+                                    {
+                                        "type": "DataGrid",
+                                        "mode": "Array",
+                                        "value": {
+                                            "$ref": "#/properties/resultData/properties/risks/"
+                                        },
+                                        "width": 12,
+                                        "columns": [
+                                            {
+                                                "sortable": false,
+                                                "title": "risk",
+                                                "cellContent": {
+                                                    "type": "OutputText",
+                                                    "value": {
+                                                        "$ref": "#/properties/risk"
+                                                    }
+                                                },
+                                                "name": "risk"
+                                            },
+                                            {
+                                                "sortable": false,
+                                                "title": "amount",
+                                                "cellContent": {
+                                                    "type": "OutputText",
+                                                    "value": {
+                                                        "$ref": "#/properties/insAmount"
+                                                    }
+                                                },
+                                                "name": "insAmount"
+                                            },
+                                            {
+                                                "sortable": false,
+                                                "title": "premium",
+                                                "cellContent": {
+                                                    "type": "OutputText",
+                                                    "value": {
+                                                        "$ref": "#/properties/insPremium"
+                                                    }
+                                                },
+                                                "name": "insPremium"
+                                            },
+                                            {
+                                                "sortable": false,
+                                                "title": "Reinsurance rate",
+                                                "cellContent": {
+                                                    "type": "OutputText",
+                                                    "value": {
+                                                        "$ref": "#/properties/"
+                                                    },
+                                                    "template": "{{expr reinsRate 'p:6'}}"
+                                                },
+                                                "name": "reinsRate"
+                                            },
+                                            {
+                                                "sortable": false,
+                                                "title": "Reinsurance premium",
+                                                "cellContent": {
+                                                    "type": "OutputText",
+                                                    "value": {
+                                                        "$ref": "#/properties/reinsPremium"
+                                                    }
+                                                },
+                                                "name": "reinsPremium"
+                                            },
+                                            {
+                                                "sortable": false,
+                                                "title": "startDate",
+                                                "cellContent": {
+                                                    "type": "OutputText",
+                                                    "value": {
+                                                        "$ref": "#/properties/startDate"
+                                                    }
+                                                },
+                                                "name": "startDate"
+                                            },
+                                            {
+                                                "sortable": false,
+                                                "title": "endDate",
+                                                "cellContent": {
+                                                    "type": "OutputText",
+                                                    "value": {
+                                                        "$ref": "#/properties/endDate"
+                                                    }
+                                                },
+                                                "name": "endDate"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "type": "Group",
+            "width": 12,
+            "stackContent": "Left",
+            "elements": [
+                {
+                    "elementId": "exportDataButton",
+                    "type": "ExportDataButton",
+                    "labelColor": "Primary",
+                    "backgroundColor": "BackgroundColor",
+                    "fill": "Solid",
+                    "label": "Export data"
+                }
+            ]
+        }
+    ]
+}

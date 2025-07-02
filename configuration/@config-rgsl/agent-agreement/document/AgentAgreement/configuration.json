@@ -1,0 +1,177 @@
+{
+    "dimensions": {
+        "agentAgreementType": "Agreement"
+    },
+    "entityType": "AgentAgreement",
+    "hideFromDashboard": false,
+    "ui": {
+        "layout": "VersionedDocumentLayout",
+        "composition": {
+            "SummaryContent": "SummaryContent",
+            "MainContent": "MainContent"
+        }
+    },
+    "validFrom": "2000-01-01",
+    "states": [
+        {
+            "name": "Draft",
+            "actors": [
+                {
+                    "actor": "AdministratorAA",
+                    "uiSchema": "MainContent",
+                    "transitions": [
+                        "DraftToActivated",
+                        "DraftToAnnulled"
+                    ],
+                    "operations": [
+                        "Save"
+                    ],
+                    "allowComments": true,
+                    "relations": []
+                },
+                {
+                    "actor": "General",
+                    "uiSchema": "MainContent",
+                    "transitions": [],
+                    "operations": [],
+                    "relations": []
+                },
+                {
+                    "actor": "ViewerAA",
+                    "uiSchema": "MainContent",
+                    "transitions": [],
+                    "operations": [],
+                    "relations": []
+                }
+            ]
+        },
+        {
+            "name": "Activated",
+            "actors": [
+                {
+                    "actor": "AdministratorAA",
+                    "uiSchema": "MainContent",
+                    "transitions": [
+                        "ActivatedToPortfolioMovement"
+                    ],
+                    "allowComments": true,
+                    "relations": []
+                },
+                {
+                    "actor": "General",
+                    "uiSchema": "MainContent",
+                    "transitions": [],
+                    "operations": [],
+                    "relations": []
+                },
+                {
+                    "actor": "ViewerAA",
+                    "uiSchema": "MainContent",
+                    "transitions": [],
+                    "operations": [],
+                    "relations": []
+                }
+            ]
+        },
+        {
+            "name": "PortfolioMovement",
+            "actors": [
+                {
+                    "actor": "AdministratorAA",
+                    "uiSchema": "MainContent",
+                    "transitions": [],
+                    "allowComments": true,
+                    "relations": []
+                },
+                {
+                    "actor": "General",
+                    "uiSchema": "MainContent",
+                    "transitions": [],
+                    "operations": [],
+                    "relations": []
+                },
+                {
+                    "actor": "ViewerAA",
+                    "uiSchema": "MainContent",
+                    "transitions": [],
+                    "operations": [],
+                    "relations": []
+                }
+            ]
+        },
+        {
+            "name": "Cancelled",
+            "actors": [
+                {
+                    "actor": "AdministratorAA",
+                    "uiSchema": "MainContent",
+                    "transitions": [],
+                    "allowComments": true,
+                    "relations": []
+                },
+                {
+                    "actor": "General",
+                    "uiSchema": "MainContent",
+                    "transitions": [],
+                    "operations": [],
+                    "relations": []
+                },
+                {
+                    "actor": "ViewerAA",
+                    "uiSchema": "MainContent",
+                    "transitions": [],
+                    "operations": [],
+                    "relations": []
+                }
+            ]
+        },
+        {
+            "name": "Annulled",
+            "actors": [
+                {
+                    "actor": "AdministratorAA",
+                    "uiSchema": "MainContent",
+                    "transitions": [],
+                    "allowComments": true,
+                    "relations": []
+                },
+                {
+                    "actor": "General",
+                    "uiSchema": "MainContent",
+                    "transitions": [],
+                    "operations": [],
+                    "relations": []
+                },
+                {
+                    "actor": "ViewerAA",
+                    "uiSchema": "MainContent",
+                    "transitions": [],
+                    "operations": [],
+                    "relations": []
+                }
+            ]
+        }
+    ],
+    "attachments": [
+        {
+            "attachmentType": "AgentAgreement",
+            "flow": "Incoming"
+        },
+        {
+            "attachmentType": "AAAmendment",
+            "flow": "Incoming"
+        },
+        {
+            "attachmentType": "AACancellationNotification",
+            "flow": "Incoming"
+        },
+        {
+            "attachmentType": "PortfolioMovement",
+            "flow": "Incoming"
+        }
+    ],
+    "components": [
+        "CurrencyCodeDropdown"
+    ],
+    "version": "1"
+}

@@ -1,0 +1,299 @@
+{
+    "type": "GridLayout",
+    "numberOfColumns": 4,
+    "formProperties": {
+        "events": {
+            "onLoad": "onLoad"
+        }
+    },
+    "eventHandlers": [
+        {
+            "eventName": "DOCUMENT_SELECTION_CHANGED",
+            "commands": {
+                "commandType": "executeAction",
+                "actionName": "documentSelectionChanged"
+            }
+        }
+    ],
+    "elements": [
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "GridLayout",
+                    "numberOfColumns": 4,
+                    "elements": [
+                        {
+                            "type": "HeaderContentLayout",
+                            "elements": [
+                                {
+                                    "type": "OutputText",
+                                    "skipTranslate": true,
+                                    "width": 3,
+                                    "stackContent": "Left",
+                                    "value": {
+                                        "$ref": "#"
+                                    },
+                                    "textStyle": {
+                                        "uppercase": true,
+                                        "textSize": "Normal",
+                                        "width": 1,
+                                        "textColor": "Black"
+                                    },
+                                    "template": "{{#style 'bold'}}{{#i18n}}{{expr ConfigurationCodeName}}@Title{{/i18n}}{{/style}}"
+                                },
+                                {
+                                    "type": "Group",
+                                    "width": 1,
+                                    "stackContent": "Right",
+                                    "elements": [
+                                        {
+                                            "type": "Actor",
+                                            "elementId": "ai-actor-selection-control",
+                                            "value": {
+                                                "$ref": "#/properties/WorkUnitActor"
+                                            }
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "Section",
+            "sectionLevel": 1,
+            "label": "Select document",
+            "collapsing": {
+                "enabled": false
+            },
+            "elements": [
+                {
+                    "type": "TabLayout",
+                    "elementId": "allocationTabs",
+                    "elements": [
+                        {
+                            "type": "Tab",
+                            "elementId": "policyOpenAmountTab",
+                            "title": "policyTab",
+                            "onTabLeave": {
+                                "commandType": "raiseEvent",
+                                "eventName": "ALLOCATION_TYPE_CHANGED"
+                            },
+                            "elements": [
+                                {
+                                    "type": "InlineView",
+                                    "showContainerActions": false,
+                                    "views": [
+                                        {
+                                            "viewReference": {
+                                                "configurationCodeName": "PolicyOpenAmountRgslView",
+                                                "configurationVersion": "1",
+                                                "configurationConceptType": "SearchView"
+                                            }
+                                        }
+                                    ],
+                                    "hide": false,
+                                    "elementId": "policyOpenAmountViewId"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Tab",
+                            "elementId": "paymentOrderOpenAmountTab",
+                            "title": "paymentOrderTab",
+                            "onTabLeave": {
+                                "commandType": "raiseEvent",
+                                "eventName": "ALLOCATION_TYPE_CHANGED"
+                            },
+                            "elements": [
+                                {
+                                    "type": "InlineView",
+                                    "showContainerActions": false,
+                                    "views": [
+                                        {
+                                            "viewReference": {
+                                                "configurationCodeName": "PaymentOrderOpenAmountRgslView",
+                                                "configurationVersion": "1",
+                                                "configurationConceptType": "SearchView"
+                                            }
+                                        }
+                                    ],
+                                    "hide": false,
+                                    "elementId": "paymentOrderOpenAmountViewId"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "Section",
+            "sectionLevel": 1,
+            "label": "Select payment",
+            "collapsing": {
+                "enabled": false
+            },
+            "elements": [
+                {
+                    "type": "Group",
+                    "elements": [
+                        {
+                            "type": "Group",
+                            "elements": [
+                                {
+                                    "type": "Lookup",
+                                    "elementId": "BSILookup",
+                                    "value": {
+                                        "$ref": "#"
+                                    },
+                                    "width": 1,
+                                    "dialogButton": {},
+                                    "dialog": {
+                                        "viewReference": {
+                                            "configurationCodeName": "BankStatementItemRgslView",
+                                            "configurationVersion": "1",
+                                            "configurationConceptType": "SearchView"
+                                        },
+                                        "onLoad": "initBsiRgslView",
+                                        "inputParameters": {
+                                            "uiContext": {
+                                                "selectionMode": "Single"
+                                            }
+                                        }
+                                    },
+                                    "onSelected": "bsiSearchResultAssignment",
+                                    "selectedDisplayValueUISchema": {
+                                        "type": "Input",
+                                        "label": "Payment",
+                                        "readOnly": true,
+                                        "value": {
+                                            "$ref": "#/properties/Body/properties/bankStatementItem/properties/id"
+                                        }
+                                    }
+                                },
+                                {
+                                    "type": "Input",
+                                    "label": "Payment no",
+                                    "value": {
+                                        "$ref": "#/properties/Body/properties/bankStatementItem/properties/no"
+                                    },
+                                    "width": 1,
+                                    "readOnly": true
+                                },
+                                {
+                                    "type": "Currency",
+                                    "label": "Available amount to allocate",
+                                    "currencyValue": {
+                                        "$ref": "#/properties/Body/properties/bankStatementItem/properties/currencyCode"
+                                    },
+                                    "value": {
+                                        "$ref": "#/properties/Body/properties/bankStatementItem/properties/openAmount"
+                                    },
+                                    "skipTranslate": true,
+                                    "width": 1,
+                                    "readOnly": true
+                                },
+                                {
+                                    "type": "OutputText",
+                                    "label": "ExchangeRateDate",
+                                    "elementId": "exchangeRateDateId",
+                                    "hide": true,
+                                    "value": {
+                                        "$ref": "#/properties/Body/properties/exchangeRateDate"
+                                    },
+                                    "skipTranslate": true,
+                                    "width": 1
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Group",
+                            "elements": [
+                                {
+                                    "type": "Currency",
+                                    "label": "Amount to allocate (payment currency)",
+                                    "currencyValue": {
+                                        "$ref": "#/properties/Body/properties/bankStatementItem/properties/currencyCode"
+                                    },
+                                    "value": {
+                                        "$ref": "#/properties/Body/properties/payAmountToAllocate"
+                                    },
+                                    "width": 1,
+                                    "onValueChanged": [
+                                        {
+                                            "commandType": "raiseEvent",
+                                            "eventName": "Selected"
+                                        },
+                                        {
+                                            "commandType": "executeAction",
+                                            "actionName": "onChangePayAmountToAllocate"
+                                        }
+                                    ],
+                                    "elementId": "allocationAmountPayCurrency"
+                                },
+                                {
+                                    "type": "Currency",
+                                    "label": "Amount to allocate (document currency)",
+                                    "currencyValue": {
+                                        "$ref": "#/properties/Body/properties/document/properties/currencyCode"
+                                    },
+                                    "value": {
+                                        "$ref": "#/properties/Body/properties/docAmountToAllocate"
+                                    },
+                                    "width": 1,
+                                    "onValueChanged": [
+                                        {
+                                            "commandType": "raiseEvent",
+                                            "eventName": "Selected"
+                                        },
+                                        {
+                                            "commandType": "executeAction",
+                                            "actionName": "onChangeDocAmountToAllocate"
+                                        }
+                                    ],
+                                    "elementId": "allocationAmountDocCurrency"
+                                },
+                                {
+                                    "type": "Input",
+                                    "label": "Tolerance type",
+                                    "control": "Dropdown",
+                                    "value": {
+                                        "$ref": "#/properties/Body/properties/toleranceType"
+                                    },
+                                    "width": 1
+                                },
+                                {
+                                    "type": "OutputText",
+                                    "label": "CrossRate",
+                                    "elementId": "crossRateId",
+                                    "hide": true,
+                                    "value": {
+                                        "$ref": "#/properties/Body/properties/crossRate"
+                                    },
+                                    "skipTranslate": true,
+                                    "width": 1
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Group",
+                            "elements": [
+                                {
+                                    "type": "Button",
+                                    "elementId": "allocationButtonId",
+                                    "readOnly": true,
+                                    "label": "Allocate",
+                                    "onClick": "allocate"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

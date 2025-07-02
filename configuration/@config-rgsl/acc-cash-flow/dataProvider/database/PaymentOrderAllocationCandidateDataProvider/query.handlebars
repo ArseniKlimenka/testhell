@@ -1,0 +1,64 @@
+select
+	art.CODE_NAME,
+	po.PAYMENT_ORDER_NUMBER as DOCUMENT_NO,
+	pos.PAYMENT_CURRENCY_CODE as CURRENCY_CODE,
+	pos.PAYMENT_ORDER_DATE,
+	pors.FULL_NAME as RECIPIENT_NAME,
+	ph.PARTY_CODE as RECIPIENT_CODE,
+	bal.OPEN_DEBT_AMOUNT,
+	bal.DEBT_AMOUNT
+from
+	acc.PAYMENT_ORDER po
+	inner join acc_impl.PAYMENT_ORDER_HUB poh on poh.PAYMENT_ORDER_NUMBER = po.PAYMENT_ORDER_NUMBER
+	inner join acc_impl.PAYMENT_ORDER_SAT_LATEST pos on pos.PAYMENT_ORDER_HKEY = poh.PAYMENT_ORDER_HKEY
+	left join acc_impl.PO_RECIPIENT_LINK porl on porl.PAYMENT_ORDER_HKEY = poh.PAYMENT_ORDER_HKEY
+	left join acc_impl.PO_RECIPIENT_SAT pors on pors.PO_RECIPIENT_HKEY = porl.PO_RECIPIENT_HKEY
+	left join pty_impl.PARTY_HUB ph on ph.PARTY_HKEY = porl.PARTY_HKEY
+	left join CFX.PUBLISHED_ARTIFACT art on art.PUBLISHED_ARTIFACT_ID = po.PUBLISHED_ARTIFACT_ID
+	left join cfg.PROCESS_STATE ps on po.STATE_ID = ps.PROCESS_STATE_ID
+	left join
+		(select
+				lines.DOCUMENT_NO,
+				lines.CURRENCY_CODE,
+				sum(lines.OPEN_AMOUNT) as OPEN_DEBT_AMOUNT,
+				sum(lines.AMOUNT) as DEBT_AMOUNT
+		from (select
+				poh.PAYMENT_ORDER_NUMBER as DOCUMENT_NO,
+				pos.PAYMENT_CURRENCY_CODE as CURRENCY_CODE,
+				pos.PO_CURRENCY_AMOUNT as AMOUNT,
+				pos.PO_CURRENCY_AMOUNT as OPEN_AMOUNT
+			from
+				acc_impl.PAYMENT_ORDER_HUB poh
+				inner join acc_impl.PAYMENT_ORDER_SAT_LATEST pos on pos.PAYMENT_ORDER_HKEY = poh.PAYMENT_ORDER_HKEY
+			union all
+			select
+				alc.DOCUMENT_NO,
+				alc.DOC_CURRENCY_CODE as CURRENCY_CODE,
+				0 as AMOUNT,
+				-(mat.DOC_AMOUNT + mat.TOLERANCE_DOC_AMOUNT) as OPEN_AMOUNT
+			from
+				acc_impl.ALLOCATION alc
+				inner join acc_impl.MATCHING mat on mat.ALLOCATION_ID = alc.ALLOCATION_ID
+			where alc.DOCUMENT_TYPE_ID = 3
+			) lines
+		group by
+			lines.DOCUMENT_NO,
+			lines.CURRENCY_CODE
+		) bal on bal.DOCUMENT_NO = po.PAYMENT_ORDER_NUMBER and bal.CURRENCY_CODE = pos.PAYMENT_CURRENCY_CODE
+WHERE bal.OPEN_DEBT_AMOUNT != 0
+	and ps.CODE_NAME = 'Approved'
+{{#if parameters.poNo}}
+	and po.PAYMENT_ORDER_NUMBER = @poNo
+{{/if}}
+{{#if parameters.recipientCode}}
+	and ph.PARTY_CODE = @recipientCode
+{{/if}}
+{{#if parameters.currencyCode}}
+	and pos.PAYMENT_CURRENCY_CODE = @currencyCode
+{{/if}}
+{{#if parameters.poDateFrom}}
+	and pos.PAYMENT_ORDER_DATE >= @poDateFrom
+{{/if}}
+{{#if parameters.poDateTo}}
+	and pos.PAYMENT_ORDER_DATE <= @poDateTo
+{{/if}}

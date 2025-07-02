@@ -1,0 +1,45 @@
+﻿SELECT
+	ud.UNIVERSAL_DOCUMENT_ID REQUEST_ID,
+	ud.UNIVERSAL_DOCUMENT_NUMBER REQUEST_NUMBER,
+	ps.CODE_NAME REQUEST_STATE,
+	JSON_VALUE(ud.BODY, '$.typeOfRequest') TYPE_OF_REQUEST,
+	JSON_VALUE(ud.BODY, '$.amendmentReason') AMENDMENT_REASON,
+	JSON_VALUE(ud.BODY, '$.issueDate') REQUEST_ISSUE_DATE,
+    pa.CODE_NAME REQUEST_CODE_NAME,
+	JSON_VALUE(ud.BODY, '$.contract.number') CONTRACT_NUMBER,
+	JSON_VALUE(ud.BODY, '$.recipient.partyData.partyCode') RECIPIENT_PARTY_CODE,
+	JSON_VALUE(ud.BODY, '$.recipient.partyData.partyFullName') RECIPIENT_PARTY_FULL_NAME,
+	JSON_VALUE(ud.BODY, '$.recipient.reasonForRecipient') REASON_FOR_RECIPIENT
+FROM BFX.UNIVERSAL_DOCUMENT ud
+LEFT JOIN CFX.PUBLISHED_ARTIFACT pa ON pa.PUBLISHED_ARTIFACT_ID = ud.PUBLISHED_ARTIFACT_ID
+LEFT JOIN CFG.PROCESS_STATE ps ON ps.PROCESS_STATE_ID = ud.STATE_ID
+WHERE
+    1 = 1
+AND pa.CODE_NAME = 'LifeInsuranceRequest'
+{{#if parameters.requestId}}
+    AND ud.UNIVERSAL_DOCUMENT_ID = @requestId
+{{/if}}
+{{#if parameters.requestNumber}}
+    AND ud.UNIVERSAL_DOCUMENT_NUMBER = @requestNumber
+{{/if}}
+{{#if parameters.excludeRequestNumber}}
+    AND ud.UNIVERSAL_DOCUMENT_NUMBER <> @excludeRequestNumber
+{{/if}}
+{{#if parameters.requestState}}
+    AND ps.CODE_NAME = @requestState
+{{/if}}
+{{#if parameters.typeOfRequest}}
+    AND JSON_VALUE(ud.BODY, '$.typeOfRequest') = @typeOfRequest
+{{/if}}
+{{#if parameters.amendmentReason}}
+    AND JSON_VALUE(ud.BODY, '$.amendmentReason') = @amendmentReason
+{{/if}}
+{{#if parameters.contractNumber}}
+    AND JSON_VALUE(ud.BODY, '$.contract.number') = @contractNumber
+{{/if}}
+{{#if parameters.isDidPayment}}
+AND 'didPayment' IN (
+    SELECT value
+    FROM OPENJSON(ud.body, '$.changeClass'))
+{{/if}}
+ORDER BY ud.UNIVERSAL_DOCUMENT_NUMBER

@@ -1,0 +1,26 @@
+{
+    "mainDataSource": "GetRepostAaCommissionPoliciesDataSource",
+    "additionalDataSources": [
+        "GetPeriodFirstOpenDateDataSource"
+    ],
+    "aggregate": true,
+    "useBackgroundTaskWorker": true,
+    "restartable": true,
+    "enableAutomaticRecovery": true,
+    "sinks": [
+        {
+            "ref": "CalculateInvoicedCommissionSinkGroup"
+        }
+    ],
+    "completionSinks": [
+        {
+            "name": "UpdateJobLog",
+            "database": {
+                "tables": [
+                    "PAS_IMPL.INVOICED_COMMISSION_JOB_LOG"
+                ]
+            }
+        }
+    ],
+    "version": "1"
+}

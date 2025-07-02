@@ -1,0 +1,19 @@
+select p.PARTY_CODE,
+       p.PARTY_ID,
+       p.COMMON_BODY,
+       p.BODY,
+       pa.CODE_NAME
+from PTY.PARTY p
+join CFX.PUBLISHED_ARTIFACT pa on pa.PUBLISHED_ARTIFACT_ID = p.PUBLISHED_ARTIFACT_ID
+join PTY_IMPL.PARTY_HUB ph ON ph.PARTY_CODE = p.PARTY_CODE
+join PTY_IMPL.PARTY_INFO_SAT_LATEST ptys ON ptys.PARTY_INFO_HKEY = ph.PARTY_HKEY
+where 1 = 1
+{{#if parameters.partyCodes}}
+   and p.PARTY_CODE in (@partyCodes)
+{{/if}}
+{{#if parameters.showDuplicates}}
+   and ptys.DUPLICATE_MASTER_NUMBER IS NOT NULL
+{{else}}
+   and ptys.DUPLICATE_MASTER_NUMBER IS NULL
+{{/if}}
+   

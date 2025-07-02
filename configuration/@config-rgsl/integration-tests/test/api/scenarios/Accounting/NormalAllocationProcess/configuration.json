@@ -1,0 +1,163 @@
+{
+    "description": "Validate normal allocation and deallocation process",
+    "steps": [
+        {
+            "$ref": "AdjustAccountingPeriods",
+            "context": {
+                "firstOpenPeriod": "2022-01-01"
+            }
+        },
+        {
+            "$ref": "AdjustCurrentDate",
+            "context": {
+                "currentDate": "2022-01-01"
+            }
+        },
+        {
+            "$ref": "CreateALIPolicyDemo",
+            "context": {
+                "paymentFrequencyCode": "3"
+            }
+        },
+        {
+            "$ref": "CreatePaymentAndAllocate",
+            "description": "Pay first installment",
+            "context": {
+                "payAmount": 160000,
+                "referenceNo": "{{$.contractNumber}}",
+                "paymentDetails": {
+                    "amount": 160000,
+                    "transactionDate": "2022-01-01"
+                }
+            }
+        },
+        {
+            "code": "ValidateTransactions_1",
+            "description": "Validate transactions 1",
+            "requests": [],
+            "assert": {
+                "expected": "./steps/validateTransactions/expectedResult_1.json",
+                "module": "../../lib/accounting/assert.js",
+                "function": "assertTransactions"
+            }
+        },
+        {
+            "$ref": "AdjustAccountingPeriods",
+            "context": {
+                "firstOpenPeriod": "2022-06-01"
+            }
+        },
+        {
+            "$ref": "AdjustCurrentDate",
+            "context": {
+                "currentDate": "2022-07-01"
+            }
+        },
+        {
+            "$ref": "ExecuteEtl",
+            "description": "Invoice second installment",
+            "context": {
+                "etlName": "PreparePaymentPlanBasedInvoiceETLService",
+                "etlRequest": {
+                    "contractNumbers": ["{{$.contractNumber}}"]
+                }
+            }
+        },
+        {
+            "code": "ValidateTransactions_2",
+            "description": "Validate transactions 2",
+            "requests": [],
+            "assert": {
+                "expected": "./steps/validateTransactions/expectedResult_2.json",
+                "module": "../../lib/accounting/assert.js",
+                "function": "assertTransactions"
+            }
+        },
+        {
+            "$ref": "CancelAllocation",
+            "description": "Cancel second installment allocation",
+            "context": {
+                "cancelAllocContractNumber": "{{$.contractNumber}}",
+                "cancelAllocDueDate": "2022-07-01"
+            }
+        },
+        {
+            "code": "ValidateTransactions_3",
+            "description": "Validate transactions 3",
+            "requests": [],
+            "assert": {
+                "expected": "./steps/validateTransactions/expectedResult_3.json",
+                "module": "../../lib/accounting/assert.js",
+                "function": "assertTransactions"
+            }
+        },
+        {
+            "$ref": "CancelAllocation",
+            "description": "Cancel first installment allocation",
+            "context": {
+                "cancelAllocContractNumber": "{{$.contractNumber}}",
+                "cancelAllocDueDate": "2022-01-01"
+            }
+        },
+        {
+            "code": "ValidateTransactions_4",
+            "description": "Validate transactions 4",
+            "requests": [],
+            "assert": {
+                "expected": "./steps/validateTransactions/expectedResult_4.json",
+                "module": "../../lib/accounting/assert.js",
+                "function": "assertTransactions"
+            }
+        },
+        {
+            "$ref": "CreatePaymentAndAllocate",
+            "description": "Pay first half of the installment",
+            "context": {
+                "payAmount": 50000,
+                "referenceNo": "{{$.contractNumber}}",
+                "paymentDetails": {
+                    "amount": 50000,
+                    "transactionDate": "2020-01-01"
+                }
+            }
+        },
+        {
+            "code": "ValidateTransactions_5",
+            "description": "Validate transactions 5",
+            "requests": [],
+            "assert": {
+                "expected": "./steps/validateTransactions/expectedResult_5.json",
+                "module": "../../lib/accounting/assert.js",
+                "function": "assertTransactions"
+            }
+        },
+        {
+            "$ref": "CreatePaymentAndAllocate",
+            "description": "Pay second half of the installment",
+            "context": {
+                "payAmount": 50000,
+                "referenceNo": "{{$.contractNumber}}",
+                "paymentDetails": {
+                    "amount": 50000,
+                    "transactionDate": "2022-01-01"
+                }
+            }
+        },
+        {
+            "code": "ValidateTransactions_6",
+            "description": "Validate transactions 6",
+            "requests": [],
+            "assert": {
+                "expected": "./steps/validateTransactions/expectedResult_6.json",
+                "module": "../../lib/accounting/assert.js",
+                "function": "assertTransactions"
+            }
+        },
+        {
+            "$ref": "AdjustCurrentDate",
+            "context": {
+                "currentDate": null
+            }
+        }
+    ]
+}

@@ -1,0 +1,41 @@
+{
+    "input": {
+        "criteria": {
+            "originDocumentNumber": "T",
+            "calculationDate": "2021-01-01",
+            "calculationContext": {
+                "insuranceRule": "T",
+                "insuranceProduct": "T",
+                "insuranceCurrency": "T",
+                "insuranceYear": 1,
+                "insuranceTerm": 1,
+                "premiumPeriod": 1,
+                "premiumPeriodType": "T"
+            }
+        }
+    },
+    "expectedResult": {
+        "parameters": {
+            "originDocumentNumber": "T",
+            "calculationDate": "2021-01-01",
+            "selectTerms": [
+                ",latestRules.INSURANCE_YEAR"
+            ],
+            "whereTerms": [
+                "AND (latestRules.PRODUCT_VALUE_REF_ID IS NULL OR ((latestRules.PRODUCT_INVERSION = 0 AND @insuranceProduct IN (SELECT STRING_VALUE FROM PAS_IMPL.AA_EVAL_ATTR_VALUE WHERE VALUE_REF_ID = latestRules.PRODUCT_VALUE_REF_ID)) OR (latestRules.PRODUCT_INVERSION = 1 AND @insuranceProduct NOT IN (SELECT STRING_VALUE FROM PAS_IMPL.AA_EVAL_ATTR_VALUE WHERE VALUE_REF_ID = latestRules.PRODUCT_VALUE_REF_ID))))",
+                "AND (latestRules.INSURANCE_CURRENCY IS NULL OR (((latestRules.INSURANCE_CURRENCY_INVERSION = 0 AND latestRules.INSURANCE_CURRENCY = @insuranceCurrency)) OR ((latestRules.INSURANCE_CURRENCY_INVERSION = 1 AND latestRules.INSURANCE_CURRENCY <> @insuranceCurrency))))",            
+                "AND ((latestRules.INSURANCE_TERM_FROM IS NULL OR ((latestRules.INSURANCE_TERM_INCLUDE_FROM = 1 and @insuranceTerm >= latestRules.INSURANCE_TERM_FROM) OR (latestRules.INSURANCE_TERM_INCLUDE_FROM = 0 and @insuranceTerm > latestRules.INSURANCE_TERM_FROM))) AND (latestRules.INSURANCE_TERM_TO IS NULL OR ((latestRules.INSURANCE_TERM_INCLUDE_TO = 1 and @insuranceTerm <= latestRules.INSURANCE_TERM_TO) OR (latestRules.INSURANCE_TERM_INCLUDE_TO = 0 and @insuranceTerm < latestRules.INSURANCE_TERM_TO))))",                   
+                "AND ((latestRules.PREMIUM_PERIOD_FROM IS NULL OR ((latestRules.PREMIUM_PERIOD_INCLUDE_FROM = 1 and @premiumPeriod >= latestRules.PREMIUM_PERIOD_FROM) OR (latestRules.PREMIUM_PERIOD_INCLUDE_FROM = 0 and @premiumPeriod > latestRules.PREMIUM_PERIOD_FROM))) AND (latestRules.PREMIUM_PERIOD_TO IS NULL OR ((latestRules.PREMIUM_PERIOD_INCLUDE_TO = 1 and @premiumPeriod <= latestRules.PREMIUM_PERIOD_TO) OR (latestRules.PREMIUM_PERIOD_INCLUDE_TO = 0 and @premiumPeriod < latestRules.PREMIUM_PERIOD_TO))))",
+                "AND (latestRules.PREM_PERIOD_VALUE_REF_ID IS NULL OR (@premiumPeriodType IN (SELECT STRING_VALUE FROM PAS_IMPL.AA_EVAL_ATTR_VALUE WHERE VALUE_REF_ID = latestRules.PREM_PERIOD_VALUE_REF_ID)))"
+            ],
+            "ruleTableAlias": "latestRules",
+            "insuranceRule": "T",
+            "insuranceProduct": "T",
+            "insuranceCurrency": "T",
+            "insuranceYear": 1,
+            "insuranceTerm": 1,
+            "premiumPeriod": 1,
+            "premiumPeriodType": "T"
+        }
+    }
+}

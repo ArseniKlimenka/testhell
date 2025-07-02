@@ -1,0 +1,463 @@
+{
+    "processType": "Amendment",
+    "actors": [
+        "Operations",
+        "OperationsDirector",
+        "UKSP",
+        "Viewer",
+        "ContractAdministrator",
+        "Accounting",
+        "System"
+    ],
+    "initialState": "Draft",
+    "states": [
+        {
+            "name": "Draft",
+            "operations": [
+                {
+                    "name": "Save",
+                    "exclusiveToAssignedUser": true
+                }
+            ]
+        },
+        {
+            "name": "OperationsApproval",
+            "operations": [
+                {
+                    "name": "Save"
+                }
+            ]
+        },
+        {
+            "name": "AwaitingDissolution",
+            "operations": [
+                {
+                    "name": "Save"
+                }
+            ]
+        },
+        {
+            "name": "AssetsSold",
+            "operations": [
+                {
+                    "name": "Save"
+                }
+            ]
+        },
+        {
+            "name": "AwaitingApproval",
+            "operations": []
+        },
+        {
+            "name": "AwaitingCancellationDate",
+            "operations": []
+        },
+        {
+            "name": "AwaitingPaymentDocuments",
+            "operations": [
+                {
+                    "name": "Save"
+                }
+            ]
+        },
+        {
+            "name": "RequestToClient",
+            "operations": [
+                {
+                    "name": "Save"
+                }
+            ]
+        },
+        {
+            "name": "OperationsDirectorApproval",
+            "operations": [
+                {
+                    "name": "Save"
+                }
+            ]
+        },
+        {
+            "name": "POCreation"
+        },
+        {
+            "name": "SentToPayment",
+            "operations": [
+                {
+                    "name": "Save",
+                    "exclusiveToAssignedUser": true
+                }
+            ]
+        },
+        {
+            "name": "Paid",
+            "operations": [],
+            "appliesVersion": true
+        },
+        {
+            "name": "Activated",
+            "operations": [],
+            "appliesVersion": true
+        },
+        {
+            "name": "Cancelled",
+            "operations": [],
+            "discardsVersion": true
+        },
+        {
+            "name": "Rejected",
+            "operations": [],
+            "discardsVersion": true
+        }
+    ],
+    "transitions": [
+        {
+            "name": "Draft_to_OperationsApproval",
+            "from": "Draft",
+            "to": "OperationsApproval",
+            "allowOnValidationErrors": {
+                "all": true
+            },
+            "exclusiveToAssignedUser": true,
+            "actionToRunBefore": "onBeforeTransition"
+        },
+        {
+            "name": "OperationsApproval_to_RequestToClient",
+            "from": "OperationsApproval",
+            "to": "RequestToClient",
+            "exclusiveToAssignedUser": true,
+            "actionToRunBefore": "onBeforeTransition",
+            "allowOnValidationErrors": {
+                "codes": [
+                    "hasActiveCancellationInquiries",
+                    "notPaidEndowmentsFound",
+                    "RecipientsWithoutBankAccountsWarning",
+                    "CreditRefundSelectedAttachmentRequired"
+                ]
+            }
+        },
+        {
+            "name": "OperationsApproval_to_AwaitingDissolution",
+            "from": "OperationsApproval",
+            "to": "AwaitingDissolution",
+            "actionToRunBefore": "onBeforeTransition",
+            "allowOnValidationErrors": {
+                "codes": [
+                    "hasActiveCancellationInquiries",
+                    "notPaidEndowmentsFound",
+                    "RecipientsWithoutBankAccountsWarning",
+                    "CreditRefundSelectedAttachmentRequired"
+                ]
+            }
+        },
+        {
+            "name": "AwaitingDissolution_to_AssetsSold",
+            "from": "AwaitingDissolution",
+            "to": "AssetsSold",
+            "actionToRunBefore": "onBeforeTransition",
+            "allowOnValidationErrors": {
+                "codes": [
+                    "hasActiveCancellationInquiries",
+                    "notPaidEndowmentsFound",
+                    "RecipientsWithoutBankAccountsWarning",
+                    "CreditRefundSelectedAttachmentRequired"
+                ]
+            }
+        },
+        {
+            "name": "AssetsSold_to_Activated",
+            "from": "AssetsSold",
+            "to": "Activated",
+            "actionToRunBefore": "onBeforeTransition",
+            "allowOnValidationErrors": {
+                "codes": [
+                    "hasActiveCancellationInquiries",
+                    "notPaidEndowmentsFound",
+                    "RecipientsWithoutBankAccountsWarning",
+                    "CreditRefundSelectedAttachmentRequired"
+                ]
+            }
+        },
+        {
+            "name": "AssetsSold_to_SentToPayment",
+            "from": "AssetsSold",
+            "to": "Activated",
+            "actionToRunBefore": "onBeforeTransition",
+            "allowOnValidationErrors": {
+                "codes": [
+                    "hasActiveCancellationInquiries",
+                    "notPaidEndowmentsFound",
+                    "RecipientsWithoutBankAccountsWarning",
+                    "CreditRefundSelectedAttachmentRequired"
+                ]
+            }
+        },
+        {
+            "name": "AwaitingDissolution_to_Cancelled",
+            "from": "AwaitingDissolution",
+            "to": "Cancelled",
+            "actionToRunBefore": "onBeforeTransition",
+            "allowOnValidationErrors": {
+                "all": true
+            }
+        },
+        {
+            "name": "AssetsSold_to_Cancelled",
+            "from": "AssetsSold",
+            "to": "Cancelled",
+            "actionToRunBefore": "onBeforeTransition",
+            "allowOnValidationErrors": {
+                "all": true
+            }
+        },
+        {
+            "name": "OperationsApproval_to_AwaitingApproval",
+            "from": "OperationsApproval",
+            "to": "AwaitingApproval",
+            "exclusiveToAssignedUser": true,
+            "actionToRunBefore": "onBeforeTransition",
+            "allowOnValidationErrors": {
+                "codes": [
+                    "hasActiveCancellationInquiries",
+                    "notPaidEndowmentsFound",
+                    "RecipientsWithoutBankAccountsWarning",
+                    "CreditRefundSelectedAttachmentRequired"
+                ]
+            }
+        },
+        {
+            "name": "OperationsApproval_to_AwaitingCancellationDate",
+            "from": "OperationsApproval",
+            "to": "AwaitingCancellationDate",
+            "exclusiveToAssignedUser": true,
+            "actionToRunBefore": "onBeforeTransition",
+            "allowOnValidationErrors": {
+                "codes": [
+                    "hasActiveCancellationInquiries",
+                    "notPaidEndowmentsFound",
+                    "RecipientsWithoutBankAccountsWarning",
+                    "CreditRefundSelectedAttachmentRequired"
+                ]
+            }
+        },
+        {
+            "name": "AwaitingCancellationDate_to_OperationsApproval",
+            "from": "AwaitingCancellationDate",
+            "to": "OperationsApproval",
+            "exclusiveToAssignedUser": true,
+            "actionToRunBefore": "onBeforeTransition",
+            "allowOnValidationErrors": {
+                "codes": [
+                    "hasActiveCancellationInquiries",
+                    "notPaidEndowmentsFound",
+                    "RecipientsWithoutBankAccountsWarning",
+                    "CreditRefundSelectedAttachmentRequired"
+                ]
+            }
+        },
+        {
+            "name": "OperationsApproval_to_AwaitingPaymentDocuments",
+            "from": "OperationsApproval",
+            "to": "AwaitingPaymentDocuments",
+            "exclusiveToAssignedUser": true,
+            "actionToRunBefore": "onBeforeTransition",
+            "allowOnValidationErrors": {
+                "codes": [
+                    "hasActiveCancellationInquiries",
+                    "AtleastOneRecipientIsRequired",
+                    "notPaidEndowmentsFound",
+                    "RecipientsWithoutBankAccountsWarning",
+                    "CreditRefundSelectedAttachmentRequired"
+                ]
+            }
+        },
+        {
+            "name": "OperationsApproval_to_Cancelled",
+            "from": "OperationsApproval",
+            "to": "Cancelled",
+            "exclusiveToAssignedUser": true,
+            "actionToRunBefore": "onBeforeTransition",
+            "allowOnValidationErrors": {
+                "all": true
+            }
+        },
+        {
+            "name": "OperationsApproval_to_Activated",
+            "from": "OperationsApproval",
+            "to": "Activated",
+            "exclusiveToAssignedUser": true,
+            "actionToRunBefore": "onBeforeTransition",
+            "allowOnValidationErrors": {
+                "codes": [
+                    "hasActiveCancellationInquiries",
+                    "notPaidEndowmentsFound",
+                    "RecipientsWithoutBankAccountsWarning",
+                    "CreditRefundSelectedAttachmentRequired"
+                ]
+            }
+        },
+        {
+            "name": "OperationsApproval_to_POCreation",
+            "from": "OperationsApproval",
+            "to": "POCreation",
+            "exclusiveToAssignedUser": true,
+            "actionToRunBefore": "onBeforeTransition",
+            "allowOnValidationErrors": {
+                "codes": [
+                    "hasActiveCancellationInquiries",
+                    "notPaidEndowmentsFound",
+                    "RecipientsWithoutBankAccountsWarning",
+                    "CreditRefundSelectedAttachmentRequired"
+                ]
+            }
+        },
+        {
+            "name": "OperationsApproval_to_Rejected",
+            "from": "OperationsApproval",
+            "to": "Rejected",
+            "exclusiveToAssignedUser": true,
+            "actionToRunBefore": "onBeforeTransition",
+            "allowOnValidationErrors": {
+                "codes": [
+                    "hasActiveCancellationInquiries",
+                    "notPaidEndowmentsFound",
+                    "RecipientsWithoutBankAccountsWarning",
+                    "CreditRefundSelectedAttachmentRequired"
+                ]
+            }
+        },
+        {
+            "name": "RequestToClient_to_OperationsApproval",
+            "from": "RequestToClient",
+            "to": "OperationsApproval",
+            "exclusiveToAssignedUser": true,
+            "actionToRunBefore": "onBeforeTransition",
+            "allowOnValidationErrors": {
+                "codes": [
+                    "hasActiveCancellationInquiries",
+                    "notPaidEndowmentsFound",
+                    "RecipientsWithoutBankAccountsWarning",
+                    "CreditRefundSelectedAttachmentRequired"
+                ]
+            }
+        },
+        {
+            "name": "AwaitingApproval_to_OperationsApproval",
+            "from": "AwaitingApproval",
+            "to": "OperationsApproval",
+            "exclusiveToAssignedUser": true,
+            "actionToRunBefore": "onBeforeTransition",
+            "allowOnValidationErrors": {
+                "codes": [
+                    "hasActiveCancellationInquiries",
+                    "notPaidEndowmentsFound",
+                    "RecipientsWithoutBankAccountsWarning",
+                    "CreditRefundSelectedAttachmentRequired"
+                ]
+            }
+        },
+        {
+            "name": "AwaitingPaymentDocuments_to_POCreation",
+            "from": "AwaitingPaymentDocuments",
+            "to": "POCreation",
+            "exclusiveToAssignedUser": true,
+            "actionToRunBefore": "onBeforeTransition",
+            "allowOnValidationErrors": {
+                "codes": [
+                    "hasActiveCancellationInquiries",
+                    "notPaidEndowmentsFound",
+                    "RecipientsWithoutBankAccountsWarning",
+                    "CreditRefundSelectedAttachmentRequired"
+                ]
+            }
+        },
+        {
+            "name": "AwaitingPaymentDocuments_to_Activated",
+            "from": "AwaitingPaymentDocuments",
+            "to": "Activated",
+            "exclusiveToAssignedUser": true,
+            "actionToRunBefore": "onBeforeTransition",
+            "allowOnValidationErrors": {
+                "codes": [
+                    "hasActiveCancellationInquiries",
+                    "notPaidEndowmentsFound",
+                    "RecipientsWithoutBankAccountsWarning",
+                    "CreditRefundSelectedAttachmentRequired"
+                ]
+            }
+        },
+        {
+            "name": "OperationsDirectorApproval_to_SentToPayment",
+            "from": "OperationsDirectorApproval",
+            "to": "POCreation",
+            "exclusiveToAssignedUser": true,
+            "actionToRunBefore": "onBeforeTransition",
+            "allowOnValidationErrors": {
+                "codes": [
+                    "hasActiveCancellationInquiries",
+                    "notPaidEndowmentsFound",
+                    "RecipientsWithoutBankAccountsWarning",
+                    "CreditRefundSelectedAttachmentRequired"
+                ]
+            }
+        },
+        {
+            "name": "FinishPOCreation",
+            "from": "POCreation",
+            "to": "SentToPayment",
+            "broadcastEvent": {
+                "serverSideEvents": true
+            },
+            "actionToRunBefore": "onBeforeTransition",
+            "allowOnValidationErrors": {
+                "codes": [
+                    "hasActiveCancellationInquiries",
+                    "notPaidEndowmentsFound",
+                    "RecipientsWithoutBankAccountsWarning",
+                    "CreditRefundSelectedAttachmentRequired"
+                ]
+            }
+        },
+        {
+            "name": "OperationsDirectorApproval_to_OperationsApproval",
+            "from": "OperationsDirectorApproval",
+            "to": "OperationsApproval",
+            "exclusiveToAssignedUser": true,
+            "actionToRunBefore": "onBeforeTransition",
+            "allowOnValidationErrors": {
+                "codes": [
+                    "hasActiveCancellationInquiries",
+                    "notPaidEndowmentsFound",
+                    "RecipientsWithoutBankAccountsWarning",
+                    "CreditRefundSelectedAttachmentRequired"
+                ]
+            }
+        },
+        {
+            "name": "SentToPayment_to_Paid",
+            "from": "SentToPayment",
+            "to": "Paid",
+            "allowOnValidationErrors": {
+                "codes": [
+                    "hasActiveCancellationInquiries",
+                    "notPaidEndowmentsFound",
+                    "RecipientsWithoutBankAccountsWarning",
+                    "CreditRefundSelectedAttachmentRequired"
+                ]
+            }
+        },
+        {
+            "name": "SentToPayment_to_Activated",
+            "from": "SentToPayment",
+            "to": "Activated",
+            "actionToRunBefore": "onBeforeTransition",
+            "allowOnValidationErrors": {
+                "codes": [
+                    "hasActiveCancellationInquiries",
+                    "notPaidEndowmentsFound",
+                    "RecipientsWithoutBankAccountsWarning",
+                    "CreditRefundSelectedAttachmentRequired"
+                ]
+            }
+        }
+    ]
+}

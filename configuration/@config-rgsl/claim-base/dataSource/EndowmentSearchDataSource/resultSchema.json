@@ -1,0 +1,242 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+        "endowmentNumber": {
+            "type": "string"
+        },
+        "documentState": {
+            "type": "string"
+        },
+        "documentStateCode": {
+            "type": "string"
+        },
+        "contractNumber": {
+            "type": "string"
+        },
+        "risk": {
+            "type": "object",
+            "properties": {
+                "riskCode": {
+                    "type": "string"
+                },
+                "riskInsuredSum": {
+                    "type": "number"
+                },
+                "riskShortDescription": {
+                    "type": "string"
+                }
+            }
+        },
+        "risksInsuredSumByPeriod": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                    "riskCode": {
+                        "type": "string"
+                    },
+                    "periods": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "additionalProperties": false,
+                            "properties": {
+                                "insuredSum": {
+                                    "type": "number"
+                                },
+                                "startDate": {
+                                    "type": "string",
+                                    "aiFormat": "date"
+                                },
+                                "endDate": {
+                                    "type": "string",
+                                    "aiFormat": "date"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "contractCurrency": {
+            "type": "string"
+        },
+        "eventType": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                }
+            }
+        },
+        "eventReason": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                }
+            }
+        },
+        "eventDate": {
+            "type": "string",
+            "format": "date",
+            "aiFormat": "date"
+        },
+        "statementApplicationDate": {
+            "type": "string",
+            "format": "date",
+            "aiFormat": "date"
+        },
+        "endowmentBeneficiaries": {
+            "type": "array",
+            "mapping": {
+                "path": "#/properties/endowmentBeneficiaries"
+            },
+            "items": {
+                "type": "object",
+                "properties": {
+                    "partyCode": {
+                        "type": "string"
+                    },
+                    "beneficiaryReason": {
+                        "type": "object",
+                        "properties": {
+                            "code": {
+                                "type": "string"
+                            },
+                            "description": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "beneficiaryPaymentType": {
+                        "type": "object",
+                        "properties": {
+                            "code": {
+                                "type": "string"
+                            },
+                            "description": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "amountToPayPercetage": {
+                        "type": "number"
+                    },
+                    "bankAccount": {
+                        "type": "object",
+                        "properties": {
+                            "value": {
+                                "type": "object",
+                                "properties": {
+                                    "bankId": {
+                                        "type": "string"
+                                    },
+                                    "bankName": {
+                                        "type": "string"
+                                    },
+                                    "bankBic": {
+                                        "type": "string"
+                                    },
+                                    "bankCorrespondentAccount": {
+                                        "type": "string"
+                                    },
+                                    "SWIFT": {
+                                        "type": "string"
+                                    },
+                                    "IBAN": {
+                                        "type": "string"
+                                    },
+                                    "foreignBank": {
+                                        "type": "boolean"
+                                    },
+                                    "currency": {
+                                        "type": "object",
+                                        "additionalProperties": false,
+                                        "properties": {
+                                            "currencyCode": {
+                                                "type": "string"
+                                            },
+                                            "currencyDesc": {
+                                                "type": "string"
+                                            },
+                                            "currencyNumericCode": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    },
+                                    "number": {
+                                        "type": "string"
+                                    },
+                                    "openingDate": {
+                                        "type": "string",
+                                        "aiFormat": "date",
+                                        "aiMeaning": "past"
+                                    },
+                                    "closingDate": {
+                                        "type": "string",
+                                        "aiFormat": "date",
+                                        "aiMeaning": "future"
+                                    },
+                                    "bankInn": {
+                                        "type": "string"
+                                    }
+                                }
+                            },
+                            "displayName": {
+                                "type": "string"
+                            }
+                        }
+                    }                  
+                }
+            }
+        },
+        "paymentLines": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "lineType": {
+                        "type": "string"
+                    },
+                    "lineAmountInContractCurrency": {
+                        "type": "number"
+                    },
+                    "lineAmountInRubCurrency": {
+                        "type": "number"
+                    }
+                }
+            }
+        },
+        "approvalConclusions": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "insuranceMethodologyConclusion": {
+                    "type": "string"
+                },
+                "actuaryConclusion": {
+                    "type": "string"
+                },
+                "legalConclusion": {
+                    "type": "string"
+                },
+                "securityConclusion": {
+                    "type": "string"
+                },
+                "complianceConclusion": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

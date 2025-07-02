@@ -1,0 +1,3 @@
+UPDATE [BFX_IMPL].[GIFT_SERVICE]
+SET [DESCRIPTION] = N'Финансовый чекап'
+WHERE [name] = N'FINCHECKUP'

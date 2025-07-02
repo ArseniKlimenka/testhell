@@ -1,0 +1,141 @@
+{
+    "entityType": "PaymentOrder",
+    "condition": {
+        "events": [
+            "StatusChanged"
+        ],
+        "documentStates": [
+            "Paid"
+        ]
+    },
+    "sinks": [
+        {
+            "name": "GetRelatedClaim",
+            "fetch": {
+                "configuration": {
+                    "name": "GetClaimFullDataDataSource"
+                }
+            }
+        },
+        {
+            "name": "GetRelatedEndowment",
+            "fetch": {
+                "configuration": {
+                    "name": "GetEndowmentFullDataDataSource"
+                }
+            }
+        },
+        {
+            "name": "UpdateClaim",
+            "document": {
+                "configuration": {
+                    "name": "Claim"
+                },
+                "allowUpdating": {
+                    "inStates": [
+                        "SentToPayment",
+                        "PartiallyPaid",
+                        "OUSV"
+                    ]
+                }
+            }
+        },
+        {
+            "name": "UpdateCollectiveClaim",
+            "document": {
+                "configuration": {
+                    "name": "CollectiveClaim"
+                },
+                "allowUpdating": {
+                    "inStates": [
+                        "SentToPayment",
+                        "OUSV"
+                    ]
+                }
+            }
+        },
+        {
+            "name": "UpdateEndowment",
+            "document": {
+                "configuration": {
+                    "name": "Endowment"
+                },
+                "allowUpdating": {
+                    "inStates": [
+                        "SentToPayment",
+                        "PartiallyPaid"
+                    ]
+                }
+            }
+        },
+        {
+            "name": "GetRelatedCancellationAmendment",
+            "fetch": {
+                "configuration": {
+                    "name": "GetContractFullDataDataSource"
+                }
+            }
+        },
+        {
+            "name": "UpdateCancellationAmendment",
+            "executeAs": "System",
+            "document": {
+            }
+        },
+        {
+            "ref": "SetActStatusCompletedPaidSinkGroup"
+        },
+        {
+            "name": "GetMainRiskData",
+            "fetch": {
+                "configuration": {
+                    "name": "GetMainPolicyRiskDataSource"
+                }
+            }
+        },
+        {
+            "name": "GetRiskData",
+            "fetch": {
+                "configuration": {
+                    "name": "RisksDataSource"
+                }
+            }
+        },
+        {
+            "name": "GetAAData",
+            "fetch": {
+                "configuration": {
+                    "name": "GetAADataByContractNoDataSource"
+                }
+            }
+        },
+        {
+            "name": "GetPolicyHolderData",
+            "fetch": {
+                "configuration": {
+                    "name": "GetPolicyHolderDimensionsDataSource"
+                }
+            }
+        },
+        {
+            "name": "PostPaymentOrderTransaction",
+            "class": {
+                "className": "Adacta.AdInsure.RGSL.Accounting.API.Shared.Subledger.Services.IPostingServiceRgsl, Adacta.AdInsure.RGSL.Accounting.API",
+                "methodName": "PostTransaction"
+            }
+        }
+    ],
+    "errorSinks": [
+        {
+            "name": "SetStatusError",
+            "documentTransition": {
+                "transition": {
+                    "transitionName": "Paid_to_UpdateRelatedEntitiesError",
+                    "configurationName": "PaymentOrder",
+                    "configurationVersion": "1"
+                }
+            }
+        }
+    ],
+    "version": "1"
+}

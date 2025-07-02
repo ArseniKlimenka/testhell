@@ -1,0 +1,51 @@
+{
+    "entityType": "UniversalDocument",
+    "version": "1",
+    "condition": {
+        "events": [
+            "StatusChanged"
+        ],
+        "configuration": {
+            "dimensions": {
+                "universalDocumentType": [
+                    "LifeInsuranceAttachmentVerification"
+                ]
+            }
+        },
+        "documentStates": [
+            "Cancelled"
+        ]
+    },
+    "sinks": [
+        {
+            "name": "GetContractVersions",
+            "fetch": {
+                "configuration": {
+                    "name": "ContractVersionsDataSource"
+                }
+            }
+        },
+        {
+            "name": "GetContractStateHistory",
+            "fetch": {
+                "configuration": {
+                    "name": "DocumentStateHistoryDataSource"
+                }
+            }
+        },
+        {
+            "name": "GetInitiatorData",
+            "fetch": {
+                "configuration": {
+                    "name": "UserDataSource"
+                }
+            }
+        },
+        {
+            "name": "AboutCancelNotification",
+            "notification": {
+                "notificationName": "AboutCancelNotification"
+            }
+        }
+    ]
+}

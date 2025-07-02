@@ -1,0 +1,69 @@
+{
+    "mainDataSource": "ImportStagingDataSource",
+    "aggregate": false,
+    "allowParallelExecution": false,
+    "allowMultipleTransactions": true,
+    "sinks": [
+        {
+            "name": "GetKeycloakUser",
+            "api": {
+                "configuration": {
+                    "name": "KeycloakGetUserApiDataProvider"
+                }
+            }
+        },
+        {
+            "name": "FindParty",
+            "fetch": {
+                "configuration": {
+                    "name": "GetPartyDataSource"
+                }
+            }
+        },
+        {
+            "name": "UpdateKeycloakUser",
+            "api": {
+                "configuration": {
+                    "name": "KeycloakUpdateUserApiDataProvider"
+                }
+            }
+        },
+        {
+            "name": "Notification",
+            "notification": {
+                "notificationName": "SendPassword"
+            }
+        },
+        {
+            "name": "WriteSuccessStatus",
+            "database": {
+                "tables": [
+                    "BFX.IMPORT_RECORD_STATUS"
+                ]
+            }
+        }
+    ],
+    "completionSinks": [
+        {
+            "name": "FinishedImporting",
+            "documentTransition": {
+                "transition": {
+                    "transitionName": "FinishImporting",
+                    "configurationName": "UsersExcelImport",
+                    "configurationVersion": "1"
+                }
+            }
+        }
+    ],
+    "errorSinks": [
+        {
+            "name": "WriteErrorStatus",
+            "database": {
+                "tables": [
+                    "BFX.IMPORT_RECORD_STATUS"
+                ]
+            }
+        }
+    ],
+    "version": "1"
+}

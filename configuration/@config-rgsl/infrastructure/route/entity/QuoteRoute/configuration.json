@@ -1,0 +1,43 @@
+{
+    "entityType": "Contract",
+    "condition": {
+        "events": [
+            "Created",
+            "StatusChanged"
+        ],
+        "configuration": {
+            "names": [],
+            "dimensions": {
+                "contractType": [
+                    "Quote"
+                ]
+            }
+        }
+    },
+    "sinks": [
+        {
+            "name": "Quote",
+            "database": {
+                "tables": [
+                    "PAS_IMPL.QUOTE_HUB",
+                    "PAS_IMPL.QUOTE_SAT",
+                    "PAS_IMPL.QUOTE_RISKS_SAT",
+                    "PAS_IMPL.QUOTE_BENEFICIARY_SAT",
+                    "PAS_IMPL.QUOTE_INVESTMENT_SAT",
+                    "PAS_IMPL.CF_QUOTE_SAT",
+                    "PAS_IMPL.QUOTE_ASSET_SAT"
+                ]
+            }
+        },
+        {
+            "name": "QuoteAdditionalInitiators",
+            "database": {
+                "tables": [
+                    "PAS_IMPL.QUOTE_ADDITIONAL_INITIATOR_SAT",
+                    "PAS_IMPL.QUOTE_ADDITIONAL_INITIATOR_LINK"
+                ]
+            }
+        }
+    ],
+    "version": "1"
+}

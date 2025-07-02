@@ -1,0 +1,122 @@
+IF NOT EXISTS (SELECT * FROM SYS.OBJECTS WHERE OBJECT_ID = OBJECT_ID(N'[PAS_IMPL].[CONTRACT_BODY_UPDATE_INFO]') AND TYPE IN (N'U'))
+BEGIN
+	CREATE TABLE PAS_IMPL.CONTRACT_BODY_UPDATE_INFO
+	(
+		[ID] [int] IDENTITY(1,1) PRIMARY KEY,
+		[CONTRACT_NUMBER] [nvarchar](64) NOT NULL,
+		[RISK_NUMBER] [nvarchar](8) NULL,
+		[RISK_INSURED_SUM_WCB] DECIMAL(18, 2) NULL,
+		[IS_UPDATED] [bit] NOT NULL,
+		[INFO] [nvarchar](MAX) NULL,
+		[DATE] datetime NOT NULL
+	)
+
+	CREATE INDEX IX_CONTRACT_BODY_UPDATE_INFO_CONTRACT_NUMBER
+	ON PAS_IMPL.CONTRACT_BODY_UPDATE_INFO
+	(CONTRACT_NUMBER)
+END
+
+DROP INDEX IF EXISTS IX_CTU_CONTRACT_NUMBER ON #CONTRACT_TO_UPDATE;
+DROP TABLE IF EXISTS #CONTRACT_TO_UPDATE
+
+SELECT c.CONTRACT_NUMBER, c.BODY
+  INTO #CONTRACT_TO_UPDATE
+  FROM PAS.CONTRACT c
+       LEFT JOIN PAS_IMPL.CONTRACT_BODY_UPDATE_INFO cbui ON cbui.CONTRACT_NUMBER = c.CONTRACT_NUMBER
+ WHERE cbui.IS_UPDATED IS NULL
+
+CREATE INDEX IX_CTU_CONTRACT_NUMBER ON #CONTRACT_TO_UPDATE (CONTRACT_NUMBER);
+
+DECLARE @contract_number NVARCHAR(max)
+DECLARE @key NVARCHAR(max)
+DECLARE @riskInsuredSum DECIMAL(18, 2)
+DECLARE @dontNeedUpdate int;
+
+DECLARE cur CURSOR FORWARD_ONLY FOR
+SELECT c.CONTRACT_NUMBER FROM #CONTRACT_TO_UPDATE c
+--LEFT JOIN PAS_IMPL.CONTRACT_BODY_UPDATE_INFO cbui ON cbui.CONTRACT_NUMBER = c.CONTRACT_NUMBER
+--WHERE cbui.IS_UPDATED IS NULL
+
+OPEN cur
+FETCH NEXT FROM cur INTO @contract_number
+WHILE @@fetch_status = 0 BEGIN
+
+	DECLARE innerCur CURSOR FORWARD_ONLY FOR
+	SELECT c.contract_number,
+		   r.[key],
+		   CONVERT(DECIMAL(18,2), STR(JSON_VALUE(r.value, '$.riskInsuredSum'), 18, 2)) as riskInsuredSum
+	FROM #CONTRACT_TO_UPDATE c
+		   CROSS APPLY OPENJSON(JSON_QUERY(c.body, '$.risks')) r
+	WHERE c.contract_number = @contract_number
+
+	SET @dontNeedUpdate = (
+			SELECT COUNT(*) FROM #CONTRACT_TO_UPDATE c
+		    CROSS APPLY OPENJSON(JSON_QUERY(c.body, '$.risks')) r
+			WHERE c.contract_number = @contract_number)
+
+	IF (@dontNeedUpdate = 0)
+	BEGIN
+		INSERT INTO PAS_IMPL.CONTRACT_BODY_UPDATE_INFO (CONTRACT_NUMBER, RISK_NUMBER, RISK_INSURED_SUM_WCB, IS_UPDATED, INFO, DATE)
+			SELECT
+				@contract_number,
+				NULL,
+				NULL,
+				0,
+				'DONT_NEED_UPDATE',
+				GETDATE()
+
+	END
+	ELSE
+	BEGIN
+		OPEN innerCur
+		FETCH NEXT FROM innerCur INTO @contract_number, @key, @riskInsuredSum
+		WHILE @@fetch_status = 0 BEGIN
+
+			BEGIN TRY
+			BEGIN TRAN
+
+				INSERT INTO PAS_IMPL.CONTRACT_BODY_UPDATE_INFO (CONTRACT_NUMBER, RISK_NUMBER, RISK_INSURED_SUM_WCB, IS_UPDATED, INFO, DATE)
+				SELECT
+					@contract_number,
+					@key,
+					@riskInsuredSum,
+					1,
+					NULL,
+					GETDATE()
+
+				UPDATE PAS.CONTRACT
+				SET BODY = JSON_MODIFY(body, '$.risks[' + @key + '].riskInsuredSumWithoutCashBack', @riskInsuredSum)
+				WHERE contract_number = @contract_number
+
+				FETCH NEXT FROM innerCur INTO @contract_number, @key, @riskInsuredSum
+
+			COMMIT TRAN
+
+			END TRY
+			BEGIN CATCH
+				ROLLBACK TRAN
+				PRINT @contract_number
+				DECLARE @ErrorMessage NVARCHAR(4000); DECLARE @ErrorSeverity INT; DECLARE @ErrorState INT;
+				SELECT @ErrorMessage = ERROR_MESSAGE(), @ErrorSeverity = ERROR_SEVERITY(), @ErrorState = 1;
+
+				UPDATE PAS_IMPL.CONTRACT_BODY_UPDATE_INFO
+				SET INFO = CONCAT('ErrorMessage:',@ErrorMessage, ' ErrorSeverity:', @ErrorSeverity, '. ErrorState:', @ErrorState, '.'),
+					IS_UPDATED = NULL
+				WHERE CONTRACT_NUMBER = @contract_number AND RISK_NUMBER = @key
+
+				RAISERROR (@ErrorMessage, @ErrorSeverity, @ErrorState);
+			END CATCH;
+
+		END
+		CLOSE innerCur
+	END
+	DEALLOCATE innerCur
+
+  FETCH NEXT FROM cur INTO @contract_number
+
+END
+CLOSE cur
+DEALLOCATE cur
+
+DROP INDEX IF EXISTS IX_CTU_CONTRACT_NUMBER ON #CONTRACT_TO_UPDATE;
+DROP TABLE IF EXISTS #CONTRACT_TO_UPDATE

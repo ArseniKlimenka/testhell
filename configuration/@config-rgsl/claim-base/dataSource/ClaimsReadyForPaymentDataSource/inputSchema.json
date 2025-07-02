@@ -1,0 +1,78 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "description": "Business activity data source input schema",
+    "type": "object",
+    "properties": {
+        "criteria": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "assigneeId": {
+                    "type": "string"
+                },
+                "claimNumber": {
+                    "type":"string"
+                },
+                "contractNumber": {
+                    "type": "string"
+                },
+                "insuredEventNumber": {
+                    "type": "string"
+                },
+                "activityDateFrom": {
+                    "type": "string",
+                    "format": "date",
+                    "aiFormat": "date"
+                },
+                "activityDateDateTo": {
+                    "type": "string",
+                    "format": "date",
+                    "aiFormat": "date"
+                },
+                "statementApplicationDateFrom": {
+                    "type": "string",
+                    "format": "date",
+                    "aiFormat": "date"
+                },
+                "statementApplicationDateTo": {
+                    "type": "string",
+                    "format": "date",
+                    "aiFormat": "date"
+                },
+                "insuredEventDateFrom": {
+                    "type": "string",
+                    "format": "date",
+                    "aiFormat": "date"
+                },
+                "insuredEventDateTo": {
+                    "type": "string",
+                    "format": "date",
+                    "aiFormat": "date"
+                },
+                "product": {
+                    "type": "object",
+                    "properties": {
+                        "productCode": {
+                            "type": "string"
+                        },
+                        "productDescription": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "productGroup": {
+                    "$ref": "component:ProductGroup"
+                },
+                "policyHolderCode": {
+                    "type":"string"
+                },
+                "policyHolderType": {
+                    "type":"string"
+                },                
+                "policyHolderName": {
+                    "type":"string"
+                }            
+            }
+        }
+    }
+}

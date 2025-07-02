@@ -1,0 +1,27 @@
+﻿SELECT
+  REQUEST,
+	RESPONSE,
+  CREATED_DATE
+FROM BFX_IMPL.SEND_EVENT
+WHERE 1=1
+{{#if parameters.eventType}}
+  AND EVENT_TYPE = @eventType
+{{/if}}
+{{#if parameters.eventTypes}}
+  AND EVENT_TYPE IN (@eventTypes)
+{{/if}}
+{{#if parameters.subscriber}}
+  AND SUBSCRIBER = @subscriber
+{{/if}}
+{{#if parameters.subscribers}}
+  AND SUBSCRIBER IN (@subscribers)
+{{/if}}
+{{#if parameters.status}}
+  AND STATUS = @status
+{{/if}}
+{{#if parameters.needToSend}}
+  AND NEED_TO_SEND = @needToSend
+{{/if}}
+{{#if parameters.documentNumber}}
+  AND DOCUMENT_NUMBER = @documentNumber
+{{/if}}

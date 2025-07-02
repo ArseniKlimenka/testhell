@@ -1,0 +1,32 @@
+{
+    "description": "Create payment and auto-allocate",
+    "steps": [
+        {
+            "code": "ImportBSI",
+            "description": "Import BSI",
+            "requests": [
+                {
+                    "code": "Body",
+                    "path": "./steps/01.importBSI/bsi.json"
+                }
+            ],
+            "executor": {
+                "module": "./steps/01.importBSI/executor.js",
+                "function": "executor"
+            }
+        },
+        {
+            "code": "Auto-allocate",
+            "description": "Payment auto-allocation",
+            "requests": [],
+            "executor": {
+                "module": "./steps/02.autoAllocate/executor.js",
+                "function": "executor"
+            },
+            "assert": {
+                "module": "./steps/02.autoAllocate/assert.js",
+                "function": "assertAllocation"
+            }
+        }
+    ]
+}

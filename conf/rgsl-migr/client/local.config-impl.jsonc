@@ -1,0 +1,66 @@
+{
+    // WebApi base Url
+    "apiBaseUrl": "https://adinsure-migr-server.life.rgs.local/",
+    "authConfig": {
+        // Url of the Identity Provider
+        "issuer": "https://adinsure-migr-auth.life.rgs.local",
+        // URL of the SPA to redirect the user to after login
+        "redirectUri": "https://adinsure-migr.life.rgs.local/entry/login-redirect?",
+        // The SPA's id. The SPA is registerd with this id at the auth-server
+        "clientId": "web-client-vnext",
+        // set the scope for the permissions the client should request
+        "scope": "openid profile email roles adinsure",
+        // URL of the SPA to redirect the user to after logout
+        "postLogoutRedirectUri": "https://adinsure-migr.life.rgs.local/entry",
+        // URL of the SPA to redirect the user after silent refresh
+        "silentRefreshRedirectUri": "https://adinsure-migr.life.rgs.local/oauth-silent-refresh.html",
+        // ± 10 mins window
+        "clockSkewInSec": 600
+    },
+    "cultureSettings": {
+        "defaultLanguage": "en-US",
+        "supportedLanguages": [
+            {
+                "name": "CLIENT_CORE.##ENGLISH",
+                "key": "en-US",
+                "adTranslatorKey": "en-US-VSK=en-US",
+                "locale": "en",
+                "valueFormatSettings": {
+                    "decimalPlaces": 2,
+                    "useGroup": true,
+                    "dateFormat": "dd.MM.yyyy",
+                    "dateTimeFormat": "dd.MM.yyyy HH:mm",
+                    "timeFormat": "HH:mm"
+                }
+            },
+            {
+                "name": "CLIENT_CORE.##RUSSIAN",
+                "key": "ru-RU",
+                "adTranslatorKey": "ru-Ru-VSK=ru-RU",
+                "locale": "ru",
+                "valueFormatSettings": {
+                    "decimalPlaces": 2,
+                    "useGroup": true,
+                    "dateFormat": "dd.MM.yyyy",
+                    "dateTimeFormat": "dd.MM.yyyy HH:mm",
+                    "timeFormat": "HH:mm"
+                }
+            }
+        ]
+    },
+    "visualizationSettings": {
+        "themeSettings": {
+            "supportedThemes": [
+                {
+                    "name": "Carmine Red Default",
+                    "fileName": "ai-carmine-red"
+                },
+                {
+                    "name": "Blue Grey",
+                    "fileName": "ai-blue-grey"
+                }
+            ]
+        }
+    },
+    "testMode": false
+}

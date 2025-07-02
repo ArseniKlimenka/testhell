@@ -1,0 +1,20 @@
+{
+    "description": "Create accumulated life insurance policy and activate",
+    "steps": [
+        {
+            "code": "CreatePolicy",
+            "description": "Create policy",
+            "actor": "Operations",
+            "requests": [
+                {
+                    "code": "body",
+                    "path": "./steps/createPolicy/body.json"
+                }
+            ],
+            "executor": {
+                "module": "./steps/createPolicy/executor.js",
+                "function": "executor"
+            }
+        }
+    ]
+}

@@ -1,0 +1,122 @@
+{
+    "steps": [
+        {
+            "$ref": "AdjustAccountingPeriods",
+            "context": {
+                "firstOpenPeriod": "2022-01-01"
+            }
+        },
+        {
+            "$ref": "AdjustCurrentDate",
+            "context": {
+                "currentDate": "2022-01-01"
+            }
+        },
+        {
+            "$ref": "CreateALIPolicyDemo",
+            "context": {
+                "policyStartDate": "2022-01-01",
+                "paymentFrequencyCode": "2",
+                "contractFieldName": "contract1"
+            }
+        },
+        {
+            "$ref": "CreatePaymentAndAllocate",
+            "description": "Pay first installment",
+            "context": {
+                "payAmount": 100000,
+                "referenceNo": "{{$.contract1.number}}",
+                "paymentDetails": {
+                    "amount": 100000,
+                    "transactionDate": "2022-01-01",
+                    "debtorName": "Петров Пётр Петрович"
+                }
+            }
+        },
+        {
+            "$ref": "ImportInvestProfit",
+            "context": {
+                "contractNumber": "{{$.contract1.number}}",
+                "cancellationValidFrom": "2022-07-01",
+                "amount": 10000
+            }
+        },
+        {
+            "code": "CancelPolicy",
+            "description": "Cancel policy",
+            "actor": "Operations",
+            "requests": [],
+            "executor": {
+                "module": "./steps/createCancellation/executor.js",
+                "function": "executor"
+            },
+            "context": {
+                "cancellationAmendmentReason": "byClientNonCoolOff",
+                "cancellationAmendmentSubType": "byClientDecision",
+                "cancellationValidFrom": "2022-07-01",
+                "contractFieldName": "amendment"
+            }
+        },
+        {
+            "code": "ValidatePaymentOrder",
+            "description": "Validate payment order",
+            "requests": [],
+            "executor": {
+                "module": "./steps/validatePaymentOrder/executor.js",
+                "function": "executor"
+            },
+            "assert": {
+                "expected": "./steps/validatePaymentOrder/expectedResult.json",
+                "module": "./steps/validatePaymentOrder/assert.js",
+                "function": "assertPO"
+            }
+        },
+        {
+            "$ref": "CreateALIPolicyDemo",
+            "context": {
+                "policyStartDate": "2022-01-01",
+                "paymentFrequencyCode": "2",
+                "riskPremium": 60000,
+                "contractFieldName": "contract2"
+            }
+        },
+        {
+            "code": "Netting",
+            "description": "Netting",
+            "actor": "PaymentOrderAdministrator",
+            "requests": [],
+            "executor": {
+                "module": "./steps/netting/executor.js",
+                "function": "executor"
+            }
+        },
+        {
+            "code": "ApprovePaymentOrder",
+            "actor": "ChiefPaymentDistributor",
+            "description": "Approve payment order",
+            "requests": [],
+            "executor": {
+                "module": "./steps/approvePaymentOrder/executor.js",
+                "function": "executor"
+            }
+        },
+        {
+            "$ref": "CreateOutgoingPaymentAndAllocate",
+            "description": "Pay normal payment order",
+            "context": {
+                "payAmount": 40000,
+                "referenceNo": "{{$.paymentOrderMain.paymentOrderNumber}}",
+                "paymentDetails": {
+                    "amount": 40000,
+                    "transactionDate": "2022-01-01"
+                }
+            }
+        },
+        {
+            "$ref": "AdjustCurrentDate",
+            "context": {
+                "currentDate": null
+            }
+        }
+    ]
+}

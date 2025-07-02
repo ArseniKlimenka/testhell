@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>Adacta.AdInsure.RGSL.Common.Domain</AssemblyName>
+    <RootNamespace>Adacta.AdInsure.RGSL.Common.Domain</RootNamespace>
+  </PropertyGroup>
+  <Import Project="..\..\..\common.targets" />
+  <ItemGroup>
+    <Compile Remove="Services\**" />
+    <EmbeddedResource Remove="Services\**" />
+    <None Remove="Services\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Adacta.AdInsure.Framework.Core" Version="43.11.0" />
+    <PackageReference Include="AdNPoco" Version="3.4.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\RGSL.Common.API\RGSL.Common.API.csproj" />
+  </ItemGroup>
+</Project>

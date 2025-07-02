@@ -1,0 +1,22 @@
+{
+    "mainDataSource": "BankStatementItemDatabaseDataSource",
+    "aggregate": true,
+    "useBackgroundTaskWorker": true,
+    "sinks": [
+        {
+            "ref": "ReindexBankStatementItemSinkGroup"
+        }
+    ],
+    "completionSinks": [
+        {
+            "name": "CleanupSink",
+            "message": {
+                "messageChannel": {
+                    "destination": "Infrastructure.Configuration.OnSearchEngineCleanupRequested",
+                    "policy": "DefaultMessageQueuePolicy"
+                }
+            }
+        }
+    ],
+    "version": "1"
+}

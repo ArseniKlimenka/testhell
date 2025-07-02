@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="ru-RU" xml:lang="ru-RU" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+	<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+	<title>«{{productCaps}}</title>
+	<link rel="stylesheet" href="assets/styles/style.css">
+	{{{exampleLabel}}}
+	{{{bottomLeftContentHolderOrBoth}}}
+	{{{bottomRightContentHolderOrBoth}}}
+	{{{runningTitleForDMSprogramFirstPage}}}
+	{{{reducePrintoutPagesTotalNumber}}}
+	{{{setKidPrintoutTopRunningTitle}}}
+	{{{setPolicyPrintoutRunningTitleIfKidExist}}}
+	{{{setKidPrintoutBottomRunningTitleFirstPage}}}
+	{{{setKidPrintoutBottomRunningTitleSecondPage}}} 
+	{{{setKidPrintoutBottomRunningTitleThirdPage}}}
+</head>
+
+<body>
+
+	<!-- Ключевой информационный документ - KID Printout Body -->
+	{{#if isKidPrintout}}
+		{{> ../../../life-insurance/component/KIDPrintoutBody/printout/template.html }}
+	{{/if}}
+
+	<!-- для загрузки динамических изображений в хранилище печатки. -->
+	{{#if alwaysFalse}}
+		{{> ../../../life-insurance/component/TempSignatureContainer/printout/template.html }}
+	{{/if}}
+
+	{{#if alwaysFalse}}
+		{{> ../../../life-insurance/component/CommonAppendixImageContainer/printout/template.html }}
+	{{/if}}
+
+	<div class="policyPage">
+		<!-- Договор -->
+		<div class="signatureHolderOrBoth">
+			<div class="container">
+
+				<div class="logoDiv">
+					<img src="../component/POImageConst/printout/assets/img/logoHeader.png" alt="Логотип Росгосстрах Жизнь" class="logo">
+				</div>
+				<div class="qrCodeAndInsurerInfo">
+					<div class="qrDiv">
+						<span class="qr_code">
+							{{QR}}
+						</span>
+					</div>
+					<div class="insurerInfoDiv">
+						<p>
+							<strong>Страховщик: </strong>ООО СК «Росгосстрах Жизнь».<br>
+							Лицензии Банка России: {{insurer.license}}, ИНН {{insurer.INN}}, КПП {{insurer.KPP}}<br>
+							<strong>Юридический адрес: </strong>{{insurer.address}}<br>
+							<strong>Реквизиты банка: </strong>{{bankInfo}}<br>
+							<strong>Телефон круглосуточного Контакт-центра: </strong>8 800 100 12 10 (бесплатный номер
+							для
+							звонков по России).
+						</p>
+					</div>
+				</div>
+
+				<div class="container2">
+					<p id="qrInfoTop" class="qrInfo">Для оплаты считайте данный штрих код</p>
+					<p id="qrInfoMiddle" class="qrInfo">в мобильном приложении интернет-банка</p>
+					<p id="policyheadingTop" class="policyheading">ДОГОВОР СТРАХОВАНИЯ № {{policy.number}} от
+						{{policy.issueDate}} г.</p>
+					<p id="policyheadingMiddle" class="policyheading">по программе «{{policy.product}}</p>
+					<p id="policyheadingButton" class="policyheading">на основании {{policy.rule}}
+						<br>(далее по тексту – Правила).
+					</p>
+				</div>
+
+				<div class="policy_item">
+					I. СТРАХОВАТЕЛЬ
+				</div>
+
+				<table class="person">
+					<col class="col1">
+					<col class="col2">
+					<col class="col3">
+					<col class="col4">
+					<col class="col5">
+					<col class="col6">
+					<col class="col7">
+					<tr>
+						<td class="tgrey">Фамилия Имя Отчество:</td>
+						<td class="twhite" colspan="4">{{holder.fullName}}</td>
+						<td class="tgrey">Пол:</td>
+						<td class="twhite center">{{holder.gender}}</td>
+					</tr>
+					<tr>
+						<td class="tgrey">Дата рождения:</td>
+						<td class="twhite center" colspan="2">{{holder.dateOfBirth}}</td>
+						<td class="tgrey" colspan="2">Место рождения:</td>
+						<td class="twhite center" colspan="2">{{holder.birthPlace}}</td>
+					</tr>
+					<tr>
+						<td class="tgrey">Телефон:</td>
+						<td class="twhite center" colspan="2">{{holder.phoneNumber}}</td>
+						<td class="tgrey" colspan="2">Гражданство:</td>
+						<td class="twhite center" colspan="2">{{holder.citizenship}}</td>
+					</tr>
+					<tr>
+						<td class="tgrey">E-mail:</td>
+						<td class="twhite" colspan="6">{{holder.email}}</td>
+					</tr>
+					<tr>
+						<td class="tgrey">Документ, удостоверяющий личность:</td>
+						<td class="twhite" colspan="4">{{holder.document.typeAndSN}}</td>
+						<td class="tgrey">Дата выдачи:</td>
+						<td class="twhite center">{{holder.document.dateOfIssue}}</td>
+					</tr>
+					{{#unless holder.isNotIssuedBy}}
+					<tr>
+						<td class="tgrey">Кем выдан:</td>
+						<td class="twhite" colspan="6">{{holder.document.issuedBy}}</td>
+					</tr>
+					{{/unless}}
+					<tr>
+						<td class="tgrey">Адрес постоянной регистрации:</td>
+						<td class="twhite" colspan="6">{{holder.registrationAddress}}</td>
+					</tr>
+					<tr>
+						<td class="tgrey">Почтовый адрес:</td>
+						<td class="twhite" colspan="6">{{holder.postAddress}}</td>
+					</tr>
+				</table>
+
+				<div class="policy_item">
+					II. ЗАСТРАХОВАННЫЙ
+				</div>
+
+				<table class="person">
+					<col class="col1">
+					<col class="col2">
+					<col class="col3">
+					<col class="col4">
+					<col class="col5">
+					<col class="col6">
+					<col class="col7">
+					<tr>
+						<td class="tgrey">Фамилия Имя Отчество:</td>
+						<td class="twhite" colspan="4">{{insured.fullName}}</td>
+						<td class="tgrey">Пол:</td>
+						<td class="twhite  center">{{insured.gender}}</td>
+					</tr>
+					<tr>
+						<td class="tgrey">Дата рождения:</td>
+						<td class="twhite center" colspan="2">{{insured.dateOfBirth}}</td>
+						<td class="tgrey" colspan="2">Место рождения:</td>
+						<td class="twhite center" colspan="2">{{insured.birthPlace}}</td>
+					</tr>
+					<tr>
+						<td class="tgrey">Телефон:</td>
+						<td class="twhite center" colspan="2">{{insured.phoneNumber}}</td>
+						<td class="tgrey" colspan="2">Гражданство:</td>
+						<td class="twhite center" colspan="2">{{insured.citizenship}}</td>
+					</tr>
+					<tr>
+						<td class="tgrey">E-mail:</td>
+						<td class="twhite" colspan="6">{{insured.email}}</td>
+					</tr>
+					<tr>
+						<td class="tgrey">Документ, удостоверяющий личность:</td>
+						<td class="twhite" colspan="4">{{insured.document.typeAndSN}}</td>
+						<td class="tgrey">Дата выдачи:</td>
+						<td class="twhite center">{{insured.document.dateOfIssue}}</td>
+					</tr>
+					{{#unless insured.isNotIssuedBy}}
+					<tr>
+						<td class="tgrey">Кем выдан:</td>
+						<td class="twhite" colspan="6">{{insured.document.issuedBy}}</td>
+					</tr>
+					{{/unless}}
+					<tr>
+						<td class="tgrey">Адрес постоянной регистрации:</td>
+						<td class="twhite" colspan="6">{{insured.registrationAddress}}</td>
+					</tr>
+					<tr>
+						<td class="tgrey">Почтовый адрес:</td>
+						<td class="twhite" colspan="6">{{insured.postAddress}}</td>
+					</tr>
+				</table>
+
+				<div class="policy_item">
+					III. ВЫГОДОПРИОБРЕТАТЕЛИ
+				</div>
+
+				{{#if isBeneficiaries}}
+				<table class="person">
+					<col class="col1">
+					<col class="col2">
+					<col class="col3">
+					<col class="col4">
+					<col class="col5">
+					<col class="col6">
+					<col class="col7">
+					{{#each beneficiaries}}
+					<tr>
+						<td class="tgrey" colspan="7">Выгодоприобретатель {{this.index}}. Доля {{this.percentage}}%</td>
+					</tr>
+					<tr>
+						<td class="tgrey">Фамилия Имя Отчество, Дата рождения:</td>
+						<td class="twhite" colspan="4">{{this.beneficiar.fullName}}, {{this.beneficiar.dateOfBirth}}</td>
+						<td class="tgrey">Пол:</td>
+						<td class="twhite  center">{{this.beneficiar.gender}}</td>
+					</tr>
+					{{#if this.dateOfBirthPlaceOfBirth}}
+					<tr>
+						<td class="tgrey">Дата рождения:</td>
+						<td class="twhite center">{{this.beneficiar.dateOfBirth}}</td>
+						<td class="tgrey" colspan="2">Место рождения:</td>
+						<td class="twhite" colspan="3">{{this.beneficiar.placeOfBirth}}</td>
+					</tr>
+					{{/if}}
+					{{#if this.phoneEmailCitizenship}}
+					<tr>
+						<td class="tgrey">Телефон:</td>
+						<td class="twhite center">{{this.beneficiar.phoneNumber}}</td>
+						<td class="tgrey">E-mail:</td>
+						<td class="twhite center" colspan="2">{{this.beneficiar.email}}</td>
+						<td class="tgrey">Гражданство:</td>
+						<td class="twhite center">{{this.beneficiar.citizenship}}</td>
+					</tr>
+					{{/if}}
+					{{#if this.isDocument}}
+					<tr>
+						<td class="tgrey">Документ, удостоверяющий личность:</td>
+						<td class="twhite" colspan="4">{{this.beneficiar.document.typeAndSN}}</td>
+						<td class="tgrey">Дата выдачи:</td>
+						<td class="twhite center">{{this.beneficiar.document.dateOfIssue}}</td>
+					</tr>
+					{{#unless this.beneficiar.isNotIssuedBy}}
+					<tr>
+						<td class="tgrey">Кем выдан:</td>
+						<td class="twhite" colspan="6">{{this.beneficiar.document.document.issuedBy}}</td>
+					</tr>
+					{{/unless}}
+					{{/if}}
+					{{#if this.isRegistrationAddress}}
+					<tr>
+						<td class="tgrey">Адрес постоянной регистрации:</td>
+						<td class="twhite" colspan="6">{{this.beneficiar.registrationAddress}}</td>
+					</tr>
+					{{/if}}
+					{{#if this.isPostAddress}}
+					<tr>
+						<td class="tgrey">Почтовый адрес:</td>
+						<td class="twhite" colspan="6">{{this.beneficiar.postAddress}}</td>
+					</tr>
+					{{/if}}
+					{{/each}}
+				</table>
+				{{#if shareSumIsNot1}}
+				<p class="afterTable">
+					В случае если общая доля менее 100%, Выгодоприобретателями на случай смерти Застрахованного по
+					оставшейся доле являются наследники Застрахованного по закону.
+				</p>
+				{{/if}}
+				{{else}}
+				<p class="afterTable">
+					Выгодоприобретателем является Застрахованный
+				</p>
+				{{/if}}
+
+
+				<div class="policy_item">
+					IV. СТРАХОВЫЕ РИСКИ, СТРАХОВЫЕ СУММЫ, СТРАХОВАЯ ПРЕМИЯ, СТРАХОВАЯ ВЫПЛАТА, СРОК ДЕЙСТВИЯ 
+					ДОГОВОРА СТРАХОВАНИЯ
+				</div>
+
+				<table class="risks">
+					<tr>
+						<td class="tgrey center riskCol1"><strong>Страховые риски</strong></td>
+						<td class="tgrey center riskCol2"><strong>Страховая сумма, рубли</strong></td>
+						<td class="tgrey center riskCol3"><strong>Страховая премия, рубли</strong></td>
+						<td class="tgrey center riskCol4"><strong>Страховая выплата</strong></td>
+					</tr>
+					<tr>
+						<td class="twhite">
+							Обращение Застрахованного за предоставлением медицинских или иных услуг, 
+							предусмотренных Программой, в связи с необходимостью проведения профилактических 
+							мероприятий, снижающих степень опасных для жизни или здоровья 
+							Застрахованного угроз и/или устраняющих их
+						</td>
+						<td class="twhite center">{{riskInsuredSum}}</td>
+						<td class="twhite center">{{risk.premium.sum}}</td>
+						<td class="twhite center">
+							предоставление медицинских или иных услуг, предусмотренных 
+							Программой добровольного медицинского страхования «{{policy.product}}
+						</td>
+					</tr>
+				</table>
+
+				<p class="afterTable" id="marginTopAndButton">
+					Банковские расходы, связанные с осуществлением страховой выплаты, оплачиваются получателем платежа.
+				</p>
+
+				<table class="insuranceTerms">
+					<col class="col1">
+					<col class="col2">
+					<col class="col3">
+					<tr>
+						<td class="tgrey" colspan="2"><strong>Страховая премия уплачивается единовременно в полном объеме
+								не
+								позднее:</strong>
+						</td>
+						<td class="twhite">{{experationDate}}</td>
+					</tr>
+				</table>
+				{{#if isOASTextAfterDecember}}
+				<p class="afterTable" id="marginTopAndButton">
+					В случае если страховая премия не была оплачена (или была оплачена не полностью) в указанный срок либо в случае оплаты страховой премии позднее {{OASdatePaymentPeriod}}, Страховщик вправе считать договор страхования не вступившим в силу и произвести возврат поступивших средств Страхователю.
+					<br>Стороны признают, что события, имеющие признаки страхового и наступившие до уплаты страховой премии в полном объеме, не признаются страховым случаем и страховая выплата по ним не осуществляется (пункт 2 статьи 957 Гражданского кодекса Российской Федерации).						
+				</p>
+				{{else}}
+				<p class="afterTable" id="marginTopAndButton">
+					В случае если страховая премия не была оплачена (или была оплачена не полностью) в указанный срок, 
+					{{#if insuranceTerms.paymentPeriodLastDate}} либо в случае оплаты страховой премии позднее {{insuranceTerms.paymentPeriodLastDate}}, {{/if}}
+					Страховщик вправе считать договор страхования не вступившим в силу и произвести возврат поступивших 
+					средств Страхователю. Банковские расходы, связанные с оплатой страховой премии, несет Страхователь.
+				</p>
+				{{/if}}
+				<table class="insuranceTerms">
+					<col class="col1">
+					<col class="col2">
+					<col class="col3">
+					<tr>
+						<td class="tgrey"><strong>Срок действия договора страхования:</strong></td>
+						<td class="twhite center">{{insuranceTerms.text}}</td>
+						<td class="twhite textJustify">Договор страхования вступает в силу с
+							{{insuranceTerms.startDate}}{{#unless isOASTextAfterDecember}}
+							при условии уплаты страховой премии в полном объеме{{/unless}} и действует до
+							{{insuranceTerms.endDate}} включительно.
+						</td>
+					</tr>
+				</table>
+
+				<div class="avoidPageBreakInsideAfter">
+					<div class="policy_item">
+						V. ДЕКЛАРАЦИЯ СТРАХОВАТЕЛЯ И ЗАСТРАХОВАННОГО
+					</div>
+
+					<table class="declarationMain">
+						<tr>
+							<td class="twhite">Настоящим Страхователь и Застрахованный {{#unless isGenChkHealth}}/ законный 
+								представитель несовершеннолетнего Застрахованного{{/unless}}</td>
+							<td class="twhite"><input type="checkbox" checked> подтверждают, что:</td>
+							<td class="twhite"><input type="checkbox"> не подтверждают, что:</td>
+						</tr>
+					</table>
+
+					<ul class="declaration">
+						{{#each declarationMain}}
+						<li>
+							<p>{{this}}</p>
+						</li>
+						{{/each}}
+					</ul>
+				</div>
+
+				<div class="policy_item">
+					VI. ИНЫЕ УСЛОВИЯ
+				</div>
+		
+				<ol class="otherCondition">
+					<li>
+						В случае отказа Страхователя (физического лица) от договора страхования в период, 
+						предусмотренный договором страхования и действующим законодательством, когда Страхователь 
+						имеет право на возврат уплаченной страховой премии (уплаченных страховых взносов), 
+						Страховщик осуществляет возврат уплаченной Страхователем суммы в рублях независимо 
+						от курса валюты, в которой выражены обязательства по договору страхования. 
+						Если страховая премия была уплачена в иной валюте, возврату подлежит сумма 
+						денежных средств в валюте, в которой она была уплачена.
+					</li>
+					<li>
+						Если после заключения договора страхования будет выявлено, что Страхователь/Застрахованный 
+						сообщил в настоящем договоре или иных документах, заполняемых при заключении договора 
+						страхования заведомо ложные сведения или предоставил подложные документы, и если эти 
+						сведения или документы привели к заключению договора страхования на условиях отличных 
+						от тех, на которых он был бы заключен, то Страховщик имеет право отказать в страховой выплате.
+					</li>
+					<li>
+						Стороны пришли к соглашению о том, что факсимильное воспроизведение подписей уполномоченных 
+						лиц Страховщика и факсимильный оттиск печати Страховщика признаются сторонами аналогом 
+						собственноручной подписи уполномоченных лиц Страховщика и оригинала печати Страховщика.
+					</li>
+					<li>
+						Неотъемлемой частью настоящего договора страхования являются: Правила, Программа 
+						добровольного медицинского страхования «{{policy.product}}, заявления (при наличии), 
+						составленные и заполненные по просьбе Страховщика Страхователем и/или лицом, заявляемым на страхование.
+					</li>
+					{{#if otherCondition.isOtherCondition}}
+					<li>
+						{{otherCondition.policySpecialConditions}}
+					</li>
+					{{/if}}
+				</ol>
+
+			</div>
+		</div>
+
+		<!-- Приложение к договору -->
+		<div class="wrapper programPage">
+
+			<div class="right">Приложение к договору страхования № {{policy.number}} от {{policy.issueDate}} г.</div>
+			<div class="right">по программе «{{policy.product}}</div>
+		
+			<div class="header">
+				<div class="center bold">ПРОГРАММА ДОБРОВОЛЬНОГО МЕДИЦИНСКОГО СТРАХОВАНИЯ</div>
+				<div class="center bold">«{{productCaps}}</div>
+				<div class="center">(далее – Программа)</div>
+			</div>
+		
+			<div class="section">
+				<div class="bold"><span class="p1">1.</span>ОБЩИЕ ПОЛОЖЕНИЯ</div>
+				<div><span class="p2">1.1.</span>
+					<span class="left">В </span>рамках настоящей Программы Страховщик организует Застрахованному 
+					при наступлении страхового случая и оплачивает медицинские и/или 
+					иные услуги в объеме, предусмотренном Программой.
+				</div>
+				<div><span>
+					<span class="left bold">Страховым случаем</span> является документально подтвержденное обращение 
+					Застрахованного в медицинскую и/или иную организацию, из числа 
+					предусмотренных настоящей Программой, для получения медицинских 
+					и/или иных услуг, предусмотренных настоящей Программой, в связи 
+					с необходимостью проведения профилактических мероприятий, снижающих 
+					степень опасных для жизни или здоровья Застрахованного угроз и/или 
+					устраняющих их, в течение срока страхования, установленного 
+					в договоре страхования.
+				</span></div>
+				<div><span class="p2">1.2.</span>
+					<span class="left">Застрахованным</span>по настоящей Программе может являться только лицо в возрасте 
+					от {{age}} полных лет (включительно) на дату заключения договора страхования.
+				</div>
+				<div><span class="p2">1.3.</span>
+					<span class="left">В</span>рамках настоящей Программы Застрахованный 1 (один) раз в течение срока 
+					страхования, предусмотренного в договоре страхования, имеет право обратиться 
+					за предоставлением медицинских и/или иных услуг, указанных в Программе.
+				</div>
+				<div><span class="p2">1.4.</span>
+					<span class="left">В</span>рамках страхового покрытия, предусмотренного в п. 2 Программы, 
+					период ожидания составляет 14 (четырнадцать) дней с даты вступления 
+					в силу договора страхования.
+				</div>
+			</div>
+		
+			<div class="section">
+				<div class="bold"><span class="p1">2.</span>ОБЪЕМ МЕДИЦИНСКИХ И ИНЫХ УСЛУГ<sup>1</sup></div>
+				<div><span class="p2">2.1.</span>Генетическое тестирование включает:</div>
+				<div><span class="p3">2.1.1.</span>{{paragraph211}}</div>
+				<div><span class="p4">2.1.1.1.</span>ДНК-тест (включая забор биоматериала).</div>
+				<div><span class="p4">2.1.1.2.</span>
+					<span class="left">Подготовка</span> заключения<sup>2</sup> по результатам ДНК-теста с индивидуальными 
+					рекомендациями и дальнейшим назначением дополнительных 
+					обследований/консультаций<sup>3</sup> при их необходимости.
+				</div>
+			</div>
+
+			<div class="section">
+				<div class="bold"><span class="p1">3.</span>ПРАВИЛА И ПОРЯДОК ОРГАНИЗАЦИИ ОКАЗАНИЯ УСЛУГ</div>
+				<div><span class="p2">3.1.</span>
+					<span class="left">Услуги,</span> указанные в п. 2 Программы, оказываются Застрахованному по предварительной записи 
+					в рамках графика работы специалистов организации, оказывающей услугу, в течение 10 (десяти) 
+					рабочих дней с даты обращения Застрахованного за предоставлением услуги.
+				</div>
+				<div><span class="p2">3.2.</span>
+					{{#if isGenChkHealth}}
+						<span class="left">Для</span> получения услуг по настоящей Программе Застрахованному требуется предоставить письменное согласие 
+						на обработку его персональных данных, в том числе медицинских, и передачу информации организации, 
+						оказывающей услуги. В случае отказа Застрахованного от предоставления письменного согласия 
+						на обработку его персональных данных, в том числе медицинских, и передачу информации, услуги Застрахованному не оказываются.
+					{{else}}
+						<span class="left">Оказание</span> услуг несовершеннолетнему Застрахованному осуществляется строго 
+						в присутствии законного представителя Застрахованного.
+					{{/if}}
+				</div>
+				{{#unless isGenChkHealth}}	
+					<div><span class="p2">3.3.</span>
+						<span class="left">Для</span> получения услуг по настоящей Программе Застрахованному / законному представителю Застрахованного 
+						требуется предоставить письменное согласие на обработку персональных данных Застрахованного, 
+						в том числе медицинских, и передачу информации организации, оказывающей услуги. 
+						В случае отказа Застрахованного / законного представителя Застрахованного от предоставления 
+						письменного согласия на обработку персональных данных Застрахованного, в том числе медицинских, 
+						и передачу информации, услуги Застрахованному не оказываются.
+					</div>
+				{{/unless}}
+			</div>
+
+			<div class="section">
+				<div class="bold"><span class="p1">4.</span>ИСКЛЮЧЕНИЯ ИЗ ПРОГРАММЫ СТРАХОВАНИЯ</div>
+				<div><span class="p2">4.1.</span>Не признается страховым случаем:</div>
+				<div><span class="p3">4.1.1.</span>
+					<span class="left">обращение</span> за получением медицинских и/или иных услуг лицом, 
+					не являющимся Застрахованным по договору страхования, в том числе 
+					в случае установления факта передачи Застрахованным страховых 
+					документов другому лицу для получения таким лицом медицинских 
+					и/или иных услуг, предусмотренных Программой;
+				</div>
+				<div><span class="p3">4.1.2.</span>
+					<span class="left">обращение</span> Застрахованного, находящегося в состоянии алкогольного, 
+					токсического или наркотического опьянения;
+				</div>
+				<div><span class="p3">4.1.3.</span>
+					<span class="left">получение</span> Застрахованным медицинских и/или иных услуг 
+					вне срока страхования;
+				</div>
+				<div><span class="p3">4.1.4.</span>
+					<span class="left">получение</span> Застрахованным медицинских и/или иных услуг, 
+					не предусмотренных Программой, в том числе: вызовы врача на дом, 
+					услуги, оказываемые в условиях дневного стационара и в стационарных условиях; 
+					услуги скорой, в том числе скорой специализированной, медицинской помощи, 
+					услуги по вызову скорой, в том числе скорой специализированной, медицинской помощи;
+				</div>
+				<div><span class="p3">4.1.5.</span>
+					<span class="left">если</span> количество или частота обращений за оказанием медицинских и/или иных 
+					услуг превышает лимит ответственности, установленный Программой.
+				</div>
+				<div><span class="p2">4.2.</span>
+					<span class="left">Застрахованному</span> не возмещаются денежные средства, затраченные 
+					на любые дополнительные диагностические и лечебные мероприятия, 
+					консультации врачей-специалистов, не предусмотренные Программой, 
+					а также другие расходы, включая стоимость предоставленных носителей 
+					информации, стоимость телефонных переговоров и т. д.
+				</div>
+				<div><span class="p2">4.3.</span>
+					<span class="left">В</span> случае экстренной ситуации, требующей вызова неотложных служб, 
+					консультации оказываются только в рамках информирования о порядке 
+					действий при экстренной ситуации, согласно законодательству Российской Федерации.
+				</div>
+			</div>
+			
+			<div class="signatureImg">{{{signatureImg}}}
+				<div class="signatureNames">
+					{{#if signatureOnlyForHolder}}
+						<div class="signatureHolderName signatureFont">{{holder.signatureName}}</div>
+						<!--
+						{{else}}
+							<div class="signatureFont">{{holder.signatureName}}</div>
+							<div class="signatureInsuredName signatureFont">{{insured.signatureName}}</div>
+						-->
+					{{/if}}
+				</div>
+			</div>
+
+			<div class="footer">
+				{{#if isGenChkHealth}}
+					<div class="correctFooter"></div>
+				{{/if}}
+				<hr>
+				<div>
+					<sup>1</sup>Перечень и объем медицинских услуг может быть скорректирован в одностороннем порядке Страховщиком, 
+					а также может зависеть от возможностей лаборатории / медицинской организации, находящейся 
+					в территориальной доступности для Застрахованного. Медицинские услуги предоставляются Застрахованному 
+					по предварительной записи, Застрахованный имеет право отказаться от назначенного времени оказания 
+					услуги не позднее чем за 24 часа до назначенного времени. В случае если до назначенного времени 
+					оказания услуги осталось менее 24 часов, то Застрахованный имеет право отказаться от назначенного 
+					времени не более 1 раза, при повторном отказе в срок менее чем за 24 часа до назначенного времени 
+					услуга будет считаться оказанной в полном объеме. Также услуга будет считаться оказанной в полном объеме, 
+					если Застрахованный не явился в назначенное время по адресу, определенному в качестве места оказания услуги, 
+					для получения медицинской услуги.
+				</div>
+				<div>
+					<sup>2</sup>Срок подготовки заключения – до 92 (девяноста двух) календарных дней.
+				</div>
+				<div>
+					<sup>3</sup>Дополнительные обследования/консультации и/или иные медицинские услуги, 
+					не входящие в Программу, оплачиваются Застрахованным за свой счет.
+				</div>
+			</div>
+		
+		</div>
+	</div>
+
+</body>
+
+</html>

@@ -1,0 +1,106 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+        "criteria": {
+            "type": "object",
+            "anyOf": [
+                {
+                    "required": [
+                        "documentNoStr"
+                    ]
+                }
+            ],
+            "additionalProperties": false,
+            "properties": {
+                "documentNo": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "documentNoStr": {
+                    "type": "string",
+                    "aiTitle": "documentNoStr"
+                },
+                "serviceProviderNameFrom": {
+                    "type": "string",
+                    "aiTitle": "serviceProviderNameFrom"
+                },
+                "serviceProviderNameTo": {
+                    "type": "string",
+                    "aiTitle": "serviceProviderNameTo"
+                },
+                "serviceProviderCodeFrom": {
+                    "type": "string",
+                    "aiTitle": "serviceProviderCodeFrom"
+                },
+                "serviceProviderCodeTo": {
+                    "type": "string",
+                    "aiTitle": "serviceProviderCodeTo"
+                },
+                "userName": {
+                    "type": "string",
+                    "aiTitle": "userName"
+                },
+                "issueDate":{
+                    "type": "string",
+                    "aiFormat": "date"
+                },
+                "transferState": {
+                    "$ref": "component:TransferStateComponent"
+                },
+                "contractState": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "component:ContractStateComponent"
+                    }
+                },
+                "contractNumbers": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "contractNumbersStr": {
+                    "type": "string",
+                    "aiTitle": "contractNumbersStr"
+                },
+                "holderName": {
+                    "type": "string"
+                },
+                "productDescription": {
+                    "type": "string"
+                },
+                "startDate":{
+                    "type": "string",
+                    "aiFormat": "date"
+                },
+                "groupByRefNo": {
+                    "type": "boolean"
+                },
+                "dueDate":{
+                    "type": "string",
+                    "aiFormat": "date"
+                }
+            }
+        },
+        "sort": {
+            "type": "array",
+            "additionalProperties": false,
+            "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                    "descending": {
+                        "type": "boolean"
+                    },
+                    "fieldName": {
+                        "type": "string"
+                    }
+                }
+            }
+        }
+    }
+}

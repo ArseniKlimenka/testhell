@@ -1,0 +1,12 @@
+ARG platform_version=latest
+FROM registryru.adacta-fintech.ru/adinsure/mono/signalr:${platform_version}
+
+COPY ./os-release /usr/lib/os-release
+
+COPY ./certs/life-ca.crt /usr/share/ca-certificates/
+RUN echo life-ca.crt >> /etc/ca-certificates.conf
+
+COPY ./certs/rgsl-ru.crt /usr/share/ca-certificates/
+RUN echo rgsl-ru.crt >> /etc/ca-certificates.conf
+
+RUN update-ca-certificates

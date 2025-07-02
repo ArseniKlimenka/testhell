@@ -1,0 +1,22 @@
+select
+    ph.PORTFOLIO_TRANSFER_NUMBER,
+    ps.ISSUE_DATE,
+    ptState.CODE_NAME as DOCUMENT_STATE,
+	ps.AA_NUMBER_TO,
+	ps.SERVICE_PROVIDER_CODE_TO,
+	ps.SAD_NUMBER_TO
+from
+	acc_impl.PORTFOLIO_TRANSFER_SAT_LATEST ps
+	inner join acc_impl.PORTFOLIO_TRANSFER_HUB ph on ph.PORTFOLIO_TRANSFER_HKEY = ps.PORTFOLIO_TRANSFER_HKEY
+	inner join bfx.UNIVERSAL_DOCUMENT ud on ud.UNIVERSAL_DOCUMENT_NUMBER = ph.PORTFOLIO_TRANSFER_NUMBER
+	inner join cfg.PROCESS_STATE ptState on ptState.PROCESS_STATE_ID = ud.STATE_ID
+where 1=1
+{{#if parameters.documentNo}}
+	AND ph.PORTFOLIO_TRANSFER_NUMBER = @documentNo
+{{/if}}
+{{#if parameters.issueDateFrom}}
+	AND ps.ISSUE_DATE >= @issueDateFrom
+{{/if}}
+{{#if parameters.issueDateTo}}
+	AND ps.ISSUE_DATE <= @issueDateTo
+{{/if}}

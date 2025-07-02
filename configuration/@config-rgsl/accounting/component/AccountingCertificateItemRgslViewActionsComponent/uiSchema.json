@@ -1,0 +1,84 @@
+{
+    "type": "ButtonGroup",
+    "label": "Actions",
+    "rule": {
+        "effect": "HIDE",
+        "condition": {
+            "type": "FUNC",
+            "value": [
+                {
+                    "$ref": "#"
+                }
+            ],
+            "ruleFunction": "hideButtonGroup"
+        }
+    },
+    "elements": [
+        {
+            "type": "Button",
+            "hide": false,
+            "readOnly": true,
+            "icon": {
+                "size": "Small",
+                "color": "BackgroundColor",
+                "name": "Plus"
+            },
+            "eventHandlers": [
+                {
+                    "eventName": "Selected",
+                    "senders": [
+                        "TableViewId"
+                    ],
+                    "commands": {
+                        "commandType": "executeAction",
+                        "actionName": "enableCreateFnsXml"
+                    }
+                }
+            ],
+            "styleClass": "md-icon-button",
+            "value": {
+                "$ref": "#"
+            },
+            "onClick": [
+                {
+                    "commandType": "executeAction",
+                    "actionName": "createFnsXml"
+                }
+            ],
+            "label": "Create Fns Xml"
+        },
+        {
+            "type": "Button",
+            "hide": false,
+            "readOnly": true,
+            "icon": {
+                "size": "Small",
+                "color": "BackgroundColor",
+                "name": "Plus"
+            },
+            "eventHandlers": [
+                {
+                    "eventName": "Selected",
+                    "senders": [
+                        "TableViewId"
+                    ],
+                    "commands": {
+                        "commandType": "executeAction",
+                        "actionName": "enableCreateFnsXml"
+                    }
+                }
+            ],
+            "styleClass": "md-icon-button",
+            "value": {
+                "$ref": "#"
+            },
+            "onClick": [
+                {
+                    "commandType": "executeAction",
+                    "actionName": "issueCertificates"
+                }
+            ],
+            "label": "Issue verifications"
+        }
+    ]
+}

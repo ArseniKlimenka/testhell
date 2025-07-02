@@ -1,0 +1,238 @@
+{
+    "type": "Section",
+    "label": "AdditionalBeneficiaries",
+    "labelType": "H1",
+    "collapsing": {
+        "initial": false,
+        "enabled": true
+    },
+    "width": 12,
+    "elements": [
+        {
+            "type": "Group",
+            "width": 12,
+            "elements": [
+                {
+                    "type": "DataGrid",
+                    "mode": "Array",
+                    "checkIfRowActionIsAllowed": "checkIfRowActionIsAllowed",
+                    "checkIfAddButtonVisible": "checkIfAddButtonVisible",
+                    "showDeleteConfirmation": true,
+                    "pagination": {
+                        "mode": "Regular",
+                        "pageSizes": [
+                            5,
+                            10,
+                            15
+                        ],
+                        "defaultPageSize": 5
+                    },
+                    "value": {
+                        "$ref": "#"
+                    },
+                    "actions": [
+                        "Add",
+                        "Edit",
+                        "Delete"
+                    ],
+                    "edit": {
+                        "mode": "Detached",
+                        "onBeforeGridAction": "beneficiariesOnBeforeGridAction",
+                        "onAfterGridAction": "beneficiariesOnAfterGridAction"
+                    },
+                    "rule": {
+                        "effect": "ENABLE_INITIAL",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "enableArray",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    },
+                    "columns": [
+                        {
+                            "title": "beneficiaryRisk",
+                            "name": "beneficiaryRisk",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "defaultValue": "",
+                                "value": {
+                                    "$ref": "#/properties/risk/properties/description"
+                                }
+                            }
+                        },
+                        {
+                            "title": "beneficiary",
+                            "name": "beneficiary",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "defaultValue": "",
+                                "value": {
+                                    "$ref": "#/properties/partyFullName"
+                                }
+                            }
+                        },
+                        {
+                            "title": "share",
+                            "name": "share",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "defaultValue": "",
+                                "template": "{{expr share 'p:2'}}",
+                                "value": {
+                                    "$ref": "#"
+                                }
+                            }
+                        },
+                        {
+                            "title": "relationType",
+                            "name": "relationType",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "defaultValue": "",
+                                "value": {
+                                    "$ref": "#/properties/relationType"
+                                }
+                            }
+                        },
+                        {
+                            "title": "dateOfBirth",
+                            "name": "dateOfBirth",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "defaultValue": "",
+                                "value": {
+                                    "$ref": "#/properties/dateOfBirth"
+                                }
+                            }
+                        }
+                    ],
+                    "detailsTemplates": {
+                        "edit": {
+                            "content": {
+                                "type": "GridLayout",
+                                "fillAvailableSpace": true,
+                                "numberOfColumns": 12,
+                                "elements": [
+                                    {
+                                        "type": "Group",
+                                        "width": 12,
+                                        "elements": [
+                                            {
+                                                "type": "Input",
+                                                "label": "partyFullName",
+                                                "value": {
+                                                    "$ref": "#/properties/partyFullName"
+                                                },
+                                                "width": 4
+                                            },
+                                            {
+                                                "type": "Input",
+                                                "label": "dateOfBirth",
+                                                "value": {
+                                                    "$ref": "#/properties/dateOfBirth"
+                                                },
+                                                "width": 4
+                                            },
+                                            {
+                                                "type": "Input",
+                                                "label": "personGender",
+                                                "value": {
+                                                    "$ref": "#/properties/personGender"
+                                                },
+                                                "width": 4
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "type": "Group",
+                                        "width": 12,
+                                        "elements": [
+                                            {
+                                                "type": "Input",
+                                                "showAsRequired": true,
+                                                "label": "share",
+                                                "decimalPlaces": 2,
+                                                "clearValueOutOfRange": true,
+                                                "control": "Percentage",
+                                                "value": {
+                                                    "$ref": "#/properties/share"
+                                                },
+                                                "width": 4
+                                            },
+                                            {
+                                                "type": "Input",
+                                                "hide": false,
+                                                "showAsRequired": true,
+                                                "enableCustomValue": true,
+                                                "label": "relationType",
+                                                "description": "relationTypeDesc",
+                                                "source": {
+                                                    "dataSource": {
+                                                        "name": "PartyRelationsTypeDataSource",
+                                                        "reloadOnOpen": true,
+                                                        "searchFieldPath": "relationTypeDescription",
+                                                        "responseMapping": "relationTypeResponseMapping",
+                                                        "resultCount": 1000
+                                                    }
+                                                },
+                                                "control": "Dropdown",
+                                                "value": {
+                                                    "$ref": "#/properties/relationType"
+                                                },
+                                                "width": 4
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "type": "Group",
+                                        "width": 12,
+                                        "elements": [
+                                            {
+                                                "type": "Input",
+                                                "label": "beneficiaryRisk",
+                                                "value": {
+                                                    "$ref": "#/properties/risk"
+                                                },
+                                                "control": "Dropdown",
+                                                "preSelectFirstItem": true,
+                                                "source": {
+                                                    "reloadOnOpen": true,
+                                                    "dataSource": {
+                                                        "name": "RiskInfoDataSource",
+                                                        "searchFieldPath": "description",
+                                                        "requestMapping": "beneficiaryRiskRequestMapping",
+                                                        "responseMapping": "beneficiaryRiskResponseMapping",
+                                                        "resultCount": 100
+                                                    },
+                                                    "displayFieldName": "displayName",
+                                                    "valueFieldName": "value"
+                                                },
+                                                "width": 3
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                }
+            ]
+        }
+    ],
+    "rule": {
+        "effect": "HIDE",
+        "condition": {
+            "type": "FUNC",
+            "value": [
+                {
+                    "$ref": "#"
+                }
+            ],
+            "ruleFunction": "hideAdditionalBeneficiaries"
+        }
+    }
+}

@@ -1,0 +1,159 @@
+{
+    "type": "Section",
+    "label": "Main attributes",
+    "scope": "mainAttributes",
+    "width": 12,
+    "elements": [
+        {
+            "type": "Group",
+            "width": 12,
+            "elements": [
+                {
+                    "type": "Input",
+                    "elementId": "changeTypes",
+                    "multiple": true,
+                    "control": "Dropdown",
+                    "label": "changeType",
+                    "filter": "filterChangeTypes",
+                    "value": {
+                        "$ref": "#/properties/changeTypes"
+                    },
+                    "width": 5,
+                    "onValueChanged": [
+                        {
+                            "commandType": "executeAction",
+                            "actionName": "onChangeTypesChanged"
+                        }
+                    ]
+                },
+                {
+                    "type": "Input",
+                    "elementId": "personalDataChangeType",
+                    "control": "Dropdown",
+                    "label": "personalDataChangeType",
+                    "multiple": true,
+                    "value": {
+                        "$ref": "#/properties/personalDataChangeType"
+                    },
+                    "width": 5,
+                    "rule": {
+                        "effect": "SHOW",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "showPersonalDataChangeType",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "type": "Group",
+            "width": 12,
+            "elements": [
+                {
+                    "type": "Input",
+                    "label": "amendmentIssueDate",
+                    "value": {
+                        "$ref": "#/properties/amendmentIssueDate"
+                    },
+                    "width": 3,
+                    "rule": {
+                        "effect": "ENABLE_INITIAL",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "isAmendmentIssueDateEnabled",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "type": "Group",
+            "width": 12,
+            "elements": [
+                {
+                    "type": "Input",
+                    "label": "effectiveDate",
+                    "value": {
+                        "$ref": "#/properties/amendmentEffectiveDate"
+                    },
+                    "width": 3,
+                    "rule": {
+                        "effect": "ENABLE_INITIAL",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "isEffectiveDateEnabled",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "type": "Dropdown",
+                    "label": "initiator",
+                    "multiple": false,
+                    "enableClear": true,
+                    "enableCustomValue": false,
+                    "value": {
+                        "$ref": "#/properties/initiator"
+                    },
+                    "onValueChanged": [
+                        {
+                            "commandType": "executeAction",
+                            "actionName": "onInitiatorChange"
+                        }
+                    ],
+                    "width": 4
+                },
+                {
+                    "type": "Dropdown",
+                    "label": "changeReason",
+                    "multiple": false,
+                    "enableClear": true,
+                    "enableCustomValue": false,
+                    "value": {
+                        "$ref": "#/properties/changeReason"
+                    },
+                    "rule": {
+                        "effect": "SHOW",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "enableChangeReason",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    },
+                    "width": 4
+                }
+            ]
+        }
+    ],
+    "rule": {
+        "effect": "ENABLE_INITIAL",
+        "condition": {
+            "type": "FUNC",
+            "ruleFunction": "areMainAttributesEnabled",
+            "value": [
+                {
+                    "$ref": "#"
+                }
+            ]
+        }
+    }
+}

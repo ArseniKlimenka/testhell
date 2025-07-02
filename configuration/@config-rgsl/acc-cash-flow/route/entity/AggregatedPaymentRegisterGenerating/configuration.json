@@ -1,0 +1,113 @@
+{
+    "entityType": "ImportDocument",
+    "condition": {
+        "events": [
+            "StatusChanged"
+        ],
+        "configuration": {
+            "names": [
+                "AggregatedPaymentRegisterImport"
+            ],
+            "dimensions": {}
+        },
+        "documentStates": [
+            "Generating"
+        ]
+    },
+    "sinks": [
+        {
+            "name": "UpdateRegistryClearErrors",
+            "document": {
+                "configuration": {
+                    "name": "AggregatedPaymentRegisterImport"
+                },
+                "allowUpdating": {
+                    "inStates": [
+                        "Generating"
+                    ]
+                }
+            }
+        },
+        {
+            "name": "FetchAllocatedRegistry",
+            "fetch": {
+                "configuration": {
+                    "name": "AggregatedPaymentRegisterAllocatedDataSource"
+                }
+            }
+        },
+        {
+            "name": "FetchSmallPaymentDefinitions",
+            "fetch": {
+                "configuration": {
+                    "name": "AggregatedPaymentRegisterDataSource"
+                }
+            }
+        },
+        {
+            "name": "ImportSmallPayments",
+            "class": {
+                "className": "Adacta.AdInsure.RGSL.Accounting.API.Shared.CashFlow.BankStatement.Services.IBankStatementServiceAppRGSL, Adacta.AdInsure.RGSL.Accounting.API",
+                "methodName": "Create"
+            }
+        },
+        {
+            "name": "AutoAllocateRGSL",
+            "class": {
+                "className": "Adacta.AdInsure.RGSL.Accounting.API.Shared.CashFlow.Allocation.Services.IAutoAllocationServiceAppRGSL, Adacta.AdInsure.RGSL.Accounting.API",
+                "methodName": "AutoAllocate"
+            }
+        }
+    ],
+    "completionSinks": [
+        {
+            "name": "FinishedGeneration",
+            "executeAs": "System",
+            "documentTransition": {
+                "transition": {
+                    "transitionName": "Generating_to_Generated",
+                    "configurationName": "AggregatedPaymentRegisterImport",
+                    "configurationVersion": "1"
+                }
+            }
+        },
+        {
+            "name": "SendSuccessNotification",
+            "notification": {
+                "notificationName": "AggregatedPaymentImportSuccess"
+            }
+        }
+    ],
+    "errorSinks": [
+        {
+            "name": "RegistryGenerationError",
+            "documentTransition": {
+                "transition": {
+                    "transitionName": "Generating_to_RegistryGenerationError",
+                    "configurationName": "AggregatedPaymentRegisterImport",
+                    "configurationVersion": "1"
+                }
+            }
+        },
+        {
+            "name": "UpdateRegistryGenerationError",
+            "document": {
+                "configuration": {
+                    "name": "AggregatedPaymentRegisterImport"
+                },
+                "allowUpdating": {
+                    "inStates": [
+                        "RegistryGenerationError"
+                    ]
+                }
+            }
+        },
+        {
+            "name": "SendFailureNotification",
+            "notification": {
+                "notificationName": "AggregatedPaymentImportFailed"
+            }
+        }
+    ],
+    "version": "1"
+}

@@ -1,0 +1,11 @@
+truncate table PTY.PERSON_HUB;
+truncate table ORG.ORGANISATION_UNIT_HUB;
+truncate table ORG.ORGANISATION_UNIT_INFO_SAT;
+truncate table ORG.ORGANISATION_LINK;
+truncate table PAS.AMENDMENT_HUB;
+truncate table PAS.AMENDMENT_SAT;
+truncate table PAS.P_AMENDMENT_LINK;
+truncate table PAS.OBJECT_HUB;
+truncate table PAS.P_OBJECT_LINK;
+truncate table PAS.P_OBJECT_SAT;
+truncate table PAS.QUOTE_HUB;

@@ -1,0 +1,27 @@
+{
+    "entityType": "UniversalDocument",
+    "condition": {
+        "events": [
+            "StatusChanged"
+        ],
+        "configuration": {
+            "names": [
+                "InsuredEvent"
+            ]
+        }
+    },
+    "sinks": [
+        {
+            "name": "SaveInsuredEventData",
+            "database": {
+                "tables": [
+                    "CLM_IMPL.IE_HUB",
+                    "CLM_IMPL.IE_SAT",
+                    "CLM_IMPL.IE_CONTRACT_LINK",
+                    "CLM_IMPL.IE_CONTRACT_SAT"
+                ]
+            }
+        }
+    ],
+    "version": "1"
+}

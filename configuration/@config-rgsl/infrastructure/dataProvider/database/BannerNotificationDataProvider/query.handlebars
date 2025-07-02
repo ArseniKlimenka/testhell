@@ -1,0 +1,17 @@
+﻿select
+  ntf.NOTIFICATION_ID,
+  ntf.ORIGINATING_APPLICATION_USER_ID USER_ID,
+  ntf.SUBJECT
+from
+  BFX.NOTIFICATION_MAILBOX ntf
+where ntf.IS_DELETED = 0
+  and ntf.NOTIFICATION_TYPE = 'Banner'
+  and ntf.NOTIFICATION_ID not in 
+  (
+  select
+    ntf.ORIGINATING_NOTIFICATION_ID
+  from
+    BFX.NOTIFICATION_MAILBOX ntf
+  where ntf.IS_DELETED = 1
+    and ntf.NOTIFICATION_TYPE = 'Banner'
+  )

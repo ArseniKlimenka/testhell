@@ -1,0 +1,42 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema",
+    "description": "Deduplication document.",
+    "type": "object",
+    "additionalProperties": true,
+    "aiAudit": {
+        "scope": "General"
+    },
+    "properties": {
+        "updatedDocuments": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "additionalProperties": true
+            }
+        },
+        "masterParty": {
+            "type": "object",
+            "additionalProperties": true,
+            "properties": {
+                "partyCode": {
+                    "type": "string"
+                },
+                "partyFullName": {
+                    "type": "string"
+                }
+            }
+        },
+        "duplicateParty": {
+            "type": "object",
+            "additionalProperties": true,
+            "properties": {
+                "partyCode": {
+                    "type": "string"
+                },
+                "partyFullName": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,118 @@
+{
+    "poMainRgslRequest": {
+        "soap:Envelope": {
+            "@xmlns:soap": "http://www.w3.org/2003/05/soap-envelope",
+            "@xmlns:koss": "http://www.pfergo.org/koss",
+            "@xmlns:hi": "http://www.sample-package.org/Hi",
+            "soap:Header": null,
+            "soap:Body": {
+                "koss:AddBill": {
+                    "koss:request": {
+                        "hi:INN": "753013619034",
+                        "hi:Name": "",
+                        "hi:KPP": "",
+                        "hi:ULOrFL": "Физическое Лицо",
+                        "hi:CodeOKPO": null,
+                        "hi:BankAccount": {
+                            "hi:AccountNumber": "40802810300011287487",
+                            "hi:AccountType": "Расчетный",
+                            "hi:Bank": {
+                                "hi:Bank": "АО ЮНИКРЕДИТ БАНК",
+                                "hi:BIK": "044525545",
+                                "hi:Country": "RU"
+                            }
+                        },
+                        "hi:InvoiceAmount": "162100",
+                        "hi:InvoiceCurrency": "RUB",
+                        "hi:CodeOrganization": "ООО «СК «ЭРГО Жизнь»",
+                        "hi:VATRate": "БезНДС",
+                        "hi:VATAmount": "0",
+                        "hi:InvoiceNumber": "{{$.contractNumber}}",
+                        "hi:KSP": {
+                            "hi:KSP": "80-20-001"
+                        },
+                        "hi:AccountOrganization": "40702810300011287480",
+                        "hi:FIOSurname": "Иванов",
+                        "hi:FIOName": "Иван",
+                        "hi:FIOMiddleName": "Иванович",
+                        "hi:Country": "Россия",
+                        "hi:ServiceField": "{{$.contractBody.insuredPerson.partyData.partyCode}}",
+                        "hi:Agreement_Number": "{{$.contractNumber}}",
+                        "hi:Agreement_Date": "2022-01-01",
+                        "hi:LegalAddressLink": {
+                            "hi:Country": "Россия",
+                            "hi:Postcode": "123610",
+                            "hi:City": "Москва",
+                            "hi:Street": "Краснопресненская наб.",
+                            "hi:Building": "12",
+                            "hi:Housing": "2",
+                            "hi:Room": "5",
+                            "hi:Remark": null
+                        },
+                        "hi:Session_ID": "{{$.paymentOrderMain.paymentOrderNumber}}",
+                        "hi:SystemId": "ADINSURE",
+                        "hi:DDS": "2640"
+                    }
+                }
+            }
+        }
+    },
+    "poPitRgslRequest": {
+        "soap:Envelope": {
+            "@xmlns:soap": "http://www.w3.org/2003/05/soap-envelope",
+            "@xmlns:koss": "http://www.pfergo.org/koss",
+            "@xmlns:hi": "http://www.sample-package.org/Hi",
+            "soap:Header": null,
+            "soap:Body": {
+                "koss:AddBill": {
+                    "koss:request": {
+                        "hi:INN": "753013619034",
+                        "hi:Name": "",
+                        "hi:KPP": "",
+                        "hi:ULOrFL": "Физическое Лицо",
+                        "hi:CodeOKPO": null,
+                        "hi:BankAccount": {
+                            "hi:AccountNumber": "40802810300011287487",
+                            "hi:AccountType": "Расчетный",
+                            "hi:Bank": {
+                                "hi:Bank": "АО ЮНИКРЕДИТ БАНК",
+                                "hi:BIK": "044525545",
+                                "hi:Country": "RU"
+                            }
+                        },
+                        "hi:InvoiceAmount": "39000",
+                        "hi:InvoiceCurrency": "RUB",
+                        "hi:CodeOrganization": "ООО «СК «ЭРГО Жизнь»",
+                        "hi:VATRate": "БезНДС",
+                        "hi:VATAmount": "0",
+                        "hi:InvoiceNumber": "{{$.contractNumber}}",
+                        "hi:KSP": {
+                            "hi:KSP": "80-20-001"
+                        },
+                        "hi:AccountOrganization": "40702810300011287480",
+                        "hi:FIOSurname": "Иванов",
+                        "hi:FIOName": "Иван",
+                        "hi:FIOMiddleName": "Иванович",
+                        "hi:Country": "Россия",
+                        "hi:ServiceField": "{{$.contractBody.insuredPerson.partyData.partyCode}}",
+                        "hi:Agreement_Number": "{{$.contractNumber}}",
+                        "hi:Agreement_Date": "2022-01-01",
+                        "hi:LegalAddressLink": {
+                            "hi:Country": "Россия",
+                            "hi:Postcode": "123610",
+                            "hi:City": "Москва",
+                            "hi:Street": "Краснопресненская наб.",
+                            "hi:Building": "12",
+                            "hi:Housing": "2",
+                            "hi:Room": "5",
+                            "hi:Remark": null
+                        },
+                        "hi:Session_ID": "{{$.paymentOrderPIT.paymentOrderNumber}}",
+                        "hi:SystemId": "ADINSURE",
+                        "hi:DDS": "2600"
+                    }
+                }
+            }
+        }
+    }
+}

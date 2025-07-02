@@ -1,0 +1,147 @@
+{
+    "type": "Group",
+    "elements": [
+        {
+            "type": "DataGrid",
+            "elementId": "serchResultTable",
+            "mode": "DataSource",
+            "pagination": {
+                "mode": "Regular",
+                "pageSizes": [
+                    5,
+                    10,
+                    15
+                ]
+            },
+            "selection": {
+                "mode": "Single",
+                "enableRowSelection": true,
+                "showCheckBox": true
+            },
+            "columns": [
+                {
+                    "sortable": false,
+                    "title": "Claim number",
+                    "name": "Claim number",
+                    "cellContent": {
+                        "type": "Link",
+                        "readOnly": true,
+                        "targetType": "Url",
+                        "label": "Claim number",
+                        "value": {
+                            "mapping": "claimNumberUriMapping",
+                            "$ref": "#"
+                        },
+                        "width": 5,
+                        "content": {
+                            "text": {
+                                "type": "OutputText",
+                                "value": {
+                                    "$ref": "#/properties/resultData/properties/claimNumber"
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "Claim state",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/documentState"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "Contract number",
+                    "name": "Contract number",
+                    "cellContent": {
+                        "type": "Link",
+                        "readOnly": true,
+                        "targetType": "Url",
+                        "label": "Contract number",
+                        "value": {
+                            "mapping": "contractNumberUriMapping",
+                            "$ref": "#"
+                        },
+                        "width": 5,
+                        "content": {
+                            "text": {
+                                "type": "OutputText",
+                                "value": {
+                                    "$ref": "#/properties/resultData/properties/contractNumber"
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "Contract state",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/contractStateDescription"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "Policy holder full name",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/policyHolderInfo/properties/policyHolderFullName"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "Insured person full name",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/insuredPersonInfo/properties/insuredPersonFullName"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "Insured event number",
+                    "name": "Insured event number",
+                    "cellContent": {
+                        "type": "Link",
+                        "readOnly": true,
+                        "targetType": "Url",
+                        "label": "Insured event number",
+                        "value": {
+                            "mapping": "insuredEventNumberUriMapping",
+                            "$ref": "#"
+                        },
+                        "width": 5,
+                        "content": {
+                            "text": {
+                                "type": "OutputText",
+                                "value": {
+                                    "$ref": "#/properties/resultData/properties/insuredEvent/properties/insuredEventNumber"
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "Insured event date",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/insuredEvent/properties/insuredEventDate"
+                        }
+                    }
+                }
+            ]
+        }
+    ]
+}

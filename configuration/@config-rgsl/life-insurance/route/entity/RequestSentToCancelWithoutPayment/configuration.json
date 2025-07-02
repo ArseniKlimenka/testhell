@@ -1,0 +1,51 @@
+{
+    "entityType": "UniversalDocument",
+    "condition": {
+        "events": [
+            "StatusChanged"
+        ],
+        "configuration": {
+            "names": [
+                "LifeInsuranceRequest"
+            ]
+        },
+        "documentStates": [
+            "CancelWithoutPayment"
+        ]
+    },
+    "allowMultipleTransactions": true,
+    "sinks": [
+        {
+            "name": "GetContractProduct",
+            "fetch": {
+                "configuration": {
+                    "name": "ContractVersionsDataSource"
+                }
+            }
+        },
+        {
+            "name": "GenerateRequestInfoLetterNumber",
+            "sequence": {
+                "createNewSequenceName": true
+            }
+        },
+        {
+            "name": "UpdateLifeInsuranceRequest",
+            "document": {
+                "configuration": {
+                    "name": "LifeInsuranceRequest",
+                    "version": "1"
+                },
+                "allowUpdating": {
+                    "inStates": [
+                        "CancelWithoutPayment"
+                    ]
+                },
+                "allowOnValidationErrors": {
+                    "all": true
+                }
+            }
+        }
+    ],
+    "version": "1"
+}

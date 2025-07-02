@@ -1,0 +1,23 @@
+{
+    "sinks": [
+        {
+            "name": "GetContract",
+            "fetch": {
+                "configuration": {
+                    "name": "ContractVersionsDataSource"
+                }
+            }
+        },
+        {
+            "name": "VerifyCode",
+            "class": {
+                "className": "Adacta.AdInsure.RGSL.Common.API.Shared.Services.ISmsSecurityCodeManagementService, Adacta.AdInsure.RGSL.Common.API",
+                "methodName": "VerifySecurityCode"
+            }
+        }
+    ],
+    "responses": [
+        200,
+        422
+    ]
+}

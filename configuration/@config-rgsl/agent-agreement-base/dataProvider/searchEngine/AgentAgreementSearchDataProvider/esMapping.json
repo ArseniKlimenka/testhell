@@ -1,0 +1,300 @@
+{
+    "mappings": {
+        "dynamic": "strict",
+        "properties": {
+            "id": {
+                "type": "keyword"
+            },
+            "number": {
+                "type": "keyword"
+            },
+            "stateCode": {
+                "type": "keyword"
+            },
+            "versionState": {
+                "type": "keyword"
+            },
+            "metadata": {
+                "properties": {
+                    "createdOn": {
+                        "type": "date"
+                    },
+                    "createdBy": {
+                        "type": "keyword"
+                    },
+                    "createdByDisplayName": {
+                        "type": "keyword"
+                    },
+                    "updatedOn": {
+                        "type": "date"
+                    },
+                    "updatedBy": {
+                        "type": "keyword"
+                    },
+                    "recordVersion": {
+                        "type": "integer"
+                    },
+                    "entityType": {
+                        "type": "keyword"
+                    },
+                    "configuration": {
+                        "properties": {
+                            "name": {
+                                "type": "keyword"
+                            },
+                            "version": {
+                                "type": "keyword"
+                            },
+                            "dimensions": {
+                                "dynamic": "false",
+                                "properties": {
+                                    "agentAgreementType": {
+                                        "type": "keyword"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "lastAmendmentConfiguration": {
+                        "dynamic": "strict",
+                        "properties": {
+                            "name": {
+                                "type": "text"
+                            },
+                            "version": {
+                                "type": "keyword"
+                            },
+                            "dimensions": {
+                                "dynamic": "false",
+                                "properties": {
+                                    "agentAgreementType": {
+                                        "type": "keyword"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "body": {
+                "dynamic": "strict",
+                "properties": {
+                    "manualNumber": {
+                        "type": "keyword"
+                    },
+                    "externalNumber": {
+                        "type": "keyword"
+                    },
+                    "startDate": {
+                        "type": "date",
+                        "format": "strict_date"
+                    },
+                    "endDate": {
+                        "type": "date",
+                        "format": "strict_date"
+                    },
+                    "conclusionDate": {
+                        "type": "date",
+                        "format": "strict_date"
+                    },
+                    "cancellationDate": {
+                        "type": "date",
+                        "format": "strict_date"
+                    },
+                    "organizationalUnit": {
+                        "dynamic": "strict",
+                        "properties": {
+                            "code": {
+                                "type": "keyword"
+                            },
+                            "name": {
+                                "type": "text",
+                                "index": false
+                            }
+                        }
+                    },
+                    "participants": {
+                        "dynamic": "strict",
+                        "properties": {
+                            "agent": {
+                                "dynamic": "strict",
+                                "properties": {
+                                    "serviceProviderCode": {
+                                        "type": "keyword"
+                                    },
+                                    "serviceProviderType": {
+                                        "type": "keyword"
+                                    },
+                                    "partyCode": {
+                                        "type": "keyword"
+                                    },
+                                    "partyType": {
+                                        "type": "keyword"
+                                    },
+                                    "fullName": {
+                                        "type": "text",
+                                        "index": false
+                                    },
+                                    "personalNumber": {
+                                        "type": "keyword"
+                                    },
+                                    "shortOrgName": {
+                                        "type": "keyword"
+                                    },
+                                    "partyBody": {
+                                        "dynamic": "strict",
+                                        "properties": {
+                                            "partyGeneralData": {
+                                                "dynamic": "strict",
+                                                "properties": {
+                                                    "INNKIO": {
+                                                        "type": "keyword"
+                                                    }
+                                                }
+                                            },
+                                            "partyOrganisationData": {
+                                                "dynamic": "strict",
+                                                "properties": {
+                                                    "site": {
+                                                        "dynamic": "strict",
+                                                        "properties": {
+                                                            "websiteAddress": {
+                                                                "type": "keyword"
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "partyPersonData": {
+                                                "dynamic": "strict",
+                                                "properties": {
+                                                    "SNILS": {
+                                                        "type": "keyword"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "salesChannel": {
+                        "dynamic": "strict",
+                        "properties": {
+                            "code": {
+                                "type": "keyword"
+                            },
+                            "description": {
+                                "type": "keyword"
+                            }
+                        }
+                    },
+                    "isDocCorrect": {
+                        "type": "keyword"
+                    },
+                    "isTechnical": {
+                        "type": "boolean"
+                    },
+                    "isPersonalBusiness": {
+                        "type": "boolean"
+                    },
+                    "salesClassification": {
+                        "type": "text"
+                    },
+                    "commissionRules": {
+                        "dynamic": "strict",
+                        "properties": {
+                            "ruleNum": {
+                                "type": "integer"
+                            },
+                            "insuranceProduct": {
+                                "dynamic": "strict",
+                                "properties": {
+                                    "values": {
+                                        "dynamic": "strict",
+                                        "properties": {
+                                            "description": {
+                                                "type": "text",
+                                                "index": false
+                                            },
+                                            "code": {
+                                                "type": "keyword"
+                                            }
+                                        }
+                                    },
+                                    "isInverted": {
+                                        "type": "boolean"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "attributes": {
+                        "dynamic": "strict",
+                        "properties": {
+                            "mainAttributes": {
+                                "dynamic": "strict",
+                                "properties": {
+                                    "agency": {
+                                        "dynamic": "strict",
+                                        "properties": {
+                                            "code": {
+                                                "type": "keyword"
+                                            },
+                                            "description": {
+                                                "type": "keyword"
+                                            }
+                                        }
+                                    },
+                                    "organisation": {
+                                        "dynamic": "strict",
+                                        "properties": {
+                                            "mvzNumber": {
+                                                "type": "keyword"
+                                            }
+                                        }
+                                    },
+                                    "orderNumber": {
+                                        "type": "keyword"
+                                    },
+                                    "cbAgentType": {
+                                        "dynamic": "strict",
+                                        "properties": {
+                                            "code": {
+                                                "type": "keyword"
+                                            },
+                                            "description": {
+                                                "type": "text"
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "additionalAttributes": {
+                                "dynamic": "strict",
+                                "properties": {
+                                    "useNds": {
+                                        "type": "boolean"
+                                    },
+                                    "vatRates": {
+                                        "dynamic": "strict",
+                                        "properties": {
+                                            "startDate": {
+                                                "type": "date",
+                                                "format": "strict_date"
+                                            },
+                                            "vatRate": {
+                                                "type": "float"
+                                            }
+                                        } 
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

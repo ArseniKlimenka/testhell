@@ -1,0 +1,128 @@
+{
+	"info": {
+		"_postman_id": "8d5daafd-5d98-497b-81c1-c95231ae9f95",
+		"name": "policy-route-multi",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "30627287"
+	},
+	"item": [
+		{
+			"name": "PolicyRoute",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"entityType\": \"Contract\",\r\n    \"executionRoutes\": [\r\n        {\r\n            \"name\": \"PolicyRoute\"\r\n        }\r\n    ],\r\n    \"businessIdentifier\": \"{{businessIdentifier}}\",\r\n    \"eventType\": \"StatusChanged\",\r\n    \"documentStateNew\": \"{{documentStateNew}}\",\r\n    \"configurationName\": \"{{configurationName}}\",\r\n    \"configurationVersion\": \"1\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{SERVER_URI}}/api/core/entity-routes",
+					"host": [
+						"{{SERVER_URI}}"
+					],
+					"path": [
+						"api",
+						"core",
+						"entity-routes"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "oauth2",
+		"oauth2": [
+			{
+				"key": "password",
+				"value": "ptkrf123#",
+				"type": "string"
+			},
+			{
+				"key": "accessTokenUrl",
+				"value": "{{IS_URI}}/connect/token",
+				"type": "string"
+			},
+			{
+				"key": "tokenName",
+				"value": "AdInsure token RGSL PROD",
+				"type": "string"
+			},
+			{
+				"key": "refreshRequestParams",
+				"value": [],
+				"type": "any"
+			},
+			{
+				"key": "tokenRequestParams",
+				"value": [],
+				"type": "any"
+			},
+			{
+				"key": "authRequestParams",
+				"value": [],
+				"type": "any"
+			},
+			{
+				"key": "challengeAlgorithm",
+				"value": "S256",
+				"type": "string"
+			},
+			{
+				"key": "username",
+				"value": "administrator",
+				"type": "string"
+			},
+			{
+				"key": "grant_type",
+				"value": "password_credentials",
+				"type": "string"
+			},
+			{
+				"key": "clientSecret",
+				"value": "EA8C35E8-5875-493E-B6A8-6687A0C178EB",
+				"type": "string"
+			},
+			{
+				"key": "clientId",
+				"value": "config-studio-client",
+				"type": "string"
+			},
+			{
+				"key": "addTokenTo",
+				"value": "header",
+				"type": "string"
+			},
+			{
+				"key": "client_authentication",
+				"value": "header",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

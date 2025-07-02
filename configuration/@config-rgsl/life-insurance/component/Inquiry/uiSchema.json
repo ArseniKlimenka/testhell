@@ -1,0 +1,106 @@
+{
+    "type": "Section",
+    "label": "Basic Conditions",
+    "width": 12,
+    "collapsing": {
+        "initial": false,
+        "enabled": true
+    },
+    "elements": [
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "Input",
+                    "label": "department",
+                    "readOnly": true,
+                    "value": {
+                        "$ref": "#/properties/department/properties/nameLocalized"
+                    },
+                    "width": 4
+                },
+                {
+                    "type": "Link",
+                    "label": "Quote Number",
+                    "width": 4,
+                    "targetType": "Url",
+                    "value": {
+                        "mapping": "QuoteUrlMapping",
+                        "$ref": "#"
+                    },
+                    "content": {
+                        "text": {
+                            "type": "OutputText",
+                            "defaultValue": "",
+                            "value": {
+                                "$ref": "#/properties/quoteNumber"
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "type": "Input",
+            "label": "textOfInquiry",
+            "control": "TextArea",
+            "readOnly": true,
+            "enableResize": true,
+            "numberOfRows": 3,
+            "value": {
+                "$ref": "#/properties/textOfInquiry"
+            },
+            "width": 12
+        },
+        {
+            "type": "Input",
+            "elementId": "textOfAnswer",
+            "label": "textOfAnswer",
+            "control": "TextArea",
+            "enableResize": true,
+            "readOnly": true,
+            "numberOfRows": 3,
+            "value": {
+                "$ref": "#/properties/textOfAnswer"
+            },
+            "width": 12,
+            "rule": {
+                "effect": "ENABLE_INITIAL",
+                "condition": {
+                    "type": "FUNC",
+                    "ruleFunction": "shouldEnableTextOfAnswer",
+                    "value": [
+                        {
+                            "$ref": "#"
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "type": "Input",
+            "elementId": "textOfComment",
+            "label": "textOfComment",
+            "control": "TextArea",
+            "enableResize": true,
+            "readOnly": true,
+            "numberOfRows": 3,
+            "value": {
+                "$ref": "#/properties/textOfComment"
+            },
+            "width": 12,
+            "rule": {
+                "effect": "ENABLE_INITIAL",
+                "condition": {
+                    "type": "FUNC",
+                    "ruleFunction": "enableTextOfComment",
+                    "value": [
+                        {
+                            "$ref": "#"
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}

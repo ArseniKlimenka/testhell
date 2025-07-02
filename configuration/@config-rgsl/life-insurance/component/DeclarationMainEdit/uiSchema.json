@@ -1,0 +1,89 @@
+{
+    "type": "GridLayout",
+    "numberOfColumns": 12,
+    "elements": [
+        {
+            "type": "Input",
+            "label": "itemNumber",
+            "readOnly": true,
+            "value": {
+                "$ref": "#/properties/itemNumber"
+            },
+            "width": 2
+        },
+        {
+            "type": "Input",
+            "label": "itemText",
+            "control": "TextArea",
+            "enableResize": true,
+            "numberOfRows": 2,
+            "readOnly": true,
+            "value": {
+                "$ref": "#/properties/itemText"
+            },
+            "width": 10
+        },
+        {
+            "type": "Input",
+            "label": "agreementPolicyHolder",
+            "value": {
+                "$ref": "#/properties/agreementPolicyHolder"
+            },
+            "width": 2
+        },
+        {
+            "type": "Input",
+            "label": "commentPolicyHolder",
+            "control": "TextArea",
+            "enableResize": true,
+            "numberOfRows": 2,
+            "value": {
+                "$ref": "#/properties/commentPolicyHolder"
+            },
+            "width": 10
+        },
+        {
+            "type": "Input",
+            "label": "agreementInsuredPerson",
+            "value": {
+                "$ref": "#/properties/agreementInsuredPerson"
+            },
+            "width": 2,
+            "rule": {
+                "effect": "HIDE",
+                "condition": {
+                    "type": "FUNC",
+                    "ruleFunction": "HideRuleDeclarationMainEdit",
+                    "value": [
+                        {
+                            "$ref": "#"
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "type": "Input",
+            "label": "commentInsuredPerson",
+            "control": "TextArea",
+            "enableResize": true,
+            "numberOfRows": 2,
+            "value": {
+                "$ref": "#/properties/commentInsuredPerson"
+            },
+            "width": 10,
+            "rule": {
+                "effect": "HIDE",
+                "condition": {
+                    "type": "FUNC",
+                    "ruleFunction": "HideRuleDeclarationMainEdit",
+                    "value": [
+                        {
+                            "$ref": "#"
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}

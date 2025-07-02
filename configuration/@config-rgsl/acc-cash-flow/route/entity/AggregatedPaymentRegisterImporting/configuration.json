@@ -1,0 +1,67 @@
+{
+    "entityType": "ImportDocument",
+    "condition": {
+        "events": [
+            "StatusChanged"
+        ],
+        "configuration": {
+            "names": [
+                "AggregatedPaymentRegisterImport"
+            ],
+            "dimensions": {}
+        },
+        "documentStates": [
+            "Importing"
+        ]
+    },
+    "sinks": [
+        {
+            "name": "FetchSmallPaymentItems",
+            "fetch": {
+                "configuration": {
+                    "name": "ImportStagingDataSource"
+                }
+            }
+        },
+        {
+            "name": "ProcessUploadedAggregatedPaymentRegister",
+            "database": {
+                "tables": [
+                    "ACC_IMPL.AGGREGATED_PAYMENT_REGISTER"
+                ]
+            }
+        },
+        {
+            "name": "WriteSummary",
+            "document": {
+                "configuration": {
+                    "name": "AggregatedPaymentRegisterImport"
+                },
+                "allowUpdating": {
+                    "inStates": [
+                        "Importing"
+                    ]
+                }
+            }
+        },
+        {
+            "name": "FinishedImporting",
+            "documentTransition": {
+                "transition": {
+                    "transitionName": "FinishImporting",
+                    "configurationName": "AggregatedPaymentRegisterImport",
+                    "configurationVersion": "1"
+                }
+            }
+        }
+    ],
+    "errorSinks": [
+        {
+            "name": "SendFailureNotification",
+            "notification": {
+                "notificationName": "AggregatedPaymentImportFailed"
+            }
+        }
+    ],
+    "version": "1"
+}

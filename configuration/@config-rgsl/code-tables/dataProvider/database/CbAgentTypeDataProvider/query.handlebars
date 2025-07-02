@@ -1,0 +1,16 @@
+SELECT ct.CODE,
+	   ct.DESCRIPTION
+			FROM (
+				  SELECT cti.CODE,
+						 JSON_VALUE(cti.BODY, '$.description') as DESCRIPTION
+							FROM BFX.CODE_TABLE_ITEM cti
+							JOIN CFX.PUBLISHED_ARTIFACT pa on cti.PUBLISHED_ARTIFACT_ID = pa.PUBLISHED_ARTIFACT_ID
+				  WHERE pa.CODE_NAME = 'CbAgentType') ct
+WHERE 1 = 1
+{{#if parameters.code}}
+AND ct.CODE = @code
+{{/if}}
+{{#if parameters.description}}
+AND ct.DESCRIPTION LIKE @description
+{{/if}}
+ORDER BY ct.CODE ASC

@@ -1,0 +1,230 @@
+{
+    "type": "DataGrid",
+    "mode": "Array",
+    "pagination": {
+        "mode": "Regular",
+        "defaultPageSize": 15,
+        "pageSizes": [
+            5,
+            10,
+            15
+        ]
+    },
+    "value": {
+        "$ref": "#/properties/Body/properties/attachments"
+    },
+    "labelType": "H1",
+    "label": "attachments",
+    "actions": [
+        "Add",
+        "Edit",
+        "Delete"
+    ],
+    "edit": {
+        "mode": "Detached",
+        "onPrepareAddedRow": "prepareArrayOperationHandler",
+        "onPrepareEditedRow": "prepareArrayOperationHandler",
+        "onBeforeGridAction": "preArrayOperationHandler",
+        "onAfterGridAction": "postArrayOperationHandler",
+        "navigateToAfterAddedRow": "First"
+    },
+    "showDeleteConfirmation": true,
+    "avoidAutoAddRow": true,
+    "checkIfRowActionIsAllowed": "arrayCheckRowOperationHandler",
+    "checkIfAddButtonVisible": "arrayCheckAddButtonVisible",
+    "height": "Small",
+    "header": {
+        "showReloadButton": false,
+        "showNumberOfResults": true,
+        "toolbar": {
+            "type": "GridLayout",
+            "numberOfColumns": 4
+        }
+    },
+    "footer": {
+        "toolbar": {
+            "type": "GridLayout",
+            "numberOfColumns": 4,
+            "elements": [
+                {
+                    "type": "Group",
+                    "width": 4,
+                    "stackContent": "Right",
+                    "elements": [
+                        {
+                            "type": "Button",
+                            "label": "setAttachmentsLogins",
+                            "elementId": "setAttachmentsLogins",
+                            "value": {
+                                "$ref": "#"
+                            },
+                            "onClick": [
+                                {
+                                    "commandType": "executeAction",
+                                    "actionName": "setAttachmentsLogins"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Button",
+                            "label": "downloadAllAttachments",
+                            "elementId": "downloadAllAttachments",
+                            "value": {
+                                "$ref": "#"
+                            },
+                            "onClick": [
+                                {
+                                    "commandType": "executeAction",
+                                    "actionName": "downloadAllAttachments"
+                                }
+                            ],
+                            "rule": {
+                                "effect": "ENABLE_INITIAL",
+                                "condition": {
+                                    "type": "FUNC",
+                                    "value": [
+                                        {
+                                            "$ref": "#"
+                                        }
+                                    ],
+                                    "ruleFunction": "enableDownloadAllAttachments"
+                                }
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    "columns": [
+        {
+            "title": "Attachment Type",
+            "cellContent": {
+                "type": "OutputText",
+                "allowMultiLine": true,
+                "template": "{{expr attachmentTypeName}}{{#if isRequired}}{{#style 'color-danger bold'}} *{{/style}}{{/if}}",
+                "value": {
+                    "$ref": "#"
+                }
+            },
+            "style": {
+                "width": "large"
+            }
+        },
+        {
+            "title": "",
+            "cellContent": {
+                "type": "GridButtonGroup",
+                "elements": [
+                    {
+                        "type": "Button",
+                        "label": "Download",
+                        "onClick": "downloadAttachment",
+                        "icon": {
+                            "name": "Download"
+                        },
+                        "value": {
+                            "$ref": "#"
+                        },
+                        "rule": {
+                            "effect": "SHOW",
+                            "condition": {
+                                "type": "LEAF",
+                                "expectedValue": "Uploaded",
+                                "value": {
+                                    "$ref": "#/properties/uploadStatus"
+                                }
+                            }
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "title": "createdBy",
+            "cellContent": {
+                "type": "OutputText",
+                "value": {
+                    "$ref": "#/properties/createdBy"
+                }
+            },
+            "style": {
+                "width": "medium"
+            },
+            "rule": {
+                "effect": "HIDE",
+                "condition": {
+                    "type": "FUNC",
+                    "value": [
+                        {
+                            "$ref": "#"
+                        }
+                    ],
+                    "ruleFunction": "hideColumn"
+                }
+            }
+        },
+        {
+            "title": "createdByLogin",
+            "cellContent": {
+                "type": "OutputText",
+                "value": {
+                    "$ref": "#/properties/createdByLogin"
+                }
+            },
+            "style": {
+                "width": "medium"
+            },
+            "rule": {
+                "effect": "HIDE",
+                "condition": {
+                    "type": "FUNC",
+                    "value": [
+                        {
+                            "$ref": "#"
+                        }
+                    ],
+                    "ruleFunction": "hideColumn"
+                }
+            }
+        },
+        {
+            "title": "createdOn",
+            "name": "createdOn",
+            "cellContent": {
+                "type": "OutputText",
+                "template": "{{expr createdOn 'dt'}}",
+                "value": {
+                    "$ref": "#"
+                }
+            },
+            "style": {
+                "width": "medium"
+            }
+        },
+        {
+            "title": "Name",
+            "cellContent": {
+                "type": "OutputText",
+                "allowMultiLine": true,
+                "value": {
+                    "$ref": "#/properties/attachmentName"
+                }
+            },
+            "style": {
+                "width": "large"
+            }
+        }
+    ],
+    "detailsTemplates": {
+        "edit": {
+            "content": {
+                "type": "Component",
+                "name": "AttachmentsAddOrEdit",
+                "value": {
+                    "$ref": "#"
+                }
+            }
+        }
+    }
+}

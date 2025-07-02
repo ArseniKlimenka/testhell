@@ -1,0 +1,68 @@
+{
+    "type": "object",
+    "additionalProperties": false,
+    "aiValidation": {
+        "rule": "CollectiveLifeInsurancePolicyImportTemplateValidation"
+    },
+    "aiDataEnrichment": [
+        {
+            "name": "CollectiveLifeInsurancePolicyReturnConfirmedData"
+        }
+    ],
+    "properties": {
+        "file": {
+            "$ref": "component:FileUpload"
+        },
+        "partner": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "partnerCode": {
+                    "type": "string"
+                },
+                "partnerDescription": {
+                    "type": "string"
+                },
+                "partnerShortDescription": {
+                    "type": "string"
+                },
+                "partnerBusinessCode": {
+                    "type": "string"
+                }
+            }
+        },
+        "insuranceProduct": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "productCode": {
+                    "type": "string"
+                },
+                "productDescription": {
+                    "type": "string"
+                },
+                "productGroup": {
+                    "type": "string"
+                },
+                "salesSegment": {
+                    "type": "string"
+                }
+            }
+        },
+        "withTarification": {
+            "type": "boolean"
+        },
+        "created": {
+            "type": "string"
+        },
+        "createdBy": {
+            "type": "string"
+        },
+        "confirmed": {
+            "type": "string"
+        },
+        "confirmedBy": {
+            "type": "string"
+        }
+    }
+}

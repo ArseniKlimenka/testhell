@@ -1,0 +1,9 @@
+select
+        c.ORIGINAL_DOCUMENT_ID,
+        max(c.SEQ_NUMBER) as LATEST_SEQ_NUMBER,
+        max(case when c.VERSION_STATE = 'Applied' then c.SEQ_NUMBER end) as LATEST_APPLIED_SEQ_NUMBER,
+        max(case when COALESCE(c.VERSION_STATE, N'Draft') <> 'Discarded' then c.SEQ_NUMBER end) as LATEST_NON_DISCARDED_SEQ_NUMBER
+    from PAS.CONTRACT c
+    where
+        c.ORIGINAL_DOCUMENT_ID = (select ORIGINAL_DOCUMENT_ID from PAS.CONTRACT where CONTRACT_NUMBER = @contractNumber)
+    group by c.ORIGINAL_DOCUMENT_ID

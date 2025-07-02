@@ -1,0 +1,2 @@
+DELETE FROM [BFX_IMPL].[PRODUCTS] where code ='EBMGUBRR';
+INSERT INTO [BFX_IMPL].[PRODUCTS] SELECT '87C07418-EF76-4D71-8AFE-E770F58741DE', 'EBMGUBRR', N'endowment', N'5 лет Стратегия на пять. Гарант', N'НСЖ', N'massUBRR', NULL

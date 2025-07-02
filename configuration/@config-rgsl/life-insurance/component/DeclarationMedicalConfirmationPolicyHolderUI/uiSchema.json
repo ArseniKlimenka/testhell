@@ -1,0 +1,125 @@
+{
+    "type": "Section",
+    "sectionLevel": 1,
+    "label": "DeclarationMedicalPolicyHolderQuestions",
+    "isCollapsed": false,
+    "width": 12,
+    "elements": [
+        {
+            "type": "Section",
+            "sectionLevel": 2,
+            "label": "PolicyHolder",
+            "elements": [
+                {
+                    "type": "Input",
+                    "isCompact": true,
+                    "label": "isConfirmed",
+                    "value": {
+                        "$ref": "#/properties/declarationMedicalConfirmationPolicyHolder/properties/isConfirmed"
+                    },
+                    "width": 2,
+                    "onValueChanged": [
+                        {
+                            "commandType": "executeAction",
+                            "actionName": "onChangeConfirmation"
+                        }
+                    ]
+                },
+                {
+                    "type": "Input",
+                    "isCompact": true,
+                    "label": "isNotConfirmed",
+                    "value": {
+                        "$ref": "#/properties/declarationMedicalConfirmationPolicyHolder/properties/isNotConfirmed"
+                    },
+                    "width": 2,
+                    "onValueChanged": [
+                        {
+                            "commandType": "executeAction",
+                            "actionName": "onChangeConfirmation"
+                        }
+                    ]
+                },
+                {
+                    "type": "Input",
+                    "isCompact": true,
+                    "label": "manualCorrection",
+                    "value": {
+                        "$ref": "#/properties/declarationMedicalConfirmationPolicyHolder/properties/manualCorrection"
+                    },
+                    "width": 2,
+                    "onValueChanged": [
+                        {
+                            "commandType": "executeAction",
+                            "actionName": "onChangeManualCorrection"
+                        }
+                    ],
+                    "rule": {
+                        "effect": "SHOW",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "showManualCorrection",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "type": "Input",
+                    "control": "TextArea",
+                    "enableResize": true,
+                    "numberOfRows": 2,
+                    "label": "comment",
+                    "value": {
+                        "$ref": "#/properties/declarationMedicalConfirmationPolicyHolder/properties/comment"
+                    },
+                    "width": 8,
+                    "rule": {
+                        "effect": "SHOW",
+                        "condition": {
+                            "type": "LEAF",
+                            "expectedValue": true,
+                            "value": {
+                                "$ref": "#/properties/declarationMedicalConfirmationPolicyHolder/properties/isNotConfirmed"
+                            }
+                        }
+                    }
+                }
+            ],
+            "rule": {
+                "effect": "DISABLE_INITIAL",
+                "condition": {
+                    "type": "FUNC",
+                    "ruleFunction": "hasFutureNumberForAgent",
+                    "value": [
+                        {
+                            "$ref": "#"
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "type": "Component",
+            "name": "DeclarationMedicalPolicyHolder",
+            "value": {
+                "$ref": "#/properties/declarationMedicalPolicyHolder"
+            }
+        }
+    ],
+    "rule": {
+        "effect": "HIDE",
+        "condition": {
+            "type": "FUNC",
+            "value": [
+                {
+                    "$ref": "#"
+                }
+            ],
+            "ruleFunction": "hideDeclarationMedicalQuestions"
+        }
+    }
+}

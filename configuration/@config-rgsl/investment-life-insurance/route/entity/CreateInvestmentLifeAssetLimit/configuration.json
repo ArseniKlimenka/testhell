@@ -1,0 +1,36 @@
+{
+    "entityType": "Contract",
+    "condition": {
+        "events": [
+            "Created"
+        ],
+        "configuration": {
+            "names": [
+                "InvestmentLifeInsurancePolicy"
+            ]
+        }
+    },
+    "sinks": [
+        {
+            "name": "CreateAssetLimit",
+            "document": {
+                "configuration": {
+                    "name": "InvestmentLifeInsurancePolicy",
+                    "version": "1"
+                },
+                "allowUpdating": {
+                    "inStates": [
+                        "Draft"
+                    ]
+                },
+                "allowOnValidationErrors": {
+                    "all": true
+                },
+                "enrichFields": [
+                    "[ReserveAssetLimit]"
+                ]
+            }
+        }
+    ],
+    "version": "1"
+}

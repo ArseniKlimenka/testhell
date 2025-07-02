@@ -1,0 +1,12 @@
+update 
+  BFX_IMPL.RISK_PRODUCT_RELATION
+set
+  PARENT_RISK = 'D36404'
+where RISK_CODE = 'DA36404'
+  and PRODUCT_CODE = 'CAPCLRELOAS'
+
+insert into BFX_IMPL.RISK_PRODUCT_RELATION
+select NEWID(), 'D36404', 'CAPCLRELOAS', 1, NULL, 'D36404CAPCLRELOASR', '01', '3', 'main', 'policyHolder'
+
+insert into BFX_IMPL.RISK_PRODUCT_RELATION
+select NEWID(), 'DA36404', 'CAPCLRELOAS', 0, 'D36404', NULL, '03', '4', 'main', 'policyHolder'

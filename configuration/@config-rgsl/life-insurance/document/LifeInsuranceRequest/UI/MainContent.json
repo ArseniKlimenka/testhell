@@ -1,0 +1,1017 @@
+{
+    "id": "MainContent",
+    "type": "Group",
+    "formProperties": {
+        "events": {
+            "beforeSave": "LifeInsuranceRequestBeforeSave",
+            "onLoad": "LifeInsuranceRequestOnLoad"
+        }
+    },
+    "elements": [
+        {
+            "type": "TabLayout",
+            "elementId": "TabLayout",
+            "options": {
+                "fixedPosition": true,
+                "scrollableTabs": false,
+                "buttonsForSwitchingTabs": true
+            },
+            "elements": [
+                {
+                    "type": "Tab",
+                    "elementId": "tabRequestConditions",
+                    "title": "tabRequestConditions",
+                    "elements": [
+                        {
+                            "type": "GridLayout",
+                            "fixedButton": true,
+                            "numberOfColumns": 12,
+                            "elements": [
+                                {
+                                    "type": "Component",
+                                    "metadata": {
+                                        "autogenerate": true
+                                    },
+                                    "name": "RelatedRequestAmendments",
+                                    "value": {
+                                        "$ref": "#"
+                                    }
+                                },
+                                {
+                                    "type": "Section",
+                                    "label": "First block Attributies",
+                                    "isCollapsed": false,
+                                    "width": 12,
+                                    "elements": [
+                                        {
+                                            "type": "Group",
+                                            "elements": [
+                                                {
+                                                    "type": "Input",
+                                                    "elementId": "PolicyNumberInput",
+                                                    "label": "Policy number",
+                                                    "value": {
+                                                        "$ref": "#/properties/Body/properties/contract/properties/number"
+                                                    },
+                                                    "width": 4,
+                                                    "rule": {
+                                                        "effect": "DISABLE_INITIAL",
+                                                        "condition": {
+                                                            "type": "FUNC",
+                                                            "ruleFunction": "disablePolicyNumber",
+                                                            "value": [
+                                                                {
+                                                                    "$ref": "#"
+                                                                }
+                                                            ]
+                                                        }
+                                                    }
+                                                },
+                                                {
+                                                    "type": "Group",
+                                                    "width": 2,
+                                                    "elements": [
+                                                        {
+                                                            "type": "Button",
+                                                            "label": "Search Contract",
+                                                            "isCompact": false,
+                                                            "icon": {
+                                                                "name": "search",
+                                                                "color": "BackgroundColor",
+                                                                "size": "Medium"
+                                                            },
+                                                            "onClick": "searchContractButton",
+                                                            "rule": {
+                                                                "effect": "SHOW",
+                                                                "condition": {
+                                                                    "type": "FUNC",
+                                                                    "ruleFunction": "showSearchContractButton",
+                                                                    "value": [
+                                                                        {
+                                                                            "$ref": "#"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            }
+                                                        },
+                                                        {
+                                                            "type": "Link",
+                                                            "targetType": "Url",
+                                                            "value": {
+                                                                "mapping": "contractUrlMapping",
+                                                                "$ref": "#"
+                                                            },
+                                                            "content": {
+                                                                "text": {
+                                                                    "type": "OutputText",
+                                                                    "defaultValue": "",
+                                                                    "value": {
+                                                                        "mapping": "contractlinkNameMapping",
+                                                                        "$ref": "#"
+                                                                    }
+                                                                }
+                                                            },
+                                                            "rule": {
+                                                                "effect": "SHOW",
+                                                                "condition": {
+                                                                    "type": "FUNC",
+                                                                    "ruleFunction": "showLink",
+                                                                    "value": [
+                                                                        {
+                                                                            "$ref": "#"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            }
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "type": "Input",
+                                                    "label": "issueDateContract",
+                                                    "readOnly": true,
+                                                    "value": {
+                                                        "$ref": "#/properties/Body/properties/contract/properties/issueDate"
+                                                    },
+                                                    "width": 2
+                                                },
+                                                {
+                                                    "type": "Input",
+                                                    "label": "startDateContract",
+                                                    "readOnly": true,
+                                                    "value": {
+                                                        "$ref": "#/properties/Body/properties/contract/properties/startDate"
+                                                    },
+                                                    "width": 2
+                                                },
+                                                {
+                                                    "type": "Input",
+                                                    "label": "endDateContract",
+                                                    "readOnly": true,
+                                                    "value": {
+                                                        "$ref": "#/properties/Body/properties/contract/properties/endDate"
+                                                    },
+                                                    "width": 2
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "type": "Group",
+                                            "elements": [
+                                                {
+                                                    "type": "Input",
+                                                    "readOnly": true,
+                                                    "label": "Holder FullName",
+                                                    "value": {
+                                                        "$ref": "#/properties/Body/properties/holder/properties/fullName"
+                                                    },
+                                                    "width": 4
+                                                },
+                                                {
+                                                    "type": "Dropdown",
+                                                    "label": "Type of Request",
+                                                    "multiple": false,
+                                                    "enableClear": true,
+                                                    "enableCustomValue": false,
+                                                    "filter": "typeOfRequestFilter",
+                                                    "onValueChanged": [
+                                                        {
+                                                            "commandType": "executeAction",
+                                                            "actionName": "typeOfRequestOnChange"
+                                                        }
+                                                    ],
+                                                    "value": {
+                                                        "$ref": "#/properties/Body/properties/typeOfRequest"
+                                                    },
+                                                    "width": 4,
+                                                    "rule": {
+                                                        "effect": "DISABLE_INITIAL",
+                                                        "condition": {
+                                                            "type": "FUNC",
+                                                            "ruleFunction": "disableTypeOfRequest",
+                                                            "value": [
+                                                                {
+                                                                    "$ref": "#"
+                                                                }
+                                                            ]
+                                                        }
+                                                    }
+                                                },
+                                                {
+                                                    "type": "Input",
+                                                    "readOnly": true,
+                                                    "label": "percentRateImpact",
+                                                    "value": {
+                                                        "$ref": "#/properties/Body/properties/contract/properties/percentRateImpact"
+                                                    },
+                                                    "width": 4,
+                                                    "rule": {
+                                                        "effect": "SHOW",
+                                                        "condition": {
+                                                            "type": "FUNC",
+                                                            "ruleFunction": "showPercentRateImpact",
+                                                            "value": [
+                                                                {
+                                                                    "$ref": "#"
+                                                                }
+                                                            ]
+                                                        }
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "Section",
+                                    "label": "Second block Attributies",
+                                    "isCollapsed": false,
+                                    "width": 12,
+                                    "elements": [
+                                        {
+                                            "type": "Group",
+                                            "readOnly": true,
+                                            "elements": [
+                                                {
+                                                    "type": "Input",
+                                                    "label": "issueDate",
+                                                    "value": {
+                                                        "$ref": "#/properties/Body/properties/issueDate"
+                                                    },
+                                                    "onValueChanged": [
+                                                        {
+                                                            "commandType": "executeAction",
+                                                            "actionName": "onChangeRequestIssueDate"
+                                                        }
+                                                    ],
+                                                    "width": 4
+                                                },
+                                                {
+                                                    "type": "Input",
+                                                    "label": "receivedDate",
+                                                    "value": {
+                                                        "$ref": "#/properties/Body/properties/receivedDate"
+                                                    },
+                                                    "rule": {
+                                                        "effect": "SHOW",
+                                                        "condition": {
+                                                            "type": "FUNC",
+                                                            "ruleFunction": "showReceivedDate",
+                                                            "value": [
+                                                                {
+                                                                    "$ref": "#"
+                                                                }
+                                                            ]
+                                                        }
+                                                    },
+                                                    "width": 4
+                                                },
+                                                {
+                                                    "type": "Input",
+                                                    "label": "registrationDate",
+                                                    "value": {
+                                                        "$ref": "#/properties/Body/properties/registrationDate"
+                                                    },
+                                                    "width": 4
+                                                }
+                                            ],
+                                            "rule": {
+                                                "effect": "ENABLE_INITIAL",
+                                                "condition": {
+                                                    "type": "FUNC",
+                                                    "ruleFunction": "enableForOperations",
+                                                    "value": [
+                                                        {
+                                                            "$ref": "#"
+                                                        }
+                                                    ]
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "type": "Group",
+                                            "rule": {
+                                                "effect": "SHOW",
+                                                "condition": {
+                                                    "type": "FUNC",
+                                                    "ruleFunction": "showApplicantLookUp",
+                                                    "value": [
+                                                        {
+                                                            "$ref": "#"
+                                                        }
+                                                    ]
+                                                }
+                                            },
+                                            "elements": [
+                                                {
+                                                    "type": "Dropdown",
+                                                    "width": 4,
+                                                    "label": "Applicant Type",
+                                                    "enableCustomValue": false,
+                                                    "filter": "applicantTypeFilter",
+                                                    "value": {
+                                                        "$ref": "#/properties/Body/properties/applicantType"
+                                                    },
+                                                    "onValueChanged": [
+                                                        {
+                                                            "commandType": "executeAction",
+                                                            "actionName": "applicantTypeOnChange"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "type": "Lookup",
+                                                    "width": 4,
+                                                    "value": {
+                                                        "$ref": "#/properties/Body/properties/applicant/properties/partyData"
+                                                    },
+                                                    "dialogButton": {
+                                                        "icon": {
+                                                            "name": "User",
+                                                            "color": "Primary"
+                                                        }
+                                                    },
+                                                    "dialog": {
+                                                        "viewReference": {
+                                                            "configurationCodeName": "GeneralPartySearchWithEditView",
+                                                            "configurationConceptType": "SearchView",
+                                                            "configurationVersion": "1"
+                                                        },
+                                                        "onLoad": "onLoadApplicantPartyView",
+                                                        "size": "ExtraLarge"
+                                                    },
+                                                    "onSelected": "partyResultMapping",
+                                                    "selectedDisplayValueUISchema": {
+                                                        "type": "Input",
+                                                        "label": "Applicant FullName",
+                                                        "readOnly": true,
+                                                        "value": {
+                                                            "$ref": "#/properties/Body/properties/applicant/properties/partyData/properties/partyFullName"
+                                                        }
+                                                    }
+                                                },
+                                                {
+                                                    "type": "Link",
+                                                    "width": 4,
+                                                    "targetType": "Url",
+                                                    "value": {
+                                                        "mapping": "applicantUrlMapping",
+                                                        "$ref": "#"
+                                                    },
+                                                    "content": {
+                                                        "text": {
+                                                            "type": "OutputText",
+                                                            "defaultValue": "",
+                                                            "value": {
+                                                                "mapping": "applicantlinkNameMapping",
+                                                                "$ref": "#"
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "type": "Group",
+                                            "rule": {
+                                                "effect": "SHOW",
+                                                "condition": {
+                                                    "type": "FUNC",
+                                                    "ruleFunction": "showApplicantFullName",
+                                                    "value": [
+                                                        {
+                                                            "$ref": "#"
+                                                        }
+                                                    ]
+                                                }
+                                            },
+                                            "elements": [
+                                                {
+                                                    "type": "Dropdown",
+                                                    "width": 4,
+                                                    "label": "Applicant Type",
+                                                    "enableCustomValue": false,
+                                                     "filter": "applicantTypeFilter",
+                                                    "value": {
+                                                        "$ref": "#/properties/Body/properties/applicantType"
+                                                    },
+                                                    "onValueChanged": [
+                                                        {
+                                                            "commandType": "executeAction",
+                                                            "actionName": "applicantTypeOnChange"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "type": "Input",
+                                                    "readOnly": true,
+                                                    "label": "Applicant FullName",
+                                                    "value": {
+                                                        "$ref": "#/properties/Body/properties/applicant/properties/partyData/properties/partyFullName"
+                                                    },
+                                                    "width": 4
+                                                },
+                                                {
+                                                    "type": "Link",
+                                                    "width": 4,
+                                                    "targetType": "Url",
+                                                    "value": {
+                                                        "mapping": "applicantUrlMapping",
+                                                        "$ref": "#"
+                                                    },
+                                                    "content": {
+                                                        "text": {
+                                                            "type": "OutputText",
+                                                            "defaultValue": "",
+                                                            "value": {
+                                                                "mapping": "applicantlinkNameMapping",
+                                                                "$ref": "#"
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "type": "Group",
+                                            "elements": [
+                                                {
+                                                    "type": "Group",
+                                                    "width": 4,
+                                                    "elements": [
+                                                        {
+                                                            "type": "Dropdown",
+                                                            "label": "signatureForm",
+                                                            "preSelectFirstItem": true,
+                                                            "multiple": false,
+                                                            "enableClear": true,
+                                                            "enableCustomValue": false,
+                                                            "value": {
+                                                                "$ref": "#/properties/Body/properties/signatureForm"
+                                                            },
+                                                            "rule": {
+                                                                "effect": "DISABLE_INITIAL",
+                                                                "condition": {
+                                                                    "type": "FUNC",
+                                                                    "ruleFunction": "disableSignatureForm",
+                                                                    "value": [
+                                                                        {
+                                                                            "$ref": "#"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            }
+                                                        }
+                                                    ],
+                                                    "rule": {
+                                                        "effect": "SHOW",
+                                                        "condition": {
+                                                            "type": "FUNC",
+                                                            "ruleFunction": "showSignatureForm",
+                                                            "value": [
+                                                                {
+                                                                    "$ref": "#"
+                                                                }
+                                                            ]
+                                                        }
+                                                    }
+                                                },
+                                                {
+                                                    "type": "Group",
+                                                    "width": 8,
+                                                    "rule": {
+                                                        "effect": "HIDE",
+                                                        "condition": {
+                                                            "type": "FUNC",
+                                                            "ruleFunction": "hideBankAccount",
+                                                            "value": [
+                                                                {
+                                                                    "$ref": "#"
+                                                                }
+                                                            ]
+                                                        }
+                                                    },
+                                                    "elements": [
+                                                        {
+                                                            "type": "Dropdown",
+                                                            "label": "bankAccount",
+                                                            "value": {
+                                                                "$ref": "#/properties/Body/properties/bankAccount"
+                                                            },
+                                                            "enableClear": true,
+                                                            "enableCustomValue": false,
+                                                            "source": {
+                                                                "array": {
+                                                                    "$ref": "#/properties/Body/properties/bankAccountsArray"
+                                                                },
+                                                                "displayFieldName": "displayName"
+                                                            },
+                                                            "rule": {
+                                                                "effect": "DISABLE_INITIAL",
+                                                                "condition": {
+                                                                    "type": "FUNC",
+                                                                    "ruleFunction": "disableBankAccount",
+                                                                    "value": [
+                                                                        {
+                                                                            "$ref": "#"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            },
+                                                            "width": 8
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "type": "Group",
+                                            "elements": [
+                                                {
+                                                    "type": "Dropdown",
+                                                    "label": "changeSubtype",
+                                                    "multiple": true,
+                                                    "enableClear": true,
+                                                    "enableCustomValue": false,
+                                                    "filter": "changeSubtypeFilter",
+                                                    "value": {
+                                                        "$ref": "#/properties/Body/properties/changeSubtype"
+                                                    },
+                                                    "onValueChanged": [
+                                                        {
+                                                            "commandType": "executeAction",
+                                                            "actionName": "changeSubtypeOnChange"
+                                                        }
+                                                    ],
+                                                    "width": 4
+                                                },
+                                                {
+                                                    "type": "Dropdown",
+                                                    "label": "changeClass",
+                                                    "multiple": true,
+                                                    "enableClear": true,
+                                                    "enableCustomValue": false,
+                                                    "filter": "changeClassFilter",
+                                                    "value": {
+                                                        "$ref": "#/properties/Body/properties/changeClass"
+                                                    },
+                                                    "onValueChanged": [
+                                                        {
+                                                            "commandType": "executeAction",
+                                                            "actionName": "changeClassOnChange"
+                                                        }
+                                                    ],
+                                                    "width": 4
+                                                },
+                                                {
+                                                    "type": "Dropdown",
+                                                    "label": "changeReason",
+                                                    "multiple": false,
+                                                    "enableClear": true,
+                                                    "enableCustomValue": false,
+                                                    "value": {
+                                                        "$ref": "#/properties/Body/properties/changeReason"
+                                                    },
+                                                    "rule": {
+                                                        "effect": "SHOW",
+                                                        "condition": {
+                                                            "type": "FUNC",
+                                                            "ruleFunction": "showChangeReason",
+                                                            "value": [
+                                                                {
+                                                                    "$ref": "#"
+                                                                }
+                                                            ]
+                                                        }
+                                                    },
+                                                    "width": 4
+                                                }
+                                            ],
+                                            "rule": {
+                                                "effect": "SHOW",
+                                                "condition": {
+                                                    "type": "FUNC",
+                                                    "ruleFunction": "showChangeAttributes",
+                                                    "value": [
+                                                        {
+                                                            "$ref": "#"
+                                                        }
+                                                    ]
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "type": "Group",
+                                            "elements": [
+                                                {
+                                                    "type": "Group",
+                                                    "elements": [
+                                                        {
+                                                            "type": "Dropdown",
+                                                            "label": "initiator",
+                                                            "multiple": false,
+                                                            "enableClear": true,
+                                                            "enableCustomValue": false,
+                                                            "value": {
+                                                                "$ref": "#/properties/Body/properties/initiator"
+                                                            },
+                                                            "onValueChanged": [
+                                                                {
+                                                                    "commandType": "executeAction",
+                                                                    "actionName": "initiatorOnChange"
+                                                                }
+                                                            ],
+                                                            "rule": {
+                                                                "effect": "DISABLE_INITIAL",
+                                                                "condition": {
+                                                                    "type": "FUNC",
+                                                                    "ruleFunction": "disableInitiator",
+                                                                    "value": [
+                                                                        {
+                                                                            "$ref": "#"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            },
+                                                            "width": 4
+                                                        }
+                                                    ],
+                                                    "width": 4,
+                                                    "rule": {
+                                                        "effect": "SHOW",
+                                                        "condition": {
+                                                            "type": "FUNC",
+                                                            "ruleFunction": "showInitiator",
+                                                            "value": [
+                                                                {
+                                                                    "$ref": "#"
+                                                                }
+                                                            ]
+                                                        }
+                                                    }
+                                                },
+                                                {
+                                                    "type": "Group",
+                                                    "elements": [
+                                                        {
+                                                            "type": "Dropdown",
+                                                            "readOnly": true,
+                                                            "label": "receiveMethod",
+                                                            "value": {
+                                                                "$ref": "#/properties/Body/properties/receiveMethod"
+                                                            },
+                                                            "rule": {
+                                                                "effect": "ENABLE_INITIAL",
+                                                                "condition": {
+                                                                    "type": "FUNC",
+                                                                    "ruleFunction": "enableForGeneralBackOffice",
+                                                                    "value": [
+                                                                        {
+                                                                            "$ref": "#"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            },
+                                                            "width": 4
+                                                        }
+                                                    ],
+                                                    "width": 4,
+                                                    "rule": {
+                                                        "effect": "SHOW",
+                                                        "condition": {
+                                                            "type": "FUNC",
+                                                            "ruleFunction": "showReceiveMethod",
+                                                            "value": [
+                                                                {
+                                                                    "$ref": "#"
+                                                                }
+                                                            ]
+                                                        }
+                                                    }
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "type": "Group",
+                                            "elements": [
+                                                {
+                                                    "type": "Dropdown",
+                                                    "label": "changeType",
+                                                    "multiple": true,
+                                                    "enableClear": true,
+                                                    "enableCustomValue": false,
+                                                    "value": {
+                                                        "$ref": "#/properties/Body/properties/changeType"
+                                                    },
+                                                    "width": 4
+                                                }
+                                            ],
+                                            "rule": {
+                                                "effect": "SHOW",
+                                                "condition": {
+                                                    "type": "FUNC",
+                                                    "ruleFunction": "showChangeType",
+                                                    "value": [
+                                                        {
+                                                            "$ref": "#"
+                                                        }
+                                                    ]
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "type": "Group",
+                                            "elements": [
+                                                {
+                                                    "type": "Dropdown",
+                                                    "label": "Amendment Reason",
+                                                    "multiple": false,
+                                                    "enableClear": true,
+                                                    "enableCustomValue": false,
+                                                    "filter": "amendmentReasonFilter",
+                                                    "value": {
+                                                        "$ref": "#/properties/Body/properties/amendmentReason"
+                                                    },
+                                                    "rule": {
+                                                        "effect": "DISABLE_INITIAL",
+                                                        "condition": {
+                                                            "type": "FUNC",
+                                                            "ruleFunction": "disableAmendmentReason",
+                                                            "value": [
+                                                                {
+                                                                    "$ref": "#"
+                                                                }
+                                                            ]
+                                                        }
+                                                    },
+                                                    "width": 4
+                                                }
+                                            ],
+                                            "rule": {
+                                                "effect": "SHOW",
+                                                "condition": {
+                                                    "type": "FUNC",
+                                                    "ruleFunction": "showAmendmentReason",
+                                                    "value": [
+                                                        {
+                                                            "$ref": "#"
+                                                        }
+                                                    ]
+                                                }
+                                            }
+                                        }
+                                    ],
+                                    "rule": {
+                                        "effect": "SHOW",
+                                        "condition": {
+                                            "type": "FUNC",
+                                            "value": [
+                                                {
+                                                    "$ref": "#/properties/Body/properties/holder/properties/fullName"
+                                                },
+                                                {
+                                                    "$ref": "#/properties/Body/properties/typeOfRequest"
+                                                }
+                                            ],
+                                            "ruleFunction": "isRequestSaved"
+                                        }
+                                    }
+                                },
+                                {
+                                    "type": "Component",
+                                    "metadata": {
+                                        "autogenerate": true
+                                    },
+                                    "name": "LifeInsurancePaymentCalculation",
+                                    "value": {
+                                        "$ref": "#/properties/Body/properties/paymentCalculation"
+                                    },
+                                    "rule": {
+                                        "effect": "SHOW",
+                                        "condition": {
+                                            "type": "FUNC",
+                                            "ruleFunction": "showPaymentCalculation",
+                                            "value": [
+                                                {
+                                                    "$ref": "#"
+                                                }
+                                            ]
+                                        }
+                                    }
+                                },
+                                {
+                                    "type": "Group",
+                                    "elements": [
+                                        {
+                                            "type": "Component",
+                                            "metadata": {
+                                                "autogenerate": true
+                                            },
+                                            "name": "EquityDidPayment",
+                                            "value": {
+                                                "$ref": "#/properties/Body/properties/equityDidPayment"
+                                            }
+                                        }
+                                    ],
+                                    "rule": {
+                                        "effect": "SHOW",
+                                        "condition": {
+                                            "type": "FUNC",
+                                            "ruleFunction": "showEquityDidPayment",
+                                            "value": [
+                                                {
+                                                    "$ref": "#"
+                                                }
+                                            ]
+                                        }
+                                    }
+                                },
+                                {
+                                    "type": "Group",
+                                    "elements": [
+                                        {
+                                            "type": "Component",
+                                            "metadata": {
+                                                "autogenerate": true
+                                            },
+                                            "name": "EquityStrategies",
+                                            "value": {
+                                                "$ref": "#/properties/Body/properties/equityStrategies"
+                                            }
+                                        }
+                                    ],
+                                    "rule": {
+                                        "effect": "SHOW",
+                                        "condition": {
+                                            "type": "FUNC",
+                                            "ruleFunction": "showEquityStrategies",
+                                            "value": [
+                                                {
+                                                    "$ref": "#"
+                                                }
+                                            ]
+                                        }
+                                    }
+                                },
+                                {
+                                    "type": "Group",
+                                    "elements": [
+                                        {
+                                            "type": "Component",
+                                            "name": "Recipient",
+                                            "value": {
+                                                "$ref": "#/properties/Body/properties/recipient"
+                                            }
+                                        }
+                                    ],
+                                    "rule": {
+                                        "effect": "SHOW",
+                                        "condition": {
+                                            "type": "FUNC",
+                                            "ruleFunction": "showRecipient",
+                                            "value": [
+                                                {
+                                                    "$ref": "#"
+                                                }
+                                            ]
+                                        }
+                                    }
+                                },
+                                {
+                                    "type": "Group",
+                                    "elements": [
+                                        {
+                                            "type": "Component",
+                                            "name": "AttachmentsSection",
+                                            "value": {
+                                                "$ref": "#"
+                                            }
+                                        }
+                                    ],
+                                    "rule": {
+                                        "effect": "SHOW",
+                                        "condition": {
+                                            "type": "FUNC",
+                                            "value": [
+                                                {
+                                                    "$ref": "#/properties/Body/properties/holder/properties/fullName"
+                                                },
+                                                {
+                                                    "$ref": "#/properties/Body/properties/typeOfRequest"
+                                                }
+                                            ],
+                                            "ruleFunction": "isRequestSaved"
+                                        }
+                                    }
+                                },
+                                {
+                                    "type": "Group",
+                                    "elements": [
+                                        {
+                                            "type": "Component",
+                                            "name": "NecessaryImprovements",
+                                            "value": {
+                                                "$ref": "#"
+                                            }
+                                        }
+                                    ],
+                                    "rule": {
+                                        "effect": "SHOW",
+                                        "condition": {
+                                            "type": "FUNC",
+                                            "value": [
+                                                {
+                                                    "$ref": "#/properties/Body/properties/holder/properties/fullName"
+                                                },
+                                                {
+                                                    "$ref": "#/properties/Body/properties/typeOfRequest"
+                                                }
+                                            ],
+                                            "ruleFunction": "isRequestSaved"
+                                        }
+                                    }
+                                },
+                                {
+                                    "type": "Component",
+                                    "metadata": {
+                                        "autogenerate": true
+                                    },
+                                    "name": "EntityComments",
+                                    "value": {
+                                        "$ref": "#"
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "Tab",
+                    "elementId": "tabRequestHistory",
+                    "title": "tabRequestHistory",
+                    "elements": [
+                        {
+                            "type": "Component",
+                            "metadata": {
+                                "autogenerate": true
+                            },
+                            "name": "DocumentActivityHistory",
+                            "value": {
+                                "$ref": "#"
+                            }
+                        },
+                        {
+                            "type": "Component",
+                            "metadata": {
+                                "autogenerate": true
+                            },
+                            "name": "DocumentStateHistory",
+                            "value": {
+                                "$ref": "#"
+                            }
+                        },
+                        {
+                            "type": "Component",
+                            "metadata": {
+                                "autogenerate": true
+                            },
+                            "name": "RelatedRequestDocuments",
+                            "value": {
+                                "$ref": "#"
+                            }
+                        }
+                    ],
+                    "rule": {
+                        "effect": "SHOW",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "historyTabVisibility",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "type": "Tab",
+                    "elementId": "tabDocumentErrorsHistory",
+                    "title": "tabDocumentErrorsHistory",
+                    "elements": [
+                        {
+                            "type": "Component",
+                            "metadata": {
+                                "autogenerate": true
+                            },
+                            "name": "RelatedRequestDocumentErrors",
+                            "value": {
+                                "$ref": "#"
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

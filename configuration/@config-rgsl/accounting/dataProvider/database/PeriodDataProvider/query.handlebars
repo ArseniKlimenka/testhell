@@ -1,0 +1,35 @@
+SELECT * FROM (
+SELECT p.PERIOD_ID
+      ,p.PERIOD_STATUS_ID
+      ,p.PERIOD_TYPE_ID
+      ,p.DESCRIPTION
+      ,p.START_DATE
+      ,p.END_DATE
+      ,h.CREATE_DATE LAST_UPDATED
+      ,u.USERNAME
+      ,ROW_NUMBER() OVER(PARTITION BY p.PERIOD_ID ORDER BY h.CREATE_DATE DESC) ROW_NUM
+FROM acc_impl.PERIOD p
+LEFT JOIN acc_impl.PERIOD_HISTORY h on h.PERIOD_ID = p.PERIOD_ID
+LEFT JOIN org.APPLICATION_USER u on u.APPLICATION_USER_ID = h.USER_ID) p
+WHERE p.ROW_NUM = 1
+{{#if parameters.periodId}}
+      and p.PERIOD_ID = @periodId
+{{/if}}
+{{#if parameters.periodStatusId}}
+      and p.PERIOD_STATUS_ID = @periodStatusId
+{{/if}}
+{{#if parameters.periodTypeIds}}
+      and p.PERIOD_TYPE_ID in (@periodTypeIds)
+{{/if}}
+{{#if parameters.reportingPeriodFrom}}
+      and p.START_DATE >= @reportingPeriodFrom
+{{/if}}
+{{#if parameters.reportingPeriodTo}}
+      and p.END_DATE <= @reportingPeriodTo
+{{/if}}
+{{#if parameters.endDate}}
+      and p.END_DATE = @endDate
+{{/if}}
+{{#if parameters.atDate}}
+      and @atDate between p.START_DATE and p.END_DATE
+{{/if}}

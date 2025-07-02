@@ -1,0 +1,25 @@
+{
+    "entityType": "UniversalDocument",
+    "condition": {
+        "events": [
+            "Created",
+            "Updated",
+            "StatusChanged"
+        ],
+        "configuration": {
+            "names": [
+                "CommissionAct"
+            ]
+        }
+    },
+    "sinks": [
+        {
+            "name": "CreateOrUpdate",
+            "class": {
+                "className": "Adacta.AdInsure.RGSL.Accounting.API.Shared.Commission.Services.ICommissionActServiceApp, Adacta.AdInsure.RGSL.Accounting.API",
+                "methodName": "CreateOrUpdate"
+            }
+        }
+    ],
+    "version": "1"
+}

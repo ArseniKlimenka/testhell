@@ -1,0 +1,17 @@
+﻿SELECT TOP 1
+    JSON_VALUE(beneficiary.value, '$.partyFullName') AS beneficiaryName,
+    JSON_VALUE(beneficiary.value, '$.dateOfBirth') AS beneficiaryDateOfBirth
+FROM 
+    pas.contract ca
+    JOIN pas.contract c ON c.original_document_id = ca.original_document_id
+    JOIN cfx.published_artifact pa ON pa.published_artifact_id = c.published_artifact_id
+    CROSS APPLY OPENJSON(c.BODY, '$.additionalBeneficiaries') AS beneficiary
+WHERE 
+    c.contract_id != c.original_document_id
+    AND ca.CONTRACT_NUMBER = @contractNumber
+    AND pa.code_name = 'EquityLifeInsuranceNonFinChange'
+    AND 'beneficiarySelection' IN (
+        SELECT value
+        FROM OPENJSON(c.body, '$.amendmentData.nonFinChangeAmendmentData.mainAttributes.changeTypes'))
+ORDER BY 
+    c.SEQ_NUMBER DESC

@@ -1,0 +1,45 @@
+module.exports = function DataSourceInputMapping(input) {
+
+    if (!input || !input.data || !input.data.criteria) {
+
+        throw "Input criteria was not defined!";
+    }
+
+    const output = {
+        parameters: {
+            ...input.data.criteria,
+        }
+    };
+
+    if (input.data.sort) {
+
+        input.data.sort.forEach(element => {
+            let sortedFieldName = '';
+            switch (element.fieldName) {
+                case 'documentNo':
+                    sortedFieldName = 'PORTFOLIO_TRANSFER_NUMBER';
+                    break;
+                case 'issueDate':
+                    sortedFieldName = 'ISSUE_DATE';
+                    break;
+                case 'stateCode':
+                    sortedFieldName = 'DOCUMENT_STATE';
+                    break;
+            }
+            if (sortedFieldName.length > 0) {
+                const direction = element.descending ? 'desc' : 'asc';
+                output.sort = output.sort || {};
+                output.sort[sortedFieldName] = direction;
+            }
+        });
+    }
+
+    if (!output.sort) {
+
+        output.sort = {
+            PORTFOLIO_TRANSFER_NUMBER: 'asc'
+        };
+    }
+
+    return output;
+};

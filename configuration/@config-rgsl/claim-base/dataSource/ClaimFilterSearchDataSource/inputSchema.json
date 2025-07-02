@@ -1,0 +1,107 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+        "criteria": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "documentCode": {
+                    "type": "string"
+                },
+                "contractNumber": {
+                    "type": "string"
+                },
+                "riskCode": {
+                    "type": "string"
+                },
+                "documentState": {
+                    "type": "string",
+                    "enum": [
+                        "Draft",
+                        "ClaimManagerApproval",
+                        "RequestToClient",
+                        "LegalApproval",
+                        "SecurityApproval",
+                        "ClaimDirectorApproval",
+                        "MethodologyDirectorApproval",
+                        "POCreation",
+                        "SentToPayment",
+                        "PartiallyPaid",
+                        "Paid",
+                        "Rejected",
+                        "RejectedByCommonReasons",
+                        "Expired"
+                    ]
+                },
+                "applicantCode": {
+                    "type": "string"
+                },
+                "applicantFullName": {
+                    "type": "string"
+                },
+                "insuredPersonCode": {
+                    "type": "string"
+                },
+                "insuredPersonFullName": {
+                    "type": "string"
+                },
+                "policyHolderCode": {
+                    "type": "string"
+                },
+                "policyHolderFullName": {
+                    "type": "string"
+                },
+                "insuredEventNumber": {
+                    "type": "string"
+                },
+                "insuredEventDateFrom": {
+                    "type": "string",
+                    "format": "date",
+                    "aiFormat": "date"
+                },
+                "insuredEventDateTo": {
+                    "type": "string",
+                    "format": "date",
+                    "aiFormat": "date"
+                },
+                "insuredEventDate": {
+                    "type": "string",
+                    "format": "date",
+                    "aiFormat": "date"
+                },
+                "statementReceivedDateFrom": {
+                    "type": "string",
+                    "format": "date",
+                    "aiFormat": "date"
+                },
+                "statementReceivedDateTo": {
+                    "type": "string",
+                    "format": "date",
+                    "aiFormat": "date"
+                },
+
+                "statementApplicationDateFrom": {
+                    "type": "string",
+                    "format": "date",
+                    "aiFormat": "date"
+                },
+                "statementApplicationDateTo": {
+                    "type": "string",
+                    "format": "date",
+                    "aiFormat": "date"
+                },
+                "beneficiaryCode": {
+                    "type": "string"
+                },
+                "onlyPaid": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "sort": {
+            "type": "array"
+        }
+    }
+}

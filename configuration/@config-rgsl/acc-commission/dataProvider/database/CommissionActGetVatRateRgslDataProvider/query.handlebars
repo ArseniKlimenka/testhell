@@ -1,0 +1,21 @@
+select top 1 vat.VAT_RATE
+from
+	pas.AGENT_AGREEMENT aaM
+	inner join pas_impl.AA_HUB aah on aah.AA_NUMBER = aaM.AGENT_AGREEMENT_NUMBER
+	inner join pas_impl.AA_SAT_LATEST aas on aas.AA_HKEY = aah.AA_HKEY
+	inner join pas_impl.AA_VAT_RATE_SAT vat on vat.AA_VAT_RATE_HKEY = aah.AA_HKEY
+where 1=1
+	and aas.USE_NDS = 1
+	and vat.IS_DELETED = 0
+	and vat.START_DATE <= @issueDate
+	and aaM.AGENT_AGREEMENT_ID = (
+		select top 1
+			aaA2.AGENT_AGREEMENT_ID
+		from
+			pas.AGENT_AGREEMENT aaM2
+			inner join pas.AGENT_AGREEMENT aaA2 on aaA2.ORIGINAL_DOCUMENT_ID = aaM2.ORIGINAL_DOCUMENT_ID and (aaA2.SEQ_NUMBER = 0 or aaA2.VERSION_STATE = 'Applied')
+		where 1=1
+			and aaM2.AGENT_AGREEMENT_NUMBER = @agentAgreementNumber
+		order by aaA2.SEQ_NUMBER desc
+	)
+order by vat.START_DATE desc

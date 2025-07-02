@@ -1,0 +1,125 @@
+{
+    "steps": [
+        {
+            "$ref": "AdjustAccountingPeriods",
+            "context": {
+                "firstOpenPeriod": "2025-01-01"
+            }
+        },
+        {
+            "$ref": "AdjustCurrentDate",
+            "context": {
+                "currentDate": "2025-01-01"
+            }
+        },
+        {
+            "$ref": "CreateALIPolicyDemo",
+            "context": {
+                "paymentFrequencyCode": "2"
+            }
+        },
+        {
+            "$ref": "CreatePaymentAndAllocate",
+            "description": "Pay first two installments",
+            "context": {
+                "payAmount": 300000,
+                "referenceNo": "{{$.contractNumber}}",
+                "paymentDetails": {
+                    "amount": 300000,
+                    "transactionDate": "2025-01-01",
+                    "debtorName": "Петров Пётр Петрович"
+                }
+            }
+        },
+        {
+            "$ref": "ImportInvestProfit",
+            "context": {
+                "cancellationValidFrom": "2022-07-01",
+                "amount": 100
+            }
+        },
+        {
+            "code": "CancelPolicy",
+            "actor": "Operations",
+            "requests": [],
+            "executor": {
+                "module": "./steps/createCancellation/executor.js",
+                "function": "executor"
+            },
+            "context": {
+                "cancellationAmendmentReason": "byClientNonCoolOff",
+                "cancellationAmendmentSubType": "byClientDecision",
+                "cancellationValidFrom": "2022-07-01",
+                "contractFieldName": "amendment"
+            }
+        },
+        {
+            "code": "ValidatePaymentOrder",
+            "description": "Validate payment order",
+            "requests": [],
+            "executor": {
+                "module": "./steps/validatePaymentOrder/executor.js",
+                "function": "executor"
+            },
+            "assert": {
+                "expected": "./steps/validatePaymentOrder/expectedResult.json",
+                "module": "./steps/validatePaymentOrder/assert.js",
+                "function": "assertPO"
+            }
+        },
+        {
+            "code": "ApprovePaymentOrder",
+            "actor": "ChiefPaymentDistributor",
+            "description": "Approve payment order",
+            "requests": [],
+            "executor": {
+                "module": "./steps/approvePaymentOrder/executor.js",
+                "function": "executor"
+            },
+            "assert": {
+                "expected": "./steps/approvePaymentOrder/expectedResult.json",
+                "module": "./steps/approvePaymentOrder/assert.js",
+                "function": "assertPO"
+            }
+        },
+        {
+            "$ref": "CreateOutgoingPaymentAndAllocate",
+            "description": "Pay normal payment order",
+            "context": {
+                "payAmount": 162100,
+                "referenceNo": "{{$.paymentOrderMain.paymentOrderNumber}}",
+                "paymentDetails": {
+                    "amount": 162100,
+                    "transactionDate": "2022-01-01"
+                }
+            }
+        },
+        {
+            "$ref": "CreateOutgoingPaymentAndAllocate",
+            "description": "Pay PIT payment order",
+            "context": {
+                "payAmount": 39000,
+                "referenceNo": "{{$.paymentOrderPIT.paymentOrderNumber}}",
+                "paymentDetails": {
+                    "amount": 39000,
+                    "transactionDate": "2022-01-01"
+                }
+            }
+        },
+        {
+            "code": "ValidatePolicyPaid",
+            "description": "Validate policy status = 'paid'",
+            "requests": [],
+            "assert": {
+                "module": "./steps/validatePolicyPaid/assert.js",
+                "function": "assertPolicyPaid"
+            }
+        },
+        {
+            "$ref": "AdjustCurrentDate",
+            "context": {
+                "currentDate": null
+            }
+        }
+    ]
+}

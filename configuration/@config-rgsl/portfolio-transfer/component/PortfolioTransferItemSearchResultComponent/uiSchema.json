@@ -1,0 +1,261 @@
+{
+    "type": "Group",
+    "elements": [
+        {
+            "type": "DataGrid",
+            "orderBy": "Description",
+            "mode": "DataSource",
+            "pagination": {
+                "mode": "Regular",
+                "pageSizes": [
+                    50,
+                    100,
+                    500
+                ],
+                "defaultPageSize": 100
+            },
+            "selection": {
+                "mode": "Multi",
+                "enableRowSelection": false,
+                "showCheckBox": true
+            },
+            "height": "None",
+            "columns": [
+                {
+                    "sortable": true,
+                    "title": "DocumentNo",
+                    "cellContent": {
+                        "type": "Link",
+                        "targetType": "Entity",
+                        "value": {
+                            "mapping": "linkToPtOverview",
+                            "$ref": "#"
+                        },
+                        "width": 1,
+                        "content": {
+                            "text": {
+                                "type": "OutputText",
+                                "value": {
+                                    "$ref": "#/properties/resultData/properties/documentNo"
+                                }
+                            }
+                        }
+                    },
+                    "filter": {
+                        "content": {
+                            "type": "Input",
+                            "label": "fullNameFilter",
+                            "value": {
+                                "$ref": "#/properties/request/properties/data/properties/criteria/properties/documentNoStr"
+                            },
+                            "width": 2
+                        }
+                    },
+                    "name": "documentNo"
+                },
+                {
+                    "sortable": true,
+                    "title": "IssueDate",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/issueDate"
+                        }
+                    },
+                    "filter": {
+                        "content": {
+                            "type": "Input",
+                            "label": "fullNameFilter",
+                            "value": {
+                                "$ref": "#/properties/request/properties/data/properties/criteria/properties/issueDate"
+                            },
+                            "width": 2
+                        }
+                    },
+                    "name": "issueDate"
+                },
+                {
+                    "sortable": true,
+                    "title": "ServiceProviderNameFrom",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/serviceProviderNameFrom"
+                        }
+                    },
+                    "filter": {
+                        "content": {
+                            "type": "Input",
+                            "label": "serviceProviderNameFromFilter",
+                            "value": {
+                                "$ref": "#/properties/request/properties/data/properties/criteria/properties/serviceProviderNameFrom"
+                            },
+                            "width": 2
+                        }
+                    },
+                    "name": "serviceProviderNameFrom"
+                },
+                {
+                    "sortable": true,
+                    "title": "ServiceProviderNameTo",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/serviceProviderNameTo"
+                        }
+                    },
+                    "filter": {
+                        "content": {
+                            "type": "Input",
+                            "label": "serviceProviderNameToFilter",
+                            "value": {
+                                "$ref": "#/properties/request/properties/data/properties/criteria/properties/serviceProviderNameTo"
+                            },
+                            "width": 2
+                        }
+                    },
+                    "name": "serviceProviderNameTo"
+                },
+                {
+                    "sortable": true,
+                    "title": "TransferState",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/transferState"
+                        }
+                    },
+                    "filter": {
+                        "content": {
+                            "type": "Input",
+                            "label": "transferStateFilter",
+                            "value": {
+                                "$ref": "#/properties/request/properties/data/properties/criteria/properties/transferState"
+                            },
+                            "width": 2
+                        }
+                    },
+                    "name": "transferState"
+                },
+                {
+                    "sortable": true,
+                    "title": "userName",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/userName"
+                        }
+                    },
+                    "filter": {
+                        "content": {
+                            "type": "Input",
+                            "label": "userNameFilter",
+                            "value": {
+                                "$ref": "#/properties/request/properties/data/properties/criteria/properties/userName"
+                            },
+                            "width": 2
+                        }
+                    },
+                    "name": "recordSource"
+                },
+                {
+                    "sortable": true,
+                    "title": "ReferenceNo",
+                    "cellContent": {
+                        "type": "Link",
+                        "label": "Link to contract",
+                        "targetType": "Entity",
+                        "value": {
+                            "mapping": "linkToContractOverview",
+                            "$ref": "#"
+                        },
+                        "width": 1,
+                        "openInNewTab": true,
+                        "content": {
+                            "text": {
+                                "type": "OutputText",
+                                "value": {
+                                    "$ref": "#/properties/resultData/properties/referenceNo"
+                                }
+                            }
+                        }
+                    },
+                    "filter": {
+                        "content": {
+                            "type": "Input",
+                            "label": "contractNumbersStrFilter",
+                            "value": {
+                                "$ref": "#/properties/request/properties/data/properties/criteria/properties/contractNumbersStr"
+                            },
+                            "width": 2
+                        }
+                    },
+                    "name": "referenceNo"
+                },
+                {
+                    "sortable": true,
+                    "title": "ProductDescription",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/productDescription"
+                        }
+                    },
+                    "filter": {
+                        "content": {
+                            "type": "Input",
+                            "label": "productDescriptionFilter",
+                            "value": {
+                                "$ref": "#/properties/request/properties/data/properties/criteria/properties/productDescription"
+                            },
+                            "width": 2
+                        }
+                    },
+                    "name": "productDescription"
+                },
+                {
+                    "sortable": true,
+                    "title": "HolderName",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/holderName"
+                        }
+                    },
+                    "filter": {
+                        "content": {
+                            "type": "Input",
+                            "label": "holderNameFilter",
+                            "value": {
+                                "$ref": "#/properties/request/properties/data/properties/criteria/properties/holderName"
+                            },
+                            "width": 2
+                        }
+                    },
+                    "name": "holderName"
+                },
+                {
+                    "sortable": true,
+                    "title": "StartDate",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/startDate"
+                        }
+                    },
+                    "filter": {
+                        "content": {
+                            "type": "Input",
+                            "label": "startDateFilter",
+                            "value": {
+                                "$ref": "#/properties/request/properties/data/properties/criteria/properties/startDate"
+                            },
+                            "width": 2
+                        }
+                    },
+                    "name": "startDate"
+                }
+            ]
+        }
+    ]
+}

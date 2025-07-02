@@ -1,0 +1,62 @@
+SELECT
+     RECORD_ID
+    ,DOCUMENT_NUMBER
+    ,ORIGINAL_DOCUMENT_NUMBER
+    ,PREVIOUS_NUMBER
+    ,SEQUENCE_NUMBER
+    ,EXCEPTION_TYPE
+    ,TRANSITION_NAME
+    ,CONF_NAME
+    ,CONF_VERSION
+    ,ENTITY_TYPE
+    ,EVENT_TYPE
+    ,STATE
+    ,RELATED_UNI_DOC_NUMBER
+    ,RELATED_UNI_DOC_TRANSITION
+    ,RELATED_UNI_DOC_CONF
+    ,RELATED_CLAIM_NUMBER
+    ,RELATED_CLAIM_TRANSITION
+    ,RELATED_CLAIM_CONF
+    ,SINK_NAME
+    ,VALIDATION_RESULT
+    ,ERROR_TYPE
+    ,ERROR_CAUSE
+    ,ERROR_MESSAGE
+    ,BUSINESS_ERRORS
+    ,IMPORT_DOCUMENT_ID
+    ,SOURCE_ID
+    ,RECORD_KEY
+    ,RESULT_SUMMARY
+    ,STACK_TRACE
+    ,DIM_AMENDMENT_TYPE
+    ,DIM_CONTRACT_TYPE
+    ,DIM_PRODUCT_GROUP
+    ,TRIGGERED_BY_USERNAME
+    ,START_BY_USERNAME
+    ,ERROR_DATE
+    ,STATUS
+    ,RELATED_UNI_VERS_DOC_NUMBER
+    ,RELATED_UNI_VERS_DOC_TRANSITION
+    ,RELATED_UNI_VERS_DOC_CONF
+    ,RELATED_UNI_ME_CODE
+    ,RELATED_UNI_ME_CONF
+FROM BFX_IMPL.SINK_ERROR
+WHERE 1=1
+{{#if parameters.number}}
+    AND DOCUMENT_NUMBER = @number
+{{/if}}
+{{#if parameters.relatedClaimNumber}}
+    AND RELATED_CLAIM_NUMBER = @relatedClaimNumber
+{{/if}}
+{{#if parameters.relatedUniDocNumber}}
+    AND RELATED_UNI_DOC_NUMBER = @relatedUniDocNumber
+{{/if}}
+{{#if parameters.relatedUniVersDocNumber}}
+    AND RELATED_UNI_VERS_DOC_NUMBER LIKE '%' + @relatedUniVersDocNumber + '%'
+{{/if}}
+{{#if parameters.relatedUniMECode}}
+    AND RELATED_UNI_ME_CODE = @relatedUniMECode
+{{/if}}
+{{#if parameters.anyMatchNumber}}
+    AND (DOCUMENT_NUMBER = @anyMatchNumber OR RELATED_CLAIM_NUMBER = @anyMatchNumber OR RELATED_UNI_DOC_NUMBER = @anyMatchNumber)
+{{/if}}

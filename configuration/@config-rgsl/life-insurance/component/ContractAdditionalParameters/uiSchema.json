@@ -1,0 +1,103 @@
+{
+    "type": "Tab",
+    "elementId": "ContractAdditionalParametersTabId",
+    "title": "ContractAdditionalParametersTab",
+    "elements": [
+        {
+            "type": "Section",
+            "title": "Economic parameters inline view",
+            "elementId": "ContractAdditionalParametersInlineViewSectionId",
+            "elements": [
+                {
+                    "type": "Button",
+                    "elementId": "ContractAdditionalParametersRefreshButton",
+                    "label": "Refresh",
+                    "icon": {
+                        "name": "rotate-right",
+                        "color": "BackgroundColor",
+                        "size": "Medium"
+                    },
+                    "onClick": {
+                        "commandType": "executeAction",
+                        "actionName": "onClickRefreshButtonContractAdditionalParameters"
+                    },
+                    "width": 4
+                },
+                {
+                    "type": "TabLayout",
+                    "elementId": "ContractAdditionalParametersTabLayout",
+                    "elements": [
+                        {
+                            "type": "Tab",
+                            "elementId": "ContractAdditionalParametersTabBasicParameters",
+                            "title": "Basic parameters",
+                            "elements": [
+                                {
+                                    "type": "Section",
+                                    "title": "Consent",
+                                    "elementId": "ContractAdditionalParametersTabBasicParametersConsentSection",
+                                    "label": "ConsentSection",
+                                    "elements": [
+                                        {
+                                            "type": "Component",
+                                            "metadata": {
+                                                "autogenerate": true
+                                            },
+                                            "name": "Consent",
+                                            "value": {
+                                                "$ref": "#/properties/Body/properties/consent"
+                                            }
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Tab",
+                            "elementId": "ContractAdditionalParametersTabAdditionalParameters",
+                            "title": "Additional parameters",
+                            "onTabEnter": {
+                                "commandType": "executeAction",
+                                "actionName": "onTabEnterContractAdditionalParameters"
+                            },
+                            "elements": [
+                                {
+                                    "type": "InlineView",
+                                    "elementId": "ContractAdditionalParametersInlineViewId",
+                                    "showContainerActions": false,
+                                    "hide": true,
+                                    "views": [
+                                        {
+                                            "viewReference": {
+                                                "configurationCodeName": "ContractEntity",
+                                                "configurationConceptType": "UniversalMasterEntity",
+                                                "configurationVersion": "1"
+                                            },
+                                            "onCreateViewParams": "onCreateViewParamsContractAdditionalParameters"
+                                        }
+                                    ],
+                                    "value": {
+                                        "$ref": "#"
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "sectionLevel": 1
+        }
+    ],
+    "rule": {
+        "effect": "SHOW",
+        "condition": {
+            "type": "FUNC",
+            "ruleFunction": "showContractAdditionalParametersTab",
+            "value": [
+                {
+                    "$ref": "#"
+                }
+            ]
+        }
+    }
+}

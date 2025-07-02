@@ -1,0 +1,23 @@
+{
+    "entityType": "UniversalDocument",
+    "condition": {
+        "events": [
+            "StatusChanged"
+        ],
+        "configuration": {
+            "names": [
+                "CommissionAct"
+            ]
+        }
+    },
+    "sinks": [
+        {
+            "name": "ChangeState",
+            "class": {
+                "className": "Adacta.AdInsure.RGSL.Accounting.API.Shared.Commission.Services.ICommissionActServiceApp, Adacta.AdInsure.RGSL.Accounting.API",
+                "methodName": "SetStatus"
+            }
+        }
+    ],
+    "version": "1"
+}

@@ -1,0 +1,29 @@
+{
+    "entityType": "ImportDocument",
+    "condition": {
+        "events": [
+            "StatusChanged"
+        ],
+        "configuration": {
+            "names": [
+                "ImportCreditLifeCoolOff"
+            ],
+            "dimensions": {}
+        },
+        "transitions": [
+            "StartImporting"
+        ]
+    },
+    "sinks": [
+        {
+            "name": "ImportCreditLife",
+            "etlService": {
+                "configuration": {
+                    "name": "ImportCreditLifeCoolOffETL",
+                    "version": "1"
+                }
+            }
+        }
+    ],
+    "version": "1"
+}

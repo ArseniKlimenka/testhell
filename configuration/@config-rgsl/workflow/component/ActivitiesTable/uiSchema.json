@@ -1,0 +1,210 @@
+{
+    "type": "GridLayout",
+    "numberOfColumns": 4,
+    "elements": [
+        {
+            "type": "DataGrid",
+            "elementId": "activitiesTableVerificationId",
+            "mode": "DataSource",
+            "pagination": {
+                "mode": "Regular",
+                "defaultPageSize": 50,
+                "pageSizes": [
+                    5,
+                    10,
+                    15,
+                    50,
+                    100,
+                    250,
+                    500
+                ]
+            },
+            "selection": {
+                "mode": "Multi",
+                "enableRowSelection": true,
+                "showCheckBox": true,
+                "onSelectionChanged": {
+                    "commandType": "executeAction",
+                    "actionName": "onSelectionChanged"
+                }
+            },
+            "height": "None",
+            "actions": [],
+            "initialSort": {
+                "sortBy": "createdDate",
+                "sortOrder": "Desc"
+            },
+            "columns": [
+                {
+                    "title": "Document Number",
+                    "sortable": true,
+                    "name": "businessNumber",
+                    "cellContent": {
+                        "type": "Link",
+                        "targetType": "Entity",
+                        "value": {
+                            "mapping": "prepareEntityLink",
+                            "$ref": "#/properties/resultData/properties/metadata"
+                        },
+                        "content": {
+                            "text": {
+                                "type": "OutputText",
+                                "textProperties": [
+                                    "bold"
+                                ],
+                                "template": "{{expr businessNumber}}",
+                                "value": {
+                                    "$ref": "#"
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "title": "contractNumber",
+                    "sortable": true,
+                    "name": "contractNumber",
+                    "cellContent": {
+                        "type": "Link",
+                        "targetType": "Entity",
+                        "value": {
+                            "mapping": "prepareContractLink",
+                            "$ref": "#/properties/resultData/"
+                        },
+                        "content": {
+                            "text": {
+                                "type": "OutputText",
+                                "textProperties": [
+                                    "bold"
+                                ],
+                                "template": "{{#if contractNumber}}{{expr contractNumber}}{{else}}{{expr businessNumber}}{{/if}}",
+                                "value": {
+                                    "$ref": "#"
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "title": "contractHolderName",
+                    "sortable": true,
+                    "name": "contractHolderName",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "defaultValue": "",
+                        "template": "{{expr resultData.contractHolderName}}",
+                        "value": {
+                            "$ref": "#"
+                        }
+                    }
+                },
+                {
+                    "title": "contractInsuredName",
+                    "sortable": true,
+                    "name": "contractInsuredName",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "defaultValue": "",
+                        "template": "{{expr resultData.contractInsuredName}}",
+                        "value": {
+                            "$ref": "#"
+                        }
+                    }
+                },
+                {
+                    "title": "documentStateLocalized",
+                    "sortable": true,
+                    "name": "documentStateLocalized",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "defaultValue": "",
+                        "template": "{{expr resultData.documentStateLocalized}}",
+                        "value": {
+                            "$ref": "#"
+                        }
+                    }
+                },
+                {
+                    "title": "Assignee",
+                    "sortable": true,
+                    "name": "assigneeName",
+                    "cellContent": {
+                        "type": "GridLayout",
+                        "numberOfColumns": 4,
+                        "elements": [
+                            {
+                                "type": "OutputText",
+                                "defaultValue": "",
+                                "template": "{{#if resultData.assigneeName}}{{expr resultData.assigneeName}}{{else}}{{expr resultData.groupName}}{{/if}}",
+                                "width": 3,
+                                "value": {
+                                    "$ref": "#"
+                                }
+                            },
+                            {
+                                "type": "Icon",
+                                "iconStyleFunction": "getAssigneeIcon",
+                                "width": 1,
+                                "value": {
+                                    "$ref": "#/properties/resultData/properties/assigneeName"
+                                }
+                            }
+                        ]
+                    }
+                },
+                {
+                    "title": "AssigneeLogin",
+                    "sortable": true,
+                    "name": "assigneeLogin",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "defaultValue": "",
+                        "template": "{{#if resultData.assigneeLogin}}{{expr resultData.assigneeLogin}}{{else}}{{expr resultData.groupName}}{{/if}}",
+                        "width": 3,
+                        "value": {
+                            "$ref": "#"
+                        }
+                    }
+                },
+                {
+                    "title": "Task status",
+                    "sortable": true,
+                    "name": "activityStatus",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/activityStatus"
+                        }
+                    }
+                },
+                {
+                    "title": "createdDate",
+                    "sortable": true,
+                    "name": "createdDate",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "template": "{{expr createdDate 'dt'}}",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/resultData"
+                        }
+                    }
+                },
+                {
+                    "title": "closedDate",
+                    "sortable": true,
+                    "name": "closedDate",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "template": "{{expr closedDate 'dt'}}",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/resultData"
+                        }
+                    }
+                }
+            ]
+        }
+    ]
+}

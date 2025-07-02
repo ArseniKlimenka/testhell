@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="ru-RU" xml:lang="ru-RU" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+	<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+	<title>СТРАХОВОЙ АКТ</title>
+	<link rel="stylesheet" href="assets/styles/style.css">
+	{{{topLeftContent}}}
+</head>
+
+<body>
+
+	<div id="ia-doc-no-wrapper">
+		<div class="doc-desc-container">
+			<p class="ia-act-no">СТРАХОВОЙ АКТ № {{actNumber}}</p>
+		</div>
+		<div class="doc-desc-container">
+			<p class="ia-claim-no">Убыток № {{claimNumber}}</p>
+		</div>
+	</div>
+
+	<div id="info-wrapper">
+		<div id="info-city-container">
+			<p class="info-text">г.Москва</p>
+		</div>
+		<div id="info-date-container">
+			<p class="info-text">{{actDateFormated}}</p>
+		</div>
+	</div>
+
+	<div class="ia-title-container">
+		<p id="ia-title-text">Настоящий акт составлен на основании заявления Застрахованного лица о
+			страховой выплате и представленных Страховщику документов, подтверждающих факт произошедшего
+			страхового случая и устанавливающих его причину.</p>
+	</div>
+
+	<table id="ia-main-table" cellpadding="5">
+		<th class="main-table-header"></th>
+		<th class="main-table-header"></th>
+		<th class="main-table-header"></th>
+		<tr>
+			<td colspan="2">Номер договора страхования страхования (полиса)</td>
+			<td>{{contractNumber}}</td>
+		</tr>
+		<tr>
+			<td colspan="2">Дата заключения (предложения) договора страхования</td>
+			<td>{{contractIssueDateFormated}}</td>
+		</tr>
+		<tr>
+			<td colspan="2">Дата начала действия (ответственности) договора страхования</td>
+			<td>{{contractStartDateFormated}}</td>
+		</tr>
+		<tr>
+			<td colspan="2">Вид страхования</td>
+			<td>{{contractType}}</td>
+		</tr>
+		<tr>
+			<td colspan="2">Страхователь</td>
+			<td>{{holderFullName}}</td>
+		</tr>
+		<tr>
+			<td colspan="2">Застрахованный</td>
+			<td>{{insuredFullName}}</td>
+		</tr>
+		<tr>
+			<td colspan="2">Диагноз</td>
+			<td>{{diagnosisDescription}}</td>
+		</tr>
+		<tr>
+			<td colspan="2">Тип страхового события</td>
+			<td>{{insuredEventTypeDescription}}</td>
+		</tr>
+		<tr>
+			<td colspan="2">Причина страхового события</td>
+			<td>{{insuredEventReasonDescription}}</td>
+		</tr>
+		<tr>
+			<td colspan="2">Риск</td>
+			<td>{{riskDescription}}</td>
+		</tr>
+		<tr>
+			<td colspan="2" rowspan="2">Страховая сумма по риску на дату страхового события (в валюте страхования)</td>
+			<td>{{riskInsuredSumFormated}}</td>
+		</tr><tr>
+			<td>{{contractCurrencyDescription}}</td>
+		</tr>
+		
+		<tr>
+			<td colspan="2">Основание к выплате (страховой случай для страхового акта)</td>
+			<td>{{{paymentDescription}}}</td>
+		</tr>
+		<tr>
+			<td colspan="2">Сумма страховой выплаты (цифрами)</td>
+			<td>{{paymentAmountFormated}}</td>
+		</tr>
+		<tr>
+			<td colspan="2">Сумма страховой выплаты (прописью)</td>
+			<td>{{paymentAmountStringValue}}</td>
+		</tr>
+		<tr>
+			<td colspan="2">Ранее произведенные выплаты договору страхования (в отношении указанного Застрахованного
+				лица)</td>
+			<td>{{{previousPayments}}}</td>
+		</tr>
+		<tr>
+			<td colspan="2">Форма страховой выплаты</td>
+			<td>{{paymentType}}</td>
+		</tr>
+		<tr>
+			<td colspan="2">Получатель</td>
+			<td>{{recipientFullName}}</td>
+		</tr>
+	</table>
+
+	<div id="stamp-container">
+
+		<table id="ia-bank-table" cellpadding="5">
+			<th class="main-table-header"></th>
+			<th class="main-table-header"></th>
+			<tr>
+				<td id="inner-header" colspan="3">Банковские реквизиты получателя</td>
+			</tr>
+			<tr>
+				<td colspan="2">Наименование банка</td>
+				<td>{{recipientBankName}}</td>
+			</tr>
+			<tr>
+				<td colspan="2">К/С</td>
+				<td>{{corrBankAccount}}</td>
+			</tr>
+			<tr>
+				<td colspan="2">Л/С</td>
+				<td>{{recipientBankAccount}}</td>
+			</tr>
+			<tr>
+				<td colspan="2">БИК </td>
+				<td>{{BIC}}</td>
+			</tr>
+			<tr>
+				<td colspan="2">ИНН</td>
+				<td>{{INN}}</td>
+			</tr>
+			<tr>
+				<td colspan="2">Основание быть Получателем</td>
+				<td>{{beneficiaryReason}}</td>
+			</tr>
+		</table>
+
+
+		<div class="ia-title-container">
+			<p id="second-title">Решение о произведении страховой выплаты:</p>
+		</div>
+
+		<div id="doc-info-container">
+			<div>
+				<p>Размер страховой выплаты: {{paymentAmountFormated}}</p>
+			</div>
+			<div>
+				<p>{{paymentAmountStringValue}}</p>
+			</div>
+			<div>
+				<p>КСП договора страхования:</p>
+				<p>{{mvzNumber}}</p>
+			</div>
+			<div>
+				<p>Код линии бизнеса:</p>
+				<p>{{riskBusinessLine}}</p>
+			</div>
+			<div>
+				<p>Internal Order:</p>
+				<p>{{orderNumber}}</p>
+			</div>
+		</div>
+
+		<div id="signer-info-container">
+			<div>
+				<img src="assets/img/logoHeader.png">
+			</div>
+			<div>
+				<p>{{actSignerName}}</p>
+			</div>
+			<div>
+				<p style="color: crimson;">ДОКУМЕНТ ПОДПИСАН ЭЛЕКТРОННОЙ ПОДПИСЬЮ</p>
+			</div>
+			<div>
+				<p>Логин: {{actSignerUsername}}</p>
+				<p>Контактный e-mail: {{actSignerMail}}</p>
+				<p>Дата подписания: {{actSignerDate}}</p>
+				<p>Время подписания: {{actSignerTime}}</p>
+			</div>
+		</div>
+
+		<div id="executor-info-container">
+			<p>Исп.</p>
+			<p>{{actExecutor}}</p>
+		</div>
+	</div>
+
+
+	<div class="pagebreak"> </div>
+
+
+	<div id="al-title-container">
+		<p id="al-title-text">Лист согласования страховой документации</p>
+	</div>
+
+	<div id="al-doc-no-wrapper">
+		<div>
+			<p class="al-claim-no">Убыток № {{claimNumber}}</p>
+		</div>
+		<div>
+			<p class="al-act-no">Страховой акт № {{actNumber}}</p>
+		</div>
+	</div>
+
+	<table id="al-main-table" cellpadding="5">
+		<th>№ п.п</th>
+		<th>Подразделение</th>
+		<th>ФИО работника</th>
+		<th>Дата согласования</th>
+		<th>Статус согласования</th>
+		<th>Комментарий</th>
+		{{{tableRows}}}
+	</table>
+
+</body>
+
+</html>

@@ -1,0 +1,223 @@
+{
+    "type": "GridLayout",
+    "numberOfColumns": 6,
+    "elements": [
+        {
+            "type": "OutputText",
+            "label": "Payment date",
+            "readOnly": true,
+            "value": {
+                "$ref": "#/properties/paymentDate"
+            },
+            "width": 1
+        },
+        {
+            "type": "Input",
+            "label": "Non-acceptance",
+            "readOnly": true,
+            "value": {
+                "$ref": "#/properties/nonAcceptance"
+            },
+            "width": 1
+        },
+        {
+            "type": "OutputText",
+            "label": "Original payment description",
+            "readOnly": true,
+            "value": {
+                "$ref": "#/properties/originalDescription"
+            },
+            "width": 4,
+            "rule": {
+                "effect": "SHOW",
+                "condition": {
+                    "type": "FUNC",
+                    "value": [
+                        {
+                            "$ref": "#"
+                        }
+                    ],
+                    "ruleFunction": "showOriginalPaymentDescription"
+                }
+            }
+        },
+        {
+            "type": "OutputText",
+            "label": "Income source name",
+            "value": {
+                "$ref": "#/properties/incomeSourceName"
+            },
+            "width": 1
+        },
+        {
+            "type": "GridLayout",
+            "numberOfColumns": 4,
+            "elements": [
+                {
+                    "type": "Section",
+                    "label": "Debtor",
+                    "customCSSStyle":{
+                        "--section-level-1-icon-class-float": "left"
+                    },
+                    "elements": [
+                        {
+                            "type": "OutputText",
+                            "label": "Name",
+                            "readOnly": true,
+                            "value": {
+                                "$ref": "#/properties/debtorName"
+                            },
+                            "width": 1
+                        },
+                        {
+                            "type": "OutputText",
+                            "label": "Account No",
+                            "readOnly": true,
+                            "value": {
+                                "$ref": "#/properties/debtorAccountNo"
+                            },
+                            "width": 1
+                        },
+                        {
+                            "type": "OutputText",
+                            "label": "TIN",
+                            "readOnly": true,
+                            "value": {
+                                "$ref": "#/properties/debtorTin"
+                            },
+                            "width": 1
+                        },
+                        {
+                            "type": "OutputText",
+                            "label": "BIC",
+                            "readOnly": true,
+                            "value": {
+                                "$ref": "#/properties/debtorBic"
+                            },
+                            "width": 1
+                        }
+                    ]
+                },
+                {
+                    "type": "Section",
+                    "label": "Creditor",
+                    "customCSSStyle":{
+                        "--section-level-1-icon-class-float": "left"
+                    },
+                    "elements": [
+                        {
+                            "type": "OutputText",
+                            "label": "Name",
+                            "readOnly": true,
+                            "value": {
+                                "$ref": "#/properties/creditorName"
+                            },
+                            "width": 1
+                        },
+                        {
+                            "type": "OutputText",
+                            "label": "Account No",
+                            "readOnly": true,
+                            "value": {
+                                "$ref": "#/properties/creditorAccountNo"
+                            },
+                            "width": 1
+                        },
+                        {
+                            "type": "OutputText",
+                            "label": "TIN",
+                            "readOnly": true,
+                            "value": {
+                                "$ref": "#/properties/creditorTin"
+                            },
+                            "width": 1
+                        },
+                        {
+                            "type": "OutputText",
+                            "label": "BIC",
+                            "readOnly": true,
+                            "value": {
+                                "$ref": "#/properties/creditorBic"
+                            },
+                            "width": 1
+                        }
+                    ]
+                },
+                {
+                    "type": "Section",
+                    "label": "Allocation details",
+                    "elementId": "allocationDetails",
+                    "customCSSStyle":{
+                        "--section-level-1-icon-class-float": "left"
+                    },
+                    "elements": [
+                        {
+                            "type": "InlineView",
+                            "showContainerActions": false,
+                            "views": [
+                                {
+                                    "viewReference": {
+                                        "configurationCodeName": "AllocationRgslView",
+                                        "configurationVersion": "1",
+                                        "configurationConceptType": "SearchView"
+                                    },
+                                    "onViewInitialized": "initAlocResultView",
+                                    "viewType": "Search"
+                                }
+                            ],
+                            "value": {
+                                "$ref": "#"
+                            },
+                            "hide": false,
+                            "elementId": "BankStatementImportRecordStatusInlineView"
+                        }
+                    ],
+                    "sectionLevel": 1
+                },
+                {
+                    "type": "Component",
+                    "metadata": {
+                        "autogenerate": true
+                    },
+                    "customCSSStyle":{
+                        "--section-level-1-icon-class-float": "left"
+                    },
+                    "name": "RelatedAccountingEntriesComponent",
+                    "value": {
+                        "$ref": "#"
+                    }
+                },
+                {
+                    "type": "Section",
+                    "label": "Bank statement item history",
+                    "elementId": "BankStatementItemHistory",
+                    "customCSSStyle":{
+                        "--section-level-1-icon-class-float": "left"
+                    },
+                    "elements": [
+                        {
+                            "type": "InlineView",
+                            "showContainerActions": false,
+                            "views": [
+                                {
+                                    "viewReference": {
+                                        "configurationCodeName": "BankStatementItemHistoryRgslView",
+                                        "configurationVersion": "1",
+                                        "configurationConceptType": "SearchView"
+                                    },
+                                    "onViewInitialized": "initBsiHistoryRgslView",
+                                    "viewType": "Search"
+                                }
+                            ],
+                            "value": {
+                                "$ref": "#"
+                            },
+                            "hide": false
+                        }
+                    ],
+                    "sectionLevel": 1
+                }
+            ]
+        }
+    ]
+}

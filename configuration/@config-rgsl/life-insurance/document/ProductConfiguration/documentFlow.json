@@ -1,0 +1,83 @@
+{
+    "processType": "ProductConfiguration",
+    "actors": [
+        "ProductConfigurationEditor",
+        "ProductConfigurationViewer",
+        "EconomicParametersEditor",
+        "EconomicParametersViewer",
+        "System"
+    ],
+    "initialState": "Draft",
+    "states": [
+        {
+            "name": "Draft",
+            "operations": [
+                {
+                    "name": "Save"
+                }
+            ]
+        },
+        {
+            "name": "Activated",
+            "operations": [],
+            "appliesVersion": true
+        },
+        {
+            "name": "Updating",
+            "operations": [],
+            "appliesVersion": true
+        },
+        {
+            "name": "Cancelled",
+            "operations": [],
+            "discardsVersion": true
+        }
+    ],
+    "transitions": [
+        {
+            "name": "Draft_to_Activated",
+            "from": "Draft",
+            "to": "Activated",
+            "broadcastEvent": {
+                "serverSideEvents": true
+            },
+            "whenBlocked": "Greyout"
+        },
+        {
+            "name": "Activated_to_Updating",
+            "from": "Activated",
+            "to": "Updating",
+            "broadcastEvent": {
+                "serverSideEvents": true
+            },
+            "allowOnValidationErrors": {
+                "all": true
+            },
+            "whenBlocked": "Hide"
+        },
+        {
+            "name": "Updating_to_Activated",
+            "from": "Updating",
+            "to": "Activated",
+            "broadcastEvent": {
+                "serverSideEvents": true
+            },
+            "allowOnValidationErrors": {
+                "all": true
+            },
+            "whenBlocked": "DisplayNormally"
+        },
+        {
+            "name": "Draft_to_Cancelled",
+            "from": "Draft",
+            "to": "Cancelled",
+            "broadcastEvent": {
+                "serverSideEvents": true
+            },
+            "whenBlocked": "Greyout",
+            "allowOnValidationErrors": {
+                "all": true
+            }
+        }
+    ]
+}

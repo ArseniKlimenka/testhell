@@ -1,0 +1,46 @@
+{
+    "type": "Section",
+    "sectionLevel": 1,
+    "label": "AssetPeriodReport",
+    "width": 6,
+    "elements": [
+        {
+            "type": "Input",
+            "control": "DateRange",
+            "dateFrom": {
+                "type": "Input",
+                "label": "beginDate",
+                "width": 1,
+                "value": {
+                    "$ref": "#/properties/request/properties/data/properties/criteria/properties/beginDate"
+                },
+                "control": "DatetimePicker"
+            },
+            "dateTo": {
+                "type": "Input",
+                "label": "endDate",
+                "width": 1,
+                "value": {
+                    "$ref": "#/properties/request/properties/data/properties/criteria/properties/endDate"
+                },
+                "control": "DatetimePicker"
+            },
+            "width": 2
+        },
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "Button",
+                    "label": "AssetReportDatePeriod",
+                    "onClick": [
+                        {
+                            "commandType": "executeAction",
+                            "actionName": "AssetReportDatePeriod"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

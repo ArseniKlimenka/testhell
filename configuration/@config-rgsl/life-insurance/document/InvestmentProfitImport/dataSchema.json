@@ -1,0 +1,62 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema",
+    "description": "Document guiding the import of investment profit.",
+    "type": "object",
+    "aiDeepRequired": [
+        "/file/fileId",
+        "/file/fileName"
+    ],
+    "aiDataEnrichment": [
+        {
+            "name": "GetLoadedDataErrors",
+            "dataSource": "LoadDataErrorsDataSource"
+        }
+    ],
+    "properties": {
+        "file": {
+            "$ref": "component:FileUpload"
+        },
+        "sourceFileFormatData": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "fileFormat": {
+                        "type": "integer"
+                    },
+                    "formatName": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "sourceFileFormat": {
+            "type": "integer"
+        },
+        "summary": {
+            "type": "object",
+            "properties": {
+                "contractNumber":{
+                    "type":"string"
+                },
+                "reinsurerShare":{
+                    "type":"number"
+                },
+                "reinsurerCode":{
+                    "type":"integer"
+                },
+                "investmentProfitNumber":{
+                    "type":"string"
+                },
+                "version":{
+                    "type":"integer"
+                }
+            }         
+        }
+    },
+    "required": [
+        "file",
+        "sourceFileFormat"
+    ],
+    "additionalProperties": false
+}

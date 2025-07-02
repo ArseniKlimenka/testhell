@@ -1,0 +1,45 @@
+{
+    "entityType": "UniversalDocument",
+    "condition": {
+        "events": [
+            "StatusChanged"
+        ],
+        "configuration": {
+            "names": [
+                "PortfolioTransfer"
+            ]
+        },
+        "documentStates": [
+            "TransferProcessing"
+        ]
+    },
+    "sinks": [
+        {
+            "name": "GetDocuments",
+            "fetch": {
+                "configuration": {
+                    "name": "PortfolioTransferItemSearchRgslDataSource"
+                }
+            }
+        },
+        {
+            "name": "CreateRecord",
+            "database": {
+                "tables": [
+                    "ACC_IMPL.PORTFOLIO_TRANSFER_DOCUMENT_LINK",
+                    "ACC_IMPL.PORTFOLIO_TRANSFER_DOCUMENT_SAT"
+                ]
+            }
+        },
+        {
+            "name": "StartEtl",
+            "etlService": {
+                "configuration": {
+                    "name": "PortfolioTransferCancelAllocationEtl",
+                    "version": "1"
+                }
+            }
+        }
+    ],
+    "version": "1"
+}

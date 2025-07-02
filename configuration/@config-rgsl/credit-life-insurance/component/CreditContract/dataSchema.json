@@ -1,0 +1,57 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "CreditContract",
+    "description": "CreditContract",
+    "type": "object",
+    "additionalProperties": false,
+    "aiDataEnrichment": [
+        {
+            "name": "setCreditContractParams"
+        }
+    ],
+    "aiValidation": {
+        "rule": "validateCreditContract"
+    },
+    "properties": {
+        "creditSum": {
+            "type": "number",
+            "minimum": 0.01,
+            "aiTitle": "creditSum"
+        },
+        "creditSumNet": {
+            "type": "number",
+            "minimum": 0.01,
+            "aiTitle": "creditSumNet"
+        },
+        "creditRate": {
+            "type": "number",
+            "minimum": 0.0001,
+            "maximum": 1,
+            "aiTitle": "creditRate"
+        },
+        "creditRateRefuse": {
+            "type": "number",
+            "minimum": 0.0001,
+            "maximum": 1,
+            "aiTitle": "creditRateRefuse"
+        },
+        "annuityPaymentSum": {
+            "type": "number",
+            "minimum": 0.01,
+            "aiTitle": "annuityPaymentSum"
+        },
+        "creditContractId": {
+            "type": "string",
+            "aiTitle": "creditContractId"
+        },
+        "creditDate": {
+            "type": "string",
+            "aiFormat": "date",
+            "aiTitle": "creditDate"
+        },
+        "creditContractNumber": {
+            "type": "string",
+            "aiTitle": "creditContractNumber"
+        }
+    }
+}

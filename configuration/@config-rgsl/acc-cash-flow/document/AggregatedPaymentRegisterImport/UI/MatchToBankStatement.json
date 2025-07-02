@@ -1,0 +1,223 @@
+{
+    "id": "AggregatedPaymentMatchToBankStatement",
+    "type": "GridLayout",
+    "numberOfColumns": 4,
+    "formProperties": {
+        "events": {
+            "onLoad": "onAfterLoadFileLoadAction"
+        }
+    },
+    "elements": [
+        {
+            "type": "Component",
+            "name": "DocumentHeader",
+            "value": {
+                "$ref": "#"
+            }
+        },
+        {
+            "type": "Group",
+            "width": 4,
+            "elements": [
+                {
+                    "type": "GridLayout",
+                    "numberOfColumns": 2,
+                    "fillAvailableSpace": true,
+                    "width": 3,
+                    "elements": [
+                        {
+                            "type": "Group",
+                            "elements": [
+                                {
+                                    "type": "Input",
+                                    "label": "EXCEL file:",
+                                    "readOnly": true,
+                                    "value": {
+                                        "$ref": "#/properties/Body/properties/file/properties/fileName"
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Group",
+                            "elements": [
+                                {
+                                    "type": "Lookup",
+                                    "multiple": true,
+                                    "value": {
+                                        "$ref": "#"
+                                    },
+                                    "width": 1,
+                                    "dialogButton": {},
+                                    "dialog": {
+                                        "viewReference": {
+                                            "configurationCodeName": "BankStatementItemRgslView",
+                                            "configurationVersion": "1",
+                                            "configurationConceptType": "SearchView"
+                                        },
+                                        "onLoad": "initBsiRgslView",
+                                        "inputParameters": {
+                                            "uiContext": {
+                                                "selectionMode": "Multi"
+                                            }
+                                        }
+                                    },
+                                    "onSelected": "bsiSearchResultAssignment",
+                                    "selectedDisplayValueUISchema": {
+                                        "type": "Input",
+                                        "label": "BSI",
+                                        "readOnly": true,
+                                        "value": {
+                                            "$ref": "#/properties/ClientViewModel/bankStatementItemNos"
+                                        }
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Group",
+                            "elements": [
+                                {
+                                    "type": "Section",
+                                    "label": "LoadDataErrors",
+                                    "elementId": "loadingLoadedDataErrorsID",
+                                    "elements": [
+                                        {
+                                            "type": "InlineView",
+                                            "showContainerActions": false,
+                                            "views": [
+                                                {
+                                                    "viewReference": {
+                                                        "configurationCodeName": "LoadedDataErrorsFromXml",
+                                                        "configurationVersion": "1",
+                                                        "configurationConceptType": "SearchView"
+                                                    },
+                                                    "onViewInitialized": "initLoadedDataFromXml",
+                                                    "viewType": "Search"
+                                                }
+                                            ],
+                                            "value": {
+                                                "$ref": "#"
+                                            },
+                                            "hide": false,
+                                            "elementId": "BankStatementImportInlineView"
+                                        }
+                                    ],
+                                    "sectionLevel": 1
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "SideContentLayout",
+                    "fixedPosition": true,
+                    "width": 1,
+                    "elements": [
+                        {
+                            "type": "GridLayout",
+                            "numberOfColumns": 2,
+                            "elements": [
+                                {
+                                    "type": "TabLayout",
+                                    "elements": [
+                                        {
+                                            "type": "Tab",
+                                            "icon": {
+                                                "name": "Bars",
+                                                "size": "Large"
+                                            },
+                                            "elements": [
+                                                {
+                                                    "type": "OutputText",
+                                                    "label": "Aggregated Payment number",
+                                                    "skipTranslate": true,
+                                                    "value": {
+                                                        "$ref": "#/properties/Number"
+                                                    },
+                                                    "width": 2
+                                                },
+                                                {
+                                                    "type": "OutputText",
+                                                    "label": "Rows imported",
+                                                    "skipTranslate": true,
+                                                    "value": {
+                                                        "$ref": "#/properties/Body/properties/summary/properties/numberOfRowsImported"
+                                                    },
+                                                    "width": 2
+                                                },
+                                                {
+                                                    "type": "OutputText",
+                                                    "label": "Total payment amount",
+                                                    "skipTranslate": true,
+                                                    "decimalPlaces": 2,
+                                                    "value": {
+                                                        "$ref": "#/properties/Body/properties/summary/properties/totalPaymentAmount"
+                                                    },
+                                                    "width": 2
+                                                },
+                                                {
+                                                    "type": "OutputText",
+                                                    "label": "Total allocation amount",
+                                                    "skipTranslate": true,
+                                                    "decimalPlaces": 2,
+                                                    "value": {
+                                                        "$ref": "#/properties/Body/properties/summary/properties/totalAllocationAmount"
+                                                    },
+                                                    "width": 2
+                                                }
+                                            ],
+                                            "elementId": "tab-Summary"
+                                        },
+                                        {
+                                            "type": "Tab",
+                                            "icon": {
+                                                "name": "Clipboard-Check",
+                                                "size": "Large"
+                                            },
+                                            "elements": [
+                                                {
+                                                    "type": "Component",
+                                                    "name": "AuditInfo",
+                                                    "value": {
+                                                        "$ref": "#/properties/AuditInfo"
+                                                    }
+                                                }
+                                            ],
+                                            "elementId": "tab-Audit Info"
+                                        },
+                                        {
+                                            "type": "Tab",
+                                            "icon": {
+                                                "name": "Bell",
+                                                "size": "Large"
+                                            },
+                                            "tabType": "error",
+                                            "elements": [
+                                                {
+                                                    "type": "ValidationSummary",
+                                                    "elementId": "RequiredPropertiesValidations"
+                                                }
+                                            ],
+                                            "elementId": "tab-Notifications",
+                                            "additionalInfo": {
+                                                "display": "ValidationErrorsCount"
+                                            }
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "Component",
+            "name": "DocumentFooter",
+            "value": {
+                "$ref": "#"
+            }
+        }
+    ]
+}

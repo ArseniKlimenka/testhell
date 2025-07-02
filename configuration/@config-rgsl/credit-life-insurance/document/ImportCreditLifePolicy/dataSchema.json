@@ -1,0 +1,100 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema",
+    "description": "Document guiding the import of funds.",
+    "type": "object",
+    "additionalProperties": false,
+    "aiValidation": [
+        {
+            "rule": "validationImportCreditLifePolicy"
+        }
+    ],
+    "properties": {
+        "file": {
+            "$ref": "component:FileUpload"
+        },
+        "partner": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "partnerCode": {
+                    "type": "string"
+                },
+                "partnerDescription": {
+                    "type": "string"
+                },
+                "partnerBusinessCode": {
+                    "type": "string"
+                }
+            }
+        },
+        "initiator": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "userId": {
+                    "type": "string"
+                },
+                "userName": {
+                    "type": "string"
+                },
+                "partyCode": {
+                    "type": "string"
+                },
+                "partyFullName": {
+                    "type": "string"
+                },
+                "employeeCode": {
+                    "type": "string"
+                },
+                "organisationUnitCode": {
+                    "type": "string"
+                },
+                "organisationUnitName": {
+                    "type": "string"
+                }
+            }
+        },
+        "agentAgreement": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "number": {
+                    "type": "string"
+                },
+                "manualNumber": {
+                    "type": "string"
+                },
+                "externalNumber": {
+                    "type": "string"
+                },
+                "formatedNumber": {
+                    "type": "string"
+                },
+                "amendmentNumber": {
+                    "type": "string"
+                }
+            }
+        },
+        "summary": {
+            "type": "object",
+            "properties": {
+                "date": {
+                    "type": "string",
+                    "aiFormat": "date"
+                },
+                "documentState": {
+                    "type": "string"
+                },
+                "numberOfRowsImported": {
+                    "type": "number"
+                },
+                "numberOfRowsImportedError": {
+                    "type": "number"
+                }
+            }
+        }
+    }
+}

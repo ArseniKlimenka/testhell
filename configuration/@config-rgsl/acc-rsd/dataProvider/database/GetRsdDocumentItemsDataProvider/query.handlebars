@@ -1,0 +1,51 @@
+select
+	JSON_QUERY('["' + (select STRING_AGG(ril.RSD_ITEM_HKEY, '", "')) + '"]') as RSD_ITEM_HKEYS,
+	ril.CONTRACT_NUMBER,
+	art.CODE_NAME as CONTRACT_CONFIGURATION_NAME,
+	art.PUBLISHED_VERSION as CONTRACT_CONFIGURATION_VERSION,
+	pols.HOLDER_NAME,
+	pols.CURRENCY_CODE,
+	{{#if parameters.groupByContract}}null as ITEM_NO,{{else}}ril.ITEM_NO,{{/if}}
+	ril.DUE_DATE,
+	sum(ris.OPEN_AMOUNT) as OPEN_AMOUNT,
+	sum(ris.OPEN_AMOUNT_NO_RSD) as OPEN_AMOUNT_NO_RSD,
+	ris.DEADLINE_DATE,
+	datediff(day, ris.DEADLINE_DATE, rsds.CREATED_DATE) as OVERDUE_DAYS,
+	coalesce(odr.RATE, 0) as RSD_RATE,
+	sum(ris.RSD_AMOUNT) as RSD_AMOUNT,
+	sum(ris.RSD_AMOUNT_MANUAL) as RSD_AMOUNT_MANUAL
+from
+	acc_impl.RSD_HUB rsdh
+	inner join acc_impl.RSD_SAT_LATEST rsds on rsds.RSD_HKEY = rsdh.RSD_HKEY
+	inner join acc_impl.RSD_ITEM_LINK ril on ril.RSD_HKEY = rsdh.RSD_HKEY
+	inner join acc_impl.RSD_ITEM_SAT_LATEST ris on ris.RSD_ITEM_HKEY = ril.RSD_ITEM_HKEY
+	inner join pas.CONTRACT ctr with (nolock) on ctr.CONTRACT_NUMBER = ril.CONTRACT_NUMBER
+	inner join cfx.PUBLISHED_ARTIFACT art on art.PUBLISHED_ARTIFACT_ID = ctr.PUBLISHED_ARTIFACT_ID
+	inner join pas_impl.POLICY_HUB polh on polh.CONTRACT_NUMBER = ril.CONTRACT_NUMBER
+	inner join pas_impl.POLICY_SAT_LATEST pols on pols.POLICY_HKEY = polh.POLICY_HKEY
+	left join acc_impl.OVERDUE_DAYS_RATE odr on datediff(day, ris.DEADLINE_DATE, rsds.CREATED_DATE) between odr.DAYS_FROM and odr.DAYS_TO
+where 1=1
+	and ris.IS_DELETED = 0
+{{#if parameters.rsdNumber}}
+	and rsdh.RSD_NUMBER = @rsdNumber
+{{/if}}
+{{#if parameters.contractNumber}}
+	and ril.CONTRACT_NUMBER = @contractNumber
+{{/if}}
+{{#if parameters.contractNumbers}}
+	and ril.CONTRACT_NUMBER in (@contractNumbers)
+{{/if}}
+{{#if parameters.holderName}}
+	and pols.HOLDER_NAME in (@holderName)
+{{/if}}
+group by
+	ril.CONTRACT_NUMBER,
+	art.CODE_NAME,
+	art.PUBLISHED_VERSION,
+	pols.HOLDER_NAME,
+	pols.CURRENCY_CODE,
+	{{#unless parameters.groupByContract}}ril.ITEM_NO,{{/unless}}
+	ril.DUE_DATE,
+	ris.DEADLINE_DATE,
+	rsds.CREATED_DATE,
+	odr.RATE

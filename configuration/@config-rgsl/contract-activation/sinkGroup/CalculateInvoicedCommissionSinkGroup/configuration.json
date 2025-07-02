@@ -1,0 +1,59 @@
+{
+    "sinks": [
+        {
+            "name": "GetLastInvoicedCommission",
+            "fetch": {
+                "configuration": {
+                    "name": "GetLastInvoicedCommissionDataSource"
+                }
+            }
+        },
+        {
+            "name": "GetPolicyAaCommission",
+            "fetch": {
+                "configuration": {
+                    "name": "GetPolicyAaCommissionDataSource"
+                }
+            }
+        },
+        {
+            "name": "GetPolicyCommission",
+            "fetch": {
+                "configuration": {
+                    "name": "GetPolicyCommissionDataSource"
+                }
+            }
+        },
+        {
+            "name": "GetPaymentPlan",
+            "fetch": {
+                "configuration": {
+                    "name": "GetPaymentPlanDataSource"
+                }
+            }
+        },
+        {
+            "name": "GetPolicyInfo",
+            "fetch": {
+                "configuration": {
+                    "name": "GetPolicyInfoDataSource"
+                }
+            }
+        },
+        {
+            "name": "InvoicedCommissionASS",
+            "database": {
+                "tables": [
+                    "PAS_IMPL.P_INVOICED_COMMISSION"
+                ]
+            }
+        },
+        {
+            "name": "PostTransaction",
+            "class": {
+                "className": "Adacta.AdInsure.RGSL.Accounting.API.Shared.Subledger.Services.IPostingServiceRgsl, Adacta.AdInsure.RGSL.Accounting.API",
+                "methodName": "PostTransaction"
+            }
+        }
+    ]
+}

@@ -1,0 +1,99 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema",
+    "type": "object",
+    "additionalProperties": false,
+    "aiDataEnrichment": [
+        {
+            "name": "CheckInquiries",
+            "dataSource": "InquiriesDataSource"
+        }
+    ],
+    "aiValidation": {
+        "rule": "validationCollectiveLifeInsurancePolicy"
+    },
+    "aiAudit": {
+        "scope": "General"
+    },
+    "properties": {
+        "mainInsuranceConditions": {
+            "$ref": "component:MainInsuranceConditions"
+        },
+        "basicConditions": {
+            "allOf": [
+                {
+                    "$ref": "component:BasicConditions"
+                },
+                {
+                    "aiAdditionalContext": {
+                        "name": "issueFormCode",
+                        "$data": "/issueForm/code/issueFormCode",
+                        "source": "Body"
+                    }
+                }
+            ]
+        },
+        "additionalConditions": {
+            "$ref": "component:AdditionalConditions"
+        },
+        "policyHolder": {
+            "$ref": "component:PolicyHolder"
+        },
+        "risks": {
+            "$ref": "component:Risks"
+        },
+        "riskConditions": {
+            "$ref": "component:RiskConditions"
+        },
+        "risksPackages": {
+            "$ref": "component:RisksPackages"
+        },
+        "policyTerms": {
+            "$ref": "component:PolicyTerms"
+        },
+        "issueForm": {
+            "$ref": "component:IssueFormCollective"
+        },
+        "additionalServices": {
+            "$ref": "component:AdditionalServices"
+        },
+        "insuranceRules": {
+            "$ref": "component:InsuranceRules"
+        },
+        "initiator": {
+            "$ref": "component:Initiator"
+        },
+        "attachmentsPackage": {
+            "$ref": "component:AttachmentsPackage"
+        },
+        "paymentPlan": {
+            "$ref": "component:PaymentPlan"
+        },
+        "inquiriesList": {
+            "$ref": "component:InquiriesList"
+        },
+        "uwTriggers": {
+            "$ref": "component:UWTriggers"
+        },
+        "triggersConditions": {
+            "$ref": "component:UWTriggersConditions"
+        },
+        "technicalInformation": {
+            "$ref": "component:TechnicalInformation"
+        },
+        "commission": {
+            "$ref": "component:PolicyCommission"
+        },
+        "oldCommission": {
+            "type": "object"
+        },
+        "curator": {
+            "$ref": "component:Curator"
+        },
+        "productConfiguration": {
+            "$ref": "component:ProductConfigurationCorp"
+        },
+        "policyEnrichments": {
+            "$ref": "component:PolicyEnrichments"
+        }
+    }
+}

@@ -1,0 +1,7 @@
+select r.RATE_DATE, r.RATE from BFX_IMPL.BANK_KEY_RATE r
+where r.RATE_DATE between @dateFrom and @dateTo
+union
+select s.RATE_DATE, s.RATE from
+(select top 1 c.RATE_DATE, c.RATE from BFX_IMPL.BANK_KEY_RATE c
+where c.RATE_DATE < @dateFrom
+order by c.RATE_DATE desc) s

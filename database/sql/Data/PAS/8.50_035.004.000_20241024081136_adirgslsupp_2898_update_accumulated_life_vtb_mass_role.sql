@@ -1,0 +1,3 @@
+UPDATE CFG.APPLICATION_ROLE
+SET CODE_NAME = 'AccumulatedLifeVTBMass'
+WHERE CODE_NAME = 'AccumulatedLifeVTBmass'

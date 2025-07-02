@@ -1,0 +1,121 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+        "criteria": {
+            "type": "object",
+            "aiValidation": {
+                "rule": "searchCriteriaValidation"
+            },
+            "additionalProperties": false,
+            "properties": {
+                "refDocumentNo": {
+                    "type": "string"
+                },
+                "documentTypeId": {
+                    "type": "integer"
+                },
+                "payerName": {
+                    "type": "string"
+                },
+                "policyHolderCode": {
+                    "type": "string"
+                },
+                "paymentDateFrom": {
+                    "type": "string",
+                    "aiFormat": "date"
+                },
+                "paymentDateTo": {
+                    "type": "string",
+                    "aiFormat": "date"
+                },
+                "policyStartDateFrom": {
+                    "type": "string",
+                    "aiFormat": "date"
+                },
+                "policyStartDateTo": {
+                    "type": "string",
+                    "aiFormat": "date"
+                },
+                "transactionDateFrom": {
+                    "type": "string",
+                    "aiFormat": "date"
+                },
+                "transactionDateTo": {
+                    "type": "string",
+                    "aiFormat": "date"
+                },
+                "payAmountFrom": {
+                    "type": "number"
+                },
+                "payAmountTo": {
+                    "type": "number"
+                },
+                "currencyCode": {
+                    "type": "string"
+                },
+                "bankStatementItemNo": {
+                    "type": "string"
+                },
+                "bankStatementItemId": {
+                    "type": "integer"
+                },
+                "bankStatementItemIds": {
+                    "type": "array",
+                    "items": {
+                        "type": "integer"
+                    }
+                },
+                "bankStatementItemSourceIds": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "component:BankStatementItemSourceIdComponent"
+                    }
+                },
+                "productCode": {
+                    "type": "string"
+                },
+                "fetchCancellations": {
+                    "type": "boolean"
+                },
+                "isNotCancelled": {
+                    "type": "boolean"
+                },
+                "paymentCancellationId": {
+                    "type": "string"
+                },
+                "allocationIds": {
+                    "type": "array",
+                    "items": {
+                        "type": "integer"
+                    }
+                },
+                "paymentPlanDateFrom": {
+                    "type": "string",
+                    "aiFormat": "date"
+                },
+                "paymentPlanDateTo": {
+                    "type": "string",
+                    "aiFormat": "date"
+                }
+            }
+        },
+        "sort": {
+            "type": "array",
+            "additionalProperties": false,
+            "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                    "descending": {
+                        "type": "boolean"
+                    },
+                    "fieldName": {
+                        "type": "string"
+                    }
+                }
+            }
+        }
+    }
+}

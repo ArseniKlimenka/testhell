@@ -1,0 +1,10 @@
+﻿SELECT CR.COUNTRY_CODE, CR.ALFA_2, CR.COUNTRY_SHORT_NAME, CPC.PHONE_CODE
+  FROM BFX_IMPL.COUNTRY_REF CR,
+       BFX_IMPL.COUNTRY_PHONE_CODE CPC
+ WHERE CR.COUNTRY_CODE = CPC.COUNTRY_CODE
+{{#if parameters.countryPhoneCodeSearchText}}
+   AND (   CR.COUNTRY_SHORT_NAME LIKE @countryPhoneCodeSearchText
+        OR CR.COUNTRY_FULL_NAME LIKE @countryPhoneCodeSearchText
+        OR CPC.PHONE_CODE LIKE @countryPhoneCodeSearchText
+       )
+{{/if}}

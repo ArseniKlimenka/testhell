@@ -1,0 +1,196 @@
+{
+    "type": "Group",
+    "elements": [
+        {
+            "type": "DataGrid",
+            "elementId": "generalContractSearchTable",
+            "mode": "DataSource",
+            "pagination": {
+                "mode": "Regular",
+                "pageSizes": [
+                    5,
+                    10,
+                    15
+                ]
+            },
+            "selection": {
+                "mode": "Single",
+                "enableRowSelection": true,
+                "showCheckBox": true
+            },
+            "columns": [
+                {
+                    "title": "entityId",
+                    "name": "entityId",
+                    "sortable": true,
+                    "cellContent": {
+                        "type": "Link",
+                        "targetType": "Url",
+                        "openInNewTab": false,
+                        "value": {
+                            "mapping": "urlMapping",
+                            "$ref": "#"
+                        },
+                        "content": {
+                            "text": {
+                                "type": "OutputText",
+                                "textProperties": [
+                                    "bold"
+                                ],
+                                "template": "{{expr entityId}}",
+                                "value": {
+                                    "$ref": "#/properties/metadata"
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "title": "productName",
+                    "name": "productName",
+                    "sortable": false,
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "mapping": "productNameMapping",
+                            "$ref": "#"
+                        }
+                    }
+                },
+                {
+                    "title": "contractTypeDescription",
+                    "name": "contractTypeDescription",
+                    "sortable": false,
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/contractTypeDescription"
+                        }
+                    }
+                },
+                {
+                    "title": "stateCodeDescription",
+                    "name": "stateCodeDescription",
+                    "sortable": false,
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/stateCodeDescription"
+                        }
+                    }
+                },
+                {
+                    "title": "issueDate",
+                    "name": "issueDate",
+                    "sortable": true,
+                    "cellContent": {
+                        "type": "OutputText",
+                        "template": "{{#if issueDate}}{{expr issueDate 'd'}}{{/if}}",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/resultData"
+                        }
+                    }
+                },
+                {
+                    "title": "startDate",
+                    "name": "startDate",
+                    "sortable": true,
+                    "cellContent": {
+                        "type": "OutputText",
+                        "template": "{{#if startDate}}{{expr startDate 'd'}}{{/if}}",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/resultData"
+                        }
+                    }
+                },
+                {
+                    "title": "endDate",
+                    "name": "endDate",
+                    "sortable": true,
+                    "cellContent": {
+                        "type": "OutputText",
+                        "template": "{{#if endDate}}{{expr endDate 'd'}}{{/if}}",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/resultData"
+                        }
+                    }
+                },
+                {
+                    "title": "policyHolderName",
+                    "name": "policyHolderName",
+                    "sortable": true,
+                    "cellContent": {
+                        "type": "OutputText",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/policyHolderName"
+                        }
+                    }
+                },
+                {
+                    "title": "paymentFrequency",
+                    "name": "paymentFrequency",
+                    "sortable": true,
+                    "cellContent": {
+                        "type": "OutputText",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/paymentFrequencyWithCode/properties/paymentFrequencyDescription"
+                        }
+                    }
+                },
+                {
+                    "title": "amount",
+                    "name": "amount",
+                    "sortable": true,
+                    "cellContent": {
+                        "type": "OutputText",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/amount"
+                        }
+                    }
+                },
+                {
+                    "title": "amountWithAllRisks",
+                    "name": "amountWithAllRisks",
+                    "sortable": true,
+                    "cellContent": {
+                        "type": "OutputText",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/amountWithAllRisks"
+                        }
+                    }
+                },
+                {
+                    "title": "initiatorName",
+                    "name": "initiatorName",
+                    "sortable": true,
+                    "cellContent": {
+                        "type": "OutputText",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/initiatorName"
+                        }
+                    }
+                },
+                {
+                    "title": "initiatorOrganisationUnitName",
+                    "name": "initiatorOrganisationUnitName",
+                    "sortable": true,
+                    "cellContent": {
+                        "type": "OutputText",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/initiatorOrganisationUnitName"
+                        }
+                    }
+                }
+            ]
+        }
+    ]
+}

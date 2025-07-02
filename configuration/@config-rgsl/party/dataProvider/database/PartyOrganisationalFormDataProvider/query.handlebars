@@ -1,0 +1,6 @@
+﻿select CODE,
+       DESCRIPTION
+  from BFX_IMPL.OKOPF
+{{#if parameters.organisationalFormSearchText}}
+  WHERE DESCRIPTION LIKE @organisationalFormSearchText
+{{/if}}

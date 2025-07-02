@@ -1,0 +1,562 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema",
+    "type": "object",
+    "properties": {
+        "contractNumber": {
+            "type": "string",
+            "mapping": {
+                "path": "#/properties/attributes/properties/mainAttributes/properties/contract/properties/number"
+            }
+        },
+        "contractConfigurationName": {
+            "type": "string",
+            "mapping": {
+                "path": "#/properties/attributes/properties/mainAttributes/properties/contract/properties/configurationName"
+            }
+        },
+        "contractConfigurationVersion": {
+            "type": "string",
+            "mapping": {
+                "path": "#/properties/attributes/properties/mainAttributes/properties/contract/properties/configurationVersion"
+            }
+        },
+        "contractStateCode": {
+            "type": "string",
+            "mapping": {
+                "path": "#/properties/attributes/properties/mainAttributes/properties/contract/properties/stateCode"
+            }
+        },
+        "contractStateDescription": {
+            "type": "string",
+            "mapping": {
+                "path": "#/properties/attributes/properties/mainAttributes/properties/contract/properties/stateDescription"
+            }
+        },
+        "risk": {
+            "type": "object",
+            "properties": {
+                "riskCode": {
+                    "type": "string",
+                    "mapping": {
+                        "path": "#/properties/attributes/properties/mainAttributes/properties/selectedRisk/properties/riskCode"
+                    }
+                },
+                "riskInsuredSum": {
+                    "type": "number",
+                    "mapping": {
+                        "path": "#/properties/attributes/properties/mainAttributes/properties/selectedRisk/properties/riskInsuredSum"
+                    }
+                },
+                "riskShortDescription": {
+                    "type": "string",
+                    "mapping": {
+                        "path": "#/properties/attributes/properties/mainAttributes/properties/selectedRisk/properties/riskShortDescription"
+                    }
+                }
+            }
+        },
+        "risksInsuredSumByPeriod": {
+            "type": "array",
+            "mapping": {
+                "path": "#/properties/attributes/properties/mainAttributes/properties/risksInsuredSumByPeriod"
+            },
+            "items": {
+                "type": "object",
+                "properties": {
+                    "riskCode": {
+                        "type": "string",
+                        "mapping": {
+                            "path": "#/properties/riskCode"
+                        }
+                    },
+                    "periods": {
+                        "type": "array",
+                        "mapping": {
+                            "path": "#/properties/periods"
+                        },
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "insuredSum": {
+                                    "type": "number",
+                                    "mapping": {
+                                        "path": "#/properties/insuredSum"
+                                    }
+                                },
+                                "startDate": {
+                                    "type": "string",
+                                    "aiFormat": "date",
+                                    "mapping": {
+                                        "path": "#/properties/startDate"
+                                    }
+                                },
+                                "endDate": {
+                                    "type": "string",
+                                    "aiFormat": "date",
+                                    "mapping": {
+                                        "path": "#/properties/endDate"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "riskAdditionalAttributes": {
+            "type": "object",
+            "properties": {
+                "disabilityGroup": {
+                    "type": "string",
+                    "mapping": {
+                        "path": "#/properties/attributes/properties/mainAttributes/properties/riskAdditionalAttributes/properties/disabilityGroup"
+                    }
+                },
+                "numberOfPaidDays": {
+                    "type": "integer",
+                    "mapping": {
+                        "path": "#/properties/attributes/properties/mainAttributes/properties/riskAdditionalAttributes/properties/numberOfPaidDays"
+                    }
+                },
+                "injuries": {
+                    "type": "array",
+                    "mapping": {
+                        "path": "#/properties/attributes/properties/mainAttributes/properties/riskAdditionalAttributes/properties/injuries"
+                    },
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "injuryDetails": {
+                                "type": "object",
+                                "properties": {
+                                    "code": {
+                                        "type": "string",
+                                        "mapping": {
+                                            "path": "#/properties/injuryDetails/properties/code"
+                                        }
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "mapping": {
+                                            "path": "#/properties/injuryDetails/properties/description"
+                                        }
+                                    },
+                                    "defaultPymentPercentage": {
+                                        "type": "number",
+                                        "mapping": {
+                                            "path": "#/properties/injuryDetails/properties/defaultPymentPercentage"
+                                        }
+                                    },
+                                    "group": {
+                                        "type": "object",
+                                        "properties": {
+                                            "code": {
+                                                "type": "integer",
+                                                "mapping": {
+                                                    "path": "#/properties/injuryDetails/properties/group/properties/code"
+                                                }
+                                            },
+                                            "description": {
+                                                "type": "string",
+                                                "mapping": {
+                                                    "path": "#/properties/injuryDetails/properties/group/properties/description"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "subgroupLevel1": {
+                                        "type": "object",
+                                        "properties": {
+                                            "code": {
+                                                "type": "string",
+                                                "mapping": {
+                                                    "path": "#/properties/injuryDetails/properties/subgroupLevel1/properties/description"
+                                                }
+                                            },
+                                            "description": {
+                                                "type": "string",
+                                                "mapping": {
+                                                    "path": "#/properties/injuryDetails/properties/subgroupLevel1/properties/description"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "paymentInjuryPercentage": {
+                                "type": "number",
+                                "mapping": {
+                                    "path": "#/properties/paymentInjuryPercentage"
+                                }
+                            },
+                            "numberOfInjuries": {
+                                "type": "integer",
+                                "mapping": {
+                                    "path": "#/properties/numberOfInjuries"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "applicationInfo": {
+            "type": "object",
+            "properties": {
+                "applicantCode": {
+                    "type": "string",
+                    "mapping": {
+                        "path": "#/properties/attributes/properties/mainAttributes/properties/applicationInfo/applicant/properties/partyCode"
+                    }
+                },
+                "applicantFullName": {
+                    "type": "string",
+                    "mapping": {
+                        "path": "#/properties/attributes/properties/mainAttributes/properties/applicationInfo/applicant/properties/fullName"
+                    }
+                },
+                "applicantType": {
+                    "type": "string",
+                    "mapping": {
+                        "path": "#/properties/attributes/properties/mainAttributes/properties/applicationInfo/applicant/properties/partyType"
+                    }
+                },
+                "statementReceivedDate": {
+                    "type": "string",
+                    "format": "date",
+                    "mapping": {
+                        "path": "#/properties/attributes/properties/mainAttributes/properties/applicationInfo/properties/statementReceivedDate"
+                    }
+                },
+                "statementApplicationDate": {
+                    "type": "string",
+                    "format": "date",
+                    "mapping": {
+                        "path": "#/properties/attributes/properties/mainAttributes/properties/applicationInfo/properties/statementApplicationDate"
+                    }
+                }
+            }
+        },
+        "insuredPersonInfo": {
+            "type": "object",
+            "properties": {
+                "insuredPersonCode": {
+                    "type": "string",
+                    "mapping": {
+                        "path": "#/properties/attributes/properties/mainAttributes/properties/insuredPersonInfo/properties/insuredPerson/properties/partyCode"
+                    }
+                },
+                "insuredPersonFullName": {
+                    "type": "string",
+                    "mapping": {
+                        "path": "#/properties/attributes/properties/mainAttributes/properties/insuredPersonInfo/properties/insuredPerson/properties/fullName"
+                    }
+                },
+                "insuredPersonType": {
+                    "type": "string",
+                    "mapping": {
+                        "path": "#/properties/attributes/properties/mainAttributes/properties/insuredPersonInfo/properties/insuredPerson/properties/partyType"
+                    }
+                }
+            }
+        },
+        "policyHolderInfo": {
+            "type": "object",
+            "properties": {
+                "policyHolderCode": {
+                    "type": "string",
+                    "mapping": {
+                        "path": "#/properties/attributes/properties/mainAttributes/properties/policyHolderInfo/properties/policyHolder/properties/partyCode"
+                    }
+                },
+                "policyHolderFullName": {
+                    "type": "string",
+                    "mapping": {
+                        "path": "#/properties/attributes/properties/mainAttributes/properties/policyHolderInfo/properties/policyHolder/properties/fullName"
+                    }
+                },
+                "policyHolderType": {
+                    "type": "string",
+                    "mapping": {
+                        "path": "#/properties/attributes/properties/mainAttributes/properties/policyHolderInfo/properties/policyHolder/properties/partyType"
+                    }
+                }
+            }
+        },
+        "paymentAmountInDocCurrency": {
+            "type": "number",
+            "mapping": {
+                "path": "#/properties/attributes/properties/claimAmounts/properties/paymentAmountInDocCurrency"
+            }
+        },
+        "contractCurrency": {
+            "type": "number",
+            "mapping": {
+                "path": "#/properties/attributes/properties/claimAmounts/properties/contractCurrency"
+            }
+        },
+        "paymentAmountInRubCurrency": {
+            "type": "number",
+            "mapping": {
+                "path": "#/properties/attributes/properties/claimAmounts/properties/paymentAmountInRubCurrency"
+            }
+        },
+        "totalPaymentPercentage": {
+            "type": "number",
+            "mapping": {
+                "path": "#/properties/attributes/properties/claimAmounts/properties/paymentPercentage"
+            }
+        },
+        "diagnosis": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "string",
+                    "mapping": {
+                        "path": "#/properties/attributes/properties/mainAttributes/properties/diagnosis/properties/code"
+                    }
+                },
+                "description": {
+                    "type": "string",
+                    "mapping": {
+                        "path": "#/properties/attributes/properties/mainAttributes/properties/diagnosis/properties/description"
+                    }
+                }
+            }
+        },
+        "diagnosisNote": {
+            "type": "string",
+            "mapping": {
+                "path": "#/properties/attributes/properties/mainAttributes/properties/diagnosisNote"
+            }
+        },
+        "insuredEvent": {
+            "type": "object",
+            "properties": {
+                "insuredEventNumber": {
+                    "type": "number",
+                    "mapping": {
+                        "path": "#/properties/attributes/properties/mainAttributes/properties/insuredEvent/properties/insuredEventNumber"
+                    }
+                },
+                "insuredEventType": {
+                    "type": "object",
+                    "properties": {
+                        "code": {
+                            "type": "string",
+                            "mapping": {
+                                "path": "#/properties/attributes/properties/mainAttributes/properties/insuredEvent/properties/insuredEventType/properties/code"
+                            }
+                        },
+                        "description": {
+                            "type": "string",
+                            "mapping": {
+                                "path": "#/properties/attributes/properties/mainAttributes/properties/insuredEvent/properties/insuredEventType/properties/description"
+                            }
+                        }
+                    }
+                },
+                "insuredEventReason": {
+                    "type": "object",
+                    "properties": {
+                        "code": {
+                            "type": "string",
+                            "mapping": {
+                                "path": "#/properties/attributes/properties/mainAttributes/properties/insuredEvent/properties/insuredEventReason/properties/code"
+                            }
+                        },
+                        "description": {
+                            "type": "string",
+                            "mapping": {
+                                "path": "#/properties/attributes/properties/mainAttributes/properties/insuredEvent/properties/insuredEventReason/properties/description"
+                            }
+                        }
+                    }
+                },
+                "insuredEventDate": {
+                    "type": "string",
+                    "format": "date",
+                    "mapping": {
+                        "path": "#/properties/attributes/properties/mainAttributes/properties/insuredEvent/properties/insuredEventDate"
+                    }
+                }
+            }
+        },
+        "claimBeneficiaries": {
+            "type": "array",
+            "mapping": {
+                "path": "#/properties/attributes/properties/claimBeneficiaries"
+            },
+            "items": {
+                "type": "object",
+                "properties": {
+                    "partyCode": {
+                        "type": "string",
+                        "mapping": {
+                            "path": "#/properties/partyCode"
+                        }
+                    },
+                    "beneficiaryReason": {
+                        "type": "object",
+                        "properties": {
+                            "code": {
+                                "type": "string",
+                                "mapping": {
+                                    "path": "#/properties/beneficiaryReason/properties/code"
+                                }
+                            },
+                            "description": {
+                                "type": "string",
+                                "mapping": {
+                                    "path": "#/properties/beneficiaryReason/properties/description"
+                                }
+                            }
+                        }
+                    },
+                    "beneficiaryPaymentType": {
+                        "type": "object",
+                        "properties": {
+                            "code": {
+                                "type": "string",
+                                "mapping": {
+                                    "path": "#/properties/beneficiaryPaymentType/properties/code"
+                                }
+                            },
+                            "description": {
+                                "type": "string",
+                                "mapping": {
+                                    "path": "#/properties/beneficiaryPaymentType/properties/description"
+                                }
+                            }
+                        }
+                    },
+                    "bankAccount": {
+                        "type": "object",
+                        "properties": {
+                            "bankId": {
+                                "type": "string",
+                                "mapping": {
+                                    "path": "#/properties/bankAccount/properties/bankId"
+                                }
+                            },
+                            "bankName": {
+                                "type": "string",
+                                "mapping": {
+                                    "path": "#/properties/bankAccount/properties/bankName"
+                                }
+                            },
+                            "bankBic": {
+                                "type": "string",
+                                "mapping": {
+                                    "path": "#/properties/bankAccount/properties/bankBic"
+                                }
+                            },
+                            "bankCorrespondentAccount": {
+                                "type": "string",
+                                "mapping": {
+                                    "path": "#/properties/bankAccount/properties/bankCorrespondentAccount"
+                                }
+                            },
+                            "SWIFT": {
+                                "type": "string",
+                                "mapping": {
+                                    "path": "#/properties/bankAccount/properties/SWIFT"
+                                }
+                            },
+                            "IBAN": {
+                                "type": "string",
+                                "mapping": {
+                                    "path": "#/properties/bankAccount/properties/IBAN"
+                                }
+                            },
+                            "foreignBank": {
+                                "type": "boolean",
+                                "mapping": {
+                                    "path": "#/properties/bankAccount/properties/foreignBank"
+                                }
+                            },
+                            "currency": {
+                                "type": "object",
+                                "properties": {
+                                    "currencyCode": {
+                                        "type": "string",
+                                        "mapping": {
+                                            "path": "#/properties/bankAccount/properties/currency/properties/currencyCode"
+                                        }
+                                    },
+                                    "currencyDesc": {
+                                        "type": "string",
+                                        "mapping": {
+                                            "path": "#/properties/bankAccount/properties/currency/properties/currencyDesc"
+                                        }
+                                    },
+                                    "currencyNumericCode": {
+                                        "type": "string",
+                                        "mapping": {
+                                            "path": "#/properties/bankAccount/properties/currency/properties/currencyNumericCode"
+                                        }
+                                    }
+                                }
+                            },
+                            "number": {
+                                "type": "string",
+                                "mapping": {
+                                    "path": "#/properties/bankAccount/properties/number"
+                                }
+                            },
+                            "openingDate": {
+                                "type": "string",
+                                "aiFormat": "date",
+                                "mapping": {
+                                    "path": "#/properties/bankAccount/properties/openingDate"
+                                }
+                            },
+                            "closingDate": {
+                                "type": "string",
+                                "aiFormat": "date",
+                                "mapping": {
+                                    "path": "#/properties/bankAccount/properties/closingDate"
+                                }
+                            },
+                            "bankInn": {
+                                "type": "string",
+                                "mapping": {
+                                    "path": "#/properties/bankAccount/properties/bankInn"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "approvalConclusions": {
+            "type": "object",
+            "properties": {
+                "legalConclusion": {
+                    "type": "string",
+                    "mapping": {
+                        "path": "#/properties/attributes/properties/approvalConclusions/properties/legalConclusion"
+                    }
+                },
+                "securityConclusion": {
+                    "type": "string",
+                    "mapping": {
+                        "path": "#/properties/attributes/properties/approvalConclusions/properties/securityConclusion"
+                    }
+                }
+            }
+        },
+        "fixedExchangeRate": {
+            "type": "number",
+            "mapping": {
+                "path": "#/properties/attributes/properties/claimAmounts/properties/fixedExchangeRate"
+            }
+        },
+        "useFixedExchangeRate": {
+            "type": "boolean",
+            "mapping": {
+                "path": "#/properties/attributes/properties/claimAmounts/properties/useFixedExchangeRate"
+            }
+        }
+    }
+}

@@ -1,0 +1,41 @@
+{
+    "mainDataSource": "GetCommissionActWithoutDocumentDataSource",
+    "useBackgroundTaskWorker": true,
+    "restartable": true,
+    "enableAutomaticRecovery": true,
+    "sinks": [
+        {
+            "name": "GetCommissionAct",
+            "fetch": {
+                "configuration": {
+                    "name": "CommissionActRgslDataSource"
+                }
+            }
+        },
+        {
+            "name": "GetCommissionActProducts",
+            "fetch": {
+                "configuration": {
+                    "name": "CommissionActProductFilterDataSource"
+                }
+            }
+        },
+        {
+            "name": "CreateCommissionAct",
+            "document": {
+                "configuration": {
+                    "name": "CommissionAct",
+                    "version": "1"
+                }
+            }
+        },
+        {
+            "name": "MigrateActHistory",
+            "class": {
+                "className": "Adacta.AdInsure.RGSL.Accounting.API.Shared.Commission.Services.ICommissionActServiceApp, Adacta.AdInsure.RGSL.Accounting.API",
+                "methodName": "MigrateActHistory"
+            }
+        }
+    ],
+    "version": "1"
+}

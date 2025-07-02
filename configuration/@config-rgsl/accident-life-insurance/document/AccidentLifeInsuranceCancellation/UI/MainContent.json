@@ -1,0 +1,164 @@
+{
+    "id": "MainContent",
+    "type": "Group",
+    "formProperties": {
+        "events": {
+            "beforeSave": "LifeAmendmentCancellationBeforeSave",
+            "onLoad": "LifeAmendmentCancellationOnLoad",
+            "afterSave": "LifeAmendmentCancellationAfterSave"
+        }
+    },
+    "elements": [
+        {
+            "type": "TabLayout",
+            "elementId": "TabLayout",
+            "options": {
+                "fixedPosition": true,
+                "scrollableTabs": false,
+                "buttonsForSwitchingTabs": true
+            },
+            "elements": [
+                {
+                    "type": "Tab",
+                    "elementId": "tabAmendmentConditions",
+                    "title": "tabAmendmentConditions",
+                    "elements": [
+                        {
+                            "type": "Component",
+                            "metadata": {
+                                "autogenerate": true
+                            },
+                            "name": "BasicAmendmentConditions",
+                            "value": {
+                                "$ref": "#"
+                            }
+                        },
+                        {
+                            "type": "Component",
+                            "metadata": {
+                                "autogenerate": true
+                            },
+                            "name": "PaymentAmendmentConditions",
+                            "value": {
+                                "$ref": "#/properties/Body/properties/paymentAmendmentConditions"
+                            }
+                        },
+                        {
+                            "type": "Component",
+                            "metadata": {
+                                "autogenerate": true
+                            },
+                            "name": "EntityComments",
+                            "value": {
+                                "$ref": "#"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "type": "Tab",
+                    "elementId": "tabCancellationInquiry",
+                    "title": "CancellationInquiry",
+                    "elements": [
+                        {
+                            "type": "Component",
+                            "metadata": {
+                                "autogenerate": true
+                            },
+                            "name": "CancellationInquiries",
+                            "value": {
+                                "$ref": "#"
+                            }
+                        }
+                    ],
+                    "rule": {
+                        "effect": "HIDE",
+                        "condition": {
+                            "type": "FUNC",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ],
+                            "ruleFunction": "hideInquiries"
+                        }
+                    }
+                },
+                {
+                    "type": "Component",
+                    "elementId": "componentCancellationAttachments",
+                    "name": "CancellationAttachmentsTab",
+                    "value": {
+                        "$ref": "#"
+                    }
+                },
+                {
+                    "type": "Component",
+                    "name": "TaxDeduction",
+                    "value": {
+                        "$ref": "#"
+                    }
+                },
+                {
+                    "type": "Tab",
+                    "elementId": "tabHistory",
+                    "title": "History",
+                    "elements": [
+                        {
+                            "type": "Component",
+                            "metadata": {
+                                "autogenerate": true
+                            },
+                            "name": "DocumentActivityHistory",
+                            "value": {
+                                "$ref": "#"
+                            }
+                        },
+                        {
+                            "type": "Component",
+                            "metadata": {
+                                "autogenerate": true
+                            },
+                            "name": "DocumentStateHistory",
+                            "value": {
+                                "$ref": "#"
+                            }
+                        },
+                        {
+                            "type": "Component",
+                            "metadata": {
+                                "autogenerate": true
+                            },
+                            "name": "RelatedDocuments",
+                            "value": {
+                                "$ref": "#"
+                            }
+                        },
+                        {
+                            "type": "Component",
+                            "metadata": {
+                                "autogenerate": true
+                            },
+                            "name": "RelatedRequests",
+                            "value": {
+                                "$ref": "#"
+                            }
+                        }
+                    ],
+                    "rule": {
+                        "effect": "SHOW",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "tabHistoryVisibility",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    }
+                }
+            ]
+        }
+    ]
+}

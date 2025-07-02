@@ -1,0 +1,121 @@
+SELECT
+	en.ENDOWMENT_NUMBER,
+	en.ENDOWMENT_STATE,
+	en.CONTRACT_NUMBER,
+	en.CONTRACT_TYPE,
+	en.EVENT_DATE,
+	en.APPLICATION_DATE,
+	en.RECEIVED_DATE,
+	en.TYPE_CODE,
+	en.TYPE_DESCRIPTION,
+	en.REASON_CODE,
+	en.REASON_DESCRIPTION,
+	en.RISK_CODE,
+	en.RISK_DESCRIPTION,
+	pr.CODE AS PRODUCT_CODE,
+	pr.DESCRIPTION AS PRODUCT_NAME,
+	pr.PRODUCT_GROUP,
+	pSat.HOLDER_CODE,
+	hSat.CONFIGURATION_CODE_NAME AS HOLDER_TYPE,
+	pSat.HOLDER_NAME,
+	pSat.CURRENCY_CODE,
+	SUM(en.AMOUNT_CURR) AS AMOUNT_CURR,
+	SUM(en.AMOUNT_LC) AS AMOUNT_LC
+FROM (
+SELECT 
+	e.UNIVERSAL_DOCUMENT_NUMBER AS ENDOWMENT_NUMBER,
+	ps.CODE_NAME AS ENDOWMENT_STATE,
+	JSON_VALUE(e.BODY, '$.mainAttributes.contract.number') AS CONTRACT_NUMBER,
+	JSON_VALUE(e.BODY, '$.mainAttributes.contract.configurationName') AS CONTRACT_TYPE,
+	JSON_VALUE(e.BODY, '$.mainAttributes.applicationInfo.eventDate') AS EVENT_DATE,
+	JSON_VALUE(e.BODY, '$.mainAttributes.applicationInfo.statementApplicationDate') AS APPLICATION_DATE,
+	JSON_VALUE(e.BODY, '$.mainAttributes.applicationInfo.statementReceivedDate') AS RECEIVED_DATE,
+	JSON_VALUE(e.BODY, '$.mainAttributes.eventType.code') AS TYPE_CODE,
+	JSON_VALUE(e.BODY, '$.mainAttributes.eventType.description') AS TYPE_DESCRIPTION,
+	JSON_VALUE(e.BODY, '$.mainAttributes.eventReason.code') AS REASON_CODE,
+	JSON_VALUE(e.BODY, '$.mainAttributes.eventReason.description') AS REASON_DESCRIPTION,
+	JSON_VALUE(e.BODY, '$.mainAttributes.selectedRisk.riskCode') AS RISK_CODE,
+	JSON_VALUE(e.BODY, '$.mainAttributes.selectedRisk.riskShortDescription') AS RISK_DESCRIPTION,
+	pl.AMOUNT_CURR,
+	pl.AMOUNT_LC
+FROM BFX.UNIVERSAL_DOCUMENT e
+JOIN CFX.PUBLISHED_ARTIFACT art ON art.PUBLISHED_ARTIFACT_ID = e.PUBLISHED_ARTIFACT_ID
+JOIN CFG.PROCESS_STATE ps ON e.STATE_ID = ps.PROCESS_STATE_ID
+CROSS APPLY OPENJSON(e.BODY, '$.endowmentAmounts.paymentLines') WITH (
+	AMOUNT_CURR decimal(15,2) '$.lineAmountInContractCurrency',
+	AMOUNT_LC decimal(15,2) '$.lineAmountInRubCurrency'
+) pl
+WHERE art.CODE_NAME = 'Endowment'
+{{#if parameters.documentCode}}
+  AND e.UNIVERSAL_DOCUMENT_NUMBER = @documentCode
+{{/if}}
+{{#if parameters.documentState}}
+  AND ps.CODE_NAME = @documentState
+{{/if}}
+) en
+	JOIN PAS_IMPL.POLICY_HUB pHub ON pHub.CONTRACT_NUMBER = en.CONTRACT_NUMBER
+	JOIN PAS_IMPL.POLICY_SAT_LATEST pSat ON pSat.POLICY_HKEY = pHub.POLICY_HKEY
+	JOIN BFX_IMPL.PRODUCTS pr ON pr.CODE = pSat.PRODUCT_CODE
+	JOIN PTY_IMPL.PARTY_HUB hHub ON hHub.PARTY_CODE = pSat.HOLDER_CODE
+	JOIN PTY_IMPL.PARTY_INFO_SAT_LATEST hSat on hSat.PARTY_INFO_HKEY = hHub.PARTY_HKEY
+WHERE 1 = 1
+{{#if parameters.contractNumber}}
+  AND en.CONTRACT_NUMBER = @contractNumber
+{{/if}}
+{{#if parameters.riskCode}}
+  AND en.RISK_CODE = @riskCode
+{{/if}}
+{{#if parameters.eventTypeCode}}
+  AND en.TYPE_CODE = @eventTypeCode
+{{/if}}
+{{#if parameters.eventReasonCode}}
+  AND en.REASON_CODE = @eventReasonCode
+{{/if}}
+{{#if parameters.eventDateFrom}}
+  AND en.EVENT_DATE >= @eventDateFrom
+{{/if}}
+{{#if parameters.eventDateTo}}
+  AND en.EVENT_DATE <= @eventDateTo
+{{/if}}
+{{#if parameters.statementReceivedDateFrom}}
+  AND en.RECEIVED_DATE >= @statementReceivedDateFrom
+{{/if}}
+{{#if parameters.statementReceivedDateTo}}
+  AND en.RECEIVED_DATE <= @statementReceivedDateTo
+{{/if}}
+{{#if parameters.statementApplicationDateFrom}}
+  AND en.APPLICATION_DATE >= @statementApplicationDateFrom
+{{/if}}
+{{#if parameters.statementApplicationDateTo}}
+  AND en.APPLICATION_DATE <= @statementApplicationDateTo
+{{/if}}
+{{#if parameters.productGroup}}
+  AND pr.PRODUCT_GROUP = @productGroup
+{{/if}}
+{{#if parameters.productCode}}
+  AND pr.CODE = @productCode
+{{/if}}
+{{#if parameters.policyHolderCode}}
+  AND pSat.HOLDER_CODE = @policyHolderCode
+{{/if}}
+GROUP BY
+	en.ENDOWMENT_NUMBER,
+	en.ENDOWMENT_STATE,
+	en.CONTRACT_NUMBER,
+	en.CONTRACT_TYPE,
+	en.EVENT_DATE,
+	en.APPLICATION_DATE,
+	en.RECEIVED_DATE,
+	en.TYPE_CODE,
+	en.TYPE_DESCRIPTION,
+	en.REASON_CODE,
+	en.REASON_DESCRIPTION,
+	en.RISK_CODE,
+	en.RISK_DESCRIPTION,
+	pr.CODE,
+	pr.DESCRIPTION,
+	pr.PRODUCT_GROUP,
+	pSat.HOLDER_CODE,
+	hSat.CONFIGURATION_CODE_NAME,
+	pSat.HOLDER_NAME,
+	pSat.CURRENCY_CODE

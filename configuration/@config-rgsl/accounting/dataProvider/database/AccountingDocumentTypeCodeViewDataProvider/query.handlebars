@@ -1,0 +1,17 @@
+﻿SELECT 
+	dtcw.DOCUMENT_TYPE_CODE,
+	dtcw.CODE_VIEW
+FROM ACC_IMPL.DOCUMENT_TYPE_CODE_VIEW dtcw
+WHERE 1 = 1
+{{#if parameters.documentTypeCode}}
+	AND dtcw.DOCUMENT_TYPE_CODE = @documentTypeCode
+{{/if}}
+{{#if parameters.documentTypeCodes}}
+	AND dtcw.DOCUMENT_TYPE_CODE IN (@documentTypeCodes)
+{{/if}}
+{{#if parameters.viewCode}}
+	AND dtcw.CODE_VIEW = @viewCode
+{{/if}}
+{{#if parameters.viewCodes}}
+	AND dtcw.CODE_VIEW IN (@viewCodes)
+{{/if}}

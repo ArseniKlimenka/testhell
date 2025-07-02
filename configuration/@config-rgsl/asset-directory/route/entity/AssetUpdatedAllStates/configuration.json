@@ -1,0 +1,35 @@
+{
+    "entityType": "UniversalVersionedDocument",
+    "condition": {
+        "events": [
+            "Created",
+            "StatusChanged",
+            "Updated"
+        ],
+        "configuration": {
+            "names": [
+                "Asset",
+                "AssetChangeAmendment"
+            ]
+        }
+    },
+    "sinks": [
+        {
+            "name": "SaveAssetData",
+            "database": {
+                "tables": [
+                    "PAS_IMPL.ASSET_SAT",
+                    "PAS_IMPL.ASSET_HUB",
+                    "PAS_IMPL.ASSET_CONDITION_LINK",
+                    "PAS_IMPL.ASSET_CONDITION_SAT",
+                    "PAS_IMPL.ASSET_CONDITION_PRODUCT_VALUE",
+                    "PAS_IMPL.ASSET_AMENDMENT_SAT",
+                    "PAS_IMPL.ASSET_AMENDMENT_LINK",
+                    "PAS_IMPL.ASSET_ENTITY_HUB",
+                    "PAS_IMPL.ASSET_ENTITY_LINK"
+                ]
+            }
+        }
+    ],
+    "version": "1"
+}

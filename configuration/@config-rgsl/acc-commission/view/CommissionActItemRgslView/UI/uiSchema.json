@@ -1,0 +1,524 @@
+{
+    "id": "CommissionActItemUiSchema",
+    "type": "GridLayout",
+    "numberOfColumns": 4,
+    "elements": [
+        {
+            "type": "Section",
+            "sectionLevel": 1,
+            "label": "ItemSearchFilters",
+            "collapsing": {
+                "initial": true,
+                "enabled": true
+            },
+            "elements": [
+                {
+                    "type": "GridLayout",
+                    "numberOfColumns": 6,
+                    "width": 4,
+                    "elements": [
+                        {
+                            "type": "GridLayout",
+                            "numberOfColumns": 1,
+                            "width": 1,
+                            "stackContent": "Left",
+                            "fillAvailableSpace": true,
+                            "elements": [
+                                {
+                                    "type": "Input",
+                                    "control": "TextArea",
+                                    "enableResize": true,
+                                    "numberOfRows": 12,
+                                    "label": "DocumentNumbers",
+                                    "value": {
+                                        "$ref": "#/properties/request/properties/data/properties/criteria/properties/documentNumbersStr"
+                                    },
+                                    "width": 1,
+                                    "rule": {
+                                        "effect": "ENABLE_INITIAL",
+                                        "condition": {
+                                            "type": "FUNC",
+                                            "ruleFunction": "enableDocumentNumbers",
+                                            "value": [
+                                                {
+                                                    "$ref": "#"
+                                                }
+                                            ]
+                                        }
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "type": "GridLayout",
+                            "numberOfColumns": 4,
+                            "width": 5,
+                            "stackContent": "Rigth",
+                            "elements": [
+                                {
+                                    "type": "Input",
+                                    "label": "ReferenceNo",
+                                    "value": {
+                                        "$ref": "#/properties/request/properties/data/properties/criteria/properties/documentNumber"
+                                    },
+                                    "width": 1,
+                                    "rule": {
+                                        "effect": "ENABLE_INITIAL",
+                                        "condition": {
+                                            "type": "FUNC",
+                                            "ruleFunction": "enableDocumentNumber",
+                                            "value": [
+                                                {
+                                                    "$ref": "#"
+                                                }
+                                            ]
+                                        }
+                                    }
+                                },
+                                {
+                                    "type": "Input",
+                                    "label": "stateCode",
+                                    "width": 1,
+                                    "value": {
+                                        "$ref": "#/properties/request/properties/data/properties/criteria/properties/stateCode"
+                                    }
+                                },
+                                {
+                                    "type": "Input",
+                                    "label": "hasNoChanges",
+                                    "width": 1,
+                                    "value": {
+                                        "$ref": "#/properties/request/properties/data/properties/criteria/properties/hasNoChanges"
+                                    }
+                                },
+                                {
+                                    "type": "Input",
+                                    "multiple": true,
+                                    "control": "Dropdown",
+                                    "label": "StatusId",
+                                    "value": {
+                                        "$ref": "#/properties/request/properties/data/properties/criteria/properties/statusIds"
+                                    },
+                                    "width": 1
+                                },
+                                {
+                                    "type": "Input",
+                                    "label": "HolderName",
+                                    "value": {
+                                        "$ref": "#/properties/request/properties/data/properties/criteria/properties/polHolderName"
+                                    },
+                                    "width": 1
+                                },
+                                {
+                                    "type": "Input",
+                                    "control": "DateRange",
+                                    "dateFrom": {
+                                        "type": "Input",
+                                        "label": "StartDateFrom",
+                                        "width": 1,
+                                        "value": {
+                                            "$ref": "#/properties/request/properties/data/properties/criteria/properties/polStartDateFrom"
+                                        },
+                                        "control": "DatetimePicker"
+                                    },
+                                    "dateTo": {
+                                        "type": "Input",
+                                        "label": "StartDateTo",
+                                        "width": 1,
+                                        "value": {
+                                            "$ref": "#/properties/request/properties/data/properties/criteria/properties/polStartDateTo"
+                                        },
+                                        "control": "DatetimePicker"
+                                    },
+                                    "width": 2
+                                },
+                                {
+                                    "type": "Input",
+                                    "control": "DateRange",
+                                    "dateFrom": {
+                                        "type": "Input",
+                                        "label": "EndDateFrom",
+                                        "width": 1,
+                                        "value": {
+                                            "$ref": "#/properties/request/properties/data/properties/criteria/properties/polEndDateFrom"
+                                        },
+                                        "control": "DatetimePicker"
+                                    },
+                                    "dateTo": {
+                                        "type": "Input",
+                                        "label": "EndDateTo",
+                                        "width": 1,
+                                        "value": {
+                                            "$ref": "#/properties/request/properties/data/properties/criteria/properties/polEndDateTo"
+                                        },
+                                        "control": "DatetimePicker"
+                                    },
+                                    "width": 2
+                                },
+                                {
+                                    "type": "Input",
+                                    "label": "CurrencyCode",
+                                    "value": {
+                                        "$ref": "#/properties/request/properties/data/properties/criteria/properties/docCurrencyCode"
+                                    },
+                                    "width": 1
+                                },
+                                {
+                                    "type": "Input",
+                                    "label": "ProductCode",
+                                    "readOnly": true,
+                                    "value": {
+                                        "$ref": "#/properties/request/properties/data/properties/criteria/properties/productCode"
+                                    },
+                                    "width": 1
+                                },
+                                {
+                                    "type": "Component",
+                                    "name": "ProductCode",
+                                    "value": {
+                                        "$ref": "#/properties/request/properties/data/properties/criteria/properties/productCode"
+                                    }
+                                },
+                                {
+                                    "type": "Input",
+                                    "label": "SourceLineId",
+                                    "value": {
+                                        "$ref": "#/properties/request/properties/data/properties/criteria/properties/sourceLineId"
+                                    },
+                                    "width": 1
+                                },
+                                {
+                                    "type": "Input",
+                                    "label": "InsuredYearsCount",
+                                    "value": {
+                                        "$ref": "#/properties/request/properties/data/properties/criteria/properties/insuredYearsCount"
+                                    },
+                                    "width": 1
+                                },
+                                {
+                                    "type": "Input",
+                                    "label": "PaymentPeriod",
+                                    "value": {
+                                        "$ref": "#/properties/request/properties/data/properties/criteria/properties/paymentPeriod"
+                                    },
+                                    "width": 1
+                                },
+                                {
+                                    "type": "Input",
+                                    "label": "InsuranceYear",
+                                    "value": {
+                                        "$ref": "#/properties/request/properties/data/properties/criteria/properties/insuranceYear"
+                                    },
+                                    "width": 1
+                                },
+                                {
+                                    "type": "Input",
+                                    "label": "DueDate",
+                                    "value": {
+                                        "$ref": "#/properties/request/properties/data/properties/criteria/properties/dueDate"
+                                    },
+                                    "width": 1
+                                },
+                                {
+                                    "type": "Input",
+                                    "label": "PaymentFrequency",
+                                    "value": {
+                                        "$ref": "#/properties/request/properties/data/properties/criteria/properties/paymentFrequencyCode"
+                                    },
+                                    "width": 1
+                                },
+                                {
+                                    "type": "Input",
+                                    "label": "PaymentTransactionDate",
+                                    "value": {
+                                        "$ref": "#/properties/request/properties/data/properties/criteria/properties/paymentTransactionDate"
+                                    },
+                                    "width": 1
+                                },
+                                {
+                                    "type": "Input",
+                                    "label": "PaymentFrequency2",
+                                    "value": {
+                                        "$ref": "#/properties/request/properties/data/properties/criteria/properties/paymentFrequency2Code"
+                                    },
+                                    "width": 1
+                                },
+                                {
+                                    "type": "Input",
+                                    "label": "InstallmentType",
+                                    "value": {
+                                        "$ref": "#/properties/request/properties/data/properties/criteria/properties/installmentType"
+                                    },
+                                    "width": 1
+                                },
+                                {
+                                    "type": "Input",
+                                    "label": "PaymentLcAmount",
+                                    "value": {
+                                        "$ref": "#/properties/request/properties/data/properties/criteria/properties/paymentLcAmount"
+                                    },
+                                    "width": 1
+                                },
+                                {
+                                    "type": "Input",
+                                    "label": "Notes",
+                                    "value": {
+                                        "$ref": "#/properties/request/properties/data/properties/criteria/properties/notes"
+                                    },
+                                    "width": 1
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "Group",
+                    "width": 4,
+                    "elements": [
+                        {
+                            "type": "Group",
+                            "width": 3,
+                            "stackContent": "Left",
+                            "elements": [
+                                {
+                                    "type": "Button",
+                                    "label": "Search",
+                                    "submitOnEnter": true,
+                                    "onClick": [
+                                        {
+                                            "commandType": "executeOperation",
+                                            "operation": "SEARCH"
+                                        }
+                                    ],
+                                    "icon": {
+                                        "name": "Search",
+                                        "color": "BackgroundColor",
+                                        "size": "Small"
+                                    },
+                                    "value": {
+                                        "$ref": "#/properties/response/properties/data"
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Group",
+                            "width": 1,
+                            "stackContent": "Right",
+                            "elements": [
+                                {
+                                    "type": "Button",
+                                    "label": "Clear",
+                                    "backgroundColor": "Primary",
+                                    "fill": "Outline",
+                                    "labelColor": "Primary",
+                                    "onClick": [
+                                        {
+                                            "commandType": "raiseEvent",
+                                            "eventName": "ClearFilter"
+                                        },
+                                        {
+                                            "commandType": "executeAction",
+                                            "actionName": "clearFilter"
+                                        }
+                                    ],
+                                    "icon": {
+                                        "name": "Times",
+                                        "color": "Primary",
+                                        "size": "Small"
+                                    },
+                                    "value": {
+                                        "$ref": "#/properties/response/properties/data"
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "Group",
+            "width": 4,
+            "readOnly": true,
+            "stackContent": "Left",
+            "elements": [
+                {
+                    "type": "Button",
+                    "label": "AutoPopulate",
+                    "onClick": "autoPopulate",
+                    "icon": {
+                        "name": "Search-Plus",
+                        "color": "BackgroundColor",
+                        "size": "Small"
+                    },
+                    "rule": {
+                        "effect": "ENABLE_INITIAL",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "enableAutoPopulate",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "type": "Button",
+                    "label": "PopulateFromFile",
+                    "onClick": "populateFromFile",
+                    "icon": {
+                        "name": "Upload",
+                        "color": "BackgroundColor",
+                        "size": "Small"
+                    },
+                    "rule": {
+                        "effect": "ENABLE_INITIAL",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "enableAutoPopulateWithFile",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "type": "Button",
+                    "label": "ClearAct",
+                    "onClick": "clearAct",
+                    "icon": {
+                        "name": "Times",
+                        "color": "BackgroundColor",
+                        "size": "Small"
+                    },
+                    "rule": {
+                        "effect": "ENABLE_INITIAL",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "enableClear",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "type": "Button",
+                    "label": "AnnulItem",
+                    "onClick": "annulItem",
+                    "icon": {
+                        "name": "Trash",
+                        "color": "BackgroundColor",
+                        "size": "Small"
+                    },
+                    "rule": {
+                        "effect": "ENABLE_INITIAL",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "enableActItemsEditing",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "type": "Button",
+                    "label": "RenewItem",
+                    "onClick": "renewItem",
+                    "rule": {
+                        "effect": "ENABLE_INITIAL",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "enableActItemsEditing",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "type": "Button",
+                    "label": "ChangeCommRate",
+                    "onClick": "changeCommRate",
+                    "icon": {
+                        "name": "Edit",
+                        "color": "BackgroundColor",
+                        "size": "Small"
+                    },
+                    "rule": {
+                        "effect": "ENABLE_INITIAL",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "enableActItemsEditingNoSingle",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "type": "Group",
+            "width": 4,
+            "stackContent": "Left",
+            "elements": [
+                {
+                    "type": "Input",
+                    "label": "GroupByContract",
+                    "value": {
+                        "$ref": "#/properties/request/properties/data/properties/criteria/properties/groupByContract"
+                    },
+                    "width": 1,
+                    "onValueChanged": [
+                        {
+                            "commandType": "raiseEvent",
+                            "eventName": "GROUP_BY_CONTRACT_CHANGED",
+                            "parameters": {
+                                "documentView": "view"
+                            }
+                        },
+                        {
+                            "commandType": "executeOperation",
+                            "operation": "SEARCH"
+                        }
+                    ],
+                    "rule": {
+                        "effect": "ENABLE_INITIAL",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "enableGroupByContract",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    },
+                    "elementId": "groupByContract"
+                }
+            ]
+        },
+        {
+            "type": "Component",
+            "name": "CommissionActItemResultComponent",
+            "value": {
+                "$ref": "#"
+            }
+        }
+    ]
+}

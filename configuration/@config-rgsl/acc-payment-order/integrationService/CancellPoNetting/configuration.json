@@ -1,0 +1,82 @@
+{
+    "sinks": [
+        {
+            "name": "GetCurrentPaymentOrder",
+            "fetch": {
+                "configuration": {
+                    "name": "GetPaymentOrderGeneralDataSource"
+                }
+            }
+        },
+        {
+            "name": "GetAllocations",
+            "fetch": {
+                "configuration": {
+                    "name": "AllocationDataSource"
+                }
+            }
+        },
+        {
+            "name": "CancelAllocations",
+            "class": {
+                "className": "Adacta.AdInsure.RGSL.Accounting.API.Shared.CashFlow.Allocation.Services.IAllocationServiceAppRGSL, Adacta.AdInsure.RGSL.Accounting.API",
+                "methodName": "Cancel"
+            }
+        },
+        {
+            "name": "ValidateBankStatementItemsInfo",
+            "fetch": {
+                "configuration": {
+                    "name": "BankStatementItemDatabaseDataSource"
+                }
+            }
+        },
+        {
+            "name": "CreatePaymentOrder",
+            "document": {
+                "configuration": {
+                    "name": "PaymentOrder",
+                    "version": "1"
+                }
+            },
+            "executeAs": "System"
+        },
+        {
+            "name": "UpdateSourcePaymentOrder",
+            "document": {
+                "configuration": {
+                    "name": "PaymentOrder",
+                    "version": "1"
+                },
+                "allowUpdating": {
+                    "inStates": [
+                        "Paid"
+                    ]
+                }
+            },
+            "executeAs": "System"
+        },
+        {
+            "name": "CancelBankStatementItems",
+            "class": {
+                "className": "Adacta.AdInsure.RGSL.Accounting.API.Shared.CashFlow.BankStatement.Services.IBankStatementServiceAppRGSL, Adacta.AdInsure.RGSL.Accounting.API",
+                "methodName": "Cancel"
+            }
+        },
+        {
+            "name": "SetCancelledNettingState",
+            "documentTransition": {
+                "transition": {
+                    "transitionName": "Paid_to_PaidCancelledNetting",
+                    "configurationName": "PaymentOrder",
+                    "configurationVersion": "1"
+                }
+            },
+            "executeAs": "System"
+        }
+    ],
+    "responses": [
+        200,
+        422
+    ]
+}

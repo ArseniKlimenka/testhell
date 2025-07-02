@@ -1,0 +1,99 @@
+{
+    "processType": "LifeInsuranceInquiry",
+    "actors": [
+        "GeneralBackOffice",
+        "Agent",
+        "System"
+    ],
+    "initialState": "Draft",
+    "states": [
+        {
+            "name": "Draft",
+            "operations": [
+                {
+                    "name": "Save",
+                    "exclusiveToAssignedUser": true
+                }
+            ]
+        },
+        {
+            "name": "Issued",
+            "operations": []
+        },
+        {
+            "name": "Cancelled",
+            "operations": [
+                {
+                    "name": "Save",
+                    "exclusiveToAssignedUser": false
+                }
+            ]
+        }
+    ],
+    "transitions": [
+        {
+            "name": "Draft_to_Issued",
+            "from": "Draft",
+            "to": "Issued",
+            "exclusiveToAssignedUser": true,
+            "actionToRunBefore": "VerificationActionToRunBefore",
+            "whenBlocked": "DisplayNormally"
+        },
+        {
+            "name": "Draft_to_Issued_System",
+            "from": "Draft",
+            "to": "Issued",
+            "exclusiveToAssignedUser": false
+        },
+        {
+            "name": "Draft_to_Cancelled",
+            "from": "Draft",
+            "to": "Cancelled",
+            "exclusiveToAssignedUser": true,
+            "actionToRunBefore": "VerificationActionToRunBefore",
+            "whenBlocked": "DisplayNormally"
+        },
+        {
+            "name": "Draft_to_Cancelled_System",
+            "from": "Draft",
+            "to": "Cancelled",
+            "exclusiveToAssignedUser": false
+        },
+        {
+            "name": "Cancelled_to_Draft",
+            "from": "Cancelled",
+            "to": "Draft",
+            "exclusiveToAssignedUser": false,
+            "actionToRunBefore": "VerificationActionToRunBefore",
+            "whenBlocked": "DisplayNormally"
+        },
+        {
+            "name": "Cancelled_to_Draft_Operations",
+            "from": "Cancelled",
+            "to": "Draft",
+            "exclusiveToAssignedUser": false,
+            "actionToRunBefore": "VerificationActionToRunBefore",
+            "whenBlocked": "DisplayNormally"
+        },
+        {
+            "name": "Cancelled_to_Draft_System",
+            "from": "Cancelled",
+            "to": "Draft",
+            "exclusiveToAssignedUser": false
+        },
+        {
+            "name": "Issued_to_Draft",
+            "from": "Issued",
+            "to": "Draft",
+            "exclusiveToAssignedUser": false,
+            "actionToRunBefore": "VerificationActionToRunBefore",
+            "whenBlocked": "DisplayNormally"
+        },
+        {
+            "name": "Issued_to_Draft_System",
+            "from": "Issued",
+            "to": "Draft",
+            "exclusiveToAssignedUser": false
+        }
+    ]
+}

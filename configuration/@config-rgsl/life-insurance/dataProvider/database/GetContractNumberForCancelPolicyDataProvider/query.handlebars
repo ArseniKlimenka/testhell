@@ -1,0 +1,86 @@
+﻿select
+  a.CONTRACT_NUMBER,
+  a.CODE_NAME CONFIGURATION_NAME,
+  min(a.DEADLINE_DATE) DEADLINE_DATE
+from
+(
+  select
+    CONTRACT_NUMBER,
+    CODE_NAME,
+    DUE_DATE,
+    min(DEADLINE_DATE) DEADLINE_DATE,
+    sum(OPEN_AMOUNT) OPEN_AMOUNT
+  from
+  (
+    select
+      agr.CONTRACT_NUMBER,
+      art.CODE_NAME,
+      lnk.DUE_DATE,
+      dateadd(day, 90, sat.DEADLINE_DATE) DEADLINE_DATE,
+      sat.AMOUNT OPEN_AMOUNT
+    from
+      PAS_IMPL.POLICY_HUB hub
+        inner join
+      PAS_IMPL.POLICY_SAT_LATEST pol
+        on hub.POLICY_HKEY = pol.POLICY_HKEY
+        inner join
+      PAS.CONTRACT agr
+        on hub.CONTRACT_NUMBER = agr.CONTRACT_NUMBER
+        inner join
+      CFX.PUBLISHED_ARTIFACT art
+        on agr.PUBLISHED_ARTIFACT_ID = art.PUBLISHED_ARTIFACT_ID
+        inner join
+      CFG.PROCESS_STATE pst
+        on agr.STATE_ID = pst.PROCESS_STATE_ID and pst.CODE_NAME = 'Activated'
+        inner join
+      PAS_IMPL.P_PAYMENT_PLAN_LINK lnk 
+        on hub.POLICY_HKEY = lnk.POLICY_HKEY
+        inner join 
+      PAS_IMPL.P_PAYMENT_PLAN_SAT_LATEST sat 
+        on lnk.P_PAYMENT_PLAN_HKEY = sat.P_PAYMENT_PLAN_HKEY
+    where pol.PRODUCT_CODE not in (@codes)
+    union all
+    select
+      alc.DOCUMENT_NO CONTRACT_NUMBER,
+      art.CODE_NAME,
+      alp.DUE_DATE,
+      NULL DEADLINE_DATE,
+      -(mat.DOC_AMOUNT + mat.TOLERANCE_DOC_AMOUNT) OPEN_AMOUNT
+    from
+      ACC_IMPL.ALLOCATION alc
+        inner join
+      PAS_IMPL.POLICY_HUB hub
+        on alc.DOCUMENT_NO = hub.CONTRACT_NUMBER
+        inner join
+      PAS_IMPL.POLICY_SAT_LATEST pol
+        on hub.POLICY_HKEY = pol.POLICY_HKEY
+        inner join
+      PAS.CONTRACT agr
+        on alc.DOCUMENT_NO = agr.CONTRACT_NUMBER
+        inner join
+      CFX.PUBLISHED_ARTIFACT art
+        on agr.PUBLISHED_ARTIFACT_ID = art.PUBLISHED_ARTIFACT_ID
+        inner join
+      CFG.PROCESS_STATE pst
+        on agr.STATE_ID = pst.PROCESS_STATE_ID and pst.CODE_NAME = 'Activated'
+        inner join
+      ACC_IMPL.ALLOCATION_POLICY alp 
+        on alc.ALLOCATION_ID = alp.ALLOCATION_ID
+        inner join 
+      ACC_IMPL.MATCHING mat 
+        on mat.ALLOCATION_ID = alc.ALLOCATION_ID
+    where pol.PRODUCT_CODE not in (@codes)
+  ) t
+  group by 
+    t.CONTRACT_NUMBER,
+    t.CODE_NAME,
+    t.DUE_DATE
+) a
+where a.DEADLINE_DATE < getdate()
+  and a.OPEN_AMOUNT > 0
+  {{#if parameters.contractNumber}}
+  and a.CONTRACT_NUMBER = @contractNumber
+  {{/if}}
+group by
+  a.CONTRACT_NUMBER,
+  a.CODE_NAME

@@ -1,0 +1,23 @@
+select
+	pty.PARTY_ID,
+	ptyh.PARTY_CODE,
+	pty.BODY
+from
+	pty_impl.PARTY_HUB ptyh
+	inner join pty.PARTY pty on pty.PARTY_CODE = ptyh.PARTY_CODE
+	inner join pty_impl.PARTY_INFO_SAT_LATEST pisl on pisl.PARTY_INFO_HKEY = ptyh.PARTY_HKEY
+where 1=1
+{{#if parameters.partyCode}}
+	and ptyh.PARTY_CODE = @partyCode
+{{/if}}
+{{#if parameters.fullName}}
+	and pisl.FULL_NAME = @fullName
+{{/if}}
+{{#if parameters.bankAccountNumber}}
+    and JSON_VALUE(pty.BODY, '$.partyBankAccounts[0].number') = @bankAccountNumber
+{{/if}}
+{{#if parameters.showDuplicates}}
+   and pisl.DUPLICATE_MASTER_NUMBER IS NOT NULL
+{{else}}
+   and pisl.DUPLICATE_MASTER_NUMBER IS NULL
+{{/if}}

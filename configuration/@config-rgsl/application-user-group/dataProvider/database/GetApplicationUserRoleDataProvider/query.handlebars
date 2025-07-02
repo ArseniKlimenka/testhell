@@ -1,0 +1,9 @@
+﻿with codes (code) AS
+(
+SELECT VALUE FROM OPENJSON(@code)
+)
+
+select ar.APPLICATION_ROLE_ID,
+      ar.CODE_NAME
+from CFG.APPLICATION_ROLE ar
+where ar.CODE_NAME in  (select code from codes)

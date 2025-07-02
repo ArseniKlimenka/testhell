@@ -1,0 +1,48 @@
+﻿SELECT EXCEL_ROW_NUMBER
+      ,PRODUCT_CODE
+      ,STRATEGY_CODE
+      ,ISSUE_DATE_FROM
+      ,ISSUE_DATE_TO
+      ,ISSUE_DATE_STR
+      ,PRODUCT_DESCRIPTION
+      ,STRATEGY_DESCRIPTION_FULL
+      ,PURCHASE_DATE
+      ,DISCHARGE_DATE
+      ,DID_BEGIN_DATE
+      ,DID_END_DATE
+      ,COUPON_PERIODS
+      ,WINDOW_START_DATE
+      ,WINDOW_END_DATE
+      ,IMPORT_DOCUMENT_ID
+      ,CONF_VERSION
+      ,LOADED_BY
+      ,LOAD_DATE
+FROM BFX_IMPL.STRATEGY_INSTRUMENTS si
+WHERE 1 = 1
+{{#if parameters.productCode}}
+	AND si.PRODUCT_CODE = @productCode
+{{/if}}
+{{#if parameters.issueDate}}
+	AND @issueDate >= si.ISSUE_DATE_FROM AND @issueDate <= si.ISSUE_DATE_TO
+{{/if}}
+{{#if parameters.issueDateFrom}}
+	AND si.ISSUE_DATE_FROM >= @issueDate
+{{/if}}
+{{#if parameters.issueDateTo}}
+	AND @issueDate <= si.ISSUE_DATE_TO
+{{/if}}
+{{#if parameters.importDocumentId}}
+	AND si.IMPORT_DOCUMENT_ID = @importDocumentId
+{{/if}}
+{{#if parameters.maxVersion}}
+	AND si.CONF_VERSION = (SELECT MAX(CONF_VERSION) MAX_VERSION FROM BFX_IMPL.STRATEGY_INSTRUMENTS)
+{{/if}}
+{{#if parameters.strategyCode}}
+	AND si.STRATEGY_CODE = @strategyCode
+{{/if}}
+{{#if parameters.version}}
+	AND si.CONF_VERSION = @version
+{{/if}}
+{{#if parameters.productDescription}}
+	AND si.PRODUCT_DESCRIPTION LIKE '%' + @productDescription + '%'
+{{/if}}

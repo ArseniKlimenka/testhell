@@ -1,0 +1,697 @@
+{
+    "description": "Create test parties, agent, agent agreement",
+    "steps": [
+        {
+            "code": "CheckAlreadyExecuted",
+            "description": "Check the test to not be executed twice",
+            "executor": {
+                "module": "./0.alreadyExecuted.js",
+                "function": "alreadyExecuted"
+            }
+        },
+        {
+            "code": "CreateLegalEntities",
+            "description": "Create LegalEntity parties",
+            "actor": "PartyEditor",
+            "requests": [
+                {
+                    "code": "PSB",
+                    "path": "../../../../../legal-entity/masterEntity/LegalEntity/examples/importData/PSB.json"
+                },
+                {
+                    "code": "BFKO",
+                    "path": "../../../../../legal-entity/masterEntity/LegalEntity/examples/importData/BFKO.json"
+                },
+                {
+                    "code": "RGSL",
+                    "path": "../../../../../legal-entity/masterEntity/LegalEntity/examples/importData/RGSL.json"
+                },
+                {
+                    "code": "DEMO",
+                    "path": "../../../../../legal-entity/masterEntity/LegalEntity/examples/importData/DEMO.json"
+                },
+                {
+                    "code": "AKCEPT",
+                    "path": "../../../../../legal-entity/masterEntity/LegalEntity/examples/importData/AKCEPT.json"
+                },
+                {
+                    "code": "AKBARS",
+                    "path": "../../../../../legal-entity/masterEntity/LegalEntity/examples/importData/AKBARS.json"
+                },
+                {
+                    "code": "ZENIT",
+                    "path": "../../../../../legal-entity/masterEntity/LegalEntity/examples/importData/ZENIT.json"
+                },
+                {
+                    "code": "BFKOAUTO",
+                    "path": "../../../../../legal-entity/masterEntity/LegalEntity/examples/importData/BFKOAUTO.json"
+                },
+                {
+                    "code": "PSBVIP",
+                    "path": "../../../../../legal-entity/masterEntity/LegalEntity/examples/importData/PSBVIP.json"
+                },
+                {
+                    "code": "OAS",
+                    "path": "../../../../../legal-entity/masterEntity/LegalEntity/examples/importData/OAS.json"
+                },
+                {
+                    "code": "MINBANK",
+                    "path": "../../../../../legal-entity/masterEntity/LegalEntity/examples/importData/MINBANK.json"
+                },
+                {
+                    "code": "SMP",
+                    "path": "../../../../../legal-entity/masterEntity/LegalEntity/examples/importData/SMP.json"
+                },
+                {
+                    "code": "SOVKOMBANK",
+                    "path": "../../../../../legal-entity/masterEntity/LegalEntity/examples/importData/SOVKOMBANK.json"
+                },
+                {
+                    "code": "ROSBANK",
+                    "path": "../../../../../legal-entity/masterEntity/LegalEntity/examples/importData/ROSBANK.json"
+                },
+                {
+                    "code": "REINVEST",
+                    "path": "../../../../../legal-entity/masterEntity/LegalEntity/examples/importData/REINVEST.json"
+                },
+                {
+                    "code": "LIFEINVEST",
+                    "path": "../../../../../legal-entity/masterEntity/LegalEntity/examples/importData/LIFEINVEST.json"
+                },
+                {
+                    "code": "VTB",
+                    "path": "../../../../../legal-entity/masterEntity/LegalEntity/examples/importData/VTB.json"
+                },
+                {
+                    "code": "VTBMASS",
+                    "path": "../../../../../legal-entity/masterEntity/LegalEntity/examples/importData/VTBMASS.json"
+                },
+                {
+                    "code": "POCHTABANK",
+                    "path": "../../../../../legal-entity/masterEntity/LegalEntity/examples/importData/POCHTABANK.json"
+                },
+                {
+                    "code": "UBRRMASS",
+                    "path": "../../../../../legal-entity/masterEntity/LegalEntity/examples/importData/UBRRMASS.json"
+                }
+            ],
+            "executor": {
+                "module": "1.createLegalEntities.js",
+                "function": "createLegalEntities"
+            }
+        },
+        {
+            "code": "CreateNaturalPersons",
+            "description": "Create NaturalPerson parties",
+            "actor": "PartyEditor",
+            "requests": [
+                {
+                    "code": "PolicyHolder",
+                    "path": "../../../../../natural-person/masterEntity/NaturalPerson/examples/importData/PolicyHolder.json"
+                },
+                {
+                    "code": "Administrator",
+                    "path": "../../../../../natural-person/masterEntity/NaturalPerson/examples/importData/Administrator.json"
+                },
+                {
+                    "code": "Saler.PSB.MASS",
+                    "path": "../../../../../natural-person/masterEntity/NaturalPerson/examples/importData/Saler.PSB.MASS.json"
+                },
+                {
+                    "code": "Saler.PSB.Afflyent",
+                    "path": "../../../../../natural-person/masterEntity/NaturalPerson/examples/importData/Saler.PSB.Afflyent.json"
+                },
+                {
+                    "code": "OPERU",
+                    "path": "../../../../../natural-person/masterEntity/NaturalPerson/examples/importData/OPERU.json"
+                },
+                {
+                    "code": "Underwriter",
+                    "path": "../../../../../natural-person/masterEntity/NaturalPerson/examples/importData/Underwriter.json"
+                },
+                {
+                    "code": "BFKOinitiator",
+                    "path": "../../../../../natural-person/masterEntity/NaturalPerson/examples/importData/BFKOinitiator.json"
+                },
+                {
+                    "code": "Saler.Demo",
+                    "path": "../../../../../natural-person/masterEntity/NaturalPerson/examples/importData/Saler.Demo.json"
+                },
+                {
+                    "code": "AKCEPTinitiator",
+                    "path": "../../../../../natural-person/masterEntity/NaturalPerson/examples/importData/AKCEPTinitiator.json"
+                },
+                {
+                    "code": "AKBARSinitiator",
+                    "path": "../../../../../natural-person/masterEntity/NaturalPerson/examples/importData/AKBARSinitiator.json"
+                },
+                {
+                    "code": "ZENITinitiator",
+                    "path": "../../../../../natural-person/masterEntity/NaturalPerson/examples/importData/ZENITinitiator.json"
+                },
+                {
+                    "code": "BFKOAUTOinitiator",
+                    "path": "../../../../../natural-person/masterEntity/NaturalPerson/examples/importData/BFKOAUTOinitiator.json"
+                },
+                {
+                    "code": "PSBVIPinitiator",
+                    "path": "../../../../../natural-person/masterEntity/NaturalPerson/examples/importData/PSBVIPinitiator.json"
+                },
+                {
+                    "code": "OASinitiator",
+                    "path": "../../../../../natural-person/masterEntity/NaturalPerson/examples/importData/OASinitiator.json"
+                },
+                {
+                    "code": "MINBANKinitiator",
+                    "path": "../../../../../natural-person/masterEntity/NaturalPerson/examples/importData/MINBANKinitiator.json"
+                },
+                {
+                    "code": "SMPinitiator",
+                    "path": "../../../../../natural-person/masterEntity/NaturalPerson/examples/importData/SMPinitiator.json"
+                },
+                {
+                    "code": "SOVKOMBANKinitiator",
+                    "path": "../../../../../natural-person/masterEntity/NaturalPerson/examples/importData/SOVKOMBANKinitiator.json"
+                },
+                {
+                    "code": "ROSBANKinitiator",
+                    "path": "../../../../../natural-person/masterEntity/NaturalPerson/examples/importData/ROSBANKinitiator.json"
+                },
+                {
+                    "code": "REINVESTinitiator",
+                    "path": "../../../../../natural-person/masterEntity/NaturalPerson/examples/importData/REINVESTinitiator.json"
+                },
+                {
+                    "code": "LIFEINVESTinitiator",
+                    "path": "../../../../../natural-person/masterEntity/NaturalPerson/examples/importData/LIFEINVESTinitiator.json"
+                },
+                {
+                    "code": "VTBinitiator",
+                    "path": "../../../../../natural-person/masterEntity/NaturalPerson/examples/importData/VTBinitiator.json"
+                },
+                {
+                    "code": "VTBMASSinitiator",
+                    "path": "../../../../../natural-person/masterEntity/NaturalPerson/examples/importData/VTBMASSinitiator.json"
+                },
+                {
+                    "code": "POCHTABANKinitiator",
+                    "path": "../../../../../natural-person/masterEntity/NaturalPerson/examples/importData/POCHTABANKinitiator.json"
+                },
+                {
+                    "code": "UBRRMASSinitiator",
+                    "path": "../../../../../natural-person/masterEntity/NaturalPerson/examples/importData/UBRRMASSinitiator.json"
+                }
+            ],
+            "executor": {
+                "module": "2.createNaturalPersons.js",
+                "function": "createNaturalPersons"
+            }
+        },
+        {
+            "code": "CreatePartners",
+            "description": "Create Partner service providers",
+            "actor": "OrganisationAdministrator",
+            "requests": [
+                {
+                    "code": "PSB",
+                    "path": "../../../../../partner/masterEntity/Partner/examples/importData/PSB.json"
+                },
+                {
+                    "code": "BFKO",
+                    "path": "../../../../../partner/masterEntity/Partner/examples/importData/BFKO.json"
+                },
+                {
+                    "code": "RGSL",
+                    "path": "../../../../../partner/masterEntity/Partner/examples/importData/RGSL.json"
+                },
+                {
+                    "code": "DEMO",
+                    "path": "../../../../../partner/masterEntity/Partner/examples/importData/DEMO.json"
+                },
+                {
+                    "code": "AKCEPT",
+                    "path": "../../../../../partner/masterEntity/Partner/examples/importData/AKCEPT.json"
+                },
+                {
+                    "code": "AKBARS",
+                    "path": "../../../../../partner/masterEntity/Partner/examples/importData/AKBARS.json"
+                },
+                {
+                    "code": "ZENIT",
+                    "path": "../../../../../partner/masterEntity/Partner/examples/importData/ZENIT.json"
+                },
+                {
+                    "code": "BFKOAUTO",
+                    "path": "../../../../../partner/masterEntity/Partner/examples/importData/BFKOAUTO.json"
+                },
+                {
+                    "code": "PSBVIP",
+                    "path": "../../../../../partner/masterEntity/Partner/examples/importData/PSBVIP.json"
+                },
+                {
+                    "code": "OAS",
+                    "path": "../../../../../partner/masterEntity/Partner/examples/importData/OAS.json"
+                },
+                {
+                    "code": "MINBANK",
+                    "path": "../../../../../partner/masterEntity/Partner/examples/importData/MINBANK.json"
+                },
+                {
+                    "code": "SMP",
+                    "path": "../../../../../partner/masterEntity/Partner/examples/importData/SMP.json"
+                },
+                {
+                    "code": "SOVKOMBANK",
+                    "path": "../../../../../partner/masterEntity/Partner/examples/importData/SOVKOMBANK.json"
+                },
+                {
+                    "code": "ROSBANK",
+                    "path": "../../../../../partner/masterEntity/Partner/examples/importData/ROSBANK.json"
+                },
+                {
+                    "code": "REINVEST",
+                    "path": "../../../../../partner/masterEntity/Partner/examples/importData/REINVEST.json"
+                },
+                {
+                    "code": "LIFEINVEST",
+                    "path": "../../../../../partner/masterEntity/Partner/examples/importData/LIFEINVEST.json"
+                },
+                {
+                    "code": "VTB",
+                    "path": "../../../../../partner/masterEntity/Partner/examples/importData/VTB.json"
+                },
+                {
+                    "code": "VTBMASS",
+                    "path": "../../../../../partner/masterEntity/Partner/examples/importData/VTBMASS.json"
+                },
+                {
+                    "code": "POCHTABANK",
+                    "path": "../../../../../partner/masterEntity/Partner/examples/importData/POCHTABANK.json"
+                },
+                {
+                    "code": "UBRRMASS",
+                    "path": "../../../../../partner/masterEntity/Partner/examples/importData/UBRRMASS.json"
+                }
+            ],
+            "executor": {
+                "module": "3.createPartners.js",
+                "function": "createPartners"
+            }
+        },
+        {
+            "code": "CreateOrganisationUnits",
+            "description": "Create OrganisationUnit-s",
+            "actor": "OrganisationAdministrator",
+            "requests": [
+                {
+                    "code": "BFKO",
+                    "path": "../../../../../organisation-unit/masterEntity/OrganisationUnit/examples/importData/BFKO.json"
+                },
+                {
+                    "code": "RGSL",
+                    "path": "../../../../../organisation-unit/masterEntity/OrganisationUnit/examples/importData/RGSL.json"
+                },
+                {
+                    "code": "PSB",
+                    "path": "../../../../../organisation-unit/masterEntity/OrganisationUnit/examples/importData/PSB.json"
+                },
+                {
+                    "code": "PSB-VolgaBranch",
+                    "path": "../../../../../organisation-unit/masterEntity/OrganisationUnit/examples/importData/PSB-VolgaBranch.json"
+                },
+                {
+                    "code": "PSB-VolgaBranch-DOPuoltavski",
+                    "path": "../../../../../organisation-unit/masterEntity/OrganisationUnit/examples/importData/PSB-VolgaBranch-DOPuoltavski.json"
+                },
+                {
+                    "code": "DEMO",
+                    "path": "../../../../../organisation-unit/masterEntity/OrganisationUnit/examples/importData/DEMO.json"
+                },
+                {
+                    "code": "AKCEPT",
+                    "path": "../../../../../organisation-unit/masterEntity/OrganisationUnit/examples/importData/AKCEPT.json"
+                },
+                {
+                    "code": "AKBARS",
+                    "path": "../../../../../organisation-unit/masterEntity/OrganisationUnit/examples/importData/AKBARS.json"
+                },
+                {
+                    "code": "ZENIT",
+                    "path": "../../../../../organisation-unit/masterEntity/OrganisationUnit/examples/importData/ZENIT.json"
+                },
+                {
+                    "code": "BFKOAUTO",
+                    "path": "../../../../../organisation-unit/masterEntity/OrganisationUnit/examples/importData/BFKOAUTO.json"
+                },
+                {
+                    "code": "PSBVIP",
+                    "path": "../../../../../organisation-unit/masterEntity/OrganisationUnit/examples/importData/PSBVIP.json"
+                },
+                {
+                    "code": "OAS",
+                    "path": "../../../../../organisation-unit/masterEntity/OrganisationUnit/examples/importData/OAS.json"
+                },
+                {
+                    "code": "MINBANK",
+                    "path": "../../../../../organisation-unit/masterEntity/OrganisationUnit/examples/importData/MINBANK.json"
+                },
+                {
+                    "code": "SMP",
+                    "path": "../../../../../organisation-unit/masterEntity/OrganisationUnit/examples/importData/SMP.json"
+                },
+                {
+                    "code": "SOVKOMBANK",
+                    "path": "../../../../../organisation-unit/masterEntity/OrganisationUnit/examples/importData/SOVKOMBANK.json"
+                },
+                {
+                    "code": "ROSBANK",
+                    "path": "../../../../../organisation-unit/masterEntity/OrganisationUnit/examples/importData/ROSBANK.json"
+                },
+                {
+                    "code": "REINVEST",
+                    "path": "../../../../../organisation-unit/masterEntity/OrganisationUnit/examples/importData/REINVEST.json"
+                },
+                {
+                    "code": "LIFEINVEST",
+                    "path": "../../../../../organisation-unit/masterEntity/OrganisationUnit/examples/importData/LIFEINVEST.json"
+                },
+                {
+                    "code": "VTB",
+                    "path": "../../../../../organisation-unit/masterEntity/OrganisationUnit/examples/importData/VTB.json"
+                },
+                {
+                    "code": "VTBMASS",
+                    "path": "../../../../../organisation-unit/masterEntity/OrganisationUnit/examples/importData/VTBMASS.json"
+                },
+                {
+                    "code": "POCHTABANK",
+                    "path": "../../../../../organisation-unit/masterEntity/OrganisationUnit/examples/importData/POCHTABANK.json"
+                },
+                {
+                    "code": "UBRRMASS",
+                    "path": "../../../../../organisation-unit/masterEntity/OrganisationUnit/examples/importData/UBRRMASS.json"
+                }
+            ],
+            "executor": {
+                "module": "4.createOrganisationUnits.js",
+                "function": "createOrganisationUnits"
+            }
+        },
+        {
+            "code": "CreateAgentAgreements",
+            "description": "Create AgentAgreement documents",
+            "actor": "AdministratorAA",
+            "requests": [
+                {
+                    "code": "BFKO",
+                    "path": "../../../../../agent-agreement/document/AgentAgreement/examples/importData/BFKO.json"
+                },
+                {
+                    "code": "PSB",
+                    "path": "../../../../../agent-agreement/document/AgentAgreement/examples/importData/PSB.json"
+                },
+                {
+                    "code": "DEMO",
+                    "path": "../../../../../agent-agreement/document/AgentAgreement/examples/importData/DEMO.json"
+                },
+                {
+                    "code": "AKCEPT",
+                    "path": "../../../../../agent-agreement/document/AgentAgreement/examples/importData/AKCEPT.json"
+                },
+                {
+                    "code": "AKBARS",
+                    "path": "../../../../../agent-agreement/document/AgentAgreement/examples/importData/AKBARS.json"
+                },
+                {
+                    "code": "ZENIT",
+                    "path": "../../../../../agent-agreement/document/AgentAgreement/examples/importData/ZENIT.json"
+                },
+                {
+                    "code": "BFKOAUTO",
+                    "path": "../../../../../agent-agreement/document/AgentAgreement/examples/importData/BFKOAUTO.json"
+                },
+                {
+                    "code": "PSBVIP",
+                    "path": "../../../../../agent-agreement/document/AgentAgreement/examples/importData/PSBVIP.json"
+                },
+                {
+                    "code": "OAS",
+                    "path": "../../../../../agent-agreement/document/AgentAgreement/examples/importData/OAS.json"
+                },
+                {
+                    "code": "MINBANK",
+                    "path": "../../../../../agent-agreement/document/AgentAgreement/examples/importData/MINBANK.json"
+                },
+                {
+                    "code": "SMP",
+                    "path": "../../../../../agent-agreement/document/AgentAgreement/examples/importData/SMP.json"
+                },
+                {
+                    "code": "SOVKOMBANK",
+                    "path": "../../../../../agent-agreement/document/AgentAgreement/examples/importData/SOVKOMBANK.json"
+                },
+                {
+                    "code": "ROSBANK",
+                    "path": "../../../../../agent-agreement/document/AgentAgreement/examples/importData/ROSBANK.json"
+                },
+                {
+                    "code": "REINVEST",
+                    "path": "../../../../../agent-agreement/document/AgentAgreement/examples/importData/REINVEST.json"
+                },
+                {
+                    "code": "LIFEINVEST",
+                    "path": "../../../../../agent-agreement/document/AgentAgreement/examples/importData/LIFEINVEST.json"
+                },
+                {
+                    "code": "VTB",
+                    "path": "../../../../../agent-agreement/document/AgentAgreement/examples/importData/VTB.json"
+                },
+                {
+                    "code": "VTBMASS",
+                    "path": "../../../../../agent-agreement/document/AgentAgreement/examples/importData/VTBMASS.json"
+                },
+                {
+                    "code": "POCHTABANK",
+                    "path": "../../../../../agent-agreement/document/AgentAgreement/examples/importData/POCHTABANK.json"
+                },
+                {
+                    "code": "UBRRMASS",
+                    "path": "../../../../../agent-agreement/document/AgentAgreement/examples/importData/UBRRMASS.json"
+                }
+            ],
+            "executor": {
+                "module": "5.createAgentAgreements.js",
+                "function": "createAgentAgreements"
+            }
+        },
+        {
+            "code": "CreateEmployees",
+            "description": "Create Employee-s",
+            "actor": "OrganisationAdministrator",
+            "requests": [
+                {
+                    "code": "Administrator",
+                    "path": "../../../../../employee/masterEntity/Employee/examples/importData/Administrator.json"
+                },
+                {
+                    "code": "Saler.PSB.MASS",
+                    "path": "../../../../../employee/masterEntity/Employee/examples/importData/Saler.PSB.MASS.json"
+                },
+                {
+                    "code": "Saler.PSB.Afflyent",
+                    "path": "../../../../../employee/masterEntity/Employee/examples/importData/Saler.PSB.Afflyent.json"
+                },
+                {
+                    "code": "OPERU",
+                    "path": "../../../../../employee/masterEntity/Employee/examples/importData/OPERU.json"
+                },
+                {
+                    "code": "Underwriter",
+                    "path": "../../../../../employee/masterEntity/Employee/examples/importData/Underwriter.json"
+                },
+                {
+                    "code": "BFKOinitiator",
+                    "path": "../../../../../employee/masterEntity/Employee/examples/importData/BFKOinitiator.json"
+                },
+                {
+                    "code": "Saler.Demo",
+                    "path": "../../../../../employee/masterEntity/Employee/examples/importData/Saler.Demo.json"
+                },
+                {
+                    "code": "AKCEPTinitiator",
+                    "path": "../../../../../employee/masterEntity/Employee/examples/importData/AKCEPTinitiator.json"
+                },
+                {
+                    "code": "AKBARSinitiator",
+                    "path": "../../../../../employee/masterEntity/Employee/examples/importData/AKBARSinitiator.json"
+                },
+                {
+                    "code": "ZENITinitiator",
+                    "path": "../../../../../employee/masterEntity/Employee/examples/importData/ZENITinitiator.json"
+                },
+                {
+                    "code": "BFKOAUTOinitiator",
+                    "path": "../../../../../employee/masterEntity/Employee/examples/importData/BFKOAUTOinitiator.json"
+                },
+                {
+                    "code": "PSBVIPinitiator",
+                    "path": "../../../../../employee/masterEntity/Employee/examples/importData/PSBVIPinitiator.json"
+                },
+                {
+                    "code": "OASinitiator",
+                    "path": "../../../../../employee/masterEntity/Employee/examples/importData/OASinitiator.json"
+                },
+                {
+                    "code": "MINBANKinitiator",
+                    "path": "../../../../../employee/masterEntity/Employee/examples/importData/MINBANKinitiator.json"
+                },
+                {
+                    "code": "SMPinitiator",
+                    "path": "../../../../../employee/masterEntity/Employee/examples/importData/SMPinitiator.json"
+                },
+                {
+                    "code": "SOVKOMBANKinitiator",
+                    "path": "../../../../../employee/masterEntity/Employee/examples/importData/SOVKOMBANKinitiator.json"
+                },
+                {
+                    "code": "ROSBANKinitiator",
+                    "path": "../../../../../employee/masterEntity/Employee/examples/importData/ROSBANKinitiator.json"
+                },
+                {
+                    "code": "REINVESTinitiator",
+                    "path": "../../../../../employee/masterEntity/Employee/examples/importData/REINVESTinitiator.json"
+                },
+                {
+                    "code": "LIFEINVESTinitiator",
+                    "path": "../../../../../employee/masterEntity/Employee/examples/importData/LIFEINVESTinitiator.json"
+                },
+                {
+                    "code": "VTBinitiator",
+                    "path": "../../../../../employee/masterEntity/Employee/examples/importData/VTBinitiator.json"
+                },
+                {
+                    "code": "VTBMASSinitiator",
+                    "path": "../../../../../employee/masterEntity/Employee/examples/importData/VTBMASSinitiator.json"
+                },
+                {
+                    "code": "POCHTABANKinitiator",
+                    "path": "../../../../../employee/masterEntity/Employee/examples/importData/POCHTABANKinitiator.json"
+                },
+                {
+                    "code": "UBRRMASSinitiator",
+                    "path": "../../../../../employee/masterEntity/Employee/examples/importData/UBRRMASSinitiator.json"
+                }
+            ],
+            "executor": {
+                "module": "6.createEmployees.js",
+                "function": "createEmployees"
+            }
+        },
+        {
+            "code": "CreateUsers",
+            "description": "Create User-s",
+            "actor": "OrganisationAdministrator",
+            "requests": [],
+            "executor": {
+                "module": "7.createUsers.js",
+                "function": "createUsers"
+            }
+        },
+        {
+            "code": "CreateReinsurers",
+            "description": "Create Reinsurer service providers",
+            "actor": "OrganisationAdministrator",
+            "requests": [
+                {
+                    "code": "AKCEPT",
+                    "path": "../../../../../reinsurer/masterEntity/Reinsurer/examples/importData/AKCEPT.json"
+                },
+                {
+                    "code": "AKBARS",
+                    "path": "../../../../../reinsurer/masterEntity/Reinsurer/examples/importData/AKBARS.json"
+                },
+                {
+                    "code": "BFKO",
+                    "path": "../../../../../reinsurer/masterEntity/Reinsurer/examples/importData/BFKO.json"
+                },
+                {
+                    "code": "BFKOAUTO",
+                    "path": "../../../../../reinsurer/masterEntity/Reinsurer/examples/importData/BFKOAUTO.json"
+                },
+                {
+                    "code": "DEMO",
+                    "path": "../../../../../reinsurer/masterEntity/Reinsurer/examples/importData/DEMO.json"
+                },
+                {
+                    "code": "MINBANK",
+                    "path": "../../../../../reinsurer/masterEntity/Reinsurer/examples/importData/MINBANK.json"
+                },
+                {
+                    "code": "PSB",
+                    "path": "../../../../../reinsurer/masterEntity/Reinsurer/examples/importData/PSB.json"
+                },
+                {
+                    "code": "RGSL",
+                    "path": "../../../../../reinsurer/masterEntity/Reinsurer/examples/importData/RGSL.json"
+                },
+
+                {
+                    "code": "ZENIT",
+                    "path": "../../../../../reinsurer/masterEntity/Reinsurer/examples/importData/ZENIT.json"
+                },
+                {
+                    "code": "PSBVIP",
+                    "path": "../../../../../reinsurer/masterEntity/Reinsurer/examples/importData/PSBVIP.json"
+                },
+                {
+                    "code": "OAS",
+                    "path": "../../../../../reinsurer/masterEntity/Reinsurer/examples/importData/OAS.json"
+                },
+                {
+                    "code": "SMP",
+                    "path": "../../../../../reinsurer/masterEntity/Reinsurer/examples/importData/SMP.json"
+                }
+            ],
+            "executor": {
+                "module": "8.createReinsurers.js",
+                "function": "createReinsurers"
+            }
+        },
+        {
+            "code": "ImportProducts",
+            "actor": "Administrator",
+            "requests": [],
+            "executor": {
+                "module": "9.importProducts.js",
+                "function": "importProducts"
+            }
+        },
+        {
+            "code": "ImportRatesOfReturn",
+            "actor": "Administrator",
+            "requests": [],
+            "executor": {
+                "module": "10.importRatesOfReturn.js",
+                "function": "importRatesOfReturn"
+            }
+        },
+        {
+            "code": "ImportStrategyConf",
+            "actor": "Administrator",
+            "requests": [],
+            "executor": {
+                "module": "11.importStrategyConf.js",
+                "function": "importStrategyConf"
+            }
+        },
+        {
+            "code": "ImportStrategyInstr",
+            "actor": "Administrator",
+            "requests": [],
+            "executor": {
+                "module": "12.importStrategyInstr.js",
+                "function": "importStrategyInstr"
+            }
+        }
+    ]
+}

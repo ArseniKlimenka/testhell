@@ -1,0 +1,51 @@
+select
+	id.IS_FIRST_INSTALLMENT,
+	id.DUE_DATE,
+	id.CONTRACT_NO,
+	id.CURRENCY_CODE,
+	sum(id.AMOUNT) as AMOUNT,
+	sum(id.OPEN_AMOUNT) as OPEN_AMOUNT,
+	cast(case when ppps.POSTED_UNTIL_POSTING_DATE >= id.DUE_DATE then 1 else 0 end as bit) as IS_POSTED
+from
+	(
+		select
+			polh.POLICY_HKEY,
+			polh.CONTRACT_NUMBER as CONTRACT_NO,
+			ppsl.IS_FIRST_INSTALLMENT,
+			ppl.DUE_DATE,
+			ppsl.CURRENCY_CODE,
+			ppsl.AMOUNT as OPEN_AMOUNT,
+			ppsl.AMOUNT
+		from
+			pas_impl.POLICY_HUB polh
+			inner join pas_impl.P_PAYMENT_PLAN_LINK ppl on ppl.POLICY_HKEY = polh.POLICY_HKEY
+			inner join pas_impl.P_PAYMENT_PLAN_SAT_LATEST ppsl on ppsl.P_PAYMENT_PLAN_HKEY = ppl.P_PAYMENT_PLAN_HKEY
+		where 1=1
+			and polh.CONTRACT_NUMBER = @contractNo
+		union all
+		select
+			polh.POLICY_HKEY,
+			alc.DOCUMENT_NO as CONTRACT_NO,
+			palc.IS_FIRST_INSTALLMENT,
+			palc.DUE_DATE,
+			alc.DOC_CURRENCY_CODE as CURRENCY_CODE,
+			-(mat.DOC_AMOUNT + mat.TOLERANCE_DOC_AMOUNT) as OPEN_AMOUNT,
+			0 as AMOUNT
+		from
+			pas_impl.POLICY_HUB polh
+			inner join acc_impl.REFERENCE_NUMBER rn on rn.REFERENCE_NO = polh.CONTRACT_NUMBER
+			inner join acc_impl.ALLOCATION alc on alc.DOCUMENT_NO = rn.DOCUMENT_NO
+			inner join acc_impl.BANK_STATEMENT_ITEM bsi on bsi.BANK_STATEMENT_ITEM_ID = alc.BANK_STATEMENT_ITEM_ID
+			inner join ACC_IMPL.ALLOCATION_POLICY palc on palc.ALLOCATION_ID = alc.ALLOCATION_ID
+			inner join ACC_IMPL.MATCHING mat on mat.ALLOCATION_ID = alc.ALLOCATION_ID
+		where 1=1
+			and bsi.PAYMENT_SOURCE_ID != 4
+			and alc.DOCUMENT_NO = @contractNo
+	) id
+	left join acc_impl.POSTED_PAYMENT_PLAN_SAT_LATEST ppps on ppps.POSTED_PAYMENT_PLAN_HKEY = id.POLICY_HKEY
+group by
+	id.IS_FIRST_INSTALLMENT,
+	id.DUE_DATE,
+	id.CONTRACT_NO,
+	id.CURRENCY_CODE,
+	ppps.POSTED_UNTIL_POSTING_DATE

@@ -1,0 +1,52 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "description": "Entries loaded into staging table for an import document.",
+    "properties": {
+        "sourceId": {
+            "type": "string",
+            "description": "Identifier of the import source.",
+            "aiTitle":"Import source id"
+        },
+        "rowNumber": {
+            "type": "integer",
+            "description": "Import document ID.",
+            "aiTitle":"Row number"
+        },
+        "recordKey": {
+            "type": "string",
+            "description": "Record key.",
+            "aiTitle":"Record key"
+        },
+        "errorType": {
+            "type": "string",
+            "description": "Identifier of the import source.",
+            "aiTitle":"Error type"
+        },
+        "rawData": {
+            "type": "string",
+            "aiTitle":"Raw data"
+        },
+        "errorMessage": {
+            "type": "string",
+            "aiTitle":"Error message"
+        },
+        "mappingResult": {
+            "type": "string",
+            "aiTitle":"Mapping result"
+        },
+        "errorDetails": {
+            "type":"array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "code": {
+                        "type": "string"
+                    },
+                    "message": {
+                        "type": "string"
+                    }
+                }
+            }
+        }
+    }
+}

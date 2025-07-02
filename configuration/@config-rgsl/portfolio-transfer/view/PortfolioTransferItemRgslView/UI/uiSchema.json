@@ -1,0 +1,239 @@
+{
+    "id": "PortfolioTransferItemUiSchema",
+    "type": "GridLayout",
+    "numberOfColumns": 4,
+    "elements": [
+        {
+            "type": "Section",
+            "sectionLevel": 1,
+            "label": "ItemSearchFilters",
+            "collapsing": {
+                "initial": true,
+                "enabled": true
+            },
+            "elements": [
+                {
+                    "type": "GridLayout",
+                    "numberOfColumns": 6,
+                    "width": 4,
+                    "elements": [
+                        {
+                            "type": "GridLayout",
+                            "numberOfColumns": 1,
+                            "width": 1,
+                            "stackContent": "Left",
+                            "fillAvailableSpace": true,
+                            "elements": [
+                                {
+                                    "type": "Input",
+                                    "control": "TextArea",
+                                    "enableResize": true,
+                                    "numberOfRows": 6,
+                                    "label": "DocumentNumbers",
+                                    "value": {
+                                        "$ref": "#/properties/request/properties/data/properties/criteria/properties/contractNumbersStr"
+                                    },
+                                    "width": 1,
+                                    "rule": {
+                                        "effect": "ENABLE_INITIAL",
+                                        "condition": {
+                                            "type": "FUNC",
+                                            "ruleFunction": "enableDocumentNumbers",
+                                            "value": [
+                                                {
+                                                    "$ref": "#"
+                                                }
+                                            ]
+                                        }
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "type": "GridLayout",
+                            "numberOfColumns": 4,
+                            "width": 5,
+                            "stackContent": "Rigth",
+                            "elements": [
+                                {
+                                    "type": "Input",
+                                    "label": "TransferState",
+                                    "control": "Dropdown",
+                                    "value": {
+                                        "$ref": "#/properties/request/properties/data/properties/criteria/properties/transferState"
+                                    },
+                                    "width": 1
+                                },
+                                {
+                                    "type": "Input",
+                                    "label": "HolderName",
+                                    "value": {
+                                        "$ref": "#/properties/request/properties/data/properties/criteria/properties/holderName"
+                                    },
+                                    "width": 1
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "Group",
+                    "width": 4,
+                    "elements": [
+                        {
+                            "type": "Group",
+                            "width": 3,
+                            "stackContent": "Left",
+                            "elements": [
+                                {
+                                    "type": "Button",
+                                    "label": "Search",
+                                    "submitOnEnter": true,
+                                    "onClick": [
+                                        {
+                                            "commandType": "executeOperation",
+                                            "operation": "SEARCH"
+                                        }
+                                    ],
+                                    "icon": {
+                                        "name": "Search",
+                                        "color": "BackgroundColor",
+                                        "size": "Small"
+                                    },
+                                    "value": {
+                                        "$ref": "#/properties/response/properties/data"
+                                    },
+                                    "rule": {
+                                        "effect": "ENABLE_INITIAL",
+                                        "condition": {
+                                            "type": "FUNC",
+                                            "ruleFunction": "enableSearch",
+                                            "value": [
+                                                {
+                                                    "$ref": "#"
+                                                }
+                                            ]
+                                        }
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Group",
+                            "width": 1,
+                            "stackContent": "Right",
+                            "elements": [
+                                {
+                                    "type": "Button",
+                                    "label": "Clear",
+                                    "backgroundColor": "Primary",
+                                    "fill": "Outline",
+                                    "labelColor": "Primary",
+                                    "onClick": [
+                                        {
+                                            "commandType": "executeAction",
+                                            "actionName": "clearFilter"
+                                        }
+                                    ],
+                                    "icon": {
+                                        "name": "Times",
+                                        "color": "Primary",
+                                        "size": "Small"
+                                    },
+                                    "value": {
+                                        "$ref": "#/properties/response/properties/data"
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "Group",
+            "width": 4,
+            "readOnly": true,
+            "stackContent": "Left",
+            "elements": [
+                {
+                    "type": "Button",
+                    "label": "AutoPopulate",
+                    "onClick": "autoPopulate",
+                    "icon": {
+                        "name": "Search-Plus",
+                        "color": "BackgroundColor",
+                        "size": "Small"
+                    },
+                    "rule": {
+                        "effect": "ENABLE_INITIAL",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "enableAutoPopulate",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "type": "Button",
+                    "label": "Delete item",
+                    "onClick": "deleteItem",
+                    "icon": {
+                        "name": "Search-Plus",
+                        "color": "BackgroundColor",
+                        "size": "Small"
+                    },
+                    "rule": {
+                        "effect": "ENABLE_INITIAL",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "enableAutoPopulate",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "type": "Input",
+                    "label": "groupByRefNo",
+                    "name": "groupByRefNo",
+                    "isCompact": false,
+                    "value": {
+                        "$ref": "#/properties/request/properties/data/properties/criteria/properties/groupByRefNo"
+                    },
+                    "onValueChanged": {
+                        "commandType": "executeOperation",
+                        "operation": "SEARCH"
+                    },
+                    "rule": {
+                        "effect": "ENABLE_INITIAL",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "enableAutoPopulate",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    },
+                    "width": 1
+                }
+            ]
+        },
+        {
+            "type": "Component",
+            "name": "PortfolioTransferItemResultComponent",
+            "value": {
+                "$ref": "#"
+            }
+        }
+    ]
+}

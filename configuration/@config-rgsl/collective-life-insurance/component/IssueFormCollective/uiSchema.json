@@ -1,0 +1,53 @@
+{
+    "type": "Section",
+    "label": "issueForm",
+    "isCollapsed": false,
+    "width": 12,
+    "elements": [
+        {
+            "type": "GridLayout",
+            "fillAvailableSpace": true,
+            "title": "issueForm",
+            "fixedButton": true,
+            "numberOfColumns": 12,
+            "elements": [
+                {
+                    "type": "Group",
+                    "width": 12,
+                    "elements": [
+                        {
+                            "type": "Input",
+                            "label": "issueForm",
+                            "value": {
+                                "$ref": "#/properties/code"
+                            },
+                            "source": {
+                                "dataSource": {
+                                    "name": "IssueFormDataSource",
+                                    "reloadOnOpen": true,
+                                    "searchFieldPath": "issueFormDescription",
+                                    "responseMapping": "issueFormResponseMapping"
+                                },
+                                "displayFieldName": "issueFormDescription"
+                            },
+                            "control": "Dropdown",
+                            "width": 4,
+                            "rule": {
+                                "effect": "ENABLE_INITIAL",
+                                "condition": {
+                                    "type": "FUNC",
+                                    "ruleFunction": "enableIssueForm",
+                                    "value": [
+                                        {
+                                            "$ref": "#"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

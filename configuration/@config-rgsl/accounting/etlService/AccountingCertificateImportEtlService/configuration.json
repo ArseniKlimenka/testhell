@@ -1,0 +1,45 @@
+{
+    "mainDataSource": "ImportStagingAccountingCertificatesDataSource",
+    "sinks": [
+        {
+            "name": "CreateAccCertificate",
+            "document": {
+                "configuration": {
+                    "name": "AccountingCertificate",
+                    "version": "1"
+                }
+            }
+        },
+        {
+            "name": "WriteSuccessStatus",
+            "database": {
+                "tables": [
+                    "BFX.IMPORT_RECORD_STATUS"
+                ]
+            }
+        }
+    ],
+    "completionSinks": [
+        {
+            "name": "FinishedImporting",
+            "documentTransition": {
+                "transition": {
+                    "transitionName": "FinishImporting",
+                    "configurationName": "AccountingCertificateImport",
+                    "configurationVersion": "1"
+                }
+            }
+        }
+    ],
+    "errorSinks": [
+        {
+            "name": "WriteErrorStatus",
+            "database": {
+                "tables": [
+                    "BFX.IMPORT_RECORD_STATUS"
+                ]
+            }
+        }
+    ],
+    "version": "1"
+}

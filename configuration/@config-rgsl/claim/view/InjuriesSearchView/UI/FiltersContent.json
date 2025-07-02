@@ -1,0 +1,200 @@
+{
+    "type": "Group",
+    "formProperties": {
+        "events": {}
+    },
+    "elements": [
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "Input",
+                    "label": "insuranceRule",
+                    "value": {
+                        "$ref": "#/properties/request/properties/data/properties/criteria/properties/insuranceRule"
+                    },
+                    "autocomplete": {
+                        "minTextLength": 3,
+                        "dropDownItemsCount": 30
+                    },
+                    "control": "Dropdown",
+                    "source": {
+                        "reloadOnOpen": true,
+                        "dataSource": {
+                            "name": "InsuranceRulesDataSource",
+                            "searchFieldPath": "description",
+                            "requestMapping": "insuranceRulesRequestMapping",
+                            "responseMapping": "insuranceRulesResponseMapping",
+                            "resultCount": 30
+                        },
+                        "displayFieldName": "displayName",
+                        "valueFieldName": "value"
+                    },
+                    "rule": {
+                        "effect": "DISABLE_INITIAL",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "disableInsuranceRuleDropdown",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    },
+                    "width": 1
+                },
+                {
+                    "type": "Input",
+                    "label": "injuryGroup",
+                    "value": {
+                        "$ref": "#/properties/request/properties/data/properties/criteria/properties/group"
+                    },
+                    "autocomplete": {
+                        "minTextLength": 3,
+                        "dropDownItemsCount": 30
+                    },
+                    "control": "Dropdown",
+                    "source": {
+                        "reloadOnOpen": true,
+                        "dataSource": {
+                            "name": "InjuryGroupDataSource",
+                            "searchFieldPath": "description",
+                            "requestMapping": "injuryGroupRequestMapping",
+                            "responseMapping": "injuryGroupResponseMapping",
+                            "resultCount": 30
+                        },
+                        "displayFieldName": "displayName",
+                        "valueFieldName": "value"
+                    },
+                    "width": 1
+                },
+                {
+                    "type": "Input",
+                    "label": "injurySubgroup",
+                    "value": {
+                        "$ref": "#/properties/request/properties/data/properties/criteria/properties/subgroupLevel1"
+                    },
+                    "autocomplete": {
+                        "minTextLength": 3,
+                        "dropDownItemsCount": 30
+                    },
+                    "control": "Dropdown",
+                    "source": {
+                        "reloadOnOpen": true,
+                        "dataSource": {
+                            "name": "InjurySubgroupLevel1DataSource",
+                            "searchFieldPath": "description",
+                            "requestMapping": "injurySubgroupRequestMapping",
+                            "responseMapping": "injurySubgroupResponseMapping",
+                            "resultCount": 30
+                        },
+                        "displayFieldName": "displayName",
+                        "valueFieldName": "value"
+                    },
+                    "width": 1
+                },
+                {
+                    "type": "Input",
+                    "label": "injurySubSubgroup",
+                    "value": {
+                        "$ref": "#/properties/request/properties/data/properties/criteria/properties/subgroupLevel2"
+                    },
+                    "autocomplete": {
+                        "minTextLength": 3,
+                        "dropDownItemsCount": 30
+                    },
+                    "control": "Dropdown",
+                    "source": {
+                        "reloadOnOpen": true,
+                        "dataSource": {
+                            "name": "InjurySubgroupLevel2DataSource",
+                            "searchFieldPath": "description",
+                            "requestMapping": "injurySubSubgroupRequestMapping",
+                            "responseMapping": "injurySubSubgroupResponseMapping",
+                            "resultCount": 30
+                        },
+                        "displayFieldName": "displayName",
+                        "valueFieldName": "value"
+                    },
+                    "width": 1
+                },
+                {
+                    "type": "Input",
+                    "label": "injurySubSubSubgroup",
+                    "value": {
+                        "$ref": "#/properties/request/properties/data/properties/criteria/properties/subgroupLevel3"
+                    },
+                    "autocomplete": {
+                        "minTextLength": 3,
+                        "dropDownItemsCount": 30
+                    },
+                    "control": "Dropdown",
+                    "source": {
+                        "reloadOnOpen": true,
+                        "dataSource": {
+                            "name": "InjurySubgroupLevel3DataSource",
+                            "searchFieldPath": "description",
+                            "requestMapping": "injurySubSubSubgroupRequestMapping",
+                            "responseMapping": "injurySubSubSubgroupResponseMapping",
+                            "resultCount": 30
+                        },
+                        "displayFieldName": "displayName",
+                        "valueFieldName": "value"
+                    },
+                    "width": 1
+                },
+                {
+                    "type": "Input",
+                    "label": "description",
+                    "value": {
+                        "$ref": "#/properties/request/properties/data/properties/criteria/properties/description"
+                    },
+                    "autocomplete": {
+                        "minTextLength": 3,
+                        "dropDownItemsCount": 30
+                    },
+                    "control": "Dropdown",
+                    "source": {
+                        "reloadOnOpen": true,
+                        "dataSource": {
+                            "name": "InjuryDescriptionDataSource",
+                            "searchFieldPath": "description",
+                            "requestMapping": "injuryDescriptionRequestMapping",
+                            "responseMapping": "injuryDescriptionResponseMapping",
+                            "resultCount": 30
+                        },
+                        "displayFieldName": "displayName",
+                        "valueFieldName": "value"
+                    },
+                    "width": 1
+                },
+                {
+                    "type": "Input",
+                    "label": "note",
+                    "value": {
+                        "$ref": "#/properties/request/properties/data/properties/criteria/properties/note"
+                    },
+                    "autocomplete": {
+                        "minTextLength": 3,
+                        "dropDownItemsCount": 30
+                    },
+                    "control": "Dropdown",
+                    "source": {
+                        "reloadOnOpen": true,
+                        "dataSource": {
+                            "name": "InjuryNoteDataSource",
+                            "searchFieldPath": "description",
+                            "requestMapping": "injuryNoteRequestMapping",
+                            "responseMapping": "injuryNoteResponseMapping",
+                            "resultCount": 30
+                        },
+                        "displayFieldName": "displayName",
+                        "valueFieldName": "value"
+                    },
+                    "width": 1
+                }
+            ]
+        }
+    ]
+}

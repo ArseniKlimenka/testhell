@@ -1,0 +1,27 @@
+﻿SELECT EXCEL_ROW_NUMBER
+      ,RULE_NUMBER
+      ,RULE_CODE
+      ,RULE_DESCRIPTION
+      ,RULE_DATE
+      ,RULE_LINK
+      ,IMPORT_DOCUMENT_ID
+      ,CONF_VERSION
+      ,LOADED_BY
+      ,LOAD_DATE
+FROM BFX_IMPL.INSURANCE_RULES rr
+WHERE 1 = 1
+{{#if parameters.ruleNumber}}
+	AND rr.RULE_NUMBER = @ruleNumber
+{{/if}}
+{{#if parameters.ruleCode}}
+      AND rr.RULE_CODE = @ruleCode
+{{/if}}
+{{#if parameters.ruleDescription}}
+	AND rr.RULE_DESCRIPTION = @ruleDescription
+{{/if}}
+{{#if parameters.ruleLink}}
+	AND rr.RULE_LINK = @ruleLink
+{{/if}}
+{{#if parameters.maxVersion}}
+	AND rr.CONF_VERSION = (SELECT MAX(CONF_VERSION) MAX_VERSION FROM BFX_IMPL.INSURANCE_RULES)
+{{/if}}

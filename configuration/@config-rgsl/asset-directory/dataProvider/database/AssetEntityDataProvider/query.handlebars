@@ -1,0 +1,8 @@
+select ASSET_ENTITY_NUMBER
+from PAS_IMPL.ASSET_ENTITY_HUB aeh
+join PAS_IMPL.ASSET_ENTITY_LINK ael on aeh.ASSET_ENTITY_HKEY = ael.ASSET_ENTITY_NUMBER_HKEY
+join PAS_IMPL.ASSET_HUB ah on ah.ASSET_HKEY = ael.ASSET_NUMBER_HKEY
+WHERE 1=1
+{{#if parameters.assetNumber}}
+    AND ah.ASSET_NUMBER = @assetNumber
+{{/if}}

@@ -1,0 +1,31 @@
+{
+    "name": "@config-rgsl/application-user-group",
+    "version": "1.0.0",
+    "description": "Application user group libraries",
+    "main": "index.js",
+    "directories": {
+        "test": "test"
+    },
+    "scripts": {
+        "test-coverage": "nyc --all --reporter=text-summary --reporter=lcov npm run test",
+        "test": "node ../../../node_modules/@adinsure-tools/test-runner -t unit -e local",
+        "test-debug": "node --inspect-brk ../../../node_modules/@adinsure-tools/test-runner -t unit -e local",
+        "generate-report-api": "node -e \"require('@adinsure-tools/test-framework').generateSummaryReport('../../../api-test-report','API')\"",
+        "test-validate": "node ../../../node_modules/@adinsure-tools/test-runner -t validation -e local -c test-validate-basic-setup.json",
+        "test-validate-debug": "node --inspect-brk ../../../node_modules/@adinsure-tools/test-runner -t validation -e local -c test-validate-basic-setup.json",
+        "test-api": "node ../../../node_modules/@adinsure-tools/test-runner -t api -e local",
+        "test-api-debug": "node --inspect-brk ../../../node_modules/@adinsure-tools/test-runner -t api -e local"
+    },
+    "keywords": [
+        "application-user-group",
+        "configuration"
+    ],
+    "adInsure": {
+        "projectNameDisplay": "Application User Group",
+        "domain": "SupportingProcesses",
+        "ownershipScope": "organisation"
+    },
+    "dependencies": {
+        "@config-rgsl/infrastructure": "1.0.0"
+    }
+}

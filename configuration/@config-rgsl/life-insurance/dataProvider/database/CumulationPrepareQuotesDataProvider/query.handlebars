@@ -1,0 +1,11 @@
+﻿SELECT
+	c.CONTRACT_NUMBER
+FROM pas.CONTRACT c
+LEFT JOIN CFX.PUBLISHED_ARTIFACT pa ON pa.PUBLISHED_ARTIFACT_ID = c.PUBLISHED_ARTIFACT_ID
+LEFT JOIN PAS_IMPL.QUOTE_HUB contractHub ON contractHub.CONTRACT_NUMBER = c.CONTRACT_NUMBER
+LEFT JOIN PAS_IMPL.QUOTE_SAT_LATEST contractSat ON contractSat.QUOTE_HKEY = contractHub.QUOTE_HKEY
+LEFT JOIN CFG.PROCESS_STATE procState ON procState.PROCESS_STATE_ID = c.STATE_ID
+WHERE 1=1
+AND pa.CODE_NAME != 'CollectiveLifeInsurancePolicy'
+AND procState.CODE_NAME IN ('OnReview', 'InfoRequest', 'Approved')
+AND (contractSat.HOLDER_CODE = @policyHolderCode OR contractSat.INSURED_CODE = @insuredPersonCode)

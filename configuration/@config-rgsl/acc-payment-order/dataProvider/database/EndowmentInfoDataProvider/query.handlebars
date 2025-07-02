@@ -1,0 +1,43 @@
+SELECT c.UNIVERSAL_DOCUMENT_NUMBER AS ENDOWMENT_NUMBER,
+	   JSON_VALUE(c.BODY, '$.mainAttributes.contract.number') AS CONTRACT_NUMBER,
+	   JSON_VALUE(c.BODY, '$.mainAttributes.selectedRisk.riskCode') AS RISK_CODE,
+	   JSON_VALUE(c.BODY, '$.mainAttributes.selectedRisk.riskShortDescription') AS RISK_DESCRIPTION,
+	   JSON_VALUE(c.BODY, '$.mainAttributes.applicationInfo.statementReceivedDate') AS STATEMENT_RECEIVED_DATE,
+	   JSON_VALUE(c.BODY, '$.endowmentAmounts.contractCurrency') AS CONTRACT_CURRENCY,
+	   JSON_VALUE(c.BODY, '$.endowmentAmounts.shouldUseNetting') AS SHOULD_USE_NETTING,
+	   JSON_VALUE(c.BODY, '$.endowmentAmounts.nonAcceptance') AS NON_ACCEPTANCE,
+	   JSON_VALUE(c.BODY, '$.endowmentAmounts.numberOfNonAcceptancePayment') AS NON_ACCEPTANCE_PAYMENT_NUMBER,
+	   JSON_VALUE(c.BODY, '$.endowmentAmounts.fixedExchangeRate') AS FIXED_EXCHANGE_RATE,
+	   JSON_VALUE(c.BODY, '$.endowmentAmounts.useFixedExchangeRate') AS USE_FIXED_EXCHANGE_RATE,
+	   r.BENEFICIARY_PARTY_CODE,
+	   r.AMOUNT_TO_PAY_DOC_CURR AS AMOUNT_IN_CONTRACT_CURRENCY,
+	   r.AMOUNT_TO_PAY_RUB_CURR AS AMOUNT_IN_RUB,
+	   r.PIT_DOC_CURR,
+	   r.PIT_RUB_CURR,
+	   r.BANK_ACCOUNT_NUMBER,
+	   r.PAYMENT_TYPE_CODE,
+	   r.AMOUNT_TO_PAY_PERCENTAGE,
+	(
+		select
+			json_value([value], '$.lineType') as lineType,
+			json_value([value], '$.lineAmountInContractCurrency') as lineAmountInContractCurrency,
+			json_value([value], '$.lineAmountInRubCurrency') as lineAmountInRubCurrency
+		from openjson(c.BODY,'$.endowmentAmounts.paymentLines') pl
+		for json path
+	) as PAYMENT_LINES
+FROM BFX.UNIVERSAL_DOCUMENT c
+CROSS APPLY OPENJSON(c.BODY,'$.endowmentBeneficiaries')
+ with  
+ (    
+     BENEFICIARY_PARTY_CODE NVARCHAR(50) N'lax $.partyCode',
+	 AMOUNT_TO_PAY_DOC_CURR DECIMAL(15,7) N'lax $.amountToPay',
+	 AMOUNT_TO_PAY_RUB_CURR DECIMAL(15,7) N'lax $.amountToPayInRubCurrency',
+	 AMOUNT_TO_PAY_PERCENTAGE DECIMAL(15,7) N'lax $.amountToPayPercetage',
+	 PIT_DOC_CURR DECIMAL(15,7) N'lax $.pitAmount',
+	 PIT_RUB_CURR DECIMAL(15,7) N'lax $.pitAmountInRubCurrency',
+	 BANK_ACCOUNT_NUMBER NVARCHAR(100) N'lax $.bankAccount.number',
+	 PAYMENT_TYPE_CODE NVARCHAR(50) N'lax $.beneficiaryPaymentType.code'
+ ) r
+WHERE
+c.UNIVERSAL_DOCUMENT_NUMBER = @documentNumber
+AND r.BENEFICIARY_PARTY_CODE = @beneficiaryCode

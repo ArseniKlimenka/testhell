@@ -1,0 +1,45 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema",
+    "type": "object",
+    "aiDataEnrichment": [
+        {
+            "name": "CollectiveLifeInsurancePolicyImportGetTemplate",
+            "dataSource": "CollectiveLifeInsurancePolicyImportGetTemplateDataSource"
+        }
+    ],
+    "properties": {
+        "contractNumber": {
+            "type": "string"
+        },
+        "productCode": {
+            "type": "string"
+        },
+        "withTarification": {
+            "type": "boolean"
+        },
+        "file": {
+            "type": "object",
+            "properties": {
+                "fileId": {
+                    "type": "string"
+                },
+                "fileName": {
+                    "type": "string",
+                    "aiTitle": "fileName"
+                }
+            },
+            "required": [
+                "fileId",
+                "fileName"
+            ],
+            "additionalProperties": false
+        },
+        "template": {
+            "$ref": "component:FileUpload"
+        }
+    },
+    "required": [
+        "file"
+    ],
+    "additionalProperties": false
+}

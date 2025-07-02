@@ -1,0 +1,139 @@
+{
+    "mainDataSource": "ImportStagingDataSource",
+    "aggregate": false,
+    "allowParallelExecution": false,
+    "additionalDataSources": [
+        "GetProductConfigurationDataSource"
+    ],
+    "sinks": [
+        {
+            "name": "CheckBlackList",
+            "class": {
+                "className": "Adacta.AdInsure.RGSL.Party.API.Services.ICheckBlackListService, Adacta.AdInsure.RGSL.Party.API",
+                "methodName": "CheckBlackListAgreement"
+            }
+        },
+        {
+            "name": "GetContractors",
+            "class": {
+                "className": "Adacta.AdInsure.RGSL.Party.API.Services.ICheckContractorsService, Adacta.AdInsure.RGSL.Party.API",
+                "methodName": "CheckContractors"
+            }
+        },
+        {
+            "name": "FindNaturalPerson",
+            "fetch": {
+                "configuration": {
+                    "name": "GeneralPartyDataSource"
+                }
+            }
+        },
+        {
+            "name": "GetNaturalPerson",
+            "fetch": {
+                "configuration": {
+                    "name": "GetPartyDataSource"
+                }
+            }
+        },
+        {
+            "name": "CreateOrUpdateNaturalPerson",
+            "masterEntity": {
+                "configuration": {
+                    "name": "NaturalPerson",
+                    "version": "1"
+                },
+                "allowUpdating": true
+            }
+        },
+        {
+            "name": "CreatePolicy",
+            "document": {
+                "configuration": {
+                    "name": "CreditLifeInsurancePolicy",
+                    "version": "1"
+                },
+                "allowOnValidationErrors": {
+                    "all": false
+                }
+            }
+        },
+        {
+            "name": "FindPolicy",
+            "fetch": {
+                "configuration": {
+                    "name": "ContractVersionsDataSource"
+                }
+            }
+        },
+        {
+            "ref": "CalculateCommissionSinkGroup"
+        },
+        {
+            "name": "UpdatePolicy",
+            "document": {
+                "configuration": {
+                    "name": "CreditLifeInsurancePolicy",
+                    "version": "1"
+                },
+                "allowOnValidationErrors": {
+                    "all": false
+                },
+                "allowUpdating": {
+                    "inStates": [
+                        "Draft"
+                    ]
+                }
+            }
+        },
+        {
+            "name": "SignPolicy",
+            "documentTransition": {
+                "transition": {
+                    "transitionName": "Draft_to_Active",
+                    "configurationName": "CreditLifeInsurancePolicy",
+                    "configurationVersion": "1"
+                }
+            }
+        },
+        {
+            "name": "WriteWarningStatus",
+            "database": {
+                "tables": [
+                    "BFX.IMPORT_RECORD_STATUS"
+                ]
+            }
+        },
+        {
+            "name": "WriteSuccessStatus",
+            "database": {
+                "tables": [
+                    "BFX.IMPORT_RECORD_STATUS"
+                ]
+            }
+        }
+    ],
+    "completionSinks": [
+        {
+            "name": "FinishedImporting",
+            "documentTransition": {
+                "transition": {
+                    "transitionName": "FinishImporting",
+                    "configurationName": "ImportCreditLifePolicy",
+                    "configurationVersion": "1"
+                }
+            }
+        }
+    ],
+    "errorSinks": [
+        {
+            "name": "WriteErrorStatus",
+            "database": {
+                "tables": [
+                    "BFX.IMPORT_RECORD_STATUS"
+                ]
+            }
+        }
+    ],
+    "version": "1"
+}

@@ -1,0 +1,1 @@
+insert into BFX_IMPL.OKOPF values('0', '00000', N'Иное')

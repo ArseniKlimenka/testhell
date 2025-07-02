@@ -1,0 +1,128 @@
+{
+    "type": "Section",
+    "sectionLevel": 1,
+    "label": "DeclarationMedicalQuestions",
+    "isCollapsed": false,
+    "width": 12,
+    "elements": [
+        {
+            "type": "Section",
+            "sectionLevel": 2,
+            "label": "InsuredPerson",
+            "elements": [
+                {
+                    "type": "Input",
+                    "elementId": "medicalQuestionsIsConfirmed",
+                    "isCompact": true,
+                    "label": "isConfirmed",
+                    "value": {
+                        "$ref": "#/properties/declarationMedicalConfirmation/properties/isConfirmed"
+                    },
+                    "width": 2,
+                    "onValueChanged": [
+                        {
+                            "commandType": "executeAction",
+                            "actionName": "onChangeConfirmation"
+                        }
+                    ]
+                },
+                {
+                    "type": "Input",
+                    "elementId": "medicalQuestionsIsNotConfirmed",
+                    "isCompact": true,
+                    "label": "isNotConfirmed",
+                    "value": {
+                        "$ref": "#/properties/declarationMedicalConfirmation/properties/isNotConfirmed"
+                    },
+                    "width": 2,
+                    "onValueChanged": [
+                        {
+                            "commandType": "executeAction",
+                            "actionName": "onChangeConfirmation"
+                        }
+                    ]
+                },
+                {
+                    "type": "Input",
+                    "isCompact": true,
+                    "label": "manualCorrection",
+                    "value": {
+                        "$ref": "#/properties/declarationMedicalConfirmation/properties/manualCorrection"
+                    },
+                    "width": 2,
+                    "onValueChanged": [
+                        {
+                            "commandType": "executeAction",
+                            "actionName": "onChangeManualCorrection"
+                        }
+                    ],
+                    "rule": {
+                        "effect": "SHOW",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "showManualCorrection",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "type": "Input",
+                    "elementId": "medicalQuestionsComment",
+                    "control": "TextArea",
+                    "enableResize": true,
+                    "numberOfRows": 2,
+                    "label": "comment",
+                    "value": {
+                        "$ref": "#/properties/declarationMedicalConfirmation/properties/comment"
+                    },
+                    "width": 8,
+                    "rule": {
+                        "effect": "SHOW",
+                        "condition": {
+                            "type": "LEAF",
+                            "expectedValue": true,
+                            "value": {
+                                "$ref": "#/properties/declarationMedicalConfirmation/properties/isNotConfirmed"
+                            }
+                        }
+                    }
+                }
+            ],
+            "rule": {
+                "effect": "DISABLE_INITIAL",
+                "condition": {
+                    "type": "FUNC",
+                    "ruleFunction": "hasFutureNumberForAgent",
+                    "value": [
+                        {
+                            "$ref": "#"
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "type": "Component",
+            "name": "DeclarationMedical",
+            "value": {
+                "$ref": "#/properties/declarationMedical"
+            }
+        }
+    ],
+    "rule": {
+        "effect": "HIDE",
+        "condition": {
+            "type": "FUNC",
+            "value": [
+                {
+                    "$ref": "#"
+                }
+            ],
+            "ruleFunction": "hideDeclarationMedicalQuestions"
+        }
+    }
+}

@@ -1,0 +1,37 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "Life Insurance",
+    "description": "Data schema describing Underwriter Triggers",
+    "type": "array",
+    "additionalProperties": false,
+    "aiDataEnrichment": [
+        {
+            "name": "setTriggersEnrichment"
+        }
+    ],
+    "aiValidation": {
+        "rule": "validateUWTriggers"
+    },
+    "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+            "objectName": {
+                "type": "string",
+                "aiTitle": "objectName"
+            },
+            "triggerName": {
+                "type": "string",
+                "aiTitle": "triggerName"
+            },
+            "confirmationDepartment": {
+                "type": "string",
+                "aiTitle": "confirmationDepartment"
+            },
+            "departament": {
+                "type": "string",
+                "aiTitle": "departaments"
+            }
+        }
+    }
+}

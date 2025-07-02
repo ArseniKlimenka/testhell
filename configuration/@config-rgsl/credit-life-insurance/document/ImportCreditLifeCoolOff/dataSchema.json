@@ -1,0 +1,34 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema",
+    "description": "Document guiding the import of funds.",
+    "type": "object",
+    "additionalProperties": false,
+    "aiValidation": [
+        {
+            "rule": "validationImportCreditLifePolicy"
+        }
+    ],
+    "properties": {
+        "file": {
+            "$ref": "component:FileUpload"
+        },
+        "summary": {
+            "type": "object",
+            "properties": {
+                "date": {
+                    "type": "string",
+                    "aiFormat": "date"
+                },
+                "documentState": {
+                    "type": "string"
+                },
+                "numberOfRowsImported": {
+                    "type": "number"
+                },
+                "numberOfRowsImportedError": {
+                    "type": "number"
+                }
+            }
+        }
+    }
+}

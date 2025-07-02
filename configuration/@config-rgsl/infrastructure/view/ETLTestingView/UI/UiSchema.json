@@ -1,0 +1,172 @@
+{
+    "id": "ETLTestingViewUiSchema.json",
+    "type": "Group",
+    "elements": [
+        {
+            "type": "GridLayout",
+            "numberOfColumns": 4,
+            "elements": [
+                {
+                    "type": "Component",
+                    "name": "OverviewHeader",
+                    "value": {
+                        "$ref": "#"
+                    }
+                },
+                {
+                    "type": "Group",
+                    "elements": [
+                        {
+                            "type": "TabLayout",
+                            "options": {
+                                "fixedPosition": false,
+                                "scrollableTabs": true
+                            },
+                            "elements": [
+                                {
+                                    "type": "Tab",
+                                    "elementId": "accountingTab",
+                                    "elements": [
+                                        {
+                                            "type": "Section",
+                                            "label": "Accounting",
+                                            "elements": [
+                                                {
+                                                    "type": "Section",
+                                                    "sectionLevel": 2,
+                                                    "label": "Grouping payment orders",
+                                                    "elements": [
+                                                        {
+                                                            "type": "Group",
+                                                            "width": 4,
+                                                            "elements": [
+                                                                {
+                                                                    "type": "Button",
+                                                                    "value": {
+                                                                        "$ref": "#"
+                                                                    },
+                                                                    "width": 1,
+                                                                    "onClick": [
+                                                                        {
+                                                                            "commandType": "executeAction",
+                                                                            "actionName": "groupPaymentOrdersETLService"
+                                                                        }
+                                                                    ],
+                                                                    "label": "Execute"
+                                                                }
+                                                            ]
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "type": "GroupSeparator"
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "title": "Accounting"
+                                },
+                                {
+                                    "type": "Tab",
+                                    "elementId": "billingTab",
+                                    "elements": [
+                                        {
+                                            "type": "Section",
+                                            "label": "Billing",
+                                            "elements": [
+                                                {
+                                                    "type": "Section",
+                                                    "sectionLevel": 2,
+                                                    "label": "Activate policies with fully paid first installment",
+                                                    "elements": [
+                                                        {
+                                                            "type": "Group",
+                                                            "width": 4,
+                                                            "elements": [
+                                                                {
+                                                                    "type": "Button",
+                                                                    "value": {
+                                                                        "$ref": "#"
+                                                                    },
+                                                                    "width": 1,
+                                                                    "onClick": [
+                                                                        {
+                                                                            "commandType": "executeAction",
+                                                                            "actionName": "activateContractsWithPaidFirstInstallment"
+                                                                        }
+                                                                    ],
+                                                                    "label": "Execute"
+                                                                }
+                                                            ]
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "type": "Section",
+                                                    "sectionLevel": 2,
+                                                    "label": "Payment plan based invoicing",
+                                                    "elements": [
+                                                        {
+                                                            "type": "Input",
+                                                            "label": "Contract number",
+                                                            "description": "Contract number",
+                                                            "value": {
+                                                                "$ref": "#/properties/Body/properties/contractNoPayPlanInv"
+                                                            },
+                                                            "width": 1,
+                                                            "rule": {
+                                                                "effect": "HIDE",
+                                                                "condition": {
+                                                                    "type": "LEAF",
+                                                                    "expectedValue": true,
+                                                                    "value": {
+                                                                        "$ref": "#/properties/Body/properties/jointInvoicing"
+                                                                    }
+                                                                }
+                                                            }
+                                                        },
+                                                        {
+                                                            "type": "Input",
+                                                            "control": "DatetimePicker",
+                                                            "label": "Include Instalments until",
+                                                            "description": "For installment based invoicing, please enter date until installments will be included in invoice.",
+                                                            "width": 1,
+                                                            "value": {
+                                                                "$ref": "#/properties/Body/properties/installmentsUntil"
+                                                            }
+                                                        },
+                                                        {
+                                                            "type": "Group",
+                                                            "elements": [
+                                                                {
+                                                                    "type": "Button",
+                                                                    "value": {
+                                                                        "$ref": "#"
+                                                                    },
+                                                                    "onClick": [
+                                                                        {
+                                                                            "commandType": "executeAction",
+                                                                            "actionName": "createPaymentPlanBasedInvoice"
+                                                                        }
+                                                                    ],
+                                                                    "label": "Generate invoices"
+                                                                }
+                                                            ],
+                                                            "label": "",
+                                                            "width": 1
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "title": "Billing"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,70 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "Life Insurance",
+    "description": "Data schema describing Risk",
+    "type": "object",
+    "additionalProperties": false,
+    "aiValidation": {
+        "rule": "validateEquityStrategy"
+    },
+    "properties": {
+        "strategy": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "strategyCode": {
+                    "type": "string",
+                    "aiTitle": "strategyCode"
+                },
+                "strategyName": {
+                    "type": "string",
+                    "aiTitle": "strategyName"
+                },
+                "payOffDescription": {
+                    "type": "string",
+                    "aiTitle": "payOffDescription"
+                },
+                "pipCategory": {
+                    "type": "string",
+                    "aiTitle": "pipCategory"
+                },
+                "payOffType": {
+                    "type": "string",
+                    "aiTitle": "payOffType"
+                },
+                "isin": {
+                    "type": "string",
+                    "aiTitle": "isin"
+                },
+                "couponRate": {
+                    "type": "number",
+                    "aiTitle": "couponRate"
+                },
+                "repaymentDate": {
+                    "type": "string",
+                    "aiFormat": "date",
+                    "aiTitle": "repaymentDate"
+                },
+                "emitent": {
+                    "type": "string",
+                    "aiTitle": "emitent"
+                }
+            }
+        },
+        "payOffType": {
+            "type": "string",
+            "aiTitle": "payOffType"
+        },
+        "share": {
+            "type": "number",
+            "minimum": 0.0001,
+            "maximum": 1,
+            "aiTitle": "share"
+        },
+        "sum": {
+            "type": "number",
+            "minimum": 0.0001,
+            "aiTitle": "sum"
+        }
+    }
+}

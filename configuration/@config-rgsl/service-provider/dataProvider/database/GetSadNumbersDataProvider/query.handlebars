@@ -1,0 +1,82 @@
+WITH SadNumbersByBranch AS (
+  SELECT 
+    DISTINCT Json_value(sp.body, '$.branch.branchId') branchID, 
+    SadNumbersByBranch.sadnumber 
+  FROM 
+    org.service_provider sp CROSS apply (
+      SELECT 
+        TOP 2 Json_value(spInner.body, '$.sadNumber') sadNumber 
+      FROM 
+        org.service_provider spInner 
+      WHERE 
+        1 = 1 
+        AND (
+          Json_value(spInner.body, '$.sadNumber') != '' 
+          OR NOT Json_value(spInner.body, '$.sadNumber') IS NULL
+        ) 
+        AND Json_value(spInner.body, '$.sadEndDate') > Getdate()
+        AND Json_value(spInner.body, '$.positionKFN') = '113'
+        AND Json_value(
+          spInner.body, '$.branch.branchId'
+        ) = Json_value(sp.body, '$.branch.branchId')
+    ) SadNumbersByBranch 
+  WHERE 
+    1 = 1 
+    AND (
+      Json_value(sp.body, '$.branch.branchId') != '' 
+      OR NOT Json_value(sp.body, '$.branch.branchId') IS NULL
+    ) 
+    AND Json_value(sp.body, '$.sadEndDate') > Getdate() 
+    AND Json_value(sp.body, '$.positionKFN') = '113'
+), 
+RollupSadnNmbersToOneRow AS (
+  SELECT 
+    DISTINCT s1.branchid, 
+    '[' + Stuff(
+      (
+        SELECT 
+          ', ' + sadnumber 
+        FROM 
+          SadNumbersByBranch s2 
+        WHERE 
+          s2.branchid = s1.branchid FOR xml path('')
+      ), 
+      1, 
+      2, 
+      ''
+    ) + ']' AS sadNumberArray 
+  FROM 
+    SadNumbersByBranch s1
+), 
+SeparateSadNumbers AS (
+  SELECT 
+    branchid, 
+    Json_value(sadnumberarray, '$[0]') sadNumber1, 
+    Json_value(sadnumberarray, '$[1]') sadNumber2 
+  FROM 
+    RollupSadnNmbersToOneRow
+), 
+FinalResultTable AS (
+  SELECT 
+    sp.service_provider_code, 
+	sp.BODY,
+    rt.sadnumber1, 
+    rt.sadnumber2 
+  FROM 
+    org.service_provider sp CROSS apply (
+      SELECT 
+        * 
+      FROM 
+        SeparateSadNumbers 
+      WHERE 
+        SeparateSadNumbers.branchid = Json_value(sp.body, '$.branch.branchId')
+    ) AS rt
+) 
+
+SELECT 
+  FinalResultTable.SERVICE_PROVIDER_CODE,
+  FinalResultTable.BODY,
+  FinalResultTable.sadNumber1 SAD_NUMBER_1,
+  FinalResultTable.sadNumber2 SAD_NUMBER_2 
+FROM 
+  FinalResultTable

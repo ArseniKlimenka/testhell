@@ -1,0 +1,27 @@
+{
+    "allowParallelExecution": false,
+    "mainDataSource": "EndowmentBeneficiariesDataSource",
+    "additionalDataSources": [
+    ],
+    "sinks": [
+        {
+            "ref": "CreatePaymentOrderSinkGroup"
+        }
+    ],
+    "completionSinks": [
+        {
+            "name": "FinishPOCreationForEndowment",
+            "documentTransition": {
+                "transition": {
+                    "transitionName": "FinishPOCreation",
+                    "configurationName": "Endowment",
+                    "configurationVersion": "1"
+                }
+            }
+        }
+    ],
+    "errorSinks": [
+        
+    ],
+    "version": "1"
+}

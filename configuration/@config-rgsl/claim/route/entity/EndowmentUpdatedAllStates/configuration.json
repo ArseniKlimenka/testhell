@@ -1,0 +1,35 @@
+{
+    "entityType": "UniversalDocument",
+    "condition": {
+        "events": [
+            "StatusChanged",
+            "Updated",
+            "Created"
+        ],
+        "configuration": {
+            "names": [
+                "Endowment"
+            ]
+        }
+    },
+    "sinks": [
+        {
+            "name": "SaveEndowmentData",
+            "database": {
+                "tables": [
+                    "EWT_IMPL.EWT_HUB",
+                    "EWT_IMPL.EWT_SAT",
+                    "EWT_IMPL.EWT_BENEFICIARY_SAT",
+                    "EWT_IMPL.EWT_BENEFICIARY_LINK",
+                    "EWT_IMPL.EWT_APPLICANT_LINK",
+                    "EWT_IMPL.EWT_APPLICANT_SAT",	
+                    "EWT_IMPL.EWT_RISK_SAT",
+                    "EWT_IMPL.EWT_PAYMENT_LINES_SAT",
+                    "EWT_IMPL.EWT_CONTRACT_SAT",
+                    "EWT_IMPL.EWT_CONTRACT_LINK"
+                ]
+            }
+        }
+    ],
+    "version": "1"
+}

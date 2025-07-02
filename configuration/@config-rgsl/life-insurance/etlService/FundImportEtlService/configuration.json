@@ -1,0 +1,78 @@
+{
+    "mainDataSource": "ImportStagingDataSource",
+    "allowParallelExecution": true,
+    "additionalDataSources": [
+        "GetFundImportDataSource",
+        "GetFundStatusDataSource",
+        "GetFundAllowImportDataSource"
+    ],
+    "sinks": [
+        {
+            "name": "CheckContract",
+            "fetch": {
+                "configuration": {
+                    "name": "GetContractFullDataDataSource"
+                }
+            }
+        },
+        {
+            "name": "GetFundReportDate",
+            "fetch": {
+                "configuration": {
+                    "name": "GetFundImportDataSource"
+                }
+            }
+        },
+        {
+            "name": "GetContractAmendments",
+            "fetch": {
+                "configuration": {
+                    "name": "ContractAmendmentsDataSource"
+                }
+            }
+        },
+        {
+            "name": "WriteSuccessStatus",
+            "database": {
+                "tables": [
+                    "BFX.IMPORT_RECORD_STATUS"
+                ]
+            }
+        },
+        {
+            "name": "WriteToFundTable",
+            "database": {
+                "tables": [
+                    "BFX_IMPL.FUND"
+                ]
+            }
+        }
+    ],
+    "errorSinks": [
+        {
+            "name": "WriteErrorStatus",
+            "database": {
+                "tables": [
+                    "BFX.IMPORT_RECORD_STATUS"
+                ]
+            }
+        }
+    ],
+    "completionSinks": [
+        {
+            "name": "FinishedImporting",
+            "documentTransition": {
+                "transition": {
+                    "transitionName": "FinishImporting",
+                    "configurationName": "FundImport",
+                    "configurationVersion": "1"
+                }
+            }
+        },
+        {
+            "name": "AwaitingDissolutionToAssetsSold",
+            "documentTransition": {}
+        }
+    ],
+    "version": "1"
+}

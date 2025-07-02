@@ -1,0 +1,4 @@
+INSERT INTO BFX_IMPL.GUARANTEED_INCOME (NAME, CODE, DESCRIPTION)
+VALUES ('INSURANCE_TERM_END', '1', N'В конце срока страхования'),
+       ('ANNUAL', '2', N'Ежегодно')
+GO

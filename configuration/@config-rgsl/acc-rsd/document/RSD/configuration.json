@@ -1,0 +1,93 @@
+{
+    "entityType": "UniversalDocument",
+    "dimensions": {},
+    "hideFromDashboard": false,
+    "ui": {
+        "layout": "DocumentLayoutMainAndSummaryOnly",
+        "composition": {
+            "SummaryContent": "SummaryContent",
+            "MainContent": "MainContent"
+        }
+    },
+    "validFrom": "2000-01-01",
+    "states": [
+        {
+            "name": "Draft",
+            "actors": [
+                {
+                    "actor": "Accountant",
+                    "operations": [
+                    ],
+                    "transitions": [
+                        "Draft_To_Completing",
+                        "Draft_To_Annulled"
+                    ]
+                },
+                {
+                    "actor": "ChiefAccountant",
+                    "operations": [
+                        "Save"
+                    ],
+                    "transitions": [
+                        "Draft_To_Completing",
+                        "Draft_To_Annulled"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Completing",
+            "actors": [
+                {
+                    "actor": "Accountant",
+                    "operations": [],
+                    "transitions": []
+                },
+                {
+                    "actor": "ChiefAccountant",
+                    "operations": [],
+                    "transitions": []
+                }
+            ]
+        },
+        {
+            "name": "Completed",
+            "actors": [
+                {
+                    "actor": "Accountant",
+                    "operations": [],
+                    "transitions": []
+                },
+                {
+                    "actor": "ChiefAccountant",
+                    "operations": [],
+                    "transitions": []
+                }
+            ]
+        },
+        {
+            "name": "Annulled",
+            "actors": [
+                {
+                    "actor": "Accountant",
+                    "operations": [],
+                    "transitions": []
+                },
+                {
+                    "actor": "ChiefAccountant",
+                    "operations": [],
+                    "transitions": []
+                }
+            ]
+        }
+    ],
+    "components": [],
+    "transitions": {},
+    "attachments": [
+        {
+            "attachmentType": "otherFiles",
+            "flow": "Incoming"
+        }
+    ],
+    "version": "1"
+}

@@ -1,0 +1,30 @@
+{
+    "type": "Section",
+    "label": "Party Role",
+    "collapsing": {
+        "initial": false,
+        "enabled": true
+    },
+    "elements": [
+        {
+            "type": "Dropdown",
+            "elementId" : "hasPartyRoleChanged-id",
+            "label": "partyRole",
+            "value": {
+                "$ref": "#/properties/partyRole"
+            },
+            "filter": "partyRoleFilter",
+            "width": 4,
+            "onValueChanged": [
+                {
+                    "commandType": "executeAction",
+                    "actionName": "partyRoleChanged"
+                },
+                {
+                    "commandType": "raiseEvent",
+                    "eventName": "HAS_PARTY_ROLE_CHANGED"
+                }
+            ]
+        }
+    ]
+}

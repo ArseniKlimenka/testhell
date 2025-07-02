@@ -1,0 +1,39 @@
+WITH SadNumberBySKK AS (
+  select 
+    Json_value(sp.body, '$.SKK') SKK, 
+    Json_value(sp.body, '$.sadNumber') SAD_NUMBER 
+  from 
+    ORG.SERVICE_PROVIDER sp 
+  WHERE 
+    1 = 1 
+    AND (
+      Json_value(sp.body, '$.SKK') != '' 
+      OR NOT Json_value(sp.body, '$.SKK') IS NULL
+    ) 
+    AND Json_value(sp.body, '$.sadEndDate') > Getdate() 
+    AND (
+      Json_value(sp.body, '$.positionKFN') = '101' 
+      OR Json_value(sp.body, '$.positionKFN') = '986'
+    )
+), 
+FinalResultTable AS (
+  SELECT 
+    sp.SERVICE_PROVIDER_CODE, 
+    sp.BODY, 
+    rt.SAD_NUMBER 
+  FROM 
+    org.service_provider sp CROSS apply (
+      SELECT 
+        * 
+      FROM 
+        SadNumberBySKK 
+      WHERE 
+        SadNumberBySKK.SKK = Json_value(sp.body, '$.SKK')
+    ) AS rt
+) 
+SELECT 
+  FinalResultTable.SERVICE_PROVIDER_CODE, 
+  FinalResultTable.BODY, 
+  FinalResultTable.SAD_NUMBER 
+FROM 
+  FinalResultTable

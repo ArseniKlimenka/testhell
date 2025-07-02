@@ -1,0 +1,13 @@
+delete from acc_impl.RSD_JOB_PP_DATA where RSD_JOB_PP_DATA_ID in
+(
+	select min(RSD_JOB_PP_DATA_ID) as MIN_ID--, count(*), CONTRACT_NUMBER, LOAD_DATE, DUE_DATE, OBJECT_CODE, ITEM_NO
+	from
+		acc_impl.RSD_JOB_PP_DATA t
+	--where t.CONTRACT_NUMBER = '13400-56000842'
+	group by CONTRACT_NUMBER, LOAD_DATE, DUE_DATE, OBJECT_CODE, ITEM_NO
+	having count(*) > 1
+)
+go
+
+create unique index UI_RSD_JOB_PP_DATA on acc_impl.RSD_JOB_PP_DATA (CONTRACT_NUMBER, LOAD_DATE, DUE_DATE, OBJECT_CODE, ITEM_NO)
+go

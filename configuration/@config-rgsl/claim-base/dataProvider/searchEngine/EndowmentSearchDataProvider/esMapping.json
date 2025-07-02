@@ -1,0 +1,287 @@
+{
+    "mappings": {
+        "dynamic": "strict",
+        "properties": {
+            "id": {
+                "type": "keyword"
+            },
+            "number": {
+                "type": "keyword"
+            },
+            "stateCode": {
+                "type": "keyword"
+            },
+            "versionState": {
+                "type": "keyword"
+            },
+            "metadata": {
+                "properties": {
+                    "createdOn": {
+                        "type": "date"
+                    },
+                    "createdBy": {
+                        "type": "keyword"
+                    },
+                    "createdByDisplayName": {
+                        "type": "keyword"
+                    },
+                    "updatedOn": {
+                        "type": "date"
+                    },
+                    "updatedBy": {
+                        "type": "keyword"
+                    },
+                    "recordVersion": {
+                        "type": "integer"
+                    },
+                    "entityType": {
+                        "type": "keyword"
+                    },
+                    "configuration": {
+                        "properties": {
+                            "name": {
+                                "type": "keyword"
+                            },
+                            "version": {
+                                "type": "keyword"
+                            },
+                            "dimensions": {
+                                "dynamic": "false",
+                                "type": "object"
+                            }
+                        }
+                    }
+                }
+            },
+            "body": {
+                "dynamic": "strict",
+                "properties": {
+                    "contractNumber": {
+                        "type": "keyword"
+                    },
+                    "risk": {
+                        "dynamic": "strict",
+                        "properties": {
+                            "riskCode": {
+                                "type": "keyword"
+                            },
+                            "riskInsuredSum": {
+                                "type": "scaled_float",
+                                "scaling_factor": 10000000
+                            },
+                            "riskShortDescription": {
+                                "type": "text",
+                                "index": false
+                            }
+                        }
+                    },
+                    "risksInsuredSumByPeriod": {
+                        "dynamic": "strict",
+                        "properties": {
+                            "riskCode": {
+                                "type": "keyword"
+                            },
+                            "periods": {
+                                "dynamic": "strict",
+                                "properties": {
+                                    "insuredSum": {
+                                        "type": "scaled_float",
+                                        "scaling_factor": 10000000
+                                    },
+                                    "startDate": {
+                                        "type": "date"
+                                    },
+                                    "endDate": {
+                                        "type": "date"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "applicationInfo": {
+                        "dynamic": "strict",
+                        "properties": {
+                            "applicantCode": {
+                                "type": "keyword"
+                            },
+                            "statementReceivedDate": {
+                                "type": "date"
+                            },
+                            "statementApplicationDate": {
+                                "type": "date"
+                            },
+                            "eventDate": {
+                                "type": "date"
+                            }
+                        }
+                    },
+                    "contractCurrency": {
+                        "type": "keyword"
+                    },
+                    "eventType": {
+                        "dynamic": "strict",
+                        "properties": {
+                            "code": {
+                                "type": "keyword"
+                            },
+                            "description": {
+                                "type": "text",
+                                "index": false
+                            }
+                        }
+                    },
+                    "eventReason": {
+                        "dynamic": "strict",
+                        "properties": {
+                            "code": {
+                                "type": "keyword"
+                            },
+                            "description": {
+                                "type": "text",
+                                "index": false
+                            }
+                        }
+                    },
+                    "endowmentBeneficiaries": {
+                        "dynamic": "strict",
+                        "properties": {
+                            "partyCode": {
+                                "type": "keyword"
+                            },
+                            "beneficiaryReason": {
+                                "dynamic": "strict",
+                                "properties": {
+                                    "code": {
+                                        "type": "keyword"
+                                    },
+                                    "description": {
+                                        "type": "text",
+                                        "index": false
+                                    }
+                                }
+                            },
+                            "beneficiaryPaymentType": {
+                                "dynamic": "strict",
+                                "properties": {
+                                    "code": {
+                                        "type": "keyword"
+                                    },
+                                    "description": {
+                                        "type": "text",
+                                        "index": false
+                                    }
+                                }
+                            },
+                            "amountToPayPercetage": {
+                                "type": "scaled_float",
+                                "scaling_factor": 10000000
+                            },
+                            "bankAccount": {
+                                "dynamic": "strict",
+                                "properties": {
+                                    "bankId": {
+                                        "type": "keyword"
+                                    },
+                                    "bankName": {
+                                        "type": "text",
+                                        "index": false
+                                    },
+                                    "bankBic": {
+                                        "type": "keyword"
+                                    },
+                                    "bankCorrespondentAccount": {
+                                        "type": "keyword"
+                                    },
+                                    "SWIFT": {
+                                        "type": "keyword"
+                                    },
+                                    "IBAN": {
+                                        "type": "keyword"
+                                    },
+                                    "foreignBank": {
+                                        "type": "boolean"
+                                    },
+                                    "currency": {
+                                        "dynamic": "strict",
+                                        "properties": {
+                                            "currencyCode": {
+                                                "type": "keyword"
+                                            },
+                                            "currencyDesc": {
+                                                "type": "text",
+                                                "index": false
+                                            },
+                                            "currencyNumericCode": {
+                                                "type": "keyword"
+                                            }
+                                        }
+                                    },
+                                    "number": {
+                                        "type": "keyword"
+                                    },
+                                    "openingDate": {
+                                        "type": "date"
+                                    },
+                                    "closingDate": {
+                                        "type": "date"
+                                    },
+                                    "bankInn": {
+                                        "type": "keyword"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "paymentLines": {
+                        "dynamic": "strict",
+                        "properties": {
+                            "lineType": {
+                                "type": "keyword"
+                            },
+                            "lineAmountInContractCurrency": {
+                                "type": "scaled_float",
+                                "scaling_factor": 10000000
+                            },
+                            "lineAmountInRubCurrency": {
+                                "type": "scaled_float",
+                                "scaling_factor": 10000000
+                            }
+                        }
+                    },
+                    "approvalConclusions": {
+                        "dynamic": "strict",
+                        "properties": {
+                            "insuranceMethodologyConclusion": {
+                                "type": "text",
+                                "index": false
+                            },
+                            "actuaryConclusion": {
+                                "type": "text",
+                                "index": false
+                            },
+                            "legalConclusion": {
+                                "type": "text",
+                                "index": false
+                            },
+                            "securityConclusion": {
+                                "type": "text",
+                                "index": false
+                            },
+                            "complianceConclusion": {
+                                "type": "text",
+                                "index": false
+                            }
+                        }
+                    },
+                    "fixedExchangeRate": {
+                        "type": "scaled_float",
+                        "scaling_factor": 10000000
+                    },
+                    "useFixedExchangeRate": {
+                        "type": "boolean"
+                    }
+                }
+            }
+        }
+    }
+}

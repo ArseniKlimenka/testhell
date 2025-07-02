@@ -1,0 +1,19 @@
+{
+    "sinks": [
+        {
+            "name": "CheckAndPostPendingPayments",
+            "class": {
+                "className": "Adacta.AdInsure.RGSL.Accounting.API.Shared.CashFlow.Allocation.Services.IPendingPaymentAppService, Adacta.AdInsure.RGSL.Accounting.API",
+                "methodName": "CheckAndPost"
+            }
+        },
+        {
+            "name": "WriteLog",
+            "database": {
+                "tables": [
+                    "ACC_IMPL.PENDING_PAYMENT_ETL_LOG"
+                ]
+            }
+        }
+    ]
+}

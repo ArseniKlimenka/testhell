@@ -1,0 +1,113 @@
+{
+    "type": "Group",
+    "elements": [
+        {
+            "type": "Section",
+            "label": "General",
+            "width": 2,
+            "elements": [
+                {
+                    "type": "Input",
+                    "label": "ETL service name",
+                    "value": {
+                        "$ref": "#/properties/request/properties/data/properties/criteria/properties/etlConfigurationCodeName"
+                    },
+                    "width": 1
+                },
+                {
+                    "type": "Input",
+                    "label": "Execution id",
+                    "value": {
+                        "$ref": "#/properties/request/properties/data/properties/criteria/properties/taskId"
+                    },
+                    "width": 1
+                },
+                {
+                    "type": "Dropdown",
+                    "multiple": true,
+                    "label": "State",
+                    "value": {
+                        "$ref": "#/properties/request/properties/data/properties/criteria/properties/states"
+                    },
+                    "width": 1
+                }
+            ]
+        },
+        {
+            "type": "Section",
+            "label": "Date filters",
+            "width": 2,
+            "elements": [
+                {
+                    "type": "Input",
+                    "control": "DateRange",
+                    "dateFrom": {
+                        "type": "Input",
+                        "label": "Requested on from",
+                        "width": 1,
+                        "value": {
+                            "$ref": "#/properties/request/properties/data/properties/criteria/properties/requestedOnFrom"
+                        },
+                        "control": "DatetimePicker"
+                    },
+                    "dateTo": {
+                        "type": "Input",
+                        "label": "Requested on to",
+                        "width": 1,
+                        "value": {
+                            "$ref": "#/properties/request/properties/data/properties/criteria/properties/requestedOnTo"
+                        },
+                        "control": "DatetimePicker"
+                    },
+                    "width": 2
+                },
+                {
+                    "type": "Input",
+                    "control": "DateRange",
+                    "dateFrom": {
+                        "type": "Input",
+                        "label": "Started on from",
+                        "width": 1,
+                        "value": {
+                            "$ref": "#/properties/request/properties/data/properties/criteria/properties/startedOnFrom"
+                        },
+                        "control": "DatetimePicker"
+                    },
+                    "dateTo": {
+                        "type": "Input",
+                        "label": "Started on to",
+                        "width": 1,
+                        "value": {
+                            "$ref": "#/properties/request/properties/data/properties/criteria/properties/startedOnTo"
+                        },
+                        "control": "DatetimePicker"
+                    },
+                    "width": 2
+                },
+                {
+                    "type": "Input",
+                    "control": "DateRange",
+                    "dateFrom": {
+                        "type": "Input",
+                        "label": "Completed on from",
+                        "width": 1,
+                        "value": {
+                            "$ref": "#/properties/request/properties/data/properties/criteria/properties/completedOnFrom"
+                        },
+                        "control": "DatetimePicker"
+                    },
+                    "dateTo": {
+                        "type": "Input",
+                        "label": "Completed on to",
+                        "width": 1,
+                        "value": {
+                            "$ref": "#/properties/request/properties/data/properties/criteria/properties/completedOnTo"
+                        },
+                        "control": "DatetimePicker"
+                    },
+                    "width": 2
+                }
+            ]
+        }
+    ]
+}

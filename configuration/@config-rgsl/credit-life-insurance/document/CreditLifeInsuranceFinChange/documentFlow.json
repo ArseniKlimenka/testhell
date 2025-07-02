@@ -1,0 +1,72 @@
+{
+    "processType": "AccumulatedLifeInsuranceNonFinChange",
+    "actors": [
+        "Operations",
+        "System"
+    ],
+    "initialState": "OperationsApproval",
+    "states": [
+        {
+            "name": "Draft",
+            "operations": [
+                {
+                    "name": "Save"
+                }
+            ]
+        },
+        {
+            "name": "OperationsApproval",
+            "operations": [
+                {
+                    "name": "Save"
+                }
+            ]
+        },
+        {
+            "name": "Activated",
+            "appliesVersion": true
+        },
+        {
+            "name": "Cancelled",
+            "operations": [
+                {
+                    "name": "Save"
+                }
+            ],
+            "discardsVersion": true
+        }
+    ],
+    "transitions": [
+        {
+            "name": "Draft_to_Cancelled",
+            "from": "Draft",
+            "to": "Cancelled",
+            "allowOnValidationErrors": {
+                "all": true
+            }
+        },
+        {
+            "name": "Draft_to_OperationsApproval",
+            "from": "Draft",
+            "to": "OperationsApproval"
+        },
+        {
+            "name": "OperationsApproval_to_Cancelled",
+            "from": "OperationsApproval",
+            "to": "Cancelled",
+            "allowOnValidationErrors": {
+                "all": true
+            },
+            "exclusiveToAssignedUser": true
+        },
+        {
+            "name": "OperationsApproval_to_Activated",
+            "from": "OperationsApproval",
+            "to": "Activated",
+            "allowOnValidationErrors": {
+                "all": false
+            },
+            "exclusiveToAssignedUser": true
+        }
+    ]
+}

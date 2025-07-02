@@ -1,0 +1,131 @@
+{
+    "processType": "CommissionAct",
+    "initialState": "Draft",
+    "actors": [
+        "ViewerCommissionAct",
+        "UserCommissionAct",
+        "AdminCommissionAct",
+        "System"
+    ],
+    "states": [
+        {
+            "name": "Draft",
+            "operations": [
+                {
+                    "name": "Save"
+                }
+            ]
+        },
+        {
+            "name": "Generating",
+            "operations": []
+        },
+        {
+            "name": "Deleted",
+            "operations": []
+        },
+        {
+            "name": "Confirming",
+            "operations": []
+        },
+        {
+            "name": "Confirmed",
+            "operations": []
+        },
+        {
+            "name": "Approved",
+            "operations": [
+                {
+                    "name": "Save"
+                }
+            ]
+        },
+        {
+            "name": "CompletedPayOrder",
+            "operations": []
+        },
+        {
+            "name": "CompletedPaid",
+            "operations": []
+        },
+        {
+            "name": "CompletedPaidNegative",
+            "operations": []
+        },
+        {
+            "name": "Annulled",
+            "operations": []
+        }
+    ],
+    "transitions": [
+        {
+            "name": "Draft_To_Confirming",
+            "from": "Draft",
+            "to": "Confirming"
+        },
+        {
+            "name": "Draft_To_Deleted",
+            "from": "Draft",
+            "to": "Deleted",
+            "allowOnValidationErrors": {
+                "all": true
+            }
+        },
+        {
+            "name": "Draft_To_Generating",
+            "from": "Draft",
+            "to": "Generating",
+            "broadcastEvent": {
+                "serverSideEvents": true
+            }
+        },
+        {
+            "name": "Generating_To_Draft",
+            "from": "Generating",
+            "to": "Draft",
+            "broadcastEvent": {
+                "serverSideEvents": true
+            }
+        },
+        {
+            "name": "Confirming_To_Draft",
+            "from": "Confirming",
+            "to": "Draft"
+        },
+        {
+            "name": "Confirming_To_Confirmed",
+            "from": "Confirming",
+            "to": "Confirmed"
+        },
+        {
+            "name": "Confirmed_To_Approved",
+            "from": "Confirmed",
+            "to": "Approved"
+        },
+        {
+            "name": "Approved_To_CompletedPayOrder",
+            "from": "Approved",
+            "to": "CompletedPayOrder"
+        },
+        {
+            "name": "Approved_To_CompletedPaid",
+            "from": "Approved",
+            "to": "CompletedPaid"
+        },
+        {
+            "name": "Approved_To_CompletedPaidNegative",
+            "from": "Approved",
+            "to": "CompletedPaidNegative"
+        },
+        {
+            "name": "CompletedPaidNegative_To_Approved",
+            "from": "CompletedPaidNegative",
+            "to": "Approved"
+        },
+        {
+            "name": "Approved_To_Annulled",
+            "from": "Approved",
+            "to": "Annulled"
+        }
+    ]
+}

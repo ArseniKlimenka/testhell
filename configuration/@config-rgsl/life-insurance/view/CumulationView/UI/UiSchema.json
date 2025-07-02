@@ -1,0 +1,195 @@
+{
+    "type": "Group",
+    "elements": [
+        {
+            "type": "GridLayout",
+            "numberOfColumns": 12,
+            "elements": [
+                {
+                    "type": "Group",
+                    "elements": [
+                        {
+                            "type": "TreeTable",
+                            "elementId": "cumulationResultTable",
+                            "mode": "DataSource",
+                            "subArrayDataPath": "#/properties/documents",
+                            "columns": [
+                                {
+                                    "title": "riskGroupDescription",
+                                    "skipTranslate": true,
+                                    "mainArray": true,
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "style": {
+                                            "width": "extra-small"
+                                        },
+                                        "allowMultiLine": true,
+                                        "textProperties": [
+                                            "left",
+                                            "bold"
+                                        ],
+                                        "value": {
+                                            "$ref": "#/properties/riskGroupDescription"
+                                        }
+                                    }
+                                },
+                                {
+                                    "title": "cumulationInsuredSum",
+                                    "name": "cumulationInsuredSum",
+                                    "mainArray": true,
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "defaultValue": "",
+                                        "template": "{{#style 'right'}}{{expr cumulationInsuredSum 'n:2'}}{{/style}}",
+                                        "value": {
+                                            "$ref": "#"
+                                        }
+                                    }
+                                },
+                                {
+                                    "title": "amountDescription",
+                                    "skipTranslate": true,
+                                    "mainArray": true,
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "value": {
+                                            "$ref": "#/properties/amountDescription"
+                                        }
+                                    }
+                                },
+                                {
+                                    "title": "isLimitExceededDescription",
+                                    "skipTranslate": true,
+                                    "mainArray": true,
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "value": {
+                                            "$ref": "#/properties/isLimitExceededDescription"
+                                        }
+                                    }
+                                },
+                                {
+                                    "title": "partyFullName",
+                                    "skipTranslate": true,
+                                    "mainArray": true,
+                                    "cellContent": {
+                                        "type": "Link",
+                                        "targetType": "Entity",
+                                        "value": {
+                                            "mapping": "PreparePartyLink",
+                                            "$ref": "#/properties"
+                                        },
+                                        "content": {
+                                            "text": {
+                                                "type": "OutputText",
+                                                "template": "{{expr partyFullName}}",
+                                                "value": {
+                                                    "$ref": "#"
+                                                }
+                                            }
+                                        },
+                                        "rule": {
+                                            "effect": "STYLE",
+                                            "condition": {
+                                                "type": "FUNC",
+                                                "style": {
+                                                    "margin": "-4.5px -10px",
+                                                    "padding": "0 10px 0 0"
+                                                },
+                                                "value": [
+                                                    {
+                                                        "$ref": "#"
+                                                    }
+                                                ],
+                                                "ruleFunction": "applyDocumentStyle"
+                                            }
+                                        }
+                                    }
+                                },
+                                {
+                                    "title": "documentNumber",
+                                    "skipTranslate": true,
+                                    "cellContent": {
+                                        "type": "Link",
+                                        "targetType": "Entity",
+                                        "value": {
+                                            "mapping": "PrepareDocumentLink",
+                                            "$ref": "#/properties"
+                                        },
+                                        "content": {
+                                            "text": {
+                                                "type": "OutputText",
+                                                "template": "{{expr documentNumber}}",
+                                                "value": {
+                                                    "$ref": "#"
+                                                }
+                                            }
+                                        },
+                                        "rule": {
+                                            "effect": "STYLE",
+                                            "condition": {
+                                                "type": "FUNC",
+                                                "style": {
+                                                    "margin": "-4.5px -10px",
+                                                    "padding": "0 10px 0 0"
+                                                },
+                                                "value": [
+                                                    {
+                                                        "$ref": "#"
+                                                    }
+                                                ],
+                                                "ruleFunction": "applyDocumentStyle"
+                                            }
+                                        }
+                                    }
+                                },
+                                {
+                                    "title": "documentStateDescription",
+                                    "skipTranslate": true,
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "value": {
+                                            "$ref": "#/properties/documentStateDescription"
+                                        }
+                                    }
+                                },
+                                {
+                                    "title": "documentRiskDescription",
+                                    "skipTranslate": true,
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "value": {
+                                            "$ref": "#/properties/documentRiskDescription"
+                                        }
+                                    }
+                                },
+                                {
+                                    "title": "documentRiskInsuredSum",
+                                    "name": "documentRiskInsuredSum",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "defaultValue": "",
+                                        "template": "{{#style 'right'}}{{expr documentRiskInsuredSum 'n:2'}}{{/style}}",
+                                        "value": {
+                                            "$ref": "#"
+                                        }
+                                    }
+                                },
+                                {
+                                    "title": "documentCurrencyCode",
+                                    "skipTranslate": true,
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "value": {
+                                            "$ref": "#/properties/documentCurrencyCode"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

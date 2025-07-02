@@ -1,0 +1,37 @@
+{
+    "entityType": "Contract",
+    "condition": {
+        "events": [
+            "ActivityCreatedEvent"
+        ]
+    },
+    "sinks": [
+        {
+            "name": "GetContractVersions",
+            "fetch": {
+                "configuration": {
+                    "name": "ContractVersionsDataSource"
+                }
+            }
+        },
+        {
+            "name": "ActivityMovedToUnderwriting2Notification",
+            "notification": {
+                "notificationName": "ActivityMovedToUnderwriting2Notification"
+            }
+        },
+        {
+            "name": "ActivityCreatedNotification",
+            "notification": {
+                "notificationName": "ActivityCreatedNotification"
+            }
+        },
+        {
+            "name": "ActivityCreatedUKSPNotification",
+            "notification": {
+                "notificationName": "ActivityCreatedUKSPNotification"
+            }
+        }
+    ],
+    "version": "1"
+}

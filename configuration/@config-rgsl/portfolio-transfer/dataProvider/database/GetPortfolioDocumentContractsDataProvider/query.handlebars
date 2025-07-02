@@ -1,0 +1,26 @@
+select
+	polh.CONTRACT_NUMBER,
+	ptds.STATE,
+	ptds.ERROR,
+	(
+		select
+			ptdps.BANK_STATEMENT_ITEM_ID as bankStatementItemId,
+			ptdps.PAY_AMOUNT as payAmount,
+			ptdps.DOC_AMOUNT as docAmount
+		from acc_impl.PORTFOLIO_TRANSFER_DOCUMENT_PAYMENT_SAT ptdps
+		where ptdps.PORTFOLIO_TRANSFER_DOCUMENT_PAYMENT_HKEY = ptds.PORTFOLIO_TRANSFER_DOCUMENT_HKEY
+		for json path
+	) as PAYMENTS
+from
+	acc_impl.PORTFOLIO_TRANSFER_HUB pth
+	inner join acc_impl.PORTFOLIO_TRANSFER_DOCUMENT_LINK ptdl on ptdl.PORTFOLIO_TRANSFER_HKEY = pth.PORTFOLIO_TRANSFER_HKEY
+	inner join acc_impl.PORTFOLIO_TRANSFER_DOCUMENT_SAT_LATEST ptds on ptds.PORTFOLIO_TRANSFER_DOCUMENT_HKEY = ptdl.PORTFOLIO_TRANSFER_DOCUMENT_HKEY
+	inner join pas_impl.POLICY_HUB polh on polh.POLICY_HKEY = ptdl.POLICY_HKEY
+where 1=1
+	and pth.PORTFOLIO_TRANSFER_NUMBER = @documentNo
+{{#if parameters.stateCodes}}
+	and ptds.STATE in (@stateCodes)
+{{/if}}
+{{#if parameters.notInStateCodes}}
+	and ptds.STATE not in (@notInStateCodes)
+{{/if}}

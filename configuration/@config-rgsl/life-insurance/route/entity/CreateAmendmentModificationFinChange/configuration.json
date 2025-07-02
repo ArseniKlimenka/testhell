@@ -1,0 +1,142 @@
+{
+    "entityType": "UniversalDocument",
+    "condition": {
+        "events": [
+            "StatusChanged"
+        ],
+        "configuration": {
+            "names": [
+                "LifeInsuranceRequest"
+            ]
+        },
+        "documentStates": [
+            "CreateFinancialAmendment",
+            "AmendmentsCreated"
+        ]
+    },
+    "allowMultipleTransactions": true,
+    "sinks": [
+        {
+            "name": "GetExistingRequestAttachments",
+            "fetch": {
+                "configuration": {
+                    "name": "EntitiesAttachmentDataSource"
+                }
+            }
+        },
+        {
+            "name": "GetContract",
+            "fetch": {
+                "configuration": {
+                    "name": "ContractVersionsDataSource"
+                }
+            }
+        },
+        {
+            "name": "CreateAccumulatedLifeFinChangeAmendment",
+            "documentRelation": {
+                "relation": {
+                    "relationName": "AccumulatedLifeInsurancePolicyCreateFinancialChangeAmendmentRelation",
+                    "configurationName": "AccumulatedLifeInsurancePolicy",
+                    "configurationVersion": "1"
+                }
+            }
+        },
+        {
+            "name": "GetRequestTransitionDate",
+            "fetch": {
+                "configuration": {
+                    "name": "DocumentStateHistoryDataSource"
+                }
+            }
+        },
+        {
+            "name": "CreateEquityLifeFinChangeAmendment",
+            "documentRelation": {
+                "relation": {
+                    "relationName": "LifeInsuranceRequestCreateFinancialChangeAmendmentRelation",
+                    "configurationName": "EquityLifeInsurancePolicy",
+                    "configurationVersion": "1"
+                }
+            }
+        },
+        {
+            "name": "AmendmentToWaitingForPayment",
+            "documentTransition": {
+                "transition": {
+                    "transitionName": "OperationsApproval_to_WaitingForPayment",
+                    "configurationName": "EquityLifeInsuranceFinChange",
+                    "configurationVersion": "1"
+                }
+            }
+        },
+        {
+            "name": "CreateInvestmentLifeFinChangeAmendment",
+            "documentRelation": {
+                "relation": {
+                    "relationName": "InvestmentLifeInsurancePolicyCreateFinancialChangeAmendmentRelation",
+                    "configurationName": "InvestmentLifeInsurancePolicy",
+                    "configurationVersion": "1"
+                }
+            }
+        },
+        {
+            "name": "CreateCreditLifeFinChangeAmendment",
+            "documentRelation": {
+                "relation": {
+                    "relationName": "CreditLifeInsurancePolicyCreateFinancialChangeAmendmentRelation",
+                    "configurationName": "CreditLifeInsurancePolicy",
+                    "configurationVersion": "1"
+                }
+            }
+        },
+        {
+            "name": "CreateRiskLifeFinChangeAmendment",
+            "documentRelation": {
+                "relation": {
+                    "relationName": "RiskLifeInsurancePolicyCreateFinancialChangeAmendmentRelation",
+                    "configurationName": "RiskLifeInsurancePolicy",
+                    "configurationVersion": "1"
+                }
+            }
+        },
+        {
+            "name": "CreateMedLifeFinChangeAmendment",
+            "documentRelation": {
+                "relation": {
+                    "relationName": "MedLifeInsurancePolicyCreateFinancialChangeAmendmentRelation",
+                    "configurationName": "MedLifeInsurancePolicy",
+                    "configurationVersion": "1"
+                }
+            }
+        },
+        {
+            "name": "CreateAccidentLifeFinChangeAmendment",
+            "documentRelation": {
+                "relation": {
+                    "relationName": "AccidentLifeInsurancePolicyCreateFinancialChangeAmendmentRelation",
+                    "configurationName": "AccidentLifeInsurancePolicy",
+                    "configurationVersion": "1"
+                }
+            }
+        },
+        {
+            "name": "GetAmendmentId",
+            "fetch": {
+                "configuration": {
+                    "name": "ContractVersionsDataSource"
+                }
+            }
+        },
+        {
+            "ref": "CopyAttachmentsSinkGroup"
+        },
+        {
+            "name": "RequestToCreateAmendment",
+            "documentTransition": {
+                "transition": {}
+            }
+        }
+    ],
+    "version": "1"
+}

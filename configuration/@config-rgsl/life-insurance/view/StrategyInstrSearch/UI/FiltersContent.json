@@ -1,0 +1,72 @@
+{
+    "type": "Group",
+    "formProperties": {
+        "events": {
+            "onLoad": "onLoadStrategyInstrSearchView"
+        }
+    },
+    "elements": [
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "Input",
+                    "label": "productCode",
+                    "width": 1,
+                    "value": {
+                        "$ref": "#/properties/request/properties/data/properties/criteria/properties/productCode"
+                    },
+                    "elementId": "productCodeId"
+                },
+                {
+                    "type": "Input",
+                    "label": "issueDate",
+                    "width": 1,
+                    "value": {
+                        "$ref": "#/properties/request/properties/data/properties/criteria/properties/issueDate"
+                    },
+                    "elementId": "issueDateId",
+                    "control": "DatetimePicker"
+                }
+            ]
+        },
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "Input",
+                    "label": "productDescription",
+                    "width": 1,
+                    "value": {
+                        "$ref": "#/properties/request/properties/data/properties/criteria/properties/productDescription"
+                    },
+                    "elementId": "productDescriptionId"
+                },
+                {
+                    "type": "Input",
+                    "label": "strategyCode",
+                    "width": 1,
+                    "value": {
+                        "$ref": "#/properties/request/properties/data/properties/criteria/properties/strategyCode"
+                    },
+                    "elementId": "strategyCodeId"
+                },
+                {
+                    "type": "Input",
+                    "label": "version",
+                    "width": 1,
+                    "value": {
+                        "$ref": "#/properties/request/properties/data/properties/criteria/properties/version"
+                    },
+                    "onValueChanged": [
+                        {
+                            "commandType": "executeAction",
+                            "actionName": "onChangeVersion"
+                        }
+                    ],
+                    "elementId": "versionId"
+                }
+            ]
+        }
+    ]
+}

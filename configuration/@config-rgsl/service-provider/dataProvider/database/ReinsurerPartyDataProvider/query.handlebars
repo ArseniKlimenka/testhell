@@ -1,0 +1,10 @@
+select
+  ptl.FULL_NAME
+from
+  ORG_IMPL.SERVICE_PROVIDER_INFO_SAT_LATEST spl,
+  PTY_IMPL.PARTY_HUB pth,
+  PTY_IMPL.PARTY_INFO_SAT_LATEST ptl
+where spl.CONFIGURATION_CODE_NAME = 'Reinsurer'
+  and spl.PARTY_CODE = pth.PARTY_CODE
+  and pth.PARTY_HKEY = ptl.PARTY_INFO_HKEY
+  and spl.PARTNER_CODE = @reinsurerCode

@@ -1,0 +1,220 @@
+{
+    "type": "Group",
+    "width": 12,
+    "elements": [
+        {
+            "type": "Group",
+            "width": 12,
+            "elements": [
+                {
+                    "type": "Lookup",
+                    "label": "Contract",
+                    "value": {
+                        "$ref": "#"
+                    },
+                    "width": 3,
+                    "dialogButton": {
+                        "icon": {
+                            "name": "Search",
+                            "color": "BackgroundColor",
+                            "size": "Medium"
+                        }
+                    },
+                    "clearButton": {
+                        "clearAction": "contractClearAction",
+                        "icon": {
+                            "name": "Times",
+                            "size": "Medium",
+                            "color": "BackgroundColor"
+                        }
+                    },
+                    "readOnly": false,
+                    "dialog": {
+                        "viewReference": {
+                            "configurationCodeName": "ContractSearch",
+                            "configurationVersion": "1",
+                            "configurationConceptType": "SearchView"
+                        },
+                        "onLoad": "contractSearchOnLoad"
+                    },
+                    "onSelected": "contractSearchResultAssignment",
+                    "selectedDisplayValueUISchema": {
+                        "type": "Input",
+                        "elementId": "PolicyNumberForAccountingCertificate",
+                        "label": "Policy number",
+                        "readOnly": false,
+                        "value": {
+                            "$ref": "#/properties/number"
+                        }
+                    },
+                    "rule": {
+                        "effect": "DISABLE_INITIAL",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "disablePolicyNumber",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "type": "Group",
+                    "width": 2,
+                    "elements": [
+                        {
+                            "type": "Button",
+                            "label": "Search contract",
+                            "isCompact": false,
+                            "icon": {
+                                "name": "search",
+                                "color": "BackgroundColor",
+                                "size": "Medium"
+                            },
+                            "onClick": "searchContractButton",
+                            "rule": {
+                                "effect": "SHOW",
+                                "condition": {
+                                    "type": "FUNC",
+                                    "ruleFunction": "showSearchContractButton",
+                                    "value": [
+                                        {
+                                            "$ref": "#"
+                                        }
+                                    ]
+                                }
+                            }
+                        },
+                        {
+                            "type": "Link",
+                            "targetType": "Url",
+                            "value": {
+                                "mapping": "contractUrlMapping",
+                                "$ref": "#"
+                            },
+                            "content": {
+                                "text": {
+                                    "type": "OutputText",
+                                    "defaultValue": "",
+                                    "value": {
+                                        "mapping": "contractLinkNameMapping",
+                                        "$ref": "#"
+                                    }
+                                }
+                            },
+                            "rule": {
+                                "effect": "SHOW",
+                                "condition": {
+                                    "type": "FUNC",
+                                    "ruleFunction": "showLink",
+                                    "value": [
+                                        {
+                                            "$ref": "#"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    ]
+                },
+                {
+                    "type": "Input",
+                    "label": "Contract type",
+                    "value": {
+                        "$ref": "#/properties/type"
+                    },
+                    "autocomplete": {
+                        "minTextLength": 1
+                    },
+                    "control": "Dropdown",
+                    "source": {
+                        "dataSource": {
+                            "name": "AccountingContractTypeDataSource",
+                            "reloadOnOpen": true,
+                            "searchFieldPath": "description",
+                            "requestMapping": "accountingContractTypeRequestMapping",
+                            "responseMapping": "accountingContractTypeResponseMapping"
+                        },
+                        "displayFieldName": "displayName",
+                        "valueFieldName": "value"
+                    },
+                    "width": 3
+                },
+                {
+                    "type": "String",
+                    "readOnly": true,
+                    "label": "Migration status",
+                    "value": {
+                        "$ref": "#/properties/migrationStatus"
+                    },
+                    "width": 2,
+                    "rule": {
+                        "effect": "STYLE",
+                        "condition": {
+                            "type": "LEAF",
+                            "style": {
+                                "background-color": "lemonchiffon"
+                            },
+                            "value": {
+                                "$ref": "#/properties/isMigrated"
+                            },
+                            "expectedValue": true
+                        }
+                    }
+                },
+                {
+                    "type": "Input",
+                    "label": "isInsurerSendDataToFns",
+                    "value": {
+                        "$ref": "#/properties/isInsurerSendDataToFns"
+                    },
+                    "width": 1
+                }
+            ]
+        },
+        {
+            "type": "Group",
+            "width": 12,
+            "elements": [
+                {
+                    "type": "Input",
+                    "readOnly": true,
+                    "label": "Holder full name",
+                    "value": {
+                        "$ref": "#/properties/parties/properties/holder/properties/fullName"
+                    },
+                    "width": 6
+                },
+                {
+                    "type": "Input",
+                    "label": "Contract issue date",
+                    "readOnly": true,
+                    "value": {
+                        "$ref": "#/properties/issueDate"
+                    },
+                    "width": 2
+                },
+                {
+                    "type": "Input",
+                    "label": "Contract start date",
+                    "readOnly": true,
+                    "value": {
+                        "$ref": "#/properties/startDate"
+                    },
+                    "width": 2
+                },
+                {
+                    "type": "Input",
+                    "label": "Contract end date",
+                    "readOnly": true,
+                    "value": {
+                        "$ref": "#/properties/endDate"
+                    },
+                    "width": 2
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,80 @@
+{
+    "type": "Group",
+    "formProperties": {
+        "events": {}
+    },
+    "elements": [
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "Input",
+                    "label": "documentCode",
+                    "value": {
+                        "$ref": "#/properties/request/properties/data/properties/criteria/properties/documentCode"
+                    },
+                    "width": 1,
+                    "name": "documentCode"
+                },
+                {
+                    "type": "Input",
+                    "label": "contractNumber",
+                    "value": {
+                        "$ref": "#/properties/request/properties/data/properties/criteria/properties/contractNumber"
+                    },
+                    "width": 1,
+                    "name": "contractNumber"
+                },
+                {
+                    "type": "Dropdown",
+                    "label": "documentState",
+                    "value": {
+                        "$ref": "#/properties/request/properties/data/properties/criteria/properties/documentState"
+                    },
+                    "width": 1,
+                    "name": "documentState",
+                    "rule": {
+                        "effect": "DISABLE_INITIAL",
+                        "condition": {
+                            "type": "LEAF",
+                            "expectedValue": true,
+                            "value": {
+                                "$ref": "#/properties/viewContext/properties/lockDocumentState"
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "Input",
+                    "control": "DateRange",
+                    "dateFrom": {
+                        "type": "Input",
+                        "label": "insuredEventDateFrom",
+                        "width": 1,
+                        "value": {
+                            "$ref": "#/properties/request/properties/data/properties/criteria/properties/insuredEventDateFrom"
+                        },
+                        "control": "DatetimePicker",
+                        "name": "insuredEventDateFrom"
+                    },
+                    "dateTo": {
+                        "type": "Input",
+                        "label": "insuredEventDateTo",
+                        "width": 1,
+                        "value": {
+                            "$ref": "#/properties/request/properties/data/properties/criteria/properties/insuredEventDateTo"
+                        },
+                        "control": "DatetimePicker",
+                        "name": "insuredEventDateTo"
+                    },
+                    "width": 1
+                }
+            ]
+        }
+    ]
+}

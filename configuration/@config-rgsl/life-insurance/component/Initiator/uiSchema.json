@@ -1,0 +1,137 @@
+{
+    "type": "Section",
+    "label": "Initiator",
+    "isCollapsed": false,
+    "width": 12,
+    "elements": [
+        {
+            "type": "Group",
+            "width": 12,
+            "elements": [
+                {
+                    "elementId": "initiatorLookup",
+                    "type": "Lookup",
+                    "readOnly": true,
+                    "label": "employeeName",
+                    "commands": [
+                        {
+                            "commandType": "executeOperation",
+                            "operation": "SEARCH",
+                            "errorHandling": "silent",
+                            "data": null
+                        }
+                    ],
+                    "value": {
+                        "$ref": "#"
+                    },
+                    "width": 4,
+                    "dialogButton": {},
+                    "clearButton": {
+                        "clearAction": "employeeNameClear"
+                    },
+                    "dialog": {
+                        "viewReference": {
+                            "configurationCodeName": "ServiceProviderSearchView",
+                            "configurationVersion": "1",
+                            "configurationConceptType": "SearchView"
+                        },
+                        "onLoad": "employeeNameOnLoad"
+                    },
+                    "onSelected": "employeeNameOnSelected",
+                    "selectedDisplayValueUISchema": {
+                        "elementId": "initiatorLookupSubUI",
+                        "type": "OutputText",
+                        "label": "employeeName",
+                        "readOnly": true,
+                        "value": {
+                            "$ref": "#/properties/partyFullName"
+                        },
+                        "defaultValue": "",
+                        "backgroundColor": "Secondary"
+                    },
+                    "rule": {
+                        "effect": "ENABLE_INITIAL",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "enableInitiatorLookup",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "type": "Link",
+                    "readOnly": true,
+                    "hide": true,
+                    "targetType": "Url",
+                    "value": {
+                        "mapping": "employeeNameURLMapping",
+                        "$ref": "#"
+                    },
+                    "content": {
+                        "text": {
+                            "type": "OutputText",
+                            "defaultValue": "",
+                            "value": {
+                                "mapping": "employeeNameMapping"
+                            }
+                        }
+                    },
+                    "width": 4,
+                    "rule": {
+                        "effect": "SHOW",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "isCreatedByOperations",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "type": "Input",
+                    "readOnly": true,
+                    "label": "organisationUnitName",
+                    "value": {
+                        "$ref": "#/properties/organisationUnitName"
+                    },
+                    "width": 4
+                }
+            ]
+        },
+        {
+            "type": "Group",
+            "width": 12,
+            "stackContent": "Left",
+            "elements": [
+                {
+                    "type": "Input",
+                    "readOnly": true,
+                    "label": "sadNumber",
+                    "value": {
+                        "$ref": "#/properties/sadNumber"
+                    },
+                    "width": 4
+                }
+            ]
+        }
+    ],
+    "rule": {
+        "effect": "SHOW",
+        "condition": {
+            "type": "FUNC",
+            "ruleFunction": "showInitiator",
+            "value": [
+                {
+                    "$ref": "#"
+                }
+            ]
+        }
+    }
+}

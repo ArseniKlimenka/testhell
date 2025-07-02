@@ -1,0 +1,218 @@
+{
+    "id": "RecalcInsuredSumImportImport",
+    "type": "GridLayout",
+    "formProperties": {
+        "events": {
+            "onLoad": "onLoad"
+        }
+    },
+    "title": "RecalcInsuredSumImport",
+    "numberOfColumns": 4,
+    "elements": [
+        {
+            "type": "GridLayout",
+            "fixedButton": true,
+            "numberOfColumns": 4,
+            "elements": [
+                {
+                    "type": "Component",
+                    "name": "DocumentHeader",
+                    "value": {
+                        "$ref": "#"
+                    }
+                },
+                {
+                    "type": "Group",
+                    "width": 4,
+                    "elements": [
+                        {
+                            "type": "GridLayout",
+                            "elements": [
+                                {
+                                    "type": "Group",
+                                    "elements": [
+                                        {
+                                            "type": "TabLayout",
+                                            "options": {
+                                                "menuAlligment": "Horizontal",
+                                                "menuMode": "Single"
+                                            },
+                                            "elements": [
+                                                {
+                                                    "type": "Tab",
+                                                    "elements": [
+                                                        {
+                                                            "elementId": "importInfoSection",
+                                                            "type": "Section",
+                                                            "label": "ImportInfo",
+                                                            "elements": [
+                                                                {
+                                                                    "type": "Group",
+                                                                    "elements": [
+                                                                        {
+                                                                            "elementId": "fileSelection",
+                                                                            "type": "FileUpload",
+                                                                            "label": "FileSelection",
+                                                                            "description": "FileSelectionDescription",
+                                                                            "value": {
+                                                                                "$ref": "#/properties/Body/properties/file"
+                                                                            },
+                                                                            "width": 4
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "sectionLevel": 1
+                                                        }
+                                                    ],
+                                                    "title": "RecalcInsuredSumImportFile",
+                                                    "elementId": "tabRecalcInsuredSumImportFile"
+                                                },
+                                                {
+                                                    "type": "Tab",
+                                                    "elements": [
+                                                        {
+                                                            "elementId": "loadedDataSection",
+                                                            "type": "Section",
+                                                            "label": "LoadedData",
+                                                            "elements": [
+                                                                {
+                                                                    "type": "InlineView",
+                                                                    "showContainerActions": false,
+                                                                    "views": [
+                                                                        {
+                                                                            "viewReference": {
+                                                                                "configurationCodeName": "RecalcInsuredSumImportLoadFromExcel",
+                                                                                "configurationVersion": "1",
+                                                                                "configurationConceptType": "SearchView"
+                                                                            },
+                                                                            "onViewInitialized": "onViewInitialized",
+                                                                            "viewType": "Search"
+                                                                        }
+                                                                    ],
+                                                                    "value": {
+                                                                        "$ref": "#"
+                                                                    },
+                                                                    "hide": false,
+                                                                    "elementId": "RecalcInsuredSumImportLoadedInlineView"
+                                                                }
+                                                            ],
+                                                            "sectionLevel": 1
+                                                        },
+                                                        {
+                                                            "elementId": "loadErrorsSection",
+                                                            "type": "Section",
+                                                            "label": "LoadDataErrors",
+                                                            "elements": [
+                                                                {
+                                                                    "type": "InlineView",
+                                                                    "showContainerActions": false,
+                                                                    "views": [
+                                                                        {
+                                                                            "viewReference": {
+                                                                                "configurationCodeName": "LoadedDataErrorsFromExcel",
+                                                                                "configurationVersion": "1",
+                                                                                "configurationConceptType": "SearchView"
+                                                                            },
+                                                                            "onViewInitialized": "onViewInitialized",
+                                                                            "viewType": "Search"
+                                                                        }
+                                                                    ],
+                                                                    "value": {
+                                                                        "$ref": "#"
+                                                                    },
+                                                                    "hide": false,
+                                                                    "elementId": "RecalcInsuredSumImportLoadedErrorsInlineView"
+                                                                }
+                                                            ],
+                                                            "sectionLevel": 1
+                                                        }
+                                                    ],
+                                                    "title": "RecalcInsuredSumImportLoaded",
+                                                    "elementId": "tabRecalcInsuredSumImportLoaded"
+                                                },
+                                                {
+                                                    "type": "Tab",
+                                                    "elements": [
+                                                        {
+                                                            "elementId": "importedDataSection",
+                                                            "type": "Section",
+                                                            "label": "ImportedData",
+                                                            "elements": [
+                                                                {
+                                                                    "type": "InlineView",
+                                                                    "showContainerActions": false,
+                                                                    "views": [
+                                                                        {
+                                                                            "viewReference": {
+                                                                                "configurationCodeName": "RecalcInsuredSumImportSuccess",
+                                                                                "configurationVersion": "1",
+                                                                                "configurationConceptType": "SearchView"
+                                                                            },
+                                                                            "onViewInitialized": "onViewInitialized",
+                                                                            "viewType": "Search"
+                                                                        }
+                                                                    ],
+                                                                    "value": {
+                                                                        "$ref": "#"
+                                                                    },
+                                                                    "hide": false,
+                                                                    "elementId": "RecalcInsuredSumImportRecordStatusInlineView"
+                                                                }
+                                                            ],
+                                                            "sectionLevel": 1
+                                                        },
+                                                        {
+                                                            "elementId": "failedImportSection",
+                                                            "type": "Section",
+                                                            "label": "FailedImportedData",
+                                                            "elements": [
+                                                                {
+                                                                    "type": "InlineView",
+                                                                    "showContainerActions": false,
+                                                                    "views": [
+                                                                        {
+                                                                            "viewReference": {
+                                                                                "configurationCodeName": "RecalcInsuredSumImportFail",
+                                                                                "configurationVersion": "1",
+                                                                                "configurationConceptType": "SearchView"
+                                                                            },
+                                                                            "onViewInitialized": "onViewInitialized",
+                                                                            "viewType": "Search"
+                                                                        }
+                                                                    ],
+                                                                    "value": {
+                                                                        "$ref": "#"
+                                                                    },
+                                                                    "hide": false,
+                                                                    "elementId": "RecalcInsuredSumImportRecordStatusFailedInlineView"
+                                                                }
+                                                            ],
+                                                            "sectionLevel": 1
+                                                        }
+                                                    ],
+                                                    "title": "RecalcInsuredSumImportImported",
+                                                    "elementId": "tabRecalcInsuredSumImportImported"
+                                                }
+                                            ],
+                                            "elementId": "TabLayout"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "numberOfColumns": 12,
+                            "width": 4
+                        }
+                    ]
+                },
+                {
+                    "type": "Component",
+                    "name": "DocumentFooter",
+                    "value": {
+                        "$ref": "#"
+                    }
+                }
+            ]
+        }
+    ]
+}

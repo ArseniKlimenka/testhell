@@ -1,0 +1,257 @@
+{
+    "type": "Group",
+    "metadata": {
+        "autogenerate": false
+    },
+    "formProperties": {
+        "events": {
+            "onLoad": "assetAmendmentOnLoad"
+        }
+    },
+    "width": 12,
+    "elements": [
+        {
+            "type": "TabLayout",
+            "lazyTabLoading": true,
+            "width": 12,
+            "elements": [
+                {
+                    "type": "Tab",
+                    "elementId": "ChangeAmendmentDataTab",
+                    "metadata": {
+                        "autogenerate": false
+                    },
+                    "scope": "title",
+                    "title": "Change Amendment",
+                    "elements": [
+                        {
+                            "type": "Group",
+                            "metadata": {
+                                "autogenerate": false
+                            },
+                            "width": 12,
+                            "elements": [
+                                {
+                                    "type": "Component",
+                                    "metadata": {
+                                        "autogenerate": true
+                                    },
+                                    "name": "AssetChangeAmendmentMainInfoComponent",
+                                    "value": {
+                                        "$ref": "#/properties/Body/properties/assetChangeAmendmentMainInfoComponent"
+                                    },
+                                    "width": 12
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "Tab",
+                    "elementId": "Tab-11",
+                    "metadata": {
+                        "autogenerate": false
+                    },
+                    "scope": "title",
+                    "title": "Asset information",
+                    "elements": [
+                        {
+                            "type": "Group",
+                            "metadata": {
+                                "autogenerate": false
+                            },
+                            "width": 12,
+                            "elements": [
+                                {
+                                    "type": "Section",
+                                    "collapsing": {
+                                        "enabled": true
+                                    },
+                                    "label": "Main Information",
+                                    "metadata": {
+                                        "autogenerate": false
+                                    },
+                                    "sectionLevel": 1,
+                                    "width": 12,
+                                    "elements": [
+                                        {
+                                            "type": "Component",
+                                            "metadata": {
+                                                "autogenerate": true
+                                            },
+                                            "name": "MainInformation",
+                                            "value": {
+                                                "$ref": "#/properties/Body/properties/mainInformation"
+                                            },
+                                            "width": 12
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "Section",
+                                    "collapsing": {
+                                        "enabled": true
+                                    },
+                                    "label": "Main Conditions",
+                                    "metadata": {
+                                        "autogenerate": false
+                                    },
+                                    "sectionLevel": 1,
+                                    "width": 12,
+                                    "elements": [
+                                        {
+                                            "type": "Component",
+                                            "metadata": {
+                                                "autogenerate": true
+                                            },
+                                            "name": "AssetConditions",
+                                            "value": {
+                                                "$ref": "#/properties/Body/properties/assetConditions"
+                                            },
+                                            "width": 12
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "Section",
+                                    "collapsing": {
+                                        "enabled": true
+                                    },
+                                    "label": "Remaining limit",
+                                    "metadata": {
+                                        "autogenerate": false
+                                    },
+                                    "sectionLevel": 1,
+                                    "width": 12,
+                                    "elements": [
+                                        {
+                                            "type": "GridLayout",
+                                            "numberOfColumns": 4,
+                                            "width": 12,
+                                            "elements": [
+                                                {
+                                                    "type": "Button",
+                                                    "label": "Show available balance",
+                                                    "metadata": {
+                                                        "autogenerate": true
+                                                    },
+                                                    "useParentScope": false,
+                                                    "onClick": [
+                                                        {
+                                                            "commandType": "executeAction",
+                                                            "actionName": "calculateAvailableBalance"
+                                                        }
+                                                    ],
+                                                    "width": 2
+                                                },
+                                                {
+                                                    "type": "Input",
+                                                    "control": "String",
+                                                    "label": "Available balance",
+                                                    "metadata": {
+                                                        "autogenerate": true
+                                                    },
+                                                    "readOnly": true,
+                                                    "useParentScope": false,
+                                                    "value": {
+                                                        "$ref": "#/properties/Body/properties/availableBalance"
+                                                    },
+                                                    "width": 2
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "type": "GridLayout",
+                                            "numberOfColumns": 4,
+                                            "width": 12,
+                                            "elements": [
+                                                {
+                                                    "type": "Button",
+                                                    "label": "Show available balance rub",
+                                                    "metadata": {
+                                                        "autogenerate": true
+                                                    },
+                                                    "useParentScope": false,
+                                                    "onClick": [
+                                                        {
+                                                            "commandType": "executeAction",
+                                                            "actionName": "calculateAvailableBalanceRub"
+                                                        }
+                                                    ],
+                                                    "width": 2
+                                                },
+                                                {
+                                                    "type": "Input",
+                                                    "control": "String",
+                                                    "label": "Available balance rub",
+                                                    "metadata": {
+                                                        "autogenerate": true
+                                                    },
+                                                    "readOnly": true,
+                                                    "useParentScope": false,
+                                                    "value": {
+                                                        "$ref": "#/properties/Body/properties/availableBalanceRub"
+                                                    },
+                                                    "width": 2
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "Tab",
+                    "elementId": "Tab-13",
+                    "metadata": {
+                        "autogenerate": false
+                    },
+                    "scope": "title",
+                    "title": "History",
+                    "rule": {
+                        "effect": "SHOW",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "showHistoryTab",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    },
+                    "elements": [
+                        {
+                            "type": "Component",
+                            "metadata": {
+                                "autogenerate": true
+                            },
+                            "name": "DocumentStateHistory",
+                            "value": {
+                                "$ref": "#"
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "studioMetadata": {
+        "autogeneratedNodes": [
+            {
+                "path": "#/properties/Body/properties/assetChangeAmendmentMainInfoComponent18"
+            },
+            {
+                "path": "#/properties/Body/properties/assetConditions"
+            },
+            {
+                "path": "#/properties/Body/properties/availableBalance"
+            },
+            {
+                "path": "#/properties/Body/properties/mainInformation"
+            }
+        ]
+    }
+}

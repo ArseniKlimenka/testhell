@@ -1,0 +1,97 @@
+# ------------------------------------------------------------------------------
+# Includes
+# ------------------------------------------------------------------------------
+
+include:
+  - template: Security/Container-Scanning.gitlab-ci.yml
+  - .gitlab-templates.yml
+
+# ------------------------------------------------------------------------------
+# Templates
+# ------------------------------------------------------------------------------
+
+container_scanning:
+  stage: security
+  tags:
+    - docker
+    - linux
+  variables:
+    CONTAINER_SCANNING_DISABLED: "true"
+    CS_DISABLE_LANGUAGE_VULNERABILITY_SCAN: "false"
+
+
+  
+# ------------------------------------------------------------------------------
+# PIPELINE VARIABLES
+# ------------------------------------------------------------------------------
+
+variables:
+  ADINSURE_REGISTRY_PROJECT: ${ADINSURE_REGISTRY}.azurecr.io/adinsure/mono
+
+# ------------------------------------------------------------------------------
+# STAGES
+# ------------------------------------------------------------------------------
+
+stages:
+  - build
+  - publish
+  - security
+
+# ------------------------------------------------------------------------------
+# PUBLISH Stage
+# ------------------------------------------------------------------------------
+
+keycloak-scip:plugin:
+  stage: build
+  extends: .default-build-environment
+  variables:
+    KEYCLOAK_SCIM_VERSION: 18.0.2-15
+  script:
+    - ops download:keycloak-scim -v ${KEYCLOAK_SCIM_VERSION} -o ./keycloak/
+    - unzip ./keycloak/Keycloak-scim-${KEYCLOAK_SCIM_VERSION}.zip -d ./keycloak
+  needs: []
+  artifacts:
+    paths:
+      - ./keycloak/suvera-keycloak-scim2-outbound-provisioning-jar-with-dependencies.jar
+  rules:
+    - when: always
+
+docker:keycloak:
+  stage: publish
+  image: docker:20.10.6
+  tags:
+    - docker
+    - linux
+  variables:
+    DOCKER_HOST: tcp://docker:2376
+    DOCKER_TLS_CERTDIR: "/certs"
+    DOCKER_TLS_VERIFY: 1
+    DOCKER_CERT_PATH: "$DOCKER_TLS_CERTDIR/client"
+  services:
+    - docker:20.10.6-dind
+  before_script:
+    - !reference [.registries-login]
+  script:
+    - docker build -t ${CI_REGISTRY_IMAGE}/keycloak:dev --pull keycloak
+    - docker tag ${CI_REGISTRY_IMAGE}/keycloak:dev ${ADINSURE_REGISTRY_PROJECT}/keycloak:dev
+    - docker push ${CI_REGISTRY_IMAGE}/keycloak:dev
+    - docker push ${ADINSURE_REGISTRY_PROJECT}/keycloak:dev
+  needs:
+    - keycloak-scip:plugin
+  rules:
+    - when: always
+
+docker:build:container_scanning:
+  extends: container_scanning
+  stage: security
+  tags:
+    - docker
+    - linux
+  variables:
+    DOCKERFILE_SOURCE: ./sas/Dockerfile
+    CS_IMAGE: ${CI_REGISTRY_IMAGE}/keycloak:dev
+    CS_SEVERITY_THRESHOLD: HIGH
+  needs:
+    - docker:keycloak
+  rules:
+    - when: always

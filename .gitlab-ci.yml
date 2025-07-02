@@ -1,0 +1,202 @@
+variables:
+  GIT_CLEAN_FLAGS: -ffdx -e node_modules/*
+  INFRASTRUCTURE_VERSION: &INFRASTRUCTURE_VERSION 'release/43'
+  INFRASTRUCTURE_REPO_ID: '25'
+  TESTS_ENVIRONMENT: 'ci'
+  SKIP_DOCKER_SCHEDULER: 'true'
+  RETAG_DOCKER_SIGNALR: 'true'
+
+default:
+  image: registryru.adacta-fintech.ru/adinsure/mono/ops/build:43-latest-node22
+
+include:
+  - project: 'osla/infrastructure'
+    ref: *INFRASTRUCTURE_VERSION
+    file:
+      - '/.gitlab-ci-base.yml'
+      - '/.gitlab-ci-badge.yml'
+      - '/.gitlab-ci-upgrade.yml'
+      - '/.gitlab-ci-docker.yml'
+      - '/.gitlab-ci-release.yml'
+      - '/.gitlab-ci-deploy-k8s.yml'
+      - '/.gitlab-ci-plugins.yml'
+      - '/.gitlab-ci-api-tests-keycloak.yml'
+      - '/.gitlab-ci-ui-tests-keycloak.yml'
+      - '/.gitlab-ci-changelogs.yml'
+  - local: '/.build/ci/.gitlab-ci-deploy-windows.yml'
+
+.docker_base:
+  variables:
+    SKIP_DOCKER_IDSRV: 'true'
+
+stages:
+  - build+check
+  - deploy
+  - integration
+
+set-vars:
+  stage: .pre
+  script:
+    - echo "DEPLOY_PACKAGE_VERSION=$(cat VERSION)" >> vars.env
+  artifacts:
+    reports:
+      dotenv: var.env
+  rules:
+    - !reference ['plugins:build', rules]
+
+release-version:
+  script:
+    - 'curl --create-dirs --output ".build/ci/external/JiraIntegration.ps1" --header "PRIVATE-TOKEN: ${PRIVATE_TOKEN}" "${CI_API_V4_URL}/projects/${INFRASTRUCTURE_REPO_ID}/repository/files/scripts%2FJiraIntegration%2Eps1/raw?ref=${INFRASTRUCTURE_VERSION}"'
+    - pwsh ./.build/ci/ReleaseHelper.ps1
+
+
+plugins:build:
+  rules:
+    - if: $CI_PIPELINE_SOURCE == 'schedule' && $ACTION_DEPLOY == 'true'
+    - !reference [".plugins:build-rules", rules]
+
+build:package:
+  variables:
+    dbUpVersion: "2.0.0-202412.1"
+  stage: build+check
+  script:
+    - cp ./.build/install.ps1 ./install.ps1
+    - mkdir -p ./beforeDeployment && cp ./.build/createRunnerProcedures.sql ./beforeDeployment/createRunnerProcedures.sql
+    - mkdir -p ./afterDeployment && cp ./.build/dropRunnerProcedures.sql ./afterDeployment/dropRunnerProcedures.sql
+    - mkdir -p .build/ci/external
+    - 'wget --header "PRIVATE-TOKEN: ${PRIVATE_TOKEN}" --output-document="./.build/ci/external/Invoke-Publish.ps1" "${CI_API_V4_URL}/projects/${INFRASTRUCTURE_REPO_ID}/repository/files/scripts%2FInvoke-Publish.ps1/raw?ref=${INFRASTRUCTURE_VERSION}"'
+    - 'curl -L --create-dirs --output "Adacta.DbUp-${dbUpVersion}.zip" --header "PRIVATE-TOKEN: ${PRIVATE_TOKEN}" "${CI_API_V4_URL}/projects/2/packages/generic/Adacta.DbUp/${dbUpVersion}/Adacta.DbUp-${dbUpVersion}.zip"'
+    - mkdir -p tools/Adacta.DbUp-${dbUpVersion}
+    - unzip -o Adacta.DbUp-${dbUpVersion}.zip -d tools/Adacta.DbUp-${dbUpVersion}
+  artifacts:
+    paths:
+      - .adi
+      - .build
+      - .npmrc
+      - .yarnrc
+      - conf
+      - configuration
+      - database
+      - extensions
+      - scheduler
+      - beforeDeployment
+      - afterDeployment
+      - install.ps1
+      - package.json
+      - yarn.lock
+      - CHANGELOG.md
+      - tools/Adacta.DbUp-${dbUpVersion}/net8.0
+    expire_in: 1w
+    name: "deploy-package-$DEPLOY_PACKAGE_VERSION-$CI_PIPELINE_IID"
+  needs:
+    - plugins:build
+    - set-vars
+  rules:
+    - !reference ["plugins:build", rules]
+
+db-scripts:block-online:
+  stage: build+check
+  script:
+    - echo "You should only add DB script generated in offline mode."
+    - exit 1
+  needs: []
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "schedule" || $CI_COMMIT_REF_PROTECTED == "true"'
+      when: never
+    - if: $CI_MERGE_REQUEST_ID
+      changes:
+        - database/**/7.10_*.sql
+
+# ------------------------------------------------------------------------------
+# TEST Stage: actions for running tests and verifying integration
+# ------------------------------------------------------------------------------
+
+test:api:
+  variables:
+    API_TESTS_CUSTOM_COMMAND: 'yarn run import-test-data --env=$$Environment && yarn run test-api -e $$Environment ; $$TESTSEXITCODE = $$LastExitCode ; yarn run create-junit-report'
+  artifacts:
+    expire_in: 1w
+    when: always
+    paths:
+      - './logs'
+      - './api-test-report'
+    reports:
+      junit:
+        - './api-test-report/API-mssql-test-report.xml'
+  before_script:
+    - cp docker/astra/os-release database/os-release
+    - cp docker/astra/os-release extensions/server/os-release
+    - cp -R docker/certs extensions/server/
+    - cp -R docker/certs database/
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+
+.ui-tests2:
+  extends: .test:ui
+  variables:
+    REPORT_PORTAL_PROJECT: "empty"
+
+.api-tests-rules:
+  rules:
+    - if: $USE_MULTIPLE_LAYERS == "true" && $MULTIPLE_LAYER_JOB != "true"
+      when: never
+    - if: $CI_MERGE_REQUEST_ID && $CI_COMMIT_MESSAGE =~ /\[prepare_release_candidate\]/
+      when: never
+    - if: $CI_MERGE_REQUEST_ID && $CI_COMMIT_MESSAGE =~ /\[release_version_master\]/
+    - if: $CI_MERGE_REQUEST_ID && $CI_COMMIT_MESSAGE =~ /\[release_version_release\]/
+    - if: $CI_MERGE_REQUEST_SOURCE_BRANCH_NAME  =~ /^upgrade\//
+    - if: $ACTION_API_TESTS == "true" && $CI_PIPELINE_SOURCE == "schedule"
+    - if: $CI_MERGE_REQUEST_ID
+      when: manual
+      allow_failure: true
+
+.ui-tests-rules:
+  rules:
+    - if: $CI_MERGE_REQUEST_ID && $CI_COMMIT_MESSAGE =~ /\[prepare_release_candidate\]/
+      when: never
+    - if: $CI_MERGE_REQUEST_ID && $CI_COMMIT_MESSAGE =~ /\[release_version_master\]/
+    - if: $CI_MERGE_REQUEST_ID && $CI_COMMIT_MESSAGE =~ /\[release_version_release\]/
+    - if: $CI_MERGE_REQUEST_SOURCE_BRANCH_NAME  =~ /^upgrade\//
+    - if: $ACTION_UI_TESTS == "true" && $CI_PIPELINE_SOURCE == "schedule"
+    - if: $CI_MERGE_REQUEST_ID
+      when: manual
+      allow_failure: true
+
+config:validate:on-demand:
+  rules:
+    - when: never
+
+docker:client:
+  before_script:
+    - cp docker/astra/os-release extensions/client/os-release
+    - cp -R docker/certs extensions/client/
+    - !reference ['.docker_base', before_script]
+
+docker:db-migrate:
+  before_script:
+    - cp docker/astra/os-release database/os-release
+    - cp -R docker/certs database/
+    - !reference ['.docker_base', before_script]
+
+docker:server:
+  before_script:
+    - cp docker/astra/os-release extensions/server/os-release
+    - cp -R docker/certs extensions/server/
+    - !reference ['.docker_base', before_script]
+
+docker:signalr:
+  before_script:
+    - cp docker/astra/os-release extensions/signalr/os-release
+    - cp -R docker/certs extensions/signalr/
+    - !reference ['.docker_base', before_script]
+
+test:ui:chrome:
+  rules:
+    - when: never
+
+test:ui:edge:
+  rules:
+    - when: never
+
+test:ui:firefox:
+  rules:
+    - when: never

@@ -1,0 +1,29 @@
+{
+    "Logging": {
+        "LogLevel": {
+            "Default": "Information",
+            "Microsoft.AspNetCore": "Warning"
+        }
+    },
+    "appSettings": {
+        "AdInsure": {
+            "Healthcheck": {
+              "Enabled": "true"
+            },
+            "Settings": {
+                "OAuthIdentity": {
+                    "IdentityEndpointUrl": "https://adinsure-prpd-auth.rgsl.ru"
+                }
+            }
+        }
+    },
+    "MessagingInfrastructure": {
+        "messageBusses": {
+            "Default": {
+                "transport": {
+                    "connectionString": "Endpoint=failover:(tcp://adins-prpd-mq-01:61616)?transport.startupMaxReconnectAttempts=3&transport.timeout=1000;Username=user;Password=user"
+                }
+            }
+        }
+    }
+}

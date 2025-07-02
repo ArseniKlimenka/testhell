@@ -1,0 +1,48 @@
+{
+    "type": "Group",
+    "elements": [
+        {
+            "type": "GroupSeparator"
+        },
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "OutputText",
+                    "label": "insuredPersonLabel",
+                    "textProperties": [
+                        "bold"
+                    ],
+                    "literalValue": "insuredPerson",
+                    "width": 12
+                }
+            ]
+        },
+        {
+            "type": "InlineView",
+            "showContainerActions": false,
+            "views": [
+                {
+                    "viewReference": {
+                        "configurationCodeName": "NaturalPerson",
+                        "configurationVersion": "1",
+                        "configurationConceptType": "Party"
+                    },
+                    "onCreateViewParams": "insuredPersonAttachmentsOnCreateViewParams"
+                }
+            ]
+        }
+    ],
+    "rule": {
+        "effect": "SHOW",
+        "condition": {
+            "type": "FUNC",
+            "ruleFunction": "insuredPersonAttachmentsShow",
+            "value": [
+                {
+                    "$ref": "#"
+                }
+            ]
+        }
+    }
+}

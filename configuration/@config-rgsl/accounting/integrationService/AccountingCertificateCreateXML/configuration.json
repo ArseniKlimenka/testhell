@@ -1,0 +1,32 @@
+{
+    "allowMultipleTransactions": true,
+    "sinks": [
+        {
+            "name": "GetBody",
+            "fetch": {
+                "configuration": {
+                    "name": "GetAccountingCertificateBodyDataSource"
+                }
+            }
+        },
+        {
+            "name": "CreateXML",
+            "class": {
+                "className": "Adacta.AdInsure.RGSL.Accounting.Domain.AccountingCertificate.Interface.IFnsXMLDomainService, Adacta.AdInsure.RGSL.Accounting.Domain",
+                "methodName": "CreateXml"
+            }
+        },
+        {
+            "name": "UpdateAttachmentType",
+            "database": {
+                "tables": [
+                    "ACC_IMPL.CRT_ATTACHMENT_TYPE_SAT"
+                ]
+            }
+        }
+    ],
+    "responses": [
+        200,
+        422
+    ]
+}

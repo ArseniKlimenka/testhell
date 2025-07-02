@@ -1,0 +1,22 @@
+ConfigurationType	ConfigurationName	ItemType	TranslationKey	Expression	Translation_ru-RU	Translation_en-US
+DataSchema	Beneficiaries	field-title	specialConditions	specialConditions	Спец. условия	specialConditions
+UiSchema	Beneficiaries	ui-label	Beneficiaries	Beneficiaries	Выгодоприобретатели на случай смерти застрахованного	Beneficiaries
+UiSchema	Beneficiaries	ui-label	beneficiary	beneficiary	Выгодоприобретатель	beneficiary
+UiSchema	Beneficiaries	ui-label	share	share	Доля	share
+UiSchema	Beneficiaries	ui-label	relationType	relationType	Родственная связь	relationType
+UiSchema	Beneficiaries	ui-label	specialConditions	specialConditions	Спец. условия	specialConditions
+UiSchema	Beneficiaries	ui-label	BeneficiariesFullDescription	BeneficiariesFullDescription	В случае если общая доля по каждой категории менее 100%, выгодоприобретателями по оставшейся доле являются наследники застрахованного лица по закону	BeneficiariesFullDescription
+Rule	BeneficiariesValidateBeneficiaries	rule	validation@shareSum100	validateBeneficiaries	E: Сумма долей выгодоприобретателей должна быть ровно 100%	E: validation@shareSum100
+Rule	BeneficiariesValidateBeneficiaries	rule	validation@shareSumMore100	validateBeneficiaries	E: Сумма долей выгодоприобретателей не должна превышать 100%	E: validation@shareSumMore100
+Rule	BeneficiariesValidateBeneficiaries	rule	validation@insuredIsBeneficiary	validateBeneficiaries	E: Среди выгодоприобретателей не должно быть застрахованного	E: validation@insuredIsBeneficiary
+Rule	BeneficiariesValidateBeneficiaries	rule	validation@beneficiariesDuplicates	validateBeneficiaries	E: Среди выгодоприобретателей не должно быть одинаковых контрагентов	E: validation@beneficiariesDuplicates
+UiSchema	Beneficiaries	ui-label	heritors	heritors	Наследники застрахованного лица по закону	heritors
+UiSchema	Beneficiaries	ui-label	isHeritors	isHeritors	Да	isHeritors
+UiSchema	Beneficiaries	ui-label	isNotHeritors	isNotHeritors	Нет	isNotHeritors
+Rule	BeneficiariesValidateBeneficiaries	rule	validation@beneficiariesIsHeritors	validateBeneficiaries	E: Необходимо указать кто будет выгодоприобретателем	E: validation@beneficiariesIsHeritors
+Rule	BeneficiariesValidateBeneficiaries	rule	validation@beneficiariesIsNotHeritors	validateBeneficiaries	E: Необходимо добавить хотя бы одного выгодоприобретателя${entity.additionalText}	E: validation@beneficiariesIsNotHeritors
+UiSchema	Beneficiaries	ui-label	dateOfBirth	dateOfBirth	Дата рождения	dateOfBirth
+Rule	BeneficiariesValidateBeneficiaries	rule	validation@beneficiaryBirthDateMustBeGreaterThan1901YearAndLesserThanToday	validateBeneficiaries	E: Дата рождения должна быть больше 1901 года и меньше или равна сегодняшней	E: validation@beneficiaryBirthDateMustBeGreaterThan1901YearAndLesserThanToday
+UiSchema	Beneficiaries	ui-label	beneficiaryCategory	beneficiaryCategory	Категория	beneficiaryCategory
+Rule	BeneficiariesValidateBeneficiaries	rule	validation@notExistsNonAdult	validateBeneficiaries	E: Необходимо добавить выгодоприобретателя в категории «Несовершеннолетнее лицо», при этом выгодоприобретатель должен быть младше 18 лет на дату оформления договора	E: validation@notExistsNonAdult
+Rule	BeneficiariesValidateBeneficiaries	rule	validation@allBbeneficiariesSumsMore100	validateBeneficiaries	E: Общая доля выгодоприобретателей должна быть меньше или равна 100%	E: allBbeneficiariesSumsMore100

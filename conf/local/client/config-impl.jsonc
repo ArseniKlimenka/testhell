@@ -1,0 +1,76 @@
+{
+  "apiBaseUrl": "http://localhost:60000/",
+  "authConfig": {
+    "issuer": "http://localhost:60001/realms/adinsure",
+    "redirectUri": "http://localhost:60004/entry/login-redirect?",
+    "clientId": "web-client-vnext",
+    "scope": "openid profile email roles adinsure",
+    "postLogoutRedirectUri": "http://localhost:60004/entry",
+    "silentRefreshRedirectUri": "http://localhost:60004/oauth-silent-refresh.html",
+    "clockSkewInSec": 10
+  },
+  "implementationVersion": "82.0.0-rc1",
+  "cultureSettings": {
+    "defaultLanguage": "ru-RU",
+    "implementationVersion": "1.0.0",
+    "supportedLocales": [
+      {
+        "name": "CLIENT_CORE.##ENGLISH",
+        "key": "en",
+        "adTranslatorKey": "en-US-VSK=en-US",
+        "valueFormatSettings": {
+          "decimalPlaces": 2,
+          "useGroup": true,
+          "dateFormat": "dd.MM.yyyy",
+          "dateTimeFormat": "dd.MM.yyyy HH:mm",
+          "timeFormat": "HH:mm"
+        }
+      },
+      {
+        "name": "CLIENT_CORE.##RUSSIAN",
+        "key": "ru",
+        "adTranslatorKey": "ru-Ru-VSK=ru-RU",
+        "valueFormatSettings": {
+          "decimalPlaces": 2,
+          "useGroup": true,
+          "dateFormat": "dd.MM.yyyy",
+          "dateTimeFormat": "dd.MM.yyyy HH:mm",
+          "timeFormat": "HH:mm",
+          "firstDayOfWeek": "mo"
+        }
+      }
+    ],
+    "supportedLanguages": [
+      {
+        "name": "CLIENT_CORE.##ENGLISH",
+        "key": "en-US"
+      },
+      {
+        "name": "CLIENT_CORE.##RUSSIAN",
+        "key": "ru-RU"
+      }
+    ]
+  },
+  "visualizationSettings": {
+    "themeSettings": {
+      "supportedThemes": [
+        {
+          "name": "Carmine Red Default",
+          "fileName": "ai-carmine-red"
+        },
+        {
+          "name": "Blue Grey",
+          "fileName": "ai-blue-grey"
+        }
+      ]
+    }
+  },
+  "serverMessagesSettings": {
+    "enabled": true,
+    "serverUrl": "http://localhost:60006/api/server-side-messages",
+    "connectRetries": 5,
+    "connectRetryTimeout": 5000
+  },
+  "testMode": false,
+  "maxRequestSize": 50000000
+}

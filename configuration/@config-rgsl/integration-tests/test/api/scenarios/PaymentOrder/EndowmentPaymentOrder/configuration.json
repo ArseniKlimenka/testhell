@@ -1,0 +1,86 @@
+{
+    "steps": [
+        {
+            "$ref": "AdjustAccountingPeriods",
+            "context": {
+                "firstOpenPeriod": "2022-01-01"
+            }
+        },
+        {
+            "$ref": "AdjustCurrentDate",
+            "context": {
+                "currentDate": "2022-01-01"
+            }
+        },
+        {
+            "$ref": "CreateALIPolicyDemo",
+            "context": {
+                "paymentFrequencyCode": "1"
+            }
+        },
+        {
+            "$ref": "CreatePaymentAndAutoAllocate",
+            "description": "Pay first installment",
+            "context": {
+                "amountToAllocate": 100000,
+                "expectedPostAmount": 100000,
+                "transactionDate": "2022-01-01",
+                "referenceNoToAllocate": "{{$.contractNumber}}"
+            }
+        },
+        {
+            "code": "ValidateTransactions_1",
+            "requests": [],
+            "assert": {
+                "expected": "./steps/validateTransactions/expectedResult_1.json",
+                "module": "../../lib/accounting/assert.js",
+                "function": "assertTransactions"
+            }
+        },
+        {
+            "code": "CreateEndowment",
+            "actor": "Operations",
+            "requests": [],
+            "executor": {
+                "module": "./steps/createEndowment/executor.js",
+                "function": "executor"
+            }
+        },
+        {
+            "code": "ApprovePaymentOrder",
+            "actor": "ChiefPaymentDistributor",
+            "requests": [],
+            "executor": {
+                "module": "./steps/approvePaymentOrder/executor.js",
+                "function": "executor"
+            },
+            "assert": {
+                "expected": "./steps/approvePaymentOrder/expectedResult.json",
+                "module": "./steps/approvePaymentOrder/assert.js",
+                "function": "assertPO"
+            }
+        },
+        {
+            "$ref": "CreateOutgoingPaymentAndAutoAllocate",
+            "description": "Pay payment order",
+            "context": {
+                "paymentAmount": 10000,
+                "amountToAllocate": 10000,
+                "transactionDate": "2022-01-01",
+                "referenceNoToAllocate": "{{$.paymentOrder.paymentOrderNumber}}"
+            }
+        },
+        {
+            "code": "ValidateTransactions_2",
+            "requests": [],
+            "assert": {
+                "expected": "./steps/validateTransactions/expectedResult_2.json",
+                "module": "../../lib/accounting/assert.js",
+                "function": "assertTransactions"
+            }
+        },
+        {
+            "$ref": "AdjustCurrentDate"
+        }
+    ]
+}

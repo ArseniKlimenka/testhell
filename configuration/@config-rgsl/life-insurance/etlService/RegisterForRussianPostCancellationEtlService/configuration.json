@@ -1,0 +1,57 @@
+{
+    "mainDataSource": "RegisterForRussianPostCancellationDataSource",
+    "aggregate": false,
+    "allowParallelExecution": false,
+    "allowMultipleTransactions": true,
+    "sinks": [
+        {
+            "name": "GetLatestProductConfigurationVersion",
+            "fetch": {
+                "configuration": {
+                    "name": "GetProductConfigurationDataSource"
+                }
+            }
+        },
+        {
+            "name": "GetActualCoolOffEndDate",
+            "class": {
+                "className": "Adacta.AdInsure.Organisation.API.WorkCalendar.Services.IWorkCalendarService, Adacta.AdInsure.Organisation.API",
+                "methodName": "GetAvailabilityForWorkCalendar"
+            }
+        },
+        {
+            "name": "GetActualRequestToCurrentDate",
+            "class": {
+                "className": "Adacta.AdInsure.Organisation.API.WorkCalendar.Services.IWorkCalendarService, Adacta.AdInsure.Organisation.API",
+                "methodName": "GetAvailabilityForWorkCalendar"
+            }
+        },
+        {
+            "name": "UpdateCancellationInquiry",
+            "document": {
+                "configuration": {
+                    "name": "CancellationInquiry",
+                    "version": "1"
+                },
+                "allowOnValidationErrors": {
+                    "all": true
+                },
+                "allowUpdating": {
+                    "inStates": [
+                        "Draft"
+                    ]
+                }
+            }
+        },
+        {
+            "name": "WriteCancellationASS",
+            "database": {
+                "tables": [
+                    "PAS_IMPL.INQUIRY_SAT"
+                ]
+            }
+        }
+    ],
+    "version": "1"
+}
+

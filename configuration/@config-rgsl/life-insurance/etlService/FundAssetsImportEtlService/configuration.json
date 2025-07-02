@@ -1,0 +1,73 @@
+{
+    "mainDataSource": "ImportStagingDataSource",
+    "allowParallelExecution": true,
+    "additionalDataSources": [
+        "GetFundAssetsImportDataSource",
+        "GetFundAllowImportDataSource"
+    ],
+    "sinks": [
+        {
+            "name": "CheckContract",
+            "fetch": {
+                "configuration": {
+                    "name": "GetContractFullDataDataSource"
+                }
+            }
+        },
+        {
+            "name": "CheckFundReportDate",
+            "fetch": {
+                "configuration": {
+                    "name": "GetFundImportDataSource"
+                }
+            }
+        },
+        {
+            "name": "GetFundAssetsReportDate",
+            "fetch": {
+                "configuration": {
+                    "name": "GetFundAssetsImportDataSource"
+                }
+            }
+        },
+        {
+            "name": "WriteSuccessStatus",
+            "database": {
+                "tables": [
+                    "BFX.IMPORT_RECORD_STATUS"
+                ]
+            }
+        },
+        {
+            "name": "WriteToFundAssetsTable",
+            "database": {
+                "tables": [
+                    "BFX_IMPL.FUND_ASSETS"
+                ]
+            }
+        }
+    ],
+    "errorSinks": [
+        {
+            "name": "WriteErrorStatus",
+            "database": {
+                "tables": [
+                    "BFX.IMPORT_RECORD_STATUS"
+                ]
+            }
+        }
+    ],
+    "completionSinks": [
+        {
+            "name": "FinishedImporting",
+            "documentTransition": {
+                "transition": {
+                    "transitionName": "FinishImporting",
+                    "configurationName": "FundAssetsImport",
+                    "configurationVersion": "1"
+                }
+            }
+        }
+    ],
+    "version": "1"
+}

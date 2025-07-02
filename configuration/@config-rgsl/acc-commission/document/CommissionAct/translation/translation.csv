@@ -1,0 +1,60 @@
+ConfigurationType	ConfigurationName	ItemType	TranslationKey	Expression	Translation_en-US	Translation_ru-RU
+DocumentConfiguration	CommissionAct	actors	System	System	System	System
+DocumentConfiguration	CommissionAct	actors	ViewerCommissionAct	ViewerCommissionAct	ViewerCommissionAct	Просмотр
+DocumentConfiguration	CommissionAct	actors	UserCommissionAct	UserCommissionAct	Commission act user	Специалист АВР
+DocumentConfiguration	CommissionAct	actors	AdminCommissionAct	AdminCommissionAct	Commission act admin	Администратор АВР
+DocumentConfiguration	CommissionAct	rootConfiguration	CommissionAct@Title	CommissionAct	Commission act	Акт выполненных работ
+UiSchema	CommissionActAditionalDataSearchFilters	ui-label	IncludedProducts	IncludedProducts	Included products	Включенные продукты
+UiSchema	CommissionActAditionalDataSearchFilters	ui-label	ExcludedProducts	ExcludedProducts	Excluded products	Исключенные продукты
+UiSchema	CommissionActAditionalDataSearchFilters	ui-label	IncludedProductGroup	IncludedProductGroup	Included product group	Включенные виды страхования
+UiSchema	CommissionActAditionalDataSearchFilters	ui-label	ExcludedProductGroup	ExcludedProductGroup	Excluded product group	Исключенные виды страхования
+UiSchema	CommissionActHeader	ui-label	ReportingPeriodFrom	ReportingPeriodFrom	Reporting period from	Отчетный период, с
+UiSchema	CommissionActHeader	ui-label	ReportingPeriodTo	ReportingPeriodTo	Reporting period to	Отчетный период, по
+UiSchema	CommissionActHeader	ui-label	ItemsCount	ItemsCount	Items count	Количество строк АВР
+UiSchema	CommissionActHeader	ui-label	CommissionAmount	CommissionAmount	Commission amount	Сумма КВ к выплате
+UiSchema	CommissionActHeader	ui-label	VatAmount	VatAmount	Vat amount	Сумма НДС
+UiSchema	CommissionActHeader	ui-label	PeriodFrom	PeriodFrom	Period from	Дата поступления, с
+UiSchema	CommissionActHeader	ui-label	PeriodTo	PeriodTo	Period to	Дата поступления, по
+UiSchema	CommissionActHeader	ui-label	ActIssueDate	ActIssueDate	Issue date	Дата выпуска АВР (дата проводки)
+UiSchema	CommissionActHeader	ui-label	PayDate	PayDate	Pay date	Дата оплаты акта
+UiSchema	CommissionActHeader	ui-label	AaServiceProviderCode	AaServiceProviderCode	AA code	Посредник
+UiSchema	CommissionActHeader	ui-label	AgentAgreementServiceProviderName	AgentAgreementServiceProviderName	Agent	Агент
+UiSchema	CommissionActHeader	ui-label	AANumber	AANumber	AA number	№ Договора посредника
+UiSchema	CommissionActHeader	ui-label	AgentPersonalNumber	AgentPersonalNumber	Agent personal number	ТНА
+UiSchema	CommissionActHeader	ui-label	Notes	Notes	Notes	Примечание
+UiSchema	CommissionActFooter	ui-label	printReport	printReport	Print Report	Печать
+UiSchema	CommissionActFooter	ui-label	exportReport	exportReport	Export Report	Выгрузить
+ClientAction	CommissionActOnBeforeSave	ui-message	WrongDuplicatePeriod	onBeforeSave	Wrong duplicate period	Создание акта невозможно, проверьте Даты отчетного периода: {{actNo}}.
+ClientAction	CommissionActOnBeforeSave	ui-message	HasIntersections	onBeforeSave	Has intersections	Создание акта невозможно. Имеются пересечения продуктов с актом № {{actNo}}.
+DataSchema	CommissionAct	field-title	actTypeId	actTypeId	Act type id	Тип акта
+DataSchema	CommissionAct	field-title	actIssueDate	actIssueDate	Issue date	Дата выпуска АВР (дата проводки)
+DataSchema	CommissionAct	field-title	aaServiceProviderName	aaServiceProviderName	Agent	Агент
+DataSchema	CommissionAct	field-title	aaName	aaName	AA name	№ Договора посредника
+DataSchema	CommissionAct	field-title	periodTo	periodTo	Period to	Дата поступления, по
+DataSchema	CommissionAct	field-title	reportingPeriodFrom	reportingPeriodFrom	Reporting period from	Отчетный период, с
+DataSchema	CommissionAct	field-title	reportingPeriodTo	reportingPeriodTo	Reporting period to	Отчетный период, по
+UiSchema	CommissionActHeader	ui-label	OriginalReceiptDate	OriginalReceiptDate	Original receipt date	Дата получения оригинала акта
+UiSchema	CommissionActAditionalDataSearchFilters	ui-label	isDocCorrect	isDocCorrect	Is documentation correct	Документация корректна
+DocumentFlowDefinition	CommissionActFlow	transitions	transitions@Draft_To_Confirming@Title	Draft_To_Confirming	Draft_To_Confirming	Проект / На согласовании
+DocumentFlowDefinition	CommissionActFlow	transitions	transitions@Draft_To_Deleted@Title	Draft_To_Deleted	Draft_To_Deleted	Проект / Удалён
+DocumentFlowDefinition	CommissionActFlow	transitions	transitions@Draft_To_Generating@Title	Draft_To_Generating	Draft_To_Generating	Генерация
+DocumentFlowDefinition	CommissionActFlow	transitions	transitions@Generating_To_Draft@Title	Generating_To_Draft	Generating_To_Draft	Проект / Черновик
+DocumentFlowDefinition	CommissionActFlow	transitions	transitions@Confirming_To_Draft@Title	Confirming_To_Draft	Confirming_To_Draft	Проект / Черновик
+DocumentFlowDefinition	CommissionActFlow	transitions	transitions@Confirming_To_Confirmed@Title	Confirming_To_Confirmed	Confirming_To_Confirmed	Согласовать
+DocumentFlowDefinition	CommissionActFlow	transitions	transitions@Confirmed_To_Approved@Title	Confirmed_To_Approved	Confirmed_To_Approved	Подтвержден / Подписан
+DocumentFlowDefinition	CommissionActFlow	transitions	transitions@Approved_To_CompletedPayOrder@Title	Approved_To_CompletedPayOrder	Approved_To_CompletedPayOrder	Возврат КВ / Получен
+DocumentFlowDefinition	CommissionActFlow	transitions	transitions@Approved_To_CompletedPaid@Title	Approved_To_CompletedPaid	Approved_To_CompletedPaid	Оплачен
+DocumentFlowDefinition	CommissionActFlow	transitions	transitions@Approved_To_CompletedPaidNegative@Title	Approved_To_CompletedPaidNegative	Approved_To_CompletedPaidNegative	Возврат КВ получен
+DocumentFlowDefinition	CommissionActFlow	transitions	transitions@CompletedPaidNegative_To_Approved@Title	CompletedPaidNegative_To_Approved	CompletedPaidNegative_To_Approved	Подтвержден / Подписан
+DocumentFlowDefinition	CommissionActFlow	transitions	transitions@Approved_To_Annulled@Title	Approved_To_Annulled	Approved_To_Annulled	Подтвержден / Сторнирован
+DocumentFlowDefinition	CommissionActFlow	operations	operations@Save@Title	Save	Save	Сохранить
+DocumentFlowDefinition	CommissionActFlow	states	states@Draft	Draft	Draft	Проект / Черновик
+DocumentFlowDefinition	CommissionActFlow	states	states@Generating	Generating	Generating	Генерация
+DocumentFlowDefinition	CommissionActFlow	states	states@Deleted	Deleted	Deleted	Проект / Удалён
+DocumentFlowDefinition	CommissionActFlow	states	states@Confirming	Confirming	Confirming	Проект / На согласовании
+DocumentFlowDefinition	CommissionActFlow	states	states@Confirmed	Confirmed	Confirmed	Согласован
+DocumentFlowDefinition	CommissionActFlow	states	states@Approved	Approved	Approved	Подтвержден / Подписан
+DocumentFlowDefinition	CommissionActFlow	states	states@CompletedPayOrder	CompletedPayOrder	CompletedPayOrder	Возврат КВ / Получен
+DocumentFlowDefinition	CommissionActFlow	states	states@CompletedPaid	CompletedPaid	CompletedPaid	Оплачен
+DocumentFlowDefinition	CommissionActFlow	states	states@CompletedPaidNegative	CompletedPaidNegative	CompletedPaidNegative	Возврат КВ получен
+DocumentFlowDefinition	CommissionActFlow	states	states@Annulled	Annulled	Annulled	Подтвержден / Сторнирован

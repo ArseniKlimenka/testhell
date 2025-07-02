@@ -1,0 +1,52 @@
+{
+    "processType": "CancellationInquiry",
+    "actors": [
+        "InquiryManager"
+    ],
+    "initialState": "Draft",
+    "states": [
+        {
+            "name": "Draft",
+            "operations": [
+                {
+                    "name": "Save"
+                }
+            ]
+        },
+        {
+            "name": "Issued",
+            "operations": []
+        },
+        {
+            "name": "Rejected",
+            "operations": []
+        },
+        {
+            "name": "Cancelled",
+            "operations": []
+        }
+    ],
+    "transitions": [
+        {
+            "name": "DraftIssued",
+            "from": "Draft",
+            "to": "Issued",
+            "exclusiveToAssignedUser": true,
+            "whenBlocked": "DisplayNormally"
+        },
+        {
+            "name": "DraftRejected",
+            "from": "Draft",
+            "to": "Rejected",
+            "exclusiveToAssignedUser": true,
+            "whenBlocked": "DisplayNormally"
+        },
+        {
+            "name": "DraftCancelled",
+            "from": "Draft",
+            "to": "Cancelled",
+            "exclusiveToAssignedUser": false,
+            "whenBlocked": "DisplayNormally"
+        }
+    ]
+}

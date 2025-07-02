@@ -1,0 +1,138 @@
+{
+    "type": "Group",
+    "elements": [
+        {
+            "type": "DataGrid",
+            "elementId": "AmountOfPremiumsPaidDataGrid",
+            "value": {
+                "$ref": "#/properties/response/properties/data"
+            },
+            "mode": "DataSource",
+            "pagination": {
+                "mode": "Regular",
+                "pageSizes": [
+                    10,
+                    25,
+                    50,
+                    500
+                ]
+            },
+            "selection": {
+                "mode": "Multi",
+                "enableRowSelection": true,
+                "showCheckBox": true,
+                "onSelectionChanged": [
+                    {
+                        "commandType": "executeAction",
+                        "actionName": "onRowSelectChange"
+                    }
+                ]
+            },
+            "height": "None",
+            "columns": [
+                {
+                    "sortable": false,
+                    "title": "Payment date",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/dueDate"
+                        }
+                    },
+                    "name": "dueDate"
+                },
+                {
+                    "sortable": false,
+                    "title": "Payment amount in contract currency",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/docAmount"
+                        }
+                    },
+                    "name": "docAmount"
+                },
+                {
+                    "sortable": false,
+                    "title": "Currency code",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/currencyCode"
+                        }
+                    },
+                    "name": "currencyCode"
+                },
+                {
+                    "title": "Bank statement item id",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "template": "{{expr bankStatementItemId 'i::false'}}",
+                        "value": {
+                            "$ref": "#/properties/resultData"
+                        }
+                    },
+                    "name": "bankStatementItemId"
+                },
+                {
+                    "sortable": false,
+                    "title": "Transaction date",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "template": "{{expr transactionDate 'd'}}",
+                        "value": {
+                            "$ref": "#/properties/resultData"
+                        }
+                    },
+                    "name": "transactionDate"
+                },
+                {
+                    "sortable": false,
+                    "title": "Amount",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "template": "{{#style 'right'}}{{expr amount 'n:2'}}{{/style}}",
+                        "value": {
+                            "$ref": "#/properties/resultData"
+                        }
+                    },
+                    "name": "amount"
+                },
+                {
+                    "sortable": false,
+                    "title": "Amount life risks",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "template": "{{#style 'right'}}{{expr amountLife 'n:2'}}{{/style}}",
+                        "value": {
+                            "$ref": "#/properties/resultData"
+                        }
+                    },
+                    "name": "amountLifeRisks"
+                },
+                {
+                    "sortable": false,
+                    "title": "Amount life risks in rubles",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "template": "{{#style 'right'}}{{expr amountLifeRub 'n:2'}}{{/style}}",
+                        "value": {
+                            "$ref": "#/properties/resultData"
+                        }
+                    },
+                    "name": "amountLifeRubRisks"
+                },
+                {
+                    "title": "Debtor",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/debtorName"
+                        }
+                    },
+                    "name": "debtorName"
+                }
+            ]
+        }
+    ]
+}

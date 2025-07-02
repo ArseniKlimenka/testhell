@@ -1,0 +1,44 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "Life Insurance",
+    "description": "Data schema describing Issue Form",
+    "type": "object",
+    "aiTitle": "issueForm",
+    "aiValidation": {
+        "rule": "validateFields"
+    },
+    "additionalProperties": false,
+    "aiDataEnrichment": [
+        {
+            "name": "setIssueFormEnrichment",
+            "dataSource": "IssueFormDataSource"
+        }
+    ],
+    "properties": {
+        "code": {
+            "type": "object",
+            "aiTitle": "issueForm",
+            "additionalProperties": false,
+            "properties": {
+                "issueFormCode": {
+                    "type": "string",
+                    "aiTitle": "issueFormCode"
+                },
+                "issueFormDescription": {
+                    "type": "string",
+                    "aiTitle": "issueFormDescription"
+                }
+            }
+        },
+        "phoneNumber": {
+            "type": "string"
+        },
+        "email": {
+            "type": "string"
+        },
+        "polciyHolderIsPayer": {
+            "type": "boolean",
+            "aiTitle": "polciyHolderIsPayer"
+        }
+    }
+}

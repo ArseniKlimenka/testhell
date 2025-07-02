@@ -1,0 +1,14 @@
+select {{#if parameters.isTop1}}top 1{{/if}}
+	ACCOUNT_NO
+from
+	acc_impl.CT_BSI_SOURCE_ACCOUNT
+where 1=1
+{{#if parameters.accountNoLike}}
+	and ACCOUNT_NO like @accountNoLike
+{{/if}}
+{{#if parameters.incomeSourceId}}
+	and INCOME_SOURCE_ID = @incomeSourceId
+{{/if}}
+{{#if parameters.paymentSourceId}}
+	and PAYMENT_SOURCE_ID = @paymentSourceId
+{{/if}}

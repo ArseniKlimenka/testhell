@@ -1,0 +1,16 @@
+select distinct alc.DOCUMENT_NO
+from
+	acc_impl.MATCHING_POLICY matp
+	inner join acc_impl.MATCHING mat on mat.MATCHING_ID = matp.MATCHING_ID
+	inner join acc_impl.ALLOCATION alc on alc.ALLOCATION_ID = mat.ALLOCATION_ID
+	inner join acc_impl.ALLOCATION_POLICY alcp on alcp.ALLOCATION_ID = mat.ALLOCATION_ID
+	inner join pas_impl.POLICY_HUB phub on phub.CONTRACT_NUMBER = alc.DOCUMENT_NO
+	inner join acc_impl.POSTED_PAYMENT_PLAN_SAT_LATEST postedPPs on postedPPs.POSTED_PAYMENT_PLAN_HKEY = phub.POLICY_HKEY
+where 1=1
+	and mat.CANCELLED = 0
+	and mat.CANCELLED_MATCHING_ID is null
+	and matp.IS_POSTED = 0
+	and matp.POSTING_DATE <= postedPPs.POSTED_UNTIL_POSTING_DATE
+{{#if parameters.documentNumbers}}
+	and alc.DOCUMENT_NO in (@documentNumbers)
+{{/if}}

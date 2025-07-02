@@ -1,0 +1,129 @@
+{
+    "dimensions": {
+        "contractType": "Amendment",
+        "amendmentType": "Technical",
+        "productGroup": "med"
+    },
+    "entityType": "Contract",
+    "validFrom": "2000-01-01",
+    "ui": {
+        "layout": "VersionedDocumentLayout",
+        "composition": {
+            "SummaryContent": "SummaryContent",
+            "MainContent": "MainContent"
+        }
+    },
+    "states": [
+        {
+            "name": "Draft",
+            "actors": [
+                {
+                    "actor": "Viewer",
+                    "transitions": [
+
+                    ],
+                    "uiSchema": "MainContent",
+                    "allowComments": false,
+                    "operations": [
+
+                    ]
+                },
+                {
+                    "actor": "Operations",
+                    "transitions": [
+                        "Draft_to_Cancelled"
+                    ],
+                    "uiSchema": "MainContent",
+                    "allowComments": false,
+                    "operations": [
+
+                    ]
+                },
+                {
+                    "actor": "System",
+                    "transitions": [
+                        "Draft_to_Cancelled",
+                        "Draft_to_Activated"
+                    ],
+                    "uiSchema": "MainContent",
+                    "allowComments": false,
+                    "operations": [
+                        "Save"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Activated",
+            "actors": [
+                {
+                    "actor": "Viewer",
+                    "transitions": [
+
+                    ],
+                    "uiSchema": "MainContent",
+                    "allowComments": false,
+                    "operations": [
+
+                    ]
+                },
+                {
+                    "actor": "Operations",
+                    "transitions": [
+
+                    ],
+                    "uiSchema": "MainContent",
+                    "allowComments": false,
+                    "operations": [
+
+                    ]
+                },
+                {
+                    "actor": "System",
+                    "transitions": [
+
+                    ],
+                    "uiSchema": "MainContent",
+                    "allowComments": false,
+                    "operations": [
+
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Cancelled",
+            "actors": [
+                {
+                    "actor": "Viewer",
+                    "transitions": [
+
+                    ],
+                    "uiSchema": "MainContent",
+                    "allowComments": false,
+                    "operations": [
+
+                    ]
+                },
+                {
+                    "actor": "System",
+                    "transitions": [
+
+                    ],
+                    "uiSchema": "MainContent",
+                    "allowComments": false,
+                    "operations": [
+
+                    ]
+                }
+            ]
+        }
+    ],
+    "version": "1",
+    "components": [
+        "TechnicalAmendmentData"
+    ],
+    "attachments": [
+
+    ]
+}

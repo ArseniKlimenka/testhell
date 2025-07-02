@@ -1,0 +1,34 @@
+with ph as
+(
+select
+	party_code,
+	body,
+	sys_updated_on,
+	sys_updated_by_id
+from pty.party_history
+union all
+select
+	party_code,
+	body,
+	sys_updated_on,
+	sys_updated_by_id
+from pty_impl.party_history_arch
+), tax_residence_history as
+(
+select ph.sys_updated_on,
+       json_value(ph.body, '$.partyGeneralData.taxResidence.countryShortName') as tax_residence,
+       lag(json_value(ph.body, '$.partyGeneralData.taxResidence.countryShortName'), 1, 'N/A') over (order by ph.sys_updated_on) as previous_tax_residence,
+       auc.value as sys_updated_by
+  from ph,
+       org.application_user au,
+       org.application_user_claim auc
+ where ph.sys_updated_by_id = au.application_user_id
+   and au.application_user_id = auc.application_user_id
+   and auc.claim_type = 'DisplayName'
+   and party_code = @partyCode
+)
+select sys_updated_on,
+       tax_residence,
+       sys_updated_by
+  from tax_residence_history
+ where not tax_residence = previous_tax_residence

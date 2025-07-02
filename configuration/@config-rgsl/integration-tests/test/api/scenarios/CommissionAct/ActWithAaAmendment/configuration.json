@@ -1,0 +1,57 @@
+{
+    "description": "Check invoiced commission recalculation ETL service",
+    "steps": [
+        {
+            "$ref": "AdjustAccountingPeriods",
+            "context": {
+                "firstOpenPeriod": "2000-01-01"
+            }
+        },
+        {
+            "$ref": "AdjustCurrentDate",
+            "context": {
+                "currentDate": "2021-07-04"
+            }
+        },
+        {
+            "$ref": "CreateAa"
+        },
+        {
+            "$ref": "CreateAccumulatedLifeInsurancePolicy",
+            "context": {
+                "agentAgreementId": "{{$.agentAgreement.id}}"
+            }
+        },
+        {
+            "$ref": "CreatePaymentAndAutoAllocate",
+            "description": "Pay first two installments",
+            "context": {
+                "amountToAllocate": 100000,
+                "referenceNoToAllocate": "{{$.contractNumber}}"
+            }
+        },
+        {
+            "$ref": "CreateChangeAmendment",
+            "context": {
+                "amdnmentStartDate": "2021-04-01"
+            }
+        },
+        {
+            "$ref": "CreateCommissionActForPolicy",
+            "context": {
+                "referenceNoToInclude": "{{$.contractNumber}}"
+            },
+            "assert": {
+                "expected": "./steps/createCommissionAct/expectedResult.json",
+                "module": "./steps/createCommissionAct/assert.js",
+                "function": "assertAct"
+            }
+        },
+        {
+            "$ref": "AdjustCurrentDate",
+            "context": {
+                "currentDate": null
+            }
+        }
+    ]
+}

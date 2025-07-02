@@ -1,0 +1,210 @@
+{
+    "type": "Section",
+    "labelType": "H1",
+    "label": "LifeInsurancePaymentCalculation",
+    "width": 12,
+    "elements": [
+        {
+            "type": "Group",
+            "width": 12,
+            "elements": [
+                {
+                    "type": "DataGrid",
+                    "mode": "Array",
+                    "checkIfRowActionIsAllowed": "checkIfRowActionIsAllowed",
+                    "isCollapsed": false,
+                    "value": {
+                        "$ref": "#/properties/paymentLines"
+                    },
+                    "actions": [
+                        "Edit"
+                    ],
+                    "edit": {
+                        "mode": "Detached",
+                        "inline": "SingleRow"
+                    },
+                    "columns": [
+                        {
+                            "title": "paymentType",
+                            "name": "paymentType",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "defaultValue": "",
+                                "value": {
+                                    "$ref": "#/properties/paymentLineType"
+                                }
+                            },
+                            "footerContent": {
+                                "type": "OutputText",
+                                "literalValue": "total"
+                            }
+                        },
+                        {
+                            "title": "paymentSum",
+                            "name": "paymentSum",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "value": {
+                                    "$ref": "#/properties/paymentLineSum"
+                                }
+                            },
+                            "editCellContent": {
+                                "type": "Input",
+                                "value": {
+                                    "$ref": "#/properties/paymentLineSum"
+                                }
+                            },
+                            "footerContent": {
+                                "type": "OutputText",
+                                "template": "{{#style 'right'}}{{expr totalSum 'n:2'}}{{/style}}",
+                                "value": {
+                                    "mapping": "paymentSumFooterContent",
+                                    "$ref": "#"
+                                }
+                            }
+                        }
+                    ],
+                    "rule": {
+                        "effect": "ENABLE_INITIAL",
+                        "condition": {
+                            "type": "LEAF",
+                            "expectedValue": true,
+                            "value": {
+                                "$ref": "#/properties/paymentLinesManualCorrection"
+                            }
+                        }
+                    }
+                },
+                {
+                    "type": "Input",
+                    "label": "paymentLinesManualCorrection",
+                    "isCompact": true,
+                    "value": {
+                        "$ref": "#/properties/paymentLinesManualCorrection"
+                    },
+                    "width": 3
+                }
+            ],
+            "rule": {
+                "effect": "HIDE",
+                "condition": {
+                    "type": "FUNC",
+                    "ruleFunction": "isAgent",
+                    "value": [
+                        {
+                            "$ref": "#"
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "type": "Group",
+            "width": 12,
+            "elements": [
+                {
+                    "type": "DataGrid",
+                    "mode": "Array",
+                    "checkIfRowActionIsAllowed": "checkIfRowActionIsAllowed",
+                    "isCollapsed": false,
+                    "value": {
+                        "$ref": "#/properties/paymentLines"
+                    },
+                    "actions": [
+                        "Edit"
+                    ],
+                    "edit": {
+                        "mode": "Detached",
+                        "inline": "SingleRow"
+                    },
+                    "columns": [
+                        {
+                            "title": "paymentType",
+                            "name": "paymentType",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "defaultValue": "",
+                                "value": {
+                                    "$ref": "#/properties/paymentLineType"
+                                }
+                            },
+                            "footerContent": {
+                                "type": "OutputText",
+                                "literalValue": "total"
+                            }
+                        },
+                        {
+                            "title": "paymentSum",
+                            "name": "paymentSum",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "value": {
+                                    "$ref": "#/properties/paymentLineSum"
+                                }
+                            },
+                            "editCellContent": {
+                                "type": "Input",
+                                "value": {
+                                    "$ref": "#/properties/paymentLineSum"
+                                }
+                            },
+                            "footerContent": {
+                                "type": "OutputText",
+                                "template": "{{#style 'right'}}{{expr totalSum 'n:2'}}{{/style}}",
+                                "value": {
+                                    "mapping": "paymentSumFooterContent",
+                                    "$ref": "#"
+                                }
+                            }
+                        }
+                    ],
+                    "rule": {
+                        "effect": "DISABLE_INITIAL",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "isDisable",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "type": "Input",
+                    "label": "paymentLinesManualCorrection",
+                    "isCompact": true,
+                    "value": {
+                        "$ref": "#/properties/paymentLinesManualCorrection"
+                    },
+                    "width": 3,
+                    "rule": {
+                        "effect": "DISABLE_INITIAL",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "isDisable",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    }
+                }
+            ],
+            "rule": {
+                "effect": "SHOW",
+                "condition": {
+                    "type": "FUNC",
+                    "ruleFunction": "isAgent",
+                    "value": [
+                        {
+                            "$ref": "#"
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}

@@ -1,0 +1,80 @@
+{
+    "type": "Group",
+    "elements": [
+        {
+            "type": "DataGrid",
+            "value": {
+                "$ref": "#/properties/response/properties/data"
+            },
+            "mode": "DataSource",
+            "pagination": {
+                "mode": "Regular",
+                "pageSizes": [
+                    10,
+                    25,
+                    50,
+                    500
+                ]
+            },
+            "selection": {
+                "mode": "Multi",
+                "enableRowSelection": true,
+                "showCheckBox": true,
+                "onSelectionChanged": [
+                    {
+                        "commandType": "raiseEvent",
+                        "eventName": "Selected"
+                    }
+                ]
+            },
+            "height": "None",
+            "columns": [
+                {
+                    "sortable": true,
+                    "title": "DocumentNo",
+                    "cellContent": {
+                        "type": "Link",
+                        "targetType": "Entity",
+                        "value": {
+                            "mapping": "linkToPtOverview",
+                            "$ref": "#"
+                        },
+                        "width": 1,
+                        "content": {
+                            "text": {
+                                "type": "OutputText",
+                                "value": {
+                                    "$ref": "#/properties/resultData/properties/documentNo"
+                                }
+                            }
+                        }
+                    },
+                    "name": "documentNo"
+                },
+                {
+                    "sortable": true,
+                    "title": "IssueDate",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/issueDate"
+                        }
+                    },
+                    "name": "issueDate"
+                },
+                {
+                    "sortable": true,
+                    "title": "StateCode",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/stateCode"
+                        }
+                    },
+                    "name": "stateCode"
+                }
+            ],
+            "elementId": "TableViewId"
+        }
+    ]
+}

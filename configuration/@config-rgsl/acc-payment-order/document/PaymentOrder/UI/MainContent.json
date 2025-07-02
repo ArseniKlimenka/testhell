@@ -1,0 +1,1431 @@
+{
+    "type": "GridLayout",
+    "formProperties": {
+        "events": {
+            "onLoad": "onLoadDocumentAction",
+            "beforeSave": "beforeSaveDocumentAction"
+        }
+    },
+    "numberOfColumns": 4,
+    "width": 12,
+    "elements": [
+        {
+            "type": "TabLayout",
+            "options": {
+                "menuAlligment": "Horizontal",
+                "menuMode": "Single"
+            },
+            "elements": [
+                {
+                    "type": "Tab",
+                    "elementId": "mainInformation",
+                    "title": "mainInformation",
+                    "elements": [
+                        {
+                            "type": "Dropdown",
+                            "autocomplete": {
+                                "searchDelay": 300,
+                                "minTextLength": 2,
+                                "dropDownItemsCount": 10,
+                                "selectItemOnMatch": true,
+                                "matchCaseInsensitive": true,
+                                "showIcon": true
+                            },
+                            "enableClear": true,
+                            "label": "Payment order type",
+                            "metadata": {
+                                "autogenerate": true
+                            },
+                            "useParentScope": false,
+                            "value": {
+                                "$ref": "#/properties/Body/properties/paymentOrderInformation/properties/paymentOrderType"
+                            },
+                            "readOnly": true,
+                            "width": 1
+                        },
+                        {
+                            "type": "DatetimePicker",
+                            "label": "Payment order date",
+                            "metadata": {
+                                "autogenerate": true
+                            },
+                            "readOnly": true,
+                            "useParentScope": false,
+                            "value": {
+                                "$ref": "#/properties/Body/properties/paymentOrderInformation/properties/paymentOrderDate"
+                            },
+                            "width": 1
+                        },
+                        {
+                            "type": "DatetimePicker",
+                            "label": "paymentDeadlineDate",
+                            "metadata": {
+                                "autogenerate": true
+                            },
+                            "useParentScope": false,
+                            "value": {
+                                "$ref": "#/properties/Body/properties/paymentOrderInformation/properties/paymentDeadlineDate"
+                            },
+                            "width": 1,
+                            "rule": {
+                                "condition": {
+                                    "type": "LEAF",
+                                    "value": {
+                                        "$ref": "#/properties/Body/properties/paymentOrderInformation/properties/paymentOrderType"
+                                    },
+                                    "expectedValue": "Commission"
+                                },
+                                "effect": "SHOW"
+                            }
+                        },
+                        {
+                            "type": "Section",
+                            "label": "Payment order information",
+                            "scope": "paymentOrderInformation",
+                            "width": 4,
+                            "elements": [
+                                {
+                                    "type": "Group",
+                                    "width": 4,
+                                    "elements": [
+                                        {
+                                            "type": "GridLayout",
+                                            "numberOfColumns": 1,
+                                            "width": 1,
+                                            "elements": [
+                                                {
+                                                    "type": "Input",
+                                                    "control": "String",
+                                                    "label": "Reference document number",
+                                                    "metadata": {
+                                                        "autogenerate": true
+                                                    },
+                                                    "useParentScope": false,
+                                                    "value": {
+                                                        "$ref": "#/properties/Body/properties/paymentOrderInformation/properties/referenceNumber"
+                                                    },
+                                                    "width": 1,
+                                                    "showAsRequired": true,
+                                                    "readOnly": true
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "type": "Input",
+                                            "control": "String",
+                                            "label": "Recipient name",
+                                            "metadata": {
+                                                "autogenerate": true
+                                            },
+                                            "useParentScope": false,
+                                            "value": {
+                                                "$ref": "#/properties/Body/properties/paymentOrderInformation/properties/recipientNameFromBaseDocument"
+                                            },
+                                            "width": 1,
+                                            "readOnly": true
+                                        },
+                                        {
+                                            "type": "Input",
+                                            "control": "String",
+                                            "label": "Contract number",
+                                            "metadata": {
+                                                "autogenerate": true
+                                            },
+                                            "readOnly": true,
+                                            "useParentScope": false,
+                                            "value": {
+                                                "$ref": "#/properties/Body/properties/paymentOrderInformation/properties/contractNumber"
+                                            },
+                                            "width": 1,
+                                            "rule": {
+                                                "condition": {
+                                                    "type": "LEAF",
+                                                    "value": {
+                                                        "$ref": "#/properties/Body/properties/paymentOrderInformation/properties/paymentOrderType"
+                                                    },
+                                                    "inValues": [
+                                                        "Claim",
+                                                        "PaymentRefund",
+                                                        "PolicyCancellation"
+                                                    ]
+                                                },
+                                                "effect": "SHOW"
+                                            }
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "Group",
+                                    "width": 4,
+                                    "elements": [
+                                        {
+                                            "type": "Dropdown",
+                                            "autocomplete": {
+                                                "searchDelay": 300,
+                                                "minTextLength": 2,
+                                                "dropDownItemsCount": 10,
+                                                "selectItemOnMatch": true,
+                                                "matchCaseInsensitive": true,
+                                                "showIcon": true
+                                            },
+                                            "enableClear": true,
+                                            "label": "Payment method",
+                                            "metadata": {
+                                                "autogenerate": true
+                                            },
+                                            "showAsRequired": true,
+                                            "useParentScope": false,
+                                            "value": {
+                                                "$ref": "#/properties/Body/properties/paymentOrderInformation/properties/paymentMethod"
+                                            },
+                                            "width": 1
+                                        },
+                                        {
+                                            "type": "Dropdown",
+                                            "autocomplete": {
+                                                "searchDelay": 300,
+                                                "minTextLength": 0,
+                                                "dropDownItemsCount": 10,
+                                                "selectItemOnMatch": false,
+                                                "matchCaseInsensitive": true,
+                                                "showIcon": true
+                                            },
+                                            "enableClear": true,
+                                            "label": "Payer bank account number",
+                                            "metadata": {
+                                                "autogenerate": true
+                                            },
+                                            "source": {
+                                                "compareFunction": "bankAccountCompareFunction",
+                                                "dataSource": {
+                                                    "name": "GetDebtorAccountDataSource",
+                                                    "searchFieldPath": "searchText",
+                                                    "requestMapping": "bankAccountSearchRequestMapping",
+                                                    "responseMapping": "bankAccountSearchResponseMapping",
+                                                    "resultCount": 1000
+                                                }
+                                            },
+                                            "showAsRequired": true,
+                                            "useParentScope": false,
+                                            "value": {
+                                                "$ref": "#/properties/Body/properties/paymentOrderInformation/properties/payerBankAccountNumber"
+                                            },
+                                            "width": 1
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "Group",
+                                    "width": 4,
+                                    "elements": [
+                                        {
+                                            "type": "Input",
+                                            "control": "Boolean",
+                                            "label": "Is acquiring",
+                                            "metadata": {
+                                                "autogenerate": true
+                                            },
+                                            "useParentScope": false,
+                                            "value": {
+                                                "$ref": "#/properties/Body/properties/paymentOrderInformation/properties/isAcquiring"
+                                            },
+                                            "width": 1,
+                                            "rule": {
+                                                "condition": {
+                                                    "type": "LEAF",
+                                                    "value": {
+                                                        "$ref": "#/properties/Body/properties/paymentOrderInformation/properties/paymentOrderType"
+                                                    },
+                                                    "inValues": [
+                                                        "PaymentRefund"
+                                                    ]
+                                                },
+                                                "effect": "SHOW"
+                                            }
+                                        },
+                                        {
+                                            "type": "Input",
+                                            "control": "Boolean",
+                                            "label": "Is cool-off period",
+                                            "metadata": {
+                                                "autogenerate": true
+                                            },
+                                            "useParentScope": false,
+                                            "value": {
+                                                "$ref": "#/properties/Body/properties/paymentOrderInformation/properties/isCoolOffPeriod"
+                                            },
+                                            "width": 1,
+                                            "rule": {
+                                                "condition": {
+                                                    "type": "LEAF",
+                                                    "value": {
+                                                        "$ref": "#/properties/Body/properties/paymentOrderInformation/properties/paymentOrderType"
+                                                    },
+                                                    "inValues": [
+                                                        "PaymentRefund"
+                                                    ]
+                                                },
+                                                "effect": "SHOW"
+                                            }
+                                        },
+                                        {
+                                            "type": "Input",
+                                            "control": "Boolean",
+                                            "label": "Non acceptance",
+                                            "metadata": {
+                                                "autogenerate": true
+                                            },
+                                            "useParentScope": false,
+                                            "value": {
+                                                "$ref": "#/properties/Body/properties/paymentOrderInformation/properties/nonAcceptance"
+                                            },
+                                            "width": 1,
+                                            "readOnly": true,
+                                            "rule": {
+                                                "condition": {
+                                                    "type": "LEAF",
+                                                    "value": {
+                                                        "$ref": "#/properties/Body/properties/paymentOrderInformation/properties/paymentOrderType"
+                                                    },
+                                                    "inValues": [
+                                                        "Claim",
+                                                        "PolicyCancellation"
+                                                    ]
+                                                },
+                                                "effect": "SHOW"
+                                            }
+                                        },
+                                        {
+                                            "type": "Input",
+                                            "control": "Boolean",
+                                            "label": "isManual",
+                                            "metadata": {
+                                                "autogenerate": true
+                                            },
+                                            "useParentScope": false,
+                                            "readOnly": true,
+                                            "value": {
+                                                "$ref": "#/properties/Body/properties/paymentOrderInformation/properties/isManual"
+                                            },
+                                            "width": 1,
+                                            "rule": {
+                                                "condition": {
+                                                    "type": "LEAF",
+                                                    "value": {
+                                                        "$ref": "#/properties/Body/properties/paymentOrderInformation/properties/paymentOrderType"
+                                                    },
+                                                    "inValues": [
+                                                        "Claim",
+                                                        "PolicyCancellation"
+                                                    ]
+                                                },
+                                                "effect": "SHOW"
+                                            }
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "Group",
+                                    "width": 4,
+                                    "elements": [
+                                        {
+                                            "type": "Input",
+                                            "control": "String",
+                                            "hide": false,
+                                            "label": "Number of non acceptance payement",
+                                            "metadata": {
+                                                "autogenerate": true
+                                            },
+                                            "rule": {
+                                                "condition": {
+                                                    "type": "LEAF",
+                                                    "value": {
+                                                        "$ref": "#/properties/Body/properties/paymentOrderInformation/properties/nonAcceptance"
+                                                    },
+                                                    "expectedValue": true
+                                                },
+                                                "effect": "SHOW"
+                                            },
+                                            "useParentScope": false,
+                                            "value": {
+                                                "$ref": "#/properties/Body/properties/paymentOrderInformation/properties/numberOfNonAcceptancePayment"
+                                            },
+                                            "width": 1,
+                                            "readOnly": true
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Section",
+                            "label": "Amounts",
+                            "scope": "Amounts",
+                            "width": 4,
+                            "elements": [
+                                {
+                                    "type": "Group",
+                                    "width": 4,
+                                    "elements": [
+                                        {
+                                            "type": "Input",
+                                            "control": "String",
+                                            "label": "Payment order currency",
+                                            "metadata": {
+                                                "autogenerate": true
+                                            },
+                                            "readOnly": true,
+                                            "useParentScope": false,
+                                            "value": {
+                                                "$ref": "#/properties/Body/properties/paymentOrderAmounts/properties/paymentOrderCurrencyCode"
+                                            },
+                                            "width": 1
+                                        },
+                                        {
+                                            "type": "Currency",
+                                            "currencyValue": {
+                                                "$ref": "#/properties/Body/properties/paymentOrderAmounts/properties/paymentOrderCurrencyCode"
+                                            },
+                                            "decimalPlaces": 2,
+                                            "metadata": {
+                                                "autogenerate": true
+                                            },
+                                            "useParentScope": false,
+                                            "value": {
+                                                "$ref": "#/properties/Body/properties/paymentOrderAmounts/properties/paymentAmountInDocCurrency"
+                                            },
+                                            "width": 1,
+                                            "label": "Amount in document currency",
+                                            "readOnly": true
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "Group",
+                                    "width": 4,
+                                    "elements": [
+                                        {
+                                            "type": "Input",
+                                            "label": "Payment currency",
+                                            "value": {
+                                                "$ref": "#/properties/Body/properties/paymentOrderAmounts/properties/paymentCurrencyCode"
+                                            },
+                                            "autocomplete": {
+                                                "minTextLength": 0,
+                                                "dropItemsCount": 15,
+                                                "selectItemOnMatch": true,
+                                                "matchCaseInsensitive": true
+                                            },
+                                            "control": "Dropdown",
+                                            "source": {
+                                                "dataSource": {
+                                                    "name": "GetAllCurrenciesDataSource",
+                                                    "searchFieldPath": "currencyCode",
+                                                    "responseMapping": "currencySearchResponseMapping",
+                                                    "resultCount": 32
+                                                }
+                                            },
+                                            "width": 1,
+                                            "elementId": "currencyElementId",
+                                            "rule": {
+                                                "effect": "DISABLE_INITIAL",
+                                                "condition": {
+                                                    "type": "FUNC",
+                                                    "ruleFunction": "shouldDisablePaymentCurrency",
+                                                    "value": [
+                                                        {
+                                                            "$ref": "#"
+                                                        }
+                                                    ]
+                                                }
+                                            },
+                                            "onValueChanged": "onChangePaymentCurrency"
+                                        },
+                                        {
+                                            "type": "Input",
+                                            "control": "Number",
+                                            "decimalPlaces": 6,
+                                            "label": "Exchange rate",
+                                            "metadata": {
+                                                "autogenerate": true
+                                            },
+                                            "readOnly": true,
+                                            "useParentScope": false,
+                                            "value": {
+                                                "$ref": "#/properties/Body/properties/paymentOrderAmounts/properties/exchangeRate"
+                                            },
+                                            "width": 1
+                                        },
+                                        {
+                                            "type": "Input",
+                                            "control": "Number",
+                                            "decimalPlaces": 6,
+                                            "label": "fixedExchangeRate",
+                                            "metadata": {
+                                                "autogenerate": true
+                                            },
+                                            "readOnly": true,
+                                            "useParentScope": false,
+                                            "value": {
+                                                "$ref": "#/properties/Body/properties/paymentOrderAmounts/properties/fixedExchangeRate"
+                                            },
+                                            "width": 1,
+                                            "rule": {
+                                                "effect": "SHOW",
+                                                "condition": {
+                                                    "type": "FUNC",
+                                                    "ruleFunction": "shouldShowFixedExchangeRate",
+                                                    "value": [
+                                                        {
+                                                            "$ref": "#"
+                                                        }
+                                                    ]
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "type": "Input",
+                                            "control": "Boolean",
+                                            "label": "useFixedExchangeRate",
+                                            "metadata": {
+                                                "autogenerate": true
+                                            },
+                                            "useParentScope": false,
+                                            "readOnly": true,
+                                            "value": {
+                                                "$ref": "#/properties/Body/properties/paymentOrderAmounts/properties/useFixedExchangeRate"
+                                            },
+                                            "width": 1,
+                                            "rule": {
+                                                "effect": "SHOW",
+                                                "condition": {
+                                                    "type": "FUNC",
+                                                    "ruleFunction": "shouldShowFixedExchangeRate",
+                                                    "value": [
+                                                        {
+                                                            "$ref": "#"
+                                                        }
+                                                    ]
+                                                }
+                                            }
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "Group",
+                                    "width": 4,
+                                    "elements": [
+                                        {
+                                            "type": "Input",
+                                            "control": "Number",
+                                            "decimalPlaces": 2,
+                                            "label": "Netted amount",
+                                            "metadata": {
+                                                "autogenerate": true
+                                            },
+                                            "readOnly": true,
+                                            "useParentScope": false,
+                                            "value": {
+                                                "$ref": "#/properties/Body/properties/paymentOrderNetting/properties/totalNettingAmount"
+                                            },
+                                            "width": 1
+                                        },
+                                        {
+                                            "type": "Input",
+                                            "control": "Number",
+                                            "decimalPlaces": 2,
+                                            "label": "Tax amount LC",
+                                            "metadata": {
+                                                "autogenerate": true
+                                            },
+                                            "readOnly": true,
+                                            "useParentScope": false,
+                                            "value": {
+                                                "$ref": "#/properties/Body/properties/paymentOrderAmounts/properties/taxAmountLC"
+                                            },
+                                            "width": 1,
+                                            "rule": {
+                                                "condition": {
+                                                    "type": "LEAF",
+                                                    "value": {
+                                                        "$ref": "#/properties/Body/properties/paymentOrderInformation/properties/paymentOrderType"
+                                                    },
+                                                    "expectedValue": "Claim"
+                                                },
+                                                "effect": "SHOW"
+                                            }
+                                        },
+                                        {
+                                            "type": "Input",
+                                            "control": "Number",
+                                            "decimalPlaces": 2,
+                                            "label": "Total payment amount",
+                                            "metadata": {
+                                                "autogenerate": true
+                                            },
+                                            "readOnly": true,
+                                            "useParentScope": false,
+                                            "value": {
+                                                "$ref": "#/properties/Body/properties/paymentOrderAmounts/properties/totalPaymentAmount"
+                                            },
+                                            "width": 1
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "TextArea",
+                                    "enableResize": true,
+                                    "label": "Payment description",
+                                    "metadata": {
+                                        "autogenerate": true
+                                    },
+                                    "numberOfRows": 2,
+                                    "useParentScope": false,
+                                    "value": {
+                                        "$ref": "#/properties/Body/properties/paymentOrderAmounts/properties/paymentDescription"
+                                    },
+                                    "width": 4
+                                },
+                                {
+                                    "type": "TextArea",
+                                    "enableResize": true,
+                                    "label": "Comments",
+                                    "metadata": {
+                                        "autogenerate": true
+                                    },
+                                    "numberOfRows": 2,
+                                    "readOnly": true,
+                                    "useParentScope": false,
+                                    "value": {
+                                        "$ref": "#/properties/Body/properties/paymentOrderAmounts/properties/comments"
+                                    },
+                                    "width": 4
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Section",
+                            "label": "Recipient Information",
+                            "scope": "recipientInformation",
+                            "width": 4,
+                            "elements": [
+                                {
+                                    "type": "Lookup",
+                                    "value": {
+                                        "$ref": "#/properties/Body/properties/recipientInformation/properties/partyFullName"
+                                    },
+                                    "width": 1,
+                                    "dialogButton": {
+                                        "icon": {
+                                            "name": "User",
+                                            "color": "Primary"
+                                        }
+                                    },
+                                    "dialog": {
+                                        "viewReference": {
+                                            "configurationCodeName": "GeneralPartySearchView",
+                                            "configurationVersion": "1",
+                                            "configurationConceptType": "SearchView"
+                                        }
+                                    },
+                                    "onSelected": "partySearchResultAssignment",
+                                    "selectedDisplayValueUISchema": {
+                                        "type": "Input",
+                                        "label": "Party name",
+                                        "readOnly": false,
+                                        "value": {
+                                            "$ref": "#/properties/Body/properties/recipientInformation/properties/partyFullName"
+                                        }
+                                    },
+                                    "label": "Party name",
+                                    "rule": {
+                                        "effect": "ENABLE_INITIAL",
+                                        "condition": {
+                                            "type": "FUNC",
+                                            "ruleFunction": "isRecipientEnabled",
+                                            "value": [
+                                                {
+                                                    "$ref": "#"
+                                                }
+                                            ]
+                                        }
+                                    }
+                                },
+                                {
+                                    "type": "Dropdown",
+                                    "autocomplete": {
+                                        "searchDelay": 300,
+                                        "minTextLength": 2,
+                                        "dropDownItemsCount": 10,
+                                        "selectItemOnMatch": true,
+                                        "matchCaseInsensitive": true,
+                                        "showIcon": true
+                                    },
+                                    "enableClear": true,
+                                    "label": "Party type",
+                                    "metadata": {
+                                        "autogenerate": true
+                                    },
+                                    "useParentScope": false,
+                                    "value": {
+                                        "$ref": "#/properties/Body/properties/recipientInformation/properties/partyType"
+                                    },
+                                    "width": 1,
+                                    "readOnly": true
+                                },
+                                {
+                                    "type": "Input",
+                                    "control": "String",
+                                    "label": "INN number",
+                                    "metadata": {
+                                        "autogenerate": true
+                                    },
+                                    "readOnly": true,
+                                    "useParentScope": false,
+                                    "value": {
+                                        "$ref": "#/properties/Body/properties/recipientInformation/properties/innNumber"
+                                    },
+                                    "width": 1
+                                },
+                                {
+                                    "type": "Input",
+                                    "control": "String",
+                                    "label": "KPP Number",
+                                    "metadata": {
+                                        "autogenerate": true
+                                    },
+                                    "readOnly": true,
+                                    "useParentScope": false,
+                                    "value": {
+                                        "$ref": "#/properties/Body/properties/recipientInformation/properties/kppNumber"
+                                    },
+                                    "width": 1
+                                },
+                                {
+                                    "type": "Input",
+                                    "label": "Recipient Bank Account",
+                                    "value": {
+                                        "$ref": "#/properties/Body/properties/recipientInformation/properties/bankAccount"
+                                    },
+                                    "autocomplete": {
+                                        "minTextLength": 1
+                                    },
+                                    "control": "Dropdown",
+                                    "source": {
+                                        "dataSource": {
+                                            "reloadOnOpen": true,
+                                            "name": "GetPartyBankAccountsOnlyDataSource",
+                                            "searchFieldPath": "bankAccountNumber",
+                                            "responseMapping": "recipientBankAccountSearchResponseMapping",
+                                            "requestMapping": "recipientBankAccountSearchRequestMapping"
+                                        },
+                                        "displayFieldName": "displayName",
+                                        "valueFieldName": "value"
+                                    },
+                                    "width": 1,
+                                    "onValueChanged": [
+                                        {
+                                            "commandType": "executeAction",
+                                            "actionName": "onRecipientBankAccountChanged"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "Input",
+                                    "control": "String",
+                                    "label": "Correspondent bank account",
+                                    "metadata": {
+                                        "autogenerate": true
+                                    },
+                                    "useParentScope": false,
+                                    "value": {
+                                        "$ref": "#/properties/Body/properties/recipientInformation/properties/bankAccount/properties/correspondentBankAccount"
+                                    },
+                                    "width": 1,
+                                    "readOnly": true
+                                },
+                                {
+                                    "type": "Input",
+                                    "control": "String",
+                                    "label": "Bank BIC",
+                                    "metadata": {
+                                        "autogenerate": true
+                                    },
+                                    "useParentScope": false,
+                                    "value": {
+                                        "$ref": "#/properties/Body/properties/recipientInformation/properties/bankAccount/properties/bankBIC"
+                                    },
+                                    "width": 1,
+                                    "readOnly": true
+                                },
+                                {
+                                    "type": "Input",
+                                    "control": "String",
+                                    "label": "Bank name",
+                                    "metadata": {
+                                        "autogenerate": true
+                                    },
+                                    "useParentScope": false,
+                                    "value": {
+                                        "$ref": "#/properties/Body/properties/recipientInformation/properties/bankAccount/properties/bankName"
+                                    },
+                                    "width": 1,
+                                    "readOnly": true
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Section",
+                            "label": "PaymentLines",
+                            "scope": "PaymentLines",
+                            "width": 12,
+                            "elements": [
+                                {
+                                    "type": "DataGrid",
+                                    "mode": "Array",
+                                    "checkIfRowActionIsAllowed": "isPOItemsTableRowActionAllowed",
+                                    "checkIfAddButtonVisible": "isPOItemsTableAddButtonVisible",
+                                    "actions": [
+                                        "Add",
+                                        "Edit",
+                                        "Details",
+                                        "Delete"
+                                    ],
+                                    "edit": {
+                                        "mode": "Detached",
+                                        "onAfterGridAction": "updatePOItemsGridLines",
+                                        "onBeforeGridAction": "beforePOItemsGridAction"
+                                    },
+                                    "value": {
+                                        "$ref": "#/properties/Body/properties/paymentOrderItems"
+                                    },
+                                    "height": "None",
+                                    "columns": [
+                                        {
+                                            "title": "itemType",
+                                            "cellContent": {
+                                                "type": "OutputText",
+                                                "value": {
+                                                    "$ref": "#/properties/itemType"
+                                                }
+                                            },
+                                            "name": "itemType"
+                                        },
+                                        {
+                                            "title": "paymentOrderCurrencyAmount",
+                                            "cellContent": {
+                                                "type": "OutputText",
+                                                "value": {
+                                                    "$ref": "#/properties/paymentOrderCurrencyAmount"
+                                                }
+                                            },
+                                            "name": "paymentOrderCurrencyAmount"
+                                        },
+                                        {
+                                            "title": "paymentCurrencyAmount",
+                                            "cellContent": {
+                                                "type": "OutputText",
+                                                "value": {
+                                                    "$ref": "#/properties/paymentCurrencyAmount"
+                                                }
+                                            },
+                                            "name": "paymentCurrencyAmount"
+                                        }
+                                    ],
+                                    "detailsTemplates": {
+                                        "edit": {
+                                            "content": {
+                                                "type": "Group",
+                                                "elements": [
+                                                    {
+                                                        "type": "GridLayout",
+                                                        "fillAvailableSpace": true,
+                                                        "numberOfColumns": 12,
+                                                        "elements": [
+                                                            {
+                                                                "type": "Group",
+                                                                "elements": [
+                                                                    {
+                                                                        "type": "Input",
+                                                                        "control": "Dropdown",
+                                                                        "label": "itemType",
+                                                                        "value": {
+                                                                            "$ref": "#/properties/itemType"
+                                                                        },
+                                                                        "width": 3,
+                                                                        "filter": "filterItemTypes"
+                                                                    },
+                                                                    {
+                                                                        "type": "Input",
+                                                                        "label": "paymentOrderCurrencyAmount",
+                                                                        "value": {
+                                                                            "$ref": "#/properties/paymentOrderCurrencyAmount"
+                                                                        },
+                                                                        "width": 3,
+                                                                        "onValueChanged": [
+                                                                            {
+                                                                                "commandType": "executeAction",
+                                                                                "actionName": "onPaymentLinePOCurrencyAmountChanged"
+                                                                            }
+                                                                        ]
+                                                                    }
+                                                                ]
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        },
+                                        "view": {
+                                            "content": {
+                                                "type": "Group",
+                                                "elements": [
+                                                    {
+                                                        "type": "GridLayout",
+                                                        "fillAvailableSpace": true,
+                                                        "numberOfColumns": 12,
+                                                        "elements": [
+                                                            {
+                                                                "type": "Group",
+                                                                "elements": [
+                                                                    {
+                                                                        "type": "Input",
+                                                                        "control": "Dropdown",
+                                                                        "label": "itemType",
+                                                                        "value": {
+                                                                            "$ref": "#/properties/itemType"
+                                                                        },
+                                                                        "readOnly": true,
+                                                                        "width": 3
+                                                                    },
+                                                                    {
+                                                                        "type": "Input",
+                                                                        "label": "paymentOrderCurrencyAmount",
+                                                                        "value": {
+                                                                            "$ref": "#/properties/paymentOrderCurrencyAmount"
+                                                                        },
+                                                                        "readOnly": true,
+                                                                        "width": 3
+                                                                    }
+                                                                ]
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "Tab",
+                    "elementId": "nettingTab",
+                    "title": "nettingTab",
+                    "rule": {
+                        "effect": "SHOW",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "shouldShowNettingTab",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    },
+                    "elements": [
+                        {
+                            "type": "Section",
+                            "label": "Netting",
+                            "scope": "Netting",
+                            "width": 12,
+                            "elements": [
+                                {
+                                    "type": "Group",
+                                    "width": 12,
+                                    "elements": [
+                                        {
+                                            "type": "Input",
+                                            "control": "Number",
+                                            "decimalPlaces": 2,
+                                            "label": "Netted amount",
+                                            "readOnly": true,
+                                            "useParentScope": false,
+                                            "value": {
+                                                "$ref": "#/properties/Body/properties/paymentOrderNetting/properties/totalNettingAmount"
+                                            },
+                                            "width": 1
+                                        },
+                                        {
+                                            "type": "DataGrid",
+                                            "elementId": "nettedDocumentsTable",
+                                            "mode": "Array",
+                                            "pagination": {
+                                                "mode": "Regular",
+                                                "pageSizes": [
+                                                    5,
+                                                    10,
+                                                    15
+                                                ]
+                                            },
+                                            "actions": [
+                                                "Add",
+                                                "Edit",
+                                                "Details",
+                                                "Delete"
+                                            ],
+                                            "edit": {
+                                                "mode": "Detached",
+                                                "onBeforeGridAction": "beforeNettedDocsGridAction",
+                                                "onAfterGridAction": "updateGridLines"
+                                            },
+                                            "height": "None",
+                                            "value": {
+                                                "$ref": "#/properties/Body/properties/paymentOrderNetting/properties/nettedDocuments"
+                                            },
+                                            "selection": {
+                                                "mode": "Single",
+                                                "enableRowSelection": true,
+                                                "showCheckBox": true
+                                            },
+                                            "columns": [
+                                                {
+                                                    "sortable": false,
+                                                    "title": "documentNumber",
+                                                    "cellContent": {
+                                                        "type": "OutputText",
+                                                        "defaultValue": "",
+                                                        "value": {
+                                                            "$ref": "#/properties/documentNumber"
+                                                        }
+                                                    }
+                                                },
+                                                {
+                                                    "sortable": false,
+                                                    "title": "isFutureContract",
+                                                    "cellContent": {
+                                                        "type": "Icon",
+                                                        "iconStyleFunction": "getIsFutureContractIcon",
+                                                        "value": {
+                                                            "$ref": "#/properties/isFutureContract"
+                                                        }
+                                                    }
+                                                },
+                                                {
+                                                    "sortable": false,
+                                                    "title": "initialOpenAmount",
+                                                    "cellContent": {
+                                                        "type": "OutputText",
+                                                        "defaultValue": "",
+                                                        "value": {
+                                                            "$ref": "#/properties/initialOpenAmount"
+                                                        }
+                                                    }
+                                                },
+                                                {
+                                                    "sortable": false,
+                                                    "title": "currency",
+                                                    "cellContent": {
+                                                        "type": "OutputText",
+                                                        "defaultValue": "",
+                                                        "value": {
+                                                            "$ref": "#/properties/documentCurrency"
+                                                        }
+                                                    }
+                                                },
+                                                {
+                                                    "sortable": false,
+                                                    "title": "nettedAmount",
+                                                    "cellContent": {
+                                                        "type": "OutputText",
+                                                        "defaultValue": "",
+                                                        "value": {
+                                                            "$ref": "#/properties/nettedAmount"
+                                                        }
+                                                    }
+                                                },
+                                                {
+                                                    "sortable": false,
+                                                    "title": "exchangeRate",
+                                                    "cellContent": {
+                                                        "type": "OutputText",
+                                                        "defaultValue": "",
+                                                        "value": {
+                                                            "$ref": "#/properties/exchangeRate"
+                                                        }
+                                                    }
+                                                },
+                                                {
+                                                    "sortable": false,
+                                                    "title": "nettedAmountInDocCurrency",
+                                                    "cellContent": {
+                                                        "type": "OutputText",
+                                                        "defaultValue": "",
+                                                        "value": {
+                                                            "$ref": "#/properties/nettedAmountInDocCurrency"
+                                                        }
+                                                    }
+                                                }
+                                            ],
+                                            "detailsTemplates": {
+                                                "edit": {
+                                                    "content": {
+                                                        "type": "Group",
+                                                        "elements": [
+                                                            {
+                                                                "type": "GridLayout",
+                                                                "fillAvailableSpace": true,
+                                                                "numberOfColumns": 12,
+                                                                "elements": [
+                                                                    {
+                                                                        "type": "Group",
+                                                                        "elements": [
+                                                                            {
+                                                                                "type": "Lookup",
+                                                                                "label": "docForNettingLookup",
+                                                                                "value": {
+                                                                                    "$ref": "#"
+                                                                                },
+                                                                                "width": 3,
+                                                                                "dialogButton": {},
+                                                                                "clearButton": {
+                                                                                    "clearAction": "clearDocForNetting"
+                                                                                },
+                                                                                "dialog": {
+                                                                                    "viewReference": {
+                                                                                        "configurationCodeName": "ContractsForNettingSearchView",
+                                                                                        "configurationVersion": "1",
+                                                                                        "configurationConceptType": "SearchView"
+                                                                                    },
+                                                                                    "onLoad": "docForNettingOnLoad"
+                                                                                },
+                                                                                "onSelected": "docsForNettingResultMapping",
+                                                                                "selectedDisplayValueUISchema": {
+                                                                                    "type": "Input",
+                                                                                    "label": "docForNetting",
+                                                                                    "readOnly": true,
+                                                                                    "value": {
+                                                                                        "$ref": "#/properties/documentNumber"
+                                                                                    },
+                                                                                    "rule": {
+                                                                                        "effect": "ENABLE_INITIAL",
+                                                                                        "condition": {
+                                                                                            "type": "FUNC",
+                                                                                            "ruleFunction": "enableDocForNettingText",
+                                                                                            "value": [
+                                                                                                {
+                                                                                                    "$ref": "#"
+                                                                                                }
+                                                                                            ]
+                                                                                        }
+                                                                                    }
+                                                                                },
+                                                                                "rule": {
+                                                                                    "effect": "ENABLE_INITIAL",
+                                                                                    "condition": {
+                                                                                        "type": "FUNC",
+                                                                                        "ruleFunction": "enableDocForNetting",
+                                                                                        "value": [
+                                                                                            {
+                                                                                                "$ref": "#"
+                                                                                            }
+                                                                                        ]
+                                                                                    }
+                                                                                }
+                                                                            },
+                                                                            {
+                                                                                "type": "Input",
+                                                                                "label": "isFutureContract",
+                                                                                "value": {
+                                                                                    "$ref": "#/properties/isFutureContract"
+                                                                                },
+                                                                                "width": 3,
+                                                                                "onValueChanged": [
+                                                                                    {
+                                                                                        "commandType": "executeAction",
+                                                                                        "actionName": "onIsFutureContractChanged"
+                                                                                    }
+                                                                                ]
+                                                                            }
+                                                                        ]
+                                                                    },
+                                                                    {
+                                                                        "type": "Group",
+                                                                        "elements": [
+                                                                            {
+                                                                                "type": "Input",
+                                                                                "label": "initialOpenAmount",
+                                                                                "readOnly": true,
+                                                                                "value": {
+                                                                                    "$ref": "#/properties/initialOpenAmount"
+                                                                                },
+                                                                                "width": 3
+                                                                            },
+                                                                            {
+                                                                                "type": "Input",
+                                                                                "label": "currency",
+                                                                                "readOnly": true,
+                                                                                "value": {
+                                                                                    "$ref": "#/properties/documentCurrency"
+                                                                                },
+                                                                                "width": 3
+                                                                            }
+                                                                        ]
+                                                                    },
+                                                                    {
+                                                                        "type": "Group",
+                                                                        "elements": [
+                                                                            {
+                                                                                "type": "Input",
+                                                                                "label": "nettedAmount",
+                                                                                "value": {
+                                                                                    "$ref": "#/properties/nettedAmount"
+                                                                                },
+                                                                                "width": 3,
+                                                                                "onValueChanged": [
+                                                                                    {
+                                                                                        "commandType": "executeAction",
+                                                                                        "actionName": "onDocNettedAmountChanged"
+                                                                                    }
+                                                                                ]
+                                                                            },
+                                                                            {
+                                                                                "type": "Input",
+                                                                                "label": "exchangeRate",
+                                                                                "value": {
+                                                                                    "$ref": "#/properties/exchangeRate"
+                                                                                },
+                                                                                "width": 3,
+                                                                                "readOnly": true
+                                                                            },
+                                                                            {
+                                                                                "type": "Input",
+                                                                                "label": "nettedAmountInDocCurrency",
+                                                                                "value": {
+                                                                                    "$ref": "#/properties/nettedAmountInDocCurrency"
+                                                                                },
+                                                                                "width": 3,
+                                                                                "readOnly": true
+                                                                            }
+                                                                        ]
+                                                                    }
+                                                                ]
+                                                            }
+                                                        ]
+                                                    }
+                                                },
+                                                "view": {
+                                                    "content": {
+                                                        "type": "Group",
+                                                        "elements": [
+                                                            {
+                                                                "type": "GridLayout",
+                                                                "fillAvailableSpace": true,
+                                                                "numberOfColumns": 12,
+                                                                "elements": [
+                                                                    {
+                                                                        "type": "Group",
+                                                                        "elements": [
+                                                                            {
+                                                                                "type": "Lookup",
+                                                                                "label": "docForNetting",
+                                                                                "elementId": "docForNettingLookup",
+                                                                                "value": {
+                                                                                    "$ref": "#"
+                                                                                },
+                                                                                "width": 3,
+                                                                                "dialogButton": {},
+                                                                                "clearButton": {
+                                                                                    "clearAction": "clearDocForNetting"
+                                                                                },
+                                                                                "dialog": {
+                                                                                    "viewReference": {
+                                                                                        "configurationCodeName": "ContractsForNettingSearchView",
+                                                                                        "configurationVersion": "1",
+                                                                                        "configurationConceptType": "SearchView"
+                                                                                    }
+                                                                                },
+                                                                                "onSelected": "docsForNettingResultMapping",
+                                                                                "selectedDisplayValueUISchema": {
+                                                                                    "type": "Input",
+                                                                                    "label": "docForNetting",
+                                                                                    "readOnly": true,
+                                                                                    "value": {
+                                                                                        "$ref": "#/properties/documentNumber"
+                                                                                    }
+                                                                                }
+                                                                            },
+                                                                            {
+                                                                                "type": "Input",
+                                                                                "label": "isFutureContract",
+                                                                                "value": {
+                                                                                    "$ref": "#/properties/isFutureContract"
+                                                                                },
+                                                                                "width": 3,
+                                                                                "readOnly": true
+                                                                            }
+                                                                        ]
+                                                                    },
+                                                                    {
+                                                                        "type": "Group",
+                                                                        "elements": [
+                                                                            {
+                                                                                "type": "Input",
+                                                                                "label": "initialOpenAmount",
+                                                                                "readOnly": true,
+                                                                                "value": {
+                                                                                    "$ref": "#/properties/initialOpenAmount"
+                                                                                },
+                                                                                "width": 3
+                                                                            },
+                                                                            {
+                                                                                "type": "Input",
+                                                                                "label": "currency",
+                                                                                "readOnly": true,
+                                                                                "value": {
+                                                                                    "$ref": "#/properties/documentCurrency"
+                                                                                },
+                                                                                "width": 3
+                                                                            }
+                                                                        ]
+                                                                    },
+                                                                    {
+                                                                        "type": "Group",
+                                                                        "elements": [
+                                                                            {
+                                                                                "type": "Input",
+                                                                                "label": "nettedAmount",
+                                                                                "value": {
+                                                                                    "$ref": "#/properties/nettedAmount"
+                                                                                },
+                                                                                "width": 3,
+                                                                                "readOnly": true
+                                                                            },
+                                                                            {
+                                                                                "type": "Input",
+                                                                                "label": "exchangeRate",
+                                                                                "value": {
+                                                                                    "$ref": "#/properties/exchangeRate"
+                                                                                },
+                                                                                "width": 3,
+                                                                                "readOnly": true
+                                                                            },
+                                                                            {
+                                                                                "type": "Input",
+                                                                                "label": "nettedAmountInDocCurrency",
+                                                                                "value": {
+                                                                                    "$ref": "#/properties/nettedAmountInDocCurrency"
+                                                                                },
+                                                                                "width": 3,
+                                                                                "readOnly": true
+                                                                            }
+                                                                        ]
+                                                                    }
+                                                                ]
+                                                            }
+                                                        ]
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Group",
+                            "width": 12,
+                            "elements": [
+                                {
+                                    "type": "Button",
+                                    "value": {
+                                        "$ref": "#"
+                                    },
+                                    "onClick": [
+                                        {
+                                            "commandType": "executeAction",
+                                            "actionName": "cancelNetting"
+                                        }
+                                    ],
+                                    "label": "cancellNetting",
+                                    "width": 2,
+                                    "rule": {
+                                        "effect": "ENABLE_INITIAL",
+                                        "condition": {
+                                            "type": "FUNC",
+                                            "ruleFunction": "enableNettingCancelling",
+                                            "value": [
+                                                {
+                                                    "$ref": "#"
+                                                }
+                                            ]
+                                        }
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Group",
+                            "width": 12,
+                            "elements": [
+                                {
+                                    "type": "GroupSeparator"
+                                },
+                                {
+                                    "type": "OutputText",
+                                    "label": "",
+                                    "textProperties": [
+                                        "bold"
+                                    ],
+                                    "literalValue": "nettingCancellationInformation",
+                                    "width": 12
+                                },
+                                {
+                                    "type": "Link",
+                                    "readOnly": true,
+                                    "targetType": "Url",
+                                    "label": "nettingPoNumber",
+                                    "value": {
+                                        "mapping": "nettingPoCodeUriMapping",
+                                        "$ref": "#"
+                                    },
+                                    "width": 5,
+                                    "content": {
+                                        "text": {
+                                            "type": "OutputText",
+                                            "value": {
+                                                "$ref": "#/properties/ClientViewModel/properties/nettingPoNumber"
+                                            }
+                                        }
+                                    }
+                                }
+                            ],
+                            "rule": {
+                                "effect": "SHOW",
+                                "condition": {
+                                    "type": "FUNC",
+                                    "ruleFunction": "shouldShowNettingPo",
+                                    "value": [
+                                        {
+                                            "$ref": "#"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    ]
+                },
+                {
+                    "type": "Component",
+                    "name": "PaymentOrderAttachmentsTab",
+                    "value": {
+                        "$ref": "#"
+                    }
+                }
+            ]
+        }
+    ]
+}

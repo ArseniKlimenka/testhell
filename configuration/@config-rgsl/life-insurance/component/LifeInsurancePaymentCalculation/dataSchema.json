@@ -1,0 +1,53 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "object",
+    "additionalProperties": false,
+    "aiDataEnrichment": [
+        {
+            "name": "SetDefaultPayments"
+        },
+        {
+            "name": "SetPayments",
+            "integrationService": {
+                "name": "LifeInsurancePaymentCalculationEnrichmentService",
+                "version": "1"
+            }
+        }
+    ],
+    "properties": {
+        "paymentLinesManualCorrection": {
+            "type": "boolean",
+            "aiTitle": "paymentLinesManualCorrection"
+        },
+        "paymentLines": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                    "paymentLineType"
+                ],
+                "properties": {
+                    "paymentLineType": {
+                        "type": "string",
+                        "enum": [
+                            "Account",
+                            "Penalty",
+                            "Buyer",
+                            "DID",
+                            "Tax"
+                        ],
+                        "aiTitle": "paymentLineType"
+                    },
+                    "paymentLineSum": {
+                        "type": "number",
+                        "aiTitle": "paymentLineSum"
+                    }
+                }
+            }
+        },
+        "fundStatus": {
+            "type": "string"
+        }
+    }
+}

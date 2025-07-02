@@ -1,0 +1,189 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+        "criteria": {
+            "type": "object",
+            "aiTitle": "criteria",
+            "anyOf": [
+                {
+                    "required": [
+                        "actId"
+                    ]
+                },
+                {
+                    "required": [
+                        "actNo"
+                    ]
+                },
+                {
+                    "required": [
+                        "lineContractNo"
+                    ]
+                },
+                {
+                    "required": [
+                        "actStateCodes"
+                    ],
+                    "properties": {
+                        "actStateCodes": {
+                            "type": "array",
+                            "minItems": 1
+                        }
+                    }
+                },
+                {
+                    "required": [
+                        "reportingDateFrom"
+                    ]
+                },
+                {
+                    "required": [
+                        "reportingDateTo"
+                    ]
+                },
+                {
+                    "required": [
+                        "issueDateFrom"
+                    ]
+                },
+                {
+                    "required": [
+                        "issueDateTo"
+                    ]
+                },
+                {
+                    "required": [
+                        "actPayDateFrom"
+                    ]
+                },
+                {
+                    "required": [
+                        "actPayDateTo"
+                    ]
+                }
+            ],
+            "additionalProperties": false,
+            "properties": {
+                "actId": {
+                    "type": "integer",
+                    "aiTitle": "actId"
+                },
+                "lineContractNo": {
+                    "type": "string",
+                    "aiTitle": "lineContractNo"
+                },
+                "lineBusinessLine": {
+                    "$ref": "component:BusinessLine"
+                },
+                "lineProductGroup": {
+                    "$ref": "component:ProductGroup"
+                },
+                "lineProducts": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "actNo": {
+                    "type": "string",
+                    "aiTitle": "actNo"
+                },
+                "actStateCodes": {
+                    "type": "array",
+                    "aiTitle": "actStateCodes",
+                    "items": {
+                        "$ref": "component:ActStateComponent"
+                    }
+                },
+                "aaServiceProviderCode": {
+                    "type": "string"
+                },
+                "aaServiceProviderName": {
+                    "type": "string"
+                },
+                "actTypeId": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "component:ActTypeComponent"
+                    }
+                },
+                "aaNumbers": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "reportingDateFrom": {
+                    "type": "string",
+                    "aiFormat": "date",
+                    "aiTitle": "reportingDateFrom"
+                },
+                "reportingDateTo": {
+                    "type": "string",
+                    "aiFormat": "date",
+                    "aiTitle": "reportingDateTo"
+                },
+                "issueDateFrom": {
+                    "type": "string",
+                    "aiFormat": "date",
+                    "aiTitle": "issueDateFrom"
+                },
+                "issueDateTo": {
+                    "type": "string",
+                    "aiFormat": "date",
+                    "aiTitle": "issueDateTo"
+                },
+                "actPayDateFrom": {
+                    "type": "string",
+                    "aiFormat": "date",
+                    "aiTitle": "actPayDateFrom"
+                },
+                "actPayDateTo": {
+                    "type": "string",
+                    "aiFormat": "date",
+                    "aiTitle": "actPayDateTo"
+                },
+                "notes": {
+                    "type": "string"
+                },
+                "lineInstallmentDateFrom": {
+                    "type": "string",
+                    "aiFormat": "date"
+                },
+                "lineInstallmentDateTo": {
+                    "type": "string",
+                    "aiFormat": "date"
+                },
+                "linePaymentDateFrom": {
+                    "type": "string",
+                    "aiFormat": "date"
+                },
+                "linePaymentDateTo": {
+                    "type": "string",
+                    "aiFormat": "date"
+                },
+                "hasCommAmountLc": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "sort": {
+            "type": "array",
+            "additionalProperties": false,
+            "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                    "descending": {
+                        "type": "boolean"
+                    },
+                    "fieldName": {
+                        "type": "string"
+                    }
+                }
+            }
+        }
+    }
+}

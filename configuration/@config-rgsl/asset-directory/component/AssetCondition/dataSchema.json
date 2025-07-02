@@ -1,0 +1,62 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "object",
+    "additionalProperties": false,
+    "aiValidation": {
+        "rule": "assetConditionValidation"
+    },
+    "properties": {
+        "partner": {
+            "type": "object",
+            "additionalProperties": false,
+            "aiTitle": "insuranceProduct",
+            "properties": {
+                "partnerCode": {
+                    "type": "string",
+                    "aiTitle": "partnerCode"
+                },
+                "partnerDescription": {
+                    "type": "string",
+                    "aiTitle": "partnerDescription"
+                },
+                "partnerShortDescription": {
+                    "type": "string"
+                },
+                "partnerBusinessCode": {
+                    "type": "string"
+                }
+            }
+        },
+        "insuranceProduct": {
+            "type": "array",
+            "additionalProperties": false,
+            "aiTitle": "insuranceProduct",
+            "properties": {
+                "productCode": {
+                    "type": "string",
+                    "aiTitle": "productCode"
+                },
+                "productDescription": {
+                    "type": "string",
+                    "aiTitle": "productDescription"
+                },
+                "productGroup": {
+                    "type": "string",
+                    "aiTitle": "productGroup"
+                },
+                "salesSegment": {
+                    "type": "string",
+                    "aiTitle": "productGroup"
+                }
+            }
+        },
+        "limit": {
+            "type": "number"
+        },
+        "insuranceStartDate": {
+            "type": "string",
+            "aiType": "date",
+            "aiFormat": "date"
+        }
+    }
+}

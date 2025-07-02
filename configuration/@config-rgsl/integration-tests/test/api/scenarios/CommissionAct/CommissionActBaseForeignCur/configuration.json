@@ -1,0 +1,122 @@
+{
+    "steps": [
+        {
+            "$ref": "AdjustAccountingPeriods",
+            "context": {
+                "firstOpenPeriod": "2022-01-01"
+            }
+        },
+        {
+            "$ref": "AdjustCurrentDate",
+            "context": {
+                "currentDate": "2022-01-01"
+            }
+        },
+        {
+            "$ref": "SetCurrencyExchangeRates",
+            "context": {
+                "currencies": {
+                    "EUR": [
+                        {
+                            "date": "2000-01-01",
+                            "rate": 80
+                        },
+                        {
+                            "date": "2022-01-02",
+                            "rate": 100
+                        }
+                    ],
+                    "USD": [
+                        {
+                            "date": "2000-01-01",
+                            "rate": 50
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "$ref": "CreateALIPolicyDemo",
+            "context": {
+                "policyStartDate": "2022-01-01",
+                "currencyCode": "EUR",
+                "paymentFrequencyCode": "1",
+                "riskPremium": 1000
+            }
+        },
+        {
+            "$ref": "CreatePaymentAndAutoAllocate",
+            "description": "Pay first installment",
+            "context": {
+                "amountToAllocate": 1600,
+                "currencyCode": "USD",
+                "expectedMatchAmount": 1000,
+                "paymentDate": "2022-01-01",
+                "transactionDate": "2022-01-01",
+                "referenceNoToAllocate": "{{$.contractNumber}}"
+            }
+        },
+        {
+            "code": "ValidateTransactions_1",
+            "description": "Validate transactions 1",
+            "requests": [],
+            "assert": {
+                "expected": "./steps/validateTransactions/expectedResult_1.json",
+                "module": "../../lib/accounting/assert.js",
+                "function": "assertTransactions"
+            }
+        },
+        {
+            "$ref": "CreateCommissionActForPolicy",
+            "context": {
+                "actIssueDate": "2022-01-02",
+                "referenceNoToInclude": "{{$.contractNumber}}"
+            },
+            "assert": {
+                "expected": "./steps/createCommissionAct/expectedResult.json",
+                "module": "./steps/createCommissionAct/assert.js",
+                "function": "assertAct"
+            }
+        },
+        {
+            "code": "ApproveCommissionAct",
+            "description": "Approve commission act",
+            "actor": "AdminCommissionAct",
+            "requests": [],
+            "executor": {
+                "module": "./steps/approveCommAct/executor.js",
+                "function": "executor"
+            }
+        },
+        {
+            "code": "ValidatePaymentOrder",
+            "description": "Validate payment order",
+            "requests": [],
+            "executor": {
+                "module": "./steps/validatePaymentOrder/executor.js",
+                "function": "executor"
+            },
+            "assert": {
+                "expected": "./steps/validatePaymentOrder/expectedResult.json",
+                "module": "./steps/validatePaymentOrder/assert.js",
+                "function": "assertPO"
+            }
+        },
+        {
+            "code": "ValidateTransactions_2",
+            "description": "Validate transactions 2",
+            "requests": [],
+            "assert": {
+                "expected": "./steps/validateTransactions/expectedResult_2.json",
+                "module": "../../lib/accounting/assert.js",
+                "function": "assertTransactions"
+            }
+        },
+        {
+            "$ref": "AdjustCurrentDate",
+            "context": {
+                "currentDate": null
+            }
+        }
+    ]
+}

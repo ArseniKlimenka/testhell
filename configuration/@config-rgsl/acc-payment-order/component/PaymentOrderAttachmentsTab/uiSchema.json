@@ -1,0 +1,59 @@
+{
+    "type": "Tab",
+    "elementId": "tabPOAttachments",
+    "title": "Attachments",
+    "elements": [
+        {
+            "type": "Component",
+            "name": "AttachmentsSection",
+            "value": {
+                "$ref": "#"
+            }
+        },
+        {
+            "type": "Group",
+            "readOnly": true,
+            "elements": [
+                {
+                    "type": "GroupSeparator"
+                },
+                {
+                    "type": "OutputText",
+                    "label": "",
+                    "textProperties": [
+                        "bold"
+                    ],
+                    "literalValue": "endowmentAttachments",
+                    "width": 12
+                },
+                {
+                    "type": "InlineView",
+                    "showContainerActions": false,
+                    "views": [
+                        {
+                            "viewReference": {
+                                "configurationCodeName": "Endowment",
+                                "configurationVersion": "1",
+                                "configurationConceptType": "UniversalDocument"
+                            },
+                            "onCreateViewParams": "setDocumentNumber",
+                            "readOnly": true
+                        }
+                    ]
+                }
+            ],
+            "rule": {
+                "effect": "SHOW",
+                "condition": {
+                    "type": "FUNC",
+                    "ruleFunction": "shouldShowEndowmentAttachments",
+                    "value": [
+                        {
+                            "$ref": "#"
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}

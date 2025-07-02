@@ -1,0 +1,96 @@
+{
+    "entityType": "ImportDocument",
+    "states": [
+        {
+            "name": "Draft",
+            "actors": [
+                {
+                    "actor": "ClaimManager",
+                    "uiSchema": "UiSchemaDraft",
+                    "operations": [
+                        "Save"
+                    ],
+                    "transitions": [
+                        "StartLoading"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Loading",
+            "actors": [
+                {
+                    "actor": "ClaimManager",
+                    "uiSchema": "UiSchemaLoad",
+                    "operations": [],
+                    "transitions": []
+                }
+            ]
+        },
+        {
+            "name": "ReloadSetup",
+            "actors": [
+                {
+                    "actor": "ClaimManager",
+                    "uiSchema": "UiSchemaLoad",
+                    "operations": [
+                        "Save"
+                    ],
+                    "transitions": [
+                        "StartReloading"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Loaded",
+            "actors": [
+                {
+                    "actor": "ClaimManager",
+                    "uiSchema": "UiSchemaLoad",
+                    "operations": [],
+                    "transitions": [
+                        "Reload",
+                        "StartImporting"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Importing",
+            "actors": [
+                {
+                    "actor": "ClaimManager",
+                    "uiSchema": "UiSchemaImport",
+                    "operations": [],
+                    "transitions": [
+                    ]
+                },
+                {
+                    "actor": "System",
+                    "uiSchema": "UiSchemaImport",
+                    "operations": [],
+                    "transitions": [
+                        "FinishImporting"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Imported",
+            "actors": [
+                {
+                    "actor": "ClaimManager",
+                    "uiSchema": "UiSchemaImport",
+                    "operations": []
+                }
+            ]
+        }
+    ],
+    "version": "1",
+    "components": [
+        "DocumentFooter",
+        "DocumentHeader"
+    ],
+    "validFrom": "2000-01-01"
+}

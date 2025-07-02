@@ -1,0 +1,271 @@
+{
+    "type": "Group",
+    "elements": [
+        {
+            "type": "DataGrid",
+            "value": {
+                "$ref": "#/properties/response/properties/data"
+            },
+            "mode": "DataSource",
+            "pagination": {
+                "mode": "Regular",
+                "pageSizes": [
+                    10,
+                    25,
+                    50,
+                    500
+                ]
+            },
+            "selection": {
+                "mode": "Multi",
+                "enableRowSelection": true,
+                "showCheckBox": true,
+                "onSelectionChanged": [
+                    {
+                        "commandType": "raiseEvent",
+                        "eventName": "Selected"
+                    }
+                ]
+            },
+            "height": "None",
+            "columns": [
+                {
+                    "sortable": true,
+                    "title": "ActNo",
+                    "cellContent": {
+                        "type": "Link",
+                        "targetType": "Url",
+                        "value": {
+                            "mapping": "urlMapping",
+                            "$ref": "#"
+                        },
+                        "width": 1,
+                        "content": {
+                            "text": {
+                                "type": "OutputText",
+                                "value": {
+                                    "$ref": "#/properties/resultData/properties/actNo"
+                                }
+                            }
+                        }
+                    },
+                    "name": "actNo"
+                },
+                {
+                    "sortable": true,
+                    "title": "ActStateCode",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/actStateCode"
+                        }
+                    },
+                    "name": "actStateCode"
+                },
+                {
+                    "sortable": true,
+                    "title": "AANumber",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/aaNumber"
+                        }
+                    },
+                    "name": "aaNumber"
+                },
+                {
+                    "sortable": true,
+                    "title": "AAExternalNumber",
+                    "cellContent": {
+                        "type": "Link",
+                        "targetType": "Url",
+                        "value": {
+                            "mapping": "linkToAAOverview",
+                            "$ref": "#"
+                        },
+                        "width": 1,
+                        "content": {
+                            "text": {
+                                "type": "OutputText",
+                                "value": {
+                                    "$ref": "#/properties/resultData/properties/aaExternalNumber"
+                                }
+                            }
+                        }
+                    },
+                    "name": "aaExternalNumber"
+                },
+                {
+                    "sortable": true,
+                    "title": "AaServiceProviderName",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/aaServiceProviderName"
+                        }
+                    },
+                    "name": "aaServiceProviderName"
+                },
+                {
+                    "sortable": false,
+                    "title": "AAPartyType",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/aaPartyType"
+                        }
+                    },
+                    "name": "aaPartyType"
+                },
+                {
+                    "sortable": true,
+                    "title": "PremiumAmount",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "template": "{{#style 'right'}}{{expr premiumAmount 'n:2'}}{{/style}}",
+                        "value": {
+                            "$ref": "#/properties/resultData"
+                        }
+                    },
+                    "name": "premiumAmount"
+                },
+                {
+                    "sortable": true,
+                    "title": "CommissionAmount",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "template": "{{#style 'right'}}{{expr commissionAmount 'n:2'}}{{/style}}",
+                        "value": {
+                            "$ref": "#/properties/resultData"
+                        }
+                    },
+                    "name": "commissionAmount"
+                },
+                {
+                    "sortable": true,
+                    "title": "ReportingPeriodFrom",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "template": "{{expr reportingPeriodFrom 'd'}}",
+                        "value": {
+                            "$ref": "#/properties/resultData"
+                        }
+                    },
+                    "name": "reportingPeriodFrom"
+                },
+                {
+                    "sortable": true,
+                    "title": "ReportingPeriodTo",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "template": "{{expr reportingPeriodTo 'd'}}",
+                        "value": {
+                            "$ref": "#/properties/resultData"
+                        }
+                    },
+                    "name": "reportingPeriodTo"
+                },
+                {
+                    "sortable": true,
+                    "title": "ActIssueDate",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "template": "{{expr actIssueDate 'd'}}",
+                        "value": {
+                            "$ref": "#/properties/resultData"
+                        }
+                    },
+                    "name": "actIssueDate"
+                },
+                {
+                    "sortable": true,
+                    "title": "ActPayDate",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "template": "{{expr actPayDate 'd'}}",
+                        "value": {
+                            "$ref": "#/properties/resultData"
+                        }
+                    },
+                    "name": "actPayDate"
+                },
+                {
+                    "sortable": true,
+                    "title": "OriginalReceiptDate",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "template": "{{expr originalReceiptDate 'd'}}",
+                        "value": {
+                            "$ref": "#/properties/resultData"
+                        }
+                    },
+                    "name": "originalReceiptDate"
+                },
+                {
+                    "sortable": true,
+                    "title": "AACbAgentType",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/aaCbAgentType"
+                        }
+                    },
+                    "name": "aaCbAgentType"
+                },
+                {
+                    "sortable": true,
+                    "title": "AttrMVZ",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/attrMVZ"
+                        }
+                    },
+                    "name": "attrMVZ"
+                },
+                {
+                    "sortable": true,
+                    "title": "Username",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/username"
+                        }
+                    },
+                    "name": "username"
+                },
+                {
+                    "title": "CreatedDate",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/createdDate"
+                        }
+                    },
+                    "name": "createdDate"
+                },
+                {
+                    "title": "LastUpdated",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/lastUpdated"
+                        }
+                    },
+                    "name": "lastUpdated"
+                },
+                {
+                    "title": "Notes",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/notes"
+                        }
+                    },
+                    "name": "notes"
+                }
+            ],
+            "elementId": "TableViewId"
+        }
+    ]
+}

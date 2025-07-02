@@ -1,0 +1,388 @@
+{
+    "id": "groupsCalendarView.ui-schema.json",
+    "type": "GridLayout",
+    "numberOfColumns": 4,
+    "elements": [
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "Input",
+                    "label": "Managed user group",
+                    "enableClear": true,
+                    "preSelectFirstItem": true,
+                    "source": {
+                        "reloadOnOpen": false,
+                        "displayFieldName": "userGroupName",
+                        "dataSource": {
+                            "name": "GetGroupsOfUserDataSource",
+                            "resultCount": 100,
+                            "searchFieldPath": "userGroupCode",
+                            "requestMapping": "prepareGetUserGroupsAPIRequest",
+                            "responseMapping": "userGroupsResponseMapping"
+                        }
+                    },
+                    "value": {
+                        "$ref": "#/properties/Body/properties/criteria/properties/selectedUserGroup"
+                    },
+                    "control": "Dropdown",
+                    "elementId": "groupCalendarSelectionOfManagedUserGroup",
+                    "onValueChanged": [
+                        {
+                            "commandType": "executeAction",
+                            "actionName": "onUserGroupSelected"
+                        }
+                    ],
+                    "width": 1
+                },
+                {
+                    "type": "Input",
+                    "id": "groupCalendarSelectionOfUser",
+                    "label": "Application user",
+                    "enableClear": true,
+                    "source": {
+                        "reloadOnOpen": true,
+                        "displayFieldName": "displayName",
+                        "array": {
+                            "$ref": "#/properties/Body/properties/criteria/properties/users"
+                        }
+                    },
+                    "value": {
+                        "$ref": "#/properties/Body/properties/criteria/properties/selectedUser"
+                    },
+                    "control": "Dropdown",
+                    "onValueChanged": [
+                        {
+                            "commandType": "executeAction",
+                            "actionName": "refreshArraysFilters"
+                        }
+                    ],
+                    "width": 1
+                },
+                {
+                    "type": "Input",
+                    "id": "groupCalendarSelectionOfDateRange",
+                    "control": "DateRange",
+                    "dateFrom": {
+                        "type": "Input",
+                        "label": "Date from",
+                        "width": 1,
+                        "value": {
+                            "$ref": "#/properties/Body/properties/criteria/properties/dateFrom"
+                        },
+                        "onValueChanged": [
+                            {
+                                "commandType": "executeAction",
+                                "actionName": "refreshArraysFilters"
+                            }
+                        ],
+                        "control": "DatetimePicker"
+                    },
+                    "dateTo": {
+                        "type": "Input",
+                        "label": "Date To",
+                        "width": 1,
+                        "value": {
+                            "$ref": "#/properties/Body/properties/criteria/properties/dateTo"
+                        },
+                        "onValueChanged": [
+                            {
+                                "commandType": "executeAction",
+                                "actionName": "refreshArraysFilters"
+                            }
+                        ],
+                        "control": "DatetimePicker"
+                    },
+                    "width": 2
+                }
+            ]
+        },
+        {
+            "type": "Group",
+            "width": 4,
+            "stackContent": "Right",
+            "elements": [
+                {
+                    "type": "Button",
+                    "value": {
+                        "$ref": "#"
+                    },
+                    "onClick": [
+                        {
+                            "commandType": "executeAction",
+                            "actionName": "clearFilter"
+                        }
+                    ],
+                    "label": "Clear"
+                }
+            ]
+        },
+        {
+            "type": "Section",
+            "label": "Exceptions",
+            "collapseWhenEmpty": true,
+            "elements": [
+                {
+                    "type": "Group",
+                    "elements": [
+                        {
+                            "type": "DataGrid",
+                            "mode": "Array",
+                            "pagination": {
+                                "mode": "Regular",
+                                "pageSizes": [
+                                    5,
+                                    10,
+                                    15
+                                ],
+                                "defaultPageSize": 10
+                            },
+                            "filterAction": "exceptionsRulesFilter",
+                            "value": {
+                                "$ref": "#/properties/Body/properties/groupUsersExceptions"
+                            },
+                            "labelType": "H2",
+                            "actions": [],
+                            "edit": {
+                                "mode": "Detached"
+                            },
+                            "height": "None",
+                            "columns": [
+                                {
+                                    "title": "User",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "skipTranslate": true,
+                                        "value": {
+                                            "$ref": "#/properties/applicationUserDisplayName"
+                                        }
+                                    }
+                                },
+                                {
+                                    "title": "Description",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "skipTranslate": true,
+                                        "value": {
+                                            "$ref": "#/properties/description"
+                                        }
+                                    }
+                                },
+                                {
+                                    "title": "Is workday",
+                                    "cellContent": {
+                                        "type": "Icon",
+                                        "iconStyleFunction": "getIsWorkdayIcon",
+                                        "value": {
+                                            "$ref": "#/properties/isWork"
+                                        }
+                                    }
+                                },
+                                {
+                                    "title": "Date from",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "template": "{{expr dateFrom 'd'}}",
+                                        "defaultValue": "",
+                                        "value": {
+                                            "$ref": "#"
+                                        }
+                                    }
+                                },
+                                {
+                                    "title": "Date to",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "template": "{{expr dateTo 'd'}}",
+                                        "defaultValue": "",
+                                        "value": {
+                                            "$ref": "#"
+                                        }
+                                    }
+                                },
+                                {
+                                    "title": "From",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "defaultValue": "",
+                                        "skipTranslate": true,
+                                        "value": {
+                                            "$ref": "#/properties/timeFrom"
+                                        }
+                                    }
+                                },
+                                {
+                                    "title": "To",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "defaultValue": "",
+                                        "skipTranslate": true,
+                                        "value": {
+                                            "$ref": "#/properties/timeTo"
+                                        }
+                                    }
+                                },
+                                {
+                                    "title": "Repetition",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "value": {
+                                            "mapping": "getRepetitionMessage",
+                                            "$ref": "#"
+                                        }
+                                    }
+                                },
+                                {
+                                    "title": "Capacity",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "defaultValue": "",
+                                        "skipTranslate": true,
+                                        "value": {
+                                            "$ref": "#/properties/capacity"
+                                        }
+                                    }
+                                },
+                                {
+                                    "title": "Source calendar",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "defaultValue": "",
+                                        "skipTranslate": true,
+                                        "value": {
+                                            "$ref": "#/properties/sourceCalendarCode"
+                                        }
+                                    }
+                                }
+                            ],
+                            "detailsTemplates": {
+                                "edit": {
+                                    "content": {}
+                                }
+                            }
+                        }
+                    ],
+                    "width": 4
+                }
+            ],
+            "sectionLevel": 1
+        },
+        {
+            "type": "Section",
+            "label": "Substitutes",
+            "collapseWhenEmpty": true,
+            "elements": [
+                {
+                    "type": "DataGrid",
+                    "mode": "Array",
+                    "pagination": {
+                        "mode": "Regular",
+                        "pageSizes": [
+                            5,
+                            10,
+                            15
+                        ],
+                        "defaultPageSize": 10
+                    },
+                    "filterAction": "filterSubstitutes",
+                    "value": {
+                        "$ref": "#/properties/Body/properties/groupUsersSubstitutes"
+                    },
+                    "labelType": "H2",
+                    "actions": [
+                        "Edit"
+                    ],
+                    "edit": {
+                        "mode": "Detached",
+                        "onAfterGridAction": "substituteArrayOperationHandler"
+                    },
+                    "height": "None",
+                    "columns": [
+                        {
+                            "title": "Application user",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "skipTranslate": true,
+                                "value": {
+                                    "$ref": "#/properties/applicationUserDisplayName"
+                                }
+                            }
+                        },
+                        {
+                            "title": "Substitute",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "defaultValue": "",
+                                "skipTranslate": true,
+                                "value": {
+                                    "$ref": "#/properties/substituteUserDisplayName"
+                                }
+                            }
+                        }
+                    ],
+                    "detailsTemplates": {
+                        "edit": {
+                            "content": {
+                                "type": "GridLayout",
+                                "numberOfColumns": 4,
+                                "elements": [
+                                    {
+                                        "type": "Group",
+                                        "elements": [
+                                            {
+                                                "type": "Input",
+                                                "label": "Application user",
+                                                "readOnly": true,
+                                                "value": {
+                                                    "$ref": "#/properties/applicationUserDisplayName"
+                                                },
+                                                "width": 2
+                                            },
+                                            {
+                                                "type": "Group",
+                                                "elements": [
+                                                    {
+                                                        "type": "Input",
+                                                        "label": "Substitute user",
+                                                        "readOnly": true,
+                                                        "value": {
+                                                            "$ref": "#/properties/substituteUserDisplayName"
+                                                        },
+                                                        "width": 3
+                                                    },
+                                                    {
+                                                        "type": "Lookup",
+                                                        "value": {
+                                                            "$ref": "#/properties/substituteUserId"
+                                                        },
+                                                        "width": 1,
+                                                        "dialogButton": {},
+                                                        "clearButton": {
+                                                            "clearAction": "substitutesClearSubstituteUser"
+                                                        },
+                                                        "dialog": {
+                                                            "onLoad": "initUserLookupToGroupUsersOnly",
+                                                            "viewReference": {
+                                                                "configurationCodeName": "ApplicationUserLookup",
+                                                                "configurationConceptType": "SearchView",
+                                                                "configurationVersion": "1"
+                                                            }
+                                                        },
+                                                        "onSelected": "substitutesUserResultMapping"
+                                                    }
+                                                ],
+                                                "width": 2
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "width": 4
+                }
+            ],
+            "sectionLevel": 1
+        }
+    ]
+}

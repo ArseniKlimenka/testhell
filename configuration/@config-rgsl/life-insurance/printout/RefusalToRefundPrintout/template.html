@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ru-RU" xml:lang="ru-RU" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+	<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+	<title>ИП об отказе в возврате взноса</title>
+	<link rel="stylesheet" href="assets/styles/style.css">
+	{{{topRightContent}}}
+	{{{bottomLeftContentNobody}}}
+	{{{bottomLeftContent}}}
+	{{{bottomRightContent}}}
+</head>
+
+<body>
+
+	<!-- для загрузки динамических изображений в хранилище печатки. -->
+	{{#if alwaysFalse}}
+		{{> ../../../life-insurance/component/TempSignatureContainer/printout/template.html }}
+	{{/if}}
+	{{#if alwaysFalse}}
+		{{> ../../../life-insurance/component/CommonImageContainer/printout/template.html }}
+	{{/if}}
+
+	<div class="policySignature break">
+		<div class="container">
+			<div class="logoDiv">
+				<img src="../component/POImageConst/printout/assets/img/logoHeader.png" alt="Логотип Росгосстрах Жизнь" class="logo">
+			</div>
+			
+			<div>От <u>{{requestIssueDate}}</u> № <u>{{informationLetterNumber}}</u></div>
+
+			<table class="headerTable">
+				<tbody>
+					<tr>
+						<td class="headerTableColumn"></td>
+						<td class="headerTableColumn">
+							<div><strong>КОМУ: {{policyHolderFullName}}</strong></div>
+							<div class="headerAddress"><strong>Фактический адрес: {{partyAddressFactualPostalCode}}, {{partyAddressFactualValue}}</strong></div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+
+			<div class="headerTitle"><strong>Уважаемый {{policyHolderNamePatronymic}}!</strong></div>
+
+			<div class="paragraph">
+				Общество с ограниченной ответственностью Страховая компания «Росгосстрах Жизнь» (далее — Общество), 
+				рассмотрев Ваше обращение, поступившее в адрес Общества {{requestIssueDate}}, сообщает следующее:
+			</div>
+
+			<div class="paragraph">
+				{{contractIssueDate}} между Вами и ООО СК «Росгосстрах Жизнь» был заключен Договор страхования 
+				№ {{contractNumber}} по программе «{{productDescription}}», 
+				(далее – «Договор страхования») неотъемлемой частью Договора страхования являются 
+				{{ruleDescription}}.
+			</div>
+
+			<div class="paragraph">
+				Согласно указанию ЦБ РФ №3854-У от 20.11.2015 г. «О минимальных (стандартных) требованиях 
+				к условиям и порядку осуществления отдельных видов добровольного страхования», 
+				Страхователь вправе отказаться от договора страхования, и вернуть оплаченную 
+				страховую премию в полном объеме в течение {{coolOffPeriod}} календарных дней. 
+			</div>
+
+			<div class="paragraph">
+				Порядок, установленный в настоящем указании, не распространяется на отношения сторон 
+				Договора страхования по истечении {{coolOffPeriod}}  календарных дней 
+				с начала срока действия Договора страхования (период охлаждения).
+			</div>
+
+			<div class="paragraph"><strong>
+				Ваше обращение к Обществу с заявлением о возврате страховой премии поступило {{requestIssueDate}}г, 
+				т. е. по истечении периода охлаждения.
+			</strong></div>
+
+			<div class="paragraph">
+				Руководствуясь Правилам страхования, действие договора страхования 
+				может быть досрочно прекращено по инициативе Страхователя. 
+			</div>
+
+			<div class="paragraph">
+				В соответствии с абз. 2 ч. 3 ст. 958 Гражданского Кодекса РФ, при досрочном отказе 
+				страхователя (выгодоприобретателя) от Договора страхования уплаченная Обществу 
+				страховая премия не подлежит возврату, если договором не предусмотрено иное. 
+				Согласно п. 12.1.5, 12.2 Правил страхования, в случае отказа Страхователя 
+				от Договора страхования по истечении {{coolOffPeriod}} календарных дней, 
+				уплаченная страховая премия возврату не подлежит.
+			</div>
+
+			<div class="paragraph paragraphTopIndent">
+				На основании вышеизложенного, у ООО СК «Росгосстрах Жизнь» не возникает 
+				законных оснований для возврата страховой премии 
+				по Договору № {{contractNumber}} от {{contractIssueDate}} г.
+			</div>
+
+			<div class="paragraph paragraphTopIndent">При возникновении вопросов Вы всегда можете обратиться к нам любым удобным способом:</div>
+
+			<ul>
+				<li>по телефону Горячей линии 8-800-100-12-10 (звонок по России бесплатно);</li>
+				<li>по электронной почте info@rgsl.ru;</li>
+				<li>отправив письмо по адресу: 119991, г. Москва-59, ул. Киевская, д. 7, к. 1</li>
+			</ul>
+
+			<div class="signatureDiv">
+				<div class="signatureFirstLine">{{insurerInfo.subscriber.name}}</div>
+				<div>{{insurerInfo.subscriber.position1}} {{insurerInfo.subscriber.position2}}</div>
+				<div>{{insurerInfo.subscriber.proxy2022}}</div>
+				<div>{{insurerInfo.subscriber.signatureField}}</div>
+				<div class="signatureText">{{insurerInfo.subscriber.signatureText}}</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>

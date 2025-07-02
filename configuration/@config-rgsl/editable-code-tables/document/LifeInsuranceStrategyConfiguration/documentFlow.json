@@ -1,0 +1,31 @@
+{
+    "processType": "LifeInsuranceStrategyConfiguration",
+    "actors": [
+        "GeneralBackOffice"
+    ],
+    "initialState": "Draft",
+    "states": [
+        {
+            "name": "Draft",
+            "operations": [
+                {
+                    "name": "Save"
+                }
+            ]
+        },
+        {
+            "name": "Deleted",
+            "operations": [
+               
+            ]
+        }
+    ],
+    "transitions": [
+        {
+            "name": "Draft_to_Deleted",
+            "from": "Draft",
+            "to": "Deleted",
+            "whenBlocked": "DisplayNormally"
+        }
+    ]
+}

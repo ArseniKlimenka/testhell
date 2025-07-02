@@ -1,0 +1,114 @@
+{
+    "mappings": {
+        "dynamic": "strict",
+        "dynamic_templates": [
+            {
+                "additional_attributes_template": {
+                    "path_match": "additionalAttributes.*",
+                    "mapping": {
+                        "type": "object",
+                        "dynamic": "strict",
+                        "properties": {
+                            "valueCode": {
+                                "type": "keyword"
+                            },
+                            "value": {
+                                "type": "text"
+                            },
+                            "fullTextSearchableValue": {
+                                "type": "text",
+                                "copy_to": [
+                                    "body._summary"
+                                ]
+                            }
+                        }
+                    }
+                }
+            }
+        ],
+        "properties": {
+            "id": {
+                "type": "keyword"
+            },
+            "code": {
+                "type": "keyword",
+                "copy_to": [
+                    "body._summary"
+                ]
+            },
+            "parentId": {
+                "type": "keyword"
+            },
+            "parentCode": {
+                "type": "keyword"
+            },
+            "metadata": {
+                "properties": {
+                    "createdOn": {
+                        "type": "date"
+                    },
+                    "createdBy": {
+                        "type": "keyword"
+                    },
+                    "createdByDisplayName": {
+                        "type": "keyword"
+                    },
+                    "updatedOn": {
+                        "type": "date"
+                    },
+                    "updatedBy": {
+                        "type": "keyword"
+                    },
+                    "recordVersion": {
+                        "type": "integer"
+                    },
+                    "entityType": {
+                        "type": "keyword"
+                    },
+                    "configuration": {
+                        "properties": {
+                            "name": {
+                                "type": "keyword"
+                            },
+                            "version": {
+                                "type": "keyword"
+                            },
+                            "dimension": {
+                                "type": "keyword"
+                            }
+                        }
+                    }
+                }
+            },
+            "body": {
+                "properties": {
+                    "_summary": {
+                        "type": "text"
+                    },
+                    "name": {
+                        "type": "keyword",
+                        "copy_to": [
+                            "body._summary"
+                        ]
+                    },
+                    "timeZone": {
+                        "type": "keyword"
+                    },
+                    "applicationUserId": {
+                        "type": "keyword"
+                    },
+                    "additionalAttributes": {
+                        "type": "object",
+                        "dynamic": "true"
+                    },
+                    "isDefault": {
+                        "type": "boolean"
+                    },
+                    "isActive": {
+                        "type": "boolean"
+                    }
+                }
+            }
+        }
+    }
+}

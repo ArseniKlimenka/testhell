@@ -1,0 +1,676 @@
+{
+    "jobs": [
+        {
+            "LogicalName": "ContractAmendmentsCreationForEtlService",
+            "GroupName": "PAS",
+            "JobType": "Adacta.AdInsure.Scheduler.Jobs.AdInsure.AdInsureApiJob, Adacta.AdInsure.Scheduler.Jobs",
+            "Description": "Autoconversion",
+            "Parameters": {
+                "url": "/api/core/shared/etl-services/ContractAmendmentsCreationForEtlService/1",
+                "method": "POST",
+                "content": "{}",
+                "adinsure.client-id": "scheduler-user"
+            }
+        },
+        {
+            "LogicalName": "CbrLoadCurrencyRates",
+            "GroupName": "CBR",
+            "JobType": "Adacta.AdInsure.Scheduler.Jobs.AdInsure.AdInsureApiJob, Adacta.AdInsure.Scheduler.Jobs",
+            "Description": "Batch job for daily importing of currency exchange rates from http://www.cbr.ru/",
+            "Parameters": {
+                "url": "/api/rgsl/common/shared/cbr-integration/load-currency-rates",
+                "method": "POST",
+                "content": "{}",
+                "adinsure.client-id": "scheduler-user"
+            }
+        },
+        {
+            "LogicalName": "CbrLoadKeyRates",
+            "GroupName": "CBR",
+            "JobType": "Adacta.AdInsure.Scheduler.Jobs.AdInsure.AdInsureApiJob, Adacta.AdInsure.Scheduler.Jobs",
+            "Description": "Batch job for daily importing of the Central Bankey rates from http://www.cbr.ru/",
+            "Parameters": {
+                "url": "/api/rgsl/common/shared/cbr-integration/load-key-rate",
+                "method": "POST",
+                "content": "{}",
+                "adinsure.client-id": "scheduler-user"
+            }
+        },
+        {
+            "LogicalName": "AccBankStatementImport",
+            "GroupName": "ACC",
+            "JobType": "Adacta.AdInsure.Scheduler.Jobs.AdInsure.AdInsureApiJob, Adacta.AdInsure.Scheduler.Jobs",
+            "Description": "Batch job for daily importing of bank statement items from 1C",
+            "Parameters": {
+                "url": "/api/core/shared/etl-services/GetNewBankStatementsRgslEtlService/1",
+                "method": "POST",
+                "content": "{}",
+                "adinsure.client-id": "scheduler-user"
+            }
+        },
+        {
+            "LogicalName": "AccCreatePaymentPlan",
+            "GroupName": "ACC",
+            "JobType": "Adacta.AdInsure.Scheduler.Jobs.AdInsure.AdInsureApiJob, Adacta.AdInsure.Scheduler.Jobs",
+            "Description": "Batch job for prepare payment plan based invoice",
+            "Parameters": {
+                "url": "/api/core/shared/etl-services/PreparePaymentPlanBasedInvoiceETLService/1",
+                "method": "POST",
+                "content": "{}",
+                "adinsure.client-id": "scheduler-user"
+            }
+        },
+        {
+            "LogicalName": "AccActivateContracts",
+            "GroupName": "ACC",
+            "JobType": "Adacta.AdInsure.Scheduler.Jobs.AdInsure.AdInsureApiJob, Adacta.AdInsure.Scheduler.Jobs",
+            "Description": "Batch job for activate contracts with paid first installment",
+            "Parameters": {
+                "url": "/api/core/shared/etl-services/ActivateContractsWithPaidFirstInstallmentEtlService/1",
+                "method": "POST",
+                "content": "{}",
+                "adinsure.client-id": "scheduler-user"
+            }
+        },
+        {
+            "LogicalName": "AutoAllocatePayments",
+            "GroupName": "ACC",
+            "JobType": "Adacta.AdInsure.Scheduler.Jobs.AdInsure.AdInsureApiJob, Adacta.AdInsure.Scheduler.Jobs",
+            "Description": "Batch job for allocate payments to binded contracts",
+            "Parameters": {
+                "url": "/api/core/shared/etl-services/AutoAllocatePaymentsEtlService/1",
+                "method": "POST",
+                "content": "{}",
+                "adinsure.client-id": "scheduler-user"
+            }
+        },
+        {
+            "LogicalName": "RepostAaCommissionChanges",
+            "GroupName": "PAS",
+            "JobType": "Adacta.AdInsure.Scheduler.Jobs.AdInsure.AdInsureApiJob, Adacta.AdInsure.Scheduler.Jobs",
+            "Description": "Repost agent agreemnt commission changes",
+            "Parameters": {
+                "url": "/api/core/shared/etl-services/RepostAaCommissionChangesETLService/1",
+                "method": "POST",
+                "content": "{}",
+                "adinsure.client-id": "scheduler-user"
+            }
+        },
+        {
+            "LogicalName": "SendAgimaEvent",
+            "GroupName": "PAS",
+            "JobType": "Adacta.AdInsure.Scheduler.Jobs.AdInsure.AdInsureApiJob, Adacta.AdInsure.Scheduler.Jobs",
+            "Description": "Send events by policies",
+            "Parameters": {
+                "url": "/api/core/shared/etl-services/SendEventETLService/1",
+                "method": "POST",
+                "content": "{ \"data\": { \"eventType\": \"PartnerIsPolicyholder\", \"subscriber\": \"AGIMA\" } }",
+                "adinsure.client-id": "scheduler-user"
+            }
+        },
+        {
+            "LogicalName": "SendElma365Event",
+            "GroupName": "PAS",
+            "JobType": "Adacta.AdInsure.Scheduler.Jobs.AdInsure.AdInsureApiJob, Adacta.AdInsure.Scheduler.Jobs",
+            "Description": "Send events by policies",
+            "Parameters": {
+                "url": "/api/core/shared/etl-services/SendEventETLService/1",
+                "method": "POST",
+                "content": "{ \"data\": { \"eventType\": \"PartnerIsPolicyholder\", \"subscriber\": \"ELMA365\" } }",
+                "adinsure.client-id": "scheduler-user"
+            }
+        },
+        {
+            "LogicalName": "SendPolicyHolderCheckEvent",
+            "GroupName": "PAS",
+            "JobType": "Adacta.AdInsure.Scheduler.Jobs.AdInsure.AdInsureApiJob, Adacta.AdInsure.Scheduler.Jobs",
+            "Description": "Send events by policies",
+            "Parameters": {
+                "url": "/api/core/shared/etl-services/SendEventETLService/1",
+                "method": "POST",
+                "content": "{ \"data\": { \"eventType\": \"AllocationFinished\", \"subscriber\": \"POLICY_HOLDER_CHECK\" } }",
+                "adinsure.client-id": "scheduler-user"
+            }
+        },
+        {
+            "LogicalName": "SendEfrEvent",
+            "GroupName": "PAS",
+            "JobType": "Adacta.AdInsure.Scheduler.Jobs.AdInsure.AdInsureApiJob, Adacta.AdInsure.Scheduler.Jobs",
+            "Description": "Send events by policies",
+            "Parameters": {
+                "url": "/api/core/shared/etl-services/SendEventETLService/1",
+                "method": "POST",
+                "content": "{ \"data\": { \"eventType\": \"ModifyDocsStatus\", \"subscriber\": \"EFR\" } }",
+                "adinsure.client-id": "scheduler-user"
+            }
+        },
+        {
+            "LogicalName": "SendAccidentPolicyCancelledEvent",
+            "GroupName": "PAS",
+            "JobType": "Adacta.AdInsure.Scheduler.Jobs.AdInsure.AdInsureApiJob, Adacta.AdInsure.Scheduler.Jobs",
+            "Description": "Send events by accident policies in cancelled status",
+            "Parameters": {
+                "url": "/api/core/shared/etl-services/SendEventETLService/1",
+                "method": "POST",
+                "content": "{ \"data\": { \"eventType\": \"SportsmanContractIsCancelledOrFinished\", \"subscriber\": \"SPORTSMAN_DELETE\" } }",
+                "adinsure.client-id": "scheduler-user"
+            }
+        },
+        {
+            "LogicalName": "CompleteContracts",
+            "GroupName": "PAS",
+            "JobType": "Adacta.AdInsure.Scheduler.Jobs.AdInsure.AdInsureApiJob, Adacta.AdInsure.Scheduler.Jobs",
+            "Description": "Batch job for complete contracts",
+            "Parameters": {
+                "url": "/api/core/shared/etl-services/CompleteContractsWithPaidFirstInstallmentEtlService/1",
+                "method": "POST",
+                "content": "{}",
+                "adinsure.client-id": "scheduler-user"
+            }
+        },
+        {
+            "LogicalName": "ActiveContractsForOperation",
+            "GroupName": "PAS",
+            "JobType": "Adacta.AdInsure.Scheduler.Jobs.AdInsure.AdInsureApiJob, Adacta.AdInsure.Scheduler.Jobs",
+            "Description": "Batch job for move contracts from Draft to Active",
+            "Parameters": {
+                "url": "/api/core/shared/etl-services/ActiveContractsForOperationEtlService/1",
+                "method": "POST",
+                "content": "{}",
+                "adinsure.client-id": "scheduler-user"
+            }
+        },
+        {
+            "LogicalName": "RosfinmonitoringXmlAllocated",
+            "GroupName": "ACC",
+            "JobType": "Adacta.AdInsure.Scheduler.Jobs.AdInsure.AdInsureApiJob, Adacta.AdInsure.Scheduler.Jobs",
+            "Description": "Batch job for making XML-files for Rosfinmonitoring",
+            "Parameters": {
+                "url": "/api/core/shared/etl-services/RosfinmonitoringXmlEtlService/1",
+                "method": "POST",
+                "content": "{ \"data\": { \"paymentStatusIds\": [1,2] } }",
+                "adinsure.client-id": "scheduler-user"
+            }
+        },
+        {
+            "LogicalName": "CancellationWithoutPayment",
+            "GroupName": "PAS",
+            "JobType": "Adacta.AdInsure.Scheduler.Jobs.AdInsure.AdInsureApiJob, Adacta.AdInsure.Scheduler.Jobs",
+            "Description": "Send notifications when contracts without payment more than 5 days",
+            "Parameters": {
+                "url": "/api/core/shared/etl-services/CancellationWithoutPaymentEtlService/1",
+                "method": "POST",
+                "content": "{}",
+                "adinsure.client-id": "scheduler-user"
+            }
+        },
+        {
+            "LogicalName": "ProcessDelayedCanellationAmendments",
+            "GroupName": "PAS",
+            "JobType": "Adacta.AdInsure.Scheduler.Jobs.AdInsure.AdInsureApiJob, Adacta.AdInsure.Scheduler.Jobs",
+            "Description": "Chage state for cancellation amrendments with cancellation date awaiting",
+            "Parameters": {
+                "url": "/api/core/shared/etl-services/ProcessDelayedCanellationAmendments/1",
+                "method": "POST",
+                "content": "{}",
+                "adinsure.client-id": "scheduler-user"
+            }
+        },
+        {
+            "LogicalName": "RegisterForRussianPostCancellation",
+            "GroupName": "PAS",
+            "JobType": "Adacta.AdInsure.Scheduler.Jobs.AdInsure.AdInsureApiJob, Adacta.AdInsure.Scheduler.Jobs",
+            "Description": "Register for Russian Post",
+            "Parameters": {
+                "url": "/api/core/shared/etl-services/RegisterForRussianPostCancellationEtlService/1",
+                "method": "POST",
+                "content": "{}",
+                "adinsure.client-id": "scheduler-user"
+            }
+        },
+        {
+            "LogicalName": "RegisterForRussianPostEndowment",
+            "GroupName": "PAS",
+            "JobType": "Adacta.AdInsure.Scheduler.Jobs.AdInsure.AdInsureApiJob, Adacta.AdInsure.Scheduler.Jobs",
+            "Description": "Register for Russian Post",
+            "Parameters": {
+                "url": "/api/core/shared/etl-services/RegisterForRussianPostEndowmentEtlService/1",
+                "method": "POST",
+                "content": "{}",
+                "adinsure.client-id": "scheduler-user"
+            }
+        },
+        {
+            "LogicalName": "NotPaidAmountContractsCancellation",
+            "GroupName": "PAS",
+            "JobType": "Adacta.AdInsure.Scheduler.Jobs.AdInsure.AdInsureApiJob, Adacta.AdInsure.Scheduler.Jobs",
+            "Description": "Cancel contracts for which the first installment has not been paid",
+            "Parameters": {
+                "url": "/api/core/shared/etl-services/NotPaidAmountContractsCancellationEtlService/1",
+                "method": "POST",
+                "content": "{}",
+                "adinsure.client-id": "scheduler-user"
+            }
+        },
+        {
+            "LogicalName": "ProcessDelayedEndowments",
+            "GroupName": "CLM",
+            "JobType": "Adacta.AdInsure.Scheduler.Jobs.AdInsure.AdInsureApiJob, Adacta.AdInsure.Scheduler.Jobs",
+            "Description": "Register for Russian Post",
+            "Parameters": {
+                "url": "/api/core/shared/etl-services/ProcessDelayedEndowments/1",
+                "method": "POST",
+                "content": "{}",
+                "adinsure.client-id": "scheduler-user"
+            }
+        },
+        {
+            "LogicalName": "CancelPolicyEtlService",
+            "GroupName": "PAS",
+            "JobType": "Adacta.AdInsure.Scheduler.Jobs.AdInsure.AdInsureApiJob, Adacta.AdInsure.Scheduler.Jobs",
+            "Description": "Cancellation of unpaid contracts",
+            "Parameters": {
+                "url": "/api/core/shared/etl-services/CancelPolicyEtlService/1",
+                "method": "POST",
+                "content": "{}",
+                "adinsure.client-id": "scheduler-user"
+            }
+        },
+        {
+            "LogicalName": "ReCallActivePolicyRoutesETLService",
+            "GroupName": "PAS",
+            "JobType": "Adacta.AdInsure.Scheduler.Jobs.AdInsure.AdInsureApiJob, Adacta.AdInsure.Scheduler.Jobs",
+            "Description": "Call missing routes",
+            "Parameters": {
+                "url": "/api/core/shared/etl-services/ReCallActivePolicyRoutesETLService/1",
+                "method": "POST",
+                "content": "{}",
+                "adinsure.client-id": "scheduler-user"
+            }
+        },
+        {
+            "LogicalName": "ReCallQuoteRoutesETLService",
+            "GroupName": "PAS",
+            "JobType": "Adacta.AdInsure.Scheduler.Jobs.AdInsure.AdInsureApiJob, Adacta.AdInsure.Scheduler.Jobs",
+            "Description": "Call missing routes",
+            "Parameters": {
+                "url": "/api/core/shared/etl-services/ReCallQuoteRoutesETLService/1",
+                "method": "POST",
+                "content": "{}",
+                "adinsure.client-id": "scheduler-user"
+            }
+        },
+        {
+            "LogicalName": "ClaimSentToPaymentNotificationEtlService",
+            "GroupName": "PAS",
+            "JobType": "Adacta.AdInsure.Scheduler.Jobs.AdInsure.AdInsureApiJob, Adacta.AdInsure.Scheduler.Jobs",
+            "Description": "Call missing routes",
+            "Parameters": {
+                "url": "/api/core/shared/etl-services/ClaimSentToPaymentNotificationEtlService/1",
+                "method": "POST",
+                "content": "{}",
+                "adinsure.client-id": "scheduler-user"
+            }
+        },
+        {
+            "LogicalName": "NegativeKpkResultEmailSend",
+            "GroupName": "ACC",
+            "JobType": "Adacta.AdInsure.Scheduler.Jobs.AdInsure.AdInsureApiJob, Adacta.AdInsure.Scheduler.Jobs",
+            "Description": "Job for sending emails about negative result responses of KPK service",
+            "Parameters": {
+                "url": "/api/core/shared/etl-services/NegativeKpkResultEmailSendEtlService/1",
+                "method": "POST",
+                "content": "{}",
+                "adinsure.client-id": "scheduler-user"
+            }
+        },
+        {
+            "LogicalName": "UpdateUserExpireDate",
+            "GroupName": "ORG",
+            "JobType": "Adacta.AdInsure.Scheduler.Jobs.AdInsure.AdInsureApiJob, Adacta.AdInsure.Scheduler.Jobs",
+            "Description": "Job for updating user expire date",
+            "Parameters": {
+                "url": "/api/core/shared/etl-services/UpdateUserExpireDateEtl/1",
+                "method": "POST",
+                "content": "{}",
+                "adinsure.client-id": "scheduler-user"
+            }
+        },
+        {
+            "LogicalName": "AssetRemaindersEmailSend",
+            "GroupName": "PAS",
+            "JobType": "Adacta.AdInsure.Scheduler.Jobs.AdInsure.AdInsureApiJob, Adacta.AdInsure.Scheduler.Jobs",
+            "Description": "Job for sending asset remainders",
+            "Parameters": {
+                "url": "/api/core/shared/integration-services/AssetNotification/1",
+                "method": "POST",
+                "content": "{}",
+                "adinsure.client-id": "scheduler-user"
+            }
+        },
+        {
+            "LogicalName": "PolicyQouteCancellation",
+            "GroupName": "PAS",
+            "JobType": "Adacta.AdInsure.Scheduler.Jobs.AdInsure.AdInsureApiJob, Adacta.AdInsure.Scheduler.Jobs",
+            "Description": "Job for cancelling policies and qoutes",
+            "Parameters": {
+                "url": "/api/core/shared/etl-services/PolicyQuoteCancellationETLService/1",
+                "method": "POST",
+                "content": "{}",
+                "adinsure.client-id": "scheduler-user"
+            }
+        }
+    ],
+    "triggers": [
+        {
+            "LogicalName": "ContractAmendmentsCreationForEtlServiceTrigger",
+            "GroupName": "PAS",
+            "CronExpression": "0 0 3 ? * * *",
+            "JobKey": {
+                "Name": "ContractAmendmentsCreationForEtlService",
+                "Group": "PAS"
+            },
+            "MisfireInstruction": "InstructionNotSet"
+        },
+        {
+            "LogicalName": "CbrLoadCurrencyRatesTrigger",
+            "GroupName": "CBR",
+            "CronExpression": "0 0 0 ? * * *",
+            "JobKey": {
+                "Name": "CbrLoadCurrencyRates",
+                "Group": "CBR"
+            },
+            "MisfireInstruction": "InstructionNotSet"
+        },
+        {
+            "LogicalName": "CbrLoadKeyRatesTrigger",
+            "GroupName": "CBR",
+            "CronExpression": "0 0 0 ? * * *",
+            "JobKey": {
+                "Name": "CbrLoadKeyRates",
+                "Group": "CBR"
+            },
+            "MisfireInstruction": "InstructionNotSet"
+        },
+        {
+            "LogicalName": "AccBankStatementImportTrigger",
+            "GroupName": "ACC",
+            "CronExpression": "0 0 0 ? * * *",
+            "JobKey": {
+                "Name": "AccBankStatementImport",
+                "Group": "ACC"
+            },
+            "MisfireInstruction": "InstructionNotSet"
+        },
+        {
+            "LogicalName": "AccCreatePaymentPlanTrigger",
+            "GroupName": "ACC",
+            "CronExpression": "0 0 0 ? * * *",
+            "JobKey": {
+                "Name": "AccCreatePaymentPlan",
+                "Group": "ACC"
+            },
+            "MisfireInstruction": "InstructionNotSet"
+        },
+        {
+            "LogicalName": "AccActivateContractsTrigger",
+            "GroupName": "ACC",
+            "CronExpression": "0 0 0 ? * * *",
+            "JobKey": {
+                "Name": "AccActivateContracts",
+                "Group": "ACC"
+            },
+            "MisfireInstruction": "InstructionNotSet"
+        },
+        {
+            "LogicalName": "AutoAllocatePaymentsTrigger",
+            "GroupName": "ACC",
+            "CronExpression": "0 0 1 ? * * *",
+            "JobKey": {
+                "Name": "AutoAllocatePayments",
+                "Group": "ACC"
+            },
+            "MisfireInstruction": "InstructionNotSet"
+        },
+        {
+            "LogicalName": "RepostAaCommissionChangesTrigger",
+            "GroupName": "PAS",
+            "CronExpression": "0 0 2 ? * * *",
+            "JobKey": {
+                "Name": "RepostAaCommissionChanges",
+                "Group": "PAS"
+            },
+            "MisfireInstruction": "InstructionNotSet"
+        },
+        {
+            "LogicalName": "SendElma365EventTrigger",
+            "GroupName": "PAS",
+            "CronExpression": "0 */5 * ? * *",
+            "JobKey": {
+                "Name": "SendElma365Event",
+                "Group": "PAS"
+            },
+            "MisfireInstruction": "InstructionNotSet"
+        },
+        {
+            "LogicalName": "SendPolicyHolderCheckEventTrigger",
+            "GroupName": "PAS",
+            "CronExpression": "0 0 * ? * * *",
+            "JobKey": {
+                "Name": "SendPolicyHolderCheckEvent",
+                "Group": "PAS"
+            },
+            "MisfireInstruction": "InstructionNotSet"
+        },
+        {
+            "LogicalName": "SendAgimaEventTrigger",
+            "GroupName": "PAS",
+            "CronExpression": "0 0 10 * * ?",
+            "JobKey": {
+                "Name": "SendAgimaEvent",
+                "Group": "PAS"
+            },
+            "MisfireInstruction": "InstructionNotSet"
+        },
+        {
+            "LogicalName": "SendEfrEventTrigger",
+            "GroupName": "PAS",
+            "CronExpression": "0 0 * ? * *",
+            "JobKey": {
+                "Name": "SendEfrEvent",
+                "Group": "PAS"
+            },
+            "MisfireInstruction": "InstructionNotSet"
+        },
+        {
+            "LogicalName": "SendAccidentPolicyActivatedEventTrigger",
+            "GroupName": "PAS",
+            "CronExpression": "0 */1 * ? * *",
+            "JobKey": {
+                "Name": "SendAccidentPolicyActivatedEvent",
+                "Group": "PAS"
+            },
+            "MisfireInstruction": "InstructionNotSet"
+        },
+        {
+            "LogicalName": "SendAccidentPolicyCancelledEventTrigger",
+            "GroupName": "PAS",
+            "CronExpression": "0 */1 * ? * *",
+            "JobKey": {
+                "Name": "SendAccidentPolicyCancelledEvent",
+                "Group": "PAS"
+            },
+            "MisfireInstruction": "InstructionNotSet"
+        },
+        {
+            "LogicalName": "CompleteContractsTrigger",
+            "GroupName": "PAS",
+            "CronExpression": "0 0 0 ? * * *",
+            "JobKey": {
+                "Name": "CompleteContracts",
+                "Group": "PAS"
+            },
+            "MisfireInstruction": "InstructionNotSet"
+        },
+        {
+            "LogicalName": "ActiveContractsForOperationTrigger",
+            "GroupName": "PAS",
+            "CronExpression": "0 10 23 ? * * *",
+            "JobKey": {
+                "Name": "ActiveContractsForOperation",
+                "Group": "PAS"
+            },
+            "MisfireInstruction": "InstructionNotSet"
+        },
+        {
+            "LogicalName": "RosfinmonitoringXmlAllocatedTrigger",
+            "GroupName": "ACC",
+            "CronExpression": "0 0 19 ? * * *",
+            "JobKey": {
+                "Name": "RosfinmonitoringXmlAllocated",
+                "Group": "ACC"
+            },
+            "MisfireInstruction": "InstructionNotSet"
+        },
+        {
+            "LogicalName": "CancellationWithoutPaymentTrigger",
+            "GroupName": "PAS",
+            "CronExpression": "0 0 5 ? * * *",
+            "JobKey": {
+                "Name": "CancellationWithoutPayment",
+                "Group": "PAS"
+            },
+            "MisfireInstruction": "InstructionNotSet"
+        },
+        {
+            "LogicalName": "ProcessDelayedCanellationAmendmentsTrigger",
+            "GroupName": "PAS",
+            "CronExpression": "0 0 0 ? * * *",
+            "JobKey": {
+                "Name": "ProcessDelayedCanellationAmendments",
+                "Group": "PAS"
+            },
+            "MisfireInstruction": "InstructionNotSet"
+        },
+        {
+            "LogicalName": "RegisterForRussianPostCancellationTrigger",
+            "GroupName": "PAS",
+            "CronExpression": "0 0 3 ? * * *",
+            "JobKey": {
+                "Name": "RegisterForRussianPostCancellation",
+                "Group": "PAS"
+            },
+            "MisfireInstruction": "InstructionNotSet"
+        },
+        {
+            "LogicalName": "RegisterForRussianPostEndowmentTrigger",
+            "GroupName": "PAS",
+            "CronExpression": "0 30 3 ? * * *",
+            "JobKey": {
+                "Name": "RegisterForRussianPostEndowment",
+                "Group": "PAS"
+            },
+            "MisfireInstruction": "InstructionNotSet"
+        },
+        {
+            "LogicalName": "NotPaidAmountContractsCancellationTrigger",
+            "GroupName": "PAS",
+            "CronExpression": "0 1 0 ? * * *",
+            "JobKey": {
+                "Name": "NotPaidAmountContractsCancellation",
+                "Group": "PAS"
+            },
+            "MisfireInstruction": "InstructionNotSet"
+        },
+        {
+            "LogicalName": "ProcessDelayedEndowmentsTrigger",
+            "GroupName": "CLM",
+            "CronExpression": "0 30 3 ? * * *",
+            "JobKey": {
+                "Name": "ProcessDelayedEndowments",
+                "Group": "CLM"
+            },
+            "MisfireInstruction": "InstructionNotSet"
+        },
+        {
+            "LogicalName": "CancelPolicyEtlServiceTrigger",
+            "GroupName": "PAS",
+            "CronExpression": "1 0 0 * * ? 2025",
+            "JobKey": {
+                "Name": "CancelPolicyEtlService",
+                "Group": "PAS"
+            },
+            "MisfireInstruction": "InstructionNotSet"
+        },
+        {
+            "LogicalName": "ReCallActivePolicyRoutesETLServiceTrigger",
+            "GroupName": "PAS",
+            "CronExpression": "0 1 0 ? * * *",
+            "JobKey": {
+                "Name": "ReCallActivePolicyRoutesETLService",
+                "Group": "PAS"
+            },
+            "MisfireInstruction": "InstructionNotSet"
+        },
+        {
+            "LogicalName": "ReCallQuoteRoutesETLServiceTrigger",
+            "GroupName": "PAS",
+            "CronExpression": "0 1 0 ? * * *",
+            "JobKey": {
+                "Name": "ReCallQuoteRoutesETLService",
+                "Group": "PAS"
+            },
+            "MisfireInstruction": "InstructionNotSet"
+        },
+        {
+            "LogicalName": "ClaimSentToPaymentNotificationEtlServiceTrigger",
+            "GroupName": "PAS",
+            "CronExpression": "0 30 17 ? * * *",
+            "JobKey": {
+                "Name": "ClaimSentToPaymentNotificationEtlService",
+                "Group": "PAS"
+            },
+            "MisfireInstruction": "InstructionNotSet"
+        },
+        {
+            "LogicalName": "NegativeKpkResultEmailTrigger",
+            "GroupName": "ACC",
+            "CronExpression": "0 0 * ? * * *",
+            "JobKey": {
+                "Name": "NegativeKpkResultEmailSend",
+                "Group": "ACC"
+            },
+            "MisfireInstruction": "InstructionNotSet"
+        },
+        {
+            "LogicalName": "UpdateUserExpireDateTrigger",
+            "GroupName": "ORG",
+            "CronExpression": "0 30 0 ? * * *",
+            "JobKey": {
+                "Name": "UpdateUserExpireDate",
+                "Group": "ORG"
+            },
+            "MisfireInstruction": "InstructionNotSet"
+        },
+        {
+            "LogicalName": "AssetRemaindersEmailSendTrigger",
+            "GroupName": "PAS",
+            "CronExpression": "0 0 9 ? * * *",
+            "JobKey": {
+                "Name": "AssetRemaindersEmailSend",
+                "Group": "PAS"
+            },
+            "MisfireInstruction": "InstructionNotSet"
+        },
+        {
+            "LogicalName": "PolicyQouteCancellationTrigger",
+            "GroupName": "PAS",
+            "CronExpression": "0 0 5 ? * * *",
+            "JobKey": {
+                "Name": "PolicyQouteCancellation",
+                "Group": "PAS"
+            },
+            "MisfireInstruction": "InstructionNotSet"
+        }
+    ]
+}

@@ -1,0 +1,65 @@
+{
+    "type": "Group",
+    "width": 4,
+    "elements": [
+        {
+            "type": "Group",
+            "width": 2,
+            "stackContent": "Left",
+            "elements": [
+                {
+                    "type": "Button",
+                    "label": "PopulateFromFile",
+                    "onClick": "populateFromFile",
+                    "icon": {
+                        "name": "Upload",
+                        "color": "BackgroundColor",
+                        "size": "Small"
+                    },
+                    "rule": {
+                        "effect": "ENABLE_INITIAL",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "enableAutoPopulateWithFile",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "type": "Button",
+                    "readOnly": true,
+                    "eventHandlers": [
+                        {
+                            "eventName": "Selected",
+                            "commands": {
+                                "commandType": "executeAction",
+                                "actionName": "enableDeleteItem"
+                            }
+                        }
+                    ],
+                    "styleClass": "md-icon-button",
+                    "value": {
+                        "$ref": "#"
+                    },
+                    "onClick": [
+                        {
+                            "commandType": "executeAction",
+                            "actionName": "deleteItem"
+                        }
+                    ],
+                    "icon": {
+                        "name": "Search",
+                        "color": "BackgroundColor",
+                        "size": "Small"
+                    },
+                    "label": "deleteItem",
+                    "elementId": "deleteItem"
+                }
+            ]
+        }
+    ]
+}

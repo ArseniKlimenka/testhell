@@ -1,0 +1,548 @@
+{
+    "id": "MainContent",
+    "type": "Group",
+    "formProperties": {
+        "events": {
+            "onLoad": "VerificationOnLoad"
+        }
+    },
+    "elements": [
+        {
+            "type": "TabLayout",
+            "options": {
+                "fixedPosition": true,
+                "scrollableTabs": false,
+                "buttonsForSwitchingTabs": true
+            },
+            "elements": [
+                {
+                    "type": "Tab",
+                    "title": "verificationMainData",
+                    "elementId": "verificationMainData",
+                    "elements": [
+                        {
+                            "type": "GridLayout",
+                            "fixedButton": true,
+                            "fillAvailableSpace": true,
+                            "numberOfColumns": 12,
+                            "elements": [
+                                {
+                                    "type": "Group",
+                                    "elements": [
+                                        {
+                                            "type": "OutputText",
+                                            "textProperties": [
+                                                "bold"
+                                            ],
+                                            "literalValue": "verificationResult"
+                                        },
+                                        {
+                                            "type": "Dropdown",
+                                            "elementId": "attachmentErrorArray",
+                                            "label": "attachmentErrorArray",
+                                            "value": {
+                                                "$ref": "#/properties/Body/properties/attachmentErrorArray"
+                                            },
+                                            "multiple": true,
+                                            "autocomplete": {
+                                                "minTextLength": 1,
+                                                "dropDownItemsCount": 1000,
+                                                "selectItemOnMatch": false
+                                            },
+                                            "source": {
+                                                "dataSource": {
+                                                    "name": "AttachmentErrorDataSource",
+                                                    "searchFieldPath": "description",
+                                                    "responseMapping": "attachmentErrorResponseMapping",
+                                                    "resultCount": 1000
+                                                },
+                                                "displayValueTemplate": "{{expr attachmentErrorDescriptionShort}} ({{expr attachmentErrorDescriptionFull}})"
+                                            }
+                                        },
+                                        {
+                                            "type": "Input",
+                                            "elementId": "attachmentErrorComment",
+                                            "label": "attachmentErrorComment",
+                                            "control": "TextArea",
+                                            "enableResize": true,
+                                            "numberOfRows": 2,
+                                            "value": {
+                                                "$ref": "#/properties/Body/properties/attachmentErrorComment"
+                                            },
+                                            "width": 12
+                                        },
+                                        {
+                                            "type": "Input",
+                                            "elementId": "attachmentErrorCommentSales",
+                                            "label": "attachmentErrorCommentSales",
+                                            "control": "TextArea",
+                                            "enableResize": true,
+                                            "numberOfRows": 2,
+                                            "value": {
+                                                "$ref": "#/properties/Body/properties/attachmentErrorCommentSales"
+                                            },
+                                            "width": 12
+                                        },
+                                        {
+                                            "type": "Group",
+                                            "elements": [
+                                                {
+                                                    "type": "Button",
+                                                    "label": "CancelledToDraft",
+                                                    "elementId": "CancelledToDraft",
+                                                    "isCompact": true,
+                                                    "width": 2,
+                                                    "icon": {
+                                                        "name": "save",
+                                                        "color": "BackgroundColor",
+                                                        "size": "Small"
+                                                    },
+                                                    "onClick": "transitionCancelledToDraft"
+                                                },
+                                                {
+                                                    "type": "Button",
+                                                    "label": "CancelledToDraftOperations",
+                                                    "elementId": "CancelledToDraftOperations",
+                                                    "isCompact": true,
+                                                    "width": 3,
+                                                    "icon": {
+                                                        "name": "save",
+                                                        "color": "BackgroundColor",
+                                                        "size": "Small"
+                                                    },
+                                                    "onClick": "transitionCancelledToDraftOperations"
+                                                },
+                                                {
+                                                    "type": "Button",
+                                                    "label": "DraftToCancelled",
+                                                    "elementId": "DraftToCancelled",
+                                                    "isCompact": true,
+                                                    "width": 2,
+                                                    "icon": {
+                                                        "name": "save",
+                                                        "color": "BackgroundColor",
+                                                        "size": "Small"
+                                                    },
+                                                    "onClick": "transitionDraftToCancelled"
+                                                },
+                                                {
+                                                    "type": "Button",
+                                                    "label": "DraftToIssued",
+                                                    "elementId": "DraftToIssued",
+                                                    "isCompact": true,
+                                                    "width": 3,
+                                                    "icon": {
+                                                        "name": "save",
+                                                        "color": "BackgroundColor",
+                                                        "size": "Small"
+                                                    },
+                                                    "onClick": "transitionDraftToIssued"
+                                                },
+                                                {
+                                                    "type": "Button",
+                                                    "label": "IssuedToDraft",
+                                                    "elementId": "IssuedToDraft",
+                                                    "isCompact": true,
+                                                    "width": 2,
+                                                    "icon": {
+                                                        "name": "save",
+                                                        "color": "BackgroundColor",
+                                                        "size": "Small"
+                                                    },
+                                                    "onClick": "transitionIssuedToDraft"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "Group",
+                                    "elements": [
+                                        {
+                                            "type": "GroupSeparator"
+                                        },
+                                        {
+                                            "type": "OutputText",
+                                            "label": "policyHolderLabel",
+                                            "textProperties": [
+                                                "bold"
+                                            ],
+                                            "literalValue": "policyHolder",
+                                            "width": 2
+                                        },
+                                        {
+                                            "type": "Link",
+                                            "targetType": "Url",
+                                            "width": 10,
+                                            "value": {
+                                                "mapping": "policyHolderUrlMapping",
+                                                "$ref": "#"
+                                            },
+                                            "content": {
+                                                "text": {
+                                                    "type": "OutputText",
+                                                    "value": {
+                                                        "$ref": "#/properties/Body/properties/policyHolderFullName"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "Group",
+                                    "elements": [
+                                        {
+                                            "type": "InlineView",
+                                            "showContainerActions": false,
+                                            "views": [
+                                                {
+                                                    "viewReference": {
+                                                        "configurationCodeName": "NaturalPerson",
+                                                        "configurationVersion": "1",
+                                                        "configurationConceptType": "Party"
+                                                    },
+                                                    "onCreateViewParams": "InlineViewVerificationHolderCreateParams"
+                                                }
+                                            ],
+                                            "value": {
+                                                "$ref": "#"
+                                            },
+                                            "hide": false,
+                                            "elementId": "AttachmentsHolderInlineView"
+                                        }
+                                    ],
+                                    "rule": {
+                                        "effect": "SHOW",
+                                        "condition": {
+                                            "type": "LEAF",
+                                            "expectedValue": "NaturalPerson",
+                                            "value": {
+                                                "$ref": "#/properties/Body/properties/policyHolderType"
+                                            }
+                                        }
+                                    }
+                                },
+                                {
+                                    "type": "Group",
+                                    "elements": [
+                                        {
+                                            "type": "GroupSeparator"
+                                        },
+                                        {
+                                            "type": "InlineView",
+                                            "showContainerActions": false,
+                                            "views": [
+                                                {
+                                                    "viewReference": {
+                                                        "configurationCodeName": "LegalEntity",
+                                                        "configurationVersion": "1",
+                                                        "configurationConceptType": "Party"
+                                                    },
+                                                    "onCreateViewParams": "InlineViewVerificationHolderCreateParams"
+                                                }
+                                            ],
+                                            "value": {
+                                                "$ref": "#"
+                                            },
+                                            "hide": false,
+                                            "elementId": "AttachmentsHolderInlineView"
+                                        }
+                                    ],
+                                    "rule": {
+                                        "effect": "SHOW",
+                                        "condition": {
+                                            "type": "LEAF",
+                                            "expectedValue": "LegalEntity",
+                                            "value": {
+                                                "$ref": "#/properties/Body/properties/policyHolderType"
+                                            }
+                                        }
+                                    }
+                                },
+                                {
+                                    "type": "Group",
+                                    "elements": [
+                                        {
+                                            "type": "Group",
+                                            "elements": [
+                                                {
+                                                    "type": "Group",
+                                                    "elements": [
+                                                        {
+                                                            "type": "OutputText",
+                                                            "label": "insuredPersonLabel",
+                                                            "textProperties": [
+                                                                "bold"
+                                                            ],
+                                                            "literalValue": "insuredPerson",
+                                                            "width": 2
+                                                        },
+                                                        {
+                                                            "type": "Link",
+                                                            "targetType": "Url",
+                                                            "width": 10,
+                                                            "value": {
+                                                                "mapping": "insuredPersonUrlMapping",
+                                                                "$ref": "#"
+                                                            },
+                                                            "content": {
+                                                                "text": {
+                                                                    "type": "OutputText",
+                                                                    "value": {
+                                                                        "$ref": "#/properties/Body/properties/insuredPersonFullName"
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "type": "InlineView",
+                                                    "showContainerActions": false,
+                                                    "views": [
+                                                        {
+                                                            "viewReference": {
+                                                                "configurationCodeName": "NaturalPerson",
+                                                                "configurationVersion": "1",
+                                                                "configurationConceptType": "Party"
+                                                            },
+                                                            "onCreateViewParams": "InlineViewVerificationInsurerCreateParams"
+                                                        }
+                                                    ],
+                                                    "value": {
+                                                        "$ref": "#"
+                                                    },
+                                                    "hide": false,
+                                                    "elementId": "AttachmentsInsurerInlineView"
+                                                }
+                                            ],
+                                            "rule": {
+                                                "effect": "HIDE",
+                                                "condition": {
+                                                    "type": "LEAF",
+                                                    "expectedValue": true,
+                                                    "value": {
+                                                        "$ref": "#/properties/Body/properties/isPolicyHolder"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    ],
+                                    "rule": {
+                                        "effect": "HIDE",
+                                        "condition": {
+                                            "type": "FUNC",
+                                            "ruleFunction": "isInsuredPersonHide",
+                                            "value": [
+                                                {
+                                                    "$ref": "#"
+                                                }
+                                            ]
+                                        }
+                                    }
+                                },
+                                {
+                                    "type": "Group",
+                                    "elements": [
+                                        {
+                                            "type": "GroupSeparator"
+                                        },
+                                        {
+                                            "type": "Group",
+                                            "elements": [
+                                                {
+                                                    "type": "OutputText",
+                                                    "label": "policyLabel",
+                                                    "textProperties": [
+                                                        "bold"
+                                                    ],
+                                                    "literalValue": "policy",
+                                                    "width": 2
+                                                },
+                                                {
+                                                    "type": "Link",
+                                                    "targetType": "Url",
+                                                    "width": 10,
+                                                    "value": {
+                                                        "mapping": "policyUrlMapping",
+                                                        "$ref": "#"
+                                                    },
+                                                    "content": {
+                                                        "text": {
+                                                            "type": "OutputText",
+                                                            "value": {
+                                                                "$ref": "#/properties/Body/properties/number"
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "type": "InlineView",
+                                            "showContainerActions": false,
+                                            "views": [
+                                                {
+                                                    "viewReference": {
+                                                        "configurationCodeName": "AccumulatedLifeInsurancePolicy",
+                                                        "configurationVersion": "1",
+                                                        "configurationConceptType": "Contract"
+                                                    },
+                                                    "onCreateViewParams": "InlineViewVerificationPolicyCreateParams"
+                                                }
+                                            ],
+                                            "value": {
+                                                "$ref": "#"
+                                            },
+                                            "hide": true,
+                                            "elementId": "AttachmentsAccPolicyInlineView"
+                                        },
+                                        {
+                                            "type": "InlineView",
+                                            "showContainerActions": false,
+                                            "views": [
+                                                {
+                                                    "viewReference": {
+                                                        "configurationCodeName": "InvestmentLifeInsurancePolicy",
+                                                        "configurationVersion": "1",
+                                                        "configurationConceptType": "Contract"
+                                                    },
+                                                    "onCreateViewParams": "InlineViewVerificationPolicyCreateParams"
+                                                }
+                                            ],
+                                            "value": {
+                                                "$ref": "#"
+                                            },
+                                            "hide": true,
+                                            "elementId": "AttachmentsInvPolicyInlineView"
+                                        },
+                                        {
+                                            "type": "InlineView",
+                                            "showContainerActions": false,
+                                            "views": [
+                                                {
+                                                    "viewReference": {
+                                                        "configurationCodeName": "EquityLifeInsurancePolicy",
+                                                        "configurationVersion": "1",
+                                                        "configurationConceptType": "Contract"
+                                                    },
+                                                    "onCreateViewParams": "InlineViewVerificationPolicyCreateParams"
+                                                }
+                                            ],
+                                            "value": {
+                                                "$ref": "#"
+                                            },
+                                            "hide": true,
+                                            "elementId": "AttachmentsEquityPolicyInlineView"
+                                        },
+                                        {
+                                            "type": "InlineView",
+                                            "showContainerActions": false,
+                                            "views": [
+                                                {
+                                                    "viewReference": {
+                                                        "configurationCodeName": "MedLifeInsurancePolicy",
+                                                        "configurationVersion": "1",
+                                                        "configurationConceptType": "Contract"
+                                                    },
+                                                    "onCreateViewParams": "InlineViewVerificationPolicyCreateParams"
+                                                }
+                                            ],
+                                            "value": {
+                                                "$ref": "#"
+                                            },
+                                            "hide": true,
+                                            "elementId": "AttachmentsMedPolicyInlineView"
+                                        },
+                                        {
+                                            "type": "InlineView",
+                                            "showContainerActions": false,
+                                            "views": [
+                                                {
+                                                    "viewReference": {
+                                                        "configurationCodeName": "RiskLifeInsurancePolicy",
+                                                        "configurationVersion": "1",
+                                                        "configurationConceptType": "Contract"
+                                                    },
+                                                    "onCreateViewParams": "InlineViewVerificationPolicyCreateParams"
+                                                }
+                                            ],
+                                            "value": {
+                                                "$ref": "#"
+                                            },
+                                            "hide": true,
+                                            "elementId": "AttachmentsRiskPolicyInlineView"
+                                        },
+                                        {
+                                            "type": "InlineView",
+                                            "showContainerActions": false,
+                                            "views": [
+                                                {
+                                                    "viewReference": {
+                                                        "configurationCodeName": "AccidentLifeInsurancePolicy",
+                                                        "configurationVersion": "1",
+                                                        "configurationConceptType": "Contract"
+                                                    },
+                                                    "onCreateViewParams": "InlineViewVerificationPolicyCreateParams"
+                                                }
+                                            ],
+                                            "value": {
+                                                "$ref": "#"
+                                            },
+                                            "hide": true,
+                                            "elementId": "AttachmentsAccidentPolicyInlineView"
+                                        },
+                                        {
+                                            "type": "InlineView",
+                                            "showContainerActions": false,
+                                            "views": [
+                                                {
+                                                    "viewReference": {
+                                                        "configurationCodeName": "CollectiveLifeInsurancePolicy",
+                                                        "configurationVersion": "1",
+                                                        "configurationConceptType": "Contract"
+                                                    },
+                                                    "onCreateViewParams": "InlineViewVerificationPolicyCreateParams"
+                                                }
+                                            ],
+                                            "value": {
+                                                "$ref": "#"
+                                            },
+                                            "hide": true,
+                                            "elementId": "AttachmentsCollectivePolicyInlineView"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "Tab",
+                    "title": "verificationHistoryData",
+                    "elementId": "verificationHistoryData",
+                    "elements": [
+                        {
+                            "type": "InlineView",
+                            "showContainerActions": false,
+                            "views": [
+                                {
+                                    "viewReference": {
+                                        "configurationCodeName": "VerificationHistoryView",
+                                        "configurationVersion": "1",
+                                        "configurationConceptType": "SearchView"
+                                    },
+                                    "onViewInitialized": "onVerificationViewInitialized"
+                                }
+                            ],
+                            "value": {
+                                "$ref": "#"
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,37 @@
+{
+    "type": "Section",
+    "sectionLevel": 1,
+    "label": "PartyFinQuestHistory",
+    "elements": [
+        {
+            "type": "InlineView",
+            "showContainerActions": false,
+            "views": [
+                {
+                    "viewReference": {
+                        "configurationCodeName": "PartyFinQuestHistoryView2023",
+                        "configurationConceptType": "SearchView",
+                        "configurationVersion": "1"
+                    },
+                    "onViewInitialized": "onViewInitialized"
+                }
+            ],
+            "value": {
+                "$ref": "#"
+            },
+            "hide": false
+        }
+    ],
+    "rule": {
+        "effect": "HIDE",
+        "condition": {
+            "type": "FUNC",
+            "ruleFunction": "hideFinKnowledgeQuestionnaireHistory",
+            "value": [
+                {
+                    "$ref": "#"
+                }
+            ]
+        }
+    }
+}

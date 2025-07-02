@@ -1,0 +1,105 @@
+{
+    "id": "UiSchemaAgent.json",
+    "type": "Group",
+    "formProperties": {
+        "events": {
+            "onLoad": "onLoadDocumentAction"
+        }
+    },
+    "elements": [
+        {
+            "type": "GridLayout",
+            "fillAvailableSpace": true,
+            "title": "AA Cancellation Amendment",
+            "fixedButton": true,
+            "numberOfColumns": 12,
+            "elements": [
+                {
+                    "type": "TabLayout",
+                    "options": {
+                        "menuAlligment": "Horizontal",
+                        "menuMode": "Single"
+                    },
+                    "elements": [
+                        {
+                            "type": "Tab",
+                            "elementId": "AmendmentData",
+                            "scope": "amendment",
+                            "title": "amendment",
+                            "elements": [
+                                {
+                                    "type": "Section",
+                                    "label": "Main attributes",
+                                    "scope": "mainAttributes",
+                                    "width": 12,
+                                    "elements": [
+                                        {
+                                            "type": "Component",
+                                            "name": "AACancellationAmendmentData",
+                                            "value": {
+                                                "$ref": "#/properties/Body/properties/amendmentData/properties/cancellationAmendmentData"
+                                            }
+                                        },
+                                        {
+                                            "type": "DatetimePicker",
+                                            "label": "cancellationDate",
+                                            "value": {
+                                                "$ref": "#/properties/Body/properties/validity/properties/cancellationDate"
+                                            },
+                                            "width": 3,
+                                            "onValueChanged": [
+                                                {
+                                                    "commandType": "executeAction",
+                                                    "actionName": "setCancellationDate"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Tab",
+                            "elementId": "statusTab",
+                            "title": "documentStatus",
+                            "elements": [
+                                {
+                                    "type": "Section",
+                                    "label": "",
+                                    "width": 12,
+                                    "elements": [
+                                        {
+                                            "type": "Group",
+                                            "elements": [
+                                                {
+                                                    "type": "InlineView",
+                                                    "showContainerActions": false,
+                                                    "views": [
+                                                        {
+                                                            "viewReference": {
+                                                                "configurationCodeName": "AADocumentStateHistoryView",
+                                                                "configurationVersion": "1",
+                                                                "configurationConceptType": "SearchView"
+                                                            },
+                                                            "onViewInitialized": "initDocumentStateHistory",
+                                                            "viewType": "Search"
+                                                        }
+                                                    ],
+                                                    "value": {
+                                                        "$ref": "#"
+                                                    },
+                                                    "hide": false,
+                                                    "elementId": "StatusView"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

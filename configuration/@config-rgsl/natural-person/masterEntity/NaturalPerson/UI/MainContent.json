@@ -1,0 +1,369 @@
+{
+    "type": "Group",
+    "title": "Natural Person",
+    "fillAvailableSpace": true,
+    "formProperties": {
+        "events": {
+            "onLoad": "onLoad",
+            "beforeSave": "beforeSave",
+            "afterSave": "NaturalPersonAfrerSave"
+        }
+    },
+    "elements": [
+        {
+            "type": "TabLayout",
+            "elementId": "MainContent",
+            "onInit": "naturalPersonTabsVisible",
+            "options": {
+                "fixedPosition": true,
+                "scrollableTabs": false,
+                "buttonsForSwitchingTabs": false
+            },
+            "elements": [
+                {
+                    "type": "Tab",
+                    "elementId": "MainTab",
+                    "title": "MainTab",
+                    "elements": [
+                        {
+                            "type": "Component",
+                            "metadata": {
+                                "autogenerate": true
+                            },
+                            "name": "PartyDuplicateMaster",
+                            "value": {
+                                "$ref": "#/properties/Body/properties/partyGeneralData"
+                            }
+                        },
+                        {
+                            "type": "Component",
+                            "metadata": {
+                                "autogenerate": true
+                            },
+                            "name": "PartyRoleOfPerson",
+                            "value": {
+                                "$ref": "#/properties/Body/properties/partyRoleOfPerson"
+                            }
+                        },
+                        {
+                            "type": "Component",
+                            "metadata": {
+                                "autogenerate": true
+                            },
+                            "name": "PartyPersonData",
+                            "value": {
+                                "$ref": "#/properties/Body/properties/partyPersonData"
+                            }
+                        },
+                        {
+                            "type": "Component",
+                            "metadata": {
+                                "autogenerate": true
+                            },
+                            "name": "PartyGeneralData",
+                            "value": {
+                                "$ref": "#/properties/Body/properties/partyGeneralData"
+                            }
+                        },
+                        {
+                            "type": "Component",
+                            "metadata": {
+                                "autogenerate": true
+                            },
+                            "name": "PartyCRS",
+                            "value": {
+                                "$ref": "#/properties/Body/properties/partyCRS"
+                            }
+                        },
+                        {
+                            "type": "Component",
+                            "metadata": {
+                                "autogenerate": true
+                            },
+                            "name": "PartyFatca",
+                            "value": {
+                                "$ref": "#/properties/Body/properties/partyFatca"
+                            }
+                        },
+                        {
+                            "type": "Component",
+                            "metadata": {
+                                "autogenerate": true
+                            },
+                            "name": "PartyAddresses",
+                            "value": {
+                                "$ref": "#/properties/Body/properties/partyAddresses"
+                            }
+                        },
+                        {
+                            "type": "Component",
+                            "metadata": {
+                                "autogenerate": true
+                            },
+                            "name": "PartyDocuments",
+                            "value": {
+                                "$ref": "#/properties/Body/properties/partyDocuments"
+                            }
+                        },
+                        {
+                            "type": "Component",
+                            "metadata": {
+                                "autogenerate": true
+                            },
+                            "name": "PartyPhones",
+                            "value": {
+                                "$ref": "#/properties/Body/properties/partyPhones"
+                            }
+                        },
+                        {
+                            "type": "Component",
+                            "metadata": {
+                                "autogenerate": true
+                            },
+                            "name": "PartyEmails",
+                            "value": {
+                                "$ref": "#/properties/Body/properties/partyEmails"
+                            }
+                        },
+                        {
+                            "type": "Component",
+                            "metadata": {
+                                "autogenerate": true
+                            },
+                            "name": "PartyEmailsAdditionalInfo",
+                            "value": {
+                                "$ref": "#/properties/Body/properties/partyEmailsAdditionalInfo"
+                            },
+                            "rule" : {
+                                "effect" : "DISABLE_INITIAL",
+                                "condition" : {
+                                    "type" : "FUNC",
+                                    "ruleFunction": "isEmailFilled",
+                                    "value": [
+                                        {
+                                            "$ref": "#/properties/Body/properties/partyEmails"
+                                        }
+                                    ]
+                                }
+                            }
+                        },
+                        {
+                            "type": "Component",
+                            "metadata": {
+                                "autogenerate": true
+                            },
+                            "name": "PartyBankAccounts",
+                            "value": {
+                                "$ref": "#/properties/Body/properties/partyBankAccounts"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "type": "Tab",
+                    "elementId": "QuestionnaireTab",
+                    "title": "QuestionnaireTab",
+                    "elements": [
+                        {
+                            "type": "Component",
+                            "metadata": {
+                                "autogenerate": true
+                            },
+                            "name": "FinKnowledgeQuestionnaire2024",
+                            "value": {
+                                "$ref": "#/properties/Body/properties/finKnowledgeQuestionnaire2024"
+                            }
+                        },
+                        {
+                            "type": "Component",
+                            "metadata": {
+                                "autogenerate": true
+                            },
+                            "name": "FinKnowledgeQuestionnaire2023",
+                            "value": {
+                                "$ref": "#/properties/Body/properties/finKnowledgeQuestionnaire2023"
+                            }
+                        },
+                        {
+                            "type": "Component",
+                            "metadata": {
+                                "autogenerate": true
+                            },
+                            "name": "FinKnowledgeQuestionnaire",
+                            "value": {
+                                "$ref": "#/properties/Body/properties/finKnowledgeQuestionnaire"
+                            }
+                        },
+                        {
+                            "type": "Component",
+                            "metadata": {
+                                "autogenerate": true
+                            },
+                            "name": "BeneficiaryOwnerQuestionnaire",
+                            "value": {
+                                "$ref": "#/properties/Body/properties/beneficiaryOwnerQuestionnaire"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "type": "Component",
+                    "metadata": {
+                        "autogenerate": true
+                    },
+                    "name": "AttachmentsTab",
+                    "value": {
+                        "$ref": "#"
+                    }
+                },
+                {
+                    "type": "Tab",
+                    "elementId": "VerificationsTab",
+                    "title": "VerificationsTab",
+                    "elements": [
+                        {
+                            "type": "Group",
+                            "elements": [
+                                {
+                                    "type": "InlineView",
+                                    "showContainerActions": false,
+                                    "views": [
+                                        {
+                                            "viewReference": {
+                                                "configurationCodeName": "AgentPartyVerificationView",
+                                                "configurationVersion": "1",
+                                                "configurationConceptType": "SearchView"
+                                            },
+                                            "viewType": "Search"
+                                        }
+                                    ],
+                                    "hide": false,
+                                    "elementId": "StatusView"
+                                }
+                            ]
+                        }
+                    ],
+                    "rule": {
+                        "effect": "SHOW",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "isSavedAndIsBackOffice",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "type": "Tab",
+                    "elementId": "AdditionalDataTab",
+                    "title": "AdditionalDataTab",
+                    "elements": [
+                        {
+                            "type": "Component",
+                            "metadata": {
+                                "autogenerate": true
+                            },
+                            "name": "PartyTaxResidencies",
+                            "value": {
+                                "$ref": "#/properties/Body/properties/partyTaxResidencies"
+                            }
+                        },
+                        {
+                            "type": "Component",
+                            "name": "PartyExcludedPersons",
+                            "value": {
+                                "$ref": "#/properties/Body/properties/partyExcludedPersons"
+                            }
+                        },
+                        {
+                            "type": "GroupSeparator"
+                        },
+                        {
+                            "type": "Component",
+                            "name": "GetContractorsButton",
+                            "value": {
+                                "$ref": "#"
+                            }
+                        },
+                        {
+                            "type": "GroupSeparator"
+                        },
+                        {
+                            "type": "Component",
+                            "name": "PartyFinQuestHistory2024",
+                            "value": {
+                                "$ref": "#"
+                            }
+                        },
+                        {
+                            "type": "Component",
+                            "name": "PartyFinQuestHistory2023",
+                            "value": {
+                                "$ref": "#"
+                            }
+                        },
+                        {
+                            "type": "Component",
+                            "name": "PartyFinQuestHistory",
+                            "value": {
+                                "$ref": "#"
+                            }
+                        },
+                        {
+                            "type": "Component",
+                            "name": "PartyDuplicate",
+                            "value": {
+                                "$ref": "#"
+                            }
+                        }
+                    ],
+                    "rule": {
+                        "effect": "SHOW",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "isSavedAndIsBackOffice",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "type": "Tab",
+                    "elementId": "PartyHistoryChanges",
+                    "title": "PartyHistoryChanges",
+                    "elements": [
+                        {
+                            "type": "Component",
+                            "name": "PartyHistoryChanges",
+                            "value": {
+                                "$ref": "#"
+                            }
+                        }
+                    ],
+                    "onTabEnter": {
+                        "commandType": "raiseEvent",
+                        "eventName": "PARTY_HISTORY_TAB_SELECTED"
+                    },
+                    "rule": {
+                        "effect": "SHOW",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "showPartyHistoryChanges",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    }
+                }
+            ]
+        }
+    ]
+}

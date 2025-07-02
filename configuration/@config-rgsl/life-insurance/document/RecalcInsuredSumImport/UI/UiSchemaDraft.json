@@ -1,0 +1,73 @@
+{
+    "id": "RecalcInsuredSumImportDraft",
+    "type": "GridLayout",
+    "formProperties": {
+        "events": {
+            "onLoad": "onLoad"
+        }
+    },
+    "title": "RecalcInsuredSumImport",
+    "numberOfColumns": 4,
+    "elements": [
+        {
+            "type": "Component",
+            "name": "DocumentHeader",
+            "value": {
+                "$ref": "#"
+            }
+        },
+        {
+            "type": "Group",
+            "width": 4,
+            "elements": [
+                {
+                    "type": "TabLayout",
+                    "options": {
+                        "menuAlligment": "Horizontal",
+                        "menuMode": "Single"
+                    },
+                    "elements": [
+                        {
+                            "type": "Tab",
+                            "elements": [
+                                {
+                                    "elementId": "importInfoSection",
+                                    "type": "Section",
+                                    "label": "ImportInfo",
+                                    "elements": [
+                                        {
+                                            "type": "Group",
+                                            "elements": [
+                                                {
+                                                    "elementId": "fileSelection",
+                                                    "type": "FileUpload",
+                                                    "label": "FileSelection",
+                                                    "description": "FileSelectionDescription",
+                                                    "value": {
+                                                        "$ref": "#/properties/Body/properties/file"
+                                                    },
+                                                    "width": 1
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "sectionLevel": 1
+                                }
+                            ],
+                            "title": "RecalcInsuredSumImportFile",
+                            "elementId": "tabRecalcInsuredSumImportFile"
+                        }
+                    ],
+                    "elementId": "TabLayout"
+                }
+            ]
+        },
+        {
+            "type": "Component",
+            "name": "DocumentFooter",
+            "value": {
+                "$ref": "#"
+            }
+        }
+    ]
+}

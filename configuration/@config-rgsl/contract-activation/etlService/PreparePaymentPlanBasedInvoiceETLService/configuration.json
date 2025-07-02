@@ -1,0 +1,33 @@
+{
+    "mainDataSource": "GetInvoicingCandidatesDataSource",
+    "aggregate": true,
+    "useBackgroundTaskWorker": true,
+    "restartable": true,
+    "enableAutomaticRecovery": true,
+    "additionalDataSources": [
+        "WorkCalendarDataSource"
+    ],
+    "sinks": [
+        {
+            "ref": "PostPremiumIncreaseTransactionsSinkGroup"
+        },
+        {
+            "ref": "RevaluationSinkGroup"
+        },
+        {
+            "ref": "CalculateInvoicedCommissionSinkGroup"
+        }
+    ],
+    "completionSinks": [
+        {
+            "name": "RunPendingPayments",
+            "etlService": {
+                "configuration": {
+                    "name": "PendingPaymentsEtlService",
+                    "version": "1"
+                }
+            }
+        }
+    ],
+    "version": "1"
+}

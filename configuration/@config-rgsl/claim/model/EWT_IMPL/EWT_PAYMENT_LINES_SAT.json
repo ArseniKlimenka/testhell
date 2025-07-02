@@ -1,0 +1,38 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema",
+    "type": "object",
+    "description": "Endowment payment lines",
+    "aiReference": "EWT_IMPL.EWT_HUB",
+    "aiAdditionalKeys": [
+        "TYPE"
+    ],
+    "aiDeletionMode": {
+        "mode": "flag",
+        "columnName": "IS_DELETED"
+    },
+    "aiGeneratedViews": {
+        "latestState": true
+    },
+    "properties": {
+        "TYPE": {
+            "title": "Endowment payment line type",
+            "type": "string",
+            "aiType": "nvarchar(100)"
+        },
+        "CONTRACT_CURRENCY": {
+            "title": "Endowment payment line amount in contract currency",
+            "type": "number",
+            "aiType": "decimal(15,7)"
+        },
+        "RUB_CURRENCY": {
+            "title": "Endowment payment line amount in rub currency",
+            "type": "number",
+            "aiType": "decimal(15,7)"
+        },
+        "IS_DELETED": {
+            "title": "Is Endowment injury deleted",
+            "type": "boolean",
+            "aiType": "boolean"
+        }
+    }
+}

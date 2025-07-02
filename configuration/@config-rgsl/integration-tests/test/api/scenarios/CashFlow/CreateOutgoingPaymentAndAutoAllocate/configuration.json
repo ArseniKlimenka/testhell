@@ -1,0 +1,21 @@
+{
+    "description": "Create outgoing payment and auto-allocate",
+    "steps": [
+        {
+            "$ref": "CreateOutgoingPayment"
+        },
+        {
+            "code": "Auto-allocate",
+            "description": "Payment auto-allocation",
+            "requests": [],
+            "executor": {
+                "module": "./steps/autoAllocate/executor.js",
+                "function": "executor"
+            },
+            "assert": {
+                "module": "./steps/autoAllocate/assert.js",
+                "function": "assertAllocation"
+            }
+        }
+    ]
+}

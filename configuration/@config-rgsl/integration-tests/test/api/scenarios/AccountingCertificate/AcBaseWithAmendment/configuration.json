@@ -1,0 +1,151 @@
+{
+    "description": "Standard portfolio transfer process",
+    "steps": [
+        {
+            "$ref": "AdjustAccountingPeriods",
+            "context": {
+                "firstOpenPeriod": "2022-01-01"
+            }
+        },
+        {
+            "$ref": "AdjustCurrentDate",
+            "context": {
+                "currentDate": "2022-01-01"
+            }
+        },
+        {
+            "$ref": "CreateALIPolicyDemo",
+            "context": {
+                "policyStartDate": "2022-01-01",
+                "paymentFrequencyCode": "2",
+                "riskPremium": 100000
+            }
+        },
+        {
+            "$ref": "CreatePaymentAndAllocate",
+            "description": "Pay first installment",
+            "context": {
+                "payAmount": 100000,
+                "referenceNo": "{{$.contractNumber}}",
+                "paymentDetails": {
+                    "amount": 100000,
+                    "paymentDate": "2022-01-01"
+                }
+            },
+            "assert": {
+                "module": "./assertPayment.js",
+                "function": "assertPayment"
+            }
+        },
+        {
+            "$ref": "ExecuteIntegrationService",
+            "actor": "ServiceExecutor",
+            "context": {
+                "integrationServiceName": "AccountingCertificateCreateService",
+                "integrationServiceRequest": {
+                    "typeOfRequest": {
+                        "code": "1"
+                    },
+                    "accountingYear": {
+                        "year": "2022"
+                    },
+                    "contract": {
+                        "type": {
+                            "code": "life",
+                            "description": "Договор добровольного страхования жизни"
+                        },
+                        "number": "{{$.contractNumber}}",
+                        "isInsurerSendDataToFns": true
+                    },
+                    "paymentContract": {
+                        "isManualCorrectionSum": false
+                    },
+                    "taxPayerData": {
+                        "partyCode": "{{$.contractBody.policyHolder.partyData.partyCode}}",
+                        "isTaxPayerPolicyHolder": true
+                    },
+                    "insuredPersonData": {
+                        "partyCode": "{{$.contractBody.policyHolder.partyData.partyCode}}"
+                    },
+                    "issueData": {},
+                    "attachmentsPackage": [],
+                    "technicalInformation": {},
+                    "requestDate": "2022-01-01",
+                    "isApplicantPolicyHolder": false,
+                    "applicantFullName": "{{$.contractBody.policyHolder.partyData.partyFullName}}",
+                    "accountingCertificateIncomeSource": 1,
+                    "accountingCertificateEnrichments": {
+                        "enrichFields": [
+                            "**/**"
+                        ]
+                    }
+                },
+                "resultField": "integrationServiceResult"
+            },
+            "assert": {
+                "expected": "./expectedAcResult_1.json",
+                "module": "./assertAccCert.js",
+                "function": "assertAccCert"
+            }
+        },
+        {
+            "code": "IssueAc",
+            "actor": "AccountingCertificateEditor",
+            "executor": {
+                "module": "./issueAc.js",
+                "function": "issueAc"
+            },
+            "assert": {
+                "expected": "./expectedAcResult_2.json",
+                "module": "./assertAccCert.js",
+                "function": "assertAccCert"
+            }
+        },
+        {
+            "$ref": "CreatePaymentAndAllocate",
+            "description": "Pay second installment",
+            "context": {
+                "payAmount": 100000,
+                "referenceNo": "{{$.contractNumber}}",
+                "paymentDetails": {
+                    "amount": 100000
+                }
+            }
+        },
+        {
+            "$ref": "ExecuteIntegrationService",
+            "actor": "ServiceExecutor",
+            "context": {
+                "integrationServiceName": "AccountingCertificateCreateService",
+                "integrationServiceRequest": {
+                    "accountingCertificateNumber": "{{$.integrationServiceResult.Number}}"
+                },
+                "resultField": "integrationServiceResult"
+            },
+            "assert": {
+                "expected": "./expectedAcResult_3.json",
+                "module": "./assertAccCert.js",
+                "function": "assertAccCert"
+            }
+        },
+        {
+            "code": "IssueAcAmendment",
+            "actor": "AccountingCertificateEditor",
+            "executor": {
+                "module": "./issueAcAmendment.js",
+                "function": "issueAcAmendment"
+            },
+            "assert": {
+                "expected": "./expectedAcResult_4.json",
+                "module": "./assertAccCert.js",
+                "function": "assertAccCert"
+            }
+        },
+        {
+            "$ref": "AdjustCurrentDate",
+            "context": {
+                "currentDate": null
+            }
+        }
+    ]
+}

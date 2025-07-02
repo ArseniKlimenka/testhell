@@ -1,0 +1,182 @@
+{{concat 'create'}} table #AA_HKEYS
+(
+	AA_HKEY char(32)
+){{concat ';'}}
+
+{{concat 'create'}} table #PC_OUT_DATA
+(
+	PAYABLE_COMMISSION_ID bigint,
+	CANCELLED_PC_ID bigint,
+	DOCUMENT_NO nvarchar(64),
+	DOC_CURRENCY_CODE nvarchar(3),
+	BANK_STATEMENT_ITEM_ID bigint,
+	PAYMENT_TRANSACTION_DATE date,
+	INSTALLMENT_DUE_DATE date,
+	SOURCE_LINE_ID nvarchar(50),
+	MATCHING_DOC_AMOUNT decimal(15,2),
+	DOC_COMM_RATE decimal(15,6),
+	DOC_EXPENSES_RATE decimal(15,6),
+	DOC_NP_RATE decimal(15,6),
+	DOC_SP_RATE decimal(15,6),
+	ISSUE_FORM_CODE nvarchar(20),
+	INITIATOR_IS_DBO bit,
+	PRODUCT_GROUP nvarchar(255),
+	IS_TECHNICAL bit
+){{concat ';'}}
+
+{{concat 'create'}} table #MANUAL_PC_VALUE
+(
+	PAYABLE_COMMISSION_ID bigint,
+	MANUAL_COMM_RATE decimal(15,6),
+){{concat ';'}}
+
+{{#if parameters.checkAttachments}}
+{{concat 'create'}} table #ATTACHMENTS_VERIFICATIONS
+(
+	DOCUMENT_NO nvarchar(64),
+	NOT_ISSUED int
+){{concat ';'}}
+{{/if}}
+
+{{concat 'insert'}} into #AA_HKEYS
+select aaHub.AA_HKEY
+from
+	pas.AGENT_AGREEMENT aa
+	inner join pas.AGENT_AGREEMENT aaAm on aaAm.ORIGINAL_DOCUMENT_ID = aa.ORIGINAL_DOCUMENT_ID
+	inner join pas_impl.AA_HUB aaHub on aaHub.AA_NUMBER = aaAm.AGENT_AGREEMENT_NUMBER
+where 1=1
+	and aa.agent_agreement_number = @agentAgreementNumber
+	{{concat ';'}}
+
+{{concat 'insert'}} into #PC_OUT_DATA
+select
+	pc.PAYABLE_COMMISSION_ID,
+	pc.CANCELLED_PC_ID,
+	alc.DOCUMENT_NO,
+	alc.DOC_CURRENCY_CODE,
+	bsi.BANK_STATEMENT_ITEM_ID,
+	bsi.TRANSACTION_DATE as PAYMENT_TRANSACTION_DATE,
+	alcp.DUE_DATE as INSTALLMENT_DUE_DATE,
+	matp.SOURCE_LINE_ID,
+	pc.DOC_BASE_AMOUNT as MATCHING_DOC_AMOUNT,
+	pCommSatl.MANUAL_RATE as DOC_COMM_RATE,
+	pCommSatl.MANUAL_EXPENSES_RATE as DOC_EXPENSES_RATE,
+	pCommSatl.MANUAL_NP_RATE as DOC_NP_RATE,
+	pCommSatl.MANUAL_SP_RATE as DOC_SP_RATE,
+	polsl.ISSUE_FORM_CODE,
+	polsl.INITIATOR_IS_DBO,
+	prod.PRODUCT_GROUP,
+	aas.IS_TECHNICAL
+from
+	acc_impl.PAYABLE_COMMISSION pc
+	inner join pas_impl.POLICY_COMMISSION_SAT_LATEST pCommSatl on
+		pCommSatl.POLICY_COMMISSION_HKEY = pc.POLICY_COMMISSION_HKEY
+		and pCommSatl.OBJECT_CODE = pc.OBJECT_CODE
+		and pCommSatl.ITEM_CODE = pc.ITEM_CODE
+		and pCommSatl.PERIOD_NUMBER = pc.PERIOD_NUMBER
+	inner join pas_impl.POLICY_COMMISSION_LINK pCommLink on pCommLink.POLICY_COMMISSION_HKEY = pCommSatl.POLICY_COMMISSION_HKEY
+	inner join pas_impl.AA_SAT_LATEST aas on aas.AA_HKEY = pCommLink.AA_HKEY
+	inner join org_impl.SERVICE_PROVIDER_HUB agentServPrv on agentServPrv.SERVICE_PROVIDER_HKEY = pCommLink.SERVICE_PROVIDER_HKEY
+	inner join acc_impl.MATCHING mat on mat.MATCHING_ID = pc.MATCHING_ID
+	inner join acc_impl.MATCHING_POLICY matp on matp.MATCHING_ID = mat.MATCHING_ID
+	inner join acc_impl.ALLOCATION alc on alc.ALLOCATION_ID = mat.ALLOCATION_ID
+	inner join acc_impl.ALLOCATION_POLICY alcp on alcp.ALLOCATION_ID = alc.ALLOCATION_ID
+	inner join acc_impl.BANK_STATEMENT_ITEM bsi on bsi.BANK_STATEMENT_ITEM_ID = alc.BANK_STATEMENT_ITEM_ID
+	inner join pas_impl.POLICY_HUB polh on polh.CONTRACT_NUMBER = alc.DOCUMENT_NO
+	inner join pas_impl.POLICY_SAT_LATEST polsl on polsl.POLICY_HKEY = polh.POLICY_HKEY
+	inner join bfx_impl.PRODUCTS prod on prod.CODE = polsl.product_code
+where 1=1
+	and agentServPrv.service_provider_code = @agentServiceProviderCode
+{{#if parameters.referenceNumbers}}
+	and alc.document_no in (@referenceNumbers)
+{{/if}}
+{{#if parameters.productGroupInclude}}
+	and prod.product_group = @productGroupInclude
+{{/if}}
+{{#if parameters.productsInclude}}
+	and polsl.product_code in (@productsInclude)
+{{/if}}
+{{#if parameters.productGroupExclude}}
+	and prod.product_group <> @productGroupExclude
+{{/if}}
+{{#if parameters.productsExclude}}
+	and polsl.product_code not in (@productsExclude)
+{{/if}}
+{{#if parameters.reportingPeriodTo}}
+	and alcp.due_date <= @reportingPeriodTo
+{{/if}}
+{{#if parameters.periodFrom}}
+	and bsi.transaction_date >= @periodFrom
+{{/if}}
+{{#if parameters.periodTo}}
+	and bsi.transaction_date <= @periodTo
+{{/if}}
+	and pCommLink.AA_HKEY in (select * from #AA_HKEYS)
+	and pc.IS_MIGRATED = 0
+	and not exists (select * from acc_impl.CA_ACT_ITEM_PC incPc where incPc.PAYABLE_COMMISSION_ID = pc.PAYABLE_COMMISSION_ID and incPc.CANCELLED = 0)
+	and not exists (
+		select *
+		from
+			acc_impl.CA_ACT_ITEM_PC incPc
+			inner join acc_impl.CA_ACT incAct on incAct.ACT_ID = incPc.ACT_ID
+		where 1=1
+			and incAct.ACT_NO = @actNo
+			and incPc.PAYABLE_COMMISSION_ID = pc.PAYABLE_COMMISSION_ID
+			and incPc.CANCELLED = 1
+	){{concat ';'}}
+
+{{concat 'insert'}} into #MANUAL_PC_VALUE
+select
+	pcod.PAYABLE_COMMISSION_ID,
+	min(cai.COMM_RATE_MANUAL) as MANUAL_COMM_RATE
+from
+	acc_impl.CA_ACT_ITEM_PC caipc
+	join acc_impl.CA_ACT_ITEM cai on cai.ACT_ITEM_ID = caipc.ACT_ITEM_ID
+	join #PC_OUT_DATA pcod on pcod.CANCELLED_PC_ID = caipc.PAYABLE_COMMISSION_ID
+where caipc.CANCELLED = 0
+group by pcod.PAYABLE_COMMISSION_ID
+having count(distinct cai.COMM_RATE_MANUAL) = 1 and min(cai.COMM_RATE_MANUAL) is not null{{concat ';'}}
+
+{{#if parameters.checkAttachments}}
+{{concat 'insert'}} into #ATTACHMENTS_VERIFICATIONS
+select
+	pcod.DOCUMENT_NO,
+	count(vs.STATE) - sum(case vs.STATE when 'Issued' then 1 else 0 end) NOT_ISSUED
+from
+	pas_impl.VERIFICATION_HUB vh
+	join PAS_IMPL.VERIFICATION_SAT_LATEST vs on vs.VERIFICATION_HKEY = vh.VERIFICATION_HKEY
+	join PAS_IMPL.POLICY_VERIFICATION_LINK pvl on pvl.VERIFICATION_HKEY = vh.VERIFICATION_HKEY
+	join PAS_IMPL.POLICY_HUB ph on ph.POLICY_HKEY = pvl.POLICY_HKEY
+	join #PC_OUT_DATA pcod on pcod.DOCUMENT_NO = ph.CONTRACT_NUMBER
+where 1=1
+	and (pcod.ISSUE_FORM_CODE != 'offer' and pcod.INITIATOR_IS_DBO = 0 and pcod.PRODUCT_GROUP not in ('credit', 'risk'))
+group by pcod.DOCUMENT_NO
+union all
+select distinct
+	pcod.DOCUMENT_NO,
+	0 NOT_ISSUED
+from #PC_OUT_DATA pcod
+where 1=1
+	and (pcod.ISSUE_FORM_CODE = 'offer' or pcod.INITIATOR_IS_DBO = 1 or pcod.PRODUCT_GROUP in ('credit', 'risk')){{concat ';'}}
+{{/if}}
+
+select
+	od.*,
+	mv.MANUAL_COMM_RATE
+from
+	#PC_OUT_DATA od
+	left join #MANUAL_PC_VALUE mv on mv.PAYABLE_COMMISSION_ID = od.PAYABLE_COMMISSION_ID
+{{#if parameters.checkAttachments}}
+	inner join #ATTACHMENTS_VERIFICATIONS av on av.DOCUMENT_NO = od.DOCUMENT_NO and av.NOT_ISSUED = 0
+{{/if}}
+	{{concat ';'}}
+
+{{concat 'drop'}} table #AA_HKEYS{{concat ';'}}
+
+{{concat 'drop'}} table #PC_OUT_DATA{{concat ';'}}
+
+{{concat 'drop'}} table #MANUAL_PC_VALUE{{concat ';'}}
+
+{{#if parameters.checkAttachments}}
+{{concat 'drop'}} table #ATTACHMENTS_VERIFICATIONS{{concat ';'}}
+{{/if}}

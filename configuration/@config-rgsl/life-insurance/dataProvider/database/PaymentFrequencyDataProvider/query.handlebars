@@ -1,0 +1,10 @@
+﻿SELECT p.CODE, 
+       p.DESCRIPTION 
+FROM BFX_IMPL.PAYMENT_FREQUENCY p
+WHERE 1 = 1
+{{#if parameters.code}}
+AND p.CODE = @code
+{{/if}}
+{{#if parameters.description}}
+AND p.DESCRIPTION LIKE @description
+{{/if}}

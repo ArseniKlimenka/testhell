@@ -1,0 +1,17 @@
+﻿SELECT ct.CODE,
+	   ct.DESCRIPTION,
+	   ct.PARENT_CODE,
+	   CONCAT(ct.CODE,' ',ct.DESCRIPTION) as FULL_TEXT_RESULT
+FROM BFX_IMPL.DISEASE_CLASS ct
+WHERE 1 = 1
+{{#if parameters.code}}
+AND ct.CODE = @code
+{{/if}}
+{{#if parameters.description}}
+{{#if parameters.fullText}}
+AND (ct.CODE LIKE @description OR ct.DESCRIPTION LIKE @description)
+{{else}}
+AND ct.DESCRIPTION LIKE @description
+{{/if}}
+{{/if}}
+ORDER BY ct.CODE ASC

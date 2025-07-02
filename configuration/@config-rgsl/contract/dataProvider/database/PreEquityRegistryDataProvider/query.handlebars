@@ -1,0 +1,46 @@
+﻿{{concat 'drop'}} table if exists #product_conf_actual{{concat ';'}}
+{{concat 'drop'}} table if exists #equity_contracts{{concat ';'}}
+
+select pc.product_code,
+       pc.issue_date_from,
+       pc.issue_date_to,
+       pc.cool_off_period_days
+  into #product_conf_actual
+  from bfx_impl.product_conf pc
+ where pc.conf_version = (select max(conf_version) max_version from bfx_impl.product_conf);
+
+select c.contract_number,
+       c.body,
+       c.state_id,
+       c.contract_id,
+       c.original_document_id,
+       pa.code_name
+  into #equity_contracts
+  from pas.contract c
+       join cfx.published_artifact pa on pa.published_artifact_id = c.published_artifact_id and pa.code_name in ('EquityLifeInsurancePolicy');
+
+select co.contract_number,
+       '' as portfolio_name,
+       case
+          when c.contract_number = co.contract_number
+          then null
+          else c.contract_number
+        end as amendment_number,
+       case
+          when c.contract_number = co.contract_number
+          then null
+          else c.code_name
+        end as amendment_type,
+       cast(json_value(co.body, '$.risks[0].riskPremium') as decimal(15,2)) + isnull(cast(json_value(co.body, '$.additionalInvestmentParameters.coolOffDID') as decimal(15,2)), 0) as endowment_premium,
+       dateadd(day, pc.cool_off_period_days + 1, json_value(co.body, '$.basicConditions.issueDate')) as cool_off_period_end_date_plus1
+  from #equity_contracts c
+       join #equity_contracts co on c.original_document_id = co.contract_id
+       join cfg.process_state cps on cps.process_state_id = c.state_id
+         and cps.CODE_NAME = 'Activated'
+       join #product_conf_actual pc on pc.product_code = json_value(co.body, '$.mainInsuranceConditions.insuranceProduct.productCode')
+         and pc.issue_date_from <= json_value(co.body, '$.basicConditions.issueDate')
+         and pc.issue_date_to >= json_value(co.body, '$.basicConditions.issueDate')
+ where dateadd(day, pc.cool_off_period_days + 1, json_value(co.body, '$.basicConditions.issueDate')) = @preEquityRegistryDate;
+
+{{concat 'drop'}} table if exists #product_conf_actual{{concat ';'}}
+{{concat 'drop'}} table if exists #equity_contracts{{concat ';'}}

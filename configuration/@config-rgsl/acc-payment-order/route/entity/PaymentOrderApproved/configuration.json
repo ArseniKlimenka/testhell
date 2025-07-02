@@ -1,0 +1,53 @@
+{
+    "entityType": "PaymentOrder",
+    "condition": {
+        "events": [
+            "StatusChanged"
+        ],
+        "documentStates": [
+            "Approved"
+        ]
+    },
+    "sinks": [
+        {
+            "name": "ReferenceNumber",
+            "database": {
+                "tables": [
+                    "ACC_IMPL.REFERENCE_NUMBER"
+                ]
+            }
+        },
+        {
+            "ref": "PaymentOrderAssSinkGroup"
+        },
+        {
+            "ref": "ExecuteNettingSinkGroup"
+        },
+        {
+            "ref": "SendRequestToRgslSinkGroup"
+        },
+        {
+            "name": "SetStatusPaid",
+            "documentTransition": {
+                "transition": {
+                    "transitionName": "Approved_to_Paid",
+                    "configurationName": "PaymentOrder",
+                    "configurationVersion": "1"
+                }
+            }
+        }
+    ],
+    "errorSinks": [
+        {
+            "name": "SetStatusError",
+            "documentTransition": {
+                "transition": {
+                    "transitionName": "Approved_to_PaymentError",
+                    "configurationName": "PaymentOrder",
+                    "configurationVersion": "1"
+                }
+            }
+        }
+    ],
+    "version": "1"
+}

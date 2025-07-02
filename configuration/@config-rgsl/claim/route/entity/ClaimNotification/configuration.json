@@ -1,0 +1,27 @@
+{
+    "entityType": "Claim",
+    "condition": {
+        "events": [
+            "StatusChanged"
+        ],
+        "configuration": {
+            "names": [
+                "Claim"
+            ]
+        },
+        "documentStates": [
+            "SecurityApproval",
+            "LegalApproval",
+            "MethodologyDirectorApproval"
+        ]
+    },
+    "sinks": [
+        {
+            "name": "Notification",
+            "notification": {
+                "notificationName": "SendClaimNotification"
+            }
+        }
+    ],
+    "version": "1"
+}

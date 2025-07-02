@@ -1,0 +1,1 @@
+update bfx_impl.risks set FULL_DESCRIPTION = N'Смерть Застрахованного по любой причине' where code ='DLPT36404' 

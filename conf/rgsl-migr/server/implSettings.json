@@ -1,0 +1,213 @@
+/*
+  Here is listed standard set of configuration entries.
+  For more info please navigate to https://docs.adinsure.com/administration/configure/adinsure-settings/#Server
+*/
+{
+    "Logging": {
+        "LogLevel": {
+            "Default": "Trace"
+        }
+    },
+    "appSettings": {
+        "dbDataAccess": {
+            "readSync": true,
+            "writeSync": true
+        },
+        "AdInsure": {
+            "NotificationChannels": {
+                "email": {
+                    "type": "email",
+                    "host": "mail.rgsl.ru",
+                    "port": 25,
+                    "username": "rgsl.test",
+                    "password": "&El@&Lhx4LPo1]SR@jfcb@48Z",
+                    "useSSL": false,
+                    "sender": {
+                        "name": "rgsl.test",
+                        "email": "rgsl.test@rgsl.ru"
+                    }
+                },
+                "Adinsure": {
+                    "type": "Adinsure"
+                }
+            },
+            "Healthcheck": {
+                "Enabled": "true"
+            },
+            "Monitoring": {
+                "Enabled": "true"
+            },
+            "MessageBroker": {
+                /* Integration of AdInsure with ActiveMQ */
+                /*  Uri: ActiveMQ Broker URI */
+                "Uri": "activemq:tcp://adins-migrate:61616",
+                "Username": "user",
+                //Username: ActiveMQ Username
+                /*  Password: ActiveMQ Password */
+                "Password": "cG6wSh25vRvnc",
+            },
+            "Settings": {
+                "MaxRequestBodySize": 50000000,
+                "AuditTrail": {
+                    /* Whether to use audit logging or not */
+                    // "EnableAuditing": true,
+                    /* Name of the search engine index used to store audit log */
+                    // "AuditLogSearchEngineIndexName": "auditlog"
+                },
+                "scriptingEnginePools": {
+                    "all": {
+                        "startEngines": 2,
+                        "maxEngines": 70,
+                        "MaxOldSpaceSize": 4096
+                    }
+                },
+                "Extensions": {
+                    "FileSystemRootFolder": "extensions"
+                },
+                "Core": {
+                    "LocalCurrencyCode": "RUB"
+                },
+                "General": {
+                    "Language": "ru-RU"
+                },
+                "SearchEngine": {
+                    /*
+                        Integration of AdInsure with ElasticSearch
+                        URL: cluster URI
+                        IndexPrefix: index prefix
+                        User: Username of the search user
+                        Password: Password of the search user
+                        NOTE: Username and password are only viable if the cluster has security enabled (xpack.security.enabled flag)
+                    */
+                    "IndexPrefix": "adinsure_index",
+                    "URL": "http://adins-migrate:9200",
+                    //"User": "elastic",
+                    //"SPassword": "adinsure",
+                    //"SniffOnStartup": true
+                },
+                "Log": {
+                    /* Location of Logs for AdInsure */
+                    "LogRoot": "C:\\AdInsure\\Logs\\Server",
+                    /* Logging level for AdInsure */
+                    "LogLevel": "DEBUG"
+                },
+                "PrintoutRenderer": {
+                    "DebugLevel": "None",
+                    "Url": "http://adins-test-pdf.life.rgs.local:9423/service/rest",
+                    "ExternalAssetsFolder": "C:\\AdInsure\\migr",
+                    "StaticAssetsServerBaseUrl": "http://adins-migrate.life.rgs.local:60010/"
+                },
+                "OAuthIdentity": {
+                    /* Endpoint Url to IdentityServer used for Authorization. Identity endpoint url: Url path (always add "/identity" at the end) */
+                    "IdentityEndpointUrl": "https://adinsure-migr-auth.adins-migrate.life.rgs.local",
+                    "RequiredScopes": "adinsure",
+                    "Audience": "https://adinsure-migr-auth.adins-migrate.life.rgs.local/resources"
+                },
+                "RGSL": {
+                    "Integration": {
+                        "Dadata": {
+                            "EnableDadataService": "true",
+                            "Uri": "https://suggestions.dadata.ru/suggestions/api/4_1/rs/suggest/address/",
+                            "Token": "6c9443ebae312fa155dc9f59b34bba891c5ebe5d"
+                        },
+                        "Cbr": {
+                            "CurrencyExchangeRatesUrl": "http://www.cbr.ru/scripts/XML_daily.asp",
+                            "WebServiceDailyInfoCbrUrl": "https://www.cbr.ru/DailyInfoWebServ/DailyInfo.asmx",
+                            "BanksImportPath": "\\import\\banks.xml",
+                            // set below option to true for use ProxyCredentialAddressPort for Cbr requests
+                            "UseProxy": "false"
+                        },
+                        "KPK": {
+                            "UserName": "ADINSURE",
+                            "Password": "wl#df9rUuW",
+                            "Uri": "http://life-1cw-03/1C_KPK_LIFE2021_QUA/ws/Kpk.1cws"
+                        },
+                        "BlackList": {
+                            "EnableBlackListService": "true",
+                            "Login": "ADINSURE",
+                            "Password": "wl#df9rUuW",
+                            "Url": "http://life-1cw-03/1C_KPK_LIFE2021_QUA/ws/BL.1cws"
+                        },
+                        "SAP": {
+                            "Login": "TEST_ADAKTA",
+                            "Password": "Xc$Fpw1zZU",
+                            "CreatePartyUrl": "https://b2b-aq.rgsl.ru/sap/bc/srt/rfc/sap/zerluapi000000000100_srvc/200/zerluapi000000000100_srvc_http/zerluapi000000000100_srvc_http",
+                            "UpdatePartyUrl": "https://b2b-aq.rgsl.ru/sap/bc/srt/wsdl/flv_10002A101AD1/bndg_url/sap/bc/srt/rfc/sap/zerluapi000000000172_srvc/200/zerluapi000000000172_srvc/zerluapi000000000172_srvc?sap-client=200",
+                            "CreateContractUrl": "https://b2b-aq.rgsl.ru/sap/bc/srt/wsdl/flv_10002A101AD1/bndg_url/sap/bc/srt/rfc/sap/zerluapi000000000101_srvc/200/zerluapi000000000101_srvc/zerluapi000000000101_srvc?sap-client=200"
+                        },
+                        "DigitalSignature": {
+                            //"Uri": "http://esbcam-qua-01:18080/restSignPDF/upload-file"
+                            "Uri": "http://esbcam-prd-02:18080/restSignPDF/upload-file"
+                        },
+                        "SecuritySmsNotification": {
+                            "Uri": "https://gate30.edna.ru:13228/rgsl/connector4/send",
+                            "SecurityCodeExpirationInMinutes": "30",
+                            "SecurityCodeCooldownInMinutes": "5",
+                            "SmsServiceLogin": "rgsl4",
+                            "SmsServicePassword": "5tUu3qwz"
+                        },
+                        "AuthService": {
+                            "Scope": "adinsure",
+                            "ClientId": "services",
+                            "ClientSecret": "EA8C35E8-5875-493E-B6A8-6687A0C178EB"
+                        },
+                        "GetContractDataCustomService": {
+                            "EnableLogging": false
+                        },
+                        "SendEvent": {
+                            "EnableLogging": false
+                        },
+                        "NalogPDF":{
+                            "OutputFolder": "\\\\lifefs01\\DATA01\\ADINSURE\\NalogPDF\\TEST\\"
+                        }
+                    }
+                },
+                "AssetServer": {
+                    "PublicUpload": {
+                        "Url": "http://adins-migrate:60010/"
+                    }
+                },
+                "FileUploadRestrictions": {
+                    "CheckFileType": true,
+                    "CheckFileTypeByContent": true,
+                    "AllowedFileTypes": [
+                        {
+                            "FileType": "JPEG",
+                            "Extensions": ["jpeg", "jpe", "jpg"]
+                        },
+                        {
+                            "FileType": "PNG"
+                        },
+                        {
+                            "FileType": "TIFF"
+                        },
+                        {
+                            "FileType": "MyOffice",
+                            "Extensions": ["odt", "xodt", "ods", "xods"]
+                        },
+                        {
+                            "FileType": "Mail",
+                            "Extensions": ["msg", "eml"]
+                        },
+                        {
+                            "FileType": "XML"
+                        },
+                        {
+                            "FileType": "Microsoft Office Document",
+                            "Extensions": ["doc", "docx", "xls", "xlsx", "xlsb", "rtf"]
+                        },
+                        {
+                            "FileType": "PDF"
+                        },
+                        {
+                            "FileType": "TXT"
+                        },
+                        {
+                            "FileType": "CSV"
+                        }
+                    ]
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,110 @@
+{
+    "id": "MainContent.json",
+    "type": "Group",
+    "formProperties": {
+        "events": {
+            "beforeSave": "beforeSaveDocumentAction",
+            "afterSave": "afterSaveDocumentAction"
+        }
+    },
+    "elements": [
+        {
+            "type": "GridLayout",
+            "fillAvailableSpace": true,
+            "title": "Portfolio movement amendment",
+            "fixedButton": true,
+            "numberOfColumns": 12,
+            "elements": [
+                {
+                    "type": "TabLayout",
+                    "options": {
+                        "menuAlligment": "Horizontal",
+                        "menuMode": "Single"
+                    },
+                    "elements": [
+                        {
+                            "type": "Tab",
+                            "elementId": "AmendmentData",
+                            "scope": "amendment",
+                            "title": "amendment",
+                            "elements": [
+                                {
+                                    "type": "Component",
+                                    "name": "PolicyPortfolioMovementAmendmentMainAttrs",
+                                    "value": {
+                                        "$ref": "#/properties/Body/properties/amendmentData/properties/portfolioMovementAmendmentData/properties/mainAttributes"
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Tab",
+                            "elementId": "tabInsuranceConditions",
+                            "title": "Insurance Conditions",
+                            "elements": [
+                                {
+                                    "type": "Component",
+                                    "metadata": {
+                                        "autogenerate": true
+                                    },
+                                    "name": "MainInsuranceConditions",
+                                    "value": {
+                                        "$ref": "#/properties/Body/properties/mainInsuranceConditions"
+                                    }
+                                },
+                                {
+                                    "type": "Component",
+                                    "metadata": {
+                                        "autogenerate": true
+                                    },
+                                    "label": "agentAgreement",
+                                    "name": "AgentAgreementCommonComponent",
+                                    "value": {
+                                        "$ref": "#/properties/Body/properties/commission/properties/agentAgreement/"
+                                    }
+                                },
+                                {
+                                    "type": "Component",
+                                    "metadata": {
+                                        "autogenerate": true
+                                    },
+                                    "name": "Initiator",
+                                    "value": {
+                                        "$ref": "#/properties/Body/properties/initiator"
+                                    }
+                                },
+                                {
+                                    "type": "Component",
+                                    "metadata": {
+                                        "autogenerate": true
+                                    },
+                                    "name": "AdditionalInitiators",
+                                    "value": {
+                                        "$ref": "#/properties/Body/properties/additionalInitiators"
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Tab",
+                            "elementId": "commissionTab",
+                            "title": "commissionTab",
+                            "elements": [
+                                {
+                                    "type": "Component",
+                                    "metadata": {
+                                        "autogenerate": true
+                                    },
+                                    "name": "PolicyCommission",
+                                    "value": {
+                                        "$ref": "#/properties/Body/properties/commission"
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

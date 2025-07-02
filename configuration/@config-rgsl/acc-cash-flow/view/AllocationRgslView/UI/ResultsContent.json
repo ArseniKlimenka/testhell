@@ -1,0 +1,284 @@
+{
+    "type": "Group",
+    "elements": [
+        {
+            "type": "DataGrid",
+            "customCSSStyle":{
+                "--data-grid-ai-grid-buttons-text-align": "left"
+            },
+            "value": {
+                "$ref": "#/properties/response/properties/data"
+            },
+            "mode": "DataSource",
+            "pagination": {
+                "mode": "Regular",
+                "pageSizes": [
+                    5,
+                    10,
+                    15
+                ]
+            },
+            "selection": {
+                "mode": "Multi",
+                "enableRowSelection": false,
+                "showCheckBox": true,
+                "onSelectionChanged": [
+                    {
+                        "commandType": "raiseEvent",
+                        "eventName": "Selected"
+                    }
+                ]
+            },
+            "height": "None",
+            "columns": [
+                {
+                    "sortable": true,
+                    "title": "Id",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "template": "{{expr allocationId 'i::false'}}",
+                        "value": {
+                            "$ref": "#/properties/resultData"
+                        }
+                    },
+                    "name": "allocationId"
+                },
+                {
+                    "sortable": true,
+                    "title": "BsiId",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "template": "{{expr bsiId 'i::false'}}",
+                        "value": {
+                            "$ref": "#/properties/resultData"
+                        }
+                    },
+                    "name": "bsiId"
+                },
+                {
+                    "sortable": true,
+                    "title": "Allocation date",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/allocationDate"
+                        }
+                    },
+                    "name": "allocationDate"
+                },
+                {
+                    "sortable": true,
+                    "title": "Ref document no",
+                    "cellContent": {
+                        "type": "Link",
+                        "label": "Link to document",
+                        "targetType": "Entity",
+                        "value": {
+                            "mapping": "linkToDocumentOverview",
+                            "$ref": "#"
+                        },
+                        "width": 1,
+                        "openInNewTab": true,
+                        "content": {
+                            "text": {
+                                "type": "OutputText",
+                                "value": {
+                                    "$ref": "#/properties/resultData/properties/refDocumentNo"
+                                }
+                            }
+                        }
+                    },
+                    "name": "refDocumentNo"
+                },
+                {
+                    "sortable": true,
+                    "title": "Policy start date",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/policyStartDate"
+                        }
+                    },
+                    "name": "policyStartDate"
+                },
+                {
+                    "sortable": true,
+                    "title": "Due date",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/dueDate"
+                        }
+                    },
+                    "name": "dueDate"
+                },
+                {
+                    "title": "Installment amount",
+                    "sortable": true,
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/installmentAmount"
+                        }
+                    },
+                    "name": "installmentAmount"
+                },
+                {
+                    "title": "Installment open amount",
+                    "sortable": true,
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/installmentOpenAmount"
+                        }
+                    },
+                    "name": "installmentOpenAmount"
+                },
+                {
+                    "title": "Installment status",
+                    "sortable": true,
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/installmentStatus"
+                        }
+                    },
+                    "name": "installmentStatus"
+                },
+                {
+                    "title": "Pay status",
+                    "sortable": true,
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/bsi/properties/statusId"
+                        }
+                    },
+                    "name": "payStatus"
+                },
+                {
+                    "title": "Product",
+                    "sortable": true,
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/productDesc"
+                        }
+                    },
+                    "name": "product"
+                },
+                {
+                    "title": "Policy holder",
+                    "sortable": true,
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/policyHolderName"
+                        }
+                    },
+                    "name": "policyHolder"
+                },
+                {
+                    "title": "Transaction date",
+                    "sortable": true,
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/bsi/properties/transactionDate"
+                        }
+                    },
+                    "name": "transactionDate"
+                },
+                {
+                    "title": "Payment date",
+                    "sortable": true,
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/bsi/properties/paymentDate"
+                        }
+                    },
+                    "name": "paymentDate"
+                },
+                {
+                    "title": "Pay amount",
+                    "sortable": true,
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/payAmount"
+                        }
+                    },
+                    "name": "payAmount"
+                },
+                {
+                    "title": "Doc amount",
+                    "sortable": true,
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/docAmount"
+                        }
+                    },
+                    "name": "docAmount"
+                },
+                {
+                    "title": "Exchange difference",
+                    "sortable": true,
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/exchangeDifference"
+                        }
+                    },
+                    "name": "exchangeDifference"
+                },
+                {
+                    "title": "Pay currency code",
+                    "sortable": true,
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/payCurrencyCode"
+                        }
+                    },
+                    "name": "payCurrencyCode"
+                },
+                {
+                    "title": "Tolerance overpayment",
+                    "sortable": true,
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/toleranceOverpayment"
+                        }
+                    },
+                    "name": "toleranceOverpayment"
+                },
+                {
+                    "title": "Tolerance underpayment",
+                    "sortable": true,
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/toleranceUnderpayment"
+                        }
+                    },
+                    "name": "toleranceUnderpayment"
+                },
+                {
+                    "title": "Payer name",
+                    "sortable": true,
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/bsi/properties/payerName"
+                        }
+                    },
+                    "name": "payerName"
+                }
+            ],
+            "elementId": "TableViewId"
+        }
+    ]
+}

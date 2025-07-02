@@ -1,0 +1,424 @@
+{
+    "processType": "Claim",
+    "initialState": "ClaimManagerApproval",
+    "actors": [
+        "ClaimManager",
+        "Legal",
+        "Security",
+        "ClaimDirector",
+        "MethodologyDirector",
+        "ClaimAdministrator",
+        "ViewClaim"
+    ],
+    "states": [
+        {
+            "name": "Draft",
+            "operations": [
+                {
+                    "name": "Save",
+                    "exclusiveToAssignedUser": true
+                }
+            ]
+        },
+        {
+            "name": "ClaimManagerApproval",
+            "operations": [
+                {
+                    "name": "Save",
+                    "exclusiveToAssignedUser": true
+                }
+            ]
+        },
+        {
+            "name": "ClaimImportInProgress"
+        },
+        {
+            "name": "RequestToClient",
+            "operations": [
+                {
+                    "name": "Save",
+                    "exclusiveToAssignedUser": true
+                }
+            ]
+        },
+        {
+            "name": "RequestToExternalOrganisation",
+            "operations": [
+                {
+                    "name": "Save",
+                    "exclusiveToAssignedUser": true
+                }
+            ]
+        },
+        {
+            "name": "Expired"
+        },
+        {
+            "name": "LegalApproval"
+        },
+        {
+            "name": "SecurityApproval"
+        },
+        {
+            "name": "ClaimDirectorApproval"
+        },
+        {
+            "name": "POCreation"
+        },
+        {
+            "name": "SentToPayment",
+            "operations":[
+                {
+                    "name": "Save",
+                    "exclusiveToAssignedUser": true
+                }
+            ]
+        },
+        {
+            "name": "MethodologyDirectorApproval"
+        },
+        {
+            "name": "Paid"
+        },
+        {
+            "name": "PartiallyPaid"
+        },
+        {
+            "name": "RejectedByCommonReasons"
+        },
+        {
+            "name": "Rejected"
+        },
+        {
+            "name": "Cancelled"
+        }
+    ],
+    "transitions": [
+        {
+            "name": "DraftToClaimManagerApproval",
+            "from": "Draft",
+            "to": "ClaimManagerApproval",
+            "allowOnValidationErrors": {
+                "all": true
+            }
+        },
+        {
+            "name": "DraftToCancelled",
+            "from": "Draft",
+            "to": "Cancelled",
+            "allowOnValidationErrors": {
+                "all": true
+            }
+        },
+        {
+            "name": "ClaimManagerApprovalToRequestToExternalOrganisation",
+            "from": "ClaimManagerApproval",
+            "to": "RequestToExternalOrganisation",
+            "exclusiveToAssignedUser": true,
+            "allowOnValidationErrors": {
+                "codes": [
+                    "DuplicatedClaimsFound",
+                    "PaymentAmountIsTooBig",
+                    "InsuredEventDateIsLaterThanCancellationDate"
+                ]
+            }
+        },
+        {
+            "name": "ClaimManagerApprovalToRequestToClient",
+            "from": "ClaimManagerApproval",
+            "to": "RequestToClient",
+            "exclusiveToAssignedUser": true,
+            "allowOnValidationErrors": {
+                "codes": [
+                    "DuplicatedClaimsFound",
+                    "PaymentAmountIsTooBig",
+                    "InsuredEventDateIsLaterThanCancellationDate"
+                ]
+            }
+        },
+        {
+            "name": "ClaimManagerApprovalToRejectedByCommonReasons",
+            "from": "ClaimManagerApproval",
+            "to": "RejectedByCommonReasons",
+            "allowOnValidationErrors": {
+                "all": true
+            },
+            "exclusiveToAssignedUser": true
+        },
+        {
+            "name": "ClaimManagerApprovalToCanelled",
+            "from": "ClaimManagerApproval",
+            "to": "Cancelled",
+            "allowOnValidationErrors": {
+                "all": true
+            },
+            "exclusiveToAssignedUser": true
+        },
+        {
+            "name": "StartImport",
+            "from": "ClaimManagerApproval",
+            "to": "ClaimImportInProgress",
+            "allowOnValidationErrors": {
+                "all": true
+            }
+        },
+        {
+            "name": "FinishImport",
+            "from": "ClaimImportInProgress",
+            "to": "ClaimManagerApproval",
+            "allowOnValidationErrors": {
+                "all": true
+            },
+            "broadcastEvent": {
+                "serverSideEvents": true
+            }
+        },
+        {
+            "name": "RequestToClientToClaimManagerApproval",
+            "from": "RequestToClient",
+            "to": "ClaimManagerApproval",
+            "allowOnValidationErrors": {
+                "all": true
+            },
+            "exclusiveToAssignedUser": true
+        },
+        {
+            "name": "RequestToClientToExpired",
+            "from": "RequestToClient",
+            "to": "Expired",
+            "allowOnValidationErrors": {
+                "all": true
+            },
+            "exclusiveToAssignedUser": true
+        },
+        {
+            "name": "RequestToExternalOrganisationToClaimManagerApproval",
+            "from": "RequestToExternalOrganisation",
+            "to": "ClaimManagerApproval",
+            "allowOnValidationErrors": {
+                "all": true
+            },
+            "exclusiveToAssignedUser": true,
+            "whenBlocked":"Hide"
+        },
+        {
+            "name": "RequestToExternalOrganisationToExpired",
+            "from": "RequestToExternalOrganisation",
+            "to": "Expired",
+            "allowOnValidationErrors": {
+                "all": true
+            },
+            "exclusiveToAssignedUser": true
+        },
+        {
+            "name": "ClaimManagerApprovalToLegalApproval",
+            "from": "ClaimManagerApproval",
+            "to": "LegalApproval",
+            "exclusiveToAssignedUser": true,
+            "allowOnValidationErrors": {
+                "codes": [
+                    "DuplicatedClaimsFound",
+                    "PaymentAmountIsTooBig",
+                    "InsuredEventDateIsLaterThanCancellationDate"
+                ]
+            }
+        },
+        {
+            "name": "LegalApprovalToClaimManagerApproval",
+            "from": "LegalApproval",
+            "to": "ClaimManagerApproval",
+            "exclusiveToAssignedUser": true,
+            "allowOnValidationErrors": {
+                "codes": [
+                    "DuplicatedClaimsFound",
+                    "PaymentAmountIsTooBig",
+                    "InsuredEventDateIsLaterThanCancellationDate"
+                ]
+            }
+        },
+        {
+            "name": "ClaimManagerApprovalToSecurityApproval",
+            "from": "ClaimManagerApproval",
+            "to": "SecurityApproval",
+            "exclusiveToAssignedUser": true,
+            "allowOnValidationErrors": {
+                "codes": [
+                    "DuplicatedClaimsFound",
+                    "PaymentAmountIsTooBig",
+                    "InsuredEventDateIsLaterThanCancellationDate"
+                ]
+            }
+        },
+        {
+            "name": "SecurityApprovalToClaimManagerApproval",
+            "from": "SecurityApproval",
+            "to": "ClaimManagerApproval",
+            "exclusiveToAssignedUser": true,
+            "allowOnValidationErrors": {
+                "codes": [
+                    "DuplicatedClaimsFound",
+                    "PaymentAmountIsTooBig",
+                    "InsuredEventDateIsLaterThanCancellationDate"
+                ]
+            }
+        },
+        {
+            "name": "ClaimManagerApprovalToRejected",
+            "from": "ClaimManagerApproval",
+            "to": "Rejected",
+            "allowOnValidationErrors": {
+                "all": true
+            },
+            "exclusiveToAssignedUser": true
+        },
+        {
+            "name": "RejectedToClaimManagerApproval",
+            "from": "Rejected",
+            "to": "ClaimManagerApproval",
+            "allowOnValidationErrors": {
+                "all": true
+            }
+        },
+        {
+        "name": "ClaimManagerApprovalToClaimDirectorApproval",
+            "from": "ClaimManagerApproval",
+            "to": "ClaimDirectorApproval",
+            "exclusiveToAssignedUser": true,
+            "allowOnValidationErrors": {
+                "codes": [
+                    "DuplicatedClaimsFound",
+                    "PaymentAmountIsTooBig",
+                    "InsuredEventDateIsLaterThanCancellationDate"
+                ]
+            }
+        },
+        {
+            "name": "ClaimDirectorApprovalToSentToPayment",
+            "from": "ClaimDirectorApproval",
+            "to": "POCreation",
+            "exclusiveToAssignedUser": true,
+            "allowOnValidationErrors": {
+                "codes": [
+                    "DuplicatedClaimsFound",
+                    "PaymentAmountIsTooBig",
+                    "InsuredEventDateIsLaterThanCancellationDate"
+                ]
+            }
+        },
+        {
+            "name": "ClaimDirectorApprovalToMethodologyDirectorApproval",
+            "from": "ClaimDirectorApproval",
+            "to": "MethodologyDirectorApproval",
+            "exclusiveToAssignedUser": true,
+            "allowOnValidationErrors": {
+                "codes": [
+                    "DuplicatedClaimsFound",
+                    "PaymentAmountIsTooBig",
+                    "InsuredEventDateIsLaterThanCancellationDate"
+                ]
+            }
+        },
+        {
+            "name": "ClaimDirectorApprovalToClaimManagerApproval",
+            "from": "ClaimDirectorApproval",
+            "to": "ClaimManagerApproval",
+            "exclusiveToAssignedUser": true,
+            "allowOnValidationErrors": {
+                "codes": [
+                    "DuplicatedClaimsFound",
+                    "PaymentAmountIsTooBig",
+                    "InsuredEventDateIsLaterThanCancellationDate"
+                ]
+            }
+        },
+        {
+            "name": "MethodologyDirectorApprovalToClaimDirectorApproval",
+            "from": "MethodologyDirectorApproval",
+            "to": "ClaimDirectorApproval",
+            "exclusiveToAssignedUser": true,
+            "allowOnValidationErrors": {
+                "codes": [
+                    "DuplicatedClaimsFound",
+                    "PaymentAmountIsTooBig",
+                    "InsuredEventDateIsLaterThanCancellationDate"
+                ]
+            }
+        },
+        {
+            "name": "MethodologyDirectorApprovalToSentToPayment",
+            "from": "MethodologyDirectorApproval",
+            "to": "POCreation",
+            "exclusiveToAssignedUser": true,
+            "allowOnValidationErrors": {
+                "codes": [
+                    "DuplicatedClaimsFound",
+                    "PaymentAmountIsTooBig",
+                    "InsuredEventDateIsLaterThanCancellationDate"
+                ]
+            }
+        },
+        {
+            "name": "SentToPaymentToPaid",
+            "from": "SentToPayment",
+            "to": "Paid",
+            "allowOnValidationErrors": {
+                "codes": [
+                    "DuplicatedClaimsFound",
+                    "PaymentAmountIsTooBig",
+                    "InsuredEventDateIsLaterThanCancellationDate"
+                ]
+            }
+        },
+        {
+            "name": "SentToPaymentToPartiallyPaid",
+            "from": "SentToPayment",
+            "to": "PartiallyPaid",
+            "allowOnValidationErrors": {
+                "codes": [
+                    "DuplicatedClaimsFound",
+                    "PaymentAmountIsTooBig",
+                    "InsuredEventDateIsLaterThanCancellationDate"
+                ]
+            }
+        },
+        {
+            "name": "PartiallyPaidToPaid",
+            "from": "PartiallyPaid",
+            "to": "Paid",
+            "allowOnValidationErrors": {
+                "codes": [
+                    "DuplicatedClaimsFound",
+                    "PaymentAmountIsTooBig",
+                    "InsuredEventDateIsLaterThanCancellationDate"
+                ]
+            }
+        },
+        {
+            "name": "FinishPOCreation",
+            "from": "POCreation",
+            "to": "SentToPayment",
+            "allowOnValidationErrors": {
+                "codes": [
+                    "DuplicatedClaimsFound",
+                    "PaymentAmountIsTooBig",
+                    "InsuredEventDateIsLaterThanCancellationDate"
+                ]
+            },
+            "broadcastEvent": {
+                "serverSideEvents": true
+            }
+        },
+        {
+            "name": "SentToPaymentToClaimManagerApproval",
+            "from": "SentToPayment",
+            "to": "ClaimManagerApproval",
+            "allowOnValidationErrors": {
+                "codes": [
+                    "DuplicatedClaimsFound",
+                    "PaymentAmountIsTooBig",
+                    "InsuredEventDateIsLaterThanCancellationDate"
+                ]
+            }
+        }
+    ]
+}

@@ -1,0 +1,16 @@
+select ph.PARTY_CODE,
+       pis.FULL_NAME,
+       ba.BANK_ACCOUNT as ACCOUNT_NUMBER,
+       ba.BIC as BANK_CODE,
+       pis.INNKIO as INN,
+       ba.CURRENCY_CODE,
+       pa.CODE_NAME as PARTY_TYPE,
+       p.BODY
+from PTY_IMPL.PARTY_BANK_ACCOUNTS_SAT_LATEST ba
+inner join PTY_IMPL.PARTY_HUB ph on ba.PARTY_BANK_ACCOUNTS_HKEY = ph.PARTY_HKEY
+inner join PTY_IMPL.PARTY_INFO_SAT_LATEST pis on pis.PARTY_INFO_HKEY = ba.PARTY_BANK_ACCOUNTS_HKEY
+inner join PTY.PARTY p on p.PARTY_CODE = ph.PARTY_CODE
+inner join CFX.PUBLISHED_ARTIFACT pa on p.PUBLISHED_ARTIFACT_ID = pa.PUBLISHED_ARTIFACT_ID
+where 1=1
+    and ba.IS_DELETED = 0
+    and ba.BANK_ACCOUNT = @partyBankAccount

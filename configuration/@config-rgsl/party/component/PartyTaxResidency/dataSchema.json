@@ -1,0 +1,39 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "PartyTaxResidency",
+    "type": "object",
+    "additionalProperties": false,
+    "aiValidation": {
+        "rule": "validatePartyTaxResidency"
+    },
+    "properties": {
+        "residenceCountry": {
+            "aiTitle": "residenceCountry",
+            "$ref": "component:PartyCountry"
+        },
+        "docType": {
+            "aiTitle": "docType",
+            "$ref": "component:PartyDocumentType"
+        },
+        "otherDocTypeDesc": {
+            "type": "string",
+            "aiTitle": "otherDocTypeDesc"
+        },
+        "startDate": {
+            "type": "string",
+            "aiFormat": "date",
+            "aiTitle": "startDate",
+            "aiMeaning": "past"
+        },
+        "endDate": {
+            "type": "string",
+            "aiFormat": "date",
+            "aiTitle": "endDate",
+            "aiMeaning": "future"
+        },
+        "daysCount": {
+            "type": "integer",
+            "aiTitle": "daysCount"
+        }
+    }
+}

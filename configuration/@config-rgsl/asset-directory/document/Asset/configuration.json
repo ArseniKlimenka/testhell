@@ -1,0 +1,177 @@
+{
+    "dimensions": {
+        "universalVersionedDocumentGroup": "Asset",
+        "universalVersionedDocumentType": "Document"
+    },
+    "entityType": "UniversalVersionedDocument",
+    "version": "1",
+    "validFrom": "2000-01-01",
+    "attachments": [
+        {
+            "attachmentType": "assetPlacementAgreement",
+            "flow": "Incoming"
+        }
+    ],
+    "states": [
+        {
+            "name": "Draft",
+            "actors": [
+                {
+                    "actor": "AssetEditor",
+                    "transitions": [
+                        "Draft_To_Open",
+                        "Draft_To_Cancelled"
+                    ],
+                    "operations": [
+                        "Save"
+                    ],
+                    "relations": [],
+                    "attachmentsRestrictions": [
+                        {
+                            "attachmentType": "assetPlacementAgreement",
+                            "permissions": [
+                                "Create",
+                                "Read",
+                                "Update",
+                                "Delete"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "actor": "AssetViewer",
+                    "transitions": [],
+                    "operations": [],
+                    "relations": [],
+                    "attachmentsRestrictions": [
+                        {
+                            "attachmentType": "assetPlacementAgreement",
+                            "permissions": [
+                                "Read"
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Open",
+            "actors": [
+                {
+                    "actor": "AssetEditor",
+                    "transitions": [
+                        "Open_To_Closed"
+                    ],
+                    "relations": [],
+                    "attachmentsRestrictions": [
+                        {
+                            "attachmentType": "assetPlacementAgreement",
+                            "permissions": [
+                                "Create",
+                                "Read",
+                                "Update",
+                                "Delete"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "actor": "AssetViewer",
+                    "transitions": [],
+                    "operations": [],
+                    "relations": [],
+                    "attachmentsRestrictions": [
+                        {
+                            "attachmentType": "assetPlacementAgreement",
+                            "permissions": [
+                                "Read"
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Closed",
+            "actors": [
+                {
+                    "actor": "AssetEditor",
+                    "transitions": [
+                        "Closed_To_Open"
+                    ],
+                    "relations": [],
+                    "attachmentsRestrictions": [
+                        {
+                            "attachmentType": "assetPlacementAgreement",
+                            "permissions": [
+                                "Create",
+                                "Read",
+                                "Update",
+                                "Delete"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "actor": "AssetViewer",
+                    "transitions": [],
+                    "operations": [],
+                    "relations": [],
+                    "attachmentsRestrictions": [
+                        {
+                            "attachmentType": "assetPlacementAgreement",
+                            "permissions": [
+                                "Read"
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Cancelled",
+            "actors": [
+                {
+                    "actor": "AssetEditor",
+                    "attachmentsRestrictions": [
+                        {
+                            "attachmentType": "assetPlacementAgreement",
+                            "permissions": [
+                                "Create",
+                                "Read",
+                                "Update",
+                                "Delete"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "actor": "AssetViewer",
+                    "transitions": [],
+                    "operations": [],
+                    "relations": [],
+                    "attachmentsRestrictions": [
+                        {
+                            "attachmentType": "assetPlacementAgreement",
+                            "permissions": [
+                                "Read"
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "components": [
+        "AssetConditions",
+        "MainInformation"
+    ],
+    "ui": {
+        "layout": "VersionedDocumentLayout",
+        "composition": {
+            "MainContent": "MainContent",
+            "SummaryContent": "SummaryContent"
+        }
+    },
+    "keywords": []
+}

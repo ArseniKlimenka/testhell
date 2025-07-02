@@ -1,0 +1,7 @@
+select
+	pols.END_DATE
+from
+	pas_impl.POLICY_HUB polh
+	inner join pas_impl.POLICY_SAT_LATEST pols on polh.POLICY_HKEY = pols.POLICY_HKEY
+where 1=1
+	and polh.CONTRACT_NUMBER = @contractNumber

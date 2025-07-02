@@ -1,0 +1,275 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "Life Insurance",
+    "description": "Data schema describing Basic Conditions",
+    "type": "object",
+    "additionalProperties": false,
+    "aiValidation": {
+        "rule": "validationBasicConditions"
+    },
+    "aiDataEnrichment": [
+        {
+            "name": "setRiskPremium"
+        },
+        {
+            "name": "checkData"
+        },
+        {
+            "name": "SetCurrency",
+            "dataSource": "CurrenciesDataSource"
+        },
+        {
+            "name": "SetAvailableInsuranceTermsDays"
+        },
+        {
+            "name": "SetFixedInsuredSums"
+        },
+        {
+            "name": "SetOriginalReceiptDate"
+        }
+    ],
+    "properties": {
+        "withTarification": {
+            "type": "boolean",
+            "aiTitle": "withTarification"
+        },
+        "applicationDate": {
+            "type": "string",
+            "aiFormat": "date",
+            "aiTitle": "applicationDate"
+        },
+        "receiptDate": {
+            "type": "string",
+            "aiFormat": "date",
+            "aiTitle": "receiptDate"
+        },
+        "acceptToWorkDate": {
+            "type": "string",
+            "aiFormat": "date",
+            "aiTitle": "acceptToWorkDate"
+        },
+        "issueDate": {
+            "type": "string",
+            "aiFormat": "date",
+            "aiTitle": "issueDate"
+        },
+        "originalReceiptDate": {
+            "type": "string",
+            "aiFormat": "date",
+            "aiTitle": "originalReceiptDate"
+        },
+        "currency": {
+            "type": "object",
+            "additionalProperties": false,
+            "aiTitle": "currency",
+            "properties": {
+                "currencyCode": {
+                    "type": "string",
+                    "aiTitle": "currencyCode"
+                },
+                "currencyDesc": {
+                    "type": "string",
+                    "aiTitle": "currencyDesc"
+                },
+                "currencyNumericCode": {
+                    "type": "string",
+                    "aiTitle": "currencyNumericCode"
+                }
+            }
+        },
+        "insuranceTerms": {
+            "aiTitle": "insuranceTerms",
+            "$ref": "component:EnumStringNumbers"
+        },
+        "insuranceTermsMonths": {
+            "aiTitle": "insuranceTermsMonths",
+            "$ref": "component:EnumStringNumbers"
+        },
+        "availableInsuranceTermsDays": {
+            "type": "array",
+            "additionalProperties": false,
+            "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                    "description": {
+                        "type": "string"
+                    },
+                    "value": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "insuranceTermsDays": {
+            "aiTitle": "insuranceTermsDays",
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "description": {
+                    "type": "string"
+                },
+                "value": {
+                    "type": "string"
+                }
+            }
+        },
+        "paymentFrequency": {
+            "type": "object",
+            "aiTitle": "paymentFrequency",
+            "properties": {
+                "paymentFrequencyCode": {
+                    "type": "string",
+                    "aiTitle": "paymentFrequencyCode"
+                },
+                "paymentFrequencyDescription": {
+                    "type": "string",
+                    "aiTitle": "paymentFrequencyDescription"
+                }
+            }
+        },
+        "riskPremium": {
+            "type": "number",
+            "aiTitle": "riskPremium"
+        },
+        "fixedPremiums": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "value": {
+                        "type": "number"
+                    }
+                }
+            }
+        },
+        "riskInsuredSum": {
+            "type": "number",
+            "aiTitle": "riskInsuredSum"
+        },
+        "fixedInsuredSums": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "value": {
+                        "type": "number"
+                    }
+                }
+            }
+        },
+        "calcFromInsuredSum": {
+            "type": "boolean",
+            "aiTitle": "calcFromInsuredSum"
+        },
+        "endowmentPaymentVariant": {
+            "type": "object",
+            "aiTitle": "endowmentPaymentVariant",
+            "properties": {
+                "endowmentPaymentVariantCode": {
+                    "type": "string",
+                    "aiTitle": "endowmentPaymentVariantCode"
+                },
+                "endowmentPaymentVariantDescription": {
+                    "type": "string",
+                    "aiTitle": "endowmentPaymentVariantDescription"
+                }
+            }
+        },
+        "endowmentEndOfDerivedPeriod": {
+            "type": "string",
+            "aiFormat": "date",
+            "aiTitle": "endowmentEndOfDerivedPeriod"
+        },
+        "guaranteedIncome": {
+            "type": "object",
+            "aiTitle": "guaranteedIncome",
+            "properties": {
+                "guaranteedIncomeCode": {
+                    "type": "string",
+                    "aiTitle": "guaranteedIncomeCode"
+                },
+                "guaranteedIncomeDescription": {
+                    "type": "string",
+                    "aiTitle": "guaranteedIncomeDescription"
+                }
+            }
+        },
+        "annuityPaymentAmount": {
+            "type": "string",
+            "aiTitle": "annuityPaymentAmount"
+        },
+        "annuityPaymentTerm": {
+            "type": "string",
+            "aiTitle": "annuityPaymentTerm"
+        },
+        "isReinvest": {
+            "type": "boolean",
+            "aiTitle": "isReinvest"
+        },
+        "invoiceOnActivation": {
+            "type": "boolean",
+            "aiTitle": "invoiceOnActivation"
+        },
+        "maxInsuredSum": {
+            "type": "number",
+            "aiTitle": "maxInsuredSum"
+        },
+        "isFixedRate": {
+            "type": "boolean",
+            "aiTitle": "isFixedRate"
+        },
+        "exchangeRate": {
+            "type": "number",
+            "aiTitle": "exchangeRate"
+        },
+        "reinvestContractNumber": {
+            "type": "string",
+            "aiTitle": "reinvestContractNumber"
+        },
+        "reinvestIssueDate": {
+            "type": "string",
+            "aiTitle": "reinvestIssueDate",
+            "aiFormat": "date"
+        },
+        "isEvaluationContract": {
+            "type": "boolean",
+            "aiTitle": "isEvaluationContract"
+        },
+        "isSpecialOffer": {
+            "type": "boolean",
+            "aiTitle": "isSpecialOffer"
+        },
+        "sportTypes": {
+            "allOf": [
+                {
+                    "aiTitle": "sportTypes",
+                    "$ref": "component:SportTypes"
+                },
+                {
+                    "aiAdditionalContext": {
+                        "name": "issueDate",
+                        "$data": "1/issueDate"
+                    }
+                }
+            ] 
+        },
+        "daysBetweenIssueAndStartDynamic": {
+            "allOf": [
+                {
+                    "$ref": "component:DaysBetweenIssueAndStartDynamic"
+                },
+                {
+                    "aiAdditionalContext": {
+                        "name": "insuranceTermsDays",
+                        "$data": "1/insuranceTermsDays"
+                    }
+                }
+            ]  
+        },
+        "coverageDuration": {
+            "$ref": "component:CoverageDuration",
+            "aiTitle": "coverageDuration"
+        }
+    }
+}

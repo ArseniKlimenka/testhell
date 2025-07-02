@@ -1,0 +1,146 @@
+﻿select
+	uvd.UNIVERSAL_VERSIONED_DOCUMENT_NUMBER,
+	ps.CODE_NAME as STATE,
+	crtS.SEQ_NUMBER,
+	paCer.CODE_NAME as CERTIFICATE_CONFIGURATION_NAME,
+	ud_orig.UNIVERSAL_VERSIONED_DOCUMENT_NUMBER as ORIGINAL_DOCUMENT_NUMBER,
+	crtS.CONTRACT_NUMBER,
+	crtS.APPLICANT_FULL_NAME,
+	crtS.REQUEST_DATE,
+	crtS.ACCOUNTING_YEAR,
+	crtS.CORRECTION_NUMBER,
+	crtS.AMOUNT_OF_PREMIUMS_PAID,
+	pa.CODE_NAME CONTRACT_CODE_NAME,
+	crtS.CERTIFICATE_ISSUE_DATE,
+	crtS.INCOME_SOURCE,
+	cats.ATTACHMENT_TYPE as TAX_CERTIFICATE_FORMAT,
+	crtS.HOLDER_PARTY_CODE,
+	crtS.INSURED_PARTY_CODE,
+	crts.IS_INSURER_SEND_DATA_TO_FNS,
+	uvd.SYS_CREATED_ON,
+	(
+		select top 1 COALESCE(pinfo.FULL_NAME, users.USERNAME)
+		from
+			BFX.ENTITY_HISTORY eh
+			join ORG.APPLICATION_USER users ON users.APPLICATION_USER_ID = eh.CHANGE_CAUSED_BY
+			left join ORG.APPLICATION_USER_CLAIM partyCodeClaim ON partyCodeClaim.APPLICATION_USER_ID = users.APPLICATION_USER_ID AND partyCodeClaim.CLAIM_TYPE = 'PartyCode'
+			left join PTY_IMPL.PARTY_HUB phub ON phub.PARTY_CODE = partyCodeClaim.VALUE
+			left join PTY_IMPL.PARTY_INFO_SAT_LATEST pinfo ON pinfo.PARTY_INFO_HKEY = phub.PARTY_HKEY
+		where 1=1
+			and uvd.UNIVERSAL_VERSIONED_DOCUMENT_ID = eh.ENTITY_ID
+			and STATE_CHANGED = 1
+		order by eh.CHANGED_ON desc
+	) as TRANSITION_COMMITIOR,
+	cast((
+		select count(*)
+		from bfx.ATTACHMENT_RELATED_ENTITY are
+			inner join bfx.ATTACHMENT a on a.ATTACHMENT_ID = are.ATTACHMENT_ID AND a.ATTACHMENT_TYPE = 'taxDeductionCertificate'
+		where are.ENTITY_REF_ID = uvd.UNIVERSAL_VERSIONED_DOCUMENT_ID
+	) as bit) as HAS_ATTACHMENT
+from
+	BFX.UNIVERSAL_VERSIONED_DOCUMENT uvd
+	inner join bfx.UNIVERSAL_VERSIONED_DOCUMENT ud_orig
+		ON ud_orig.UNIVERSAL_VERSIONED_DOCUMENT_ID = uvd.ORIGINAL_DOCUMENT_ID
+	inner join CFX.PUBLISHED_ARTIFACT paCer ON paCer.PUBLISHED_ARTIFACT_ID = uvd.PUBLISHED_ARTIFACT_ID
+	JOIN ACC_IMPL.CRT_HUB crtH ON crtH.CERTIFICATE_NUMBER = uvd.UNIVERSAL_VERSIONED_DOCUMENT_NUMBER
+	JOIN ACC_IMPL.CRT_SAT_LATEST crtS ON crtS.CRT_HKEY = crtH.CRT_HKEY
+	JOIN CFG.PROCESS_STATE ps ON ps.PROCESS_STATE_ID = uvd.STATE_ID
+	JOIN PAS.CONTRACT c ON c.CONTRACT_NUMBER = crtS.CONTRACT_NUMBER
+	JOIN CFX.PUBLISHED_ARTIFACT pa ON pa.PUBLISHED_ARTIFACT_ID = c.PUBLISHED_ARTIFACT_ID
+	left join ACC_IMPL.CRT_ATTACHMENT_TYPE_SAT_LATEST cats on crtS.CRT_HKEY = cats.CRT_ATTACHMENT_TYPE_HKEY
+where 1=1
+{{#if parameters.originalOnly}}
+		and uvd.SEQ_NUMBER = 0
+{{/if}}
+{{#if parameters.accountingCertificateNumber}}
+	AND uvd.UNIVERSAL_VERSIONED_DOCUMENT_NUMBER = @accountingCertificateNumber
+{{/if}}
+
+{{#if parameters.accountingCertificateState}}
+	AND ps.CODE_NAME = @accountingCertificateState
+{{/if}}
+
+{{#if parameters.accountingCertificateStates}}
+	AND ps.CODE_NAME IN (@accountingCertificateStates)
+{{/if}}
+
+{{#if parameters.accountingCertificateSeqNumber}}
+	AND uvd.SEQ_NUMBER = @accountingCertificateSeqNumber
+{{/if}}
+
+{{#if parameters.originalDocumentNumber}}
+	AND crtS.ORIGINAL_DOCUMENT_NUMBER = @originalDocumentNumber
+{{/if}}
+
+{{#if parameters.contractNumber}}
+	AND crtS.CONTRACT_NUMBER = @contractNumber
+{{/if}}
+
+{{#if parameters.holderPartyCode}}
+	AND crtS.HOLDER_PARTY_CODE = @holderPartyCode
+{{/if}}
+
+{{#if parameters.insuredPartyCode}}
+	AND crtS.INSURED_PARTY_CODE = @insuredPartyCode
+{{/if}}
+
+{{#if parameters.applicantFullName}}
+	AND crtS.APPLICANT_FULL_NAME LIKE @applicantFullName + '%'
+{{/if}}
+
+{{#if parameters.requestDate}}
+	AND crtS.REQUEST_DATE = @requestDate
+{{/if}}
+
+{{#if parameters.requestDateFrom}}
+	AND crtS.REQUEST_DATE >= @requestDateFrom
+{{/if}}
+
+{{#if parameters.requestDateTo}}
+	AND crtS.REQUEST_DATE <= @requestDateTo
+{{/if}}
+
+{{#if parameters.accountingYear}}
+	AND crtS.ACCOUNTING_YEAR = @accountingYear
+{{/if}}
+
+{{#if parameters.correctionNumber}}
+	AND crtS.CORRECTION_NUMBER = @correctionNumber
+{{/if}}
+
+{{#if parameters.correctionNumberZero}}
+	AND crtS.CORRECTION_NUMBER = 0
+{{/if}}
+
+{{#if parameters.amountOfPremiumPaid}}
+	AND crtS.AMOUNT_OF_PREMIUMS_PAID = @amountOfPremiumPaid
+{{/if}}
+
+{{#if parameters.certificateIssueDate}}
+	AND crtS.CERTIFICATE_ISSUE_DATE = @certificateIssueDate
+{{/if}}
+
+{{#if parameters.isInsurerSendDataToFns}}
+	AND crts.IS_INSURER_SEND_DATA_TO_FNS = @isInsurerSendDataToFns
+{{/if}}
+
+{{#if parameters.incomeSource}}
+	AND crts.INCOME_SOURCE = @incomeSource
+{{/if}}
+
+{{#if parameters.taxCertificateFormat}}
+	AND cats.ATTACHMENT_TYPE = @taxCertificateFormat
+{{/if}}
+
+{{#if parameters.certificateCreateDate}}
+	AND DATEADD(hour, 3, uvd.SYS_CREATED_ON) >= @certificateCreateDate AND DATEADD(hour, 3, uvd.SYS_CREATED_ON) < DATEADD(day, 1, @certificateCreateDate)
+{{/if}}
+
+{{#if parameters.selectedNumbers}}
+	AND uvd.UNIVERSAL_VERSIONED_DOCUMENT_NUMBER in (@selectedNumbers)
+{{/if}}
+
+{{#if parameters.taxCertificateFormats}}
+	AND cats.ATTACHMENT_TYPE in (@taxCertificateFormats)
+{{/if}}
+order by UNIVERSAL_VERSIONED_DOCUMENT_NUMBER

@@ -1,0 +1,40 @@
+{
+    "sinks": [
+        {
+            "name": "GetSendEventConfiguration",
+            "fetch": {
+                "configuration": {
+                    "name": "SendEventConfigurationDataSource"
+                }
+            }
+        },
+        {
+            "name": "GetHolderCode",
+            "fetch": {
+                "configuration": {
+                    "name": "GetContractHolderCodeByContractNoDataSource"
+                }
+            }
+        },
+        {
+            "name": "GetPartyData",
+            "fetch": {
+                "configuration": {
+                    "name": "GetPartyDataSource"
+                }
+            }
+        },
+        {
+            "name": "WriteSendEvent",
+            "database": {
+                "tables": [
+                    "BFX_IMPL.SEND_EVENT"
+                ]
+            }
+        }
+    ],
+    "responses": [
+        200,
+        422
+    ]
+}

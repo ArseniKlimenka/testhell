@@ -1,0 +1,46 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema",
+    "type": "object",
+    "description": "Policy beneficiary satellite",
+    "aiReference": "PAS_IMPL.POLICY_HUB",
+    "aiAdditionalKeys": [
+        "BENEFICIARY_ID"
+    ],
+    "aiDeletionMode": {
+        "mode": "flag",
+        "columnName": "IS_DELETED"
+    },
+    "aiGeneratedViews": {
+        "latestState": true
+    },
+    "properties": {
+        "BENEFICIARY_ID": {
+            "type": "string",
+            "aiType": "guid"
+        },
+        "FULL_NAME": {
+            "type": "string",
+            "aiType": "nvarchar(256)"
+        },
+        "DATE_OF_BIRTH": {
+            "type": "string",
+            "aiType": "date"
+        },
+        "PERSON_GENDER": {
+            "type": "string",
+            "aiType": "nvarchar(256)"
+        },
+        "RELATION_TYPE": {
+            "type": "string",
+            "aiType": "nvarchar(256)"
+        },
+        "SHARE": {
+            "type": "number",
+            "aiType": "decimal(15,2)"
+        },
+        "IS_DELETED": {
+            "type": "boolean",
+            "aiType": "boolean"
+        }
+    }
+}

@@ -1,0 +1,570 @@
+{
+    "processType": "Endowment",
+    "initialState": "OperationsApproval",
+    "actors": [
+        "Operations",
+        "OperationsDirector",
+        "Methodology",
+        "Actuary",
+        "Accounting",
+        "Legal",
+        "Security",
+        "PartnerSalesSupport",
+        "ClientServiceCenter",
+        "CallCenter",
+        "Compliance",
+        "DeputyDirector",
+        "ViewEndowment",
+        "EndowmentAdministrator"
+    ],
+    "states": [
+        {
+            "name": "OperationsApproval",
+            "operations": [
+                {
+                    "name": "Save"
+                }
+            ]
+        },
+        {
+            "name": "AwaitingInquiries",
+            "operations": [
+                {
+                    "name": "Save"
+                }
+            ]
+        },
+        {
+            "name": "AwaitingApproval",
+            "operations": [
+            ]
+        },
+        {
+            "name": "AwaitingEndowmentDate",
+            "operations": [
+            ]
+        },
+        {
+            "name": "OperationsDirectorApproval",
+            "operations": [
+                {
+                    "name": "Save"
+                }
+            ]
+        },
+        {
+            "name": "InsuranceMethodologyApproval",
+            "operations": [
+                {
+                    "name": "Save"
+                }
+            ]
+        },
+        {
+            "name": "ActuaryApproval",
+            "operations": [
+                {
+                    "name": "Save"
+                }
+            ]
+        },
+        {
+            "name": "AccountingApproval",
+            "operations": [
+                {
+                    "name": "Save"
+                }
+            ]
+        },
+        {
+            "name": "ComplianceApproval",
+            "operations": [
+                {
+                    "name": "Save"
+                }
+            ]
+        },
+        {
+            "name": "SecurityApproval",
+            "operations": [
+                {
+                    "name": "Save"
+                }
+            ]
+        },
+        {
+            "name": "LegalApproval",
+            "operations": [
+                {
+                    "name": "Save"
+                }
+            ]
+        },
+        {
+            "name": "CallCenterApproval",
+            "operations": [
+                {
+                    "name": "Save"
+                }
+            ]
+        },
+        {
+            "name": "PartnerSalesSupportApproval",
+            "operations": [
+                {
+                    "name": "Save"
+                }
+            ]
+        },
+        {
+            "name": "ClientServiceApproval",
+            "operations": [
+                {
+                    "name": "Save"
+                }
+            ]
+        },
+        {
+            "name": "POCreation"
+        },
+        {
+            "name": "RequestToClient",
+            "operations": [
+                {
+                    "name": "Save"
+                }	
+            ]
+        },
+        {
+            "name": "DeputyDirectorApproval",
+            "operations": [
+                {
+                    "name": "Save"
+                }	
+            ]
+        },
+        {
+            "name": "SentToPayment",
+            "operations": [
+                {
+                    "name": "Save",
+                    "exclusiveToAssignedUser": true
+                }
+            ]
+        },
+        {
+            "name": "PartiallyPaid",
+            "operations": [
+                {
+                    "name": "Save",
+                    "exclusiveToAssignedUser": true
+                }
+            ]
+        },
+        {
+            "name": "Paid",
+            "operations": []
+        },
+        {
+            "name": "Rejected",
+            "operations": []
+        },
+        {
+            "name": "Cancelled",
+            "operations": []
+        }
+    ],
+    "transitions": [
+        {
+            "name": "OperationsApproval_to_AwaitingInquiries",
+            "from": "OperationsApproval",
+            "to": "AwaitingInquiries",
+            "exclusiveToAssignedUser": true,
+            "allowOnValidationErrors": {
+                "codes": [
+                    "hasActiveEndowmentInquiries",
+                    "DeputyDirectorApprovalIsRequired"
+                ]
+            },
+            "actionToRunBefore": "onBeforeTransition"
+        },
+        {
+            "name": "AwaitingInquiries_to_OperationsApproval",
+            "from": "AwaitingInquiries",
+            "to": "OperationsApproval",
+            "exclusiveToAssignedUser": true,
+            "allowOnValidationErrors": {
+                "codes": [
+                    "hasActiveEndowmentInquiries",
+                    "DeputyDirectorApprovalIsRequired"
+                ]
+            },
+            "actionToRunBefore": "onBeforeTransition"
+        },
+        {
+            "name": "OperationsApproval_to_AwaitingApproval",
+            "from": "OperationsApproval",
+            "to": "AwaitingApproval",
+            "exclusiveToAssignedUser": true,
+            "allowOnValidationErrors": {
+                "codes": [
+                    "hasActiveEndowmentInquiries",
+                    "DeputyDirectorApprovalIsRequired"
+                ]
+            },
+            "actionToRunBefore": "onBeforeTransition"
+        },
+        {
+            "name": "AwaitingApproval_to_OperationsApproval",
+            "from": "AwaitingApproval",
+            "to": "OperationsApproval",
+            "exclusiveToAssignedUser": true,
+            "allowOnValidationErrors": {
+                "codes": [
+                    "hasActiveEndowmentInquiries",
+                    "DeputyDirectorApprovalIsRequired"
+                ]
+            },
+            "actionToRunBefore": "onBeforeTransition"
+        },
+        {
+            "name": "OperationsApproval_to_AwaitingEndowmentDate",
+            "from": "OperationsApproval",
+            "to": "AwaitingEndowmentDate",
+            "exclusiveToAssignedUser": true,
+            "allowOnValidationErrors": {
+                "codes": [
+                    "hasActiveEndowmentInquiries",
+                    "DeputyDirectorApprovalIsRequired"
+                ]
+            },
+            "actionToRunBefore": "onBeforeTransition"
+        },
+        {
+            "name": "AwaitingEndowmentDate_to_OperationsApproval",
+            "from": "AwaitingEndowmentDate",
+            "to": "OperationsApproval",
+            "exclusiveToAssignedUser": true,
+            "allowOnValidationErrors": {
+                "codes": [
+                    "hasActiveEndowmentInquiries",
+                    "DeputyDirectorApprovalIsRequired"
+                ]
+            },
+            "actionToRunBefore": "onBeforeTransition"
+        },
+        {
+            "name": "OperationsApproval_to_POCreation",
+            "from": "OperationsApproval",
+            "to": "POCreation",
+            "exclusiveToAssignedUser": true,
+            "allowOnValidationErrors": {
+                "codes": [
+                    "hasActiveEndowmentInquiries",
+                    "DeputyDirectorApprovalIsRequired"
+                ]
+            },
+            "actionToRunBefore": "onBeforeTransition"
+        },
+        {
+            "name": "OperationsDirectorApprovalToOperationsApproval",
+            "from": "OperationsDirectorApproval",
+            "to": "OperationsApproval",
+            "allowOnValidationErrors": {
+                "codes": [
+                    "hasActiveEndowmentInquiries",
+                    "DeputyDirectorApprovalIsRequired"
+                ]
+            },
+            "exclusiveToAssignedUser": true,
+            "actionToRunBefore": "onBeforeTransition"
+        },
+        {
+            "name": "OperationsDirectorApprovalToDeputyDirectorAproval",
+            "from": "OperationsDirectorApproval",
+            "to": "DeputyDirectorApproval",
+            "allowOnValidationErrors": {
+                "codes": [
+                    "hasActiveEndowmentInquiries",
+                    "DeputyDirectorApprovalIsRequired"
+                ]
+            },
+            "exclusiveToAssignedUser": true,
+            "actionToRunBefore": "onBeforeTransition"
+        },
+        {
+            "name": "OperationsDirectorApprovalToRejected",
+            "from": "OperationsDirectorApproval",
+            "to": "Rejected",
+            "allowOnValidationErrors": {
+                "codes": [
+                    "hasActiveEndowmentInquiries",
+                    "DeputyDirectorApprovalIsRequired"
+                ]
+            },
+            "exclusiveToAssignedUser": true,
+            "actionToRunBefore": "onBeforeTransition"
+        },
+        {
+            "name": "OperationsDirectorApprovalToCancelled",
+            "from": "OperationsDirectorApproval",
+            "to": "Cancelled",
+            "allowOnValidationErrors": {
+                "all": true
+            },
+            "exclusiveToAssignedUser": true
+        },
+        {
+            "name": "OperationsDirectorApprovalToSentToPayment",
+            "from": "OperationsDirectorApproval",
+            "to": "POCreation",
+            "allowOnValidationErrors": {
+                "codes": [
+                    "hasActiveEndowmentInquiries",
+                    "DeputyDirectorApprovalIsRequired"
+                ]
+            },
+            "actionToRunBefore": "onBeforeTransition",
+            "exclusiveToAssignedUser": true
+        },
+        {
+            "name": "DeputyDirectorAprovalToOperationsDirectorApproval",
+            "from": "DeputyDirectorApproval",
+            "to": "OperationsDirectorApproval",
+            "allowOnValidationErrors": {
+                "codes": [
+                    "hasActiveEndowmentInquiries",
+                    "DeputyDirectorApprovalIsRequired"
+                ]
+            },
+            "exclusiveToAssignedUser": true,
+            "actionToRunBefore": "onBeforeTransition"
+        },
+        {
+            "name": "DeputyDirectorAprovalToRejected",
+            "from": "DeputyDirectorApproval",
+            "to": "Rejected",
+            "allowOnValidationErrors": {
+                "codes": [
+                    "hasActiveEndowmentInquiries",
+                    "DeputyDirectorApprovalIsRequired"
+                ]
+            },
+            "exclusiveToAssignedUser": true,
+            "actionToRunBefore": "onBeforeTransition"
+        },
+        {
+            "name": "DeputyDirectorAprovalToSentToPayment",
+            "from": "DeputyDirectorApproval",
+            "to": "POCreation",
+            "allowOnValidationErrors": {
+                "codes": [
+                    "hasActiveEndowmentInquiries",
+                    "DeputyDirectorApprovalIsRequired"
+                ]
+            },
+            "exclusiveToAssignedUser": true,
+            "actionToRunBefore": "onBeforeTransition"
+        },
+        {
+            "name": "InsuranceMethodologyApprovalToOperationsApproval",
+            "from": "InsuranceMethodologyApproval",
+            "to": "OperationsApproval",
+            "allowOnValidationErrors": {
+                "codes": [
+                    "hasActiveEndowmentInquiries",
+                    "DeputyDirectorApprovalIsRequired"
+                ]
+            },
+            "exclusiveToAssignedUser": true,
+            "actionToRunBefore": "onBeforeTransition"
+        },
+        {
+            "name": "ActuaryApprovalToOperationsApproval",
+            "from": "ActuaryApproval",
+            "to": "OperationsApproval",
+            "allowOnValidationErrors": {
+                "codes": [
+                    "hasActiveEndowmentInquiries",
+                    "DeputyDirectorApprovalIsRequired"
+                ]
+            },
+            "exclusiveToAssignedUser": true,
+            "actionToRunBefore": "onBeforeTransition"
+        },
+        {
+            "name": "AccountingApprovalToOperationsApproval",
+            "from": "AccountingApproval",
+            "to": "OperationsApproval",
+            "allowOnValidationErrors": {
+                "codes": [
+                    "hasActiveEndowmentInquiries",
+                    "DeputyDirectorApprovalIsRequired"
+                ]
+            },
+            "exclusiveToAssignedUser": true,
+            "actionToRunBefore": "onBeforeTransition"
+        },
+        {
+            "name": "ComplianceApprovalToOperationsApproval",
+            "from": "ComplianceApproval",
+            "to": "OperationsApproval",
+            "allowOnValidationErrors": {
+                "codes": [
+                    "hasActiveEndowmentInquiries",
+                    "DeputyDirectorApprovalIsRequired"
+                ]
+            },
+            "exclusiveToAssignedUser": true,
+            "actionToRunBefore": "onBeforeTransition"
+        },
+        {
+            "name": "SecurityApprovalToOperationsApproval",
+            "from": "SecurityApproval",
+            "to": "OperationsApproval",
+            "allowOnValidationErrors": {
+                "codes": [
+                    "hasActiveEndowmentInquiries",
+                    "DeputyDirectorApprovalIsRequired"
+                ]
+            },
+            "exclusiveToAssignedUser": true,
+            "actionToRunBefore": "onBeforeTransition"
+        },
+        {
+            "name": "LegalApprovalToOperationsApproval",
+            "from": "LegalApproval",
+            "to": "OperationsApproval",
+            "allowOnValidationErrors": {
+                "codes": [
+                    "hasActiveEndowmentInquiries",
+                    "DeputyDirectorApprovalIsRequired"
+                ]
+            },
+            "exclusiveToAssignedUser": true,
+            "actionToRunBefore": "onBeforeTransition"
+        },
+        {
+            "name": "CallCenterApprovalToRequestToClient",
+            "from": "CallCenterApproval",
+            "to": "RequestToClient",
+            "allowOnValidationErrors": {
+                "codes": [
+                    "hasActiveEndowmentInquiries",
+                    "DeputyDirectorApprovalIsRequired"
+                ]
+            },
+            "exclusiveToAssignedUser": true,
+            "actionToRunBefore": "onBeforeTransition"
+        },
+        {
+            "name": "PartnerSalesSupportApprovalToRequestToClient",
+            "from": "PartnerSalesSupportApproval",
+            "to": "RequestToClient",
+            "allowOnValidationErrors": {
+                "codes": [
+                    "hasActiveEndowmentInquiries",
+                    "DeputyDirectorApprovalIsRequired"
+                ]
+            },
+            "exclusiveToAssignedUser": true,
+            "actionToRunBefore": "onBeforeTransition"
+        },
+        {
+            "name": "ClientServiceApprovalToRequestToClient",
+            "from": "ClientServiceApproval",
+            "to": "RequestToClient",
+            "allowOnValidationErrors": {
+                "codes": [
+                    "hasActiveEndowmentInquiries",
+                    "DeputyDirectorApprovalIsRequired"
+                ]
+            },
+            "exclusiveToAssignedUser": true,
+            "actionToRunBefore": "onBeforeTransition"
+        },
+        {
+            "name": "RequestToClientToOperationsApproval",
+            "from": "RequestToClient",
+            "to": "OperationsApproval",
+            "allowOnValidationErrors": {
+                "codes": [
+                    "hasActiveEndowmentInquiries",
+                    "DeputyDirectorApprovalIsRequired"
+                ]
+            },
+            "exclusiveToAssignedUser": true,
+            "actionToRunBefore": "onBeforeTransition"
+        },
+        {
+            "name": "OperationsApprovalToRejected",
+            "from": "OperationsApproval",
+            "to": "Rejected",
+            "allowOnValidationErrors": {
+                "all": true
+            },
+            "exclusiveToAssignedUser": true,
+            "actionToRunBefore": "onBeforeTransition"
+        },
+        {
+            "name": "OperationsApprovalToCancelled",
+            "from": "OperationsApproval",
+            "to": "Cancelled",
+            "allowOnValidationErrors": {
+                "all": true
+            },
+            "exclusiveToAssignedUser": true,
+            "actionToRunBefore": "onBeforeTransition"
+        },
+        {
+            "name": "SentToPaymentToPaid",
+            "from": "SentToPayment",
+            "to": "Paid",
+            "allowOnValidationErrors": {
+                "codes": [
+                    "hasActiveEndowmentInquiries",
+                    "DeputyDirectorApprovalIsRequired"
+                ]
+            },
+            "exclusiveToAssignedUser": true
+        },
+        {
+            "name": "SentToPaymentToPartiallyPaid",
+            "from": "SentToPayment",
+            "to": "PartiallyPaid",
+            "allowOnValidationErrors": {
+                "codes": [
+                    "hasActiveEndowmentInquiries",
+                    "DeputyDirectorApprovalIsRequired"
+                ]
+            },
+            "exclusiveToAssignedUser": true
+        },
+        {
+            "name": "PartiallyPaidToPaid",
+            "from": "PartiallyPaid",
+            "to": "Paid",
+            "allowOnValidationErrors": {
+                "codes": [
+                    "hasActiveEndowmentInquiries",
+                    "DeputyDirectorApprovalIsRequired"
+                ]
+            },
+            "exclusiveToAssignedUser": true
+        },
+        {
+            "name": "FinishPOCreation",
+            "from": "POCreation",
+            "to": "SentToPayment",
+            "allowOnValidationErrors": {
+                "codes": [
+                    "hasActiveEndowmentInquiries",
+                    "DeputyDirectorApprovalIsRequired"
+                ]
+            },
+            "broadcastEvent": {
+                "serverSideEvents": true
+            }
+        }
+    ]
+}

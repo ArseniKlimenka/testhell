@@ -1,0 +1,8 @@
+﻿select
+	polh.CONTRACT_NUMBER
+from
+	pas_impl.AA_HUB aah
+	inner join pas_impl.POLICY_COMMISSION_LINK pcl on aah.AA_HKEY = pcl.AA_HKEY
+	inner join pas_impl.POLICY_HUB polh on polh.POLICY_HKEY = pcl.POLICY_HKEY
+where 1=1
+	and aah.AA_NUMBER = @agentAgreementNumber

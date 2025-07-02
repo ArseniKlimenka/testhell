@@ -1,0 +1,15 @@
+﻿SELECT COUNTRY_CODE,
+       COUNTRY_SHORT_NAME,
+       COUNTRY_FULL_NAME,
+       ALFA_2,
+       ALFA_3
+  FROM BFX_IMPL.COUNTRY_REF
+ WHERE 1 = 1
+{{#if parameters.countrySearchText}}
+    AND (COUNTRY_SHORT_NAME LIKE @countrySearchText
+         OR
+         COUNTRY_FULL_NAME LIKE @countrySearchText)
+{{/if}}
+{{#if parameters.withoutObsolete}}
+    AND IS_OBSOLETE = 0
+{{/if}}

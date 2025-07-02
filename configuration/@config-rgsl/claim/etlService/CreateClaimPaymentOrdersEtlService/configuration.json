@@ -1,0 +1,24 @@
+{
+    "allowParallelExecution": false,
+    "mainDataSource": "ClaimBeneficiariesDataSource",
+    "additionalDataSources": [],
+    "sinks": [
+        {
+            "ref": "CreatePaymentOrderSinkGroup"
+        }
+    ],
+    "completionSinks": [
+        {
+            "name": "FinishPOCreationForClaim",
+            "documentTransition": {
+                "transition": {
+                    "transitionName": "FinishPOCreation",
+                    "configurationName": "Claim",
+                    "configurationVersion": "1"
+                }
+            }
+        }
+    ],
+    "errorSinks": [],
+    "version": "1"
+}

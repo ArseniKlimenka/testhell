@@ -1,0 +1,51 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "description": "Related document errors data source input schema",
+    "type": "object",
+    "properties": {
+        "criteria": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "number": {
+                    "type": "string",
+                    "description": "Number of document."
+                },
+                "relatedClaimNumber": {
+                    "type": "string",
+                    "description": "Number of related claim document."
+                },
+                "relatedUniDocNumber": {
+                    "type": "string",
+                    "description": "Number of related universal document."
+                },
+                "relatedUniVersDocNumber": {
+                    "type": "string",
+                    "description": "Number of related universal versioned document."
+                },
+                "relatedUniMECode": {
+                    "type": "string",
+                    "description": "Code of related master entity document."
+                },
+                "anyMatchNumber": {
+                    "type": "string",
+                    "description": "Any match by number."
+                }
+            }
+        },
+        "sort": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "descending": {
+                        "type": "boolean"
+                    },
+                    "fieldName": {
+                        "type": "string"
+                    }
+                }
+            }
+        }
+    }
+}

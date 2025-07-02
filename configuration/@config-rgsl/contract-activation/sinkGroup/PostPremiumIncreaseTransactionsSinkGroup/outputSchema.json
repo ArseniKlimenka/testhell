@@ -1,0 +1,34 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema",
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+        "affectedContracts"
+    ],
+    "properties": {
+        "affectedContracts": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                    "contractNumber",
+                    "affectedDateFrom"
+                ],
+                "properties": {
+                    "contractNumber": {
+                        "type": "string"
+                    },
+                    "affectedDateFrom": {
+                        "type": "string",
+                        "aiFormat": "date"
+                    },
+                    "newPostedUntilPostingDate": {
+                        "type": "string",
+                        "aiFormat": "date"
+                    }
+                }
+            }
+        }
+    }
+}

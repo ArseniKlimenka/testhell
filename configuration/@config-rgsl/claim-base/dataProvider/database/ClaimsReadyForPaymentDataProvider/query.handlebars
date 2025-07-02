@@ -1,0 +1,82 @@
+﻿SELECT cl.CLAIM_NUMBER,
+	   clmSat.CLAIM_STATE,
+	   ac.CREATED_ON AS ACTIVITY_DATE,
+	   riskSat.DESCRIPTION AS RISK_NAME,
+	   appSat.STATEMENT_APPLICATION_DATE,
+	   ieHub.IE_NUMBER,
+	   ieSat.IE_DATE,
+	   pHub.CONTRACT_NUMBER,
+	   art.CODE_NAME AS CONTRACT_TYPE,
+	   pr.CODE AS PRODUCT_CODE,
+	   pr.DESCRIPTION AS PRODUCT_NAME,
+	   pr.PRODUCT_GROUP,
+	   pSat.HOLDER_CODE,
+	   hSat.CONFIGURATION_CODE_NAME AS HOLDER_TYPE,
+	   pSat.HOLDER_NAME,
+	   clmSat.PAYMENT_AMOUNT_DOC_CUR,
+	   clmIeSat.CONTRACT_CURRENCY,
+	   clmSat.PAYMENT_AMOUNT_RUB_CUR   
+FROM CLM.CLAIM cl
+JOIN BFX.ENTITY_REF ref ON ref.BUSINESS_KEY = cl.CLAIM_NUMBER
+JOIN CFG.PROCESS_STATE ps ON cl.STATE_ID = ps.PROCESS_STATE_ID
+JOIN BFX.ACTIVITY ac ON ac.ENTITY_REF_ID = ref.ENTITY_REF_ID AND ac.DOCUMENT_STATE = ps.PROCESS_STATE_ID AND ac.ASSIGNED_USER_ID = @assigneeId --'8BFEA441-2668-48A2-BFE0-08700B4840C9'
+JOIN CLM_IMPL.CLM_HUB clmHub ON clmHub.CLAIM_NUMBER = cl.CLAIM_NUMBER
+JOIN CLM_IMPL.CLM_SAT_LATEST clmSat ON clmSat.CLM_HKEY = clmHub.CLM_HKEY
+JOIN CLM_IMPL.CLM_APPLICANT_LINK appLink ON appLink.CLM_HKEY = clmHub.CLM_HKEY
+JOIN CLM_IMPL.CLM_APPLICANT_SAT_LATEST appSat ON appSat.CLM_APPLICANT_HKEY = appLink.CLM_APPLICANT_HKEY AND appSat.IS_DELETED = 0
+JOIN CLM_IMPL.CLM_RISK_SAT_LATEST riskSat ON riskSat.CLM_RISK_HKEY = clmHub.CLM_HKEY AND riskSat.IS_DELETED = 0
+JOIN CLM_IMPL.CLM_IE_LINK clmIeLink ON clmIeLink.CLM_HKEY = clmHub.CLM_HKEY
+JOIN CLM_IMPL.CLM_IE_SAT clmIeSat ON clmIeSat.CLM_IE_HKEY = clmIeLink.CLM_IE_HKEY AND clmIeSat.IS_DELETED = 0
+JOIN CLM_IMPL.IE_HUB ieHub ON ieHub.IE_HKEY = clmIeLink.IE_HKEY
+JOIN CLM_IMPL.IE_SAT ieSat ON ieSat.IE_HKEY = ieHub.IE_HKEY
+JOIN CLM_IMPL.IE_CONTRACT_LINK ieCtrLink ON ieCtrLink.IE_HKEY = ieHub.IE_HKEY
+JOIN CLM_IMPL.IE_CONTRACT_SAT_LATEST ieCtrSat ON ieCtrSat.IE_CONTRACT_HKEY = ieCtrLink.IE_CONTRACT_HKEY AND ieCtrSat.IS_DELETED = 0
+JOIN PAS_IMPL.POLICY_HUB pHub ON pHub.POLICY_HKEY = ieCtrLink.POLICY_HKEY
+JOIN PAS_IMPL.POLICY_SAT_LATEST pSat ON pSat.POLICY_HKEY = pHub.POLICY_HKEY
+JOIN PAS.CONTRACT ctr ON ctr.CONTRACT_NUMBER = pHub.CONTRACT_NUMBER
+JOIN CFX.PUBLISHED_ARTIFACT art ON art.PUBLISHED_ARTIFACT_ID = ctr.PUBLISHED_ARTIFACT_ID
+JOIN BFX_IMPL.PRODUCTS pr ON pr.CODE = pSat.PRODUCT_CODE
+JOIN PTY_IMPL.PARTY_HUB hHub ON hHub.PARTY_CODE = pSat.HOLDER_CODE
+JOIN PTY_IMPL.PARTY_INFO_SAT_LATEST hSat on hSat.PARTY_INFO_HKEY = hHub.PARTY_HKEY
+WHERE ps.CODE_NAME IN ('ClaimDirectorApproval', 'MethodologyDirectorApproval')
+AND ac.ACTIVITY_STATUS = 'Open'
+{{#if parameters.claimNumber}}
+AND cl.CLAIM_NUMBER = @claimNumber
+{{/if}}
+{{#if parameters.contractNumber}}
+AND pHub.CONTRACT_NUMBER = @contractNumber
+{{/if}}
+{{#if parameters.insuredEventNumber}}
+AND ieHub.IE_NUMBER = @insuredEventNumber
+{{/if}}
+{{#if parameters.activityDateFrom}}
+AND ac.CREATED_ON >= @activityDateFrom
+{{/if}}
+{{#if parameters.activityDateDateTo}}
+AND ac.CREATED_ON <= @activityDateDateTo
+{{/if}}
+{{#if parameters.statementApplicationDateFrom}}
+AND appSat.STATEMENT_APPLICATION_DATE >= @statementApplicationDateFrom
+{{/if}}
+{{#if parameters.statementApplicationDateTo}}
+AND appSat.STATEMENT_APPLICATION_DATE <= @statementApplicationDateTo
+{{/if}}
+{{#if parameters.insuredEventDateFrom}}
+AND ieSat.IE_DATE >= @insuredEventDateFrom
+{{/if}}
+{{#if parameters.insuredEventDateTo}}
+AND ieSat.IE_DATE <= @insuredEventDateTo
+{{/if}}
+{{#if parameters.productCode}}
+AND pr.CODE = @productCode
+{{/if}}
+{{#if parameters.productGroup}}
+AND pr.PRODUCT_GROUP = @productGroup
+{{/if}}
+
+{{#if parameters.policyHolderCode}}
+AND pSat.HOLDER_CODE = @policyHolderCode
+{{/if}}
+{{#if parameters.policyHolderType}}
+AND hSat.CONFIGURATION_CODE_NAME = @policyHolderType
+{{/if}}

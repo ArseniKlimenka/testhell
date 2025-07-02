@@ -1,0 +1,10 @@
+﻿select CODE,
+       DESCRIPTION,
+       REGION_CODE
+from BFX_IMPL.REGISTRATION_AGENCY
+{{#if parameters.agencyCode}}
+where CODE = @agencyCode
+{{/if}}
+{{#if parameters.agencySearchText}}
+where DESCRIPTION like @agencySearchText
+{{/if}}

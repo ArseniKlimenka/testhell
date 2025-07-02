@@ -1,0 +1,902 @@
+{
+    "type": "Group",
+    "elements": [
+        {
+            "type": "DataGrid",
+            "elementId": "ProductConfigurationSearchTable",
+            "mode": "DataSource",
+            "pagination": {
+                "mode": "Regular",
+                "pageSizes": [
+                    10,
+                    50,
+                    100
+                ]
+            },
+            "selection": {
+                "mode": "None"
+            },
+            "columns": [
+                {
+                    "sortable": true,
+                    "title": "excelRowNumber",
+                    "name": "excelRowNumber",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/excelRowNumber"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "productCode",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/productCode"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "issueDateFrom",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/issueDateFrom"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "issueDateTo",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/issueDateTo"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "issueDateStr",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/issueDateStr"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "productDescription",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/productDescription"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "productGroupCode",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/productGroupCode"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "paymentFrequency",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/paymentFrequency"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "insuranceTerms",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/insuranceTerms"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "insuranceTermsMonths",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/insuranceTermsMonths"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "isWholeLife",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "template": "{{#if isWholeLife '==' 'true'}}true{{else}}false{{/if}}",
+                        "value": {
+                            "$ref": "#/properties/resultData"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "insuredIsPolicyHolder",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "template": "{{#if insuredIsPolicyHolder '==' 'true'}}true{{else}}false{{/if}}",
+                        "value": {
+                            "$ref": "#/properties/resultData"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "holderAgeOnStartDateMin",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/holderAgeOnStartDateMin"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "holderAgeOnStartDateMax",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/holderAgeOnStartDateMax"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "holderAgeOnStartDateMaxMandatoryAgreement",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/holderAgeOnStartDateMaxMandatoryAgreement"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "holderAgeOnEndDateMax",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/holderAgeOnEndDateMax"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "insuredAgeOnStartDateMin",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/insuredAgeOnStartDateMin"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "insuredAgeOnStartDateMax",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/insuredAgeOnStartDateMax"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "insuredAgeOnStartDateMandatoryAgreement",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/insuredAgeOnStartDateMandatoryAgreement"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "insuredAgeOnEndDateMax",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/insuredAgeOnEndDateMax"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "insuredAgeOnEndDateMaxMandatoryAgreement",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/insuredAgeOnEndDateMaxMandatoryAgreement"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "strategy",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/strategy"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "additionalServices",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/additionalServices"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "giftServices",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/giftServices"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "giftServicesPremium",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/giftServicesPremium"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "prefixOld",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/prefixOld"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "prefix",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/prefix"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "prefixByStrategyOld",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/prefixByStrategyOld"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "prefixByStrategy",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/prefixByStrategy"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "fixedPremiums",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/fixedPremiums"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "fixedInsuredSums",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/fixedInsuredSums"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "setFirstFixedInsuredSum",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "template": "{{#if setFirstFixedInsuredSum '==' 'true'}}true{{else}}false{{/if}}",
+                        "value": {
+                            "$ref": "#/properties/resultData"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "disableRiskInsuredSum",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "template": "{{#if disableRiskInsuredSum '==' 'true'}}true{{else}}false{{/if}}",
+                        "value": {
+                            "$ref": "#/properties/resultData"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "allowCalcFromPremium",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "template": "{{#if allowCalcFromPremium '==' 'true'}}true{{else}}false{{/if}}",
+                        "value": {
+                            "$ref": "#/properties/resultData"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "allowCalcFromInsuredSum",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "template": "{{#if allowCalcFromInsuredSum '==' 'true'}}true{{else}}false{{/if}}",
+                        "value": {
+                            "$ref": "#/properties/resultData"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "canHaveAdditionalRisks",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "template": "{{#if canHaveAdditionalRisks '==' 'true'}}true{{else}}false{{/if}}",
+                        "value": {
+                            "$ref": "#/properties/resultData"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "minRiskInsuredSum",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/minRiskInsuredSum"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "maxRiskInsuredSum",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/maxRiskInsuredSum"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "minPremium",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/minPremium"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "maxPremium",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/maxPremium"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "maxPremiumMandatoryAgreement",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/maxPremiumMandatoryAgreement"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "maxInsuredSumMainRisk",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/maxInsuredSumMainRisk"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "maxInsuredSumMainRiskMandatoryAgreement",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/maxInsuredSumMainRiskMandatoryAgreement"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "isPaidUpAvailable",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "template": "{{#if isPaidUpAvailable '==' 'true'}}true{{else}}false{{/if}}",
+                        "value": {
+                            "$ref": "#/properties/resultData"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "ruleCode",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/ruleCode"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "daysBetweenIssueAndStart",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/daysBetweenIssueAndStart"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "payPeriodDays",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/payPeriodDays"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "gracePeriodDays",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/gracePeriodDays"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "coolOffPeriodDays",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/coolOffPeriodDays"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "partnerBusinessCode",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/partnerBusinessCode"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "riskPackages",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/riskPackages"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "useThreePayments",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "template": "{{#if useThreePayments '==' 'true'}}true{{else}}false{{/if}}",
+                        "value": {
+                            "$ref": "#/properties/resultData"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "activeFrom",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/activeFrom"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "activeTo",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/activeTo"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "paperTypes",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/paperTypes"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "applicationPrintout",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/applicationPrintout"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "policyPrintout",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/policyPrintout"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "cashBackCoeff",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/cashBackCoeff"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "showFinKnowledgeQuestionnaire",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "template": "{{#if showFinKnowledgeQuestionnaire '==' 'true'}}true{{else}}false{{/if}}",
+                        "value": {
+                            "$ref": "#/properties/resultData"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "isReinvestAvailable",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "template": "{{#if isReinvestAvailable '==' 'true'}}true{{else}}false{{/if}}",
+                        "value": {
+                            "$ref": "#/properties/resultData"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "isReinvestFieldsAvailable",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "template": "{{#if isReinvestFieldsAvailable '==' 'true'}}true{{else}}false{{/if}}",
+                        "value": {
+                            "$ref": "#/properties/resultData"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "invoiceOnActivationIfReinvest",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "template": "{{#if invoiceOnActivationIfReinvest '==' 'true'}}true{{else}}false{{/if}}",
+                        "value": {
+                            "$ref": "#/properties/resultData"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "daysBetweenIssueAndStartReinvest",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/daysBetweenIssueAndStartReinvest"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "payPeriodDaysReinvest",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/payPeriodDaysReinvest"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "creditPrograms",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/creditPrograms"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "availableCurrencies",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/availableCurrencies"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "isMigrated",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "template": "{{#if isMigrated '==' 'true'}}true{{else}}false{{/if}}",
+                        "value": {
+                            "$ref": "#/properties/resultData"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "guaranteedIncome",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/guaranteedIncome"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "availablePaymentFrequency",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/availablePaymentFrequency"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "policyHolderType",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/policyHolderType"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "cardType",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/cardType"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "cumulationProductGroup",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/cumulationProductGroup"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "didType",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/didType"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "numOfWorkDaysToInvest",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/numOfWorkDaysToInvest"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "mf",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/mf"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "coolOffDIDRate",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/coolOffDIDRate"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "importDocumentId",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/importDocumentId"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "version",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/version"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "loadedBy",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/loadedBy"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "loadDate",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/loadDate"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "insuranceTermsDays",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/insuranceTermsDays"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "isProductLinkedToAsset",
+                    "cellContent": {
+                        "type": "OutputText",
+			"value": {
+                            "$ref": "#/properties/resultData/properties/isProductLinkedToAsset"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "consentToDataTransferingFNS",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "template": "{{#if consentToDataTransferingFNS '==' '1'}}true{{else}}false{{/if}}",
+                        "value": {
+                            "$ref": "#/properties/resultData"
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "type": "GridLayout",
+            "numberOfColumns": 3,
+            "elements": [
+                {
+                    "type": "Group",
+                    "stackContent": "Left",
+                    "width": 2,
+                    "elements": [
+                        {
+                            "type": "Button",
+                            "label": "Export last imported product configuration",
+                            "onClick": [
+                                {
+                                    "commandType": "executeAction",
+                                    "actionName": "exportLastProductConfiguration"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Button",
+                            "label": "Export filtered product configuration",
+                            "onClick": [
+                                {
+                                    "commandType": "executeAction",
+                                    "actionName": "exportFilteredProductConfiguration"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

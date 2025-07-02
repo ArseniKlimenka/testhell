@@ -1,0 +1,90 @@
+{
+    "allowParallelExecution": false,
+    "mainDataSource": "ContractNumberForCancelPolicyDataSource",
+    "additionalDataSources": [
+
+    ],
+    "initialisationSinks": [
+
+    ],
+    "sinks": [
+        {
+            "name": "CheckCancellationByClaim",
+            "fetch": {
+                "configuration": {
+                    "name": "DeathClaimByContractNumberDataSource"
+                }
+            }
+        },
+        {
+            "name": "CheckCancellationByAmendment",
+            "fetch": {
+                "configuration": {
+                    "name": "ContractChildDocumentsDataSource"
+                }
+            }
+        },
+        {
+            "name": "MakeTransitionToCancelled",
+            "documentTransition": {
+            }
+        },
+        {
+            "name": "GetContract",
+            "fetch": {
+                "configuration": {
+                    "name": "ContractVersionsDataSource"
+                }
+            }
+        },
+        {
+            "name": "GetExchangeRate",
+            "class": {
+                "className": "Adacta.AdInsure.RGSL.Common.API.Shared.Services.IRgslCurrencyConverterService, Adacta.AdInsure.RGSL.Common.API",
+                "methodName": "Convert"
+            }
+        },
+        {
+            "name": "GetAllocations",
+            "fetch": {
+                "configuration": {
+                    "name": "AllocationDataSource"
+                }
+            }
+        },
+        {
+            "name": "GetHolderData",
+            "fetch": {
+                "configuration": {
+                    "name": "GeneralPartyDataSource"
+                }
+            }
+        },
+        {
+            "name": "CreateLifeAmendmentCancellation",
+            "documentRelation": {
+                "relation": {
+                    "relationName": "CreateLifeAmendmentCancellation",
+                    "configurationVersion": "1"
+                }
+            }
+        },
+        {
+            "name": "MakeTransitionToAwaitingPaymentDocuments",
+            "documentTransition": {
+            }
+        },
+        {
+            "name": "MakeTransitionToActivated",
+            "documentTransition": {
+            }
+        }
+    ],
+    "completionSinks": [
+
+    ],
+    "errorSinks": [
+
+    ],
+    "version": "1"
+}

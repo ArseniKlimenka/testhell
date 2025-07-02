@@ -1,0 +1,212 @@
+{
+    "type": "Section",
+    "sectionLevel": 1,
+    "label": "DeclarationMainQuestions",
+    "isCollapsed": false,
+    "width": 12,
+    "elements": [
+        {
+            "type": "Section",
+            "sectionLevel": 2,
+            "label": "PolicyHolder",
+            "elements": [
+                {
+                    "type": "Input",
+                    "elementId": "declarationMainIsConfirmedPolicyHolder",
+                    "isCompact": true,
+                    "label": "isConfirmedPolicyHolder",
+                    "value": {
+                        "$ref": "#/properties/declarationMainConfirmation/properties/isConfirmedPolicyHolder"
+                    },
+                    "width": 2,
+                    "onValueChanged": [
+                        {
+                            "commandType": "executeAction",
+                            "actionName": "onChangeConfirmation"
+                        }
+                    ]
+                },
+                {
+                    "type": "Input",
+                    "elementId": "declarationMainIsNotConfirmedPolicyHolder",
+                    "isCompact": true,
+                    "label": "isNotConfirmedPolicyHolder",
+                    "value": {
+                        "$ref": "#/properties/declarationMainConfirmation/properties/isNotConfirmedPolicyHolder"
+                    },
+                    "width": 2,
+                    "onValueChanged": [
+                        {
+                            "commandType": "executeAction",
+                            "actionName": "onChangeConfirmation"
+                        }
+                    ]
+                },
+                {
+                    "type": "Input",
+                    "elementId": "declarationMainCommentPolicyHolder",
+                    "control": "TextArea",
+                    "enableResize": true,
+                    "numberOfRows": 2,
+                    "label": "commentPolicyHolder",
+                    "value": {
+                        "$ref": "#/properties/declarationMainConfirmation/properties/commentPolicyHolder"
+                    },
+                    "width": 8,
+                    "rule": {
+                        "effect": "SHOW",
+                        "condition": {
+                            "type": "LEAF",
+                            "expectedValue": true,
+                            "value": {
+                                "$ref": "#/properties/declarationMainConfirmation/properties/isNotConfirmedPolicyHolder"
+                            }
+                        }
+                    }
+                }
+            ],
+            "rule": {
+                "effect": "DISABLE_INITIAL",
+                "condition": {
+                    "type": "FUNC",
+                    "ruleFunction": "hasFutureNumberForAgent",
+                    "value": [
+                        {
+                            "$ref": "#"
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "type": "Section",
+            "sectionLevel": 2,
+            "label": "InsuredPerson",
+            "rule": {
+                "effect": "HIDE",
+                "condition": {
+                    "type": "FUNC",
+                    "ruleFunction": "hideInsuredPerson",
+                    "value": [
+                        {
+                            "$ref": "#/properties/declarationMainConfirmation"
+                        }
+                    ]
+                }
+            },
+            "elements": [
+                {
+                    "type": "Group",
+                    "elements": [
+                        {
+                            "type": "Input",
+                            "elementId": "declarationMainIsConfirmedInsuredPerson",
+                            "isCompact": true,
+                            "label": "isConfirmedInsuredPerson",
+                            "value": {
+                                "$ref": "#/properties/declarationMainConfirmation/properties/isConfirmedInsuredPerson"
+                            },
+                            "width": 2,
+                            "onValueChanged": [
+                                {
+                                    "commandType": "executeAction",
+                                    "actionName": "onChangeConfirmation"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Input",
+                            "elementId": "declarationMainIsNotConfirmedInsuredPerson",
+                            "isCompact": true,
+                            "label": "isNotConfirmedInsuredPerson",
+                            "value": {
+                                "$ref": "#/properties/declarationMainConfirmation/properties/isNotConfirmedInsuredPerson"
+                            },
+                            "width": 2,
+                            "onValueChanged": [
+                                {
+                                    "commandType": "executeAction",
+                                    "actionName": "onChangeConfirmation"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Input",
+                            "elementId": "declarationMainCommentInsuredPerson",
+                            "control": "TextArea",
+                            "enableResize": true,
+                            "numberOfRows": 2,
+                            "label": "commentInsuredPerson",
+                            "value": {
+                                "$ref": "#/properties/declarationMainConfirmation/properties/commentInsuredPerson"
+                            },
+                            "width": 8,
+                            "rule": {
+                                "effect": "SHOW",
+                                "condition": {
+                                    "type": "LEAF",
+                                    "expectedValue": true,
+                                    "value": {
+                                        "$ref": "#/properties/declarationMainConfirmation/properties/isNotConfirmedInsuredPerson"
+                                    }
+                                }
+                            }
+                        }
+                    ],
+                    "rule": {
+                        "effect": "DISABLE_INITIAL",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "hasFutureNumberForAgent",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "type": "Section",
+            "sectionLevel": 2,
+            "elements": [
+                {
+                    "type": "Input",
+                    "isCompact": true,
+                    "label": "manualCorrection",
+                    "value": {
+                        "$ref": "#/properties/declarationMainConfirmation/properties/manualCorrection"
+                    },
+                    "width": 2,
+                    "onValueChanged": [
+                        {
+                            "commandType": "executeAction",
+                            "actionName": "onChangeManualCorrection"
+                        }
+                    ],
+                    "rule": {
+                        "effect": "SHOW",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "showManualCorrection",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "type": "Component",
+            "name": "DeclarationMain",
+            "value": {
+                "$ref": "#/properties/declarationMain"
+            }
+        }
+    ]
+}

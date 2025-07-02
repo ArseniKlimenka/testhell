@@ -1,0 +1,119 @@
+{
+    "elementId": "AllocationPaymentOrderDataGridId",
+    "type": "DataGrid",
+    "value": {
+        "$ref": "#/properties/response/properties/data"
+    },
+    "mode": "DataSource",
+    "pagination": {
+        "mode": "Regular",
+        "pageSizes": [
+            10,
+            25,
+            50,
+            500
+        ]
+    },
+    "eventHandlers": [
+        {
+            "eventName": "ALLOCATION_TYPE_CHANGED",
+            "senders": [],
+            "commands": {
+                "commandType": "executeAction",
+                "actionName": "allocationTypeChanged"
+            }
+        }
+    ],
+    "selection": {
+        "mode": "Single",
+        "enableRowSelection": true,
+        "showCheckBox": true,
+        "selectBy": "#/properties/resultData/properties/documentNo",
+        "onSelectionChanged": {
+            "commandType": "executeAction",
+            "actionName": "onSelectionChanged"
+        }
+    },
+    "height": "None",
+    "columns": [
+        {
+            "sortable": true,
+            "title": "PO No",
+            "cellContent": {
+                "type": "Link",
+                "label": "Link to payment order",
+                "targetType": "Entity",
+                "value": {
+                    "mapping": "linkToPOOverview",
+                    "$ref": "#"
+                },
+                "width": 1,
+                "openInNewTab": true,
+                "content": {
+                    "text": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/documentNo"
+                        }
+                    }
+                }
+            },
+            "name": "documentNo"
+        },
+        {
+            "sortable": true,
+            "title": "PO date",
+            "cellContent": {
+                "type": "OutputText",
+                "value": {
+                    "$ref": "#/properties/resultData/properties/poDate"
+                }
+            },
+            "name": "poDate"
+        },
+        {
+            "sortable": true,
+            "title": "Recipient",
+            "cellContent": {
+                "type": "OutputText",
+                "value": {
+                    "$ref": "#/properties/resultData/properties/recipientName"
+                }
+            },
+            "name": "recipientName"
+        },
+        {
+            "sortable": true,
+            "title": "Debt amount",
+            "cellContent": {
+                "type": "OutputText",
+                "value": {
+                    "$ref": "#/properties/resultData/properties/debtAmount"
+                }
+            },
+            "name": "debtAmount"
+        },
+        {
+            "sortable": true,
+            "title": "Open debt amount",
+            "cellContent": {
+                "type": "OutputText",
+                "value": {
+                    "$ref": "#/properties/resultData/properties/openDebtAmount"
+                }
+            },
+            "name": "openDebtAmount"
+        },
+        {
+            "sortable": true,
+            "title": "Currency code",
+            "cellContent": {
+                "type": "OutputText",
+                "value": {
+                    "$ref": "#/properties/resultData/properties/currencyCode"
+                }
+            },
+            "name": "currencyCode"
+        }
+    ]
+}

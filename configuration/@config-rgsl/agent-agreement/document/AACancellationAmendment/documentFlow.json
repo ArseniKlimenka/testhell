@@ -1,0 +1,47 @@
+{
+    "processType": "AgentAgreement",
+    "initialState": "Draft",
+    "actors": [
+        "AdministratorAA",
+        "General",
+        "ViewerAA"
+    ],
+    "states": [
+        {
+            "name": "Draft",
+            "operations": [
+                {
+                    "name": "Save"
+                }
+            ]
+        },
+        {
+            "name": "Activated",
+            "appliesVersion": true
+        },
+        {
+            "name": "Annulled",
+            "discardsVersion": true
+        }
+    ],
+    "transitions": [
+        {
+            "name": "DraftToAnnulled",
+            "from": "Draft",
+            "to": "Annulled",
+            "allowOnValidationErrors": {
+                "all": true
+            }
+        },
+        {
+            "name": "DraftToActivated",
+            "from": "Draft",
+            "to": "Activated"
+        },
+        {
+            "name": "ActivatedToAnnulled",
+            "from": "Activated",
+            "to": "Annulled"
+        }
+    ]
+}

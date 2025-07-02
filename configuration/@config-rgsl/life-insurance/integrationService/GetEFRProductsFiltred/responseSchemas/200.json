@@ -1,0 +1,64 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema",
+    "description": "Response schema for correct EFR products filtered response.",
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+        "id": {
+            "type": "string",
+            "description": "Generated id for response."
+        },
+        "errorResponse": {
+            "type": "object",
+            "code": {
+                "type": "string",
+                "description": "Error code."
+            },
+            "message": {
+                "type": "string",
+                "description": "Error description."
+            },
+            "additionalErrorData": {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string",
+                        "description": "Additional error description."
+                    }
+                }
+            }
+        },
+        "data": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "adinsureProduct": {
+                    "type": "object",
+                    "additionalProperties": true,
+                    "description": "Product response object"
+                },
+                "adinsureAgent": {
+                    "type": "object",
+                    "additionalProperties": true,
+                    "description": "Agent response object"
+                },
+                "adinsureConditions": {
+                    "type": "object",
+                    "additionalProperties": true,
+                    "description": "Conditions response object"
+                },
+                "adinsureRisks": {
+                    "type": "array",
+                    "description": "Array of risk response objects",
+                    "items": {
+                        "type": "object",
+                        "risk": {
+                            "type": "object",
+                            "additionalProperties": true
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

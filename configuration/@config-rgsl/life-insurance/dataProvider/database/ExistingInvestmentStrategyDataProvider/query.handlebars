@@ -1,0 +1,9 @@
+﻿select
+  distinct
+  inv.STRATEGY_CODE,
+  inv.STRATEGY_DESCRIPTION
+from
+  PAS_IMPL.QUOTE_SAT agr,
+  PAS_IMPL.QUOTE_INVESTMENT_SAT inv
+where agr.QUOTE_HKEY = inv.QUOTE_INVESTMENT_HKEY
+  and agr.PRODUCT_CODE = @productCode

@@ -1,0 +1,228 @@
+{
+    "type": "GridLayout",
+    "numberOfColumns": 12,
+    "elements": [
+        {
+            "type": "Section",
+            "label": "Input parameters",
+            "sectionLevel": 1,
+            "elements": [
+                {
+                    "type": "Input",
+                    "label": "Product",
+                    "multiple": true,
+                    "value": {
+                        "$ref": "#/properties/productCodes"
+                    },
+                    "control": "Dropdown",
+                    "width": 3,
+                    "autocomplete": {
+                        "minTextLength": 0,
+                        "dropDownItemsCount": 15,
+                        "selectItemOnMatch": false
+                    },
+                    "source": {
+                        "dataSource": {
+                            "name": "ProductsDataSource",
+                            "searchFieldPath": "description",
+                            "requestMapping": "productRequestMapping",
+                            "responseMapping": "productResponseMapping"
+                        },
+                        "displayFieldName": "productDescription",
+                        "valueFieldName": "productCode"
+                    }
+                },
+                {
+                    "type": "Input",
+                    "label": "Strategy",
+                    "multiple": false,
+                    "value": {
+                        "$ref": "#/properties/strategyCode"
+                    },
+                    "control": "Dropdown",
+                    "width": 3,
+                    "autocomplete": {
+                        "minTextLength": 0,
+                        "dropDownItemsCount": 1000,
+                        "selectItemOnMatch": false
+                    },
+                    "source": {
+                        "dataSource": {
+                            "name": "InvestmentStrategyDataSource",
+                            "searchFieldPath": "investmentStrategyDescription",
+                            "responseMapping": "investmentStrategyResponseMapping",
+                            "resultCount": 1000
+                        },
+                        "displayFieldName": "investmentStrategyDescription",
+                        "valueFieldName": "investmentStrategyCode"
+                    }
+                },
+                {
+                    "type": "Input",
+                    "label": "issueDateMin",
+                    "width": 3,
+                    "value": {
+                        "$ref": "#/properties/issueDateMin"
+                    }
+                },
+                {
+                    "type": "Input",
+                    "label": "issueDateMax",
+                    "width": 3,
+                    "value": {
+                        "$ref": "#/properties/issueDateMax"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "Section",
+            "label": "Output parameters",
+            "sectionLevel": 1,
+            "elements": [
+                {
+                    "type": "Group",
+                    "elements": [
+                        {
+                            "type": "Input",
+                            "width": 4,
+                            "label": "strategyDescriptionFull",
+                            "value": {
+                                "$ref": "#/properties/strategyDescriptionFull"
+                            }
+                        },
+                        {
+                            "type": "Input",
+                            "width": 4,
+                            "label": "purchaseDate",
+                            "value": {
+                                "$ref": "#/properties/purchaseDate"
+                            }
+                        },
+                        {
+                            "type": "Input",
+                            "width": 4,
+                            "label": "dischargeDate",
+                            "value": {
+                                "$ref": "#/properties/dischargeDate"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "type": "Group",
+                    "elements": [
+                        {
+                            "type": "Input",
+                            "width": 4,
+                            "label": "didBeginDate",
+                            "value": {
+                                "$ref": "#/properties/didBeginDate"
+                            }
+                        },
+                        {
+                            "type": "Input",
+                            "width": 4,
+                            "label": "didEndDate",
+                            "value": {
+                                "$ref": "#/properties/didEndDate"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "type": "Group",
+                    "elements": [
+                        {
+                            "type": "Input",
+                            "width": 4,
+                            "label": "windowStartDate",
+                            "value": {
+                                "$ref": "#/properties/windowStartDate"
+                            }
+                        },
+                        {
+                            "type": "Input",
+                            "width": 4,
+                            "label": "windowEndDate",
+                            "value": {
+                                "$ref": "#/properties/windowEndDate"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "type": "Group",
+                    "elements": [
+                        {
+                            "type": "DataGrid",
+                            "label": "couponPeriods",
+                            "labelType": "H1",
+                            "paginationMode": "regular",
+                            "value": {
+                                "$ref": "#/properties/couponPeriods"
+                            },
+                            "mode": "Array",
+                            "pagination": {
+                                "mode": "Regular",
+                                "pageSizes": [
+                                    15,
+                                    30,
+                                    50
+                                ],
+                                "defaultPageSize": 15
+                            },
+                            "actions": [
+                                "Add",
+                                "Edit",
+                                "Delete"
+                            ],
+                            "edit": {
+                                "mode": "Immediate",
+                                "inline": "SingleRow"
+                            },
+                            "height": "None",
+                            "alternateRowColors": true,
+                            "columns": [
+                                {
+                                    "sortable": true,
+                                    "title": "beginDate",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "value": {
+                                            "$ref": "#/properties/beginDate"
+                                        }
+                                    },
+                                    "editCellContent": {
+                                        "type": "Input",
+                                        "value": {
+                                            "$ref": "#/properties/beginDate"
+                                        }
+                                    },
+                                    "name": "beginDate"
+                                },
+                                {
+                                    "sortable": true,
+                                    "title": "endDate",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "value": {
+                                            "$ref": "#/properties/endDate"
+                                        }
+                                    },
+                                    "editCellContent": {
+                                        "type": "Input",
+                                        "value": {
+                                            "$ref": "#/properties/endDate"
+                                        }
+                                    },
+                                    "name": "endDate"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

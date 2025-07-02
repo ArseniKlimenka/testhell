@@ -1,0 +1,68 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema",
+    "description": "Response schema for correct EFR products response.",
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+        "id": {
+            "type": "string",
+            "description": "Generated id for response."
+        },
+        "data": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "products": {
+                    "type": "array",
+                    "description": "Array of cover objects",
+                    "items": {
+                        "type": "object",
+                        "salesSegment": {
+                            "type": "string"
+                        },
+                        "partnerCode": {
+                            "type": "string"
+                        },
+                        "partnerBusinessCode": {
+                            "type": "string"
+                        },
+                        "productType": {
+                            "type": "string"
+                        },
+                        "productName": {
+                            "type": "string"
+                        },
+                        "productCode": {
+                            "type": "string"
+                        },
+                        "investmentStrategyCode": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "risks": {
+                            "type": "array",
+                            "description": "Array of risk objects",
+                            "items": {
+                                "type": "object",
+                                "riskCode": {
+                                    "type": "string"
+                                },
+                                "riskShortDescription": {
+                                    "type": "string"
+                                },
+                                "riskFullDescription": {
+                                    "type": "string"
+                                },
+                                "riskMandatory": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

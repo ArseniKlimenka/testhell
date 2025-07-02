@@ -1,0 +1,76 @@
+{
+    "type": "DataGrid",
+    "mode": "DataSource",
+    "orderBy": "UserId",
+    "pagination": {
+        "mode": "Regular",
+        "pageSizes": [
+            5,
+            10,
+            15
+        ]
+    },
+    "selection": {
+        "mode": "None"
+    },
+    "height": "None",
+    "columns": [
+        {
+            "sortable": false,
+            "title": "Username",
+            "cellContent": {
+                "type": "Link",
+                "targetType": "Entity",
+                "value": {
+                    "mapping": "urlMapping",
+                    "$ref": "#"
+                },
+                "content": {
+                    "text": {
+                        "type": "OutputText",
+                        "template": "{{expr username}}",
+                        "textProperties": [
+                            "bold"
+                        ],
+                        "value": {
+                            "$ref": "#/properties/resultData"
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "sortable": false,
+            "title": "Party name",
+            "cellContent": {
+                "type": "OutputText",
+                "defaultValue": "",
+                "value": {
+                    "$ref": "#/properties/resultData/properties/displayName"
+                }
+            }
+        },
+        {
+            "sortable": false,
+            "title": "Party code",
+            "cellContent": {
+                "type": "OutputText",
+                "defaultValue": "",
+                "value": {
+                    "$ref": "#/properties/resultData/properties/partyCode"
+                }
+            }
+        },
+        {
+            "sortable": false,
+            "title": "Expire date",
+            "cellContent": {
+                "type": "OutputText",
+                "defaultValue": "",
+                "value": {
+                    "$ref": "#/properties/resultData/properties/expireDate"
+                }
+            }
+        }
+    ]
+}

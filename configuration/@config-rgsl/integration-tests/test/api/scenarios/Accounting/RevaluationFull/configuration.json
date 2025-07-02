@@ -1,0 +1,125 @@
+{
+    "steps": [
+        {
+            "$ref": "AdjustAccountingPeriods",
+            "context": {
+                "firstOpenPeriod": "2022-01-01"
+            }
+        },
+        {
+            "$ref": "AdjustCurrentDate",
+            "context": {
+                "currentDate": "2022-01-01"
+            }
+        },
+        {
+            "$ref": "SetCurrencyExchangeRates",
+            "context": {
+                "currencies": {
+                    "EUR": [
+                        {
+                            "date": "2000-01-01",
+                            "rate": 80
+                        },
+                        {
+                            "date": "2022-02-01",
+                            "rate": 100
+                        },
+                        {
+                            "date": "2022-03-01",
+                            "rate": 125
+                        }
+                    ],
+                    "USD": [
+                        {
+                            "date": "2000-01-01",
+                            "rate": 50
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "$ref": "CreateALIPolicyDemo",
+            "context": {
+                "policyStartDate": "2022-01-01",
+                "currencyCode": "EUR",
+                "paymentFrequencyCode": "3",
+                "riskPremium": 1000
+            }
+        },
+        {
+            "$ref": "CreatePaymentAndAutoAllocate",
+            "description": "Pay first installment",
+            "context": {
+                "amountToAllocate": 2000,
+                "currencyCode": "USD",
+                "expectedMatchAmount": 1000,
+                "paymentDate": "2022-02-01",
+                "transactionDate": "2022-02-02",
+                "referenceNoToAllocate": "{{$.contractNumber}}"
+            }
+        },
+        {
+            "code": "ValidateTransactions_1",
+            "description": "Validate transactions 1",
+            "requests": [],
+            "assert": {
+                "expected": "./steps/validateTransactions/expectedResult_1.json",
+                "module": "../../lib/accounting/assert.js",
+                "function": "assertTransactions"
+            }
+        },
+        {
+            "$ref": "CreatePaymentAndAutoAllocate",
+            "description": "Pay second installment (1/2)",
+            "context": {
+                "amountToAllocate": 1250,
+                "currencyCode": "USD",
+                "expectedMatchAmount": 500,
+                "expectedPostAmount": 0,
+                "paymentDate": "2022-03-01",
+                "transactionDate": "2022-03-02",
+                "referenceNoToAllocate": "{{$.contractNumber}}"
+            }
+        },
+        {
+            "code": "ValidateTransactions_2",
+            "description": "Validate transactions 2",
+            "requests": [],
+            "assert": {
+                "expected": "./steps/validateTransactions/expectedResult_2.json",
+                "module": "../../lib/accounting/assert.js",
+                "function": "assertTransactions"
+            }
+        },
+        {
+            "$ref": "CreatePaymentAndAutoAllocate",
+            "description": "Pay second installment (2/2)",
+            "context": {
+                "amountToAllocate": 1250,
+                "currencyCode": "USD",
+                "expectedMatchAmount": 500,
+                "paymentDate": "2022-03-01",
+                "transactionDate": "2022-03-02",
+                "referenceNoToAllocate": "{{$.contractNumber}}"
+            }
+        },
+        {
+            "code": "ValidateTransactions_3",
+            "description": "Validate transactions 3",
+            "requests": [],
+            "assert": {
+                "expected": "./steps/validateTransactions/expectedResult_3.json",
+                "module": "../../lib/accounting/assert.js",
+                "function": "assertTransactions"
+            }
+        },
+        {
+            "$ref": "AdjustCurrentDate",
+            "context": {
+                "currentDate": null
+            }
+        }
+    ]
+}

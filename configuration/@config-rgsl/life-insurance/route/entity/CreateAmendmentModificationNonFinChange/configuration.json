@@ -1,0 +1,139 @@
+{
+    "entityType": "UniversalDocument",
+    "condition": {
+        "events": [
+            "StatusChanged"
+        ],
+        "configuration": {
+            "names": [
+                "LifeInsuranceRequest"
+            ]
+        },
+        "documentStates": [
+            "CreateNonFinancialAmendment"
+        ]
+    },
+    "allowMultipleTransactions": true,
+    "sinks": [
+        {
+            "name": "GenerateChangeMailSequence",
+            "sequence": {
+                "createNewSequenceName": true
+            }
+        },
+        {
+            "name": "GetExistingRequestAttachments",
+            "fetch": {
+                "configuration": {
+                    "name": "EntitiesAttachmentDataSource"
+                }
+            }
+        },
+        {
+            "name": "GetContract",
+            "fetch": {
+                "configuration": {
+                    "name": "ContractVersionsDataSource"
+                }
+            }
+        },
+        {
+            "name": "CreateAccumulatedLifeNonFinChangeAmendment",
+            "documentRelation": {
+                "relation": {
+                    "relationName": "CreditLifeInsurancePolicyCreateNonFinancialChangeAmendmentRelation",
+                    "configurationName": "AccumulatedLifeInsurancePolicy",
+                    "configurationVersion": "1"
+                }
+            }
+        },
+        {
+            "name": "CreateEquityLifeNonFinChangeAmendment",
+            "documentRelation": {
+                "relation": {
+                    "relationName": "EquityLifeInsurancePolicyCreateNonFinancialChangeAmendmentRelation",
+                    "configurationName": "EquityLifeInsurancePolicy",
+                    "configurationVersion": "1"
+                }
+            }
+        },
+        {
+            "name": "CreateInvestmentLifeNonFinChangeAmendment",
+            "documentRelation": {
+                "relation": {
+                    "relationName": "InvestmentLifeInsurancePolicyCreateNonFinancialChangeAmendmentRelation",
+                    "configurationName": "InvestmentLifeInsurancePolicy",
+                    "configurationVersion": "1"
+                }
+            }
+        },
+        {
+            "name": "CreateCreditLifeNonFinChangeAmendment",
+            "documentRelation": {
+                "relation": {
+                    "relationName": "CreditLifeInsurancePolicyCreateNonFinancialChangeAmendmentRelation",
+                    "configurationName": "CreditLifeInsurancePolicy",
+                    "configurationVersion": "1"
+                }
+            }
+        },
+        {
+            "name": "CreateRiskLifeNonFinChangeAmendment",
+            "documentRelation": {
+                "relation": {
+                    "relationName": "RiskLifeInsurancePolicyCreateNonFinancialChangeAmendmentRelation",
+                    "configurationName": "RiskLifeInsurancePolicy",
+                    "configurationVersion": "1"
+                }
+            }
+        },
+        {
+            "name": "CreateMedLifeNonFinChangeAmendment",
+            "documentRelation": {
+                "relation": {
+                    "relationName": "MedLifeInsurancePolicyCreateNonFinancialChangeAmendmentRelation",
+                    "configurationName": "MedLifeInsurancePolicy",
+                    "configurationVersion": "1"
+                }
+            }
+        },
+        {
+            "name": "CreateAccidentLifeNonFinChangeAmendment",
+            "documentRelation": {
+                "relation": {
+                    "relationName": "AccidentLifeInsurancePolicyCreateNonFinancialChangeAmendmentRelation",
+                    "configurationName": "AccidentLifeInsurancePolicy",
+                    "configurationVersion": "1"
+                }
+            }
+        },
+        {
+            "name": "GetAmendmentId",
+            "fetch": {
+                "configuration": {
+                    "name": "ContractVersionsDataSource"
+                }
+            }
+        },
+        {
+            "ref": "CopyAttachmentsSinkGroup"
+        },
+        {
+            "name": "RequestToCreateAmendment",
+            "documentTransition": {
+                "transition": {}
+            }
+        }
+    ],
+    "errorSinks": [
+        {
+            "name": "WriteSinkError",
+            "database": {
+                "tables": [
+                    "BFX_IMPL.SINK_ERROR"
+                ]
+            }
+        }
+    ],
+    "version": "1"
+}

@@ -1,0 +1,36 @@
+{
+    "type": "Group",
+    "elements": [
+        {
+            "type": "Link",
+            "label": "CopyOf",
+            "targetType": "Url",
+            "value": {
+                "mapping": "contractUrlMapping",
+                "$ref": "#"
+            },
+            "content": {
+                "text": {
+                    "type": "OutputText",
+                    "defaultValue": "",
+                    "value": {
+                        "mapping": "linkNameMapping",
+                        "$ref": "#"
+                    }
+                }
+            },
+            "rule": {
+                "effect": "SHOW",
+                "condition": {
+                    "type": "FUNC",
+                    "value": [
+                        {
+                            "$ref": "#"
+                        }
+                    ],
+                    "ruleFunction": "showCopyOf"
+                }
+            }
+        }
+    ]
+}

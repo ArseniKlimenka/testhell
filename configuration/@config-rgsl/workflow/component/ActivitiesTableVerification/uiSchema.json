@@ -1,0 +1,313 @@
+{
+    "type": "GridLayout",
+    "numberOfColumns": 4,
+    "elements": [
+        {
+            "type": "DataGrid",
+            "mode": "DataSource",
+            "pagination": {
+                "mode": "Regular",
+                "defaultPageSize": 50,
+                "pageSizes": [
+                    5,
+                    10,
+                    15,
+                    50
+                ]
+            },
+            "selection": {
+                "mode": "Multi",
+                "enableRowSelection": true,
+                "showCheckBox": true
+            },
+            "height": "None",
+            "actions": [],
+            "columns": [
+                {
+                    "title": "Document Number",
+                    "sortable": true,
+                    "name": "businessNumber",
+                    "cellContent": {
+                        "type": "Link",
+                        "targetType": "Entity",
+                        "value": {
+                            "mapping": "prepareEntityLink",
+                            "$ref": "#/properties/resultData/properties/metadata"
+                        },
+                        "content": {
+                            "text": {
+                                "type": "OutputText",
+                                "textProperties": [
+                                    "bold"
+                                ],
+                                "template": "{{expr businessNumber}}",
+                                "value": {
+                                    "$ref": "#"
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "title": "contractNumber",
+                    "sortable": true,
+                    "name": "contractNumber",
+                    "cellContent": {
+                        "type": "Link",
+                        "targetType": "Entity",
+                        "value": {
+                            "mapping": "prepareContractLink",
+                            "$ref": "#/properties/resultData"
+                        },
+                        "content": {
+                            "text": {
+                                "type": "OutputText",
+                                "textProperties": [
+                                    "bold"
+                                ],
+                                "template": "{{expr contractNumber}}",
+                                "value": {
+                                    "$ref": "#"
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "title": "issueDate",
+                    "sortable": true,
+                    "name": "issueDate",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "template": "{{expr issueDate 'd'}}",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/resultData"
+                        }
+                    }
+                },
+                {
+                    "title": "holderName",
+                    "sortable": true,
+                    "name": "holderName",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "template": "{{expr holderName}}",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/resultData"
+                        }
+                    }
+                },
+                {
+                    "title": "holderBirthDate",
+                    "sortable": true,
+                    "name": "holderBirthDate",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "template": "{{expr holderBirthDate 'd'}}",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/resultData"
+                        }
+                    }
+                },
+                {
+                    "title": "paymentFrequencyName",
+                    "sortable": true,
+                    "name": "paymentFrequencyName",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "template": "{{expr paymentFrequencyName}}",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/resultData"
+                        }
+                    }
+                },
+                {
+                    "title": "productGroup",
+                    "sortable": true,
+                    "name": "productGroup",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "template": "{{expr productGroup}}",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/resultData"
+                        }
+                    }
+                },
+                {
+                    "title": "productName",
+                    "sortable": true,
+                    "name": "productName",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "template": "{{expr productName}}",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/resultData"
+                        }
+                    }
+                },
+                {
+                    "title": "partnerName",
+                    "sortable": true,
+                    "name": "partnerName",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "template": "{{expr partnerName}}",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/resultData"
+                        }
+                    }
+                },
+                {
+                    "title": "Assignee",
+                    "sortable": true,
+                    "name": "assigneeName",
+                    "cellContent": {
+                        "type": "GridLayout",
+                        "numberOfColumns": 4,
+                        "elements": [
+                            {
+                                "type": "OutputText",
+                                "defaultValue": "",
+                                "template": "{{#if resultData.assigneeName}}{{expr resultData.assigneeName}}{{else}}{{expr resultData.groupName}}{{/if}}",
+                                "width": 3,
+                                "value": {
+                                    "$ref": "#"
+                                }
+                            },
+                            {
+                                "type": "Icon",
+                                "iconStyleFunction": "getAssigneeIcon",
+                                "width": 1,
+                                "value": {
+                                    "$ref": "#/properties/resultData/properties/assigneeName"
+                                }
+                            }
+                        ]
+                    }
+                },
+                {
+                    "title": "AssigneeLogin",
+                    "sortable": true,
+                    "name": "assigneeLogin",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "defaultValue": "",
+                        "template": "{{#if resultData.assigneeLogin}}{{expr resultData.assigneeLogin}}{{else}}{{expr resultData.groupName}}{{/if}}",
+                        "width": 3,
+                        "value": {
+                            "$ref": "#"
+                        }
+                    }
+                },
+                {
+                    "title": "documentStateLocalized",
+                    "sortable": true,
+                    "name": "documentStateLocalized",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "defaultValue": "",
+                        "template": "{{expr resultData.documentStateLocalized}}",
+                        "value": {
+                            "$ref": "#"
+                        }
+                    }
+                },
+                {
+                    "title": "Task status",
+                    "sortable": true,
+                    "name": "activityStatus",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/activityStatus"
+                        }
+                    }
+                },
+                {
+                    "title": "createdDate",
+                    "sortable": true,
+                    "name": "createdDate",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "template": "{{expr createdDate 'dt'}}",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/resultData"
+                        }
+                    }
+                },
+                {
+                    "title": "closedDate",
+                    "sortable": true,
+                    "name": "closedDate",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "template": "{{expr closedDate 'dt'}}",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/resultData"
+                        }
+                    }
+                },
+                {
+                    "title": "startDate",
+                    "sortable": true,
+                    "name": "startDate",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "template": "{{expr startDate 'd'}}",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/resultData"
+                        }
+                    }
+                },
+                {
+                    "title": "endDate",
+                    "sortable": true,
+                    "name": "endDate",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "template": "{{expr endDate 'd'}}",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/resultData"
+                        }
+                    }
+                },
+                {
+                    "title": "contractState",
+                    "sortable": true,
+                    "name": "contractState",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/contractState"
+                        }
+                    }
+                },
+                {
+                    "title": "holderAge",
+                    "sortable": true,
+                    "name": "holderAge",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "template": "{{expr holderAge}}",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/resultData"
+                        }
+                    }
+                }
+            ]
+        }
+    ]
+}

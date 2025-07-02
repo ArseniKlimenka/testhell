@@ -1,0 +1,19 @@
+SELECT r.riskCode 
+FROM 
+    (
+		SELECT body 
+		FROM pas.CONTRACT 
+		WHERE
+			{{#if parameters.contractNumber}} 
+			CONTRACT_NUMBER = @contractNumber
+			{{else}}
+			0=1
+			{{/if}}
+	) c
+    CROSS APPLY OPENJSON(c.BODY,'$.risks')
+	WITH
+	(
+		riskCode NVARCHAR(50) '$.risk.riskCode',
+		riskOrder INT '$.risk.riskOrder'
+	) r
+WHERE r.riskOrder = 1

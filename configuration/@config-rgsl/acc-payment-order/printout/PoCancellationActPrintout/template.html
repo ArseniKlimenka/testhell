@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="ru-RU" xml:lang="ru-RU" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+    <title>СТРАХОВОЙ АКТ</title>
+    <link rel="stylesheet" href="assets/styles/style.css">
+	{{{topLeftContent}}}
+</head>
+
+<body>
+
+    <div id="doc-no-wrapper">
+		<div class="doc-desc-container">
+			<p><span class="act-no">СТРАХОВОЙ АКТ № </span><span>{{actNumber}}</span></p>
+		</div>
+        <div class="doc-desc-container">
+			<p><span class="claim-no">Расторжение № </span><span>{{contractAmendmentNumber}}</span></p>
+		</div>
+	</div>
+
+    <div id="info-wrapper">
+		<div id="info-city-container">
+			<p class="info-text">г. Москва </p>
+		</div>
+		<div id="info-date-container">
+			<p class="info-text">{{actDateFormated}}</p>
+		</div>
+	</div>
+
+    <div class="title-container">
+		<p id="title-text">Настоящий акт составлен на основании заявления Страхователя о выплате выкупной суммы и представленных Страховщику документов, подтверждающих факт расторжения договора страхования.</p>
+        <p id="title-text">Досрочное прекращение договора страхования № {{contractNumber}}
+			<br>
+			от {{paymentOrderDate}} на основании уведомления от {{contractIssueDateFormated}}</p>
+	</div>
+
+    <table id="main-table" cellpadding="5">
+		<th class="main-table-header"></th>
+		<th class="main-table-header"></th>
+		<th class="main-table-header"></th>
+		<tr>
+			<td colspan="2">Номер договора страхования (полиса)</td>
+			<td>{{contractNumber}}</td>
+		</tr>
+		<tr>
+			<td colspan="2">Дата заключения (предложения) договора страхования</td>
+			<td>{{contractIssueDateFormated}}</td>
+		</tr>
+		<tr>
+			<td colspan="2">Дата начала действия (ответственности) договора страхования</td>
+			<td>{{contractStartDateFormated}}</td>
+		</tr>
+		<tr>
+			<td colspan="2">Вид страхования</td>
+			<td>{{contractType}}</td>
+		</tr>
+		<tr>
+			<td colspan="2">Страхователь</td>
+			<td>{{holderFullName}}</td>
+		</tr>
+		<tr>
+			<td colspan="2">Застрахованный</td>
+			<td>{{insuredFullName}}</td>
+		</tr>
+		<tr>
+			<td colspan="2">Валюта договора страхования</td>
+			<td>{{contractCurrencyDescription}}</td>
+		</tr>
+		<tr>
+			<td colspan="2">Основание к выплате</td>
+			<td>{{paymentBasis}}</td>
+		</tr>
+		<tr>
+			<td colspan="2">Размер выкупной суммы до удержания НДФЛ</td>
+			<td>{{surrenderValue}}</td>
+		</tr>
+		<tr>
+			<td colspan="2">Размер дополнительного инвестиционного дохода</td>
+			<td>{{investProfit}}</td>
+		</tr>
+		<tr>
+			<td colspan="2">Размер НДФЛ</td>
+			<td>{{pitAmountInRub}}</td>
+		</tr>
+		<tr>
+			<td colspan="2">Обязательства по оплате страховых взносов до конца текущего полисного года</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td colspan="2">Размер задолженности по оплате страховых взносов на дату расторжения</td>
+			<td>{{debt}}</td>
+		</tr>
+		<tr>
+			<td colspan="2">Ранее произведенные выплаты по договору страхования (в отношении указанного Застрахованного лица)</td>
+			<td>{{{previousPayments}}}</td>
+		</tr>
+		<tr>
+			<td colspan="2">Размер суммы, подлежащей возврату итого (цифрами)</td>
+			<td>{{totalPaymentAmount}}</td>
+		</tr>
+		<tr>
+			<td colspan="2">Размер суммы, подлежащей возврату итого (прописью)</td>
+			<td>{{paymentAmountStringValue}}</td>
+		</tr>
+        <tr>
+			<td colspan="2">Форма страховой выплаты</td>
+			<td>{{{insurancePaymentForm}}}</td>
+		</tr>
+        <tr>
+			<td colspan="2">Получатель</td>
+			<td>{{recipientFullName}}</td>
+		</tr>	
+	</table>
+
+	<div id="stamp-container">
+
+		<table id="main-table" cellpadding="5">
+			<th class="main-table-header"></th>
+			<th class="main-table-header"></th>
+			<tr>
+				<td colspan="3" id="inner-header">Банковские реквизиты получателя</td>
+			</tr>
+			<tr>
+				<td colspan="2">Наименование банка</td>
+				<td>{{recipientBankName}}</td>
+			</tr>
+			<tr>
+				<td colspan="2">К/С</td>
+				<td>{{corrBankAccount}}</td>
+			</tr>
+			<tr>
+				<td colspan="2">Л/С</td>
+				<td>{{recipientBankAccount}}</td>
+			</tr>
+			<tr>
+				<td colspan="2">БИК</td>
+				<td>{{BIC}}</td>
+			</tr>
+			<tr>
+				<td colspan="2">Основание быть Получателем</td>
+				<td>{{beneficiaryReason}}</td>
+			</tr>
+		</table>
+
+		<div class="title-container">
+			<p id="second-title">Решение о произведении страховой выплаты:</p>
+		</div>
+
+		<div id="doc-info-container">
+			<div>
+				<p>Размер выплаты: {{totalPaymentAmount}}</p>
+			</div>
+			<div>
+				<p>{{paymentAmountStringValue}}</p>
+			</div>
+			<div>
+				<p>КСП договора страхования:</p>
+				<p>{{mvzNumber}}</p>
+			</div>
+			<div>
+				<p>Код линии бизнеса:</p>
+				<p>{{riskBusinessLine}}</p>
+			</div>
+			<div>
+				<p>Internal Order:</p>
+				<p>{{orderNumber}}</p>
+			</div>
+		</div>
+
+		<div id="signer-info-container">
+			<div>
+				<img style="width: 100%;" src="assets/img/logoHeader.png">
+			</div>
+			<div>
+				<p>{{actSignerName}}</p>
+			</div>
+			<div>
+				<p style="color: crimson;">ДОКУМЕНТ ПОДПИСАН ЭЛЕКТРОННОЙ ПОДПИСЬЮ</p>
+			</div>
+			<div>
+				<p>Логин: {{actSignerUsername}}</p>
+				<p>Контактный e-mail: {{actSignerMail}}</p>
+				<p>Дата подписания: {{actSignerDate}}</p>
+				<p>Время подписания: {{actSignerTime}}</p>
+			</div>
+		</div>
+
+		<div id="executor-info-container">
+			<p>Исп.</p>
+			<p>{{actExecutor}}</p>
+		</div>
+	</div>
+
+</body>
+
+</html>

@@ -1,0 +1,10 @@
+select distinct CONTRACT_NUMBER
+from pas_impl.P_INVOICED_COMMISSION
+where CURRENCY_CODE != 'RUB'
+group by
+	CONTRACT_NUMBER,
+	DUE_DATE,
+	POSTING_DATE,
+	OBJECT_CODE,
+	ITEM_NO
+having sum(CALC_COMM_AMOUNT) != 0

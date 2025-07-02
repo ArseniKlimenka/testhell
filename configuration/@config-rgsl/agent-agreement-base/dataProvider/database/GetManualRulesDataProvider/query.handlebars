@@ -1,0 +1,19 @@
+select DISTINCT abcs.[MANUAL_RULE], aeav.STRING_VALUE as PRODUCT, abcs.MANUAL_RULE_DESCRIPTION
+from(
+	select top 1 internalQuery.AGENT_AGREEMENT_NUMBER as firstNumber, aa.AGENT_AGREEMENT_NUMBER as lastNumber
+		from PAS.AGENT_AGREEMENT aa
+		join
+			(select aa.AGENT_AGREEMENT_ID, aa1.AGENT_AGREEMENT_NUMBER
+			from PAS.AGENT_AGREEMENT aa
+			join PAS.AGENT_AGREEMENT aa1 on aa.ORIGINAL_DOCUMENT_ID = aa1.AGENT_AGREEMENT_ID
+			where aa.VERSION_STATE = 'Applied') internalQuery on internalQuery.AGENT_AGREEMENT_ID = aa.AGENT_AGREEMENT_ID
+			order by SEQ_NUMBER desc) lastAAQuery
+	join PAS_IMPL.AA_HUB ah on ah.AA_NUMBER = lastAAQuery.lastNumber
+	JOIN PAS_IMPL.AA_COMM_LINK acl on ah.AA_HKEY = acl.AA_HKEY
+	JOIN PAS_IMPL.AA_BASE_COMM_SAT abcs on abcs.AA_BASE_COMM_HKEY = acl.AA_COMM_HKEY
+	JOIN PAS_IMPL.AA_EVAL_ATTR_VALUE aeav ON aeav.VALUE_REF_ID = abcs.PRODUCT_VALUE_REF_ID
+WHERE
+lastAAQuery.firstNumber = @aaNumber
+AND abcs.START_DATE <= @calculationDate AND (@calculationDate <=abcs.END_DATE OR abcs.END_DATE IS NULL) AND
+	aeav.STRING_VALUE = @product
+AND abcs.MANUAL_RULE_DESCRIPTION IS NOT NULL

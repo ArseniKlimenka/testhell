@@ -1,0 +1,26 @@
+﻿SELECT polhub.CONTRACT_NUMBER,
+	   amHub.AMENDMENT_NUMBER,
+	   amSat.AMENDMENT_TYPE,
+	   amSat.AMENDMENT_REASON,
+	   amState.CODE_NAME as STATE,
+	   amSat.ISSUE_DATE,
+	   amSat.VALID_FROM
+FROM PAS_IMPL.POLICY_HUB polhub
+JOIN PAS_IMPL.POLICY_AMENDMENT_LINK amLink on amLink.POLICY_HKEY = polhub.POLICY_HKEY
+JOIN PAS_IMPL.AMENDMENT_HUB amHub on amHub.AMENDMENT_HKEY = amLink.AMENDMENT_HKEY
+inner join pas.CONTRACT amc on amc.CONTRACT_NUMBER = amHub.AMENDMENT_NUMBER
+inner join cfg.PROCESS_STATE amState on amState.PROCESS_STATE_ID = amc.STATE_ID
+JOIN PAS_IMPL.AMENDMENT_SAT_LATEST amSat on amSat.AMENDMENT_HKEY = amHub.AMENDMENT_HKEY
+WHERE 1 = 1
+{{#if parameters.contractNumber}}
+AND polhub.CONTRACT_NUMBER = @contractNumber
+{{/if}}
+{{#if parameters.amendmentNumber}}
+AND amHub.AMENDMENT_NUMBER = @amendmentNumber
+{{/if}}
+{{#if parameters.amendmentType}}
+AND amSat.AMENDMENT_TYPE = @amendmentType
+{{/if}}
+{{#if parameters.amendmentState}}
+AND amState.CODE_NAME = @amendmentState
+{{/if}}

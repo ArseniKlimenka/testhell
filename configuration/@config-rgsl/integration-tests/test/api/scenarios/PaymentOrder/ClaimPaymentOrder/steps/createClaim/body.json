@@ -1,0 +1,62 @@
+{
+	"mainAttributes": {
+		"contract": {
+			"number": "{{$.insuredEventBody.contract.number}}",
+			"configurationName": "{{$.insuredEventBody.contract.configurationName}}"
+		},
+		"insuredEvent": {
+			"insuredEventNumber": "{{$.insuredEventNumber}}",
+			"insuredEventReason": {
+				"code": "{{$.insuredEventBody.insuredEventReason.code}}",
+				"description": "{{$.insuredEventBody.insuredEventReason.description}}"
+			},
+			"insuredEventType": {
+				"code": "{{$.insuredEventBody.insuredEventType.code}}",
+				"description": "{{$.insuredEventBody.insuredEventType.description}}"
+			},
+			"insuredEventDate": "{{$.insuredEventBody.eventDateInfo.eventDate}}"
+		},
+		"diagnosisNote": "{{$.insuredEventBody.diagnosisNote}}",
+		"applicationInfo": {
+			"receiveMethod": "email",
+			"statementReceivedDate": "{{$.insuredEventBody.eventDateInfo.eventDate}}",
+			"statementApplicationDate": "{{$.insuredEventBody.eventDateInfo.eventDate}}"
+		},
+		"riskAdditionalAttributes": {
+			"injuries": []
+		},
+		"risksInsuredSumByPeriod": [],
+		"selectedRisk": {
+			"riskCode": "CDH10800",
+			"riskShortDescription": "КЗ лечение",
+			"riskInsuredSum": 100000,
+			"businessLine": "10800"
+		}
+	},
+	"approvalConclusions": {
+		"legalConclusion": "I agree!",
+		"securityConclusion": "I agree!"
+	},
+	"requestReasons": {},
+	"claimAmounts": {
+		"contractCurrency": "RUB"
+	},
+	"claimBeneficiaries": [
+		{
+			"beneficiaryReason": {
+				"code": "003",
+				"description": "Выгодоприобретатель по договору страхования"
+			},
+			"beneficiaryPaymentType": {
+				"code": "005",
+				"description": "На расчетный счет"
+			},
+			"partyCode": "{{$.contractBody.insuredPerson.partyData.partyCode}}",
+			"partyType": "{{$.contractBody.insuredPerson.partyData.partyType}}",
+			"fullName": "{{$.contractBody.insuredPerson.partyData.partyFullName}}",
+			"amountToPayPercetage": 0.1,
+			"amountToPay": 10000,
+			"amountToPayInRubCurrency": 10000
+		}
+	]
+}

@@ -1,0 +1,182 @@
+{
+    "id": "WorkflowDashboardView.json",
+    "type": "GridLayout",
+    "numberOfColumns": 4,
+    "width": 4,
+    "elements": [
+        {
+            "type": "HeaderContentLayout",
+            "fixedPosition": true,
+            "elements": []
+        },
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "TabLayout",
+                    "options": {
+                        "fixedPosition": true,
+                        "scrollableTabs": false,
+                        "buttonsForSwitchingTabs": false
+                    },
+                    "elements": [
+                        {
+                            "type": "Tab",
+                            "elements": [
+                                {
+                                    "type": "InlineView",
+                                    "showContainerActions": false,
+                                    "views": [
+                                        {
+                                            "onViewInitialized": "initCurrentUserTasksView",
+                                            "viewReference": {
+                                                "configurationCodeName": "CurrentUserActivitiesSearchView",
+                                                "configurationConceptType": "SearchView",
+                                                "configurationVersion": "1"
+                                            }
+                                        }
+                                    ],
+                                    "value": {
+                                        "$ref": "#"
+                                    },
+                                    "hide": false,
+                                    "elementId": "CurrentUserActivitiesSearchView"
+                                }
+                            ],
+                            "elementId": "tab-My tasks",
+                            "title": "My tasks"
+                        },
+                        {
+                            "type": "Tab",
+                            "elements": [
+                                {
+                                    "type": "InlineView",
+                                    "showContainerActions": false,
+                                    "views": [
+                                        {
+                                            "onViewInitialized": "initUnassignedTasksView",
+                                            "viewReference": {
+                                                "configurationCodeName": "GroupActivitiesSearchView",
+                                                "configurationConceptType": "SearchView",
+                                                "configurationVersion": "1"
+                                            }
+                                        }
+                                    ],
+                                    "value": {
+                                        "$ref": "#"
+                                    },
+                                    "hide": false,
+                                    "elementId": "GroupActivitiesSearchViewUnassigned"
+                                }
+                            ],
+                            "elementId": "tab-Unassigned tasks",
+                            "title": "Unassigned tasks",
+                            "rule": {
+                                "effect": "SHOW",
+                                "condition": {
+                                    "type": "FUNC",
+                                    "ruleFunction": "showGroupTabs",
+                                    "value": [
+                                        {
+                                            "$ref": "#"
+                                        }
+                                    ]
+                                }
+                            }
+                        },
+                        {
+                            "type": "Tab",
+                            "elements": [
+                                {
+                                    "type": "InlineView",
+                                    "showContainerActions": false,
+                                    "views": [
+                                        {
+                                            "onViewInitialized": "initGroupTasksView",
+                                            "viewReference": {
+                                                "configurationCodeName": "GroupActivitiesSearchView",
+                                                "configurationConceptType": "SearchView",
+                                                "configurationVersion": "1"
+                                            }
+                                        }
+                                    ],
+                                    "value": {
+                                        "$ref": "#"
+                                    },
+                                    "hide": false,
+                                    "elementId": "GroupActivitiesSearchView"
+                                }
+                            ],
+                            "elementId": "tab-Group tasks",
+                            "title": "Group tasks",
+                            "rule": {
+                                "effect": "SHOW",
+                                "condition": {
+                                    "type": "FUNC",
+                                    "ruleFunction": "showGroupTabs",
+                                    "value": [
+                                        {
+                                            "$ref": "#"
+                                        }
+                                    ]
+                                }
+                            }
+                        },
+                        {
+                            "type": "Tab",
+                            "hide": true,
+                            "elements": [
+                                {
+                                    "type": "InlineView",
+                                    "showContainerActions": false,
+                                    "views": [
+                                        {
+                                            "viewReference": {
+                                                "configurationCodeName": "MyCalendarView",
+                                                "configurationConceptType": "SearchView",
+                                                "configurationVersion": "1"
+                                            }
+                                        }
+                                    ],
+                                    "value": {
+                                        "$ref": "#"
+                                    },
+                                    "hide": false,
+                                    "elementId": "MyCalendarEditView"
+                                }
+                            ],
+                            "elementId": "tab-My calendar",
+                            "title": "My calendar"
+                        },
+                        {
+                            "type": "Tab",
+                            "hide": true,
+                            "elements": [
+                                {
+                                    "type": "InlineView",
+                                    "showContainerActions": false,
+                                    "views": [
+                                        {
+                                            "viewReference": {
+                                                "configurationCodeName": "GroupCalendarView",
+                                                "configurationConceptType": "SearchView",
+                                                "configurationVersion": "1"
+                                            }
+                                        }
+                                    ],
+                                    "value": {
+                                        "$ref": "#"
+                                    },
+                                    "hide": false,
+                                    "elementId": "GroupCalendarView"
+                                }
+                            ],
+                            "elementId": "tab-Group calendar",
+                            "title": "Group calendar"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

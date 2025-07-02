@@ -1,0 +1,117 @@
+{
+    "type": "Group",
+    "width": 12,
+    "elements": [
+        {
+            "type": "Group",
+            "width": 12,
+            "elements": [
+                {
+                    "type": "Input",
+                    "label": "useNds",
+                    "value": {
+                        "$ref": "#/properties/useNds"
+                    },
+                    "width": 4
+                },
+                {
+                    "type": "Input",
+                    "label": "isDocCorrect",
+                    "value": {
+                        "$ref": "#/properties/isDocCorrect"
+                    },
+                    "width": 4
+                },
+                {
+                    "type": "Group",
+                    "width": 12,
+                    "hide": true,
+                    "elements": [
+                        {
+                            "type": "DataGrid",
+                            "mode": "Array",
+                            "width": 8,
+                            "actions": [
+                                "Add",
+                                "Edit",
+                                "Delete"
+                            ],
+                            "edit": {
+                                "mode": "Detached"
+                            },
+                            "value": {
+                                "$ref": "#/properties/vatRates"
+                            },
+                            "height": "None",
+                            "columns": [
+                                {
+                                    "title": "startDate",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "value": {
+                                            "$ref": "#/properties/startDate"
+                                        }
+                                    },
+                                    "name": "startDate"
+                                },
+                                {
+                                    "title": "vatRate",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "template": "{{expr vatRate 'p'}}",
+                                        "value": {
+                                            "$ref": "#"
+                                        }
+                                    },
+                                    "name": "vatRate"
+                                }
+                            ],
+                            "detailsTemplates": {
+                                "edit": {
+                                    "content": {
+                                        "type": "GridLayout",
+                                        "fillAvailableSpace": true,
+                                        "numberOfColumns": 2,
+                                        "elements": [
+                                            {
+                                                "type": "Group",
+                                                "elements": [
+                                                    {
+                                                        "type": "Input",
+                                                        "label": "startDate",
+                                                        "value": {
+                                                            "$ref": "#/properties/startDate"
+                                                        },
+                                                        "width": 1
+                                                    },
+                                                    {
+                                                        "type": "Percentage",
+                                                        "label": "vatRate",
+                                                        "value": {
+                                                            "$ref": "#/properties/vatRate"
+                                                        },
+                                                        "width": 1
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    ],
+                    "rule": {
+                        "effect": "SHOW",
+                        "condition": {
+                            "type": "LEAF",
+                            "value": {
+                                "$ref": "#/properties/useNds"
+                            },
+                            "expectedValue": true
+                        }
+                    }
+                }
+            ]
+        }
+    ]
+}

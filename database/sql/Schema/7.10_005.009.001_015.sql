@@ -1,0 +1,5 @@
+alter table ACC_IMPL.BANK_STATEMENT_ITEM add RGSL_DOCUMENT_TYPE_ID int null
+go
+
+alter table ACC_IMPL.BANK_STATEMENT_ITEM add RGSL_DOCUMENT_DATE date null
+go

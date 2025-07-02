@@ -1,0 +1,88 @@
+{
+    "type": "Section",
+    "label": "Insured Person",
+    "isCollapsed": false,
+    "width": 12,
+    "elements": [
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "Component",
+                    "name": "PolicyPartyLookUpSearch",
+                    "value": {
+                        "$ref": "#/properties/partyData"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "Input",
+                    "label": "sportsmanBookNumber",
+                    "value": {
+                        "$ref": "#/properties/sportsmanBookNumber"
+                    },
+                    "width": 4,
+                    "description": "sportsmanBookNumberDesc",
+                    "rule": {
+                        "effect": "SHOW",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "showSportsmanBookNumber",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "type": "Input",
+                    "isCompact": true,
+                    "label": "isPolicyHolder",
+                    "value": {
+                        "$ref": "#/properties/isPolicyHolder"
+                    },
+                    "width": 4,
+                    "onValueChanged": [
+                        {
+                            "commandType": "executeAction",
+                            "actionName": "copyPolicyHolderAction"
+                        }
+                    ],
+                    "rule": {
+                        "effect": "STYLE",
+                        "condition": {
+                            "type": "FUNC",
+                            "style": {
+                                "background-color": "lemonchiffon"
+                            },
+                            "value": [
+                                {
+                                    "$ref": "#/properties/ClientViewModel"
+                                }
+                            ],
+                            "ruleFunction": "onChangeProductStyle"
+                        }
+                    }
+                }
+            ],
+            "rule": {
+                "effect": "DISABLE_INITIAL",
+                "condition": {
+                    "type": "FUNC",
+                    "ruleFunction": "disableIsPolicyHolder",
+                    "value": [
+                        {
+                            "$ref": "#"
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}

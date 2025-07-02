@@ -1,0 +1,22 @@
+﻿SELECT
+	PRODUCT_CODE,
+	VARIANT_CODE,
+	CODE_DESCRIPTION VARIANT_CODE_DESCRIPTION
+FROM BFX_IMPL.AA_PRODUCT_VARIANT aapv
+JOIN BFX_IMPL.AA_VARIANT aav ON aav.CODE = aapv.VARIANT_CODE
+WHERE 1 = 1
+{{#if parameters.productCode}}
+    AND aapv.PRODUCT_CODE = @productCode
+{{/if}}
+{{#if parameters.productCodes}}
+    AND aapv.PRODUCT_CODE IN (@productCodes)
+{{/if}}
+{{#if parameters.variantCode}}
+    AND aapv.VARIANT_CODE = @variantCode
+{{/if}}
+{{#if parameters.variantCodes}}
+    AND aapv.VARIANT_CODE IN (@variantCodes)
+{{/if}}
+{{#if parameters.variantDescription}}
+    AND (aav.CODE_DESCRIPTION LIKE @searchText OR aav.CODE_DESCRIPTION LIKE @searchText)
+{{/if}}

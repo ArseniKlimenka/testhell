@@ -1,0 +1,90 @@
+{
+    "steps": [
+        {
+            "$ref": "AdjustAccountingPeriods",
+            "context": {
+                "firstOpenPeriod": "2022-01-01"
+            }
+        },
+        {
+            "$ref": "CreateALIPolicyDemo",
+            "context": {
+                "paymentFrequencyCode": "1",
+                "invoiceOnActivation": true
+            }
+        },
+        {
+            "$ref": "AdjustCurrentDate",
+            "context": {
+                "currentDate": "2023-01-01"
+            }
+        },
+        {
+            "code": "DropRsdData",
+            "description": "DropRsdData",
+            "requests": [],
+            "executor": {
+                "module": "./steps/dropRsdData/execute.js",
+                "function": "execute"
+            }
+        },
+        {
+            "$ref": "ExecuteEtl",
+            "context": {
+                "etlName": "CalculateRsdPpDataEtl",
+                "etlRequest": {
+                    "from": "0001-01-01",
+                    "executionDate": "9999-12-31",
+                    "contractNumber": "{{$.contractNumber}}"
+                }
+            }
+        },
+        {
+            "code": "CreateRSD",
+            "description": "CreateRSD",
+            "actor": "ChiefAccountant",
+            "executor": {
+                "module": "./steps/createRsd/executor.js",
+                "function": "executor"
+            }
+        },
+        {
+            "$ref": "ExecuteIntegrationService",
+            "context": {
+                "integrationServiceName": "RsdAutoPopulate",
+                "integrationServiceRequest": {
+                    "rsdNumber": "{{$.rsdNumber}}",
+                    "skipDraftValidation": true,
+                    "takeLatest": true,
+                    "contractNumber": "{{$.contractNumber}}"
+                }
+            }
+        },
+        {
+            "code": "RsdSetStatusCompleting",
+            "description": "RsdSetStatusCompleting",
+            "requests": [],
+            "executor": {
+                "module": "./steps/rsdSetStatusCompleting/executor.js",
+                "function": "executor"
+            },
+            "assert": {
+                "module": "./steps/rsdSetStatusCompleting/assert.js",
+                "function": "assertRsdCompleting"
+            }
+        },
+        {
+            "code": "ValidateTransactions_1",
+            "description": "Validate transactions 1",
+            "requests": [],
+            "assert": {
+                "expected": "./steps/validateTransactions/expectedResult_1.json",
+                "module": "../../lib/accounting/assert.js",
+                "function": "assertTransactions"
+            }
+        },
+        {
+            "$ref": "AdjustCurrentDate"
+        }
+    ]
+}

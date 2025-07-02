@@ -1,0 +1,34 @@
+{
+  "name": "@config-rgsl/editable-code-tables",
+  "version": "1.0.0",
+  "description": "Editable code tables",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test-validate": "node ../../../node_modules/@adinsure-tools/test-runner -t validation -e ../../../test/validate/test-main.js -c {{@config-rgsl::infrastructure::(?:.*)}}$",
+    "test-validate-debug": "node --inspect-brk ../../../node_modules/@adinsure-tools/test-runner -t validation -e ../../../test/validate/test-main.js -c {{@config-rgsl::infrastructure::(?:.*)}}$",
+    "build": "npm run build:validate-schemas & npm run build:build & npm run build:check-es-mapping & npm run build:config-items & npm run build:translate",
+    "build:check-es-mapping": "node ../../../node_modules/@adinsure-tools/studio-services/dist/scripts/check-es-mapping.js -w ../../../ -r ./",
+    "publish": "npm run build & npm run publish:import-config-items & npm run publish:import-translation & npm run publish:import-authorization & npm run publish:import-document-access-authorization & npm run publish:publish & npm run publish:import-data & npm run publish:import-group-authorization"
+  },
+  "keywords": [
+    "editable code tables"
+  ],
+  "adInsure": {
+    "projectNameDisplay": "editable-code-tables",
+    "ownershipScope": "editable-code-tables",
+    "domain": "SupportingProcesses"
+  },
+  "dependencies": {
+    "@config-system/infrastructure": "43.4.0",
+    "@config-rgsl/infrastructure": "1.0.0",
+    "@config-rgsl/party": "1.0.0",
+    "@config-rgsl/employee": "1.0.0",
+    "@config-rgsl/life-insurance": "1.0.0",
+    "@config-rgsl/natural-person": "1.0.0",
+    "@config-rgsl/application-user-group": "1.0.0",
+    "@config-rgsl/organisation-unit": "1.0.0"
+  }
+}

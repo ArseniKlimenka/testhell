@@ -1,0 +1,51 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "object",
+    "properties": {
+        "criteria": {
+            "type": "object",
+            "aiValidation": {
+                "rule": "searchCriteriaValidation"
+            },
+            "additionalProperties": false,
+            "properties": {
+                "contractNo": {
+                    "type": "string"
+                },
+                "policyHolderCode": {
+                    "type": "string"
+                },
+                "currencyCode": {
+                    "type": "string"
+                },
+                "productCode": {
+                    "type": "string"
+                },
+                "startDateFrom": {
+                    "type": "string",
+                    "aiFormat": "date"
+                },
+                "startDateTo": {
+                    "type": "string",
+                    "aiFormat": "date"
+                }
+            }
+        },
+        "sort": {
+            "type": "array",
+            "additionalProperties": false,
+            "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                    "descending": {
+                        "type": "boolean"
+                    },
+                    "fieldName": {
+                        "type": "string"
+                    }
+                }
+            }
+        }
+    }
+}

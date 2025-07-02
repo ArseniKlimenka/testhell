@@ -1,0 +1,85 @@
+{
+    "type": "Group",
+    "elements": [
+        {
+            "type": "DataGrid",
+            "value": {
+                "$ref": "#/properties/response/properties/data"
+            },
+            "mode": "DataSource",
+            "pagination": {
+                "mode": "Regular",
+                "pageSizes": [
+                    50,
+                    200
+                ]
+            },
+            "selection": {
+                "mode": "Single",
+                "enableRowSelection": true,
+                "showCheckBox": true
+            },
+            "height": "None",
+            "columns": [
+                {
+                    "sortable": true,
+                    "title": "Id",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "template": "{{expr bankStatementItemId 'i::false'}}",
+                        "value": {
+                            "$ref": "#/properties/resultData"
+                        }
+                    },
+                    "name": "bankStatementItemId"
+                },
+                {
+                    "sortable": true,
+                    "title": "Reference no",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/referenceNo"
+                        }
+                    },
+                    "name": "referenceNo"
+                },
+                {
+                    "sortable": true,
+                    "title": "Error code",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/errorCode"
+                        }
+                    },
+                    "name": "errorCode"
+                },
+                {
+                    "sortable": true,
+                    "title": "ErrorMessage",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/errorMessage"
+                        }
+                    },
+                    "name": "errorMessage"
+                },
+                {
+                    "sortable": true,
+                    "title": "Last updated",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "template": "{{expr lastUpdated 'd'}}",
+                        "value": {
+                            "$ref": "#/properties/resultData"
+                        }
+                    },
+                    "name": "lastUpdated"
+                }
+            ],
+            "elementId": "TableViewId"
+        }
+    ]
+}

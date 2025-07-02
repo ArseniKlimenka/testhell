@@ -1,0 +1,53 @@
+﻿{{concat 'drop'}} table if exists #product_conf_actual{{concat ';'}}
+{{concat 'drop'}} table if exists #equity_contracts{{concat ';'}}
+
+select pc.product_code,
+       pc.issue_date_from,
+       pc.issue_date_to
+  into #product_conf_actual
+  from bfx_impl.product_conf pc
+ where pc.conf_version = (select max(conf_version) max_version from bfx_impl.product_conf);
+
+select c.contract_number,
+       c.body,
+       c.state_id,
+       c.contract_id,
+       c.original_document_id,
+       pa.code_name
+  into #equity_contracts
+  from pas.contract c
+       join cfx.published_artifact pa on pa.published_artifact_id = c.published_artifact_id and pa.code_name in ('EquityLifeInsurancePolicy', 'EquityLifeInsuranceCancellation', 'EquityLifeInsuranceNonFinChange', 'EquityLifeInsuranceFinChange');
+
+select co.contract_number,
+       case
+          when c.contract_number = co.contract_number
+          then null
+          else c.contract_number
+        end as amendment_number,
+       cps.code_name as contract_state,
+       c.code_name as amendment_type,
+	   (
+			select
+				json_value([value], '$.paymentLineSum') as paymentSum
+			from openjson(c.BODY,'$.paymentCalculation.paymentLines') pl
+			WHERE json_value([value], '$.paymentLineType') = 'Account'
+	   ) as netAssetsAmount
+  from #equity_contracts c
+       join cfg.process_state cps on cps.process_state_id = c.state_id
+       join bfx.entity_history eh on c.contract_id = eh.entity_id
+         and eh.new_state IN ('AssetsSold', 'WaitingForPayment')
+         and eh.changed_on >= dateadd(day, -1, @preEquityDebitingRegistryDate)
+         and eh.changed_on <= @preEquityDebitingRegistryDate
+       join #equity_contracts co on c.original_document_id = co.contract_id
+       join #product_conf_actual pc on pc.product_code = json_value(co.body, '$.mainInsuranceConditions.insuranceProduct.productCode')
+         and pc.issue_date_from <= json_value(co.body, '$.basicConditions.issueDate')
+         and pc.issue_date_to >= json_value(co.body, '$.basicConditions.issueDate')
+       join bfx_impl.products p on p.code = json_value(co.body, '$.mainInsuranceConditions.insuranceProduct.productCode')
+       left join pas_impl.amendment_hub amh ON amh.amendment_number = c.contract_number
+  where
+   c.contract_number = co.contract_number
+   OR (c.contract_number != co.contract_number)
+   AND (cps.code_name IN ('AssetsSold') OR (cps.code_name IN ('WaitingForPayment') AND json_query(c.body, '$.amendmentData.finChangeAmendmentData.mainAttributes.changeTypes') like '%didPayment%'));
+
+{{concat 'drop'}} table if exists #product_conf_actual{{concat ';'}}
+{{concat 'drop'}} table if exists #equity_contracts{{concat ';'}}

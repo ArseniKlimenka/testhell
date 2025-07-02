@@ -1,0 +1,168 @@
+{
+    "id": "AggregatedPaymentMatchToBankStatement",
+    "type": "GridLayout",
+    "numberOfColumns": 4,
+    "formProperties": {
+        "events": {
+            "onLoad": "onAfterLoadFileLoadAction"
+        }
+    },
+    "elements": [
+        {
+            "type": "Component",
+            "name": "DocumentHeader",
+            "value": {
+                "$ref": "#"
+            }
+        },
+        {
+            "type": "Group",
+            "width": 4,
+            "elements": [
+                {
+                    "type": "GridLayout",
+                    "numberOfColumns": 2,
+                    "fillAvailableSpace": true,
+                    "width": 3,
+                    "elements": [
+                        {
+                            "type": "Group",
+                            "elements": [
+                                {
+                                    "type": "Input",
+                                    "label": "EXCEL file:",
+                                    "readOnly": true,
+                                    "value": {
+                                        "$ref": "#/properties/Body/properties/file/properties/fileName"
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Group",
+                            "elements": [
+                                {
+                                    "type": "Input",
+                                    "label": "BSI id:",
+                                    "readOnly": true,
+                                    "value": {
+                                        "$ref": "#/properties/ClientViewModel/properties/bankStatementItemIds"
+                                    }
+                                },
+                                {
+                                    "type": "Input",
+                                    "label": "BSI no:",
+                                    "readOnly": true,
+                                    "value": {
+                                        "$ref": "#/properties/ClientViewModel/properties/bankStatementItemNos"
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "SideContentLayout",
+                    "fixedPosition": true,
+                    "width": 1,
+                    "elements": [
+                        {
+                            "type": "GridLayout",
+                            "numberOfColumns": 2,
+                            "elements": [
+                                {
+                                    "type": "TabLayout",
+                                    "elements": [
+                                        {
+                                            "type": "Tab",
+                                            "icon": {
+                                                "name": "Bars",
+                                                "size": "Large"
+                                            },
+                                            "elements": [
+                                                {
+                                                    "type": "OutputText",
+                                                    "label": "Aggregated Payment number",
+                                                    "skipTranslate": true,
+                                                    "value": {
+                                                        "$ref": "#/properties/Number"
+                                                    },
+                                                    "width": 2
+                                                },
+                                                {
+                                                    "type": "OutputText",
+                                                    "label": "Errors",
+                                                    "skipTranslate": true,
+                                                    "allowMultiLine": true,
+                                                    "value": {
+                                                        "$ref": "#/properties/Body/properties/errors"
+                                                    },
+                                                    "rule": {
+                                                        "effect": "HIDE",
+                                                        "condition": {
+                                                            "type": "FUNC",
+                                                            "ruleFunction": "hideErrors",
+                                                            "value": [
+                                                                {
+                                                                    "$ref": "#"
+                                                                }
+                                                            ]
+                                                        }
+                                                    },
+                                                    "width": 2
+                                                }
+                                            ],
+                                            "elementId": "tab-Summary"
+                                        },
+                                        {
+                                            "type": "Tab",
+                                            "icon": {
+                                                "name": "Clipboard-Check",
+                                                "size": "Large"
+                                            },
+                                            "elements": [
+                                                {
+                                                    "type": "Component",
+                                                    "name": "AuditInfo",
+                                                    "value": {
+                                                        "$ref": "#/properties/AuditInfo"
+                                                    }
+                                                }
+                                            ],
+                                            "elementId": "tab-Audit Info"
+                                        },
+                                        {
+                                            "type": "Tab",
+                                            "icon": {
+                                                "name": "Bell",
+                                                "size": "Large"
+                                            },
+                                            "tabType": "error",
+                                            "elements": [
+                                                {
+                                                    "type": "ValidationSummary",
+                                                    "elementId": "RequiredPropertiesValidations"
+                                                }
+                                            ],
+                                            "elementId": "tab-Notifications",
+                                            "additionalInfo": {
+                                                "display": "ValidationErrorsCount"
+                                            }
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "Component",
+            "name": "DocumentFooter",
+            "value": {
+                "$ref": "#"
+            }
+        }
+    ]
+}

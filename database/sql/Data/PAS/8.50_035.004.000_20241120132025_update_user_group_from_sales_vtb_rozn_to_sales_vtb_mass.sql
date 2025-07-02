@@ -1,0 +1,6 @@
+if (SELECT APPLICATION_USER_GROUP_ID FROM org.application_user_group WHERE APPLICATION_USER_GROUP_CODE = 'salesVTBMass') is not null
+begin
+	UPDATE org.application_user_group_assignment
+	SET APPLICATION_USER_GROUP_ID = (SELECT APPLICATION_USER_GROUP_ID FROM org.application_user_group WHERE APPLICATION_USER_GROUP_CODE = 'salesVTBMass')
+	WHERE  APPLICATION_USER_GROUP_ID = (SELECT APPLICATION_USER_GROUP_ID FROM org.application_user_group WHERE APPLICATION_USER_GROUP_CODE = 'salesVTBRozn')
+end

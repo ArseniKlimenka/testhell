@@ -1,0 +1,53 @@
+{
+    "mainDataSource": "UsersToUpdateExpireDateDataSource",
+    "useBackgroundTaskWorker": true,
+    "restartable": false,
+    "enableAutomaticRecovery": false,
+    "sinks": [
+        {
+            "name": "GetKeycloakUser",
+            "api": {
+                "configuration": {
+                    "name": "KeycloakGetUserByIdApiDataProvider"
+                }
+            }
+        },
+        {
+            "name": "UpdateKeycloakUser",
+            "api": {
+                "configuration": {
+                    "name": "KeycloakUpdateUserApiDataProvider"
+                }
+            }
+        },
+        {
+            "name": "WriteLog",
+            "database": {
+                "tables": [
+                    "ORG_IMPL.UPDATE_USER_EXP_DATE_ETL_LOG"
+                ]
+            }
+        }
+    ],
+    "completionSinks": [
+        {
+            "name": "StartDisableUserEtl",
+            "etlService": {
+                "configuration": {
+                    "name": "DisableUserIfExpiredEtl",
+                    "version": "1"
+                }
+            }
+        },
+        {
+            "name": "StartExpiryNotificationEtl",
+            "etlService": {
+                "configuration": {
+                    "name": "UserExpiringNotificationEtl",
+                    "version": "1"
+                }
+            }
+        }
+    ],
+    "version": "1"
+}

@@ -1,0 +1,2 @@
+delete from bfx_impl.products where code = N'I713VTBP'; insert into bfx_impl.products values ('27E635BA-6DAF-48B2-9EDE-EFB0E25E18DB', N'I713VTBP',N'investment',N'Бонд Репак Драйвер Гарантия 5RUB',N'НСЖ', N'migrated', null);
+delete from bfx_impl.products where code = N'I851VTBP'; insert into bfx_impl.products values ('7D0F8BFE-E54E-4413-BA78-E8B0EA10FBC0', N'I851VTBP',N'investment',N'Драйвер Гарантия Ультра 1CNY',N'НСЖ', N'migrated', null);

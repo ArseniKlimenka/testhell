@@ -1,0 +1,473 @@
+{
+    "settings": {
+        "analysis": {
+            "analyzer": {
+                "whitespace_analyzer": {
+                    "type": "custom",
+                    "tokenizer": "whitespace",
+                    "filter": [
+                        "lowercase"
+                    ]
+                },
+                "contract_no_analyzer": {
+                    "type": "pattern",
+                    "pattern": ","
+                }
+            }
+        }
+    },
+    "mappings": {
+        "dynamic": "strict",
+        "dynamic_templates": [
+            {
+                "named_attributes_template": {
+                    "path_match": "body.additionalAttributes.*",
+                    "mapping": {
+                        "type": "object",
+                        "dynamic": "strict",
+                        "properties": {
+                            "valueCode": {
+                                "type": "keyword"
+                            },
+                            "value": {
+                                "type": "text"
+                            },
+                            "fullTextSearchableValue": {
+                                "type": "text",
+                                "copy_to": [
+                                    "_summary"
+                                ]
+                            }
+                        }
+                    }
+                }
+            }
+        ],
+        "properties": {
+            "_summary": {
+                "type": "text",
+                "store": true,
+                "analyzer": "whitespace_analyzer"
+            },
+            "metadata": {
+                "dynamic": "strict",
+                "properties": {
+                    "configuration": {
+                        "dynamic": "strict",
+                        "properties": {
+                            "name": {
+                                "type": "text"
+                            },
+                            "version": {
+                                "type": "keyword"
+                            },
+                            "dimensions": {
+                                "dynamic": "false",
+                                "properties": {
+                                    "channel": {
+                                        "type": "keyword"
+                                    },
+                                    "marketSegment": {
+                                        "type": "keyword"
+                                    },
+                                    "contractType": {
+                                        "type": "keyword"
+                                    },
+                                    "productGroup": {
+                                        "type": "keyword"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "lastAmendmentConfiguration": {
+                        "dynamic": "strict",
+                        "properties": {
+                            "name": {
+                                "type": "text"
+                            },
+                            "version": {
+                                "type": "keyword"
+                            },
+                            "dimensions": {
+                                "dynamic": "false",
+                                "properties": {
+                                    "channel": {
+                                        "type": "keyword"
+                                    },
+                                    "marketSegment": {
+                                        "type": "keyword"
+                                    },
+                                    "contractType": {
+                                        "type": "keyword"
+                                    },
+                                    "productGroup": {
+                                        "type": "keyword"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "createdOn": {
+                        "type": "date"
+                    },
+                    "createdBy": {
+                        "type": "keyword"
+                    },
+                    "createdByDisplayName": {
+                        "type": "keyword"
+                    },
+                    "updatedOn": {
+                        "type": "date"
+                    },
+                    "updatedBy": {
+                        "type": "keyword"
+                    },
+                    "recordVersion": {
+                        "type": "integer"
+                    },
+                    "entityType": {
+                        "type": "keyword"
+                    },
+                    "ownership": {
+                        "dynamic": "false",
+                        "properties": {
+                            "owner": {
+                                "type": "keyword"
+                            },
+                            "organisationUnit": {
+                                "type": "keyword"
+                            },
+                            "partnerBusinessCode": {
+                                "type": "keyword"
+                            }
+                        }
+                    }
+                }
+            },
+            "id": {
+                "type": "text"
+            },
+            "number": {
+                "type": "text",
+                "analyzer": "contract_no_analyzer",
+                "fields": {
+                    "sort": {
+                        "type": "keyword",
+                        "normalizer": "lowercase"
+                    }
+                }
+            },
+            "stateCode": {
+                "type": "keyword"
+            },
+            "versionState": {
+                "type": "keyword"
+            },
+            "body": {
+                "properties": {
+                    "productCode": {
+                        "type": "keyword"
+                    },
+                    "productDescription": {
+                        "type": "text"
+                    },
+                    "issueDate": {
+                        "type": "date",
+                        "format": "strict_date"
+                    },
+                    "startDate": {
+                        "type": "date",
+                        "format": "strict_date"
+                    },
+                    "endDate": {
+                        "type": "date",
+                        "format": "strict_date"
+                    },
+                    "additionalAttributes": {
+                        "type": "object",
+                        "dynamic": "true"
+                    },
+                    "parties": {
+                        "dynamic": "strict",
+                        "properties": {
+                            "holder": {
+                                "dynamic": "strict",
+                                "properties": {
+                                    "personId": {
+                                        "type": "keyword"
+                                    },
+                                    "personCode": {
+                                        "type": "keyword"
+                                    },
+                                    "partyType": {
+                                        "type": "keyword"
+                                    },
+                                    "fullName": {
+                                        "type": "keyword"
+                                    }
+                                }
+                            },
+                            "insuredPerson": {
+                                "dynamic": "strict",
+                                "properties": {
+                                    "personId": {
+                                        "type": "keyword"
+                                    },
+                                    "personCode": {
+                                        "type": "keyword"
+                                    },
+                                    "partyType": {
+                                        "type": "keyword"
+                                    },
+                                    "fullName": {
+                                        "type": "keyword"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "initiatorServiceProviderCode": {
+                        "type": "keyword"
+                    },
+                    "initiatorName": {
+                        "type": "keyword"
+                    },
+                    "initiatorOrganisationUnitName": {
+                        "type": "keyword"
+                    },
+                    "partner": {
+                        "dynamic": "strict",
+                        "properties": {
+                            "partnerCode": {
+                                "type": "text"
+                            },
+                            "partnerDescription": {
+                                "type": "text"
+                            },
+                            "partnerShortDescription": {
+                                "type": "text"
+                            },
+                            "partnerBusinessCode": {
+                                "type": "text"
+                            }
+                        }
+                    },
+                    "organisationUnitCode": {
+                        "type": "text",
+                        "analyzer": "contract_no_analyzer"
+                    },
+                    "paymentFrequency": {
+                        "type": "text"
+                    },
+                    "currencyCode": {
+                        "type": "text"
+                    },
+                    "amount": {
+                        "type": "text"
+                    },
+                    "amountWithAllRisks": {
+                        "type": "text"
+                    },
+                    "items": {
+                        "dynamic": "strict",
+                        "properties": {
+                            "id": {
+                                "type": "keyword"
+                            },
+                            "description": {
+                                "type": "text",
+                                "index": false
+                            },
+                            "attributes": {
+                                "dynamic": "strict",
+                                "properties": {
+                                    "currency": {
+                                        "type": "text"
+                                    },
+                                    "risks": {
+                                        "dynamic": "strict",
+                                        "properties": {
+                                            "riskCode": {
+                                                "type": "keyword"
+                                            },
+                                            "riskShortDescription": {
+                                                "type": "text",
+                                                "index": false
+                                            },
+                                            "riskFullDescription": {
+                                                "type": "text",
+                                                "index": false
+                                            },
+                                            "riskInsuredSum": {
+                                                "type": "text"
+                                            },
+                                            "risksGroup": {
+                                                "type": "text"
+                                            },
+                                            "riskPerson": {
+                                                "type": "text"
+                                            },
+                                            "riskInsuredSumByPeriod": {
+                                                "dynamic": "strict",
+                                                "properties": {
+                                                    "insuredSum": {
+                                                        "type": "text"
+                                                    },
+                                                    "startDate": {
+                                                        "type": "date",
+                                                        "format": "strict_date"
+                                                    },
+                                                    "endDate": {
+                                                        "type": "date",
+                                                        "format": "strict_date"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "isReinvest": {
+                        "type": "keyword"
+                    },
+                    "issueFormCode": {
+                        "type": "keyword"
+                    },
+                    "creditProgram": {
+                        "dynamic": "strict",
+                        "properties": {
+                            "creditProgramId": {
+                                "type": "keyword"
+                            },
+                            "externalContractId": {
+                                "type": "keyword"
+                            },
+                            "percentRateImpact": {
+                                "type": "boolean"
+                            }
+                        }
+                    },
+                    "insuranceRules": {
+                        "dynamic": "strict",
+                        "properties": {
+                            "ruleCode": {
+                                "type": "keyword"
+                            },
+                            "ruleDescription": {
+                                "type": "text",
+                                "index": false
+                            },
+                            "ruleDate": {
+                                "type": "date"
+                            }
+                        }
+                    },
+                    "beneficiaries": {
+                        "dynamic": "strict",
+                        "properties": {
+                            "beneficiaries": {
+                                "dynamic": "strict",
+                                "properties": {
+                                    "beneficiaryId": {
+                                        "type": "text"
+                                    },
+                                    "partyFullName": {
+                                        "type": "text"
+                                    },
+                                    "dateOfBirth": {
+                                        "type": "date"
+                                    },
+                                    "personGender": {
+                                        "type": "text"
+                                    },
+                                    "share": {
+                                        "type": "text"
+                                    },
+                                    "relationType": {
+                                        "type": "text"
+                                    }
+                                }
+                            },
+                            "isHeritors": {
+                                "type": "boolean"
+                            },
+                            "isNotHeritors": {
+                                "type": "boolean"
+                            }
+                        }
+                    },
+                    "commission": {
+                        "dynamic": "strict",
+                        "properties": {
+                            "agentAgreement": {
+                                "dynamic": "strict",
+                                "properties": {
+                                    "externalNumber": {
+                                        "type": "keyword"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "endowmentPaymentVariant": {
+                        "dynamic": "strict",
+                        "properties": {
+                            "endowmentPaymentVariantCode": {
+                                "type": "keyword"
+                            },
+                            "endowmentPaymentVariantDescription": {
+                                "type": "text",
+                                "index": false
+                            }
+                        }
+                    },
+                    "paymentFrequencyWithCode": {
+                        "dynamic": "strict",
+                        "properties": {
+                            "paymentFrequencyCode": {
+                                "type": "keyword"
+                            },
+                            "paymentFrequencyDescription": {
+                                "type": "text",
+                                "index": false
+                            }
+                        }
+                    },
+                    "productStrategyCode": {
+                        "type": "keyword"
+                    },
+                    "productStrategyDescription": {
+                        "type": "keyword"
+                    },
+                    "insuranceTerms": {
+                        "type": "keyword"
+                    },
+                    "futureContractNumber": {
+                        "type": "keyword"
+                    },
+                    "exchangeRate": {
+                        "type": "scaled_float",
+                        "scaling_factor": 10000000
+                    },
+                    "isEvaluationContract": {
+                        "type": "boolean"
+                    },
+                    "cardType": {
+                        "type": "text"
+                    },
+                    "consent": {
+                        "dynamic": "strict",
+                        "properties": {
+                            "consentToDataTransferingFNS": {
+                                "type": "boolean"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

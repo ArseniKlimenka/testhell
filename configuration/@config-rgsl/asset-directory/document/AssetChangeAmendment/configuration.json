@@ -1,0 +1,81 @@
+{
+    "dimensions": {
+        "universalVersionedDocumentType": "Document",
+        "universalVersionedDocumentGroup": "Asset"
+    },
+    "entityType": "UniversalVersionedDocument",
+    "version": "1",
+    "validFrom": "2000-01-01",
+    "attachments": [],
+    "states": [
+        {
+            "name": "Draft",
+            "actors": [
+                {
+                    "actor": "AssetEditor",
+                    "transitions": [
+                        "DraftToActivated",
+                        "DraftToAnnulled"
+                    ],
+                    "operations": [
+                        "Save"
+                    ],
+                    "relations": []
+                },
+                {
+                    "actor": "AssetViewer",
+                    "transitions": [],
+                    "operations": [],
+                    "relations": []
+                }
+            ]
+        },
+        {
+            "name": "Activated",
+            "actors": [
+                {
+                    "actor": "AssetEditor",
+                    "transitions": [
+                        "ActivatedToAnnulled"
+                    ],
+                    "relations": []
+                },
+                {
+                    "actor": "AssetViewer",
+                    "transitions": [],
+                    "operations": [],
+                    "relations": []
+                }
+            ]
+        },
+        {
+            "name": "Annulled",
+            "actors": [
+                {
+                    "actor": "AssetEditor",
+                    "transitions": [],
+                    "relations": []
+                },
+                {
+                    "actor": "AssetViewer",
+                    "transitions": [],
+                    "operations": [],
+                    "relations": []
+                }
+            ]
+        }
+    ],
+    "components": [
+        "AssetChangeAmendmentMainInfoComponent",
+        "AssetConditions",
+        "MainInformation"
+    ],
+    "ui": {
+        "layout": "VersionedDocumentLayout",
+        "composition": {
+            "MainContent": "MainContent",
+            "SummaryContent": "SummaryContent"
+        }
+    },
+    "keywords": []
+}

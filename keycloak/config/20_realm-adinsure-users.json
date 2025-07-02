@@ -1,0 +1,36 @@
+{
+    "id": "AdInsure",
+    "realm": "adinsure",
+    "users": [
+        {
+            "username": "administrator",
+            "enabled": true,
+            "firstName": "Administrator",
+            "lastName": "User",
+            "credentials": [
+                {
+                    "type": "password",
+                    "value": "$(env:KEYCLOAK_ADINSURE_ADMINISTRATOR_PASSWORD)"
+                }
+            ],
+            "attributes": {
+                "AccountType": [
+                    "Standard"
+                ],
+                "ExpireDate": [
+                    "2100-01-01"
+                ]
+            }
+        }
+    ],
+    "clientScopeMappings": {
+        "account": [
+            {
+                "client": "account-console",
+                "roles": [
+                    "manage-account"
+                ]
+            }
+        ]
+    }
+}

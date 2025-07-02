@@ -1,0 +1,49 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "object",
+    "additionalProperties": false,
+    "aiDataEnrichment": [
+        {
+            "name": "setRisksPackagesNameEnrichment"
+        }
+    ],
+    "aiValidation": [
+        {
+            "rule": "validateRisksPackages"
+        }
+    ],
+    "properties": {
+        "availablePackages": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                    "packageCode": {
+                        "type": "string"
+                    },
+                    "packageName": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "selectedPackages": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                    "packageCode": {
+                        "type": "string"
+                    },
+                    "packageName": {
+                        "type": "string"
+                    }
+                }
+            }
+        }
+    }
+}

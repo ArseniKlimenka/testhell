@@ -1,0 +1,27 @@
+{
+    "entityType": "Claim",
+    "condition": {
+        "events": [
+            "Updated"
+        ],
+        "configuration": {
+            "names": [
+                "Claim"
+            ]
+        },
+        "documentStates": [
+            "SentToPayment",
+            "PartiallyPaid",
+            "OUSV"
+        ]
+    },
+    "sinks": [
+        {
+            "name": "UpdatePaymentStatus",
+            "documentTransition": {
+                "transition": {}
+            }
+        }
+    ],
+    "version": "1"
+}

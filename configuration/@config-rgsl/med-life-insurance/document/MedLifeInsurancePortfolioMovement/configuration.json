@@ -1,0 +1,78 @@
+{
+    "dimensions": {
+        "contractType": "Amendment",
+        "amendmentType": "PortfolioMovement",
+        "productGroup": "med",
+        "premiumEvent": "financialChange"
+    },
+    "entityType": "Contract",
+    "validFrom": "2000-01-01",
+    "ui": {
+        "layout": "VersionedDocumentLayout",
+        "composition": {
+            "SummaryContent": "SummaryContent",
+            "MainContent": "MainContent"
+        }
+    },
+    "states": [
+        {
+            "name": "Draft",
+            "actors": [
+                {
+                    "actor": "Operations",
+                    "transitions": [
+                        "Draft_to_Cancelled",
+                        "Draft_to_Activated"
+                    ],
+                    "uiSchema": "MainContent",
+                    "allowComments": true,
+                    "operations": [
+                        "Save"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Activated",
+            "actors": [
+                {
+                    "actor": "Operations",
+                    "transitions": [],
+                    "uiSchema": "MainContent",
+                    "allowComments": true,
+                    "operations": []
+                },
+                {
+                    "actor": "System",
+                    "uiSchema": "MainContent",
+                    "operations": [
+                        "Save"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Cancelled",
+            "actors": [
+                {
+                    "actor": "Operations",
+                    "transitions": [],
+                    "uiSchema": "MainContent"
+                },
+                {
+                    "actor": "System",
+                    "uiSchema": "MainContent",
+                    "operations": [
+                        "Save"
+                    ]
+                }
+            ]
+        }
+    ],
+    "version": "1",
+    "components": [
+        "PolicyFinChangeAmendmentMainAttrs",
+        "PolicyFinChangeAmendmentApplicationInfo",
+        "PolicyChangeAmendmentInfo"
+    ]
+}

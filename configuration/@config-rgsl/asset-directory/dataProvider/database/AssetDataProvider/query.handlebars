@@ -1,0 +1,46 @@
+SELECT 
+	ud.UNIVERSAL_VERSIONED_DOCUMENT_NUMBER
+    ,sat.ASSET_HKEY
+    ,sat.LOAD_DATE
+    ,sat.RECORD_SOURCE
+    ,sat.HASH_DIFF
+    ,sat.STATE
+    ,sat.ORIGINAL_DOCUMENT_NUMBER
+    ,sat.SEQ_NUMBER
+    ,sat.IS_RISK_TRANSFERED_TO_CLIENT
+    ,sat.CURRENCY_CODE
+    ,sat.INFORMATION_RESOURCE
+    ,sat.PAPER_SHORT_NAME
+    ,sat.ID_ISIN
+    ,sat.ISSUER
+    ,sat.ACTIVE_TYPE
+    ,sat.ASSET_SIZE
+    ,sat.ACQUISITION_RATE
+    ,sat.UNIT_PURCHASE_PRICE
+    ,sat.BOND_DENOMINATION_IN_CURRENCY
+    ,sat.ASSET_UNIT_PRICE
+    ,sat.END_UNIT_PRICE
+
+FROM BFX.UNIVERSAL_VERSIONED_DOCUMENT ud
+INNER JOIN PAS_IMPL.ASSET_HUB hub ON hub.ASSET_NUMBER = ud.UNIVERSAL_VERSIONED_DOCUMENT_NUMBER
+INNER JOIN PAS_IMPL.ASSET_SAT_LATEST sat ON sat.ASSET_HKEY = hub.ASSET_HKEY
+INNER JOIN CFG.PROCESS_STATE ps ON ps.CODE_NAME = sat.STATE
+WHERE 1=1
+{{#if parameters.activeTypes}}
+    AND sat.ACTIVE_TYPE IN (@activeTypes)
+{{/if}}
+{{#if parameters.paperShortName}}
+    AND sat.PAPER_SHORT_NAME = @paperShortName
+{{/if}}
+{{#if parameters.idIsin}}
+    AND sat.ID_ISIN = @idIsin
+{{/if}}
+{{#if parameters.states}}
+    AND sat.STATE IN (@states)
+{{/if}}
+{{#if parameters.originalDocumentNumber}}
+    AND sat.ORIGINAL_DOCUMENT_NUMBER = @originalDocumentNumber
+{{/if}}
+{{#if parameters.dontShowAmendments}}
+    AND ud.SEQ_NUMBER = 0
+{{/if}}

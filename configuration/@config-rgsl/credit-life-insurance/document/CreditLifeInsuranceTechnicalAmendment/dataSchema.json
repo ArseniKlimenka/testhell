@@ -1,0 +1,158 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema",
+    "type": "object",
+    "additionalProperties": false,
+    "aiAudit": {
+        "scope": "General"
+    },
+    "properties": {
+        "mainInsuranceConditions": {
+            "$ref": "component:MainInsuranceConditions"
+        },
+        "basicConditions": {
+            "$ref": "component:BasicConditions"
+        },
+        "risks": {
+            "$ref": "component:Risks"
+        },
+        "risksPackages": {
+            "$ref": "component:RisksPackages"
+        },
+        "riskConditions": {
+            "$ref": "component:RiskConditions"
+        },
+        "risksCorrection": {
+            "$ref": "component:RisksCorrection"
+        },
+        "surrenderValues": {
+            "$ref": "component:SurrenderValues"
+        },
+        "policyTerms": {
+            "$ref": "component:PolicyTerms"
+        },
+        "policyHolder": {
+            "$ref": "component:PolicyHolder"
+        },
+        "insuredPerson": {
+            "$ref": "component:InsuredPerson"
+        },
+        "beneficiaries": {
+            "$ref": "component:Beneficiaries"
+        },
+        "paymentPlan": {
+            "$ref": "component:PaymentPlan"
+        },
+        "issueForm": {
+            "allOf": [
+                {
+                    "$ref": "component:IssueForm"
+                },
+                {
+                    "aiAdditionalContext": {
+                        "name": "policyHolder",
+                        "$data": "/policyHolder",
+                        "source": "Body"
+                    }
+                },
+                {
+                    "aiAdditionalContext": {
+                        "name": "insuredPerson",
+                        "$data": "/insuredPerson",
+                        "source": "Body"
+                    }
+                },
+                {
+                    "aiAdditionalContext": {
+                        "name": "futureContractNumber",
+                        "$data": "/technicalInformation/futureContractNumber",
+                        "source": "Body"
+                    }
+                }
+            ]
+        },
+        "insuranceRules": {
+            "$ref": "component:InsuranceRules"
+        },
+        "initiator": {
+            "$ref": "component:Initiator"
+        },
+        "additionalInitiators": {
+            "$ref": "component:AdditionalInitiators"
+        },
+        "technicalInformation": {
+            "$ref": "component:TechnicalInformation"
+        },
+        "commission": {
+            "$ref": "component:PolicyCommission"
+        },
+        "creditContract": {
+            "$ref": "component:CreditContract"
+        },
+        "creditSalesPlace": {
+            "$ref": "component:CreditSalesPlace"
+        },
+        "creditProgram": {
+            "$ref": "component:CreditProgram"
+        },
+        "uwTriggers": {
+            "$ref": "component:UWTriggers"
+        },
+        "triggersConditions": {
+            "$ref": "component:UWTriggersConditions"
+        },
+        "insurerComment": {
+            "$ref": "component:InsurerComment"
+        },
+        "declarationMedicalConfirmation": {
+            "$ref": "component:DeclarationMedicalConfirmation"
+        },
+        "declarationMedical": {
+            "$ref": "component:DeclarationMedical"
+        },
+        "declarationMainConfirmation": {
+            "$ref": "component:DeclarationMainConfirmation"
+        },
+        "declarationMain": {
+            "$ref": "component:DeclarationMain"
+        },
+        "declarationMedicalConfirmationPolicyHolder": {
+            "$ref": "component:DeclarationMedicalConfirmationPolicyHolder"
+        },
+        "declarationMedicalPolicyHolder": {
+            "$ref": "component:DeclarationMedicalPolicyHolder"
+        },
+        "inquiriesList": {
+            "$ref": "component:InquiriesList"
+        },
+        "attachmentsPackage": {
+            "$ref": "component:AttachmentsPackage"
+        },
+        "amendmentData": {
+            "type": "object",
+            "additionalProperties": true,
+            "properties": {
+                "technicalAmendmentData": {
+                    "$ref": "component:TechnicalAmendmentData"
+                }
+            }
+        },
+        "migrationAttributes": {
+            "$ref": "component:MigrationAttributes"
+        },
+        "allocationInformation": {
+            "$ref": "component:AllocationInformation"
+        },
+        "cumulation": {
+            "$ref": "component:Cumulation"
+        },
+        "productConfiguration": {
+            "$ref": "component:ProductConfiguration"
+        },
+        "policyEnrichments": {
+            "$ref": "component:PolicyEnrichments"
+        },
+        "consent": {
+            "$ref": "component:Consent"
+        }
+    }
+}

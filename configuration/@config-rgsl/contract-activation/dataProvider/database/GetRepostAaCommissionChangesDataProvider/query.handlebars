@@ -1,0 +1,17 @@
+﻿select
+	aah.AA_NUMBER,
+	max(aaChange.LOAD_DATE) as LAST_LOAD_DATE,
+	min(aaChange.START_DATE) as AA_AMENDMENT_START_DATE
+from
+	pas_impl.AA_CHANGE_SAT_LATEST aaChange
+	inner join pas_impl.AA_AMENDMENT_LINK aaal on aaal.AA_AMENDMENT_HKEY = aaChange.AA_CHANGE_HKEY
+	inner join pas_impl.AA_BASE_SAT_LATEST aas on aas.AA_BASE_HKEY = aaal.AGREEMENT_HKEY
+	inner join pas_impl.AA_HUB aah on aah.AA_HKEY = aas.AA_BASE_HKEY
+where 1=1
+	and not exists
+	(
+		select *
+		from pas_impl.INVOICED_COMMISSION_JOB_LOG icjl
+		where icjl.AA_NUMBER = aah.AA_NUMBER and icjl.LAST_LOAD_DATE >= aaChange.LOAD_DATE
+	)
+group by aah.AA_NUMBER

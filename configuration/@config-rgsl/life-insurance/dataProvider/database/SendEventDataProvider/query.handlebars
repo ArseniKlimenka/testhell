@@ -1,0 +1,63 @@
+﻿with PRODUCTS as (
+  select
+    VALUE PRODUCT_CODE,
+	SUBSCRIBER
+  from
+    BFX_IMPL.SEND_EVENT_EXCEPTIONS
+  where VALUE_TYPE = 'PRODUCT'
+),
+AGENT_AGREEMENTS as (
+  select
+    VALUE AGENT_AGREEMENT_NUMBER,
+	SUBSCRIBER
+  from
+    BFX_IMPL.SEND_EVENT_EXCEPTIONS
+  where VALUE_TYPE = 'AGENT AGREEMENT'
+)
+select
+  evn.SEND_EVENT_ID,
+  evn.EVENT_TYPE,
+  evn.SUBSCRIBER,
+  evn.DOCUMENT_NUMBER,
+  evn.PRODUCT_CODE,
+  evn.REQUEST,
+  evn.RESPONSE,
+  evn.STATUS,
+  evn.UPDATED_DATE,
+  evn.CREATED_DATE
+into
+  #SEND_EVENT
+from
+  BFX_IMPL.SEND_EVENT evn,
+  BFX_IMPL.SEND_EVENT_CONFIGURATION cnf
+where evn.SUBSCRIBER = cnf.SUBSCRIBER
+  and evn.NEED_TO_SEND = 1
+  and evn.CREATED_DATE >= cnf.BEGIN_DATE
+  and evn.CREATED_DATE <= cnf.END_DATE
+  and evn.PRODUCT_CODE not in (select prd.PRODUCT_CODE from PRODUCTS prd where prd.SUBSCRIBER = evn.SUBSCRIBER)
+  and evn.AGENT_AGREEMENT_NUMBER not in (select agr.AGENT_AGREEMENT_NUMBER from AGENT_AGREEMENTS agr where agr.SUBSCRIBER = evn.SUBSCRIBER)
+  and isnull(evn.POLICY_HOLDER_TYPE, 'NaturalPerson') = 'NaturalPerson'
+{{#if parameters.eventTypes}}
+  and evn.EVENT_TYPE IN (@eventTypes)
+{{else}}
+  and evn.EVENT_TYPE = @eventType
+{{/if}}
+{{#if parameters.subscriber}}
+  and evn.SUBSCRIBER = @subscriber
+{{/if}}
+
+select
+  SEND_EVENT_ID,
+  EVENT_TYPE,
+  SUBSCRIBER,
+  DOCUMENT_NUMBER,
+  PRODUCT_CODE,
+  REQUEST,
+  RESPONSE,
+  STATUS,
+  UPDATED_DATE,
+  CREATED_DATE
+from
+  #SEND_EVENT
+
+{{concat 'drop'}} table #SEND_EVENT

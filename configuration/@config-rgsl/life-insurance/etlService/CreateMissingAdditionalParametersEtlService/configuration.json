@@ -1,0 +1,33 @@
+{
+    "allowParallelExecution": true,
+    "mainDataSource": "MissingAdditionalParametersDataSource",
+    "sinks": [
+        {
+            "name": "GetQuoteByPolicyNumber",
+            "fetch": {
+                "configuration": {
+                    "name": "RelatedDocumentsDataSource"
+                }
+            }
+        },
+        {
+            "name": "GetExistingContractEntity",
+            "fetch": {
+                "configuration": {
+                    "name": "UniversalMasterEntityDataSource"
+                }
+            }
+        },
+        {
+            "name": "CreateAdditionalParameters",
+            "masterEntity": {
+                "configuration": {
+                    "name": "ContractEntity",
+                    "version": "1"
+                },
+                "allowUpdating": true
+            }
+        }
+    ],
+    "version": "1"
+}

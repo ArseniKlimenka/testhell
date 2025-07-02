@@ -1,0 +1,14 @@
+﻿select
+  FILE_ID,
+  FILE_NAME,
+  CREATED,
+  CREATED_BY,
+  CONFIRMED,
+  CONFIRMED_BY,
+  LOAD_DATE
+from 
+  PAS_IMPL.CP_IMPORT_TEMPLATE_SAT
+where PRODUCT_CODE = @productCode
+  and isnull(WITH_TARIFICATION, 0) = @withTarification
+order by 
+  LOAD_DATE desc

@@ -1,0 +1,19 @@
+select
+	pr.BANK_STATEMENT_ITEM_ID,
+	pr.REFERENCE_NO,
+	pr.ERROR_CODE,
+	pr.ERROR_MESSAGE,
+	pr.LAST_UPDATED
+from
+	acc_impl.PAYMENT_REFERENCE pr
+where 1=1
+	and pr.IS_ERROR = 1
+{{#if parameters.bankStatementItemId}}
+	and pr.BANK_STATEMENT_ITEM_ID = @bankStatementItemId
+{{/if}}
+{{#if parameters.referenceNo}}
+	and pr.REFERENCE_NO = @referenceNo
+{{/if}}
+{{#if parameters.errorCode}}
+	and pr.ERROR_CODE = @errorCode
+{{/if}}

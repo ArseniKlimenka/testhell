@@ -1,0 +1,123 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "Accounting certificate contract",
+    "description": "Data schema describing accounting certificate contract",
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+        "number",
+        "type",
+        "issueDate",
+        "startDate",
+        "endDate"
+    ],
+    "properties": {
+        "configurationName": {
+            "type": "string"
+        },
+        "number": {
+            "type": "string",
+            "aiTitle": "number"
+        },
+        "type": {
+            "type": "object",
+            "aiTitle": "type",
+            "additionalProperties": false,
+            "properties": {
+                "code": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                }
+            }
+        },
+        "productCode": {
+            "type": "string"
+        },
+        "partner": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "partnerCode": {
+                    "type": "string"
+                },
+                "partnerDescription": {
+                    "type": "string"
+                },
+                "partnerShortDescription": {
+                    "type": "string"
+                },
+                "partnerBusinessCode": {
+                    "type": "string"
+                }
+            }
+        },
+        "stateCode": {
+            "type": "string"
+        },
+        "stateCodeDescription": {
+            "type": "string"
+        },
+        "parties": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "holder": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+                        "personCode": {
+                            "type": "string"
+                        },
+                        "partyType": {
+                            "type": "string"
+                        },
+                        "fullName": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "insuredPerson": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+                        "personCode": {
+                            "type": "string"
+                        },
+                        "partyType": {
+                            "type": "string"
+                        },
+                        "fullName": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "issueDate": {
+            "type": "string",
+            "aiFormat": "date",
+            "aiTitle": "issueDate"
+        },
+        "startDate": {
+            "type": "string",
+            "aiFormat": "date",
+            "aiTitle": "startDate"
+        },
+        "endDate": {
+            "type": "string",
+            "aiFormat": "date",
+            "aiTitle": "endDate"
+        },
+        "isMigrated": {
+            "type": "boolean"
+        },
+        "migrationStatus": {
+            "type": "string"
+        },
+        "isInsurerSendDataToFns": {
+            "type": "boolean"
+        }
+    }
+}

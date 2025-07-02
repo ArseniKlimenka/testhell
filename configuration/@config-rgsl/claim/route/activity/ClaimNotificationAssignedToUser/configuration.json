@@ -1,0 +1,40 @@
+{
+    "entityType": "Claim",
+    "condition": {
+        "events": [
+            "ActivityAssigneeChangedEvent",
+            "ActivityStateChangedEvent"
+        ],
+        "configuration": {
+            "names": [
+                "Claim"
+            ],
+            "dimensions": {}
+        }
+    },
+    "sinks": [
+        {
+            "name": "DocumentActivities",
+            "fetch": {
+                "configuration": {
+                    "name": "ActivitiesDataSource"
+                }
+            }
+        },
+        {
+            "name": "PartyEmails",
+            "fetch": {
+                "configuration": {
+                    "name": "GetPartyEmailDataSource"
+                }
+            }
+        },
+        {
+            "name": "Notification",
+            "notification": {
+                "notificationName": "SendClaimNotificationAssignedToUser"
+            }
+        }
+    ],
+    "version": "1"
+}

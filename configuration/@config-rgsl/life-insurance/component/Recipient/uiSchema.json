@@ -1,0 +1,162 @@
+{
+    "type": "Section",
+    "label": "Recipients",
+    "isCollapsed": false,
+    "width": 12,
+    "elements": [
+        {
+            "type": "Group",
+            "rule": {
+                "effect": "SHOW",
+                "condition": {
+                    "type": "FUNC",
+                    "ruleFunction": "toggleRecipientLookUp",
+                    "value": [
+                        {
+                            "$ref": "#"
+                        }
+                    ]
+                }
+            },
+            "elements": [
+                {
+                    "type": "Dropdown",
+                    "label": "Reason for recipient",
+                    "readOnly": true,
+                    "showAsRequired": true,
+                    "enableCustomValue": false,
+                    "value": {
+                        "$ref": "#/properties/reasonForRecipient"
+                    },
+                    "width": 4
+                },
+                {
+                    "type": "Lookup",
+                    "width": 4,
+                    "value": {
+                        "$ref": "#/properties/partyData"
+                    },
+                    "dialogButton": {
+                        "icon": {
+                            "name": "User",
+                            "color": "Primary"
+                        }
+                    },
+                    "dialog": {
+                        "viewReference": {
+                            "configurationCodeName": "GeneralPartySearchWithEditView",
+                            "configurationConceptType": "SearchView",
+                            "configurationVersion": "1"
+                        },
+                        "onLoad": "onLoadRecipientPartyView",
+                        "size": "ExtraLarge"
+                    },
+                    "onSelected": "recipientPartyResultMapping",
+                    "selectedDisplayValueUISchema": {
+                        "type": "Input",
+                        "label": "Recipient FullName",
+                        "readOnly": true,
+                        "showAsRequired": true,
+                        "value": {
+                            "$ref": "#/properties/partyData/properties/partyFullName"
+                        }
+                    }
+                },
+                {
+                    "type": "Link",
+                    "width": 4,
+                    "targetType": "Url",
+                    "value": {
+                        "mapping": "recipientUrlMapping",
+                        "$ref": "#"
+                    },
+                    "content": {
+                        "text": {
+                            "type": "OutputText",
+                            "defaultValue": "",
+                            "value": {
+                                "mapping": "recipientLinkNameMapping",
+                                "$ref": "#"
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "type": "Group",
+            "rule": {
+                "effect": "HIDE",
+                "condition": {
+                    "type": "FUNC",
+                    "ruleFunction": "toggleRecipientLookUp",
+                    "value": [
+                        {
+                            "$ref": "#"
+                        }
+                    ]
+                }
+            },
+            "elements": [
+                {
+                    "type": "Dropdown",
+                    "label": "Reason for recipient",
+                    "readOnly": true,
+                    "showAsRequired": true,
+                    "enableCustomValue": false,
+                    "value": {
+                        "$ref": "#/properties/reasonForRecipient"
+                    },
+                    "width": 4
+                },
+                {
+                    "type": "Input",
+                    "readOnly": true,
+                    "showAsRequired": true,
+                    "label": "Recipient FullName",
+                    "value": {
+                        "$ref": "#/properties/partyData/properties/partyFullName"
+                    },
+                    "width": 4
+                },
+                {
+                    "type": "Link",
+                    "width": 4,
+                    "targetType": "Url",
+                    "value": {
+                        "mapping": "recipientUrlMapping",
+                        "$ref": "#"
+                    },
+                    "content": {
+                        "text": {
+                            "type": "OutputText",
+                            "defaultValue": "",
+                            "value": {
+                                "mapping": "recipientLinkNameMapping",
+                                "$ref": "#"
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "type": "Dropdown",
+            "label": "Recipient Bank Account",
+            "showAsRequired": true,
+            "value": {
+                "$ref": "#/properties/bankAccount"
+            },
+            "enableClear": true,
+            "enableCustomValue": false,
+            "source": {
+                "array": {
+                    "$ref": "#/properties/bankAccountsArray"
+                },
+                "displayFieldName": "displayName"
+            },
+            "width": 8,
+            "reloadOnOpen": false
+        }
+    ]
+}

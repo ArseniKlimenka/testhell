@@ -1,0 +1,23 @@
+﻿select
+	u.APPLICATION_USER_ID,
+	u.USERNAME,
+	aucEmail.VALUE as EMAIL,
+	cExpireDate.VALUE as EXPIRE_DATE
+from
+	org.APPLICATION_USER u
+	inner join org.APPLICATION_USER_CLAIM aucIsActive on aucIsActive.APPLICATION_USER_ID = u.APPLICATION_USER_ID and aucIsActive.CLAIM_TYPE = N'IsUserActive' and aucIsActive.VALUE = 'true'
+	inner join org.APPLICATION_USER_CLAIM aucEmail on aucEmail.APPLICATION_USER_ID = u.APPLICATION_USER_ID and aucEmail.CLAIM_TYPE = N'Email' and aucEmail.VALUE is not null
+	left join org.APPLICATION_USER_CLAIM cExpireDate on cExpireDate.APPLICATION_USER_ID = u.APPLICATION_USER_ID and cExpireDate.CLAIM_TYPE = 'ExpireDate'
+where 1=1
+	and not exists (
+		select nfc.*
+		from
+			bfx.NOTIFICATION_MAILBOX nfc
+			inner join cfx.PUBLISHED_ARTIFACT pa on pa.PUBLISHED_ARTIFACT_ID = nfc.PUBLISHED_ARTIFACT_ID and pa.CODE_NAME = 'UserExpiringUserNotification'
+		where 1=1
+			and nfc.TARGET_APPLICATION_USER_ID = u.APPLICATION_USER_ID
+			and nfc.IS_DELETED = 0
+			and nfc.NOTIFICATION_STATE != 'Read'
+			and nfc.NOTIFICATION_END_TIME >= SYSDATETIME()
+	)
+	and cExpireDate.VALUE <= CONVERT(NVARCHAR(10), dateadd(day, @userExpireDateWarnBeforeDays, SYSDATETIME()), 23)

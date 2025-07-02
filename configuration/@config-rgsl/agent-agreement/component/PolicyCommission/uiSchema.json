@@ -1,0 +1,600 @@
+{
+    "type": "Group",
+    "width": 12,
+    "formEvents": {
+        "onInit": "beforeSaveAction"
+    },
+    "elements": [
+        {
+            "type": "Section",
+            "label": "PolicyCommission",
+            "isCollapsed": false,
+            "width": 12,
+            "elements": [
+                {
+                    "type": "Group",
+                    "width": 12,
+                    "elements": [
+                        {
+                            "type": "Group",
+                            "width": 12,
+                            "elements": [
+                                {
+                                    "type": "Lookup",
+                                    "value": {
+                                        "$ref": "#/properties/agentAgreement"
+                                    },
+                                    "dialogButton": {},
+                                    "clearButton": {
+                                        "clearAction": "clearAgentAgreement"
+                                    },
+                                    "dialog": {
+                                        "viewReference": {
+                                            "configurationCodeName": "AADocumentSearchView",
+                                            "configurationConceptType": "SearchView",
+                                            "configurationVersion": "1"
+                                        },
+                                        "onLoad": "agentAgreementSelectionOnLoad"
+                                    },
+                                    "onSelected": "agentAgreementOnSelected",
+                                    "selectedDisplayValueUISchema": {
+                                        "type": "Input",
+                                        "label": "agentAgreement",
+                                        "readOnly": true,
+                                        "value": {
+                                            "$ref": "#/properties/agentAgreement/properties/formatedNumber"
+                                        }
+                                    },
+                                    "width": 4
+                                },
+                                {
+                                    "type": "Button",
+                                    "value": {
+                                        "$ref": "#"
+                                    },
+                                    "width": 2,
+                                    "onClick": [
+                                        {
+                                            "commandType": "executeAction",
+                                            "actionName": "calculateCommission"
+                                        }
+                                    ],
+                                    "label": "calculateCommission",
+                                    "rule": {
+                                        "effect": "DISABLE_INITIAL",
+                                        "condition": {
+                                            "type": "FUNC",
+                                            "ruleFunction": "isCalculationDisabled",
+                                            "value": [
+                                                {
+                                                    "$ref": "#"
+                                                }
+                                            ]
+                                        }
+                                    }
+                                },
+                                {
+                                    "type": "Link",
+                                    "width": 4,
+                                    "targetType": "Url",
+                                    "value": {
+                                        "mapping": "agentAgreementUrlMapping",
+                                        "$ref": "#"
+                                    },
+                                    "content": {
+                                        "text": {
+                                            "type": "OutputText",
+                                            "defaultValue": "",
+                                            "value": {
+                                                "mapping": "agentAgreementLinkNameMapping",
+                                                "$ref": "#"
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Group",
+                            "width": 12,
+                            "elements": [
+                                {
+                                    "type": "DataGrid",
+                                    "elementId": "commissionTable",
+                                    "mode": "Array",
+                                    "value": {
+                                        "$ref": "#/properties/policyCommissionItems"
+                                    },
+                                    "pagination": {
+                                        "mode": "Regular",
+                                        "pageSizes": [5, 10, 15]
+                                    },
+                                    "selection": {
+                                        "mode": "Multi",
+                                        "enableRowSelection": true,
+                                        "showCheckBox": true,
+                                        "onSelectionChanged": [
+                                            {
+                                                "commandType": "executeAction",
+                                                "actionName": "commissionPeriodCheck"
+                                            }]
+                                    },
+                                    "columns": [
+                                        {
+                                            "sortable": false,
+                                            "title": "insuredObjectDescription",
+                                            "cellContent": {
+                                                "type": "OutputText",
+                                                "defaultValue": "",
+                                                "value": {
+                                                    "$ref": "#/properties/insuredObjectDescription"
+                                                }
+                                            },
+                                            "rule": {
+                                                "effect": "HIDE",
+                                                "condition": {
+                                                    "type": "FUNC",
+                                                    "ruleFunction": "isCollectivePolicy",
+                                                    "value": [
+                                                        {
+                                                            "$ref": "#"
+                                                        }
+                                                    ]
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "sortable": false,
+                                            "title": "policyItemDescription",
+                                            "cellContent": {
+                                                "type": "OutputText",
+                                                "defaultValue": "",
+                                                "value": {
+                                                    "$ref": "#/properties/policyItemDescription"
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "sortable": false,
+                                            "title": "periodNumber",
+                                            "cellContent": {
+                                                "type": "OutputText",
+                                                "defaultValue": "",
+                                                "template": "{{expr periodNumber 'i'}}",
+                                                "value": {
+                                                    "$ref": "#"
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "sortable": false,
+                                            "title": "calculatedRate",
+                                            "cellContent": {
+                                                "type": "OutputText",
+                                                "defaultValue": "",
+                                                "template": "{{expr calculatedRate 'p'}}",
+                                                "value": {
+                                                    "$ref": "#"
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "sortable": false,
+                                            "title": "manualRate",
+                                            "cellContent": {
+                                                "type": "OutputText",
+                                                "defaultValue": "",
+                                                "template": "{{expr manualRate 'p'}}",
+                                                "value": {
+                                                    "$ref": "#"
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "sortable": false,
+                                            "title": "calculatedAmount",
+                                            "cellContent": {
+                                                "type": "OutputText",
+                                                "defaultValue": "",
+                                                "value": {
+                                                    "$ref": "#/properties/calculatedAmount"
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "sortable": false,
+                                            "title": "manualAmount",
+                                            "cellContent": {
+                                                "type": "OutputText",
+                                                "defaultValue": "",
+                                                "value": {
+                                                    "$ref": "#/properties/manualAmount"
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "sortable": false,
+                                            "title": "calculatedExpensesRate",
+                                            "cellContent": {
+                                                "type": "OutputText",
+                                                "defaultValue": "",
+                                                "template": "{{expr calculatedExpensesRate 'p'}}",
+                                                "value": {
+                                                    "$ref": "#"
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "sortable": false,
+                                            "title": "manualExpensesRate",
+                                            "cellContent": {
+                                                "type": "OutputText",
+                                                "defaultValue": "",
+                                                "template": "{{expr manualExpensesRate 'p'}}",
+                                                "value": {
+                                                    "$ref": "#"
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "sortable": false,
+                                            "title": "calculatedNatuaralPersonRate",
+                                            "cellContent": {
+                                                "type": "OutputText",
+                                                "defaultValue": "",
+                                                "template": "{{expr calculatedNatuaralPersonRate 'p'}}",
+                                                "value": {
+                                                    "$ref": "#"
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "sortable": false,
+                                            "title": "manualNatuaralPersonRate",
+                                            "cellContent": {
+                                                "type": "OutputText",
+                                                "defaultValue": "",
+                                                "template": "{{expr manualNatuaralPersonRate 'p'}}",
+                                                "value": {
+                                                    "$ref": "#"
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "sortable": false,
+                                            "title": "calculatedSolePropriatorRate",
+                                            "cellContent": {
+                                                "type": "OutputText",
+                                                "defaultValue": "",
+                                                "template": "{{expr calculatedSolePropriatorRate 'p'}}",
+                                                "value": {
+                                                    "$ref": "#"
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "sortable": false,
+                                            "title": "manualSolePropriatorRate",
+                                            "cellContent": {
+                                                "type": "OutputText",
+                                                "defaultValue": "",
+                                                "template": "{{expr manualSolePropriatorRate 'p'}}",
+                                                "value": {
+                                                    "$ref": "#"
+                                                }
+                                            }
+                                        }
+                                    ],
+                                    "rule": {
+                                        "effect": "ENABLE_INITIAL",
+                                        "condition": {
+                                            "type": "FUNC",
+                                            "ruleFunction": "enableCommTable",
+                                            "value": [
+                                                {
+                                                    "$ref": "#"
+                                                }
+                                            ]
+                                        }
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Group",
+                            "width": 12,
+                            "elements": [
+                                {
+                                    "type": "Group",
+                                    "width": 12,
+                                    "elements": [
+                                        {
+                                            "type": "Input",
+                                            "width": 2,
+                                            "label": "manualRule",
+                                            "value": {
+                                                "$ref": "#/properties/manualRule"
+                                            },
+                                            "control": "Dropdown",
+                                            "source": {
+                                                "dataSource": {
+                                                    "name": "GetManualRulesDataSource",
+                                                    "reloadOnOpen": true,
+                                                    "searchFieldPath": "manualRuleDescription",
+                                                    "requestMapping": "commissionRequestMapping",
+                                                    "responseMapping": "commissionResponseMapping"
+                                                },
+                                                "displayFieldName": "manualRuleDescription",
+                                                "valueFieldName": "manualRule"
+                                            }
+                                        },
+                                        {
+                                            "type": "Input",
+                                            "control": "Percentage",
+                                            "label": "manualRate",
+                                            "value": {
+                                                "$ref": "#/properties/tempData/properties/manualRate"
+                                            },
+                                            "width": 2
+                                        },
+                                        {
+                                            "type": "Input",
+                                            "label": "manualAmount",
+                                            "value": {
+                                                "$ref": "#/properties/tempData/properties/manualAmount"
+                                            },
+                                            "width": 2
+                                        },
+                                        {
+                                            "type": "Input",
+                                            "control": "Percentage",
+                                            "label": "manualExpensesRate",
+                                            "value": {
+                                                "$ref": "#/properties/tempData/properties/manualExpensesRate"
+                                            },
+                                            "width": 2
+                                        },
+                                        {
+                                            "type": "Input",
+                                            "control": "Percentage",
+                                            "label": "manualNatuaralPersonRate",
+                                            "value": {
+                                                "$ref": "#/properties/tempData/properties/manualNatuaralPersonRate"
+                                            },
+                                            "width": 2
+                                        },
+                                        {
+                                            "type": "Input",
+                                            "control": "Percentage",
+                                            "label": "manualSolePropriatorRate",
+                                            "value": {
+                                                "$ref": "#/properties/tempData/properties/manualSolePropriatorRate"
+                                            },
+                                            "width": 2
+                                        }
+                                    ],
+                                    "rule": {
+                                        "effect": "HIDE",
+                                        "condition": {
+                                            "type": "FUNC",
+                                            "ruleFunction": "hideManualComm",
+                                            "value": [
+                                                {
+                                                    "$ref": "#"
+                                                }
+                                            ]
+                                        }
+                                    }
+                                }
+                            ],
+                            "rule": {
+                                "effect": "ENABLE_INITIAL",
+                                "condition": {
+                                    "type": "FUNC",
+                                    "ruleFunction": "enableManualComm",
+                                    "value": [
+                                        {
+                                            "$ref": "#"
+                                        }
+                                    ]
+                                }
+                            }
+                        },
+                        {
+                            "type": "Group",
+                            "width": 12,
+                            "elements": [
+                                {
+                                    "type": "Group",
+                                    "width": 12,
+                                    "elements": [
+                                        {
+                                            "type": "Button",
+                                            "value": {
+                                                "$ref": "#"
+                                            },
+                                            "width": 3,
+                                            "onClick": [
+                                                {
+                                                    "commandType": "executeAction",
+                                                    "actionName": "setManualCommission"
+                                                }
+                                            ],
+                                            "label": "setManualCommission"
+                                        }
+                                    ],
+                                    "rule": {
+                                        "effect": "HIDE",
+                                        "condition": {
+                                            "type": "FUNC",
+                                            "ruleFunction": "hideManualComm",
+                                            "value": [
+                                                {
+                                                    "$ref": "#"
+                                                }
+                                            ]
+                                        }
+                                    }
+                                }
+                            ],
+                            "rule": {
+                                "effect": "ENABLE_INITIAL",
+                                "condition": {
+                                    "type": "FUNC",
+                                    "ruleFunction": "enableManualComm",
+                                    "value": [
+                                        {
+                                            "$ref": "#"
+                                        }
+                                    ]
+                                }
+                            }
+                        },
+                        {
+                            "type": "Group",
+                            "width": 12,
+                            "elements": [
+                                {
+                                    "type": "Input",
+                                    "label": "budgetRule",
+                                    "value": {
+                                        "$ref": "#/properties/budgetRule/properties/rule"
+                                    },
+                                    "autocomplete": {
+                                        "minTextLength": 1
+                                    },
+                                    "control": "Dropdown",
+                                    "source": {
+                                        "dataSource": {
+                                            "name": "BudgetRuleDataSource",
+                                            "reloadOnOpen": true,
+                                            "searchFieldPath": "description",
+                                            "requestMapping": "budgetRuleRequestMapping",
+                                            "responseMapping": "budgetRuleResponseMapping"
+                                        },
+                                        "displayFieldName": "displayName",
+                                        "valueFieldName": "value"
+                                    },
+                                    "width": 4,
+                                    "rule": {
+                                        "effect": "DISABLE_INITIAL",
+                                        "condition": {
+                                            "type": "FUNC",
+                                            "ruleFunction": "isBudgetRuleDisabled",
+                                            "value": [
+                                                {
+                                                    "$ref": "#"
+                                                }
+                                            ]
+                                        }
+                                    }
+                                },
+                                {
+                                    "type": "Input",
+                                    "label": "budgetRuleAlgorithm",
+                                    "value": {
+                                        "$ref": "#/properties/budgetRule/properties/algorithm"
+                                    },
+                                    "autocomplete": {
+                                        "minTextLength": 1
+                                    },
+                                    "control": "Dropdown",
+                                    "source": {
+                                        "dataSource": {
+                                            "name": "BudgetRuleAlgorithmDataSource",
+                                            "reloadOnOpen": true,
+                                            "searchFieldPath": "description",
+                                            "requestMapping": "algorithmRequestMapping",
+                                            "responseMapping": "algorithmResponseMapping"
+                                        },
+                                        "displayFieldName": "displayName",
+                                        "valueFieldName": "value"
+                                    },
+                                    "width": 4,
+                                    "rule": {
+                                        "effect": "DISABLE_INITIAL",
+                                        "condition": {
+                                            "type": "FUNC",
+                                            "ruleFunction": "isBudgetRuleDisabled",
+                                            "value": [
+                                                {
+                                                    "$ref": "#"
+                                                }
+                                            ]
+                                        }
+                                    }
+                                },
+                                {
+                                    "type": "Input",
+                                    "label": "isManualBudgetRule",
+                                    "value": {
+                                        "$ref": "#/properties/budgetRule/properties/isManual"
+                                    },
+                                    "width": 2,
+                                    "onValueChanged": [
+                                        {
+                                            "commandType": "executeAction",
+                                            "actionName": "onIsManualBugedRuleChanged"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "Section",
+            "label": "InvoicedCommission",
+            "isCollapsed": false,
+            "width": 12,
+            "elements": [
+                {
+                    "type": "InlineView",
+                    "showContainerActions": false,
+                    "views": [
+                        {
+                            "viewReference": {
+                                "configurationCodeName": "InvoicedCommissionView",
+                                "configurationVersion": "1",
+                                "configurationConceptType": "SearchView"
+                            },
+                            "onViewInitialized": "initInvoicedCommissionView",
+                            "viewType": "Search"
+                        }
+                    ],
+                    "value": {
+                        "$ref": "#"
+                    },
+                    "hide": false,
+                    "elementId": "invoicedCommissionViewElementId"
+                }
+            ],
+            "rule": {
+                "effect": "HIDE",
+                "condition": {
+                    "type": "FUNC",
+                    "ruleFunction": "isCollectivePolicy",
+                    "value": [
+                        {
+                            "$ref": "#"
+                        }
+                    ]
+                }
+            }
+        }
+    ],
+    "rule": {
+        "effect": "DISABLE_INITIAL",
+        "condition": {
+            "type": "FUNC",
+            "ruleFunction": "hasFutureNumberForAgent",
+            "value": [
+                {
+                    "$ref": "#"
+                }
+            ]
+        }
+    }
+}

@@ -1,0 +1,49 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+        "criteria": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "documentCode": {
+                    "type": "string"
+                },
+                "contractNumber": {
+                    "type": "string"
+                },
+                "contractConfName": {
+                    "type": "string"
+                },
+                "documentState": {
+                    "type": "string",
+                    "enum": [
+                        "Draft",
+                        "Confirmed",
+                        "Cancelled"
+                    ]
+                },                
+                "insuredEventDateFrom": {
+                    "type": "string",
+                    "format": "date",
+                    "aiFormat": "date"
+                },
+                "insuredEventDateTo": {
+                    "type": "string",
+                    "format": "date",
+                    "aiFormat": "date"
+                },
+                "insuredEventTypeCodes": {
+                    "type":"array",
+                    "items": {
+                        "type":"string"
+                    }
+                }
+            }
+        },
+        "sort": {
+            "type": "array"
+        }
+    }
+}

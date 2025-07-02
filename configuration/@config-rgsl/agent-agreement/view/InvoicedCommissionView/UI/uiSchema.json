@@ -1,0 +1,67 @@
+{
+    "type": "DataGrid",
+    "mode": "DataSource",
+    "header": {
+        "showReloadButton": true,
+        "showNumberOfResults": false
+    },
+    "selection": {
+        "mode": "None"
+    },
+    "height": "None",
+    "columns": [
+        {
+            "sortable": false,
+            "title": "insuredFullName",
+            "cellContent": {
+                "type": "OutputText",
+                "value": {
+                    "$ref": "#/properties/resultData/properties/insuredFullName"
+                }
+            }
+        },
+        {
+            "sortable": false,
+            "title": "riskName",
+            "cellContent": {
+                "type": "OutputText",
+                "value": {
+                    "$ref": "#/properties/resultData/properties/riskName"
+                }
+            }
+        },
+        {
+            "sortable": false,
+            "title": "insuranceYear",
+            "cellContent": {
+                "type": "OutputText",
+                "value": {
+                    "$ref": "#/properties/resultData/properties/insuranceYear"
+                }
+            }
+        },
+        {
+            "sortable": false,
+            "title": "usedCommRate",
+            "cellContent": {
+                "type": "OutputText",
+                "template": "{{expr usedCommRate 'p'}}",
+                "value": {
+                    "$ref": "#/properties/resultData/"
+                }
+            }
+        },
+        {
+            "sortable": false,
+            "title": "actualCommRate",
+            "cellContent": {
+                "type": "OutputText",
+                "template": "{{expr actualCommRate 'p'}}",
+                "defaultValue": "",
+                "value": {
+                    "$ref": "#/properties/resultData/"
+                }
+            }
+        }
+    ]
+}

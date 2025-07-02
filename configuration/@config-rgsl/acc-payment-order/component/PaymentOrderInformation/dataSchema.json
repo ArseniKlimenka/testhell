@@ -1,0 +1,131 @@
+{
+    "type": "object",
+    "description": "Payment order information",
+    "additionalProperties": false,
+    "properties": {
+        "paymentOrderType": {
+            "$ref": "component:PaymentOrderType"
+        },
+        "paymentOrderSubType": {
+            "$ref": "component:PaymentOrderSubtype"
+        },
+        "referenceNumber": {
+            "type": "string",
+            "description": "document number for which this payment order was craeted (payment, policy, claim)"
+        },
+        "paymentOrderDate": {
+            "type": "string",
+            "aiFormat": "date",
+            "description": "date of cration of payment order"
+        },
+        "paymentDeadlineDate": {
+            "type": "string",
+            "aiFormat": "date",
+            "description": "payment deadline date"
+        },
+        "paymentMethod": {
+            "type": "string",
+            "enum": [
+                "Wire transfer"
+            ]
+        },
+        "contractNumber": {
+            "type": "string",
+            "description": "contrct number (for claims and policy cancellations)"
+        },
+        "contractAmendmentNumber": {
+            "type": "string",
+            "description": "contract amendment number"
+        },
+        "recipientNameFromBaseDocument": {
+            "type": "string",
+            "description": "Name of recipient based on referenced document (auto filled)"
+        },
+        "payerBankAccountNumber": {
+            "type": "string",
+            "description": "Payer bank account number"
+        },
+        "shouldUseNetting": {
+            "type": "boolean"
+        }, 
+        "nonAcceptance": {
+            "type": "boolean",
+            "description": "Non acceptance flag from payment"
+        },
+        "numberOfNonAcceptancePayment": {
+            "type": "string",
+            "description": "number of payment in case when nonAcceptance is true"
+        },
+        "isAcquiring": {
+            "type": "boolean",
+            "description": "Is acquiring"
+        },
+        "isCoolOffPeriod": {
+            "type": "boolean",
+            "description": "Is cool off period"
+        },
+        "isManual": {
+            "type": "boolean",
+            "description": "Is payment order created manually"
+        },
+        "isCanelledNetting": {
+            "type": "boolean",
+            "description": "Is payment order has cancelled netting"
+        },
+        "isCreatedFromNetting": {
+            "type": "boolean",
+            "description": "Is payment order has been created from netting"
+        },
+        "originalPaymentOrderNumber": {
+            "type": "string",
+            "description": "number of first original payment order"
+        },
+        "parentPaymentOrderNumber": {
+            "type": "string",
+            "description": "number of parent payment order"
+        },
+        "insuranceAct": {
+            "type": "object",
+            "actNumber": {
+                "type": "string",
+                "description": "Generated insurance act number"
+            },
+            "actDate": {
+                "type": "string",
+                "description": "Insurance act date"
+            },
+            "executorFullName": {
+                "type": "string",
+                "description": "Insurance act executor name"
+            },
+            "executorPartyCode": {
+                "type": "string",
+                "description": "Insurance act executor party code"
+            },
+            "signedOn": {
+                "type": "string",
+                "aiFormat": "local-date-time",
+                "description": "Signed on"
+            },
+            "signerFullName": {
+                "type": "string",
+                "description": "Signer full name"
+            },
+            "signerUsername": {
+                "type": "string",
+                "description": "Signer username"
+            },
+            "signerPartyCode": {
+                "type": "string",
+                "description": "Signer party code"
+            }
+        }   
+    },
+    "required": [
+        "referenceNumber",
+        "paymentMethod",
+        "paymentOrderDate",
+        "payerBankAccountNumber",
+        "paymentOrderType"
+    ]
+}

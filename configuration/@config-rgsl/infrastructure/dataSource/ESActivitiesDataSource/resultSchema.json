@@ -1,0 +1,235 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "description": "Activities returned by data provider.",
+    "type": "object",
+    "properties": {
+        "activityId": {
+            "type": "string",
+            "description": "ID of activity."
+        },
+        "entityId": {
+            "type": "string",
+            "description": "Entity id."
+        },
+        "businessNumber": {
+            "type": "string",
+            "description": "Business number of document."
+        },
+        "entityStereotype": {
+            "type": "string",
+            "description": "Entity stereotype."
+        },
+        "activityType": {
+            "description": "Type of activity.",
+            "$ref": "component:ActivityType"
+        },
+        "activityTypeDescription": {
+            "type": "string",
+            "description": "Type of activity translated.",
+            "default": "",
+            "aiLocalized": {
+                "configurationName": "dataSource/ActivitiesByEntityIdDataSource/1",
+                "field": "ActivityType",
+                "itemType": "enum",
+                "scope": "1/activityType",
+                "rootConcept": "ActivityType"
+            }
+        },
+        "manualActivityType": {
+            "type": "string",
+            "description": "Manual type of activity.",
+            "default": "",
+            "aiLocalized": {
+                "configurationName": "masterEntity/ManualActivityType/1",
+                "field": "description",
+                "itemType": "localized-field",
+                "scope": "1/manualActivityType"
+            }
+        },
+        "activityStatus": {
+            "description": "Status of activity.",
+            "$ref": "component:ActivityStatus"
+        },
+        "assigneeId": {
+            "type": "string",
+            "description": "Assignee id of activity."
+        },
+        "assigneeName": {
+            "type": "string",
+            "description": "Assignee name of activity."
+        },
+        "assigneLogin": {
+            "type": "string",
+            "description": "Assignee login of activity."
+        },
+        "createdDate": {
+            "type": "string",
+            "aiFormat": "date-time",
+            "description": "Date when activity was created."
+        },
+        "createdBy": {
+            "type": "string",
+            "description": "User that created the activities."
+        },
+        "closedDate": {
+            "type": "string",
+            "aiFormat": "date-time",
+            "description": "Date when activity was closed."
+        },
+        "closedBy": {
+            "type": "string",
+            "description": "User that closed the activity."
+        },
+        "groupCode": {
+            "type": "string",
+            "description": "Group code."
+        },
+        "groupName": {
+            "type": "string",
+            "description": "Group name where activity is assigned on.",
+            "default": "",
+            "aiLocalized": {
+                "configurationName": "masterEntity/ApplicationUserGroup/1",
+                "field": "name",
+                "itemType": "localized-field",
+                "scope": "1/groupCode"
+            }
+        },
+        "deadline": {
+            "type": "string",
+            "aiFormat": "date-time",
+            "description": "Deadline of activity."
+        },
+        "documentState": {
+            "type": "string",
+            "description": "Document state of activity."
+        },
+        "documentStateLocalized": {
+            "type": "string",
+            "description": "Localized document state of activity."
+        },
+        "priorityCode": {
+            "type": "string",
+            "description": "Priority code."
+        },
+        "priorityDescription": {
+            "type": "string",
+            "description": "Priority description.",
+            "default": "",
+            "aiLocalized": {
+                "configurationName": "masterEntity/ActivityPriority/1",
+                "field": "description",
+                "itemType": "localized-field",
+                "scope": "1/priorityCode"
+            }
+        },
+        "priorityWeight": {
+            "type": "integer",
+            "description": "Priority weight."
+        },
+        "effortCode": {
+            "type": "string",
+            "description": "Effort code."
+        },
+        "effortDescription": {
+            "type": "string",
+            "description": "Effort description.",
+            "default": "",
+            "aiLocalized": {
+                "configurationName": "masterEntity/ActivityEffort/1",
+                "field": "description",
+                "itemType": "localized-field",
+                "scope": "1/effortDescription"
+            }
+        },
+        "effortInMinutes": {
+            "type": "integer",
+            "description": "Estimated effort in minutes."
+        },
+        "comment": {
+            "type": "string",
+            "description": "Comment."
+        },
+        "metadata": {
+            "type": "object",
+            "description": "Document metadata.",
+            "properties": {
+                "entityType": {
+                    "type": "string",
+                    "description": "Entity type."
+                },
+                "businessNumber": {
+                    "type": "string",
+                    "description": "Business number."
+                },
+                "configuration": {
+                    "type": "object",
+                    "description": "Entity configuration.",
+                    "properties": {
+                        "name": {
+                            "type": "string",
+                            "description": "Configuration name."
+                        },
+                        "configurationVersion": {
+                            "type": "integer",
+                            "description": "Configuration version."
+                        },
+                        "state": {
+                            "type": "string",
+                            "description": "Entity state."
+                        }
+                    }
+                }
+            }
+        },
+        "partnerName": {
+            "type": "string"
+        },
+        "contractNumber": {
+            "type": "string"
+        },
+        "contractConfCodeName": {
+            "type": "string"
+        },
+        "issueDate": {
+            "type": "string",
+            "aiFormat": "date"
+        },
+        "startDate": {
+            "type": "string",
+            "aiFormat": "date"
+        },
+        "endDate": {
+            "type": "string",
+            "aiFormat": "date"
+        },
+        "paymentFrequencyName": {
+            "type": "string"
+        },
+        "productCode": {
+            "type": "string"
+        },
+        "productName": {
+            "type": "string"
+        },
+        "productGroupCode": {
+            "type": "string"
+        },
+        "productGroup": {
+            "type": "string"
+        },
+        "contractState": {
+            "$ref": "component:ContractState"
+        },
+        "holderName": {
+            "type": "string"
+        },
+        "holderAge": {
+            "type": "integer"
+        },
+        "holderBirthDate": {
+            "type": "string",
+            "aiFormat": "date"
+        }
+    }
+}

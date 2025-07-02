@@ -1,0 +1,22 @@
+{
+    "mainDataSource": "ActivitiesDataSource",
+    "sinks": [
+        {
+            "name": "CheckActivityExists",
+            "fetch": {
+                "configuration": {
+                    "name": "ESActivitiesDataSource"
+                }
+            }
+        },
+        {
+            "name": "WriteAbsentActivity",
+            "database": {
+                "tables": [
+                    "BFX_IMPL.FIND_ABSENT_ACTIVITIES"
+                ]
+            }
+        }
+    ],
+    "version": "1"
+}

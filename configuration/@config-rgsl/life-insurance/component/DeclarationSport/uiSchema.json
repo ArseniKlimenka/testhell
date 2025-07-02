@@ -1,0 +1,338 @@
+{
+    "type": "Group",
+    "elements": [
+        {
+            "type": "Group",
+            "rule": {
+                "effect": "HIDE",
+                "condition": {
+                    "type": "FUNC",
+                    "ruleFunction": "showExpandedGrid",
+                    "value": [
+                        {
+                            "$ref": "#"
+                        }
+                    ]
+                }
+            },
+            "elements": [
+                {
+                    "rule": {
+                        "effect": "ENABLE_INITIAL",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "enableDeclarationGrid",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    },
+                    "type": "DataGrid",
+                    "elementId": "DeclarationMainArray",
+                    "mode": "Array",
+                    "labelType": "H1",
+                    "label": "sportDeclaration",
+                    "height": "None",
+                    "pagination": {
+                        "mode": "Regular",
+                        "pageSizes": [
+                            5,
+                            10,
+                            15,
+                            100
+                        ],
+                        "defaultPageSize": 100
+                    },
+                    "isCollapsed": true,
+                    "value": {
+                        "$ref": "#"
+                    },
+                    "actions": [
+                        "Add",
+                        "Edit",
+                        "Delete"
+                    ],
+                    "edit": {
+                        "mode": "Detached",
+                        "onAfterGridAction": "onAfterDeclarationGridAction"
+                    },
+                    "detailsTemplates": {
+                        "edit": {
+                            "content": {
+                                "type": "GridLayout",
+                                "fillAvailableSpace": true,
+                                "numberOfColumns": 12,
+                                "elements": [
+                                    {
+                                        "label": "itemText",
+                                        "type": "Input",
+                                        "value": {
+                                            "$ref": "#/properties/itemText"
+                                        }
+                                    },
+                                    {
+                                        "label": "departament",
+                                        "type": "Input",
+                                        "value": {
+                                            "$ref": "#/properties/departament"
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "columns": [
+                        {
+                            "title": "itemNumber",
+                            "name": "itemNumber",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "value": {
+                                    "$ref": "#/properties/itemNumber"
+                                }
+                            },
+                            "style": {
+                                "width": "extra-small"
+                            }
+                        },
+                        {
+                            "title": "itemText",
+                            "name": "itemText",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "allowMultiLine": true,
+                                "value": {
+                                    "$ref": "#/properties/itemText"
+                                }
+                            }
+                        },
+                        {
+                            "title": "departament",
+                            "name": "departament",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "value": {
+                                    "$ref": "#/properties/departament"
+                                }
+                            },
+                            "style": {
+                                "width": "extra-small"
+                            },
+                            "rule": {
+                                "effect": "SHOW",
+                                "condition": {
+                                    "type": "FUNC",
+                                    "ruleFunction": "isBackOfficeUser",
+                                    "value": [
+                                        {
+                                            "$ref": "#"
+                                        }
+                                    ]
+                                }
+                            }
+                        },
+                        {
+                            "title": "agreementInsuredPerson",
+                            "name": "agreementInsuredPerson",
+                            "cellContent": {
+                                "type": "Input",
+                                "value": {
+                                    "$ref": "#/properties/agreementInsuredPerson"
+                                },
+                                "rule": {
+                                    "effect": "DISABLE_INITIAL",
+                                    "condition": {
+                                        "type": "FUNC",
+                                        "ruleFunction": "disableAgreementInsuredPerson",
+                                        "value": [
+                                            {
+                                                "$ref": "#"
+                                            }
+                                        ]
+                                    }
+                                }
+                            },
+                            "style": {
+                                "width": "extra-small"
+                            },
+                            "rule": {
+                                "effect": "HIDE",
+                                "condition": {
+                                    "type": "FUNC",
+                                    "ruleFunction": "HideRuleDeclarationMain",
+                                    "value": [
+                                        {
+                                            "$ref": "#"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "Group",
+            "rule": {
+                "effect": "SHOW",
+                "condition": {
+                    "type": "FUNC",
+                    "ruleFunction": "showExpandedGrid",
+                    "value": [
+                        {
+                            "$ref": "#"
+                        }
+                    ]
+                }
+            },
+            "elements": [
+                {
+                    "rule": {
+                        "effect": "ENABLE_INITIAL",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "enableDeclarationGrid",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    },
+                    "type": "DataGrid",
+                    "elementId": "DeclarationMainArray",
+                    "mode": "Array",
+                    "labelType": "H1",
+                    "label": "sportDeclaration",
+                    "height": "None",
+                    "pagination": {
+                        "mode": "Regular",
+                        "pageSizes": [
+                            5,
+                            10,
+                            15
+                        ],
+                        "defaultPageSize": 17
+                    },
+                    "isCollapsed": false,
+                    "value": {
+                        "$ref": "#"
+                    },
+                    "actions": [
+                        "Add",
+                        "Edit",
+                        "Delete"
+                    ],
+                    "edit": {
+                        "mode": "Detached",
+                        "onAfterGridAction": "onAfterDeclarationGridAction"
+                    },
+                    "detailsTemplates": {
+                        "edit": {
+                            "content": {
+                                "type": "GridLayout",
+                                "fillAvailableSpace": true,
+                                "numberOfColumns": 12,
+                                "elements": [
+                                    {
+                                        "label": "itemText",
+                                        "type": "Input",
+                                        "value": {
+                                            "$ref": "#/properties/itemText"
+                                        }
+                                    },
+                                    {
+                                        "label": "departament",
+                                        "type": "Input",
+                                        "value": {
+                                            "$ref": "#/properties/departament"
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "columns": [
+                        {
+                            "title": "itemNumber",
+                            "name": "itemNumber",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "value": {
+                                    "$ref": "#/properties/itemNumber"
+                                }
+                            },
+                            "style": {
+                                "width": "extra-small"
+                            }
+                        },
+                        {
+                            "title": "itemText",
+                            "name": "itemText",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "allowMultiLine": true,
+                                "value": {
+                                    "$ref": "#/properties/itemText"
+                                }
+                            }
+                        },
+                        {
+                            "title": "departament",
+                            "name": "departament",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "value": {
+                                    "$ref": "#/properties/departament"
+                                }
+                            },
+                            "style": {
+                                "width": "extra-small"
+                            },
+                            "rule": {
+                                "effect": "SHOW",
+                                "condition": {
+                                    "type": "FUNC",
+                                    "ruleFunction": "isBackOfficeUser",
+                                    "value": [
+                                        {
+                                            "$ref": "#"
+                                        }
+                                    ]
+                                }
+                            }
+                        },
+                        {
+                            "title": "agreementInsuredPerson",
+                            "name": "agreementInsuredPerson",
+                            "cellContent": {
+                                "type": "Input",
+                                "value": {
+                                    "$ref": "#/properties/agreementInsuredPerson"
+                                }
+                            },
+                            "style": {
+                                "width": "extra-small"
+                            },
+                            "rule": {
+                                "effect": "HIDE",
+                                "condition": {
+                                    "type": "FUNC",
+                                    "ruleFunction": "HideRuleDeclarationMain",
+                                    "value": [
+                                        {
+                                            "$ref": "#"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

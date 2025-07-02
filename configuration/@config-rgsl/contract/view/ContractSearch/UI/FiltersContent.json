@@ -1,0 +1,458 @@
+{
+    "type": "Group",
+    "formProperties": {
+        "events": {
+            "onLoad": "onLoadGeneralContractSearchView"
+        }
+    },
+    "elements": [
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "Input",
+                    "control": "TextArea",
+                    "enableResize": true,
+                    "numberOfRows": 2,
+                    "label": "number",
+                    "value": {
+                        "$ref": "#/properties/request/properties/data/properties/criteria/properties/number"
+                    },
+                    "width": 1
+                },
+                {
+                    "type": "Input",
+                    "label": "contractTypeDescription",
+                    "width": 1,
+                    "value": {
+                        "$ref": "#/properties/request/properties/data/properties/criteria/properties/contractType"
+                    },
+                    "elementId": "contractTypeId"
+                },
+                {
+                    "type": "Input",
+                    "control": "DateRange",
+                    "dateFrom": {
+                        "type": "Input",
+                        "label": "issueDateFrom",
+                        "width": 1,
+                        "value": {
+                            "$ref": "#/properties/request/properties/data/properties/criteria/properties/issueDateFrom"
+                        },
+                        "control": "DatetimePicker"
+                    },
+                    "dateTo": {
+                        "type": "Input",
+                        "label": "issueDateTo",
+                        "width": 1,
+                        "value": {
+                            "$ref": "#/properties/request/properties/data/properties/criteria/properties/issueDateTo"
+                        },
+                        "control": "DatetimePicker"
+                    },
+                    "width": 2
+                }
+            ]
+        },
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "Input",
+                    "label": "productGroupDescription",
+                    "width": 1,
+                    "value": {
+                        "$ref": "#/properties/request/properties/data/properties/criteria/properties/productGroups"
+                    },
+                    "control": "Dropdown",
+                    "multiple": true,
+                    "filter": "productGroupFilter",
+                    "onValueChanged": [
+                        {
+                            "commandType": "executeAction",
+                            "actionName": "productGroupValueChanged"
+                        }
+                    ]
+                },
+                {
+                    "type": "Input",
+                    "label": "productName",
+                    "value": {
+                        "$ref": "#/properties/request/properties/data/properties/criteria/properties/products"
+                    },
+                    "control": "Dropdown",
+                    "multiple": true,
+                    "autocomplete": {
+                        "minTextLength": 0,
+                        "dropDownItemsCount": 1000,
+                        "selectItemOnMatch": false
+                    },
+                    "source": {
+                        "array": {
+                            "$ref": "#/properties/productsArray"
+                        },
+                        "displayFieldName": "productDescription"
+                    },
+                    "filter": "productFilter",
+                    "width": 1,
+                    "onValueChanged": [
+                        {
+                            "commandType": "executeAction",
+                            "actionName": "productValueChanged"
+                        }
+                    ]
+                },
+                {
+                    "type": "Input",
+                    "control": "DateRange",
+                    "dateFrom": {
+                        "type": "Input",
+                        "label": "startDateFrom",
+                        "width": 1,
+                        "value": {
+                            "$ref": "#/properties/request/properties/data/properties/criteria/properties/startDateFrom"
+                        },
+                        "control": "DatetimePicker"
+                    },
+                    "dateTo": {
+                        "type": "Input",
+                        "label": "startDateTo",
+                        "width": 1,
+                        "value": {
+                            "$ref": "#/properties/request/properties/data/properties/criteria/properties/startDateTo"
+                        },
+                        "control": "DatetimePicker"
+                    },
+                    "width": 2
+                }
+            ]
+        },
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "Lookup",
+                    "label": "policyHolder",
+                    "value": {
+                        "$ref": "#"
+                    },
+                    "width": 1,
+                    "dialogButton": {},
+                    "clearButton": {
+                        "clearAction": "policyHolderClearAction"
+                    },
+                    "dialog": {
+                        "viewReference": {
+                            "configurationCodeName": "GeneralPartySearchView",
+                            "configurationVersion": "1",
+                            "configurationConceptType": "SearchView"
+                        }
+                    },
+                    "onSelected": "policyHolderOnSelected",
+                    "selectedDisplayValueTemplate": "{{expr resultData.fullName}}"
+                },
+                {
+                    "type": "Lookup",
+                    "label": "insuredPerson",
+                    "value": {
+                        "$ref": "#"
+                    },
+                    "width": 1,
+                    "dialogButton": {},
+                    "clearButton": {
+                        "clearAction": "insuredPersonClearAction"
+                    },
+                    "dialog": {
+                        "viewReference": {
+                            "configurationCodeName": "GeneralPartySearchView",
+                            "configurationVersion": "1",
+                            "configurationConceptType": "SearchView"
+                        }
+                    },
+                    "onSelected": "insuredPersonOnSelected",
+                    "selectedDisplayValueTemplate": "{{expr resultData.fullName}}"
+                },
+                {
+                    "type": "Input",
+                    "control": "DateRange",
+                    "dateFrom": {
+                        "type": "Input",
+                        "label": "endDateFrom",
+                        "width": 1,
+                        "value": {
+                            "$ref": "#/properties/request/properties/data/properties/criteria/properties/endDateFrom"
+                        },
+                        "control": "DatetimePicker"
+                    },
+                    "dateTo": {
+                        "type": "Input",
+                        "label": "endDateTo",
+                        "width": 1,
+                        "value": {
+                            "$ref": "#/properties/request/properties/data/properties/criteria/properties/endDateTo"
+                        },
+                        "control": "DatetimePicker"
+                    },
+                    "width": 2
+                }
+            ]
+        },
+        {
+            "type": "Group",
+            "width": 4,
+            "elements": [
+                {
+                    "type": "Group",
+                    "width": 2,
+                    "hide": true,
+                    "rule": {
+                        "effect": "SHOW",
+                        "condition": {
+                            "type": "LEAF",
+                            "expectedValue": true,
+                            "value": {
+                                "$ref": "#/properties/viewContext/properties/showInitiatorGroup"
+                            }
+                        }
+                    },
+                    "elements": [
+                        {
+                            "type": "Lookup",
+                            "elementId": "initiatorLookup",
+                            "label": "initiator",
+                            "value": {
+                                "$ref": "#"
+                            },
+                            "width": 1,
+                            "dialogButton": {},
+                            "clearButton": {
+                                "clearAction": "initiatorClearAction"
+                            },
+                            "dialog": {
+                                "viewReference": {
+                                    "configurationCodeName": "ServiceProviderSearchView",
+                                    "configurationVersion": "1",
+                                    "configurationConceptType": "SearchView"
+                                },
+                                "onLoad": "initiatorOnLoad"
+                            },
+                            "onSelected": "initiatorOnSelected",
+                            "selectedDisplayValueUISchema": {
+                                "type": "Input",
+                                "label": "initiator",
+                                "readOnly": true,
+                                "value": {
+                                    "$ref": "#/properties/request/properties/data/properties/criteria/properties/initiatorName"
+                                }
+                            },
+                            "readOnly": true,
+                            "rule": {
+                                "effect": "ENABLE_INITIAL",
+                                "condition": {
+                                    "type": "LEAF",
+                                    "expectedValue": true,
+                                    "value": {
+                                        "$ref": "#/properties/viewContext/properties/enableInitiator"
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "type": "Input",
+                            "label": "isPersonalManager",
+                            "value": {
+                                "$ref": "#/properties/request/properties/data/properties/criteria/properties/isPersonalManager"
+                            },
+                            "width": 1,
+                            "onValueChanged": [
+                                {
+                                    "commandType": "executeAction",
+                                    "actionName": "onChangeIsPersonalManager"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "Group",
+                    "width": 2,
+                    "hide": true,
+                    "rule": {
+                        "effect": "SHOW",
+                        "condition": {
+                            "type": "LEAF",
+                            "expectedValue": true,
+                            "value": {
+                                "$ref": "#/properties/viewContext/properties/showOrganisationGroup"
+                            }
+                        }
+                    },
+                    "elements": [
+                        {
+                            "type": "Lookup",
+                            "elementId": "organisationUnitLookup",
+                            "label": "organisationUnit",
+                            "commands": [
+                                {
+                                    "commandType": "executeOperation",
+                                    "operation": "SEARCH",
+                                    "errorHandling": "silent",
+                                    "data": null
+                                }
+                            ],
+                            "value": {
+                                "$ref": "#"
+                            },
+                            "width": 1,
+                            "dialogButton": {},
+                            "clearButton": {
+                                "clearAction": "organisationUnitClear"
+                            },
+                            "dialog": {
+                                "viewReference": {
+                                    "configurationCodeName": "OrganisationUnitImplLookup",
+                                    "configurationVersion": "1",
+                                    "configurationConceptType": "SearchView"
+                                },
+                                "onLoad": "organisationUnitOnLoad"
+                            },
+                            "onSelected": "organisationUnitOnSelected",
+                            "selectedDisplayValueUISchema": {
+                                "type": "Input",
+                                "label": "organisationUnit",
+                                "readOnly": true,
+                                "value": {
+                                    "$ref": "#/properties/request/properties/data/properties/criteria/properties/organisationUnitName"
+                                }
+                            },
+                            "readOnly": true,
+                            "rule": {
+                                "effect": "ENABLE_INITIAL",
+                                "condition": {
+                                    "type": "LEAF",
+                                    "expectedValue": true,
+                                    "value": {
+                                        "$ref": "#/properties/viewContext/properties/enableOrganisationUnit"
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "type": "Input",
+                            "label": "includeChildren",
+                            "isCompact": false,
+                            "value": {
+                                "$ref": "#/properties/request/properties/data/properties/criteria/properties/includeChildren"
+                            },
+                            "width": 1,
+                            "readOnly": true,
+                            "rule": {
+                                "effect": "ENABLE_INITIAL",
+                                "condition": {
+                                    "type": "LEAF",
+                                    "expectedValue": true,
+                                    "value": {
+                                        "$ref": "#/properties/viewContext/properties/enableIncludeChildren"
+                                    }
+                                }
+                            }
+                        }
+                    ]
+                },
+                {
+                    "type": "Group",
+                    "width": 4,
+                    "elements": [
+                        {
+                            "type": "Input",
+                            "label": "State code",
+                            "width": 1,
+                            "value": {
+                                "$ref": "#/properties/request/properties/data/properties/criteria/properties/stateCode"
+                            }
+                        },
+                        {
+                            "type": "Input",
+                            "label": "isReinvest",
+                            "name": "isReinvest",
+                            "isCompact": false,
+                            "value": {
+                                "$ref": "#/properties/request/properties/data/properties/criteria/properties/isReinvest"
+                            },
+                            "width": 1
+                        },
+                        {
+                            "type": "Input",
+                            "label": "issueFormCode",
+                            "width": 1,
+                            "value": {
+                                "$ref": "#/properties/request/properties/data/properties/criteria/properties/issueFormCode"
+                            }
+                        },
+                        {
+                            "type": "Lookup",
+                            "elementId": "aaExternalNumber",
+                            "multiple": false,
+                            "value": {
+                                "$ref": "#"
+                            },
+                            "width": 1,
+                            "dialogButton": {},
+                            "dialog": {
+                                "viewReference": {
+                                    "configurationCodeName": "AADocumentSearchView",
+                                    "configurationVersion": "1",
+                                    "configurationConceptType": "SearchView"
+                                },
+                                "onLoad": "onLoadAaExternalNumberSearchView",
+                                "inputParameters": {
+                                    "uiContext": {
+                                        "selectionMode": "Multi"
+                                    }
+                                }
+                            },
+                            "clearButton": {
+                                "clearAction": "aaExternalNumberClearButton"
+                            },
+                            "onSelected": "aaExternalNumberSearchResultAssignment",
+                            "selectedDisplayValueUISchema": {
+                                "type": "Input",
+                                "label": "aaExternalNumber",
+                                "readOnly": false,
+                                "value": {
+                                    "$ref": "#/properties/request/properties/data/properties/criteria/properties/aaExternalNumber"
+                                }
+                            }
+                        }
+                    ]
+                },
+                {
+                    "type": "Group",
+                    "width": 4,
+                    "elements": [
+                        {
+                            "type": "Input",
+                            "label": "futureContractNumber",
+                            "name": "futureContractNumber",
+                            "isCompact": false,
+                            "value": {
+                                "$ref": "#/properties/request/properties/data/properties/criteria/properties/futureContractNumber"
+                            },
+                            "width": 1
+                        },
+                        {
+                            "type": "Input",
+                            "label": "isCollectivePolicyOnly",
+                            "name": "isCollectivePolicyOnly",
+                            "isCompact": false,
+                            "value": {
+                                "$ref": "#/properties/request/properties/data/properties/criteria/properties/isCollectivePolicyOnly"
+                            },
+                            "width": 1
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

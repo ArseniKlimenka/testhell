@@ -1,0 +1,151 @@
+{
+    "type": "Group",
+    "formProperties": {
+        "events": {
+            "onLoad": "onLoadAADocumentSearchView"
+        }
+    },
+    "elements": [
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "Input",
+                    "label": "documentNumber",
+                    "value": {
+                        "$ref": "#/properties/request/properties/data/properties/criteria/properties/documentNumber"
+                    },
+                    "width": 1,
+                    "name": "documentNumber"
+                },
+                {
+                    "type": "Input",
+                    "control": "DateRange",
+                    "dateFrom": {
+                        "type": "Input",
+                        "label": "startDate",
+                        "width": 1,
+                        "value": {
+                            "$ref": "#/properties/request/properties/data/properties/criteria/properties/startDate"
+                        },
+                        "control": "DatetimePicker",
+                        "name": "startDate"
+                    },
+                    "dateTo": {
+                        "type": "Input",
+                        "label": "endDate",
+                        "width": 1,
+                        "value": {
+                            "$ref": "#/properties/request/properties/data/properties/criteria/properties/endDate"
+                        },
+                        "control": "DatetimePicker",
+                        "name": "endDate"
+                    },
+                    "width": 1
+                }
+            ]
+        },
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "Input",
+                    "label": "externalNumber",
+                    "value": {
+                        "$ref": "#/properties/request/properties/data/properties/criteria/properties/externalNumber"
+                    },
+                    "width": 1,
+                    "name": "externalNumber"
+                },
+                {
+                    "type": "Dropdown",
+                    "label": "documentStates",
+                    "value": {
+                        "$ref": "#/properties/request/properties/data/properties/criteria/properties/documentStates"
+                    },
+                    "width": 1,
+                    "name": "documentStates"
+                }
+            ]
+        },
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "elementId": "agentPersonalNumber",
+                    "type": "Input",
+                    "label": "agentPersonalNumber",
+                    "value": {
+                        "$ref": "#/properties/request/properties/data/properties/criteria/properties/agentPersonalNumber"
+                    },
+                    "width": 1,
+                    "name": "agentPersonalNumber"
+                },
+                {
+                    "elementId": "agentPartyType",
+                    "type": "Input",
+                    "control": "Dropdown",
+                    "label": "agentPartyType",
+                    "value": {
+                        "$ref": "#/properties/request/properties/data/properties/criteria/properties/agentPartyType"
+                    },
+                    "width": 1,
+                    "name": "agentPartyType"
+                },
+                {
+                    "type": "Lookup",
+                    "elementId": "agentSearchLookup",
+                    "dialogButton": {},
+                    "clearButton": {
+                        "clearAction": "clearAgent"
+                    },
+                    "dialog": {
+                        "viewReference": {
+                            "configurationCodeName": "ServiceProviderSearchView",
+                            "configurationConceptType": "SearchView",
+                            "configurationVersion": "1"
+                        }
+                    },
+                    "onSelected": "agentResultMapping",
+                    "selectedDisplayValueUISchema": {
+                        "type": "Input",
+                        "label": "agent",
+                        "readOnly": true,
+                        "value": {
+                            "$ref": "#/properties/request/properties/data/properties/criteria/properties/agentName"
+                        }
+                    },
+                    "width": 1
+                }
+            ]
+        },
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "Input",
+                    "label": "salesChannel",
+                    "value": {
+                        "$ref": "#/properties/request/properties/data/properties/criteria/properties/salesChannelCode"
+                    },
+                    "autocomplete": {
+                        "minTextLength": 1
+                    },
+                    "control": "Dropdown",
+                    "source": {
+                        "dataSource": {
+                            "name": "SalesChannelDataSource",
+                            "reloadOnOpen": true,
+                            "searchFieldPath": "description",
+                            "requestMapping": "salesChannelRequestMapping",
+                            "responseMapping": "salesChannelResponseMapping"
+                        },
+                        "displayFieldName": "displayName",
+                        "valueFieldName": "value"
+                    },
+                    "width": 1
+                }
+            ]
+        }
+    ]
+}

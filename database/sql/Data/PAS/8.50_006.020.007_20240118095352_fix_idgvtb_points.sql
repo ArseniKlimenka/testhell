@@ -1,0 +1,5 @@
+delete from bfx_impl.declaration_main where id = '6C88B6A5-2D20-4584-88DD-2230C8048798'; insert into bfx_impl.declaration_main values ('6C88B6A5-2D20-4584-88DD-2230C8048798', 'IDGV4VTB', '1', 'E055246F-2228-4AE2-862B-16F8281A1A82', 'underwriting','1900-01-01','2099-12-31');
+delete from bfx_impl.declaration_main where id = 'B29E7C91-251B-45A7-B1BE-DF76668FD6E1'; insert into bfx_impl.declaration_main values ('B29E7C91-251B-45A7-B1BE-DF76668FD6E1', 'IDGV4VTB', '2', '4746BAB1-69AC-49CC-BDC4-1819DF1CE0BC', 'underwriting','1900-01-01','2099-12-31');
+
+delete from bfx_impl.declaration_main where id = '1E80CAED-DE55-4F17-9F29-2A3B7203C24D'; insert into bfx_impl.declaration_main values ('1E80CAED-DE55-4F17-9F29-2A3B7203C24D', 'IDGV4PPVTB', '1', 'E055246F-2228-4AE2-862B-16F8281A1A82', 'underwriting','1900-01-01','2099-12-31');
+delete from bfx_impl.declaration_main where id = '4EDEE130-FA2E-4C19-9B46-1149E41BB02A'; insert into bfx_impl.declaration_main values ('4EDEE130-FA2E-4C19-9B46-1149E41BB02A', 'IDGV4PPVTB', '2', '4746BAB1-69AC-49CC-BDC4-1819DF1CE0BC', 'underwriting','1900-01-01','2099-12-31');

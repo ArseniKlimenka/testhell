@@ -1,0 +1,20 @@
+
+insert INTO acc.CT_DOCUMENT_TYPE (DOCUMENT_TYPE_ID, DESCRIPTION, ACCOUNT_TYPE_ID, PAYABLE) values (1009,'Policy cancellation - Credit Repayment',NULL,NULL);
+
+insert into ACC_IMPL.OFR_RULE (GL_ACCOUNT_ID, PREVIOUS_PERIOD, DOCUMENT_TYPE_ID, OFR_ID)
+    values ((select GL_ACCOUNT_ID from acc.GL_ACCOUNT where GL_ACCOUNT_NO = '71406'), null, 1009, (select OFR_ID from ACC_IMPL.CT_OFR where OFR_CODE = '23103'));
+
+INSERT INTO ACC.CT_GL_POSTING_SCHEME(POSTING_SCHEME_ID, SCHEME_NAME, SCHEME_TYPE_ID, JOURNAL_TYPE_ID, VALUE_SIGN, BA_ACCOUNT_TYPE_ID, INTERNAL, SOURCE_DOC_TYPE_ID, OPENED_BY_ENTRY_TYPE_ID, VALIDITY_START, VALIDITY_END, EXPLICIT, ITEM_TYPE_ID)
+VALUES  (60, 'PO paid (Policy cancellation - CreditRepayment)', 1, 16, null, null, 0, 1009, null, '19000101', '9999-12-31', 0, null);
+
+INSERT INTO ACC.GL_POSTING_SCHEME(POSTING_SCHEME_ID, SEQ_NUMBER, IS_DEBIT, GL_ACCOUNT_TYPE_ID, SIGN, VALUE_FIELD_ID, NET_VALUE_FIELD_ID, PAIR_NO, PAIR_SEQ_NO)
+VALUES (60, 1, 1, 1007, 1, 4, 4, 1, 1),
+       (60, 2, 0, 1006, 1, 4, 4, 1, 2);
+
+insert into ACC.ATTRIBUTE_DEFINITION (NAME, ATTRIBUTE_VALUE_TYPE_ID, DESCRIPTION)
+values ('DateToCheckPrevPeriod', 2, N'Date to check if it is previous period');
+
+insert into acc.ATTRIBUTE_SET (ATTRIBUTE_SET_ID, ATTRIBUTE_DEFINITION_ID, REQUIRED, SOURCE_ID, NAME, DESCRIPTION)
+values  (3, (select ATTRIBUTE_DEFINITION_ID from ACC.ATTRIBUTE_DEFINITION where ATTRIBUTE_DEFINITION.NAME = 'DateToCheckPrevPeriod'), 0, null, 'SAP GL Account attributes 1', 'Other not validated attributes'),
+        (4, (select ATTRIBUTE_DEFINITION_ID from ACC.ATTRIBUTE_DEFINITION where ATTRIBUTE_DEFINITION.NAME = 'DateToCheckPrevPeriod'), 0, null, 'SAP GL Account attributes 2', 'Other not validated attributes'),
+        (5, (select ATTRIBUTE_DEFINITION_ID from ACC.ATTRIBUTE_DEFINITION where ATTRIBUTE_DEFINITION.NAME = 'DateToCheckPrevPeriod'), 0, null, 'SAP GL Account attributes 3', 'Other not validated attributes');

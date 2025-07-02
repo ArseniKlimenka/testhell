@@ -1,0 +1,31 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "Party",
+    "description": "Data schema describing party phisical person information. Required items from FD 2.0 19.1.1 check for double 1",
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+        "partyRole": {
+            "type": "string",
+            "enum": [
+                "/policyHolder",
+                "/insuredPerson",
+                "/beneficiary",
+                "/beneficiaryRepresentative",
+                "/beneficiaryOwner",
+                "/applicantNaturalPerson",
+                "/agentNaturalPerson",
+                "/taxPayer",
+                "/policyHolderBox",
+                "/insuredPersonBox",
+                "/policyHolderLegalEntity",
+                "/insuredPersonLegalEntity",
+                "/agentLegalEntity"
+            ],
+            "aiTitle": "partyRole"
+        },
+        "paymentFrequencyCode": {
+            "type": "string"
+        }
+    }
+}

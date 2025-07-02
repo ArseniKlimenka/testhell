@@ -1,0 +1,36 @@
+{
+    "type": "Group",
+    "elements": [
+        {
+            "type": "InlineView",
+            "showContainerActions": false,
+            "views": [
+                {
+                    "viewReference": {
+                        "configurationCodeName": "ClaimCommentsView",
+                        "configurationConceptType": "SearchView",
+                        "configurationVersion": "1"
+                    },
+                    "onViewInitialized": "initComments"
+                }
+            ],
+            "value": {
+                "$ref": "#"
+            },
+            "hide": false,
+            "elementId": "comments-control",
+            "rule": {
+                "effect": "ENABLE_INITIAL",
+                "condition": {
+                    "type": "FUNC",
+                    "ruleFunction": "enableComments",
+                    "value": [
+                        {
+                            "$ref": "#"
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}

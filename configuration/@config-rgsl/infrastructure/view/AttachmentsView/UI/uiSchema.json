@@ -1,0 +1,335 @@
+{
+    "id": "AttachmentsUiSchema",
+    "type": "Group",
+    "formProperties": {
+        "events": {
+            "onLoad": "initAttachments"
+        }
+    },
+    "elements": [
+        {
+            "type": "GridLayout",
+            "numberOfColumns": 4,
+            "elements": [
+                {
+                    "type": "Group",
+                    "elements": [
+                        {
+                            "type": "Component",
+                            "name": "AttachmentsVerificationTable",
+                            "value": {
+                                "$ref": "#/properties/Body/properties/attachmentsVerification"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "rule": {
+                "effect": "SHOW",
+                "condition": {
+                    "type": "FUNC",
+                    "ruleFunction": "hideAttachmentsVerification",
+                    "value": [
+                        {
+                            "$ref": "#"
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "type": "GridLayout",
+            "numberOfColumns": 4,
+            "elements": [
+                {
+                    "type": "Group",
+                    "elements": [
+                        {
+                            "type": "Component",
+                            "name": "AttachmentsTable",
+                            "value": {
+                                "$ref": "#"
+                            }
+                        }
+                    ],
+                    "eventHandlers": [
+                        {
+                            "eventName": "InitializeAttachments",
+                            "commands": [
+                                {
+                                    "commandType": "executeAction",
+                                    "actionName": "initAttachments"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "GridLayout",
+            "numberOfColumns": 4,
+            "elements": [
+                {
+                    "type": "Group",
+                    "width": 2,
+                    "value": {
+                        "$ref": "#/properties/Body/properties/contractSigned"
+                    },
+                    "rule": {
+                        "effect": "SHOW",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "showFileUploadSpecial",
+                            "value": [
+                                {
+                                    "$ref": "#/properties/contractSigned"
+                                }
+                            ]
+                        }
+                    },
+                    "elements": [
+                        {
+                            "type": "OutputText",
+                            "hideLabel": true,
+                            "literalValue": "contractSigned",
+                            "width": 2
+                        },
+                        {
+                            "type": "AttachmentUpload",
+                            "elementId": "contractSigned",
+                            "label": "contractSigned",
+                            "width": 2,
+                            "commands": "fileUploadSpecial",
+                            "value": {
+                                "$ref": "#/properties/Body/properties/contractSigned"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "type": "Group",
+                    "width": 2,
+                    "value": {
+                        "$ref": "#/properties/Body/properties/application"
+                    },
+                    "rule": {
+                        "effect": "SHOW",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "showFileUploadSpecial",
+                            "value": [
+                                {
+                                    "$ref": "#/properties/Body/properties/application"
+                                }
+                            ]
+                        }
+                    },
+                    "elements": [
+                        {
+                            "type": "OutputText",
+                            "hideLabel": true,
+                            "literalValue": "application",
+                            "width": 2
+                        },
+                        {
+                            "type": "AttachmentUpload",
+                            "elementId": "application",
+                            "label": "application",
+                            "width": 2,
+                            "commands": "fileUploadSpecial",
+                            "value": {
+                                "$ref": "#/properties/Body/properties/application"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "type": "Group",
+                    "width": 2,
+                    "value": {
+                        "$ref": "#/properties/Body/properties/passport"
+                    },
+                    "rule": {
+                        "effect": "SHOW",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "showFileUploadSpecial",
+                            "value": [
+                                {
+                                    "$ref": "#/properties/Body/properties/passport"
+                                }
+                            ]
+                        }
+                    },
+                    "elements": [
+                        {
+                            "type": "OutputText",
+                            "hideLabel": true,
+                            "literalValue": "passport",
+                            "width": 2
+                        },
+                        {
+                            "type": "AttachmentUpload",
+                            "elementId": "passport",
+                            "label": "passport",
+                            "width": 2,
+                            "commands": "fileUploadSpecial",
+                            "value": {
+                                "$ref": "#/properties/Body/properties/passport"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "type": "Group",
+                    "width": 2,
+                    "value": {
+                        "$ref": "#/properties/Body/properties/financialQuestionary"
+                    },
+                    "rule": {
+                        "effect": "SHOW",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "showFileUploadSpecial",
+                            "value": [
+                                {
+                                    "$ref": "#/properties/Body/properties/financialQuestionary"
+                                }
+                            ]
+                        }
+                    },
+                    "elements": [
+                        {
+                            "type": "OutputText",
+                            "hideLabel": true,
+                            "literalValue": "financialQuestionary",
+                            "width": 2
+                        },
+                        {
+                            "type": "AttachmentUpload",
+                            "elementId": "financialQuestionary",
+                            "label": "financialQuestionary",
+                            "width": 2,
+                            "commands": "fileUploadSpecial",
+                            "value": {
+                                "$ref": "#/properties/Body/properties/financialQuestionary"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "type": "Group",
+                    "width": 2,
+                    "value": {
+                        "$ref": "#/properties/Body/properties/bankNotification"
+                    },
+                    "rule": {
+                        "effect": "SHOW",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "showFileUploadSpecial",
+                            "value": [
+                                {
+                                    "$ref": "#/properties/Body/properties/bankNotification"
+                                }
+                            ]
+                        }
+                    },
+                    "elements": [
+                        {
+                            "type": "OutputText",
+                            "hideLabel": true,
+                            "literalValue": "bankNotification",
+                            "width": 2
+                        },
+                        {
+                            "type": "AttachmentUpload",
+                            "elementId": "bankNotification",
+                            "label": "bankNotification",
+                            "width": 2,
+                            "commands": "fileUploadSpecial",
+                            "value": {
+                                "$ref": "#/properties/Body/properties/bankNotification"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "type": "Group",
+                    "width": 2,
+                    "value": {
+                        "$ref": "#/properties/Body/properties/changeApplication"
+                    },
+                    "rule": {
+                        "effect": "SHOW",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "showFileUploadSpecial",
+                            "value": [
+                                {
+                                    "$ref": "#/properties/Body/properties/changeApplication"
+                                }
+                            ]
+                        }
+                    },
+                    "elements": [
+                        {
+                            "type": "OutputText",
+                            "hideLabel": true,
+                            "literalValue": "changeApplication",
+                            "width": 2
+                        },
+                        {
+                            "type": "AttachmentUpload",
+                            "elementId": "changeApplication",
+                            "label": "changeApplication",
+                            "width": 2,
+                            "commands": "fileUploadSpecial",
+                            "value": {
+                                "$ref": "#/properties/Body/properties/changeApplication"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "type": "Group",
+                    "width": 2,
+                    "value": {
+                        "$ref": "#/properties/Body/properties/supportingDocument"
+                    },
+                    "rule": {
+                        "effect": "SHOW",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "showFileUploadSpecial",
+                            "value": [
+                                {
+                                    "$ref": "#/properties/Body/properties/supportingDocument"
+                                }
+                            ]
+                        }
+                    },
+                    "elements": [
+                        {
+                            "type": "OutputText",
+                            "hideLabel": true,
+                            "literalValue": "supportingDocument",
+                            "width": 2
+                        },
+                        {
+                            "type": "AttachmentUpload",
+                            "elementId": "supportingDocument",
+                            "label": "supportingDocument",
+                            "width": 2,
+                            "commands": "fileUploadSpecial",
+                            "value": {
+                                "$ref": "#/properties/Body/properties/supportingDocument"
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

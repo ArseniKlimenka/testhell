@@ -1,0 +1,72 @@
+{
+    "allowParallelExecution": true,
+    "mainDataSource": "CollectivePolicyInsuredListDataSource",
+    "additionalDataSources": [
+        "GetContractFullDataDataSource"
+    ],
+    "initialisationSinks": [
+        {
+            "name": "ClearRiskList",
+            "class": {
+                "className": "Adacta.AdInsure.RGSL.PAS.API.Shared.Contract.Services.ICollectiveContractService, Adacta.AdInsure.RGSL.PAS.API",
+                "methodName": "ClearRiskList"
+            }
+        }
+    ],
+    "sinks": [
+        {
+            "name": "WriteRisk",
+            "class": {
+                "className": "Adacta.AdInsure.RGSL.PAS.API.Shared.Contract.Services.ICollectiveContractService, Adacta.AdInsure.RGSL.PAS.API",
+                "methodName": "WriteRisk"
+            }
+        },
+        {
+            "name": "SetInsuredCalculatedData",
+            "class": {
+                "className": "Adacta.AdInsure.RGSL.PAS.API.Shared.Contract.Services.ICollectiveContractService, Adacta.AdInsure.RGSL.PAS.API",
+                "methodName": "SetInsuredCalculatedData"
+            }
+        }
+    ],
+    "completionSinks": [
+        {
+            "name": "GetSummaryRiskData",
+            "fetch": {
+                "configuration": {
+                    "name": "CollectivePolicyGetSummaryRiskDataSource"
+                }
+            }
+        },
+        {
+            "name": "SetSummaryCalculatedData",
+            "document": {
+                "configuration": {
+                    "name": "CollectiveLifeInsurancePolicy",
+                    "version": "1"
+                },
+                "allowUpdating": {
+                    "inStates": [
+                        "PremiumCalculating"
+                    ]
+                },
+                "allowOnValidationErrors": {
+                    "all": true
+                }
+            }
+        },
+        {
+            "name": "TransitionCollectiveLifeInsurancePolicyToDraftState",
+            "documentTransition": {
+                "transition": {
+                    "configurationName": "CollectiveLifeInsurancePolicy",
+                    "configurationVersion": "1"
+                }
+            }
+        }
+    ],
+    "errorSinks": [
+        
+    ],
+    "version": "1"
+}

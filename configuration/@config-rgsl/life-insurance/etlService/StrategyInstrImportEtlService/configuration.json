@@ -1,0 +1,48 @@
+{
+    "mainDataSource": "ImportStagingDataSource",
+    "allowParallelExecution": true,
+    "additionalDataSources": [
+        "GetStrategyInstrDataSource"
+    ],
+    "sinks": [
+        {
+            "name": "WriteSuccessStatus",
+            "database": {
+                "tables": [
+                    "BFX.IMPORT_RECORD_STATUS"
+                ]
+            }
+        },
+        {
+            "name": "WriteToStrategyInstrTable",
+            "database": {
+                "tables": [
+                    "BFX_IMPL.STRATEGY_INSTRUMENTS"
+                ]
+            }
+        }
+    ],
+    "errorSinks": [
+        {
+            "name": "WriteErrorStatus",
+            "database": {
+                "tables": [
+                    "BFX.IMPORT_RECORD_STATUS"
+                ]
+            }
+        }
+    ],
+    "completionSinks": [
+        {
+            "name": "FinishedImporting",
+            "documentTransition": {
+                "transition": {
+                    "transitionName": "FinishImporting",
+                    "configurationName": "StrategyInstrImport",
+                    "configurationVersion": "1"
+                }
+            }
+        }
+    ],
+    "version": "1"
+}

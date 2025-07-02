@@ -1,0 +1,38 @@
+{
+  "name": "@config-rgsl/accident-life-insurance",
+  "version": "1.0.0",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test-validate": "node ../../../node_modules/@adinsure-tools/test-runner -t validation -e ../../../test/validate/test-main.js -c {{@config-rgsl::accident-life-insurance::(?:.*)}}$",
+    "test-validate-debug": "node --inspect-brk ../../../node_modules/@adinsure-tools/test-runner -t validation -e ../../../test/validate/test-main.js -c {{@config-rgsl::accident-life-insurance::(?:.*)}}$",
+    "build": "npm run build:validate-schemas & npm run build:build & npm run build:check-es-mapping & npm run build:config-items & npm run build:translate",
+    "build:check-es-mapping": "node ../../../node_modules/@adinsure-tools/studio-services/dist/scripts/check-es-mapping.js -w ../../../ -r ./",
+    "test-api": "node ../../../node_modules/@adinsure-tools/test-runner -t api -e local",
+    "test-api-debug": "node --inspect-brk ../../../node_modules/@adinsure-tools/test-runner -t api -e local"
+  },
+  "keywords": [
+    "configuration"
+  ],
+  "adInsure": {
+    "projectNameDisplay": "Accident Life Insurance",
+    "hierarchyLevel": "GeneralConfiguration",
+    "parent": "@config-rgsl/life-insurance",
+    "ownershipScope": "pas",
+    "domain": "PolicyAdministrationProcesses"
+  },
+  "dependencies": {
+    "@config-system/infrastructure": "43.4.0",
+    "@config-rgsl/acc-payment-order": "1.0.0",
+    "@config-rgsl/agent-agreement": "1.0.0",
+    "@config-rgsl/agent-agreement-base": "1.0.0",
+    "@config-rgsl/infrastructure": "1.0.0",
+    "@config-rgsl/life-insurance": "1.0.0",
+    "@config-rgsl/workflow": "1.0.0",
+    "@config-rgsl/acc-base": "1.0.0",
+    "@config-rgsl/claim": "1.0.0",
+    "@config-rgsl/claim-base": "1.0.0"
+  }
+}

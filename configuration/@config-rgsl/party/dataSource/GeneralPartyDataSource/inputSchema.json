@@ -1,0 +1,112 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "object",
+    "properties": {
+        "criteria": {
+            "type": "object",
+            "aiValidation": {
+                "rule": "searchCriteriaValidation"
+            },
+            "properties": {
+                "freeText": {
+                    "type": "string"
+                },
+                "createdOnFrom": {
+                    "type": "string",
+                    "aiFormat": "date"
+                },
+                "partyType": {
+                    "$ref": "component:PartyType"
+                },
+                "code": {
+                    "type": "string"
+                },
+                "lastName": {
+                    "type": "string"
+                },
+                "firstName": {
+                    "type": "string"
+                },
+                "middleName": {
+                    "type": "string"
+                },
+                "personGender": {
+                    "type": "string",
+                    "enum": [
+                        "Male",
+                        "Female"
+                    ]
+                },
+                "dateOfBirth": {
+                    "type": "string",
+                    "aiFormat": "date"
+                },
+                "dateOfBirthFrom": {
+                    "type": "string",
+                    "aiFormat": "date"
+                },
+                "dateOfBirthTo": {
+                    "type": "string",
+                    "aiFormat": "date"
+                },
+                "isDocClassIdentity": {
+                    "type": "boolean"
+                },
+                "showDuplicates": {
+                    "type": "boolean"
+                },
+                "docTypeCode": {
+                    "type": "string"
+                },
+                "docSeries": {
+                    "type": "string"
+                },
+                "docNumber": {
+                    "type": "string"
+                },
+                "OGRNOGRNIP": {
+                    "type": "string"
+                },
+                "fullName": {
+                    "type": "string"
+                },
+                "partyIdsToInclude": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "partyCodesToInclude": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "partyCodesToExclude": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "dataSourceRequestId": {
+                    "type": "string",
+                    "description": "used to skip caching in the etl service"
+                }
+            }
+        },
+        "sort": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "descending": {
+                        "type": "boolean"
+                    },
+                    "fieldName": {
+                        "type": "string"
+                    }
+                }
+            }
+        }
+    }
+}

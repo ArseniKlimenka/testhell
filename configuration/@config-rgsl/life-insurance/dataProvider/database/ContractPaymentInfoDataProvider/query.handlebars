@@ -1,0 +1,51 @@
+select
+	alc.ALLOCATION_ID,
+	alc.DOCUMENT_TYPE_ID,
+	alc.CREATE_DATE as ALLOCATION_DATE,
+	case
+		when alc.DOCUMENT_TYPE_ID = 1 then 'Contract'
+		when alc.DOCUMENT_TYPE_ID in (2, 3) then 'PaymentOrder'
+		when alc.DOCUMENT_TYPE_ID = 4 then 'ImportDocument'
+		else null
+	end as ENTITY_TYPE,
+	case
+		when alc.DOCUMENT_TYPE_ID = 1 then art.CODE_NAME
+		when alc.DOCUMENT_TYPE_ID in (2, 3) then 'PaymentOrder'
+		when alc.DOCUMENT_TYPE_ID = 4 then 'AggregatedPaymentRegisterImport'
+		else null
+	end as CONFIGURATION_NAME,
+	alc.DOCUMENT_NO,
+	bsi.STATUS_ID as PAY_STATUS_ID,
+	bsi.TRANSACTION_DATE,
+	bsi.PAYMENT_DATE,
+	alc.PAY_AMOUNT,
+	alc.PAY_RATE,
+	alc.DOC_AMOUNT,
+	alcp.EXCHANGE_DIFFERENCE,
+	bsi.CURRENCY_CODE as PAY_CURRENCY_CODE,
+	case when alc.TOLERANCE_DOC_AMOUNT < 0 then -alc.TOLERANCE_DOC_AMOUNT end as TOLERANCE_OVERPAYMENT,
+	case when alc.TOLERANCE_DOC_AMOUNT > 0 then  alc.TOLERANCE_DOC_AMOUNT end as TOLERANCE_UNDERPAYMENT,
+	bsi.DEBTOR_NAME as PAYER_NAME,
+	bsi.BANK_STATEMENT_ITEM_NO,
+	bsi.PAYMENT_DESCRIPTION,
+	bsi.FAKE,
+	(select top 1 r.EXCHANGE_RATE from BFX.CURRENCY_EXCHANGE_RATE r
+	 where CURRENCY_CODE = 'RUB' and r.EXCHANGE_RATE_DATE <= bsi.PAYMENT_DATE
+	 order by r.EXCHANGE_RATE_DATE desc) as LOC_CURR_EXCHANGE_RATE,
+	(select top 1 r.RATE from BFX_IMPL.BANK_KEY_RATE r
+	 where r.RATE_DATE <= DATEADD(month, DATEDIFF(month, 0, bsi.PAYMENT_DATE), 0)
+	 order by r.RATE_DATE desc) as CB_RATE
+from
+	ACC_IMPL.ALLOCATION alc
+	inner join ACC_IMPL.BANK_STATEMENT_ITEM bsi on bsi.BANK_STATEMENT_ITEM_ID = alc.BANK_STATEMENT_ITEM_ID
+	left join acc_impl.ALLOCATION_POLICY alcp on alcp.ALLOCATION_ID = alc.ALLOCATION_ID
+	left join PAS.CONTRACT contr on contr.CONTRACT_NUMBER = alc.DOCUMENT_NO
+	left join CFX.PUBLISHED_ARTIFACT art on art.PUBLISHED_ARTIFACT_ID = contr.PUBLISHED_ARTIFACT_ID
+where 1=1
+and alc.CANCELLED = 0
+	and alc.CANCELLED_ALLOCATION_ID is null
+	and alc.DOCUMENT_TYPE_ID = 1
+	and alc.DOCUMENT_NO = @contractNumber
+{{#if parameters.configurationName}}
+    and art.CODE_NAME = @configurationName
+{{/if}}

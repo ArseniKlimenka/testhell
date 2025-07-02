@@ -1,0 +1,20 @@
+﻿select top 1
+       p.code as product_code,
+       r.code as risk_code,
+       r.short_description as risk_short_description,
+       r.full_description as risk_full_description,
+       rt.is_life,
+       rpr.risk_order,
+       rpr.risk_program,
+       rpr.risk_person,
+       rpr.conditions_function,
+       r.risks_group
+  from bfx_impl.products p,
+       bfx_impl.risk_product_relation rpr,
+       bfx_impl.risks r,
+       bfx_impl.risk_type rt
+ where p.code = rpr.product_code
+   and r.code = rpr.risk_code
+   and r.type = rt.risk_type
+   and p.code = @productCode
+   and r.code = @riskCode

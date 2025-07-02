@@ -1,0 +1,180 @@
+{
+	"info": {
+		"_postman_id": "321aa6e0-3204-4af1-be63-9db05b9d84d8",
+		"name": "LocalDataSource",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "DataSource",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"data\": {\r\n        \"criteria\": {\r\n            \"fullBic\": \"044525443\"\r\n        }\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{SERVER_URI}}/api/entity-infrastructure/datasource/execute?configurationCodeName=BanksDataSource",
+					"host": [
+						"{{SERVER_URI}}"
+					],
+					"path": [
+						"api",
+						"entity-infrastructure",
+						"datasource",
+						"execute"
+					],
+					"query": [
+						{
+							"key": "configurationCodeName",
+							"value": "BanksDataSource"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DaDataRGSL",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{SERVER_URI}}/api/rgsl/party/dadata/Dadata?query=москва барклая 7",
+					"host": [
+						"{{SERVER_URI}}"
+					],
+					"path": [
+						"api",
+						"rgsl",
+						"party",
+						"dadata",
+						"Dadata"
+					],
+					"query": [
+						{
+							"key": "query",
+							"value": "москва барклая 7"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "oauth2",
+		"oauth2": [
+			{
+				"key": "clientSecret",
+				"value": "VnVbvQA3Ofl5hT2naidPKHQ0dSPJMLvg",
+				"type": "string"
+			},
+			{
+				"key": "clientId",
+				"value": "config-studio-client",
+				"type": "string"
+			},
+			{
+				"key": "accessTokenUrl",
+				"value": "{{IS_URI}}/realms/adinsure/protocol/openid-connect/token",
+				"type": "string"
+			},
+			{
+				"key": "password",
+				"value": "ptkrf123#",
+				"type": "string"
+			},
+			{
+				"key": "scope",
+				"value": "adinsure",
+				"type": "string"
+			},
+			{
+				"key": "username",
+				"value": "administrator",
+				"type": "string"
+			},
+			{
+				"key": "tokenName",
+				"value": "AdInsure token",
+				"type": "string"
+			},
+			{
+				"key": "grant_type",
+				"value": "password_credentials",
+				"type": "string"
+			},
+			{
+				"key": "addTokenTo",
+				"value": "header",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

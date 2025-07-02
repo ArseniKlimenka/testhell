@@ -1,0 +1,72 @@
+{
+    "type": "Group",
+    "formProperties": {
+        "events": {
+            "onLoad": "onLoadEconomicParametersSearchSearchView"
+        }
+    },
+    "elements": [
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "Input",
+                    "label": "insuranceProduct",
+                    "multiple": true,
+                    "source": {
+                        "dataSource": {
+                            "name": "ProductsDataSource",
+                            "searchFieldPath": "description",
+                            "requestMapping": "productRequestMapping",
+                            "responseMapping": "productResponseMapping",
+                            "resultCount": 1000
+                        },
+                        "displayFieldName": "productDescription"
+                    },
+                    "autocomplete": {
+                        "minTextLength": 0,
+                        "dropDownItemsCount": 1000,
+                        "selectItemOnMatch": false
+                    },
+                    "control": "Dropdown",
+                    "value": {
+                        "$ref": "#/properties/request/properties/data/properties/criteria/properties/insuranceProducts"
+                    },
+                    "width": 1
+                },
+                {
+                    "type": "Input",
+                    "label": "documentNumber",
+                    "width": 1,
+                    "value": {
+                        "$ref": "#/properties/request/properties/data/properties/criteria/properties/documentNumber"
+                    },
+                    "elementId": "documentNumberId"
+                },
+                {
+                    "type": "Input",
+                    "control": "DateRange",
+                    "dateFrom": {
+                        "type": "Input",
+                        "label": "issueDateFrom",
+                        "width": 1,
+                        "value": {
+                            "$ref": "#/properties/request/properties/data/properties/criteria/properties/issueDateFrom"
+                        },
+                        "control": "DatetimePicker"
+                    },
+                    "dateTo": {
+                        "type": "Input",
+                        "label": "issueDateTo",
+                        "width": 1,
+                        "value": {
+                            "$ref": "#/properties/request/properties/data/properties/criteria/properties/issueDateTo"
+                        },
+                        "control": "DatetimePicker"
+                    },
+                    "width": 2
+                }
+            ]
+        }
+    ]
+}

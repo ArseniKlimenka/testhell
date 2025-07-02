@@ -1,0 +1,623 @@
+<style type="text/css">
+    .kidQRDiv {
+        grid-area: kidQRDiv;
+        padding: 0;
+        margin: 0;
+    }
+
+    .kidQRCode {
+        width: 140x;
+        height: 140px;
+        position: fixed;
+        top: 20px;
+        right: 0;
+        -ro-replacedelement: qrcode;
+        -ro-qrcode-errorcorrectionlevel: Q;
+    }
+
+    
+    .kidQRCodeWithBarCode {
+        width: 140x;
+        height: 140px;
+        position: fixed;
+        top: 45px;
+        right: 0;
+        -ro-replacedelement: qrcode;
+        -ro-qrcode-errorcorrectionlevel: Q;
+    }
+
+    .kid {
+        font-family: Arial, sans-serif;
+        font-size: 12pt;
+        text-align: justify;
+    }
+
+    .kidIndent {
+        text-indent: 12.5mm;
+    }
+
+    .kid table {
+        table-layout: fixed;
+        width: 100%;
+        margin-top: 10pt;
+        margin-bottom: 0;
+    }
+
+    .kid td,
+    th {
+        padding-left: 5px;
+        padding-top: 2px;
+        padding-right: 5px;
+        padding-bottom: 2px;
+        border: 0px solid black;
+    }
+
+    .kid .kidSectionTR {
+        border-collapse: collapse;
+        border: 1px solid black;
+    }
+
+    .kidTextAlignLeft {
+        text-align: left;
+    }
+
+    .kidTextAlignCenter {
+        text-align: center;
+    }
+
+    .kidTextAlignJustify {
+        text-align: justify;
+    }
+
+    .kidHeaderInsurerTable {
+        border-collapse: collapse;
+        border: 0px solid black;
+    }
+
+    .kidHeaderInsurerTable .kidHeaderInsurerTableInside {
+        text-align: justify;
+        line-height: 1;
+    }
+
+    .kid .kidHeaderTable .kidRuleDescription {
+        width: 76%;
+        text-align: justify;
+        text-indent: 12.5mm;
+    }
+
+    .kid .headerIndent {
+        margin: 25px 0px 0px 0px;
+    }
+
+    .kidDefaultTable {
+        border-collapse: collapse;
+        border: 1px solid black;
+    }
+
+    .kidDefaultTable .col1 {
+        width: 100%;
+        line-height: 1;
+    }
+
+    .kidDefaultTable .kidDefaultTableHeader {
+        text-align: center;
+        font-weight: bold;
+    }
+
+    .kidDefaultTable .kidDefaultTableInside {
+        text-align: justify;
+        line-height: 1;
+    }
+
+    .kidDefaultTable .kidDefaultTableInsideEnd {
+        text-align: justify;
+        padding-top: 1mm;
+        margin-top: 1mm;
+        padding-bottom: 0mm;
+        margin-bottom: 0mm;
+    }
+
+    .kidReturnPremiumTable {
+        border-collapse: collapse;
+        border: 1px solid black;
+    }
+
+    .kidReturnPremiumTable .col1 {
+        width: 50%;
+    }
+
+    .kidReturnPremiumTable .col2 {
+        width: 50%;
+    }
+
+    .kidReturnPremiumTable .kidReturnPremiumTableHeader {
+        text-align: center;
+        font-weight: bold;
+    }
+
+    .kidReturnPremiumTable .kidReturnPremiumTableInside {
+        vertical-align: top;
+        border-collapse: collapse;
+        border: 1px solid black;
+        text-align: justify;
+        line-height: 1;
+        text-indent: 12.5mm;
+    }
+
+    .kidReturnPremiumTable .kidReturnPremiumInside {
+        vertical-align: top;
+        text-align: left;
+        text-align: justify;
+        line-height: 1;
+        text-indent: 12.5mm;
+    }
+
+    .kidReturnPremiumTable .kidReturnPremiumHeader {
+        vertical-align: top;
+        text-align: left;
+        line-height: 1;
+        text-indent: 12.5mm;
+        border-collapse: collapse;
+        border: 1px solid black;
+    }
+
+    .kidReturnPremiumTable .kidReturnPremiumHeaderCorrection {
+        margin-right: 30px;
+    }
+
+    .kidReturnPremiumTable .kidOtherConditions {
+        vertical-align: top;
+        text-indent: 12.5mm;
+        text-align: justify;
+        line-height: 1;
+        border-collapse: collapse;
+        border: 1px solid black;
+    }
+
+    .footnote {
+        text-align: justify;
+        font-size: 6pt;
+        font-weight: normal;
+        float: footnote;
+    }
+
+    .kid .kidHeaderTable {
+        table-layout: fixed;
+        width: 100%;
+        margin-top: 10pt;
+        margin-bottom: 0;
+        border-collapse: collapse;
+        border: 0px solid black;
+    }
+
+    .kid .kidHeaderTable td,
+    th {
+        padding-left: 5px;
+        padding-top: 5px;
+        padding-right: 5px;
+        padding-bottom: 5px;
+        border: 0px solid black;
+    }
+
+    .kid .kidHeaderTable .kidHeaderTableHeader {
+        width: 76%;
+        text-align: center;
+        vertical-align: top;
+        text-indent: 12.5mm;
+    }
+
+    .kid .kidHeaderTable .kidHeaderConditions {
+        margin: 0px 0px 0px 7px;
+    }
+
+    .kid .kidHeaderTable .kidHeaderTableProduct {
+        text-align: center;
+    }
+
+    .kid .kidHeaderTable .kidHeaderTableProductIndent {
+        width: 76%;
+        text-align: center;
+        padding: 12px 0px 12px 0px;
+    }
+
+    .kid .kidPolicyHolder {
+        margin: 10px 0px 0px 0px;
+    }
+
+    .kid .kidInvisibleTable {
+        border: 0px !important;
+    }
+
+    .kidTdWidth25Right {
+        border: 0px;
+        text-align: right;
+        width: 25%;
+        padding: 0mm;
+    }
+
+    .kidTdWidth25Left {
+        border: 0px;
+        text-align: left;
+        width: 25%;
+        padding: 0mm;
+    }
+
+    .kidTdWidth15Center {
+        border: 0px;
+        text-align: center;
+        width: 15%;
+        padding: 0mm;
+    }
+
+    .kidTdWidth25Center {
+        border: 0px;
+        text-align: center;
+        width: 25%;
+        padding: 0mm;
+    }
+
+    .kidTdWidth35Left {
+        border: 0px;
+        text-align: left;
+        width: 35%;
+        padding: 0mm;
+    }
+
+    .kidTdWidth15Center {
+        border: 0px;
+        text-align: center;
+        width: 15%;
+        padding: 0mm;
+    }
+
+    .kid .kidTextUnderline {
+        text-decoration: underline;
+    }
+
+    .kid .kidSmallText {
+        font-size: 8pt;
+    }
+
+    .kid .kidFooterTable {
+        border-collapse: separate;
+        border-spacing: 0;
+        border: 0px solid black;
+    }
+
+    .kid .kidFooterTable .col1 {
+        width: 100%;
+        line-height: 1;
+    }
+
+    .kid .kidFooterTable td,
+    th {
+        padding-left: 5px;
+        padding-top: 2px;
+        padding-right: 5px;
+        padding-bottom: 2px;
+    }
+
+    .kid .kidFooterTable .kidFooterAllBorders {
+        border: 1px solid black;
+    }
+
+    .kid .kidFooterTable .kidFooterBorderTopBottomNone {
+        border-top: 0;
+        border-bottom: 0;
+        border-right: 1px solid black;
+        border-left: 1px solid black;
+    }
+
+    .kid .kidFooterTable .kidFooterBottomBorders {
+        border-top: 0;
+        border-bottom: 1px solid black;
+        border-right: 1px solid black;
+        border-left: 1px solid black;
+    }
+
+    .kid .kidFooterTable .kidFooterTableHeader {
+        text-align: center;
+        font-weight: bold;
+    }
+
+    .kid .kidFooterTable .kidFooterTableInside {
+        text-align: justify;
+        line-height: 1;
+    }
+
+    .kid .kidFooterTable .kidFooterTableInsideEnd {
+        text-align: justify;
+        padding-top: 1mm;
+        margin-top: 1mm;
+        padding-bottom: 0mm;
+        margin-bottom: 0mm;
+    }
+
+    .kid .kidFooterTable tr:last-child {
+        border-right: 0px;
+        border-bottom: 0px;
+        border-left: 0px;
+    }
+
+    .kidFooterBottomLine {
+        border-bottom: 1px solid black;
+    }
+
+    .kidFooterNoBorder {
+        border-bottom: 0px solid black;
+    }
+
+    .kidPage {
+        page: kidGroup;
+    }
+
+    .kidSectionPageBreak {
+        page-break-inside: avoid;
+        page-break-after: avoid;
+    }
+
+    .kidPageBreakInsideAvoid {
+        page-break-inside: avoid;
+    }
+
+    .kidPageBreakInsideAuto {
+        page-break-inside: auto;
+    }
+
+    .kidPageBreakBeforeAlways {
+        page-break-before: always;
+    }
+
+    .kidPageBreakBeforeAfterAuto {
+        page-break-before: auto;
+        page-break-inside: auto;
+        page-break-after: auto;
+    }
+
+    .kidNoWrap {
+        white-space: nowrap;
+    }
+
+    .kidbar_code {
+        top: 0;
+        right: 0;
+        height: 20;
+        position: fixed;
+        -ro-replacedelement: barcode;
+        -ro-barcode-errorcorrectionlevel: Q;
+        -ro-barcode-type: code128;
+        -ro-barcode-human-readable-position: none;
+    }
+
+    .kidReturnPremiumTableCellPlain {
+        padding: 0;
+        margin: 0;
+    }
+</style>
+
+<!-- Ключевой информационный документ – KID Printout Body -->
+<div class="kid kidPage">
+    <table class="kidHeaderTable">
+        <tbody>
+            <tr>
+                <td class="kidHeaderTableHeader">
+                    <b>Ключевой информационный документ
+                        <div class="kidHeaderConditions">об условиях договора добровольного страхования</div>
+                    </b>
+                </td>
+                <td class="kidQR" rowspan="3">
+                    <div class="kidQRDiv">
+                        {{#if kidIsBarCodeNeed}}
+                        <span class="kidbar_code">
+                            {{kidBarCodePolicyNumber}}
+                        </span>
+
+                        <span class="kidQRCodeWithBarCode">{{kidRuleLinkQR}}</span>
+                        {{else}}
+                        <span class="kidQRCode">{{kidRuleLinkQR}}</span>
+                        {{/if}}
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="kidHeaderTableProductIndent">по программе {{kidProductName}}</td>
+            </tr>
+            <tr>
+                <td class="kidRuleDescription">подготовлен на основании {{kidRuleDescription}} (далее – Правила
+                    страхования)
+                    {{#if kidIsBarCodeNewLine}}
+                    <br>
+                    <br>
+                    {{/if}}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <table class="kidDefaultTable headerIndent">
+        <col class="col1">
+        <tr>
+            <td class="kidHeaderInsurerTableInside">
+                <div class="kidIndent">
+                    Страховщик: {{kidInsurer.name}}. Юридический адрес:
+                    {{kidInsurer.addressKID1Line}}<br>{{kidInsurer.addressKID2Line}}. Почтовый адрес:
+                    {{kidInsurer.address2KID1Line}}<br>{{kidInsurer.address2KID2Line}}.
+                </div>
+            </td>
+        </tr>
+    </table>
+
+    <!-- Раздел I. ЧТО ЗАСТРАХОВАНО? -->
+    <table class="kidDefaultTable">
+        <tr class="kidSectionTR kidSectionPageBreak">
+            <td class="kidDefaultTableHeader kidSectionPageBreak">Раздел I. ЧТО ЗАСТРАХОВАНО?</td>
+        </tr>
+        <tr>
+            <td class="kidDefaultTableInside kidIndent">
+                {{{kidWhatIsInsuredSection}}}
+            </td>
+        </tr>
+    </table>
+
+    <!-- Раздел II. ЧТО НЕ ЗАСТРАХОВАНО? -->
+    <table class="kidDefaultTable">
+        <col class="col1">
+        <tr class="kidSectionTR kidSectionPageBreak">
+            <td class="kidDefaultTableHeader kidSectionPageBreak">Раздел II. ЧТО НЕ ЗАСТРАХОВАНО?</td>
+        </tr>
+        <tr>
+            <td class="kidDefaultTableInside kidPageBreakInsideAuto">
+                <div class="kidIndent">
+                    {{{kidWhatIsNotInsuredSection}}}
+                </div>
+                <div class="kidIndent">
+                    Полный перечень оснований для отказа в выплате страхового возмещения указан в п. 5 Правил
+                    страхования.
+                </div>
+            </td>
+        </tr>
+    </table>
+
+    <!-- Раздел III. ТЕРРИТОРИЯ СТРАХОВАНИЯ -->
+    <table class="kidDefaultTable">
+        <col class="col1">
+        <tr class="kidSectionTR kidSectionPageBreak">
+            <td class="kidDefaultTableHeader kidSectionPageBreak">Раздел III. ТЕРРИТОРИЯ СТРАХОВАНИЯ</td>
+        </tr>
+        <tr>
+            <td class="kidDefaultTableInside kidIndent kidPageBreakInsideAuto">
+                {{{kidInsuranceTerritorySection}}}
+            </td>
+        </tr>
+    </table>
+
+    <!-- Раздел IV. КАК ПОЛУЧИТЬ СТРАХОВУЮ ВЫПЛАТУ? -->
+    <table class="kidDefaultTable">
+        <col class="col1">
+        <tr class="kidSectionTR kidSectionPageBreak">
+            <td class="kidDefaultTableHeader kidSectionPageBreak">Раздел IV. КАК ПОЛУЧИТЬ СТРАХОВУЮ ВЫПЛАТУ?</td>
+        </tr>
+        <tr>
+            <td class="kidDefaultTableInside kidPageBreakInsideAuto">
+
+                <div class="kidIndent">Для получения страховой выплаты (страхового возмещения) требуется предоставить
+                    документы, указанные в п. 11 Правил страхования.</div>
+                <div class="kidIndent">Сроки и порядок осуществления страховых выплат указаны в п. 10 Правил
+                    страхования.</div>
+                {{{kidInsurancePaymentSection}}}
+
+            </td>
+        </tr>
+    </table>
+
+    <!-- Раздел V. КАК ВЕРНУТЬ СТРАХОВУЮ ПРЕМИЮ? -->
+    <table class="kidReturnPremiumTable">
+        <col class="col1">
+        <col class="col2">
+        <tr class="kidSectionTR kidSectionPageBreak">
+            <td colspan="2" class="kidReturnPremiumTableHeader kidSectionPageBreak">Раздел V. КАК ВЕРНУТЬ СТРАХОВУЮ
+                ПРЕМИЮ?</td>
+        </tr>
+        <tr>
+            <td class="kidReturnPremiumHeader">
+                <b>Основания для возврата страховой</b>
+                <div class="kidTextAlignCenter kidReturnPremiumHeaderCorrection"><b>премии</b></div>
+            </td>
+            <td class="kidReturnPremiumHeader">
+                <b>Сумма возврата страховой премии</b>
+            </td>
+        </tr>
+        <tr>
+            <td class="kidReturnPremiumTableInside kidPageBreakInsideAuto">
+                {{{kidReasonsToReturnPremiumSection}}}
+            </td>
+            <td class="kidReturnPremiumTableInside">
+                {{#each kidInsurancePremiumRefundAmont}}
+                    <p class="kidReturnPremiumTableCellPlain">{{this}}</p>
+                {{/each}}
+            </td>
+        </tr>
+        <tr>
+            <td class="kidReturnPremiumTableInside">
+                Отказ от договора страхования в случае ненадлежащего информирования об условиях страхования
+            </td>
+            <td class="kidReturnPremiumTableInside">
+                100% страховой премии за вычетом части страховой премии, исчисляемой пропорционально
+                времени, в течение которого действовало страхование
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" class="kidOtherConditions kidPageBreakInsideAuto">
+                <b>{{{kidOtheCasesToReturnPremiumSection}}}</b>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" class="kidReturnPremiumTableInside">
+                {{{kidDaysToReturnPremiumSection}}}
+            </td>
+        </tr>
+    </table>
+
+    <!-- Раздел VI. КАК УРЕГУЛИРОВАТЬ СПОР ДО СУДА? -->
+    <table class="kidFooterTable">
+        <tbody>
+            <col class="col1">
+            <tr class="kidSectionPageBreak kidFooterAllBorders">
+                <td class="kidFooterTableHeader kidSectionPageBreak kidFooterAllBorders">Раздел VI. КАК УРЕГУЛИРОВАТЬ
+                    СПОР ДО СУДА?</td>
+            </tr>
+            <tr class="kidFooterBorderTopBottomNone">
+                <td class="kidFooterTableInside kidFooterBorderTopBottomNone">
+                    <div class="kidIndent kidPageBreakBeforeAfterAuto">Направить Страховщику заявление (претензию) в
+                        письменной форме.<br></div>
+                    <div class="kidIndent kidPageBreakBeforeAfterAuto">В случае если Страховщик не удовлетворил
+                        заявление (претензию) и при этом
+                        размер требований не превышает 500 000 (пятьсот тысяч) рублей, до обращения в суд необходимо
+                        обратиться к
+                        уполномоченному по правам потребителей финансовых услуг
+                        (сайт: www.finombudsman.ru; адрес: 119017, г. Москва, Старомонетный пер., дом 3).
+                    </div>
+
+                </td>
+            </tr>
+            <tr class="kidFooterBottomLine kidSectionPageBreak">
+                <td class="kidFooterTableInside kidSectionPageBreak kidFooterBottomBorders">
+                    <div class="kidIndent kidSectionPageBreak">Рассмотрение уполномоченным по правам потребителей
+                        финансовых услуг обращения потребителя финансовых
+                        услуг осуществляется бесплатно.
+                    </div>
+                </td>
+            </tr>
+            <tr class="kidInvisibleTable kidSectionPageBreak">
+                <td class="kidInvisibleTable kidSectionPageBreak">
+                    {{#if kidIsPaper}}
+                    <div class="kidInvisibleTable kidSectionPageBreak">
+                        <div class="kidInvisibleTable kidIndent kidPolicyHolder">Я, {{kidPolicyHolderFullName}},
+                            Ключевой информационный
+                            документ об условиях договора добровольного страхования получил,
+                            с его условиями ознакомлен и согласен.
+                        </div>
+                        <table class="kidInvisibleTable">
+                            <tbody>
+                                <tr>
+                                    <td class="kidTdWidth15Center"></td>
+                                    <td class="kidTdWidth25Right">_________________/</td>
+                                    <td class="kidTdWidth35Left">{{kidPolicyHolderFullName}}</td>
+                                    <td class="kidTdWidth15Center kidTextUnderline">{{kidIssueDate}}</td>
+                                </tr>
+                                <tr>
+                                    <td class="kidTdWidth15Center"></td>
+                                    <td class="kidTdWidth25Center kidSmallText">(Подпись)</td>
+                                    <td class="kidTdWidth35Left kidSmallText">(Расшифровка подписи)</td>
+                                    <td class="kidTdWidth15Center kidSmallText">(Дата)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    {{/if}}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>

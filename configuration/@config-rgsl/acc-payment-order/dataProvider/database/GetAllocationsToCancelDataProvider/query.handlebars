@@ -1,0 +1,57 @@
+﻿with overpaidRisks as
+(
+	select
+		CONTRACT_NUMBER,
+		DUE_DATE,
+		OBJECT_CODE,
+		ITEM_NO,
+		sum(AMOUNT) as AMOUNT,
+		sum(ALLOCATION_AMOUNT) as ALLOCATION_AMOUNT
+	from
+		(
+			select
+				polh.CONTRACT_NUMBER,
+				ppl.DUE_DATE,
+				ppsl.OBJECT_CODE,
+				ppsl.ITEM_NO,
+				ppsl.AMOUNT,
+				0 as ALLOCATION_AMOUNT
+			from
+				pas_impl.POLICY_HUB polh
+				inner join pas_impl.P_PAYMENT_PLAN_LINK ppl on ppl.POLICY_HKEY = polh.POLICY_HKEY
+				inner join pas_impl.P_PAYMENT_PLAN_SAT_LATEST ppsl on ppsl.P_PAYMENT_PLAN_HKEY = ppl.P_PAYMENT_PLAN_HKEY
+			where 1=1
+				and polh.CONTRACT_NUMBER in (@contractNumbers)
+			union all
+			select
+				alc.DOCUMENT_NO as CONTRACT_NUMBER,
+				alcp.DUE_DATE,
+				matp.OBJECT_CODE,
+				matp.SOURCE_LINE_ID as ITEM_NO,
+				0 as AMOUNT,
+				mat.DOC_AMOUNT + mat.TOLERANCE_DOC_AMOUNT as ALLOCATION_AMOUNT
+			from
+				acc_impl.ALLOCATION alc
+				inner join acc_impl.ALLOCATION_POLICY alcp on alcp.ALLOCATION_ID = alc.ALLOCATION_ID
+				inner join acc_impl.MATCHING mat on mat.ALLOCATION_ID = alc.ALLOCATION_ID
+				inner join acc_impl.MATCHING_POLICY matp on matp.MATCHING_ID = mat.MATCHING_ID
+			where 1=1
+				and alc.DOCUMENT_NO in (@contractNumbers)
+		) t
+	group by CONTRACT_NUMBER, DUE_DATE, OBJECT_CODE, ITEM_NO
+	having sum(ALLOCATION_AMOUNT) > sum(AMOUNT)
+)
+select
+	alc.DOCUMENT_NO,
+	alc.ALLOCATION_ID,
+	alc.BANK_STATEMENT_ITEM_ID,
+	alc.PAY_AMOUNT as PAY_AMOUNT,
+	alc.DOC_AMOUNT as DOC_AMOUNT
+from
+	acc_impl.ALLOCATION alc
+	inner join acc_impl.ALLOCATION_POLICY alcp on alcp.ALLOCATION_ID = alc.ALLOCATION_ID
+where 1=1
+	and alc.CANCELLED = 0
+	and alc.CANCELLED_ALLOCATION_ID is null
+	and exists (select * from overpaidRisks r where r.CONTRACT_NUMBER = alc.DOCUMENT_NO and r.DUE_DATE = alcp.DUE_DATE)
+order by alcp.DUE_DATE, alc.ALLOCATION_ID

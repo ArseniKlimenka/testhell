@@ -1,0 +1,56 @@
+{
+    "type": "Section",
+    "label": "Main Insurance Conditions",
+    "isCollapsed": false,
+    "width": 12,
+    "elements": [
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "Input",
+                    "label": "insuranceProduct",
+                    "value": {
+                        "$ref": "#/properties/insuranceProduct"
+                    },
+                    "control": "Dropdown",
+                    "autocomplete": {
+                        "minTextLength": 0,
+                        "dropDownItemsCount": 10000,
+                        "selectItemOnMatch": false
+                    },
+                    "source": {
+                        "dataSource": {
+                            "name": "ProductsFilterDataSource",
+                            "searchFieldPath": "description",
+                            "responseMapping": "productResponseMapping",
+                            "resultCount": 10000
+                        },
+                        "displayValueTemplate": "{{expr productDescription}} ({{expr productCode}})"
+                    },
+                    "width": 12,
+                    "filter": "insuranceProductFilter",
+                    "onValueChanged": [
+                        {
+                            "commandType": "executeAction",
+                            "actionName": "onChangeInsuranceProduct"
+                        }
+                    ],
+                    "elementId": "productConfigurationMainConditionsInsuranceProductId"
+                }
+            ],
+            "rule": {
+                "effect": "DISABLE_INITIAL",
+                "condition": {
+                    "type": "FUNC",
+                    "ruleFunction": "disableMainConditions",
+                    "value": [
+                        {
+                            "$ref": "#"
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}

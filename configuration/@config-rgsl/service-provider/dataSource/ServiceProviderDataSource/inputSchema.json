@@ -1,0 +1,71 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "object",
+    "properties": {
+        "criteria": {
+            "type": "object",
+            "properties": {
+                "freeText": {
+                    "type": "string"
+                },
+                "createdOnFrom": {
+                    "type": "string",
+                    "aiFormat": "date"
+                },
+                "serviceProviderCode": {
+                    "type": "string"
+                },
+                "partyCode": {
+                    "type": "string"
+                },
+                "businessCode": {
+                    "type": "string"
+                },
+                "businessCodes": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "serviceProviderType": {
+                    "$ref": "component:ServiceProviderEntityType"
+                },
+                "organisationUnitCode": {
+                    "type": "string"
+                },
+                "organisationUnitCodes": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "orgUnitsToFilterBy": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "includeChildren": {
+                    "type": "boolean"
+                },
+                "isPersonalManager": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "sort": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "descending": {
+                        "type": "boolean"
+                    },
+                    "fieldName": {
+                        "type": "string"
+                    }
+                }
+            }
+        }
+    }
+}

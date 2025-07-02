@@ -1,0 +1,40 @@
+{
+    "type": "Section",
+    "label": "PartyDeduplicationSection",
+    "collapsing": {
+        "initial": false,
+        "enabled": true
+    },
+    "elements": [
+        {
+            "type": "Link",
+            "label": "duplicateMasterNumber",
+            "width": 4,
+            "targetType": "Url",
+            "value": {
+                "mapping": "partyUrlMapping",
+                "$ref": "#"
+            },
+            "content": {
+                "text": {
+                    "type": "OutputText",
+                    "value": {
+                        "$ref": "#/properties/duplicateMasterNumber"
+                    }
+                }
+            }
+        }
+    ],
+    "rule": {
+        "effect": "SHOW",
+        "condition": {
+            "type": "FUNC",
+            "ruleFunction": "showPartyDeduplicationSection",
+            "value": [
+                {
+                    "$ref": "#"
+                }
+            ]
+        }
+    }
+}

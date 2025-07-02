@@ -1,0 +1,222 @@
+{
+    "type": "Group",
+    "elements": [
+        {
+            "type": "DataGrid",
+            "elementId": "serviceProviderSearchResultTable",
+            "mode": "DataSource",
+            "orderBy": "serviceProviderCode",
+            "rule": {
+                "effect": "SHOW",
+                "condition": {
+                    "type": "LEAF",
+                    "expectedValue": true,
+                    "value": {
+                        "$ref": "#/properties/viewContext/properties/isSearch"
+                    }
+                }
+            },
+            "pagination": {
+                "mode": "Regular",
+                "pageSizes": [
+                    5,
+                    10,
+                    15
+                ]
+            },
+            "selection": {
+                "mode": "Single",
+                "enableRowSelection": true,
+                "showCheckBox": true
+            },
+            "height": "None",
+            "columns": [
+                {
+                    "title": "serviceProviderCode",
+                    "sortable": true,
+                    "name": "code.as_int",
+                    "cellContent": {
+                        "type": "Link",
+                        "targetType": "Entity",
+                        "value": {
+                            "mapping": "urlMapping",
+                            "$ref": "#"
+                        },
+                        "content": {
+                            "text": {
+                                "type": "OutputText",
+                                "textProperties": [
+                                    "bold"
+                                ],
+                                "template": "{{expr code}}",
+                                "value": {
+                                    "$ref": "#/properties/metadata"
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "title": "businessCode",
+                    "sortable": true,
+                    "name": "body.businessCode",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/businessCode"
+                        }
+                    }
+                },
+                {
+                    "title": "partyCode",
+                    "sortable": true,
+                    "name": "body.partyCode.as_int",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/partyCode"
+                        }
+                    }
+                },
+                {
+                    "title": "partyDisplayName",
+                    "sortable": true,
+                    "name": "body.partyDisplayName",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/partyDisplayName"
+                        }
+                    }
+                },
+                {
+                    "title": "sadNumber",
+                    "sortable": true,
+                    "name": "body.sadNumber",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "defaultValue": "",
+                        "template": "{{expr sadNumber 'n:0:false'}}",
+                        "value": {
+                            "$ref": "#/properties/resultData"
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "type": "DataGrid",
+            "mode": "DataSource",
+            "orderBy": "serviceProviderCode",
+            "rule": {
+                "effect": "SHOW",
+                "condition": {
+                    "type": "LEAF",
+                    "expectedValue": true,
+                    "value": {
+                        "$ref": "#/properties/viewContext/properties/isLookup"
+                    }
+                }
+            },
+            "pagination": {
+                "mode": "Regular",
+                "pageSizes": [
+                    5,
+                    10,
+                    15
+                ]
+            },
+            "selection": {
+                "mode": "Single",
+                "enableRowSelection": true,
+                "showCheckBox": true
+            },
+            "height": "None",
+            "columns": [
+                {
+                    "title": "serviceProviderCode",
+                    "sortable": true,
+                    "name": "code.as_int",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "template": "{{expr code}}",
+                        "value": {
+                            "$ref": "#/properties/metadata"
+                        }
+                    }
+                },
+                {
+                    "title": "businessCode",
+                    "sortable": true,
+                    "name": "body.businessCode",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/businessCode"
+                        }
+                    }
+                },
+                {
+                    "title": "partyCode",
+                    "sortable": true,
+                    "name": "body.partyCode.as_int",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/partyCode"
+                        }
+                    }
+                },
+                {
+                    "title": "partyDisplayName",
+                    "sortable": true,
+                    "name": "body.partyDisplayName",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/partyDisplayName"
+                        }
+                    }
+                },
+                {
+                    "title": "sadNumber",
+                    "sortable": true,
+                    "name": "body.sadNumber",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "defaultValue": "",
+                        "template": "{{expr sadNumber 'n:0:false'}}",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/"
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "type": "Group",
+            "width": 4,
+            "stackContent": "Right",
+            "elements": [
+                {
+                    "type": "Button",
+                    "label": "Export",
+                    "submitOnEnter": true,
+                    "onClick": [
+                        {
+                            "commandType": "executeOperation",
+                            "operation": "EXPORT"
+                        }
+                    ],
+                    "icon": {
+                        "name": "Search",
+                        "color": "BackgroundColor",
+                        "size": "Small"
+                    }
+                }
+            ]
+        }
+    ]
+}

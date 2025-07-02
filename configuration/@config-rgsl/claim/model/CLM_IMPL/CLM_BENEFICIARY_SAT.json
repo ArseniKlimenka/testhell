@@ -1,0 +1,77 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema",
+    "type": "object",
+    "description": "Claim beneficiaries",
+    "aiReference": "CLM_IMPL.CLM_BENEFICIARY_LINK",
+    "aiDeletionMode": {
+        "mode": "flag",
+        "columnName": "IS_DELETED"
+    },
+    "aiGeneratedViews": {
+        "latestState": true
+    },
+    "aiAdditionalKeys": [
+        "RECORD_ID"
+    ],
+    "properties": {
+        "RECORD_ID": {
+            "type": "string",
+            "aiType": "guid"
+        },
+        "REASON_CODE": {
+            "title": "Claim beneficiary reason code",
+            "type": "string",
+            "aiType": "nvarchar(50)"
+        },
+        "REASON_DESCRIPTION": {
+            "title": "Claim beneficiary reason description",
+            "type": "string",
+            "aiType": "nvarchar(250)"
+        },
+        "PAYMENT_TYPE_CODE": {
+            "title": "Claim beneficiary payment type code",
+            "type": "string",
+            "aiType": "nvarchar(50)"
+        },
+        "PAYMENT_TYPE_DESCRIPTION": {
+            "title": "Claim beneficiary payment type description",
+            "type": "string",
+            "aiType": "nvarchar(250)"
+        },
+        "AMOUNT_TO_PAY_PERCENTAGE": {
+            "title": "Claim beneficiary amount to pay percentage",
+            "type": "number",
+            "aiType": "decimal(15,7)"
+        },
+        "AMOUNT_TO_PAY": {
+            "title": "Claim beneficiary amount to pay",
+            "type": "number",
+            "aiType": "decimal(15,7)"
+        },
+        "AMOUNT_TO_PAY_RUB_CUR": {
+            "title": "Claim beneficiary amount to pay in rubles currency",
+            "type": "number",
+            "aiType": "decimal(15,7)"
+        },
+        "BANK_ACCOUNT_NUMBER": {
+            "title": "Claim beneficiary bank account",
+            "type": "string",
+            "aiType": "nvarchar(256)"
+        },
+        "IS_PAID": {
+            "title": "Is claim beneficiary amount paid",
+            "type": "boolean",
+            "aiType": "boolean"
+        },
+        "ASSIGNED_PO_NUMBER": {
+            "title": "Claim beneficiary reason description",
+            "type": "string",
+            "aiType": "nvarchar(255)"
+        },
+        "IS_DELETED": {
+            "title": "Is claim beneficiary deleted",
+            "type": "boolean",
+            "aiType": "boolean"
+        }
+    }
+}

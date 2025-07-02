@@ -1,0 +1,33 @@
+{
+    "NLog": {
+        "variables": {
+            "logRoot": "E:/logs",
+            "maxSize": "104857600",
+            "maxFiles": "20"
+        },
+        "targets": {
+            "async": true,
+            "logfile": {
+                "type": "File",
+                "maxArchiveFiles": "${maxFiles}",
+                "archiveAboveSize": "${maxSize}",
+                "fileName": "${logRoot}/scheduler.log"
+            },
+            "logconsole": {
+                "type": "Console"
+            }
+        },
+        "rules": [
+            {
+                "logger": "*",
+                "minLevel": "Error",
+                "writeTo": "logconsole"
+            },
+            {
+                "logger": "*",
+                "minLevel": "Error",
+                "writeTo": "logfile"
+            }
+        ]
+    }
+}

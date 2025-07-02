@@ -1,0 +1,48 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "Life Insurance",
+    "description": "Data schema describing Recipient",
+    "type": "object",
+    "additionalProperties": false,
+    "aiDataEnrichment": [
+        {
+            "name": "SetRecipient",
+            "integrationService": {
+                "name": "RecipientEnrichmentService",
+                "version": "1"
+            }
+        }
+    ],
+    "properties": {
+        "partyData": {
+            "type": "object",
+            "additionalProperties": false,
+            "aiDataEnrichment": [
+                {
+                    "name": "SetRecipient"
+                }
+            ],
+            "properties": {
+                "partyCode": {
+                    "type": "string"
+                },
+                "partyFullName": {
+                    "type": "string"
+                }
+            }
+        },
+        "reasonForRecipient": {
+            "type": "string",
+            "enum": [
+                "insuredPerson",
+                "beneficiaryByEndowment"
+            ]
+        },
+        "bankAccount": {
+            "$ref": "component:BankAccount"
+        },
+        "bankAccountsArray": {
+            "$ref": "component:BankAccounts"
+        }
+    }
+}

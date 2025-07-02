@@ -1,0 +1,215 @@
+{
+    "type": "Group",
+    "formProperties": {
+        "events": {
+            "onLoad": "onLoadGeneralRequestSearchView"
+        }
+    },
+    "elements": [
+        {
+            "type": "Group",
+            "width": 4,
+            "elements": [
+                {
+                    "type": "Group",
+                    "width": 4,
+                    "elements": [
+                        {
+                            "type": "Input",
+                            "label": "requestNumber",
+                            "value": {
+                                "$ref": "#/properties/request/properties/data/properties/criteria/properties/requestNumber"
+                            },
+                            "width": 1
+                        },
+                        {
+                            "type": "Input",
+                            "label": "Request state code",
+                            "width": 1,
+                            "value": {
+                                "$ref": "#/properties/request/properties/data/properties/criteria/properties/requestState"
+                            }
+                        },
+                        {
+                            "type": "Input",
+                            "control": "DateRange",
+                            "dateFrom": {
+                                "type": "Input",
+                                "label": "requestIssueDateFrom",
+                                "width": 1,
+                                "value": {
+                                    "$ref": "#/properties/request/properties/data/properties/criteria/properties/requestIssueDateFrom"
+                                },
+                                "control": "DatetimePicker"
+                            },
+                            "dateTo": {
+                                "type": "Input",
+                                "label": "requestIssueDateTo",
+                                "width": 1,
+                                "value": {
+                                    "$ref": "#/properties/request/properties/data/properties/criteria/properties/requestIssueDateTo"
+                                },
+                                "control": "DatetimePicker"
+                            },
+                            "width": 2
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "Input",
+                    "label": "contractNumber",
+                    "value": {
+                        "$ref": "#/properties/request/properties/data/properties/criteria/properties/contractNumber"
+                    },
+                    "width": 1
+                },
+                {
+                    "type": "Input",
+                    "label": "contractState",
+                    "width": 1,
+                    "value": {
+                        "$ref": "#/properties/request/properties/data/properties/criteria/properties/contractState"
+                    }
+                },
+                {
+                    "type": "Input",
+                    "control": "DateRange",
+                    "dateFrom": {
+                        "type": "Input",
+                        "label": "contractIssueDateFrom",
+                        "width": 1,
+                        "value": {
+                            "$ref": "#/properties/request/properties/data/properties/criteria/properties/contractIssueDateFrom"
+                        },
+                        "control": "DatetimePicker"
+                    },
+                    "dateTo": {
+                        "type": "Input",
+                        "label": "contractIssueDateTo",
+                        "width": 1,
+                        "value": {
+                            "$ref": "#/properties/request/properties/data/properties/criteria/properties/contractIssueDateTo"
+                        },
+                        "control": "DatetimePicker"
+                    },
+                    "width": 2
+                }
+            ]
+        },
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "Input",
+                    "label": "requestType",
+                    "width": 1,
+                    "value": {
+                        "$ref": "#/properties/request/properties/data/properties/criteria/properties/requestType"
+                    }
+                },
+                {
+                    "type": "Input",
+                    "label": "requestAmendmentReason",
+                    "width": 1,
+                    "value": {
+                        "$ref": "#/properties/request/properties/data/properties/criteria/properties/requestAmendmentReason"
+                    }
+                },
+                {
+                    "type": "Input",
+                    "label": "contractProductGroupDescription",
+                    "width": 1,
+                    "value": {
+                        "$ref": "#/properties/request/properties/data/properties/criteria/properties/contractProductGroup"
+                    },
+                    "filter": "contractProductGroupFilter",
+                    "onValueChanged": [
+                        {
+                            "commandType": "executeAction",
+                            "actionName": "contractProductGroupValueChanged"
+                        }
+                    ]
+                },
+                {
+                    "type": "Input",
+                    "label": "contractProductCode",
+                    "value": {
+                        "$ref": "#/properties/request/properties/data/properties/criteria/properties/product"
+                    },
+                    "control": "Dropdown",
+                    "autocomplete": {
+                        "minTextLength": 0,
+                        "dropDownItemsCount": 1000,
+                        "selectItemOnMatch": false
+                    },
+                    "source": {
+                        "array": {
+                            "$ref": "#/properties/productsArray"
+                        },
+                        "displayFieldName": "productDescription"
+                    },
+                    "filter": "productFilter",
+                    "width": 1,
+                    "onValueChanged": [
+                        {
+                            "commandType": "executeAction",
+                            "actionName": "productValueChanged"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "Lookup",
+                    "label": "applicant",
+                    "value": {
+                        "$ref": "#"
+                    },
+                    "width": 1,
+                    "dialogButton": {},
+                    "clearButton": {
+                        "clearAction": "applicantClearAction"
+                    },
+                    "dialog": {
+                        "viewReference": {
+                            "configurationCodeName": "GeneralPartySearchView",
+                            "configurationVersion": "1",
+                            "configurationConceptType": "SearchView"
+                        }
+                    },
+                    "onSelected": "applicantOnSelected",
+                    "selectedDisplayValueTemplate": "{{expr resultData.fullName}}"
+                },
+                {
+                    "type": "Lookup",
+                    "label": "policyHolder",
+                    "value": {
+                        "$ref": "#"
+                    },
+                    "width": 1,
+                    "dialogButton": {},
+                    "clearButton": {
+                        "clearAction": "policyHolderClearAction"
+                    },
+                    "dialog": {
+                        "viewReference": {
+                            "configurationCodeName": "GeneralPartySearchView",
+                            "configurationVersion": "1",
+                            "configurationConceptType": "SearchView"
+                        }
+                    },
+                    "onSelected": "policyHolderOnSelected",
+                    "selectedDisplayValueTemplate": "{{expr resultData.fullName}}"
+                }
+            ]
+        }
+    ]
+}

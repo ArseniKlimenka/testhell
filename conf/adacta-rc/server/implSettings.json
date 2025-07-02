@@ -1,0 +1,179 @@
+/*
+  Here is listed standard set of configuration entries.
+  For more info please navigate to https://docs.adinsure.com/administration/configure/adinsure-settings/#Server
+*/
+{
+    "Logging": {
+        "LogLevel": {
+            "Default": "Trace"
+        }
+    },
+    "appSettings": {
+        "dbDataAccess": {
+            "readSync": true,
+            "writeSync": true
+        },
+        "AdInsure": {
+            "ApplicationUsers": {
+                "AvailableClaimTypes": "PartyCode,Username,IsUserActive,Email,DisplayName,AccountType,ExpireDate,locale,DefaultDashboard"
+            },
+            "NotificationChannels": {
+                "email": {
+                    "type": "email",
+                    "host": "mail.adacta-fintech.com",
+                    "port": 25,
+                    "username": "",
+                    "password": "",
+                    "useSSL": false,
+                    "sender": {
+                        "name": "Adacta",
+                        "email": "donotreply@adacta-fintech.com"
+                    }
+                },
+                "Adinsure": {
+                    "type": "Adinsure"
+                }
+            },
+            "Healthcheck": {
+                "Enabled": "true"
+            },
+            "Monitoring": {
+                "Enabled": "true"
+            },
+            "MessageBroker": {
+                /* Integration of AdInsure with ActiveMQ */
+                /*  Uri: ActiveMQ Broker URI */
+                "Uri": "activemq:tcp://localhost:61616",
+                "Username": "user",
+                //Username: ActiveMQ Username
+                /*  Password: ActiveMQ Password */
+            },
+            "Settings": {
+                "MaxRequestBodySize": 50000000,
+                "AuditTrail": {
+                    /* Whether to use audit logging or not */
+                    // "EnableAuditing": true,
+                    /* Name of the search engine index used to store audit log */
+                    //"AuditLogSearchEngineIndexName": "auditlog"
+                },
+                "scriptingEnginePools": {
+                    "all": {
+                        "MaxOldSpaceSize": 4096
+                    }
+                },
+                "Extensions": {
+                    "FileSystemRootFolder": "extensions"
+                },
+                "Core": {
+                    "LocalCurrencyCode": "RUB"
+                },
+                "General": {
+                    "Language": "ru-RU"
+                },
+                "SearchEngine": {
+                    /*
+                        Integration of AdInsure with ElasticSearch
+                        URL: cluster URI
+                        IndexPrefix: index prefix
+                        User: Username of the search user
+                        Password: Password of the search user
+                        NOTE: Username and password are only viable if the cluster has security enabled (xpack.security.enabled flag)
+                    */
+                    "IndexPrefix": "adinsure_index",
+                    "URL": "http://localhost:9200",
+                    //"User": "elastic",
+                    //"SPassword": "adinsure",
+                    //"SniffOnStartup": true
+                },
+                "Log": {
+                    /* Location of Logs for AdInsure */
+                    "LogRoot": "C:\\AdInsure\\Logs\\Server",
+                    /* Logging level for AdInsure */
+                    "LogLevel": "DEBUG"
+                },
+                "PrintoutRenderer": {
+                    "DebugLevel": "All",
+                    "Url": "http://localhost:9423/service/rest",
+                    "ExternalAssetsFolder": "C:\\printouts",
+                    "StaticAssetsServerBaseUrl": "http://localhost:60010/"
+                },
+                "OAuthIdentity": {
+                    "IdentityEndpointUrl": "https://rgsl-rc-auth.adacta-fintech.com/realms/adinsure",
+                    "Audience": "adinsure",
+                    "DiscoveryEndpointUrl": ".well-known/openid-configuration"
+                },
+                "RGSL": {
+                    "Integration": {
+                        "Dadata": {
+                            "EnableDadataService": "true",
+                            "Uri": "https://suggestions.dadata.ru/suggestions/api/4_1/rs/suggest/address/"
+                        },
+                        "Cbr": {
+                            "CurrencyExchangeRatesUrl": "http://www.cbr.ru/scripts/XML_daily.asp",
+                            "WebServiceDailyInfoCbrUrl": "https://www.cbr.ru/DailyInfoWebServ/DailyInfo.asmx",
+                            "BanksImportPath": "\\import\\banks.xml",
+                            // set below option to true for use ProxyCredentialAddressPort for Cbr requests
+                            "UseProxy": "false"
+                        },
+                        "KPK": {
+                            "UserName": "",
+                            "Uri": "http://localhost:60000/api/rgsl/mock-services/check-contractors/simulate"
+                        },
+                        "BlackList": {
+                            "EnableBlackListService": "true",
+                            "Login": "",
+                            "Url": "http://localhost:60000/api/rgsl/mock-services/check-black-list/simulate"
+                        },
+                        "SAP": {
+                            "Login": "TEST_ADAKTA",
+                            "CreatePartyUrl": "https://b2b-aq.adacta-fintech.com/sap/bc/srt/rfc/sap/zerluapi000000000100_srvc/200/zerluapi000000000100_srvc_http/zerluapi000000000100_srvc_http",
+                            "UpdatePartyUrl": "https://b2b-aq.adacta-fintech.com/sap/bc/srt/wsdl/flv_10002A101AD1/bndg_url/sap/bc/srt/rfc/sap/zerluapi000000000172_srvc/200/zerluapi000000000172_srvc/zerluapi000000000172_srvc?sap-client=200",
+                            "CreateContractUrl": "https://b2b-aq.adacta-fintech.com/sap/bc/srt/wsdl/flv_10002A101AD1/bndg_url/sap/bc/srt/rfc/sap/zerluapi000000000101_srvc/200/zerluapi000000000101_srvc/zerluapi000000000101_srvc?sap-client=200"
+                        },
+                        "DigitalSignature": {
+                            "Uri": "http://localhost:60000/api/rgsl/mock-services/digital-signature/simulate"
+                        },
+                        "SecuritySmsNotification": {
+                            "Uri": "http://localhost:60000/api/rgsl/mock-services/sms-notification/simulate",
+                            "SecurityCodeExpirationInMinutes": "5",
+                            "SecurityCodeCooldownInMinutes": "1",
+                            "SmsServiceLogin": "rgsl4"
+                        },
+                        "AuthService": {
+                            "Scope": "adinsure",
+                            "ClientId": "services"
+                        },
+                        "Rosfinmonitoring": {
+                            "FormatVersion": "2.0",
+                            "SoftwareVersion": "ПорталРФМ 01",
+                            "CorrespondentId": "2000039473",
+                            "OutputFolder": "C:\\AdInsure\\RosFinMon\\"
+                        },
+                        "GetContractDataCustomService": {
+                            "EnableLogging": false
+                        },
+                        "SendEvent": {
+                            "EnableLogging": false
+                        },
+                        "Fns": {
+                            "FormatVersion": "5.01",
+                            "OutputFolder": "C:\\AdInsure\\NalogXML\\"
+                        },
+                        "NalogPDF":{
+                            "OutputFolder": "C:\\AdInsure\\NalogPDF\\"
+                        }
+                    }
+                },
+                "AssetServer": {
+                    "PublicUpload": {
+                        "Url": "http://localhost:60010/"
+                    }
+                }
+            }
+        },
+        "nodeRoles": [
+            "Service",
+            "Worker"
+        ]
+    }
+}

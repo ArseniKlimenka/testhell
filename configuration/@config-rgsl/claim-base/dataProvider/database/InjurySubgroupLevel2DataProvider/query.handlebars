@@ -1,0 +1,17 @@
+﻿SELECT CONCAT(ig.SUBGROUP_CODE_LEVEL_2, ' ', ISNULL(ig.SUBGROUP_DESCRIPTION_LEVEL_2, N'без названия')) AS DESCRIPTION,
+	ig.SUBGROUP_CODE_LEVEL_2 AS CODE
+FROM BFX_IMPL.INJURY_GENERAL ig
+WHERE 1 = 1
+{{#if parameters.group}}
+AND ig.INJURY_GROUP = @group
+{{/if}}
+{{#if parameters.subgroupCodeLevel1}}
+AND ig.SUBGROUP_CODE_LEVEL_1 = @subgroupCodeLevel1
+{{/if}}
+{{#if parameters.subgroupDescriptionLevel2}}
+AND ig.SUBGROUP_DESCRIPTION_LEVEL_2 LIKE @subgroupDescriptionLevel2
+{{/if}}
+{{#if parameters.ruleCode}}
+AND ig.RULE_CODE = @ruleCode
+{{/if}}
+ORDER BY ig.ID ASC

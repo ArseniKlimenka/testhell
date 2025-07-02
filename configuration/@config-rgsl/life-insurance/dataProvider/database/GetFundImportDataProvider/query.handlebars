@@ -1,0 +1,52 @@
+﻿SELECT f.EXCEL_ROW_NUMBER
+      ,f.ROW_NUMBER
+      ,f.DOCUMENT_NUMBER
+      ,f.FUND_STATUS
+      ,f.NET_ASSETS_AMOUNT
+      ,f.FREE_MONEY
+      ,f.NUMBER_OF_UNITS
+      ,f.UNIT_CURRENT_AMOUNT
+      ,f.REPORT_DATE
+      ,f.REPORT_DATE_VERSION
+      ,f.IMPORT_DOCUMENT_ID
+      ,f.CONF_VERSION
+      ,f.LOADED_BY
+      ,f.LOAD_DATE
+FROM BFX_IMPL.FUND f
+{{#if parameters.isLatestReportDate}}
+JOIN (
+    SELECT TOP 1 f.REPORT_DATE, MAX(f.REPORT_DATE_VERSION) MAX_REPORT_DATE_VERSION
+	FROM BFX_IMPL.FUND f
+    WHERE 1 = 1
+    {{#if parameters.documentNumber}}
+        AND f.DOCUMENT_NUMBER = @documentNumber
+    {{/if}}
+    GROUP BY f.REPORT_DATE
+	ORDER BY f.REPORT_DATE DESC
+) fmax ON f.REPORT_DATE = fmax.REPORT_DATE AND f.REPORT_DATE_VERSION = fmax.MAX_REPORT_DATE_VERSION
+{{/if}}
+WHERE 1 = 1
+{{#if parameters.importDocumentId}}
+	AND f.IMPORT_DOCUMENT_ID = @importDocumentId
+{{/if}}
+{{#if parameters.documentNumber}}
+	AND f.DOCUMENT_NUMBER = @documentNumber
+{{/if}}
+{{#if parameters.maxVersion}}
+	AND f.CONF_VERSION = (SELECT MAX(CONF_VERSION) MAX_VERSION FROM BFX_IMPL.FUND)
+{{/if}}
+{{#if parameters.maxReportDateVersion}}
+	AND f.REPORT_DATE_VERSION = (SELECT MAX(REPORT_DATE_VERSION) MAX_REPORT_DATE_VERSION FROM BFX_IMPL.FUND_ASSETS)
+{{/if}}
+{{#if parameters.confVersion}}
+	AND f.CONF_VERSION = @confVersion
+{{/if}}
+{{#if parameters.reportDate}}
+	AND f.REPORT_DATE = @reportDate
+{{/if}}
+{{#if parameters.reportDateVersion}}
+	AND f.REPORT_DATE_VERSION = @reportDateVersion
+{{/if}}
+{{#if parameters.maxReportDateVersion}}
+	AND f.REPORT_DATE_VERSION = (SELECT MAX(REPORT_DATE_VERSION) MAX_REPORT_DATE_VERSION FROM BFX_IMPL.FUND_ASSETS)
+{{/if}}

@@ -1,0 +1,29 @@
+{
+    "entityType": "ImportDocument",
+    "condition": {
+        "events": [
+            "StatusChanged"
+        ],
+        "configuration": {
+            "names": [
+                "UsersExcelImport"
+            ],
+            "dimensions": {}
+        },
+        "transitions": [
+            "StartImporting"
+        ]
+    },
+    "sinks": [
+        {
+            "name": "UsersExcel",
+            "etlService": {
+                "configuration": {
+                    "name": "UsersExcelETL",
+                    "version": "1"
+                }
+            }
+        }
+    ],
+    "version": "1"
+}

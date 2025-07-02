@@ -1,0 +1,34 @@
+
+update acc.PERIOD set PERIOD_STATUS_ID = 3;
+GO
+
+INSERT INTO ACC.PERIOD(PERIOD_STATUS_ID, DESCRIPTION, START_DATE, END_DATE, SYS_CREATED_ON, SYS_UPDATED_ON, SYS_CREATED_BY_ID, SYS_UPDATED_BY_ID) VALUES (3, 'Migration period', '19000101', '20211231', '19000101', '19000101', '00000000-0000-0000-0000-000000000000', '00000000-0000-0000-0000-000000000000');
+GO
+
+WITH nums AS
+   (SELECT 1 AS value
+    UNION ALL
+    SELECT value + 1 AS value
+    FROM nums
+    WHERE nums.value < 1000)
+, ResNums AS
+    (
+	SELECT
+		value as value,
+		dateadd(month,value-1, '20220101') as start_date,
+		dateadd(month,value-1, '20220131') as end_date
+    FROM nums
+)
+INSERT INTO ACC.PERIOD(PERIOD_STATUS_ID, DESCRIPTION, START_DATE, END_DATE, SYS_CREATED_ON, SYS_UPDATED_ON, SYS_CREATED_BY_ID, SYS_UPDATED_BY_ID)
+SELECT
+	1,
+	'Period ' + format(start_date, 'yyyy-MM', 'en-US'),
+	start_date,
+	end_date,
+	SYSDATETIME(), SYSDATETIME(),
+	'00000000-0000-0000-0000-000000000000', '00000000-0000-0000-0000-000000000000'
+FROM ResNums
+where start_date < '20700101'
+option (maxrecursion 10000);
+GO
+

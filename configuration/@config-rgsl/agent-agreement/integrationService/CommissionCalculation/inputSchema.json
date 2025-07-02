@@ -1,0 +1,98 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema",
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+        "originDocumentId": {
+            "type": "string",
+            "description": "Original document id"
+        },
+        "originDocumentNumber": {
+            "type": "string",
+            "description": "Original document number"
+        },
+        "contractNumber": {
+            "type": "string",
+            "description": "Contract number"
+        },
+        "serviceProviderCode": {
+            "type": "string",
+            "description": "Agent service provider code"
+        },
+        "calculationDate": {
+            "type": "string",
+            "aiFormat": "date",
+            "description": "The date on which the calculation is performed"
+        },
+        "loggingEnabled": {
+            "type": "boolean",
+            "description": "Whether logging is enabled"
+        },
+        "manualRule": {
+            "type": "string",
+            "description": "manualRule"
+        },
+        "calculationContext": {
+            "type": "object",
+            "additionalProperties": false,
+            "description": "The context object that contains attribute values (extracted from policy) that are compared to AA rule attributes",
+            "properties": {
+                "insuranceRule": {
+                    "type": "string",
+                    "description": "Insurance rule"
+                },
+                "insuranceProduct": {
+                    "type": "string",
+                    "description": "Insurance product"
+                },
+                "insuranceCurrency": {
+                    "type": "string",
+                    "description": "Insurance currency"
+                },
+                "insuranceTerm": {
+                    "type": "number",
+                    "description": "Insurance term"
+                },
+                "premiumPeriod": {
+                    "type": "number",
+                    "description": "Premium period"
+                },
+                "premiumPeriodType": {
+                    "type": "string",
+                    "description": "Premium period type"
+                },
+                "insuranceYear": {
+                    "type": "number",
+                    "description": "Insurance term"
+                },
+                "creditProgram": {
+                    "type": "string",
+                    "description": "creditProgram"
+                },
+                "variant": {
+                    "type": "string",
+                    "description": "variant"
+                },
+                "manualRule": {
+                    "type": "string",
+                    "description": "manualRule"
+                }
+            },
+            "required": [
+                "insuranceRule",
+                "insuranceProduct",
+                "insuranceCurrency",
+                "insuranceTerm",
+                "premiumPeriod",
+                "premiumPeriodType"
+            ]
+        }
+    },
+    "required": [
+        "originDocumentNumber",
+        "contractNumber",
+        "serviceProviderCode",
+        "calculationDate",
+        "calculationContext"
+    ]
+}

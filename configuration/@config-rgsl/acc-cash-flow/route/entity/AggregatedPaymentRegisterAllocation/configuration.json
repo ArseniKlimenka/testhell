@@ -1,0 +1,84 @@
+{
+    "entityType": "ImportDocument",
+    "condition": {
+        "events": [
+            "StatusChanged"
+        ],
+        "configuration": {
+            "names": [
+                "AggregatedPaymentRegisterImport"
+            ],
+            "dimensions": {}
+        },
+        "documentStates": [
+            "Allocation"
+        ]
+    },
+    "sinks": [
+        {
+            "name": "UpdateRegistryClearErrors",
+            "document": {
+                "configuration": {
+                    "name": "AggregatedPaymentRegisterImport"
+                },
+                "allowUpdating": {
+                    "inStates": [
+                        "Allocation"
+                    ]
+                }
+            }
+        },
+        {
+            "name": "AllocateRegistry",
+            "class": {
+                "className": "Adacta.AdInsure.RGSL.Accounting.API.Shared.CashFlow.Allocation.Services.IAllocationServiceAppRGSL, Adacta.AdInsure.RGSL.Accounting.API",
+                "methodName": "AllocateGroup"
+            }
+        }
+    ],
+    "completionSinks": [
+        {
+            "name": "FinishedAllocation",
+            "executeAs": "System",
+            "documentTransition": {
+                "transition": {
+                    "transitionName": "Allocation_to_Allocated",
+                    "configurationName": "AggregatedPaymentRegisterImport",
+                    "configurationVersion": "1"
+                }
+            }
+        }
+    ],
+    "errorSinks": [
+        {
+            "name": "RegistryAllocationError",
+            "documentTransition": {
+                "transition": {
+                    "transitionName": "Allocation_to_RegistryAllocationError",
+                    "configurationName": "AggregatedPaymentRegisterImport",
+                    "configurationVersion": "1"
+                }
+            }
+        },
+        {
+            "name": "UpdateRegistryAllocationError",
+            "document": {
+                "configuration": {
+                    "name": "AggregatedPaymentRegisterImport"
+                },
+                "allowUpdating": {
+                    "inStates": [
+                        "RegistryAllocationError"
+                    ]
+                }
+            }
+        },
+        {
+            "name": "SendFailureNotification",
+            "notification": {
+                "notificationName": "AggregatedPaymentImportFailed"
+            }
+        }
+    ],
+    "version": "1"
+}

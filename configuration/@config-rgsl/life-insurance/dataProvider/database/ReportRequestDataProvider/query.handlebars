@@ -1,0 +1,72 @@
+﻿SELECT 
+	ud.UNIVERSAL_DOCUMENT_NUMBER REQUEST_NUMBER,
+	ps.CODE_NAME REQUEST_STATE,
+	JSON_VALUE(ud.BODY, '$.contract.number') CONTRACT_NUMBER,
+    JSON_VALUE(ud.BODY, '$.contract.stateCode') CONTRACT_STATE_CODE,
+	JSON_VALUE(ud.BODY, '$.contract.productCode') PRODUCT_CODE,
+	JSON_VALUE(ud.BODY, '$.contract.productGroup') PRODUCT_GROUP,
+    JSON_VALUE(ud.BODY, '$.contract.partner.partnerDescription') PARTNER,
+    CAST(JSON_VALUE(ud.BODY, '$.amountWithAllRisks') AS DECIMAL(16,2)) AMOUNT,
+	JSON_VALUE(ud.BODY, '$.holder.fullName') POLICY_HOLDER_NAME,
+	JSON_VALUE(ud.BODY, '$.applicant.partyData.partyFullName') APPLICANT_NAME,
+	JSON_VALUE(ud.BODY, '$.typeOfRequest') TYPE_OF_REQUEST,
+	JSON_VALUE(ud.BODY, '$.amendmentReason') AMENDMENT_REASON,
+	JSON_VALUE(ud.BODY, '$.contract.issueDate') CONTRACT_ISSUE_DATE,
+	JSON_VALUE(ud.BODY, '$.issueDate') REQUEST_ISSUE_DATE,
+	JSON_VALUE(ud.BODY, '$.bankAccount.bankName') BANK_NAME,
+	JSON_VALUE(ud.BODY, '$.bankAccount.number') BANK_NUMBER
+FROM BFX.UNIVERSAL_DOCUMENT ud
+LEFT JOIN CFX.PUBLISHED_ARTIFACT pa ON pa.PUBLISHED_ARTIFACT_ID = ud.PUBLISHED_ARTIFACT_ID
+LEFT JOIN CFG.PROCESS_STATE ps ON ps.PROCESS_STATE_ID = ud.STATE_ID
+WHERE
+    1 = 1
+AND pa.CODE_NAME = 'LifeInsuranceRequest'
+{{#if parameters.requestNumber}}
+    AND ud.UNIVERSAL_DOCUMENT_NUMBER = @requestNumber
+{{/if}}
+{{#if parameters.requestState}}
+    AND ps.CODE_NAME = @requestState
+{{/if}}
+{{#if parameters.contractNumber}}
+    AND JSON_VALUE(ud.BODY, '$.contract.number') = @contractNumber
+{{/if}}
+{{#if parameters.contractStateCode}}
+    AND JSON_VALUE(ud.BODY, '$.contract.stateCode') = @contractStateCode
+{{/if}}
+{{#if parameters.productCode}}
+    AND JSON_VALUE(ud.BODY, '$.contract.productCode') = @productCode
+{{/if}}
+{{#if parameters.productGroup}}
+    AND JSON_VALUE(ud.BODY, '$.contract.productGroup') = @productGroup
+{{/if}}
+{{#if parameters.partner}}
+    AND JSON_VALUE(ud.BODY, '$.contract.partner.partnerDescription') = @partner
+{{/if}}
+{{#if parameters.amount}}
+    AND JSON_VALUE(ud.BODY, '$.amountWithAllRisks') = @amount
+{{/if}}
+{{#if parameters.policyHolderCode}}
+    AND JSON_VALUE(ud.BODY, '$.holder.partyCode') = @policyHolderCode
+{{/if}}
+{{#if parameters.applicantCode}}
+    AND JSON_VALUE(ud.BODY, '$.applicant.partyData.partyCode') = @applicantCode
+{{/if}}
+{{#if parameters.typeOfRequest}}
+    AND JSON_VALUE(ud.BODY, '$.typeOfRequest') = @typeOfRequest
+{{/if}}
+{{#if parameters.amendmentReason}}
+    AND JSON_VALUE(ud.BODY, '$.amendmentReason') = @amendmentReason
+{{/if}}
+{{#if parameters.requestIssueDateFrom}}
+    AND JSON_VALUE(ud.BODY, '$.issueDate') >= @requestIssueDateFrom
+{{/if}}
+{{#if parameters.requestIssueDateTo}}
+    AND JSON_VALUE(ud.BODY, '$.issueDate') <= @requestIssueDateTo
+{{/if}}
+{{#if parameters.contractIssueDateFrom}}
+    AND JSON_VALUE(ud.BODY, '$.contract.issueDate') >= @contractIssueDateFrom
+{{/if}}
+{{#if parameters.contractIssueDateTo}}
+    AND JSON_VALUE(ud.BODY, '$.contract.issueDate') <= @contractIssueDateTo
+{{/if}}
+ORDER BY ud.UNIVERSAL_DOCUMENT_NUMBER

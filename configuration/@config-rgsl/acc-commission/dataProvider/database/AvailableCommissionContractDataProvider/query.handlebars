@@ -1,0 +1,126 @@
+select
+	t.*,
+	ps.CODE_NAME as CONTRACT_STATE_CODE,
+	aas.EXTERNAL_NUMBER as AA_EXTERNAL_NUMBER,
+	ptys.FULL_NAME as AGENT,
+	v.STATE as VERIFICATION_STATE
+from
+	(
+		select
+			t.CONTRACT_NUMBER,
+			max(t.TRANSACTION_DATE) as TRANSACTION_DATE,
+			t.DUE_DATE,
+			case
+				when sum(t.OPEN_AMOUNT) = 0 then 'paid'
+				when sum(t.OPEN_AMOUNT) = sum(t.AMOUNT) then 'not_paid'
+				else 'partially_paid' end as INSTALLMENT_STATUS,
+			sum(t.COMMISSION_AMOUNT) as COMMISSION_AMOUNT
+		from
+			(
+				select
+					polh.CONTRACT_NUMBER,
+					null as TRANSACTION_DATE,
+					ppl.DUE_DATE,
+					ppsl.POSTING_DATE,
+					ppsl.AMOUNT,
+					ppsl.AMOUNT as OPEN_AMOUNT,
+					0 as COMMISSION_AMOUNT
+				from
+					pas_impl.POLICY_HUB polh
+					inner join pas_impl.P_PAYMENT_PLAN_LINK ppl on ppl.POLICY_HKEY = polh.POLICY_HKEY
+					inner join pas_impl.P_PAYMENT_PLAN_SAT_LATEST ppsl on ppsl.P_PAYMENT_PLAN_HKEY = ppl.P_PAYMENT_PLAN_HKEY
+				where 1=1
+{{#if parameters.contractNumbers}}
+					and polh.CONTRACT_NUMBER in (@contractNumbers)
+{{/if}}
+					and ppsl.IS_FIRST_INSTALLMENT = 1
+				union all
+				select
+					alc.DOCUMENT_NO as CONTRACT_NUMBER,
+					bsi.TRANSACTION_DATE,
+					alcp.DUE_DATE,
+					matp.POSTING_DATE,
+					0 as AMOUNT,
+					-(mat.DOC_AMOUNT + mat.TOLERANCE_DOC_AMOUNT) as OPEN_AMOUNT,
+					0 as COMMISSION_AMOUNT
+				from
+					acc_impl.ALLOCATION alc
+					inner join acc_impl.BANK_STATEMENT_ITEM bsi on bsi.BANK_STATEMENT_ITEM_ID = alc.BANK_STATEMENT_ITEM_ID
+					inner join acc_impl.ALLOCATION_POLICY alcp on alcp.ALLOCATION_ID = alc.ALLOCATION_ID
+					inner join acc_impl.MATCHING mat on mat.ALLOCATION_ID = alc.ALLOCATION_ID
+					inner join acc_impl.MATCHING_POLICY matp on matp.MATCHING_ID = mat.MATCHING_ID
+				where 1=1
+{{#if parameters.contractNumbers}}
+					and alc.DOCUMENT_NO in (@contractNumbers)
+{{/if}}
+					and alcp.IS_FIRST_INSTALLMENT = 1
+				union all
+				select
+					alc.DOCUMENT_NO as CONTRACT_NUMBER,
+					bsi.TRANSACTION_DATE,
+					alcp.DUE_DATE,
+					matp.POSTING_DATE,
+					0 as AMOUNT,
+					0 as OPEN_AMOUNT,
+					PC.DOC_BASE_AMOUNT as COMMISSION_AMOUNT
+				from
+					acc_impl.ALLOCATION alc
+					inner join acc_impl.ALLOCATION_POLICY alcp on alcp.ALLOCATION_ID = alc.ALLOCATION_ID
+					inner join acc_impl.BANK_STATEMENT_ITEM bsi on bsi.BANK_STATEMENT_ITEM_ID = alc.BANK_STATEMENT_ITEM_ID
+					inner join acc_impl.MATCHING mat on mat.ALLOCATION_ID = alc.ALLOCATION_ID
+					inner join acc_impl.MATCHING_POLICY matp on matp.MATCHING_ID = mat.MATCHING_ID
+					inner join acc_impl.PAYABLE_COMMISSION pc on pc.MATCHING_ID = mat.MATCHING_ID
+				where 1=1
+{{#if parameters.contractNumbers}}
+					and alc.DOCUMENT_NO in (@contractNumbers)
+{{/if}}
+					and alcp.IS_FIRST_INSTALLMENT = 1
+					and not exists (select * from acc_impl.CA_ACT_ITEM_PC aipc where aipc.PAYABLE_COMMISSION_ID = pc.PAYABLE_COMMISSION_ID and aipc.CANCELLED = 0)
+			) t
+		where 1=1
+			and SYSDATETIME() >= t.POSTING_DATE
+		group by t.CONTRACT_NUMBER, t.DUE_DATE, t.POSTING_DATE
+		having 1=1
+			and sum(t.AMOUNT) != 0
+			and sum(t.COMMISSION_AMOUNT) = 0
+	) t
+	inner join pas.CONTRACT c on c.CONTRACT_NUMBER = t.CONTRACT_NUMBER
+	inner join cfg.PROCESS_STATE ps on ps.PROCESS_STATE_ID = c.STATE_ID
+	inner join pas_impl.POLICY_HUB polh on polh.CONTRACT_NUMBER = t.CONTRACT_NUMBER
+	left join pas_impl.POLICY_COMMISSION_LINK pcl on pcl.POLICY_HKEY = polh.POLICY_HKEY
+	left join pas_impl.AA_SAT_LATEST aas on aas.AA_HKEY = pcl.AA_HKEY
+	left join org_impl.SERVICE_PROVIDER_HUB sph on sph.SERVICE_PROVIDER_HKEY = pcl.SERVICE_PROVIDER_HKEY
+	left join org_impl.SERVICE_PROVIDER_INFO_SAT_LATEST spis on spis.SERVICE_PROVIDER_INFO_HKEY = pcl.SERVICE_PROVIDER_HKEY
+	left join pty_impl.PARTY_HUB ptyh on ptyh.PARTY_CODE = spis.PARTY_CODE
+	left join pty_impl.PARTY_INFO_SAT_LATEST ptys on ptys.PARTY_INFO_HKEY = ptyh.PARTY_HKEY
+	left join
+	(
+		select pvl.POLICY_HKEY, max(vs.STATE) as STATE
+		from
+			pas_impl.POLICY_VERIFICATION_LINK pvl
+			inner join pas_impl.VERIFICATION_HUB vh on vh.VERIFICATION_HKEY = pvl.VERIFICATION_HKEY
+			inner join pas_impl.VERIFICATION_SAT_LATEST vs on vs.VERIFICATION_HKEY = pvl.VERIFICATION_HKEY
+		group by pvl.POLICY_HKEY
+	) v on v.POLICY_HKEY = polh.POLICY_HKEY
+where 1=1
+{{#if parameters.aaServiceProviderCode}}
+	and sph.SERVICE_PROVIDER_CODE = @aaServiceProviderCode
+{{/if}}
+{{#if parameters.aaNumber}}
+	and aas.EXTERNAL_NUMBER = @aaNumber
+{{/if}}
+{{#if parameters.contractStateCode}}
+	and ps.CODE_NAME = @contractStateCode
+{{/if}}
+{{#if parameters.installmentStatus}}
+	and t.INSTALLMENT_STATUS = @installmentStatus
+{{/if}}
+{{#if parameters.transactionDateFrom}}
+	and t.TRANSACTION_DATE >= @transactionDateFrom
+{{/if}}
+{{#if parameters.transactionDateTo}}
+	and t.TRANSACTION_DATE <= @transactionDateTo
+{{/if}}
+{{#if parameters.verificationState}}
+	and v.STATE = @verificationState
+{{/if}}

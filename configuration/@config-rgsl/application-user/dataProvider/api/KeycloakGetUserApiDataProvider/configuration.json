@@ -1,0 +1,17 @@
+{
+    "version": "1",
+    "url": "{environment.identityBaseUrl}/admin/realms/adinsure/users",
+    "httpMethod": "GET",
+    "headers": {
+        "Accept": "application/json"
+    },
+    "authenticationMethod": {
+        "OpenIdConnect": {
+            "grantType": "ClientCredentials",
+            "clientSecret": "{environment.rgsl.keycloakUserManagement.clientSecret}",
+            "clientId": "{environment.rgsl.keycloakUserManagement.clientId}",
+            "scope": "{environment.rgsl.keycloakUserManagement.scope}",
+            "tokenEndpoint": "{environment.identityBaseUrl}/realms/adinsure/protocol/openid-connect/token"
+        }
+    }
+}

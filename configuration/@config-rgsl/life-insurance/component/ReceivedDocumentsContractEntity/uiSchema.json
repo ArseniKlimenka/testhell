@@ -1,0 +1,83 @@
+{
+    "type": "TabLayout",
+    "elements": [
+        {
+            "type": "Tab",
+            "title": "Contract data",
+            "elementId": "ReceivedDocumentsContractEntityContractDataId",
+            "elements": [
+                {
+                    "type": "Input",
+                    "label": "originalReceiptDate",
+                    "value": {
+                        "$ref": "#/properties/originalReceiptDate"
+                    },
+                    "width": 4
+                }
+            ]
+        },
+        {
+            "type": "Tab",
+            "title": "Amendment data",
+            "elementId": "ReceivedDocumentsContractEntityAmendmentDataId",
+            "elements": [
+                {
+                    "type": "Input",
+                    "label": "hasAmendment",
+                    "value": {
+                        "$ref": "#/properties/hasAmendment"
+                    },
+                    "onValueChanged": [
+                        {
+                            "commandType": "executeAction",
+                            "actionName": "onChangeHasAmendment"
+                        }
+                    ],
+                    "width": 4
+                }
+            ]
+        },
+        {
+            "type": "Tab",
+            "title": "Payment intermediate application",
+            "elementId": "ReceivedDocumentsContractEntityPaymentIntermediateApplicationId",
+            "elements": [
+                {
+                    "type": "Input",
+                    "label": "hasPaymentIntermediateApplication",
+                    "value": {
+                        "$ref": "#/properties/hasPaymentIntermediateApplication"
+                    },
+                    "onValueChanged": [
+                        {
+                            "commandType": "executeAction",
+                            "actionName": "onChangeHasPaymentIntermediateApplication"
+                        }
+                    ],
+                    "width": 4
+                },
+                {
+                    "type": "Input",
+                    "label": "paymentIntermediateApplicationDate",
+                    "showAsRequired": true,
+                    "value": {
+                        "$ref": "#/properties/paymentIntermediateApplicationDate"
+                    },
+                    "rule": {
+                        "effect": "SHOW",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "showPaymentIntermediateApplicationDate",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    },
+                    "width": 4
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,37 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "object",
+    "additionalProperties": false,
+    "aiValidation": [
+        {
+            "rule": "validateGiftServices"
+        }
+    ],
+    "aiDataEnrichment": [
+        {
+            "name": "setGiftServiceToAdditionalServices"
+        },
+        {
+            "name": "setGiftServiceDescription",
+            "dataSource": "GiftServiceDataSource"
+        }
+    ],
+    "properties": {
+        "selectedGiftServices": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "giftServiceCodes": {
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "giftServiceDescription": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

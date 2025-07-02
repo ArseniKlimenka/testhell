@@ -1,0 +1,349 @@
+{
+    "type": "Group",
+    "elements": [
+        {
+            "type": "Group",
+            "rule": {
+                "effect": "HIDE",
+                "condition": {
+                    "type": "FUNC",
+                    "ruleFunction": "hidePersonLookUpInputs",
+                    "value": [
+                        {
+                            "$ref": "#"
+                        }
+                    ]
+                }
+            },
+            "elements": [
+                {
+                    "type": "Lookup",
+                    "width": 4,
+                    "value": {
+                        "$ref": "#"
+                    },
+                    "dialogButton": {
+                        "icon": {
+                            "name": "User",
+                            "color": "Primary"
+                        }
+                    },
+                    "dialog": {
+                        "viewReference": {
+                            "configurationCodeName": "GeneralPartySearchWithEditView",
+                            "configurationConceptType": "SearchView",
+                            "configurationVersion": "1"
+                        },
+                        "onLoad": "onLoadView",
+                        "size": "ExtraLarge"
+                    },
+                    "onSelected": "partyResultMapping",
+                    "selectedDisplayValueUISchema": {
+                        "type": "Input",
+                        "label": "fullName",
+                        "showAsRequired": true,
+                        "readOnly": true,
+                        "value": {
+                            "$ref": "#/properties/partyFullName"
+                        },
+                        "rule": {
+                            "effect": "DISABLE_INITIAL",
+                            "condition": {
+                                "type": "FUNC",
+                                "ruleFunction": "disableTextBox",
+                                "value": [
+                                    {
+                                        "$ref": "#"
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "onValueChanged": [
+                        {
+                            "commandType": "executeAction",
+                            "actionName": "onChangeManualInputs"
+                        }
+                    ],
+                    "rule": {
+                        "effect": "DISABLE_INITIAL",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "disableLookUpInputs",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "type": "Link",
+                    "width": 4,
+                    "targetType": "Url",
+                    "value": {
+                        "mapping": "partyUrlMapping",
+                        "$ref": "#"
+                    },
+                    "content": {
+                        "text": {
+                            "type": "OutputText",
+                            "defaultValue": "",
+                            "value": {
+                                "mapping": "linkNameMapping",
+                                "$ref": "#"
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "type": "Group",
+            "rule": {
+                "effect": "SHOW",
+                "condition": {
+                    "type": "FUNC",
+                    "ruleFunction": "showManualInputs",
+                    "value": [
+                        {
+                            "$ref": "#"
+                        }
+                    ]
+                }
+            },
+            "elements": [
+                {
+                    "type": "Group",
+                    "rule": {
+                        "effect": "ENABLE_INITIAL",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "enableManualInputs",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    },
+                    "elements": [
+                        {
+                            "type": "Input",
+                            "label": "dateOfBirth",
+                            "value": {
+                                "$ref": "#/properties/dateOfBirth"
+                            },
+                            "width": 4,
+                            "onValueChanged": [
+                                {
+                                    "commandType": "executeAction",
+                                    "actionName": "onChangeManualInputs"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Input",
+                            "label": "personGender",
+                            "value": {
+                                "$ref": "#/properties/personGender"
+                            },
+                            "width": 4,
+                            "onValueChanged": [
+                                {
+                                    "commandType": "executeAction",
+                                    "actionName": "onChangeManualInputs"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "Group",
+            "rule": {
+                "effect": "HIDE",
+                "condition": {
+                    "type": "FUNC",
+                    "ruleFunction": "hideOrganisationLookUpInputs",
+                    "value": [
+                        {
+                            "$ref": "#"
+                        }
+                    ]
+                }
+            },
+            "elements": [
+                {
+                    "type": "Lookup",
+                    "width": 4,
+                    "value": {
+                        "$ref": "#"
+                    },
+                    "dialogButton": {
+                        "icon": {
+                            "name": "User",
+                            "color": "Primary"
+                        }
+                    },
+                    "dialog": {
+                        "viewReference": {
+                            "configurationCodeName": "GeneralPartySearchWithEditView",
+                            "configurationConceptType": "SearchView",
+                            "configurationVersion": "1"
+                        },
+                        "onLoad": "onLoadOrganisationView",
+                        "size": "ExtraLarge"
+                    },
+                    "onSelected": "partyResultMapping",
+                    "selectedDisplayValueUISchema": {
+                        "type": "Input",
+                        "label": "organisationFullName",
+                        "showAsRequired": true,
+                        "readOnly": true,
+                        "value": {
+                            "$ref": "#/properties/partyFullName"
+                        },
+                        "rule": {
+                            "effect": "DISABLE_INITIAL",
+                            "condition": {
+                                "type": "FUNC",
+                                "ruleFunction": "disableTextBox",
+                                "value": [
+                                    {
+                                        "$ref": "#"
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "rule": {
+                        "effect": "DISABLE_INITIAL",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "disableLookUpInputs",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "type": "Link",
+                    "width": 4,
+                    "targetType": "Url",
+                    "value": {
+                        "mapping": "partyUrlMapping",
+                        "$ref": "#"
+                    },
+                    "content": {
+                        "text": {
+                            "type": "OutputText",
+                            "defaultValue": "",
+                            "value": {
+                                "mapping": "linkNameMapping",
+                                "$ref": "#"
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "type": "Group",
+            "rule": {
+                "effect": "HIDE",
+                "condition": {
+                    "type": "FUNC",
+                    "ruleFunction": "hidePersonOrganisationLookUpInputs",
+                    "value": [
+                        {
+                            "$ref": "#"
+                        }
+                    ]
+                }
+            },
+            "elements": [
+                {
+                    "type": "Lookup",
+                    "width": 8,
+                    "value": {
+                        "$ref": "#"
+                    },
+                    "dialogButton": {
+                        "icon": {
+                            "name": "User",
+                            "color": "Primary"
+                        }
+                    },
+                    "dialog": {
+                        "viewReference": {
+                            "configurationCodeName": "GeneralPartySearchWithEditView",
+                            "configurationConceptType": "SearchView",
+                            "configurationVersion": "1"
+                        },
+                        "onLoad": "onLoadPersonOrganisationView",
+                        "size": "ExtraLarge"
+                    },
+                    "onSelected": "partyResultMapping",
+                    "selectedDisplayValueUISchema": {
+                        "type": "Input",
+                        "label": "personOrganisationFullName",
+                        "showAsRequired": true,
+                        "readOnly": true,
+                        "value": {
+                            "$ref": "#/properties/partyFullName"
+                        },
+                        "rule": {
+                            "effect": "DISABLE_INITIAL",
+                            "condition": {
+                                "type": "FUNC",
+                                "ruleFunction": "disableTextBox",
+                                "value": [
+                                    {
+                                        "$ref": "#"
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "rule": {
+                        "effect": "DISABLE_INITIAL",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "disableLookUpInputs",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "type": "Link",
+                    "width": 4,
+                    "targetType": "Url",
+                    "value": {
+                        "mapping": "partyUrlMapping",
+                        "$ref": "#"
+                    },
+                    "content": {
+                        "text": {
+                            "type": "OutputText",
+                            "defaultValue": "",
+                            "value": {
+                                "mapping": "linkNameMapping",
+                                "$ref": "#"
+                            }
+                        }
+                    }
+                }
+            ]
+        }
+    ]
+}

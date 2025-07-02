@@ -1,0 +1,12 @@
+﻿SELECT DISTINCT
+	crs.CODE as riskCode,
+	crs.DESCRIPTION as riskShortDescription,
+	r.RISKS_GROUP as risksGroup,
+	crs.BUSINESS_LINE as businessLine
+FROM CLM_IMPL.CLM_RISK_SAT crs 
+JOIN CLM_IMPL.CLM_SAT cs on crs.CLM_RISK_HKEY = cs.CLM_HKEY
+JOIN BFX_IMPL.RISKS r on crs.CODE = r.CODE
+WHERE 1 = 1
+{{#if parameters.contractNumber}}
+	AND cs.CONTRACT_NUMBER = @contractNumber
+{{/if}}

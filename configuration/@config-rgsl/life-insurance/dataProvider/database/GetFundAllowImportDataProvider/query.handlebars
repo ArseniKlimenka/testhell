@@ -1,0 +1,18 @@
+﻿SELECT
+	fai.ID,
+	fai.CODE,
+	fai.DESCRIPTION
+FROM BFX_IMPL.FUND_ALLOW_IMPORT fai
+WHERE 1 = 1
+{{#if parameters.id}}
+AND fai.ID = @ID
+{{/if}}
+{{#if parameters.code}}
+AND fai.CODE = @code
+{{/if}}
+{{#if parameters.codes}}
+AND fai.CODE IN (@codes)
+{{/if}}
+{{#if parameters.description}}
+AND fai.DESCRIPTION LIKE @description
+{{/if}}

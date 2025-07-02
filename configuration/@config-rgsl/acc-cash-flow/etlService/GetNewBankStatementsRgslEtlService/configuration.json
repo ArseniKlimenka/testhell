@@ -1,0 +1,86 @@
+{
+    "useBackgroundTaskWorker": true,
+    "restartable": true,
+    "mainDataSource": "GetNewBankStatementsRgslDataSource",
+    "enableAutomaticRecovery": true,
+    "sinks": [
+        {
+            "name": "CheckPaymentAlreadyExists",
+            "fetch": {
+                "configuration": {
+                    "name": "BankStatementItemDatabaseDataSource"
+                }
+            }
+        },
+        {
+            "name": "WriteLog",
+            "database": {
+                "tables": [
+                    "ACC_IMPL.GET_NEW_BS_LOG_HUB",
+                    "ACC_IMPL.GET_NEW_BS_LOG_SAT"
+                ]
+            }
+        },
+        {
+            "name": "GetCurrencyCode",
+            "fetch": {
+                "configuration": {
+                    "name": "CurrenciesDataSource"
+                }
+            }
+        },
+        {
+            "name": "ImportRequestRGSL",
+            "class": {
+                "className": "Adacta.AdInsure.RGSL.Accounting.API.Shared.CashFlow.BankStatement.Services.IBankStatementServiceAppRGSL, Adacta.AdInsure.RGSL.Accounting.API",
+                "methodName": "Create"
+            }
+        },
+        {
+            "name": "RefreshIsRegistry",
+            "class": {
+                "className": "Adacta.AdInsure.RGSL.Accounting.API.Shared.CashFlow.BankStatement.Services.IBankStatementServiceAppRGSL, Adacta.AdInsure.RGSL.Accounting.API",
+                "methodName": "RefreshIsRegistry"
+            }
+        },
+        {
+            "name": "AutoAllocate",
+            "class": {
+                "className": "Adacta.AdInsure.RGSL.Accounting.API.Shared.CashFlow.Allocation.Services.IAutoAllocationServiceAppRGSL, Adacta.AdInsure.RGSL.Accounting.API",
+                "methodName": "AutoAllocate"
+            }
+        }
+    ],
+    "completionSinks": [
+        {
+            "name": "ConfirmPayments",
+            "etlService": {
+                "configuration": {
+                    "name": "GetNewBankStatementsSetSuccessfulFlagEtlService",
+                    "version": "1"
+                }
+            }
+        },
+        {
+            "name": "SendSuccessNotification",
+            "notification": {
+                "notificationName": "GetNewBankStatementsEtlSuccess"
+            }
+        },
+        {
+            "name": "SendFailureNotification",
+            "notification": {
+                "notificationName": "GetNewBankStatementsEtlFailed"
+            }
+        }
+    ],
+    "errorSinks": [
+        {
+            "name": "SetErrorFlag",
+            "notification": {
+                "notificationName": "GetNewBankStatementsEtlFailed"
+            }
+        }
+    ],
+    "version": "1"
+}

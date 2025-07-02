@@ -1,0 +1,344 @@
+{
+    "id": "Claim.main-schema.json",
+    "type": "Group",
+    "formProperties": {
+        "events": {
+            "onLoad": "onLoadDocumentAction",
+            "beforeSave": "beforeSaveDocumentAction",
+            "afterSave": "afterSaveDocumentAction"
+        }
+    },
+    "elements": [
+        {
+            "type": "GridLayout",
+            "fillAvailableSpace": true,
+            "title": "insuredEvent",
+            "fixedButton": true,
+            "numberOfColumns": 12,
+            "elements": [
+                {
+                    "type": "TabLayout",
+                    "options": {
+                        "menuAlligment": "Horizontal",
+                        "menuMode": "Single"
+                    },
+                    "elements": [
+                        {
+                            "type": "Tab",
+                            "elementId": "insuredEventDetailsTab",
+                            "scope": "title",
+                            "title": "insuredEventDetailsTab",
+                            "elements": [
+                                {
+                                    "type": "Section",
+                                    "label": "mainInformation",
+                                    "scope": "mainInformation",
+                                    "width": 12,
+                                    "elements": [
+                                        {
+                                            "type": "Group",
+                                            "width": 12,
+                                            "elements": [
+                                                {
+                                                    "type": "Lookup",
+                                                    "label": "Contract",
+                                                    "value": {
+                                                        "$ref": "#"
+                                                    },
+                                                    "width": 3,
+                                                    "dialogButton": {},
+                                                    "clearButton": {
+                                                        "clearAction": "clearSelectedContract"
+                                                    },
+                                                    "readOnly": false,
+                                                    "dialog": {
+                                                        "viewReference": {
+                                                            "configurationCodeName": "ClaimContractSearch",
+                                                            "configurationVersion": "1",
+                                                            "configurationConceptType": "SearchView"
+                                                        }
+                                                    },
+                                                    "onSelected": "contractSearchResultMapping",
+                                                    "selectedDisplayValueUISchema": {
+                                                        "type": "Input",
+                                                        "label": "Contract Number",
+                                                        "readOnly": true,
+                                                        "value": {
+                                                            "$ref": "#/properties/Body/properties/contract/properties/number"
+                                                        }
+                                                    },
+                                                    "rule": {
+                                                        "effect": "DISABLE_INITIAL",
+                                                        "condition": {
+                                                            "type": "FUNC",
+                                                            "ruleFunction": "isContractDisabled",
+                                                            "value": [
+                                                                {
+                                                                    "$ref": "#"
+                                                                }
+                                                            ]
+                                                        }
+                                                    }
+                                                },
+                                                {
+                                                    "type": "Link",
+                                                    "width": 2,
+                                                    "targetType": "Url",
+                                                    "value": {
+                                                        "mapping": "urlMapping",
+                                                        "$ref": "#"
+                                                    },
+                                                    "content": {
+                                                        "text": {
+                                                            "type": "OutputText",
+                                                            "defaultValue": "",
+                                                            "value": {
+                                                                "mapping": "getContractLinkText"
+                                                            }
+                                                        }
+                                                    }
+                                                },
+                                                {
+                                                    "type": "DatetimePicker",
+                                                    "label": "eventDate",
+                                                    "value": {
+                                                        "$ref": "#/properties/Body/properties/eventDateInfo/properties/eventDate"
+                                                    },
+                                                    "width": 3,
+                                                    "onValueChanged": [
+                                                        {
+                                                            "commandType": "executeAction",
+                                                            "actionName": "calculateYearQuarter"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "type": "Input",
+                                                    "label": "yearQuarter",
+                                                    "value": {
+                                                        "$ref": "#/properties/Body/properties/eventDateInfo/properties/yearQuarter"
+                                                    },
+                                                    "width": 3,
+                                                    "readOnly": true
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "type": "Group",
+                                            "width": 12,
+                                            "elements": [
+                                                {
+                                                    "type": "Input",
+                                                    "label": "externalNumber",
+                                                    "value": {
+                                                        "$ref": "#/properties/Body/properties/contract/properties/externalNumber"
+                                                    },
+                                                    "width": 3,
+                                                    "rule": {
+                                                        "effect": "DISABLE_INITIAL",
+                                                        "condition": {
+                                                            "type": "FUNC",
+                                                            "ruleFunction": "isExternalContractDisabled",
+                                                            "value": [
+                                                                {
+                                                                    "$ref": "#"
+                                                                }
+                                                            ]
+                                                        }
+                                                    }
+                                                },
+                                                {
+                                                    "type": "Input",
+                                                    "label": "isExternal",
+                                                    "value": {
+                                                        "$ref": "#/properties/Body/properties/contract/properties/isExternal"
+                                                    },
+                                                    "width": 3,
+                                                    "onValueChanged": [
+                                                        {
+                                                            "commandType": "executeAction",
+                                                            "actionName": "clearContractRelatedData"
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "type": "Group",
+                                            "width": 12,
+                                            "elements": [
+                                                {
+                                                    "type": "Input",
+                                                    "label": "insuredEventType",
+                                                    "value": {
+                                                        "$ref": "#/properties/Body/properties/insuredEventType"
+                                                    },
+                                                    "autocomplete": {
+                                                        "minTextLength": 3,
+                                                        "dropDownItemsCount": 30
+                                                    },
+                                                    "control": "Dropdown",
+                                                    "source": {
+                                                        "reloadOnOpen": true,
+                                                        "dataSource": {
+                                                            "name": "InsuredEventTypeDataSource",
+                                                            "searchFieldPath": "description",
+                                                            "requestMapping": "insuredEventTypeRequestMapping",
+                                                            "responseMapping": "insuredEventTypeResponseMapping",
+                                                            "resultCount": 30
+                                                        },
+                                                        "displayFieldName": "displayName",
+                                                        "valueFieldName": "value"
+                                                    },
+                                                    "width": 3,
+                                                    "filter": "filterItemTypes",
+                                                    "onValueChanged": [
+                                                        {
+                                                            "commandType": "executeAction",
+                                                            "actionName": "onInsuredEventTypeChanged"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "type": "Input",
+                                                    "label": "insuredEventReason",
+                                                    "value": {
+                                                        "$ref": "#/properties/Body/properties/insuredEventReason"
+                                                    },
+                                                    "autocomplete": {
+                                                        "minTextLength": 1,
+                                                        "dropDownItemsCount": 30
+                                                    },
+                                                    "control": "Dropdown",
+                                                    "source": {
+                                                        "dataSource": {
+                                                            "reloadOnOpen": true,
+                                                            "name": "InsuredEventReasonDataSource",
+                                                            "searchFieldPath": "description",
+                                                            "requestMapping": "insuredEventReasonRequestMapping",
+                                                            "responseMapping": "insuredEventReasonResponseMapping",
+                                                            "resultCount": 30
+                                                        },
+                                                        "displayFieldName": "displayName",
+                                                        "valueFieldName": "value"
+                                                    },
+                                                    "width": 3
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "type": "Group",
+                                            "width": 12,
+                                            "elements": [
+                                                {
+                                                    "type": "Input",
+                                                    "label": "diagnosis",
+                                                    "value": {
+                                                        "$ref": "#/properties/Body/properties/diagnosis"
+                                                    },
+                                                    "autocomplete": {
+                                                        "minTextLength": 1
+                                                    },
+                                                    "control": "Dropdown",
+                                                    "source": {
+                                                        "dataSource": {
+                                                            "reloadOnOpen": true,
+                                                            "name": "DiseaseClassDataSource",
+                                                            "searchFieldPath": "fullTextResult",
+                                                            "responseMapping": "diseaseClassResponseMapping",
+                                                            "requestMapping": "diseaseClassRequestMapping"
+                                                        },
+                                                        "displayFieldName": "displayName",
+                                                        "valueFieldName": "value"
+                                                    },
+                                                    "width": 12,
+                                                    "rule": {
+                                                        "effect": "HIDE",
+                                                        "condition": {
+                                                            "type": "FUNC",
+                                                            "ruleFunction": "shouldHideDiagnosisData",
+                                                            "value": [
+                                                                {
+                                                                    "$ref": "#"
+                                                                }
+                                                            ]
+                                                        }
+                                                    }
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "type": "Group",
+                                            "width": 12,
+                                            "elements": [
+                                                {
+                                                    "type": "Input",
+                                                    "label": "diagnosisNote",
+                                                    "value": {
+                                                        "$ref": "#/properties/Body/properties/diagnosisNote"
+                                                    },
+                                                    "width": 12,
+                                                    "rule": {
+                                                        "effect": "HIDE",
+                                                        "condition": {
+                                                            "type": "FUNC",
+                                                            "ruleFunction": "shouldHideDiagnosisData",
+                                                            "value": [
+                                                                {
+                                                                    "$ref": "#"
+                                                                }
+                                                            ]
+                                                        }
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Tab",
+                            "elementId": "relatedClaimsTab",
+                            "title": "Related claims",
+                            "elements": [
+                                {
+                                    "type": "Section",
+                                    "label": "",
+                                    "width": 12,
+                                    "elements": [
+                                        {
+                                            "type": "Group",
+                                            "elements": [
+                                                {
+                                                    "type": "InlineView",
+                                                    "showContainerActions": false,
+                                                    "views": [
+                                                        {
+                                                            "viewReference": {
+                                                                "configurationCodeName": "RelatedClaimsView",
+                                                                "configurationVersion": "1",
+                                                                "configurationConceptType": "SearchView"
+                                                            },
+                                                            "onViewInitialized": "initRelatedClaims",
+                                                            "viewType": "Search"
+                                                        }
+                                                    ],
+                                                    "value": {
+                                                        "$ref": "#"
+                                                    },
+                                                    "hide": false,
+                                                    "elementId": "RealtedClaimView"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

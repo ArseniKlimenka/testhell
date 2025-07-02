@@ -1,0 +1,187 @@
+{
+    "settings": {
+        "analysis": {
+            "normalizer": {
+                "customSearchNormalizer": {
+                    "type": "custom",
+                    "char_filter": [],
+                    "filter": [
+                        "lowercase",
+                        "asciifolding"
+                    ]
+                }
+            },
+            "analyzer": {
+                "reference_no_analyzer": {
+                    "type": "pattern",
+                    "pattern": ", "
+                },
+                "rus_text_analyzer": {
+                    "type": "standard",
+                    "stopwords": [
+                        "от",
+                        "по"
+                    ]
+                }
+            }
+        }
+    },
+    "mappings": {
+        "dynamic": "strict",
+        "dynamic_templates": [
+            {
+                "additional_attributes_template": {
+                    "path_match": "additionalAttributes.*",
+                    "mapping": {
+                        "type": "object",
+                        "dynamic": "strict",
+                        "properties": {
+                            "valueCode": {
+                                "type": "keyword"
+                            },
+                            "value": {
+                                "type": "text"
+                            },
+                            "fullTextSearchableValue": {
+                                "type": "text"
+                            }
+                        }
+                    }
+                }
+            }
+        ],
+        "properties": {
+            "bankStatementItemId": {
+                "type": "integer"
+            },
+            "bankStatementItemNo": {
+                "type": "text",
+                "fields": {
+                    "keyword": {
+                        "type": "keyword"
+                    }
+                },
+                "analyzer": "rus_text_analyzer"
+            },
+            "importDocumentId": {
+                "type": "keyword"
+            },
+            "incomeSourceId": {
+                "type": "text"
+            },
+            "incomeSourceName": {
+                "type": "text"
+            },
+            "description": {
+                "type": "text"
+            },
+            "originalDescription": {
+                "type": "text"
+            },
+            "transactionDate": {
+                "type": "date",
+                "format": "strict_date"
+            },
+            "createDate": {
+                "type": "date",
+                "format": "strict_date_time"
+            },
+            "paymentDate": {
+                "type": "date",
+                "format": "strict_date"
+            },
+            "amount": {
+                "type": "double"
+            },
+            "direction": {
+                "type": "integer"
+            },
+            "currencyCode": {
+                "type": "keyword"
+            },
+            "paymentStatusId": {
+                "type": "integer"
+            },
+            "openAmount": {
+                "type": "double"
+            },
+            "hasRefunds": {
+                "type": "boolean"
+            },
+            "isRegistry": {
+                "type": "boolean"
+            },
+            "isAcquiring": {
+                "type": "boolean"
+            },
+            "nonAcceptance": {
+                "type": "boolean"
+            },
+            "toleranceType": {
+                "type": "integer"
+            },
+            "rgslGuid": {
+                "type": "keyword",
+                "normalizer": "customSearchNormalizer"
+            },
+            "segment": {
+                "type": "keyword"
+            },
+            "registryReferenceNo": {
+                "type": "text"
+            },
+            "registryFileFormat": {
+                "type": "integer"
+            },
+            "referenceNumbers": {
+                "type": "text",
+                "analyzer": "reference_no_analyzer"
+            },
+            "debtor": {
+                "type": "object",
+                "dynamic": "strict",
+                "properties": {
+                    "name": {
+                        "type": "text"
+                    },
+                    "type": {
+                        "type": "text"
+                    },
+                    "accountNo": {
+                        "type": "text"
+                    },
+                    "tin": {
+                        "type": "keyword"
+                    },
+                    "bic": {
+                        "type": "keyword"
+                    }
+                }
+            },
+            "creditor": {
+                "type": "object",
+                "dynamic": "strict",
+                "properties": {
+                    "name": {
+                        "type": "text"
+                    },
+                    "type": {
+                        "type": "text"
+                    },
+                    "accountNo": {
+                        "type": "text"
+                    },
+                    "tin": {
+                        "type": "keyword"
+                    },
+                    "bic": {
+                        "type": "keyword"
+                    }
+                }
+            },
+            "paymentSourceId": {
+                "type": "integer"
+            }
+        }
+    }
+}

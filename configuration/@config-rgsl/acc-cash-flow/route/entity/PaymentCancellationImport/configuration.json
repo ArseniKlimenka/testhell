@@ -1,0 +1,57 @@
+{
+    "entityType": "ImportDocument",
+    "condition": {
+        "events": [
+            "StatusChanged"
+        ],
+        "configuration": {
+            "names": [
+                "PaymentCancellationImport"
+            ],
+            "dimensions": {}
+        },
+        "documentStates": [
+            "Importing"
+        ]
+    },
+    "sinks": [
+        {
+            "name": "FetchItems",
+            "fetch": {
+                "configuration": {
+                    "name": "ImportStagingDataSource"
+                }
+            }
+        },
+        {
+            "name": "FetchAllocations",
+            "fetch": {
+                "configuration": {
+                    "name": "AllocationDataSource"
+                }
+            }
+        },
+        {
+            "name": "SavePaymentCancellationItems",
+            "database": {
+                "tables": [
+                    "ACC_IMPL.PAYMENT_CANCELLATION_ITEM_HUB",
+                    "ACC_IMPL.PAYMENT_CANCELLATION_ITEM_SAT",
+                    "ACC_IMPL.PAYMENT_CANCELLATION_ALLOCATION_LINK"
+                ]
+            }
+        },
+        {
+            "name": "FinishImporting",
+            "executeAs": "System",
+            "documentTransition": {
+                "transition": {
+                    "transitionName": "FinishImporting",
+                    "configurationName": "PaymentCancellationImport",
+                    "configurationVersion": "1"
+                }
+            }
+        }
+    ],
+    "version": "1"
+}

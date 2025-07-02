@@ -1,0 +1,14 @@
+﻿select amAA.AGENT_AGREEMENT_NUMBER,
+	   amAA.SEQ_NUMBER,
+	   aaSat.BUDGET_RULE_CODE,
+	   br.DESCRIPTION AS BUDGET_RULE_NAME,
+	   aaSat.BUDGET_ALG_CODE,
+	   ba.DESCRIPTION AS ALGORITHM_NAME
+from pas.AGENT_AGREEMENT aa
+join pas.AGENT_AGREEMENT amAA on amAA.ORIGINAL_DOCUMENT_ID = aa.AGENT_AGREEMENT_ID
+join pas_impl.AA_HUB aaHub on aaHub.AA_NUMBER = amAA.AGENT_AGREEMENT_NUMBER
+join pas_impl.AA_SAT_LATEST aaSat on aaSat.AA_HKEY = aaHub.AA_HKEY
+left join bfx_impl.BUDGET_RULE br on br.CODE = aaSat.BUDGET_RULE_CODE
+left join bfx_impl.BUDGET_RULE_ALGORITHM ba on ba.CODE = aaSat.BUDGET_ALG_CODE
+where aa.AGENT_AGREEMENT_NUMBER = @originalDocumentnumber
+order by SEQ_NUMBER ASC

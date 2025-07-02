@@ -1,0 +1,130 @@
+{
+    "type": "Section",
+    "label": "CreditContract",
+    "isCollapsed": false,
+    "width": 12,
+    "elements": [
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "Input",
+                    "label": "creditSumNet",
+                    "value": {
+                        "$ref": "#/properties/creditSumNet"
+                    },
+                    "width": 4
+                },
+                {
+                    "type": "Input",
+                    "readOnly": true,
+                    "label": "creditSum",
+                    "value": {
+                        "$ref": "#/properties/creditSum"
+                    },
+                    "width": 4
+                }
+            ]
+        },
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "Input",
+                    "label": "creditRate",
+                    "control": "Percentage",
+                    "decimalPlaces": 2,
+                    "clearValueOutOfRange": true,
+                    "value": {
+                        "$ref": "#/properties/creditRate"
+                    },
+                    "width": 4
+                },
+                {
+                    "type": "Input",
+                    "label": "creditRateRefuse",
+                    "control": "Percentage",
+                    "decimalPlaces": 2,
+                    "clearValueOutOfRange": true,
+                    "value": {
+                        "$ref": "#/properties/creditRateRefuse"
+                    },
+                    "width": 4,
+                    "rule": {
+                        "effect": "SHOW",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "showCreditRateRefuse",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "Group",
+                    "elements": [
+                        {
+                            "type": "Input",
+                            "readOnly": true,
+                            "label": "annuityPaymentSum",
+                            "value": {
+                                "$ref": "#/properties/annuityPaymentSum"
+                            },
+                            "width": 4
+                        },
+                        {
+                            "type": "Input",
+                            "label": "creditDate",
+                            "value": {
+                                "$ref": "#/properties/creditDate"
+                            },
+                            "width": 4
+                        },
+                        {
+                            "type": "Input",
+                            "label": "creditContractId",
+                            "value": {
+                                "$ref": "#/properties/creditContractId"
+                            },
+                            "width": 4
+                        }
+                    ]
+                },
+                {
+                    "type": "Group",
+                    "elements": [
+                        {
+                            "type": "Input",
+                            "readOnly": true,
+                            "label": "creditContractNumber",
+                            "value": {
+                                "$ref": "#/properties/creditContractNumber"
+                            },
+                            "width": 4
+                        }
+                    ]
+                }
+            ],
+            "rule": {
+                "effect": "HIDE",
+                "condition": {
+                    "type": "FUNC",
+                    "ruleFunction": "hideCreditDate",
+                    "value": [
+                        {
+                            "$ref": "#"
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}

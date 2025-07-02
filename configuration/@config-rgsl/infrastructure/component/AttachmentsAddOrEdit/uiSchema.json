@@ -1,0 +1,98 @@
+{
+    "type": "Group",
+    "elements": [
+        {
+            "type": "GridLayout",
+            "numberOfColumns": 4,
+            "elements": [
+                {
+                    "type": "AttachmentUpload",
+                    "width": 2,
+                    "uploadMultipleFiles": true,
+                    "label": "File",
+                    "commands": "setDefaultProperties",
+                    "value": {
+                        "$ref": "#/properties/attachments"
+                    },
+                    "rule": {
+                        "effect": "HIDE",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "hideAttachmentUploadControl",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "CardList",
+                    "subUISchema": {
+                        "type": "GridLayout",
+                        "numberOfColumns": 4,
+                        "elements": [
+                            {
+                                "type": "Group",
+                                "elements": [
+                                    {
+                                        "type": "Component",
+                                        "name": "AttachmentData",
+                                        "value": {
+                                            "$ref": "#"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    "value": {
+                        "$ref": "#/properties/attachments"
+                    }
+                }
+            ],
+            "rule": {
+                "effect": "HIDE",
+                "condition": {
+                    "type": "FUNC",
+                    "ruleFunction": "hideFieldsOnEdit",
+                    "value": [
+                        {
+                            "$ref": "#"
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "Component",
+                    "name": "AttachmentData",
+                    "value": {
+                        "$ref": "#"
+                    }
+                }
+            ],
+            "rule": {
+                "effect": "HIDE",
+                "condition": {
+                    "type": "FUNC",
+                    "ruleFunction": "hideFieldsOnAdd",
+                    "value": [
+                        {
+                            "$ref": "#"
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}

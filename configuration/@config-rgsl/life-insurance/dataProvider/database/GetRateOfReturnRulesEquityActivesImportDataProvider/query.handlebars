@@ -1,0 +1,44 @@
+﻿SELECT EXCEL_ROW_NUMBER
+      ,PRODUCT_CODE
+      ,INSURANCE_TERMS
+      ,ISSUE_DATE_FROM
+      ,ISSUE_DATE_TO
+      ,ISSUE_DATE_STR
+      ,MANUAL_RATE
+      ,INVESTMENT_FREQUENCY
+      ,MF
+      ,COSTS_OPEN_CONTRACTS
+      ,COMM_WITHDRAWAL_FUNDS
+      ,RKO
+      ,IS_STANDARD_CONTRACT_CONDITIONS
+      ,IS_COORDINATION_UD_REQUIRED
+      ,IMPORT_DOCUMENT_ID
+      ,CONF_VERSION
+      ,LOADED_BY
+      ,LOAD_DATE
+FROM BFX_IMPL.RATE_OF_RETURN_EQUITY_ACTIVES rrea
+WHERE 1 = 1
+{{#if parameters.productCode}}
+	AND rrea.PRODUCT_CODE = @productCode
+{{/if}}
+{{#if parameters.issueDate}}
+	AND @issueDate >= rrea.ISSUE_DATE_FROM AND @issueDate <= rrea.ISSUE_DATE_TO
+{{/if}}
+{{#if parameters.issueDateFrom}}
+	AND rrea.ISSUE_DATE_FROM >= @issueDate
+{{/if}}
+{{#if parameters.issueDateTo}}
+	AND @issueDate <= rrea.ISSUE_DATE_TO
+{{/if}}
+{{#if parameters.insuranceTerms}}
+	AND rrea.INSURANCE_TERMS LIKE '%' + @insuranceTerms + '%'
+{{/if}}
+{{#if parameters.importDocumentId}}
+	AND rrea.IMPORT_DOCUMENT_ID = @importDocumentId
+{{/if}}
+{{#if parameters.maxVersion}}
+	AND rrea.CONF_VERSION = (SELECT MAX(CONF_VERSION) MAX_VERSION FROM BFX_IMPL.RATE_OF_RETURN_EQUITY_ACTIVES)
+{{/if}}
+{{#if parameters.version}}
+	AND rrea.CONF_VERSION = @version
+{{/if}}

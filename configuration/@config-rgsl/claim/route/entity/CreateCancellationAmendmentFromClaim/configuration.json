@@ -1,0 +1,74 @@
+{
+    "entityType": "Claim",
+    "condition": {
+        "events": [
+            "StatusChanged"
+        ],
+        "configuration": {
+            "names": [
+                "Claim"
+            ]
+        },
+        "documentStates": [
+            "SentToPayment",
+            "Rejected",
+            "RejectedByCommonReasons"
+        ]
+    },
+    "sinks": [
+        {
+            "name": "GetClaimRiskInfo",
+            "fetch": {
+                "configuration": {
+                    "name": "RisksDataSource"
+                }
+            }
+        },
+        {
+            "name": "GetContract",
+            "fetch": {
+                "configuration": {
+                    "name": "ContractVersionsDataSource"
+                }
+            }
+        },
+        {
+            "name": "GetAllocations",
+            "fetch": {
+                "configuration": {
+                    "name": "AllocationDataSource"
+                }
+            }
+        },
+        {
+            "name": "GetExchangeRate",
+            "class": {
+                "className": "Adacta.AdInsure.RGSL.Common.API.Shared.Services.IRgslCurrencyConverterService, Adacta.AdInsure.RGSL.Common.API",
+                "methodName": "Convert"
+            }
+        },
+        {
+            "name": "GetHolderData",
+            "fetch": {
+                "configuration": {
+                    "name": "GeneralPartyDataSource"
+                }
+            }
+        },
+        {
+            "name": "CreateCancellationAmendment",
+            "executeAs": "System",
+            "documentRelation": {
+                "relation": {}
+            }
+        },
+        {
+            "name": "UpdateCancellationAmendmentState",
+            "executeAs": "System",
+            "documentTransition": {
+                "transition": {}
+            }
+        }
+    ],
+    "version": "1"
+}

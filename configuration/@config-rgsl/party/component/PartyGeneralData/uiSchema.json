@@ -1,0 +1,614 @@
+{
+    "type": "Section",
+    "label": "Party General Data",
+    "collapsing": {
+        "initial": false,
+        "enabled": true
+    },
+    "formProperties": {
+        "events": {
+            "onLoad": "onLoad"
+        }
+    },
+    "width": 12,
+    "elements": [
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "Input",
+                    "label": "isNonResident",
+                    "value": {
+                        "$ref": "#/properties/isNonResident"
+                    },
+                    "width": 2,
+                    "onValueChanged": [
+                        {
+                            "commandType": "executeAction",
+                            "actionName": "residentChanged"
+                        }
+                    ]
+                },
+                {
+                    "type": "Input",
+                    "elementId": "isPodFt",
+                    "label": "isPodFt",
+                    "value": {
+                        "$ref": "#/properties/isPodFt"
+                    },
+                    "width": 2,
+                    "onValueChanged": [
+                        {
+                            "commandType": "executeAction",
+                            "actionName": "onChangeIsPodFt"
+                        }
+                    ],
+                    "rule": {
+                        "effect": "SHOW",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "isNaturalPerson",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "type": "Input",
+                    "label": "registrationCountry",
+                    "value": {
+                        "$ref": "#/properties/registrationCountry"
+                    },
+                    "control": "Dropdown",
+                    "autocomplete": {
+                        "minTextLength": 0,
+                        "dropDownItemsCount": 1000,
+                        "selectItemOnMatch": false
+                    },
+                    "rule": {
+                        "effect": "ENABLE_INITIAL",
+                        "condition": {
+                            "type": "LEAF",
+                            "expectedValue": true,
+                            "value": {
+                                "$ref": "#/properties/isNonResident"
+                            }
+                        }
+                    },
+                    "source": {
+                        "dataSource": {
+                            "name": "PartyCountryDataSource",
+                            "reloadOnOpen": true,
+                            "searchFieldPath": "countrySearchText",
+                            "responseMapping": "registrationCountryResponseMapping",
+                            "resultCount": 1000
+                        },
+                        "displayFieldName": "countryShortName"
+                    },
+                    "width": 4,
+                    "onValueChanged": [
+                        {
+                            "commandType": "executeAction",
+                            "actionName": "checkDefaultResident"
+                        }
+                    ]
+                },
+                {
+                    "type": "Input",
+                    "label": "taxResidence",
+                    "value": {
+                        "$ref": "#/properties/taxResidence"
+                    },
+                    "control": "Dropdown",
+                    "autocomplete": {
+                        "minTextLength": 0,
+                        "dropDownItemsCount": 1000,
+                        "selectItemOnMatch": false
+                    },
+                    "source": {
+                        "dataSource": {
+                            "name": "PartyCountryDataSource",
+                            "searchFieldPath": "countrySearchText",
+                            "responseMapping": "taxResidenceResponseMapping",
+                            "resultCount": 1000
+                        },
+                        "displayFieldName": "countryShortName"
+                    },
+                    "width": 4,
+                    "onValueChanged": [
+                        {
+                            "commandType": "executeAction",
+                            "actionName": "onChangeTaxResidence"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "Input",
+                    "label": "TIN",
+                    "control": "String",
+                    "value": {
+                        "$ref": "#/properties/TIN"
+                    },
+                    "width": 4,
+                    "rule": {
+                        "effect": "HIDE",
+                        "condition": {
+                            "type": "LEAF",
+                            "expectedValue": true,
+                            "value": {
+                                "$ref": "#/properties/noTIN"
+                            }
+                        }
+                    }
+                },
+                {
+                    "type": "Input",
+                    "label": "noTIN",
+                    "value": {
+                        "$ref": "#/properties/noTIN"
+                    },
+                    "width": 4,
+                    "onValueChanged": [
+                        {
+                            "commandType": "executeAction",
+                            "actionName": "noTINChanged"
+                        }
+                    ]
+                },
+                {
+                    "type": "Input",
+                    "label": "Nonresident code",
+                    "control": "String",
+                    "value": {
+                        "$ref": "#/properties/nonResidentCode"
+                    },
+                    "width": 4,
+                    "rule": {
+                        "effect": "SHOW",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "showNonResidentCode",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    }
+                }
+            ],
+            "rule": {
+                "effect": "SHOW",
+                "condition": {
+                    "type": "LEAF",
+                    "expectedValue": true,
+                    "value": {
+                        "$ref": "#/properties/isNonResident"
+                    }
+                }
+            }
+        },
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "Input",
+                    "label": "TINAbsenceReason",
+                    "control": "String",
+                    "value": {
+                        "$ref": "#/properties/TINAbsenceReason"
+                    },
+                    "width": 4,
+                    "rule": {
+                        "effect": "SHOW",
+                        "condition": {
+                            "type": "LEAF",
+                            "expectedValue": true,
+                            "value": {
+                                "$ref": "#/properties/noTIN"
+                            }
+                        }
+                    }
+                }
+            ],
+            "rule": {
+                "effect": "SHOW",
+                "condition": {
+                    "type": "LEAF",
+                    "expectedValue": true,
+                    "value": {
+                        "$ref": "#/properties/isNonResident"
+                    }
+                }
+            }
+        },
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "Input",
+                    "elementId": "INNKIO",
+                    "label": "INNKIO",
+                    "value": {
+                        "$ref": "#/properties/INNKIO"
+                    },
+                    "width": 4
+                },
+                {
+                    "type": "Input",
+                    "label": "OKPO",
+                    "value": {
+                        "$ref": "#/properties/OKPO"
+                    },
+                    "width": 4
+                },
+                {
+                    "type": "Input",
+                    "label": "OKVED",
+                    "value": {
+                        "$ref": "#/properties/OKVED"
+                    },
+                    "width": 4
+                }
+            ]
+        },
+        {
+            "type": "Group",
+            "rule": {
+                "effect": "SHOW",
+                "condition": {
+                    "type": "FUNC",
+                    "ruleFunction": "isBackOfficeUser",
+                    "value": [
+                        {
+                            "$ref": "#"
+                        }
+                    ]
+                }
+            },
+            "elements": [
+                {
+                    "type": "Group",
+                    "elements": [
+                        {
+                            "type": "Input",
+                            "label": "riskEstimation",
+                            "value": {
+                                "$ref": "#/properties/riskEstimation"
+                            },
+                            "width": 4,
+                            "rule": {
+                                "effect": "DISABLE_INITIAL",
+                                "condition": {
+                                    "type": "FUNC",
+                                    "ruleFunction": "isRiskEstimationReadOnly",
+                                    "value": [
+                                        {
+                                            "$ref": "#"
+                                        }
+                                    ]
+                                }
+                            }
+                        },
+                        {
+                            "type": "Input",
+                            "label": "relationGoal",
+                            "preSelectFirstItem": true,
+                            "value": {
+                                "$ref": "#/properties/relationGoal"
+                            },
+                            "width": 4
+                        },
+                        {
+                            "type": "Input",
+                            "label": "suggestedRelationType",
+                            "preSelectFirstItem": true,
+                            "value": {
+                                "$ref": "#/properties/suggestedRelationType"
+                            },
+                            "width": 4
+                        }
+                    ]
+                },
+                {
+                    "type": "Group",
+                    "elements": [
+                        {
+                            "type": "Input",
+                            "label": "financialState",
+                            "preSelectFirstItem": true,
+                            "value": {
+                                "$ref": "#/properties/financialState"
+                            },
+                            "width": 4
+                        },
+                        {
+                            "type": "Input",
+                            "label": "businessReputation",
+                            "preSelectFirstItem": true,
+                            "value": {
+                                "$ref": "#/properties/businessReputation"
+                            },
+                            "width": 4
+                        },
+                        {
+                            "type": "Input",
+                            "label": "tradingPartnerCode",
+                            "value": {
+                                "$ref": "#/properties/tradingPartnerCode"
+                            },
+                            "width": 4
+                        }
+                    ]
+                },
+                {
+                    "type": "Group",
+                    "elements": [
+                        {
+                            "type": "Input",
+                            "label": "goalOfFinancialActivity",
+                            "value": {
+                                "$ref": "#/properties/goalOfFinancialActivity"
+                            },
+                            "control": "Dropdown",
+                            "preSelectFirstItem": true,
+                            "source": {
+                                "dataSource": {
+                                    "name": "PartyGoalOfFinancialActivityDataSource",
+                                    "searchFieldPath": "goalOfFinancialActivitySearchText",
+                                    "responseMapping": "goalOfFinancialActivityResponseMapping",
+                                    "resultCount": 25
+                                },
+                                "displayFieldName": "goalOfFinancialActivityDesc"
+                            },
+                            "width": 4
+                        },
+                        {
+                            "type": "Input",
+                            "label": "descriptionForGoalOfFinancialActivity",
+                            "value": {
+                                "$ref": "#/properties/descriptionForGoalOfFinancialActivity"
+                            },
+                            "width": 8,
+                            "rule": {
+                                "effect": "SHOW",
+                                "condition": {
+                                    "type": "FUNC",
+                                    "ruleFunction": "showDescriptionForGoalOfFinancialActivity",
+                                    "value": [
+                                        {
+                                            "$ref": "#/properties/goalOfFinancialActivity"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    ]
+                },
+                {
+                    "type": "Group",
+                    "elements": [
+                        {
+                            "type": "Input",
+                            "label": "incomeSource",
+                            "preSelectFirstItem": true,
+                            "value": {
+                                "$ref": "#/properties/incomeSource"
+                            },
+                            "control": "Dropdown",
+                            "source": {
+                                "dataSource": {
+                                    "name": "PartyIncomeSourceDataSource",
+                                    "searchFieldPath": "incomeSourceSearchText",
+                                    "responseMapping": "incomeSourceResponseMapping",
+                                    "resultCount": 25
+                                },
+                                "displayFieldName": "incomeSourceDesc"
+                            },
+                            "width": 4
+                        },
+                        {
+                            "type": "Input",
+                            "label": "descriptionForIncomeSource",
+                            "value": {
+                                "$ref": "#/properties/descriptionForIncomeSource"
+                            },
+                            "width": 8,
+                            "rule": {
+                                "effect": "SHOW",
+                                "condition": {
+                                    "type": "FUNC",
+                                    "ruleFunction": "showDescriptionForIncomeSource",
+                                    "value": [
+                                        {
+                                            "$ref": "#/properties/incomeSource"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    ]
+                },
+                {
+                    "type": "GroupSeparator"
+                },
+                {
+                    "type": "Group",
+                    "width": 12,
+                    "elements": [
+                        {
+                            "type": "Input",
+                            "label": "beneficiaryOwner",
+                            "value": {
+                                "$ref": "#/properties/beneficiaryOwner"
+                            },
+                            "control": "Dropdown",
+                            "source": {
+                                "dataSource": {
+                                    "name": "PartyBeneficiaryOwnerDataSource",
+                                    "searchFieldPath": "beneficiaryOwnerSearchText",
+                                    "responseMapping": "beneficiaryOwnerResponseMapping",
+                                    "resultCount": 25
+                                },
+                                "displayFieldName": "beneficiaryOwnerDesc"
+                            },
+                            "filter": "filterBeneficiaryOwner",
+                            "width": 8,
+                            "onValueChanged": [
+                                {
+                                    "commandType": "executeAction",
+                                    "actionName": "onChangeBeneficiaryOwner"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Group",
+                            "elements": [
+                                {
+                                    "type": "DataGrid",
+                                    "mode": "Array",
+                                    "label": "BeneficiaryOwners",
+                                    "labelType": "H1",
+                                    "pagination": {
+                                        "mode": "Regular",
+                                        "pageSizes": [
+                                            5,
+                                            10,
+                                            15
+                                        ],
+                                        "defaultPageSize": 5
+                                    },
+                                    "isCollapsed": false,
+                                    "value": {
+                                        "$ref": "#/properties/anotherNaturalPersons"
+                                    },
+                                    "actions": [
+                                        "Add",
+                                        "Edit",
+                                        "Delete"
+                                    ],
+                                    "checkIfRowActionIsAllowed": "isBeneficiaryOwnersTableActionsAllowed",
+                                    "checkIfAddButtonVisible": "isBeneficiaryOwnersTableAddButtonVisible",
+                                    "edit": {
+                                        "mode": "Immediate"
+                                    },
+                                    "height": "Small",
+                                    "columns": [
+                                        {
+                                            "title": "beneficiaryOwnerPartyName",
+                                            "name": "beneficiaryOwnerPartyName",
+                                            "cellContent": {
+                                                "type": "OutputText",
+                                                "defaultValue": "",
+                                                "value": {
+                                                    "$ref": "#/properties/anotherNaturalPerson/properties/partyFullName"
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "title": "fraction",
+                                            "name": "fraction",
+                                            "cellContent": {
+                                                "type": "OutputText",
+                                                "defaultValue": "",
+                                                "value": {
+                                                    "$ref": "#/properties/fraction"
+                                                }
+                                            }
+                                        }
+                                    ],
+                                    "detailsTemplates": {
+                                        "edit": {
+                                            "mode": "Dialog",
+                                            "content": {
+                                                "type": "Group",
+                                                "elements": [
+                                                    {
+                                                        "type": "Component",
+                                                        "name": "PartyLookUpSearch",
+                                                        "value": {
+                                                            "$ref": "#/properties/anotherNaturalPerson"
+                                                        }
+                                                    },
+                                                    {
+                                                        "type": "Input",
+                                                        "label": "fraction",
+                                                        "value": {
+                                                            "$ref": "#/properties/fraction"
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    }
+                                },
+                                {
+                                    "type": "Button",
+                                    "width": 4,
+                                    "onClick": [
+                                        {
+                                            "commandType": "executeAction",
+                                            "actionName": "refreshBeneficiaryOwners"
+                                        }
+                                    ],
+                                    "label": "refreshBeneficiaryOwners",
+                                    "rule": {
+                                        "effect": "SHOW",
+                                        "condition": {
+                                            "type": "FUNC",
+                                            "ruleFunction": "showRefreshBeneficiaryOwnersButton",
+                                            "value": [
+                                                {
+                                                    "$ref": "#"
+                                                }
+                                            ]
+                                        }
+                                    }
+                                }
+                            ],
+                            "rule": {
+                                "effect": "SHOW",
+                                "condition": {
+                                    "type": "FUNC",
+                                    "ruleFunction": "isAnotherNaturalPerson",
+                                    "value": [
+                                        {
+                                            "$ref": "#/properties/beneficiaryOwner"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    ]
+                },
+                {
+                    "type": "GroupSeparator"
+                },
+                {
+                    "type": "Group",
+                    "width": 12,
+                    "elements": [
+                        {
+                            "type": "Input",
+                            "label": "lastUpdateDate",
+                            "control": "DatetimePicker",
+                            "readOnly": true,
+                            "value": {
+                                "$ref": "#/properties/lastUpdateDate"
+                            },
+                            "width": 4
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

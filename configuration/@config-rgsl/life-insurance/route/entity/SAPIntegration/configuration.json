@@ -1,0 +1,36 @@
+{
+    "entityType": "Contract",
+    "condition": {
+        "events": [],
+        "configuration": {
+            "names": [
+                "AccumulatedLifeInsurancePolicy",
+                "InvestmentLifeInsurancePolicy"
+            ],
+            "dimensions": {}
+        },
+        "documentStates": [
+            "Active"
+        ]
+    },
+    "executionOrderWeight": 100,
+    "sinks": [
+        {
+            "name": "SAPCreateParty",
+            "class": {
+                "className": "Adacta.AdInsure.RGSL.WebAPI.Integration.SAP.Services.SAPIntegrationController, Adacta.AdInsure.RGSL.PAS.WebAPI",
+                "methodName": "CreateParty"
+            }
+        },
+        {
+            "name": "WriteIntegrationStatus",
+            "database": {
+                "tables": [
+                    "BFX_IMPL.SAP_INTEGRATION_STATUS",
+                    "PAS_IMPL.RECOMMENDED_STRATEGIES"
+                ]
+            }
+        }
+    ],
+    "version": "1"
+}

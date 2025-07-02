@@ -1,0 +1,115 @@
+{
+    "type": "GridLayout",
+    "numberOfColumns": 4,
+    "elements": [
+        {
+            "type": "DataGrid",
+            "mode": "Array",
+            "label": "PartyBankAccounts",
+            "labelType": "H1",
+            "pagination": {
+                "mode": "Regular",
+                "pageSizes": [
+                    5,
+                    10,
+                    15
+                ],
+                "defaultPageSize": 5
+            },
+            "isCollapsed": true,
+            "value": {
+                "$ref": "#"
+            },
+            "actions": [
+                "Add",
+                "Edit",
+                "Delete"
+            ],
+            "edit": {
+                "mode": "Detached",
+                "onBeforeGridAction": "bankAccountOnBeforeGridAction"
+            },
+            "height": "Small",
+            "columns": [
+                {
+                    "title": "bankName",
+                    "name": "bankName",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/bankName"
+                        }
+                    }
+                },
+                {
+                    "title": "currencyDesc",
+                    "name": "currencyDesc",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/currency/properties/currencyDesc"
+                        }
+                    }
+                },
+                {
+                    "title": "number",
+                    "name": "number",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/number"
+                        }
+                    }
+                },
+                {
+                    "title": "openingDate",
+                    "name": "openingDate",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/openingDate"
+                        }
+                    }
+                },
+                {
+                    "title": "closingDate",
+                    "name": "closingDate",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/closingDate"
+                        }
+                    }
+                }
+            ],
+            "detailsTemplates": {
+                "edit": {
+                    "content": {
+                        "type": "Component",
+                        "name": "PartyBankAccount",
+                        "value": {
+                            "$ref": "#"
+                        }
+                    }
+                }
+            }
+        }
+    ],
+    "rule": {
+        "effect": "ENABLE_INITIAL",
+        "condition": {
+            "type": "FUNC",
+            "ruleFunction": "enablePartyBankAccounts",
+            "value": [
+                {
+                    "$ref": "#"
+                }
+            ]
+        }
+    }
+}

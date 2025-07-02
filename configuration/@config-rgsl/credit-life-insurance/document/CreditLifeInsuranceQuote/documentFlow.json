@@ -1,0 +1,225 @@
+{
+    "processType": "Quote",
+    "actors": [
+        "Agent",
+        "Operations",
+        "Underwriter",
+        "UKSP",
+        "Viewer",
+        "System"
+    ],
+    "initialState": "Draft",
+    "states": [
+        {
+            "name": "Draft",
+            "operations": [
+                {
+                    "name": "Save",
+                    "exclusiveToAssignedUser": true
+                }
+            ]
+        },
+        {
+            "name": "InfoRequest",
+            "operations": [
+                {
+                    "name": "Save",
+                    "exclusiveToAssignedUser": true
+                }
+            ]
+        },
+        {
+            "name": "OnReview",
+            "operations": [
+                {
+                    "name": "Save",
+                    "exclusiveToAssignedUser": false
+                }
+            ]
+        },
+        {
+            "name": "Approved",
+            "operations": []
+        },
+        {
+            "name": "Rejected",
+            "operations": []
+        },
+        {
+            "name": "Issued",
+            "isTerminal": true,
+            "appliesVersion": true,
+            "operations": []
+        },
+        {
+            "name": "Cancelled",
+            "isTerminal": true,
+            "discardsVersion": true,
+            "operations": []
+        },
+        {
+            "name": "ChangeUnderwritingGroup",
+            "operations": [
+                {
+                    "name": "Save",
+                    "exclusiveToAssignedUser": false
+                }
+            ]
+        }
+    ],
+    "transitions": [
+        {
+            "name": "Draft_to_Approved",
+            "from": "Draft",
+            "to": "Approved",
+            "exclusiveToAssignedUser": true,
+            "allowOnValidationErrors": {
+                "all": false
+            },
+            "actionToRunBefore": "checkKPK"
+        },
+        {
+            "name": "Draft_to_Cancelled",
+            "from": "Draft",
+            "to": "Cancelled",
+            "exclusiveToAssignedUser": true,
+            "allowOnValidationErrors": {
+                "all": true
+            },
+            "whenBlocked": "DisplayNormally"
+        },
+        {
+            "name": "Draft_to_OnReview",
+            "from": "Draft",
+            "to": "OnReview",
+            "exclusiveToAssignedUser": true,
+            "allowOnValidationErrors": {
+                "all": false
+            },
+            "whenBlocked": "DisplayNormally",
+            "actionToRunBefore": "checkKPK"
+        },
+        {
+            "name": "Draft_to_Issued",
+            "from": "Draft",
+            "to": "Issued",
+            "exclusiveToAssignedUser": false,
+            "allowOnValidationErrors": {
+                "all": true
+            }
+        },
+        {
+            "name": "OnReview_to_Approved",
+            "from": "OnReview",
+            "to": "Approved",
+            "exclusiveToAssignedUser": true,
+            "allowOnValidationErrors": {
+                "all": false
+            },
+            "actionToRunBefore": "checkKPK"
+        },
+        {
+            "name": "OnReview_to_Rejected",
+            "from": "OnReview",
+            "to": "Rejected",
+            "exclusiveToAssignedUser": true,
+            "allowOnValidationErrors": {
+                "all": true
+            },
+            "whenBlocked": "DisplayNormally"
+        },
+        {
+            "name": "OnReview_to_InfoRequest",
+            "from": "OnReview",
+            "to": "InfoRequest",
+            "exclusiveToAssignedUser": true,
+            "allowOnValidationErrors": {
+                "all": true
+            },
+            "whenBlocked": "DisplayNormally"
+        },
+        {
+            "name": "InfoRequest_to_OnReview",
+            "from": "InfoRequest",
+            "to": "OnReview",
+            "exclusiveToAssignedUser": true,
+            "allowOnValidationErrors": {
+                "all": false
+            },
+            "whenBlocked": "DisplayNormally"
+        },
+        {
+            "name": "InfoRequest_to_Cancelled",
+            "from": "InfoRequest",
+            "to": "Cancelled",
+            "exclusiveToAssignedUser": true,
+            "allowOnValidationErrors": {
+                "all": true
+            },
+            "whenBlocked": "DisplayNormally"
+        },
+        {
+            "name": "Approved_to_Issued",
+            "from": "Approved",
+            "to": "Issued",
+            "exclusiveToAssignedUser": false,
+            "allowOnValidationErrors": {
+                "all": true
+            }
+        },
+        {
+            "name": "Approved_to_Cancelled",
+            "from": "Approved",
+            "to": "Cancelled",
+            "exclusiveToAssignedUser": true,
+            "allowOnValidationErrors": {
+                "all": true
+            }
+        },
+        {
+            "name": "Rejected_to_Cancelled",
+            "from": "Rejected",
+            "to": "Cancelled",
+            "exclusiveToAssignedUser": true,
+            "allowOnValidationErrors": {
+                "all": true
+            }
+        },
+        {
+            "name": "Rejected_to_Draft",
+            "from": "Rejected",
+            "to": "Draft",
+            "exclusiveToAssignedUser": false,
+            "allowOnValidationErrors": {
+                "all": true
+            }
+        },
+        {
+            "name": "Cancelled_to_Draft",
+            "from": "Cancelled",
+            "to": "Draft",
+            "exclusiveToAssignedUser": false,
+            "allowOnValidationErrors": {
+                "all": true
+            }
+        },
+        {
+            "name": "ChangeUnderwritingGroup_to_OnReview",
+            "from": "ChangeUnderwritingGroup",
+            "to": "OnReview",
+            "exclusiveToAssignedUser": false,
+            "allowOnValidationErrors": {
+                "all": true
+            }
+        },
+        {
+            "name": "OnReview_to_ChangeUnderwritingGroup",
+            "from": "OnReview",
+            "to": "ChangeUnderwritingGroup",
+            "exclusiveToAssignedUser": false,
+            "allowOnValidationErrors": {
+                "all": true
+            }
+        }
+    ]
+}

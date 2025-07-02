@@ -1,0 +1,34 @@
+{
+    "sinks": [
+        {
+            "name": "ExecuteDeduplicationDataSource",
+            "fetch": {
+                "configuration": {
+                    "name": "ExecuteDeduplicationDataSource"
+                }
+            }
+        },
+        {
+            "name": "GetUpdatedDocuments",
+            "fetch": {
+                "configuration": {
+                    "name": "GetDeduplicationInfoDataSource"
+                }
+            }
+        },
+        {
+            "ref": "IndexUpdatedDocumentsSinkGroup"
+        },
+        {
+            "name": "ReindexDeletedParty",
+            "class": {
+                "className": "Adacta.AdInsure.RGSL.Framework.API.EntitySearch.Services.IElasticSearchIndexerServiceRGSL, Adacta.AdInsure.RGSL.Framework.API",
+                "methodName": "IndexDocument"
+            }
+        }
+    ],
+    "responses": [
+        200,
+        422
+    ]
+}

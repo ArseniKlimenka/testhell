@@ -1,0 +1,30 @@
+SELECT d.PAYMENT_ORDER_NUMBER,
+	    r.DOCUMENT_NUMBER,
+		r.DOCUMENT_CURRENCY,
+	    r.INITIAL_OPEN_AMOUNT,	    
+	    r.EXCHANGE_RATE,
+	    r.NETTED_AMOUNT,
+	    r.NETTED_AMOUNT_DOC_CUR,
+	    r.BANK_STATEMENT_ID,
+	    JSON_VALUE(d.BODY, '$.paymentOrderInformation.paymentOrderDate') AS PAYMENT_ORDER_DATE,
+	    JSON_VALUE(d.BODY, '$.paymentOrderInformation.payerBankAccountNumber') AS PAYER_BANK_ACCOUNT_NUMBER
+FROM
+(SELECT po.PAYMENT_ORDER_NUMBER,
+	     po.BODY,
+	     po.COMMON_BODY
+ FROM ACC.PAYMENT_ORDER po
+ WHERE 1 = 1
+ {{#if parameters.paymentOrderNumber}}
+   AND po.PAYMENT_ORDER_NUMBER = @paymentOrderNumber
+ {{/if}}) d
+ CROSS APPLY OPENJSON(d.BODY,'$.paymentOrderNetting.nettedDocuments')
+ with  
+ (    
+     DOCUMENT_NUMBER NVARCHAR(50) N'lax $.documentNumber',
+	 INITIAL_OPEN_AMOUNT DECIMAL(15,2) N'lax $.initialOpenAmount',
+	 DOCUMENT_CURRENCY NVARCHAR(50) N'lax $.documentCurrency',
+	 EXCHANGE_RATE DECIMAL(15,7) N'lax $.exchangeRate',
+	 NETTED_AMOUNT DECIMAL(15,2) N'lax $.nettedAmount',
+	 NETTED_AMOUNT_DOC_CUR DECIMAL(15,2) N'lax $.nettedAmountInDocCurrency',
+	 BANK_STATEMENT_ID INT N'lax $.currentBankStatementId'
+ ) r

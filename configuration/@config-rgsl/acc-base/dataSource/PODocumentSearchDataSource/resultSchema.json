@@ -1,0 +1,72 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type":"object",
+    "additionalProperties": false,
+    "properties": {
+        "paymentOrderType": {
+            "$ref": "component:PaymentOrderType"
+        },
+        "paymentOrderSubType": {
+            "$ref": "component:PaymentOrderSubtype"
+        },
+        "paymentOrderNumber": {
+            "type": "string"
+        },
+        "paymentOrderDate": {
+            "type": "string",
+            "format": "date",
+            "aiFormat": "date"
+        },
+        "stateCode": {
+            "type": "string"
+        },
+        "originalStateCode": {
+            "type": "string"
+        },
+        "recipient": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "code": {
+                    "type":"string"
+                },
+                "name": {
+                    "type":"string"
+                }
+            }
+        },
+        "totalPaymentAmount": {
+            "type": "number"
+        },
+        "paymentOrderCurrencyCode": {
+            "type": "string"
+        },
+        "paymentCurrencyCode": {
+            "type": "string"
+        },
+        "paymentDescription": {
+            "type": "string"
+        },
+        "isCoolOffPeriod": {
+            "type": "boolean"
+        },
+        "insuranceAct": {
+            "type": "object",
+            "properties": {
+                "actNumber": {
+                    "type": "string"
+                },
+                "actDate": {
+                    "type": "string",
+                    "format": "date"
+                }
+            }
+        },
+        "contractNumber": {
+            "type": "string"
+        },
+        "referenceNumber": {
+            "type": "string"
+        }
+    }
+}

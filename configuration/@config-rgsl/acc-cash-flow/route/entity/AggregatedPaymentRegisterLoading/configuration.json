@@ -1,0 +1,28 @@
+{
+    "entityType": "ImportDocument",
+    "condition": {
+        "events": [
+            "StatusChanged"
+        ],
+        "configuration": {
+            "names": [
+                "AggregatedPaymentRegisterImport"
+            ],
+            "dimensions": {}
+        },
+        "documentStates": [
+            "Loading"
+        ]
+    },
+    "sinks": [
+        {
+            "name": "ReferenceNumber",
+            "database": {
+                "tables": [
+                    "ACC_IMPL.REFERENCE_NUMBER"
+                ]
+            }
+        }
+    ],
+    "version": "1"
+}

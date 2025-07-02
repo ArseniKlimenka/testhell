@@ -1,0 +1,94 @@
+{
+    "id": "current-user-keycloak.ui-schema.json",
+    "type": "GridLayout",
+    "numberOfColumns": 4,
+    "formProperties": {
+        "events": {
+            "onLoad": "getCurrentUserFromContext"
+        }
+    },
+    "elements": [
+        {
+            "type": "GridLayout",
+            "numberOfColumns": 4,
+            "width": 3,
+            "fillAvailableSpace": true,
+            "elements": [
+                {
+                    "type": "Component",
+                    "name": "ApplicationUserDetails",
+                    "value": {
+                        "$ref": "#/properties/Body/properties/general"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "SideContentLayout",
+            "fixedPosition": true,
+            "width": 1,
+            "elements": [
+                {
+                    "type": "GridLayout",
+                    "numberOfColumns": 2,
+                    "elements": [
+                        {
+                            "type": "TabLayout",
+                            "elements": [
+                                {
+                                    "type": "Tab",
+                                    "tabType": "error",
+                                    "additionalInfo": {
+                                        "display": "ValidationErrorsCount"
+                                    },
+                                    "elements": [
+                                        {
+                                            "type": "ValidationSummary",
+                                            "elementId": "RequiredPropertiesValidations"
+                                        }
+                                    ],
+                                    "elementId": "tab-error",
+                                    "icon": {
+                                        "name": "Bell",
+                                        "size": "Large"
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "FooterContentLayout",
+            "elements": [
+                {
+                    "type": "Group",
+                    "width": 2,
+                    "stackContent": "Left"
+                },
+                {
+                    "type": "Group",
+                    "width": 2,
+                    "stackContent": "Right",
+                    "elements": [
+                        {
+                            "type": "Button",
+                            "value": {
+                                "$ref": "#"
+                            },
+                            "onClick": [
+                                {
+                                    "commandType": "executeAction",
+                                    "actionName": "saveUser"
+                                }
+                            ],
+                            "label": "Save",
+                            "elementId": "saveUserButton"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,1 @@
+delete from bfx_impl.products where code = N'E844RGSL'; insert into bfx_impl.products values ('5D365C71-9743-455B-9D4E-8A45F2E7A1D7', N'E844RGSL',N'endowment',N'Рентный продукт 9RUB',N'НСЖ', 'migrated', NULL);

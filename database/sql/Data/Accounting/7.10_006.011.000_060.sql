@@ -1,0 +1,25 @@
+
+INSERT INTO ACC.CT_DOCUMENT_TYPE (DOCUMENT_TYPE_ID, DESCRIPTION, ACCOUNT_TYPE_ID, PAYABLE) VALUES (1004, N'Claim', null, null);
+
+insert INTO acc.CT_GL_ACCOUNT_TYPE (GL_ACCOUNT_TYPE_ID,DESCRIPTION, IS_DEBIT, ATTRIBUTE_SET_ID, FROM_PAYMENT) values (1006,'Cash - Outgoing (Credit)',0,NULL,0);
+insert INTO acc.CT_GL_ACCOUNT_TYPE (GL_ACCOUNT_TYPE_ID,DESCRIPTION, IS_DEBIT, ATTRIBUTE_SET_ID, FROM_PAYMENT) values (1007,'Insurance payouts',1,2,0);
+
+UPDATE ACC.GL_ACCOUNT set GL_ACCOUNT_TYPE_ID = 1006 where GL_ACCOUNT_NO = '48028';
+UPDATE acc.GL_ACCOUNT set GL_ACCOUNT_TYPE_ID = 1007 where GL_ACCOUNT_NO = '71406';
+UPDATE acc.GL_ACCOUNT set GL_ACCOUNT_TYPE_ID = 1007 where GL_ACCOUNT_NO = '71410';
+
+INSERT INTO ACC.CT_GL_POSTING_SCHEME(POSTING_SCHEME_ID, SCHEME_NAME, SCHEME_TYPE_ID, JOURNAL_TYPE_ID, VALUE_SIGN, BA_ACCOUNT_TYPE_ID, INTERNAL, SOURCE_DOC_TYPE_ID, OPENED_BY_ENTRY_TYPE_ID, VALIDITY_START, VALIDITY_END, EXPLICIT, ITEM_TYPE_ID)
+VALUES (57, 'Payment order allocation (Claim)', 1, 16, null, null, 0, 1004, null, '19000101', '9999-12-31', 0, null);
+
+INSERT INTO ACC.GL_POSTING_SCHEME(POSTING_SCHEME_ID, SEQ_NUMBER, IS_DEBIT, GL_ACCOUNT_TYPE_ID, SIGN, VALUE_FIELD_ID, NET_VALUE_FIELD_ID, PAIR_NO, PAIR_SEQ_NO)
+VALUES (57, 1, 1, 1007, 1, 4, 4, 1, 1),
+       (57, 2, 0, 1006, 1, 4, 4, 1, 2);
+
+INSERT INTO ACC.GL_POSTING_PROFILE(GL_ACCOUNT_TYPE_ID, ATTRIBUTE_VALUE_SET_ID, GL_ACCOUNT_ID, ATTRIBUTE_SET_ID, PREVIOUS_PERIOD, BA_ACCOUNT_TYPE_ID, PAYMENT_DOCUMENT_TYPE_ID, ANALYTICS_ATTRIBUTE_SET_ID, VALIDITY_START, VALIDITY_END, INVOICE_DOCUMENT_TYPE_ID)
+VALUES (1006, null, (select gl_account_id from acc.gl_account where gl_account_no='48028'), null, null, null, null, null, '19000101', '99991231', null),
+       (1007, (select attribute_value_set_id from acc.attribute_value_set where AVS_PURPOSE_ID=3 and IS_LIFE=1), (select gl_account_id from acc.gl_account where gl_account_no='71406'), 6, NULL, null, null, null, '19000101', '99991231', null),
+       (1007, (select attribute_value_set_id from acc.attribute_value_set where AVS_PURPOSE_ID=3 and IS_LIFE=0), (select gl_account_id from acc.gl_account where gl_account_no='71410'), 6, NULL, null, null, null, '19000101', '99991231', null);
+
+insert into ACC_IMPL.OFR_RULE (GL_ACCOUNT_ID, PREVIOUS_PERIOD, DOCUMENT_TYPE_ID, OFR_ID)
+    values ((select GL_ACCOUNT_ID from acc.GL_ACCOUNT where GL_ACCOUNT_NO = '71406'), null, 1004, (select OFR_ID from ACC_IMPL.CT_OFR where OFR_CODE = '23101')),
+           ((select GL_ACCOUNT_ID from acc.GL_ACCOUNT where GL_ACCOUNT_NO = '71410'), null, null, (select OFR_ID from ACC_IMPL.CT_OFR where OFR_CODE = '25101'));

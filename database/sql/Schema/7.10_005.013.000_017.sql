@@ -1,0 +1,128 @@
+CREATE TABLE [ACC_IMPL].[CA_ACT]
+(
+	[ACT_ID] bigint identity(1,1) not null,
+	[ACT_NO] nvarchar(255) not null,
+	[ISSUE_DATE] date not null,
+	[PAY_DATE] date null,
+	[STATUS_ID] int not null,
+	[AGENT_PARTY_CODE] nvarchar(128) not null,
+	[AGENT_AGREEMENT_NUMBER] nvarchar(50) not null,
+	[PERIOD_FROM] date null,
+	[PERIOD_TO] date not null,
+	[REPORTING_PERIOD_FROM] date null,
+	[REPORTING_PERIOD_TO] date null,
+	[DUE_DATE_FROM] date null,
+	[DUE_DATE_TO] date null,
+	[ISSUE_DATE_FROM] date null,
+	[ISSUE_DATE_TO] date null,
+	[QUOTE_ISSUE_DATE_FROM] date null,
+	[QUOTE_ISSUE_DATE_TO] date null,
+	[COMM_AMOUNT_LC] decimal(15, 2) not null,
+	[VAT_AMOUNT_LC] decimal(15, 2) not null,
+	[ITEMS_COUNT] decimal(15, 2) not null,
+	[NOTES] nvarchar(MAX) null,
+
+	CONSTRAINT [PK_ACC_IMPL_CA_ACT_ID] PRIMARY KEY CLUSTERED
+	(
+		[ACT_ID] asc
+	)
+)
+GO
+
+CREATE TABLE [ACC_IMPL].[CA_ACT_HISTORY]
+(
+	[ACT_HISTORY_ID] bigint identity(1,1) not null,
+	[ACT_ID] bigint not null,
+
+	[STATUS_ID_FROM] int not null,
+	[STATUS_ID_TO] int not null,
+	[CREATE_DATE] datetime2 not null,
+
+	[PERSON_CODE] nvarchar(128) not null,
+
+	CONSTRAINT [PK_ACC_IMPL_CA_ACT_HISTORY_ID] PRIMARY KEY CLUSTERED
+	(
+		[ACT_ID] asc,
+		[ACT_HISTORY_ID] asc
+	)
+)
+GO
+
+CREATE TABLE [ACC_IMPL].[CA_ACT_PRODUCT_FILTER]
+(
+	[ACT_ID] bigint not null,
+	[CODE] nvarchar(255) not null,
+	[EXCLUSIVE] bit not null,
+
+	CONSTRAINT [PK_ACC_IMPL_CA_ACT_PRODUCT_FILTER_ID] PRIMARY KEY CLUSTERED
+	(
+		[ACT_ID] asc,
+		[CODE] asc
+	)
+)
+GO
+
+CREATE TABLE [ACC_IMPL].[CA_ACT_ITEM]
+(
+	[ACT_ITEM_ID] bigint not null,
+	[ACT_ID] bigint not null,
+	[REFERENCE_NO] nvarchar(64) not null,
+	[DOC_CURRENCY_CODE] nvarchar(3) not null,
+	[SOURCE_LINE_ID] nvarchar(50) not null,
+	[PAYMENT_TRANSACTION_DATE] date not null,
+	[DUE_DATE] date not null,
+	[BANK_STATEMENT_ITEM_ID] bigint not null,
+	[INSTALLMENT_DOC_AMOUNT] decimal(15, 2) not null,
+	[INSTALLMENT_LC_AMOUNT] decimal(15, 2) not null,
+	[PAYMENT_DOC_AMOUNT] decimal(15, 2) not null,
+	[PAYMENT_LC_AMOUNT] decimal(15, 2) not null,
+	[INV_COMM_DOC_AMOUNT] decimal(15, 2) not null,
+	[INV_COMM_LC_AMOUNT] decimal(15, 2) not null,
+	[AA_COMM_RATE] decimal(15, 6) not null,
+	[DOC_COMM_RATE] decimal(15, 6) null,
+	[DOC_COMM_FIXED_AMOUNT] decimal(15, 2) null,
+	[COMM_RATE_MANUAL] decimal(15, 6) null,
+	[LC_COMM_FIXED_AMOUNT_MANUAL] decimal(15, 2) null,
+	[COMM_RATE_CALC] decimal(15, 6) not null,
+	[LC_COMM_AMOUNT_CALC] decimal(15, 2) not null,
+
+	CONSTRAINT [PK_ACC_IMPL_CA_ACT_ITEM_ID] PRIMARY KEY CLUSTERED
+	(
+		[ACT_ITEM_ID] asc
+	)
+)
+GO
+
+CREATE TABLE [ACC_IMPL].[CA_ACT_ITEM_PC]
+(
+	[ACT_ID] bigint not null,
+	[ACT_ITEM_ID] bigint not null,
+	[CANCELLED] bit not null,
+
+	CONSTRAINT [PK_ACC_IMPL_CA_ACT_ITEM_PC_ID] PRIMARY KEY CLUSTERED
+	(
+		[ACT_ID] asc,
+		[ACT_ITEM_ID] asc
+	)
+)
+GO
+
+ALTER TABLE [ACC_IMPL].[CA_ACT_ITEM] WITH CHECK ADD CONSTRAINT [FK_ACC_IMPL_CA_ACT_ITEM_ACT_ID] FOREIGN KEY([ACT_ID])
+REFERENCES [ACC_IMPL].[CA_ACT] ([ACT_ID])
+GO
+
+ALTER TABLE [ACC_IMPL].[CA_ACT_ITEM_PC] WITH CHECK ADD CONSTRAINT [FK_ACC_IMPL_CA_ACT_ITEM_PC_ACT_ITEM_ID] FOREIGN KEY([ACT_ITEM_ID])
+REFERENCES [ACC_IMPL].[CA_ACT_ITEM] ([ACT_ITEM_ID])
+GO
+
+ALTER TABLE [ACC_IMPL].[CA_ACT_ITEM_PC] WITH CHECK ADD CONSTRAINT [FK_ACC_IMPL_CA_ACT_ITEM_PC_ACT_ID] FOREIGN KEY([ACT_ID])
+REFERENCES [ACC_IMPL].[CA_ACT] ([ACT_ID])
+GO
+
+ALTER TABLE [ACC_IMPL].[CA_ACT_HISTORY] WITH CHECK ADD CONSTRAINT [FK_ACC_IMPL_CA_ACT_HISTORY_ACT_ID] FOREIGN KEY([ACT_ID])
+REFERENCES [ACC_IMPL].[CA_ACT] ([ACT_ID])
+GO
+
+ALTER TABLE [ACC_IMPL].[CA_ACT_PRODUCT_FILTER] WITH CHECK ADD CONSTRAINT [FK_ACC_IMPL_CA_ACT_PRODUCT_FILTER_ACT_ID] FOREIGN KEY([ACT_ID])
+REFERENCES [ACC_IMPL].[CA_ACT] ([ACT_ID])
+GO

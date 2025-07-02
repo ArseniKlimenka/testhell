@@ -1,0 +1,149 @@
+{
+    "processType": "DataImport",
+    "initialState": "Draft",
+    "actors": [
+        "ChiefPaymentDistributor",
+        "EmployeeUFO",
+        "System"
+    ],
+    "states": [
+        {
+            "name": "Draft",
+            "operations": [
+                "Save"
+            ]
+        },
+        {
+            "name": "Loading",
+            "operations": []
+        },
+        {
+            "name": "Loaded",
+            "operations": []
+        },
+        {
+            "name": "Importing",
+            "operations": []
+        },
+        {
+            "name": "Imported",
+            "operations": [
+                "Save"
+            ]
+        },
+        {
+            "name": "Allocation",
+            "operations": []
+        },
+        {
+            "name": "Allocated",
+            "operations": []
+        },
+        {
+            "name": "RegistryAllocationError",
+            "operations": []
+        },
+        {
+            "name": "Generating",
+            "operations": []
+        },
+        {
+            "name": "Generated",
+            "operations": []
+        },
+        {
+            "name": "RegistryGenerationError",
+            "operations": []
+        }
+    ],
+    "transitions": [
+        {
+            "name": "StartLoading",
+            "from": "Draft",
+            "to": "Loading"
+        },
+        {
+            "name": "FinishLoading",
+            "from": "Loading",
+            "to": "Loaded",
+            "broadcastEvent": {
+                "serverSideEvents": true
+            }
+        },
+        {
+            "name": "StartImporting",
+            "from": "Loaded",
+            "to": "Importing",
+            "automatic": true
+        },
+        {
+            "name": "FinishImporting",
+            "from": "Importing",
+            "to": "Imported",
+            "broadcastEvent": {
+                "serverSideEvents": true
+            }
+        },
+        {
+            "name": "Imported_to_Allocation",
+            "from": "Imported",
+            "to": "Allocation",
+            "exclusiveToAssignedUser": false,
+            "allowOnValidationErrors": {
+                "all": true
+            }
+        },
+        {
+            "name": "Allocation_to_Allocated",
+            "from": "Allocation",
+            "to": "Allocated",
+            "broadcastEvent": {
+                "serverSideEvents": true
+            }
+        },
+        {
+            "name": "Allocation_to_RegistryAllocationError",
+            "from": "Allocation",
+            "to": "RegistryAllocationError",
+            "broadcastEvent": {
+                "serverSideEvents": true
+            }
+        },
+        {
+            "name": "RegistryAllocationError_to_Allocation",
+            "from": "RegistryAllocationError",
+            "to": "Allocation",
+            "exclusiveToAssignedUser": false,
+            "allowOnValidationErrors": {
+                "all": true
+            }
+        },
+        {
+            "name": "Allocated_to_Generating",
+            "from": "Allocated",
+            "to": "Generating",
+            "automatic": true
+        },
+        {
+            "name": "Generating_to_Generated",
+            "from": "Generating",
+            "to": "Generated",
+            "broadcastEvent": {
+                "serverSideEvents": true
+            }
+        },
+        {
+            "name": "Generating_to_RegistryGenerationError",
+            "from": "Generating",
+            "to": "RegistryGenerationError",
+            "broadcastEvent": {
+                "serverSideEvents": true
+            }
+        },
+        {
+            "name": "RegistryGenerationError_to_Generating",
+            "from": "RegistryGenerationError",
+            "to": "Generating"
+        }
+    ]
+}

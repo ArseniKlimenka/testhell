@@ -1,0 +1,898 @@
+{
+    "type": "Section",
+    "label": "PaymentAmendmentConditions",
+    "sectionLevel": 1,
+    "isCollapsed": false,
+    "width": 12,
+    "elements": [
+        {
+            "type": "Section",
+            "label": "paymentLines",
+            "sectionLevel": 2,
+            "elements": [
+                {
+                    "type": "DataGrid",
+                    "mode": "Array",
+                    "value": {
+                        "$ref": "#/properties/paymentLines"
+                    },
+                    "actions": [
+                        "Edit"
+                    ],
+                    "checkIfRowActionIsAllowed": "paymentLinesIfRowActionIsAllowed",
+                    "checkIfAddButtonVisible": "paymentLinesIfAddButtonVisible",
+                    "edit": {
+                        "mode": "Detached",
+                        "inline": "SingleRow",
+                        "onBeforeGridAction": "paymentLinesOnBeforeGridAction",
+                        "onAfterGridAction": "onPaymentLinesChanged"
+                    },
+                    "columns": [
+                        {
+                            "title": "paymentLineType",
+                            "name": "paymentLineType",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "defaultValue": "",
+                                "value": {
+                                    "$ref": "#/properties/paymentLineType"
+                                }
+                            },
+                            "footerContent": {
+                                "type": "OutputText",
+                                "literalValue": "total"
+                            }
+                        },
+                        {
+                            "title": "paymentLineSum",
+                            "name": "paymentLineSum",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "defaultValue": "",
+                                "value": {
+                                    "$ref": "#/properties/paymentLineSum"
+                                }
+                            },
+                            "editCellContent": {
+                                "type": "Input",
+                                "value": {
+                                    "$ref": "#/properties/paymentLineSum"
+                                },
+                                "rule": {
+                                    "effect": "ENABLE_INITIAL",
+                                    "condition": {
+                                        "type": "FUNC",
+                                        "ruleFunction": "enablePaymentLineSum",
+                                        "value": [
+                                            {
+                                                "$ref": "#"
+                                            }
+                                        ]
+                                    }
+                                }
+                            },
+                            "footerContent": {
+                                "type": "OutputText",
+                                "defaultValue": "",
+                                "template": "{{#style 'right'}}{{expr total 'n:2'}}{{/style}}",
+                                "value": {
+                                    "mapping": "paymentLinesFooterContent",
+                                    "$ref": "#"
+                                }
+                            }
+                        },
+                        {
+                            "title": "paymentLineSumInRub",
+                            "name": "paymentLineSumInRub",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "defaultValue": "",
+                                "value": {
+                                    "$ref": "#/properties/paymentLineSumInRub"
+                                }
+                            },
+                            "editCellContent": {
+                                "type": "Input",
+                                "value": {
+                                    "$ref": "#/properties/paymentLineSumInRub"
+                                },
+                                "rule": {
+                                    "effect": "ENABLE_INITIAL",
+                                    "condition": {
+                                        "type": "FUNC",
+                                        "ruleFunction": "enablePaymentSumInRub",
+                                        "value": [
+                                            {
+                                                "$ref": "#"
+                                            }
+                                        ]
+                                    }
+                                }
+                            },
+                            "footerContent": {
+                                "type": "OutputText",
+                                "defaultValue": "",
+                                "template": "{{#style 'right'}}{{expr totalInRub 'n:2'}}{{/style}}",
+                                "value": {
+                                    "mapping": "paymentLinesFooterContent",
+                                    "$ref": "#"
+                                }
+                            }
+                        }
+                    ],
+                    "rule": {
+                        "effect": "DISABLE_INITIAL",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "disablePaymentLinesRelatedControls",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "type": "Group",
+                    "elements": [
+                        {
+                            "type": "Input",
+                            "label": "paymentLinesManualCorrection",
+                            "isCompact": true,
+                            "value": {
+                                "$ref": "#/properties/paymentLinesManualCorrection"
+                            },
+                            "width": 3,
+                            "rule": {
+                                "effect": "DISABLE_INITIAL",
+                                "condition": {
+                                    "type": "FUNC",
+                                    "ruleFunction": "disablePaymentLinesRelatedControls",
+                                    "value": [
+                                        {
+                                            "$ref": "#"
+                                        }
+                                    ]
+                                }
+                            },
+                            "onValueChanged": [
+                                {
+                                    "commandType": "executeAction",
+                                    "actionName": "onPaymentLinesManualCorrectionChanged"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "Section",
+            "label": "cancellationRecipients",
+            "scope": "cancellationRecipients",
+            "width": 12,
+            "elements": [
+                {
+                    "type": "Group",
+                    "width": 12,
+                    "elements": [
+                        {
+                            "type": "Group",
+                            "elements": [
+                                {
+                                    "type": "DataGrid",
+                                    "elementId": "cancellationRecipientsTable",
+                                    "checkIfRowActionIsAllowed": "isCancellationRecipientsRowActionAllowed",
+                                    "checkIfAddButtonVisible": "isCancellationRecipientsAddButtonVisible",
+                                    "rule": {
+                                        "effect": "ENABLE_INITIAL",
+                                        "condition": {
+                                            "type": "FUNC",
+                                            "ruleFunction": "enableCancellationRecipientsTable",
+                                            "value": [
+                                                {
+                                                    "$ref": "#"
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    "mode": "Array",
+                                    "pagination": {
+                                        "mode": "Regular",
+                                        "pageSizes": [
+                                            5,
+                                            10,
+                                            15
+                                        ]
+                                    },
+                                    "actions": [
+                                        "Add",
+                                        "Edit",
+                                        "Details",
+                                        "Delete"
+                                    ],
+                                    "edit": {
+                                        "mode": "Detached",
+                                        "onBeforeGridAction": "beforeCanellationRecipientsGridAction",
+                                        "onAfterGridAction": "afterCancellationRecipientsGridAction",
+                                        "onPrepareAddedRow": "setDefaultRecipientValues"
+                                    },
+                                    "footer": {
+                                        "toolbar": {
+                                            "type": "GridLayout",
+                                            "numberOfColumns": 4,
+                                            "elements": [
+                                                {
+                                                    "type": "Group",
+                                                    "width": 4,
+                                                    "stackContent": "Left",
+                                                    "elements": [
+                                                        {
+                                                            "type": "Button",
+                                                            "label": "addPolicyHolder",
+                                                            "elementId": "addPolicyHolder",
+                                                            "value": {
+                                                                "$ref": "#"
+                                                            },
+                                                            "onClick": [
+                                                                {
+                                                                    "commandType": "executeAction",
+                                                                    "actionName": "addPolicyHolder"
+                                                                }
+                                                            ],
+                                                            "rule": {
+                                                                "effect": "SHOW",
+                                                                "condition": {
+                                                                    "type": "FUNC",
+                                                                    "ruleFunction": "isCancellationRecipientsAddButtonVisible",
+                                                                    "value": [
+                                                                        {
+                                                                            "$ref": "#"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            }
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    "height": "None",
+                                    "value": {
+                                        "$ref": "#/properties/canellationRecipients"
+                                    },
+                                    "selection": {
+                                        "mode": "Single",
+                                        "enableRowSelection": true,
+                                        "showCheckBox": true
+                                    },
+                                    "columns": [
+                                        {
+                                            "sortable": false,
+                                            "title": "recipientName",
+                                            "name": "recipientName",
+                                            "cellContent": {
+                                                "type": "Link",
+                                                "readOnly": true,
+                                                "targetType": "Url",
+                                                "label": "recipientName",
+                                                "value": {
+                                                    "mapping": "recipientUriMapping",
+                                                    "$ref": "#"
+                                                },
+                                                "width": 5,
+                                                "content": {
+                                                    "text": {
+                                                        "type": "OutputText",
+                                                        "defaultValue": "",
+                                                        "value": {
+                                                            "$ref": "#/properties/fullName"
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "sortable": false,
+                                            "title": "PONumber",
+                                            "name": "PONumber",
+                                            "cellContent": {
+                                                "type": "Link",
+                                                "readOnly": true,
+                                                "targetType": "Url",
+                                                "label": "PONumber",
+                                                "value": {
+                                                    "mapping": "poNumberUriMapping",
+                                                    "$ref": "#"
+                                                },
+                                                "width": 5,
+                                                "content": {
+                                                    "text": {
+                                                        "type": "OutputText",
+                                                        "defaultValue": "",
+                                                        "value": {
+                                                            "mapping": "getPoLinkNameText",
+                                                            "$ref": "#"
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "sortable": false,
+                                            "title": "PitPONumber",
+                                            "name": "PitPONumber",
+                                            "cellContent": {
+                                                "type": "Link",
+                                                "readOnly": true,
+                                                "targetType": "Url",
+                                                "label": "PitPONumber",
+                                                "value": {
+                                                    "mapping": "pitPoNumberUriMapping",
+                                                    "$ref": "#"
+                                                },
+                                                "width": 5,
+                                                "content": {
+                                                    "text": {
+                                                        "type": "OutputText",
+                                                        "defaultValue": "",
+                                                        "value": {
+                                                            "mapping": "getPitPoLinkNameText",
+                                                            "$ref": "#"
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "sortable": false,
+                                            "title": "amountToPay",
+                                            "cellContent": {
+                                                "type": "OutputText",
+                                                "defaultValue": "",
+                                                "value": {
+                                                    "$ref": "#/properties/amountToPay"
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "sortable": false,
+                                            "title": "pitAmountInRubCurrency",
+                                            "cellContent": {
+                                                "type": "OutputText",
+                                                "defaultValue": "",
+                                                "value": {
+                                                    "$ref": "#/properties/pitAmountInRubCurrency"
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "sortable": false,
+                                            "title": "recipientReason",
+                                            "cellContent": {
+                                                "type": "OutputText",
+                                                "defaultValue": "",
+                                                "value": {
+                                                    "$ref": "#/properties/recipientReason/properties/description"
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "sortable": false,
+                                            "title": "recipientPaymentType",
+                                            "cellContent": {
+                                                "type": "OutputText",
+                                                "defaultValue": "",
+                                                "value": {
+                                                    "$ref": "#/properties/recipientPaymentType/properties/description"
+                                                }
+                                            }
+                                        }
+                                    ],
+                                    "detailsTemplates": {
+                                        "edit": {
+                                            "content": {
+                                                "type": "Group",
+                                                "elements": [
+                                                    {
+                                                        "type": "GridLayout",
+                                                        "fillAvailableSpace": true,
+                                                        "numberOfColumns": 12,
+                                                        "elements": [
+                                                            {
+                                                                "type": "Group",
+                                                                "elements": [
+                                                                    {
+                                                                        "type": "Input",
+                                                                        "label": "recipientReason",
+                                                                        "value": {
+                                                                            "$ref": "#/properties/recipientReason"
+                                                                        },
+                                                                        "autocomplete": {
+                                                                            "minTextLength": 3,
+                                                                            "dropDownItemsCount": 30
+                                                                        },
+                                                                        "control": "Dropdown",
+                                                                        "source": {
+                                                                            "reloadOnOpen": true,
+                                                                            "dataSource": {
+                                                                                "name": "BeneficiaryReasonDataSource",
+                                                                                "searchFieldPath": "description",
+                                                                                "requestMapping": "recipientReasonRequestMapping",
+                                                                                "responseMapping": "recipientReasonResponseMapping",
+                                                                                "resultCount": 30
+                                                                            },
+                                                                            "displayFieldName": "displayName",
+                                                                            "valueFieldName": "value"
+                                                                        },
+                                                                        "width": 12,
+                                                                        "onValueChanged": [
+                                                                            {
+                                                                                "commandType": "executeAction",
+                                                                                "actionName": "onRecipientReasonChanged"
+                                                                            }
+                                                                        ],
+                                                                        "rule": {
+                                                                            "effect": "ENABLE_INITIAL",
+                                                                            "condition": {
+                                                                                "type": "FUNC",
+                                                                                "ruleFunction": "isRecipientReasonEnabled",
+                                                                                "value": [
+                                                                                    {
+                                                                                        "$ref": "#"
+                                                                                    }
+                                                                                ]
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                ]
+                                                            },
+                                                            {
+                                                                "type": "Group",
+                                                                "elements": [
+                                                                    {
+                                                                        "type": "Lookup",
+                                                                        "label": "recipient",
+                                                                        "value": {
+                                                                            "$ref": "#"
+                                                                        },
+                                                                        "width": 3,
+                                                                        "dialogButton": {},
+                                                                        "clearButton": {
+                                                                            "clearAction": "clearRecipient"
+                                                                        },
+                                                                        "dialog": {
+                                                                            "viewReference": {
+                                                                                "configurationCodeName": "GeneralPartySearchWithEditView",
+                                                                                "configurationVersion": "1",
+                                                                                "configurationConceptType": "SearchView"
+                                                                            },
+                                                                            "onLoad": "recipientLookupOnLoad"
+                                                                        },
+                                                                        "onSelected": "recipientResultMapping",
+                                                                        "selectedDisplayValueUISchema": {
+                                                                            "type": "Input",
+                                                                            "label": "recipient",
+                                                                            "readOnly": true,
+                                                                            "value": {
+                                                                                "$ref": "#/properties/fullName"
+                                                                            },
+                                                                            "rule": {
+                                                                                "effect": "ENABLE_INITIAL",
+                                                                                "condition": {
+                                                                                    "type": "FUNC",
+                                                                                    "ruleFunction": "isRecipientNameEnabled",
+                                                                                    "value": [
+                                                                                        {
+                                                                                            "$ref": "#"
+                                                                                        }
+                                                                                    ]
+                                                                                }
+                                                                            }
+                                                                        },
+                                                                        "rule": {
+                                                                            "effect": "ENABLE_INITIAL",
+                                                                            "condition": {
+                                                                                "type": "FUNC",
+                                                                                "ruleFunction": "isRecipientLookupEnabled",
+                                                                                "value": [
+                                                                                    {
+                                                                                        "$ref": "#"
+                                                                                    }
+                                                                                ]
+                                                                            }
+                                                                        }
+                                                                    },
+                                                                    {
+                                                                        "type": "Input",
+                                                                        "label": "amountToPayPercetage",
+                                                                        "control": "Percentage",
+                                                                        "decimalPlaces": 2,
+                                                                        "clearValueOutOfRange": true,
+                                                                        "value": {
+                                                                            "$ref": "#/properties/amountToPayPercetage"
+                                                                        },
+                                                                        "width": 1,
+                                                                        "onValueChanged": [],
+                                                                        "rule": {
+                                                                            "effect": "ENABLE_INITIAL",
+                                                                            "condition": {
+                                                                                "type": "FUNC",
+                                                                                "ruleFunction": "isRecipientPercentageEnabled",
+                                                                                "value": [
+                                                                                    {
+                                                                                        "$ref": "#"
+                                                                                    }
+                                                                                ]
+                                                                            }
+                                                                        }
+                                                                    },
+                                                                    {
+                                                                        "type": "Input",
+                                                                        "label": "calculateFromAmount",
+                                                                        "value": {
+                                                                            "$ref": "#/properties/calculateFromAmount"
+                                                                        },
+                                                                        "width": 2,
+                                                                        "rule": {
+                                                                            "effect": "ENABLE_INITIAL",
+                                                                            "condition": {
+                                                                                "type": "FUNC",
+                                                                                "ruleFunction": "isCalculateFromAmountEnabled",
+                                                                                "value": [
+                                                                                    {
+                                                                                        "$ref": "#"
+                                                                                    }
+                                                                                ]
+                                                                            }
+                                                                        }
+                                                                    },
+                                                                    {
+                                                                        "type": "Input",
+                                                                        "label": "amountToPay",
+                                                                        "value": {
+                                                                            "$ref": "#/properties/amountToPay"
+                                                                        },
+                                                                        "width": 3,
+                                                                        "rule": {
+                                                                            "effect": "ENABLE_INITIAL",
+                                                                            "condition": {
+                                                                                "type": "FUNC",
+                                                                                "ruleFunction": "isRecipientAmountEnabled",
+                                                                                "value": [
+                                                                                    {
+                                                                                        "$ref": "#"
+                                                                                    }
+                                                                                ]
+                                                                            }
+                                                                        }
+                                                                    },
+                                                                    {
+                                                                        "type": "Input",
+                                                                        "label": "amountToPayInRubCurrency",
+                                                                        "value": {
+                                                                            "$ref": "#/properties/amountToPayInRubCurrency"
+                                                                        },
+                                                                        "width": 3,
+                                                                        "readOnly": true
+                                                                    }
+                                                                ]
+                                                            },
+                                                            {
+                                                                "type": "Group",
+                                                                "elements": [
+                                                                    {
+                                                                        "type": "Input",
+                                                                        "label": "pitAmountInRubCurrency",
+                                                                        "value": {
+                                                                            "$ref": "#/properties/pitAmountInRubCurrency"
+                                                                        },
+                                                                        "width": 2,
+                                                                        "rule": {
+                                                                            "effect": "ENABLE_INITIAL",
+                                                                            "condition": {
+                                                                                "type": "FUNC",
+                                                                                "ruleFunction": "isPitAmountEnabled",
+                                                                                "value": [
+                                                                                    {
+                                                                                        "$ref": "#"
+                                                                                    }
+                                                                                ]
+                                                                            }
+                                                                        }
+                                                                    },
+                                                                    {
+                                                                        "type": "Input",
+                                                                        "label": "isManualPit",
+                                                                        "value": {
+                                                                            "$ref": "#/properties/isManualPit"
+                                                                        },
+                                                                        "width": 2,
+                                                                        "onValueChanged": [
+                                                                            "refreshView"
+                                                                        ],
+                                                                        "rule": {
+                                                                            "effect": "ENABLE_INITIAL",
+                                                                            "condition": {
+                                                                                "type": "FUNC",
+                                                                                "ruleFunction": "isManualPitEnabled",
+                                                                                "value": [
+                                                                                    {
+                                                                                        "$ref": "#"
+                                                                                    }
+                                                                                ]
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                ]
+                                                            },
+                                                            {
+                                                                "type": "Group",
+                                                                "elements": [
+                                                                    {
+                                                                        "type": "Input",
+                                                                        "label": "recipientPaymentType",
+                                                                        "value": {
+                                                                            "$ref": "#/properties/recipientPaymentType"
+                                                                        },
+                                                                        "autocomplete": {
+                                                                            "minTextLength": 3,
+                                                                            "dropDownItemsCount": 30
+                                                                        },
+                                                                        "control": "Dropdown",
+                                                                        "source": {
+                                                                            "reloadOnOpen": true,
+                                                                            "dataSource": {
+                                                                                "name": "BeneficiaryPaymentTypeDataSource",
+                                                                                "searchFieldPath": "description",
+                                                                                "requestMapping": "recipientPaymentTypeRequestMapping",
+                                                                                "responseMapping": "recipientPaymentTypeResponseMapping",
+                                                                                "resultCount": 30
+                                                                            },
+                                                                            "displayFieldName": "displayName",
+                                                                            "valueFieldName": "value"
+                                                                        },
+                                                                        "width": 12,
+                                                                        "rule": {
+                                                                            "effect": "ENABLE_INITIAL",
+                                                                            "condition": {
+                                                                                "type": "FUNC",
+                                                                                "ruleFunction": "isRecipientPaymentTypeEnabled",
+                                                                                "value": [
+                                                                                    {
+                                                                                        "$ref": "#"
+                                                                                    }
+                                                                                ]
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                ]
+                                                            },
+                                                            {
+                                                                "type": "Group",
+                                                                "elements": [
+                                                                    {
+                                                                        "type": "Input",
+                                                                        "label": "recipientBankAccount",
+                                                                        "value": {
+                                                                            "$ref": "#/properties/bankAccount"
+                                                                        },
+                                                                        "control": "Dropdown",
+                                                                        "preSelectFirstItem": true,
+                                                                        "source": {
+                                                                            "reloadOnOpen": true,
+                                                                            "dataSource": {
+                                                                                "name": "GetPartyBankAccountsOnlyDataSource",
+                                                                                "searchFieldPath": "description",
+                                                                                "requestMapping": "recipientBankAccountRequestMapping",
+                                                                                "responseMapping": "recipientBankAccountResponseMapping"
+                                                                            },
+                                                                            "displayFieldName": "displayName",
+                                                                            "valueFieldName": "value"
+                                                                        },
+                                                                        "width": 6,
+                                                                        "rule": {
+                                                                            "effect": "ENABLE_INITIAL",
+                                                                            "condition": {
+                                                                                "type": "FUNC",
+                                                                                "ruleFunction": "isRecipientBankAccountEnabled",
+                                                                                "value": [
+                                                                                    {
+                                                                                        "$ref": "#"
+                                                                                    }
+                                                                                ]
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                ]
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        },
+                                        "view": {
+                                            "content": {
+                                                "type": "Group",
+                                                "elements": [
+                                                    {
+                                                        "type": "GridLayout",
+                                                        "fillAvailableSpace": true,
+                                                        "numberOfColumns": 12,
+                                                        "elements": [
+                                                            {
+                                                                "type": "Group",
+                                                                "elements": [
+                                                                    {
+                                                                        "type": "Lookup",
+                                                                        "label": "recipient",
+                                                                        "value": {
+                                                                            "$ref": "#"
+                                                                        },
+                                                                        "width": 3,
+                                                                        "dialogButton": {},
+                                                                        "clearButton": {
+                                                                            "clearAction": "clearRecipient"
+                                                                        },
+                                                                        "dialog": {
+                                                                            "viewReference": {
+                                                                                "configurationCodeName": "GeneralPartySearchView",
+                                                                                "configurationVersion": "1",
+                                                                                "configurationConceptType": "SearchView"
+                                                                            }
+                                                                        },
+                                                                        "onSelected": "recipientResultMapping",
+                                                                        "selectedDisplayValueUISchema": {
+                                                                            "type": "Input",
+                                                                            "label": "recipient",
+                                                                            "readOnly": true,
+                                                                            "value": {
+                                                                                "$ref": "#/properties/fullName"
+                                                                            }
+                                                                        }
+                                                                    },
+                                                                    {
+                                                                        "type": "Input",
+                                                                        "label": "amountToPay",
+                                                                        "value": {
+                                                                            "$ref": "#/properties/amountToPay"
+                                                                        },
+                                                                        "width": 3
+                                                                    }
+                                                                ]
+                                                            },
+                                                            {
+                                                                "type": "Group",
+                                                                "elements": [
+                                                                    {
+                                                                        "type": "Input",
+                                                                        "label": "recipientReason",
+                                                                        "value": {
+                                                                            "$ref": "#/properties/recipientReason"
+                                                                        },
+                                                                        "autocomplete": {
+                                                                            "minTextLength": 3,
+                                                                            "dropDownItemsCount": 30
+                                                                        },
+                                                                        "control": "Dropdown",
+                                                                        "readOnly": true,
+                                                                        "source": {
+                                                                            "reloadOnOpen": true,
+                                                                            "dataSource": {
+                                                                                "name": "BeneficiaryReasonDataSource",
+                                                                                "searchFieldPath": "description",
+                                                                                "requestMapping": "recipientReasonRequestMapping",
+                                                                                "responseMapping": "recipientReasonResponseMapping",
+                                                                                "resultCount": 30
+                                                                            },
+                                                                            "displayFieldName": "displayName",
+                                                                            "valueFieldName": "value"
+                                                                        },
+                                                                        "width": 12
+                                                                    }
+                                                                ]
+                                                            },
+                                                            {
+                                                                "type": "Group",
+                                                                "elements": [
+                                                                    {
+                                                                        "type": "Input",
+                                                                        "label": "recipientPaymentType",
+                                                                        "value": {
+                                                                            "$ref": "#/properties/recipientPaymentType"
+                                                                        },
+                                                                        "autocomplete": {
+                                                                            "minTextLength": 3,
+                                                                            "dropDownItemsCount": 30
+                                                                        },
+                                                                        "control": "Dropdown",
+                                                                        "source": {
+                                                                            "reloadOnOpen": true,
+                                                                            "dataSource": {
+                                                                                "name": "BeneficiaryPaymentTypeDataSource",
+                                                                                "searchFieldPath": "description",
+                                                                                "requestMapping": "recipientPaymentTypeRequestMapping",
+                                                                                "responseMapping": "recipientPaymentTypeResponseMapping",
+                                                                                "resultCount": 30
+                                                                            },
+                                                                            "displayFieldName": "displayName",
+                                                                            "valueFieldName": "value"
+                                                                        },
+                                                                        "width": 12
+                                                                    }
+                                                                ]
+                                                            },
+                                                            {
+                                                                "type": "Group",
+                                                                "elements": [
+                                                                    {
+                                                                        "type": "Input",
+                                                                        "label": "recipientBankAccount",
+                                                                        "value": {
+                                                                            "$ref": "#/properties/bankAccount"
+                                                                        },
+                                                                        "control": "Dropdown",
+                                                                        "preSelectFirstItem": true,
+                                                                        "source": {
+                                                                            "reloadOnOpen": true,
+                                                                            "dataSource": {
+                                                                                "name": "GetPartyBankAccountsOnlyDataSource",
+                                                                                "searchFieldPath": "description",
+                                                                                "requestMapping": "recipientBankAccountRequestMapping",
+                                                                                "responseMapping": "recipientBankAccountResponseMapping"
+                                                                            },
+                                                                            "displayFieldName": "displayName",
+                                                                            "valueFieldName": "value"
+                                                                        },
+                                                                        "width": 6
+                                                                    }
+                                                                ]
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Group",
+                            "elements": [
+                                {
+                                    "type": "Button",
+                                    "value": {
+                                        "$ref": "#"
+                                    },
+                                    "width": 3,
+                                    "onClick": [
+                                        {
+                                            "commandType": "executeAction",
+                                            "actionName": "createPaymentOrder"
+                                        }
+                                    ],
+                                    "label": "createPaymentOrder",
+                                    "rule": {
+                                        "effect": "ENABLE_INITIAL",
+                                        "condition": {
+                                            "type": "FUNC",
+                                            "ruleFunction": "showCreatePoButton",
+                                            "value": [
+                                                {
+                                                    "$ref": "#"
+                                                }
+                                            ]
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

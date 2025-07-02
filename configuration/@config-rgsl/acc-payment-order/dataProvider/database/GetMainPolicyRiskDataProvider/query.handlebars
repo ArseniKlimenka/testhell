@@ -1,0 +1,8 @@
+select
+	polh.CONTRACT_NUMBER,
+	rpr.RISK_CODE as MAIN_RISK_CODE
+from
+	pas_impl.POLICY_HUB polh
+	inner join pas_impl.POLICY_SAT_LATEST ps on ps.POLICY_HKEY = polh.POLICY_HKEY
+	inner join bfx_impl.RISK_PRODUCT_RELATION rpr on rpr.PRODUCT_CODE = ps.PRODUCT_CODE and rpr.RISK_ORDER = 1
+where polh.CONTRACT_NUMBER = @contractNumber

@@ -1,0 +1,83 @@
+{
+    "type": "Section",
+    "label": "Accounting certificate payment under the contract",
+    "width": 12,
+    "collapsing": {
+        "initial": false,
+        "enabled": true
+    },
+    "elements": [
+        {
+            "type": "Group",
+            "width": 12,
+            "elements": [
+                {
+                    "type": "InlineView",
+                    "showContainerActions": false,
+                    "views": [
+                        {
+                            "viewReference": {
+                                "configurationCodeName": "AccountingCertificateAmountOfPremiumsPaidView",
+                                "configurationVersion": "1",
+                                "configurationConceptType": "SearchView"
+                            },
+                            "onViewInitialized": "initAmountOfPremiumsPaidView",
+                            "viewType": "Search"
+                        }
+                    ],
+                    "value": {
+                        "$ref": "#"
+                    },
+                    "hide": false,
+                    "elementId": "BankStatementImportRecordStatusInlineView"
+                }
+            ]
+        },
+        {
+            "type": "Group",
+            "width": 12,
+            "elements": [
+                {
+                    "type": "Input",
+                    "label": "Amount of premiums paid",
+                    "value": {
+                        "$ref": "#/properties/amountOfPremiumsPaid"
+                    },
+                    "onValueChanged": [
+                        {
+                            "commandType": "executeAction",
+                            "actionName": "onChangeAmountOfPremiumsPaid"
+                        }
+                    ],
+                    "width": 6
+                }
+            ],
+            "rule": {
+                "effect": "ENABLE_INITIAL",
+                "condition": {
+                    "type": "FUNC",
+                    "ruleFunction": "enableAmountOfPremiumsPaid",
+                    "value": [
+                        {
+                            "$ref": "#"
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "type": "Input",
+            "label": "Is manual correction for sum",
+            "value": {
+                "$ref": "#/properties/isManualCorrectionSum"
+            },
+            "onValueChanged": [
+                {
+                    "commandType": "executeAction",
+                    "actionName": "onChangeIsManualCorrectionSum"
+                }
+            ],
+            "width": 6
+        }
+    ]
+}

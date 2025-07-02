@@ -1,0 +1,34 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "CreditProgram",
+    "description": "CreditProgram",
+    "type": "object",
+    "additionalProperties": false,
+    "aiValidation": {
+        "rule": "validateCreditProgram"
+    },
+    "aiDataEnrichment": [
+        {
+            "name": "setCreditProgramVersion",
+            "dataSource": "CreditProgramsDataSource"
+        }
+    ],
+    "properties": {
+        "creditProgramId": {
+            "aiTitle": "creditProgramId",
+            "$ref": "component:EnumCreditPrograms"
+        },
+        "creditProgramVersion": {
+            "type": "string",
+            "aiTitle": "creditProgramVersion"
+        },
+        "externalContractId": {
+            "type": "string",
+            "aiTitle": "externalContractId"
+        },
+        "percentRateImpact": {
+            "type": "boolean",
+            "aiTitle": "percentRateImpact"
+        }
+    }
+}

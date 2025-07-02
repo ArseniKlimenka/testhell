@@ -1,0 +1,94 @@
+SELECT
+    c.PORTFOLIO_TRANSFER_ITEM_HKEY,
+	c.PORTFOLIO_TRANSFER_NUMBER,
+	c.ISSUE_DATE,
+	c.SERVICE_PROVIDER_NAME_FROM,
+	c.SERVICE_PROVIDER_NAME_TO,
+	c.SERVICE_PROVIDER_CODE_FROM,
+	c.SERVICE_PROVIDER_CODE_TO,
+	c.TRANSFER_STATE,
+	c.RECORD_SOURCE,
+	c.CONTRACT_NUMBER,
+	c.PRODUCT_DESC,
+	c.HOLDER_NAME,
+	c.START_DATE,
+	c.DUE_DATE,
+	c.CONTRACT_STATE,
+	c.CODE_NAME,
+	c.USERNAME
+FROM (
+	SELECT
+        its.PORTFOLIO_TRANSFER_ITEM_HKEY,
+		ph.PORTFOLIO_TRANSFER_NUMBER,
+		ts.ISSUE_DATE,
+		ts.SERVICE_PROVIDER_NAME_FROM,
+		ts.SERVICE_PROVIDER_NAME_TO,
+		ts.SERVICE_PROVIDER_CODE_FROM,
+		ts.SERVICE_PROVIDER_CODE_TO,
+		its.TRANSFER_STATE,
+		ph.RECORD_SOURCE,
+		il.CONTRACT_NUMBER,
+		its.PRODUCT_DESC,
+		its.HOLDER_NAME,
+		its.START_DATE,
+		il.DUE_DATE,
+		contractState.CODE_NAME as CONTRACT_STATE,
+		its.CODE_NAME,
+		its.USERNAME,
+		ROW_NUMBER() OVER(PARTITION BY il.CONTRACT_NUMBER ORDER BY il.DUE_DATE ASC) ROW_NUM
+	FROM
+		acc_impl.PORTFOLIO_TRANSFER_ITEM_SAT_LATEST its
+		INNER JOIN acc_impl.PORTFOLIO_TRANSFER_ITEM_LINK il on its.PORTFOLIO_TRANSFER_ITEM_HKEY = il.PORTFOLIO_TRANSFER_ITEM_HKEY
+		INNER JOIN acc_impl.PORTFOLIO_TRANSFER_HUB ph on ph.PORTFOLIO_TRANSFER_HKEY = il.PORTFOLIO_TRANSFER_HKEY
+		INNER JOIN acc_impl.PORTFOLIO_TRANSFER_SAT_LATEST ts on ts.PORTFOLIO_TRANSFER_HKEY = ph.PORTFOLIO_TRANSFER_HKEY
+		INNER JOIN pas.CONTRACT c on c.CONTRACT_NUMBER = il.CONTRACT_NUMBER
+		INNER JOIN cfg.PROCESS_STATE contractState on contractState.PROCESS_STATE_ID = c.STATE_ID
+	WHERE 1=1
+	AND its.IS_DELETED = 0
+    {{#if parameters.documentNo}}
+        AND ph.PORTFOLIO_TRANSFER_NUMBER IN (@documentNo)
+    {{/if}}
+    {{#if parameters.issueDate}}
+        and ts.ISSUE_DATE = @issueDate
+    {{/if}}
+    {{#if parameters.serviceProviderNameFrom}}
+        and ts.SERVICE_PROVIDER_NAME_FROM = @serviceProviderNameFrom
+    {{/if}}
+    {{#if parameters.serviceProviderNameTo}}
+        and ts.SERVICE_PROVIDER_NAME_TO = @serviceProviderNameTo
+    {{/if}}
+    {{#if parameters.serviceProviderCodeFrom}}
+        and ts.SERVICE_PROVIDER_CODE_FROM = @serviceProviderCodeFrom
+    {{/if}}
+    {{#if parameters.serviceProviderCodeTo}}
+        and ts.SERVICE_PROVIDER_CODE_TO = @serviceProviderCodeTo
+    {{/if}}
+    {{#if parameters.contractNumbers}}
+        AND il.CONTRACT_NUMBER IN (@contractNumbers)
+    {{/if}}
+    {{#if parameters.contractState}}
+        and contractState.CODE_NAME = @contractState
+    {{/if}}
+    {{#if parameters.holderName}}
+        AND its.HOLDER_NAME LIKE @holderName
+    {{/if}}
+    {{#if parameters.transferState}}
+        AND its.TRANSFER_STATE = @transferState
+    {{/if}}
+    {{#if parameters.userName}}
+        AND its.USERNAME LIKE @userName
+    {{/if}}
+    {{#if parameters.startDate}}
+        AND its.START_DATE = @startDate
+    {{/if}}
+    {{#if parameters.dueDate}}
+        AND il.DUE_DATE = @dueDate
+    {{/if}}
+    {{#if parameters.productDescription}}
+        AND its.PRODUCT_DESC LIKE @productDescription
+    {{/if}}
+) c
+WHERE 1=1
+{{#if parameters.groupByRefNo}}
+    AND ROW_NUM = 1
+{{/if}}

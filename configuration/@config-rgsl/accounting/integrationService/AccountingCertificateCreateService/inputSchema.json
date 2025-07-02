@@ -1,0 +1,127 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema",
+    "description": "Input schema for Accounting Certificate creation service.",
+    "type": "object",
+    "additionalProperties": false,
+    "aiValidation": {
+        "rule": "validationAccountingCertificateCreateRequest"
+    },
+    "anyOf": [
+        {
+            "required": [
+                "accountingCertificateNumber"
+            ]
+        },
+        {
+            "required": [
+                "typeOfRequest",
+                "accountingYear",
+                "contract",
+                "paymentContract",
+                "insuredPersonData",
+                "isApplicantPolicyHolder",
+                "requestDate",
+                "taxPayerData"
+            ]
+        }
+    ],
+    "properties": {
+        "accountingCertificateNumber": {
+            "type": "string"
+        },
+        "typeOfRequest": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+                "code"
+            ],
+            "properties": {
+                "code": {
+                    "type": "string"
+                }
+            }
+        },
+        "accountingYear": {
+            "$ref": "component:AccountingCertificateYear"
+        },
+        "contract": {
+            "type": "object",
+            "properties": {
+                "number": {
+                    "type": "string",
+                    "aiTitle": "number"
+                },
+                "type": {
+                    "type": "object",
+                    "aiTitle": "type",
+                    "additionalProperties": false,
+                    "properties": {
+                        "code": {
+                            "type": "string"
+                        },
+                        "description": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "isInsurerSendDataToFns": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "paymentContract": {
+            "$ref": "component:AccountingCertificatePaymentContract"
+        },
+        "insuredPersonData": {
+            "type": "object",
+            "properties": {
+                "partyCode": {
+                    "type": "string"
+                },
+                "isTaxPayerInsuredPerson": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "issueData": {
+            "$ref": "component:AccountingCertificateIssueData"
+        },
+        "attachmentsPackage": {
+            "$ref": "component:AttachmentsPackage"
+        },
+        "technicalInformation": {
+            "$ref": "component:AccountingCertificateTechnicalInformation"
+        },
+        "applicantFullName": {
+            "type": "string"
+        },
+        "isApplicantPolicyHolder": {
+            "type": "boolean"
+        },
+        "requestDate": {
+            "type": "string",
+            "aiFormat": "date"
+        },
+        "seqNumber": {
+            "type": "integer"
+        },
+        "taxPayerData": {
+            "type": "object",
+            "properties": {
+                "partyCode": {
+                    "type": "string",
+                    "aiTitle": "partyCode"
+                },
+                "isTaxPayerPolicyHolder": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "accountingCertificateEnrichments": {
+            "$ref": "component:AccountingCertificateEnrichments"
+        },
+        "accountingCertificateIncomeSource": {
+            "$ref": "component:AccountingCertificateIncomeSourceComponent"
+        }
+    }
+}

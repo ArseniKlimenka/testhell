@@ -1,0 +1,216 @@
+{
+    "type": "Group",
+    "formProperties": {
+        "events": {
+            "onLoad": "onLoadGeneralInquirySearchView"
+        }
+    },
+    "elements": [
+        {
+            "type": "Group",
+            "width": 4,
+            "elements": [
+                {
+                    "type": "Group",
+                    "width": 4,
+                    "elements": [
+                        {
+                            "type": "Input",
+                            "label": "inquiryNumber",
+                            "value": {
+                                "$ref": "#/properties/request/properties/data/properties/criteria/properties/inquiryNumber"
+                            },
+                            "width": 1
+                        },
+                        {
+                            "type": "Input",
+                            "label": "Inquiry state code",
+                            "control": "Dropdown",
+                            "multiple": false,
+                            "autocomplete": {
+                                "minTextLength": 0,
+                                "dropDownItemsCount": 1000,
+                                "selectItemOnMatch": true
+                            },
+                            "width": 1,
+                            "value": {
+                                "$ref": "#/properties/request/properties/data/properties/criteria/properties/inquiryState"
+                            }
+                        },
+                        {
+                            "type": "Input",
+                            "control": "DateRange",
+                            "dateFrom": {
+                                "type": "Input",
+                                "label": "inquiryCreatedFrom",
+                                "width": 1,
+                                "value": {
+                                    "$ref": "#/properties/request/properties/data/properties/criteria/properties/inquiryCreatedFrom"
+                                },
+                                "control": "DatetimePicker"
+                            },
+                            "dateTo": {
+                                "type": "Input",
+                                "label": "inquiryCreatedTo",
+                                "width": 1,
+                                "value": {
+                                    "$ref": "#/properties/request/properties/data/properties/criteria/properties/inquiryCreatedTo"
+                                },
+                                "control": "DatetimePicker"
+                            },
+                            "width": 2
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "Input",
+                    "label": "documentNumber",
+                    "width": 1,
+                    "value": {
+                        "$ref": "#/properties/request/properties/data/properties/criteria/properties/documentNumber"
+                    }
+                },
+                {
+                    "type": "Input",
+                    "control": "Dropdown",
+                    "multiple": true,
+                    "autocomplete": {
+                        "minTextLength": 0,
+                        "dropDownItemsCount": 1000,
+                        "selectItemOnMatch": true
+                    },
+                    "label": "documentCodeName",
+                    "width": 1,
+                    "value": {
+                        "$ref": "#/properties/request/properties/data/properties/criteria/properties/documentCodeName"
+                    },
+                    "onValueChanged": [
+                        {
+                            "commandType": "executeAction",
+                            "actionName": "onChangeDocumentCodeName"
+                        }
+                    ]
+                },
+                {
+                    "type": "Input",
+                    "label": "reasonCode",
+                    "control": "Dropdown",
+                    "multiple": false,
+                    "autocomplete": {
+                        "minTextLength": 0,
+                        "dropDownItemsCount": 1000,
+                        "selectItemOnMatch": true
+                    },
+                    "width": 1,
+                    "value": {
+                        "$ref": "#/properties/request/properties/data/properties/criteria/properties/reasonCode"
+                    },
+                    "rule": {
+                        "effect": "SHOW",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "showReasonCode",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "Input",
+                    "label": "contractNumber",
+                    "width": 1,
+                    "value": {
+                        "$ref": "#/properties/request/properties/data/properties/criteria/properties/contractNumber"
+                    }
+                },
+                {
+                    "type": "Lookup",
+                    "label": "policyHolder",
+                    "value": {
+                        "$ref": "#"
+                    },
+                    "width": 1,
+                    "dialogButton": {},
+                    "clearButton": {
+                        "clearAction": "policyHolderClearAction"
+                    },
+                    "dialog": {
+                        "viewReference": {
+                            "configurationCodeName": "GeneralPartySearchView",
+                            "configurationVersion": "1",
+                            "configurationConceptType": "SearchView"
+                        }
+                    },
+                    "onSelected": "policyHolderOnSelected",
+                    "selectedDisplayValueTemplate": "{{expr resultData.fullName}}"
+                },
+                {
+                    "type": "Input",
+                    "label": "departmentCodes",
+                    "control": "Dropdown",
+                    "multiple": true,
+                    "autocomplete": {
+                        "minTextLength": 0,
+                        "dropDownItemsCount": 1000,
+                        "selectItemOnMatch": true
+                    },
+                    "width": 1,
+                    "value": {
+                        "$ref": "#/properties/request/properties/data/properties/criteria/properties/departmentCodes"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "Input",
+                    "control": "DateRange",
+                    "dateFrom": {
+                        "type": "Input",
+                        "label": "russianPostRegisterInclusionDateFrom",
+                        "width": 1,
+                        "value": {
+                            "$ref": "#/properties/request/properties/data/properties/criteria/properties/russianPostRegisterInclusionDateFrom"
+                        },
+                        "control": "DatetimePicker"
+                    },
+                    "dateTo": {
+                        "type": "Input",
+                        "label": "russianPostRegisterInclusionDateTo",
+                        "width": 1,
+                        "value": {
+                            "$ref": "#/properties/request/properties/data/properties/criteria/properties/russianPostRegisterInclusionDateTo"
+                        },
+                        "control": "DatetimePicker"
+                    },
+                    "width": 2
+                },
+                {
+                    "type": "Input",
+                    "label": "includedInRussianPostRegister",
+                    "name": "includedInRussianPostRegister",
+                    "isCompact": false,
+                    "value": {
+                        "$ref": "#/properties/request/properties/data/properties/criteria/properties/includedInRussianPostRegister"
+                    },
+                    "width": 1
+                }
+            ]
+        }
+    ]
+}

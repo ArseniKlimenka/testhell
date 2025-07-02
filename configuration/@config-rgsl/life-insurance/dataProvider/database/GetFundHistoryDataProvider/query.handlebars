@@ -1,0 +1,91 @@
+﻿WITH F_MAX_REPORTS AS (
+    SELECT
+		f.REPORT_DATE, MAX(f.REPORT_DATE_VERSION) MAX_REPORT_DATE_VERSION
+	FROM BFX_IMPL.FUND f
+	WHERE 1 = 1
+    {{#if parameters.documentNumber}}
+        AND f.DOCUMENT_NUMBER = @documentNumber
+    {{/if}}
+    GROUP BY f.REPORT_DATE
+),
+
+FA_MAX_REPORTS AS (
+    SELECT
+		fa.REPORT_DATE, MAX(fa.REPORT_DATE_VERSION) MAX_REPORT_DATE_VERSION
+	FROM BFX_IMPL.FUND_ASSETS fa
+    WHERE 1 = 1
+    {{#if parameters.documentNumber}}
+        AND fa.DOCUMENT_NUMBER = @documentNumber
+    {{/if}}
+    GROUP BY fa.REPORT_DATE
+)
+
+SELECT f.EXCEL_ROW_NUMBER
+      ,f.ROW_NUMBER
+      ,f.DOCUMENT_NUMBER
+      ,f.FUND_STATUS
+      ,f.NET_ASSETS_AMOUNT
+      ,f.FREE_MONEY
+      ,f.NUMBER_OF_UNITS
+      ,f.UNIT_CURRENT_AMOUNT
+      ,f.REPORT_DATE
+      ,f.REPORT_DATE_VERSION
+      ,f.IMPORT_DOCUMENT_ID
+      ,f.CONF_VERSION
+      ,f.LOADED_BY
+      ,f.LOAD_DATE
+	  ,(
+			SELECT
+				  fa.EXCEL_ROW_NUMBER excelRowNumber
+				  ,fa.ROW_NUMBER rowNumber
+				  ,fa.DOCUMENT_NUMBER documentNumber
+				  ,fa.ASSET_TYPE assetType
+				  ,fa.ASSET_NAME assetName
+				  ,fa.ISIN isin
+				  ,fa.ASSET_CURRENT_SHARE assetCurrentShare
+				  ,fa.ASSET_PURCHASE_PRICE_AVG assetPurchasePriceAvg
+				  ,fa.STOCK_PURCHASED_NUMBER stockPurchasedNumber
+				  ,fa.ASSET_AMOUNT_ON_PURCHASE_TIME assetAmountOnPurchaseTime
+				  ,fa.ASSET_PRICE_ON_GENERATION_REPORT_DATE assetPriceOnGenerationReportDate
+				  ,fa.ASSETS_AMOUNT_ON_GENERATION_REPORT_DATE assetsAmountOnGenerationReportDate
+				  ,fa.COUPON_RATE couponRate
+				  ,fa.ACCUMULATED_COUPON_INCOME accumulatedCouponIncome
+				  ,fa.REPORT_DATE reportDate
+				  ,fa.REPORT_DATE_VERSION reportDateVersion
+				  ,fa.IMPORT_DOCUMENT_ID importDocumentId
+				  ,fa.CONF_VERSION confVersion
+				  ,fa.LOADED_BY loadedBy
+				  ,fa.LOAD_DATE loadDate
+			FROM
+				BFX_IMPL.FUND_ASSETS fa
+                JOIN FA_MAX_REPORTS famr ON famr.MAX_REPORT_DATE_VERSION = fa.REPORT_DATE_VERSION AND famr.REPORT_DATE = fa.REPORT_DATE
+			WHERE fa.REPORT_DATE = f.REPORT_DATE AND fa.DOCUMENT_NUMBER = f.DOCUMENT_NUMBER
+			FOR JSON PATH
+		) AS ASSETS
+FROM BFX_IMPL.FUND f
+JOIN F_MAX_REPORTS fmr ON fmr.REPORT_DATE = f.REPORT_DATE AND fmr.MAX_REPORT_DATE_VERSION = f.REPORT_DATE_VERSION
+WHERE 1 = 1
+{{#if parameters.importDocumentId}}
+	AND f.IMPORT_DOCUMENT_ID = @importDocumentId
+{{/if}}
+{{#if parameters.documentNumber}}
+	AND f.DOCUMENT_NUMBER = @documentNumber
+{{/if}}
+{{#if parameters.maxVersion}}
+	AND f.CONF_VERSION = (SELECT MAX(CONF_VERSION) MAX_VERSION FROM BFX_IMPL.FUND)
+{{/if}}
+{{#if parameters.maxReportDateVersion}}
+	AND f.REPORT_DATE_VERSION = (SELECT MAX(REPORT_DATE_VERSION) MAX_REPORT_DATE_VERSION FROM BFX_IMPL.FUND_ASSETS)
+{{/if}}
+{{#if parameters.confVersion}}
+	AND f.CONF_VERSION = @confVersion
+{{/if}}
+{{#if parameters.reportDate}}
+	AND f.REPORT_DATE = @reportDate
+{{/if}}
+{{#if parameters.reportDateVersion}}
+	AND f.REPORT_DATE_VERSION = @reportDateVersion
+{{/if}}
+{{#if parameters.maxReportDateVersion}}
+	AND f.REPORT_DATE_VERSION = (SELECT MAX(REPORT_DATE_VERSION) MAX_REPORT_DATE_VERSION FROM BFX_IMPL.FUND_ASSETS)
+{{/if}}

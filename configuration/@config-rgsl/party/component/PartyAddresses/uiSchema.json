@@ -1,0 +1,100 @@
+{
+    "type": "DataGrid",
+    "defaultPageSizes": "5",
+    "value": {
+        "$ref": "#"
+    },
+    "mode": "Array",
+    "labelType": "H1",
+    "label": "PartyAddresses",
+    "isCollapsed": false,
+    "pagination": {
+        "mode": "Regular",
+        "pageSizes": [
+            5,
+            10,
+            15
+        ]
+    },
+    "actions": [
+        "Add",
+        "Edit",
+        "Delete"
+    ],
+    "edit": {
+        "mode": "Detached",
+        "onBeforeGridAction": "addressOnBeforeGridAction",
+        "onAfterGridAction": "addressOnAfterGridAction",
+        "onPrepareAddedRow": "addressOnPrepareAddedRow"
+    },
+    "height": "Small",
+    "columns": [
+        {
+            "title": "addressType",
+            "name": "addressType",
+            "cellContent": {
+                "type": "OutputText",
+                "defaultValue": "",
+                "value": {
+                    "$ref": "#/properties/addressType/properties/addressTypeDesc"
+                }
+            }
+        },
+        {
+            "title": "fullAddress",
+            "name": "fullAddress",
+            "cellContent": {
+                "type": "OutputText",
+                "defaultValue": "",
+                "value": {
+                    "$ref": "#/properties/fullAddress/properties/value"
+                }
+            }
+        },
+        {
+            "title": "actualFrom",
+            "name": "actualFrom",
+            "cellContent": {
+                "type": "OutputText",
+                "defaultValue": "",
+                "value": {
+                    "$ref": "#/properties/actualFrom"
+                }
+            }
+        },
+        {
+            "title": "actualTo",
+            "name": "actualTo",
+            "cellContent": {
+                "type": "OutputText",
+                "defaultValue": "",
+                "value": {
+                    "$ref": "#/properties/actualTo"
+                }
+            }
+        }
+    ],
+    "detailsTemplates": {
+        "edit": {
+            "content": {
+                "type": "Component",
+                "name": "PartyAddress",
+                "value": {
+                    "$ref": "#"
+                }
+            }
+        }
+    },
+    "rule": {
+        "effect": "ENABLE_INITIAL",
+        "condition": {
+            "type": "FUNC",
+            "ruleFunction": "enablePartyAddresses",
+            "value": [
+                {
+                    "$ref": "#"
+                }
+            ]
+        }
+    }
+}

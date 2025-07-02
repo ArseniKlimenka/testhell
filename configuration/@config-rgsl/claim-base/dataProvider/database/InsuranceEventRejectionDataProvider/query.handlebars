@@ -1,0 +1,15 @@
+﻿SELECT ct.CODE,
+	   ct.DESCRIPTION
+FROM BFX_IMPL.INSURED_EVENT_REJECTION ct
+WHERE 1 = 1
+{{#if parameters.code}}
+	AND ct.CODE = @code
+{{/if}}
+{{#if parameters.description}}
+{{#if parameters.fullText}}
+AND (ct.CODE LIKE @description OR ct.DESCRIPTION LIKE @description)
+{{else}}
+AND ct.DESCRIPTION LIKE @description
+{{/if}}
+{{/if}}
+ORDER BY ct.CODE ASC

@@ -1,0 +1,184 @@
+{
+    "processType": "PaymentOrder",
+    "actors": [
+        "PaymentOrderAdministrator",
+        "PaymentOrderSpecialist",
+        "System",
+        "PaymentOrderViewer"
+    ],
+    "initialState": "Draft",
+    "states": [
+        {
+            "name": "Draft",
+            "operations": [
+                "Save"
+            ]
+        },
+        {
+            "name": "WaitingForApproval"
+        },
+        {
+            "name": "Cancelled"
+        },
+        {
+            "name": "Approved"
+        },
+        {
+            "name": "PaymentError"
+        },
+        {
+            "name": "Paid",
+            "operations": [
+                "Save"
+            ]
+        },
+        {
+            "name": "UpdateRelatedEntitiesError"
+        },
+        {
+            "name": "PaidCancelledNetting"
+        }
+    ],
+    "transitions": [
+        {
+            "name": "Draft_to_WaitingForApproval",
+            "from": "Draft",
+            "to": "WaitingForApproval",
+            "actionToRunBefore": "onBeforeTransition"
+        },
+        {
+            "name": "WaitingForApproval_to_Draft",
+            "from": "WaitingForApproval",
+            "to": "Draft",
+            "actionToRunBefore": "onBeforeTransition"
+        },
+        {
+            "name": "Draft_to_Cancelled",
+            "from": "Draft",
+            "to": "Cancelled",
+            "allowOnValidationErrors": {
+                "all": true
+            },
+            "actionToRunBefore": "onBeforeTransition"
+        },
+        {
+            "name": "WaitingForApproval_to_Cancelled",
+            "from": "WaitingForApproval",
+            "to": "Cancelled",
+            "allowOnValidationErrors": {
+                "all": true
+            },
+            "actionToRunBefore": "onBeforeTransition"
+        },
+        {
+            "name": "Draft_to_Approved",
+            "from": "Draft",
+            "to": "Approved",
+            "actionToRunBefore": "onBeforeTransition"
+        },
+        {
+            "name": "WaitingForApproval_to_Approved",
+            "from": "WaitingForApproval",
+            "to": "Approved",
+            "actionToRunBefore": "onBeforeTransition"
+        },
+        {
+            "name": "Approved_to_Paid",
+            "from": "Approved",
+            "to": "Paid",
+            "actionToRunBefore": "onBeforeTransition"
+        },
+        {
+            "name": "Paid_to_PaidCancelledNetting",
+            "from": "Paid",
+            "to": "PaidCancelledNetting",
+            "actionToRunBefore": "onBeforeTransition"
+        },
+        {
+            "name": "PaidCancelledNetting_to_Paid",
+            "from": "PaidCancelledNetting",
+            "to": "Paid",
+            "actionToRunBefore": "onBeforeTransition"
+        },
+        {
+            "name": "PaymentError_to_WaitingForApproval",
+            "from": "PaymentError",
+            "to": "WaitingForApproval",
+            "actionToRunBefore": "onBeforeTransition"
+        },
+        {
+            "name": "Approved_to_PaymentError",
+            "from": "Approved",
+            "to": "PaymentError",
+            "actionToRunBefore": "onBeforeTransition"
+        },
+        {
+            "name": "Paid_to_UpdateRelatedEntitiesError",
+            "from": "Paid",
+            "to": "UpdateRelatedEntitiesError",
+            "actionToRunBefore": "onBeforeTransition"
+        },
+        {
+            "name": "UpdateRelatedEntitiesError_to_Paid",
+            "from": "UpdateRelatedEntitiesError",
+            "to": "Paid",
+            "actionToRunBefore": "onBeforeTransition"
+        },
+        {
+            "name": "Draft_to_Approved_NoErrors",
+            "from": "Draft",
+            "to": "Approved",
+            "allowOnValidationErrors": {
+                "all": true
+            }
+        },
+        {
+            "name": "Draft_to_WaitingForApproval_NoErrors",
+            "from": "Draft",
+            "to": "WaitingForApproval",
+            "allowOnValidationErrors": {
+                "all": true
+            }
+        },
+        {
+            "name": "WaitingForApproval_to_Approved_NoErrors",
+            "from": "WaitingForApproval",
+            "to": "Approved",
+            "allowOnValidationErrors": {
+                "all": true
+            }
+        },
+        {
+            "name": "Approved_to_Paid_NoErrors",
+            "from": "Approved",
+            "to": "Paid",
+            "allowOnValidationErrors": {
+                "all": true
+            }
+        },
+        {
+            "name": "Paid_to_PaidCancelledNetting_NoErrors",
+            "from": "Paid",
+            "to": "PaidCancelledNetting",
+            "allowOnValidationErrors": {
+                "all": true
+            }
+        },
+        {
+            "name": "PaidCancelledNetting_to_Paid_NoErrors",
+            "from": "PaidCancelledNetting",
+            "to": "Paid",
+            "allowOnValidationErrors": {
+                "all": true
+            }
+        },
+        {
+            "name": "Paid_to_Cancelled_NoErrors",
+            "from": "Paid",
+            "to": "Cancelled",
+            "allowOnValidationErrors": {
+                "all": true
+            }
+        }
+    ]
+}

@@ -1,0 +1,568 @@
+{
+    "mappings": {
+        "dynamic": "strict",
+        "dynamic_templates": [
+            {
+                "additional_attributes_template": {
+                    "path_match": "additionalAttributes.*",
+                    "mapping": {
+                        "type": "object",
+                        "dynamic": "strict",
+                        "properties": {
+                            "valueCode": {
+                                "type": "keyword"
+                            },
+                            "value": {
+                                "type": "text"
+                            },
+                            "fullTextSearchableValue": {
+                                "type": "text",
+                                "copy_to": [
+                                    "body._summary"
+                                ]
+                            }
+                        }
+                    }
+                }
+            }
+        ],
+        "properties": {
+            "id": {
+                "type": "keyword"
+            },
+            "code": {
+                "type": "keyword",
+                  "fields": {
+                    "as_int": {
+                    "type": "integer"
+                    }
+                }
+            },
+            "metadata": {
+                "properties": {
+                    "createdOn": {
+                        "type": "date"
+                    },
+                    "createdBy": {
+                        "type": "keyword"
+                    },
+                    "createdByDisplayName": {
+                        "type": "keyword"
+                    },
+                    "updatedOn": {
+                        "type": "date"
+                    },
+                    "updatedBy": {
+                        "type": "keyword"
+                    },
+                    "recordVersion": {
+                        "type": "integer"
+                    },
+                    "entityType": {
+                        "type": "keyword"
+                    },
+                    "configuration": {
+                        "properties": {
+                            "name": {
+                                "type": "keyword"
+                            },
+                            "version": {
+                                "type": "keyword"
+                            },
+                            "dimension": {
+                                "type": "keyword"
+                            }
+                        }
+                    },
+                    "ownership": {
+                        "properties": {
+                            "marketSegmentCode": {
+                                "type": "keyword"
+                            },
+                            "retention": {
+                                "dynamic": "false",
+                                "properties": {
+                                    "retentionDate": {
+                                        "type": "date"
+                                    },
+                                    "excludedRoot": {
+                                        "type": "boolean"
+                                    },
+                                    "excludedLeaf": {
+                                        "type": "boolean"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "body": {
+                "properties": {
+                    "_summary": {
+                        "type": "text"
+                    },
+                    "fullName": {
+                        "type": "text",
+                        "copy_to": [
+                            "body._summary"
+                        ]
+                    },
+                    "lastName": {
+                        "type": "text",
+                        "copy_to": [
+                            "body._summary"
+                        ]
+                    },
+                    "firstName": {
+                        "type": "text",
+                        "copy_to": [
+                            "body._summary"
+                        ]
+                    },
+                    "middleName": {
+                        "type": "text",
+                        "copy_to": [
+                            "body._summary"
+                        ]
+                    },
+                    "personGender": {
+                        "type": "text",
+                        "copy_to": [
+                            "body._summary"
+                        ]
+                    },
+                    "dateOfBirth": {
+                        "type": "date",
+                        "format": "strict_date"
+                    },
+                    "birthPlace": {
+                        "type": "text"
+                    },
+                    "OGRNOGRNIP": {
+                        "type": "text",
+                        "copy_to": [
+                            "body._summary"
+                        ]
+                    },
+                    "fullOrgName": {
+                        "type": "text",
+                        "copy_to": [
+                            "body._summary"
+                        ]
+                    },
+                    "shortOrgName": {
+                        "type": "text",
+                        "copy_to": [
+                            "body._summary"
+                        ]
+                    },
+                    "INNKIO": {
+                        "type": "keyword"
+                    },
+                    "KPP": {
+                        "type": "keyword"
+                    },
+                    "isNonResident": {
+                        "type": "boolean"
+                    },
+                    "duplicateMasterNumber": {
+                        "type": "text"
+                    },
+                    "identityDocuments": {
+                        "properties": {
+                            "identityDocumentType": {
+                                "type": "keyword"
+                            },
+                            "documentSeries": {
+                                "type": "keyword"
+                            },
+                            "documentNumber": {
+                                "type": "keyword"
+                            },
+                            "issueDate": {
+                                "type": "date",
+                                "format": "strict_date"
+                            },
+                            "issuerName": {
+                                "type": "text"
+                            },
+                            "issuerCode": {
+                                "type": "text"
+                            }
+                        }
+                    },
+                    "bankAccounts": {
+                        "properties": {
+                            "accountNumber": {
+                                "type": "keyword"
+                            },
+                            "bankId": {
+                                "type": "keyword"
+                            },
+                            "bankName": {
+                                "type": "keyword"
+                            },
+                            "bankBic": {
+                                "type": "keyword"
+                            },
+                            "bankCorrespondentAccount": {
+                                "type": "keyword"
+                            },
+                            "SWIFT": {
+                                "type": "keyword"
+                            },
+                            "IBAN": {
+                                "type": "keyword"
+                            },
+                            "foreignBank": {
+                                "type": "boolean"
+                            },
+                            "currency": {
+                                "dynamic": "strict",
+                                "properties": {
+                                    "currencyCode": {
+                                        "type": "keyword"
+                                    },
+                                    "currencyDesc": {
+                                        "type": "text"
+                                    },
+                                    "currencyNumericCode": {
+                                        "type": "keyword"
+                                    }
+                                }
+                            },
+                            "openingDate": {
+                                "type": "date",
+                                "format": "strict_date"
+                            },
+                            "closingDate": {
+                                "type": "date",
+                                "format": "strict_date"
+                            },
+                            "bankInn": {
+                                "type": "keyword"
+                            }
+                        }
+                    },
+                    "naturalPersonCategory": {
+                        "type": "text"
+                    },
+                    "citizenship": {
+                        "dynamic": "strict",
+                        "properties": {
+                            "countryCode": {
+                                "type": "keyword"
+                            },
+                            "countryShortName": {
+                                "type": "text"
+                            },
+                            "countryFullName": {
+                                "type": "text"
+                            },
+                            "alfa2": {
+                                "type": "text"
+                            },
+                            "alfa3": {
+                                "type": "text"
+                            }
+                        }
+                    },
+                    "SNILS": {
+                        "type": "keyword"
+                    },
+                    "isPublicOfficial": {
+                        "type": "boolean"
+                    },
+                    "executivePerson": {
+                        "dynamic": "strict",
+                        "properties": {
+                            "executivePersonCode": {
+                                "type": "keyword"
+                            },
+                            "executivePersonDesc": {
+                                "type": "text"
+                            }
+                        }
+                    },
+                    "relationType": {
+                        "type": "text"
+                    },
+                    "partyEmails": {
+                        "dynamic": "strict",
+                        "properties": {
+                            "email": {
+                                "type": "keyword"
+                            },
+                            "isForNewsletters": {
+                                "type": "boolean"
+                            },
+                            "isPreferable": {
+                                "type": "boolean"
+                            }
+                        }
+                    },
+                    "partyPhones": {
+                        "dynamic": "strict",
+                        "properties": {
+                            "countryCode": {
+                                "dynamic": "strict",
+                                "properties": {
+                                    "countryCode": {
+                                        "type": "text"
+                                    },
+                                    "alfa2": {
+                                        "type": "text"
+                                    },
+                                    "countryShortName": {
+                                        "type": "text"
+                                    },
+                                    "countryPhoneCode": {
+                                        "type": "text"
+                                    }
+                                }
+                            },
+                            "phoneType": {
+                                "dynamic": "strict",
+                                "properties": {
+                                    "phoneTypeCode": {
+                                        "type": "text"
+                                    },
+                                    "phoneTypeDesc": {
+                                        "type": "text"
+                                    }
+                                }
+                            },
+                            "cityCode": {
+                                "type": "text"
+                            },
+                            "number": {
+                                "type": "keyword"
+                            },
+                            "fullNumber": {
+                                "type": "keyword"
+                            },
+                            "fullNumberFormatted": {
+                                "type": "keyword"
+                            },
+                            "isForNewsletters": {
+                                "type": "boolean"
+                            },
+                            "isPreferable": {
+                                "type": "boolean"
+                            },
+                            "isAdditional": {
+                                "type": "boolean"
+                            },
+                            "isNonActual": {
+                                "type": "boolean"
+                            },
+                            "comments": {
+                                "type": "text",
+                                "index": false
+                            }
+                        }
+                    },
+                    "partyAddresses": {
+                        "dynamic": "strict",
+                        "properties": {
+                            "isManualAddress": {
+                                "type": "boolean"
+                            },
+                            "manualCountry": {
+                                "dynamic": "strict",
+                                "properties": {
+                                    "countryShortName": {
+                                        "type": "text"
+                                    },
+                                    "countryCode": {
+                                        "type": "keyword"
+                                    },
+                                    "countryFullName": {
+                                        "type": "text"
+                                    },
+                                    "alfa2": {
+                                        "type": "text"
+                                    },
+                                    "alfa3": {
+                                        "type": "text"
+                                    }
+                                }
+                            },
+                            "isForeignAddress": {
+                                "type": "boolean"
+                            },
+                            "isSameAsRegistration": {
+                                "type": "boolean"
+                            },
+                            "fullAddress": {
+                                "dynamic": "true",
+                                "properties": {
+                                    "value": {
+                                        "type": "text"
+                                    },
+                                    "data": {
+                                        "type": "object",
+                                        "dynamic": "true"
+                                    }
+                                }
+                            },
+                            "addressType": {
+                                "dynamic": "true",
+                                "properties": {
+                                    "addressTypeCode": {
+                                        "type": "text"
+                                    },
+                                    "addressTypeDesc": {
+                                        "type": "text"
+                                    }
+                                }
+                            },
+                            "comment": {
+                                "type": "text",
+                                "index": false
+                            },
+                            "postalCode": {
+                                "type": "text"
+                            },
+                            "country": {
+                                "type": "text"
+                            },
+                            "region": {
+                                "type": "text"
+                            },
+                            "area": {
+                                "type": "text"
+                            },
+                            "city": {
+                                "type": "text"
+                            },
+                            "settlement": {
+                                "type": "text"
+                            },
+                            "street": {
+                                "type": "text"
+                            },
+                            "house": {
+                                "type": "text"
+                            },
+                            "houseExtension": {
+                                "type": "text"
+                            },
+                            "flat": {
+                                "type": "text"
+                            },
+                            "codeOkato": {
+                                "type": "text"
+                            },
+                            "codeKladr": {
+                                "type": "text"
+                            },
+                            "actualFrom": {
+                                "type": "date",
+                                "format": "strict_date"
+                            },
+                            "actualTo": {
+                                "type": "date",
+                                "format": "strict_date"
+                            },
+                            "streetType": {
+                                "type": "text"
+                            },
+                            "settlementWithType": {
+                                "type": "text"
+                            },
+                            "cityType": {
+                                "type": "text"
+                            },
+                            "regionWithType": {
+                                "type": "text"
+                            },
+                            "areaWithType": {
+                                "type": "text"
+                            },
+                            "korpus": {
+                                "type": "text"
+                            },
+                            "stroenie": {
+                                "type": "text"
+                            }
+                        }
+                    },
+                    "partyExcludedPersons": {
+                        "dynamic": "strict",
+                        "properties": {
+                            "excludedPersonName": {
+                                "type": "text"
+                            }
+                        }
+                    },
+                    "partyTaxResidencies": {
+                        "dynamic": "strict",
+                        "properties": {
+                            "residenceCountry": {
+                                "dynamic": "strict",
+                                "properties": {
+                                    "countryShortName": {
+                                        "type": "text",
+                                        "index": false
+                                    },
+                                    "countryCode": {
+                                        "type": "keyword"
+                                    },
+                                    "countryFullName": {
+                                        "type": "text",
+                                        "index": false
+                                    },
+                                    "alfa2": {
+                                        "type": "text"
+                                    },
+                                    "alfa3": {
+                                        "type": "text"
+                                    }
+                                }
+                            },
+                            "docType": {
+                                "dynamic": "strict",
+                                "properties": {
+                                    "docTypeCode": {
+                                        "type": "keyword"
+                                    },
+                                    "docTypeDesc": {
+                                        "type": "text",
+                                        "index": false
+                                    },
+                                    "docTypeClass": {
+                                        "type": "keyword"
+                                    },
+                                    "allowToSalers": {
+                                        "type": "boolean"
+                                    }
+                                }
+                            },
+                            "otherDocTypeDesc": {
+                                "type": "text",
+                                "index": false
+                            },
+                            "startDate": {
+                                "type": "date",
+                                "format": "strict_date"
+                            },
+                            "endDate": {
+                                "type": "date",
+                                "format": "strict_date"
+                            },
+                            "daysCount": {
+                                "type": "integer"
+                            }
+                        }
+                    },
+                    "additionalAttributes": {
+                        "type": "object",
+                        "dynamic": "true"
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,230 @@
+{
+    "type": "Group",
+    "elements": [
+        {
+            "type": "DataGrid",
+            "elementId": "EtlServiceManagementViewId",
+            "mode": "DataSource",
+            "onInit": "initializeEtlServiceManagementView",
+            "pagination": {
+                "mode": "Regular",
+                "pageSizes": [
+                    5,
+                    10,
+                    15
+                ]
+            },
+            "header": {
+                "toolbar": {
+                    "type": "Group",
+                    "stackContent": "Right",
+                    "elements": [
+                        {
+                            "type": "Group",
+                            "elements": [
+                                {
+                                    "type": "OutputText",
+                                    "template": "{{#style 'bold'}}Refresh interval{{/style}}",
+                                    "width": 1
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Slider",
+                            "label": "Refresh interval",
+                            "step": 1,
+                            "minValue": 1,
+                            "width": 0.5,
+                            "maxValue": 30,
+                            "suffix": "s",
+                            "value": {
+                                "$ref": "#/properties/request/properties/data/properties/refreshInterval"
+                            },
+                            "onValueChanged": [
+                                {
+                                    "commandType": "executeAction",
+                                    "actionName": "onRefreshIntervalChange"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            },
+            "columns": [
+                {
+                    "title": "",
+                    "cellContent": {
+                        "type": "Icon",
+                        "iconStyleFunction": "showIconForRowStatus",
+                        "iconStyle": {
+                            "name": "circle-question",
+                            "size": "Large"
+                        },
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/state"
+                        }
+                    }
+                },
+                {
+                    "title": "Name",
+                    "sortable": true,
+                    "name": "name",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/etlConfigurationCodeName"
+                        }
+                    }
+                },
+                {
+                    "title": "State",
+                    "sortable": true,
+                    "name": "state",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/state"
+                        }
+                    }
+                },
+                {
+                    "title": "Requested on",
+                    "sortable": true,
+                    "name": "requestedOn",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/requestedOn"
+                        }
+                    }
+                },
+                {
+                    "title": "Requested by",
+                    "sortable": true,
+                    "name": "requestedBy",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/requestedByUsername"
+                        }
+                    }
+                },
+                {
+                    "title": "Started on",
+                    "sortable": true,
+                    "name": "startedOn",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/startedOn"
+                        }
+                    }
+                },
+                {
+                    "title": "Completed on",
+                    "sortable": true,
+                    "name": "completedOn",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/completedOn"
+                        }
+                    }
+                },
+                {
+                    "title": "Cancel requested on",
+                    "sortable": true,
+                    "name": "cancelRequestedOn",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/cancelRequestedOn"
+                        }
+                    }
+                },
+                {
+                    "title": "",
+                    "cellContent": {
+                        "type": "GridButtonGroup",
+                        "elements": [
+                            {
+                                "type": "Button",
+                                "label": "Cancel",
+                                "onClick": "cancelEtlService",
+                                "icon": {
+                                    "name": "xmark"
+                                },
+                                "value": {
+                                    "$ref": "#"
+                                },
+                                "rule": {
+                                    "effect": "ENABLE_INITIAL",
+                                    "condition": {
+                                        "type": "LEAF",
+                                        "inValues": [
+                                            "Requested",
+                                            "Processing"
+                                        ],
+                                        "value": {
+                                            "$ref": "#/properties/resultData/properties/state"
+                                        }
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                },
+                {
+                    "title": "",
+                    "cellContent": {
+                        "type": "GridButtonGroup",
+                        "elements": [
+                            {
+                                "type": "Button",
+                                "label": "Restart",
+                                "onClick": "restartEtlService",
+                                "icon": {
+                                    "name": "clone"
+                                },
+                                "value": {
+                                    "$ref": "#"
+                                },
+                                "rule": {
+                                    "effect": "ENABLE_INITIAL",
+                                    "condition": {
+                                        "type": "FUNC",
+                                        "expectedValue": true,
+                                        "value": [
+                                            {
+                                                "$ref": "#/properties/resultData/properties/restartable"
+                                            },
+                                            {
+                                                "$ref": "#/properties/resultData/properties/state"
+                                            }
+                                        ],
+                                        "ruleFunction": "shouldRestartButtonBeVisible"
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                }
+            ],
+            "actions": [
+                "Details"
+            ],
+            "detailsTemplates": {
+                "view": {
+                    "mode": "Inline",
+                    "content": {
+                        "type": "Component",
+                        "name": "EtlServiceManagementUiDetail",
+                        "value": {
+                            "$ref": "#"
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}

@@ -1,0 +1,317 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema",
+    "type": "object",
+    "additionalProperties": false,
+    "aiValidation": {
+        "rule": "rootLevelValidation"
+    },
+    "aiDataEnrichment": [
+        {
+            "name": "GetDuplicatedClaims",
+            "dataSource": "ClaimSearchDataSource"
+        },
+        {
+            "name": "GetRisksData",
+            "dataSource": "RisksDataSource"
+        },
+        {
+            "name": "GetPolicyData",
+            "dataSource": "GeneralContractSearchDataSource"
+        },
+        {
+            "name": "GetApplicant",
+            "dataSource": "GetPartyDataSource"
+        },
+        {
+            "name": "GetPolicyOpenAmountData",
+            "dataSource": "GetContractOpenAmountDataSource"
+        },
+        {
+            "name": "GetPolicyCancellationData",
+            "dataSource": "AmendmentInfoDataSource"
+        },
+        {
+            "name": "CheckRelatedPaymentOrders",
+            "dataSource": "PaymentOrderBasicInfoDataSource"
+        }
+    ],
+    "aiAudit": {
+        "scope": "General"
+    },
+    "properties": {
+        "mainAttributes": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "contract": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+                        "number": {
+                            "type": "string"
+                        },
+                        "holder": {
+                            "type": "string"
+                        },
+                        "configurationName": {
+                            "type": "string"
+                        },
+                        "configurationVersion": {
+                            "type": "string"
+                        },
+                        "stateCode": {
+                            "type": "string"
+                        },
+                        "stateDescription": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "availableRisks": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "properties": {
+                            "riskCode": {
+                                "type": "string"
+                            },
+                            "riskShortDescription": {
+                                "type": "string"
+                            },
+                            "businessLine": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                },
+                "selectedRisk": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+                        "riskCode": {
+                            "type": "string"
+                        },
+                        "riskShortDescription": {
+                            "type": "string"
+                        },
+                        "businessLine": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "insuredEvent": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+                        "insuredEventNumber": {
+                            "type": "string"
+                        },
+                        "insuredEventType": {
+                            "type": "object",
+                            "additionalProperties": false,
+                            "properties": {
+                                "code": {
+                                    "type": "string"
+                                },
+                                "description": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "insuredEventReason": {
+                            "type": "object",
+                            "additionalProperties": false,
+                            "properties": {
+                                "code": {
+                                    "type": "string"
+                                },
+                                "description": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "insuredEventDate": {
+                            "type": "string",
+                            "aiFormat": "date"
+                        },
+                        "daysWithoutWork": {
+                            "type": "number",
+                            "minimum": 0,
+                            "maximum": 10000,
+                            "clearValueOutOfRange": true
+                        }
+                    }
+                },
+                "diagnosis": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+                        "code": {
+                            "type": "string"
+                        },
+                        "description": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "diagnosisNote": {
+                    "type": "string"
+                },
+                "rejectionReason": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+                        "code": {
+                            "type": "string"
+                        },
+                        "description": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "rejectionNote": {
+                    "type": "string"
+                },
+                "applicationInfo": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+                        "applicant": {
+                            "type": "object",
+                            "additionalProperties": false,
+                            "properties": {
+                                "partyCode": {
+                                    "type": "string"
+                                },
+                                "partyType": {
+                                    "type": "string"
+                                },
+                                "fullName": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "receiveMethod": {
+                            "$ref": "component:StatementReceiveMethod",
+                            "aiTitle": "receiveMethod"
+                        }
+                    }
+                },
+                "policyHolderInfo": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+                        "policyHolder": {
+                            "type": "object",
+                            "additionalProperties": false,
+                            "properties": {
+                                "partyCode": {
+                                    "type": "string"
+                                },
+                                "partyType": {
+                                    "type": "string"
+                                },
+                                "fullName": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                },
+                "servicePeriodInfo": {
+                    "type": "string"
+                }
+            }
+        },
+        "claimAmounts": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "requestedClaimAmount": {
+                    "type": "number"
+                },
+                "paymentAmountInDocCurrency": {
+                    "type": "number"
+                },
+                "paymentAmountInRubCurrency": {
+                    "type": "number"
+                },
+                "exchangeRate": {
+                    "type": "number"
+                },
+                "contractCurrency": {
+                    "type": "string"
+                },
+                "rznu": {
+                    "type": "number"
+                },
+                "shouldUseNetting": {
+                    "type": "boolean"
+                },
+                "nonAcceptance": {
+                    "type": "boolean"
+                },
+                "isManualExchangeRate": {
+                    "type": "boolean"
+                },
+                "manualExchangeRate": {
+                    "type": "number"
+                },
+                "numberOfNonAcceptancePayment": {
+                    "type": "string"
+                },
+                "fixedExchangeRate": {
+                    "type": "number"
+                },
+                "fixedExchangeRateOriginalValue": {
+                    "type": "number"
+                },
+                "useFixedExchangeRate": {
+                    "type": "boolean"
+                },
+                "editFixedExchangeRate": {
+                    "type": "boolean"
+                },
+                "assignedPaymentOrderNumber": {
+                    "type": "string"
+                },
+                "isPaid": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "approvalConclusions": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "legalConclusion": {
+                    "type": "string"
+                },
+                "securityConclusion": {
+                    "type": "string"
+                }
+            }
+        },
+        "requestReasons": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "requestToClientReason": {
+                    "type": "string"
+                },
+                "requestToExtOrgReason": {
+                    "type": "string"
+                }
+            }
+        },
+        "claimMailSequence": {
+            "type": "string"
+        },
+        "tempTechnicalData": {
+            "type": "object",
+            "properties": {},
+            "additionalProperties": true
+        }
+    }
+}

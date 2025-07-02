@@ -1,0 +1,2 @@
+delete from bfx_impl.declaration_main where id = '9e589160-1e61-4118-9399-08837dc56ac7'; insert into bfx_impl.declaration_main values ('9e589160-1e61-4118-9399-08837dc56ac7', 'IBA3BFKO', '1', '8b99c25b-f160-48c9-a813-21f89c013af7', 'underwriting');
+delete from bfx_impl.declaration_main where id = 'd082159d-b203-4f6e-8306-0f1d96df158b'; insert into bfx_impl.declaration_main values ('d082159d-b203-4f6e-8306-0f1d96df158b', 'IBA5BFKO', '1', '8b99c25b-f160-48c9-a813-21f89c013af7', 'underwriting');

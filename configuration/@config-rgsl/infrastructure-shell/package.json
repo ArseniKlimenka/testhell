@@ -1,0 +1,62 @@
+{
+  "name": "@config-rgsl/infrastructure-shell",
+  "version": "1.0.0",
+  "description": "Infrastructure shell libraries",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test-validate": "node ../../../node_modules/@adinsure-tools/test-runner -t validation -e ../../../test/validate/test-main.js -c {{@config-rgsl::infrastructure::(?:.*)}}$",
+    "test-validate-debug": "node --inspect-brk ../../../node_modules/@adinsure-tools/test-runner -t validation -e ../../../test/validate/test-main.js -c {{@config-rgsl::infrastructure::(?:.*)}}$",
+    "build": "npm run build:validate-schemas & npm run build:build & npm run build:check-es-mapping & npm run build:config-items & npm run build:translate",
+    "build:check-es-mapping": "node ../../../node_modules/@adinsure-tools/studio-services/dist/scripts/check-es-mapping.js -w ../../../ -r ./",
+    "publish": "npm run build & npm run publish:import-config-items & npm run publish:import-translation & npm run publish:import-authorization & npm run publish:import-document-access-authorization & npm run publish:publish & npm run publish:import-data & npm run publish:import-group-authorization"
+  },
+  "keywords": [
+    "infrastructure-shell",
+    "configuration"
+  ],
+  "adInsure": {
+    "projectNameDisplay": "Infrastructure shell",
+    "ownershipScope": "infrastructure",
+    "domain": "SupportingProcesses"
+  },
+  "dependencies": {
+    "@config-rgsl/infrastructure": "1.0.0",
+    "@config-rgsl/party": "1.0.0",
+    "@config-rgsl/life-insurance": "1.0.0",
+    "@config-system/infrastructure": "43.4.0",
+    "@config-rgsl/accumulated-life-insurance": "1.0.0",
+    "@config-rgsl/risk-life-insurance": "1.0.0",
+    "@config-rgsl/service-provider": "1.0.0",
+    "@config-rgsl/partner": "1.0.0",
+    "@config-rgsl/employee": "1.0.0",
+    "@config-rgsl/reinsurer": "1.0.0",
+    "@config-rgsl/application-user": "1.0.0",
+    "@config-rgsl/organisation-unit": "1.0.0",
+    "@config-rgsl/workflow": "1.0.0",
+    "@config-rgsl/work-calendar": "1.0.0",
+    "@config-rgsl/investment-life-insurance": "1.0.0",
+    "@config-rgsl/credit-life-insurance": "1.0.0",
+    "@config-rgsl/contract": "1.0.0",
+    "@config-rgsl/natural-person": "1.0.0",
+    "@config-rgsl/legal-entity": "1.0.0",
+    "@config-rgsl/acc-cash-flow": "1.0.0",
+    "@config-rgsl/acc-payment-order": "1.0.0",
+    "@config-rgsl/acc-commission": "1.0.0",
+    "@config-rgsl/acc-rsd": "1.0.0",
+    "@config-rgsl/accounting": "1.0.0",
+    "@config-rgsl/agent-agreement": "1.0.0",
+    "@config-rgsl/claim": "1.0.0",
+    "@config-rgsl/editable-code-tables": "1.0.0",
+    "@config-rgsl/med-life-insurance": "1.0.0",
+    "@config-system/workflow": "43.4.0",
+    "@config-rgsl/acc-base": "1.0.0",
+    "@config-rgsl/collective-life-insurance": "1.0.0",
+    "@config-rgsl/equity-life-insurance": "1.0.0",
+    "@config-rgsl/portfolio-transfer": "1.0.0",
+    "@config-rgsl/accident-life-insurance": "1.0.0",
+    "@config-rgsl/asset-directory": "1.0.0"
+  }
+}

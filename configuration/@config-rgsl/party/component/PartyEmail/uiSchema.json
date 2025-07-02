@@ -1,0 +1,47 @@
+{
+    "type": "GridLayout",
+    "numberOfColumns": 4,
+    "elements": [
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "Input",
+                    "label": "email",
+                    "value": {
+                        "$ref": "#/properties/email"
+                    },
+                    "width": 2
+                },
+                {
+                    "type": "Input",
+                    "label": "isPreferable",
+                    "value": {
+                        "$ref": "#/properties/isPreferable"
+                    },
+                    "width": 1
+                },
+                {
+                    "type": "Input",
+                    "label": "isForNewsletters",
+                    "value": {
+                        "$ref": "#/properties/isForNewsletters"
+                    },
+                    "width": 1,
+                    "rule": {
+                        "effect": "SHOW",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "isBackOfficeUser",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    }
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,111 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema",
+    "description": "Response schema for correct EFR products reversed optional response.",
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+        "id": {
+            "type": "string",
+            "description": "Generated id for response."
+        },
+        "errorResponse": {
+            "type": "object",
+            "code": {
+                "type": "string",
+                "description": "Error code."
+            },
+            "message": {
+                "type": "string",
+                "description": "Error description."
+            },
+            "additionalErrorData": {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string",
+                        "description": "Additional error description."
+                    }
+                }
+            }
+        },
+        "data": {
+            "type": "array",
+            "description": "Array of grouped products by product group code",
+            "items": {
+                "type": "object",
+                "efrProductGroupCode": {
+                    "type": "string",
+                    "description": "EFR product group code"
+                },
+                "products": {
+                    "type": "array",
+                    "description": "Array of products",
+                    "items": {
+                        "type": "object",
+                        "efrProductCode": {
+                            "type": "string",
+                            "description": "EFR product code"
+                        },
+                        "efrTariff": {
+                            "type": "string",
+                            "description": "EFR product tariff"
+                        },
+                        "efrVariant": {
+                            "type": "string",
+                            "description": "EFR product variant"
+                        },
+                        "covers": {
+                            "type": "array",
+                            "description": "Array of covers",
+                            "items": {
+                                "type": "object",
+                                "cover": {
+                                    "type": "string",
+                                    "description": "Cover code"
+                                }
+                            }
+                        },
+                        "risks": {
+                            "type": "array",
+                            "description": "Array of risks",
+                            "items": {
+                                "type": "object",
+                                "efrRiskCode": {
+                                    "type": "string",
+                                    "description": "EFR risk code"
+                                },
+                                "efrRiskDescription": {
+                                    "type": "string",
+                                    "description": "EFR risk description"
+                                },
+                                "efrRiskMandatory": {
+                                    "type": "string",
+                                    "description": "EFR risk mandatory"
+                                }
+                            }
+                        },
+                        "investmentStrategies": {
+                            "type": "array",
+                            "description": "Array of investment strategies",
+                            "items": {
+                                "type": "object",
+                                "efrInvestmentStrategyCode": {
+                                    "type": "string",
+                                    "description": "EFR investment strategies code"
+                                },
+                                "efrInvestmentStrategyDescription": {
+                                    "type": "string",
+                                    "description": "EFR investment strategies description"
+                                },
+                                "efrInvestmentStrategyType": {
+                                    "type": "string",
+                                    "description": "EFR investment strategies type"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

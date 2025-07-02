@@ -1,0 +1,58 @@
+{
+    "mainDataSource": "GetRsdCandidatesToBePaidDataSource",
+    "useBackgroundTaskWorker": true,
+    "restartable": true,
+    "enableAutomaticRecovery": true,
+    "sinks": [
+        {
+            "name": "GetRsdAllocations",
+            "fetch": {
+                "configuration": {
+                    "name": "AllocationDataSource"
+                }
+            }
+        },
+        {
+            "name": "CancelRsdAllocations",
+            "class": {
+                "className": "Adacta.AdInsure.RGSL.Accounting.API.Shared.CashFlow.Allocation.Services.IAllocationServiceAppRGSL, Adacta.AdInsure.RGSL.Accounting.API",
+                "methodName": "Cancel"
+            }
+        },
+        {
+            "name": "ImportRequestRGSL",
+            "class": {
+                "className": "Adacta.AdInsure.RGSL.Accounting.API.Shared.CashFlow.BankStatement.Services.IBankStatementServiceAppRGSL, Adacta.AdInsure.RGSL.Accounting.API",
+                "methodName": "Create"
+            }
+        },
+        {
+            "name": "WriteContractBsiAss",
+            "database": {
+                "tables": [
+                    "ACC_IMPL.RSD_CONTRACT_BSI_LINK"
+                ]
+            }
+        },
+        {
+            "name": "AutoAllocateRGSL",
+            "class": {
+                "className": "Adacta.AdInsure.RGSL.Accounting.API.Shared.CashFlow.Allocation.Services.IAutoAllocationServiceAppRGSL, Adacta.AdInsure.RGSL.Accounting.API",
+                "methodName": "AutoAllocate"
+            }
+        }
+    ],
+    "completionSinks": [
+        {
+            "name": "FinishedRsdCompleting",
+            "documentTransition": {
+                "transition": {
+                    "transitionName": "Completing_To_Completed",
+                    "configurationName": "RSD",
+                    "configurationVersion": "1"
+                }
+            }
+        }
+    ],
+    "version": "1"
+}

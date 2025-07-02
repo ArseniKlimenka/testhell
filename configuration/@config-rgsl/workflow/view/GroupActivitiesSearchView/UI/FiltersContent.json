@@ -1,0 +1,448 @@
+{
+    "type": "Group",
+    "elements": [
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "Input",
+                    "control": "TextArea",
+                    "enableResize": true,
+                    "numberOfRows": 2,
+                    "label": "businessNumber",
+                    "value": {
+                        "$ref": "#/properties/request/properties/data/properties/criteria/properties/businessNumber"
+                    },
+                    "width": 1
+                },
+                {
+                    "type": "Input",
+                    "label": "activityStatus",
+                    "value": {
+                        "$ref": "#/properties/request/properties/data/properties/criteria/properties/activityStatus"
+                    },
+                    "control": "Dropdown",
+                    "width": 1
+                },
+                {
+                    "type": "Input",
+                    "control": "DateRange",
+                    "dateFrom": {
+                        "type": "Input",
+                        "label": "createdOnFrom",
+                        "width": 1,
+                        "value": {
+                            "$ref": "#/properties/request/properties/data/properties/criteria/properties/createdOnFrom"
+                        },
+                        "control": "DatetimePicker"
+                    },
+                    "dateTo": {
+                        "type": "Input",
+                        "label": "createdOnTo",
+                        "width": 1,
+                        "value": {
+                            "$ref": "#/properties/request/properties/data/properties/criteria/properties/createdOnTo"
+                        },
+                        "control": "DatetimePicker"
+                    },
+                    "width": 2
+                }
+            ]
+        },
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "Input",
+                    "label": "holderName",
+                    "value": {
+                        "$ref": "#/properties/request/properties/data/properties/criteria/properties/holderName"
+                    },
+                    "width": 1
+                },
+                {
+                    "type": "Input",
+                    "label": "insuredName",
+                    "value": {
+                        "$ref": "#/properties/request/properties/data/properties/criteria/properties/insuredName"
+                    },
+                    "width": 1
+                },
+                {
+                    "type": "Input",
+                    "control": "TextArea",
+                    "enableResize": true,
+                    "numberOfRows": 2,
+                    "label": "contractNumber",
+                    "value": {
+                        "$ref": "#/properties/request/properties/data/properties/criteria/properties/contractNumber"
+                    },
+                    "width": 1
+                }
+            ]
+        },
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "Input",
+                    "control": "DateRange",
+                    "dateFrom": {
+                        "type": "Input",
+                        "label": "closedOnFrom",
+                        "width": 1,
+                        "value": {
+                            "$ref": "#/properties/request/properties/data/properties/criteria/properties/closedOnFrom"
+                        },
+                        "control": "DatetimePicker"
+                    },
+                    "dateTo": {
+                        "type": "Input",
+                        "label": "closedOnTo",
+                        "width": 1,
+                        "value": {
+                            "$ref": "#/properties/request/properties/data/properties/criteria/properties/closedOnTo"
+                        },
+                        "control": "DatetimePicker"
+                    },
+                    "width": 2
+                }
+            ]
+        },
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "Input",
+                    "label": "groupCode",
+                    "enableClear": true,
+                    "preSelectFirstItem": false,
+                    "source": {
+                        "reloadOnOpen": false,
+                        "displayFieldName": "userGroupName",
+                        "valueFieldName": "userGroupCode",
+                        "dataSource": {
+                            "name": "GetGroupsOfUserDataSource",
+                            "resultCount": 100,
+                            "searchFieldPath": "userGroupName",
+                            "requestMapping": "prepareGetUserGroupsAPIRequest",
+                            "responseMapping": "getUserGroupsResponseMapping"
+                        }
+                    },
+                    "value": {
+                        "$ref": "#/properties/request/properties/data/properties/criteria/properties/groupCode"
+                    },
+                    "control": "Dropdown",
+                    "onValueChanged": [
+                        {
+                            "commandType": "executeAction",
+                            "actionName": "clearAssignee"
+                        },
+                        {
+                            "commandType": "executeAction",
+                            "actionName": "raiseEventOnSelect"
+                        }
+                    ],
+                    "elementId": "userGroupsSelect",
+                    "width": 1
+                },
+                {
+                    "type": "Group",
+                    "width": 1,
+                    "elements": [
+                        {
+                            "type": "Input",
+                            "label": "assigneeId",
+                            "enableClear": true,
+                            "source": {
+                                "reloadOnOpen": true,
+                                "displayFieldName": "displayName",
+                                "valueFieldName": "userId",
+                                "dataSource": {
+                                    "name": "GetUsersInGroupDataSource",
+                                    "resultCount": 100,
+                                    "searchFieldPath": "displayName",
+                                    "requestMapping": "prepareGetUsersInGroupAPIRequest",
+                                    "responseMapping": "getUsersInGroupResponseMapping"
+                                }
+                            },
+                            "rule": {
+                                "effect": "SHOW",
+                                "condition": {
+                                    "type": "FUNC",
+                                    "ruleFunction": "isGroupSelected",
+                                    "value": [
+                                        {
+                                            "$ref": "#/properties/request/properties/data/properties/criteria/properties/groupCode"
+                                        }
+                                    ]
+                                }
+                            },
+                            "value": {
+                                "$ref": "#/properties/request/properties/data/properties/criteria/properties/assigneeId"
+                            },
+                            "control": "Dropdown",
+                            "elementId": "groupMembersSelect",
+                            "width": 1
+                        }
+                    ],
+                    "rule": {
+                        "effect": "HIDE",
+                        "condition": {
+                            "type": "LEAF",
+                            "inValues": [
+                                "unassigned-tasks"
+                            ],
+                            "value": {
+                                "$ref": "#/properties/viewContext/properties/businessMode"
+                            }
+                        }
+                    }
+                },
+                {
+                    "type": "Input",
+                    "isCompact": true,
+                    "label": "showVerification",
+                    "value": {
+                        "$ref": "#/properties/request/properties/data/properties/criteria/properties/showVerification"
+                    },
+                    "onValueChanged": [
+                        {
+                            "commandType": "executeAction",
+                            "actionName": "onChangeShowVerification"
+                        }
+                    ],
+                    "rule": {
+                        "effect": "SHOW",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "isOperationsUser",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "type": "Group",
+                    "rule": {
+                        "effect": "SHOW",
+                        "condition": {
+                            "type": "LEAF",
+                            "expectedValue": true,
+                            "value": {
+                                "$ref": "#/properties/request/properties/data/properties/criteria/properties/showVerification"
+                            }
+                        }
+                    },
+                    "elements": [
+                        {
+                            "type": "Input",
+                            "control": "DateRange",
+                            "dateFrom": {
+                                "type": "Input",
+                                "label": "issueDateFrom",
+                                "width": 1,
+                                "value": {
+                                    "$ref": "#/properties/request/properties/data/properties/criteria/properties/issueDateFrom"
+                                },
+                                "control": "DatetimePicker"
+                            },
+                            "dateTo": {
+                                "type": "Input",
+                                "label": "issueDateTo",
+                                "width": 1,
+                                "value": {
+                                    "$ref": "#/properties/request/properties/data/properties/criteria/properties/issueDateTo"
+                                },
+                                "control": "DatetimePicker"
+                            },
+                            "width": 2
+                        },
+                        {
+                            "type": "Input",
+                            "label": "paymentFrequency",
+                            "source": {
+                                "dataSource": {
+                                    "name": "PaymentFrequencyDataSource",
+                                    "reloadOnOpen": true,
+                                    "searchFieldPath": "paymentFrequencyDescription",
+                                    "responseMapping": "paymentFrequencyResponseMapping"
+                                },
+                                "displayFieldName": "paymentFrequencyDescription"
+                            },
+                            "control": "Dropdown",
+                            "value": {
+                                "$ref": "#/properties/request/properties/data/properties/criteria/properties/paymentFrequency"
+                            },
+                            "width": 1
+                        },
+                        {
+                            "type": "Input",
+                            "label": "insuranceProduct",
+                            "multiple": true,
+                            "source": {
+                                "dataSource": {
+                                    "name": "ProductsDataSource",
+                                    "searchFieldPath": "description",
+                                    "requestMapping": "productRequestMapping",
+                                    "responseMapping": "productResponseMapping",
+                                    "resultCount": 1000
+                                },
+                                "displayFieldName": "productDescription"
+                            },
+                            "autocomplete": {
+                                "minTextLength": 0,
+                                "dropDownItemsCount": 1000,
+                                "selectItemOnMatch": false
+                            },
+                            "control": "Dropdown",
+                            "value": {
+                                "$ref": "#/properties/request/properties/data/properties/criteria/properties/insuranceProducts"
+                            },
+                            "width": 1
+                        },
+                        {
+                            "type": "Lookup",
+                            "label": "partner",
+                            "commands": [
+                                {
+                                    "commandType": "executeOperation",
+                                    "operation": "SEARCH",
+                                    "errorHandling": "silent",
+                                    "data": null
+                                }
+                            ],
+                            "value": {
+                                "$ref": "#"
+                            },
+                            "width": 2,
+                            "dialogButton": {},
+                            "clearButton": {
+                                "clearAction": "partnerClear"
+                            },
+                            "dialog": {
+                                "viewReference": {
+                                    "configurationCodeName": "ServiceProviderSearchView",
+                                    "configurationVersion": "1",
+                                    "configurationConceptType": "SearchView"
+                                },
+                                "onLoad": "partnerOnLoad"
+                            },
+                            "onSelected": "partnerOnSelected",
+                            "selectedDisplayValueUISchema": {
+                                "type": "Input",
+                                "label": "partner",
+                                "readOnly": true,
+                                "value": {
+                                    "$ref": "#/properties/request/properties/data/properties/criteria/properties/partner/properties/partnerDescription"
+                                }
+                            }
+                        },
+                        {
+                            "type": "Input",
+                            "label": "attachmentVerificationState",
+                            "value": {
+                                "$ref": "#/properties/request/properties/data/properties/criteria/properties/attachmentVerificationState"
+                            },
+                            "control": "Dropdown",
+                            "width": 1
+                        },
+                        {
+                            "type": "Input",
+                            "label": "contractStates",
+                            "multiple": true,
+                            "value": {
+                                "$ref": "#/properties/request/properties/data/properties/criteria/properties/contractStates"
+                            },
+                            "control": "Dropdown",
+                            "width": 1
+                        },
+                        {
+                            "type": "Input",
+                            "label": "holderAgeFrom",
+                            "value": {
+                                "$ref": "#/properties/request/properties/data/properties/criteria/properties/holderAgeFrom"
+                            },
+                            "width": 1
+                        },
+                        {
+                            "type": "Input",
+                            "label": "holderAgeTo",
+                            "value": {
+                                "$ref": "#/properties/request/properties/data/properties/criteria/properties/holderAgeTo"
+                            },
+                            "width": 1
+                        },
+                        {
+                            "type": "Input",
+                            "isCompact": true,
+                            "label": "hideUnassignedTasks",
+                            "value": {
+                                "$ref": "#/properties/request/properties/data/properties/criteria/properties/hideUnassignedTasks"
+                            },
+                            "onValueChanged": [
+                                {
+                                    "commandType": "executeAction",
+                                    "actionName": "onhideUnassignedTasksChange"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "Section",
+            "label": "Group Members",
+            "collapsing": {
+                "enabled": true,
+                "initial": true
+            },
+            "sectionLevel": 2,
+            "hide": true,
+            "rule": {
+                "effect": "SHOW",
+                "condition": {
+                    "type": "FUNC",
+                    "ruleFunction": "showGroupMembersSection",
+                    "value": [
+                        {
+                            "$ref": "#"
+                        }
+                    ]
+                }
+            },
+            "elements": [
+                {
+                    "type": "InlineView",
+                    "showContainerActions": false,
+                    "views": [
+                        {
+                            "viewReference": {
+                                "configurationCodeName": "GroupMembersWithAvailabilitiesView",
+                                "configurationConceptType": "SearchView",
+                                "configurationVersion": "1"
+                            }
+                        }
+                    ],
+                    "eventHandlers": [
+                        {
+                            "eventName": "REFRESH_GROUP_MEMBER_WITH_AVAILABILITIES_VIEW",
+                            "senders": [
+                                "userGroupsSelect"
+                            ],
+                            "commands": {
+                                "commandType": "executeAction",
+                                "actionName": "initGroupMembersWithAvailabilitiesView"
+                            }
+                        }
+                    ],
+                    "width": 4
+                }
+            ]
+        }
+    ]
+}

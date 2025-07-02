@@ -1,0 +1,33 @@
+{
+    "entityType": "UniversalDocument",
+    "condition": {
+        "events": [
+            "StatusChanged"
+        ],
+        "configuration": {
+            "names": [
+                "LifeInsuranceInquiry"
+            ]
+        },
+        "documentStates": [
+            "Issued"
+        ]
+    },
+    "sinks": [
+        {
+            "name": "GetContractData",
+            "fetch": {
+                "configuration": {
+                    "name": "GeneralContractSearchDataSource"
+                }
+            }
+        },
+        {
+            "name": "InquiryFinishedNotification",
+            "notification": {
+                "notificationName": "InquiryFinishedNotification"
+            }
+        }
+    ],
+    "version": "1"
+}

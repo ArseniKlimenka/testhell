@@ -1,0 +1,178 @@
+﻿{{concat 'drop'}} table if exists #PRODUCT_CODES{{concat ';'}}
+{{concat 'drop'}} table if exists #ORGANISATION_UNIT_CODES{{concat ';'}}
+{{concat 'drop'}} table if exists #REPORT_WITHOUT_FILTERS{{concat ';'}}
+
+select value as productCode
+  into #PRODUCT_CODES
+  from openjson(@productsArray);
+
+select value as organisationUnitCode
+  into #ORGANISATION_UNIT_CODES
+  from openjson(@organisationUnitCodes);
+
+SELECT rc.PRODUCT_GROUP,
+       rc.PRODUCT_CODE,
+       rc.PRODUCT_DESCRIPTION,
+       rc.PRODUCT_SALES_SEGMENT,
+       rc.CONTRACT_NUMBER,
+       rc.STATE,
+       rc.ISSUE_DATE,
+       rc.START_DATE,
+       rc.END_DATE,
+       rc.PAYMENT_FREQUENCY_DESC,
+       rc.RISK_PREMIUM,
+       rc.HOLDER_NAME AS PH_FULL_NAME,
+       rc.HOLDER_EMAIL AS PH_EMAIL,
+       rc.INSURED_EMAIL AS IP_EMAIL,
+       rvi.VERIFICATION_STATE as VERIF_STATE,
+       rvi.ERRORS_LIST as VERIF_ERRORS_LIST,
+       rc.INITIATOR_NAME,
+       levelOrg.organisationUnitBusinessCode AS BUSINESS_CODE,
+       levelOrg.organisationUnitName AS SUBUNIT_NAME,
+       levelOrg.parentFullName AS FILIAL_NAME,
+       levelOrg.topParentFullName AS COMPANY_NAME,
+       rc.NON_STANDART_CONTRACT,
+       rc.INSURANCE_TERMS,
+       rc.CURRENCY,
+       rc.RISK_PREMIUM_ALL,
+       rc.HOLDER_BIRTH_DATE AS DOB,
+       levelOrg.coach AS COACH,
+       levelOrg.territorialChief AS TERRITORIAL_CHIEF,
+       levelOrg.regionalChief AS REGIONAL_CHIEF,
+       rc.CREDIT_SUM,
+       rc.CREDIT_RATE,
+       rc.ANNUITY_PAYMENT_SUM,
+       rc.CREDIT_PROGRAM_ID,
+       rc.STRATEGY_DESCRIPTION_FULL,
+       --
+       rc.IS_POLICY,
+       rc.HOLDER_CODE,
+       rc.INSURED_CODE,
+       rc.INITIATOR_EMPLOYEE_CODE,
+       rc.INITIATOR_ORGUNIT_CODE,
+       rc.IS_REINVEST,
+       rc.ISSUE_FORM_CODE,
+       rc.IS_PERSONAL_MANAGER,
+       rc.MANUAL_RATE,
+       rc.CALCULATED_RATE,
+       rc.INITIATOR_TAB_NUMBER
+  INTO #REPORT_WITHOUT_FILTERS
+  FROM PAS_IMPL.REPORT_CONTRACT rc
+       LEFT JOIN PAS_IMPL.REPORT_ORG_STRUCTURE levelOrg on levelOrg.organisationUnitCode = rc.INITIATOR_ORGUNIT_CODE
+       LEFT JOIN PAS_IMPL.REPORT_VERIFICATION_INFO rvi on rvi.CONTRACT_NUMBER = rc.CONTRACT_NUMBER
+       {{#if parameters.productsArrayExists}}
+       JOIN #PRODUCT_CODES pc on pc.productCode = rc.PRODUCT_CODE
+       {{/if}}
+       {{#if parameters.organisationUnitCodesExist}}
+       JOIN #ORGANISATION_UNIT_CODES ouc on ouc.organisationUnitCode = rc.INITIATOR_ORGUNIT_CODE
+       {{/if}}
+       ;
+
+SELECT rc.PRODUCT_GROUP,
+       rc.PRODUCT_CODE,
+       rc.PRODUCT_DESCRIPTION,
+       rc.PRODUCT_SALES_SEGMENT,
+       rc.CONTRACT_NUMBER,
+       rc.STATE,
+       rc.ISSUE_DATE,
+       rc.START_DATE,
+       rc.END_DATE,
+       rc.PAYMENT_FREQUENCY_DESC,
+       rc.RISK_PREMIUM,
+       rc.PH_FULL_NAME,
+       rc.PH_EMAIL,
+       rc.IP_EMAIL,
+       rc.VERIF_STATE,
+       rc.VERIF_ERRORS_LIST,
+       rc.INITIATOR_NAME,
+       rc.INITIATOR_EMPLOYEE_CODE,
+       rc.BUSINESS_CODE,
+       rc.SUBUNIT_NAME,
+       rc.FILIAL_NAME,
+       rc.COMPANY_NAME,
+       rc.NON_STANDART_CONTRACT,
+       rc.INSURANCE_TERMS,
+       rc.CURRENCY,
+       rc.RISK_PREMIUM_ALL,
+       rc.DOB,
+       rc.COACH,
+       rc.TERRITORIAL_CHIEF,
+       rc.REGIONAL_CHIEF,
+       rc.CREDIT_SUM,
+       rc.CREDIT_RATE,
+       rc.ANNUITY_PAYMENT_SUM,
+       rc.CREDIT_PROGRAM_ID,
+       rc.STRATEGY_DESCRIPTION_FULL,
+       rc.MANUAL_RATE,
+       rc.CALCULATED_RATE,
+       rc.INITIATOR_TAB_NUMBER
+  FROM #REPORT_WITHOUT_FILTERS rc
+WHERE 1 = 1
+{{#if parameters.contractTypePolicy}}
+       AND rc.IS_POLICY = 1
+{{/if}}
+{{#if parameters.contractTypeQuote}}
+       AND rc.IS_POLICY = 0
+{{/if}}
+{{#if parameters.number}}
+       AND rc.CONTRACT_NUMBER = @number
+{{/if}}
+{{#if parameters.stateCode}}
+       AND rc.STATE = @stateCode
+{{/if}}
+{{#if parameters.productGroup}}
+       AND rc.PRODUCT_GROUP = @productGroup
+{{/if}}
+{{#if parameters.productGroups}}
+       AND rc.PRODUCT_GROUP IN (@productGroups)
+{{/if}}
+{{#if parameters.productCode}}
+       AND rc.PRODUCT_CODE = @productCode
+{{/if}}
+{{#if parameters.issueDateFrom}}
+       AND rc.ISSUE_DATE >= @issueDateFrom
+{{/if}}
+{{#if parameters.issueDateTo}}
+       AND rc.ISSUE_DATE <= @issueDateTo
+{{/if}}
+{{#if parameters.startDateFrom}}
+       AND rc.START_DATE >= @startDateFrom
+{{/if}}
+{{#if parameters.startDateTo}}
+       AND rc.START_DATE <= @startDateTo
+{{/if}}
+{{#if parameters.endDateFrom}}
+       AND rc.END_DATE >= @endDateFrom
+{{/if}}
+{{#if parameters.endDateTo}}
+       AND rc.END_DATE <= @endDateTo
+{{/if}}
+{{#if parameters.holder}}
+       AND rc.HOLDER_CODE = @holder
+{{/if}}
+{{#if parameters.insuredPerson}}
+       AND rc.INSURED_CODE = @insuredPerson
+{{/if}}
+{{#if parameters.initiatorServiceProviderCode}}
+       AND rc.INITIATOR_EMPLOYEE_CODE = @initiatorServiceProviderCode
+{{/if}}
+{{#if parameters.organisationUnitCodesExist}}
+{{else}}
+{{#if parameters.organisationUnitCode}}
+       AND rc.INITIATOR_ORGUNIT_CODE = @organisationUnitCode
+{{/if}}
+{{/if}}
+{{#if parameters.isReinvest}}
+       AND rc.IS_REINVEST = @isReinvest
+{{/if}}
+{{#if parameters.issueFormCode}}
+       AND rc.ISSUE_FORM_CODE = @issueFormCode
+{{/if}}
+{{#if parameters.isPersonalManager}}
+       AND rc.IS_PERSONAL_MANAGER = 1
+{{/if}}
+;
+
+{{concat 'drop'}} table if exists #PRODUCT_CODES{{concat ';'}}
+{{concat 'drop'}} table if exists #ORGANISATION_UNIT_CODES{{concat ';'}}
+{{concat 'drop'}} table if exists #REPORT_WITHOUT_FILTERS{{concat ';'}}

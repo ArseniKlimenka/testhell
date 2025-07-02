@@ -1,0 +1,90 @@
+{
+    "type": "Group",
+    "width": 12,
+    "elements": [
+        {
+            "type": "Group",
+            "width": 12,
+            "elements": [
+                {
+                    "type": "Input",
+                    "label": "budgetRule",
+                    "value": {
+                        "$ref": "#/properties/rule"
+                    },
+                    "autocomplete": {
+                        "minTextLength": 1
+                    },
+                    "control": "Dropdown",
+                    "source": {
+                        "dataSource": {
+                            "name": "BudgetRuleDataSource",
+                            "reloadOnOpen": true,
+                            "searchFieldPath": "description",
+                            "requestMapping": "budgetRuleRequestMapping",
+                            "responseMapping": "budgetRuleResponseMapping"
+                        },
+                        "displayFieldName": "displayName",
+                        "valueFieldName": "value"
+                    },
+                    "width": 4
+                },
+                {
+                    "type": "Input",
+                    "label": "budgetRuleAlgorithm",
+                    "value": {
+                        "$ref": "#/properties/algorithm"
+                    },
+                    "autocomplete": {
+                        "minTextLength": 1
+                    },
+                    "control": "Dropdown",
+                    "source": {
+                        "dataSource": {
+                            "name": "BudgetRuleAlgorithmDataSource",
+                            "reloadOnOpen": true,
+                            "searchFieldPath": "description",
+                            "requestMapping": "algorithmRequestMapping",
+                            "responseMapping": "algorithmResponseMapping"
+                        },
+                        "displayFieldName": "displayName",
+                        "valueFieldName": "value"
+                    },
+                    "width": 4
+                }
+            ]
+        },
+        {
+            "type": "Group",
+            "width": 12,
+            "elements": [
+                {
+                    "type": "OutputText",
+                    "hideLabel": true,
+                    "literalValue": "budgetRuleHistory",
+                    "width": 12
+                },
+                {
+                    "type": "InlineView",
+                    "showContainerActions": false,
+                    "views": [
+                        {
+                            "viewReference": {
+                                "configurationCodeName": "AABudgetRuleHistoryView",
+                                "configurationVersion": "1",
+                                "configurationConceptType": "SearchView"
+                            },
+                            "onViewInitialized": "initBudgetRuleHistory",
+                            "viewType": "Search"
+                        }
+                    ],
+                    "value": {
+                        "$ref": "#"
+                    },
+                    "hide": false,
+                    "elementId": "BudgetRuleHistoryView"
+                }
+            ]
+        }
+    ]
+}

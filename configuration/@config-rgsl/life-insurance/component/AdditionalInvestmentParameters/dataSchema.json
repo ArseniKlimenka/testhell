@@ -1,0 +1,76 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "Life Insurance",
+    "description": "Data schema describing additional investment parameters",
+    "type": "object",
+    "additionalProperties": false,
+    "aiValidation": {
+        "rule": "validateAdditionalInvestmentParameters"
+    },
+    "aiDataEnrichment": [
+        {
+            "name": "SetAdditionalInvestmentParameters",
+            "integrationService": {
+                "name": "AdditionalInvestmentParametersIS",
+                "version": "1"
+            }
+        },
+        {
+            "name": "GetCbRate",
+            "dataSource": "CbRateDataSource"
+        }
+    ],
+    "properties": {
+        "investmentStartDate": {
+            "type": "string",
+            "aiFormat": "date",
+            "aiTitle": "investmentStartDate"
+        },
+        "investmentEndDate": {
+            "type": "string",
+            "aiFormat": "date",
+            "aiTitle": "investmentEndDate"
+        },
+        "mf": {
+            "type": "number",
+            "aiTitle": "mf"
+        },
+        "coolOffDIDRate": {
+            "type": "number",
+            "aiTitle": "coolOffDIDRate"
+        },
+        "coolOffDID": {
+            "type": "number",
+            "aiTitle": "coolOffDID"
+        },
+        "rateOfReturnEquityActives": {
+            "$ref": "component:RateOfReturnEquityActives",
+            "aiTitle": "rateOfReturnEquityActives"
+        },
+        "commWithdrawalFundsArray": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+					"basisForPayment": {
+						"type": "string",
+						"aiTitle": "basisForPayment"
+					},
+					"insuredEventOccurrence": {
+						"type": "number",
+						"aiTitle": "insuredEventOccurrence"
+					},
+					"earlyTerminationContract": {
+						"type": "number",
+						"aiTitle": "earlyTerminationContract"
+					},
+					"insuredPersonAppeal": {
+						"type": "number",
+						"aiTitle": "insuredPersonAppeal"
+					}
+				}
+            }
+        }
+    }
+}

@@ -1,0 +1,67 @@
+select
+	art.CODE_NAME,
+	contr.CONTRACT_NUMBER as DOCUMENT_NO,
+	bal.CURRENCY_CODE,
+	pols.START_DATE,
+	pols.PRODUCT_CODE,
+	prod.DESCRIPTION as PRODUCT_DESCRIPTION,
+	pols.HOLDER_NAME,
+	pols.HOLDER_CODE,
+	bal.OPEN_DEBT_AMOUNT,
+	bal.DEBT_AMOUNT
+from
+	PAS.CONTRACT contr
+	inner join pas_impl.POLICY_HUB polh on polh.CONTRACT_NUMBER = contr.CONTRACT_NUMBER
+	inner join pas_impl.POLICY_SAT_LATEST pols on pols.POLICY_HKEY = polh.POLICY_HKEY
+	left join BFX_IMPL.PRODUCTS prod on prod.code = pols.PRODUCT_CODE
+	left join CFX.PUBLISHED_ARTIFACT art on art.PUBLISHED_ARTIFACT_ID = contr.PUBLISHED_ARTIFACT_ID
+	left join
+		(select
+				lines.CONTRACT_NO,
+				lines.CURRENCY_CODE,
+				sum(lines.OPEN_AMOUNT) as OPEN_DEBT_AMOUNT,
+				sum(case when lines.DUE_DATE <= GETDATE() then lines.OPEN_AMOUNT else 0 end) as DEBT_AMOUNT
+		from (select
+				ppl.DUE_DATE,
+				polh.CONTRACT_NUMBER as CONTRACT_NO,
+				ppsl.CURRENCY_CODE,
+				ppsl.AMOUNT as OPEN_AMOUNT
+			from
+				pas_impl.POLICY_HUB polh
+				inner join pas_impl.P_PAYMENT_PLAN_LINK ppl on ppl.POLICY_HKEY = polh.POLICY_HKEY
+				inner join pas_impl.P_PAYMENT_PLAN_SAT_LATEST ppsl on ppsl.P_PAYMENT_PLAN_HKEY = ppl.P_PAYMENT_PLAN_HKEY
+			union all
+			select
+				palc.DUE_DATE,
+				alc.DOCUMENT_NO,
+				alc.DOC_CURRENCY_CODE as CURRENCY_CODE,
+				-(mat.DOC_AMOUNT + mat.TOLERANCE_DOC_AMOUNT) as OPEN_AMOUNT
+			from
+				ACC_IMPL.ALLOCATION alc
+				inner join ACC_IMPL.ALLOCATION_POLICY palc on palc.ALLOCATION_ID = alc.ALLOCATION_ID
+				inner join ACC_IMPL.MATCHING mat on mat.ALLOCATION_ID = alc.ALLOCATION_ID
+			) lines
+		group by
+			lines.CONTRACT_NO,
+			lines.CURRENCY_CODE
+		) bal on bal.CONTRACT_NO = polh.CONTRACT_NUMBER
+where 1=1
+	and bal.OPEN_DEBT_AMOUNT != 0
+{{#if parameters.contractNo}}
+	and contr.CONTRACT_NUMBER = @contractNo
+{{/if}}
+{{#if parameters.policyHolderCode}}
+	and pols.HOLDER_CODE = @policyHolderCode
+{{/if}}
+{{#if parameters.currencyCode}}
+	and pols.CURRENCY_CODE = @currencyCode
+{{/if}}
+{{#if parameters.startDateFrom}}
+	and pols.START_DATE >= @startDateFrom
+{{/if}}
+{{#if parameters.startDateTo}}
+	and pols.START_DATE <= @startDateTo
+{{/if}}
+{{#if parameters.productCode}}
+	and pols.PRODUCT_CODE = @productCode
+{{/if}}

@@ -1,0 +1,34 @@
+{
+    "targetDocument": "Claim",
+    "targetDocumentVersion": "1",
+    "targetState": "ClaimManagerApproval",
+    "relationType": "Sibling",
+    "actors": [
+        "ClaimManager"
+    ],
+    "allowOnValidationErrors": {
+        "all": false
+    },
+    "requiredConfirmedConstraints": {
+        "all": false
+    },
+    "exclusiveToAssignedUser": false,
+    "whenBlocked": "Hide",
+    "enrichment": {
+        "fields": [
+            "[GetPolicyData]",
+            "[GetRisksData]",
+            "[GetInsuredPerson]"
+        ]
+    },
+    "sourceDocument": "InsuredEvent",
+    "sourceDocumentVersion": "1",
+    "sourceDocumentStates": [
+        {
+            "name": "Confirmed",
+            "actors": [
+                "ClaimManager"
+            ]
+        }
+    ]
+}

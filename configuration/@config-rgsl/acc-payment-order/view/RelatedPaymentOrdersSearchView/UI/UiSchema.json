@@ -1,0 +1,147 @@
+{
+    "id": "RelatedPaymentOrdersSearchViewUI",
+    "type": "Group",
+    "elements": [
+        {
+            "type": "GridLayout",
+            "numberOfColumns": 12,
+            "elements": [
+                {
+                    "type": "Group",
+                    "elements": [
+                        {
+                            "type": "DataGrid",
+                            "defaultPageSize": 10,
+                            "mode": "DataSource",
+                            "header": {
+                                "showReloadButton": true,
+                                "showNumberOfResults": false
+                            },
+                            "pagination": {
+                                "mode": "Regular",
+                                "pageSizes": [
+                                    5,
+                                    10,
+                                    15
+                                ]
+                            },
+                            "selection": {
+                                "mode": "None"
+                            },
+                            "height": "None",
+                            "columns": [
+                                {
+                                    "sortable": false,
+                                    "title": "paymentOrderNumber",
+                                    "name": "paymentOrderNumber",
+                                    "cellContent": {
+                                        "type": "Link",
+                                        "readOnly": true,
+                                        "targetType": "Url",
+                                        "label": "paymentOrderNumber",
+                                        "value": {
+                                            "mapping": "paymentOrderCodeUriMapping",
+                                            "$ref": "#"
+                                        },
+                                        "width": 5,
+                                        "content": {
+                                            "text": {
+                                                "type": "OutputText",
+                                                "value": {
+                                                    "$ref": "#/properties/resultData/properties/paymentOrderNumber"
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                {
+                                    "sortable": false,
+                                    "title": "paymentOrderType",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "defaultValue": "",
+                                        "value": {
+                                            "$ref": "#/properties/resultData/properties/paymentOrderType"
+                                        }
+                                    }
+                                },
+                                {
+                                    "sortable": false,
+                                    "title": "paymentOrderDate",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "template": "{{expr paymentOrderDate 'd'}}",
+                                        "defaultValue": "",
+                                        "value": {
+                                            "$ref": "#/properties/resultData"
+                                        }
+                                    },
+                                    "name": "paymentOrderDate"
+                                },
+                                {
+                                    "sortable": false,
+                                    "title": "paymentOrderState",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "defaultValue": "",
+                                        "value": {
+                                            "$ref": "#/properties/resultData/properties/paymentOrderState"
+                                        }
+                                    }
+                                },
+                                {
+                                    "sortable": false,
+                                    "title": "relatedDocumentNumber",
+                                    "name": "relatedDocumentNumber",
+                                    "cellContent": {
+                                        "type": "Link",
+                                        "readOnly": true,
+                                        "targetType": "Url",
+                                        "label": "relatedDocumentNumber",
+                                        "value": {
+                                            "mapping": "relatedDocumentNumberCodeUriMapping",
+                                            "$ref": "#"
+                                        },
+                                        "width": 5,
+                                        "content": {
+                                            "text": {
+                                                "type": "OutputText",
+                                                "value": {
+                                                    "$ref": "#/properties/resultData/properties/relatedDocumentNumber"
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                {
+                                    "sortable": false,
+                                    "title": "relatedDocumentState",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "defaultValue": "",
+                                        "value": {
+                                            "$ref": "#/properties/resultData/properties/relatedDocumentState"
+                                        }
+                                    }
+                                },
+                                {
+                                    "sortable": false,
+                                    "title": "relatedDocumentStateDate",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "template": "{{expr relatedDocumentStateDate 'd'}}",
+                                        "defaultValue": "",
+                                        "value": {
+                                            "$ref": "#/properties/resultData"
+                                        }
+                                    },
+                                    "name": "relatedDocumentStateDate"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

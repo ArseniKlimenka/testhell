@@ -1,0 +1,80 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema",
+    "type": "object",
+    "additionalProperties": false,
+    "aiValidation": {
+        "rule": "validationParty"
+    },
+    "aiDataEnrichment": [
+        {
+            "name": "FinKnowledgeQuestionnaireEnrichment"
+        }
+    ],
+    "properties": {
+        "partyRoleOfPerson": {
+            "$ref": "component:PartyRoleOfPerson"
+        },
+        "partyGeneralData": {
+            "$ref": "component:PartyGeneralData"
+        },
+        "partyPersonData": {
+            "allOf": [
+                {
+                    "$ref": "component:PartyPersonData"
+                },
+                {
+                    "aiAdditionalContext": {
+                        "name": "partyRole",
+                        "$data": "/partyRoleOfPerson/partyRole",
+                        "source": "Body"
+                    }
+                }
+            ]
+        },
+        "partyCRS": {
+            "$ref": "component:PartyCRS"
+        },
+        "partyFatca": {
+            "$ref": "component:PartyFatca"
+        },
+        "partyAddresses": {
+            "$ref": "component:PartyAddresses"
+        },
+        "partyDocuments": {
+            "$ref": "component:PartyDocuments"
+        },
+        "partyPhones": {
+            "$ref": "component:PartyPhones"
+        },
+        "partyEmails": {
+            "$ref": "component:PartyEmails"
+        },
+        "partyEmailsAdditionalInfo": {
+            "$ref": "component:PartyEmailsAdditionalInfo"
+        },
+        "partyBankAccounts": {
+            "$ref": "component:PartyBankAccounts"
+        },
+        "beneficiaryOwnerQuestionnaire": {
+            "$ref": "component:BeneficiaryOwnerQuestionnaire"
+        },
+        "finKnowledgeQuestionnaire": {
+            "$ref": "component:FinKnowledgeQuestionnaire"
+        },
+        "finKnowledgeQuestionnaire2023": {
+            "$ref": "component:FinKnowledgeQuestionnaire2023"
+        },
+        "finKnowledgeQuestionnaire2024": {
+            "$ref": "component:FinKnowledgeQuestionnaire2024"
+        },
+        "partyMigrationAttributes": {
+            "$ref": "component:PartyMigrationAttributes"
+        },
+        "partyTaxResidencies": {
+            "$ref": "component:PartyTaxResidencies"
+        },
+        "partyExcludedPersons": {
+            "$ref": "component:PartyExcludedPersons"
+        }
+    }
+}

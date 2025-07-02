@@ -1,0 +1,67 @@
+﻿SELECT EXCEL_ROW_NUMBER
+      ,PRODUCT_CODE
+      ,STRATEGY_CODE
+      ,ISSUE_DATE_FROM
+      ,ISSUE_DATE_TO
+      ,ISSUE_DATE_STR
+      ,CURRENCY_CODE
+      ,PRODUCT_DESCRIPTION
+      ,STRATEGY_DESCRIPTION_FULL
+      ,PAY_OFF_DESCRIPTION
+      ,BASE_ACTIVE_DESCRIPTION
+      ,PARTICIPATION_COEFF
+      ,PARTICIPATION_COEFF_BY_PERIODS
+      ,OPTION_PRICE
+      ,BARRIER
+      ,BARRIER_AUTO_CALL
+      ,EMITENT
+      ,FIX_RATE
+      ,INTIAL_SHARE
+      ,HEDGE_COST
+      ,SPREAD_B_A
+      ,PAY_OFF_SHORT_DESCRIPTION
+      ,TOOL_TYPE
+      ,MEASURE_TOOL_NOMINAL
+      ,CALCULATING_AGENT
+      ,PRICE_OF_MEASURE_TOOL
+      ,PART_OF_PREMIUM_FOR_TOOL
+      ,DISCOUNT
+      ,IMPORT_DOCUMENT_ID
+      ,CONF_VERSION
+      ,LOADED_BY
+      ,LOAD_DATE
+FROM BFX_IMPL.STRATEGY_CONF sc
+WHERE 1 = 1
+{{#if parameters.productCode}}
+	AND sc.PRODUCT_CODE = @productCode
+{{/if}}
+{{#if parameters.issueDate}}
+	AND @issueDate >= sc.ISSUE_DATE_FROM AND @issueDate <= sc.ISSUE_DATE_TO
+{{/if}}
+{{#if parameters.issueDateFrom}}
+	AND sc.ISSUE_DATE_FROM >= @issueDateFrom
+{{/if}}
+{{#if parameters.issueDateTo}}
+	AND @issueDateTo <= sc.ISSUE_DATE_TO
+{{/if}}
+{{#if parameters.importDocumentId}}
+	AND sc.IMPORT_DOCUMENT_ID = @importDocumentId
+{{/if}}
+{{#if parameters.maxVersion}}
+	AND sc.CONF_VERSION = (SELECT MAX(CONF_VERSION) MAX_VERSION FROM BFX_IMPL.STRATEGY_CONF)
+{{/if}}
+{{#if parameters.currencyCode}}
+	AND sc.CURRENCY_CODE = @currencyCode
+{{/if}}
+{{#if parameters.strategyCode}}
+	AND sc.STRATEGY_CODE = @strategyCode
+{{/if}}
+{{#if parameters.version}}
+	AND sc.CONF_VERSION = @version
+{{/if}}
+{{#if parameters.productDescription}}
+	AND sc.PRODUCT_DESCRIPTION LIKE '%' + @productDescription + '%'
+{{/if}}
+{{#if parameters.productCodes}}
+	AND sc.PRODUCT_CODE IN (@productCodes)
+{{/if}}

@@ -1,0 +1,41 @@
+{
+    "mainDataSource": "SendEventDataSource",
+    "allowParallelExecution": true,
+    "sinks": [
+        {
+            "name": "GetEventData",
+            "fetch": {
+                "configuration": {
+                    "name": "SendEventGetReqRespDataSource"
+                }
+            }
+        },
+        {
+            "name": "SendEvent",
+            "class": {
+                "className": "Adacta.AdInsure.RGSL.PAS.API.Integration.SendEvent.Services.ISendEventService, Adacta.AdInsure.RGSL.PAS.API",
+                "methodName": "SendEvent"
+            }
+        }
+    ],
+    "completionSinks": [
+        {
+            "name": "WriteSendEventHistory",
+            "database": {
+                "tables": [
+                    "BFX_IMPL.SEND_EVENT_HISTORY"
+                ]
+            }
+        }
+    ],
+    "errorSinks": [
+        {
+            "name": "WriteError",
+            "class": {
+                "className": "Adacta.AdInsure.RGSL.PAS.API.Integration.SendEvent.Services.ISendEventService, Adacta.AdInsure.RGSL.PAS.API",
+                "methodName": "SendEventWriteError"
+            }
+        }
+    ],
+    "version": "1"
+}

@@ -1,0 +1,441 @@
+{
+    "dimensions": {
+        "contractType": "Policy",
+        "productGroup": "collectiveAll"
+    },
+    "entityType": "Contract",
+    "attachments": [
+        {
+            "attachmentType": "contractSigned",
+            "flow": "Incoming"
+        },
+        {
+            "attachmentType": "application",
+            "flow": "Incoming"
+        },
+        {
+            "attachmentType": "appendixA",
+            "flow": "Incoming"
+        },
+        {
+            "attachmentType": "financialDocument",
+            "flow": "Incoming"
+        },
+        {
+            "attachmentType": "invoiceForPayment",
+            "flow": "Incoming"
+        },
+        {
+            "attachmentType": "insuranceRules",
+            "flow": "Incoming"
+        },
+        {
+            "attachmentType": "appendicesRulesForRisks",
+            "flow": "Incoming"
+        },
+        {
+            "attachmentType": "insuredPersonsList",
+            "flow": "Incoming"
+        },
+        {
+            "attachmentType": "other",
+            "flow": "Incoming"
+        },
+        {
+            "attachmentType": "amendment",
+            "flow": "Incoming"
+        },
+        {
+            "attachmentType": "appointmentBeneficiary",
+            "flow": "Incoming"
+        }
+    ],
+    "validFrom": "2000-01-01",
+    "ui": {
+        "layout": "VersionedDocumentLayout",
+        "composition": {
+            "SummaryContent": "SummaryContent",
+            "MainContent": "MainContent"
+        }
+    },
+    "states": [
+        {
+            "name": "Draft",
+            "actors": [
+                {
+                    "actor": "Operations",
+                    "uiSchema": "MainContent",
+                    "transitions": [
+                        "Draft_To_PremiumCalculating",
+                        "Draft_to_InquiryCreating",
+                        "Draft_to_Active",
+                        "Draft_to_Cancelled"
+                    ],
+                    "operations": [
+                        "Save"
+                    ],
+                    "relations": []
+                },
+                {
+                    "actor": "Underwriter",
+                    "uiSchema": "MainContent",
+                    "transitions": [
+                        "Draft_To_PremiumCalculating",
+                        "Draft_to_Cancelled"
+                    ],
+                    "operations": [
+                        "Save"
+                    ],
+                    "relations": []
+                },
+                {
+                    "actor": "UKSP",
+                    "transitions": [],
+                    "uiSchema": "MainContent",
+                    "operations": []
+                }
+            ]
+        },
+        {
+            "name": "PremiumCalculating",
+            "actors": [
+                {
+                    "actor": "Operations",
+                    "uiSchema": "MainContent",
+                    "transitions": [],
+                    "operations": [],
+                    "relations": []
+                },
+                {
+                    "actor": "Underwriter",
+                    "uiSchema": "MainContent",
+                    "transitions": [],
+                    "operations": [],
+                    "relations": []
+                },
+                {
+                    "actor": "System",
+                    "uiSchema": "MainContent",
+                    "transitions": [
+                        "PremiumCalculating_To_Draft"
+                    ],
+                    "operations": [],
+                    "relations": []
+                },
+                {
+                    "actor": "UKSP",
+                    "transitions": [],
+                    "uiSchema": "MainContent",
+                    "operations": []
+                }
+            ]
+        },
+        {
+            "name": "InquiryCreating",
+            "actors": [
+                {
+                    "actor": "Operations",
+                    "uiSchema": "MainContent",
+                    "transitions": [],
+                    "operations": [],
+                    "relations": []
+                },
+                {
+                    "actor": "Underwriter",
+                    "uiSchema": "MainContent",
+                    "transitions": [],
+                    "operations": [],
+                    "relations": []
+                },
+                {
+                    "actor": "System",
+                    "uiSchema": "MainContent",
+                    "transitions": [
+                        "InquiryCreating_To_OnReview"
+                    ],
+                    "operations": [],
+                    "relations": []
+                },
+                {
+                    "actor": "UKSP",
+                    "transitions": [],
+                    "uiSchema": "MainContent",
+                    "operations": []
+                }
+            ]
+        },
+        {
+            "name": "OnReview",
+            "actors": [
+                {
+                    "actor": "Operations",
+                    "transitions": [],
+                    "uiSchema": "MainContent",
+                    "operations": [],
+                    "relations": []
+                },
+                {
+                    "actor": "Underwriter",
+                    "transitions": [],
+                    "uiSchema": "MainContent",
+                    "operations": []
+                },
+                {
+                    "actor": "UKSP",
+                    "transitions": [
+                        "OnReview_to_InquiryCancelling",
+                        "OnReview_to_Active"
+                    ],
+                    "uiSchema": "MainContent",
+                    "operations": [],
+                    "allowComments": true
+                }
+            ]
+        },
+        {
+            "name": "InquiryCancelling",
+            "actors": [
+                {
+                    "actor": "Operations",
+                    "uiSchema": "MainContent",
+                    "transitions": [],
+                    "operations": [],
+                    "relations": []
+                },
+                {
+                    "actor": "Underwriter",
+                    "uiSchema": "MainContent",
+                    "transitions": [],
+                    "operations": [],
+                    "relations": []
+                },
+                {
+                    "actor": "System",
+                    "uiSchema": "MainContent",
+                    "transitions": [
+                        "InquiryCancelling_To_Draft"
+                    ],
+                    "operations": [],
+                    "relations": []
+                },
+                {
+                    "actor": "UKSP",
+                    "transitions": [],
+                    "uiSchema": "MainContent",
+                    "operations": []
+                }
+            ]
+        },
+        {
+            "name": "Active",
+            "actors": [
+                {
+                    "actor": "Operations",
+                    "uiSchema": "MainContent",
+                    "transitions": [
+                        "Active_to_Draft"
+                    ],
+                    "operations": [],
+                    "relations": []
+                },
+                {
+                    "actor": "Underwriter",
+                    "uiSchema": "MainContent",
+                    "transitions": [
+                        "Active_to_Draft"
+                    ],
+                    "operations": [],
+                    "relations": []
+                },
+                {
+                    "actor": "System",
+                    "uiSchema": "MainContent",
+                    "transitions": [
+                        "Active_to_Activated"
+                    ],
+                    "operations": [],
+                    "relations": []
+                },
+                {
+                    "actor": "UKSP",
+                    "transitions": [],
+                    "uiSchema": "MainContent",
+                    "operations": []
+                }
+            ]
+        },
+        {
+            "name": "Activated",
+            "actors": [
+                {
+                    "actor": "Operations",
+                    "uiSchema": "MainContent",
+                    "transitions": [],
+                    "operations": [],
+                    "relations": []
+                },
+                {
+                    "actor": "Underwriter",
+                    "uiSchema": "MainContent",
+                    "transitions": [],
+                    "operations": [],
+                    "relations": []
+                },
+                {
+                    "actor": "System",
+                    "uiSchema": "MainContent",
+                    "transitions": [
+                        "Activated_to_Draft",
+                        "Activated_to_CancelledByAmendment",
+                        "Activated_to_Completed"
+                    ],
+                    "operations": [],
+                    "relations": []
+                },
+                {
+                    "actor": "UKSP",
+                    "transitions": [],
+                    "uiSchema": "MainContent",
+                    "operations": []
+                }
+            ]
+        },
+        {
+            "name": "Cancelled",
+            "actors": [
+                {
+                    "actor": "Operations",
+                    "uiSchema": "MainContent",
+                    "transitions": [],
+                    "operations": [],
+                    "relations": []
+                },
+                {
+                    "actor": "Underwriter",
+                    "uiSchema": "MainContent",
+                    "transitions": [],
+                    "operations": [],
+                    "relations": []
+                },
+                {
+                    "actor": "System",
+                    "uiSchema": "MainContent",
+                    "transitions": [
+                        "Cancelled_to_Draft"
+                    ],
+                    "operations": [],
+                    "relations": []
+                },
+                {
+                    "actor": "UKSP",
+                    "transitions": [],
+                    "uiSchema": "MainContent",
+                    "operations": []
+                }
+            ]
+        },
+        {
+            "name": "CancelledByAmendment",
+            "actors": [
+                {
+                    "actor": "Operations",
+                    "uiSchema": "MainContent",
+                    "transitions": [],
+                    "operations": [],
+                    "relations": []
+                },
+                {
+                    "actor": "Underwriter",
+                    "uiSchema": "MainContent",
+                    "transitions": [],
+                    "operations": [],
+                    "relations": []
+                },
+                {
+                    "actor": "System",
+                    "uiSchema": "MainContent",
+                    "transitions": [
+                        "CancelledByAmendment_to_Draft"
+                    ],
+                    "operations": [],
+                    "relations": []
+                },
+                {
+                    "actor": "UKSP",
+                    "transitions": [],
+                    "uiSchema": "MainContent",
+                    "operations": []
+                }
+            ]
+        },
+        {
+            "name": "Completed",
+            "actors": [
+                {
+                    "actor": "Operations",
+                    "uiSchema": "MainContent",
+                    "transitions": [],
+                    "operations": [],
+                    "relations": []
+                },
+                {
+                    "actor": "Underwriter",
+                    "uiSchema": "MainContent",
+                    "transitions": [],
+                    "operations": [],
+                    "relations": []
+                },
+                {
+                    "actor": "UKSP",
+                    "transitions": [],
+                    "uiSchema": "MainContent",
+                    "operations": []
+                }
+            ]
+        }
+    ],
+    "transitions": {
+        "Draft_to_Active": {
+            "transitionEffects": {
+                "enrich": [
+                    "/attachmentsPackage"
+                ]
+            }
+        },
+        "OnReview_to_Active": {
+            "transitionEffects": {
+                "enrich": [
+                    "/attachmentsPackage",
+                    "[CheckInquiries]"
+                ]
+            }
+        },
+        "Active_to_Activated": {
+            "transitionEffects": {
+                "enrich": [
+                    "/basicConditions[SetOriginalReceiptDate]"
+                ]
+            }
+        }
+    },
+    "version": "1",
+    "components": [
+        "MainInsuranceConditions",
+        "BasicConditions",
+        "AdditionalConditions",
+        "PolicyHolder",
+        "Risks",
+        "RiskConditions",
+        "RisksPackages",
+        "PolicyTerms",
+        "IssueForm",
+        "AdditionalServices",
+        "GiftServices",
+        "InsuranceRules",
+        "Initiator",
+        "AttachmentsPackage",
+        "PaymentPlan",
+        "TechnicalInformation",
+        "Curator"
+    ]
+}

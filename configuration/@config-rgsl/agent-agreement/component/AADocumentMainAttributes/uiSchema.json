@@ -1,0 +1,264 @@
+{
+    "type": "Group",
+    "width": 12,
+    "elements": [
+        {
+            "type": "Group",
+            "width": 12,
+            "elements": [
+                {
+                    "type": "OutputText",
+                    "label": "agentAgreementNumber",
+                    "readOnly": true,
+                    "value": {
+                        "mapping": "GetAANumber"
+                    },
+                    "width": 4
+                },
+                {
+                    "type": "Input",
+                    "label": "manualDocumentNumber",
+                    "value": {
+                        "$ref": "#/properties/manualDocumentNumber"
+                    },
+                    "width": 4,
+                    "rule": {
+                        "effect": "DISABLE_INITIAL",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "documentNumberReadOnly",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    },
+                    "onValueChanged": [
+                        {
+                            "commandType": "executeAction",
+                            "actionName": "onChangeManualDocumentNumber"
+                        }
+                    ]
+                },
+                {
+                    "type": "Input",
+                    "label": "externalDocumentNumber",
+                    "value": {
+                        "$ref": "#/properties/externalDocumentNumber"
+                    },
+                    "width": 4,
+                    "rule": {
+                        "effect": "DISABLE_INITIAL",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "externalNumberReadOnly",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "type": "Group",
+            "width": 12,
+            "elements": [
+                {
+                    "type": "Group",
+                    "width": 12,
+                    "elements": [
+                        {
+                            "type": "Input",
+                            "label": "salesChannel",
+                            "value": {
+                                "$ref": "#/properties/salesChannel"
+                            },
+                            "autocomplete": {
+                                "minTextLength": 1
+                            },
+                            "control": "Dropdown",
+                            "source": {
+                                "dataSource": {
+                                    "name": "SalesChannelDataSource",
+                                    "reloadOnOpen": true,
+                                    "searchFieldPath": "description",
+                                    "requestMapping": "salesChannelRequestMapping",
+                                    "responseMapping": "salesChannelResponseMapping"
+                                },
+                                "displayFieldName": "displayName",
+                                "valueFieldName": "value"
+                            },
+                            "width": 4
+                        },
+                        {
+                            "type": "Input",
+                            "label": "rgsChannel",
+                            "value": {
+                                "$ref": "#/properties/rgsChannel"
+                            },
+                            "autocomplete": {
+                                "minTextLength": 1
+                            },
+                            "control": "Dropdown",
+                            "source": {
+                                "dataSource": {
+                                    "name": "RgsChannelDataSource",
+                                    "reloadOnOpen": true,
+                                    "searchFieldPath": "description",
+                                    "requestMapping": "rgsChannelRequestMapping",
+                                    "responseMapping": "rgsChannelResponseMapping"
+                                },
+                                "displayFieldName": "displayName",
+                                "valueFieldName": "value"
+                            },
+                            "width": 4
+                        },
+                        {
+                            "type": "Input",
+                            "label": "cbAgentType",
+                            "value": {
+                                "$ref": "#/properties/cbAgentType"
+                            },
+                            "autocomplete": {
+                                "minTextLength": 1
+                            },
+                            "control": "Dropdown",
+                            "source": {
+                                "dataSource": {
+                                    "name": "CbAgentTypeDataSource",
+                                    "reloadOnOpen": true,
+                                    "searchFieldPath": "description",
+                                    "requestMapping": "cbAgentTypeRequestMapping",
+                                    "responseMapping": "cbAgentTypeResponseMapping"
+                                },
+                                "displayFieldName": "displayName",
+                                "valueFieldName": "value"
+                            },
+                            "width": 4
+                        }
+                    ]
+                },
+                {
+                    "type": "Group",
+                    "width": 12,
+                    "elements": [
+                        {
+                            "type": "Input",
+                            "label": "agency",
+                            "value": {
+                                "$ref": "#/properties/agency"
+                            },
+                            "autocomplete": {
+                                "minTextLength": 1,
+                                "dropDownItemsCount": 10
+                            },
+                            "control": "Dropdown",
+                            "source": {
+                                "dataSource": {
+                                    "name": "AgencyInfoDataSource",
+                                    "reloadOnOpen": true,
+                                    "searchFieldPath": "description",
+                                    "requestMapping": "agencyRequestMapping",
+                                    "responseMapping": "agencyResponseMapping"
+                                },
+                                "displayFieldName": "displayName",
+                                "valueFieldName": "value"
+                            },
+                            "width": 10
+                        },
+                        {
+                            "type": "Input",
+                            "label": "Currency",
+                            "value": {
+                                "$ref": "#/properties/documentCurrency"
+                            },
+                            "autocomplete": {
+                                "minTextLength": 0,
+                                "dropItemsCount": 15,
+                                "selectItemOnMatch": true,
+                                "matchCaseInsensitive": true
+                            },
+                            "control": "Dropdown",
+                            "source": {
+                                "dataSource": {
+                                    "name": "GetAllCurrenciesDataSource",
+                                    "searchFieldPath": "currencyCode",
+                                    "responseMapping": "currencySearchResponseMapping",
+                                    "resultCount": 32
+                                }
+                            },
+                            "width": 1,
+                            "elementId": "currencyElementId",
+                            "rule": {
+                                "effect": "DISABLE_INITIAL",
+                                "condition": {
+                                    "type": "FUNC",
+                                    "ruleFunction": "documentCurrencyReadOnly",
+                                    "value": [
+                                        {
+                                            "$ref": "#"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    ]
+                },
+                {
+                    "type": "Group",
+                    "width": 12,
+                    "elements": [
+                        {
+                            "type": "Input",
+                            "label": "orderNumber",
+                            "value": {
+                                "$ref": "#/properties/orderNumber"
+                            },
+                            "width": 4
+                        },
+                        {
+                            "type": "Input",
+                            "label": "isPersonalBusiness",
+                            "value": {
+                                "$ref": "#/properties/isPersonalBusiness"
+                            },
+                            "width": 2
+                        },
+                        {
+                            "type": "Input",
+                            "label": "isTechnical",
+                            "value": {
+                                "$ref": "#/properties/isTechnical"
+                            },
+                            "width": 2,
+                            "rule": {
+                                "effect": "DISABLE_INITIAL",
+                                "condition": {
+                                    "type": "FUNC",
+                                    "ruleFunction": "isTechnicalReadOnly",
+                                    "value": [
+                                        {
+                                            "$ref": "#"
+                                        }
+                                    ]
+                                }
+                            }
+                        },
+                        {
+                            "type": "Input",
+                            "label": "salesClassification",
+                            "value": {
+                                "$ref": "#/properties/salesClassification"
+                            },
+                            "width": 4
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

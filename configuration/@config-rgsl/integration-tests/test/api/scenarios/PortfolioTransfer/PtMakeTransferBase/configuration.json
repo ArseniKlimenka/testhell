@@ -1,0 +1,53 @@
+{
+    "description": "Standard portfolio transfer process",
+    "steps": [
+        {
+            "$ref": "AdjustAccountingPeriods",
+            "context": {
+                "firstOpenPeriod": "2022-01-01"
+            }
+        },
+        {
+            "$ref": "AdjustCurrentDate",
+            "context": {
+                "currentDate": "2022-01-01"
+            }
+        },
+        {
+            "$ref": "CreateALIPolicyDemo",
+            "context": {
+                "policyStartDate": "2022-01-01",
+                "paymentFrequencyCode": "2",
+                "riskPremium": 100000
+            }
+        },
+        {
+            "$ref": "CreatePaymentAndAllocate",
+            "description": "Pay first 3 installments",
+            "context": {
+                "payAmount": 300000,
+                "referenceNo": "{{$.contractNumber}}",
+                "paymentDetails": {
+                    "amount": 300000
+                }
+            },
+            "assert": {
+                "module": "./assertPayment.js",
+                "function": "assertPayment"
+            }
+        },
+        {
+            "$ref": "CreatePortfolioTransferForPolicy",
+            "context": {
+                "portfolioTransferIssueDate": "2023-01-01",
+                "referenceNoToInclude": "{{$.contractNumber}}"
+            }
+        },
+        {
+            "$ref": "AdjustCurrentDate",
+            "context": {
+                "currentDate": null
+            }
+        }
+    ]
+}

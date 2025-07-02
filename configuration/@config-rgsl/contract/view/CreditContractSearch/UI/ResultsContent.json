@@ -1,0 +1,138 @@
+{
+    "type": "Group",
+    "elements": [
+        {
+            "type": "DataGrid",
+            "elementId": "creditContractSearchTable",
+            "mode": "DataSource",
+            "pagination": {
+                "mode": "Regular",
+                "pageSizes": [
+                    5,
+                    10,
+                    15
+                ]
+            },
+            "selection": {
+                "mode": "Single",
+                "enableRowSelection": true,
+                "showCheckBox": true
+            },
+            "columns": [
+                {
+                    "title": "entityId",
+                    "name": "entityId",
+                    "sortable": true,
+                    "cellContent": {
+                        "type": "Link",
+                        "targetType": "Url",
+                        "openInNewTab": false,
+                        "value": {
+                            "mapping": "urlMapping",
+                            "$ref": "#"
+                        },
+                        "content": {
+                            "text": {
+                                "type": "OutputText",
+                                "textProperties": [
+                                    "bold"
+                                ],
+                                "template": "{{expr entityId}}",
+                                "value": {
+                                    "$ref": "#/properties/metadata"
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "title": "productName",
+                    "name": "productName",
+                    "sortable": false,
+                    "cellContent": {
+                        "type": "OutputText",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/productDescription"
+                        }
+                    }
+                },
+                {
+                    "title": "issueDate",
+                    "name": "issueDate",
+                    "sortable": true,
+                    "cellContent": {
+                        "type": "OutputText",
+                        "template": "{{#if issueDate}}{{expr issueDate 'd'}}{{/if}}",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/resultData"
+                        }
+                    }
+                },
+                {
+                    "title": "startDate",
+                    "name": "startDate",
+                    "sortable": true,
+                    "cellContent": {
+                        "type": "OutputText",
+                        "template": "{{#if startDate}}{{expr startDate 'd'}}{{/if}}",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/resultData"
+                        }
+                    }
+                },
+                {
+                    "title": "endDate",
+                    "name": "endDate",
+                    "sortable": true,
+                    "cellContent": {
+                        "type": "OutputText",
+                        "template": "{{#if endDate}}{{expr endDate 'd'}}{{/if}}",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/resultData"
+                        }
+                    }
+                },
+                {
+                    "title": "policyHolderName",
+                    "name": "policyHolderName",
+                    "sortable": true,
+                    "cellContent": {
+                        "type": "OutputText",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/policyHolderName"
+                        }
+                    }
+                },
+                {
+                    "title": "amount",
+                    "name": "amount",
+                    "sortable": true,
+                    "cellContent": {
+                        "type": "OutputText",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/amount"
+                        }
+                    }
+                },
+                {
+                    "title": "premiumForUnusedPeriod",
+                    "name": "premiumForUnusedPeriod",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "defaultValue": "",
+                        "value": {
+                            "mapping": "premiumForUnusedPeriodMapping",
+                            "$ref": "#"
+                        }
+                    }
+                }
+            ]
+        }
+    ]
+}

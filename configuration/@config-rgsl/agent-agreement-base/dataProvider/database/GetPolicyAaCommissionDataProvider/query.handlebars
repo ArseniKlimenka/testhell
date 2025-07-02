@@ -1,0 +1,181 @@
+select
+	polh.CONTRACT_NUMBER,
+	pols.START_DATE as POLICY_START_DATE,
+	aaOrig.AGENT_AGREEMENT_ID as ORIGINAL_AA_ID,
+	aaOrig.AGENT_AGREEMENT_NUMBER as ORIGINAL_AA_NUMBER,
+	spisl.PARTNER_CODE,
+	pols.PRODUCT_CODE,
+	pols.CREDIT_PROGRAM_ID,
+	pols.CURRENCY_CODE,
+	pols.INSURANCE_TERMS as INSURANCE_TERM,
+	cast(round(DATEDIFF(day, coalesce(pols.PAYMENT_START_DATE, pols.START_DATE), coalesce(pols.PAYMENT_END_DATE, pols.END_DATE)) / 365.25, 0) as int) as PREMIUM_PERIOD,
+	pols.PAYMENT_FREQUENCY_CODE as PREMIUM_PERIOD_TYPE,
+	latestAa.AGENT_AGREEMENT_NUMBER as AA_AMENDMENT_NUMBER,
+	pp.DUE_DATE,
+	pp.INSURANCE_YEAR,
+	pols.VARIANT_CODE,
+	pols.MANUAL_RULE
+into #CONTRACT
+from
+	pas_impl.POLICY_HUB polh
+	inner join pas_impl.POLICY_SAT_LATEST pols on pols.POLICY_HKEY = polh.POLICY_HKEY
+	inner join pas.CONTRACT con on con.CONTRACT_NUMBER = polh.CONTRACT_NUMBER
+	inner join pas_impl.POLICY_COMMISSION_LINK pCommL on pCommL.POLICY_HKEY = polh.POLICY_HKEY
+	inner join pas_impl.AA_HUB aah on aah.AA_HKEY = pCommL.AA_HKEY
+	inner join pas.AGENT_AGREEMENT aa on aa.AGENT_AGREEMENT_NUMBER = aah.AA_NUMBER
+	inner join pas.AGENT_AGREEMENT aaOrig on aaOrig.AGENT_AGREEMENT_ID = aa.ORIGINAL_DOCUMENT_ID
+	inner join org_impl.SERVICE_PROVIDER_INFO_SAT_LATEST spisl on spisl.SERVICE_PROVIDER_INFO_HKEY = pCommL.SERVICE_PROVIDER_HKEY
+	inner join (
+		select aa.ORIGINAL_DOCUMENT_ID, max(aa.SEQ_NUMBER) as SEQ_NUMBER
+		from
+			pas.AGENT_AGREEMENT aa
+			inner loop join cfg.PROCESS_STATE aaps on aaps.PROCESS_STATE_ID = aa.STATE_ID
+		where aaps.CODE_NAME = 'Activated'
+		group by aa.ORIGINAL_DOCUMENT_ID
+	) latestAaSeq on latestAaSeq.ORIGINAL_DOCUMENT_ID = aaOrig.AGENT_AGREEMENT_ID
+	inner join pas.AGENT_AGREEMENT latestAa on latestAa.ORIGINAL_DOCUMENT_ID = aaOrig.ORIGINAL_DOCUMENT_ID and latestAa.SEQ_NUMBER = latestAaSeq.SEQ_NUMBER
+	inner join (
+		select ppl.POLICY_HKEY, ppl.DUE_DATE, pps.INSURANCE_YEAR
+		from
+			pas_impl.P_PAYMENT_PLAN_LINK ppl
+			inner join pas_impl.P_PAYMENT_PLAN_SAT_LATEST pps on pps.P_PAYMENT_PLAN_HKEY = ppl.P_PAYMENT_PLAN_HKEY
+		group by ppl.POLICY_HKEY, ppl.DUE_DATE, pps.INSURANCE_YEAR
+	) pp on pp.POLICY_HKEY = polh.POLICY_HKEY
+where 1=1
+{{#if parameters.contractNumbers}}
+	and polh.CONTRACT_NUMBER in (@contractNumbers)
+{{/if}}
+{{#if parameters.contractNumbersTmpTable}}
+    and polh.CONTRACT_NUMBER in (select * from {{parameters.contractNumbersTmpTable}})
+{{/if}}
+;
+
+with aabc as
+(
+	select
+		AA_BASE_COMM_HKEY,
+		LOAD_DATE,
+		RECORD_SOURCE,
+		HASH_DIFF,
+		RULE_NUM,
+		START_DATE,
+		END_DATE,
+		REGISTRATOR_NUMBER,
+		PRODUCT_VALUE_REF_ID,
+		PRODUCT_INVERSION,
+		coalesce(INSURANCE_YEAR_FROM, 0)as INSURANCE_YEAR_FROM,
+	    coalesce(INSURANCE_YEAR_TO, 9999)as INSURANCE_YEAR_TO,
+		INSURANCE_CURRENCY,
+		INSURANCE_CURRENCY_INVERSION,
+		INSURANCE_TERM_FROM,
+		INSURANCE_TERM_INCLUDE_FROM,
+		INSURANCE_TERM_TO,
+		INSURANCE_TERM_INCLUDE_TO,
+		PREMIUM_PERIOD_FROM,
+		PREMIUM_PERIOD_INCLUDE_FROM,
+		PREMIUM_PERIOD_TO,
+		PREMIUM_PERIOD_INCLUDE_TO,
+		PREM_PERIOD_VALUE_REF_ID,
+		MIN_RATE,
+		MAX_RATE,
+		MAX_RATE_LIMIT,
+		RATE,
+		EXPENSES_RATE,
+		NATURAL_PERSON_RATE,
+		SOLE_PROPRIATOR_RATE,
+		AMOUNT,
+		DISABLE_DISCOUNT,
+		DISABLE_MANUAL_CORRECTION,
+		ALWAYS_USE_MAX_RATE,
+		CREDIT_PROGRAM_VALUE_REF_ID,
+		CREDIT_PROGRAM_INVERSION,
+		VARIANT_VALUE_REF_ID,
+        VARIANT_INVERSION,
+		[MANUAL_RULE]
+	from (
+		select
+			AA_BASE_COMM_HKEY,
+			LOAD_DATE,
+			RECORD_SOURCE,
+			HASH_DIFF,
+			RULE_NUM,
+			START_DATE,
+			END_DATE,
+			REGISTRATOR_NUMBER,
+			PRODUCT_VALUE_REF_ID,
+			PRODUCT_INVERSION,
+			INSURANCE_YEAR_FROM,
+            INSURANCE_YEAR_TO,
+			INSURANCE_CURRENCY,
+			INSURANCE_CURRENCY_INVERSION,
+			INSURANCE_TERM_FROM,
+			INSURANCE_TERM_INCLUDE_FROM,
+			INSURANCE_TERM_TO,
+			INSURANCE_TERM_INCLUDE_TO,
+			PREMIUM_PERIOD_FROM,
+			PREMIUM_PERIOD_INCLUDE_FROM,
+			PREMIUM_PERIOD_TO,
+			PREMIUM_PERIOD_INCLUDE_TO,
+			PREM_PERIOD_VALUE_REF_ID,
+			MIN_RATE,
+			MAX_RATE,
+			MAX_RATE_LIMIT,
+			RATE,
+			EXPENSES_RATE,
+			NATURAL_PERSON_RATE,
+			SOLE_PROPRIATOR_RATE,
+			AMOUNT,
+			DISABLE_DISCOUNT,
+			DISABLE_MANUAL_CORRECTION,
+			ALWAYS_USE_MAX_RATE,
+			CREDIT_PROGRAM_VALUE_REF_ID,
+			CREDIT_PROGRAM_INVERSION,
+			VARIANT_VALUE_REF_ID,
+        	VARIANT_INVERSION,
+			MANUAL_RULE,
+			rank() over (partition by AA_BASE_COMM_HKEY, RULE_NUM order by LOAD_DATE desc) rank
+		from PAS_IMPL.AA_BASE_COMM_SAT
+	) commRule
+	where commRule.rank = 1
+)
+select
+	c.CONTRACT_NUMBER,
+	c.POLICY_START_DATE,
+	c.DUE_DATE,
+	c.INSURANCE_YEAR as PP_INSURANCE_YEAR,
+	{{parameters.ruleTableAlias}}.RULE_NUM,
+	{{parameters.ruleTableAlias}}.START_DATE,
+	{{parameters.ruleTableAlias}}.END_DATE,
+	{{parameters.ruleTableAlias}}.REGISTRATOR_NUMBER,
+	{{parameters.ruleTableAlias}}.MIN_RATE,
+	{{parameters.ruleTableAlias}}.MAX_RATE,
+	{{parameters.ruleTableAlias}}.MAX_RATE_LIMIT,
+	{{parameters.ruleTableAlias}}.RATE,
+	{{parameters.ruleTableAlias}}.EXPENSES_RATE,
+	{{parameters.ruleTableAlias}}.NATURAL_PERSON_RATE,
+	{{parameters.ruleTableAlias}}.SOLE_PROPRIATOR_RATE,
+	{{parameters.ruleTableAlias}}.AMOUNT,
+	{{parameters.ruleTableAlias}}.DISABLE_DISCOUNT,
+	{{parameters.ruleTableAlias}}.DISABLE_MANUAL_CORRECTION,
+	{{parameters.ruleTableAlias}}.ALWAYS_USE_MAX_RATE
+	{{#each parameters.selectTerms}}{{this}}{{/each}}
+into #RESULT
+from
+	#CONTRACT c
+	inner join pas_impl.AA_HUB hub on hub.AA_NUMBER = c.AA_AMENDMENT_NUMBER
+	inner join pas_impl.AA_COMM_LINK link on link.AA_HKEY = hub.AA_HKEY
+	inner join aabc {{parameters.ruleTableAlias}} on 1=1
+		and {{parameters.ruleTableAlias}}.AA_BASE_COMM_HKEY = link.AA_COMM_HKEY
+		and {{parameters.ruleTableAlias}}.START_DATE <= c.DUE_DATE
+		and ({{parameters.ruleTableAlias}}.END_DATE is null or {{parameters.ruleTableAlias}}.END_DATE >= c.DUE_DATE)
+	{{#each parameters.whereTerms}}{{{this}}}{{/each}}
+;
+
+select *
+from #RESULT r
+where
+	r.PP_INSURANCE_YEAR BETWEEN r.INSURANCE_YEAR_FROM AND r.INSURANCE_YEAR_TO
+;
+
+{{concat 'drop'}} table #RESULT;
+{{concat 'drop'}} table #CONTRACT{{concat ';'}}

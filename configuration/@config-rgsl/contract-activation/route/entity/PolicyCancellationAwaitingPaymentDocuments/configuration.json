@@ -1,0 +1,28 @@
+{
+    "entityType": "Contract",
+    "condition": {
+        "events": [
+            "StatusChanged"
+        ],
+        "configuration": {
+            "dimensions": {
+                "contractType": [
+                    "Amendment"
+                ],
+                "amendmentType": [
+                    "Cancellation"
+                ]
+            }
+        },
+        "documentStates": [
+            "AwaitingPaymentDocuments"
+        ]
+    },
+    "sinks": [
+        {
+            "name": "CancelPolicy",
+            "documentTransition": {}
+        }
+    ],
+    "version": "1"
+}

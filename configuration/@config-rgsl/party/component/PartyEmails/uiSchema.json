@@ -1,0 +1,94 @@
+{
+    "type": "GridLayout",
+    "numberOfColumns": 4,
+    "elements": [
+        {
+            "type": "DataGrid",
+            "mode": "Array",
+            "label": "PartyEmails",
+            "labelType": "H1",
+            "pagination": {
+                "mode": "Regular",
+                "pageSizes": [
+                    5,
+                    10,
+                    15
+                ],
+                "defaultPageSize": 5
+            },
+            "isCollapsed": false,
+            "value": {
+                "$ref": "#"
+            },
+            "actions": [
+                "Add",
+                "Edit",
+                "Delete"
+            ],
+            "edit": {
+                "mode": "Detached",
+                "onBeforeGridAction": "partyEmailsOnBeforeGridAction",
+                "onAfterGridAction": "partyEmailsAfterGridAction"
+            },
+            "height": "Small",
+            "columns": [
+                {
+                    "title": "email",
+                    "name": "email",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/email"
+                        }
+                    }
+                },
+                {
+                    "title": "isPreferable",
+                    "name": "isPreferable",
+                    "cellContent": {
+                        "type": "Icon",
+                        "iconStyleFunction": "isPreferableIconStyleFunction",
+                        "value": {
+                            "$ref": "#/properties/isPreferable"
+                        }
+                    }
+                },
+                {
+                    "title": "isForNewsletters",
+                    "name": "isForNewsletters",
+                    "cellContent": {
+                        "type": "Icon",
+                        "iconStyleFunction": "isForNewslettersIconStyleFunction",
+                        "value": {
+                            "$ref": "#/properties/isForNewsletters"
+                        }
+                    }
+                }
+            ],
+            "detailsTemplates": {
+                "edit": {
+                    "content": {
+                        "type": "Component",
+                        "name": "PartyEmail",
+                        "value": {
+                            "$ref": "#"
+                        }
+                    }
+                }
+            }
+        }
+    ],
+    "rule": {
+        "effect": "ENABLE_INITIAL",
+        "condition": {
+            "type": "FUNC",
+            "ruleFunction": "enablePartyEmails",
+            "value": [
+                {
+                    "$ref": "#"
+                }
+            ]
+        }
+    }
+}

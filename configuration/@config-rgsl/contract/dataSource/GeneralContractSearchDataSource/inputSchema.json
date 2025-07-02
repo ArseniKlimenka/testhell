@@ -1,0 +1,176 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "object",
+    "properties": {
+        "criteria": {
+            "type": "object",
+            "properties": {
+                "freeText": {
+                    "type": "string"
+                },
+                "number": {
+                    "type": "string"
+                },
+                "isStrictNumber": {
+                    "type": "boolean"
+                },
+                "stateCode": {
+                    "$ref": "component:ContractState"
+                },
+                "configurationName": {
+                    "type": "string"
+                },
+                "contractType": {
+                    "type": "string",
+                    "enum": [
+                        "Quote",
+                        "Policy"
+                    ]
+                },
+                "productGroup": {
+                    "$ref": "component:ProductGroup"
+                },
+                "productGroups": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "component:ProductGroup"
+                    }
+                },
+                "product": {
+                    "type": "object",
+                    "properties": {
+                        "productCode": {
+                            "type": "string"
+                        },
+                        "productGroup": {
+                            "type": "string"
+                        },
+                        "productDescription": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "products": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "properties": {
+                            "productCode": {
+                                "type": "string"
+                            },
+                            "productGroup": {
+                                "type": "string"
+                            },
+                            "productDescription": {
+                                "type": "string"
+                            },
+                            "productSalesSegment": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                },
+                "createdOnFrom": {
+                    "type": "string",
+                    "aiFormat": "date"
+                },
+                "issueDateFrom": {
+                    "type": "string",
+                    "aiFormat": "date"
+                },
+                "issueDateTo": {
+                    "type": "string",
+                    "aiFormat": "date"
+                },
+                "startDateFrom": {
+                    "type": "string",
+                    "aiFormat": "date"
+                },
+                "startDateTo": {
+                    "type": "string",
+                    "aiFormat": "date"
+                },
+                "endDateFrom": {
+                    "type": "string",
+                    "aiFormat": "date"
+                },
+                "endDateTo": {
+                    "type": "string",
+                    "aiFormat": "date"
+                },
+                "holder": {
+                    "type": "string"
+                },
+                "initiatorServiceProviderCode": {
+                    "type": "string"
+                },
+                "isPersonalManager": {
+                    "type": "boolean"
+                },
+                "initiatorServiceProviderCodes": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "organisationUnitCode": {
+                    "type": "string"
+                },
+                "organisationUnitCodes": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "includeChildren": {
+                    "type": "boolean"
+                },
+                "insuredPerson": {
+                    "type": "string"
+                },
+                "participant": {
+                    "type": "string"
+                },
+                "isReinvest": {
+                    "type": "boolean"
+                },
+                "issueFormCode": {
+                    "type": "string",
+                    "enum": [
+                        "paper",
+                        "offer",
+                        "ePolicy"
+                    ]
+                },
+                "aaExternalNumber": {
+                    "type": "string"
+                },
+                "excludedProducts": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "partnerCode": {
+                    "type": "string"
+                },
+                "partnerBusinessCodes": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "isCollectivePolicyOnly": {
+                    "type": "boolean"
+                },
+                "futureContractNumber": {
+                    "type": "string"
+                }
+            }
+        },
+        "sort": {
+            "type": "array"
+        }
+    }
+}

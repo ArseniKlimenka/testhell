@@ -1,0 +1,94 @@
+﻿select
+	row_number() over (
+		order by
+		ENTRY_DATE,
+		IS_STORNO,
+		case
+			when TRANSACTION_TYPE_ID = 1 then 1 --Начисление страховой премии
+			when TRANSACTION_TYPE_ID = 2 then 2 --Начисление вознаграждения посредникам (Оценка)
+			when TRANSACTION_TYPE_ID = 4 and BSI_DIRECTION = 1 then 3 --Распределение платежей (Входящие)
+			when TRANSACTION_TYPE_ID = 7 then 4 --РСД
+			when TRANSACTION_TYPE_ID = 3 then 5 --Начисление вознаграждения посредникам (Факт)
+			when TRANSACTION_TYPE_ID = 5 then 6 --Выплаты
+			when TRANSACTION_TYPE_ID = 4 and BSI_DIRECTION = 2 then 7 --Распределение платежей (Исходящие)
+			else 1000
+		end,
+		MIN_PAIR_NO,
+		IS_DEBIT desc
+	) as SORTER,
+	PAIR_NO,
+	IS_STORNO,
+	SOURCE_LINE_ID,
+	DOCUMENT_NO,
+	ENTRY_DATE,
+	TRANSACTION_TYPE_ID,
+	DEBIT_CREDIT,
+	POSTING_AMOUNT,
+	GL_ACCOUNT,
+	EPS_ACCOUNT,
+	EPS_ACCOUNT_20,
+	LLOB,
+	KSP
+from
+(
+	select
+		s.IS_DEBIT,
+		min(s.PAIR_NO) as MIN_PAIR_NO,
+		aa.TRANSACTION_TYPE_ID,
+		bsi.DIRECTION as BSI_DIRECTION,
+		cast(case when aa.CANCELLED_DOCUMENT_NO is not null or SUM(s.ACCOUNTING_GROSS_AMOUNT) < 0 then 1 else 0 end as bit) as IS_STORNO,
+	{{#if parameters.enableGrouping}}
+		null as PAIR_NO,
+		null as SOURCE_LINE_ID,
+	{{else}}
+		s.PAIR_NO,
+		s.SOURCE_LINE_ID,
+	{{/if}}
+		aa.DOCUMENT_NO,
+		ev.BUSINESS_EVENT_ID,
+		s.POST_DATE as ENTRY_DATE,
+		aa.TRANSACTION_CODE_2 as DEBIT_CREDIT,
+		SUM(s.ACCOUNTING_GROSS_AMOUNT) as POSTING_AMOUNT,
+		sapa.SAP_GL_ACCOUNT_NO as GL_ACCOUNT,
+		aa.XREF2 as EPS_ACCOUNT,
+		aa.PERSONAL_ACCOUNT_NUMBER as EPS_ACCOUNT_20,
+		aa.BUSINESS_LINE as LLOB,
+		aa.COST_CENTER as KSP
+	from ACC.GL_SUBLEDGER_ENTRY s
+		left join ACC.GL_ADDITIONAL_ATTRIBUTES aa on s.GL_ADDITIONAL_ATTRIBUTE_ID = aa.GL_ADDITIONAL_ATTRIBUTE_ID
+		left join acc_impl.BANK_STATEMENT_ITEM bsi on bsi.BANK_STATEMENT_ITEM_ID = aa.BANK_STATEMENT_ITEM_ID
+		left join ACC_IMPL.SAP_GL_ACCOUNT sapa on aa.SAP_GL_ACCOUNT_ID = sapa.SAP_GL_ACCOUNT_ID
+		left join ACC.EVENT ev on s.EVENT_ID = ev.EVENT_ID
+	where 1 = 1
+	{{#if parameters.mainContractNo}}
+		and s.MAIN_CONTRACT_NO = @mainContractNo
+	{{/if}}
+	{{#if parameters.actId}}
+		and aa.COMMISSION_ACT_ID = @actId
+	{{/if}}
+	{{#if parameters.actNo}}
+		and aa.COMMISSION_ACT_ID = (select ACT_ID from acc_impl.CA_ACT where ACT_NO = @actNo)
+	{{/if}}
+	{{#if parameters.bankStatementItemId}}
+		and aa.BANK_STATEMENT_ITEM_ID = @bankStatementItemId
+	{{/if}}
+	{{#if parameters.transactionTypeIds}}
+		and aa.TRANSACTION_TYPE_ID in (@transactionTypeIds)
+	{{/if}}
+	group by
+		s.IS_DEBIT,
+		aa.TRANSACTION_TYPE_ID,
+		bsi.DIRECTION,
+		aa.CANCELLED_DOCUMENT_NO,
+		s.PAIR_NO,
+		s.SOURCE_LINE_ID,
+		aa.DOCUMENT_NO,
+		ev.BUSINESS_EVENT_ID,
+		s.POST_DATE,
+		aa.TRANSACTION_CODE_2,
+		sapa.SAP_GL_ACCOUNT_NO,
+		aa.XREF2,
+		aa.PERSONAL_ACCOUNT_NUMBER,
+		aa.BUSINESS_LINE,
+		aa.COST_CENTER
+) t

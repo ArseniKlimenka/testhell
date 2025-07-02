@@ -1,0 +1,55 @@
+{
+    "type": "Group",
+    "width": 4,
+    "elements": [
+        {
+            "type": "Group",
+            "width": 2,
+            "stackContent": "Left",
+            "elements": [
+                {
+                    "type": "Button",
+                    "elementId": "searchViewSearchButton",
+                    "label": "Search",
+                    "submitOnEnter": true,
+                    "onClick": [
+                        {
+                            "commandType": "executeOperation",
+                            "operation": "SEARCH"
+                        }
+                    ],
+                    "icon": {
+                        "name": "Search",
+                        "color": "BackgroundColor",
+                        "size": "Small"
+                    },
+                    "value": {
+                        "$ref": "#/properties/response/properties/data"
+                    }
+                },
+                {
+                    "type": "Button",
+                    "elementId": "searchViewClearButton",
+                    "label": "Clear",
+                    "backgroundColor": "Primary",
+                    "fill": "Outline",
+                    "labelColor": "Primary",
+                    "onClick": [
+                        {
+                            "commandType": "raiseEvent",
+                            "eventName": "ClearFilter"
+                        }
+                    ],
+                    "icon": {
+                        "name": "Times",
+                        "color": "Primary",
+                        "size": "Small"
+                    },
+                    "value": {
+                        "$ref": "#/properties/response/properties/data"
+                    }
+                }
+            ]
+        }
+    ]
+}

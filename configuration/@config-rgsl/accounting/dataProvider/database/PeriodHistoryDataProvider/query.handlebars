@@ -1,0 +1,9 @@
+SELECT h.CREATE_DATE
+      ,h.PERIOD_STATUS_ID_TO
+      ,u.USERNAME
+FROM acc_impl.PERIOD_HISTORY h
+      inner join org.APPLICATION_USER u on u.APPLICATION_USER_ID = h.USER_ID
+WHERE 1=1
+{{#if parameters.periodId}}
+      and h.PERIOD_ID = @periodId
+{{/if}}

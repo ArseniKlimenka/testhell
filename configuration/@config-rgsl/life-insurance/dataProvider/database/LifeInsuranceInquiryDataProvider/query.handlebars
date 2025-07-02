@@ -1,0 +1,286 @@
+﻿{{#if parameters.isCancellationOrEndowmentOrQuote}}
+WITH ASSIGNED_USERS AS
+    (SELECT
+		ud.UNIVERSAL_DOCUMENT_NUMBER,
+		aul.value INQUIRY_ASSIGNED_ON,
+		a.USER_GROUP_CODE
+	FROM
+		BFX.ACTIVITY a
+	LEFT JOIN BFX.ENTITY_REF e ON a.ENTITY_REF_ID = e.ENTITY_REF_ID
+	LEFT JOIN BFX.UNIVERSAL_DOCUMENT ud ON ud.UNIVERSAL_DOCUMENT_ID = e.ENTITY_ID
+	LEFT JOIN CFX.PUBLISHED_ARTIFACT paUd ON paUd.PUBLISHED_ARTIFACT_ID = ud.PUBLISHED_ARTIFACT_ID
+	LEFT JOIN ORG.APPLICATION_USER_CLAIM aul ON aul.APPLICATION_USER_ID = a.ASSIGNED_USER_ID
+	WHERE aul.CLAIM_TYPE = 'DisplayName' AND (paUd.CODE_NAME = 'CancellationInquiry' OR paUd.CODE_NAME = 'EndowmentInquiry' OR paUd.CODE_NAME = 'LifeInsuranceInquiry' OR paUd.CODE_NAME = 'LifeInsurancePolicyInquiry'))
+{{/if}}
+
+{{#if parameters.isLifeInsuranceCancellation}}
+	SELECT 
+
+		ud.UNIVERSAL_DOCUMENT_NUMBER INQUIRY_NUMBER, 
+		paUd.CODE_NAME INQUIRY_CODE_NAME, 
+		CONVERT(DATE, ud.SYS_CREATED_ON) INQUIRY_CREATED_ON, 
+		psUd.CODE_NAME INQUIRY_STATE, 
+		inqS.DEPARTMENT_CODE INQUIRY_DEPARTMENT_CODE, 
+		au.INQUIRY_ASSIGNED_ON, 
+		am.CONTRACT_NUMBER DOCUMENT_NUMBER, 
+		paDoc.CODE_NAME DOCUMENT_CODE_NAME, 
+		cnlAppS.RECEIVE_DATE, 
+		ptyInfoS.FULL_NAME APPLICANT_FULL_NAME, 
+		p.CONTRACT_NUMBER, 
+		paCon.CODE_NAME CONTRACT_CODE_NAME, 
+		ps.ISSUE_DATE, 
+		ps.HOLDER_NAME, 
+		inqS.TEXT_OF_INQUIRY, 
+		(SELECT CAST(DESCRIPTION + '; 'AS xml)
+			FROM BFX_IMPL.INQUIRY_REASON ir
+			LEFT JOIN PAS_IMPL.INQUIRY_REASON_SAT cnlInqRS ON cnlInqRS.INQUIRY_REASON_HKEY = inqH.INQUIRY_HKEY
+			WHERE cnlInqRS.INQUIRY_REASON_HKEY = inqH.INQUIRY_HKEY AND ir.CODE = cnlInqRS.REASON_CODE
+			FOR XML PATH('')
+		) INQUIRY_ERRORS, 
+		inqS.INCLUDED_IN_RP_REGISTER, 
+		inqS.INCLUSION_DATE_RP_REGISTER 
+
+	FROM BFX.UNIVERSAL_DOCUMENT ud
+	LEFT JOIN ASSIGNED_USERS au ON au.UNIVERSAL_DOCUMENT_NUMBER = ud.UNIVERSAL_DOCUMENT_NUMBER
+	LEFT JOIN CFX.PUBLISHED_ARTIFACT paUd ON paUd.PUBLISHED_ARTIFACT_ID = ud.PUBLISHED_ARTIFACT_ID
+	LEFT JOIN CFG.PROCESS_STATE psUd ON psUd.PROCESS_STATE_ID = ud.STATE_ID
+	LEFT JOIN PAS_IMPL.INQUIRY_HUB inqH ON inqH.INQUIRY_NUMBER = ud.UNIVERSAL_DOCUMENT_NUMBER
+	LEFT JOIN PAS_IMPL.INQUIRY_SAT_LATEST inqS ON inqS.INQUIRY_HKEY = inqH.INQUIRY_HKEY
+	LEFT JOIN PAS_IMPL.CNL_INQUIRY_LINK inqL ON inqL.INQUIRY_HKEY = inqH.INQUIRY_HKEY
+	LEFT JOIN PAS_IMPL.AMENDMENT_HUB amH ON amH.AMENDMENT_HKEY = inqL.AMENDMENT_HKEY
+	LEFT JOIN PAS_IMPL.CNL_APPLICANT_LINK cnlAppL ON cnlAppL.AMENDMENT_HKEY = amh.AMENDMENT_HKEY
+	LEFT JOIN PAS_IMPL.CNL_APPLICANT_SAT_LATEST cnlAppS ON cnlAppS.CNL_APPLICANT_HKEY = cnlAppL.CNL_APPLICANT_HKEY
+	LEFT JOIN PAS.CONTRACT am ON am.CONTRACT_NUMBER = amH.AMENDMENT_NUMBER
+	LEFT JOIN CFX.PUBLISHED_ARTIFACT paDoc ON paDoc.PUBLISHED_ARTIFACT_ID = am.PUBLISHED_ARTIFACT_ID
+	LEFT JOIN PAS.CONTRACT p ON p.CONTRACT_ID = am.ORIGINAL_DOCUMENT_ID
+	LEFT JOIN CFX.PUBLISHED_ARTIFACT paCon ON paCon.PUBLISHED_ARTIFACT_ID = p.PUBLISHED_ARTIFACT_ID
+	LEFT JOIN PAS_IMPL.POLICY_HUB ph ON ph.CONTRACT_NUMBER = p.CONTRACT_NUMBER
+	LEFT JOIN PAS_IMPL.POLICY_SAT_LATEST ps ON ps.POLICY_HKEY = ph.POLICY_HKEY
+	LEFT JOIN CFG.PROCESS_STATE psAm ON psAm.PROCESS_STATE_ID = am.STATE_ID
+	LEFT JOIN PAS_IMPL.AMENDMENT_SAT_LATEST amS ON amS.AMENDMENT_HKEY = amH.AMENDMENT_HKEY
+	LEFT JOIN PAS_IMPL.CNL_APPLICANT_LINK amAppL ON amAppL.AMENDMENT_HKEY = amH.AMENDMENT_HKEY
+	LEFT JOIN PTY_IMPL.PARTY_HUB ptyH ON ptyH.PARTY_HKEY = amAppL.PARTY_HKEY
+	LEFT JOIN PTY_IMPL.PARTY_INFO_SAT_LATEST ptyInfoS ON ptyInfoS.PARTY_INFO_HKEY = ptyH.PARTY_HKEY
+
+	WHERE 1 = 1
+		{{#if parameters.inquiryNumber}}
+			AND ud.UNIVERSAL_DOCUMENT_NUMBER = @inquiryNumber 
+		{{/if}}
+		{{#if parameters.inquiryState}}
+			AND psUd.CODE_NAME = @inquiryState 
+		{{/if}}
+		{{#if parameters.inquiryCreatedFrom}}
+			AND CONVERT(DATE, ud.SYS_CREATED_ON) >= @inquiryCreatedFrom 
+		{{/if}}
+		{{#if parameters.inquiryCreatedTo}}
+			AND CONVERT(DATE, ud.SYS_CREATED_ON) <= @inquiryCreatedTo 
+		{{/if}}
+		{{#if parameters.reasonCode}}
+			AND amS.AMENDMENT_REASON = @reasonCode 
+		{{/if}}
+		{{#if parameters.documentNumber}}
+			AND am.CONTRACT_NUMBER = @documentNumber 
+		{{/if}}
+		{{#if parameters.contractNumber}}
+			AND p.CONTRACT_NUMBER = @contractNumber 
+		{{/if}}
+		{{#if parameters.holderCode}}
+			AND ps.HOLDER_CODE = @holderCode 
+		{{/if}}
+		{{#if parameters.departmentCodes}}
+			AND inqS.DEPARTMENT_CODE IN (@departmentCodes)
+		{{/if}}
+		{{#if parameters.includedInRussianPostRegister}}
+			AND inqS.INCLUDED_IN_RP_REGISTER = @includedInRussianPostRegister 
+		{{else}}
+			AND (inqS.INCLUDED_IN_RP_REGISTER = '0' OR inqS.INCLUDED_IN_RP_REGISTER IS NULL)
+		{{/if}}
+		{{#if parameters.russianPostRegisterInclusionDateFrom}}
+			AND inqS.INCLUSION_DATE_RP_REGISTER >= @russianPostRegisterInclusionDateFrom 
+		{{/if}}
+		{{#if parameters.russianPostRegisterInclusionDateTo}}
+			AND inqS.INCLUSION_DATE_RP_REGISTER <= @russianPostRegisterInclusionDateTo 
+		{{/if}}
+			AND paUd.CODE_NAME = 'CancellationInquiry'
+			AND paDoc.CODE_NAME LIKE '%LifeInsuranceCancellation' 
+{{/if}}	
+
+{{#if parameters.isEndowmentAndCancellation}}
+	UNION ALL
+{{/if}}
+
+{{#if parameters.isEndowment}}
+	SELECT 
+
+		ud.UNIVERSAL_DOCUMENT_NUMBER INQUIRY_NUMBER, 
+		paUd.CODE_NAME INQUIRY_CODE_NAME, 
+		CONVERT(DATE, ud.SYS_CREATED_ON) INQUIRY_CREATED_ON, 
+		psUd.CODE_NAME INQUIRY_STATE, 
+		ewtInqS.DEPARTMENT_CODE INQUIRY_DEPARTMENT_CODE, 
+		(SELECT INQUIRY_ASSIGNED_ON 
+			FROM ASSIGNED_USERS asu 
+			WHERE ud.UNIVERSAL_DOCUMENT_NUMBER = asu.UNIVERSAL_DOCUMENT_NUMBER
+		) INQUIRY_ASSIGNED_ON, 
+		ewtH.ENDOWMENT_NUMBER DOCUMENT_NUMBER, 
+		paDoc.CODE_NAME DOCUMENT_CODE_NAME, 
+		ewtAppS.STATEMENT_RECEIVED_DATE RECEIVED_DATE, 
+		ptyInfoS.FULL_NAME APPLICANT_FULL_NAME, 
+		p.CONTRACT_NUMBER, 
+		paCon.CODE_NAME CONTRACT_CODE_NAME, 
+		ps.ISSUE_DATE, 
+		ps.HOLDER_NAME, 
+		ewtInqS.TEXT_OF_INQUIRY, 
+		(SELECT CAST(DESCRIPTION + '; 'AS xml)
+		FROM BFX_IMPL.INQUIRY_REASON ir
+		LEFT JOIN EWT_IMPL.ENDOWMENT_INQUIRY_REASON_SAT_LATEST ewtInqRS ON ewtInqRS.ENDOWMENT_INQUIRY_REASON_HKEY = ewtInqH.ENDOWMENT_INQUIRY_HKEY
+		WHERE ewtInqRS.ENDOWMENT_INQUIRY_REASON_HKEY = ewtInqH.ENDOWMENT_INQUIRY_HKEY AND ir.CODE = ewtInqRS.REASON_CODE
+		FOR XML PATH('')
+		) INQUIRY_ERRORS, 
+		ewtInqS.INCLUDED_IN_RP_REGISTER, 
+		ewtInqS.INCLUSION_DATE_RP_REGISTER 
+
+	FROM BFX.UNIVERSAL_DOCUMENT ud
+	LEFT JOIN CFX.PUBLISHED_ARTIFACT paUd ON paUd.PUBLISHED_ARTIFACT_ID = ud.PUBLISHED_ARTIFACT_ID
+	LEFT JOIN CFG.PROCESS_STATE psUd ON psUd.PROCESS_STATE_ID = ud.STATE_ID
+	LEFT JOIN EWT_IMPL.ENDOWMENT_INQUIRY_HUB ewtInqH ON ewtInqH.INQUIRY_NUMBER = ud.UNIVERSAL_DOCUMENT_NUMBER
+	LEFT JOIN EWT_IMPL.ENDOWMENT_INQUIRY_SAT_LATEST ewtInqS ON ewtInqS.ENDOWMENT_INQUIRY_HKEY = ewtInqH.ENDOWMENT_INQUIRY_HKEY
+	LEFT JOIN EWT_IMPL.EWT_INQUIRY_LINK ewtInqL ON ewtInqL.ENDOWMENT_INQUIRY_HKEY = ewtInqH.ENDOWMENT_INQUIRY_HKEY
+	LEFT JOIN EWT_IMPL.EWT_HUB ewtH ON ewtH.EWT_HKEY = ewtInqL.EWT_HKEY
+	LEFT JOIN EWT_IMPL.EWT_SAT_LATEST ewtS ON ewtS.EWT_HKEY = ewtH.EWT_HKEY
+	LEFT JOIN BFX.UNIVERSAL_DOCUMENT ewtUd ON ewtUd.UNIVERSAL_DOCUMENT_NUMBER = ewtH.ENDOWMENT_NUMBER
+	LEFT JOIN CFX.PUBLISHED_ARTIFACT paDoc ON paDoc.PUBLISHED_ARTIFACT_ID = ewtUd.PUBLISHED_ARTIFACT_ID
+	LEFT JOIN EWT_IMPL.EWT_CONTRACT_LINK ewtContL ON ewtContL.EWT_HKEY = ewtH.EWT_HKEY
+	LEFT JOIN EWT_IMPL.EWT_APPLICANT_LINK ewtAppL ON ewtAppL.EWT_HKEY = ewtH.EWT_HKEY
+	LEFT JOIN EWT_IMPL.EWT_APPLICANT_SAT_LATEST ewtAppS ON ewtAppS.EWT_APPLICANT_HKEY = ewtAppL.EWT_APPLICANT_HKEY
+	LEFT JOIN PAS_IMPL.POLICY_HUB ph ON ph.POLICY_HKEY = ewtContL.POLICY_HKEY
+	LEFT JOIN PAS.CONTRACT p ON p.CONTRACT_NUMBER = ph.CONTRACT_NUMBER
+	LEFT JOIN CFX.PUBLISHED_ARTIFACT paCon ON paCon.PUBLISHED_ARTIFACT_ID = p.PUBLISHED_ARTIFACT_ID
+	LEFT JOIN PAS_IMPL.POLICY_SAT_LATEST ps ON ps.POLICY_HKEY = ph.POLICY_HKEY
+	LEFT JOIN PTY_IMPL.PARTY_HUB ptyH ON ptyH.PARTY_HKEY = ewtAppL.PARTY_HKEY
+	LEFT JOIN PTY_IMPL.PARTY_INFO_SAT_LATEST ptyInfoS ON ptyInfoS.PARTY_INFO_HKEY = ptyH.PARTY_HKEY
+
+	WHERE 1 = 1
+		{{#if parameters.inquiryNumber}}
+			AND ud.UNIVERSAL_DOCUMENT_NUMBER = @inquiryNumber 
+		{{/if}}
+		{{#if parameters.inquiryState}}
+			AND psUd.CODE_NAME = @inquiryState 
+		{{/if}}
+		{{#if parameters.inquiryCreatedFrom}}
+			AND CONVERT(DATE, ud.SYS_CREATED_ON) >= @inquiryCreatedFrom 
+		{{/if}}
+		{{#if parameters.inquiryCreatedTo}}
+			AND CONVERT(DATE, ud.SYS_CREATED_ON) <= @inquiryCreatedTo 
+		{{/if}}
+		{{#if parameters.reasonCode}}
+			AND ewtS.EVENT_REASON_CODE = @reasonCode 
+		{{/if}}
+		{{#if parameters.documentNumber}}
+			AND ewtH.ENDOWMENT_NUMBER = @documentNumber 
+		{{/if}}
+		{{#if parameters.contractNumber}}
+			AND p.CONTRACT_NUMBER = @contractNumber 
+		{{/if}}
+		{{#if parameters.holderCode}}
+			AND ps.HOLDER_CODE = @holderCode 
+		{{/if}}
+		{{#if parameters.departmentCodes}}
+			AND ewtInqS.DEPARTMENT_CODE IN (@departmentCodes)
+		{{/if}}
+		{{#if parameters.includedInRussianPostRegister}}
+			AND ewtInqS.INCLUDED_IN_RP_REGISTER = @includedInRussianPostRegister
+		{{else}}
+			AND (ewtInqS.INCLUDED_IN_RP_REGISTER = '0' OR ewtInqS.INCLUDED_IN_RP_REGISTER IS NULL)
+		{{/if}}
+		{{#if parameters.russianPostRegisterInclusionDateFrom}}
+			AND ewtInqS.INCLUSION_DATE_RP_REGISTER >= @russianPostRegisterInclusionDateFrom 
+		{{/if}}
+		{{#if parameters.russianPostRegisterInclusionDateTo}}
+			AND ewtInqS.INCLUSION_DATE_RP_REGISTER <= @russianPostRegisterInclusionDateTo 
+		{{/if}}
+			AND paUd.CODE_NAME = 'EndowmentInquiry'
+			AND paDoc.CODE_NAME = 'Endowment' 
+{{/if}}
+
+{{#if parameters.isCancellationOrEndowmentAndQuote}}
+	UNION ALL
+{{/if}}
+
+{{#if parameters.isLifeInsuranceQuote}}
+	SELECT 
+
+		ud.UNIVERSAL_DOCUMENT_NUMBER INQUIRY_NUMBER, 
+		paUd.CODE_NAME INQUIRY_CODE_NAME, 
+		CONVERT(DATE, ud.SYS_CREATED_ON) INQUIRY_CREATED_ON, 
+		psUd.CODE_NAME INQUIRY_STATE, 
+		inqS.DEPARTMENT_CODE INQUIRY_DEPARTMENT_CODE, 
+		(SELECT INQUIRY_ASSIGNED_ON 
+			FROM ASSIGNED_USERS asu 
+			WHERE ud.UNIVERSAL_DOCUMENT_NUMBER = asu.UNIVERSAL_DOCUMENT_NUMBER
+		) INQUIRY_ASSIGNED_ON, 
+		p.CONTRACT_NUMBER DOCUMENT_NUMBER, 
+		paDoc.CODE_NAME DOCUMENT_CODE_NAME, 
+		NULL RECEIVED_DATE, 
+		NULL APPLICANT_FULL_NAME, 
+		p.CONTRACT_NUMBER, 
+		paDoc.CODE_NAME CONTRACT_CODE_NAME, 
+		qs.ISSUE_DATE, 
+		qs.HOLDER_NAME, 
+		inqS.TEXT_OF_INQUIRY, 
+		NULL INQUIRY_ERRORS, 
+		inqS.INCLUDED_IN_RP_REGISTER, 
+		inqS.INCLUSION_DATE_RP_REGISTER 
+
+	FROM BFX.UNIVERSAL_DOCUMENT ud
+	LEFT JOIN CFX.PUBLISHED_ARTIFACT paUd ON paUd.PUBLISHED_ARTIFACT_ID = ud.PUBLISHED_ARTIFACT_ID
+	LEFT JOIN CFG.PROCESS_STATE psUd ON psUd.PROCESS_STATE_ID = ud.STATE_ID
+	LEFT JOIN PAS_IMPL.INQUIRY_HUB inqH ON inqH.INQUIRY_NUMBER = ud.UNIVERSAL_DOCUMENT_NUMBER
+	LEFT JOIN PAS_IMPL.INQUIRY_SAT_LATEST inqS ON inqS.INQUIRY_HKEY = inqH.INQUIRY_HKEY
+	LEFT JOIN PAS_IMPL.QUOTE_INQUIRY_LINK qInqL ON qInqL.INQUIRY_HKEY = inqH.INQUIRY_HKEY
+	LEFT JOIN PAS_IMPL.QUOTE_HUB qh ON qh.QUOTE_HKEY = qInqL.QUOTE_HKEY
+	LEFT JOIN PAS_IMPL.QUOTE_SAT_LATEST qs ON qs.QUOTE_HKEY = qh.QUOTE_HKEY
+	LEFT JOIN PAS.CONTRACT p ON p.CONTRACT_NUMBER = qh.CONTRACT_NUMBER
+	LEFT JOIN CFX.PUBLISHED_ARTIFACT paDoc ON paDoc.PUBLISHED_ARTIFACT_ID = p.PUBLISHED_ARTIFACT_ID
+
+	WHERE 1 = 1
+		{{#if parameters.inquiryNumber}}
+			AND ud.UNIVERSAL_DOCUMENT_NUMBER = @inquiryNumber
+		{{/if}}
+		{{#if parameters.inquiryState}}
+			AND psUd.CODE_NAME = @inquiryState
+		{{/if}}
+		{{#if parameters.inquiryCreatedFrom}}
+			AND CONVERT(DATE, ud.SYS_CREATED_ON) >= @inquiryCreatedFrom
+		{{/if}}
+		{{#if parameters.inquiryCreatedTo}}
+			AND CONVERT(DATE, ud.SYS_CREATED_ON) <= @inquiryCreatedTo
+		{{/if}}
+		{{#if parameters.reasonCode}}
+			AND paUd.CODE_NAME = @reasonCode
+		{{/if}}
+		{{#if parameters.documentNumber}}
+			AND p.CONTRACT_NUMBER = @documentNumber
+		{{/if}}
+		{{#if parameters.contractNumber}}
+			AND p.CONTRACT_NUMBER = @contractNumber
+		{{/if}}
+		{{#if parameters.holderCode}}
+			AND qs.HOLDER_CODE = @holderCode
+		{{/if}}
+		{{#if parameters.departmentCodes}}
+			AND inqS.DEPARTMENT_CODE IN (@departmentCodes)
+		{{/if}}
+		{{#if parameters.includedInRussianPostRegister}}
+			AND inqS.INCLUDED_IN_RP_REGISTER = @includedInRussianPostRegister
+		{{else}}
+			AND (inqS.INCLUDED_IN_RP_REGISTER = '0' OR inqS.INCLUDED_IN_RP_REGISTER IS NULL)
+		{{/if}}
+		{{#if parameters.russianPostRegisterInclusionDateFrom}}
+			AND inqS.INCLUSION_DATE_RP_REGISTER >= @russianPostRegisterInclusionDateFrom
+		{{/if}}
+		{{#if parameters.russianPostRegisterInclusionDateTo}}
+			AND inqS.INCLUSION_DATE_RP_REGISTER <= @russianPostRegisterInclusionDateTo
+		{{/if}}
+			AND (paUd.CODE_NAME = 'LifeInsuranceInquiry' OR paUd.CODE_NAME = 'LifeInsurancePolicyInquiry')
+			AND paDoc.CODE_NAME LIKE '%LifeInsuranceQuote'
+{{/if}}

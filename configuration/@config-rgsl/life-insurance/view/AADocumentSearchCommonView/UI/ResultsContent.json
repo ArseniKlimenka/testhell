@@ -1,0 +1,138 @@
+{
+    "type": "Group",
+    "elements": [
+        {
+            "type": "DataGrid",
+            "elementId": "serchResultTable",
+            "mode": "DataSource",
+            "pagination": {
+                "mode": "Regular",
+                "pageSizes": [
+                    5,
+                    10,
+                    15
+                ]
+            },
+            "selection": {
+                "mode": "Single",
+                "enableRowSelection": true,
+                "showCheckBox": true
+            },
+            "columns": [
+                {
+                    "sortable": false,
+                    "title": "externalNumber",
+                    "name": "externalNumber",
+                    "cellContent": {
+                        "type": "Link",
+                        "readOnly": true,
+                        "targetType": "Url",
+                        "label": "externalNumber",
+                        "value": {
+                            "mapping": "agentAgeementCodeUriMapping",
+                            "$ref": "#"
+                        },
+                        "width": 5,
+                        "content": {
+                            "text": {
+                                "type": "OutputText",
+                                "value": {
+                                    "$ref": "#/properties/resultData/properties/externalNumber"
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "documentNumber",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/documentNumber"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "agentName",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/agentNameShort"
+                        }
+                    }
+                },
+                {
+                    "sortable": true,
+                    "title": "startDate",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "template": "{{expr startDate 'd'}}",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/resultData"
+                        }
+                    },
+                    "name": "startDate"
+                },
+                {
+                    "sortable": true,
+                    "title": "endDate",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "template": "{{expr endDate 'd'}}",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/resultData"
+                        }
+                    },
+                    "name": "endDate"
+                },
+                {
+                    "sortable": true,
+                    "title": "conclusionDate",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "template": "{{expr conclusionDate 'd'}}",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/resultData"
+                        }
+                    },
+                    "name": "conclusionDate"
+                },
+                {
+                    "sortable": false,
+                    "title": "documentState",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/documentState"
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "type": "Group",
+            "width": 4,
+            "stackContent": "Left",
+            "elements": [
+                {
+                    "type": "Button",
+                    "label": "Export Report",
+                    "onClick": [
+                        {
+                            "commandType": "executeAction",
+                            "actionName": "exportReport"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

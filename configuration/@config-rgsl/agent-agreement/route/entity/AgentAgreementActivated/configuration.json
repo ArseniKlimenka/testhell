@@ -1,0 +1,59 @@
+{
+    "entityType": "AgentAgreement",
+    "condition": {
+        "events": [
+            "StatusChanged"
+        ],
+        "configuration": {
+            "names": [
+                "AgentAgreement",
+                "AAChangeAmendment",
+                "AACancellationAmendment"
+            ],
+            "dimensions": {
+                "agentAgreementType": [
+                    "Agreement",
+                    "ChangeAmendment",
+                    "CancellationAmendment"
+                ]
+            }
+        },
+        "documentStates": [
+            "Activated"
+        ]
+    },
+    "sinks": [
+        {
+            "name": "GetSequenceValues",
+            "class": {
+                "className": "Adacta.AdInsure.RGSL.Common.API.Shared.Services.ISequenceGeneratorRGSL, Adacta.AdInsure.RGSL.Common.API",
+                "methodName": "GenerateSequenceValues"
+            }
+        },
+        {
+            "name": "AgentAgreement",
+            "database": {
+                "tables": [
+                    "PAS_IMPL.AA_HUB",
+                    "PAS_IMPL.AA_BASE_SAT",
+                    "PAS_IMPL.AA_ORGANISATION_UNIT_SAT",
+                    "PAS_IMPL.AA_SALES_CHANNEL_SAT",
+                    "PAS_IMPL.AA_COMM_TYPE_HUB",
+                    "PAS_IMPL.AA_COMM_LINK",
+                    "PAS_IMPL.AA_PARTICIPANT_LINK",
+                    "PAS_IMPL.AA_PARTICIPANT_SAT",
+                    "PAS_IMPL.AA_SAT",
+                    "PAS_IMPL.AA_VAT_RATE_SAT",
+                    "PAS_IMPL.AA_AMENDMENT_LINK",
+                    "PAS_IMPL.AA_AMENDMENT_SAT",
+                    "PAS_IMPL.AA_CHANGE_SAT",
+                    "PAS_IMPL.AA_CANCELLATION_SAT",
+                    "PAS_IMPL.AA_ORG_UNIT_LINK",
+                    "PAS_IMPL.AA_EVAL_ATTR_VALUE",
+                    "PAS_IMPL.AA_BASE_COMM_SAT"
+                ]
+            }
+        }
+    ],
+    "version": "1"
+}

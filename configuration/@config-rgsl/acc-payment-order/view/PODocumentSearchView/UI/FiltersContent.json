@@ -1,0 +1,186 @@
+{
+    "type": "Group",
+    "elements": [
+        {
+            "type": "GridLayout",
+            "numberOfColumns": 6,
+            "width": 4,
+            "elements": [
+                {
+                    "type": "GridLayout",
+                    "numberOfColumns": 1,
+                    "width": 1,
+                    "stackContent": "Left",
+                    "fillAvailableSpace": true,
+                    "elements": [
+                        {
+                            "type": "Group",
+                            "elements": [
+                                {
+                                    "type": "Input",
+                                    "control": "TextArea",
+                                    "enableResize": true,
+                                    "numberOfRows": 8,
+                                    "label": "contractNumbers",
+                                    "value": {
+                                        "$ref": "#/properties/request/properties/data/properties/criteria/properties/contractNumbersStr"
+                                    },
+                                    "width": 1
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "GridLayout",
+                    "numberOfColumns": 3,
+                    "width": 5,
+                    "stackContent": "Rigth",
+                    "elements": [
+                        {
+                            "type": "Group",
+                            "elements": [
+                                {
+                                    "type": "Input",
+                                    "label": "paymentOrderNumber",
+                                    "value": {
+                                        "$ref": "#/properties/request/properties/data/properties/criteria/properties/paymentOrderNumber"
+                                    },
+                                    "width": 1,
+                                    "name": "paymentOrderNumber"
+                                },
+                                {
+                                    "type": "Dropdown",
+                                    "label": "paymentOrderType",
+                                    "value": {
+                                        "$ref": "#/properties/request/properties/data/properties/criteria/properties/paymentOrderType"
+                                    },
+                                    "width": 1,
+                                    "name": "paymentOrderType"
+                                },
+                                {
+                                    "type": "Input",
+                                    "control": "DateRange",
+                                    "dateFrom": {
+                                        "type": "Input",
+                                        "label": "paymentOrderDateFrom",
+                                        "width": 1,
+                                        "value": {
+                                            "$ref": "#/properties/request/properties/data/properties/criteria/properties/paymentOrderDateFrom"
+                                        },
+                                        "control": "DatetimePicker",
+                                        "name": "paymentOrderDateFrom"
+                                    },
+                                    "dateTo": {
+                                        "type": "Input",
+                                        "label": "paymentOrderDateTo",
+                                        "width": 1,
+                                        "value": {
+                                            "$ref": "#/properties/request/properties/data/properties/criteria/properties/paymentOrderDateTo"
+                                        },
+                                        "control": "DatetimePicker",
+                                        "name": "paymentOrderDateTo"
+                                    },
+                                    "width": 1
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Group",
+                            "elements": [
+                                {
+                                    "type": "Dropdown",
+                                    "label": "stateCode",
+                                    "value": {
+                                        "$ref": "#/properties/request/properties/data/properties/criteria/properties/stateCode"
+                                    },
+                                    "width": 1,
+                                    "name": "stateCode"
+                                },
+                                {
+                                    "type": "Input",
+                                    "label": "Currency",
+                                    "value": {
+                                        "$ref": "#/properties/request/properties/data/properties/criteria/properties/paymentOrderCurrencyCode"
+                                    },
+                                    "autocomplete": {
+                                        "minTextLength": 0,
+                                        "dropItemsCount": 15,
+                                        "selectItemOnMatch": true,
+                                        "matchCaseInsensitive": true
+                                    },
+                                    "control": "Dropdown",
+                                    "source": {
+                                        "dataSource": {
+                                            "name": "GetAllCurrenciesDataSource",
+                                            "searchFieldPath": "currencyCode",
+                                            "responseMapping": "currencySearchResponseMapping",
+                                            "resultCount": 32
+                                        }
+                                    },
+                                    "width": 1,
+                                    "elementId": "currencyElementId"
+                                },
+                                {
+                                    "type": "Input",
+                                    "label": "isCoolOffPeriod",
+                                    "value": {
+                                        "$ref": "#/properties/request/properties/data/properties/criteria/properties/isCoolOffPeriod"
+                                    },
+                                    "width": 1,
+                                    "name": "isCoolOffPeriod"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Group",
+                            "elements": [
+                                {
+                                    "type": "Lookup",
+                                    "elementId": "recipientSearchView",
+                                    "dialogButton": {},
+                                    "clearButton": {
+                                        "clearAction": "clearRecipient"
+                                    },
+                                    "dialog": {
+                                        "viewReference": {
+                                            "configurationCodeName": "GeneralPartySearchView",
+                                            "configurationConceptType": "SearchView",
+                                            "configurationVersion": "1"
+                                        }
+                                    },
+                                    "onSelected": "recipientResultMapping",
+                                    "selectedDisplayValueUISchema": {
+                                        "type": "Input",
+                                        "label": "recipient",
+                                        "readOnly": true,
+                                        "value": {
+                                            "$ref": "#/properties/request/properties/data/properties/criteria/properties/recipientFullName"
+                                        }
+                                    },
+                                    "width": 1
+                                },
+                                {
+                                    "type": "Input",
+                                    "label": "totalPaymentAmountFrom",
+                                    "width": 1,
+                                    "value": {
+                                        "$ref": "#/properties/request/properties/data/properties/criteria/properties/totalPaymentAmountFrom"
+                                    }
+                                },
+                                {
+                                    "type": "Input",
+                                    "label": "totalPaymentAmountTo",
+                                    "width": 1,
+                                    "value": {
+                                        "$ref": "#/properties/request/properties/data/properties/criteria/properties/totalPaymentAmountTo"
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

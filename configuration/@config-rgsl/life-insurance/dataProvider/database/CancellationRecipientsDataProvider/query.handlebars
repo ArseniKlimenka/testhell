@@ -1,0 +1,15 @@
+﻿SELECT amnd.CONTRACT_NUMBER as AMENDMENT_NUMBER,
+	   c.CONTRACT_NUMBER,
+	   amnd.ORIGINAL_DOCUMENT_ID,
+	   r.RECIPIENT_PARTY_CODE,
+	   r.PAYMENT_TYPE_CODE
+FROM pas.CONTRACT amnd
+join pas.CONTRACT c on c.CONTRACT_ID = amnd.ORIGINAL_DOCUMENT_ID
+CROSS APPLY OPENJSON(amnd.BODY,'$.paymentAmendmentConditions.canellationRecipients')
+ with  
+ (    
+     RECIPIENT_PARTY_CODE NVARCHAR(50) N'lax $.partyCode',
+	 PAYMENT_TYPE_CODE NVARCHAR(50) N'lax $.recipientPaymentType.code'
+ ) r
+ WHERE 
+amnd.CONTRACT_NUMBER = @amendmentNumber

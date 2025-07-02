@@ -1,0 +1,300 @@
+{
+    "type": "Tab",
+    "elementId": "tabEndowmentAttachments",
+    "title": "Attachments",
+    "elements": [
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "Component",
+                    "name": "AttachmentsSection",
+                    "value": {
+                        "$ref": "#"
+                    }
+                }
+            ],
+            "rule": {
+                "effect": "ENABLE_INITIAL",
+                "condition": {
+                    "type": "FUNC",
+                    "ruleFunction": "enableAttachments",
+                    "value": [
+                        {
+                            "$ref": "#"
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "type": "GroupSeparator"
+        },
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "OutputText",
+                    "label": "",
+                    "textProperties": [
+                        "bold"
+                    ],
+                    "literalValue": "policyAttachments",
+                    "width": 12
+                }
+            ]
+        },
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "InlineView",
+                    "showContainerActions": false,
+                    "views": [
+                        {
+                            "viewReference": {
+                                "configurationCodeName": "CreditLifeInsurancePolicy",
+                                "configurationVersion": "1",
+                                "configurationConceptType": "Contract"
+                            },
+                            "onCreateViewParams": "setDocumentNumber"
+                        }
+                    ],
+                    "rule": {
+                        "effect": "SHOW",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "shouldShowCreditPolicyAttachments",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "type": "InlineView",
+                    "showContainerActions": false,
+                    "readOnly": true,
+                    "views": [
+                        {
+                            "viewReference": {
+                                "configurationCodeName": "AccumulatedLifeInsurancePolicy",
+                                "configurationVersion": "1",
+                                "configurationConceptType": "Contract"
+                            },
+                            "onCreateViewParams": "setDocumentNumber"
+                        }
+                    ],
+                    "rule": {
+                        "effect": "SHOW",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "shouldShowAccPolicyAttachments",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "type": "InlineView",
+                    "showContainerActions": false,
+                    "views": [
+                        {
+                            "viewReference": {
+                                "configurationCodeName": "InvestmentLifeInsurancePolicy",
+                                "configurationVersion": "1",
+                                "configurationConceptType": "Contract"
+                            },
+                            "onCreateViewParams": "setDocumentNumber"
+                        }
+                    ],
+                    "rule": {
+                        "effect": "SHOW",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "shouldShowInvestPolicyAttachments",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "type": "InlineView",
+                    "showContainerActions": false,
+                    "views": [
+                        {
+                            "viewReference": {
+                                "configurationCodeName": "MedLifeInsurancePolicy",
+                                "configurationVersion": "1",
+                                "configurationConceptType": "Contract"
+                            },
+                            "onCreateViewParams": "setDocumentNumber"
+                        }
+                    ],
+                    "rule": {
+                        "effect": "SHOW",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "shouldShowMedPolicyAttachments",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "type": "InlineView",
+                    "showContainerActions": false,
+                    "views": [
+                        {
+                            "viewReference": {
+                                "configurationCodeName": "RiskLifeInsurancePolicy",
+                                "configurationVersion": "1",
+                                "configurationConceptType": "Contract"
+                            },
+                            "onCreateViewParams": "setDocumentNumber"
+                        }
+                    ],
+                    "rule": {
+                        "effect": "SHOW",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "shouldShowRiskPolicyAttachments",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "type": "InlineView",
+                    "showContainerActions": false,
+                    "views": [
+                        {
+                            "viewReference": {
+                                "configurationCodeName": "EquityLifeInsurancePolicy",
+                                "configurationVersion": "1",
+                                "configurationConceptType": "Contract"
+                            },
+                            "onCreateViewParams": "setDocumentNumber"
+                        }
+                    ],
+                    "rule": {
+                        "effect": "SHOW",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "shouldShowEquityPolicyAttachments",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "type": "InlineView",
+                    "showContainerActions": false,
+                    "views": [
+                        {
+                            "viewReference": {
+                                "configurationCodeName": "AccidentLifeInsurancePolicy",
+                                "configurationVersion": "1",
+                                "configurationConceptType": "Contract"
+                            },
+                            "onCreateViewParams": "setDocumentNumber"
+                        }
+                    ],
+                    "rule": {
+                        "effect": "SHOW",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "shouldShowAccidentPolicyAttachments",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "type": "GroupSeparator"
+                },
+                {
+                    "type": "OutputText",
+                    "label": "",
+                    "textProperties": [
+                        "bold"
+                    ],
+                    "literalValue": "policyHolderLabel",
+                    "width": 12
+                },
+                {
+                    "type": "InlineView",
+                    "showContainerActions": false,
+                    "views": [
+                        {
+                            "viewReference": {
+                                "configurationCodeName": "LegalEntity",
+                                "configurationVersion": "1",
+                                "configurationConceptType": "Party"
+                            },
+                            "onCreateViewParams": "policyHolderAttachmentsOnCreateViewParams"
+                        }
+                    ],
+                    "rule": {
+                        "effect": "SHOW",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "policyHolderLegalEntityShow",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "type": "InlineView",
+                    "showContainerActions": false,
+                    "views": [
+                        {
+                            "viewReference": {
+                                "configurationCodeName": "NaturalPerson",
+                                "configurationVersion": "1",
+                                "configurationConceptType": "Party"
+                            },
+                            "onCreateViewParams": "policyHolderAttachmentsOnCreateViewParams"
+                        }
+                    ],
+                    "rule": {
+                        "effect": "SHOW",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "policyHolderNaturalPersonShow",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    }
+                }
+            ]
+        }
+    ]
+}

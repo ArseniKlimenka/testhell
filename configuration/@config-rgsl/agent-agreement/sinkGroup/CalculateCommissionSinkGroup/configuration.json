@@ -1,0 +1,38 @@
+{
+    "sinks": [
+        {
+            "name": "GenerateExecutionId",
+            "class": {
+                "className": "Adacta.AdInsure.RGSL.Common.API.Shared.Services.ISequenceGeneratorRGSL, Adacta.AdInsure.RGSL.Common.API",
+                "methodName": "GenerateSequenceValues"
+            }
+        },
+        {
+            "name": "GetLastActiveAAAmendment",
+            "fetch": {
+                "configuration": {
+                    "name": "GetLastActiveAAAmendmentDataSource"
+                }
+            }
+        },
+        {
+            "name": "GetMatchedCommissionRules",
+            "fetch": {
+                "configuration": {
+                    "name": "GetMatchedCommissionRulesDataSource"
+                }
+            }
+        },
+        {
+            "name": "WriteCalculationRun",
+            "database": {
+                "tables": [
+                    "PAS_IMPL.COM_CALC_LINK",
+                    "PAS_IMPL.COM_CALC_EXECUTION_STATUS",
+                    "PAS_IMPL.COM_CALC_SAT",
+                    "PAS_IMPL.AA_EVAL_ATTR_VALUE"
+                ]
+            }
+        }
+    ]
+}

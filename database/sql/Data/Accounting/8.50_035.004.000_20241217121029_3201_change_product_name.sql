@@ -1,0 +1,2 @@
+--Корректировка наименования продукта
+delete from bfx_impl.products where code = N'R627DRGSL'; insert into bfx_impl.products VALUES ('77226CFA-FF49-45E5-B1A9-3089FE3897FB', N'R627DRGSL', N'risk', N'На всякий случай', N'РСЖ', N'migrated', null);

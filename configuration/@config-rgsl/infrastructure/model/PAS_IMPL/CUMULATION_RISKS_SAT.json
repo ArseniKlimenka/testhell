@@ -1,0 +1,56 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema",
+    "type": "object",
+    "description": "Cumulation risks",
+    "aiReference": "PAS_IMPL.CUMULATION_HUB",
+    "aiDeletionMode": {
+        "mode": "flag",
+        "columnName": "IS_DELETED"
+    },
+    "aiGeneratedViews": {
+        "latestState": true
+    },
+    "aiAdditionalKeys": [
+        "RISK_GROUP_CODE",
+        "DOCUMENT_NUMBER",
+        "PARTY_CODE",
+        "RISK_CODE",
+        "RISK_INSURED_SUM",
+        "RISK_CURRENCY_CODE"
+    ],
+    "properties": {
+        "RISK_GROUP_CODE": {
+            "type": "string",
+            "aiType": "nvarchar(255)"
+        },
+        "DOCUMENT_NUMBER": {
+            "title": "Cumulation document number",
+            "type": "string",
+            "aiType": "nvarchar(64)"
+        },
+        "PARTY_CODE": {
+            "type": "string",
+            "aiType": "nvarchar(255)"
+        },
+        "RISK_CODE": {
+            "title": "Cumulation risk code",
+            "type": "string",
+            "aiType": "nvarchar(64)"
+        },
+        "RISK_INSURED_SUM": {
+            "title": "Cumulation risk insured sum",
+            "type": "number",
+            "aiType": "decimal(15,2)"
+        },
+        "RISK_CURRENCY_CODE": {
+            "title": "Cumulation risk currency code",
+            "type": "string",
+            "aiType": "nvarchar(64)"
+        },
+        "IS_DELETED": {
+            "title": "Is risk deleted",
+            "type": "boolean",
+            "aiType": "boolean"
+        }
+    }
+}

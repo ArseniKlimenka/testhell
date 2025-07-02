@@ -1,0 +1,8 @@
+delete from bfx_impl.products where code = N'I665VTBP'; insert into bfx_impl.products values ('3EAB367E-0216-4471-BEB4-DBE9F8B93268', N'I665VTBP',N'investment',N'Драйвер Гарантия БондРепак 5RUB',N'НСЖ', N'migrated', null);
+delete from bfx_impl.products where code = N'I736VTBP'; insert into bfx_impl.products values ('93FF31DE-95CD-4952-8C92-03811F651472', N'I736VTBP',N'investment',N'Бонд Репак Драйвер Гарантия 5USD',N'НСЖ', N'migrated', null);
+delete from bfx_impl.products where code = N'E792VTBP'; insert into bfx_impl.products values ('0B71215C-B060-4FF2-AF7B-512BA0F94525', N'E792VTBP',N'endowment',N'Стратегия на пять Гарант 5RUB',N'НСЖ', N'migrated', null);
+delete from bfx_impl.products where code = N'I796VTBP'; insert into bfx_impl.products values ('EA512B8F-BE62-4802-A978-AFDC05BD0E4A', N'I796VTBP',N'investment',N'Драйвер Гарантия БондРепак 5RUB',N'НСЖ', N'migrated', null);
+delete from bfx_impl.products where code = N'I796OAS'; insert into bfx_impl.products values ('C7D2C157-C3B1-42AE-A86D-A990141B5278', N'I796OAS',N'investment',N'Драйвер Гарантия БондРепак 5RUB',N'НСЖ', N'migrated', null);
+delete from bfx_impl.products where code = N'E818Primorye'; insert into bfx_impl.products values ('18B01464-4799-444A-955D-ACAC5BA89C47', N'E818Primorye',N'endowment',N'Забота о будущем 5-10RUB',N'НСЖ', N'migrated', null);
+delete from bfx_impl.products where code = N'I823VTBP'; insert into bfx_impl.products values ('62D48E9B-B079-4E7C-9091-BE46A8E942B1', N'I823VTBP',N'investment',N'Базис Актив Ультра 3RUB',N'ИСЖ', N'migrated', null);
+delete from bfx_impl.products where code = N'E825VTBP'; insert into bfx_impl.products values ('C5DF68B4-4E4D-4D05-96EA-E9724D87CA7F', N'E825VTBP',N'endowment',N'Забота о семье 7-30RUB',N'НСЖ', N'migrated', null);

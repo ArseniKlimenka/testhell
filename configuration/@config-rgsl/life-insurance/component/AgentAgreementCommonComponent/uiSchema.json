@@ -1,0 +1,49 @@
+{
+    "type": "Section",
+    "label": "Agent agreement",
+    "scope": "agentAgreement",
+    "width": 12,
+    "elements": [
+        {
+            "type": "Group",
+            "width": 12,
+            "elements": [
+                {
+                    "type": "Lookup",
+                    "elementId": "aaNumber",
+                    "value": {
+                        "$ref": "#"
+                    },
+                    "whenLocked": "Disable",
+                    "width": 3,
+                    "dialogButton": {},
+                    "dialog": {
+                        "viewReference": {
+                            "configurationCodeName": "AADocumentSearchCommonView",
+                            "configurationVersion": "1",
+                            "configurationConceptType": "SearchView"
+                        },
+                        "onLoad": "onLoadAADocumentSearchView",
+                        "inputParameters": {
+                            "uiContext": {
+                                "selectionMode": "Single"
+                            }
+                        }
+                    },
+                    "clearButton": {
+                        "clearAction": "aaNumberClearButton"
+                    },
+                    "onSelected": "aaNumberSearchResultAssignment",
+                    "selectedDisplayValueUISchema": {
+                        "type": "Input",
+                        "label": "AANumber",
+                        "readOnly": true,
+                        "value": {
+                            "$ref": "#/properties/formatedNumber"
+                        }
+                    }
+                }
+            ]
+        }
+    ]
+}

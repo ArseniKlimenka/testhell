@@ -1,0 +1,79 @@
+{
+    "type": "Section",
+    "label": "Recommended Strategies",
+    "isCollapsed": false,
+    "width": 12,
+    "elements": [
+        {
+            "type": "DataGrid",
+            "mode": "Array",
+            "header": {
+                "showReloadButton": true,
+                "showNumberOfResults": true
+            },
+            "pagination": {
+                "mode": "Regular",
+                "pageSizes": [
+                    5,
+                    10,
+                    15
+                ],
+                "defaultPageSize": 5
+            },
+            "value": {
+                "$ref": "#"
+            },
+            "actions": [],
+            "edit": {
+                "mode": "Detached"
+            },
+            "height": "Small",
+            "columns": [
+                {
+                    "cellContent": {
+                        "type": "Icon",
+                        "iconStyle": {
+                            "name": "chart-line",
+                            "size": "Medium"
+                        }
+                    }
+                },
+                {
+                    "title": "strategyDescription",
+                    "name": "strategyDescription",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/strategyDescription"
+                        }
+                    }
+                },
+                {
+                    "title": "recommendationText",
+                    "name": "recommendationText",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "allowMultiLine": true,
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/recommendationText"
+                        }
+                    }
+                }
+            ]
+        }
+    ],
+    "rule": {
+        "effect": "SHOW",
+        "condition": {
+            "type": "FUNC",
+            "ruleFunction": "showRecommendedStrategies",
+            "value": [
+                {
+                    "$ref": "#"
+                }
+            ]
+        }
+    }
+}

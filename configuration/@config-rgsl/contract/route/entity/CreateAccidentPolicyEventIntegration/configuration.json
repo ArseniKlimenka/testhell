@@ -1,0 +1,43 @@
+{
+    "entityType": "Contract",
+    "version": "1",
+    "condition": {
+        "events": [
+            "StatusChanged"
+        ],
+        "configuration": {
+            "dimensions": {
+                "contractType": [
+                    "Policy"
+                ],
+                "productGroup": [
+                    "accident"
+                ]
+            }
+        },
+        "documentStates": [
+            "CancelledByAmendment",
+            "Cancelled",
+            "Completed"
+        ]
+    },
+    "executionOrderWeight": 100,
+    "sinks": [
+        {
+            "name": "GetSendEventConfiguration",
+            "fetch": {
+                "configuration": {
+                    "name": "SendEventConfigurationDataSource"
+                }
+            }
+        },
+        {
+            "name": "WriteSendEvent",
+            "database": {
+                "tables": [
+                    "BFX_IMPL.SEND_EVENT"
+                ]
+            }
+        }
+    ]
+}

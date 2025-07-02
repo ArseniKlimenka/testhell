@@ -1,0 +1,58 @@
+{
+    "type": "ButtonGroup",
+    "label": "Actions",
+    "elements": [
+        {
+            "type": "Button",
+            "hide": false,
+            "readOnly": true,
+            "icon": {
+                "size": "Small",
+                "color": "BackgroundColor",
+                "name": "Trash-alt"
+            },
+            "eventHandlers": [
+                {
+                    "eventName": "Selected",
+                    "senders": [
+                        "serchResultTable"
+                    ],
+                    "commands": {
+                        "commandType": "executeAction",
+                        "actionName": "enableApprovePOOnSelection"
+                    }
+                }
+            ],
+            "styleClass": "md-icon-button",
+            "value": {
+                "$ref": "#"
+            },
+            "onClick": [
+                {
+                    "commandType": "executeAction",
+                    "actionName": "approvePOOnSelection"
+                }
+            ],
+            "label": "Approve"
+        },
+        {
+            "type": "Button",
+            "icon": {
+                "size": "Small",
+                "color": "BackgroundColor",
+                "name": "Print"
+            },
+            "styleClass": "md-icon-button",
+            "value": {
+                "$ref": "#"
+            },
+            "onClick": [
+                {
+                    "commandType": "executeAction",
+                    "actionName": "exportReport"
+                }
+            ],
+            "label": "Export report"
+        }
+    ]
+}

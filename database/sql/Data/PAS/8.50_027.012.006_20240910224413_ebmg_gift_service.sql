@@ -1,0 +1,5 @@
+INSERT INTO BFX_IMPL.GIFT_SERVICE (ID, NAME, CODE, DESCRIPTION)
+VALUES 
+	   (8, 'GENTICPOWER', 'MED96', N'Сила генетики'),
+	   (9, 'HEALTHYLIFESTYLE', 'MED97', N'Здоровый образ жизни')
+GO

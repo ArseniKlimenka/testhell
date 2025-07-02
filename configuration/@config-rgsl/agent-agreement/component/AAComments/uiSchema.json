@@ -1,0 +1,105 @@
+{
+    "type": "Group",
+    "elements": [
+        {
+            "type": "DataGrid",
+            "label": "Comments",
+            "labelType": "H1",
+            "paginationMode": "regular",
+            "value": {
+                "$ref": "#"
+            },
+            "mode": "Array",
+            "pagination": {
+                "mode": "Regular",
+                "pageSizes": [
+                    15,
+                    30,
+                    50
+                ],
+                "defaultPageSize": 15
+            },
+            "actions": [
+                "Add",
+                "Edit",
+                "Delete",
+                "Details"
+            ],
+            "edit": {
+                "mode": "Detached",
+                "onPrepareAddedRow": "arrayPrepareAddOperationHandler",
+                "onPrepareEditedRow": "arrayPrepareEditOperationHandler",
+                "onBeforeGridAction": "preArrayOperationHandler",
+                "onAfterGridAction": "arrayOperationHandler"
+            },
+            "showDeleteConfirmation": true,
+            "checkIfRowActionIsAllowed": "arrayCheckRowOperationHandler",
+            "height": "None",
+            "alternateRowColors": true,
+            "columns": [
+                {
+                    "title": "CommentMessage",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "template": "{{#style 'left bold'}}{{expr displayName}}; {{#i18n}}created{{/i18n}}: {{expr createdOn 'dt:dd.MM.yyyy HH::mm'}}{{#if createdOn '!==' modifiedOn}}; {{#i18n}}edited{{/i18n}}: {{expr modifiedOn 'dt:dd.MM.yyyy HH::mm'}}{{/if}}{{/style}}\\n{{expr comment}}",
+                        "allowMultiLine": true,
+                        "value": {
+                            "$ref": "#"
+                        }
+                    },
+                    "name": "comment"
+                }
+            ],
+            "detailsTemplates": {
+                "edit": {
+                    "content": {
+                        "type": "GridLayout",
+                        "numberOfColumns": 4,
+                        "elements": [
+                            {
+                                "type": "Group",
+                                "elements": [
+                                    {
+                                        "type": "Input",
+                                        "label": "CommentComment",
+                                        "enableResize": true,
+                                        "numberOfRows": 5,
+                                        "value": {
+                                            "$ref": "#/properties/comment"
+                                        },
+                                        "control": "TextArea",
+                                        "width": 4
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                },
+                "view": {
+                    "content": {
+                        "type": "GridLayout",
+                        "numberOfColumns": 4,
+                        "elements": [
+                            {
+                                "type": "Group",
+                                "elements": [
+                                    {
+                                        "type": "Input",
+                                        "label": "CommentComment",
+                                        "enableResize": true,
+                                        "numberOfRows": 5,
+                                        "value": {
+                                            "$ref": "#/properties/comment"
+                                        },
+                                        "control": "TextArea",
+                                        "width": 4
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                }
+            }
+        }
+    ]
+}

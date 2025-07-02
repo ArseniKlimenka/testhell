@@ -1,0 +1,92 @@
+{
+    "type": "Group",
+    "elements": [
+        {
+            "type": "Lookup",
+            "label": "Contract",
+            "value": {
+                "$ref": "#"
+            },
+            "width": 1,
+            "dialogButton": {},
+            "clearButton": {
+                "clearAction": "contractClearAction"
+            },
+            "readOnly": false,
+            "dialog": {
+                "viewReference": {
+                    "configurationCodeName": "ContractSearch",
+                    "configurationVersion": "1",
+                    "configurationConceptType": "SearchView"
+                }
+            },
+            "onSelected": "contractSearchResultAssignment",
+            "selectedDisplayValueUISchema": {
+                "type": "Input",
+                "label": "Contract",
+                "readOnly": false,
+                "value": {
+                    "$ref": "#/properties/request/properties/data/properties/criteria/properties/contractNo"
+                }
+            }
+        },
+        {
+            "type": "Input",
+            "control": "DateRange",
+            "dateFrom": {
+                "type": "Input",
+                "label": "startDateFrom",
+                "width": 1,
+                "value": {
+                    "$ref": "#/properties/request/properties/data/properties/criteria/properties/startDateFrom"
+                },
+                "control": "DatetimePicker"
+            },
+            "dateTo": {
+                "type": "Input",
+                "label": "startDateTo",
+                "width": 1,
+                "value": {
+                    "$ref": "#/properties/request/properties/data/properties/criteria/properties/startDateTo"
+                },
+                "control": "DatetimePicker"
+            },
+            "width": 2
+        },
+        {
+            "type": "Lookup",
+            "label": "Policy holder",
+            "value": {
+                "$ref": "#"
+            },
+            "width": 1,
+            "dialogButton": {},
+            "clearButton": {
+                "clearAction": "policyHolderClearAction"
+            },
+            "dialog": {
+                "viewReference": {
+                    "configurationCodeName": "GeneralPartySearchView",
+                    "configurationVersion": "1",
+                    "configurationConceptType": "SearchView"
+                }
+            },
+            "onSelected": "policyHolderResultAssignment",
+            "selectedDisplayValueTemplate": "{{expr resultData.fullName}}"
+        },
+        {
+            "type": "Component",
+            "name": "CurrencyCodeDropdown",
+            "value": {
+                "$ref": "#/properties/request/properties/data/properties/criteria/properties/currencyCode"
+            }
+        },
+        {
+            "type": "Component",
+            "name": "ProductCode",
+            "value": {
+                "$ref": "#/properties/request/properties/data/properties/criteria/properties/productCode"
+            }
+        }
+    ]
+}

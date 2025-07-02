@@ -1,0 +1,173 @@
+{
+    "type": "Group",
+    "formProperties": {
+        "events": {}
+    },
+    "elements": [
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "Input",
+                    "label": "documentCode",
+                    "value": {
+                        "$ref": "#/properties/request/properties/data/properties/criteria/properties/documentCode"
+                    },
+                    "width": 1,
+                    "name": "documentCode"
+                },
+                {
+                    "type": "Input",
+                    "label": "contractNumber",
+                    "value": {
+                        "$ref": "#/properties/request/properties/data/properties/criteria/properties/contractNumber"
+                    },
+                    "width": 1,
+                    "name": "contractNumber"
+                },
+                {
+                    "type": "Input",
+                    "label": "risk",
+                    "value": {
+                        "$ref": "#/properties/request/properties/data/properties/criteria/properties/riskCode"
+                    },
+                    "autocomplete": {
+                        "minTextLength": 1
+                    },
+                    "control": "Dropdown",
+                    "source": {
+                        "dataSource": {
+                            "name": "RisksDataSource",
+                            "reloadOnOpen": true,
+                            "searchFieldPath": "riskShortDescription",
+                            "requestMapping": "riskRequestMapping",
+                            "responseMapping": "riskResponseMapping"
+                        },
+                        "displayFieldName": "displayName",
+                        "valueFieldName": "value"
+                    },
+                    "width": 1
+                },
+                {
+                    "type": "Dropdown",
+                    "label": "documentState",
+                    "value": {
+                        "$ref": "#/properties/request/properties/data/properties/criteria/properties/documentState"
+                    },
+                    "width": 1,
+                    "name": "documentState"
+                }
+            ]
+        },
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "Input",
+                    "control": "DateRange",
+                    "dateFrom": {
+                        "type": "Input",
+                        "label": "eventDateFrom",
+                        "width": 1,
+                        "value": {
+                            "$ref": "#/properties/request/properties/data/properties/criteria/properties/eventDateFrom"
+                        },
+                        "control": "DatetimePicker",
+                        "name": "eventDateFrom"
+                    },
+                    "dateTo": {
+                        "type": "Input",
+                        "label": "eventDateTo",
+                        "width": 1,
+                        "value": {
+                            "$ref": "#/properties/request/properties/data/properties/criteria/properties/eventDateTo"
+                        },
+                        "control": "DatetimePicker",
+                        "name": "eventDateTo"
+                    },
+                    "width": 1
+                },
+                {
+                    "type": "Input",
+                    "control": "DateRange",
+                    "dateFrom": {
+                        "type": "Input",
+                        "label": "statementReceivedDateFrom",
+                        "width": 1,
+                        "value": {
+                            "$ref": "#/properties/request/properties/data/properties/criteria/properties/statementReceivedDateFrom"
+                        },
+                        "control": "DatetimePicker",
+                        "name": "statementReceivedDateFrom"
+                    },
+                    "dateTo": {
+                        "type": "Input",
+                        "label": "statementReceivedDateTo",
+                        "width": 1,
+                        "value": {
+                            "$ref": "#/properties/request/properties/data/properties/criteria/properties/statementReceivedDateTo"
+                        },
+                        "control": "DatetimePicker",
+                        "name": "statementReceivedDateTo"
+                    },
+                    "width": 1
+                },
+                {
+                    "type": "Input",
+                    "control": "DateRange",
+                    "dateFrom": {
+                        "type": "Input",
+                        "label": "statementApplicationDateFrom",
+                        "width": 1,
+                        "value": {
+                            "$ref": "#/properties/request/properties/data/properties/criteria/properties/statementApplicationDateFrom"
+                        },
+                        "control": "DatetimePicker",
+                        "name": "statementApplicationDateFrom"
+                    },
+                    "dateTo": {
+                        "type": "Input",
+                        "label": "statementApplicationDateTo",
+                        "width": 1,
+                        "value": {
+                            "$ref": "#/properties/request/properties/data/properties/criteria/properties/statementApplicationDateTo"
+                        },
+                        "control": "DatetimePicker",
+                        "name": "statementApplicationDateTo"
+                    },
+                    "width": 1
+                }
+            ]
+        },
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "Lookup",
+                    "elementId": "applicantSearchLookup",
+                    "dialogButton": {},
+                    "clearButton": {
+                        "clearAction": "clearApplicant"
+                    },
+                    "dialog": {
+                        "viewReference": {
+                            "configurationCodeName": "GeneralPartySearchView",
+                            "configurationConceptType": "SearchView",
+                            "configurationVersion": "1"
+                        }
+                    },
+                    "onSelected": "applicantResultMapping",
+                    "selectedDisplayValueUISchema": {
+                        "type": "Input",
+                        "label": "applicant",
+                        "readOnly": true,
+                        "value": {
+                            "$ref": "#/properties/request/properties/data/properties/criteria/properties/applicantFullName"
+                        }
+                    },
+                    "width": 1
+                }
+            ]
+        }
+    ]
+}

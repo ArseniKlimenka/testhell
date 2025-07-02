@@ -1,0 +1,171 @@
+{
+    "type": "Section",
+    "label": "Additional Investment Parameters",
+    "isCollapsed": false,
+    "width": 12,
+    "elements": [
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "Input",
+                    "elementId": "manualRateList",
+                    "label": "manualRateList",
+                    "enableClear": false,
+                    "source": {
+                        "dataSource": {
+                            "name": "GetRateOfReturnRulesEquityActivesDataSource",
+                            "searchFieldPath": "manualRate",
+                            "requestMapping": "manualRateRequestMapping",
+                            "responseMapping": "manualRateResponseMapping"
+                        },
+                        "reloadOnOpen": true,
+                        "ignoreItemsExistValidation": true,
+                        "displayFieldName": "displayName",
+                        "valueFieldName": "value"
+                    },
+                    "onValueChanged": [
+                        {
+                            "commandType": "executeAction",
+                            "actionName": "manualRateOnChange"
+                        }
+                    ],
+                    "control": "Dropdown",
+                    "value": {
+                        "$ref": "#/properties/rateOfReturnEquityActives"
+                    },
+                    "whenLocked": "Disable",
+                    "width": 3
+                },
+                {
+                    "type": "OutputText",
+                    "elementId": "manualRate",
+                    "label": "manualRate",
+                    "defaultValue": "",
+                    "template": "{{expr manualRate 'p:2'}}",
+                    "value": {
+                        "$ref": "#/properties/rateOfReturnEquityActives"
+                    },
+                    "width": 3
+                },
+                {
+                    "type": "OutputText",
+                    "elementId": "investmentFrequency",
+                    "label": "investmentFrequency",
+                    "defaultValue": "",
+                    "template": "{{expr investmentFrequency 'p:2'}}",
+                    "value": {
+                        "$ref": "#/properties/rateOfReturnEquityActives"
+                    },
+                    "width": 3
+                },
+                {
+                    "type": "OutputText",
+                    "readOnly": true,
+                    "label": "mf",
+                    "defaultValue": "",
+                    "template": "{{expr mf 'p:3'}}",
+                    "value": {
+                        "$ref": "#/properties/rateOfReturnEquityActives"
+                    },
+                    "width": 3
+                }
+            ]
+        },
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "DataGrid",
+                    "elementId": "rateOfReturnsEquityActivesTable",
+                    "mode": "Array",
+                    "label": "WithdrawalFee",
+                    "pagination": {
+                        "mode": "None"
+                    },
+                    "actions": [],
+                    "edit": {
+                        "mode": "Detached"
+                    },
+                    "selection": {
+                        "mode": "None"
+                    },
+                    "height": "None",
+                    "value": {
+                        "$ref": "#/properties/commWithdrawalFundsArray"
+                    },
+                    "customCSSStyle": {
+                        "--data-grid-ai-grid-buttons-text-align": "center",
+                        "--data-grid-detached-row-display": "table-row"
+                    },
+                    "columns": [
+                        {
+                            "sortable": false,
+                            "title": "basisForPayment",
+                            "name": "basisForPayment",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "defaultValue": "",
+                                "template": "{{expr basisForPayment}}",
+                                "value": {
+                                    "$ref": "#"
+                                }
+                            }
+                        },
+                        {
+                            "sortable": false,
+                            "title": "insuredEventOccurrence",
+                            "name": "insuredEventOccurrence",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "defaultValue": "",
+                                "template": "{{expr insuredEventOccurrence 'p:2'}}",
+                                "value": {
+                                    "$ref": "#"
+                                }
+                            }
+                        },
+                        {
+                            "sortable": false,
+                            "title": "earlyTerminationContract",
+                            "name": "earlyTerminationContract",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "defaultValue": "",
+                                "template": "{{expr earlyTerminationContract 'p:2'}}",
+                                "value": {
+                                    "$ref": "#"
+                                }
+                            }
+                        },
+                        {
+                            "sortable": false,
+                            "title": "insuredPersonAppeal",
+                            "name": "insuredPersonAppeal",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "defaultValue": "",
+                                "template": "{{expr insuredPersonAppeal 'p:2'}}",
+                                "value": {
+                                    "$ref": "#"
+                                }
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "rule": {
+        "effect": "SHOW",
+        "condition": {
+            "type": "FUNC",
+            "ruleFunction": "showAdditionalInvestmentParameters",
+            "value": [
+                {
+                    "$ref": "#"
+                }
+            ]
+        }
+    }
+}

@@ -1,0 +1,63 @@
+{
+    "id": "MainContent",
+    "type": "Group",
+    "formProperties": {
+        "events": {
+            "onLoad": "onLoadProductConfigurationCorrection",
+            "beforeSave": "beforeSaveProductConfigurationCorrection"
+        }
+    },
+    "elements": [
+        {
+            "type": "TabLayout",
+            "elementId": "TabLayout",
+            "options": {
+                "fixedPosition": true,
+                "scrollableTabs": false,
+                "buttonsForSwitchingTabs": true
+            },
+            "elements": [
+                {
+                    "type": "Tab",
+                    "elementId": "productConfigurationMainConditionsTabId",
+                    "title": "Product configuration main conditions",
+                    "elements": [
+                        {
+                            "type": "Component",
+                            "name": "ProductConfigurationMainConditions",
+                            "value": {
+                                "$ref": "#/properties/Body/properties/mainConditions"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "type": "Tab",
+                    "elementId": "economicParametersTabId",
+                    "title": "Economic parameters",
+                    "elements": [
+                        {
+                            "type": "Component",
+                            "name": "EconomicParameters",
+                            "value": {
+                                "$ref": "#/properties/Body/properties/economicParameters"
+                            }
+                        }
+                    ],
+                    "rule": {
+                        "effect": "SHOW",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "economicParametersEndowmentInvestmentShow",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    }
+                }
+            ]
+        }
+    ]
+}

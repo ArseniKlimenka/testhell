@@ -1,0 +1,31 @@
+{
+    "entityType": "Party",
+    "version": "1",
+    "condition": {
+        "events": [
+            "Created"
+        ],
+        "configuration": {
+            "names": [
+                "LegalEntity"
+            ],
+            "dimensions": {}
+        }
+    },
+    "sinks": [
+        {
+            "name": "GetParty",
+            "fetch": {
+                "configuration": {
+                    "name": "GetPartyDataSource"
+                }
+            }
+        },
+        {
+            "name": "LegalEntityCreatedNotification",
+            "notification": {
+                "notificationName": "LegalEntityCreatedNotification"
+            }
+        }
+    ]
+}

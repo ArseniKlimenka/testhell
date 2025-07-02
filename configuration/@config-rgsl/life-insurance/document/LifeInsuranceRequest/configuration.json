@@ -1,0 +1,574 @@
+{
+    "entityType": "UniversalDocument",
+    "dimensions": {
+        "productCode": "LifeInsuranceRequest",
+        "universalDocumentType": "LifeInsuranceRequest"
+    },
+    "validFrom": "2000-01-01",
+    "attachments": [
+        {
+            "attachmentType": "copyPassport",
+            "flow": "Incoming"
+        },
+        {
+            "attachmentType": "copyPolicy",
+            "flow": "Incoming"
+        },
+        {
+            "attachmentType": "cancellationApplication",
+            "flow": "Incoming"
+        },
+        {
+            "attachmentType": "changeApplication",
+            "flow": "Incoming"
+        },
+        {
+            "attachmentType": "didPaymentApplication",
+            "flow": "Incoming"
+        },
+        {
+            "attachmentType": "investmentParametersEditApplication",
+            "flow": "Incoming"
+        },
+        {
+            "attachmentType": "informationTax",
+            "flow": "Incoming"
+        },
+        {
+            "attachmentType": "other",
+            "flow": "Incoming"
+        }
+    ],
+    "ui": {
+        "layout": "VersionedDocumentLayout",
+        "composition": {
+            "MainContent": "MainContent",
+            "SummaryContent": "SummaryContent"
+        }
+    },
+    "states": [
+        {
+            "name": "Draft",
+            "actors": [
+                {
+                    "actor": "Agent",
+                    "uiSchema": "MainContent",
+                    "transitions": [
+                        "Draft_to_Cancelled",
+                        "Draft_to_OnReview"
+                    ],
+                    "operations": [
+                        "Save"
+                    ],
+                    "relations": [],
+                    "allowComments": true
+                },
+                {
+                    "actor": "GeneralBackOffice",
+                    "uiSchema": "MainContent",
+                    "transitions": [
+                        "Draft_to_Cancelled",
+                        "Draft_to_OnReview"
+                    ],
+                    "operations": [
+                        "Save"
+                    ],
+                    "relations": [],
+                    "allowComments": true
+                },
+                {
+                    "actor": "Operations",
+                    "uiSchema": "MainContent",
+                    "transitions": [
+                        "Draft_to_Cancelled",
+                        "Draft_to_OnReview"
+                    ],
+                    "operations": [
+                        "Save"
+                    ],
+                    "relations": [],
+                    "allowComments": true
+                }
+            ]
+        },
+        {
+            "name": "OnReview",
+            "actors": [
+                {
+                    "actor": "Agent",
+                    "uiSchema": "MainContent",
+                    "transitions": [],
+                    "operations": [],
+                    "relations": []
+                },
+                {
+                    "actor": "GeneralBackOffice",
+                    "uiSchema": "MainContent",
+                    "transitions": [
+                        "OnReview_to_Cancelled",
+                        "OnReview_to_Issued",
+                        "OnReview_to_Correction",
+                        "OnReview_to_CancelWithoutPayment",
+                        "OnReview_to_RefusalToTerminateByPolicyholder",
+                        "OnReview_to_CreateAmendment"
+                    ],
+                    "operations": [
+                        "Save"
+                    ],
+                    "relations": [],
+                    "allowComments": true
+                },
+                {
+                    "actor": "Operations",
+                    "uiSchema": "MainContent",
+                    "transitions": [
+                        "OnReview_to_Cancelled",
+                        "OnReview_to_Issued",
+                        "OnReview_to_Correction",
+                        "OnReview_to_CancelWithoutPayment",
+                        "OnReview_to_RefusalToTerminateByPolicyholder",
+                        "OnReview_to_CreateAmendment"
+                    ],
+                    "operations": [
+                        "Save"
+                    ],
+                    "relations": [],
+                    "allowComments": true
+                }
+            ]
+        },
+        {
+            "name": "CreateAmendment",
+            "actors": [
+                {
+                    "actor": "Agent",
+                    "uiSchema": "MainContent",
+                    "transitions": [],
+                    "operations": [],
+                    "relations": []
+                },
+                {
+                    "actor": "GeneralBackOffice",
+                    "uiSchema": "MainContent",
+                    "transitions": [
+                        "CreateAmendment_to_CreateFinancialAmendment",
+                        "CreateAmendment_to_CreateFinancialPolicyHolderChangeAmendment",
+                        "CreateAmendment_to_CreateNonFinancialAmendment",
+                        "CreateAmendment_to_AmendmentsCreated",
+                        "CreateAmendment_to_AmendmentsCancelled"
+                    ],
+                    "operations": [
+                        "Save"
+                    ],
+                    "allowComments": true
+                },
+                {
+                    "actor": "Operations",
+                    "uiSchema": "MainContent",
+                    "transitions": [
+                        "CreateAmendment_to_CreateFinancialAmendment",
+                        "CreateAmendment_to_CreateFinancialPolicyHolderChangeAmendment",
+                        "CreateAmendment_to_CreateNonFinancialAmendment",
+                        "CreateAmendment_to_AmendmentsCreated",
+                        "CreateAmendment_to_AmendmentsCancelled"
+                    ],
+                    "operations": [
+                        "Save"
+                    ],
+                    "allowComments": true
+                }
+            ]
+        },
+        {
+            "name": "CreateFinancialAmendment",
+            "actors": [
+                {
+                    "actor": "Agent",
+                    "uiSchema": "MainContent",
+                    "transitions": [],
+                    "operations": [],
+                    "relations": []
+                },
+                {
+                    "actor": "GeneralBackOffice",
+                    "uiSchema": "MainContent",
+                    "transitions": [
+                        "OnReview_to_Cancelled",
+                        "OnReview_to_Issued",
+                        "OnReview_to_Correction",
+                        "OnReview_to_CancelWithoutPayment",
+                        "OnReview_to_RefusalToTerminateByPolicyholder"
+                    ],
+                    "operations": [],
+                    "relations": [],
+                    "allowComments": true
+                },
+                {
+                    "actor": "Operations",
+                    "uiSchema": "MainContent",
+                    "transitions": [
+                        "OnReview_to_Cancelled",
+                        "OnReview_to_Issued",
+                        "OnReview_to_Correction",
+                        "OnReview_to_CancelWithoutPayment",
+                        "OnReview_to_RefusalToTerminateByPolicyholder"
+                    ],
+                    "operations": [],
+                    "relations": [],
+                    "allowComments": true
+                }
+            ]
+        },
+        {
+            "name": "CreateFinancialPolicyHolderChangeAmendment",
+            "actors": [
+                {
+                    "actor": "Agent",
+                    "uiSchema": "MainContent",
+                    "transitions": [],
+                    "operations": [],
+                    "relations": []
+                },
+                {
+                    "actor": "GeneralBackOffice",
+                    "uiSchema": "MainContent",
+                    "transitions": [
+                        "OnReview_to_Cancelled",
+                        "OnReview_to_Issued",
+                        "OnReview_to_Correction",
+                        "OnReview_to_CancelWithoutPayment",
+                        "OnReview_to_RefusalToTerminateByPolicyholder"
+                    ],
+                    "operations": [],
+                    "relations": [],
+                    "allowComments": true
+                },
+                {
+                    "actor": "Operations",
+                    "uiSchema": "MainContent",
+                    "transitions": [
+                        "OnReview_to_Cancelled",
+                        "OnReview_to_Issued",
+                        "OnReview_to_Correction",
+                        "OnReview_to_CancelWithoutPayment",
+                        "OnReview_to_RefusalToTerminateByPolicyholder"
+                    ],
+                    "operations": [],
+                    "relations": [],
+                    "allowComments": true
+                }
+            ]
+        },
+        {
+            "name": "CreateNonFinancialAmendment",
+            "actors": [
+                {
+                    "actor": "Agent",
+                    "uiSchema": "MainContent",
+                    "transitions": [],
+                    "operations": [],
+                    "relations": []
+                },
+                {
+                    "actor": "GeneralBackOffice",
+                    "uiSchema": "MainContent",
+                    "transitions": [
+                        "OnReview_to_Cancelled",
+                        "OnReview_to_Issued",
+                        "OnReview_to_Correction",
+                        "OnReview_to_CancelWithoutPayment",
+                        "OnReview_to_RefusalToTerminateByPolicyholder"
+                    ],
+                    "operations": [],
+                    "relations": [],
+                    "allowComments": true
+                },
+                {
+                    "actor": "Operations",
+                    "uiSchema": "MainContent",
+                    "transitions": [
+                        "OnReview_to_Cancelled",
+                        "OnReview_to_Issued",
+                        "OnReview_to_Correction",
+                        "OnReview_to_CancelWithoutPayment",
+                        "OnReview_to_RefusalToTerminateByPolicyholder"
+                    ],
+                    "operations": [],
+                    "relations": [],
+                    "allowComments": true
+                },
+                {
+                    "actor": "System",
+                    "uiSchema": "MainContent",
+                    "transitions": [
+                        "CreateNonFinancialAmendment_to_CreateAmendment"
+                    ],
+                    "operations": [],
+                    "relations": [],
+                    "allowComments": true
+                }
+            ]
+        },
+        {
+            "name": "AmendmentsCreated",
+            "actors": [
+                {
+                    "actor": "Agent",
+                    "uiSchema": "MainContent",
+                    "transitions": [],
+                    "operations": [],
+                    "relations": []
+                },
+                {
+                    "actor": "GeneralBackOffice",
+                    "uiSchema": "MainContent",
+                    "transitions": [
+                        "OnReview_to_Cancelled",
+                        "OnReview_to_Issued",
+                        "OnReview_to_Correction",
+                        "OnReview_to_CancelWithoutPayment",
+                        "OnReview_to_RefusalToTerminateByPolicyholder"
+                    ],
+                    "operations": [],
+                    "relations": [],
+                    "allowComments": true
+                },
+                {
+                    "actor": "Operations",
+                    "uiSchema": "MainContent",
+                    "transitions": [
+                        "OnReview_to_Cancelled",
+                        "OnReview_to_Issued",
+                        "OnReview_to_Correction",
+                        "OnReview_to_CancelWithoutPayment",
+                        "OnReview_to_RefusalToTerminateByPolicyholder"
+                    ],
+                    "operations": [],
+                    "relations": [],
+                    "allowComments": true
+                }
+            ]
+        },
+        {
+            "name": "AmendmentsCancelled",
+            "actors": [
+                {
+                    "actor": "Agent",
+                    "uiSchema": "MainContent",
+                    "transitions": [],
+                    "operations": [],
+                    "relations": []
+                },
+                {
+                    "actor": "GeneralBackOffice",
+                    "uiSchema": "MainContent",
+                    "transitions": [
+                        "OnReview_to_Cancelled",
+                        "OnReview_to_Issued",
+                        "OnReview_to_Correction",
+                        "OnReview_to_CancelWithoutPayment",
+                        "OnReview_to_RefusalToTerminateByPolicyholder"
+                    ],
+                    "operations": [],
+                    "relations": [],
+                    "allowComments": true
+                },
+                {
+                    "actor": "Operations",
+                    "uiSchema": "MainContent",
+                    "transitions": [
+                        "OnReview_to_Cancelled",
+                        "OnReview_to_Issued",
+                        "OnReview_to_Correction",
+                        "OnReview_to_CancelWithoutPayment",
+                        "OnReview_to_RefusalToTerminateByPolicyholder"
+                    ],
+                    "operations": [],
+                    "relations": [],
+                    "allowComments": true
+                }
+            ]
+        },
+        {
+            "name": "Issued",
+            "actors": [
+                {
+                    "actor": "Agent",
+                    "uiSchema": "MainContent",
+                    "transitions": [],
+                    "operations": [],
+                    "relations": []
+                },
+                {
+                    "actor": "GeneralBackOffice",
+                    "uiSchema": "MainContent",
+                    "transitions": [
+                        "Issued_to_AmendmentsCreated"
+                    ],
+                    "operations": [],
+                    "relations": []
+                },
+                {
+                    "actor": "Operations",
+                    "uiSchema": "MainContent",
+                    "transitions": [
+                        "Issued_to_AmendmentsCreated"
+                    ],
+                    "operations": [],
+                    "relations": []
+                }
+            ]
+        },
+        {
+            "name": "Correction",
+            "actors": [
+                {
+                    "actor": "Agent",
+                    "uiSchema": "MainContent",
+                    "transitions": [
+                        "Correction_to_OnReview"
+                    ],
+                    "operations": [
+                        "Save"
+                    ],
+                    "relations": [],
+                    "allowComments": true
+                },
+                {
+                    "actor": "GeneralBackOffice",
+                    "uiSchema": "MainContent",
+                    "transitions": [
+                        "Correction_to_OnReview"
+                    ],
+                    "operations": [
+                        "Save"
+                    ],
+                    "relations": [],
+                    "allowComments": true
+                },
+                {
+                    "actor": "Operations",
+                    "uiSchema": "MainContent",
+                    "transitions": [
+                        "Correction_to_OnReview"
+                    ],
+                    "operations": [
+                        "Save"
+                    ],
+                    "relations": [],
+                    "allowComments": true
+                }
+            ]
+        },
+        {
+            "name": "CancelWithoutPayment",
+            "actors": [
+                {
+                    "actor": "GeneralBackOffice",
+                    "uiSchema": "MainContent",
+                    "transitions": [],
+                    "operations": [],
+                    "relations": []
+                },
+                {
+                    "actor": "Operations",
+                    "uiSchema": "MainContent",
+                    "transitions": [],
+                    "operations": [],
+                    "relations": []
+                }
+            ]
+        },
+        {
+            "name": "RefusalToTerminateByPolicyholder",
+            "actors": [
+                {
+                    "actor": "Agent",
+                    "uiSchema": "MainContent",
+                    "transitions": [],
+                    "operations": [],
+                    "relations": []
+                },
+                {
+                    "actor": "GeneralBackOffice",
+                    "uiSchema": "MainContent",
+                    "transitions": [],
+                    "operations": [],
+                    "relations": []
+                },
+                {
+                    "actor": "Operations",
+                    "uiSchema": "MainContent",
+                    "transitions": [],
+                    "operations": [],
+                    "relations": []
+                }
+            ]
+        },
+        {
+            "name": "Cancelled",
+            "actors": [
+                {
+                    "actor": "Agent",
+                    "uiSchema": "MainContent",
+                    "transitions": [],
+                    "operations": [],
+                    "relations": []
+                },
+                {
+                    "actor": "GeneralBackOffice",
+                    "uiSchema": "MainContent",
+                    "transitions": [],
+                    "operations": [],
+                    "relations": []
+                },
+                {
+                    "actor": "Operations",
+                    "uiSchema": "MainContent",
+                    "transitions": [],
+                    "operations": [],
+                    "relations": []
+                }
+            ]
+        }
+    ],
+    "version": "1",
+    "transitions": {
+        "Draft_to_OnReview": {
+            "transitionEffects": {
+                "enrich": [
+                    "/attachmentsPackage",
+                    "[SetSellerUsername]",
+                    "/technicalInformation",
+                    "/paymentCalculation[SetPayments]"
+                ]
+            }
+        },
+        "OnReview_to_Correction": {
+            "transitionEffects": {
+                "enrich": [
+                    "[SetOperationsUsername]",
+                    "/technicalInformation"
+                ]
+            }
+        },
+        "OnReview_to_CreateAmendment": {
+            "transitionEffects": {
+                "enrich": [
+                    "/technicalInformation"
+                ]
+            }
+        },
+        "CreateAmendment_to_CreateNonFinancialAmendment": {
+            "transitionEffects": {
+                "enrich": [
+                    "/technicalInformation"
+                ]
+            }
+        }
+    },
+    "components": [
+        "Applicant",
+        "PartyBankAccount"
+    ]
+}

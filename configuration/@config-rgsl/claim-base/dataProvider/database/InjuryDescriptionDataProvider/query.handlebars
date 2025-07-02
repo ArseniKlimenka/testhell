@@ -1,0 +1,23 @@
+﻿SELECT ig.INJURY_DESCRIPTION AS DESCRIPTION,
+ig.ID AS CODE
+FROM BFX_IMPL.INJURY_GENERAL ig
+WHERE 1 = 1
+{{#if parameters.group}}
+AND ig.INJURY_GROUP = @group
+{{/if}}
+{{#if parameters.subgroupCodeLevel1}}
+AND ig.SUBGROUP_CODE_LEVEL_1 = @subgroupCodeLevel1
+{{/if}}
+{{#if parameters.subgroupCodeLevel2}}
+AND ig.SUBGROUP_CODE_LEVEL_2 = @subgroupCodeLevel2
+{{/if}}
+{{#if parameters.subgroupCodeLevel3}}
+AND ig.SUBGROUP_CODE_LEVEL_3 = @subgroupCodeLevel3
+{{/if}}
+{{#if parameters.description}}
+AND ig.INJURY_DESCRIPTION LIKE @description
+{{/if}}
+{{#if parameters.ruleCode}}
+AND ig.RULE_CODE = @ruleCode
+{{/if}}
+ORDER BY ig.ID ASC

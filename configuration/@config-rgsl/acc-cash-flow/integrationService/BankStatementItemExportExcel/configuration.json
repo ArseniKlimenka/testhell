@@ -1,0 +1,33 @@
+{
+    "sinks": [
+        {
+            "name": "FetchBankStatementIds",
+            "fetch": {
+                "configuration": {
+                    "name": "BankStatementItemRgslSearchDataSource"
+                }
+            }
+        },
+        {
+            "name": "ExportReportLogASS",
+            "database": {
+                "tables": [
+                    "ACC_IMPL.EXPORT_REPORT_LOG"
+                ]
+            }
+        },
+        {
+            "name": "BankStatementItemDataExport",
+            "dataExport": {
+                "configuration": {
+                    "name": "ReportBankStatementItemExportExcel",
+                    "version": "1"
+                }
+            }
+        }
+    ],
+    "responses": [
+        200,
+        422
+    ]
+}

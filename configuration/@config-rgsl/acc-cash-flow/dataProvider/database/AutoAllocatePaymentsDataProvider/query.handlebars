@@ -1,0 +1,27 @@
+SELECT
+	bsi.BANK_STATEMENT_ITEM_ID,
+	(
+		select STRING_AGG(pr.REFERENCE_NO, ', ') WITHIN GROUP (ORDER BY pr.ORDER_NO)
+		from ACC_IMPL.PAYMENT_REFERENCE pr
+		where pr.BANK_STATEMENT_ITEM_ID = bsi.BANK_STATEMENT_ITEM_ID
+	) as REFERENCE_NUMBERS
+FROM
+	ACC_IMPL.BANK_STATEMENT_ITEM bsi WITH (READPAST)
+WHERE 1=1
+	and exists
+	(
+		select *
+		from
+			ACC_IMPL.PAYMENT_REFERENCE pr
+			inner join acc_impl.REFERENCE_NUMBER ref on ref.REFERENCE_NO = pr.REFERENCE_NO
+		where pr.BANK_STATEMENT_ITEM_ID = bsi.BANK_STATEMENT_ITEM_ID
+	)
+{{#if parameters.paymentStatusIds}}
+	and bsi.STATUS_ID in (@paymentStatusIds)
+{{/if}}
+{{#if parameters.direction}}
+	and bsi.DIRECTION = @direction
+{{/if}}
+{{#if parameters.transactionDateFrom}}
+	and bsi.TRANSACTION_DATE >= @transactionDateFrom
+{{/if}}

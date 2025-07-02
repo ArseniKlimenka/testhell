@@ -1,0 +1,19 @@
+{
+    "description": "Create outgoing payment and auto-allocate",
+    "steps": [
+        {
+            "code": "ImportBSI",
+            "description": "Import BSI",
+            "requests": [
+                {
+                    "code": "Body",
+                    "path": "./bsi.json"
+                }
+            ],
+            "executor": {
+                "module": "./executor.js",
+                "function": "executor"
+            }
+        }
+    ]
+}

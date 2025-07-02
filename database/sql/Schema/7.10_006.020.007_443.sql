@@ -1,0 +1,7 @@
+create nonclustered index IX_PRODUCT_CODE on bfx_impl.PRODUCTS (CODE) include (DESCRIPTION)
+go
+
+drop index IX_BFX_ACT_ASSIGNED_USER_ID on bfx.ACTIVITY
+go
+create nonclustered index IX_BFX_ACT_ASSIGNED_USER_ID on bfx.ACTIVITY (ASSIGNED_USER_ID, ACTIVITY_TYPE, USER_GROUP_CODE, ACTIVITY_STATUS)
+go

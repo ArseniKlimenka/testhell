@@ -1,0 +1,28 @@
+﻿select
+	poh.PAYMENT_ORDER_NUMBER,
+	pos.PAYMENT_ORDER_TYPE,
+	pos.PAYMENT_ORDER_SUBTYPE,
+	pos.PAYMENT_ORDER_DATE,
+	ps.CODE_NAME as STATE_CODE,
+	ph.PARTY_CODE,
+	pos.PO_CURRENCY_AMOUNT,
+	pos.PO_CURRENCY_CODE,
+	pos.PAYMENT_CURRENCY_CODE,
+	pos.IS_COOL_OFF,
+	poias.ACT_NUMBER as INSURANCE_ACT_NUMBER,
+	pos.REFERENCE_NUMBER
+from
+	acc_impl.PAYMENT_ORDER_HUB poh
+	inner join acc_impl.PAYMENT_ORDER_SAT_LATEST pos on pos.PAYMENT_ORDER_HKEY = poh.PAYMENT_ORDER_HKEY
+	inner join acc.PAYMENT_ORDER po on po.PAYMENT_ORDER_NUMBER = poh.PAYMENT_ORDER_NUMBER
+	inner join cfg.PROCESS_STATE ps on ps.PROCESS_STATE_ID = po.STATE_ID
+	left join acc_impl.PO_RECIPIENT_LINK porl on porl.PAYMENT_ORDER_HKEY = poh.PAYMENT_ORDER_HKEY
+	left join pty_impl.PARTY_HUB ph on ph.PARTY_HKEY = porl.PARTY_HKEY
+	left join acc_impl.PO_INSURANCE_ACT_SAT_LATEST poias on poias.PO_INSURANCE_ACT_HKEY = poh.PAYMENT_ORDER_HKEY
+where 1=1
+{{#if parameters.referenceNumber}}
+	and pos.REFERENCE_NUMBER = @referenceNumber
+{{/if}}
+{{#if parameters.contractNumber}}
+	and pos.CONTRACT_NUMBER = @contractNumber
+{{/if}}

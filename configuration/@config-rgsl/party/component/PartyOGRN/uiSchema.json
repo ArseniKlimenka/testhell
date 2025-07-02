@@ -1,0 +1,159 @@
+{
+    "type": "Group",
+    "label": "Party OGRN and Date of Registration",
+    "width": 12,
+    "elements": [
+        {
+            "type": "Group",
+            "width": 12,
+            "elements": [
+                {
+                    "type": "Input",
+                    "elementId": "OGRNOGRNIP",
+                    "label": "OGRNOGRNIP",
+                    "value": {
+                        "$ref": "#/properties/OGRNOGRNIP"
+                    },
+                    "width": 4
+                },
+                {
+                    "type": "Input",
+                    "elementId": "dateOfStateRegistration",
+                    "label": "dateOfStateRegistration",
+                    "control": "DatetimePicker",
+                    "value": {
+                        "$ref": "#/properties/dateOfStateRegistration"
+                    },
+                    "width": 4
+                },
+                {
+                    "type": "Input",
+                    "elementId": "dateOfRecordingTermination",
+                    "label": "dateOfRecordingTermination",
+                    "control": "DatetimePicker",
+                    "rule": {
+                        "effect": "SHOW",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "showDateOfRecordingTermination",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    },
+                    "value": {
+                        "$ref": "#/properties/dateOfRecordingTermination"
+                    },
+                    "width": 4
+                }
+            ]
+        },
+        {
+            "type": "Group",
+            "width": 12,
+            "elements": [
+                {
+                    "type": "Group",
+                    "width": 12,
+                    "elements": [
+                        {
+                            "type": "Input",
+                            "elementId": "registrationAgencyCode",
+                            "label": "registrationAgencyCode",
+                            "description": "registrationAgencyCode",
+                            "value": {
+                                "$ref": "#/properties/registrationAgencyCode"
+                            },
+                            "autocomplete": {
+                                "minTextLength": 0,
+                                "dropDownItemsCount": 10,
+                                "selectItemOnMatch": false
+                            },
+                            "control": "Dropdown",
+                            "source": {
+                                "dataSource": {
+                                    "name": "PartyRegistrationAgencyDataSource",
+                                    "searchFieldPath": "agencySearchText",
+                                    "requestMapping": "registrationAgencyRequestMapping",
+                                    "responseMapping": "registrationAgencyResponseMapping",
+                                    "resultCount": 10
+                                },
+                                "displayFieldName": "agencyDescription",
+                                "valueFieldName": "agencyCode"
+                            },
+                            "width": 8,
+                            "rule": {
+                                "effect": "ENABLE_INITIAL",
+                                "condition": {
+                                    "type": "FUNC",
+                                    "ruleFunction": "enableRegistrationAgencyCode",
+                                    "value": [
+                                        {
+                                            "$ref": "#"
+                                        }
+                                    ]
+                                }
+                            }
+                        },
+                        {
+                            "type": "Input",
+                            "elementId": "isManualRegistrationAgency",
+                            "label": "isManualRegistrationAgency",
+                            "value": {
+                                "$ref": "#/properties/isManualRegistrationAgency"
+                            },
+                            "width": 4,
+                            "onValueChanged": [
+                                {
+                                    "commandType": "executeAction",
+                                    "actionName": "onChangeIsManualRegistrationAgency"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "Group",
+                    "width": 12,
+                    "elements": [
+                        {
+                            "type": "Input",
+                            "elementId": "registrationAgencyNameManual",
+                            "label": "registrationAgencyNameManual",
+                            "value": {
+                                "$ref": "#/properties/registrationAgencyNameManual"
+                            },
+                            "width": 12
+                        }
+                    ],
+                    "rule": {
+                        "effect": "ENABLE_INITIAL",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "enableRegistrationAgencyNameManual",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    }
+                }
+            ],
+            "rule": {
+                "effect": "SHOW",
+                "condition": {
+                    "type": "FUNC",
+                    "ruleFunction": "showRegistrationAgency",
+                    "value": [
+                        {
+                            "$ref": "#"
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}

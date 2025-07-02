@@ -1,0 +1,105 @@
+{
+    "processType": "DataImport",
+    "initialState": "Draft",
+    "actors": [
+        "RateOfReturnRulesEquityActivesImportSpecialist",
+        "System"
+    ],
+    "states": [
+        {
+            "name": "Draft",
+            "operations": [
+                "Save"
+            ]
+        },
+        {
+            "name": "Loading",
+            "operations": []
+        },
+        {
+            "name": "ReloadSetup",
+            "operations": [
+                "Save"
+            ]
+        },
+        {
+            "name": "Loaded",
+            "operations": []
+        },
+        {
+            "name": "Validating",
+            "operations": []
+        },
+        {
+            "name": "ValidationError",
+            "operations": []
+        },
+        {
+            "name": "Importing",
+            "operations": []
+        },
+        {
+            "name": "Imported",
+            "operations": []
+        }
+    ],
+    "transitions": [
+        {
+            "name": "StartLoading",
+            "from": "Draft",
+            "to": "Loading"
+        },
+        {
+            "name": "FinishLoading",
+            "from": "Loading",
+            "to": "Loaded",
+            "broadcastEvent": {
+                "serverSideEvents": true
+            }
+        },
+        {
+            "name": "StartReloading",
+            "from": "ReloadSetup",
+            "to": "Loading"
+        },
+        {
+            "name": "StartValidating",
+            "from": "Loaded",
+            "to": "Validating",
+            "automatic": true,
+            "allowOnValidationErrors": {
+                "all": false
+            }
+        },
+        {
+            "name": "StartImporting",
+            "from": "Validating",
+            "to": "Importing",
+            "allowOnValidationErrors": {
+                "all": false
+            }
+        },
+        {
+            "name": "FinishValidatingWithError",
+            "from": "Validating",
+            "to": "ValidationError",
+            "broadcastEvent": {
+                "serverSideEvents": true
+            },
+            "allowOnValidationErrors": {
+                "all": false
+            }
+        },
+        {
+            "name": "FinishImporting",
+            "from": "Importing",
+            "to": "Imported",
+            "broadcastEvent": {
+                "serverSideEvents": true
+            },
+            "allowOnValidationErrors": {
+                "all": false
+            }
+        }
+    ]
+}

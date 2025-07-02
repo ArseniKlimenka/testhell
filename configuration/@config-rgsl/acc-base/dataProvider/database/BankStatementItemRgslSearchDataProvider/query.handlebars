@@ -1,0 +1,128 @@
+SELECT
+	bsi.BANK_STATEMENT_ITEM_ID,
+	bsi.IMPORT_DOCUMENT_ID,
+	bsi.BANK_STATEMENT_ITEM_NO,
+	bsi.INCOME_SOURCE_ID,
+	(select top 1 DESCRIPTION from acc_impl.CT_BSI_SOURCE_ACCOUNT where INCOME_SOURCE_ID = bsi.INCOME_SOURCE_ID) as INCOME_SOURCE_NAME,
+	bsi.PAYMENT_DESCRIPTION,
+	bsi.ORIGINAL_PAYMENT_DESCRIPTION,
+	bsi.TRANSACTION_DATE,
+	bsi.CREATE_DATE,
+	bsi.PAYMENT_DATE,
+	bsi.AMOUNT,
+	bsi.DIRECTION,
+	bsi.CURRENCY_CODE,
+	bsi.STATUS_ID,
+	bsi.OPEN_AMOUNT,
+	bsi.IS_REGISTRY,
+	bsi.IS_ACQUIRING,
+	bsi.NON_ACCEPTANCE,
+	bsi.TOLERANCE_TYPE,
+	bsi.RGSL_GUID,
+	bsi.SEGMENT,
+	(select top 1 SOURCE_FILE_FORMAT from acc_impl.AGGREGATED_PAYMENT_REGISTER where AGGREGATED_PAYMENT_NUMBER = bsi.REGISTRY_REFERENCE_NO) as REGISTRY_FILE_FORMAT,
+	(
+		select STRING_AGG(pr.REFERENCE_NO, ', ') WITHIN GROUP (ORDER BY pr.ORDER_NO)
+		from ACC_IMPL.PAYMENT_REFERENCE pr
+		where pr.BANK_STATEMENT_ITEM_ID = bsi.BANK_STATEMENT_ITEM_ID
+	) as REFERENCE_NUMBERS,
+	(
+		select top 1 DOCUMENT_NO
+		from acc_impl.ALLOCATION alc
+		where alc.BANK_STATEMENT_ITEM_ID = bsi.BANK_STATEMENT_ITEM_ID
+		order by ALLOCATION_ID desc
+	) as LAST_DOCUMENT_NO,
+	bsi.PAYMENT_SOURCE_ID,
+	-- debtor
+	bsi.DEBTOR_NAME,
+	bsi.DEBTOR_TYPE,
+	bsi.DEBTOR_BANK_ACCOUNT_NO,
+	(
+		select top 1 sat.INNKIO
+		from pty_impl.PARTY_INFO_SAT sat
+		where 1=1
+			and sat.INNKIO is not null
+			and sat.FULL_NAME = bsi.DEBTOR_NAME
+			and sat.LOAD_DATE = (
+				SELECT MAX(f.LOAD_DATE) FROM pty_impl.PARTY_INFO_SAT f
+				WHERE f.PARTY_INFO_HKEY = sat.PARTY_INFO_HKEY
+			)
+		order by sat.LOAD_DATE desc
+	) as DEBTOR_TIN,
+	(
+		select top 1 sat.BIC
+		from pty_impl.PARTY_BANK_ACCOUNTS_SAT sat
+		where 1=1
+			and sat.BIC is not null
+			and sat.BANK_ACCOUNT = bsi.DEBTOR_BANK_ACCOUNT_NO
+			and sat.LOAD_DATE = (
+				SELECT  MAX(f.LOAD_DATE) FROM pty_impl.PARTY_BANK_ACCOUNTS_SAT f
+				WHERE   f.PARTY_BANK_ACCOUNTS_HKEY = sat.PARTY_BANK_ACCOUNTS_HKEY
+			)
+		order by sat.LOAD_DATE desc
+	) as DEBTOR_BIC,
+	-- creditor
+	bsi.CREDITOR_NAME,
+	bsi.CREDITOR_TYPE,
+	bsi.CREDITOR_BANK_ACCOUNT_NO,
+	(
+		select top 1 sat.INNKIO
+		from pty_impl.PARTY_INFO_SAT sat
+		where 1=1
+			and sat.INNKIO is not null
+			and sat.FULL_NAME = bsi.CREDITOR_NAME
+			and sat.LOAD_DATE = (
+				SELECT MAX(f.LOAD_DATE) FROM pty_impl.PARTY_INFO_SAT f
+				WHERE f.PARTY_INFO_HKEY = sat.PARTY_INFO_HKEY
+			)
+		order by sat.LOAD_DATE desc
+	) as CREDITOR_TIN,
+	(
+		select top 1 sat.BIC
+		from pty_impl.PARTY_BANK_ACCOUNTS_SAT sat
+		where 1=1
+			and sat.BIC is not null
+			and sat.BANK_ACCOUNT = bsi.CREDITOR_BANK_ACCOUNT_NO
+			and sat.LOAD_DATE = (
+				SELECT  MAX(f.LOAD_DATE) FROM pty_impl.PARTY_BANK_ACCOUNTS_SAT f
+				WHERE   f.PARTY_BANK_ACCOUNTS_HKEY = sat.PARTY_BANK_ACCOUNTS_HKEY
+			)
+		order by sat.LOAD_DATE desc
+	) as CREDITOR_BIC,
+	bsi.RELOAD_REQUIRED
+FROM
+	ACC_IMPL.BANK_STATEMENT_ITEM bsi{{#if parameters.skipLocked}} WITH (READPAST){{/if}}
+WHERE 1=1
+{{#if parameters.rgslGuid}}
+	and bsi.RGSL_GUID = @rgslGuid
+{{/if}}
+{{#if parameters.registryReferenceNo}}
+	and bsi.REGISTRY_REFERENCE_NO = @registryReferenceNo
+{{/if}}
+{{#if parameters.bankStatementItemId}}
+	and bsi.BANK_STATEMENT_ITEM_ID = @bankStatementItemId
+{{/if}}
+{{#if parameters.bankStatementItemIds}}
+	and bsi.BANK_STATEMENT_ITEM_ID in (@bankStatementItemIds)
+{{/if}}
+{{#if parameters.paymentStatusIds}}
+	and bsi.STATUS_ID in (@paymentStatusIds)
+{{/if}}
+{{#if parameters.direction}}
+	and bsi.DIRECTION = @direction
+{{/if}}
+{{#if parameters.transactionDateFrom}}
+	and bsi.TRANSACTION_DATE >= @transactionDateFrom
+{{/if}}
+{{#if parameters.amountFrom}}
+	and bsi.AMOUNT >= @amountFrom
+{{/if}}
+{{#if parameters.skipReloading}}
+	and bsi.RELOAD_REQUIRED = 0
+{{/if}}
+{{#if parameters.createdDateFrom}}
+	and bsi.CREATE_DATE >= @createdDateFrom
+{{/if}}
+{{#if parameters.createdDateTo}}
+	and bsi.CREATE_DATE <= @createdDateTo
+{{/if}}

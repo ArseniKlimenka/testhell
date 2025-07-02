@@ -1,0 +1,145 @@
+{
+    "id": "CollectiveLifeInsurancePolicyImportDraft",
+    "type": "GridLayout",
+    "formProperties": {
+        "events": {
+            "onLoad": "onLoad"
+        }
+    },
+    "title": "CollectiveLifeInsurancePolicyImport",
+    "numberOfColumns": 4,
+    "elements": [
+        {
+            "type": "Component",
+            "name": "DocumentHeader",
+            "value": {
+                "$ref": "#"
+            }
+        },
+        {
+            "type": "Group",
+            "width": 4,
+            "elements": [
+                {
+                    "type": "GridLayout",
+                    "elements": [
+                        {
+                            "type": "TabLayout",
+                            "options": {
+                                "menuAlligment": "Horizontal",
+                                "menuMode": "Single"
+                            },
+                            "elements": [
+                                {
+                                    "type": "Tab",
+                                    "elements": [
+                                        {
+                                            "elementId": "importInfoSection",
+                                            "type": "Section",
+                                            "label": "ImportInfo",
+                                            "elements": [
+                                                {
+                                                    "type": "Group",
+                                                    "elements": [
+                                                        {
+                                                            "elementId": "fileSelection",
+                                                            "type": "FileUpload",
+                                                            "label": "FileSelection",
+                                                            "description": "FileSelectionDescription",
+                                                            "value": {
+                                                                "$ref": "#/properties/Body/properties/file"
+                                                            },
+                                                            "width": 3
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "sectionLevel": 1
+                                        }
+                                    ],
+                                    "title": "CollectiveLifeInsurancePolicyImportFile",
+                                    "elementId": "tabCollectiveLifeInsurancePolicyImportFile"
+                                }
+                            ],
+                            "elementId": "TabLayout"
+                        }
+                    ],
+                    "numberOfColumns": 12,
+                    "width": 3
+                },
+                {
+                    "type": "SideContentLayout",
+                    "fixedPosition": true,
+                    "collapsedOnInit": false,
+                    "width": 1,
+                    "elements": [
+                        {
+                            "type": "TabLayout",
+                            "elements": [
+                                {
+                                    "type": "Tab",
+                                    "elementId": "tabSummary",
+                                    "title": "Summary",
+                                    "elements": [
+                                        {
+                                            "type": "Group",
+                                            "elements": []
+                                        },
+                                        {
+                                            "elementId": "contractNumberLink",
+                                            "type": "Link",
+                                            "targetType": "Entity",
+                                            "label": "Contract number",
+                                            "entityData": {
+                                                "entityType": "Contract",
+                                                "businessNumber": "{{expr contractNumber}}"
+                                            },
+                                            "value": {
+                                                "$ref": "#/properties/Body/"
+                                            },
+                                            "width": 1,
+                                            "content": {
+                                                "text": {
+                                                    "type": "OutputText",
+                                                    "value": {
+                                                        "$ref": "#/properties/contractNumber"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "type": "Link",
+                                            "targetType": "Url",
+                                            "label": "Download template",
+                                            "hideLabel": false,
+                                            "value": {
+                                                "$ref": "#/properties/Body/"
+                                            },
+                                            "onClick": "downloadTemplate",
+                                            "width": 1,
+                                            "content": {
+                                                "text": {
+                                                    "type": "OutputText",
+                                                    "value": {
+                                                        "$ref": "#/properties/template/properties/fileName"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "Component",
+            "name": "DocumentFooter",
+            "value": {
+                "$ref": "#"
+            }
+        }
+    ]
+}

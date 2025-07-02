@@ -1,0 +1,173 @@
+{
+    "type": "Group",
+    "elements": [
+        {
+            "type": "DataGrid",
+            "elementId": "serchResultTable",
+            "mode": "DataSource",
+            "pagination": {
+                "mode": "Regular",
+                "pageSizes": [
+                    5,
+                    10,
+                    15,
+                    50,
+                    100,
+                    500
+                ],
+                "defaultPageSize": 15
+            },
+            "value": {
+                "$ref": "#/properties/response/properties/data"
+            },
+            "selection": {
+                "mode": "Multi",
+                "enableRowSelection": true,
+                "showCheckBox": true,
+                "onSelectionChanged": [
+                    {
+                        "commandType": "raiseEvent",
+                        "eventName": "Selected"
+                    }
+                ]
+            },
+            "columns": [
+                {
+                    "sortable": false,
+                    "title": "paymentOrderNumber",
+                    "cellContent": {
+                        "type": "Link",
+                        "readOnly": true,
+                        "targetType": "Url",
+                        "label": "documentCode",
+                        "value": {
+                            "mapping": "paymentOrderCodeUriMapping",
+                            "$ref": "#"
+                        },
+                        "width": 5,
+                        "content": {
+                            "text": {
+                                "type": "OutputText",
+                                "value": {
+                                    "$ref": "#/properties/resultData/properties/paymentOrderNumber"
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "paymentOrderType",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/paymentOrderType"
+                        }
+                    }
+                },
+                {
+                    "sortable": true,
+                    "name": "paymentOrderDate",
+                    "title": "paymentOrderDate",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "template": "{{expr paymentOrderDate 'd'}}",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/resultData"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "stateCode",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/stateCode"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "recipient",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/recipient/properties/name"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "totalPaymentAmount",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/totalPaymentAmount"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "paymentOrderCurrencyCode",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/paymentOrderCurrencyCode"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "paymentCurrencyCode",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/paymentCurrencyCode"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "paymentDescription",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/paymentDescription"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "isCoolOffPeriod",
+                    "cellContent": {
+                        "type": "Icon",
+                        "iconStyleFunction": "getCoolOffIcon",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/isCoolOffPeriod"
+                        }
+                    }
+                },
+                {
+                    "sortable": false,
+                    "title": "contractNumber",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/contractNumber"
+                        }
+                    }
+                }
+            ]
+        }
+    ]
+}

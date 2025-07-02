@@ -1,0 +1,138 @@
+{
+    "type": "Section",
+    "sectionLevel": 1,
+    "label": "DeclarationSportQuestions",
+    "isCollapsed": false,
+    "width": 12,
+    "elements": [
+        {
+            "type": "OutputText",
+            "hideLabel": true,
+            "label": "QuestionForSport",
+            "literalValue": "Договором страхования предусматривается покрытие по событиям, связанными с занятием Застрахованным следующими видами спорта/увлечений: конный спорт, родео, стрельба, серфинг, вейкбординг, дайвинг, катание на водных мотоциклах, виндсерфинг, снорклинг, прыжки с трамплина в воду, парусный спорт, езда на моторном катере, катание на водных лыжах, подводное ориентирование, подводная охота, апноэ (фридайвинг), акватлон (подводная борьба), фристайл, прыжки на лыжах с трамплина, бокс, кикбоксинг, тайский бокс, армрестлинг, езда на горном велосипеде, планеризм, дельтапланеризм, парасейлинг, парашютный спорт, скайсерфинг, охота, походы и горный туризм, спелеотуризм, каноинг, каякинг, гребля на байдарке (гребной слалом), кайтинг, рафтинг (спортивный сплав), банджи-джампинг, паркур, зорбинг.",
+            "skipTranslate": true,
+            "allowMultiLine": true
+        },
+        {
+            "type": "Section",
+            "sectionLevel": 2,
+            "label": "InsuredPerson",
+            "elements": [
+                {
+                    "type": "Group",
+                    "elements": [
+                        {
+                            "type": "Input",
+                            "isCompact": true,
+                            "label": "isConfirmedSportInsuredPerson",
+                            "value": {
+                                "$ref": "#/properties/declarationSportConfirmation/properties/isConfirmedSportInsuredPerson"
+                            },
+                            "width": 2,
+                            "onValueChanged": [
+                                {
+                                    "commandType": "executeAction",
+                                    "actionName": "onChangeConfirmationSport"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Input",
+                            "isCompact": true,
+                            "label": "isNotConfirmedSportInsuredPerson",
+                            "value": {
+                                "$ref": "#/properties/declarationSportConfirmation/properties/isNotConfirmedSportInsuredPerson"
+                            },
+                            "width": 2,
+                            "onValueChanged": [
+                                {
+                                    "commandType": "executeAction",
+                                    "actionName": "onChangeConfirmationSport"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Input",
+                            "isCompact": true,
+                            "label": "manualCorrection",
+                            "value": {
+                                "$ref": "#/properties/declarationSportConfirmation/properties/manualCorrection"
+                            },
+                            "width": 2,
+                            "onValueChanged": [
+                                {
+                                    "commandType": "executeAction",
+                                    "actionName": "onChangeManualCorrection"
+                                }
+                            ],
+                            "rule": {
+                                "effect": "SHOW",
+                                "condition": {
+                                    "type": "FUNC",
+                                    "ruleFunction": "showManualCorrection",
+                                    "value": [
+                                        {
+                                            "$ref": "#"
+                                        }
+                                    ]
+                                }
+                            }
+                        },
+                        {
+                            "type": "Input",
+                            "control": "TextArea",
+                            "enableResize": true,
+                            "numberOfRows": 2,
+                            "label": "commentInsuredPerson",
+                            "value": {
+                                "$ref": "#/properties/declarationSportConfirmation/properties/commentInsuredPerson"
+                            },
+                            "width": 8,
+                            "rule": {
+                                "effect": "SHOW",
+                                "condition": {
+                                    "type": "LEAF",
+                                    "expectedValue": true,
+                                    "value": {
+                                        "$ref": "#/properties/declarationSportConfirmation/properties/isNotConfirmedSportInsuredPerson"
+                                    }
+                                }
+                            }
+                        }
+                    ],
+                    "rule": {
+                        "effect": "DISABLE_INITIAL",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "hasFutureNumberForAgent",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "type": "Component",
+            "name": "DeclarationSport",
+            "value": {
+                "$ref": "#/properties/declarationSport"
+            }
+        }
+    ],
+    "rule": {
+        "effect": "SHOW",
+        "condition": {
+            "type": "FUNC",
+            "ruleFunction": "showSportDeclaration",
+            "value": [
+                {
+                    "$ref": "#"
+                }
+            ]
+        }
+    }
+}

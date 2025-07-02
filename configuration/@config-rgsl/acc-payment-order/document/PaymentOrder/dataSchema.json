@@ -1,0 +1,73 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema",
+    "type": "object",
+    "additionalProperties": false,
+    "aiValidation": {
+        "rule": "rootLevelValidation"
+    },
+    "required": [
+        "recipientInformation"
+    ],
+    "aiDataEnrichment": [
+        {
+            "name": "GetNettedDocsData",
+            "dataSource": "GetContractsForNettingDataSource"
+        }
+    ],
+    "aiAudit": {
+        "scope": "General"
+    },
+    "properties": {
+        "paymentOrderInformation": {
+            "$ref": "component:PaymentOrderInformation"
+        },
+        "recipientInformation": {
+            "$ref": "component:RecipientInformation"
+        },
+        "paymentOrderAmounts": {
+            "$ref": "component:PaymentOrderAmounts"
+        },
+        "paymentOrderNetting": {
+            "$ref": "component:PaymentOrderNetting"
+        },
+        "paymentOrderItems": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                    "itemType": {
+                        "type": "string",
+                        "enum": [
+                            "surrenderValue",
+                            "investProfit",
+                            "investProfitSlp",
+                            "PIT",
+                            "paymentRefund",
+                            "riskPayment",
+                            "creditRefund",
+                            "marketing"
+                        ],
+                        "aiTitle": "paymentLineType"
+                    },
+                    "paymentOrderCurrencyAmount": {
+                        "type": "number",
+                        "aiTitle": "paymentOrderCurrencyAmount"
+                    },
+                    "paymentCurrencyAmount": {
+                        "type": "number",
+                        "aiTitle": "paymentCurrencyAmount"
+                    }
+                },
+                "required":[
+                    "itemType",
+                    "paymentCurrencyAmount"
+                ]
+            }
+        },
+        "tempTechnicalData": {
+            "type": "object",
+            "additionalProperties": true
+        }
+    }
+}

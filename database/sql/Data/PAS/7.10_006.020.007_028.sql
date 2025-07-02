@@ -1,0 +1,6 @@
+delete from bfx_impl.INVESTMENT_STRATEGY
+where id = 'D0AADCA2-4D4C-4502-AB8B-39759B6AE032'
+insert into bfx_impl.INVESTMENT_STRATEGY
+(ID, CODE, DESCRIPTION)
+values
+('D0AADCA2-4D4C-4502-AB8B-39759B6AE032', N'tatneft', N'Акции - Татнефть')

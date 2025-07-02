@@ -1,0 +1,29 @@
+{
+    "mainDataSource": "PolicyQuoteForCancellationDataSource",
+    "allowParallelExecution": true,
+    "sinks": [
+        {
+            "name": "GetAllocations",
+            "fetch": {
+                "configuration": {
+                    "name": "AllocationDataSource"
+                }
+            }
+        },
+        {
+            "name": "CancelAllocations",
+            "class": {
+                "className": "Adacta.AdInsure.RGSL.Accounting.API.Shared.CashFlow.Allocation.Services.IAllocationServiceAppRGSL, Adacta.AdInsure.RGSL.Accounting.API",
+                "methodName": "Cancel"
+            }
+        },
+        {
+            "ref": "CreatePaymentOrderSinkGroup"
+        },
+        {
+            "name": "DocumentCancellation",
+            "documentTransition": {}
+        }
+    ],
+    "version": "1"
+}

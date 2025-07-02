@@ -1,0 +1,46 @@
+{
+    "targetDocument": "InvestmentLifeInsurancePolicy",
+    "targetDocumentVersion": "1",
+    "targetState": "Draft",
+    "relationType": "Child",
+    "actors": [
+        "Agent",
+        "Operations"
+    ],
+    "allowOnValidationErrors": {
+        "all": false
+    },
+    "requiredConfirmedConstraints": {
+        "all": true
+    },
+    "enrichment": {
+        "fields": [
+            "/basicInvestmentParameters",
+            "/policyTerms",
+            "/risks"
+        ]
+    },
+    "copyAttachments": {
+        "all": true
+    },
+    "exclusiveToAssignedUser": true,
+    "actionToRunBefore": "checkKPK",
+    "sourceDocument": "InvestmentLifeInsuranceQuote",
+    "sourceDocumentVersion": "1",
+    "sourceDocumentStates": [
+        {
+            "name": "Draft",
+            "actors": [
+                "Agent",
+                "Operations"
+            ]
+        },
+        {
+            "name": "Approved",
+            "actors": [
+                "Agent",
+                "Operations"
+            ]
+        }
+    ]
+}

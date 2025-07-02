@@ -1,0 +1,86 @@
+{
+    "steps": [
+        {
+            "$ref": "AdjustAccountingPeriods",
+            "context": {
+                "firstOpenPeriod": "2022-01-01"
+            }
+        },
+        {
+            "$ref": "AdjustCurrentDate",
+            "context": {
+                "currentDate": "2022-01-01"
+            }
+        },
+        {
+            "$ref": "CreateALIPolicyDemo",
+            "context": {
+                "paymentFrequencyCode": "2",
+                "invoiceOnActivation": true
+            }
+        },
+        {
+            "code": "ValidateTransactions_1",
+            "description": "Validate transactions 1",
+            "requests": [],
+            "assert": {
+                "expected": "./steps/validateTransactions/expectedResult_1.json",
+                "module": "../../lib/accounting/assert.js",
+                "function": "assertTransactions"
+            }
+        },
+        {
+            "$ref": "CreatePaymentAndAutoAllocate",
+            "description": "Pay first installment",
+            "context": {
+                "amountToAllocate": 100000,
+                "expectedPostAmount": 100000,
+                "transactionDate": "2022-01-01",
+                "referenceNoToAllocate": "{{$.contractNumber}}"
+            }
+        },
+        {
+            "$ref": "CancelAllocation",
+            "description": "Cancel allocation",
+            "context": {
+                "cancelAllocContractNumber": "{{$.contractNumber}}",
+                "cancelAllocDueDate": "2022-01-01"
+            }
+        },
+        {
+            "code": "ValidateTransactions_2",
+            "description": "Validate transactions 2",
+            "requests": [],
+            "assert": {
+                "expected": "./steps/validateTransactions/expectedResult_2.json",
+                "module": "../../lib/accounting/assert.js",
+                "function": "assertTransactions"
+            }
+        },
+        {
+            "$ref": "CreateCancellationForAccumulatedLifeInsurancePolicy",
+            "context": {
+                "cancellationAmendmentReason": "byClientCoolOff",
+                "cancellationAmendmentSubType": "byClientDecision",
+                "cancellationValidFrom": "2022-01-01",
+                "contractFieldName": "amendment"
+            }
+        },
+        {
+            "code": "ValidateTransactions_3",
+            "description": "Validate transactions 3",
+            "requests": [],
+            "assert": {
+                "expected": "./steps/validateTransactions/expectedResult_3.json",
+                "module": "../../lib/accounting/assert.js",
+                "function": "assertTransactions"
+            }
+        },
+        {
+            "$ref": "AdjustCurrentDate",
+            "context": {
+                "currentDate": null
+            }
+        }
+    ]
+}

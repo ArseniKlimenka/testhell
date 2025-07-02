@@ -1,0 +1,164 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema",
+    "type": "object",
+    "additionalProperties": false,
+    "aiAudit": {
+        "scope": "General"
+    },
+    "properties": {
+        "additionalServices": {
+            "$ref": "component:AdditionalServices"
+        },
+        "basicConditions": {
+            "$ref": "component:BasicConditions"
+        },
+        "basicInvestmentParameters": {
+            "$ref": "component:BasicInvestmentParameters"
+        },
+        "beneficiaries": {
+            "$ref": "component:Beneficiaries"
+        },
+        "insuranceRules": {
+            "$ref": "component:InsuranceRules"
+        },
+        "insuredPerson": {
+            "$ref": "component:InsuredPerson"
+        },
+        "issueForm": {
+            "allOf": [
+                {
+                    "$ref": "component:IssueForm"
+                },
+                {
+                    "aiAdditionalContext": {
+                        "name": "policyHolder",
+                        "$data": "/policyHolder",
+                        "source": "Body"
+                    }
+                },
+                {
+                    "aiAdditionalContext": {
+                        "name": "insuredPerson",
+                        "$data": "/insuredPerson",
+                        "source": "Body"
+                    }
+                },
+                {
+                    "aiAdditionalContext": {
+                        "name": "futureContractNumber",
+                        "$data": "/technicalInformation/futureContractNumber",
+                        "source": "Body"
+                    }
+                }
+            ]
+        },
+        "outpaymentPlan": {
+            "$ref": "component:OutpaymentPlan"
+        },
+        "paymentPlan": {
+            "$ref": "component:PaymentPlan"
+        },
+        "policyHolder": {
+            "$ref": "component:PolicyHolder"
+        },
+        "policyTerms": {
+            "$ref": "component:PolicyTerms"
+        },
+        "promotions": {
+            "$ref": "component:Promotions"
+        },
+        "risks": {
+            "$ref": "component:Risks"
+        },
+        "risksPackages": {
+            "$ref": "component:RisksPackages"
+        },
+        "risksCorrection": {
+            "$ref": "component:RisksCorrection"
+        },
+        "giftServices": {
+            "$ref": "component:GiftServices"
+        },
+        "riskConditions": {
+            "$ref": "component:RiskConditions"
+        },
+        "surrenderValues": {
+            "$ref": "component:SurrenderValues"
+        },
+        "uwTriggers": {
+            "$ref": "component:UWTriggers"
+        },
+        "mainInsuranceConditions": {
+            "$ref": "component:MainInsuranceConditions"
+        },
+        "insurerComment": {
+            "$ref": "component:InsurerComment"
+        },
+        "initiator": {
+            "$ref": "component:Initiator"
+        },
+        "additionalInitiators": {
+            "$ref": "component:AdditionalInitiators"
+        },
+        "technicalInformation": {
+            "$ref": "component:TechnicalInformation"
+        },
+        "declarationMedicalConfirmation": {
+            "$ref": "component:DeclarationMedicalConfirmation"
+        },
+        "declarationMedical": {
+            "$ref": "component:DeclarationMedical"
+        },
+        "declarationMainConfirmation": {
+            "$ref": "component:DeclarationMainConfirmation"
+        },
+        "declarationMain": {
+            "$ref": "component:DeclarationMain"
+        },
+        "declarationMedicalConfirmationPolicyHolder": {
+            "$ref": "component:DeclarationMedicalConfirmationPolicyHolder"
+        },
+        "declarationMedicalPolicyHolder": {
+            "$ref": "component:DeclarationMedicalPolicyHolder"
+        },
+        "triggersConditions": {
+            "$ref": "component:UWTriggersConditions"
+        },
+        "inquiriesList": {
+            "$ref": "component:InquiriesList"
+        },
+        "attachmentsPackage": {
+            "$ref": "component:AttachmentsPackage"
+        },
+        "amendmentData": {
+            "type": "object",
+            "additionalProperties": true,
+            "properties": {
+                "technicalAmendmentData": {
+                    "$ref": "component:TechnicalAmendmentData"
+                }
+            }
+        },
+        "commission": {
+            "$ref": "component:PolicyCommission"
+        },
+        "migrationAttributes": {
+            "$ref": "component:MigrationAttributes"
+        },
+        "allocationInformation": {
+            "$ref": "component:AllocationInformation"
+        },
+        "cumulation": {
+            "$ref": "component:Cumulation"
+        },
+        "productConfiguration": {
+            "$ref": "component:ProductConfiguration"
+        },
+        "policyEnrichments": {
+            "$ref": "component:PolicyEnrichments"
+        },
+        "consent": {
+            "$ref": "component:Consent"
+        }
+    }
+}

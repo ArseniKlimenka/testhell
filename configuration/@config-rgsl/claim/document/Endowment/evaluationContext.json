@@ -1,0 +1,54 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "object",
+    "additionalProperties": false,
+    "aiDataEnrichment": [
+        {
+            "name": "ValidateKpkForEndowment",
+            "integrationService": {
+                "name": "ValidateKpkForEndowment",
+                "version": "1"
+            }
+        }
+    ],
+    "properties": {
+        "kpkValidation": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "kpkServiceResult": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "properties": {
+                            "ContractorPartyCode": {
+                                "type": "integer"
+                            },
+                            "CheckResultData": {
+                                "type": "object",
+                                "properties": {
+                                    "Agreement": {
+                                        "type": "string"
+                                    },
+                                    "Reason": {
+                                        "type": "string"
+                                    },
+                                    "Reject": {
+                                        "type": "string"
+                                    },
+                                    "Error": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "hasNonResident": {
+                    "type": "boolean"
+                }
+            }
+        }
+    }
+}

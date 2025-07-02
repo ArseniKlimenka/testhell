@@ -1,0 +1,59 @@
+{
+    "poRgslRequest": {
+        "soap:Envelope": {
+            "@xmlns:soap": "http://www.w3.org/2003/05/soap-envelope",
+            "@xmlns:koss": "http://www.pfergo.org/koss",
+            "@xmlns:hi": "http://www.sample-package.org/Hi",
+            "soap:Header": null,
+            "soap:Body": {
+                "koss:AddBill": {
+                    "koss:request": {
+                        "hi:INN": "753013619034",
+                        "hi:Name": "",
+                        "hi:KPP": "",
+                        "hi:ULOrFL": "Физическое Лицо",
+                        "hi:CodeOKPO": null,
+                        "hi:BankAccount": {
+                            "hi:AccountNumber": "40802810300011287487",
+                            "hi:AccountType": "Расчетный",
+                            "hi:Bank": {
+                                "hi:Bank": "АО ЮНИКРЕДИТ БАНК",
+                                "hi:BIK": "044525545",
+                                "hi:Country": "RU"
+                            }
+                        },
+                        "hi:InvoiceAmount": "100",
+                        "hi:InvoiceCurrency": "RUB",
+                        "hi:CodeOrganization": "ООО «СК «ЭРГО Жизнь»",
+                        "hi:VATRate": "БезНДС",
+                        "hi:VATAmount": "0",
+                        "hi:InvoiceNumber": "{{$.bsiIn.id}}",
+                        "hi:KSP": {
+                            "hi:KSP": "99-00-000"
+                        },
+                        "hi:AccountOrganization": "40701978600001000468",
+                        "hi:FIOSurname": "Иванов",
+                        "hi:FIOName": "Иван",
+                        "hi:FIOMiddleName": "Иванович",
+                        "hi:Country": "Россия",
+                        "hi:ServiceField": "{{$.party.partyCode}}",
+                        "hi:Agreement_Number": "{{$.paymentOrder.paymentOrderNumber}}",
+                        "hi:LegalAddressLink": {
+                            "hi:Country": "Россия",
+                            "hi:Postcode": "123610",
+                            "hi:City": "Москва",
+                            "hi:Street": "Краснопресненская наб.",
+                            "hi:Building": "12",
+                            "hi:Housing": "2",
+                            "hi:Room": "5",
+                            "hi:Remark": null
+                        },
+                        "hi:Session_ID": "{{$.paymentOrder.paymentOrderNumber}}",
+                        "hi:SystemId": "ADINSURE",
+                        "hi:DDS": "2660"
+                    }
+                }
+            }
+        }
+    }
+}

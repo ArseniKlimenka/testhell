@@ -1,0 +1,68 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "AdditionalBeneficiaries",
+    "type": "array",
+    "additionalProperties": false,
+    "aiValidation": {
+        "rule": "validateBeneficiaries"
+    },
+    "aiDataEnrichment": [],
+    "items": {
+        "type": "object",
+        "required": [
+            "beneficiaryId",
+            "partyFullName",
+            "share",
+            "dateOfBirth",
+            "risk"
+        ],
+        "properties": {
+            "beneficiaryId": {
+                "type": "string",
+                "aiTitle": "Beneficiary generated id"
+            },
+            "partyFullName": {
+                "type": "string",
+                "aiTitle": "partyFullName"
+            },
+            "share": {
+                "type": "number",
+                "minimum": 0.0001,
+                "maximum": 1,
+                "aiTitle": "share"
+            },
+            "relationType": {
+                "type": "string",
+                "aiTitle": "relationType"
+            },
+            "dateOfBirth": {
+                "type": "string",
+                "aiFormat": "date",
+                "aiTitle": "dateOfBirth"
+            },
+            "personGender": {
+                "type": "string",
+                "enum": [
+                    "Male",
+                    "Female"
+                ],
+                "aiTitle": "personGender"
+            },
+            "risk": {
+                "type": "object",
+                "aiTitle": "risk",
+                "required": [
+                    "code"
+                ],
+                "properties": {
+                    "code": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    }
+                }
+            }
+        }
+    }
+}

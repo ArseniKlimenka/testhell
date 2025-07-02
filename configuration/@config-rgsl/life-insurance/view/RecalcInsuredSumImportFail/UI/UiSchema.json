@@ -1,0 +1,106 @@
+{
+    "id": "RecalcInsuredSumImportFailUiSchema",
+    "type": "Group",
+    "elements": [
+        {
+            "type": "GridLayout",
+            "numberOfColumns": 12,
+            "elements": [
+                {
+                    "type": "Group",
+                    "elements": [
+                        {
+                            "type": "Group",
+                            "width": 2,
+                            "stackContent": "Left",
+                            "elements": [
+                                {
+                                    "elementId": "export-button",
+                                    "type": "Button",
+                                    "onClick": [
+                                        {
+                                            "commandType": "executeOperation",
+                                            "operation": "EXPORT"
+                                        }
+                                    ],
+                                    "label": "Export"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Group",
+                            "width": 2,
+                            "stackContent": "Right",
+                            "elements": []
+                        }
+                    ]
+                },
+                {
+                    "type": "Group",
+                    "elements": [
+                        {
+                            "elementId": "import-fail-table",
+                            "type": "DataGrid",
+                            "orderBy": "Description",
+                            "mode": "DataSource",
+                            "header": {
+                                "showReloadButton": true,
+                                "showNumberOfResults": true
+                            },
+                            "pagination": {
+                                "mode": "Regular",
+                                "pageSizes": [
+                                    5,
+                                    10,
+                                    15
+                                ]
+                            },
+                            "selection": {
+                                "mode": "None"
+                            },
+                            "height": "None",
+                            "columns": [
+                                {
+                                    "sortable": true,
+                                    "title": "RecordKey",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "defaultValue": " ",
+                                        "value": {
+                                            "$ref": "#/properties/resultData/properties/recordKey"
+                                        }
+                                    },
+                                    "name": "recordKey"
+                                },
+                                {
+                                    "sortable": true,
+                                    "title": "ErrorType",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "defaultValue": " ",
+                                        "value": {
+                                            "$ref": "#/properties/resultData/properties/errors/properties/errorType"
+                                        }
+                                    },
+                                    "name": "errorType"
+                                },
+                                {
+                                    "sortable": true,
+                                    "title": "ErrorMessage",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "defaultValue": " ",
+                                        "value": {
+                                            "$ref": "#/properties/resultData/properties/errors/properties/errorMessage"
+                                        }
+                                    },
+                                    "name": "errorMessage"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

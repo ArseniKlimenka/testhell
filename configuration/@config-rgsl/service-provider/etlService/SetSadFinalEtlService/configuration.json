@@ -1,0 +1,36 @@
+{
+    "mainDataSource": "SubAgentDataSource",
+    "aggregate": false,
+    "allowParallelExecution": false,
+    "initialisationSinks": [
+        {
+            "name": "StartSetSadFinalEtlService",
+            "class": {
+                "className": "Adacta.AdInsure.RGSL.PAS.API.Shared.Contract.Services.ICollectiveContractService, Adacta.AdInsure.RGSL.PAS.API",
+                "methodName": "WriteTestLog"
+            }
+        }
+    ],
+    "sinks": [
+        {
+            "name": "UpdateSubAgent",
+            "masterEntity": {
+                "configuration": {
+                    "name": "Employee",
+                    "version": "1"
+                },
+                "allowUpdating": true
+            }
+        }
+    ],
+    "completionSinks": [
+        {
+            "name": "FinishSetSadFinalEtlService",
+            "class": {
+                "className": "Adacta.AdInsure.RGSL.PAS.API.Shared.Contract.Services.ICollectiveContractService, Adacta.AdInsure.RGSL.PAS.API",
+                "methodName": "WriteTestLog"
+            }
+        }
+    ],
+    "version": "1"
+}

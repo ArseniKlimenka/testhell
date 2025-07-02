@@ -1,0 +1,27 @@
+{
+    "entityType": "UniversalDocument",
+    "condition": {
+        "events": [
+            "StatusChanged",
+            "Updated",
+            "Created"
+        ],
+        "configuration": {
+            "names": [
+                "AgentVerification"
+            ]
+        }
+    },
+    "sinks": [
+        {
+            "name": "SaveData",
+            "database": {
+                "tables": [
+                    "UNI_IMPL.AGENT_VERIFICATION_HUB",
+                    "UNI_IMPL.AGENT_VERIFICATION_SAT"
+                ]
+            }
+        }
+    ],
+    "version": "1"
+}

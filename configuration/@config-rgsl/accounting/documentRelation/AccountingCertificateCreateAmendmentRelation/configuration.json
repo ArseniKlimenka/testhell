@@ -1,0 +1,36 @@
+{
+    "targetDocument": "AccountingCertificateCorrection",
+    "targetDocumentVersion": "1",
+    "targetState": "Draft",
+    "relationType": "Child",
+    "actors": [
+        "System",
+        "AccountingCertificateEditor"
+    ],
+    "allowOnValidationErrors": {
+        "all": true
+    },
+    "requiredConfirmedConstraints": {
+        "all": false
+    },
+    "enrichment": {
+        "fields": [
+            "/accountingCertificateEnrichments"
+        ]
+    },
+    "copyAttachments": {
+        "all": false
+    },
+    "exclusiveToAssignedUser": false,
+    "whenBlocked": "DisplayNormally",
+    "sourceDocument": "AccountingCertificate",
+    "sourceDocumentVersion": "1",
+    "sourceDocumentStates": [
+        {
+            "name": "Issued",
+            "actors": [
+                "AccountingCertificateEditor"
+            ]
+        }
+    ]
+}

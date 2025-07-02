@@ -1,0 +1,2 @@
+alter table ACC_IMPL.BANK_STATEMENT_ITEM add REGISTRY_REFERENCE_NO nvarchar(64) null
+go

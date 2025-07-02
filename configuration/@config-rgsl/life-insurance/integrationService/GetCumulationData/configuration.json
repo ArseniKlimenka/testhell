@@ -1,0 +1,76 @@
+{
+    "sinks": [
+        {
+            "name": "GetCumulationRules",
+            "fetch": {
+                "configuration": {
+                    "name": "CumulationRulesDataSource"
+                }
+            }
+        },
+        {
+            "name": "PrepareCumulationQuotes",
+            "fetch": {
+                "configuration": {
+                    "name": "CumulationPrepareQuotesDataSource"
+                }
+            }
+        },
+        {
+            "name": "PrepareCumulationContracts",
+            "fetch": {
+                "configuration": {
+                    "name": "CumulationPrepareContractsDataSource"
+                }
+            }
+        },
+        {
+            "name": "GetCumulationCurrencyRates",
+            "fetch": {
+                "configuration": {
+                    "name": "CumulationCurrencyRatesDataSource"
+                }
+            }
+        },
+        {
+            "name": "GetCumulationQuotes",
+            "fetch": {
+                "configuration": {
+                    "name": "CumulationQuotesDataSource"
+                }
+            }
+        },
+        {
+            "name": "GetCumulationContracts",
+            "fetch": {
+                "configuration": {
+                    "name": "CumulationContractsDataSource"
+                }
+            }
+        },
+        {
+            "name": "GetRisksInfo",
+            "fetch": {
+                "configuration": {
+                    "name": "RiskInfoDataSource"
+                }
+            }
+        },
+        {
+            "name": "WriteCumulationResults",
+            "database": {
+                "tables": [
+                    "PAS_IMPL.CUMULATION_HUB",
+                    "PAS_IMPL.CUMULATION_SAT",
+                    "PAS_IMPL.CUMULATION_DOCUMENTS_SAT",
+                    "PAS_IMPL.CUMULATION_RISKS_SAT",
+                    "PAS_IMPL.CUMULATION_QUOTE_LINK"
+                ]
+            }
+        }
+    ],
+    "responses": [
+        200,
+        422
+    ]
+}

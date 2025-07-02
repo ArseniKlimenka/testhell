@@ -1,0 +1,72 @@
+﻿SELECT
+	clm.CLAIM_NUMBER,
+	cpa.CODE_NAME AS CLAIM_CONF,
+	clm.STATE_ID AS CLAIM_STATE_ID,
+	prst.CODE_NAME AS CLAIM_STATE_NAME,
+	ctr.CONTRACT_NUMBER,
+	ctr.STATE_ID AS CONTRACT_STATE_ID,
+	polState.CODE_NAME as CONTRACT_STATE_NAME,
+	psl.INSURED_NAME as INSURED_NAME,
+	psl.HOLDER_NAME as HOLDER_NAME,
+	ieHub.IE_NUMBER as IE_NUMBER,
+	iesat.IE_DATE as IE_DATE,
+	CONTRACT_CONF_CODE_NAME
+
+FROM CLM.CLAIM clm
+	LEFT JOIN CFG.PROCESS_STATE prst ON prst.PROCESS_STATE_ID = clm.STATE_ID
+	LEFT JOIN CLM_IMPL.CLM_HUB clmhub ON clmhub.CLAIM_NUMBER = clm.CLAIM_NUMBER
+	LEFT JOIN CLM_IMPL.CLM_SAT_LATEST clmsatl ON clmsatl.CLM_HKEY = clmhub.CLM_HKEY
+	LEFT JOIN PAS.CONTRACT ctr ON ctr.CONTRACT_NUMBER = clmsatl.CONTRACT_NUMBER
+	left join cfg.PROCESS_STATE polState on polState.PROCESS_STATE_ID = ctr.STATE_ID
+	LEFT JOIN CFX.PUBLISHED_ARTIFACT pa ON pa.PUBLISHED_ARTIFACT_ID = ctr.PUBLISHED_ARTIFACT_ID
+	LEFT JOIN CFX.PUBLISHED_ARTIFACT cpa ON cpa.PUBLISHED_ARTIFACT_ID = clm.PUBLISHED_ARTIFACT_ID
+	LEFT JOIN PAS_IMPL.POLICY_HUB ph ON ph.CONTRACT_NUMBER = clmsatl.CONTRACT_NUMBER
+	LEFT JOIN CLM_IMPL.CLM_RISK_SAT_LATEST clmRiskSatLatest ON clmRiskSatLatest.CLM_RISK_HKEY = clmHub.CLM_HKEY
+	LEFT JOIN PAS_IMPL.POLICY_SAT_LATEST psl ON psl.POLICY_HKEY = ph.POLICY_HKEY
+	LEFT JOIN CLM_IMPL.CLM_IE_LINK clmIeLink ON clmIeLink.CLM_HKEY = clmhub.CLM_HKEY
+	LEFT JOIN CLM_IMPL.IE_SAT iesat ON clmIeLink.IE_HKEY = iesat.IE_HKEY
+	LEFT JOIN CLM_IMPL.IE_HUB ieHub ON ieHub.IE_HKEY = iesat.IE_HKEY
+	LEFT JOIN CLM_IMPL.CLM_APPLICANT_LINK clmApplLink ON clmApplLink.CLM_HKEY = clmhub.CLM_HKEY
+	LEFT JOIN CLM_IMPL.CLM_APPLICANT_SAT_LATEST clmApplSatLatest ON clmApplSatLatest.CLM_APPLICANT_HKEY = clmApplLink.CLM_APPLICANT_HKEY
+	LEFT JOIN PTY_IMPL.PARTY_HUB partyHub ON partyHub.PARTY_HKEY = clmApplLink.PARTY_HKEY
+WHERE
+	1 = 1
+	{{#if parameters.claimNumber}}
+	AND clm.CLAIM_NUMBER = @claimNumber
+	{{/if}}
+	{{#if parameters.contractNumber}}
+	AND ctr.CONTRACT_NUMBER = @contractNumber
+	{{/if}}
+	{{#if parameters.riskCode}}
+	AND clmRiskSatLatest.Code = @riskCode
+	{{/if}}
+	{{#if parameters.stateCode}}
+	AND prst.CODE_NAME = @stateCode
+	{{/if}}
+	{{#if parameters.applicantCode}}
+	AND partyHub.PARTY_CODE = @applicantCode
+	{{/if}}
+	{{#if parameters.policyHolderCode}}
+	AND psl.HOLDER_CODE = @policyHolderCode
+	{{/if}}
+	{{#if parameters.insuredPersonCode}}
+	AND psl.INSURED_CODE = @insuredPersonCode
+	{{/if}}
+	{{#if parameters.insuredEventDateFrom}}
+	AND iesat.IE_DATE >= @insuredEventDateFrom
+	{{/if}}
+	{{#if parameters.insuredEventDateTo}}
+	AND iesat.IE_DATE <= @insuredEventDateTo
+	{{/if}}
+	{{#if parameters.statementReceivedDateFrom}}
+	AND clmApplSatLatest.STATEMENT_RECEIVED_DATE >= @statementReceivedDateFrom
+	{{/if}}
+	{{#if parameters.statementReceivedDateTo}}
+	AND clmApplSatLatest.STATEMENT_RECEIVED_DATE <= @statementReceivedDateTo
+	{{/if}}
+	{{#if parameters.statementApplicationDateFrom}}
+	AND clmApplSatLatest.STATEMENT_APPLICATION_DATE >= @statementApplicationDateFrom
+	{{/if}}
+	{{#if parameters.statementApplicationDateTo}}
+	AND clmApplSatLatest.STATEMENT_APPLICATION_DATE <= @statementApplicationDateTo
+	{{/if}}

@@ -1,0 +1,18 @@
+﻿SELECT ID
+      ,NAME
+      ,CODE
+      ,DESCRIPTION
+FROM BFX_IMPL.INSURANCE_TERMS_YEAR ity
+WHERE 1 = 1
+{{#if parameters.code}}
+      AND ity.CODE = @code
+{{/if}}
+{{#if parameters.codes}}
+      AND ity.CODE IN (@codes)
+{{/if}}
+{{#if parameters.description}}
+      AND ity.DESCRIPTION LIKE @description
+{{/if}}
+{{#if parameters.searchText}}
+      AND (ity.DESCRIPTION LIKE @searchText OR ity.CODE LIKE @searchText OR ity.NAME LIKE @searchText)
+{{/if}}

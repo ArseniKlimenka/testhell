@@ -1,0 +1,39 @@
+select
+	act.ACT_ID,
+	act.ACT_NO,
+	ps.CODE_NAME as STATE_CODE,
+	act.REPORTING_PERIOD_FROM,
+	act.REPORTING_PERIOD_TO,
+	act.PRODUCT_GROUP_INCLUDE,
+	act.PRODUCT_GROUP_EXCLUDE,
+	(
+		select distinct capf.CODE
+		from
+			acc_impl.CA_ACT_PRODUCT_FILTER capf
+		where capf.ACT_ID = act.ACT_ID and capf.EXCLUSIVE = 0
+		for json auto
+	) as INCLUDED_PRODUCTS,
+	(
+		select distinct capf.CODE
+		from
+			acc_impl.CA_ACT_PRODUCT_FILTER capf
+		where capf.ACT_ID = act.ACT_ID and capf.EXCLUSIVE = 1
+		for json auto
+	) as EXCLUDED_PRODUCTS
+from
+	acc_impl.CA_ACT act
+	inner join bfx.UNIVERSAL_DOCUMENT ud on ud.UNIVERSAL_DOCUMENT_NUMBER = act.ACT_NO
+	inner join cfx.PUBLISHED_ARTIFACT pa on pa.PUBLISHED_ARTIFACT_ID = ud.PUBLISHED_ARTIFACT_ID and pa.CODE_NAME = 'CommissionAct'
+	inner join cfg.PROCESS_STATE ps on ps.PROCESS_STATE_ID = ud.STATE_ID
+where 1=1
+{{#if parameters.notActId}}
+	and act.ACT_ID != @notActId
+{{/if}}
+{{#if parameters.notActNo}}
+	and act.ACT_NO != @notActNo
+{{/if}}
+	and act.AGENT_SERVICE_PROVIDER_CODE = @aaServiceProviderCode
+	and act.AGENT_AGREEMENT_NUMBER = @aaNumber
+	and act.ACT_TYPE_ID = @actTypeId
+	and (ps.CODE_NAME in ('Draft', 'Confirming') or (act.REPORTING_PERIOD_TO >= @reportingPeriodFrom and act.REPORTING_PERIOD_FROM <= @reportingPeriodTo))
+	and ps.CODE_NAME not in ('Deleted', 'Annulled')

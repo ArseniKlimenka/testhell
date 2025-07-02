@@ -1,0 +1,67 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema",
+    "description": "Input schema for EFR products filtered.",
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+        "efrProduct",
+        "efrAgent",
+        "efrCover"
+    ],
+    "properties": {
+        "efrProduct": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+                "product",
+                "prdtarv",
+                "varianc"
+            ],
+            "properties": {
+                "product": {
+                    "type": "string",
+                    "description": "Product code"
+                },
+                "prdtarv": {
+                    "type": "string",
+                    "description": "Product tariff"
+                },
+                "varianc": {
+                    "type": "string",
+                    "description": "Product variant"
+                }
+            }
+        },
+        "efrAgent": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+                "sbuvvnu"
+            ],
+            "properties": {
+                "sbuvvnu": {
+                    "type": "string",
+                    "description": "Agent"
+                }
+            }
+        },
+        "efrCover": {
+            "type": "array",
+            "description": "Array of cover objects",
+            "minItems": 1,
+            "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                    "deckuac"
+                ],
+                "properties": {
+                    "deckuac": {
+                        "type": "string",
+                        "description": "Covers"
+                    }
+                }
+            }
+        }
+    }
+}

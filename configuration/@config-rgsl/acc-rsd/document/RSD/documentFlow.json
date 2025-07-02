@@ -1,0 +1,53 @@
+{
+    "processType": "RSD",
+    "initialState": "Draft",
+    "actors": [
+        "Accountant",
+        "ChiefAccountant"
+    ],
+    "states": [
+        {
+            "name": "Draft",
+            "operations": [
+                {
+                    "name": "Save"
+                }
+            ]
+        },
+        {
+            "name": "Completing",
+            "operations": []
+        },
+        {
+            "name": "Annulled",
+            "operations": []
+        },
+        {
+            "name": "Completed",
+            "operations": []
+        }
+    ],
+    "transitions": [
+        {
+            "name": "Draft_To_Completing",
+            "from": "Draft",
+            "to": "Completing"
+        },
+        {
+            "name": "Draft_To_Annulled",
+            "from": "Draft",
+            "to": "Annulled",
+            "allowOnValidationErrors": {
+                "all": false
+            }
+        },
+        {
+            "name": "Completing_To_Completed",
+            "from": "Completing",
+            "to": "Completed",
+            "broadcastEvent": {
+                "serverSideEvents": true
+            }
+        }
+    ]
+}

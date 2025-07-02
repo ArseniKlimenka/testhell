@@ -1,0 +1,52 @@
+{
+    "entityType": "UniversalDocument",
+    "dimensions": {
+        "universalDocumentType": "LifeInsuranceStrategyConfiguration"
+    },
+    "validFrom": "2000-01-01",
+    "attachments": [],
+    "ui": {
+        "layout": "VersionedDocumentLayout",
+        "composition": {
+            "MainContent": "MainContent",
+            "SummaryContent": "SummaryContent"
+        }
+    },
+    "states": [
+        {
+            "name": "Draft",
+            "actors": [
+                {
+                    "actor": "GeneralBackOffice",
+                    "uiSchema": "MainContent",
+                    "transitions": [
+                        "Draft_to_Deleted"
+                    ],
+                    "operations": [
+                        "Save"
+                    ],
+                    "relations": []
+                }
+            ]
+        },
+        {
+            "name": "Deleted",
+            "actors": [
+                {
+                    "actor": "GeneralBackOffice",
+                    "uiSchema": "MainContent",
+                    "transitions": [
+                    ],
+                    "operations": [
+                       
+                    ],
+                    "relations": []
+                }
+            ]
+        }
+    ],
+    "version": "1",
+    "components": [
+        "StrategyConfiguration"
+    ]
+}

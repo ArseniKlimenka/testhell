@@ -1,0 +1,9 @@
+
+delete from bfx_impl.products where code = N'I619AbsolutPriv'; insert into bfx_impl.products values ('173C73F7-8597-430A-9A9B-FD8CD1E6A2D8', N'I619AbsolutPriv',N'investment',N'Драйвер БондРепак 1 RUB',N'НСЖ', N'migrated', 0);
+delete from bfx_impl.products where code = N'I663SvcP'; insert into bfx_impl.products values ('2F26A26C-4788-4A38-A99D-810C8454E564', N'I663SvcP',N'investment',N'Драйвер Гарантия БондРепак 2RUB',N'НСЖ', N'migrated', 0);
+delete from bfx_impl.products where code = N'I795Primorye'; insert into bfx_impl.products values ('7FC7FA23-C913-499A-8944-3B1995632F98', N'I795Primorye',N'investment',N'Драйвер Гарантия БондРепак 3RUB',N'НСЖ', N'migrated', 0);
+delete from bfx_impl.products where code = N'I820PFAConsulting'; insert into bfx_impl.products values ('28CA540D-AC53-4666-B930-DF54A919EA6C', N'I820PFAConsulting',N'investment',N'Драйвер Гарантия Оптима БондРепак 10RUB',N'НСЖ', N'migrated', 0);
+delete from bfx_impl.products where code = N'I832Rosbank'; insert into bfx_impl.products values ('2A0B9FBA-EFDF-4574-A6C9-7E6858F13049', N'I832Rosbank',N'investment',N'Драйвер Гарантия БондРепак 0.5RUB',N'НСЖ', N'migrated', 0);
+delete from bfx_impl.products where code = N'I852Gorizont'; insert into bfx_impl.products values ('59626762-18FB-497F-A438-D247AA16DE15', N'I852Gorizont',N'investment',N'Драйвер Гарантия Ультра БондРепак 1USD',N'НСЖ', N'migrated', 0);
+delete from bfx_impl.products where code = N'I872VTBP'; insert into bfx_impl.products values ('945DC1B5-3037-474F-9FAA-7519C1FF27B9', N'I872VTBP',N'investment',N'Драйвер Гарантия Ультра БондРепак 17RUB',N'НСЖ', N'migrated', 0);
+delete from bfx_impl.products where code = N'I663ZENITP'; insert into bfx_impl.products values ('7949AAE5-7BB6-4515-8416-56F59C7976C8', N'I663ZENITP',N'investment',N'Драйвер Гарантия БондРепак 2RUB',N'НСЖ', N'migrated', 0);

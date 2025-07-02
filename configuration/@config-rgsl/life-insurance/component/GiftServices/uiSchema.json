@@ -1,0 +1,42 @@
+{
+    "type": "Section",
+    "label": "GiftServices",
+    "sectionLevel": 2,
+    "width": 4,
+    "elements": [
+        {
+            "type": "Dropdown",
+            "label": "selectedGiftServices",
+            "value": {
+                "$ref": "#/properties/selectedGiftServices"
+            },
+            "multiple": false,
+            "autocomplete": {
+                "minTextLength": 1,
+                "dropDownItemsCount": 1000,
+                "selectItemOnMatch": false
+            },
+            "source": {
+                "dataSource": {
+                    "name": "GiftServiceDataSource",
+                    "searchFieldPath": "giftServiceName",
+                    "responseMapping": "giftServiceResponseMapping",
+                    "resultCount": 25
+                },
+                "displayFieldName": "giftServiceDescription"
+            }
+        }
+    ],
+    "rule": {
+        "effect": "SHOW",
+        "condition": {
+            "type": "FUNC",
+            "ruleFunction": "showGiftServices",
+            "value": [
+                {
+                    "$ref": "#"
+                }
+            ]
+        }
+    }
+}

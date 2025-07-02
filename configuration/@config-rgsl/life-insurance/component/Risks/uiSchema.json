@@ -1,0 +1,221 @@
+{
+    "formProperties": {
+        "events": {
+            "onLoad": "onLoad"
+        }
+    },
+    "type": "Section",
+    "labelType": "H1",
+    "label": "Risks",
+    "width": 12,
+    "elements": [
+        {
+            "type": "DataGrid",
+            "mode": "Array",
+            "isCollapsed": false,
+            "pagination": {
+                "mode": "Regular",
+                "pageSizes": [
+                    5,
+                    10,
+                    15
+                ],
+                "defaultPageSize": 15
+            },
+            "value": {
+                "$ref": "#"
+            },
+            "actions": [
+                "Add",
+                "Edit",
+                "Delete",
+                "Details"
+            ],
+            "checkIfRowActionIsAllowed": "risksCheckIfRowActionIsAllowed",
+            "checkIfAddButtonVisible": "risksCheckIfAddButtonVisible",
+            "showDeleteConfirmation": true,
+            "edit": {
+                "mode": "Detached",
+                "onBeforeGridAction": "risksOnBeforeGridAction",
+                "onAfterGridAction": "risksOnAfterGridAction",
+                "onPrepareAddedRow": "risksOnPrepareAddedRow",
+                "onPrepareEditedRow": "risksOnPrepareEditedRow",
+                "showCancelConfirmationDialog": false
+            },
+            "columns": [
+                {
+                    "title": "riskFullDescription",
+                    "name": "riskFullDescription",
+                    "cellContent": {
+                        "type": "Icon",
+                        "iconStyleFunction": "riskFullDescriptionIconStyleFunction",
+                        "value": {
+                            "$ref": "#/properties/risk"
+                        }
+                    },
+                    "style": {
+                        "width": "extra-small"
+                    },
+                    "footerContent": {
+                        "type": "OutputText",
+                        "literalValue": "total",
+                        "colspan": 3
+                    }
+                },
+                {
+                    "title": "riskShortDescription",
+                    "name": "riskShortDescription",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/risk/properties/riskShortDescription"
+                        }
+                    }
+                },
+                {
+                    "title": "riskInsuredSum",
+                    "name": "riskInsuredSum",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "defaultValue": "",
+                        "template": "{{#style 'right'}}{{#if riskInsuredSumByPeriodExists}}См. периоды{{else}}{{#if riskInsuredSumExists}}{{expr riskInsuredSum 'n:2'}}{{else}} {{/if}}{{/if}}{{/style}}",
+                        "value": {
+                            "mapping": "riskInsuredSumMapping",
+                            "$ref": "#"
+                        }
+                    }
+                },
+                {
+                    "title": "riskPremium",
+                    "name": "riskPremium",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/riskPremium"
+                        }
+                    },
+                    "footerContent": {
+                        "type": "OutputText",
+                        "defaultValue": "",
+                        "template": "{{#style 'right'}}{{expr riskPremiumSum 'n:2'}}{{/style}}",
+                        "value": {
+                            "mapping": "riskPremiumFooterContent",
+                            "$ref": "#"
+                        }
+                    }
+                },
+                {
+                    "title": "startDate",
+                    "name": "startDate",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/startDate"
+                        }
+                    },
+                    "footerContent": {
+                        "type": "OutputText",
+                        "defaultValue": "",
+                        "value": {
+                            "mapping": "riskFooterContentNothing",
+                            "$ref": "#"
+                        },
+                        "colspan": 4
+                    }
+                },
+                {
+                    "title": "endDate",
+                    "name": "endDate",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "defaultValue": "",
+                        "value": {
+                            "mapping": "riskEndDateMapping",
+                            "$ref": "#"
+                        }
+                    }
+                },
+                {
+                    "title": "riskProgram",
+                    "name": "riskProgram",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/risk/properties/riskProgram"
+                        }
+                    }
+                },
+                {
+                    "title": "riskPerson",
+                    "name": "riskPerson",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/risk/properties/riskPerson"
+                        }
+                    }
+                }
+            ],
+            "detailsTemplates": {
+                "edit": {
+                    "content": {
+                        "type": "Component",
+                        "name": "Risk",
+                        "value": {
+                            "$ref": "#"
+                        }
+                    }
+                },
+                "view": {
+                    "content": {
+                        "type": "Component",
+                        "name": "Risk",
+                        "value": {
+                            "$ref": "#"
+                        }
+                    }
+                }
+            },
+            "rule": {
+                "effect": "ENABLE_INITIAL",
+                "condition": {
+                    "type": "FUNC",
+                    "ruleFunction": "enableRisksTable",
+                    "value": [
+                        {
+                            "$ref": "#"
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "type": "Button",
+            "label": "Restore risk conditions",
+            "isCompact": false,
+            "icon": {
+                "name": "save",
+                "color": "BackgroundColor",
+                "size": "Small"
+            },
+            "onClick": "executeRestoreRiskConditions",
+            "rule": {
+                "effect": "SHOW",
+                "condition": {
+                    "type": "FUNC",
+                    "ruleFunction": "showRestoreRiskConditionsButton",
+                    "value": [
+                        {
+                            "$ref": "#"
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}

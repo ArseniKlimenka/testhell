@@ -1,0 +1,228 @@
+{
+    "sinks": [
+        {
+            "name": "GetRefPayment",
+            "fetch": {
+                "configuration": {
+                    "name": "BankStatementItemDatabaseDataSource"
+                }
+            }
+        },
+        {
+            "name": "GetRefClaim",
+            "fetch": {
+                "configuration": {
+                    "name": "ClaimInfoDataSource"
+                }
+            }
+        },
+        {
+            "name": "GetRefCollectiveClaim",
+            "fetch": {
+                "configuration": {
+                    "name": "CollectiveClaimInfoDataSource"
+                }
+            }
+        },
+        {
+            "name": "GetRefEndowment",
+            "fetch": {
+                "configuration": {
+                    "name": "EndowmentInfoDataSource"
+                }
+            }
+        },
+        {
+            "name": "GetRefContractCancellationAmendment",
+            "fetch": {
+                "configuration": {
+                    "name": "PolicyCancellationInfoDataSource"
+                }
+            }
+        },
+        {
+            "name": "GetRefCommAct",
+            "fetch": {
+                "configuration": {
+                    "name": "CommissionActRgslDataSource"
+                }
+            }
+        },
+        {
+            "name": "GetAgentAgreement",
+            "fetch": {
+                "configuration": {
+                    "name": "AgentAgreementDataSource"
+                }
+            }
+        },
+        {
+            "name": "GetPersonDataByBankAccount",
+            "fetch": {
+                "configuration": {
+                    "name": "GetPartyDataByBankAccountDataSource"
+                }
+            }
+        },
+        {
+            "name": "GetRecipientServiceProvider",
+            "fetch": {
+                "configuration": {
+                    "name": "ServiceProviderDataSource"
+                }
+            }
+        },
+        {
+            "name": "GetRecipientPartyData",
+            "fetch": {
+                "configuration": {
+                    "name": "GetPartyDataSource"
+                }
+            }
+        },
+        {
+            "name": "GetExchangeRate",
+            "class": {
+                "className": "Adacta.AdInsure.RGSL.Common.API.Shared.Services.IRgslCurrencyConverterService, Adacta.AdInsure.RGSL.Common.API",
+                "methodName": "Convert"
+            }
+        },
+        {
+            "name": "GetLocalCurrencyExchangeRate",
+            "class": {
+                "className": "Adacta.AdInsure.RGSL.Common.API.Shared.Services.IRgslCurrencyConverterService, Adacta.AdInsure.RGSL.Common.API",
+                "methodName": "Convert"
+            }
+        },
+        {
+            "name": "GenerateInsuranceActNumber",
+            "class": {
+                "className": "Adacta.AdInsure.RGSL.Common.API.Shared.Services.ISequenceGeneratorRGSL, Adacta.AdInsure.RGSL.Common.API",
+                "methodName": "GenerateSequenceValues"
+            }
+        },
+        {
+            "name": "GetInsuranceActInfo",
+            "fetch": {
+                "configuration": {
+                    "name": "ClaimStateHistoryDataSource"
+                }
+            }
+        },
+        {
+            "name": "GetEndowmentInsuranceActInfo",
+            "fetch": {
+                "configuration": {
+                    "name": "EndowmentActInfoDataSource"
+                }
+            }
+        },
+        {
+            "name": "GetCancellationAmendmentActInfo",
+            "fetch": {
+                "configuration": {
+                    "name": "CancellationAmendmentActInfoDataSource"
+                }
+            }
+        },
+        {
+            "name": "GetDefaultBankAccount",
+            "fetch": {
+                "configuration": {
+                    "name": "GetDebtorAccountDataSource"
+                }
+            }
+        },
+        {
+            "name": "CreatePaymentOrder",
+            "executeAs": "System",
+            "document": {
+                "configuration": {
+                    "name": "PaymentOrder",
+                    "version": "1"
+                }
+            }
+        },
+        {
+            "name": "CreatePITPaymentOrder",
+            "executeAs": "System",
+            "document": {
+                "configuration": {
+                    "name": "PaymentOrder",
+                    "version": "1"
+                }
+            }
+        },
+        {
+            "name": "GetRelatedClaim",
+            "fetch": {
+                "configuration": {
+                    "name": "GetClaimFullDataDataSource"
+                }
+            }
+        },
+        {
+            "name": "GetRelatedEndowment",
+            "fetch": {
+                "configuration": {
+                    "name": "GetEndowmentFullDataDataSource"
+                }
+            }
+        },
+        {
+            "name": "GetRelatedCancellationAmendment",
+            "fetch": {
+                "configuration": {
+                    "name": "GetContractFullDataDataSource"
+                }
+            }
+        },
+        {
+            "name": "UpdateClaim",
+            "executeAs": "System",
+            "document": {
+                "configuration": {
+                    "name": "Claim"
+                },
+                "allowUpdating": {
+                    "inStates": [
+                        "POCreation"
+                    ]
+                }
+            }
+        },
+        {
+            "name": "UpdateCollectiveClaim",
+            "executeAs": "System",
+            "document": {
+                "configuration": {
+                    "name": "CollectiveClaim"
+                },
+                "allowUpdating": {
+                    "inStates": [
+                        "POCreation"
+                    ]
+                }
+            }
+        },
+        {
+            "name": "UpdateEndowment",
+            "executeAs": "System",
+            "document": {
+                "configuration": {
+                    "name": "Endowment"
+                },
+                "allowUpdating": {
+                    "inStates": [
+                        "POCreation"
+                    ]
+                }
+            }
+        },
+        {
+            "name": "UpdateCancellationAmendment",
+            "executeAs": "System",
+            "document": {}
+        }
+    ]
+}

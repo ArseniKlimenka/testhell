@@ -1,0 +1,48 @@
+{
+    "type": "GridLayout",
+    "id": "AutoAllocationResultViewUiSchema",
+    "numberOfColumns": 12,
+    "elements": [
+        {
+            "type": "DataGrid",
+            "columns": [
+                {
+                    "title": "Reference No",
+                    "name": "referenceNo",
+                    "sortable": true,
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/referenceNo"
+                        }
+                    }
+                },
+                {
+                    "title": "Allocation Message",
+                    "name": "allocationMessage",
+                    "sortable": true,
+                    "cellContent": {
+                        "type": "OutputText",
+                        "value": {
+                            "$ref": "#/properties/resultData/properties/autoAllocationMessage"
+                        },
+                        "width": 1,
+                        "defaultValue": ""
+                    }
+                }
+            ],
+            "header": {
+                "showNumberOfResults": true,
+                "showPaginator": true
+            },
+            "mode": "DataSource",
+            "pagination": {
+                "mode": "Regular"
+            },
+            "selection": {
+                "mode": "Single"
+            },
+            "width": 12
+        }
+    ]
+}

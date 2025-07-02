@@ -1,0 +1,42 @@
+﻿select
+  ID,
+  CONTRACT_NUMBER,
+  PARTY_CODE,
+  SURNAME,
+  FIRST_NAME,
+  MIDDLE_NAME,
+  BIRTHDAY,
+  GENDER,
+  MOBILE,
+  AMOUNT,
+  PREMIUM,
+  REINSURER_CODE,
+  REINSURER_NAME,
+  REINSURER_SHARE,
+  (
+    select
+      prm.START_DATE startDate,
+      prm.END_DATE endDate,
+      rsk.SHORT_DESCRIPTION risk,
+      prm.AMOUNT insAmount,
+      prm.PREMIUM insPremium,
+      rns.REINS_RATE reinsRate,
+      rns.REINS_PREMIUM reinsPremium
+    from
+      BFX_IMPL.RISKS rsk
+        left outer join
+      PAS_IMPL.COLLECTIVE_POLICY_RISK_DATA prm
+        on rsk.CODE = prm.RISK_CODE
+        left outer join
+      PAS_IMPL.COLLECTIVE_POLICY_RISK_DATA_EXP rns
+        on rsk.CODE = rns.RISK_CODE
+    where lst.ID = prm.INSURED_ID
+      and lst.ID = rns.INSURED_ID
+    FOR JSON PATH
+  ) RISKS
+from
+  PAS_IMPL.COLLECTIVE_POLICY_INSURED_LIST lst
+where CONTRACT_NUMBER = @contractNumber
+{{#if parameters.fullName}}
+AND (SURNAME LIKE @fullName OR FIRST_NAME LIKE @fullName OR MIDDLE_NAME LIKE @fullName)
+{{/if}}

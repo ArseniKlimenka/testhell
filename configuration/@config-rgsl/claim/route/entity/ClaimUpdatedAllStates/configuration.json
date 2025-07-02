@@ -1,0 +1,37 @@
+{
+    "entityType": "Claim",
+    "condition": {
+        "events": [
+            "StatusChanged",
+            "Updated",
+            "Created"
+        ],
+        "configuration": {
+            "names": [
+                "Claim",
+                "CollectiveClaim"
+            ]
+        }
+    },
+    "sinks": [
+        {
+            "name": "SaveClaimData",
+            "database": {
+                "tables": [
+                    "CLM_IMPL.CLM_HUB",
+                    "CLM_IMPL.CLM_SAT",
+                    "CLM_IMPL.COLLECTIVE_CLM_SAT",
+                    "CLM_IMPL.CLM_IE_LINK",
+                    "CLM_IMPL.CLM_RISK_SAT",
+                    "CLM_IMPL.CLM_BENEFICIARY_LINK",
+                    "CLM_IMPL.CLM_BENEFICIARY_SAT",
+                    "CLM_IMPL.CLM_INJURY_SAT",
+                    "CLM_IMPL.CLM_APPLICANT_LINK",
+                    "CLM_IMPL.CLM_APPLICANT_SAT",
+                    "CLM_IMPL.CLM_IE_SAT"
+                ]
+            }
+        }
+    ],
+    "version": "1"
+}

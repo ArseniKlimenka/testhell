@@ -1,0 +1,29 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "DataSchemaForMGPolicyPrintout",
+    "type": "object",
+    "additionalProperties": true,
+    "aiDataEnrichment": [
+        {
+            "name": "GetContractRelatedData",
+            "integrationService": {
+                "name": "GetPolicyRelatedDataForEndowmentInsuranceAct",
+                "version": "1"
+            }
+        },
+        {
+            "name": "GetBankData",
+            "dataSource": "BanksDataSource"
+        },
+        {
+            "name": "GetAgentAgreementData",
+            "dataSource": "AAShortInfoDataSource"
+        },
+        {
+            "name": "GetSignerData",
+            "dataSource": "GetPartyDataSource"
+        }
+    ],
+    "properties": {
+    }
+}

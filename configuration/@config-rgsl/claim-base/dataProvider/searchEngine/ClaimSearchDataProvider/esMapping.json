@@ -1,0 +1,400 @@
+{
+    "mappings": {
+        "dynamic": "strict",
+        "properties": {
+            "id": {
+                "type": "keyword"
+            },
+            "number": {
+                "type": "keyword"
+            },
+            "stateCode": {
+                "type": "keyword"
+            },
+            "versionState": {
+                "type": "keyword"
+            },
+            "metadata": {
+                "properties": {
+                    "createdOn": {
+                        "type": "date"
+                    },
+                    "createdBy": {
+                        "type": "keyword"
+                    },
+                    "createdByDisplayName": {
+                        "type": "keyword"
+                    },
+                    "updatedOn": {
+                        "type": "date"
+                    },
+                    "updatedBy": {
+                        "type": "keyword"
+                    },
+                    "recordVersion": {
+                        "type": "integer"
+                    },
+                    "entityType": {
+                        "type": "keyword"
+                    },
+                    "configuration": {
+                        "properties": {
+                            "name": {
+                                "type": "keyword"
+                            },
+                            "version": {
+                                "type": "keyword"
+                            },
+                            "dimensions": {
+                                "dynamic": "false",
+                                "type": "object"
+                            }
+                        }
+                    }
+                }
+            },
+            "body": {
+                "dynamic": "strict",
+                "properties": {
+                    "contractNumber": {
+                        "type": "keyword"
+                    },
+                    "contractConfigurationName": {
+                        "type": "keyword"
+                    },
+                    "contractConfigurationVersion": {
+                        "type": "keyword"
+                    },
+                    "contractStateCode": {
+                        "type": "keyword"
+                    },
+                    "contractStateDescription": {
+                        "type": "keyword"
+                    },
+                    "risk": {
+                        "dynamic": "strict",
+                        "properties": {
+                            "riskCode": {
+                                "type": "keyword"
+                            },
+                            "riskInsuredSum": {
+                                "type": "scaled_float",
+                                "scaling_factor": 10000000
+                            },
+                            "riskShortDescription": {
+                                "type": "text",
+                                "index": false
+                            }
+                        }
+                    },
+                    "risksInsuredSumByPeriod": {
+                        "dynamic": "strict",
+                        "properties": {
+                            "riskCode": {
+                                "type": "keyword"
+                            },
+                            "periods": {
+                                "dynamic": "strict",
+                                "properties": {
+                                    "insuredSum": {
+                                        "type": "scaled_float",
+                                        "scaling_factor": 10000000
+                                    },
+                                    "startDate": {
+                                        "type": "date"
+                                    },
+                                    "endDate": {
+                                        "type": "date"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "riskAdditionalAttributes": {
+                        "dynamic": "strict",
+                        "properties": {
+                            "disabilityGroup": {
+                                "type": "keyword"
+                            },
+                            "numberOfPaidDays": {
+                                "type": "integer"
+                            },
+                            "injuries": {
+                                "dynamic": "strict",
+                                "properties": {
+                                    "injuryDetails": {
+                                        "dynamic": "strict",
+                                        "properties": {
+                                            "code": {
+                                                "type": "keyword"
+                                            },
+                                            "description": {
+                                                "type": "text",
+                                                "index": false
+                                            },
+                                            "defaultPymentPercentage": {
+                                                "type": "scaled_float",
+                                                "scaling_factor": 10000000
+                                            },
+                                            "group": {
+                                                "dynamic": "strict",
+                                                "properties": {
+                                                    "code": {
+                                                        "type": "integer"
+                                                    },
+                                                    "description": {
+                                                        "type": "text",
+                                                        "index": false
+                                                    }
+                                                }
+                                            },
+                                            "subgroupLevel1": {
+                                                "dynamic": "strict",
+                                                "properties": {
+                                                    "code": {
+                                                        "type": "keyword"
+                                                    },
+                                                    "description": {
+                                                        "type": "text",
+                                                        "index": false
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "paymentInjuryPercentage": {
+                                        "type": "scaled_float",
+                                        "scaling_factor": 10000000
+                                    },
+                                    "numberOfInjuries": {
+                                        "type": "integer"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "applicationInfo": {
+                        "dynamic": "strict",
+                        "properties": {
+                            "applicantCode": {
+                                "type": "keyword"
+                            },
+                            "applicantFullName": {
+                                "type": "keyword"
+                            },
+                            "applicantType": {
+                                "type": "keyword"
+                            },
+                            "statementReceivedDate": {
+                                "type": "date"
+                            },
+                            "statementApplicationDate": {
+                                "type": "date"
+                            }
+                        }
+                    },
+                    "insuredPersonInfo": {
+                        "dynamic": "strict",
+                        "properties": {
+                            "insuredPersonCode": {
+                                "type": "keyword"
+                            },
+                            "insuredPersonFullName": {
+                                "type": "keyword"
+                            },
+                            "insuredPersonType": {
+                                "type": "keyword"
+                            }
+                        }
+                    },
+                    "policyHolderInfo": {
+                        "dynamic": "strict",
+                        "properties": {
+                            "policyHolderCode": {
+                                "type": "keyword"
+                            },
+                            "policyHolderFullName": {
+                                "type": "keyword"
+                            },
+                            "policyHolderType": {
+                                "type": "keyword"
+                            }
+                        }
+                    },
+                    "paymentAmountInDocCurrency": {
+                        "type": "scaled_float",
+                        "scaling_factor": 10000000
+                    },
+                    "paymentAmountInRubCurrency": {
+                        "type": "scaled_float",
+                        "scaling_factor": 10000000
+                    },
+                    "contractCurrency": {
+                        "type": "keyword"
+                    },
+                    "totalPaymentPercentage": {
+                        "type": "scaled_float",
+                        "scaling_factor": 10000000
+                    },
+                    "diagnosis": {
+                        "dynamic": "strict",
+                        "properties": {
+                            "code": {
+                                "type": "keyword"
+                            },
+                            "description": {
+                                "type": "text",
+                                "index": false
+                            }
+                        }
+                    },
+                    "diagnosisNote": {
+                        "type": "text",
+                        "index": false
+                    },
+                    "insuredEvent": {
+                        "dynamic": "strict",
+                        "properties": {
+                            "insuredEventNumber": {
+                                "type": "keyword"
+                            },
+                            "insuredEventType": {
+                                "dynamic": "strict",
+                                "properties": {
+                                    "code": {
+                                        "type": "keyword"
+                                    },
+                                    "description": {
+                                        "type": "text",
+                                        "index": false
+                                    }
+                                }
+                            },
+                            "insuredEventReason": {
+                                "dynamic": "strict",
+                                "properties": {
+                                    "code": {
+                                        "type": "keyword"
+                                    },
+                                    "description": {
+                                        "type": "text",
+                                        "index": false
+                                    }
+                                }
+                            },
+                            "insuredEventDate": {
+                                "type": "date"
+                            }
+                        }
+                    },
+                    "claimBeneficiaries": {
+                        "dynamic": "strict",
+                        "properties": {
+                            "partyCode": {
+                                "type": "keyword"
+                            },
+                            "beneficiaryReason": {
+                                "dynamic": "strict",
+                                "properties": {
+                                    "code": {
+                                        "type": "keyword"
+                                    },
+                                    "description": {
+                                        "type": "text",
+                                        "index": false
+                                    }
+                                }
+                            },
+                            "beneficiaryPaymentType": {
+                                "dynamic": "strict",
+                                "properties": {
+                                    "code": {
+                                        "type": "keyword"
+                                    },
+                                    "description": {
+                                        "type": "text",
+                                        "index": false
+                                    }
+                                }
+                            },
+                            "bankAccount": {
+                                "dynamic": "strict",
+                                "properties": {
+                                    "bankId": {
+                                        "type": "keyword"
+                                    },
+                                    "bankName": {
+                                        "type": "text",
+                                        "index": false
+                                    },
+                                    "bankBic": {
+                                        "type": "keyword"
+                                    },
+                                    "bankCorrespondentAccount": {
+                                        "type": "keyword"
+                                    },
+                                    "SWIFT": {
+                                        "type": "keyword"
+                                    },
+                                    "IBAN": {
+                                        "type": "keyword"
+                                    },
+                                    "foreignBank": {
+                                        "type": "boolean"
+                                    },
+                                    "currency": {
+                                        "dynamic": "strict",
+                                        "properties": {
+                                            "currencyCode": {
+                                                "type": "keyword"
+                                            },
+                                            "currencyDesc": {
+                                                "type": "text",
+                                                "index": false
+                                            },
+                                            "currencyNumericCode": {
+                                                "type": "keyword"
+                                            }
+                                        }
+                                    },
+                                    "number": {
+                                        "type": "keyword"
+                                    },
+                                    "openingDate": {
+                                        "type": "date"
+                                    },
+                                    "closingDate": {
+                                        "type": "date"
+                                    },
+                                    "bankInn": {
+                                        "type": "keyword"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "approvalConclusions": {
+                        "dynamic": "strict",
+                        "properties": {
+                            "legalConclusion": {
+                                "type": "text",
+                                "index": false
+                            },
+                            "securityConclusion": {
+                                "type": "text",
+                                "index": false
+                            }
+                        }
+                    },
+                    "fixedExchangeRate": {
+                        "type": "scaled_float",
+                        "scaling_factor": 10000000
+                    },
+                    "useFixedExchangeRate": {
+                        "type": "boolean"
+                    }
+                }
+            }
+        }
+    }
+}

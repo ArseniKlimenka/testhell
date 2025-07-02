@@ -1,0 +1,197 @@
+{
+    "id": "AvailableCommissionUiSchema",
+    "type": "GridLayout",
+    "numberOfColumns": 4,
+    "formProperties": {
+        "events": {
+            "onLoad": "onLoad"
+        }
+    },
+    "elements": [
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "Section",
+                    "sectionLevel": 1,
+                    "label": "MainFilters",
+                    "elements": [
+                        {
+                            "type": "Group",
+                            "elements": [
+                                {
+                                    "type": "Lookup",
+                                    "value": {
+                                        "$ref": "#"
+                                    },
+                                    "label": "AgentName",
+                                    "dialogButton": {
+                                        "icon": {
+                                            "name": "User",
+                                            "color": "Primary"
+                                        }
+                                    },
+                                    "clearButton": {
+                                        "clearAction": "aaServiceProviderCodeClearButton"
+                                    },
+                                    "dialog": {
+                                        "viewReference": {
+                                            "configurationCodeName": "ServiceProviderSearchView",
+                                            "configurationConceptType": "SearchView",
+                                            "configurationVersion": "1"
+                                        }
+                                    },
+                                    "onSelected": "aaServiceProviderCodeSearchResultAssignment",
+                                    "selectedDisplayValueUISchema": {
+                                        "type": "Input",
+                                        "label": "AgentName",
+                                        "readOnly": true,
+                                        "value": {
+                                            "$ref": "#/properties/request/properties/data/properties/criteria/properties/aaServiceProviderName"
+                                        }
+                                    },
+                                    "width": 1
+                                },
+                                {
+                                    "type": "Lookup",
+                                    "elementId": "AANumber",
+                                    "value": {
+                                        "$ref": "#"
+                                    },
+                                    "width": 1,
+                                    "dialogButton": {},
+                                    "dialog": {
+                                        "viewReference": {
+                                            "configurationCodeName": "AADocumentSearchView",
+                                            "configurationVersion": "1",
+                                            "configurationConceptType": "SearchView"
+                                        },
+                                        "onLoad": "onLoadAADocumentSearchView",
+                                        "inputParameters": {
+                                            "uiContext": {
+                                                "selectionMode": "Single"
+                                            }
+                                        }
+                                    },
+                                    "clearButton": {
+                                        "clearAction": "aaNumberClearButton"
+                                    },
+                                    "onSelected": "aaNumberSearchResultAssignment",
+                                    "selectedDisplayValueUISchema": {
+                                        "type": "Input",
+                                        "label": "AANumber",
+                                        "readOnly": true,
+                                        "value": {
+                                            "$ref": "#/properties/request/properties/data/properties/criteria/properties/aaNumber"
+                                        }
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Group",
+                            "elements": [
+                                {
+                                    "type": "Input",
+                                    "control": "DateRange",
+                                    "dateFrom": {
+                                        "type": "Input",
+                                        "label": "TransactionDateFrom",
+                                        "width": 1,
+                                        "value": {
+                                            "$ref": "#/properties/request/properties/data/properties/criteria/properties/transactionDateFrom"
+                                        },
+                                        "control": "DatetimePicker"
+                                    },
+                                    "dateTo": {
+                                        "type": "Input",
+                                        "label": "TransactionDateTo",
+                                        "width": 1,
+                                        "value": {
+                                            "$ref": "#/properties/request/properties/data/properties/criteria/properties/transactionDateTo"
+                                        },
+                                        "control": "DatetimePicker"
+                                    },
+                                    "width": 2
+                                },
+                                {
+                                    "type": "Input",
+                                    "label": "isDocCorrect",
+                                    "value": {
+                                        "$ref": "#/properties/request/properties/data/properties/criteria/properties/isDocCorrect"
+                                    },
+                                    "width": 2
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "Group",
+            "width": 1,
+            "stackContent": "Left",
+            "elements": [
+                {
+                    "type": "Button",
+                    "label": "Search",
+                    "submitOnEnter": true,
+                    "onClick": [
+                        {
+                            "commandType": "executeOperation",
+                            "operation": "SEARCH"
+                        }
+                    ],
+                    "icon": {
+                        "name": "Search",
+                        "color": "BackgroundColor",
+                        "size": "Small"
+                    },
+                    "value": {
+                        "$ref": "#/properties/response/properties/data"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "DataGrid",
+                    "orderBy": "CommissionAmount",
+                    "mode": "DataSource",
+                    "selection": {
+                        "mode": "Multi",
+                        "enableRowSelection": false,
+                        "showCheckBox": true
+                    },
+                    "columns": [
+                        {
+                            "sortable": true,
+                            "title": "AgentName",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "value": {
+                                    "$ref": "#/properties/resultData/properties/agentName"
+                                }
+                            },
+                            "name": "agentName"
+                        },
+                        {
+                            "sortable": true,
+                            "title": "AANumber",
+                            "cellContent": {
+                                "type": "OutputText",
+                                "value": {
+                                    "$ref": "#/properties/resultData/properties/aaExternalNumber"
+                                }
+                            },
+                            "name": "aaNumber"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

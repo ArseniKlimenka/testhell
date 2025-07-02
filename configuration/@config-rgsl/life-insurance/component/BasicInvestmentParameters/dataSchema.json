@@ -1,0 +1,183 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "Life Insurance",
+    "description": "Data schema describing strategy configuration and instruments for basic investment parameters",
+    "type": "object",
+    "additionalProperties": false,
+    "aiDataEnrichment": [
+        {
+            "name": "GetStrategyConfiguration",
+            "dataSource": "GetStrategyConfDataSource"
+        },
+        {
+            "name": "GetStrategyInstruments",
+            "dataSource": "GetStrategyInstrDataSource"
+        }
+    ],
+    "aiValidation": {
+        "rule": "validationBasicInvestmentParameters"
+    },
+    "properties": {
+        "investmentStrategy": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "investmentStrategyCode": {
+                    "type": "string",
+                    "aiTitle": "investmentStrategyCode"
+                },
+                "investmentStrategyDescription": {
+                    "type": "string",
+                    "aiTitle": "investmentStrategyDescription"
+                }
+            }
+        },
+        "investmentStrategyDescriptionFull": {
+            "type": "string",
+            "aiTitle": "investmentStrategyDescriptionFull"
+        },
+        "rateOfReturn": {
+            "type": "number"
+        },
+        "rateOfReturnManualRate": {
+            "type": "number"
+        },
+        "variant": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "variantCode": {
+                    "type": "string",
+                    "aiTitle": "variantCode"
+                },
+                "variantDescription": {
+                    "type": "string",
+                    "aiTitle": "variantDescription"
+                }
+            }
+        },
+        "cashback": {
+            "type": "number"
+        },
+        "payOffDescription": {
+            "type": "string",
+            "aiTitle": "payOffDescription"
+        },
+        "isManualSetInvestmentParams": {
+            "type": "boolean",
+            "aiTitle": "isManualSetInvestmentParams"
+        },
+        "baseActiveDescription": {
+            "type": "string",
+            "aiTitle": "baseActiveDescription"
+        },
+        "participationCoeff": {
+            "type": "number",
+            "aiTitle": "participationCoeff"
+        },
+        "optionPrice": {
+            "type": "number",
+            "aiTitle": "optionPrice"
+        },
+        "barrier": {
+            "type": "string",
+            "aiTitle": "barrier"
+        },
+        "barrierAutoCall": {
+            "type": "string",
+            "aiTitle": "barrierAutoCall"
+        },
+        "participationCoeffByPeriods": {
+            "type": "string",
+            "aiTitle": "participationCoeffByPeriods"
+        },
+        "purchaseDate": {
+            "type": "string",
+            "aiFormat": "date"
+        },
+        "emitent": {
+            "type": "string",
+            "aiTitle": "emitent"
+        },
+        "fixRate": {
+            "type": "number",
+            "aiTitle": "fixRate"
+        },
+        "intialShare": {
+            "type": "number",
+            "aiTitle": "intialShare"
+        },
+        "hedgeCost": {
+            "type": "number",
+            "aiTitle": "hedgeCost"
+        },
+        "spreadBA": {
+            "type": "number",
+            "aiTitle": "spreadBA"
+        },
+        "payOffShortDescription": {
+            "type": "string",
+            "aiTitle": "payOffShortDescription"
+        },
+        "toolType": {
+            "type": "string",
+            "aiTitle": "toolType"
+        },
+        "measureToolNominal": {
+            "type": "number",
+            "aiTitle": "measureToolNominal"
+        },
+        "calculatingAgent": {
+            "type": "string",
+            "aiTitle": "calculatingAgent"
+        },
+        "priceOfMeasureTool": {
+            "type": "number",
+            "aiTitle": "priceOfMeasureTool"
+        },
+        "partOfPremiumForTool": {
+            "type": "number",
+            "aiTitle": "partOfPremiumForTool"
+        },
+        "discount": {
+            "type": "number",
+            "aiTitle": "discount"
+        },
+        "dischargeDate": {
+            "type": "string",
+            "aiFormat": "date"
+        },
+        "didBeginDate": {
+            "type": "string",
+            "aiFormat": "date"
+        },
+        "didEndDate": {
+            "type": "string",
+            "aiFormat": "date"
+        },
+        "couponPeriods": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "beginDate": {
+                        "type": "string",
+                        "aiFormat": "date"
+                    },
+                    "endDate": {
+                        "type": "string",
+                        "aiFormat": "date"
+                    }
+                }
+            }
+        },
+        "windowStartDate": {
+            "type": "string",
+            "aiFormat": "date"
+        },
+        "windowEndDate": {
+            "type": "string",
+            "aiFormat": "date"
+        }
+    }
+}

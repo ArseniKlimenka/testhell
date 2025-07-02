@@ -1,0 +1,51 @@
+{
+    "type": "Section",
+    "label": "RisksPackages",
+    "sectionLevel": 2,
+    "width": 12,
+    "elements": [
+        {
+            "type": "Dropdown",
+            "label": "selectedPackages",
+            "value": {
+                "$ref": "#/properties/selectedPackages"
+            },
+            "multiple": true,
+            "autocomplete": {
+                "minTextLength": 1,
+                "dropDownItemsCount": 1000,
+                "selectItemOnMatch": false
+            },
+            "source": {
+                "array": {
+                    "$ref": "#/properties/availablePackages"
+                },
+                "displayValueTemplate": "{{expr packageName}}"
+            },
+            "rule": {
+                "effect": "ENABLE_INITIAL",
+                "condition": {
+                    "type": "FUNC",
+                    "ruleFunction": "enableRisksPackages",
+                    "value": [
+                        {
+                            "$ref": "#"
+                        }
+                    ]
+                }
+            }
+        }
+    ],
+    "rule": {
+        "effect": "SHOW",
+        "condition": {
+            "type": "FUNC",
+            "ruleFunction": "showSelectedPackages",
+            "value": [
+                {
+                    "$ref": "#"
+                }
+            ]
+        }
+    }
+}

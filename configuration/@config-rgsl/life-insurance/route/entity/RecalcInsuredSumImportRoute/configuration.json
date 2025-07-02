@@ -1,0 +1,29 @@
+{
+    "entityType": "ImportDocument",
+    "condition": {
+        "events": [
+            "StatusChanged"
+        ],
+        "configuration": {
+            "names": [
+                "RecalcInsuredSumImport"
+            ],
+            "dimensions": {}
+        },
+        "documentStates": [
+            "Importing"
+        ]
+    },
+    "sinks": [
+        {
+            "name": "RecalcInsuredSumImportSink",
+            "etlService": {
+                "configuration": {
+                    "name": "RecalcInsuredSumImportEtlService",
+                    "version": "1"
+                }
+            }
+        }
+    ],
+    "version": "1"
+}

@@ -1,0 +1,81 @@
+﻿select c.*
+into #NOTA_QUOTES
+from pas.contract c
+       join cfx.published_artifact pa on pa.published_artifact_id = c.published_artifact_id
+       join cfg.process_state ps on ps.process_state_id = c.state_id
+       join pas_impl.quote_hub qh on qh.contract_number = c.contract_number
+       join pas_impl.quote_sat_latest qsl on qsl.quote_hkey = qh.quote_hkey
+where pa.code_name = N'InvestmentLifeInsuranceQuote'
+  and JSON_VALUE (c.BODY,'$.basicInvestmentParameters.purchaseDate') = @purchaseDate
+  and ps.code_name not in ('Approved', 'Rejected', 'Issued', 'Cancelled')
+  and qsl.product_code like '%NOTE%'
+
+select
+  agh.CONTRACT_NUMBER, 
+  ags.STATE,
+  JSON_VALUE (c.BODY,'$.technicalInformation.futureContractNumber') FUTURE_CONTRACT_NUMBER,
+  JSON_VALUE (c.BODY,'$.basicConditions.issueDate') ISSUE_DATE,
+  JSON_VALUE (c.BODY,'$.basicInvestmentParameters.investmentStrategyDescriptionFull') STRATEGY_DESCRIPTION,	
+  JSON_VALUE (c.BODY,'$.basicInvestmentParameters.purchaseDate') PURCHASE_DATE, 
+  isnull(JSON_VALUE(c.BODY,'$.basicConditions.isReinvest'), 0) IS_REINVEST, 
+  JSON_VALUE (c.BODY,'$.basicConditions.riskPremium') RISK_PREMIUM_ALL,
+  (
+    select
+      sum(bsi.AMOUNT)
+    from
+      ACC_IMPL.BANK_STATEMENT_ITEM bsi,
+      ACC_IMPL.PAYMENT_REFERENCE pmt 
+    where bsi.BANK_STATEMENT_ITEM_ID = pmt.BANK_STATEMENT_ITEM_ID 
+      and pmt.REFERENCE_NO = JSON_VALUE (c.BODY,'$.technicalInformation.futureContractNumber')
+	  and bsi.STATUS_ID !=3
+  ) PAID_PREMIUM,
+  (select top 1 JSON_VALUE(value, '$.comment')
+      from OPENJSON(c.comments)
+   order by cast(JSON_VALUE(value, '$.id') as int) desc) COMMENT
+into #NOTE_TABLE
+from
+  PAS_IMPL.QUOTE_HUB agh,
+  PAS_IMPL.QUOTE_SAT_LATEST ags,
+  #NOTA_QUOTES c
+where agh.QUOTE_HKEY = ags.QUOTE_HKEY
+  and c.CONTRACT_NUMBER = agh.CONTRACT_NUMBER
+  and ags.PRODUCT_CODE = @productCode
+  and JSON_VALUE (c.BODY,'$.basicInvestmentParameters.investmentStrategy.investmentStrategyCode') = @strategyCode
+
+{{concat 'insert'}} into #NOTE_TABLE
+select
+  agh.CONTRACT_NUMBER,
+  ags.STATE,
+  ins.FUTURE_CONTRACT_NUMBER,
+  ags.ISSUE_DATE,
+  ins.STRATEGY_DESCRIPTION,
+  ags.PURCHASE_DATE,
+  isnull(ags.IS_REINVEST, 0) IS_REINVEST,
+  ags.RISK_PREMIUM_ALL,
+  (
+    select
+      sum(bsi.AMOUNT)
+    from
+      ACC_IMPL.BANK_STATEMENT_ITEM bsi,
+      ACC_IMPL.PAYMENT_REFERENCE pmt 
+    where bsi.BANK_STATEMENT_ITEM_ID = pmt.BANK_STATEMENT_ITEM_ID 
+      and pmt.REFERENCE_NO = ins.FUTURE_CONTRACT_NUMBER
+	  and bsi.STATUS_ID !=3
+  ) PAID_PREMIUM,
+  NULL COMMENT
+from
+  PAS_IMPL.QUOTE_HUB agh,
+  PAS_IMPL.QUOTE_SAT_LATEST ags,
+  PAS_IMPL.QUOTE_INVESTMENT_SAT_LATEST ins
+where agh.QUOTE_HKEY = ags.QUOTE_HKEY
+  and agh.QUOTE_HKEY = ins.QUOTE_INVESTMENT_HKEY
+  and ags.PURCHASE_DATE = @purchaseDate
+  and ags.PRODUCT_CODE = @productCode
+  and ins.STRATEGY_CODE = @strategyCode
+  and ags.STATE in ('Approved', 'Rejected', 'Issued', 'Cancelled')
+
+select * from #NOTE_TABLE
+
+{{concat 'drop'}} table #NOTE_TABLE
+
+{{concat 'drop'}} table #NOTA_QUOTES

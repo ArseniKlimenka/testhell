@@ -1,0 +1,55 @@
+select
+	id.DUE_DATE,
+	id.CONTRACT_NO,
+	id.CURRENCY_CODE,
+	id.PLAN_AMOUNT,
+	id.OPEN_AMOUNT,
+	id.IS_PAID_DATA
+into #INSTALLMENT_DATA
+from (
+	select
+		ppl.DUE_DATE,
+		polh.CONTRACT_NUMBER as CONTRACT_NO,
+		ppsl.CURRENCY_CODE,
+		ppsl.AMOUNT as OPEN_AMOUNT,
+		ppsl.AMOUNT as PLAN_AMOUNT,
+		0 as IS_PAID_DATA
+	from
+		pas_impl.POLICY_HUB polh
+		inner join pas_impl.P_PAYMENT_PLAN_LINK ppl on ppl.POLICY_HKEY = polh.POLICY_HKEY
+		inner join pas_impl.P_PAYMENT_PLAN_SAT_LATEST ppsl on ppsl.P_PAYMENT_PLAN_HKEY = ppl.P_PAYMENT_PLAN_HKEY
+	where 1=1
+		and polh.CONTRACT_NUMBER = @contractNo
+	union all
+	select
+		palc.DUE_DATE,
+		alc.DOCUMENT_NO as CONTRACT_NO,
+		alc.DOC_CURRENCY_CODE as CURRENCY_CODE,
+		-(mat.DOC_AMOUNT + mat.TOLERANCE_DOC_AMOUNT) as OPEN_AMOUNT,
+		0 as PLAN_AMOUNT,
+		1 as IS_PAID_DATA
+	from
+		ACC_IMPL.ALLOCATION alc
+		inner join acc_impl.BANK_STATEMENT_ITEM bsi on bsi.BANK_STATEMENT_ITEM_ID = alc.BANK_STATEMENT_ITEM_ID
+		inner join ACC_IMPL.ALLOCATION_POLICY palc on palc.ALLOCATION_ID = alc.ALLOCATION_ID
+		inner join ACC_IMPL.MATCHING mat on mat.ALLOCATION_ID = alc.ALLOCATION_ID
+	where 1=1
+		and bsi.PAYMENT_SOURCE_ID != 4
+		and alc.DOCUMENT_NO = @contractNo) id;
+
+select
+	id.DUE_DATE,
+	id.CONTRACT_NO,
+	id.CURRENCY_CODE,
+	sum(id.PLAN_AMOUNT) as INSTALLMENT_SUM,
+	sum(id.PLAN_AMOUNT) as PLAN_AMOUNT,
+	sum(id.OPEN_AMOUNT) as UNDERPAYMENT_SUM,
+	- (select sum(iid.OPEN_AMOUNT) from #INSTALLMENT_DATA iid where iid.IS_PAID_DATA = 1) 
+		- (select sum(iid.OPEN_AMOUNT) from #INSTALLMENT_DATA iid where iid.IS_PAID_DATA = 0 and iid.DUE_DATE <= id.DUE_DATE) as OVERPAYMENT_SUM
+from #INSTALLMENT_DATA id
+group by
+	id.DUE_DATE,
+	id.CONTRACT_NO,
+	id.CURRENCY_CODE;
+
+{{concat 'drop'}} table #INSTALLMENT_DATA{{concat ';'}}

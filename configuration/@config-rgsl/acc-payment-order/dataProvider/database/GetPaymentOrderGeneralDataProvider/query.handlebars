@@ -1,0 +1,8 @@
+SELECT  po.PAYMENT_ORDER_NUMBER,
+	     po.BODY,
+	     po.COMMON_BODY
+ FROM ACC.PAYMENT_ORDER po
+ WHERE 1 = 1
+ {{#if parameters.paymentOrderNumber}}
+   AND po.PAYMENT_ORDER_NUMBER = @paymentOrderNumber
+ {{/if}}

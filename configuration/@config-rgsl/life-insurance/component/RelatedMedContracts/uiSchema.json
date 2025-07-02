@@ -1,0 +1,37 @@
+{
+    "type": "Section",
+    "sectionLevel": 1,
+    "label": "RelatedMedContracts",
+    "elements": [
+        {
+            "type": "InlineView",
+            "showContainerActions": false,
+            "views": [
+                {
+                    "viewReference": {
+                        "configurationCodeName": "RelatedMedContractsView",
+                        "configurationConceptType": "SearchView",
+                        "configurationVersion": "1"
+                    },
+                    "onViewInitialized": "onViewInitialized"
+                }
+            ],
+            "value": {
+                "$ref": "#"
+            },
+            "hide": false
+        }
+    ],
+    "rule": {
+        "effect": "SHOW",
+        "condition": {
+            "type": "FUNC",
+            "ruleFunction": "showRelatedMedContracts",
+            "value": [
+                {
+                    "$ref": "#"
+                }
+            ]
+        }
+    }
+}

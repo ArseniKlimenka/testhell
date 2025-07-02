@@ -1,0 +1,26 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "properties": {
+        "criteria": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+                "contractNumbers"
+            ],
+            "properties": {
+                "contractNumbers":{
+                    "type": "array",
+                    "description": "Array of contract numbers to invoice",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "postingDateTo": {
+                    "type": "string",
+                    "aiFormat": "date",
+                    "description": "Installments that will go to invoicing"
+                }
+            }
+        }
+    }
+}

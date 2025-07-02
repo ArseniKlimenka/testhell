@@ -1,0 +1,49 @@
+{
+    "sinks": [
+        {
+            "name": "FetchRsd",
+            "fetch": {
+                "configuration": {
+                    "name": "GetRsdDocumentDataSource"
+                }
+            }
+        },
+        {
+            "name": "LoadManualItems",
+            "fetch": {
+                "configuration": {
+                    "name": "PopulateRsdItemsDataLoader"
+                }
+            }
+        },
+        {
+            "name": "FetchRsdPaymentPlanData",
+            "fetch": {
+                "configuration": {
+                    "name": "GetRsdPaymentPlanDataDataSource"
+                }
+            }
+        },
+        {
+            "name": "FetchRsdPaymentPlanDataFromPolicy",
+            "fetch": {
+                "configuration": {
+                    "name": "GetRsdPaymentPlanDataFromPolicyDataSource"
+                }
+            }
+        },
+        {
+            "name": "WriteItemsASS",
+            "database": {
+                "tables": [
+                    "ACC_IMPL.RSD_ITEM_LINK",
+                    "ACC_IMPL.RSD_ITEM_SAT"
+                ]
+            }
+        }
+    ],
+    "responses": [
+        200,
+        422
+    ]
+}

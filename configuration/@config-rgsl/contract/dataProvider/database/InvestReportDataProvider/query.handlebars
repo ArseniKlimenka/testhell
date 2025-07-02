@@ -1,0 +1,63 @@
+﻿{{concat 'drop'}} table if exists #contracts_numbers{{concat ';'}}
+{{concat 'drop'}} table if exists #contracts{{concat ';'}}
+
+select c.contract_number
+  into #contracts_numbers
+  from pas.contract c
+       inner join cfx.published_artifact pa on pa.published_artifact_id = c.published_artifact_id and pa.code_name = 'InvestmentLifeInsurancePolicy'
+       inner join pas_impl.POLICY_HUB polh on polh.contract_number = c.contract_number
+       inner join pas_impl.POLICY_SAT_LATEST pols on pols.POLICY_HKEY = polh.POLICY_HKEY and ISNULL(pols.IS_MIGRATED,0) = 0;
+
+select c.*
+  into #contracts
+  from pas.contract c
+       inner join #contracts_numbers cn on cn.contract_number = c.contract_number
+
+select json_value(c.body, '$.mainInsuranceConditions.insuranceProduct.productCode') as productCode,
+       CASE
+           WHEN json_value(c.body, '$.basicConditions.issueDate') = '2021-12-29'
+              THEN '2022-01-01'
+           ELSE json_value(c.body, '$.basicConditions.issueDate')
+       END as issueDate,
+       json_value(c.body, '$.basicInvestmentParameters.investmentStrategy.investmentStrategyCode') as investmentStrategyCode,
+       json_value(c.body, '$.basicInvestmentParameters.barrier') as barrier,
+       json_value(c.body, '$.basicInvestmentParameters.barrierAutoCall') as barrierAutoCall,
+       json_value(c.body, '$.mainInsuranceConditions.partner.partnerBusinessCode') as partnerBusinessCode,
+       json_value(c.body, '$.basicConditions.paymentFrequency.paymentFrequencyCode') as paymentFrequencyCode,
+       --
+       c.contract_number,
+       c.sys_created_on,
+       json_value(c.body, '$.policyTerms.startDate') as startDate,
+       json_value(c.body, '$.policyTerms.endDate') as endDate,
+       json_value(c.body, '$.basicConditions.insuranceTerms') as insuranceTerms,
+       json_value(c.body, '$.mainInsuranceConditions.insuranceProduct.productDescription') as productDescription,
+       json_value(c.body, '$.basicInvestmentParameters.investmentStrategy.investmentStrategyDescription') as investmentStrategyDescription,
+       json_value(c.body, '$.basicInvestmentParameters.baseActiveDescription') as baseActiveDescription,
+       json_value(c.body, '$.basicInvestmentParameters.purchaseDate') as purchaseDate,
+       json_value(c.body, '$.basicConditions.currency.currencyCode') as currencyCode,
+       json_value(c.body, '$.basicInvestmentParameters.participationCoeff') as participationCoeff,
+       json_value(c.body, '$.basicInvestmentParameters.optionPrice') as optionPrice,
+       json_value(c.body, '$.mainInsuranceConditions.partner.partnerDescription') as partnerDescription,
+       json_value(c.body, '$.basicInvestmentParameters.hedgeCost') as hedgeCost,
+       json_value(c.body, '$.basicInvestmentParameters.spreadBA') as spreadBA,
+       json_value(c.body, '$.basicInvestmentParameters.payOffShortDescription') as payOffShortDescription,
+       json_value(c.body, '$.basicInvestmentParameters.toolType') as toolType,
+       json_value(c.body, '$.basicInvestmentParameters.measureToolNominal') as measureToolNominal,
+       json_value(c.body, '$.basicInvestmentParameters.calculatingAgent') as calculatingAgent,
+       json_value(c.body, '$.basicInvestmentParameters.priceOfMeasureTool') as priceOfMeasureTool,
+       json_value(c.body, '$.basicInvestmentParameters.partOfPremiumForTool') as partOfPremiumForTool,
+	   si.COUPON_PERIODS as couponPeriods,
+	   si.WINDOW_START_DATE as windowStartDate,
+	   si.WINDOW_END_DATE as windowEndDate,
+	   si.DID_BEGIN_DATE as didBeginDate,
+	   si.DID_END_DATE as didEndDate,
+	   si.DISCHARGE_DATE as dischargeDate
+from #contracts c
+LEFT JOIN BFX_IMPL.STRATEGY_INSTRUMENTS si ON si.PRODUCT_CODE = json_value(c.body, '$.mainInsuranceConditions.insuranceProduct.productCode')
+    AND json_value(c.body, '$.basicConditions.issueDate') >= si.ISSUE_DATE_FROM
+    AND json_value(c.body, '$.basicConditions.issueDate') <= si.ISSUE_DATE_TO
+    AND si.STRATEGY_CODE = json_value(c.body, '$.basicInvestmentParameters.investmentStrategy.investmentStrategyCode')
+    AND si.CONF_VERSION = (SELECT MAX(CONF_VERSION) MAX_VERSION FROM BFX_IMPL.STRATEGY_INSTRUMENTS);
+
+{{concat 'drop'}} table if exists #contracts_numbers{{concat ';'}}
+{{concat 'drop'}} table if exists #contracts{{concat ';'}}

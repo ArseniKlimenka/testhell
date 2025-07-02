@@ -1,0 +1,31 @@
+﻿select
+	ic.CONTRACT_NUMBER,
+	ic.DUE_DATE,
+	ic.POSTING_DATE,
+	ic.OBJECT_CODE,
+	ic.ITEM_NO,
+	ic.CURRENCY_CODE,
+	sum(BASE_AMOUNT) as BASE_AMOUNT,
+	ic.AA_COMM_RATE,
+	ic.DOC_COMM_RATE,
+	sum(CALC_COMM_AMOUNT) as CALC_COMM_AMOUNT
+from
+	pas_impl.P_INVOICED_COMMISSION ic
+where 1=1
+	and ic.COMM_TYPE in (@commTypes)
+	and ic.CONTRACT_NUMBER in (@contractNumbers)
+group by
+	CONTRACT_NUMBER,
+	DUE_DATE,
+	POSTING_DATE,
+	OBJECT_CODE,
+	ITEM_NO,
+	CURRENCY_CODE,
+	AA_COMM_RATE,
+	DOC_COMM_RATE
+having 1=1
+	and sum(CALC_COMM_AMOUNT) != 0
+order by
+	DUE_DATE,
+	OBJECT_CODE,
+	ITEM_NO

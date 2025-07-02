@@ -1,0 +1,36 @@
+{
+    "sinks": [
+        {
+            "name": "GetProductConfiguration",
+            "fetch": {
+                "configuration": {
+                    "name": "GetProductConfigurationDataSource"
+                }
+            }
+        },
+        {
+            "name": "GetPolicyHolder",
+            "fetch": {
+                "configuration": {
+                    "name": "GetPartyDataSource"
+                }
+            }
+        },
+        {
+            "name": "EnrichDocument",
+            "executeAs": "System",
+            "document": {
+                "allowUpdating": {
+                    "inStates": [
+                        "Draft",
+                        "Active"
+                    ]
+                },
+                "allowOnValidationErrors": {
+                    "all": true
+                },
+                "evaluateOnly": true
+            }
+        }
+    ]
+}

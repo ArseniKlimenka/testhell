@@ -1,0 +1,116 @@
+{
+    "type": "GridLayout",
+    "numberOfColumns": 4,
+    "elements": [
+        {
+            "type": "DataGrid",
+            "mode": "Array",
+            "label": "PartyPhones",
+            "labelType": "H1",
+            "pagination": {
+                "mode": "Regular",
+                "pageSizes": [
+                    5,
+                    10,
+                    15
+                ],
+                "defaultPageSize": 5
+            },
+            "isCollapsed": false,
+            "value": {
+                "$ref": "#"
+            },
+            "actions": [
+                "Add",
+                "Edit",
+                "Delete"
+            ],
+            "edit": {
+                "mode": "Detached",
+                "onBeforeGridAction": "partyPhonesOnBeforeGridAction",
+                "onPrepareAddedRow": "partyPhonesOnPrepareAddedRow"
+            },
+            "height": "Small",
+            "columns": [
+                {
+                    "title": "phoneTypeDesc",
+                    "name": "phoneTypeDesc",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/phoneType/properties/phoneTypeDesc"
+                        }
+                    }
+                },
+                {
+                    "title": "fullNumberFormatted",
+                    "name": "fullNumberFormatted",
+                    "cellContent": {
+                        "type": "OutputText",
+                        "defaultValue": "",
+                        "value": {
+                            "$ref": "#/properties/fullNumberFormatted"
+                        }
+                    }
+                },
+                {
+                    "title": "isPreferable",
+                    "name": "isPreferable",
+                    "cellContent": {
+                        "type": "Icon",
+                        "iconStyleFunction": "isPreferableIconStyleFunction",
+                        "value": {
+                            "$ref": "#/properties/isPreferable"
+                        }
+                    }
+                },
+                {
+                    "title": "isForNewsletters",
+                    "name": "isForNewsletters",
+                    "cellContent": {
+                        "type": "Icon",
+                        "iconStyleFunction": "isForNewslettersIconStyleFunction",
+                        "value": {
+                            "$ref": "#/properties/isForNewsletters"
+                        }
+                    }
+                },
+                {
+                    "title": "isNonActual",
+                    "name": "isNonActual",
+                    "cellContent": {
+                        "type": "Icon",
+                        "iconStyleFunction": "isNonActualIconStyleFunction",
+                        "value": {
+                            "$ref": "#/properties/isNonActual"
+                        }
+                    }
+                }
+            ],
+            "detailsTemplates": {
+                "edit": {
+                    "content": {
+                        "type": "Component",
+                        "name": "PartyPhone",
+                        "value": {
+                            "$ref": "#"
+                        }
+                    }
+                }
+            }
+        }
+    ],
+    "rule": {
+        "effect": "ENABLE_INITIAL",
+        "condition": {
+            "type": "FUNC",
+            "ruleFunction": "enablePartyPhones",
+            "value": [
+                {
+                    "$ref": "#"
+                }
+            ]
+        }
+    }
+}

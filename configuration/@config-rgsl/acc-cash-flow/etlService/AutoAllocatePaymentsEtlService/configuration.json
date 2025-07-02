@@ -1,0 +1,17 @@
+{
+    "mainDataSource": "AutoAllocatePaymentsDataSource",
+    "useBackgroundTaskWorker": true,
+    "restartable": true,
+    "enableAutomaticRecovery": true,
+    "aggregate": true,
+    "sinks": [
+        {
+            "name": "AutoAllocateRGSL",
+            "class": {
+                "className": "Adacta.AdInsure.RGSL.Accounting.API.Shared.CashFlow.Allocation.Services.IAutoAllocationServiceAppRGSL, Adacta.AdInsure.RGSL.Accounting.API",
+                "methodName": "AutoAllocate"
+            }
+        }
+    ],
+    "version": "1"
+}

@@ -1,0 +1,21 @@
+﻿select pa.code_name as published_artifact_code, 
+       c.contract_id,
+       c.contract_number,
+       ps.code_name as process_state_code,
+       c.sys_created_on,
+       auc.username as sys_created_by,
+       c.sys_updated_on,
+       auu.username as sys_updated_by,
+       isnull(asl.valid_from, json_value(c.body, '$.amendmentData.technicalAmendmentData.amendmentDate')) as valid_from,
+       json_value(c.body, '$.amendmentData.technicalAmendmentData.comment') as comment
+  from pas.contract ca
+       join pas.contract c on c.original_document_id = ca.original_document_id
+       join cfx.published_artifact pa on pa.published_artifact_id = c.published_artifact_id
+       join cfg.process_state ps on ps.process_state_id = c.state_id
+       join org.application_user auc on auc.application_user_id = c.sys_created_by_id
+       join org.application_user auu on auu.application_user_id = c.sys_updated_by_id
+       join pas_impl.amendment_hub ah on ah.amendment_number = c.contract_number
+       join pas_impl.amendment_sat_latest asl on asl.amendment_hkey = ah.amendment_hkey
+ where 1=1
+   and c.contract_id != c.original_document_id
+   and ca.contract_id = @contractId

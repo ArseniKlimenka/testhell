@@ -1,0 +1,2368 @@
+<!DOCTYPE html>
+<html lang="ru-RU" xml:lang="ru-RU" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+	<meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+	<title>Договор</title>
+	<link rel="stylesheet" href="assets/styles/style.css" />
+	{{{exampleLabel}}}
+	{{{bottomRightContentHolder}}}
+	{{{bottomRightContentBoth}}}
+	{{{bottomLeftContentHolder}}}
+	{{{bottomLeftContentBoth}}}
+	{{{signatureNone}}}
+	{{{reducePrintoutPagesTotalNumber}}}
+	{{{setKidPrintoutTopRunningTitle}}}
+	{{{setPolicyPrintoutRunningTitleIfKidExist}}}
+	{{{setKidPrintoutBottomRunningTitleFirstPage}}}
+	{{{setKidPrintoutBottomRunningTitleSecondPage}}}
+	{{{setKidPrintoutBottomRunningTitleThirdPage}}}
+</head>
+
+<body>
+
+	<!-- для загрузки динамических изображений в хранилище печатки. -->
+	{{#if alwaysFalse}}
+		{{> ../../../life-insurance/component/TempSignatureContainer/printout/template.html }}
+	{{/if}}
+
+	{{#if alwaysFalse}}
+		{{> ../../../life-insurance/component/CommonAppendixImageContainer/printout/template.html }}
+	{{/if}}
+
+	{{#if alwaysFalse}}
+		{{> ../../component/AccumulatedAppendixImageContainer/printout/template.html }}
+	{{/if}}
+
+	<!-- Ключевой информационный документ - KID Printout Body -->
+	{{#if isKidPrintout}}
+		{{> ../../../life-insurance/component/KIDPrintoutBody/printout/template.html }}
+	{{/if}}
+
+	{{#unless isKidPrintout}}
+	<!-- Памятка ВСС БФКО, Зенит, Акцепт и ОАС-->
+	<div class="memory">
+		<div class="headermemo">
+			<p class="greymemo">ПАМЯТКА К ДОГОВОРУ СТРАХОВАНИЯ ЖИЗНИ</p>
+			<p class="whitememo">по программе «{{policy.product}}» № {{policy.number}} от {{policy.issueDate}} г.</p>
+		</div>
+
+		<div class="mainmemo">
+			<p>
+				Уважаемый Клиент, благодарим Вас за выбор ООО СК «Росгосстрах Жизнь» (далее – «Страховая компания»). Мы
+				надеемся, что наше сотрудничество будет приятным и долговременным. Для этого хотим обратить Ваше
+				внимание на важные условия договора страхования жизни (далее – «договор страхования» или «договор»),
+				заключенного на основании {{policy.rule}} (далее – «Правила страхования»):
+			</p>
+
+			<ul>
+				<li>
+					Договор страхования не является банковским вкладом и не входит в систему гарантирования Агентства
+					по страхованию вкладов в соответствии с Федеральным законом от 23.12.2003 №177-ФЗ «О страховании
+					вкладов в банках Российской Федерации».
+				</li>
+				<li>
+					Договор страхования не предусматривает участия Страхователя в инвестиционном доходе Страховщика.
+				</li>
+				<li>
+					Договор страхования носит долгосрочный характер и предусматривает обязательства Страхователя по
+					оплате страховой премии (страховых взносов). Порядок и сроки уплаты страховой премии устанавливаются
+					договором страхования.
+				</li>
+				<li>
+					Обязательства по договору несет Страховая компания, а не {{typeOfPartner}}, при посредничестве
+					которого заключен договор страхования.
+				</li>
+			</ul>
+
+			<p class="boldmemo">
+				Расторжение договора страхования
+			</p>
+
+			<ul>
+				<li>
+					В случае досрочного прекращения договора страхования Страхователю выплачивается выкупная сумма,
+					размер которой может быть меньше суммы уплаченных взносов. Размеры выкупной суммы и порядок ее
+					определения указаны в договоре и в Правилах страхования.
+				</li>
+				<li>
+					Расторжение договора страхования осуществляется на основании письменного заявления Страхователя.
+				</li>
+				<li>
+					Обращаем внимание, что Страхователь вправе отказаться от договора страхования в течение 30
+					(тридцати) календарных дней со дня его заключения при отсутствии в данном периоде событий, имеющих
+					признаки страхового случая. Оплаченная страховая премия в полном размере возвращается Страхователю в
+					течение 10 (десяти) рабочих дней.<span class="footnote">Указание Банка России от 20.11.2015 №3854-У
+						«О минимальных (стандартных) требованиях к условиям и порядку осуществления отдельных видов
+						добровольного страхования».</span>
+				</li>
+			</ul>
+
+			<p class="boldmemo">
+				Порядок подачи заявления об отказе от договора страхования
+			</p>
+
+			<p>
+				Заявление можно подать одним из следующих способов по Вашему выбору:
+			</p>
+
+			<ul>
+				<li>
+					По почте на адрес Страховой компании: {{insurer.address2}}.
+				</li>
+				<li>
+					Путем личного обращения по месту приема заявлений. С информацией о способах и местах приема
+					заявлений Вы можете ознакомиться на официальном сайте Страховой компании (www.rgsl.ru).
+				</li>
+			</ul>
+
+			<p class="boldmemo">
+				При подаче заявления необходимо предоставить следующие документы:
+			</p>
+
+			<ol>
+				<li>
+					<strong>Заявление на расторжение</strong> (при личном визите форма для заполнения будет
+					предоставлена сотрудником Страховой компании).
+				</li>
+				<li>
+					<strong>Документ, удостоверяющий личность заявителя</strong> (в т. ч., применительно к паспорту
+					гражданина РФ, страницы с указанием места жительства).
+				</li>
+				<li>
+					<strong>Надлежащим образом оформленный документ, подтверждающий полномочия представителя</strong>
+					(при обращении представителей).
+				</li>
+			</ol>
+
+			<p>
+				Просим заполнять документы разборчивым почерком, лучше всего печатными буквами – так оператор сможет
+				быстрее обработать Ваше заявление.
+			</p>
+		</div>
+
+	</div>
+	{{/unless}}
+
+	<div class="policyPage">
+		<!-- Договор-->
+		<div class="policySignature break">
+			<div class="container">
+				{{#if isBarCodeNeed}}
+				<div class="brDiv">
+					<span class="bar_code">
+						{{barCodePolicyNumber}}
+					</span>
+				</div>
+				{{/if}}
+				<div class="logoDiv">
+					<img src="../../component/POImageConst/printout/assets/img/logoHeader.png" alt="Логотип Росгосстрах Жизнь"
+						class="logo">
+				</div>
+				<div class="qrCodeAndInsurerInfo">
+					<div class="qrDiv">
+						<span class="qr_code">
+							{{QR}}
+						</span>
+					</div>
+					<div class="insurerInfoDiv">
+						<p>
+							<strong>Страховщик: </strong>ООО СК «Росгосстрах Жизнь», лицензии Банка России: {{insurer.license}}, ИНН {{insurer.INN}}, КПП {{insurer.KPP}}<br>
+							<strong>Юридический адрес: </strong>{{insurer.address}}<br>
+							{{#if isBankInfoTwoLine}}
+							<strong>Реквизиты банка: </strong>{{bankInfo1}}<br>
+							{{bankInfo2}}<br>
+							{{else}}
+							<strong>Реквизиты банка: </strong>{{bankInfo}}<br>
+							{{/if}}
+							<strong>Телефон круглосуточного Контакт-центра: </strong>8 800 100 12 10 (бесплатный номер для
+							звонков по России)
+						</p>
+					</div>
+				</div>
+
+				<div class="container2">
+					<p id="qrInfoTop" class="qrInfo">Для оплаты считайте данный штрих код</p>
+					<p id="qrInfoMiddle" class="qrInfo">в мобильном приложении интернет-банка</p>
+					<p id="policyheadingTop" class="policyheading">ДОГОВОР СТРАХОВАНИЯ № {{policy.number}} от
+						{{policy.issueDate}} г.</p>
+					<p id="policyheadingMiddle" class="policyheading">по программе «{{policy.product}}»</p>
+					<p id="policyheadingButton" class="policyheading">на основании {{policy.rule}}
+						<br>(далее по тексту – Правила).
+					</p>
+				</div>
+
+				<div class="policy_item">
+					I. СТРАХОВАТЕЛЬ
+				</div>
+
+				{{#if isECATFVTB}}
+				<table class="personVTB">
+					<col class="col1">
+					<col class="col2">
+					<col class="col3">
+					<col class="col4">
+					<col class="col5">
+					<col class="col6">
+					<col class="col7">
+					<col class="col8">
+					<tr>
+						<td class="tgrey">Фамилия Имя Отчество:</td>
+						<td class="twhite" colspan=5>{{holder.fullName}}</td>
+						<td class="tgrey">Пол:</td>
+						<td class="twhite center">{{holder.gender}}</td>
+					</tr>
+					<tr>
+						<td class="tgrey">Дата рождения:</td>
+						<td class="twhite center">{{holder.dateOfBirth}}</td>
+						<td class="tgrey" colspan=2>Место рождения:</td>
+						<td class="twhite center" colspan=4>{{holder.birthPlace}}</td>
+					</tr>
+					<tr>
+						<td class="tgrey">Телефон:</td>
+						<td class="twhite center">{{holder.phoneNumber}}</td>
+						<td class="tgrey">E-mail:</td>
+						<td class="twhite center" colspan="3">{{holder.email}}</td>
+						<td class="tgrey" >Гражданство:</td>
+						<td class="twhite center" >{{holder.citizenship}}</td>
+					</tr>
+					<tr>
+						<td class="tgrey">Документ, удостоверяющий личность:</td>
+						<td class="twhite" colspan=5>{{holder.document.typeAndSN}}</td>
+						<td class="tgrey">Дата выдачи:</td>
+						<td class="twhite center">{{holder.document.dateOfIssue}}</td>
+					</tr>
+					{{#unless holder.isNotIssuedBy}}
+					<tr>
+						<td class="tgrey">Кем выдан:</td>
+						<td class="twhite" colspan=7>{{holder.document.issuedBy}}</td>
+					</tr>
+					{{/unless}}
+					<tr>
+						<td class="tgrey">Адрес постоянной регистрации:</td>
+						<td class="twhite" colspan=7>{{holder.registrationAddress}}</td>
+					</tr>
+					<tr>
+						<td class="tgrey">Почтовый адрес:</td>
+						<td class="twhite" colspan=7>{{holder.postAddress}}</td>
+					</tr>
+				</table>
+				{{else}}
+				<table class="person">
+					<col class="col1">
+					<col class="col2">
+					<col class="col3">
+					<col class="col4">
+					<col class="col5">
+					<col class="col6">
+					<col class="col7">
+					<tr>
+						<td class="tgrey">Фамилия Имя Отчество:</td>
+						<td class="twhite" colspan=4>{{holder.fullName}}</td>
+						<td class="tgrey">Пол:</td>
+						<td class="twhite center">{{holder.gender}}</td>
+					</tr>
+					<tr>
+						<td class="tgrey">Дата рождения:</td>
+						<td class="twhite center" colspan=2>{{holder.dateOfBirth}}</td>
+						<td class="tgrey" colspan=2>Место рождения:</td>
+						<td class="twhite center" colspan=2>{{holder.birthPlace}}</td>
+					</tr>
+					<tr>
+						<td class="tgrey">Телефон:</td>
+						<td class="twhite center" colspan=2>{{holder.phoneNumber}}</td>
+						<td class="tgrey" colspan=2>Гражданство:</td>
+						<td class="twhite center" colspan=2>{{holder.citizenship}}</td>
+					</tr>
+					<tr>
+						<td class="tgrey">E-mail:</td>
+						<td class="twhite" colspan=6>{{holder.email}}</td>
+					</tr>
+					<tr>
+						<td class="tgrey">Документ, удостоверяющий личность:</td>
+						<td class="twhite" colspan=4>{{holder.document.typeAndSN}}</td>
+						<td class="tgrey">Дата выдачи:</td>
+						<td class="twhite center">{{holder.document.dateOfIssue}}</td>
+					</tr>
+					{{#unless holder.isNotIssuedBy}}
+					<tr>
+						<td class="tgrey">Кем выдан:</td>
+						<td class="twhite" colspan=6>{{holder.document.issuedBy}}</td>
+					</tr>
+					{{/unless}}
+					<tr>
+						<td class="tgrey">Адрес постоянной регистрации:</td>
+						<td class="twhite" colspan=6>{{holder.registrationAddress}}</td>
+					</tr>
+					<tr>
+						<td class="tgrey">Почтовый адрес:</td>
+						<td class="twhite" colspan=6>{{holder.postAddress}}</td>
+					</tr>
+				</table>
+				{{/if}}
+
+				<div class="policy_item">
+					II. ЗАСТРАХОВАННЫЙ
+				</div>
+
+				{{#if isECATFVTB}}
+				<table class="personVTB">
+					<col class="col1">
+					<col class="col2">
+					<col class="col3">
+					<col class="col4">
+					<col class="col5">
+					<col class="col6">
+					<col class="col7">
+					<col class="col8">
+					<tr>
+						<td class="tgrey">Фамилия Имя Отчество:</td>
+						<td class="twhite" colspan=5>{{insured.fullName}}</td>
+						<td class="tgrey">Пол:</td>
+						<td class="twhite  center">{{insured.gender}}</td>
+					</tr>
+					<tr>
+						<td class="tgrey">Дата рождения:</td>
+						<td class="twhite center" >{{insured.dateOfBirth}}</td>
+						<td class="tgrey" colspan=2>Место рождения:</td>
+						<td class="twhite center" colspan=4>{{insured.birthPlace}}</td>
+					</tr>
+					<tr>
+						<td class="tgrey">Телефон:</td>
+						<td class="twhite center">{{insured.phoneNumber}}</td>
+						<td class="tgrey">E-mail:</td>
+						<td class="twhite center" colspan="3">{{insured.email}}</td>
+						<td class="tgrey" >Гражданство:</td>
+						<td class="twhite center" >{{insured.citizenship}}</td>
+					</tr>
+					<tr>
+						<td class="tgrey">Документ, удостоверяющий личность:</td>
+						<td class="twhite" colspan=5>{{insured.document.typeAndSN}}</td>
+						<td class="tgrey">Дата выдачи:</td>
+						<td class="twhite center">{{insured.document.dateOfIssue}}</td>
+					</tr>
+					{{#unless insured.isNotIssuedBy}}
+					<tr>
+						<td class="tgrey">Кем выдан:</td>
+						<td class="twhite" colspan=7>{{insured.document.issuedBy}}</td>
+					</tr>
+					{{/unless}}
+					<tr>
+						<td class="tgrey">Адрес постоянной регистрации:</td>
+						<td class="twhite" colspan=7>{{insured.registrationAddress}}</td>
+					</tr>
+					<tr>
+						<td class="tgrey">Почтовый адрес:</td>
+						<td class="twhite" colspan=7>{{insured.postAddress}}</td>
+					</tr>
+				</table>
+				{{else}}
+				<table class="person">
+					<col class="col1">
+					<col class="col2">
+					<col class="col3">
+					<col class="col4">
+					<col class="col5">
+					<col class="col6">
+					<col class="col7">
+					<tr>
+						<td class="tgrey">Фамилия Имя Отчество:</td>
+						<td class="twhite" colspan=4>{{insured.fullName}}</td>
+						<td class="tgrey">Пол:</td>
+						<td class="twhite  center">{{insured.gender}}</td>
+					</tr>
+					<tr>
+						<td class="tgrey">Дата рождения:</td>
+						<td class="twhite center" colspan=2>{{insured.dateOfBirth}}</td>
+						<td class="tgrey" colspan=2>Место рождения:</td>
+						<td class="twhite center" colspan=2>{{insured.birthPlace}}</td>
+					</tr>
+					<tr>
+						<td class="tgrey">Телефон:</td>
+						<td class="twhite center" colspan=2>{{insured.phoneNumber}}</td>
+						<td class="tgrey" colspan=2>Гражданство:</td>
+						<td class="twhite center" colspan=2>{{insured.citizenship}}</td>
+					</tr>
+					<tr>
+						<td class="tgrey">E-mail:</td>
+						<td class="twhite" colspan=6>{{insured.email}}</td>
+					</tr>
+					<tr>
+						<td class="tgrey">Документ, удостоверяющий личность:</td>
+						<td class="twhite" colspan=4>{{insured.document.typeAndSN}}</td>
+						<td class="tgrey">Дата выдачи:</td>
+						<td class="twhite center">{{insured.document.dateOfIssue}}</td>
+					</tr>
+					{{#unless insured.isNotIssuedBy}}
+					<tr>
+						<td class="tgrey">Кем выдан:</td>
+						<td class="twhite" colspan=6>{{insured.document.issuedBy}}</td>
+					</tr>
+					{{/unless}}
+					<tr>
+						<td class="tgrey">Адрес постоянной регистрации:</td>
+						<td class="twhite" colspan=6>{{insured.registrationAddress}}</td>
+					</tr>
+					<tr>
+						<td class="tgrey">Почтовый адрес:</td>
+						<td class="twhite" colspan=6>{{insured.postAddress}}</td>
+					</tr>
+				</table>
+				{{/if}}
+
+
+				<div class="policy_item">
+					III. СТРАХОВЫЕ РИСКИ, СТРАХОВЫЕ СУММЫ, СТРАХОВАЯ ВЫПЛАТА, СРОК СТРАХОВАНИЯ ПО РИСКУ
+				</div>
+
+				<table class="risks">
+					<col class="col1">
+					<col class="col2">
+					<col class="col3">
+					<col class="col4">
+					<col class="col5">
+					<col class="col6">
+					<tr>
+						<td class="tgrey center" rowspan=2>Страховые риски</td>
+						<td class="tgrey center" rowspan=2>Страховая сумма, {{currency}}</td>
+						<td class="tgrey center" rowspan=2>Размер {{frequency.risk}} страхового взноса, {{currency}}</td>
+						<td class="tgrey center" rowspan=2>Страховая выплата</td>
+						<td class="tgrey center" colspan=2>Срок страхования по риску</td>
+					</tr>
+					<tr>
+						<td class="tgrey fifthCollum center">с</td>
+						<td class="tgrey sixthcollum center">по</td>
+					</tr>
+					{{#if isECATFVTB}}
+					<tr>
+						<td class="twhite" colspan=6>Основная программа</td>
+					</tr>
+					{{/if}}
+					{{#if EBMOPTIMAOAS2}}
+					{{#each risk.mandatory}}
+					<tr>
+						<td class="twhite">{{this.insuranceRisks}}</td>
+						<td class="twhite center">{{#if age70minus}}{{this.sumInsured}}, но не более 10 000 000 рублей
+												  {{else if age71plus}}{{this.sumInsured}}, но не более 1 000 000 рублей{{/if}}</td>
+						<td class="twhite center">{{this.insurancePremium}}</td>
+						<td class="twhite center">{{this.insurancePayment}}</td>
+						<td class="twhite center">{{this.startDate}}</td>
+						<td class="twhite center">{{this.endDate}}</td>
+					</tr>
+					{{/each}}
+					{{else if isEBMMGREINVEST}}
+					{{#each risk.mandatory}}
+					<tr>
+						<td class="twhite">{{this.insuranceRisks}}</td>
+						<td class="twhite center">{{#if age70minus}}{{this.sumInsured}}, но не более < 2 000 000 рублей
+											 	  {{else if age71plus}}{{this.sumInsured}}, но не более > 1 000 000 рублей{{/if}}</td>
+						<td class="twhite center">{{this.insurancePremium}}</td>
+						<td class="twhite center">{{this.insurancePayment}}</td>
+						<td class="twhite center">{{this.startDate}}</td>
+						<td class="twhite center">{{this.endDate}}</td>
+					</tr>
+					{{/each}}
+					{{else}}
+					{{#each risk.mandatory}}
+					<tr>
+						<td class="twhite">{{this.insuranceRisks}}</td>
+						<td class="twhite center">{{this.sumInsured}}</td>
+						<td class="twhite center">{{this.insurancePremium}}</td>
+						<td class="twhite center">{{this.insurancePayment}}</td>
+						<td class="twhite center">{{this.startDate}}</td>
+						<td class="twhite center">{{this.endDate}}</td>
+					</tr>
+					{{/each}}
+					{{/if}}
+				</table>
+
+				<p class="afterTable">
+					При определении страховой суммы в договоре страхования в иностранной валюте страховая выплата
+					производится в рублях по курсу Банка России на дату выплаты. Банковские расходы, связанные с
+					осуществлением страховой выплаты, оплачиваются получателем платежа.
+				</p>
+
+				<div class="policy_item">
+					IV. СТРАХОВАЯ ПРЕМИЯ, ПОРЯДОК УПЛАТЫ СТРАХОВОЙ ПРЕМИИ
+				</div>
+				<table class="premium">
+					<col class="col1">
+					<col class="col2">
+					<tr>
+						<td colspan=2>Страховая премия уплачивается в виде страховых взносов в течение срока действия
+							договора страхования.</td>
+					</tr>
+					<tr>
+						<td class="tgrey">Периодичность уплаты страховой премии</td>
+						<td class="twhite">{{frequency.premium}}</td>
+					</tr>
+					<tr>
+						<td class="textJustify" colspan=2>Размеры страховых взносов и даты их оплаты указаны в Графике
+							уплаты страховых взносов
+							(приложение к договору страхования).</td>
+					</tr>
+				</table>
+				{{#if isNewTextPSB}}
+					{{#if isNewTextOAS_EBM3GUBRR}}
+					<p class="afterTable">
+						{{#if isNewTextStrong}}
+						<strong>
+						{{/if}}
+							В случае если первый страховой взнос не был оплачен (или был оплачен не полностью) в указанный срок,
+							{{#if insuranceTerms.paymentPeriodLastDate}} либо в случае оплаты первого страхового взноса позднее {{insuranceTerms.paymentPeriodLastDate}}, {{/if}}
+							Страховщик вправе считать договор страхования не вступившим в силу и произвести возврат поступивших средств Страхователю.
+							</br>Стороны признают, что события, имеющие признаки страхового и наступившие до уплаты страховой премии в полном объеме, не признаются страховым случаем и страховая выплата по ним не осуществляется (пункт 2 статьи 957 Гражданского кодекса Российской Федерации).
+						{{#if isNewTextStrong}}
+						</strong>
+						{{/if}}
+					</p>
+					{{else}}
+					<p class="afterTable">
+						В случае если страховая премия не была оплачена (или была оплачена не полностью) в указанный срок,
+						{{#if insuranceTerms.paymentPeriodLastDate}} либо в случае оплаты страховой премии позднее {{insuranceTerms.paymentPeriodLastDate}}, {{/if}}
+						Страховщик вправе считать договор страхования не вступившим в силу и произвести возврат поступивших средств Страхователю.
+						Стороны признают, что события, имеющие признаки страхового и наступившие до уплаты страховой премии в полном объеме, не признаются страховым случаем и страховая выплата по ним не осуществляется (пункт 2 статьи 957 Гражданского кодекса Российской Федерации).
+					</p>
+					{{/if}}
+				{{else if isNewTextEBMGUBRR}}
+				<p class="afterTable">
+					В случае если первый страховой взнос не был оплачен (или был оплачен не полностью) в указанный срок,
+					{{#if insuranceTerms.paymentPeriodLastDate}} либо в случае оплаты первого страхового взноса позднее {{insuranceTerms.paymentPeriodLastDate}}, {{/if}}
+					Страховщик вправе считать договор страхования не вступившим в силу и произвести возврат поступивших средств Страхователю.
+				</br>Стороны признают, что события, имеющие признаки страхового и наступившие до уплаты страховой премии в полном объеме, не признаются страховым случаем и страховая выплата по ним не осуществляется (пункт 2 статьи 957 Гражданского кодекса Российской Федерации).
+				</p>
+				{{else}}
+				<p class="afterTable">
+					В случае если первый страховой взнос не был оплачен (или был оплачен не полностью) в указанный срок,
+					{{#if insuranceTerms.paymentPeriodLastDate}} либо в случае оплаты первого страхового взноса позднее {{insuranceTerms.paymentPeriodLastDate}}, {{/if}}
+					Страховщик вправе считать договор страхования не вступившим в силу и произвести возврат поступивших
+					средств Страхователю.
+					<br>Датой оплаты страхового взноса считается дата списания всей суммы страхового взноса со счета
+					Страхователя (или иного уполномоченного им лица) в счет оплаты договора страхования в случае безналичных
+					расчетов{{#if isECATFVTB}},{{/if}} либо дата платежного документа в случае наличных расчетов в соответствии с законодательством
+					Российской Федерации.
+				</p>
+				{{/if}}
+				<p class="afterTable">
+					При определении страховой премии в договоре страхования в иностранной валюте сумма, подлежащая уплате в
+					рублях, определяется по курсу Банка России соответствующей валюты на дату оплаты. Банковские расходы,
+					связанные с оплатой страховой премии, несет Страхователь.
+				</p>
+
+				<div class="policy_item">
+					V. СРОК ДЕЙСТВИЯ ДОГОВОРА СТРАХОВАНИЯ
+				</div>
+
+				<table class="insuranceTerms">
+					<col class="col1">
+					<col class="col2">
+					<col class="col3">
+					<tr>
+						<td class="tgrey">Срок действия договора страхования:</td>
+						<td class="twhite center">{{insuranceTerms.text}}</td>
+						<td class="twhite">Договор страхования вступает в силу с {{insuranceTerms.startDate}}{{#unless isNewTextPSB}} при условии
+							уплаты первого страхового взноса в полном объеме{{/unless}} и действует до {{insuranceTerms.endDate}}
+							включительно.</td>
+					</tr>
+				</table>
+
+				<div class="policy_item">
+					VI. ДЕКЛАРАЦИЯ О СОСТОЯНИИ ЗДОРОВЬЯ И
+					ФАКТОРАХ РИСКА ЗАСТРАХОВАННОГО
+				</div>
+
+				<table class="declarationMedical">
+					<col class="col1">
+					<col class="col2">
+					<col class="col3">
+					<tr>
+						<td class="twhite">Настоящим я, {{insured.fullName}},</td>
+						<td class="twhite"><input type="checkbox" checked> подтверждаю, что:</td>
+						<td class="twhite"><input type="checkbox"> не подтверждаю, что:</td>
+					</tr>
+				</table>
+
+				<ul class="declaration">
+					{{#each declarationMedical}}
+					<li>
+						<p>{{this}}</p>
+					</li>
+					{{/each}}
+				</ul>
+
+
+				<div class="policy_item">
+					VII. ДЕКЛАРАЦИЯ СТРАХОВАТЕЛЯ И ЗАСТРАХОВАННОГО
+				</div>
+
+				<table class="declarationMain">
+					<tr>
+						<td class="twhite">Настоящим Страхователь и Застрахованный</td>
+						<td class="twhite"><input type="checkbox" checked> подтверждают, что:</td>
+						<td class="twhite"><input type="checkbox"> не подтверждают, что:</td>
+					</tr>
+				</table>
+
+				<ul class="declaration">
+					{{#each declarationMain}}
+					<li>
+						<p>{{this}}</p>
+					</li>
+					{{/each}}
+				</ul>
+
+				<div class="policy_item">
+					VIII. ИНЫЕ УСЛОВИЯ
+				</div>
+
+				<ol class="otherCondition">
+					<li>
+						В случае отказа Страхователя (физического лица) от договора страхования в период, предусмотренный
+						договором страхования и действующим законодательством, когда Страхователь имеет право на возврат
+						уплаченной страховой премии (уплаченных страховых взносов), Страховщик осуществляет возврат
+						уплаченной Страхователем суммы в рублях независимо от курса валюты, в которой выражены обязательства
+						по договору страхования. Если страховая премия была уплачена в иной валюте, возврату подлежит сумма
+						денежных средств в валюте, в которой она была уплачена.
+					</li>
+					<li>
+						Если после заключения договора страхования будет выявлено, что Страхователь (Застрахованный) сообщил
+						в настоящем договоре страхования или иных документах, заполняемых при заключении договора
+						страхования, заведомо ложные сведения или предоставил подложные документы, и если эти сведения или
+						документы привели к заключению договора страхования на условиях отличных от тех, на которых он был
+						бы заключен, то Страховщик имеет право отказать в страховой выплате.
+					</li>
+					<li>
+						Стороны пришли к соглашению о том, что факсимильное воспроизведение подписей уполномоченных лиц
+						Страховщика и факсимильный оттиск печати Страховщика признаются сторонами аналогом собственноручной
+						подписи уполномоченных лиц Страховщика и оригинала печати Страховщика.
+					</li>
+					{{#if isEBMAKCEPT}}
+					<li>
+						В случае заключения договора страхования в электронном виде в соответствии с Соглашением об электронном документообороте, к которому присоединяется Страхователь, договор страхования, 
+						а также ссылка на Правила на официальном сайте, направляются Страхователю в электронном виде на адрес электронной почты, указанный в настоящем договоре страхования, 
+						подписанные со стороны Страховщика усиленной квалифицированной электронной подписью. 
+						Согласие Страхователя с условиями договора страхования подтверждается простой электронной подписью Страхователя в соответствии с Соглашением.
+					</li>
+					{{else}}
+					<li>
+						В случае заключения договора страхования в электронном виде в соответствии с Соглашением об
+						электронном документообороте, к которому присоединяется Страхователь, подписанный со стороны
+						Страховщика усиленной квалифицированной электронной подписью договор страхования{{#unless isECATFVTB}},{{/unless}}
+						{{#unless isKidPrintout}} включая Памятку к договору страхования жизни, {{/unless}} направляется
+						Страхователю в электронном виде на адрес электронной почты, указанный в настоящем договоре
+						страхования.
+						Согласие Страхователя с условиями договора страхования подтверждается простой электронной подписью
+						Страхователя в соответствии с Соглашением.
+					</li>
+					{{/if}}
+					<li>
+						Неотъемлемой частью настоящего договора страхования являются:
+						{{#unless isKidPrintout}} Памятка к договору страхования жизни, {{/unless}}
+						График уплаты страховых взносов, Правила, заявления, составленные и заполненные по просьбе
+						Страховщика Страхователем и лицом, заявляемым на страхование.
+						{{#unless isKidPrintout}}
+							Отдельные условия настоящего договора страхования разъяснены в Памятке к договору страхования жизни.
+						{{/unless}}
+					</li>
+					{{#if otherCondition.isOtherCondition}}
+					<li>
+						{{otherCondition.policySpecialConditions}}
+					</li>
+					{{/if}}
+				</ol>
+
+				<div class="breakAvoid">
+					<div class="policy_item">
+						IX. ТАБЛИЦА ВЫКУПНЫХ СУММ
+					</div>
+					<p class="afterTable">
+						При расторжении договора страхования выкупная сумма на дату досрочного прекращения договора
+						страхования рассчитывается как выкупная сумма на конец полисного года (полисного периода),
+						соответствующего дате досрочного прекращения договора страхования, за вычетом суммы страховых
+						взносов, которые Страхователь должен был бы уплатить Страховщику в течение оставшейся части
+						полисного года (полисного периода), в котором имеет место досрочное прекращение договора
+						страхования.
+					</p>
+				</div>
+
+				<table class="surrenderValues">
+					<col class="col1">
+					<col class="col2">
+					<col class="col3">
+					<col class="col4">
+					<tr>
+						<td class="tgrey center" colspan=3>Полисный год</td>
+						<td class="tgrey center" rowspan=2>Выкупная сумма на конец текущего полисного года, {{currency}}
+						</td>
+					</tr>
+					<tr>
+						<td class="tgrey center">№ п/п</td>
+						<td class="tgrey center">начало</td>
+						<td class="tgrey center">окончание</td>
+					</tr>
+					{{#each surrenderValues}}
+					<tr>
+						<td class="twhite center">{{this.index}}</td>
+						<td class="twhite center">{{this.periodStartDate}}</td>
+						<td class="twhite center">{{this.periodEndDate}}</td>
+						<td class="twhite center">{{this.surrenderValue}}</td>
+					</tr>
+					{{/each}}
+				</table>
+
+				<p class="afterTable">
+					При определении выкупной суммы в договоре страхования в иностранной валюте выплата выкупной суммы
+					переводится в рублях по курсу Банка России на дату выплаты. Банковские расходы, связанные с
+					осуществлением выплаты выкупной суммы, оплачиваются получателем платежа.
+					<br>В случае наличия у Страхователя задолженности по уплате страховых взносов перед Страховщиком, сумма
+					задолженности вычитается из выкупной суммы.
+				</p>
+
+				{{#if isECATFVTB}}
+
+				<div class="policy_item">
+					X. ВЫГОДОПРИОБРЕТАТЕЛИ
+				</div>
+
+				<table class="person">
+					<col class="col1">
+					<col class="col2">
+					<col class="col3">
+					<col class="col4">
+					<col class="col5">
+					<col class="col6">
+					<col class="col7">
+					<tr>
+						<td class="tgrey" colspan=7>Выгодоприобретатель по рискам «Дожитие Застрахованного до окончания
+							срока страхования» и «Смерть Застрахованного по любой причине с отложенной страховой выплатой»:</td>
+					</tr>
+					{{#each beneficiariesNonAdult}}
+					<tr>
+						<td class="twhite" colspan=7>Выгодоприобретатель {{this.index}}. Доля {{this.percentage}}%</td>
+					</tr>
+					<tr>
+						<td class="tgrey">Фамилия Имя Отчество:</td>
+						<td class="twhite" colspan=4>{{this.beneficiar.fullName}}</td>
+						<td class="tgrey">Дата рождения:</td>
+						<td class="twhite  center">{{this.beneficiar.dateOfBirth}}</td>
+					</tr>
+					{{/each}}
+				</table>
+				<br>
+
+				<table class="person">
+					<col class="col1">
+					<col class="col2">
+					<col class="col3">
+					<col class="col4">
+					<col class="col5">
+					<col class="col6">
+					<col class="col7">
+					<tr>
+						<td class="tgrey" colspan=7>Выгодоприобретатели по риску «Смерть Застрахованного по любой причине»:</td>
+					</tr>
+					{{#if isBeneficiariesStandard}}
+					{{#each beneficiariesStandard}}
+					<tr>
+						<td class="twhite" colspan=7>Выгодоприобретатель {{this.index}}. Доля {{this.percentage}}%</td>
+					</tr>
+					<tr>
+						<td class="tgrey">Фамилия Имя Отчество:</td>
+						<td class="twhite" colspan=4>{{this.beneficiar.fullName}}</td>
+						<td class="tgrey">Дата рождения:</td>
+						<td class="twhite  center">{{this.beneficiar.dateOfBirth}}</td>
+					</tr>
+					{{/each}}
+					{{#if shareSumStandardIsNot1}}
+					<tr>
+						<td class="twhite" colspan=7>В случае если общая доля менее 100%, Выгодоприобретателями на
+							случай смерти Застрахованного по оставшейся доле являются наследники Застрахованного по закону.</td>
+					</tr>
+					{{/if}}
+					{{else}}
+					<tr>
+						<td class="twhite" colspan=7>Наследники по закону</td>
+					</tr>
+					{{/if}}
+				</table>
+
+				{{else}}
+				{{#if isBeneficiaries}}
+
+				<div class="policy_item">
+					X. ВЫГОДОПРИОБРЕТАТЕЛИ НА СЛУЧАЙ СМЕРТИ ЗАСТРАХОВАННОГО
+				</div>
+
+				<table class="person">
+					<col class="col1">
+					<col class="col2">
+					<col class="col3">
+					<col class="col4">
+					<col class="col5">
+					<col class="col6">
+					<col class="col7">
+					{{#each beneficiaries}}
+					<tr>
+						<td class="tgrey" colspan=7>Выгодоприобретатель {{this.index}}. Доля {{this.percentage}}%</td>
+					</tr>
+					<tr>
+						<td class="tgrey">Фамилия Имя Отчество, Дата рождения:</td>
+						<td class="twhite" colspan=4>{{this.beneficiar.fullName}}, {{this.beneficiar.dateOfBirth}}</td>
+						<td class="tgrey">Пол:</td>
+						<td class="twhite  center">{{this.beneficiar.gender}}</td>
+					</tr>
+					{{#if this.dateOfBirthPlaceOfBirth}}
+					<tr>
+						<td class="tgrey">Дата рождения:</td>
+						<td class="twhite center">{{this.beneficiar.dateOfBirth}}</td>
+						<td class="tgrey" colspan=2>Место рождения:</td>
+						<td class="twhite" colspan=3>{{this.beneficiar.placeOfBirth}}</td>
+					</tr>
+					{{/if}}
+					{{#if this.phoneEmailCitizenship}}
+					<tr>
+						<td class="tgrey">Телефон:</td>
+						<td class="twhite center">{{this.beneficiar.phoneNumber}}</td>
+						<td class="tgrey">E-mail:</td>
+						<td class="twhite center" colspan=2>{{this.beneficiar.email}}</td>
+						<td class="tgrey">Гражданство:</td>
+						<td class="twhite center">{{this.beneficiar.citizenship}}</td>
+					</tr>
+					{{/if}}
+					{{#if this.isDocument}}
+					<tr>
+						<td class="tgrey">Документ, удостоверяющий личность:</td>
+						<td class="twhite" colspan=4>{{this.beneficiar.document.typeAndSN}}</td>
+						<td class="tgrey">Дата выдачи:</td>
+						<td class="twhite center">{{this.beneficiar.document.dateOfIssue}}</td>
+					</tr>
+					{{#unless this.beneficiar.isNotIssuedBy}}
+					<tr>
+						<td class="tgrey">Кем выдан:</td>
+						<td class="twhite" colspan=6>{{this.beneficiar.document.document.issuedBy}}</td>
+					</tr>
+					{{/unless}}
+					{{/if}}
+					{{#if this.isRegistrationAddress}}
+					<tr>
+						<td class="tgrey">Адрес постоянной регистрации:</td>
+						<td class="twhite" colspan=6>{{this.beneficiar.registrationAddress}}</td>
+					</tr>
+					{{/if}}
+					{{#if this.isPostAddress}}
+					<tr>
+						<td class="tgrey">Почтовый адрес:</td>
+						<td class="twhite" colspan=6>{{this.beneficiar.postAddress}}</td>
+					</tr>
+					{{/if}}
+					{{/each}}
+				</table>
+				{{#if shareSumIsNot1}}
+				<p class="afterTable">
+					В случае если общая доля менее 100%, Выгодоприобретателями на случай смерти Застрахованного по
+					оставшейся доле являются наследники Застрахованного по закону.
+				</p>
+				{{/if}}
+				{{else}}
+
+				<div class="policy_item">
+					X. ВЫГОДОПРИОБРЕТАТЕЛИ НА СЛУЧАЙ СМЕРТИ ЗАСТРАХОВАННОГО
+				</div>
+				<table class="person">
+						<tr>
+							<td colspan=7>Наследники по закону</td>
+						</tr>
+				</table>
+
+				{{/if}}
+				{{/if}}
+
+			</div>
+		</div>
+
+		<!-- График платежей-->
+		<div class="policySignature break">
+
+			<p class="alignRight">Приложение к договору страхования № {{policy.number}} от {{policy.issueDate}} г.
+			</p>
+			<p class="alignRight">по программе «{{policy.product}}»</p>
+
+			<div class="paymentPlan">
+				<div class="paymentPlanLabel">
+					График уплаты страховых взносов
+				</div>
+				<table class="premium">
+					<col class="col1">
+					<col class="col2">
+					<tr>
+						<td class="center"><strong>Дата оплаты</strong></td>
+						<td class="center"><strong>Размер платежа (страхового взноса), {{currency}}</strong></td>
+					</tr>
+					{{#each paymentPlan}}
+					<tr>
+						<td class="center">{{this.dateOfPayment}}</td>
+						<td class="center">{{this.insurancePremium}}</td>
+					</tr>
+					{{/each}}
+				</table>
+			</div>
+		</div>
+		{{#if BFKOpartner}}
+		<!-- 65+ -->
+		{{#if holder60plus}}
+		<div class="containerAdd break notice">
+			<p class="textCenter">Уведомление</p>
+
+			<p>Я, {{holder.fullName}}, настоящим подтверждаю, что ознакомл{{#if
+				holderGenderMale}}ен{{else}}ена{{/if}} со всеми условиями договора добровольного накопительного страхования
+				жизни СК «Росгосстрах жизнь» (далее – Договор). Я понимаю все условия по оформляемому Договору, а именно:
+			</p>
+			<ol>
+				<li>
+					Договор не является договором банковского вклада. Переданные по данному договору денежные средства не
+					подлежат страхованию вкладов в соответствии с действующим законодательством.
+				</li>
+				<li>
+					Досрочный выход из продукта (за исключением возврата средств в течение 30 календарных дней с даты
+					оформления Договора – «период охлаждения») влечет возможные существенные потери по отношению к
+					первоначально инвестированной сумме.
+				</li>
+				<li>
+					Я понимаю, что в соответствии с условиями Договора, в случае несоблюдения графика уплаты взносов мне
+					не будут возвращены ранее уплаченные взносы в полном объеме. С третьего года страхования выплачивается
+					выкупная сумма, размер которой всегда меньше размера уплаченных страховых взносов.
+				</li>
+			</ol>
+
+			<p>ФИО ____________________________________________</p>
+			<p class="smallText"> (заполняется клиентом собственноручно)</p>
+			<p>Паспорт серия ________ № _______________</p>
+			<p class="smallText"> (заполняется клиентом собственноручно)</p>
+			<p>_____________ / __________________________________________________ /</p>
+			<p class="smallText2">
+				&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp(подпись)&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp(Ф.И.О.
+				полностью, заполняется клиентом собственноручно)</p>
+			<p> «____» ________________ 20___ г.</p>
+			<p class="smallText2">&nbsp&nbsp&nbsp&nbsp(заполняется клиентом собственноручно)</p>
+		</div>
+		{{/if}}
+
+		<!-- Приложения Согласие на обработку персональных данных-->
+		<div>
+			<p class="center textBold break">Согласие на обработку персональных данных Страхователя</p>
+			<table class="personalData">
+				<col class="col1">
+				<col class="col2">
+				<col class="col3">
+				<col class="col4">
+				<col class="col5">
+				<col class="col6">
+				<col class="col7">
+				<col class="col8">
+				<col class="col9">
+				<col class="col10">
+				<col class="col11">
+				<col class="col12">
+				<col class="col13">
+				<col class="col14">
+				<col class="col15">
+				<col class="col16">
+				<col class="col17">
+				<col class="col18">
+				<col class="col19">
+				<col class="col20">
+				<col class="col21">
+				<col class="col22">
+				<col class="col23">
+				<col class="col24">
+				<col class="col25">
+				<tr>
+					<td colspan=25 class="textCenter colorSteel">
+						1.ПЕРСОНАЛЬНЫЕ ДАННЫЕ КЛИЕНТА
+					</td>
+				</tr>
+				<tr>
+					<td colspan=5>Фамилия Имя Отчество</td>
+					<td colspan=20>{{holder.fullName}}</td>
+				</tr>
+				<tr>
+					<td>Пол</td>
+					<td colspan=4>
+						{{#if holder.isGenderMale}}<span class="smallCheckbox"><input type="checkbox"
+								checked></span>Мужской<br><span class="smallCheckbox"><input type="checkbox"></span>Женский
+						{{else}}<span class="smallCheckbox"><input type="checkbox"></span>Мужской<br><span
+							class="smallCheckbox" checked><input type="checkbox" checked></span>Женский{{/if}}
+					</td>
+					<td colspan=3>Гражданство</td>
+					<td colspan=6>
+						{{#if holder.isCitizenshipRusssia}}<span class="smallCheckbox"><input type="checkbox"
+								checked></span>РФ<br><span class="smallCheckbox"><input type="checkbox"></span>Иное
+						{{else}}<span class="smallCheckbox"><input type="checkbox"></span>РФ<br><span class="smallCheckbox"
+							checked><input type="checkbox" checked></span>Иное{{/if}}
+					</td>
+					<td colspan=3>Дата рождения</td>
+					<td colspan=3>{{holder.dateOfBirth}}</td>
+					<td colspan=4>Место рождения</td>
+					<td>{{holder.birthPlace}}</td>
+				</tr>
+				<tr>
+					<td rowspan=4 colspan="4">Документ,<br>удостоверяющий<br>личность</td>
+					<td colspan=7>
+						{{#if holder.isRusssiaPassport}}<span class="smallCheckbox"><input type="checkbox"
+								checked></span>паспорт гражданина РФ<br><span class="smallCheckbox"><input
+								type="checkbox"></span>заграничный паспорт гражданина РФ<br>
+						<span class="smallCheckbox"><input type="checkbox"></span>свидетельство о рождении<br><span
+							class="smallCheckbox"><input type="checkbox"></span>Иное{{/if}}
+						{{#if holder.isForeignTravelPassport}}<span class="smallCheckbox"><input
+								type="checkbox"></span>паспорт
+						гражданина РФ<br><span class="smallCheckbox"><input type="checkbox" checked></span>заграничный
+						паспорт
+						гражданина РФ<br>
+						<span class="smallCheckbox"><input type="checkbox"></span>свидетельство о рождении<br><span
+							class="smallCheckbox"><input type="checkbox"></span>Иное{{/if}}
+						{{#if holder.isBirthCertificate}}<span class="smallCheckbox"><input type="checkbox"></span>паспорт
+						гражданина РФ<br><span class="smallCheckbox"><input type="checkbox"></span>заграничный паспорт
+						гражданина РФ<br>
+						<span class="smallCheckbox" checked><input type="checkbox"></span>свидетельство о рождении<br><span
+							class="smallCheckbox"><input type="checkbox"></span>Иное{{/if}}
+						{{#if holder.isOtherDocument}}<span class="smallCheckbox"><input type="checkbox"></span>паспорт
+						гражданина РФ<br><span class="smallCheckbox"><input type="checkbox"></span>заграничный паспорт
+						гражданина РФ<br>
+						<span class="smallCheckbox"><input type="checkbox"></span>свидетельство о рождении<br><span
+							class="smallCheckbox" checked><input type="checkbox"></span>Иное{{/if}}
+					</td>
+					<td colspan=8></td>
+					<td colspan=3></td>
+					<td colspan=3></td>
+				</tr>
+				<tr>
+					<td colspan=7>Серия</td>
+					<td colspan=8>{{holder.docSeries}}</td>
+					<td colspan=3>Номер</td>
+					<td colspan=3>{{holder.docNumber}}</td>
+				</tr>
+				<tr>
+					<td colspan=7>код подразделения (при <br>наличии): </td>
+					<td colspan=8>{{holder.issuerCode}}</td>
+					<td colspan=3>дата выдачи</td>
+					<td colspan=3>{{holder.issueDate}}</td>
+				</tr>
+				<tr>
+					<td colspan=7>орган, выдавший документ:</td>
+					<td colspan=14>{{holder.issuerName}}</td>
+				</tr>
+				<tr>
+					<td colspan=10>Сведения о ранее выданном паспорте гражданина РФ<br>(<span class="colorBlue">заполняется
+							при
+							наличии</span>)</td>
+					<td colspan=5>Серия </td>
+					<td colspan=4></td>
+					<td colspan=4>Номер</td>
+					<td colspan=2></td>
+				</tr>
+				<tr>
+					<td rowspan=2 colspan=9>Адрес по месту постоянной регистрации <span class="cursive">(страна,<br>индекс,
+							регион, район, город/населенный пункт,<br>улица, дом, корпус, квартира)</span> </td>
+					<td colspan=4>Дата<br>регистрации</td>
+					<td colspan=12></td>
+				</tr>
+				<tr>
+					<td colspan=15>{{holder.regFullAddress}}</td>
+				</tr>
+				<tr>
+					<td rowspan=2 colspan=9>Адрес по месту фактического проживания <span class="cursive">(страна,<br>индекс,
+							регион, район, город/населенный пункт,<br>улица, дом, корпус, квартира)</span>
+					</td>
+					<td colspan=16>
+						{{#if holder.isSameAsRegistration}}<span class="smallCheckbox"><input type="checkbox"
+								checked></span>{{else}}<span class="smallCheckbox"><input type="checkbox"></span>{{/if}}
+						совпадает с адресом регистрации по месту жительства
+					</td>
+				</tr>
+				<tr>
+					<td colspan=16>{{holder.factFullAddress}}</td>
+				</tr>
+				<tr>
+					<td colspan=3>Домашний телефон<br>по адресу<br>регистрации</td>
+					<td colspan=4></td>
+					<td colspan=5>Телефон по месту<br>фактического<br>проживания</td>
+					<td colspan=4></td>
+					<td colspan=5>Мобильный<br>телефон</td>
+					<td colspan=4>{{holder.phoneNumber}}</td>
+				</tr>
+				<tr>
+					<td colspan=2>e-mail</td>
+					<td colspan=4>{{holder.email}}</td>
+					<td>ИНН (при<br>наличии)</td>
+					<td colspan=9>{{holder.INN}}</td>
+					<td colspan=5>СНИЛС (при<br>наличии)</td>
+					<td colspan=4>{{holder.SNILS}}</td>
+				</tr>
+				<tr>
+					<td colspan=25 class="textCenter colorSteel">
+						2.СОГЛАСИЕ КЛИЕНТА, ПРЕДОСТАВЛЕННОЕ ПАО Банк «ФК Открытие»/ ПАО «Росгосстрах
+						Банк»,<br>НА
+						ВЗАИМОДЕЙСТВИЕ С БЮРО КРЕДИТНЫХ ИСТОРИЙ
+					</td>
+				</tr>
+				<tr>
+					<td colspan=3>Я<br><input type="checkbox"> выражаю<br>согласие<br><input type="checkbox"> не
+						выражаю<br>согласие</td>
+					<td colspan=22>
+						<p>на получение ПАО Банк «ФК Открытие», ПАО «Росгосстрах Банк» (далее совместно – Пользователи
+							кредитной
+							истории, а по отдельности – Пользователь кредитной истории) информации обо мне из любых бюро
+							кредитных
+							историй (одного или нескольких), содержащейся в основной части моей кредитной истории в объеме,
+							порядке
+							и сроки, которые предусмотрены Федеральным законом от 30.12.2004 №218-ФЗ «О кредитных
+							историях».<br>
+							Согласие предоставлено в целях:</p>
+						<p>- проверки Пользователем /-ями кредитной истории сведений, предоставленных мной Пользователю /
+							-ям
+							кредитной истории либо иным компаниям Группы* при приеме на обслуживание и /или при заключении
+							договоров
+							с Пользователем/-ями кредитной истории и/или иными компаниями Группы;<br>
+							- проверки Пользователем /-ями кредитной истории сведений обо мне в процессе оказания мне
+							банковских
+							услуг и/или иных услуг компаний Группы;<br>
+							- проверки Пользователем / -ями кредитной истории сведений при формирования Пользователем/-ями
+							кредитной
+							истории предложений по кредитным, банковским и иным продуктам компаний Группы.
+							Право выбора бюро кредитных историй предоставляется мной Пользователям кредитной истории по их
+							усмотрению и дополнительного согласования со мной не требует.</p>
+						<p>Код субъекта кредитной истории
+							<span
+								class="bigBox">&#9633&#9633&#9633&#9633&#9633&#9633&#9633&#9633&#9633&#9633&#9633&#9633&#9633&#9633</span>
+						</p>
+						<p class="cursive"> (Указать свой код, сформированный посредством комбинации цифровых и буквенных
+							символов в
+							соответствии с пунктом 2.13 Указания Банка России от 31.08.2005 №1610-У «О порядке направления
+							запросов и получения информации из Центрального каталога кредитных историй субъектом кредитной
+							истории и пользователем кредитной истории посредством обращения на официальный сайт Банка России
+							в
+							информационно-телекоммуникационной сети «Интернет». Код (дополнительный код) произвольно
+							формируется заемщиком и должен состоять из букв русского алфавита и цифр или букв латинского
+							алфавита и цифр. Минимальная длина кодов не должна быть менее четырех знаков, максимальная - не
+							должна быть более пятнадцати знаков.</p>
+						<p><sup>*</sup>&nbsp&nbspПод компаниями Группы понимаются: ПАО Банк «ФК Открытие», место нахождения:
+							г.
+							Москва,
+							ул.
+							Летниковская, д.2, стр.4; ПАО «Росгосстрах Банк», место нахождения: 121059, г. Москва, вн. тер.
+							г.
+							муниципальный округ Дорогомилово, ул. Киевская, д. 7, к. 1; АО «НПФ «Открытие», место
+							нахождения: г.
+							Москва; ПАО СК «Росгосстрах», место нахождения: 140002, Московская область, город Люберцы, улица
+							Парковая, дом 3; ООО СК «Росгосстрах Жизнь», место нахождения: 121059, г. Москва, вн.тер.г.
+							муниципальный округ Дорогомилово, ул. Киевская, д. 7, к. 1; АО «Открытие Брокер», место
+							нахождения
+							115114, г. Москва, ул. Летниковская, д. 2, стр. 4; ООО «УК «ОТКРЫТИЕ», место нахождения 115114,
+							Москва,
+							ул. Кожевническая, д. 14, стр. 5</p>
+					</td>
+				</tr>
+				<tr>
+					<td colspan=25 class="textCenter colorSteel">3. СОГЛАСИЕ КЛИЕНТА НА ОБРАБОТКУ ПЕРСОНАЛЬНЫХ
+						ДАННЫХ</td>
+				</tr>
+				<tr>
+					<td colspan=3>Я<br><input type="checkbox"> выражаю<br>согласие<br><input type="checkbox"> не
+						выражаю<br>согласие</td>
+					<td colspan=22>
+						<p>на обработку 1) ПАО Банк «ФК Открытие», место нахождения: г. Москва, ул. Летниковская, д.2,
+							стр.4; 2)
+							ПАО
+							«Росгосстрах Банк», место нахождения: 121059, г. Москва, вн. тер. г. муниципальный округ
+							Дорогомилово,
+							ул.
+							Киевская, д. 7, к. 1; 3) АО «НПФ «Открытие», место нахождения: г. Москва; 4) ПАО СК
+							«Росгосстрах»,
+							место
+							нахождения: 140002, Московская область, город Люберцы, улица Парковая, дом 3; 5) ООО СК
+							«Росгосстрах
+							Жизнь», место нахождения: 121059, г. Москва, вн.тер.г. муниципальный округ Дорогомилово, ул.
+							Киевская,
+							д. 7,
+							к. 1; 6) АО «Открытие Брокер», место нахождения 115114, г. Москва, ул. Летниковская, д. 2, стр.
+							4;
+							7)
+							ООО «УК
+							«ОТКРЫТИЕ», место нахождения 115114, Москва, ул. Кожевническая, д. 14, стр. 5 (далее –
+							Операторы)
+							моих
+							персональных данных (совершение любых действий с использованием средств автоматизации и/ или
+							без, в
+							том
+							числе сбор, запись, систематизацию, накопление, хранение, уточнение (обновление, изменение),
+							извлечение,
+							использование, передачу (распространение, предоставление, доступ), включая трансграничную
+							передачу,
+							обезличивание, блокирование, удаление и уничтожение) в соответствии с требованиями Федерального
+							закона
+							от
+							27.07.2006 №152-ФЗ «О персональных данных». Фотография моего лица (индивидуальные биометрические
+							характеристики моего лица), персональные данные, указанные в настоящем согласии, включая:
+							фамилию,
+							имя,
+							отчество; данные документа, удостоверяющего личность; год, месяц, число и место рождения;
+							гражданство;
+							адрес; контактные телефоны, почтовые адреса, адреса электронной почты и другие сведения,
+							предоставленные
+							мною для заключения договора с любым из Операторов или в период их действия, содержащиеся в
+							заявлениях,
+							письмах, соглашениях и иных документах (полученных Операторами или одним из Операторов также в
+							электронном виде), предоставляются в целях:</p>
+						<p>
+							- сбора и оформления документов для заключения договоров страхования в рамках добровольного
+							страхования физических лиц по программам накопительного и инвестиционного страхования жизни;
+							<br>- получения кредита и исполнения кредитного договора/договора о предоставлении и
+							использовании
+							банковских карт с ПАО Банк «ФК Открытие», ПАО «Росгосстрах Банк»; заключения и исполнения
+							договоров оказания услуг с любым из Операторов;
+							<br>- страхования моих имущественных интересов и имущественных интересов Операторов или одного
+							из
+							Операторов, связанных с риском его убытков, в результате неисполнения (ненадлежащего исполнения)
+							мной договорных обязательств;
+							<br>- получения информации о кредитном договоре/договоре о предоставлении и использовании
+							банковских
+							карт, заключенном с ПАО Банк «ФК Открытие», ПАО «Росгосстрах Банк»/иных договорах оказания услуг
+							лицами, указанными в настоящем согласии;
+							<br>- урегулирования просроченной задолженности перед ПАО Банк «ФК Открытие», ПАО «Росгосстрах
+							Банк»
+							в
+							случае неисполнения или ненадлежащего исполнения мной договорных обязательств;
+							<br>- заключения и исполнения договора уступки (или залога) прав (требований) по кредитному
+							договору/договору о предоставлении и использовании банковских карт, заключенному с ПАО Банка «ФК
+							Открытие», ПАО «Росгосстрах Банк», с любыми третьими лицами (при отсутствии запрета в договоре,
+							заключенном с Клиентом);
+							<br>- получения информации о других продуктах и услугах Операторов;
+							<br>- оценку моей платежеспособности с привлечением Операторами партнеров.
+						</p>
+						<p>
+							Настоящее согласие действует до момента получения письменного заявления Застрахованного лица об
+							отзыве
+							настоящего согласия одним из Операторов или всеми Операторами. Прекращение кредитного
+							договора/договора о предоставлении и использовании банковских карт/ иного договора оказания
+							услуг не
+							прекращает действие согласия. Осведомлен(а), что настоящее согласие может быть отозвано мной при
+							предоставлении Оператору/-ам заявления в простой письменной форме.
+						</p>
+					</td>
+				</tr>
+				<tr>
+					<td colspan=25 class="textCenter colorSteel">4. СОГЛАСИЕ КЛИЕНТА<br>
+						НА ПОЛУЧЕНИЕ КОММЕРЧЕСКИХ ПРЕДЛОЖЕНИЙ</td>
+				</tr>
+				<tr>
+					<td colspan=3>Я<br><input type="checkbox"> выражаю<br>согласие<br><input type="checkbox"> не
+						выражаю<br>согласие</td>
+					<td colspan=22>
+						<p>на получение мною от ООО СК «Росгосстрах Жизнь» и иных компаний Группы информации о продуктах и
+							услугах, коммерческих предложений Банка/ группы Компаний*, в том числе посредством почтовой
+							связи и
+							сетям электросвязи (телефонной, факсимильной, подвижной радиотелефонной связи и прочее) по
+							адресу
+							постоянной регистрации, адресу фактического проживания, адресу электронной почты, на контактные
+							номера
+							телефонов, указанные в настоящем согласии.</p>
+						<p>*&nbsp&nbspПод компаниями Группы понимаются: ПАО Банк «ФК Открытие», место нахождения: г. Москва,
+							ул. Летниковская, д.2, стр.4; ПАО «Росгосстрах Банк», место нахождения: 121059, г. Москва, вн.
+							тер.
+							г.
+							муниципальный округ Дорогомилово, ул. Киевская, д. 7, к. 1; АО «НПФ «Открытие», место
+							нахождения: г.
+							Москва; ПАО СК «Росгосстрах», место нахождения: 140002, Московская область, город Люберцы, улица
+							Парковая, дом 3; ООО СК «Росгосстрах Жизнь», место нахождения: 121059, г. Москва, вн.тер.г.
+							муниципальный
+							округ Дорогомилово, ул. Киевская, д. 7, к. 1; АО «Открытие Брокер», место нахождения 115114, г.
+							Москва, ул.
+							Летниковская, д. 2, стр. 4; ООО «УК «ОТКРЫТИЕ», место нахождения 115114, Москва, ул.
+							Кожевническая,
+							д. 14,
+							стр. 5</p>
+					</td>
+				</tr>
+				<tr>
+					<td colspan=25 class="textCenter colorSteel">КЛИЕНТ</td>
+				</tr>
+				<tr>
+					<td colspan=25 class="paddingTopBottom6">
+						<span class="spanLeft">Подпись __________________/{{holder.signatureName}}</span>
+						<span class="spanRight">{{policy.issueDateDocumentationFormat}}</span>
+					</td>
+				</tr>
+			</table>
+		</div>
+		{{#unless isPolicyHolder}}
+		<div>
+			<p class="center textBold break">Согласие на обработку персональных данных Застрахованного лица</p>
+			<table class="personalData">
+				<col class="col1">
+				<col class="col2">
+				<col class="col3">
+				<col class="col4">
+				<col class="col5">
+				<col class="col6">
+				<col class="col7">
+				<col class="col8">
+				<col class="col9">
+				<col class="col10">
+				<col class="col11">
+				<col class="col12">
+				<col class="col13">
+				<col class="col14">
+				<col class="col15">
+				<col class="col16">
+				<col class="col17">
+				<col class="col18">
+				<col class="col19">
+				<col class="col20">
+				<col class="col21">
+				<col class="col22">
+				<col class="col23">
+				<col class="col24">
+				<col class="col25">
+				<tr>
+					<td colspan=25 class="textCenter colorSteel">
+						1.ПЕРСОНАЛЬНЫЕ ДАННЫЕ ЗАСТРАХОВАННОГО ЛИЦА
+					</td>
+				</tr>
+				<tr>
+					<td colspan=5>Фамилия Имя Отчество</td>
+					<td colspan=20>{{insured.fullName}}</td>
+				</tr>
+				<tr>
+					<td>Пол</td>
+					<td colspan=4>
+						{{#if insured.isGenderMale}}<span class="smallCheckbox"><input type="checkbox"
+								checked></span>Мужской<br><span class="smallCheckbox"><input type="checkbox"></span>Женский
+						{{else}}<span class="smallCheckbox"><input type="checkbox"></span>Мужской<br><span
+							class="smallCheckbox" checked><input type="checkbox" checked></span>Женский{{/if}}
+					</td>
+					<td colspan=3>Гражданство</td>
+					<td colspan=6>
+						{{#if insured.isCitizenshipRusssia}}<span class="smallCheckbox"><input type="checkbox"
+								checked></span>РФ<br><span class="smallCheckbox"><input type="checkbox"></span>Иное
+						{{else}}<span class="smallCheckbox"><input type="checkbox"></span>РФ<br><span class="smallCheckbox"
+							checked><input type="checkbox" checked></span>Иное{{/if}}
+					</td>
+					<td colspan=3>Дата рождения</td>
+					<td colspan=3>{{insured.dateOfBirth}}</td>
+					<td colspan=4>Место рождения</td>
+					<td>{{insured.birthPlace}}</td>
+				</tr>
+				<tr>
+					<td rowspan=4 colspan="4">Документ,<br>удостоверяющий<br>личность</td>
+					<td colspan=7>
+						{{#if insured.isRusssiaPassport}}<span class="smallCheckbox"><input type="checkbox"
+								checked></span>паспорт гражданина РФ<br><span class="smallCheckbox"><input
+								type="checkbox"></span>заграничный паспорт гражданина РФ<br>
+						<span class="smallCheckbox"><input type="checkbox"></span>свидетельство о рождении<br><span
+							class="smallCheckbox"><input type="checkbox"></span>Иное{{/if}}
+						{{#if insured.isForeignTravelPassport}}<span class="smallCheckbox"><input
+								type="checkbox"></span>паспорт
+						гражданина РФ<br><span class="smallCheckbox"><input type="checkbox" checked></span>заграничный
+						паспорт
+						гражданина РФ<br>
+						<span class="smallCheckbox"><input type="checkbox"></span>свидетельство о рождении<br><span
+							class="smallCheckbox"><input type="checkbox"></span>Иное{{/if}}
+						{{#if insured.isBirthCertificate}}<span class="smallCheckbox"><input type="checkbox"></span>паспорт
+						гражданина РФ<br><span class="smallCheckbox"><input type="checkbox"></span>заграничный паспорт
+						гражданина РФ<br>
+						<span class="smallCheckbox" checked><input type="checkbox"></span>свидетельство о рождении<br><span
+							class="smallCheckbox"><input type="checkbox"></span>Иное{{/if}}
+						{{#if insured.isOtherDocument}}<span class="smallCheckbox"><input type="checkbox"></span>паспорт
+						гражданина РФ<br><span class="smallCheckbox"><input type="checkbox"></span>заграничный паспорт
+						гражданина РФ<br>
+						<span class="smallCheckbox"><input type="checkbox"></span>свидетельство о рождении<br><span
+							class="smallCheckbox" checked><input type="checkbox"></span>Иное{{/if}}
+					</td>
+					<td colspan=8></td>
+					<td colspan=3></td>
+					<td colspan=3></td>
+				</tr>
+				<tr>
+					<td colspan=7>Серия</td>
+					<td colspan=8>{{insured.docSeries}}</td>
+					<td colspan=3>Номер</td>
+					<td colspan=3>{{insured.docNumber}}</td>
+				</tr>
+				<tr>
+					<td colspan=7>код подразделения (при <br>наличии): </td>
+					<td colspan=8>{{insured.issuerCode}}</td>
+					<td colspan=3>дата выдачи</td>
+					<td colspan=3>{{insured.issueDate}}</td>
+				</tr>
+				<tr>
+					<td colspan=7>орган, выдавший документ:</td>
+					<td colspan=14>{{insured.issuerName}}</td>
+				</tr>
+				<tr>
+					<td colspan=10>Сведения о ранее выданном паспорте гражданина РФ<br>(<span class="colorBlue">заполняется
+							при
+							наличии</span>)</td>
+					<td colspan=5>Серия </td>
+					<td colspan=4></td>
+					<td colspan=4>Номер</td>
+					<td colspan=2></td>
+				</tr>
+				<tr>
+					<td rowspan=2 colspan=9>Адрес по месту постоянной регистрации <span class="cursive">(страна,<br>индекс,
+							регион, район, город/населенный пункт,<br>улица, дом, корпус, квартира)</span>
+					</td>
+					<td colspan=4>Дата<br>регистрации</td>
+					<td colspan=12></td>
+				</tr>
+				<tr>
+					<td colspan=15>{{insured.regFullAddress}}</td>
+				</tr>
+				<tr>
+					<td rowspan=2 colspan=9>Адрес по месту фактического проживания <span class="cursive">(страна,<br>индекс,
+							регион, район, город/населенный пункт,<br>улица, дом, корпус, квартира)</span>
+					</td>
+					<td colspan=16>
+						{{#if insured.isSameAsRegistration}}<span class="smallCheckbox"><input type="checkbox"
+								checked></span>{{else}}<span class="smallCheckbox"><input type="checkbox"></span>{{/if}}
+						совпадает с адресом регистрации по месту жительства
+					</td>
+				</tr>
+				<tr>
+					<td colspan=16>{{insured.factFullAddress}}</td>
+				</tr>
+				<tr>
+					<td colspan=3>Домашний телефон<br>по адресу<br>регистрации</td>
+					<td colspan=4></td>
+					<td colspan=5>Телефон по месту<br>фактического<br>проживания</td>
+					<td colspan=4></td>
+					<td colspan=5>Мобильный<br>телефон</td>
+					<td colspan=4>{{insured.phoneNumber}}</td>
+				</tr>
+				<tr>
+					<td colspan=2>e-mail</td>
+					<td colspan=4>{{insured.email}}</td>
+					<td>ИНН (при<br>наличии)</td>
+					<td colspan=9>{{insured.INN}}</td>
+					<td colspan=5>СНИЛС (при<br>наличии)</td>
+					<td colspan=4>{{insured.SNILS}}</td>
+				</tr>
+				<tr>
+					<td colspan=25 class="textCenter colorSteel">
+						2.СОГЛАСИЕ ЗАСТРАХОВАННОГО ЛИЦА, ПРЕДОСТАВЛЕННОЕ ПАО Банк «ФК Открытие»/ ПАО «Росгосстрах
+						Банк»,<br>НА
+						ВЗАИМОДЕЙСТВИЕ С БЮРО КРЕДИТНЫХ ИСТОРИЙ
+					</td>
+				</tr>
+				<tr>
+					<td colspan=3>Я<br><input type="checkbox"> выражаю<br>согласие<br><input type="checkbox"> не
+						выражаю<br>согласие</td>
+					<td colspan=22>
+						<p>на получение ПАО Банк «ФК Открытие», ПАО «Росгосстрах Банк» (далее совместно – Пользователи
+							кредитной
+							истории, а по отдельности – Пользователь кредитной истории) информации обо мне из любых бюро
+							кредитных
+							историй (одного или нескольких), содержащейся в основной части моей кредитной истории в объеме,
+							порядке
+							и сроки, которые предусмотрены Федеральным законом от 30.12.2004 №218-ФЗ «О кредитных
+							историях».<br>
+							Согласие предоставлено в целях:</p>
+						<p>- проверки Пользователем /-ями кредитной истории сведений, предоставленных мной Пользователю /
+							-ям
+							кредитной истории либо иным компаниям Группы* при приеме на обслуживание и /или при заключении
+							договоров
+							с Пользователем/-ями кредитной истории и/или иными компаниями Группы;<br>
+							- проверки Пользователем /-ями кредитной истории сведений обо мне в процессе оказания мне
+							банковских
+							услуг и/или иных услуг компаний Группы;<br>
+							- проверки Пользователем / -ями кредитной истории сведений при формирования Пользователем/-ями
+							кредитной
+							истории предложений по кредитным, банковским и иным продуктам компаний Группы.
+							Право выбора бюро кредитных историй предоставляется мной Пользователям кредитной истории по их
+							усмотрению и дополнительного согласования со мной не требует.</p>
+						<p>Код субъекта кредитной истории
+							<span
+								class="bigBox">&#9633&#9633&#9633&#9633&#9633&#9633&#9633&#9633&#9633&#9633&#9633&#9633&#9633&#9633</span>
+						</p>
+						<p class="cursive"> (Указать свой код, сформированный посредством комбинации цифровых и буквенных
+							символов в
+							соответствии с пунктом 2.13 Указания Банка России от 31.08.2005 №1610-У «О порядке направления
+							запросов и получения информации из Центрального каталога кредитных историй субъектом кредитной
+							истории и пользователем кредитной истории посредством обращения на официальный сайт Банка России
+							в
+							информационно-телекоммуникационной сети «Интернет». Код (дополнительный код) произвольно
+							формируется заемщиком и должен состоять из букв русского алфавита и цифр или букв латинского
+							алфавита и цифр. Минимальная длина кодов не должна быть менее четырех знаков, максимальная - не
+							должна быть более пятнадцати знаков.</p>
+						<p><sup>*</sup>&nbsp&nbspПод компаниями Группы понимаются: ПАО Банк «ФК Открытие», место нахождения:
+							г.
+							Москва,
+							ул.
+							Летниковская, д.2, стр.4; ПАО «Росгосстрах Банк», место нахождения: 121059, г. Москва, вн. тер.
+							г.
+							муниципальный округ Дорогомилово, ул. Киевская, д. 7, к. 1; АО «НПФ «Открытие», место
+							нахождения: г.
+							Москва; ПАО СК «Росгосстрах», место нахождения: 140002, Московская область, город Люберцы, улица
+							Парковая, дом 3; ООО СК «Росгосстрах Жизнь», место нахождения: 121059, г. Москва, вн.тер.г.
+							муниципальный округ Дорогомилово, ул. Киевская, д. 7, к. 1; АО «Открытие Брокер», место
+							нахождения
+							115114, г. Москва, ул. Летниковская, д. 2, стр. 4; ООО «УК «ОТКРЫТИЕ», место нахождения 115114,
+							Москва,
+							ул. Кожевническая, д. 14, стр. 5</p>
+					</td>
+				</tr>
+				<tr>
+					<td colspan=25 class="textCenter colorSteel">3. СОГЛАСИЕ ЗАСТРАХОВАННОГО ЛИЦА НА ОБРАБОТКУ ПЕРСОНАЛЬНЫХ
+						ДАННЫХ</td>
+				</tr>
+				<tr>
+					<td colspan=3>Я<br><input type="checkbox"> выражаю<br>согласие<br><input type="checkbox"> не
+						выражаю<br>согласие</td>
+					<td colspan=22>
+						<p>на обработку 1) ПАО Банк «ФК Открытие», место нахождения: г. Москва, ул. Летниковская, д.2,
+							стр.4; 2)
+							ПАО
+							«Росгосстрах Банк», место нахождения: 121059, г. Москва, вн. тер. г. муниципальный округ
+							Дорогомилово,
+							ул.
+							Киевская, д. 7, к. 1; 3) АО «НПФ «Открытие», место нахождения: г. Москва; 4) ПАО СК
+							«Росгосстрах»,
+							место
+							нахождения: 140002, Московская область, город Люберцы, улица Парковая, дом 3; 5) ООО СК
+							«Росгосстрах
+							Жизнь», место нахождения: 121059, г. Москва, вн.тер.г. муниципальный округ Дорогомилово, ул.
+							Киевская,
+							д. 7,
+							к. 1; 6) АО «Открытие Брокер», место нахождения 115114, г. Москва, ул. Летниковская, д. 2, стр.
+							4;
+							7)
+							ООО «УК
+							«ОТКРЫТИЕ», место нахождения 115114, Москва, ул. Кожевническая, д. 14, стр. 5 (далее –
+							Операторы)
+							моих
+							персональных данных (совершение любых действий с использованием средств автоматизации и/ или
+							без, в
+							том
+							числе сбор, запись, систематизацию, накопление, хранение, уточнение (обновление, изменение),
+							извлечение,
+							использование, передачу (распространение, предоставление, доступ), включая трансграничную
+							передачу,
+							обезличивание, блокирование, удаление и уничтожение) в соответствии с требованиями Федерального
+							закона
+							от
+							27.07.2006 №152-ФЗ «О персональных данных». Фотография моего лица (индивидуальные биометрические
+							характеристики моего лица), персональные данные, указанные в настоящем согласии, включая:
+							фамилию,
+							имя,
+							отчество; данные документа, удостоверяющего личность; год, месяц, число и место рождения;
+							гражданство;
+							адрес; контактные телефоны, почтовые адреса, адреса электронной почты и другие сведения,
+							предоставленные
+							мною для заключения договора с любым из Операторов или в период их действия, содержащиеся в
+							заявлениях,
+							письмах, соглашениях и иных документах (полученных Операторами или одним из Операторов также в
+							электронном виде), предоставляются в целях:</p>
+						<p>
+							- сбора и оформления документов для заключения договоров страхования в рамках добровольного
+							страхования физических лиц по программам накопительного и инвестиционного страхования жизни;
+							<br>- получения кредита и исполнения кредитного договора/договора о предоставлении и
+							использовании
+							банковских карт с ПАО Банк «ФК Открытие», ПАО «Росгосстрах Банк»; заключения и исполнения
+							договоров оказания услуг с любым из Операторов;
+							<br>- страхования моих имущественных интересов и имущественных интересов Операторов или одного
+							из
+							Операторов, связанных с риском его убытков, в результате неисполнения (ненадлежащего исполнения)
+							мной договорных обязательств;
+							<br>- получения информации о кредитном договоре/договоре о предоставлении и использовании
+							банковских
+							карт, заключенном с ПАО Банк «ФК Открытие», ПАО «Росгосстрах Банк»/иных договорах оказания услуг
+							лицами, указанными в настоящем согласии;
+							<br>- урегулирования просроченной задолженности перед ПАО Банк «ФК Открытие», ПАО «Росгосстрах
+							Банк»
+							в
+							случае неисполнения или ненадлежащего исполнения мной договорных обязательств;
+							<br>- заключения и исполнения договора уступки (или залога) прав (требований) по кредитному
+							договору/договору о предоставлении и использовании банковских карт, заключенному с ПАО Банка «ФК
+							Открытие», ПАО «Росгосстрах Банк», с любыми третьими лицами (при отсутствии запрета в договоре,
+							заключенном с Клиентом);
+							<br>- получения информации о других продуктах и услугах Операторов;
+							<br>- оценку моей платежеспособности с привлечением Операторами партнеров.
+						</p>
+						<p>
+							Настоящее согласие действует до момента получения письменного заявления Застрахованного лица об
+							отзыве
+							настоящего согласия одним из Операторов или всеми Операторами. Прекращение кредитного
+							договора/договора о предоставлении и использовании банковских карт/ иного договора оказания
+							услуг не
+							прекращает действие согласия. Осведомлен(а), что настоящее согласие может быть отозвано мной при
+							предоставлении Оператору/-ам заявления в простой письменной форме.
+						</p>
+					</td>
+				</tr>
+				<tr>
+					<td colspan=25 class="textCenter colorSteel">4. СОГЛАСИЕ ЗАСТРАХОВАННОГО ЛИЦА<br>
+						НА ПОЛУЧЕНИЕ КОММЕРЧЕСКИХ ПРЕДЛОЖЕНИЙ</td>
+				</tr>
+				<tr>
+					<td colspan=3>Я<br><input type="checkbox"> выражаю<br>согласие<br><input type="checkbox"> не
+						выражаю<br>согласие</td>
+					<td colspan=22>
+						<p>на получение мною от ООО СК «Росгосстрах Жизнь» и иных компаний Группы информации о продуктах и
+							услугах, коммерческих предложений Банка/ группы Компаний*, в том числе посредством почтовой
+							связи и
+							сетям электросвязи (телефонной, факсимильной, подвижной радиотелефонной связи и прочее) по
+							адресу
+							постоянной регистрации, адресу фактического проживания, адресу электронной почты, на контактные
+							номера
+							телефонов, указанные в настоящем согласии.</p>
+						<p>*&nbsp&nbspПод компаниями Группы понимаются: ПАО Банк «ФК Открытие», место нахождения: г. Москва,
+							ул. Летниковская, д.2, стр.4; ПАО «Росгосстрах Банк», место нахождения: 121059, г. Москва, вн.
+							тер.
+							г.
+							муниципальный округ Дорогомилово, ул. Киевская, д. 7, к. 1; АО «НПФ «Открытие», место
+							нахождения: г.
+							Москва; ПАО СК «Росгосстрах», место нахождения: 140002, Московская область, город Люберцы, улица
+							Парковая, дом 3; ООО СК «Росгосстрах Жизнь», место нахождения: 121059, г. Москва, вн.тер.г.
+							муниципальный
+							округ Дорогомилово, ул. Киевская, д. 7, к. 1; АО «Открытие Брокер», место нахождения 115114, г.
+							Москва, ул.
+							Летниковская, д. 2, стр. 4; ООО «УК «ОТКРЫТИЕ», место нахождения 115114, Москва, ул.
+							Кожевническая,
+							д. 14,
+							стр. 5</p>
+					</td>
+				</tr>
+				<tr>
+					<td colspan=25 class="textCenter colorSteel">ЗАСТРАХОВАННОЕ ЛИЦО</td>
+				</tr>
+				<tr>
+					<td colspan=25 class="paddingTopBottom6">
+						<span class="spanLeft">Подпись __________________/{{insured.signatureName}}</span>
+						<span class="spanRight">{{policy.issueDateDocumentationFormat}}</span>
+					</td>
+				</tr>
+			</table>
+		</div>
+		{{/unless}}
+		<!-- Приложения Уведомление от БФКО-->
+		<div class="signatureNone">
+			<div class="noticeBFKO">
+				<p class="break right smallText">Приложение к Приказу<br>от 04.02.2019 №122</p>
+				<p class="right boldText marginTop">Форма У-109-2</p>
+				<p class="textCenter">Уведомление<br>граждан при предложении им финансовых услуг в ПАО Банк «ФК Открытие»
+				</p>
+				<p class="right">{{holderInfo.issueDate}}</p>
+				<p class="mainText">
+					Я, {{holder.fullName}}, настоящим подтверждаю, что ПАО Банк «ФК Открытие» предоставил мне сведения о
+					том,
+					что:
+				</p>
+				<ol>
+					<li>
+						инвестиционное или накопительное страхование жизни оказывается компанией ООО СК «Росгосстрах Жизнь»;
+					</li>
+					<li>
+						условия договора и действия, которые будут совершены в рамках оказания услуги, определены формой
+						Правил страхования, размещенной на сайте в сети Интернет по адресу www.rgsl.ru;
+					</li>
+					<li>
+						размер вознаграждения (комиссии), которое будет взиматься ООО СК «Росгосстрах Жизнь», в рамках
+						оказания услуги определен в соответствии с документом, указанным выше в пункте 2 настоящего
+						Уведомления;
+					</li>
+					<li>
+						риски, связанные с оказанием услуги, определены документом, указанным выше в пункте 2 настоящего
+						Уведомления. Инвестирование в финансовые инструменты связано с определенным риском, заявления
+						любых лиц о возможном увеличении в будущем стоимости инвестированных средств могут рассматриваться
+						не иначе как предположения. Результаты инвестирования в прошлом не определяют и не являются
+						гарантией
+						доходности инвестирования в будущем.
+					</li>
+				</ol>
+				<p class="mainText">Также настоящим подтверждаю, что уведомлен о нижеследующем:</p>
+				<table>
+					<col class="col1">
+					<col class="col2">
+					<tr>
+						<td>
+							<input type="checkbox" checked>
+						</td>
+						<td>
+							денежные средства по указанным в настоящем Уведомлении продуктам либо услугам не застрахованы в
+							соответствии с Федеральным законом от 23.12.2003 г. №177-ФЗ «О страховании вкладов в банках
+							Российской
+							Федерации»;
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<input type="checkbox" checked>
+						</td>
+						<td>
+							ПАО Банк «ФК Открытие» не является поставщиком указанных продуктов либо услуг;
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<input type="checkbox" checked>
+						</td>
+						<td>
+							ПАО Банк «ФК Открытие» не является инвестиционным советником и не оказывает услуги по
+							инвестиционному
+							консультированию, как этот термин определен в статье 6.1. Федерального закона от 22.04.1996 N
+							39-ФЗ
+							«О
+							рынке ценных бумаг», и/или иные какие-либо подобные услуги. Информация подготовлена и
+							предоставляется
+							ПАО Банк «ФК Открытие» обезличено для определенной категории и/или для всех клиентов,
+							потенциальных
+							клиентов и контрагентов ООО СК «Росгосстрах Жизнь». В рамках предоставления данной информации
+							ПАО
+							Банк «ФК Открытие» не представляет каких-либо консультаций, рекомендаций, советов или анализа в
+							отношении каких-либо ценных бумаг, сделок с ними и (или) заключения договоров, являющихся
+							производными
+							финансовыми инструментами, представляемая ПАО Банк «ФК Открытие» информация не является
+							индивидуальной инвестиционной консультацией.
+						</td>
+					</tr>
+				</table>
+
+				{{#if holderInfo.bool}}
+				<p class="mainText">Также настоящим подтверждаю, что:</p>
+				<ul>
+					{{#if holderInfo.isEmail}}
+					<li class="circle">
+						e-mail – {{holderInfo.email}} является адресом электронной почты, который используется мною;
+						документы и
+						сообщения, направленные на указанный адрес электронной почты либо полученные с этого адреса
+						электронной почты, будут, соответственно, получены либо отправлены мною; об изменении
+						используемого мною e-mail обязуюсь сообщать незамедлительно{{#if
+						holder.phoneNumber}};{{else}}.{{/if}}
+					</li>
+					{{/if}}
+					{{#if holderInfo.isPhoneNumber}}
+					<li class="circle">
+						телефонный номер {{holderInfo.phoneNumber}} является номером телефона, который используется мною;
+						sms-сообщения,
+						отправленные с указанного номера либо направленные на этот номер телефона, будут,
+						соответственно, отправлены либо прочитаны мною; об изменении номера используемого мною
+						телефона обязуюсь сообщать незамедлительно
+					</li>
+					{{/if}}
+				</ul>
+				{{/if}}
+				<p>
+					<span class="spanLeft">{{holder.fullName}}</span><span class="spanRight">____________________</span>
+				</p>
+				<p>
+					<span class="spanRight">(подпись гражданина)</span>
+				</p>
+			</div>
+		</div>
+		{{/if}}
+		<!-- Приложения Уведомление от Зенит-->
+		{{#if ZenithPartner}}
+		<section>
+			<div class="zenitMargin zenitNotice">
+				<div class="logoDiv">
+					<img src="../../../life-insurance/component/POImageConst/printout/assets/img/bankZenithLogo.png"
+						alt="Логотип Банк ЗЕНИТ" class="logo">
+				</div>
+
+				<p class="textRight backgroundMarine">www.zenit.ru</p>
+
+				<p class="textCenter boldText">
+					Информация, предоставляемая ПАО Банк ЗЕНИТ, действующим от имени страховой организации при заключении с
+					физическим лицом договора добровольного страхования жизни{{#unless newBankDoc}} с условием выплаты гарантированного дохода по
+					ставке, зафиксированной в договоре добровольного страхования{{/unless}}
+				</p>
+				{{#if newBankDoc}}
+				<div class="containerNewDoc">
+					Я, <span class="line">{{holder.fullName}}</span> <br>
+					<span style="font-style: italic;">(фамилия, имя, отчество (при наличии) полностью)</span>
+				</div>
+				<p class="textJustifyNewDoc">
+					(далее – Страхователь{{#if isPolicyHolder}} /Застрахованный{{/if}}), настоящим
+					подтверждаю, что ПАО Банк
+					ЗЕНИТ предоставило мне информацию о договоре накопительного страхования жизни страховой компании ООО СК
+					«Росгосстрах Жизнь» (далее – Страховщик):
+				</p>
+				{{else}}
+				<p class="textJustify">
+					Я, {{holder.fullName}} (далее – Страхователь{{#if isPolicyHolder}} /Застрахованный{{/if}}), настоящим
+					подтверждаю, что ПАО Банк
+					ЗЕНИТ предоставило мне информацию о договоре накопительного страхования жизни страховой компании ООО СК
+					«Росгосстрах Жизнь» (далее – Страховщик):
+				</p>
+				{{/if}}
+				
+
+				<table class="zenithTable">
+					<col class="col1">
+					<col class="col2">
+					<col class="col3">
+					<col class="col4">
+					<tr>
+						<td class="boldText textCenter">
+							N п/п
+						</td>
+						<td class="boldText textCenter">
+							Вид информации
+						</td>
+						<td class="boldText textCenter">
+							Содержание предоставляемой информации
+						</td>
+						<td class="boldText textCenter">
+							Подпись физического лица, подтверждающая его ознакомление с информацией
+						</td>
+					</tr>
+					<tr>
+						<td class="boldText textCenter">1</td>
+						<td class="boldText textCenter">2</td>
+						<td class="boldText textCenter">3</td>
+						<td class="boldText textCenter">4</td>
+					</tr>
+					<tr>
+						<td rowspan=7 class="textCenter">1</td>
+						{{#unless newBankDoc}}
+						<td rowspan=7>
+							Информация о договоре добровольного страхования жизни с условием периодических страховых выплат
+							(ренты, аннуитетов) и (или) с участием страхователя в инвестиционном доходе страховщика (далее -
+							договор добровольного страхования)
+						</td>
+						{{else}}
+						<td rowspan=7>
+							Информация о договоре добровольного страхования жизни на случай смерти, дожития до определенного возраста или срока либо
+							наступления иного события (далее – договор добровольного страхования, договор)
+						</td>
+						{{/unless}}
+						<td>
+							1.1 Переданные по договору добровольного страхования денежные средства не подлежат
+							страхованию
+							в соответствии с Федеральным законом от 23 декабря 2003 года № 177-ФЗ «О страховании
+							вкладов в
+							банках Российской Федерации»
+						</td>
+						<td class="textCenter">
+							<p class="borderCheck"></p>
+							<p>С информацией ознакомлен(-а)</p>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							1.2 Договор добровольного страхования не является договором банковского вклада (банковского
+							счета)
+						</td>
+						<td class="textCenter">
+							<p class="borderCheck"></p>
+							<p>С информацией ознакомлен(-а)</p>
+						</td>
+					</tr>
+					<tr>
+						{{#unless newBankDoc}}
+						<td>
+							1.3 Размер гарантированного дохода установлен договором добровольного страхования
+						</td>
+						{{else}}
+						<td>
+							1.3 Размер гарантированной страховой суммы по риску "Дожитие" установлен договором добровольного страхования
+						</td>
+						{{/unless}}
+						<td class="textCenter">
+							<p class="borderCheck"></p>
+							<p>С информацией ознакомлен(-а)</p>
+						</td>
+					</tr>
+					<tr>
+						<td>
+
+							1.4 Договор носит долгосрочный характер и предусматривает обязательства Страхователя по
+							оплате
+							страховых взносов (страховой премии). Порядок и сроки уплаты страховой премии
+							устанавливаются
+							договором
+						</td>
+						<td class="textCenter">
+							<p class="borderCheck"></p>
+							<p>С информацией ознакомлен(-а)</p>
+						</td>
+					</tr>
+					<tr>
+						{{#unless newBankDoc}}
+						<td>
+							1.5 В течение первых 30 календарных дней (в соответствии с условиями
+							договора) со дня
+							заключения договора действует «период охлаждения», в течение которого Страхователь
+							вправе
+							досрочно расторгнуть договор и получить возврат уплаченной страховой премии в полном
+							объеме
+							(кроме случаев, если по договору уже производились страховые выплаты, либо у Страховщика
+							имеются
+							заявления Застрахованного лица (выгодоприобретателя) о наступлении страхового случая по
+							договору
+							в течение «периода охлаждения» в порядке, предусмотренном Указанием Банка России от
+							20.11.2015 №
+							3854-У «О минимальных (стандартных) требованиях к условиям и порядку осуществления
+							отдельных
+							видов добровольного страхования». Возврат уплаченной страховой премии осуществляется
+							Страховщиком
+						</td>
+						{{else}}
+						<td>
+							1.5. В течение первых 30 календарных дней со дня заключения договора добровольного
+							страхования действует «период охлаждения», в течение которого Страхователь вправе досрочно
+							расторгнуть договор и получить возврат уплаченной страховой премии в полном объеме
+							(кроме случаев, если по договору уже производились страховые выплаты, либо у Страховщика имеются заявления Застрахованного лица (Выгодоприобретателя)
+							о наступлении страхового случая по договору в течение «периода охлаждения» в порядке, предусмотренном Указанием Банка России от 20.11.2015 № 3854-У
+							«О минимальных (стандартных) требованиях к условиям и порядку осуществления отдельных видов добровольного страхования». Возврат уплаченной страховой премии осуществляется Страховщиком
+						</td>
+						{{/unless}}
+						<td class="textCenter">
+							<p class="borderCheck"></p>
+							<p>С информацией ознакомлен(-а)</p>
+						</td>
+					</tr>
+					<tr>
+						{{#unless newBankDoc}}
+						<td>
+							1.6 При досрочном прекращении договора по истечении «периода охлаждения»
+							Страховщик выплачивает Страхователю выкупную сумму в размере, определяемом согласно
+							договору, в зависимости от периода страхования, на который приходится дата досрочного
+							прекращения договора. При этом размер выкупной суммы может быть меньше суммы уплаченной
+							страховой премии по договору.
+						</td>
+						{{else}}
+						<td>
+							1.6 При досрочном прекращении договора добровольного страхования по истечении «периода охлаждения»
+							Страховщик выплачивает Страхователю выкупную сумму в размере, определяемом согласно
+							договору, в зависимости от периода страхования, на который приходится дата досрочного
+							прекращения договора. При этом размер выкупной суммы может быть меньше суммы уплаченной
+							страховой премии по договору
+						</td>
+						{{/unless}}
+						<td class="textCenter">
+							<p class="borderCheck"></p>
+							<p>С информацией ознакомлен(-а)</p>
+						</td>
+					</tr>
+					{{#if isAfter02072025}}
+					<tr>
+						<td>
+							1.7 Вложение в базовый актив всех имеющихся у потребителя услуги (продукта) (Страхователя) денежных средств либо их большей части может привести к утрате всех его накоплений
+						</td>
+						<td class="textCenter">
+							<p class="borderCheck"></p>
+							<p>С информацией ознакомлен(-а)</p>
+						</td>
+					</tr>
+					{{/if}}
+				</table>
+
+				<p class="textLeft">{{policy.issueDateDocumentationFormat}} г.</p>
+			</div>
+		</section>
+		{{/if}}
+		<!-- Квитанция ОАС-->
+		{{#if OASpartner}}
+		<section>
+			<div class="claimCheckDiv OASreceipt">
+				<div class="leftDiv">
+					<div>ИЗВЕЩЕНИЕ</div>
+					<div>Кассир</div>
+				</div>
+				<div class="rightDiv">
+					<div>
+						<p>Наименование получателя ООО СК «Росгосстрах Жизнь»</p>
+						<p>ИНН 7743504307</p>
+						<p>{{bankInfo}}.</p>
+						<p>Плательщик (Ф.И.О., адрес)</p>
+						<hr>
+						<p>{{holder.fullName}}</p>
+						<hr>
+						<p>{{holder.registrationAddress}}</p>
+					</div>
+					<div>
+						<table>
+							<col class="col1">
+							<col class="col2">
+							<col class="col3">
+							<tr>
+								<td>Назначение платежа</td>
+								<td>Дата</td>
+								<td>Сумма</td>
+							</tr>
+							<tr>
+								<td>Оплата услуг страхования по договору <br>№ {{policy.number}}</td>
+								<td>{{policy.issueDate}}</td>
+								<td>{{risk.premium.sum}} руб.</td>
+							</tr>
+						</table>
+					</div>
+					<div>
+						<p>Подпись плательщика</p>
+					</div>
+				</div>
+				<div class="leftDiv">
+					<div>КВИТАНЦИЯ</div>
+					<div>Кассир</div>
+				</div>
+				<div class="rightDiv">
+					<div>
+						<p>Наименование получателя ООО СК «Росгосстрах Жизнь»</p>
+						<p>ИНН 7743504307</p>
+						<p>{{bankInfo}}.</p>
+						<p>Плательщик (Ф.И.О., адрес)</p>
+						<hr>
+						<p>{{holder.fullName}}</p>
+						<hr>
+						<p>{{holder.registrationAddress}}</p>
+					</div>
+					<div>
+						<table>
+							<col class="col1">
+							<col class="col2">
+							<col class="col3">
+							<tr>
+								<td>Назначение платежа</td>
+								<td>Дата</td>
+								<td>Сумма</td>
+							</tr>
+							<tr>
+								<td>Оплата услуг страхования по договору <br>№ {{policy.number}}</td>
+								<td>{{policy.issueDate}}</td>
+								<td>{{risk.premium.sum}} руб.</td>
+							</tr>
+						</table>
+					</div>
+					<div>
+						<p>Подпись плательщика</p>
+					</div>
+				</div>
+			</div>
+		</section>
+		{{/if}}
+		<!-- Приложения Уведомление от Акцепт-->
+		{{#if AkceptPartner}}
+		<section>
+			<div class="smallMargin akceptNotice break">
+
+				<p class="textCenter boldText">
+					Форма уведомления граждан при предложении им
+					<br>финансовых услуг в кредитных организациях
+				</p>
+
+				<p class="right">{{holderInfo.issueDate}} г.</p>
+
+				<div class="textJustify">
+
+					<p>Я, {{holder.fullName}}, настоящим подтверждаю, что АО «Банк Акцепт», предоставил мне сведения о том,
+						что:</p>
+
+					<ol class="firstStep">
+						<li>предлагаемая услуга: «Страхование жизни» по программе страхования «{{policy.product}}» на срок
+							{{insuranceTerms.text}} оказывается компанией ООО СК «Росгосстрах Жизнь» в рамках договора
+							страхования жизни;</li>
+						<li>услуга не является договором банковского вклада и подразумевает страхование имущественных
+							интересов, связанных со смертью Застрахованного и с дожитием Застрахованного до определенного
+							возраста или срока (конкретный перечень страховых случаев определен в Договоре страхования). В
+							составе страховой выплаты Страхователю или иному лицу, в пользу которого заключен Договор
+							страхования, может быть выплачен дополнительный доход<span class="footnote">Под доходом
+								понимается разница между страховой премией за весь срок страхования и страховой выплатой по
+								риску «Дожитие Застрахованного до окончания срока страхования».</span>. Страховая выплата
+							производится при наступлении предусмотренного Договором страхования страхового случая;</li>
+						<li>размер страховой премии составит {{risk.premium.sum}} рублей;</li>
+						<li>риски, связанные с оказанием услуги, заключаются в следующем:
+							<ol class="secondStep">
+								<li>При досрочном прекращении договора страхования Страхователю выплачивается выкупная сумма
+									в размере, определяемом п. IX Договора страхования в зависимости от периода страхования,
+									на который приходится дата досрочного прекращения Договора страхования.</li>
+								<li>В случае смерти Застрахованного в течение срока страхования, не являющейся страховым
+									случаем в соответствии с условиями Договора страхования жизни, Страхователю
+									выплачивается выкупная сумма в размере, определяемом п. IX Договора страхования в
+									зависимости от периода страхования, на который приходится дата досрочного прекращения
+									Договора страхования.</li>
+								<li>Внесенный страховой взнос возвращается Страхователю в полном объеме только в случае
+									досрочного прекращения Договора страхования в течение 30 (тридцати) календарных дней с
+									даты оформления Договора (кроме случаев, если по Договору страхования уже производились
+									страховые выплаты, либо у Страховщика имеются заявления Страхователя (Застрахованного,
+									Выгодоприобретателя) о наступлении по Договору страхования страхового случая в течение
+									первых 30 (тридцати) календарных дней со дня его заключения).</li>
+							</ol>
+						</li>
+					</ol>
+
+					<p class="right subsribeTab">_________________
+						<br>(подпись гражданина)
+					</p>
+
+					<p class="boldText">Также настоящим подтверждаю, что уведомлен о нижеследующем:</p>
+
+					<p><span>&#9744;</span>Денежные средства, уплаченные мной в рамках данной услуги (договор страхования)
+						не являются застрахованными в соответствии с Федеральным законом от 23.12.2003 № 177-ФЗ «О
+						страховании вкладов физических лиц в банках Российской Федерации».</p>
+
+					<p class="right subsribeTab">_________________
+						<br>(подпись гражданина)
+					</p>
+
+					<p><span>&#9744;</span>АО «Банк Акцепт» не является поставщиком указанных услуг (стороной договора
+						страхования)</p>
+
+					<p class="right subsribeTab">_________________
+						<br>(подпись гражданина)
+					</p>
+				</div>
+			</div>
+		</section>
+		<!-- Согласие на обработку данных от Акцепта-->
+		<section>
+			<div class="smallMargin akceptPersonalData break">
+
+				<p class="textCenter boldText">
+					СОГЛАСИЕ
+					<br>на обработку персональных данных
+				</p>
+
+				<table>
+					<col class="col1">
+					<col class="col2">
+					<col class="col3">
+					<col class="col4">
+					<col class="col5">
+					<col class="col6">
+					<col class="col7">
+					<tr>
+						<td class="right">Фамилия</td>
+						<td colspan=6>{{holder.lastName}}</td>
+					</tr>
+					<tr>
+						<td class="right">Имя</td>
+						<td colspan=6>{{holder.firstName}}</td>
+					</tr>
+					<tr>
+						<td class="right">Отчество</td>
+						<td colspan=6>{{holder.middleName}}</td>
+					</tr>
+					<tr>
+						<td class="right" colspan=4>Наименование документа удостоверяющего личность</td>
+						<td colspan=3>{{holder.typeOfDOcumentDesc}}</td>
+					</tr>
+					<tr>
+						<td class="right">Серия</td>
+						<td>{{holder.docSeries}}</td>
+						<td class="right">Номер</td>
+						<td colspan=2>{{holder.docNumber}}</td>
+						<td class="right">Дата выдачи</td>
+						<td>{{holder.document.dateOfIssue}}</td>
+					</tr>
+					<tr>
+						<td class="right">Кем выдан</td>
+						<td colspan=6>{{holder.document.issuedBy}}</td>
+					</tr>
+					<tr>
+						<td class="right">Адрес регистрации</td>
+						<td colspan=6>{{holder.registrationAddress}}</td>
+					</tr>
+					<tr>
+						<td class="right">Телефон</td>
+						<td colspan=6>{{holder.phoneNumber}}</td>
+					</tr>
+				</table>
+
+				<div class="textJustify mainText">
+					<p>Настоящим, я <span>&#9744;</span> даю <span>&#9744;</span> не даю согласие АО «Банк Акцепт», адрес
+						местонахождения г. Новосибирск, ул. Советская, д. 14, на обработку моих персональных данных
+						(фамилия, имя, отчество, реквизиты документа, удостоверяющего личность, адрес, телефон, любые иные
+						данные), в том числе автоматизированную, сбор, запись, систематизацию, накопление, уточнение
+						(изменение, обновление), извлечение, использование, обезличивание, хранение, уничтожение, а также
+						передачу их партнеру Банка – ООО СК «Росгосстрах Жизнь» (далее – Страховщик), адрес местонахождения
+						121059, г. Москва, вн. тер. г. муниципальный округ Дорогомилово, ул. Киевская, д. 7, к. 1, в целях
+						принятия решения/заключения/исполнения договоров страхования Страховщиком, проверки предоставленной
+						мной информации/персональных данных/документов, а также в целях продвижения/предложения и
+						реализации/оказании мне иных продуктов/услуг Банка и/или Страховщика, проведения опросов,
+						уточнения/обновления данных, в том числе путем осуществления прямых контактов со мной с помощью
+						средств связи.</p>
+					<p>Настоящее согласие действует в течение 10 лет с даты его подписания. Я уведомлен о праве отозвать
+						согласие путем предоставления в Банк письменного заявления.</p>
+				</div>
+
+				<div class="subsribe">
+					<span>{{holder.signatureName}}</span>
+					<span>________________</span>
+					<span>{{policy.issueDateDocumentationFormat}} г.</span>
+					<span class="smallText">Фамилия и инициалы</span>
+					<span class="smallText">Подпись</span>
+				</div>
+			</div>
+		</section>
+		{{/if}}
+		<!-- Приложения Уведомление от ВТБ-->
+		{{#if isVTBBankDocument}}
+		{{#if isVTBNOTE}}
+		<div class="signatureNone break">
+			<div class="VTBNotice">
+				<p class="textCenter boldText">
+					ИНФОРМАЦИЯ, ПРЕДОСТАВЛЯЕМАЯ БАНКОМ ВТБ (ПУБЛИЧНЫМ<br>
+					АКЦИОНЕРНЫМ ОБЩЕСТВОМ), ДЕЙСТВУЮЩИМ ОТ ИМЕНИ СТРАХОВОЙ<br>
+					ОРГАНИЗАЦИИ  ООО СК « РОСГОССТРАХ ЖИЗНЬ», ПРИ ЗАКЛЮЧЕНИИ С<br>
+					ФИЗИЧЕСКИМ ЛИЦОМ ДОГОВОРА ДОБРОВОЛЬНОГО СТРАХОВАНИЯ ЖИЗНИ С<br>
+					УЧАСТИЕМ СТРАХОВАТЕЛЯ В ИНВЕСТИЦИОННОМ ДОХОДЕ СТРАХОВЩИКА
+				</p>
+				<p class="textCenter boldText">№ {{policy.number}} от {{policy.issueDate}} г.</p>
+				<table class="VTBTable">
+					<col class="col1">
+					<col class="col2">
+					<col class="col3">
+					<col class="col4">
+					<tr>
+						<td class="boldText textCenter">
+							N<br>п/п
+						</td>
+						<td class="boldText textCenter">
+							Вид информации
+						</td>
+						<td class="boldText textCenter">
+							Содержание предоставляемой информации
+						</td>
+						<td class="boldText textCenter">
+							Подпись физического лица, подтверждающая его ознакомление с информацией
+						</td>
+					</tr>
+					<tr>
+						<td class="boldText textCenter">1</td>
+						<td class="boldText textCenter">2</td>
+						<td class="boldText textCenter">3</td>
+						<td class="boldText textCenter">4</td>
+					</tr>
+					<tr>
+						<td rowspan=3 class="textCenter">1</td>
+						<td rowspan=3>
+							Информация о договоре добровольного страхования жизни с участием страхователя в инвестиционном
+							доходе страховщика (далее - договор добровольного страхования)
+						</td>
+						<td>
+							1.1 Переданные по договору добровольного страхования денежные средства не подлежат страхованию в
+							соответствии с Федеральным законом от 23 декабря 2003 года N 177-ФЗ «О страховании вкладов в банках
+							Российской Федерации»
+						</td>
+						<td class="textCenter">
+							<p class="borderCheck"></p>
+							<p>С информацией ознакомлен</p>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							1.2 Отсутствует гарантия получения доходности*
+						</td>
+						<td class="textCenter">
+							<p class="borderCheck"></p>
+							<p>С информацией ознакомлен</p>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							1.3 Договор добровольного страхования не является договором банковского вклада (банковского счета)
+						</td>
+						<td class="textCenter">
+							<p class="borderCheck"></p>
+							<p>С информацией ознакомлен</p>
+						</td>
+					</tr>
+				</table>
+
+				<p>
+					* Наличие и величина дополнительного инвестиционного дохода, обеспечивающего доходность по договору добровольного
+					страхования, зависят от результатов инвестиционной деятельности ООО СК «Росгосстрах Жизнь». Дополнительный
+					инвестиционный доход формируется в соответствии с Правилами страхования и подлежит выплате при наступлении
+					страховых случаев «ДОЖИТИЕ» или «СМЕРТЬ по любой причине», либо при досрочном расторжении договора добровольного
+					страхования.
+				</p>
+				<p>
+					Основные положения договора добровольного страхования указаны в Информации  (памятке) о договоре добровольного
+					страхования, в том числе о его условиях и рисках, связанных с его исполнением.
+				</p>
+			</div>
+		</div>
+		{{/if}}
+		<div class="signatureNone break">
+			<div class="VTBNotice">
+				<p class="textCenter boldText">
+					ИНФОРМАЦИЯ, ПРЕДОСТАВЛЯЕМАЯ БАНКОМ ВТБ (ПУБЛИЧНЫМ<br>
+					АКЦИОНЕРНЫМ ОБЩЕСТВОМ), ДЕЙСТВУЮЩИМ ОТ ИМЕНИ СТРАХОВОЙ<br>
+					ОРГАНИЗАЦИИ  ООО СК «РОСГОССТРАХ ЖИЗНЬ», ПРИ ЗАКЛЮЧЕНИИ С<br>
+					ФИЗИЧЕСКИМ ЛИЦОМ ДОГОВОРА ДОБРОВОЛЬНОГО СТРАХОВАНИЯ ЖИЗНИ
+				</p>
+				<p class="textCenter boldText">№ {{policy.number}} от {{policy.issueDate}} г.</p>
+				<table class="VTBTable">
+					<col class="col1">
+					<col class="col2">
+					<col class="col3">
+					<col class="col4">
+					<tr>
+						<td class="boldText textCenter">
+							N п/п
+						</td>
+						<td class="boldText textCenter">
+							Вид информации
+						</td>
+						<td class="boldText textCenter">
+							Содержание предоставляемой информации
+						</td>
+						<td class="boldText textCenter">
+							Подпись физического лица, подтверждающая его ознакомление с информацией
+						</td>
+					</tr>
+					<tr>
+						<td class="boldText textCenter">1</td>
+						<td class="boldText textCenter">2</td>
+						<td class="boldText textCenter">3</td>
+						<td class="boldText textCenter">4</td>
+					</tr>
+					<tr>
+						<td rowspan=3 class="textCenter">1</td>
+						<td rowspan=3>
+							Информация о договоре добровольного страхования жизни (далее - договор добровольного страхования)
+						</td>
+						<td>
+							1.1 Переданные по договору добровольного страхования денежные средства не подлежат страхованию в
+							соответствии с Федеральным законом от 23 декабря 2003 года N 177-ФЗ «О страховании вкладов в банках
+							Российской Федерации»
+						</td>
+						<td class="textCenter">
+							<p class="borderCheck"></p>
+							<p>С информацией ознакомлен</p>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							1.2 Отсутствует гарантия получения доходности*
+						</td>
+						<td class="textCenter">
+							<p class="borderCheck"></p>
+							<p>С информацией ознакомлен</p>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							1.3 Договор добровольного страхования не является договором банковского вклада (банковского счета)
+						</td>
+						<td class="textCenter">
+							<p class="borderCheck"></p>
+							<p>С информацией ознакомлен</p>
+						</td>
+					</tr>
+				</table>
+
+				<p class="textJustify">
+					*По договору добровольного страхования доход фиксирован и обеспечивается положительной разницей	между размером страховой суммы по риску «ДОЖИТИЕ» и размером уплаченной страховой премии.
+				</p>
+				<p class="textJustify">
+					Основные положения договора добровольного страхования указаны в Ключевом информационном документе об условиях
+					договора добровольного страхования, в том числе о его условиях и рисках, связанных с его исполнением.
+				</p>
+			</div>
+		</div>
+		{{/if}}
+	</div>
+</body>
+
+</html>

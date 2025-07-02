@@ -1,0 +1,136 @@
+{
+    "id": "FundLoadedDataFromExcelUiSchema",
+    "type": "Group",
+    "elements": [
+        {
+            "type": "GridLayout",
+            "numberOfColumns": 4,
+            "elements": [
+                {
+                    "type": "Group",
+                    "elements": [
+                        {
+                            "type": "DataGrid",
+                            "mode": "DataSource",
+                            "header": {
+                                "showReloadButton": true,
+                                "showNumberOfResults": true
+                            },
+                            "pagination": {
+                                "mode": "Regular",
+                                "pageSizes": [
+                                    15,
+                                    50,
+                                    100
+                                ]
+                            },
+                            "selection": {
+                                "mode": "None"
+                            },
+                            "height": "None",
+                            "initialSort": {
+                                "sortBy": "excelRowNumber",
+                                "sortOrder": "Desc"
+                            },
+                            "columns": [
+                                {
+                                    "sortable": true,
+                                    "title": "excelRowNumber",
+                                    "name": "excelRowNumber",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "value": {
+                                            "$ref": "#/properties/resultData/properties/data/properties/excelRowNumber"
+                                        }
+                                    }
+                                },
+                                {
+                                    "sortable": false,
+                                    "title": "rowNumber",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "value": {
+                                            "$ref": "#/properties/resultData/properties/data/properties/rowNumber"
+                                        }
+                                    }
+                                },
+                                {
+                                    "sortable": false,
+                                    "title": "documentNumber",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "value": {
+                                            "$ref": "#/properties/resultData/properties/data/properties/documentNumber"
+                                        }
+                                    }
+                                },
+                                {
+                                    "sortable": false,
+                                    "title": "fundStatus",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "value": {
+                                            "$ref": "#/properties/resultData/properties/data/properties/fundStatus"
+                                        }
+                                    }
+                                },
+                                {
+                                    "sortable": false,
+                                    "title": "netAssetsAmount",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "value": {
+                                            "$ref": "#/properties/resultData/properties/data/properties/netAssetsAmount"
+                                        }
+                                    }
+                                },
+                                {
+                                    "sortable": false,
+                                    "title": "freeMoney",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "value": {
+                                            "$ref": "#/properties/resultData/properties/data/properties/freeMoney"
+                                        }
+                                    }
+                                },
+                                {
+                                    "sortable": false,
+                                    "title": "numberOfUnits",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "value": {
+                                            "$ref": "#/properties/resultData/properties/data/properties/numberOfUnits"
+                                        }
+                                    }
+                                },
+                                {
+                                    "sortable": false,
+                                    "title": "unitCurrentAmount",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "value": {
+                                            "$ref": "#/properties/resultData/properties/data/properties/unitCurrentAmount"
+                                        }
+                                    }
+                                },
+                                {
+                                    "sortable": true,
+                                    "title": "reportDate",
+                                    "name": "reportDate",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "template": "{{expr reportDate 'd'}}",
+                                        "value": {
+                                            "$ref": "#/properties/resultData/properties/data"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

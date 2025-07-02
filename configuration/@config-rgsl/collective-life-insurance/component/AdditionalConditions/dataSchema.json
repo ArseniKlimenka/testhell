@@ -1,0 +1,29 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "Life Insurance",
+    "description": "Data schema describing Additional Conditions",
+    "type": "object",
+    "additionalProperties": false,
+    "aiValidation": {
+        "rule": "validationAdditionalConditions"
+    },
+    "properties": {
+        "gracePeriod": {
+            "type": "integer",
+            "aiTitle": "gracePeriod"
+        },
+        "firstInstallmentDeadlineDate": {
+            "type": "string",
+            "aiFormat": "date",
+            "aiTitle": "firstInstallmentDeadlineDate"
+        },
+        "coverageDuration": {
+            "$ref": "component:CoverageDuration",
+            "aiTitle": "coverageDuration"
+        },
+        "coverageArea": {
+            "type": "string",
+            "aiTitle": "coverageArea"
+        }
+    }
+}

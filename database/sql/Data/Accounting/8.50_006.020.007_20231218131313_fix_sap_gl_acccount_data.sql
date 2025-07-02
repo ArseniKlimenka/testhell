@@ -1,0 +1,4 @@
+update ACC_IMPL.SAP_GL_ACCOUNT_RULE
+set PREVIOUS_PERIOD = null
+where GL_ACCOUNT_ID = (select GL_ACCOUNT_ID from acc.GL_ACCOUNT where GL_ACCOUNT_NO = '71512')
+go

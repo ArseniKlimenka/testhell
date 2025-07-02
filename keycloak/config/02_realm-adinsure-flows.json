@@ -1,0 +1,129 @@
+{
+    "id": "AdInsure",
+    "realm": "adinsure",
+    "authenticatorConfig": [
+        {
+            "alias": "scim attr",
+            "config": {
+                "attribute_expected_value": "yes",
+                "attribute_name": "scim"
+            }
+        },
+        {
+            "alias": "session limits",
+            "config": {
+                "userClientLimit": "0",
+                "behavior": "Terminate oldest session",
+                "userRealmLimit": "1"
+            }
+        }
+    ],
+    "authenticationFlows": [
+        {
+            "alias": "AdInsure Browser - Conditional OTP",
+            "description": "Flow to determine if the OTP is required for the authentication",
+            "providerId": "basic-flow",
+            "topLevel": false,
+            "authenticationExecutions": [
+                {
+                    "authenticator": "conditional-user-configured",
+                    "authenticatorFlow": false,
+                    "requirement": "REQUIRED",
+                    "priority": 20
+                },
+                {
+                    "authenticator": "auth-otp-form",
+                    "authenticatorFlow": false,
+                    "requirement": "REQUIRED",
+                    "priority": 21
+                }
+            ]
+        },
+        {
+            "alias": "AdInsure browser",
+            "description": "Browser-based authentication which rejects the SCIM user",
+            "providerId": "basic-flow",
+            "topLevel": true,
+            "authenticationExecutions": [
+                {
+                    "authenticator": "auth-cookie",
+                    "authenticatorFlow": false,
+                    "requirement": "ALTERNATIVE",
+                    "priority": 20
+                },
+                {
+                    "authenticator": "auth-spnego",
+                    "authenticatorFlow": false,
+                    "requirement": "DISABLED",
+                    "priority": 31
+                },
+                {
+                    "authenticator": "identity-provider-redirector",
+                    "authenticatorFlow": false,
+                    "requirement": "ALTERNATIVE",
+                    "priority": 32
+                },
+                {
+                    "authenticatorFlow": true,
+                    "requirement": "ALTERNATIVE",
+                    "priority": 33,
+                    "flowAlias": "AdInsure forms"
+                }
+            ]
+        },
+        {
+            "alias": "AdInsure forms",
+            "description": "Username, password, otp and other auth forms.",
+            "providerId": "basic-flow",
+            "topLevel": false,
+            "authenticationExecutions": [
+                {
+                    "authenticator": "auth-username-password-form",
+                    "authenticatorFlow": false,
+                    "requirement": "REQUIRED",
+                    "priority": 10
+                },
+                {
+                    "authenticatorFlow": true,
+                    "requirement": "CONDITIONAL",
+                    "priority": 20,
+                    "flowAlias": "Deny if SCIM user"
+                },
+                {
+                    "authenticatorFlow": true,
+                    "requirement": "CONDITIONAL",
+                    "priority": 21,
+                    "flowAlias": "AdInsure Browser - Conditional OTP"
+                },
+                {
+                    "authenticatorConfig": "session limits",
+                    "authenticator": "user-session-limits",
+                    "authenticatorFlow": false,
+                    "requirement": "REQUIRED",
+                    "priority": 30
+                }
+            ]
+        },
+        {
+            "alias": "Deny if SCIM user",
+            "description": "Flow which rejects the SCIM user based on attribute",
+            "providerId": "basic-flow",
+            "topLevel": false,
+            "authenticationExecutions": [
+                {
+                    "authenticatorConfig": "scim attr",
+                    "authenticator": "conditional-user-attribute",
+                    "authenticatorFlow": false,
+                    "requirement": "REQUIRED",
+                    "priority": 0
+                },
+                {
+                    "authenticator": "deny-access-authenticator",
+                    "authenticatorFlow": false,
+                    "requirement": "REQUIRED",
+                    "priority": 1
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,83 @@
+select
+	  mq.CONTRACT_NUMBER,
+	  mq.AMENDMENT_NUMBER,
+	  mq.AMENDMENT_CODE_NAME,
+	  mq.AMENMDENT_ISSUE_DATE,
+	  mq.CANCELLATION_REASON,
+	  mq.POLICY_CURRENCY,
+	  mq.RECIPIENT_PARTY_CODE,
+	  mq.AMOUNT_IN_CONTRACT_CURRENCY,
+	  mq.AMOUNT_IN_RUB,
+	  mq.PIT_DOC_CURR,
+	  mq.PIT_RUB_CURR,
+	  mq.AMOUNT_TO_PAY_PERCENT,
+	  mq.PAYMENT_LINES,
+	  mq.FIXED_EXCH_RATE,
+	  mq.USE_FIXED_EXCH_RATE,
+	  mq.BANK_ACCOUNT_NUMBER
+from(
+
+select
+	plc.CONTRACT_NUMBER,
+	amnd.CONTRACT_NUMBER as AMENDMENT_NUMBER,
+	amndArt.CODE_NAME as AMENDMENT_CODE_NAME,
+	json_value(amnd.BODY, '$.basicAmendmentConditions.issueDate') as AMENMDENT_ISSUE_DATE,
+	json_value(amnd.BODY, '$.basicAmendmentConditions.amendmentReason') as CANCELLATION_REASON,
+	json_value(plc.BODY, '$.basicConditions.currency.currencyCode') as POLICY_CURRENCY,
+	json_value(amnd.BODY, '$.paymentAmendmentConditions.fixedExchangeRate') as FIXED_EXCH_RATE,
+	json_value(amnd.BODY, '$.paymentAmendmentConditions.useFixedExchangeRate') as USE_FIXED_EXCH_RATE,
+	r.BANK_ACCOUNT_NUMBER AS BANK_ACCOUNT_NUMBER,
+	r.RECIPIENT_PARTY_CODE AS RECIPIENT_PARTY_CODE,
+	r.AMOUNT_TO_PAY_DOC_CURR AS AMOUNT_IN_CONTRACT_CURRENCY,
+	r.AMOUNT_TO_PAY_RUB_CURR AS AMOUNT_IN_RUB,
+	r.PIT_DOC_CURR AS PIT_DOC_CURR,
+	r.PIT_RUB_CURR AS PIT_RUB_CURR,
+	r.AMOUNT_TO_PAY_PERCENT AS AMOUNT_TO_PAY_PERCENT,
+	(
+		select
+			json_value([value], '$.paymentLineType') as paymentType,
+			json_value([value], '$.paymentLineSum') as paymentSum,
+			json_value([value], '$.paymentLineSumInRub') as paymentSumInRub
+		from openjson(amnd.BODY,'$.paymentAmendmentConditions.paymentLines') pl
+		for json path
+	) as PAYMENT_LINES
+from pas.CONTRACT plc
+	join pas.CONTRACT amnd on plc.ORIGINAL_DOCUMENT_ID = amnd.ORIGINAL_DOCUMENT_ID
+	join cfx.PUBLISHED_ARTIFACT amndArt on amndArt.PUBLISHED_ARTIFACT_ID = amnd.PUBLISHED_ARTIFACT_ID
+	CROSS APPLY OPENJSON(amnd.BODY,'$.paymentAmendmentConditions.canellationRecipients')
+ with  
+ (    
+     RECIPIENT_PARTY_CODE NVARCHAR(50) N'lax $.partyCode',
+	 AMOUNT_TO_PAY_DOC_CURR DECIMAL(15,7) N'lax $.amountToPay',
+	 AMOUNT_TO_PAY_RUB_CURR DECIMAL(15,7) N'lax $.amountToPayInRubCurrency',
+	 PIT_DOC_CURR DECIMAL(15,7) N'lax $.pitAmount',
+	 PIT_RUB_CURR DECIMAL(15,7) N'lax $.pitAmountInRubCurrency',
+	 AMOUNT_TO_PAY_PERCENT FLOAT N'lax $.amountToPayPercetage',
+	 BANK_ACCOUNT_NUMBER NVARCHAR(100) N'lax $.bankAccount.number'
+ ) r
+where 1=1
+{{#if parameters.contractNumber}}
+	and plc.CONTRACT_NUMBER = @contractNumber
+{{/if}}
+{{#if parameters.cancellationNumber}}
+	and amnd.CONTRACT_NUMBER = @cancellationNumber
+{{else}}
+	and amnd.CONTRACT_NUMBER =
+	(
+		select top 1
+			am.CONTRACT_NUMBER
+		from pas.contract ctr
+			inner join pas.contract am on am.ORIGINAL_DOCUMENT_ID = ctr.CONTRACT_ID and am.ORIGINAL_DOCUMENT_ID != am.CONTRACT_ID
+			inner join pas_impl.AMENDMENT_HUB amh on amh.AMENDMENT_NUMBER = am.CONTRACT_NUMBER
+			inner join pas_impl.AMENDMENT_SAT_LATEST ams on ams.AMENDMENT_HKEY = amh.AMENDMENT_HKEY
+		where 1=1
+			and ams.AMENDMENT_TYPE = 'Cancellation'
+			and ctr.CONTRACT_NUMBER = @contractNumber
+		order by am.SYS_CREATED_ON desc
+	)
+{{/if}}
+) mq
+where 1 = 1
+{{#if parameters.recipientPartyCode}}
+and RECIPIENT_PARTY_CODE = @recipientPartyCode
+{{/if}}

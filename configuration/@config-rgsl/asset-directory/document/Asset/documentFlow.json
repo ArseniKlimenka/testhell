@@ -1,0 +1,73 @@
+{
+    "processType": "Asset",
+    "initialState": "Draft",
+    "actors": [
+        "AssetEditor",
+        "AssetViewer"
+    ],
+    "states": [
+        {
+            "name": "Draft",
+            "operations": [
+                "Save"
+            ]
+        },
+        {
+            "name": "Open",
+            "operations": [],
+            "appliesVersion": true
+        },
+        {
+            "name": "Closed",
+            "operations": [],
+            "appliesVersion": true
+        },
+        {
+            "name": "Cancelled",
+            "isTerminal": true,
+            "operations": [],
+            "discardsVersion": true
+        }
+    ],
+    "transitions": [
+        {
+            "name": "Draft_To_Open",
+            "from": "Draft",
+            "to": "Open",
+            "broadcastEvent": {
+                "serverSideEvents": true
+            },
+            "whenBlocked": "Greyout"
+        },
+        {
+            "name": "Draft_To_Cancelled",
+            "from": "Draft",
+            "to": "Cancelled",
+            "whenBlocked": "Greyout",
+            "broadcastEvent": {
+                "serverSideEvents": true
+            },
+            "allowOnValidationErrors": {
+                "all": true
+            }
+        },
+        {
+            "name": "Open_To_Closed",
+            "from": "Open",
+            "to": "Closed",
+            "broadcastEvent": {
+                "serverSideEvents": true
+            },
+            "whenBlocked": "Greyout"
+        },
+        {
+            "name": "Closed_To_Open",
+            "from": "Closed",
+            "to": "Open",
+            "broadcastEvent": {
+                "serverSideEvents": true
+            },
+            "whenBlocked": "Greyout"
+        }
+    ]
+}

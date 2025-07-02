@@ -1,0 +1,1194 @@
+{
+    "type": "Section",
+    "label": "Basic Conditions",
+    "isCollapsed": false,
+    "width": 12,
+    "elements": [
+        {
+            "type": "Group",
+            "hide": true,
+            "elements": [
+                {
+                    "type": "Dropdown",
+                    "label": "withTarification",
+                    "value": {
+                        "$ref": "#/properties/withTarification"
+                    },
+                    "width": 4,
+                    "onValueChanged": [
+                        {
+                            "commandType": "executeAction",
+                            "actionName": "onChangeWithTarification"
+                        }
+                    ],
+                    "rule": {
+                        "effect": "ENABLE_INITIAL",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "enableWithTarification",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    }
+                }
+            ],
+            "rule": {
+                "effect": "SHOW",
+                "condition": {
+                    "type": "FUNC",
+                    "ruleFunction": "showWithTarification",
+                    "value": [
+                        {
+                            "$ref": "#"
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "Group",
+                    "elements": [
+                        {
+                            "type": "Input",
+                            "elementId": "applicationDate",
+                            "label": "applicationDate",
+                            "value": {
+                                "$ref": "#/properties/applicationDate"
+                            },
+                            "width": 4
+                        },
+                        {
+                            "type": "Input",
+                            "elementId": "receiptDate",
+                            "label": "receiptDate",
+                            "value": {
+                                "$ref": "#/properties/receiptDate"
+                            },
+                            "width": 4
+                        },
+                        {
+                            "type": "Input",
+                            "elementId": "acceptToWorkDate",
+                            "label": "acceptToWorkDate",
+                            "value": {
+                                "$ref": "#/properties/acceptToWorkDate"
+                            },
+                            "width": 4
+                        }
+                    ],
+                    "rule": {
+                        "effect": "SHOW",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "isCreatedByOperations",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    }
+                }
+            ],
+            "rule": {
+                "effect": "ENABLE_INITIAL",
+                "condition": {
+                    "type": "FUNC",
+                    "ruleFunction": "shouldEnableApplicationDates",
+                    "value": [
+                        {
+                            "$ref": "#"
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "type": "Input",
+            "elementId": "issueDate",
+            "label": "issueDate",
+            "readOnly": false,
+            "value": {
+                "$ref": "#/properties/issueDate"
+            },
+            "width": 4,
+            "onValueChanged": [
+                {
+                    "commandType": "executeAction",
+                    "actionName": "onChangeIssueDate"
+                }
+            ],
+            "rule": {
+                "effect": "DISABLE_INITIAL",
+                "condition": {
+                    "type": "FUNC",
+                    "ruleFunction": "disableIsPolicyIssueDate",
+                    "value": [
+                        {
+                            "$ref": "#"
+                        }
+                    ]
+                }
+            }
+        },      
+        {
+            "type": "Group",
+            "width": 4,
+            "elements": [
+                {
+                    "type": "Group",
+                    "elements": [
+                        {
+                            "type": "Group",
+                            "elements": [
+                                {
+                                    "type": "Input",
+                                    "label": "insuranceTerms",
+                                    "value": {
+                                        "$ref": "#/properties/insuranceTerms"
+                                    },
+                                    "filter": "insuranceTermsFilter",
+                                    "onValueChanged": [
+                                        {
+                                            "commandType": "executeAction",
+                                            "actionName": "onChangeInsuranceTerms"
+                                        }
+                                    ],
+                                    "width": 4,
+                                    "rule": {
+                                        "effect": "STYLE",
+                                        "condition": {
+                                            "type": "FUNC",
+                                            "style": {
+                                                "background-color": "lemonchiffon"
+                                            },
+                                            "value": [
+                                                {
+                                                    "$ref": "#/properties/ClientViewModel"
+                                                }
+                                            ],
+                                            "ruleFunction": "onChangeProductStyle"
+                                        }
+                                    }
+                                }
+                            ],
+                            "rule": {
+                                "effect": "SHOW",
+                                "condition": {
+                                    "type": "FUNC",
+                                    "ruleFunction": "showYearTerms",
+                                    "value": [
+                                        {
+                                            "$ref": "#"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    ],
+                    "rule": {
+                        "effect": "ENABLE_INITIAL",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "enableYearTerms",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "type": "Group",
+                    "elements": [
+                        {
+                            "type": "OutputText",
+                            "label": "insuranceTerms",
+                            "value": {
+                                "mapping": "wholeLifeTermsMapping",
+                                "$ref": "#"
+                            },
+                            "rule": {
+                                "effect": "DISABLE_INITIAL",
+                                "condition": {
+                                    "type": "FUNC",
+                                    "ruleFunction": "hasFutureNumberForAgent",
+                                    "value": [
+                                        {
+                                            "$ref": "#"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    ],
+                    "rule": {
+                        "effect": "SHOW",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "showInsuranceTerms",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "type": "Group",
+                    "elements": [
+                        {
+                            "type": "Group",
+                            "elements": [
+                                {
+                                    "type": "Input",
+                                    "label": "insuranceTermsMonths",
+                                    "value": {
+                                        "$ref": "#/properties/insuranceTermsMonths"
+                                    },
+                                    "filter": "insuranceTermsMonthsFilter",
+                                    "width": 4,
+                                    "rule": {
+                                        "effect": "STYLE",
+                                        "condition": {
+                                            "type": "FUNC",
+                                            "style": {
+                                                "background-color": "lemonchiffon"
+                                            },
+                                            "value": [
+                                                {
+                                                    "$ref": "#/properties/ClientViewModel"
+                                                }
+                                            ],
+                                            "ruleFunction": "onChangeProductStyle"
+                                        }
+                                    }
+                                }
+                            ],
+                            "rule": {
+                                "effect": "SHOW",
+                                "condition": {
+                                    "type": "FUNC",
+                                    "ruleFunction": "showMonthTerms",
+                                    "value": [
+                                        {
+                                            "$ref": "#"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    ],
+                    "rule": {
+                        "effect": "ENABLE_INITIAL",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "enableMonthTerms",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "type": "Group",
+                    "elements": [
+                        {
+                            "type": "Input",
+                            "label": "insuranceTermsDays",
+                            "value": {
+                                "$ref": "#/properties/insuranceTermsDays"
+                            },
+                            "onValueChanged": [
+                                {
+                                    "commandType": "executeAction",
+                                    "actionName": "onChangeInsuranceTermsDays"
+                                }
+                            ],
+                            "source": {
+                                "array": {
+                                    "$ref": "#/properties/availableInsuranceTermsDays"
+                                },
+                                "displayValueTemplate": "{{expr description}}"
+                            },
+                            "control": "Dropdown",
+                            "rule": {
+                                "effect": "DISABLE_INITIAL",
+                                "condition": {
+                                    "type": "FUNC",
+                                    "ruleFunction": "hasFutureNumberForAgent",
+                                    "value": [
+                                        {
+                                            "$ref": "#"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    ],
+                    "rule": {
+                        "effect": "SHOW",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "showInsuranceTermsDays",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    }
+                }
+            ],
+            "rule": {
+                "effect": "DISABLE_INITIAL",
+                "condition": {
+                    "type": "FUNC",
+                    "ruleFunction": "hasFutureNumberForAgent",
+                    "value": [
+                        {
+                            "$ref": "#"
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "type": "Group",
+            "width": 4,
+            "elements": [
+                {
+                    "type": "Input",
+                    "label": "currency",
+                    "value": {
+                        "$ref": "#/properties/currency"
+                    },
+                    "filter": "currencyFilter",
+                    "readOnly": true,
+                    "control": "Dropdown",
+                    "autocomplete": {
+                        "minTextLength": 0,
+                        "dropDownItemsCount": 1000,
+                        "selectItemOnMatch": false
+                    },
+                    "source": {
+                        "dataSource": {
+                            "name": "CurrenciesDataSource",
+                            "searchFieldPath": "currencySearchText",
+                            "responseMapping": "currencyResponseMapping",
+                            "resultCount": 1000
+                        },
+                        "displayValueTemplate": "{{expr currencyDesc}} ({{expr currencyCode}})"
+                    },
+                    "width": 4,
+                    "onValueChanged": [
+                        {
+                            "commandType": "executeAction",
+                            "actionName": "onChangeCurrency"
+                        }
+                    ],
+                    "rule": {
+                        "effect": "ENABLE_INITIAL",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "enableCurrency",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    }
+                }
+            ],
+            "rule": {
+                "effect": "HIDE",
+                "condition": {
+                    "type": "FUNC",
+                    "ruleFunction": "hideCurrency",
+                    "value": [
+                        {
+                            "$ref": "#"
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "type": "Group",
+            "hide": true,
+            "width": 4,
+            "elements": [
+                {
+                    "type": "Input",
+                    "elementId": "originalReceiptDate",
+                    "label": "originalReceiptDate",
+                    "readOnly": false,
+                    "value": {
+                        "$ref": "#/properties/originalReceiptDate"
+                    },
+                    "rule": {
+                        "effect": "ENABLE_INITIAL",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "enableOriginalReceiptDate",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    }
+                }
+            ],
+            "rule": {
+                        "effect": "SHOW",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "showOriginalReceiptDate",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+            }
+        },
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "Input",
+                    "label": "isFixedRate",
+                    "value": {
+                        "$ref": "#/properties/isFixedRate"
+                    },
+                    "onValueChanged": [
+                        {
+                            "commandType": "executeAction",
+                            "actionName": "onChangeIsFixedRate"
+                        }
+                    ],
+                    "width": 4,
+                    "rule": {
+                        "effect": "ENABLE_INITIAL",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "enableRateData",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "type": "Input",
+                    "label": "exchangeRate",
+                    "value": {
+                        "$ref": "#/properties/exchangeRate"
+                    },
+                    "width": 4,
+                    "rule": {
+                        "effect": "ENABLE_INITIAL",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "enableExchangeRate",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    }
+                }
+            ],
+            "rule": {
+                "effect": "HIDE",
+                "condition": {
+                    "type": "FUNC",
+                    "ruleFunction": "hideCurrencyExchangeGroup",
+                    "value": [
+                        {
+                            "$ref": "#"
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "Group",
+                    "width": 4,
+                    "elements": [
+                        {
+                            "type": "Input",
+                            "elementId": "paymentFrequency",
+                            "label": "paymentFrequency",
+                            "source": {
+                                "dataSource": {
+                                    "name": "PaymentFrequencyDataSource",
+                                    "reloadOnOpen": true,
+                                    "searchFieldPath": "paymentFrequencyDescription",
+                                    "responseMapping": "paymentFrequencyResponseMapping"
+                                },
+                                "displayFieldName": "paymentFrequencyDescription"
+                            },
+                            "onValueChanged": [
+                                {
+                                    "commandType": "executeAction",
+                                    "actionName": "onChangePaymentFrequency"
+                                }
+                            ],
+                            "filter": "paymentFrequencyFilter",
+                            "control": "Dropdown",
+                            "value": {
+                                "$ref": "#/properties/paymentFrequency"
+                            },
+                            "width": 4,
+                            "rule": {
+                                "effect": "STYLE",
+                                "condition": {
+                                    "type": "FUNC",
+                                    "style": {
+                                        "background-color": "lemonchiffon"
+                                    },
+                                    "value": [
+                                        {
+                                            "$ref": "#/properties/ClientViewModel"
+                                        }
+                                    ],
+                                    "ruleFunction": "onChangeProductStyle"
+                                }
+                            }
+                        }
+                    ],
+                    "rule": {
+                        "effect": "ENABLE_INITIAL",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "enablePaymentFrequency",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "type": "Group",
+                    "width": 4,
+                    "elements": [
+                        {
+                            "type": "Group",
+                            "width": 2,
+                            "elements": [
+                                {
+                                    "type": "Group",
+                                    "width": 2,
+                                    "elements": [
+                                        {
+                                            "type": "Input",
+                                            "elementId": "riskPremium",
+                                            "label": "riskPremium",
+                                            "value": {
+                                                "$ref": "#/properties/riskPremium"
+                                            },
+                                            "width": 2,
+                                            "onValueChanged": [
+                                                {
+                                                    "commandType": "executeAction",
+                                                    "actionName": "onChangeRiskPremium"
+                                                }
+                                            ],
+                                            "rule": {
+                                                "effect": "SHOW",
+                                                "condition": {
+                                                    "type": "FUNC",
+                                                    "ruleFunction": "showRiskPremium",
+                                                    "value": [
+                                                        {
+                                                            "$ref": "#"
+                                                        }
+                                                    ]
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "type": "Input",
+                                            "label": "riskPremium",
+                                            "value": {
+                                                "$ref": "#/properties/riskPremium"
+                                            },
+                                            "control": "Dropdown",
+                                            "source": {
+                                                "array": {
+                                                    "$ref": "#/properties/Body/properties/basicConditions/properties/fixedPremiums"
+                                                },
+                                                "valueFieldName": "value",
+                                                "displayValueTemplate": "{{expr value 'n:2'}}"
+                                            },
+                                            "filter": "riskPremiumFilter",
+                                            "width": 2,
+                                            "rule": {
+                                                "effect": "SHOW",
+                                                "condition": {
+                                                    "type": "FUNC",
+                                                    "ruleFunction": "showRiskPremiumArray",
+                                                    "value": [
+                                                        {
+                                                            "$ref": "#"
+                                                        }
+                                                    ]
+                                                }
+                                            }
+                                        }
+                                    ],
+                                    "rule": {
+                                        "effect": "ENABLE_INITIAL",
+                                        "condition": {
+                                            "type": "FUNC",
+                                            "ruleFunction": "enableRiskPremium",
+                                            "value": [
+                                                {
+                                                    "$ref": "#"
+                                                }
+                                            ]
+                                        }
+                                    }
+                                },
+                                {
+                                    "type": "Group",
+                                    "width": 4,
+                                    "elements": [
+                                        {
+                                            "type": "Input",
+                                            "label": "riskInsuredSum",
+                                            "value": {
+                                                "$ref": "#/properties/riskInsuredSum"
+                                            },
+                                            "onValueChanged": [
+                                                {
+                                                    "commandType": "executeAction",
+                                                    "actionName": "onChangeRiskInsuredSum"
+                                                }
+                                            ],
+                                            "width": 2,
+                                            "rule": {
+                                                "effect": "SHOW",
+                                                "condition": {
+                                                    "type": "FUNC",
+                                                    "ruleFunction": "showRiskInsuredSum",
+                                                    "value": [
+                                                        {
+                                                            "$ref": "#"
+                                                        }
+                                                    ]
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "type": "Input",
+                                            "label": "riskInsuredSum",
+                                            "value": {
+                                                "$ref": "#/properties/riskInsuredSum"
+                                            },
+                                            "onValueChanged": [
+                                                {
+                                                    "commandType": "executeAction",
+                                                    "actionName": "onChangeRiskInsuredSumArray"
+                                                }
+                                            ],
+                                            "control": "Dropdown",
+                                            "source": {
+                                                "array": {
+                                                    "$ref": "#/properties/Body/properties/basicConditions/properties/fixedInsuredSums"
+                                                },
+                                                "valueFieldName": "value",
+                                                "displayValueTemplate": "{{expr value 'n:2'}}"
+                                            },
+                                            "filter": "riskInsuredSumFilter",
+                                            "width": 2,
+                                            "rule": {
+                                                "effect": "SHOW",
+                                                "condition": {
+                                                    "type": "FUNC",
+                                                    "ruleFunction": "showRiskInsuredSumArray",
+                                                    "value": [
+                                                        {
+                                                            "$ref": "#"
+                                                        }
+                                                    ]
+                                                }
+                                            }
+                                        }
+                                    ],
+                                    "rule": {
+                                        "effect": "ENABLE_INITIAL",
+                                        "condition": {
+                                            "type": "FUNC",
+                                            "ruleFunction": "enableRiskInsuredSum",
+                                            "value": [
+                                                {
+                                                    "$ref": "#"
+                                                }
+                                            ]
+                                        }
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Group",
+                            "width": 2,
+                            "elements": [
+                                {
+                                    "type": "Input",
+                                    "label": "calcFromInsuredSum",
+                                    "value": {
+                                        "$ref": "#/properties/calcFromInsuredSum"
+                                    },
+                                    "width": 2,
+                                    "onValueChanged": [
+                                        {
+                                            "commandType": "executeAction",
+                                            "actionName": "onChangeCalcFromInsuredSum"
+                                        }
+                                    ],
+                                    "rule": {
+                                        "effect": "SHOW",
+                                        "condition": {
+                                            "type": "FUNC",
+                                            "ruleFunction": "showCalcFromInsuredSum",
+                                            "value": [
+                                                {
+                                                    "$ref": "#"
+                                                }
+                                            ]
+                                        }
+                                    }
+                                }
+                            ],
+                            "rule": {
+                                "effect": "ENABLE_INITIAL",
+                                "condition": {
+                                    "type": "FUNC",
+                                    "ruleFunction": "enableCalcFromInsuredSum",
+                                    "value": [
+                                        {
+                                            "$ref": "#"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    ],
+                    "rule": {
+                        "effect": "DISABLE_INITIAL",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "hasFutureNumberForAgent",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "type": "Group",
+                    "width": 4,
+                    "elements": [
+                        {
+                            "type": "Input",
+                            "readOnly": true,
+                            "label": "insuranceTermsWholeLife",
+                            "value": {
+                                "$ref": "#/properties/insuranceTerms"
+                            },
+                            "width": 4,
+                            "rule": {
+                                "effect": "SHOW",
+                                "condition": {
+                                    "type": "FUNC",
+                                    "ruleFunction": "showWholeLifeTerms",
+                                    "value": [
+                                        {
+                                            "$ref": "#"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    ],
+                    "rule": {
+                        "effect": "DISABLE_INITIAL",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "hasFutureNumberForAgent",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    }
+                }
+            ],
+            "rule": {
+                "effect": "HIDE",
+                "condition": {
+                    "type": "FUNC",
+                    "ruleFunction": "hideCurrency",
+                    "value": [
+                        {
+                            "$ref": "#"
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "type": "Group",
+            "width": 12,
+            "elements": [
+                {
+                    "type": "Group",
+                    "width": 12,
+                    "elements": [
+                        {
+                            "type": "Input",
+                            "label": "endowmentPaymentVariant",
+                            "value": {
+                                "$ref": "#/properties/endowmentPaymentVariant"
+                            },
+                            "source": {
+                                "dataSource": {
+                                    "name": "EndowmentPaymentVariantDataSource",
+                                    "reloadOnOpen": true,
+                                    "searchFieldPath": "endowmentPaymentVariantDescription",
+                                    "responseMapping": "endowmentPaymentVariantResponseMapping"
+                                },
+                                "displayFieldName": "endowmentPaymentVariantDescription"
+                            },
+                            "filter": "endowmentPaymentVariantFilter",
+                            "control": "Dropdown",
+                            "width": 4,
+                            "enableClear": false,
+                            "onValueChanged": [
+                                {
+                                    "commandType": "executeAction",
+                                    "actionName": "onChangeEndowmentPaymentVariant"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Input",
+                            "readOnly": true,
+                            "label": "guaranteedIncome",
+                            "value": {
+                                "$ref": "#/properties/guaranteedIncome/properties/guaranteedIncomeDescription"
+                            },
+                            "width": 4,
+                            "rule": {
+                                "effect": "HIDE",
+                                "condition": {
+                                    "type": "FUNC",
+                                    "ruleFunction": "hideGuaranteedIncome",
+                                    "value": [
+                                        {
+                                            "$ref": "#"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    ],
+                    "rule": {
+                        "effect": "HIDE",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "hideEndowmentPaymentVariant",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    }
+                }
+            ],
+            "rule": {
+                "effect": "ENABLE_INITIAL",
+                "condition": {
+                    "type": "FUNC",
+                    "ruleFunction": "shouldEnableEndowmentData",
+                    "value": [
+                        {
+                            "$ref": "#"
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "type": "Group",
+            "hide": true,
+            "elements": [
+                {
+                    "type": "Input",
+                    "readOnly": true,
+                    "label": "endowmentEndOfDerivedPeriod",
+                    "value": {
+                        "$ref": "#/properties/endowmentEndOfDerivedPeriod"
+                    },
+                    "width": 4
+                },
+                {
+                    "type": "Input",
+                    "readOnly": true,
+                    "label": "annuityPaymentAmount",
+                    "value": {
+                        "$ref": "#/properties/annuityPaymentAmount"
+                    },
+                    "width": 4
+                },
+                {
+                    "type": "Input",
+                    "readOnly": true,
+                    "label": "annuityPaymentTerm",
+                    "value": {
+                        "$ref": "#/properties/annuityPaymentTerm"
+                    },
+                    "width": 4
+                }
+            ],
+            "rule": {
+                "effect": "DISABLE_INITIAL",
+                "condition": {
+                    "type": "FUNC",
+                    "ruleFunction": "hasFutureNumberForAgent",
+                    "value": [
+                        {
+                            "$ref": "#"
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "Input",
+                    "label": "isReinvest",
+                    "value": {
+                        "$ref": "#/properties/isReinvest"
+                    },
+                    "onValueChanged": [
+                        {
+                            "commandType": "executeAction",
+                            "actionName": "onChangeIsReinvent"
+                        }
+                    ],
+                    "width": 4,
+                    "rule": {
+                        "effect": "SHOW",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "isReinvestAvailable",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "type": "Input",
+                    "label": "reinvestContractNumber",
+                    "value": {
+                        "$ref": "#/properties/reinvestContractNumber"
+                    },
+                    "width": 4,
+                    "rule": {
+                        "effect": "SHOW",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "isReinvestFieldsAvailable",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "type": "Input",
+                    "label": "reinvestIssueDate",
+                    "value": {
+                        "$ref": "#/properties/reinvestIssueDate"
+                    },
+                    "width": 4,
+                    "rule": {
+                        "effect": "SHOW",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "isReinvestFieldsAvailable",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    }
+                }
+            ],
+            "rule": {
+                "effect": "DISABLE_INITIAL",
+                "condition": {
+                    "type": "FUNC",
+                    "ruleFunction": "hasFutureNumberForAgent",
+                    "value": [
+                        {
+                            "$ref": "#"
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "Component",
+                    "metadata": {
+                        "autogenerate": true
+                    },
+                    "name": "SportTypes",
+                    "value": {
+                        "$ref": "#/properties/sportTypes"
+                    }
+                },
+                {
+                    "type": "Input",
+                    "label": "coverageDuration",
+                    "value": {
+                        "$ref": "#/properties/coverageDuration"
+                    },
+                    "width": 4,
+                    "rule": {
+                        "effect": "SHOW",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "showCoverageDuration",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "type": "Component",
+                    "name": "DaysBetweenIssueAndStartDynamic",
+                    "value": {
+                        "$ref": "#/properties/daysBetweenIssueAndStartDynamic"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "Input",
+                    "label": "isEvaluationContract",
+                    "value": {
+                        "$ref": "#/properties/isEvaluationContract"
+                    },
+                    "width": 4,
+                    "rule": {
+                        "effect": "ENABLE_INITIAL",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "isEvaluationContractEnabled",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    }
+                }
+            ],
+            "rule": {
+                "effect": "HIDE",
+                "condition": {
+                    "type": "FUNC",
+                    "ruleFunction": "hideEvaluateGroup",
+                    "value": [
+                        {
+                            "$ref": "#"
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "Input",
+                    "label": "isSpecialOffer",
+                    "value": {
+                        "$ref": "#/properties/isSpecialOffer"
+                    },
+                    "width": 5,
+                    "rule": {
+                        "effect": "ENABLE_INITIAL",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "enableIsSpecialOffer",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    }
+                }
+            ],
+            "rule": {
+                "effect": "HIDE",
+                "condition": {
+                    "type": "FUNC",
+                    "ruleFunction": "hideIsSpecialOffer",
+                    "value": [
+                        {
+                            "$ref": "#"
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}

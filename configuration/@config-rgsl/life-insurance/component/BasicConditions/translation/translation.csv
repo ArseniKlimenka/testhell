@@ -1,0 +1,103 @@
+ConfigurationType	ConfigurationName	ItemType	TranslationKey	Expression	Translation_ru-RU	Translation_en-US
+DataSchema	BasicConditions	field-title	applicationDate	applicationDate	Дата подписания заявления	applicationDate
+DataSchema	BasicConditions	field-title	receiptDate	receiptDate	Дата поступления заявления в СК	receiptDate
+DataSchema	BasicConditions	field-title	acceptToWorkDate	acceptToWorkDate	Дата принятия в работу заявления	acceptToWorkDate
+DataSchema	BasicConditions	field-title	issueDate	issueDate	Дата заключения	issueDate
+DataSchema	BasicConditions	field-title	currency	currency	Валюта	currency
+DataSchema	BasicConditions	field-title	insuranceTerms	insuranceTerms	Срок страхования, лет	insuranceTerms
+DataSchema	BasicConditions	field-title	paymentFrequency	paymentFrequency	Периодичность оплаты	paymentFrequency
+DataSchema	BasicConditions	field-title	riskPremium	riskPremium	Размер взноса	riskPremium
+DataSchema	BasicConditions	field-title	endowmentPaymentVariant	endowmentPaymentVariant	Вариант выплаты по дожитию	endowmentPaymentVariant
+DataSchema	BasicConditions	field-title	endowmentEndOfDerivedPeriod	endowmentEndOfDerivedPeriod	Дата окончания наследуемого периода для дожития	endowmentEndOfDerivedPeriod
+DataSchema	BasicConditions	field-title	annuityPaymentAmount	annuityPaymentAmount	Сумма аннуитетной выплаты	annuityPaymentAmount
+DataSchema	BasicConditions	field-title	annuityPaymentTerm	annuityPaymentTerm	Срок выплаты аннуитетных выплат	annuityPaymentTerm
+UiSchema	BasicConditions	ui-label	Basic Conditions	Basic Conditions	Базовые условия	Basic Conditions
+UiSchema	BasicConditions	ui-label	applicationDate	applicationDate	Дата подписания заявления	applicationDate
+UiSchema	BasicConditions	ui-label	receiptDate	receiptDate	Дата поступления заявления в СК	receiptDate
+UiSchema	BasicConditions	ui-label	acceptToWorkDate	acceptToWorkDate	Дата принятия в работу заявления	acceptToWorkDate
+UiSchema	BasicConditions	ui-label	issueDate	issueDate	Дата заключения	issueDate
+UiSchema	BasicConditions	ui-label	currency	currency	Валюта	currency
+UiSchema	BasicConditions	ui-label	insuranceTerms	insuranceTerms	Срок страхования, лет	insuranceTerms
+UiSchema	BasicConditions	ui-label	paymentFrequency	paymentFrequency	Периодичность оплаты	paymentFrequency
+UiSchema	BasicConditions	ui-label	riskPremium	riskPremium	Размер взноса	riskPremium
+UiSchema	BasicConditions	ui-label	endowmentPaymentVariant	endowmentPaymentVariant	Вариант выплаты по дожитию	endowmentPaymentVariant
+UiSchema	BasicConditions	ui-label	endowmentEndOfDerivedPeriod	endowmentEndOfDerivedPeriod	Дата окончания наследуемого периода для дожития	endowmentEndOfDerivedPeriod
+UiSchema	BasicConditions	ui-label	annuityPaymentAmount	annuityPaymentAmount	Сумма аннуитетной выплаты	annuityPaymentAmount
+UiSchema	BasicConditions	ui-label	annuityPaymentTerm	annuityPaymentTerm	Срок выплаты аннуитетных выплат	annuityPaymentTerm
+DataSchema	BasicConditions	field-title	paymentFrequencyCode	paymentFrequencyCode	Периодичность оплаты Код	paymentFrequencyCode
+DataSchema	BasicConditions	field-title	paymentFrequencyDescription	paymentFrequencyDescription	Периодичность оплаты Наименование	paymentFrequencyDescription
+DataSchema	BasicConditions	field-title	endowmentPaymentVariantCode	endowmentPaymentVariantCode	Вариант выплаты по дожитию Код	endowmentPaymentVariantCode
+DataSchema	BasicConditions	field-title	endowmentPaymentVariantDescription	endowmentPaymentVariantDescription	Вариант выплаты по дожитию Наименование	endowmentPaymentVariantDescription
+DataSchema	BasicConditions	field-title	currencyCode	currencyCode	Код валюты	currencyCode
+DataSchema	BasicConditions	field-title	currencyDesc	currencyDesc	Наименование валюты	currencyDesc
+DataSchema	BasicConditions	field-title	currencyNumericCode	currencyNumericCode	Числовой код валюты	currencyNumericCode
+Rule	BasicConditionsValidationBasicConditions	rule	validation@paymentFrequencyIsRequired	validationBasicConditions	E: Необходимо указать периодичность оплаты	E: validation@paymentFrequencyIsRequired
+Rule	BasicConditionsValidationBasicConditions	rule	validation@insuranceTermsIsRequired	validationBasicConditions	E: Необходимо указать срок страхования	E: validation@insuranceTermsIsRequired
+Rule	BasicConditionsValidationBasicConditions	rule	validation@issueDateIsRequired	validationBasicConditions	E: Необходимо заполнить дату заключения	E: validation@issueDateIsRequired
+Rule	BasicConditionsValidationBasicConditions	rule	validation@applicationDateLessThanIssueDate	validationBasicConditions	E: Дата подписания заявления не должна быть больше даты заключения	E: validation@applicationDateLessThanIssueDate
+Rule	BasicConditionsValidationBasicConditions	rule	validation@applicationDateIsRequired	validationBasicConditions	E: Необходимо указать дату подписания заявления	E: validation@applicationDateIsRequired
+Rule	BasicConditionsValidationBasicConditions	rule	validation@receiptDateIsRequired	validationBasicConditions	E: Необходимо указать дату поступления заявления в СК	E: validation@receiptDateIsRequired
+Rule	BasicConditionsValidationBasicConditions	rule	validation@acceptToWorkDateIsRequired	validationBasicConditions	E: Необходимо указать дату принятия в работу заявления	E: validation@acceptToWorkDateIsRequired
+Rule	BasicConditionsValidationBasicConditions	rule	validation@riskPremiumIsRequired	validationBasicConditions	E: Необходимо указать размер взноса	E: validation@riskPremiumIsRequired
+Rule	BasicConditionsValidationBasicConditions	rule	validation@daysBetweenCurrentDateIssueDate	validationBasicConditions	E: Дата заключения должны быть в промежутке от текущей даты до текущей даты + 3 дня	E: validation@daysBetweenCurrentDateIssueDate
+Rule	BasicConditionsValidationBasicConditions	rule	validation@riskPremiumMin	validationBasicConditions	E: Размер взноса ниже минимально допустимого. Минимально допустимый размер взноса ${entity.minPremium}. Максимально допустимый размер взноса ${entity.maxPremium}.	E: validation@riskPremiumMin
+Rule	BasicConditionsValidationBasicConditions	rule	validation@endowmentInsuredSum	validationBasicConditions	E: Размер страховой суммы по риску Дожитие выше максимально допустимого	E: validation@endowmentInsuredSum
+Rule	BasicConditionsValidationBasicConditions	rule	validation@receiptDateLessThancurrentDate	validationBasicConditions	E: Дата поступления заявления в СК не должна быть больше текущей даты	E: validation@receiptDateLessThancurrentDate
+Rule	BasicConditionsValidationBasicConditions	rule	validation@acceptToWorkDateLessThancurrentDate	validationBasicConditions	E: Дата принятия в работу заявления не должна быть больше текущей даты	E: validation@acceptToWorkDateLessThancurrentDate
+Rule	BasicConditionsValidationBasicConditions	rule	validation@riskPremiumMax	validationBasicConditions	E: Размер взноса выше максимально допустимого. Минимально допустимый размер взноса ${entity.minPremium}. Максимально допустимый размер взноса ${entity.maxPremium}.	E: validation@riskPremiumMax
+Rule	BasicConditionsValidationBasicConditions	rule	validation@DLPSS36404InsuredSum	validationBasicConditions	E: Нельзя заключить договор страхования с указанными параметрами, уменьшите размер страхового взноса	E: validation@DLPSS36404InsuredSum
+Rule	BasicConditionsValidationBasicConditions	rule	validation@DLPSS36404InsuredSumEcofZenit	validationBasicConditions	E: Максимально допустимый размер страховой суммы по риску «Смерть ЛП CC» 10 500 000	E: validation@DLPSS36404InsuredSumEcofZenit
+DataSchema	BasicConditions	field-title	isReinvest	isReinvest	Реинвестирование	isReinvest
+UiSchema	BasicConditions	ui-label	isReinvest	isReinvest	Реинвестирование	isReinvest
+DataSchema	BasicConditions	field-title	invoiceOnActivation	invoiceOnActivation	Инвоисинг при активации	Invoice on activation
+DataSchema	BasicConditions	field-title	insuranceTermsMonths	insuranceTermsMonths	Срок страхования, мес	insuranceTermsMonths
+UiSchema	BasicConditions	ui-label	insuranceTermsMonths	insuranceTermsMonths	Срок страхования, мес	insuranceTermsMonths
+Rule	BasicConditionsValidationBasicConditions	rule	validation@currencyIsRequired	validationBasicConditions	E: Необходимо указать валюту	E: validation@currencyIsRequired
+DataSchema	BasicConditions	field-title	riskInsuredSum	riskInsuredSum	Размер страховой суммы	riskInsuredSum
+DataSchema	BasicConditions	field-title	calcFromInsuredSum	calcFromInsuredSum	Расчет от страховой суммы	calcFromInsuredSum
+UiSchema	BasicConditions	ui-label	riskInsuredSum	riskInsuredSum	Размер страховой суммы	riskInsuredSum
+UiSchema	BasicConditions	ui-label	calcFromInsuredSum	calcFromInsuredSum	Расчет от страховой суммы	calcFromInsuredSum
+Rule	BasicConditionsValidationBasicConditions	rule	validation@riskInsuredSumIsRequired	validationBasicConditions	E: Необходимо указать размер страховой суммы	E: validation@riskInsuredSumIsRequired
+UiSchema	BasicConditions	ui-label	insuranceTermsWholeLife	insuranceTermsWholeLife	Период оплаты взносов, лет	insuranceTermsWholeLife
+DataSchema	BasicConditions	field-title	maxInsuredSum	maxInsuredSum	Максимальная страховая сумма для БФКО	maxInsuredSum
+DataSchema	BasicConditions	field-title	guaranteedIncome	guaranteedIncome	Выплата с гар. доходом	guaranteedIncome
+DataSchema	BasicConditions	field-title	guaranteedIncomeCode	guaranteedIncomeCode	Код выплаты с гар. доходом	guaranteedIncomeCode
+DataSchema	BasicConditions	field-title	guaranteedIncomeDescription	guaranteedIncomeDescription	Описание выплаты с гар. доходом	guaranteedIncomeDescription
+UiSchema	BasicConditions	ui-label	guaranteedIncome	guaranteedIncome	Выплата с гар. доходом	guaranteedIncome
+Rule	BasicConditionsValidationBasicConditions	rule	validation@hasNotRiskStartDateEqualsContractStartDate	validationBasicConditions	E: Дата начала действия хотя бы одного из рисков должна быть равна дате начала действия договора	E: hasNotRiskStartDateEqualsContractStartDate
+Rule	BasicConditionsValidationBasicConditions	rule	validation@riskStartDateLessContractStartDate	validationBasicConditions	E: Даты начала рисков не могут быть меньше даты начала действия договора	E: riskStartDateLessContractStartDate
+DataSchema	BasicConditions	field-title	withTarification	withTarification	С тарификацией	withTarification
+UiSchema	BasicConditions	ui-label	withTarification	withTarification	С тарификацией	withTarification
+DataSchema	BasicConditions	field-title	isFixedRate	isFixedRate	Фиксированный курс	isFixedRate
+DataSchema	BasicConditions	field-title	exchangeRate	exchangeRate	Курс валюты	exchangeRate
+UiSchema	BasicConditions	ui-label	isFixedRate	isFixedRate	Фиксированный курс	isFixedRate
+UiSchema	BasicConditions	ui-label	exchangeRate	exchangeRate	Курс валюты	exchangeRate
+Rule	BasicConditionsValidationBasicConditions	rule	validation@exchangeRateIsRequired	validationBasicConditions	E: Необходимо указать курс валюты	E: exchangeRateIsRequired
+Rule	BasicConditionsValidationBasicConditions	rule	validation@hasNotRiskStartDateEqualsAmendmentEffectiveDate	validationBasicConditions	E: Дата риска не равна дате начала ДС	E: hasNotRiskStartDateEqualsAmendmentEffectiveDate
+UiSchema	BasicConditions	ui-label	reinvestContractNumber	reinvestContractNumber	Номер договора	reinvestContractNumber
+UiSchema	BasicConditions	ui-label	reinvestIssueDate	reinvestIssueDate	Дата договора	reinvestIssueDate
+DataSchema	BasicConditions	field-title	reinvestContractNumber	reinvestContractNumber	Номер договора	reinvestContractNumber
+DataSchema	BasicConditions	field-title	reinvestIssueDate	reinvestIssueDate	Дата договора	reinvestIssueDate
+Rule	BasicConditionsValidationBasicConditions	rule	validation@reinvestContractNumberIsRequired	validationBasicConditions	E: Необходимо указать номер договора	E: reinvestContractNumberIsRequired
+Rule	BasicConditionsValidationBasicConditions	rule	validation@reinvestIssueDateIsRequired	validationBasicConditions	E: Необходимо указать дату договора	E: reinvestIssueDateIsRequired
+Rule	BasicConditionsValidationBasicConditions	rule	validation@calcFromInconsistency	validationBasicConditions	E: Расчет от СС/премии недопустим для продукта	E: calcFromInconsistency
+Rule	BasicConditionsValidationBasicConditions	rule	validation@riskPremiumMustBeRoundedOn1000	validationBasicConditions	E: Необходимо округлить размер взноса до 1000	E: validation@riskPremiumMustBeRoundedOn1000
+DataSchema	BasicConditions	field-title	isEvaluationContract	isEvaluationContract	Оценочный договор	isEvaluationContract
+UiSchema	BasicConditions	ui-label	isEvaluationContract	isEvaluationContract	Оценочный договор	isEvaluationContract
+Rule	BasicConditionsValidationBasicConditions	rule	validation@riskInsuredSumMin	validationBasicConditions	E: Размер страховой суммы меньше ${sum}	E: validation@riskInsuredSumMin
+Rule	BasicConditionsValidationBasicConditions	rule	validation@riskInsuredSumMax	validationBasicConditions	E: Размер страховой суммы ${currentSum}, превышает допустимый лимит в размере ${maxSum}	E: validation@riskInsuredSumMax
+Rule	BasicConditionsValidationBasicConditions	rule	validation@NoteAboutSigned	validationBasicConditions	N: Без статуса 'Подписан' НЕ допускается осуществлять оплату договора!	N: validation@NoteAboutSigned
+Rule	BasicConditionsValidationBasicConditions	rule	validation@NotePassportAndSigned	validationBasicConditions	N: Для подписания договора, необходимо ввести код подтверждения и нажать 'Проверить код'	N: validation@NotePassportAndSigned
+Rule	BasicConditionsValidationBasicConditions	rule	validation@scanReadbleQuality	validationBasicConditions	N: Убедитесь, что приложенная скан-копия паспорта читаемого качества.	N: validation@scanReadbleQuality
+UiSchema	BasicConditions	ui-label	isSpecialOffer	isSpecialOffer	Специальное предложение	isSpecialOffer
+DataSchema	BasicConditions	field-title	isSpecialOffer	isSpecialOffer	Специальное предложение	isSpecialOffer
+Rule	BasicConditionsValidationBasicConditions	rule	validation@productReleaseIsPossibleOnlyWithcomplexSales	validationBasicConditions	N: Выпуск продукта возможен только в рамках комплексной продажи!	N: productReleaseIsPossibleOnlyWithcomplexSales
+DataSchema	BasicConditions	field-title	sportTypes	sportTypes	Виды спорта	sportTypes
+DataSchema	BasicConditions	field-title	insuranceTermsDays	insuranceTermsDays	Срок действия договора	insuranceTermsDays
+UiSchema	BasicConditions	ui-label	insuranceTermsDays	insuranceTermsDays	Срок действия договора	insuranceTermsDays
+DataSchema	BasicConditions	field-title	originalReceiptDate	originalReceiptDate	Дата получения оригинала договора	originalReceiptDate
+UiSchema	BasicConditions	ui-label	originalReceiptDate	originalReceiptDate	Дата получения оригинала договора	originalReceiptDate
+Rule	BasicConditionsValidationBasicConditions	rule	validation@originalReceiptDateLessThanIssueDate	validationBasicConditions	E: Дата получения оригинала договора не должна быть меньше даты заключения	E: validation@originalReceiptDateLessThanIssueDate
+Rule	BasicConditionsValidationBasicConditions	rule	validation@riskInsuredSumMinForInsuredAge	validationBasicConditions	E: Минимальный размер страховой суммы для Застрахованного лица в возрасте ${minAge}-${maxAge} лет составляет ${sum}	E: validation@riskInsuredSumMin
+DataSchema	BasicConditions	field-title	coverageDuration	coverageDuration	Время действия покрытия	coverageDuration
+UiSchema	BasicConditions	ui-label	coverageDuration	coverageDuration	Время действия покрытия	coverageDuration

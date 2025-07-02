@@ -1,0 +1,95 @@
+{
+    "entityType": "UniversalDocument",
+    "dimensions": {},
+    "hideFromDashboard": false,
+    "ui": {
+        "layout": "PortfolioTransferLayout",
+        "composition": {
+            "Header": "Header",
+            "HistoryContent": "History",
+            "AditionalDataSearchFiltersContent": "AditionalDataSearchFilters",
+            "ItemsContent": "Items",
+            "FooterContent": "Footer"
+        }
+    },
+    "validFrom": "2000-01-01",
+    "states": [
+        {
+            "name": "Draft",
+            "actors": [
+                {
+                    "actor": "ViewerCommissionAct",
+                    "operations": [],
+                    "transitions": []
+                },
+                {
+                    "actor": "AdminCommissionAct",
+                    "operations": [
+                        "Save"
+                    ],
+                    "transitions": [
+                        "Draft_To_TransferProcessing"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "TransferProcessing",
+            "actors": [
+                {
+                    "actor": "ViewerCommissionAct",
+                    "operations": [],
+                    "transitions": []
+                },
+                {
+                    "actor": "AdminCommissionAct",
+                    "operations": [],
+                    "transitions": []
+                },
+                {
+                    "actor": "System",
+                    "transitions": [
+                        "TransferProcessing_To_Processed",
+                        "TransferProcessing_To_ProcessedWithErrors"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "ProcessedWithErrors",
+            "actors": [
+                {
+                    "actor": "ViewerCommissionAct",
+                    "operations": [],
+                    "transitions": []
+                },
+                {
+                    "actor": "AdminCommissionAct",
+                    "operations": [],
+                    "transitions": [
+                        "ProcessedWithErrors_To_TransferProcessing"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Processed",
+            "actors": [
+                {
+                    "actor": "ViewerCommissionAct",
+                    "operations": [],
+                    "transitions": []
+                },
+                {
+                    "actor": "AdminCommissionAct",
+                    "operations": [],
+                    "transitions": []
+                }
+            ]
+        }
+    ],
+    "components": [],
+    "transitions": {},
+    "attachments": [],
+    "version": "1"
+}

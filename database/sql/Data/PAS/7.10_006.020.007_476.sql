@@ -1,0 +1,87 @@
+-- Добавление продуктов
+delete from bfx_impl.products
+ where code in ('IBI3ZENIT17', 'IBI5ZENIT17')
+insert into bfx_impl.products
+(id, code, product_group, description)
+values
+('50150EF4-B710-456D-8061-12377BF28700', N'IBI3ZENIT17', N'investment', N'Базис Инвест (3 года)'),
+('C6B6B05A-C0DC-4651-B2AA-EC563CE03A68', N'IBI5ZENIT17', N'investment', N'Базис Инвест (5 лет)')
+
+-- Добавление рисков 
+delete from bfx_impl.risk_product_relation
+ where product_code in ('IBI3ZENIT17', 'IBI5ZENIT17')
+insert into bfx_impl.risk_product_relation
+(id, risk_code, product_code, is_replaceable, parent_risk, conditions_function, relation_type_code, risk_order)
+values
+('A150055B-D1F1-45C9-95A2-F80E5F63B5F4', N'E36904', N'IBI3ZENIT17', '0', NULL, NULL, N'01', 1),
+('69CC3450-A1DA-4D16-8478-863C02AC96FC', N'DLP36904', N'IBI3ZENIT17', '0', NULL, NULL, N'01', 2),
+('C9A870C0-C674-4F71-883F-CA2E70C1A7F7', N'E36904', N'IBI5ZENIT17', '0', NULL, NULL, N'01', 1),
+('4F6D1EEA-38A9-4767-943F-BCEA6931D46A', N'DLP36904', N'IBI5ZENIT17', '0', NULL, NULL, N'01', 2)
+
+--Добавление строк деклараций IBI3ZENIT17
+delete from bfx_impl.declaration_main where id = '834BB9ED-C0BB-4939-B444-F1E7EC316BDE'; insert into bfx_impl.declaration_main values ('834BB9ED-C0BB-4939-B444-F1E7EC316BDE', 'IBI3ZENIT17', '1', '02ED9AF9-B8F1-4C3F-81C0-396C00AB40D9', 'underwriting','1900-01-01','2099-12-31');
+delete from bfx_impl.declaration_main where id = 'C1A65081-3ECE-42D8-BE61-FA36BD81391B'; insert into bfx_impl.declaration_main values ('C1A65081-3ECE-42D8-BE61-FA36BD81391B', 'IBI3ZENIT17', '2', '3C749C44-B107-41D9-A7FD-3A49FD9DAF98', 'compliance','1900-01-01','2099-12-31');
+delete from bfx_impl.declaration_main where id = 'DE1162FE-7D71-4EA3-9937-E8897A5AB97E'; insert into bfx_impl.declaration_main values ('DE1162FE-7D71-4EA3-9937-E8897A5AB97E', 'IBI3ZENIT17', '3', 'ECB5B89B-1CC9-453E-A109-67D17377793B', 'compliance','1900-01-01','2099-12-31');
+delete from bfx_impl.declaration_main where id = '48517C43-93DA-4C29-AB92-4F323AA242E5'; insert into bfx_impl.declaration_main values ('48517C43-93DA-4C29-AB92-4F323AA242E5', 'IBI3ZENIT17', '4', '621F76D7-3D42-4824-BB99-F6B8D2CB2DF6', 'compliance','1900-01-01','2099-12-31');
+delete from bfx_impl.declaration_main where id = '6DDF0016-33DE-4994-BBCD-1C1B7AFA2C6B'; insert into bfx_impl.declaration_main values ('6DDF0016-33DE-4994-BBCD-1C1B7AFA2C6B', 'IBI3ZENIT17', '5', 'FE343B47-5312-4352-B19E-DD1B54948D76', 'compliance','1900-01-01','2099-12-31');
+delete from bfx_impl.declaration_main where id = '7213B131-A511-4EEE-9B79-8804D6125D00'; insert into bfx_impl.declaration_main values ('7213B131-A511-4EEE-9B79-8804D6125D00', 'IBI3ZENIT17', '6', '89213C66-6370-43DB-A9C0-B7F8A0A44849', 'compliance','1900-01-01','2099-12-31');
+delete from bfx_impl.declaration_main where id = 'F8DAC32D-6C5E-4BEE-9564-3A82FD7CD767'; insert into bfx_impl.declaration_main values ('F8DAC32D-6C5E-4BEE-9564-3A82FD7CD767', 'IBI3ZENIT17', '7', '3B157E3B-3C6D-474A-A5D8-519A128F2440', 'compliance','1900-01-01','2099-12-31');
+delete from bfx_impl.declaration_main where id = '942562E0-C441-4039-9AE9-4AC295D26F64'; insert into bfx_impl.declaration_main values ('942562E0-C441-4039-9AE9-4AC295D26F64', 'IBI3ZENIT17', '8', 'D6F3EB38-F6FC-4E05-AD03-75734F950DD3', 'compliance','1900-01-01','2099-12-31');
+delete from bfx_impl.declaration_main where id = '6B00C7D0-EEA5-4C17-9A38-EB90CC524AC7'; insert into bfx_impl.declaration_main values ('6B00C7D0-EEA5-4C17-9A38-EB90CC524AC7', 'IBI3ZENIT17', '9', '4550702B-0F3B-4570-93D1-3FD1A9F02837', 'compliance','1900-01-01','2099-12-31');
+delete from bfx_impl.declaration_main where id = 'E6D2B526-5BB8-4C6F-9559-A05D10EBA171'; insert into bfx_impl.declaration_main values ('E6D2B526-5BB8-4C6F-9559-A05D10EBA171', 'IBI3ZENIT17', '10', '821F21AD-2731-4065-93D1-5E2D602C0A0E', 'legal','1900-01-01','2099-12-31');
+delete from bfx_impl.declaration_main where id = '6DB3A631-818F-46C6-A47D-D438A782B1D8'; insert into bfx_impl.declaration_main values ('6DB3A631-818F-46C6-A47D-D438A782B1D8', 'IBI3ZENIT17', '11', '1D956ABA-F1FB-4DC1-B0C4-F6E0EB4995AF', 'block','1900-01-01','2099-12-31');
+delete from bfx_impl.declaration_main where id = '1BCE09B1-A807-40C6-A63F-0593D9484500'; insert into bfx_impl.declaration_main values ('1BCE09B1-A807-40C6-A63F-0593D9484500', 'IBI3ZENIT17', '12', 'A5F6C987-9316-4DBE-8B1F-2B6A9624A4F5', 'block','1900-01-01','2099-12-31');
+delete from bfx_impl.declaration_main where id = '2BCF0F1E-A5DF-4198-9F76-E06E1559951D'; insert into bfx_impl.declaration_main values ('2BCF0F1E-A5DF-4198-9F76-E06E1559951D', 'IBI3ZENIT17', '13', '6D5D0404-4C17-45C9-9037-B08BAF9911FF', 'legal','1900-01-01','2099-12-31');
+delete from bfx_impl.declaration_main where id = 'AB230373-955F-4213-87A5-6F38477FFADF'; insert into bfx_impl.declaration_main values ('AB230373-955F-4213-87A5-6F38477FFADF', 'IBI3ZENIT17', '14', '61176CB2-C465-4EBD-AAA9-C4745376E9E8', 'block','1900-01-01','2099-12-31');
+delete from bfx_impl.declaration_main where id = 'DF9D2007-F4AA-4D13-845F-44C3FBCBB14A'; insert into bfx_impl.declaration_main values ('DF9D2007-F4AA-4D13-845F-44C3FBCBB14A', 'IBI3ZENIT17', '15', '14BD7FA1-58F1-4622-AEC7-2D7B5D27680F', 'block','1900-01-01','2099-12-31');
+delete from bfx_impl.declaration_main where id = '4233E436-EED5-4CED-8F75-93EA07C0AB55'; insert into bfx_impl.declaration_main values ('4233E436-EED5-4CED-8F75-93EA07C0AB55', 'IBI3ZENIT17', '16', '0F71C806-C12F-4ED1-8619-A1E3B3F738F1', 'legal','1900-01-01','2099-12-31');
+delete from bfx_impl.declaration_main where id = 'CA5F0149-6ADF-4C4E-848E-41C4A129A55B'; insert into bfx_impl.declaration_main values ('CA5F0149-6ADF-4C4E-848E-41C4A129A55B', 'IBI3ZENIT17', '17', '688E62FB-E838-4CA6-B24D-4340F5301448', 'block','1900-01-01','2099-12-31');
+
+--Добавление строк деклараций IBI5ZENIT17
+delete from bfx_impl.declaration_main where id = '45906517-2949-4990-8A77-79E17C8BB5CD'; insert into bfx_impl.declaration_main values ('45906517-2949-4990-8A77-79E17C8BB5CD', 'IBI5ZENIT17', '1', '02ED9AF9-B8F1-4C3F-81C0-396C00AB40D9', 'underwriting','1900-01-01','2099-12-31');
+delete from bfx_impl.declaration_main where id = '578CBB57-E7D9-47A1-8A7C-CE010C0109C5'; insert into bfx_impl.declaration_main values ('578CBB57-E7D9-47A1-8A7C-CE010C0109C5', 'IBI5ZENIT17', '2', '3C749C44-B107-41D9-A7FD-3A49FD9DAF98', 'compliance','1900-01-01','2099-12-31');
+delete from bfx_impl.declaration_main where id = '54A59CC1-1455-428F-999D-846F43A90281'; insert into bfx_impl.declaration_main values ('54A59CC1-1455-428F-999D-846F43A90281', 'IBI5ZENIT17', '3', 'ECB5B89B-1CC9-453E-A109-67D17377793B', 'compliance','1900-01-01','2099-12-31');
+delete from bfx_impl.declaration_main where id = '8FDC876E-BF80-464C-AC95-7CE6266D4318'; insert into bfx_impl.declaration_main values ('8FDC876E-BF80-464C-AC95-7CE6266D4318', 'IBI5ZENIT17', '4', '621F76D7-3D42-4824-BB99-F6B8D2CB2DF6', 'compliance','1900-01-01','2099-12-31');
+delete from bfx_impl.declaration_main where id = 'EC93CD9A-EAC6-44AC-90AA-8E88BF658FE6'; insert into bfx_impl.declaration_main values ('EC93CD9A-EAC6-44AC-90AA-8E88BF658FE6', 'IBI5ZENIT17', '5', 'FE343B47-5312-4352-B19E-DD1B54948D76', 'compliance','1900-01-01','2099-12-31');
+delete from bfx_impl.declaration_main where id = '7B2541CB-CC39-4A13-A1E6-68D82C9E819B'; insert into bfx_impl.declaration_main values ('7B2541CB-CC39-4A13-A1E6-68D82C9E819B', 'IBI5ZENIT17', '6', '89213C66-6370-43DB-A9C0-B7F8A0A44849', 'compliance','1900-01-01','2099-12-31');
+delete from bfx_impl.declaration_main where id = '53791F38-C5F2-4E46-9069-A504753478FB'; insert into bfx_impl.declaration_main values ('53791F38-C5F2-4E46-9069-A504753478FB', 'IBI5ZENIT17', '7', '3B157E3B-3C6D-474A-A5D8-519A128F2440', 'compliance','1900-01-01','2099-12-31');
+delete from bfx_impl.declaration_main where id = '7EC08099-AAFC-42D5-9DEB-23B7C8C52608'; insert into bfx_impl.declaration_main values ('7EC08099-AAFC-42D5-9DEB-23B7C8C52608', 'IBI5ZENIT17', '8', 'D6F3EB38-F6FC-4E05-AD03-75734F950DD3', 'compliance','1900-01-01','2099-12-31');
+delete from bfx_impl.declaration_main where id = '2A50AE0C-7D64-4551-88E8-9385CD7F55DF'; insert into bfx_impl.declaration_main values ('2A50AE0C-7D64-4551-88E8-9385CD7F55DF', 'IBI5ZENIT17', '9', '4550702B-0F3B-4570-93D1-3FD1A9F02837', 'compliance','1900-01-01','2099-12-31');
+delete from bfx_impl.declaration_main where id = '9D70004B-7177-447E-9AD6-EB791677AB63'; insert into bfx_impl.declaration_main values ('9D70004B-7177-447E-9AD6-EB791677AB63', 'IBI5ZENIT17', '10', '821F21AD-2731-4065-93D1-5E2D602C0A0E', 'legal','1900-01-01','2099-12-31');
+delete from bfx_impl.declaration_main where id = '362EA626-94E2-46D4-B40A-47DA3683848A'; insert into bfx_impl.declaration_main values ('362EA626-94E2-46D4-B40A-47DA3683848A', 'IBI5ZENIT17', '11', '1D956ABA-F1FB-4DC1-B0C4-F6E0EB4995AF', 'block','1900-01-01','2099-12-31');
+delete from bfx_impl.declaration_main where id = '775D6652-6E76-43DF-91B5-D9106A948AFA'; insert into bfx_impl.declaration_main values ('775D6652-6E76-43DF-91B5-D9106A948AFA', 'IBI5ZENIT17', '12', 'A5F6C987-9316-4DBE-8B1F-2B6A9624A4F5', 'block','1900-01-01','2099-12-31');
+delete from bfx_impl.declaration_main where id = 'AF118FAD-F7BB-4F6F-90CF-28E6ACC19702'; insert into bfx_impl.declaration_main values ('AF118FAD-F7BB-4F6F-90CF-28E6ACC19702', 'IBI5ZENIT17', '13', '6D5D0404-4C17-45C9-9037-B08BAF9911FF', 'legal','1900-01-01','2099-12-31');
+delete from bfx_impl.declaration_main where id = 'D2EE9920-AFEE-4D46-88CF-98EFC40143A1'; insert into bfx_impl.declaration_main values ('D2EE9920-AFEE-4D46-88CF-98EFC40143A1', 'IBI5ZENIT17', '14', '61176CB2-C465-4EBD-AAA9-C4745376E9E8', 'block','1900-01-01','2099-12-31');
+delete from bfx_impl.declaration_main where id = '7E80A0C3-AAE4-4B9D-80DA-E8681F35A003'; insert into bfx_impl.declaration_main values ('7E80A0C3-AAE4-4B9D-80DA-E8681F35A003', 'IBI5ZENIT17', '15', '14BD7FA1-58F1-4622-AEC7-2D7B5D27680F', 'block','1900-01-01','2099-12-31');
+delete from bfx_impl.declaration_main where id = 'E48A7435-A171-4831-8CE1-813516979BCB'; insert into bfx_impl.declaration_main values ('E48A7435-A171-4831-8CE1-813516979BCB', 'IBI5ZENIT17', '16', '0F71C806-C12F-4ED1-8619-A1E3B3F738F1', 'legal','1900-01-01','2099-12-31');
+delete from bfx_impl.declaration_main where id = '9D67408A-9318-410E-8AA4-B183BF92B0B0'; insert into bfx_impl.declaration_main values ('9D67408A-9318-410E-8AA4-B183BF92B0B0', 'IBI5ZENIT17', '17', '688E62FB-E838-4CA6-B24D-4340F5301448', 'block','1900-01-01','2099-12-31');
+
+
+--Добавление строк мед деклараций
+delete from bfx_impl.declaration_medical where id = 'BDA7A470-F215-47BA-9296-BA6F212AED8D'; insert into bfx_impl.declaration_medical values ('BDA7A470-F215-47BA-9296-BA6F212AED8D', 'IBI3ZENIT17Y', '1', '772D1F67-03C0-4D27-9681-0A275B0BACEB', 'underwriting','1900-01-01','2099-12-31', 0);
+delete from bfx_impl.declaration_medical where id = 'FD93991A-97E5-4D6E-98CE-2452C9306ABA'; insert into bfx_impl.declaration_medical values ('FD93991A-97E5-4D6E-98CE-2452C9306ABA', 'IBI3ZENIT17Y', '2', 'A3480DD9-28D4-4630-943B-23FF35CCEC9B', 'underwriting','1900-01-01','2099-12-31', 0);
+delete from bfx_impl.declaration_medical where id = '6F381254-E7FE-4A71-A4E1-FA6B34F10999'; insert into bfx_impl.declaration_medical values ('6F381254-E7FE-4A71-A4E1-FA6B34F10999', 'IBI3ZENIT17Y', '3', '55FEBB90-AE79-4799-A8BB-9453C608F690', 'underwriting','1900-01-01','2099-12-31', 0);
+delete from bfx_impl.declaration_medical where id = '72238B4B-C68B-44C1-A5AA-658274D7D4BC'; insert into bfx_impl.declaration_medical values ('72238B4B-C68B-44C1-A5AA-658274D7D4BC', 'IBI3ZENIT17Y', '4', '62B1D75F-D0BF-4452-B45B-D7F4AF9CF642', 'underwriting','1900-01-01','2099-12-31', 0);
+delete from bfx_impl.declaration_medical where id = 'A4131FF8-874F-491E-94E4-DAFF4AB9502D'; insert into bfx_impl.declaration_medical values ('A4131FF8-874F-491E-94E4-DAFF4AB9502D', 'IBI3ZENIT17Y', '5', '2F2476ED-DE08-4276-AE11-6C91B057034D', 'underwriting','1900-01-01','2099-12-31', 0);
+delete from bfx_impl.declaration_medical where id = '0EB37D83-719F-46BF-882B-637F4F66E9F8'; insert into bfx_impl.declaration_medical values ('0EB37D83-719F-46BF-882B-637F4F66E9F8', 'IBI3ZENIT17Y', '6', '87976827-EBE9-48D6-B75E-036DE21D26F5', 'underwriting','1900-01-01','2099-12-31', 0);
+
+delete from bfx_impl.declaration_medical where id = 'D9E9FBE3-660D-4E9A-BC29-4752DB08A37E'; insert into bfx_impl.declaration_medical values ('D9E9FBE3-660D-4E9A-BC29-4752DB08A37E', 'IBI3ZENIT17O', '1', '772D1F67-03C0-4D27-9681-0A275B0BACEB', 'underwriting','1900-01-01','2099-12-31', 0);
+delete from bfx_impl.declaration_medical where id = '33024A68-1B34-4F11-BA48-94970C18D9F1'; insert into bfx_impl.declaration_medical values ('33024A68-1B34-4F11-BA48-94970C18D9F1', 'IBI3ZENIT17O', '2', 'A3480DD9-28D4-4630-943B-23FF35CCEC9B', 'underwriting','1900-01-01','2099-12-31', 0);
+delete from bfx_impl.declaration_medical where id = '2C83DBDC-5886-4A13-AA36-8E50E9033D74'; insert into bfx_impl.declaration_medical values ('2C83DBDC-5886-4A13-AA36-8E50E9033D74', 'IBI3ZENIT17O', '3', '55FEBB90-AE79-4799-A8BB-9453C608F690', 'underwriting','1900-01-01','2099-12-31', 0);
+delete from bfx_impl.declaration_medical where id = '61ED4FF6-F8F2-469F-8B4E-716D14C43A71'; insert into bfx_impl.declaration_medical values ('61ED4FF6-F8F2-469F-8B4E-716D14C43A71', 'IBI3ZENIT17O', '4', '62B1D75F-D0BF-4452-B45B-D7F4AF9CF642', 'underwriting','1900-01-01','2099-12-31', 0);
+delete from bfx_impl.declaration_medical where id = 'BE503BCC-A587-4062-9F53-70F842697BA4'; insert into bfx_impl.declaration_medical values ('BE503BCC-A587-4062-9F53-70F842697BA4', 'IBI3ZENIT17O', '5', '2F2476ED-DE08-4276-AE11-6C91B057034D', 'underwriting','1900-01-01','2099-12-31', 0);
+delete from bfx_impl.declaration_medical where id = '655486D6-0FB6-4EA2-9BEC-7C622CFA3ACB'; insert into bfx_impl.declaration_medical values ('655486D6-0FB6-4EA2-9BEC-7C622CFA3ACB', 'IBI3ZENIT17O', '6', '87976827-EBE9-48D6-B75E-036DE21D26F5', 'underwriting','1900-01-01','2099-12-31', 0);
+
+delete from bfx_impl.declaration_medical where id = '3CAB4376-954E-49E8-A8B9-A516BEF32816'; insert into bfx_impl.declaration_medical values ('3CAB4376-954E-49E8-A8B9-A516BEF32816', 'IBI5ZENIT17O', '1', '772D1F67-03C0-4D27-9681-0A275B0BACEB', 'underwriting','1900-01-01','2099-12-31', 0);
+delete from bfx_impl.declaration_medical where id = 'B131F21C-0BCE-4F81-92BE-EF9026CA427E'; insert into bfx_impl.declaration_medical values ('B131F21C-0BCE-4F81-92BE-EF9026CA427E', 'IBI5ZENIT17O', '2', 'A3480DD9-28D4-4630-943B-23FF35CCEC9B', 'underwriting','1900-01-01','2099-12-31', 0);
+delete from bfx_impl.declaration_medical where id = '7BBFBCA5-F663-4DEB-AC63-D24751CC296B'; insert into bfx_impl.declaration_medical values ('7BBFBCA5-F663-4DEB-AC63-D24751CC296B', 'IBI5ZENIT17O', '3', '55FEBB90-AE79-4799-A8BB-9453C608F690', 'underwriting','1900-01-01','2099-12-31', 0);
+delete from bfx_impl.declaration_medical where id = '9EE05E5F-735D-4513-9DD9-1B3471A7BCA9'; insert into bfx_impl.declaration_medical values ('9EE05E5F-735D-4513-9DD9-1B3471A7BCA9', 'IBI5ZENIT17O', '4', '62B1D75F-D0BF-4452-B45B-D7F4AF9CF642', 'underwriting','1900-01-01','2099-12-31', 0);
+delete from bfx_impl.declaration_medical where id = '7815273B-B054-4A85-964B-0239EB88AE3B'; insert into bfx_impl.declaration_medical values ('7815273B-B054-4A85-964B-0239EB88AE3B', 'IBI5ZENIT17O', '5', '2F2476ED-DE08-4276-AE11-6C91B057034D', 'underwriting','1900-01-01','2099-12-31', 0);
+delete from bfx_impl.declaration_medical where id = '9CBC8FEB-9EF0-4AE0-8CE4-D059DA0FE761'; insert into bfx_impl.declaration_medical values ('9CBC8FEB-9EF0-4AE0-8CE4-D059DA0FE761', 'IBI5ZENIT17O', '6', '87976827-EBE9-48D6-B75E-036DE21D26F5', 'underwriting','1900-01-01','2099-12-31', 0);
+
+delete from bfx_impl.declaration_medical where id = '85841CA1-BD3E-4E14-BDF4-E5CED50CE4A4'; insert into bfx_impl.declaration_medical values ('85841CA1-BD3E-4E14-BDF4-E5CED50CE4A4', 'IBI5ZENIT17Y', '1', '772D1F67-03C0-4D27-9681-0A275B0BACEB', 'underwriting','1900-01-01','2099-12-31', 0);
+delete from bfx_impl.declaration_medical where id = 'AD257994-68AF-4A00-9464-9200E5CF7A61'; insert into bfx_impl.declaration_medical values ('AD257994-68AF-4A00-9464-9200E5CF7A61', 'IBI5ZENIT17Y', '2', 'A3480DD9-28D4-4630-943B-23FF35CCEC9B', 'underwriting','1900-01-01','2099-12-31', 0);
+delete from bfx_impl.declaration_medical where id = '5F4491EE-15E1-43CB-B179-E5633AD3498E'; insert into bfx_impl.declaration_medical values ('5F4491EE-15E1-43CB-B179-E5633AD3498E', 'IBI5ZENIT17Y', '3', '55FEBB90-AE79-4799-A8BB-9453C608F690', 'underwriting','1900-01-01','2099-12-31', 0);
+delete from bfx_impl.declaration_medical where id = 'E4DBEBDE-778A-4800-8E89-8E530D61CEE8'; insert into bfx_impl.declaration_medical values ('E4DBEBDE-778A-4800-8E89-8E530D61CEE8', 'IBI5ZENIT17Y', '4', '62B1D75F-D0BF-4452-B45B-D7F4AF9CF642', 'underwriting','1900-01-01','2099-12-31', 0);
+delete from bfx_impl.declaration_medical where id = '5CF472FB-33DA-4A4A-AD25-8728A7CDA2EB'; insert into bfx_impl.declaration_medical values ('5CF472FB-33DA-4A4A-AD25-8728A7CDA2EB', 'IBI5ZENIT17Y', '5', '2F2476ED-DE08-4276-AE11-6C91B057034D', 'underwriting','1900-01-01','2099-12-31', 0);
+delete from bfx_impl.declaration_medical where id = '05541386-6EE0-4FD0-97F3-E74E908E2C04'; insert into bfx_impl.declaration_medical values ('05541386-6EE0-4FD0-97F3-E74E908E2C04', 'IBI5ZENIT17Y', '6', '87976827-EBE9-48D6-B75E-036DE21D26F5', 'underwriting','1900-01-01','2099-12-31', 0);

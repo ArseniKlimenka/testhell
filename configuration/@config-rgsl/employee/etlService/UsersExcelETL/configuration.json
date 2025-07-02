@@ -1,0 +1,107 @@
+{
+    "mainDataSource": "ImportStagingDataSource",
+    "aggregate": false,
+    "allowParallelExecution": false,
+    "allowMultipleTransactions": true,
+    "sinks": [
+        {
+            "name": "FindUser",
+            "fetch": {
+                "configuration": {
+                    "name": "GetTabNumberDataSource"
+                }
+            }
+        },
+        {
+            "name": "FindApplicationUserGroup",
+            "fetch": {
+                "configuration": {
+                    "name": "GetApplicationUserGroupsDataSource"
+                }
+            }
+        },
+        {
+            "name": "FindRoles",
+            "fetch": {
+                "configuration": {
+                    "name": "GetApplicationUserRoleDataSource"
+                }
+            }
+        },
+        {
+            "name": "FindUserGroup",
+            "fetch": {
+                "configuration": {
+                    "name": "OrganisationUnitsImplDataSource"
+                }
+            }
+        },
+        {
+            "name": "CreateNaturalPerson",
+            "executeAs": "OrganisationAdministrator",
+            "masterEntity": {
+                "configuration": {
+                    "name": "NaturalPerson",
+                    "version": "1"
+                }
+            }
+        },
+        {
+            "name": "FindParty",
+            "fetch": {
+                "configuration": {
+                    "name": "GetPartyDataSource"
+                }
+            }
+        },
+        {
+            "name": "CreateEmployee",
+            "masterEntity": {
+                "configuration": {
+                    "name": "Employee",
+                    "version": "1"
+                }
+            }
+        },
+        {
+            "ref": "CreateUserSinkGroup"
+        },
+        {
+            "name": "Notification",
+            "notification": {
+                "notificationName": "SendPassword"
+            }
+        },
+        {
+            "name": "WriteSuccessStatus",
+            "database": {
+                "tables": [
+                    "BFX.IMPORT_RECORD_STATUS"
+                ]
+            }
+        }
+    ],
+    "completionSinks": [
+        {
+            "name": "FinishedImporting",
+            "documentTransition": {
+                "transition": {
+                    "transitionName": "FinishImporting",
+                    "configurationName": "UsersExcelImport",
+                    "configurationVersion": "1"
+                }
+            }
+        }
+    ],
+    "errorSinks": [
+        {
+            "name": "WriteErrorStatus",
+            "database": {
+                "tables": [
+                    "BFX.IMPORT_RECORD_STATUS"
+                ]
+            }
+        }
+    ],
+    "version": "1"
+}

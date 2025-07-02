@@ -1,0 +1,46 @@
+{
+    "entityType": "UniversalDocument",
+    "version": "1",
+    "condition": {
+        "events": [
+            "StatusChanged"
+        ],
+        "configuration": {
+            "dimensions": {
+                "universalDocumentType": [
+                    "LifeInsuranceAttachmentVerification"
+                ]
+            }
+        },
+        "documentStates": [
+            "Issued",
+            "Cancelled"
+        ]
+    },
+    "sinks": [
+        {
+            "name": "GetSendEventConfiguration",
+            "fetch": {
+                "configuration": {
+                    "name": "SendEventConfigurationDataSource"
+                }
+            }
+        },
+        {
+            "name": "GetContractApiSender",
+            "fetch": {
+                "configuration": {
+                    "name": "ApiSenderDataSource"
+                }
+            }
+        },
+        {
+            "name": "WriteSendEvent",
+            "database": {
+                "tables": [
+                    "BFX_IMPL.SEND_EVENT"
+                ]
+            }
+        }
+    ]
+}

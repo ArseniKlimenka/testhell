@@ -1,0 +1,29 @@
+{
+    "entityType": "ImportDocument",
+    "condition": {
+        "events": [
+            "StatusChanged"
+        ],
+        "configuration": {
+            "names": [
+                "PaymentCancellationImport"
+            ],
+            "dimensions": {}
+        },
+        "documentStates": [
+            "PaymentCancellation"
+        ]
+    },
+    "sinks": [
+        {
+            "name": "TriggerEtlServiceSink",
+            "etlService": {
+                "configuration": {
+                    "name": "PaymentCancellationImport1EtlService",
+                    "version": "1"
+                }
+            }
+        }
+    ],
+    "version": "1"
+}

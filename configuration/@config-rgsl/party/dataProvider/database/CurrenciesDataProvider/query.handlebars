@@ -1,0 +1,27 @@
+SELECT c.CURRENCY_CODE,
+       c.DESCRIPTION,
+       c.ISO_NUMERIC_CODE,
+       CASE
+         WHEN c.CURRENCY_CODE = N'RUB'
+         THEN '001'
+         WHEN c.CURRENCY_CODE = N'USD'
+         THEN '002'
+         WHEN c.CURRENCY_CODE = N'EUR'
+         THEN '003'
+         ELSE c.ISO_NUMERIC_CODE
+       END AS PRIORITY
+  FROM BFX.CURRENCY_REF c
+ WHERE 1=1
+{{#if parameters.currencySearchText}}
+   AND
+   (
+      c.CURRENCY_CODE LIKE @currencySearchText OR
+      c.DESCRIPTION LIKE @currencySearchText
+   )
+{{/if}}
+{{#if parameters.id}}
+   AND c.ISO_NUMERIC_CODE = @id
+{{/if}}
+{{#if parameters.currencyCode}}
+   AND c.CURRENCY_CODE = @currencyCode
+{{/if}}

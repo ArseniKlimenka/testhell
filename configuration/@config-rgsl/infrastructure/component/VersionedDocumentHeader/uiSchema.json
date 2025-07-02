@@ -1,0 +1,125 @@
+{
+    "type": "HeaderContentLayout",
+    "fixedPosition": true,
+    "elements": [
+        {
+            "type": "Group",
+            "width": 2,
+            "stackContent": "Left",
+            "elements": [
+                {
+                    "type": "OutputText",
+                    "elementId": "documentTitleId",
+                    "skipTranslate": true,
+                    "value": {
+                        "$ref": "#"
+                    },
+                    "textStyle": {
+                        "uppercase": true,
+                        "textSize": "Normal",
+                        "textColor": "Black"
+                    },
+                    "template": "{{#style 'bold'}}{{#i18n}}{{expr ConfigurationCodeName}}@Title{{/i18n}}:{{/style}}"
+                },
+                {
+                    "type": "OutputText",
+                    "skipTranslate": true,
+                    "defaultValue": "",
+                    "value": {
+                        "$ref": "#/properties/Number",
+                        "mapping": "getNumber"
+                    },
+                    "textStyle": {
+                        "uppercase": true,
+                        "textSize": "Normal",
+                        "textColor": "Blue"
+                    },
+                    "elementId": "ai-info-control"
+                },
+                {
+                    "type": "OutputText",
+                    "elementId": "documentStateId",
+                    "value": {
+                        "$ref": "#/properties/State"
+                    },
+                    "textStyle": {
+                        "uppercase": true,
+                        "textSize": "Normal",
+                        "textColor": "Blue"
+                    },
+                    "template": "&nbsp;{{#style 'bold'}}({{#i18n}}states@{{expr Description}}{{/i18n}}){{/style}}"
+                },
+                {
+                    "type": "DocumentVersions",
+                    "value": {
+                        "$ref": "#"
+                    }
+                },
+                {
+                    "type": "DocumentAmendmentNavigation",
+                    "value": {
+                        "$ref": "#"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "Group",
+            "width": 2,
+            "stackContent": "Right",
+            "elements": [
+                {
+                    "type": "LockedControl",
+                    "elementId": "ai-locked-control",
+                    "operations": "AvailableOperations",
+                    "value": {
+                        "$ref": "#"
+                    }
+                },
+                {
+                    "type": "Actor",
+                    "value": {
+                        "$ref": "#/properties/WorkUnitActor"
+                    },
+                    "elementId": "ai-actor-selection-control"
+                },
+                {
+                    "type": "TransitionsRelations",
+                    "transitions": "AvailableTransitions",
+                    "relations": "AvailableRelations",
+                    "value": {
+                        "$ref": "#"
+                    },
+                    "elementId": "ai-transitions-relations-control"
+                },
+                {
+                    "type": "Printouts",
+                    "icon": {
+                        "name": "Print",
+                        "size": "Medium"
+                    },
+                    "printouts": "AvailablePrintouts",
+                    "entityIdentifiers": [
+                        "Number"
+                    ],
+                    "value": {
+                        "$ref": "#"
+                    },
+                    "elementId": "ai-printouts-control",
+                    "rule": {
+                        "effect": "SHOW",
+                        "condition": {
+                            "type": "FUNC",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ],
+                            "ruleFunction": "showPrintouts"
+                        }
+                    }
+                }
+            ]
+        }
+    ]
+}

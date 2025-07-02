@@ -1,0 +1,30 @@
+select
+  psl.RISK_PREMIUM,
+  psl.RISK_PREMIUM_ALL,
+  phb.CONTRACT_NUMBER
+into
+  PAS_IMPL.SK2803
+from
+  PAS_IMPL.POLICY_SAT_LATEST psl,
+  PAS_IMPL.POLICY_HUB phb 
+where phb.POLICY_HKEY = psl.POLICY_HKEY
+
+update
+  PAS.CONTRACT
+set
+  COMMON_BODY = JSON_MODIFY(COMMON_BODY, '$.attributes.riskPremium', psl.RISK_PREMIUM)
+from
+  PAS.CONTRACT agr,
+  PAS_IMPL.SK2803 psl
+where agr.CONTRACT_NUMBER = psl.CONTRACT_NUMBER
+
+update
+  PAS.CONTRACT
+set
+  COMMON_BODY = JSON_MODIFY(COMMON_BODY, '$.attributes.riskPremiumAll', psl.RISK_PREMIUM_ALL)
+from
+  PAS.CONTRACT agr,
+  PAS_IMPL.SK2803 psl
+where agr.CONTRACT_NUMBER = psl.CONTRACT_NUMBER
+
+drop table PAS_IMPL.SK2803

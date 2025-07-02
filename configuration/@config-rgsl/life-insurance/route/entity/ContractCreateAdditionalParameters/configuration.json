@@ -1,0 +1,50 @@
+{
+    "entityType": "Contract",
+    "condition": {
+        "events": [
+            "Created"
+        ],
+        "configuration": {
+            "names": [
+                "AccumulatedLifeInsurancePolicy",
+                "CreditLifeInsurancePolicy",
+                "EquityLifeInsurancePolicy",
+                "InvestmentLifeInsurancePolicy",
+                "MedLifeInsurancePolicy",
+                "RiskLifeInsurancePolicy",
+                "AccidentLifeInsurancePolicy"
+            ]
+        }
+    },
+    "executionOrderWeight": 100,
+    "sinks": [
+        {
+            "name": "GetQuoteByPolicyNumber",
+            "fetch": {
+                "configuration": {
+                    "name": "RelatedDocumentsDataSource"
+                }
+            }
+        },
+        {
+            "name": "CreateAdditionalParameters",
+            "masterEntity": {
+                "configuration": {
+                    "name": "ContractEntity",
+                    "version": "1"
+                },
+                "allowUpdating": true
+            }
+        },
+        {
+            "name": "SetEconomicParameters",
+            "etlService": {
+                "configuration": {
+                    "name": "UpdateEconomicParametersEtlService",
+                    "version": "1"
+                }
+            }
+        }
+    ],
+    "version": "1"
+}

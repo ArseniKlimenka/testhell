@@ -1,0 +1,55 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+        "criteria"
+    ],
+    "properties": {
+        "criteria": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "contractNumbersStr": {
+                    "type": "string"
+                },
+                "contractNumbers": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "aaServiceProviderCode": {
+                    "type": "string"
+                },
+                "aaNumber": {
+                    "type": "string"
+                },
+                "contractStateCode": {
+                    "$ref": "component:ContractState"
+                },
+                "installmentStatus": {
+                    "$ref": "component:InstallmentStatusComponent"
+                },
+                "transactionDateFrom": {
+                    "type": "string",
+                    "aiFormat": "date"
+                },
+                "transactionDateTo": {
+                    "type": "string",
+                    "aiFormat": "date"
+                },
+                "verificationState": {
+                    "$ref": "component:AttachmentVerificationState"
+                }
+            }
+        },
+        "exportTitle": {
+            "type": "string",
+            "aiTitle": "Export title"
+        },
+        "sort": {
+            "$ref": "component:DataSourceSort"
+        }
+    }
+}

@@ -1,0 +1,82 @@
+﻿SELECT
+    ud.UNIVERSAL_VERSIONED_DOCUMENT_ID,
+	ud.UNIVERSAL_VERSIONED_DOCUMENT_NUMBER,
+	ud.BODY
+
+FROM BFX.UNIVERSAL_VERSIONED_DOCUMENT ud
+JOIN ACC_IMPL.CRT_HUB crtH ON crtH.CERTIFICATE_NUMBER = ud.UNIVERSAL_VERSIONED_DOCUMENT_NUMBER
+JOIN ACC_IMPL.CRT_SAT_LATEST crtS ON crtS.CRT_HKEY = crtH.CRT_HKEY
+JOIN CFG.PROCESS_STATE ps ON ps.PROCESS_STATE_ID = ud.STATE_ID
+JOIN PAS.CONTRACT c ON c.CONTRACT_NUMBER = crtS.CONTRACT_NUMBER
+JOIN CFX.PUBLISHED_ARTIFACT pa ON pa.PUBLISHED_ARTIFACT_ID = c.PUBLISHED_ARTIFACT_ID
+WHERE 1=1
+
+{{#if parameters.accountingCertificateNumber}}
+	AND ud.UNIVERSAL_VERSIONED_DOCUMENT_NUMBER = @accountingCertificateNumber
+{{/if}}
+
+{{#if parameters.accountingCertificateState}}
+	AND crtS.STATE = @accountingCertificateState
+{{/if}}
+
+{{#if parameters.accountingCertificateStates}}
+	AND crtS.STATE IN (@accountingCertificateStates)
+{{/if}}
+
+{{#if parameters.accountingCertificateSeqNumber}}
+	AND crtS.SEQ_NUMBER = @accountingCertificateSeqNumber
+{{/if}}
+
+{{#if parameters.originalDocumentNumber}}
+	AND crtS.ORIGINAL_DOCUMENT_NUMBER = @originalDocumentNumber
+{{/if}}
+
+{{#if parameters.contractNumber}}
+	AND crtS.CONTRACT_NUMBER = @contractNumber
+{{/if}}
+
+{{#if parameters.holderPartyCode}}
+	AND crtS.HOLDER_PARTY_CODE = @holderPartyCode
+{{/if}}
+
+{{#if parameters.insuredPartyCode}}
+	AND crtS.INSURED_PARTY_CODE = @insuredPartyCode
+{{/if}}
+
+{{#if parameters.applicantFullName}}
+	AND crtS.APPLICANT_FULL_NAME LIKE '%' + @applicantFullName + '%'
+{{/if}}
+
+{{#if parameters.requestDate}}
+	AND crtS.REQUEST_DATE = @requestDate
+{{/if}}
+
+{{#if parameters.requestDateFrom}}
+	AND crtS.REQUEST_DATE >= @requestDateFrom
+{{/if}}
+
+{{#if parameters.requestDateTo}}
+	AND crtS.REQUEST_DATE <= @requestDateTo
+{{/if}}
+
+{{#if parameters.accountingYear}}
+	AND crtS.ACCOUNTING_YEAR = @accountingYear
+{{/if}}
+
+{{#if parameters.correctionNumber}}
+	AND crtS.CORRECTION_NUMBER = @correctionNumber
+{{/if}}
+
+{{#if parameters.amountOfPremiumPaid}}
+	AND crtS.AMOUNT_OF_PREMIUMS_PAID = @amountOfPremiumPaid
+{{/if}}
+
+{{#if parameters.certificateIssueDate}}
+	AND crtS.CERTIFICATE_ISSUE_DATE = @certificateIssueDate
+{{/if}}
+
+{{#if parameters.accountingCertificateNumbers}}
+	AND ud.UNIVERSAL_VERSIONED_DOCUMENT_NUMBER IN (@accountingCertificateNumbers)
+{{/if}}
+
+ORDER BY ud.UNIVERSAL_VERSIONED_DOCUMENT_NUMBER

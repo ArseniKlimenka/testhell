@@ -1,0 +1,278 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "AttachmentView",
+    "description": "Schema describing attachment view",
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+        "isEntitySaved": {
+            "type": "boolean",
+            "description": "Whether the entity that we're handling attachments for is saved or not"
+        },
+        "currentSequenceNumber": {
+            "type": "number",
+            "description": "Entities currently displayed version (not what version we're looking attachments for)"
+        },
+        "showFilters": {
+            "type": "boolean",
+            "description": "If we should show the filters"
+        },
+        "filteringData": {
+            "type": "object",
+            "description": "Filtering data",
+            "availableVersions": {
+                "type": "array",
+                "description": "Available versions",
+                "items": {
+                    "type": "object",
+                    "description": "Individual option for version filter",
+                    "properties": {
+                        "sequenceNumber": {
+                            "type": "string",
+                            "description": "Version's sequence number"
+                        },
+                        "versionName": {
+                            "type": "string",
+                            "description": "Version's translated display name"
+                        }
+                    }
+                }
+            },
+            "selectedVersion": {
+                "type": "object",
+                "description": "Selected version",
+                "properties": {
+                    "sequenceNumber": {
+                        "type": "string",
+                        "description": "Version's sequence number"
+                    },
+                    "versionName": {
+                        "type": "string",
+                        "description": "Version's translated display name"
+                    }
+                }
+            }
+        },
+        "attachmentTypes": {
+            "type": "array",
+            "description": "Available attachment types for new attachments",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "type": {
+                        "type": "string",
+                        "description": "Untranslated attachment type"
+                    },
+                    "typeName": {
+                        "type": "string",
+                        "description": "Translated attachment type / translation key"
+                    },
+                    "postFix": {
+                        "type": "string",
+                        "description": "Post fix for attachment type, e.g. * if attachment is required"
+                    }
+                }
+            }
+        },
+        "availableAttachmentTypes": {
+            "type": "array",
+            "description": "Available attachment types in current context (e.g. editing an attachment uploaded in a previous state)",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "type": {
+                        "type": "string",
+                        "description": "Untranslated attachment type"
+                    },
+                    "typeName": {
+                        "type": "string",
+                        "description": "Translated attachment type / translation key"
+                    },
+                    "postFix": {
+                        "type": "string",
+                        "description": "Post fix for attachment type, e.g. * if attachment is required"
+                    }
+                }
+            }
+        },
+        "attachments": {
+            "type": "array",
+            "description": "Attachment items",
+            "items": {
+                "type": "object",
+                "additionalProperties": true,
+                "required": [
+                    "attachmentType",
+                    "attachmentName"
+                ],
+                "properties": {
+                    "attachments": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "additionalProperties": false,
+                            "required": [
+                                "attachmentType",
+                                "attachmentName",
+                                "file"
+                            ],
+                            "properties": {
+                                "receiptDate": {
+                                    "type": "string",
+                                    "aiFormat": "date",
+                                    "description": "Receipt date"
+                                },
+                                "attachmentType": {
+                                    "type": "object",
+                                    "description": "Attachment type",
+                                    "properties": {
+                                        "type": {
+                                            "type": "string",
+                                            "description": "Attachment type value"
+                                        },
+                                        "typeName": {
+                                            "type": "string",
+                                            "description": "Attachment type translation"
+                                        }
+                                    }
+                                },
+                                "attachmentName": {
+                                    "type": "string",
+                                    "description": "Attachment name"
+                                },
+                                "description": {
+                                    "type": "string",
+                                    "description": "Description"
+                                },
+                                "file": {
+                                    "type": "object",
+                                    "description": "File",
+                                    "properties": {
+                                        "type": {
+                                            "type": "string",
+                                            "description": "media type"
+                                        },
+                                        "name": {
+                                            "type": "string",
+                                            "description": "File name (with extension)"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "attachmentId": {
+                        "type": "string",
+                        "description": "Attachment identifier"
+                    },
+                    "receiptDate": {
+                        "type": "string",
+                        "aiFormat": "date",
+                        "description": "Receipt date"
+                    },
+                    "attachmentType": {
+                        "type": "string",
+                        "description": "Attachment type"
+                    },
+                    "attachmentTypeName": {
+                        "type": "string",
+                        "description": "Attachment type translation"
+                    },
+                    "attachmentName": {
+                        "type": "string",
+                        "description": "Attachment name"
+                    },
+                    "description": {
+                        "type": "string",
+                        "description": "Description"
+                    },
+                    "downloadUrl": {
+                        "type": "string",
+                        "description": "Url to call to download attachment"
+                    },
+                    "file": {
+                        "type": "object",
+                        "description": "File",
+                        "properties": {
+                            "type": {
+                                "type": "string",
+                                "description": "media type"
+                            },
+                            "name": {
+                                "type": "string",
+                                "description": "File name (with extension)"
+                            }
+                        }
+                    },
+                    "uploadStatus": {
+                        "type": "string",
+                        "description": "Upload status of attachment",
+                        "enum": [
+                            "PendingUpload",
+                            "Uploaded",
+                            "PendingDeletion",
+                            "Deleted"
+                        ]
+                    },
+                    "isEditable": {
+                        "type": "boolean",
+                        "description": "Whether the attachment should be editable in current context"
+                    },
+                    "isDeletable": {
+                        "type": "boolean",
+                        "description": "Whether the attachment should be deletable in current context"
+                    },
+                    "isRequired": {
+                        "type": "boolean",
+                        "description": "Whether the attachment is required for a possible transition"
+                    },
+                    "createdOn": {
+                        "type": "string",
+                        "aiFormat": "date",
+                        "description": "Date of attachment creation"
+                    },
+                    "updatedOn": {
+                        "type": "string",
+                        "aiFormat": "date",
+                        "description": "Date when attachment was last updated"
+                    }
+                }
+            }
+        },
+        "attachmentsVerification": {
+            "$ref": "component:AttachmentsVerificationTable"
+        },
+        "isEdit": {
+            "type": "boolean",
+            "description": "Whether we're actually editing an attachment, or if we're adding it (used for hiding appropriate fields)"
+        },
+        "contractSigned": {
+            "type": "object",
+            "additionalProperties": true
+        },
+        "application": {
+            "type": "object",
+            "additionalProperties": true
+        },
+        "passport": {
+            "type": "object",
+            "additionalProperties": true
+        },
+        "financialQuestionary": {
+            "type": "object",
+            "additionalProperties": true
+        },
+        "bankNotification": {
+            "type": "object",
+            "additionalProperties": true
+        },
+        "changeApplication": {
+            "type": "object",
+            "additionalProperties": true
+        },
+        "supportingDocument": {
+            "type": "object",
+            "additionalProperties": true
+        }
+    }
+}

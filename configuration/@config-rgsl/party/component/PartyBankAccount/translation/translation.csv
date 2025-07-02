@@ -1,0 +1,50 @@
+ConfigurationType	ConfigurationName	ItemType	TranslationKey	Expression	Translation_ru-RU	Translation_en-US
+DataSchema	PartyBankAccount	field-title	bankId	bankId	ИД банка	bankId
+DataSchema	PartyBankAccount	field-title	bankName	bankName	Банк	bankName
+DataSchema	PartyBankAccount	field-title	bankBic	bankBic	БИК	bankBic
+DataSchema	PartyBankAccount	field-title	bankCorrespondentAccount	bankCorrespondentAccount	Корр. счет	bankCorrespondentAccount
+DataSchema	PartyBankAccount	field-title	currency	currency	Валюта	currency
+DataSchema	PartyBankAccount	field-title	currencyCode	currencyCode	Код валюты	currencyCode
+DataSchema	PartyBankAccount	field-title	currencyDesc	currencyDesc	Наименование валюты	currencyDesc
+DataSchema	PartyBankAccount	field-title	currencyNumericCode	currencyNumericCode	Числовой код валюты	currencyNumericCode
+DataSchema	PartyBankAccount	field-title	number	number	Номер счета	number
+DataSchema	PartyBankAccount	field-title	openingDate	openingDate	Дата открытия	openingDate
+DataSchema	PartyBankAccount	field-title	closingDate	closingDate	Дата закрытия	closingDate
+UiSchema	PartyBankAccount	ui-label	bankName	bankName	Банк	bankName
+UiSchema	PartyBankAccount	ui-label	bankBic	bankBic	БИК	bankBic
+UiSchema	PartyBankAccount	ui-label	bankCorrespondentAccount	bankCorrespondentAccount	Корр. счет	bankCorrespondentAccount
+UiSchema	PartyBankAccount	ui-label	currency	currency	Валюта	currency
+UiSchema	PartyBankAccount	ui-label	number	number	Номер счета	number
+UiSchema	PartyBankAccount	ui-label	openingDate	openingDate	Дата открытия	openingDate
+UiSchema	PartyBankAccount	ui-label	closingDate	closingDate	Дата закрытия	closingDate
+Rule	PartyBankAccountValidatePartyBankAccount	rule	validation@openingDateMoreClosingDate	validatePartyBankAccount	E: Должна быть меньше даты закрытия	E: validation@openingDateMoreClosingDate
+Rule	PartyBankAccountValidatePartyBankAccount	rule	validation@closingDateLessOpeningDate	validatePartyBankAccount	E: Должна быть больше даты открытия	E: validation@closingDateLessOpeningDate
+Rule	PartyBankAccountValidatePartyBankAccount	rule	validation@accountNumberFormat	validatePartyBankAccount	E: Формат: 20 цифр	E: validation@accountNumberFormat
+Rule	PartyBankAccountValidatePartyBankAccount	rule	validation@accountNumberKeySumm	validatePartyBankAccount	E: Не пройдена проверка по ключевой сумме	E: validation@accountNumberKeySumm
+Rule	PartyBankAccountValidatePartyBankAccount	rule	validation@accountNumberCurrencyNumericCode	validatePartyBankAccount	E: Номер счета не соответствует валюте	E: validation@accountNumberCurrencyNumericCode
+Rule	PartyBankAccountValidatePartyBankAccount	rule	validation@accountNumberCurrency	validatePartyBankAccount	E: Валюта по данному номеру счета не найдена	E: validation@accountNumberCurrency
+Rule	PartyBankAccountValidatePartyBankAccount	rule	validation@bankBicFormat	validatePartyBankAccount	E: Формат: 9 цифр	E: validation@bankBicFormat
+Rule	PartyBankAccountValidatePartyBankAccount	rule	validation@bankByBicIsNotFound	validatePartyBankAccount	E: Банк по БИК не найден	E: validation@bankByBicIsNotFound
+Rule	PartyBankAccountValidatePartyBankAccount	rule	validation@currencyIsRequired	validatePartyBankAccount	E: Необходимо заполнить Валюта.	E: validation@currencyIsRequired
+DataSchema	PartyBankAccount	field-title	SWIFT	SWIFT	SWIFT	SWIFT
+DataSchema	PartyBankAccount	field-title	IBAN	IBAN	IBAN	IBAN
+DataSchema	PartyBankAccount	field-title	foreignBank	foreignBank	Иностранный банк	foreignBank
+UiSchema	PartyBankAccount	ui-label	SWIFT	SWIFT	SWIFT	SWIFT
+UiSchema	PartyBankAccount	ui-label	IBAN	IBAN	IBAN	IBAN
+UiSchema	PartyBankAccount	ui-label	foreignBank	foreignBank	Иностранный банк	foreignBank
+Rule	PartyBankAccountValidatePartyBankAccount	rule	validation@SWIFTIsRequired	validatePartyBankAccount	E: Необходимо заполнить SWIFT.	E: validation@SWIFTIsRequired
+Rule	PartyBankAccountValidatePartyBankAccount	rule	validation@IBANIsRequired	validatePartyBankAccount	E: Необходимо заполнить IBAN.	E: validation@IBANIsRequired
+DataSchema	PartyBankAccount	field-title	bankInn	bankInn	ИНН	INN
+UiSchema	PartyBankAccount	ui-label	bankInn	bankInn	ИНН	INN
+Rule	PartyBankAccountValidatePartyBankAccount	rule	validation@INNWarning	validatePartyBankAccount	E: ИНН не проходит валидацию	E: validation@INNWarning
+DataSchema	PartyBankAccount	field-title	isSettlementThroughFTD	isSettlementThroughFTD	Расчеты через УФК	isSettlementThroughFTD
+DataSchema	PartyBankAccount	field-title	personalAccountNumber	personalAccountNumber	Лицевой счет	personalAccountNumber
+DataSchema	PartyBankAccount	field-title	ftdName	ftdName	Наименование УФК	ftdName
+UiSchema	PartyBankAccount	ui-label	isSettlementThroughFTD	isSettlementThroughFTD	Расчеты через УФК	isSettlementThroughFTD
+UiSchema	PartyBankAccount	ui-label	personalAccountNumber	personalAccountNumber	Лицевой счет	personalAccountNumber
+UiSchema	PartyBankAccount	ui-label	ftdName	ftdName	Наименование УФК	ftdName
+Rule	PartyBankAccountValidatePartyBankAccount	rule	validation@ftdBankAccountNumberFormat	validatePartyBankAccount	E: Единый казначейский счет должен начинаться с цифр 401028	E: validation@ftdBankAccountNumberFormat
+Rule	PartyBankAccountValidatePartyBankAccount	rule	validation@ftdAccountNumberFormat	validatePartyBankAccount	E: Казначейский счет должен начинаться с цифр 03	E: validation@ftdAccountNumberFormat
+UiSchema	PartyBankAccount	ui-label	bankBicFTD	bankBicFTD	БИК ТОФК	bankBicFTD
+UiSchema	PartyBankAccount	ui-label	bankCorrespondentAccountFTD	bankCorrespondentAccountFTD	Единый казначейский счет	bankCorrespondentAccountFTD
+UiSchema	PartyBankAccount	ui-label	numberFTD	numberFTD	Казначейский счет	numberFTD

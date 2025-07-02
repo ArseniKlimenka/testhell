@@ -1,0 +1,87 @@
+﻿SELECT
+	ud.UNIVERSAL_DOCUMENT_ID REQUEST_ID, -- ID заявки
+	ud.UNIVERSAL_DOCUMENT_NUMBER REQUEST_NUMBER, -- Номер заявки
+	pa.CODE_NAME REQUEST_CONF_NAME, -- -- Имя конфигурации заявки
+	prst.CODE_NAME REQUEST_STATE, -- Статус заявки
+	rqtSatL.TYPE_OF_REQUEST REQUEST_TYPE, -- Тип обращения
+	rqtSatL.AMENDMENT_REASON REQUEST_AMENDMENT_REASON, -- Причина расторжения
+	ph.CONTRACT_NUMBER CONTRACT_NUMBER, -- Номер договора
+	polps.CODE_NAME as CONTRACT_STATE, -- Статус договора
+	pac.CODE_NAME CONTRACT_CONF_NAME, -- -- Имя конфигурации заявки
+	psl.HOLDER_NAME CONTRACT_HOLDER_NAME, -- Страхователь по договору
+	rqtSatL.APPLICANT_FULL_NAME REQUEST_APPLICANT, -- Заявитель по заявке
+	psl.PRODUCT_CODE CONTRACT_PRODUCT_CODE, -- Продукт договора
+	psl.ISSUE_DATE CONTRACT_ISSUE_DATE, -- Дата заключения договора
+	rqtSatL.ISSUE_DATE REQUEST_ISSUE_DATE, -- Дата подписания заявления
+    CAST(psl.RISK_PREMIUM_ALL AS DECIMAL(16,2)) CONTRACT_RISK_PREMIUM, -- Страховой взнос по договору
+	psl.PARTNER_NAME CONTRACT_PARTNER_NAME, -- Агент по договору
+	rqtSatL.BANK_NAME REQUEST_BANK_NAME, -- Наименование банка
+	rqtSatL.BANK_NUMBER REQUEST_BANK_NUMBER, -- Банковские реквизиты
+	pc.PRODUCT_GROUP_CODE -- Группа продуктов
+FROM BFX.UNIVERSAL_DOCUMENT ud
+LEFT JOIN UNI_IMPL.RQT_HUB rqtHub ON rqtHub.REQUEST_NUMBER = ud.UNIVERSAL_DOCUMENT_NUMBER
+LEFT JOIN UNI_IMPL.RQT_SAT_LATEST rqtSatL ON rqtSatL.RQT_HKEY = rqtHub.RQT_HKEY
+LEFT JOIN CFX.PUBLISHED_ARTIFACT pa ON pa.PUBLISHED_ARTIFACT_ID = ud.PUBLISHED_ARTIFACT_ID
+LEFT JOIN CFG.PROCESS_STATE prst ON prst.PROCESS_STATE_ID = ud.STATE_ID
+LEFT JOIN PAS_IMPL.POLICY_HUB ph ON ph.CONTRACT_NUMBER = rqtSatL.CONTRACT_NUMBER
+LEFT JOIN PAS.CONTRACT c ON c.CONTRACT_NUMBER = ph.CONTRACT_NUMBER
+LEFT JOIN cfg.PROCESS_STATE polps on polps.PROCESS_STATE_ID = c.STATE_ID
+LEFT JOIN CFX.PUBLISHED_ARTIFACT pac ON pac.PUBLISHED_ARTIFACT_ID = c.PUBLISHED_ARTIFACT_ID
+LEFT JOIN PAS_IMPL.POLICY_SAT_LATEST psl ON psl.POLICY_HKEY = ph.POLICY_HKEY
+LEFT JOIN BFX_IMPL.PRODUCT_CONF pc ON pc.PRODUCT_CODE = psl.PRODUCT_CODE AND (psl.ISSUE_DATE >= pc.ISSUE_DATE_FROM AND psl.ISSUE_DATE <= pc.ISSUE_DATE_TO)
+WHERE
+    1 = 1
+AND pa.CODE_NAME = 'LifeInsuranceRequest'
+AND pc.CONF_VERSION = (SELECT MAX(CONF_VERSION) MAX_VERSION FROM BFX_IMPL.PRODUCT_CONF)
+{{#if parameters.requestNumber}}
+AND ud.UNIVERSAL_DOCUMENT_NUMBER = @requestNumber
+{{/if}}
+{{#if parameters.requestState}}
+AND prst.CODE_NAME = @requestState
+{{/if}}
+{{#if parameters.requestType}}
+AND JSON_VALUE(ud.BODY, '$.typeOfRequest') = @requestType
+{{/if}}
+{{#if parameters.requestAmendmentReason}}
+AND JSON_VALUE(ud.BODY, '$.amendmentReason') = @requestAmendmentReason
+{{/if}}
+{{#if parameters.contractNumber}}
+AND ph.CONTRACT_NUMBER = @contractNumber
+{{/if}}
+{{#if parameters.contractState}}
+AND ps.CODE_NAME = @contractState
+{{/if}}
+{{#if parameters.contractHolderCode}}
+AND psl.HOLDER_CODE = @contractHolderCode
+{{/if}}
+{{#if parameters.requestApplicantCode}}
+AND JSON_VALUE(ud.BODY, '$.applicant.partyData.partyCode') = @requestApplicantCode
+{{/if}}
+{{#if parameters.contractProductCode}}
+AND psl.PRODUCT_CODE = @contractProductCode
+{{/if}}
+{{#if parameters.contractProductGroup}}
+AND JSON_VALUE(ud.BODY, '$.contract.productGroup') = @contractProductGroup
+{{/if}}
+{{#if parameters.contractIssueDateFrom}}
+AND psl.ISSUE_DATE >= @contractIssueDateFrom
+{{/if}}
+{{#if parameters.contractIssueDateTo}}
+AND psl.ISSUE_DATE <= @contractIssueDateTo
+{{/if}}
+{{#if parameters.contractStartDateFrom}}
+AND psl.START_DATE >= @contractStartDateFrom
+{{/if}}
+{{#if parameters.contractStartDateTo}}
+AND psl.START_DATE <= @contractStartDateTo
+{{/if}}
+{{#if parameters.requestIssueDateFrom}}
+AND JSON_VALUE(ud.BODY, '$.issueDate') >= @requestIssueDateFrom
+{{/if}}
+{{#if parameters.requestIssueDateTo}}
+AND JSON_VALUE(ud.BODY, '$.issueDate') <= @requestIssueDateTo
+{{/if}}
+{{#if parameters.contractAmount}}
+AND JSON_VALUE(ud.BODY, '$.amountWithAllRisks') = @contractAmount
+{{/if}}
+ORDER BY REQUEST_NUMBER

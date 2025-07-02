@@ -1,0 +1,329 @@
+{
+    "type": "ButtonGroup",
+    "label": "Actions",
+    "rule": {
+        "effect": "HIDE",
+        "condition": {
+            "type": "FUNC",
+            "value": [
+                {
+                    "$ref": "#"
+                }
+            ],
+            "ruleFunction": "hideButtonGroup"
+        }
+    },
+    "elements": [
+        {
+            "type": "Button",
+            "hide": false,
+            "readOnly": true,
+            "icon": {
+                "size": "Small",
+                "color": "BackgroundColor",
+                "name": "Trash-alt"
+            },
+            "eventHandlers": [
+                {
+                    "eventName": "Selected",
+                    "senders": [
+                        "TableViewId"
+                    ],
+                    "commands": {
+                        "commandType": "executeAction",
+                        "actionName": "enableShowRelatedAllocations"
+                    }
+                }
+            ],
+            "styleClass": "md-icon-button",
+            "value": {
+                "$ref": "#"
+            },
+            "onClick": [
+                {
+                    "commandType": "executeAction",
+                    "actionName": "showRelatedAllocations"
+                }
+            ],
+            "label": "Show related allocations"
+        },
+        {
+            "type": "Button",
+            "hide": false,
+            "readOnly": true,
+            "icon": {
+                "size": "Small",
+                "color": "BackgroundColor",
+                "name": "Trash-alt"
+            },
+            "eventHandlers": [
+                {
+                    "eventName": "Selected",
+                    "senders": [
+                        "TableViewId"
+                    ],
+                    "commands": {
+                        "commandType": "executeAction",
+                        "actionName": "enableShowRelatedAccountingEntries"
+                    }
+                }
+            ],
+            "styleClass": "md-icon-button",
+            "value": {
+                "$ref": "#"
+            },
+            "onClick": [
+                {
+                    "commandType": "executeAction",
+                    "actionName": "showRelatedAccountingEntries"
+                }
+            ],
+            "label": "Show related accounting entries"
+        },
+        {
+            "type": "Button",
+            "hide": false,
+            "readOnly": true,
+            "icon": {
+                "size": "Small",
+                "color": "BackgroundColor",
+                "name": "Trash-alt"
+            },
+            "eventHandlers": [
+                {
+                    "eventName": "Selected",
+                    "senders": [
+                        "TableViewId"
+                    ],
+                    "commands": {
+                        "commandType": "executeAction",
+                        "actionName": "enableCancelPaymentButtonOnSelection"
+                    }
+                }
+            ],
+            "styleClass": "md-icon-button",
+            "value": {
+                "$ref": "#"
+            },
+            "onClick": [
+                {
+                    "commandType": "executeAction",
+                    "actionName": "cancelPaymentOfSelected"
+                }
+            ],
+            "label": "Cancel payment"
+        },
+        {
+            "type": "Button",
+            "hide": false,
+            "readOnly": true,
+            "icon": {
+                "size": "Small",
+                "color": "BackgroundColor",
+                "name": "Trash-alt"
+            },
+            "eventHandlers": [
+                {
+                    "eventName": "Selected",
+                    "senders": [
+                        "TableViewId"
+                    ],
+                    "commands": {
+                        "commandType": "executeAction",
+                        "actionName": "enablePaymentAllocationToRegistryOnSelection"
+                    }
+                }
+            ],
+            "styleClass": "md-icon-button",
+            "value": {
+                "$ref": "#"
+            },
+            "onClick": [
+                {
+                    "commandType": "executeAction",
+                    "actionName": "allocatedToRgistryOfSelected"
+                }
+            ],
+            "label": "Move to Allocated to Registry"
+        },
+        {
+            "type": "Button",
+            "hide": false,
+            "readOnly": true,
+            "icon": {
+                "size": "Small",
+                "color": "BackgroundColor",
+                "name": "Trash-alt"
+            },
+            "eventHandlers": [
+                {
+                    "eventName": "Selected",
+                    "senders": [
+                        "TableViewId"
+                    ],
+                    "commands": {
+                        "commandType": "executeAction",
+                        "actionName": "enableRestorePaymentButtonOnSelection"
+                    }
+                }
+            ],
+            "styleClass": "md-icon-button",
+            "value": {
+                "$ref": "#"
+            },
+            "onClick": [
+                {
+                    "commandType": "executeAction",
+                    "actionName": "restorePaymentOfSelected"
+                }
+            ],
+            "label": "Restore payment"
+        },
+        {
+            "type": "Button",
+            "hide": false,
+            "readOnly": true,
+            "eventHandlers": [
+                {
+                    "eventName": "Selected",
+                    "senders": [
+                        "TableViewId"
+                    ],
+                    "commands": {
+                        "commandType": "executeAction",
+                        "actionName": "enableAutoAllocatePaymentButtonOnSelection"
+                    }
+                }
+            ],
+            "styleClass": "md-icon-button",
+            "value": {
+                "$ref": "#"
+            },
+            "onClick": [
+                {
+                    "commandType": "executeAction",
+                    "actionName": "autoAllocatePaymentOfSelected"
+                }
+            ],
+            "label": "Auto allocation"
+        },
+        {
+            "type": "Button",
+            "hide": false,
+            "readOnly": true,
+            "icon": {
+                "size": "Small",
+                "color": "BackgroundColor",
+                "name": "Plus"
+            },
+            "eventHandlers": [
+                {
+                    "eventName": "Selected",
+                    "senders": [
+                        "TableViewId"
+                    ],
+                    "commands": {
+                        "commandType": "executeAction",
+                        "actionName": "enableUpdatePaymentDescriptionOnSelection"
+                    }
+                }
+            ],
+            "styleClass": "md-icon-button",
+            "value": {
+                "$ref": "#"
+            },
+            "onClick": [
+                {
+                    "commandType": "executeAction",
+                    "actionName": "updatePaymentDescriptionShowDialog"
+                }
+            ],
+            "label": "Correct payment description"
+        },
+        {
+            "type": "Button",
+            "hide": false,
+            "readOnly": true,
+            "icon": {
+                "size": "Small",
+                "color": "BackgroundColor",
+                "name": "Plus"
+            },
+            "eventHandlers": [
+                {
+                    "eventName": "Selected",
+                    "senders": [
+                        "TableViewId"
+                    ],
+                    "commands": {
+                        "commandType": "executeAction",
+                        "actionName": "enableRefundButtonOnSelection"
+                    }
+                }
+            ],
+            "styleClass": "md-icon-button",
+            "value": {
+                "$ref": "#"
+            },
+            "onClick": [
+                {
+                    "commandType": "executeAction",
+                    "actionName": "createAndGoToPaymentOrder"
+                }
+            ],
+            "label": "Refund payment"
+        },
+        {
+            "type": "Button",
+            "icon": {
+                "size": "Small",
+                "color": "BackgroundColor",
+                "name": "Plus"
+            },
+            "styleClass": "md-icon-button",
+            "value": {
+                "$ref": "#"
+            },
+            "onClick": [
+                {
+                    "commandType": "executeAction",
+                    "actionName": "exportReport"
+                }
+            ],
+            "label": "Export report"
+        },
+        {
+            "type": "Button",
+            "hide": false,
+            "readOnly": true,
+            "icon": {
+                "size": "Small",
+                "color": "BackgroundColor",
+                "name": "Plus"
+            },
+            "eventHandlers": [
+                {
+                    "eventName": "Selected",
+                    "senders": [
+                        "TableViewId"
+                    ],
+                    "commands": {
+                        "commandType": "executeAction",
+                        "actionName": "enableCreateRosfinmonitoringXml"
+                    }
+                }
+            ],
+            "styleClass": "md-icon-button",
+            "value": {
+                "$ref": "#"
+            },
+            "onClick": [
+                {
+                    "commandType": "executeAction",
+                    "actionName": "createRosfinmonitoringXml"
+                }
+            ],
+            "label": "Create Rosfinmonitoring Xml"
+        }
+    ]
+}

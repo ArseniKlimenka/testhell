@@ -1,0 +1,69 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+        "criteria"
+    ],
+    "properties": {
+        "criteria": {
+            "type": "object",
+            "required": [
+                "actNo",
+                "agentServiceProviderCode",
+                "agentAgreementNumber"
+            ],
+            "additionalProperties": false,
+            "properties": {
+                "actNo": {
+                    "type": "string"
+                },
+                "isDocCorrect": {
+                    "type": "boolean"
+                },
+                "agentServiceProviderCode": {
+                    "type": "string"
+                },
+                "agentAgreementNumber": {
+                    "type": "string"
+                },
+                "referenceNumbers": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "productGroupInclude": {
+                    "type": "string"
+                },
+                "productsInclude": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "productGroupExclude": {
+                    "type": "string"
+                },
+                "productsExclude": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "reportingPeriodTo": {
+                    "type": "string",
+                    "aiFormat": "date"
+                },
+                "periodFrom": {
+                    "type": "string",
+                    "aiFormat": "date"
+                },
+                "periodTo": {
+                    "type": "string",
+                    "aiFormat": "date"
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,1760 @@
+{
+    "id": "Claim.main-schema.json",
+    "type": "Group",
+    "formProperties": {
+        "events": {
+            "onLoad": "onLoadDocumentAction",
+            "beforeSave": "beforeSaveDocumentAction",
+            "afterSave": "afterSaveDocumentAction"
+        }
+    },
+    "elements": [
+        {
+            "type": "GridLayout",
+            "fillAvailableSpace": true,
+            "title": "endowment",
+            "fixedButton": true,
+            "numberOfColumns": 12,
+            "elements": [
+                {
+                    "type": "TabLayout",
+                    "options": {
+                        "menuAlligment": "Horizontal",
+                        "menuMode": "Single"
+                    },
+                    "elements": [
+                        {
+                            "type": "Tab",
+                            "elementId": "ClaimDetails",
+                            "scope": "title",
+                            "title": "Endowment details",
+                            "elements": [
+                                {
+                                    "type": "Section",
+                                    "label": "Main attributes",
+                                    "scope": "mainAttributes",
+                                    "width": 12,
+                                    "elements": [
+                                        {
+                                            "type": "Group",
+                                            "width": 12,
+                                            "elements": [
+                                                {
+                                                    "type": "Lookup",
+                                                    "label": "Contract",
+                                                    "value": {
+                                                        "$ref": "#"
+                                                    },
+                                                    "width": 3,
+                                                    "dialogButton": {},
+                                                    "clearButton": {
+                                                        "clearAction": "clearSelectedContract"
+                                                    },
+                                                    "readOnly": true,
+                                                    "dialog": {
+                                                        "viewReference": {
+                                                            "configurationCodeName": "ClaimContractSearch",
+                                                            "configurationVersion": "1",
+                                                            "configurationConceptType": "SearchView"
+                                                        }
+                                                    },
+                                                    "onSelected": "contractSearchResultMapping",
+                                                    "selectedDisplayValueUISchema": {
+                                                        "type": "Input",
+                                                        "label": "Contract Number",
+                                                        "readOnly": true,
+                                                        "value": {
+                                                            "$ref": "#/properties/Body/properties/mainAttributes/properties/contract/properties/number"
+                                                        }
+                                                    }
+                                                },
+                                                {
+                                                    "type": "Link",
+                                                    "width": 2,
+                                                    "targetType": "Url",
+                                                    "value": {
+                                                        "mapping": "urlMapping",
+                                                        "$ref": "#"
+                                                    },
+                                                    "content": {
+                                                        "text": {
+                                                            "type": "OutputText",
+                                                            "defaultValue": "",
+                                                            "value": {
+                                                                "mapping": "getContractLinkText"
+                                                            }
+                                                        }
+                                                    }
+                                                },
+                                                {
+                                                    "type": "Input",
+                                                    "label": "eventType",
+                                                    "value": {
+                                                        "$ref": "#/properties/Body/properties/mainAttributes/properties/eventType"
+                                                    },
+                                                    "autocomplete": {
+                                                        "minTextLength": 3,
+                                                        "dropDownItemsCount": 30
+                                                    },
+                                                    "readOnly": true,
+                                                    "control": "Dropdown",
+                                                    "source": {
+                                                        "reloadOnOpen": true,
+                                                        "dataSource": {
+                                                            "name": "InsuredEventTypeDataSource",
+                                                            "searchFieldPath": "description",
+                                                            "requestMapping": "eventTypeRequestMapping",
+                                                            "responseMapping": "eventTypeResponseMapping",
+                                                            "resultCount": 30
+                                                        },
+                                                        "displayFieldName": "displayName",
+                                                        "valueFieldName": "value"
+                                                    },
+                                                    "width": 3,
+                                                    "filter": "filterEventTypes",
+                                                    "onValueChanged": [
+                                                        {
+                                                            "commandType": "executeAction",
+                                                            "actionName": "onEventTypeChanged"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "type": "Input",
+                                                    "label": "eventReason",
+                                                    "value": {
+                                                        "$ref": "#/properties/Body/properties/mainAttributes/properties/eventReason"
+                                                    },
+                                                    "autocomplete": {
+                                                        "minTextLength": 1,
+                                                        "dropDownItemsCount": 30
+                                                    },
+                                                    "control": "Dropdown",
+                                                    "source": {
+                                                        "dataSource": {
+                                                            "reloadOnOpen": true,
+                                                            "name": "InsuredEventReasonDataSource",
+                                                            "searchFieldPath": "description",
+                                                            "requestMapping": "eventReasonRequestMapping",
+                                                            "responseMapping": "eventReasonResponseMapping",
+                                                            "resultCount": 30
+                                                        },
+                                                        "displayFieldName": "displayName",
+                                                        "valueFieldName": "value"
+                                                    },
+                                                    "width": 3,
+                                                    "onValueChanged": [
+                                                        {
+                                                            "commandType": "executeAction",
+                                                            "actionName": "onEventReasonChanged"
+                                                        },
+                                                        {
+                                                            "commandType": "executeAction",
+                                                            "actionName": "onEventReasonRelatedDataChanged"
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "type": "Group",
+                                            "width": 12,
+                                            "elements": [
+                                                {
+                                                    "type": "Lookup",
+                                                    "label": "applicant",
+                                                    "value": {
+                                                        "$ref": "#"
+                                                    },
+                                                    "width": 3,
+                                                    "dialogButton": {},
+                                                    "clearButton": {
+                                                        "clearAction": "clearApplicant"
+                                                    },
+                                                    "dialog": {
+                                                        "viewReference": {
+                                                            "configurationCodeName": "GeneralPartySearchWithEditView",
+                                                            "configurationVersion": "1",
+                                                            "configurationConceptType": "SearchView"
+                                                        },
+                                                        "onLoad": "applicantLookupOnLoad"
+                                                    },
+                                                    "onSelected": "applicantResultMapping",
+                                                    "selectedDisplayValueUISchema": {
+                                                        "type": "Input",
+                                                        "label": "applicant",
+                                                        "readOnly": true,
+                                                        "value": {
+                                                            "$ref": "#/properties/Body/properties/mainAttributes/properties/applicationInfo/properties/applicant/properties/fullName"
+                                                        }
+                                                    }
+                                                },
+                                                {
+                                                    "type": "Dropdown",
+                                                    "label": "receiveMethod",
+                                                    "value": {
+                                                        "$ref": "#/properties/Body/properties/mainAttributes/properties/applicationInfo/properties/receiveMethod"
+                                                    },
+                                                    "width": 3
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "Section",
+                                    "label": "riskInfo",
+                                    "scope": "riskInfo",
+                                    "width": 12,
+                                    "elements": [
+                                        {
+                                            "type": "Group",
+                                            "width": 12,
+                                            "elements": [
+                                                {
+                                                    "type": "Dropdown",
+                                                    "label": "risks",
+                                                    "multiple": false,
+                                                    "enableClear": true,
+                                                    "enableCustomValue": false,
+                                                    "preSelectFirstItem": true,
+                                                    "filter": "filterAvailableRisks",
+                                                    "source": {
+                                                        "displayFieldName": "riskShortDescription",
+                                                        "reloadOnOpen": true,
+                                                        "array": {
+                                                            "$ref": "#/properties/Body/properties/mainAttributes/properties/availableRisks"
+                                                        }
+                                                    },
+                                                    "value": {
+                                                        "$ref": "#/properties/Body/properties/mainAttributes/properties/selectedRisk"
+                                                    },
+                                                    "width": 3,
+                                                    "onValueChanged": [
+                                                        {
+                                                            "commandType": "executeAction",
+                                                            "actionName": "onAmountRelatedDataChanged"
+                                                        },
+                                                        {
+                                                            "commandType": "executeAction",
+                                                            "actionName": "onEventReasonRelatedDataChanged"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "type": "Input",
+                                                    "label": "businessLine",
+                                                    "value": {
+                                                        "$ref": "#/properties/Body/properties/mainAttributes/properties/selectedRisk/properties/businessLine"
+                                                    },
+                                                    "width": 2,
+                                                    "readOnly": true
+                                                },
+                                                {
+                                                    "type": "Input",
+                                                    "label": "endowmentPaymentVariant",
+                                                    "value": {
+                                                        "$ref": "#/properties/Body/properties/endowmentPaymentVariant"
+                                                    },
+                                                    "preSelectFirstItem": true,
+                                                    "filter": "filterPaymentVariant",
+                                                    "autocomplete": {
+                                                        "minTextLength": 3,
+                                                        "dropDownItemsCount": 30
+                                                    },
+                                                    "onValueChanged": [
+                                                        {
+                                                            "commandType": "executeAction",
+                                                            "actionName": "clearPaymentFrequency"
+                                                        }
+                                                    ],
+                                                    "control": "Dropdown",
+                                                    "source": {
+                                                        "reloadOnOpen": true,
+                                                        "dataSource": {
+                                                            "name": "ClaimEndowmentPaymentVariantDataSource",
+                                                            "searchFieldPath": "description",
+                                                            "requestMapping": "endowmentPaymentVariantRequestMapping",
+                                                            "responseMapping": "endowmentPaymentVariantResponseMapping",
+                                                            "resultCount": 30
+                                                        },
+                                                        "displayFieldName": "displayName",
+                                                        "valueFieldName": "value"
+                                                    },
+                                                    "width": 3
+                                                },
+                                                {
+                                                    "type": "Input",
+                                                    "label": "endowmentPaymentFrequency",
+                                                    "value": {
+                                                        "$ref": "#/properties/Body/properties/endowmentPaymentFrequency"
+                                                    },
+                                                    "preSelectFirstItem": true,
+                                                    "autocomplete": {
+                                                        "minTextLength": 3,
+                                                        "dropDownItemsCount": 30
+                                                    },
+                                                    "filter": "filterPaymentFrequency",
+                                                    "control": "Dropdown",
+                                                    "source": {
+                                                        "reloadOnOpen": true,
+                                                        "dataSource": {
+                                                            "name": "ClaimEndowmentPaymentFrequencyDataSource",
+                                                            "searchFieldPath": "description",
+                                                            "requestMapping": "endowmentPaymentFrequencyRequestMapping",
+                                                            "responseMapping": "endowmentPaymentFrequencyResponseMapping",
+                                                            "resultCount": 30
+                                                        },
+                                                        "displayFieldName": "displayName",
+                                                        "valueFieldName": "value"
+                                                    },
+                                                    "width": 3
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "rule": {
+                                        "effect": "SHOW",
+                                        "condition": {
+                                            "type": "FUNC",
+                                            "ruleFunction": "showRiskInfo",
+                                            "value": [
+                                                {
+                                                    "$ref": "#"
+                                                }
+                                            ]
+                                        }
+                                    }
+                                },
+                                {
+                                    "type": "Section",
+                                    "label": "endowmentDates",
+                                    "scope": "endowmentDates",
+                                    "width": 12,
+                                    "elements": [
+                                        {
+                                            "type": "Group",
+                                            "width": 12,
+                                            "elements": [
+                                                {
+                                                    "type": "DatetimePicker",
+                                                    "label": "eventDate",
+                                                    "value": {
+                                                        "$ref": "#/properties/Body/properties/mainAttributes/properties/applicationInfo/properties/eventDate"
+                                                    },
+                                                    "width": 3,
+                                                    "onValueChanged": [
+                                                        {
+                                                            "commandType": "executeAction",
+                                                            "actionName": "onAmountRelatedDataChanged"
+                                                        }
+                                                    ],
+                                                    "rule": {
+                                                        "effect": "DISABLE_INITIAL",
+                                                        "condition": {
+                                                            "type": "FUNC",
+                                                            "ruleFunction": "disableEventDate",
+                                                            "value": [
+                                                                {
+                                                                    "$ref": "#"
+                                                                }
+                                                            ]
+                                                        }
+                                                    }
+                                                },
+                                                {
+                                                    "type": "DatetimePicker",
+                                                    "label": "statementApplicationDate",
+                                                    "value": {
+                                                        "$ref": "#/properties/Body/properties/mainAttributes/properties/applicationInfo/properties/statementApplicationDate"
+                                                    },
+                                                    "width": 3
+                                                },
+                                                {
+                                                    "type": "DatetimePicker",
+                                                    "label": "statementReceivedDate",
+                                                    "value": {
+                                                        "$ref": "#/properties/Body/properties/mainAttributes/properties/applicationInfo/properties/statementReceivedDate"
+                                                    },
+                                                    "width": 3
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "Section",
+                                    "label": "endowmentAmounts",
+                                    "scope": "endowmentAmounts",
+                                    "width": 12,
+                                    "elements": [
+                                        {
+                                            "type": "Group",
+                                            "width": 12,
+                                            "elements": [
+                                                {
+                                                    "type": "OutputText",
+                                                    "label": "riskInsuredSum",
+                                                    "readOnly": true,
+                                                    "value": {
+                                                        "mapping": "getInsuredSum"
+                                                    },
+                                                    "width": 2
+                                                },
+                                                {
+                                                    "type": "Input",
+                                                    "label": "rznu",
+                                                    "value": {
+                                                        "$ref": "#/properties/Body/properties/endowmentAmounts/properties/rznu"
+                                                    },
+                                                    "width": 2,
+                                                    "rule": {
+                                                        "effect": "ENABLE_INITIAL",
+                                                        "condition": {
+                                                            "type": "FUNC",
+                                                            "ruleFunction": "isRznuEnabled",
+                                                            "value": [
+                                                                {
+                                                                    "$ref": "#"
+                                                                }
+                                                            ]
+                                                        }
+                                                    }
+                                                },
+                                                {
+                                                    "type": "Input",
+                                                    "label": "manualRznu",
+                                                    "value": {
+                                                        "$ref": "#/properties/Body/properties/endowmentAmounts/properties/manualRznu"
+                                                    },
+                                                    "width": 2,
+                                                    "onValueChanged": [
+                                                        {
+                                                            "commandType": "executeAction",
+                                                            "actionName": "updateRznu"
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "type": "Group",
+                                            "width": 12,
+                                            "elements": [
+                                                {
+                                                    "type": "Input",
+                                                    "label": "nonAcceptance",
+                                                    "value": {
+                                                        "$ref": "#/properties/Body/properties/endowmentAmounts/properties/nonAcceptance"
+                                                    },
+                                                    "width": 2,
+                                                    "onValueChanged": [
+                                                        {
+                                                            "commandType": "executeAction",
+                                                            "actionName": "onNonAcceptanceChanged"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "type": "Input",
+                                                    "label": "numberOfNonAcceptancePayment",
+                                                    "value": {
+                                                        "$ref": "#/properties/Body/properties/endowmentAmounts/properties/numberOfNonAcceptancePayment"
+                                                    },
+                                                    "width": 2,
+                                                    "rule": {
+                                                        "effect": "ENABLE_INITIAL",
+                                                        "condition": {
+                                                            "type": "FUNC",
+                                                            "ruleFunction": "numberOfNonAcceptancePaymentEnabled",
+                                                            "value": [
+                                                                {
+                                                                    "$ref": "#"
+                                                                }
+                                                            ]
+                                                        }
+                                                    }
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "type": "Group",
+                                            "width": 12,
+                                            "elements": [
+                                                {
+                                                    "type": "Input",
+                                                    "label": "contractCurrency",
+                                                    "value": {
+                                                        "$ref": "#/properties/Body/properties/endowmentAmounts/properties/contractCurrency"
+                                                    },
+                                                    "width": 2,
+                                                    "readOnly": true
+                                                },
+                                                {
+                                                    "type": "Input",
+                                                    "label": "exchangeRate",
+                                                    "value": {
+                                                        "$ref": "#/properties/Body/properties/endowmentAmounts/properties/exchangeRate"
+                                                    },
+                                                    "width": 2,
+                                                    "readOnly": true
+                                                },
+                                                {
+                                                    "type": "Input",
+                                                    "label": "fixedExchangeRate",
+                                                    "value": {
+                                                        "$ref": "#/properties/Body/properties/endowmentAmounts/properties/fixedExchangeRate"
+                                                    },
+                                                    "width": 2,
+                                                    "readOnly": true
+                                                },
+                                                {
+                                                    "type": "Input",
+                                                    "label": "useFixedExchangeRate",
+                                                    "value": {
+                                                        "$ref": "#/properties/Body/properties/endowmentAmounts/properties/useFixedExchangeRate"
+                                                    },
+                                                    "width": 2
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "Section",
+                                    "label": "paymentLines",
+                                    "scope": "paymentLines",
+                                    "width": 12,
+                                    "elements": [
+                                        {
+                                            "type": "Group",
+                                            "width": 12,
+                                            "elements": [
+                                                {
+                                                    "type": "Group",
+                                                    "elements": [
+                                                        {
+                                                            "type": "DataGrid",
+                                                            "checkIfRowActionIsAllowed": "isPaymentLinesRowActionAllowed",
+                                                            "checkIfAddButtonVisible": "isPaymentLinesAddButtonVisible",
+                                                            "elementId": "paymentLines",
+                                                            "mode": "Array",
+                                                            "actions": [
+                                                                "Edit"
+                                                            ],
+                                                            "edit": {
+                                                                "mode": "Detached",
+                                                                "inline": "SingleRow"
+                                                            },
+                                                            "height": "None",
+                                                            "value": {
+                                                                "$ref": "#/properties/Body/properties/endowmentAmounts/properties/paymentLines"
+                                                            },
+                                                            "columns": [
+                                                                {
+                                                                    "sortable": false,
+                                                                    "title": "lineType",
+                                                                    "cellContent": {
+                                                                        "type": "OutputText",
+                                                                        "defaultValue": "",
+                                                                        "value": {
+                                                                            "$ref": "#/properties/lineType"
+                                                                        }
+                                                                    },
+                                                                    "footerContent": {
+                                                                        "type": "OutputText",
+                                                                        "literalValue": "total"
+                                                                    }
+                                                                },
+                                                                {
+                                                                    "sortable": false,
+                                                                    "title": "lineAmountInContractCurrency",
+                                                                    "cellContent": {
+                                                                        "type": "OutputText",
+                                                                        "defaultValue": "",
+                                                                        "value": {
+                                                                            "$ref": "#/properties/lineAmountInContractCurrency"
+                                                                        }
+                                                                    },
+                                                                    "editCellContent": {
+                                                                        "type": "Input",
+                                                                        "value": {
+                                                                            "$ref": "#/properties/lineAmountInContractCurrency"
+                                                                        },
+                                                                        "rule": {
+                                                                            "effect": "ENABLE_INITIAL",
+                                                                            "condition": {
+                                                                                "type": "FUNC",
+                                                                                "ruleFunction": "enablePaymentLineSum",
+                                                                                "value": [
+                                                                                    {
+                                                                                        "$ref": "#"
+                                                                                    }
+                                                                                ]
+                                                                            }
+                                                                        }
+                                                                    },
+                                                                    "footerContent": {
+                                                                        "type": "OutputText",
+                                                                        "defaultValue": "",
+                                                                        "template": "{{#style 'right'}}{{expr totalAmount 'n:2'}}{{/style}}",
+                                                                        "value": {
+                                                                            "mapping": "getInsuredTotalpaymentAmount",
+                                                                            "$ref": "#"
+                                                                        }
+                                                                    }
+                                                                },
+                                                                {
+                                                                    "sortable": false,
+                                                                    "title": "lineAmountInRubCurrency",
+                                                                    "cellContent": {
+                                                                        "type": "OutputText",
+                                                                        "defaultValue": "",
+                                                                        "value": {
+                                                                            "$ref": "#/properties/lineAmountInRubCurrency"
+                                                                        }
+                                                                    },
+                                                                    "editCellContent": {
+                                                                        "type": "Input",
+                                                                        "value": {
+                                                                            "$ref": "#/properties/lineAmountInRubCurrency"
+                                                                        },
+                                                                        "rule": {
+                                                                            "effect": "ENABLE_INITIAL",
+                                                                            "condition": {
+                                                                                "type": "FUNC",
+                                                                                "ruleFunction": "enablePaymentSumInRub",
+                                                                                "value": [
+                                                                                    {
+                                                                                        "$ref": "#"
+                                                                                    }
+                                                                                ]
+                                                                            }
+                                                                        }
+                                                                    },
+                                                                    "footerContent": {
+                                                                        "type": "OutputText",
+                                                                        "defaultValue": "",
+                                                                        "template": "{{#style 'right'}}{{expr totalAmountInRub 'n:2'}}{{/style}}",
+                                                                        "value": {
+                                                                            "mapping": "getInsuredTotalpaymentAmount",
+                                                                            "$ref": "#"
+                                                                        }
+                                                                    }
+                                                                }
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "type": "Group",
+                                            "width": 12,
+                                            "elements": [
+                                                {
+                                                    "type": "Input",
+                                                    "label": "manualCorrection",
+                                                    "value": {
+                                                        "$ref": "#/properties/Body/properties/endowmentAmounts/properties/paymentLinesManualCorrection"
+                                                    },
+                                                    "width": 3,
+                                                    "onValueChanged": [
+                                                        {
+                                                            "commandType": "executeAction",
+                                                            "actionName": "onPaymentLinesManualCorrectionChanged"
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "Section",
+                                    "label": "endowmentBeneficiaries",
+                                    "scope": "endowmentBeneficiaries",
+                                    "width": 12,
+                                    "elements": [
+                                        {
+                                            "type": "Group",
+                                            "width": 12,
+                                            "elements": [
+                                                {
+                                                    "type": "Group",
+                                                    "elements": [
+                                                        {
+                                                            "type": "DataGrid",
+                                                            "elementId": "beneficiariesTable",
+                                                            "checkIfRowActionIsAllowed": "isBeneficiariesRowActionAllowed",
+                                                            "checkIfAddButtonVisible": "isBeneficiariesAddButtonVisible",
+                                                            "rule": {
+                                                                "effect": "ENABLE_INITIAL",
+                                                                "condition": {
+                                                                    "type": "FUNC",
+                                                                    "ruleFunction": "enableBeneficiariesTable",
+                                                                    "value": [
+                                                                        {
+                                                                            "$ref": "#"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            },
+                                                            "mode": "Array",
+                                                            "pagination": {
+                                                                "mode": "Regular",
+                                                                "pageSizes": [
+                                                                    5,
+                                                                    10,
+                                                                    15
+                                                                ]
+                                                            },
+                                                            "actions": [
+                                                                "Add",
+                                                                "Edit",
+                                                                "Details",
+                                                                "Delete"
+                                                            ],
+                                                            "edit": {
+                                                                "mode": "Detached",
+                                                                "onBeforeGridAction": "beforeBeneficiariesGridAction",
+                                                                "onAfterGridAction": "afterBeneficiariesGridAction",
+                                                                "onPrepareAddedRow": "setDefaultBeneficiaryValues"
+                                                            },
+                                                            "height": "None",
+                                                            "value": {
+                                                                "$ref": "#/properties/Body/properties/endowmentBeneficiaries"
+                                                            },
+                                                            "selection": {
+                                                                "mode": "Single",
+                                                                "enableRowSelection": true,
+                                                                "showCheckBox": true
+                                                            },
+                                                            "columns": [
+                                                                {
+                                                                    "sortable": false,
+                                                                    "title": "beneficiaryName",
+                                                                    "name": "beneficiaryName",
+                                                                    "cellContent": {
+                                                                        "type": "Link",
+                                                                        "readOnly": true,
+                                                                        "targetType": "Url",
+                                                                        "label": "beneficiaryName",
+                                                                        "value": {
+                                                                            "mapping": "beneficiaryUriMapping",
+                                                                            "$ref": "#"
+                                                                        },
+                                                                        "width": 5,
+                                                                        "content": {
+                                                                            "text": {
+                                                                                "type": "OutputText",
+                                                                                "defaultValue": "",
+                                                                                "value": {
+                                                                                    "$ref": "#/properties/fullName"
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                },
+                                                                {
+                                                                    "sortable": false,
+                                                                    "title": "PONumber",
+                                                                    "name": "PONumber",
+                                                                    "cellContent": {
+                                                                        "type": "Link",
+                                                                        "readOnly": true,
+                                                                        "targetType": "Url",
+                                                                        "label": "PONumber",
+                                                                        "value": {
+                                                                            "mapping": "poNumberUriMapping",
+                                                                            "$ref": "#"
+                                                                        },
+                                                                        "width": 5,
+                                                                        "content": {
+                                                                            "text": {
+                                                                                "type": "OutputText",
+                                                                                "defaultValue": "",
+                                                                                "value": {
+                                                                                    "mapping": "getPoLinkNameText",
+                                                                                    "$ref": "#"
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                },
+                                                                {
+                                                                    "sortable": false,
+                                                                    "title": "PitPONumber",
+                                                                    "name": "PitPONumber",
+                                                                    "cellContent": {
+                                                                        "type": "Link",
+                                                                        "readOnly": true,
+                                                                        "targetType": "Url",
+                                                                        "label": "PitPONumber",
+                                                                        "value": {
+                                                                            "mapping": "pitPoNumberUriMapping",
+                                                                            "$ref": "#"
+                                                                        },
+                                                                        "width": 5,
+                                                                        "content": {
+                                                                            "text": {
+                                                                                "type": "OutputText",
+                                                                                "defaultValue": "",
+                                                                                "value": {
+                                                                                    "mapping": "getPitPoLinkNameText",
+                                                                                    "$ref": "#"
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                },
+                                                                {
+                                                                    "sortable": false,
+                                                                    "title": "amountToPay",
+                                                                    "cellContent": {
+                                                                        "type": "OutputText",
+                                                                        "defaultValue": "",
+                                                                        "value": {
+                                                                            "$ref": "#/properties/amountToPay"
+                                                                        }
+                                                                    }
+                                                                },
+                                                                {
+                                                                    "sortable": false,
+                                                                    "title": "pitAmount",
+                                                                    "cellContent": {
+                                                                        "type": "OutputText",
+                                                                        "defaultValue": "",
+                                                                        "value": {
+                                                                            "$ref": "#/properties/pitAmountInRubCurrency"
+                                                                        }
+                                                                    }
+                                                                },
+                                                                {
+                                                                    "sortable": false,
+                                                                    "title": "beneficiaryReason",
+                                                                    "cellContent": {
+                                                                        "type": "OutputText",
+                                                                        "defaultValue": "",
+                                                                        "value": {
+                                                                            "$ref": "#/properties/beneficiaryReason/properties/description"
+                                                                        }
+                                                                    }
+                                                                },
+                                                                {
+                                                                    "sortable": false,
+                                                                    "title": "beneficiaryPaymentType",
+                                                                    "cellContent": {
+                                                                        "type": "OutputText",
+                                                                        "defaultValue": "",
+                                                                        "value": {
+                                                                            "$ref": "#/properties/beneficiaryPaymentType/properties/description"
+                                                                        }
+                                                                    }
+                                                                }
+                                                            ],
+                                                            "detailsTemplates": {
+                                                                "edit": {
+                                                                    "content": {
+                                                                        "type": "Group",
+                                                                        "elements": [
+                                                                            {
+                                                                                "type": "GridLayout",
+                                                                                "fillAvailableSpace": true,
+                                                                                "numberOfColumns": 12,
+                                                                                "elements": [
+                                                                                    {
+                                                                                        "type": "Group",
+                                                                                        "elements": [
+                                                                                            {
+                                                                                                "type": "Input",
+                                                                                                "label": "beneficiaryReason",
+                                                                                                "value": {
+                                                                                                    "$ref": "#/properties/beneficiaryReason"
+                                                                                                },
+                                                                                                "autocomplete": {
+                                                                                                    "minTextLength": 3,
+                                                                                                    "dropDownItemsCount": 30
+                                                                                                },
+                                                                                                "control": "Dropdown",
+                                                                                                "source": {
+                                                                                                    "reloadOnOpen": true,
+                                                                                                    "dataSource": {
+                                                                                                        "name": "BeneficiaryReasonDataSource",
+                                                                                                        "searchFieldPath": "description",
+                                                                                                        "requestMapping": "beneficiaryReasonRequestMapping",
+                                                                                                        "responseMapping": "beneficiaryReasonResponseMapping",
+                                                                                                        "resultCount": 30
+                                                                                                    },
+                                                                                                    "displayFieldName": "displayName",
+                                                                                                    "valueFieldName": "value"
+                                                                                                },
+                                                                                                "width": 12,
+                                                                                                "onValueChanged": [
+                                                                                                    {
+                                                                                                        "commandType": "executeAction",
+                                                                                                        "actionName": "onBeneficiaryReasonChanged"
+                                                                                                    }
+                                                                                                ],
+                                                                                                "rule": {
+                                                                                                    "effect": "ENABLE_INITIAL",
+                                                                                                    "condition": {
+                                                                                                        "type": "FUNC",
+                                                                                                        "ruleFunction": "isBeneficiaryReasonEnabled",
+                                                                                                        "value": [
+                                                                                                            {
+                                                                                                                "$ref": "#"
+                                                                                                            }
+                                                                                                        ]
+                                                                                                    }
+                                                                                                }
+                                                                                            }
+                                                                                        ]
+                                                                                    },
+                                                                                    {
+                                                                                        "type": "Group",
+                                                                                        "elements": [
+                                                                                            {
+                                                                                                "type": "Lookup",
+                                                                                                "label": "beneficiary",
+                                                                                                "value": {
+                                                                                                    "$ref": "#"
+                                                                                                },
+                                                                                                "width": 3,
+                                                                                                "dialogButton": {},
+                                                                                                "clearButton": {
+                                                                                                    "clearAction": "clearBeneficiary"
+                                                                                                },
+                                                                                                "dialog": {
+                                                                                                    "viewReference": {
+                                                                                                        "configurationCodeName": "GeneralPartySearchWithEditView",
+                                                                                                        "configurationVersion": "1",
+                                                                                                        "configurationConceptType": "SearchView"
+                                                                                                    },
+                                                                                                    "onLoad": "beneficiaryLookupOnLoad"
+                                                                                                },
+                                                                                                "onSelected": "beneficiaryResultMapping",
+                                                                                                "selectedDisplayValueUISchema": {
+                                                                                                    "type": "Input",
+                                                                                                    "label": "beneficiary",
+                                                                                                    "readOnly": true,
+                                                                                                    "value": {
+                                                                                                        "$ref": "#/properties/fullName"
+                                                                                                    },
+                                                                                                    "rule": {
+                                                                                                        "effect": "ENABLE_INITIAL",
+                                                                                                        "condition": {
+                                                                                                            "type": "FUNC",
+                                                                                                            "ruleFunction": "isBeneficiaryNameEnabled",
+                                                                                                            "value": [
+                                                                                                                {
+                                                                                                                    "$ref": "#"
+                                                                                                                }
+                                                                                                            ]
+                                                                                                        }
+                                                                                                    }
+                                                                                                },
+                                                                                                "rule": {
+                                                                                                    "effect": "ENABLE_INITIAL",
+                                                                                                    "condition": {
+                                                                                                        "type": "FUNC",
+                                                                                                        "ruleFunction": "isBeneficiaryLookupEnabled",
+                                                                                                        "value": [
+                                                                                                            {
+                                                                                                                "$ref": "#"
+                                                                                                            }
+                                                                                                        ]
+                                                                                                    }
+                                                                                                }
+                                                                                            },
+                                                                                            {
+                                                                                                "type": "Input",
+                                                                                                "label": "amountToPayPercetage",
+                                                                                                "control": "Percentage",
+                                                                                                "decimalPlaces": 2,
+                                                                                                "clearValueOutOfRange": true,
+                                                                                                "value": {
+                                                                                                    "$ref": "#/properties/amountToPayPercetage"
+                                                                                                },
+                                                                                                "width": 1,
+                                                                                                "onValueChanged": [],
+                                                                                                "rule": {
+                                                                                                    "effect": "ENABLE_INITIAL",
+                                                                                                    "condition": {
+                                                                                                        "type": "FUNC",
+                                                                                                        "ruleFunction": "isBeneficiaryPercentageEnabled",
+                                                                                                        "value": [
+                                                                                                            {
+                                                                                                                "$ref": "#"
+                                                                                                            }
+                                                                                                        ]
+                                                                                                    }
+                                                                                                }
+                                                                                            },
+                                                                                            {
+                                                                                                "type": "Input",
+                                                                                                "label": "calculateFromAmount",
+                                                                                                "value": {
+                                                                                                    "$ref": "#/properties/calculateFromAmount"
+                                                                                                },
+                                                                                                "width": 2,
+                                                                                                "rule": {
+                                                                                                    "effect": "ENABLE_INITIAL",
+                                                                                                    "condition": {
+                                                                                                        "type": "FUNC",
+                                                                                                        "ruleFunction": "isCalculateFromAmountEnabled",
+                                                                                                        "value": [
+                                                                                                            {
+                                                                                                                "$ref": "#"
+                                                                                                            }
+                                                                                                        ]
+                                                                                                    }
+                                                                                                }
+                                                                                            },
+                                                                                            {
+                                                                                                "type": "Input",
+                                                                                                "label": "amountToPay",
+                                                                                                "value": {
+                                                                                                    "$ref": "#/properties/amountToPay"
+                                                                                                },
+                                                                                                "width": 2,
+                                                                                                "onValueChanged": [
+                                                                                                    "refreshView"
+                                                                                                ],
+                                                                                                "rule": {
+                                                                                                    "effect": "ENABLE_INITIAL",
+                                                                                                    "condition": {
+                                                                                                        "type": "FUNC",
+                                                                                                        "ruleFunction": "isBeneficiaryAmountEnabled",
+                                                                                                        "value": [
+                                                                                                            {
+                                                                                                                "$ref": "#"
+                                                                                                            }
+                                                                                                        ]
+                                                                                                    }
+                                                                                                }
+                                                                                            },
+                                                                                            {
+                                                                                                "type": "Input",
+                                                                                                "label": "amountToPayInRubCurrency",
+                                                                                                "value": {
+                                                                                                    "$ref": "#/properties/amountToPayInRubCurrency"
+                                                                                                },
+                                                                                                "width": 2,
+                                                                                                "readOnly": true
+                                                                                            }
+                                                                                        ]
+                                                                                    },
+                                                                                    {
+                                                                                        "type": "Group",
+                                                                                        "elements": [
+                                                                                            {
+                                                                                                "type": "Input",
+                                                                                                "label": "pitAmountInRubCurrency",
+                                                                                                "value": {
+                                                                                                    "$ref": "#/properties/pitAmountInRubCurrency"
+                                                                                                },
+                                                                                                "width": 2,
+                                                                                                "rule": {
+                                                                                                    "effect": "ENABLE_INITIAL",
+                                                                                                    "condition": {
+                                                                                                        "type": "FUNC",
+                                                                                                        "ruleFunction": "isPitAmountEnabled",
+                                                                                                        "value": [
+                                                                                                            {
+                                                                                                                "$ref": "#"
+                                                                                                            }
+                                                                                                        ]
+                                                                                                    }
+                                                                                                }
+                                                                                            },
+                                                                                            {
+                                                                                                "type": "Input",
+                                                                                                "label": "isManualPit",
+                                                                                                "value": {
+                                                                                                    "$ref": "#/properties/isManualPit"
+                                                                                                },
+                                                                                                "width": 2,
+                                                                                                "onValueChanged": [
+                                                                                                    "refreshView"
+                                                                                                ],
+                                                                                                "rule": {
+                                                                                                    "effect": "ENABLE_INITIAL",
+                                                                                                    "condition": {
+                                                                                                        "type": "FUNC",
+                                                                                                        "ruleFunction": "isManualPitEnabled",
+                                                                                                        "value": [
+                                                                                                            {
+                                                                                                                "$ref": "#"
+                                                                                                            }
+                                                                                                        ]
+                                                                                                    }
+                                                                                                }
+                                                                                            }
+                                                                                        ]
+                                                                                    },
+                                                                                    {
+                                                                                        "type": "Group",
+                                                                                        "elements": [
+                                                                                            {
+                                                                                                "type": "Input",
+                                                                                                "label": "beneficiaryPaymentType",
+                                                                                                "value": {
+                                                                                                    "$ref": "#/properties/beneficiaryPaymentType"
+                                                                                                },
+                                                                                                "autocomplete": {
+                                                                                                    "minTextLength": 3,
+                                                                                                    "dropDownItemsCount": 30
+                                                                                                },
+                                                                                                "control": "Dropdown",
+                                                                                                "source": {
+                                                                                                    "reloadOnOpen": true,
+                                                                                                    "dataSource": {
+                                                                                                        "name": "BeneficiaryPaymentTypeDataSource",
+                                                                                                        "searchFieldPath": "description",
+                                                                                                        "requestMapping": "beneficiaryPaymentTypeRequestMapping",
+                                                                                                        "responseMapping": "beneficiaryPaymentTypeResponseMapping",
+                                                                                                        "resultCount": 30
+                                                                                                    },
+                                                                                                    "displayFieldName": "displayName",
+                                                                                                    "valueFieldName": "value"
+                                                                                                },
+                                                                                                "width": 12,
+                                                                                                "rule": {
+                                                                                                    "effect": "ENABLE_INITIAL",
+                                                                                                    "condition": {
+                                                                                                        "type": "FUNC",
+                                                                                                        "ruleFunction": "isBeneficiaryPaymentTypeEnabled",
+                                                                                                        "value": [
+                                                                                                            {
+                                                                                                                "$ref": "#"
+                                                                                                            }
+                                                                                                        ]
+                                                                                                    }
+                                                                                                }
+                                                                                            }
+                                                                                        ]
+                                                                                    },
+                                                                                    {
+                                                                                        "type": "Group",
+                                                                                        "elements": [
+                                                                                            {
+                                                                                                "type": "Input",
+                                                                                                "label": "beneficiaryBankAccount",
+                                                                                                "value": {
+                                                                                                    "$ref": "#/properties/bankAccount"
+                                                                                                },
+                                                                                                "control": "Dropdown",
+                                                                                                "preSelectFirstItem": true,
+                                                                                                "source": {
+                                                                                                    "reloadOnOpen": true,
+                                                                                                    "dataSource": {
+                                                                                                        "name": "GetPartyBankAccountsOnlyDataSource",
+                                                                                                        "searchFieldPath": "description",
+                                                                                                        "requestMapping": "beneficiaryBankAccountRequestMapping",
+                                                                                                        "responseMapping": "beneficiaryBankAccountResponseMapping"
+                                                                                                    },
+                                                                                                    "displayFieldName": "displayName",
+                                                                                                    "valueFieldName": "value"
+                                                                                                },
+                                                                                                "width": 6,
+                                                                                                "rule": {
+                                                                                                    "effect": "ENABLE_INITIAL",
+                                                                                                    "condition": {
+                                                                                                        "type": "FUNC",
+                                                                                                        "ruleFunction": "isBeneficiaryBankAccountEnabled",
+                                                                                                        "value": [
+                                                                                                            {
+                                                                                                                "$ref": "#"
+                                                                                                            }
+                                                                                                        ]
+                                                                                                    }
+                                                                                                }
+                                                                                            }
+                                                                                        ]
+                                                                                    }
+                                                                                ]
+                                                                            }
+                                                                        ]
+                                                                    }
+                                                                },
+                                                                "view": {
+                                                                    "content": {
+                                                                        "type": "Group",
+                                                                        "elements": [
+                                                                            {
+                                                                                "type": "GridLayout",
+                                                                                "fillAvailableSpace": true,
+                                                                                "numberOfColumns": 12,
+                                                                                "elements": [
+                                                                                    {
+                                                                                        "type": "Group",
+                                                                                        "elements": [
+                                                                                            {
+                                                                                                "type": "Lookup",
+                                                                                                "label": "beneficiary",
+                                                                                                "value": {
+                                                                                                    "$ref": "#"
+                                                                                                },
+                                                                                                "width": 3,
+                                                                                                "dialogButton": {},
+                                                                                                "clearButton": {
+                                                                                                    "clearAction": "clearBeneficiary"
+                                                                                                },
+                                                                                                "dialog": {
+                                                                                                    "viewReference": {
+                                                                                                        "configurationCodeName": "GeneralPartySearchView",
+                                                                                                        "configurationVersion": "1",
+                                                                                                        "configurationConceptType": "SearchView"
+                                                                                                    }
+                                                                                                },
+                                                                                                "onSelected": "beneficiaryResultMapping",
+                                                                                                "selectedDisplayValueUISchema": {
+                                                                                                    "type": "Input",
+                                                                                                    "label": "beneficiary",
+                                                                                                    "readOnly": true,
+                                                                                                    "value": {
+                                                                                                        "$ref": "#/properties/fullName"
+                                                                                                    }
+                                                                                                }
+                                                                                            },
+                                                                                            {
+                                                                                                "type": "Input",
+                                                                                                "label": "amountToPay",
+                                                                                                "value": {
+                                                                                                    "$ref": "#/properties/amountToPay"
+                                                                                                },
+                                                                                                "width": 2
+                                                                                            },
+                                                                                            {
+                                                                                                "type": "Input",
+                                                                                                "label": "pitAmountInRubCurrency",
+                                                                                                "value": {
+                                                                                                    "$ref": "#/properties/pitAmountInRubCurrency"
+                                                                                                },
+                                                                                                "width": 2,
+                                                                                                "readOnly": true
+                                                                                            }
+                                                                                        ]
+                                                                                    },
+                                                                                    {
+                                                                                        "type": "Group",
+                                                                                        "elements": [
+                                                                                            {
+                                                                                                "type": "Input",
+                                                                                                "label": "beneficiaryReason",
+                                                                                                "value": {
+                                                                                                    "$ref": "#/properties/beneficiaryReason"
+                                                                                                },
+                                                                                                "autocomplete": {
+                                                                                                    "minTextLength": 3,
+                                                                                                    "dropDownItemsCount": 30
+                                                                                                },
+                                                                                                "control": "Dropdown",
+                                                                                                "source": {
+                                                                                                    "reloadOnOpen": true,
+                                                                                                    "dataSource": {
+                                                                                                        "name": "BeneficiaryReasonDataSource",
+                                                                                                        "searchFieldPath": "description",
+                                                                                                        "requestMapping": "beneficiaryReasonRequestMapping",
+                                                                                                        "responseMapping": "beneficiaryReasonResponseMapping",
+                                                                                                        "resultCount": 30
+                                                                                                    },
+                                                                                                    "displayFieldName": "displayName",
+                                                                                                    "valueFieldName": "value"
+                                                                                                },
+                                                                                                "width": 12
+                                                                                            }
+                                                                                        ]
+                                                                                    },
+                                                                                    {
+                                                                                        "type": "Group",
+                                                                                        "elements": [
+                                                                                            {
+                                                                                                "type": "Input",
+                                                                                                "label": "beneficiaryPaymentType",
+                                                                                                "value": {
+                                                                                                    "$ref": "#/properties/beneficiaryPaymentType"
+                                                                                                },
+                                                                                                "autocomplete": {
+                                                                                                    "minTextLength": 3,
+                                                                                                    "dropDownItemsCount": 30
+                                                                                                },
+                                                                                                "control": "Dropdown",
+                                                                                                "source": {
+                                                                                                    "reloadOnOpen": true,
+                                                                                                    "dataSource": {
+                                                                                                        "name": "BeneficiaryPaymentTypeDataSource",
+                                                                                                        "searchFieldPath": "description",
+                                                                                                        "requestMapping": "beneficiaryPaymentTypeRequestMapping",
+                                                                                                        "responseMapping": "beneficiaryPaymentTypeResponseMapping",
+                                                                                                        "resultCount": 30
+                                                                                                    },
+                                                                                                    "displayFieldName": "displayName",
+                                                                                                    "valueFieldName": "value"
+                                                                                                },
+                                                                                                "width": 12
+                                                                                            }
+                                                                                        ]
+                                                                                    },
+                                                                                    {
+                                                                                        "type": "Group",
+                                                                                        "elements": [
+                                                                                            {
+                                                                                                "type": "Input",
+                                                                                                "label": "beneficiaryBankAccount",
+                                                                                                "value": {
+                                                                                                    "$ref": "#/properties/bankAccount"
+                                                                                                },
+                                                                                                "control": "Dropdown",
+                                                                                                "preSelectFirstItem": true,
+                                                                                                "source": {
+                                                                                                    "reloadOnOpen": true,
+                                                                                                    "dataSource": {
+                                                                                                        "name": "GetPartyBankAccountsOnlyDataSource",
+                                                                                                        "searchFieldPath": "description",
+                                                                                                        "requestMapping": "beneficiaryBankAccountRequestMapping",
+                                                                                                        "responseMapping": "beneficiaryBankAccountResponseMapping"
+                                                                                                    },
+                                                                                                    "displayFieldName": "displayName",
+                                                                                                    "valueFieldName": "value"
+                                                                                                },
+                                                                                                "width": 6
+                                                                                            }
+                                                                                        ]
+                                                                                    }
+                                                                                ]
+                                                                            }
+                                                                        ]
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "type": "Group",
+                                                    "elements": [
+                                                        {
+                                                            "type": "Button",
+                                                            "value": {
+                                                                "$ref": "#"
+                                                            },
+                                                            "width": 3,
+                                                            "onClick": [
+                                                                {
+                                                                    "commandType": "executeAction",
+                                                                    "actionName": "createPaymentOrder"
+                                                                }
+                                                            ],
+                                                            "label": "createPaymentOrder",
+                                                            "rule": {
+                                                                "effect": "ENABLE_INITIAL",
+                                                                "condition": {
+                                                                    "type": "FUNC",
+                                                                    "ruleFunction": "showCreatePoButton",
+                                                                    "value": [
+                                                                        {
+                                                                            "$ref": "#"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            }
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "Section",
+                                    "label": "requestInfo",
+                                    "scope": "requestInfo",
+                                    "width": 12,
+                                    "elements": [
+                                        {
+                                            "type": "Group",
+                                            "width": 12,
+                                            "elements": [
+                                                {
+                                                    "type": "Input",
+                                                    "label": "rejectionReason",
+                                                    "value": {
+                                                        "$ref": "#/properties/Body/properties/mainAttributes/properties/rejectionReason"
+                                                    },
+                                                    "control": "Dropdown",
+                                                    "width": 6,
+                                                    "rule": {
+                                                        "effect": "ENABLE_INITIAL",
+                                                        "condition": {
+                                                            "type": "FUNC",
+                                                            "ruleFunction": "canSelectRejectionReason",
+                                                            "value": [
+                                                                {
+                                                                    "$ref": "#"
+                                                                }
+                                                            ]
+                                                        }
+                                                    }
+                                                },
+                                                {
+                                                    "type": "TextArea",
+                                                    "enableResize": true,
+                                                    "numberOfRows": 2,
+                                                    "label": "rejectionNote",
+                                                    "value": {
+                                                        "$ref": "#/properties/Body/properties/mainAttributes/properties/rejectionNote"
+                                                    },
+                                                    "width": 12
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "Group",
+                                    "width": 12,
+                                    "elements": [
+                                        {
+                                            "type": "Component",
+                                            "metadata": {
+                                                "autogenerate": true
+                                            },
+                                            "name": "ClaimCommentsContainer",
+                                            "value": {
+                                                "$ref": "#"
+                                            }
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Tab",
+                            "elementId": "EndowmentInquiries",
+                            "scope": "title",
+                            "title": "Endowment inquiries",
+                            "elements": [
+                                {
+                                    "type": "Section",
+                                    "label": "BasicInquiryConditions",
+                                    "width": 12,
+                                    "collapsing": {
+                                        "initial": false,
+                                        "enabled": true
+                                    },
+                                    "elements": [
+                                        {
+                                            "type": "Group",
+                                            "width": 12,
+                                            "elements": [
+                                                {
+                                                    "type": "Group",
+                                                    "width": 12,
+                                                    "elements": [
+                                                        {
+                                                            "type": "DataGrid",
+                                                            "orderBy": "universalDocumentNumber",
+                                                            "value": {
+                                                                "$ref": "#/properties/Body/properties/tempTechnicalData/properties/inquiries"
+                                                            },
+                                                            "mode": "Array",
+                                                            "header": {
+                                                                "showReloadButton": true,
+                                                                "showNumberOfResults": true
+                                                            },
+                                                            "pagination": {
+                                                                "mode": "Regular",
+                                                                "pageSizes": [
+                                                                    5,
+                                                                    10,
+                                                                    15
+                                                                ]
+                                                            },
+                                                            "selection": {
+                                                                "mode": "None"
+                                                            },
+                                                            "height": "None",
+                                                            "columns": [
+                                                                {
+                                                                    "title": "inquiryNumber",
+                                                                    "cellContent": {
+                                                                        "type": "Link",
+                                                                        "targetType": "Url",
+                                                                        "title": "inquiryNumber",
+                                                                        "value": {
+                                                                            "mapping": "inquiryUrlMapping",
+                                                                            "$ref": "#"
+                                                                        },
+                                                                        "content": {
+                                                                            "text": {
+                                                                                "type": "OutputText",
+                                                                                "textProperties": [
+                                                                                    "bold"
+                                                                                ],
+                                                                                "value": {
+                                                                                    "$ref": "#/properties/inquiryNumber"
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                },
+                                                                {
+                                                                    "title": "createdOn",
+                                                                    "cellContent": {
+                                                                        "type": "OutputText",
+                                                                        "value": {
+                                                                            "$ref": "#/properties/createdOn"
+                                                                        }
+                                                                    }
+                                                                },
+                                                                {
+                                                                    "title": "updatedOn",
+                                                                    "cellContent": {
+                                                                        "type": "OutputText",
+                                                                        "value": {
+                                                                            "$ref": "#/properties/updatedOn"
+                                                                        }
+                                                                    }
+                                                                },
+                                                                {
+                                                                    "title": "state",
+                                                                    "cellContent": {
+                                                                        "type": "OutputText",
+                                                                        "value": {
+                                                                            "$ref": "#/properties/state"
+                                                                        }
+                                                                    }
+                                                                },
+                                                                {
+                                                                    "title": "departmentCode",
+                                                                    "cellContent": {
+                                                                        "type": "OutputText",
+                                                                        "value": {
+                                                                            "$ref": "#/properties/departmentCodeDescription"
+                                                                        }
+                                                                    }
+                                                                }
+                                                            ]
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "type": "Group",
+                                                    "width": 12,
+                                                    "elements": [
+                                                        {
+                                                            "type": "Input",
+                                                            "label": "department",
+                                                            "source": {
+                                                                "dataSource": {
+                                                                    "name": "GetApplicationUserGroupsDataSource",
+                                                                    "reloadOnOpen": true,
+                                                                    "searchFieldPath": "nameLocalized",
+                                                                    "responseMapping": "departmentResponseMapping",
+                                                                    "resultCount": 1000
+                                                                },
+                                                                "displayFieldName": "nameLocalized"
+                                                            },
+                                                            "control": "Dropdown",
+                                                            "value": {
+                                                                "$ref": "#/properties/ClientViewModel/properties/inquiriesData/properties/department"
+                                                            },
+                                                            "width": 4,
+                                                            "onValueChanging": "setCurrentIsDirtyViewState",
+                                                            "onValueChanged": [
+                                                                {
+                                                                    "commandType": "executeAction",
+                                                                    "actionName": "setViewClearIfWasNotDirty"
+                                                                },
+                                                                {
+                                                                    "commandType": "executeAction",
+                                                                    "actionName": "checkDepartment"
+                                                                }
+                                                            ],
+                                                            "rule": {
+                                                                "effect": "DISABLE_INITIAL",
+                                                                "condition": {
+                                                                    "type": "FUNC",
+                                                                    "value": [
+                                                                        {
+                                                                            "$ref": "#"
+                                                                        }
+                                                                    ],
+                                                                    "ruleFunction": "disableInquiries"
+                                                                }
+                                                            }
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "type": "Input",
+                                                    "label": "inquiryReasons",
+                                                    "multiple": true,
+                                                    "value": {
+                                                        "$ref": "#/properties/ClientViewModel/properties/inquiriesData/properties/inquiryReasons"
+                                                    },
+                                                    "autocomplete": {
+                                                        "minTextLength": 1,
+                                                        "dropDownItemsCount": 30
+                                                    },
+                                                    "control": "Dropdown",
+                                                    "source": {
+                                                        "dataSource": {
+                                                            "reloadOnOpen": true,
+                                                            "name": "InquiryReasonDataSource",
+                                                            "searchFieldPath": "description",
+                                                            "requestMapping": "inquiryReasonRequestMapping",
+                                                            "responseMapping": "inquiryReasonResponseMapping",
+                                                            "resultCount": 30
+                                                        },
+                                                        "displayFieldName": "displayName",
+                                                        "valueFieldName": "value"
+                                                    },
+                                                    "width": 6,
+                                                    "onValueChanged": [
+                                                        {
+                                                            "commandType": "executeAction",
+                                                            "actionName": "setViewClearIfWasNotDirty"
+                                                        }
+                                                    ],
+                                                    "rule": {
+                                                        "effect": "DISABLE_INITIAL",
+                                                        "condition": {
+                                                            "type": "FUNC",
+                                                            "value": [
+                                                                {
+                                                                    "$ref": "#"
+                                                                }
+                                                            ],
+                                                            "ruleFunction": "disableInquiryReason"
+                                                        }
+                                                    }
+                                                },
+                                                {
+                                                    "type": "Group",
+                                                    "width": 12,
+                                                    "elements": [
+                                                        {
+                                                            "type": "Input",
+                                                            "label": "Text of Inquiry",
+                                                            "control": "TextArea",
+                                                            "enableResize": true,
+                                                            "numberOfRows": 5,
+                                                            "value": {
+                                                                "$ref": "#/properties/ClientViewModel/properties/inquiriesData/properties/textOfInquiry"
+                                                            },
+                                                            "width": 12,
+                                                            "onValueChanging": "setCurrentIsDirtyViewState",
+                                                            "onValueChanged": [
+                                                                {
+                                                                    "commandType": "executeAction",
+                                                                    "actionName": "setViewClearIfWasNotDirty"
+                                                                }
+                                                            ],
+                                                            "rule": {
+                                                                "effect": "DISABLE_INITIAL",
+                                                                "condition": {
+                                                                    "type": "FUNC",
+                                                                    "value": [
+                                                                        {
+                                                                            "$ref": "#"
+                                                                        }
+                                                                    ],
+                                                                    "ruleFunction": "disableTextOfInquiry"
+                                                                }
+                                                            }
+                                                        },
+                                                        {
+                                                            "type": "Button",
+                                                            "isCompact": true,
+                                                            "label": "Enter Inquiry",
+                                                            "width": 4,
+                                                            "onClick": "createInquiry",
+                                                            "rule": {
+                                                                "effect": "DISABLE_INITIAL",
+                                                                "condition": {
+                                                                    "type": "FUNC",
+                                                                    "value": [
+                                                                        {
+                                                                            "$ref": "#"
+                                                                        }
+                                                                    ],
+                                                                    "ruleFunction": "disableInquiries"
+                                                                }
+                                                            }
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ],
+                            "rule": {
+                                "effect": "HIDE",
+                                "condition": {
+                                    "type": "FUNC",
+                                    "ruleFunction": "shouldHideInquiries",
+                                    "value": [
+                                        {
+                                            "$ref": "#"
+                                        }
+                                    ]
+                                }
+                            }
+                        },
+                        {
+                            "type": "Tab",
+                            "elementId": "statusTab",
+                            "title": "State history",
+                            "elements": [
+                                {
+                                    "type": "Section",
+                                    "label": "",
+                                    "width": 12,
+                                    "elements": [
+                                        {
+                                            "type": "Group",
+                                            "elements": [
+                                                {
+                                                    "type": "InlineView",
+                                                    "showContainerActions": false,
+                                                    "views": [
+                                                        {
+                                                            "viewReference": {
+                                                                "configurationCodeName": "EndowmentStateHistoryView",
+                                                                "configurationVersion": "1",
+                                                                "configurationConceptType": "SearchView"
+                                                            },
+                                                            "onViewInitialized": "initEndowmentStateHistory",
+                                                            "viewType": "Search"
+                                                        }
+                                                    ],
+                                                    "value": {
+                                                        "$ref": "#"
+                                                    },
+                                                    "hide": false,
+                                                    "elementId": "StatusView"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Component",
+                            "elementId": "componentEndowmentAttachments",
+                            "name": "EndowmentAttachmentsTab",
+                            "value": {
+                                "$ref": "#"
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,40 @@
+﻿SELECT 
+	COALESCE(ct.SUBGROUP_CODE_LEVEL_4, ct.SUBGROUP_CODE_LEVEL_3, ct.SUBGROUP_CODE_LEVEL_2, ct.SUBGROUP_CODE_LEVEL_1) AS CODE,
+	ct.RULE_CODE,
+	ct.INJURY_GROUP,
+	ct.SUBGROUP_CODE_LEVEL_1,
+	ct.SUBGROUP_DESCRIPTION_LEVEL_1,
+	ct.SUBGROUP_CODE_LEVEL_2,
+	ct.SUBGROUP_DESCRIPTION_LEVEL_2,
+	ct.SUBGROUP_CODE_LEVEL_3,
+	ct.SUBGROUP_DESCRIPTION_LEVEL_3,
+	ct.SUBGROUP_CODE_LEVEL_4,
+	ct.INJURY_DESCRIPTION,
+	ct.INSURANCE_SUM_RATE,
+	CONCAT(ct.NOTE1, ' ', ct.NOTE2, ' ', ct.NOTE3, ' ', ct.NOTE4) as NOTE,
+	CONCAT(ct.SUBGROUP_DESCRIPTION_LEVEL_1, ' ', ct.SUBGROUP_DESCRIPTION_LEVEL_2, ' ', ct.SUBGROUP_DESCRIPTION_LEVEL_3, ' ', ct.INJURY_DESCRIPTION) as DESCRIPTION
+
+FROM BFX_IMPL.INJURY_GENERAL ct
+WHERE 1 = 1
+{{#if parameters.group}}
+AND ct.INJURY_GROUP = @group
+{{/if}}
+{{#if parameters.subgroupLevel1}}
+AND ct.SUBGROUP_CODE_LEVEL_1 = @subgroupLevel1
+{{/if}}
+{{#if parameters.subgroupLevel2}}
+AND ct.SUBGROUP_CODE_LEVEL_2 = @subgroupLevel2
+{{/if}}
+{{#if parameters.subgroupLevel3}}
+AND ct.SUBGROUP_CODE_LEVEL_3 = @subgroupLevel3
+{{/if}}
+{{#if parameters.description}}
+AND (ct.INJURY_DESCRIPTION LIKE @description OR CONCAT(ct.SUBGROUP_DESCRIPTION_LEVEL_1, ' ', ct.SUBGROUP_DESCRIPTION_LEVEL_2, ' ', ct.SUBGROUP_DESCRIPTION_LEVEL_3, ' ', ct.INJURY_DESCRIPTION) LIKE @description)
+{{/if}}
+{{#if parameters.insuranceRule}}
+AND ct.RULE_CODE = @insuranceRule
+{{/if}}
+
+
+
+

@@ -1,0 +1,52 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "PartyDocument",
+    "type": "object",
+    "additionalProperties": false,
+    "aiValidation": {
+        "rule": "validatePartyDocument"
+    },
+    "aiDataEnrichment": [
+        {
+            "name": "SetBoxRoleDocument"
+        }
+    ],
+    "properties": {
+        "docType": {
+            "aiTitle": "docType",
+            "$ref": "component:PartyDocumentType"
+        },
+        "otherDocTypeDesc": {
+            "type": "string",
+            "aiTitle": "otherDocTypeDesc"
+        },
+        "docSeries": {
+            "type": "string",
+            "aiTitle": "docSeries"
+        },
+        "docNumber": {
+            "type": "string",
+            "aiTitle": "docNumber"
+        },
+        "issueDate": {
+            "type": "string",
+            "aiFormat": "date",
+            "aiTitle": "issueDate",
+            "aiMeaning": "past"
+        },
+        "expireDate": {
+            "type": "string",
+            "aiFormat": "date",
+            "aiTitle": "expireDate",
+            "aiMeaning": "future"
+        },
+        "issuerName": {
+            "type": "string",
+            "aiTitle": "issuerName"
+        },
+        "issuerCode": {
+            "type": "string",
+            "aiTitle": "issuerCode"
+        }
+    }
+}

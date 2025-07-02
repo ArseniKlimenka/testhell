@@ -1,0 +1,499 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "lastName": {
+      "type": "string",
+      "mapping": {
+        "path": "#/properties/lastName"
+      }
+    },
+    "firstName": {
+      "type": "string",
+      "mapping": {
+        "path": "#/properties/firstName"
+      }
+    },
+    "middleName": {
+      "type": "string",
+      "mapping": {
+        "path": "#/properties/attributes/properties/middleName"
+      }
+    },
+    "personGender": {
+      "type": "string",
+      "mapping": {
+        "path": "#/properties/attributes/properties/personGender"
+      }
+    },
+    "dateOfBirth": {
+      "type": "string",
+      "format": "date",
+      "mapping": {
+        "path": "#/properties/dateOfBirth"
+      }
+    },
+    "birthPlace": {
+      "type": "string"
+    },
+    "fullName": {
+      "type": "string",
+      "mapping": {
+        "path": "#/properties/fullName"
+      }
+    },
+    "OGRNOGRNIP": {
+      "type": "string",
+      "mapping": {
+        "path": "#/properties/attributes/properties/OGRNOGRNIP"
+      }
+    },
+    "fullOrgName": {
+      "type": "string",
+      "mapping": {
+        "path": "#/properties/attributes/properties/fullOrgName"
+      }
+    },
+    "shortOrgName": {
+      "type": "string",
+      "mapping": {
+        "path": "#/properties/attributes/properties/shortOrgName"
+      }
+    },
+    "INNKIO": {
+      "type": "string",
+      "mapping": {
+        "path": "#/properties/attributes/properties/INNKIO"
+      }
+    },
+    "KPP": {
+      "type": "string",
+      "mapping": {
+        "path": "#/properties/attributes/properties/KPP"
+      }
+    },
+    "isNonResident": {
+      "type": "boolean",
+      "mapping": {
+        "path": "#/properties/attributes/properties/isNonResident"
+      }
+    },
+    "duplicateMasterNumber": {
+      "type": "string",
+      "mapping": {
+        "path": "#/properties/attributes/properties/duplicateMasterNumber"
+      }
+    },
+    "identityDocuments": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "identityDocumentType": {
+            "type": "string"
+          },
+          "documentSeries": {
+            "type": "string"
+          },
+          "documentNumber": {
+            "type": "string"
+          },
+          "issueDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "issuerName": {
+            "type": "string"
+          },
+          "issuerCode": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "bankAccounts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "accountNumber": {
+            "type": "string"
+          },
+          "bankId": {
+            "type": "string"
+          },
+          "bankName": {
+            "type": "string"
+          },
+          "bankBic": {
+            "type": "string"
+          },
+          "bankCorrespondentAccount": {
+            "type": "string"
+          },
+          "SWIFT": {
+            "type": "string"
+          },
+          "IBAN": {
+            "type": "string"
+          },
+          "foreignBank": {
+            "type": "boolean"
+          },
+          "currency": {
+            "type": "object",
+            "properties": {
+              "currencyCode": {
+                "type": "string"
+              },
+              "currencyDesc": {
+                "type": "string"
+              },
+              "currencyNumericCode": {
+                "type": "string"
+              }
+            }
+          },
+          "openingDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "closingDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "bankInn": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "naturalPersonCategory": {
+      "type": "string"
+    },
+    "citizenship": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "countryCode": {
+            "type": "string"
+          },
+          "countryShortName": {
+            "type": "string"
+          },
+          "countryFullName": {
+            "type": "string"
+          },
+          "alfa2": {
+            "type": "string"
+          },
+          "alfa3": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "SNILS": {
+      "type": "string"
+    },
+    "isPublicOfficial": {
+      "type": "boolean"
+    },
+    "executivePerson": {
+      "type": "object",
+      "properties": {
+        "executivePersonCode": {
+          "type": "string"
+        },
+        "executivePersonDesc": {
+          "type": "string"
+        }
+      }
+    },
+    "relationType": {
+      "type": "string"
+    },
+    "partyEmails": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "isForNewsletters": {
+            "type": "boolean"
+          },
+          "isPreferable": {
+            "type": "boolean"
+          }
+        }
+      }
+    },
+    "partyPhones": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "countryCode": {
+            "type": "object",
+            "properties": {
+              "countryCode": {
+                "type": "string"
+              },
+              "alfa2": {
+                "type": "string"
+              },
+              "countryShortName": {
+                "type": "string"
+              },
+              "countryPhoneCode": {
+                "type": "string"
+              }
+            }
+          },
+          "phoneType": {
+            "type": "object",
+            "properties": {
+              "phoneTypeCode": {
+                "type": "string"
+              },
+              "phoneTypeDesc": {
+                "type": "string"
+              }
+            }
+          },
+          "cityCode": {
+            "type": "string"
+          },
+          "number": {
+            "type": "string"
+          },
+          "fullNumber": {
+            "type": "string"
+          },
+          "fullNumberFormatted": {
+            "type": "string"
+          },
+          "isForNewsletters": {
+            "type": "boolean"
+          },
+          "isPreferable": {
+            "type": "boolean"
+          },
+          "isAdditional": {
+            "type": "boolean"
+          },
+          "isNonActual": {
+            "type": "boolean"
+          },
+          "comments": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "partyAddresses": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "isManualAddress": {
+            "type": "boolean"
+          },
+          "manualCountry": {
+            "type": "object",
+            "properties": {
+              "countryShortName": {
+                  "type": "string"
+              },
+              "countryCode": {
+                  "type": "string"
+              },
+              "countryFullName": {
+                  "type": "string"
+              },
+              "alfa2": {
+                  "type": "string"
+              },
+              "alfa3": {
+                  "type": "string"
+              }
+            }
+          },
+          "isForeignAddress": {
+            "type": "boolean"
+          },
+          "isSameAsRegistration": {
+            "type": "boolean"
+          },
+          "fullAddress": {
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "string"
+              },
+              "data": {
+                "type": "object",
+                "additionalProperties": true
+              }
+            }
+          },
+          "addressType": {
+            "type": "object",
+            "properties": {
+              "addressTypeCode": {
+                "type": "string"
+              },
+              "addressTypeDesc": {
+                "type": "string"
+              }
+            }
+          },
+          "comment": {
+            "type": "string"
+          },
+          "postalCode": {
+            "type": "string"
+          },
+          "country": {
+            "type": "string"
+          },
+          "region": {
+            "type": "string"
+          },
+          "area": {
+            "type": "string"
+          },
+          "city": {
+            "type": "string"
+          },
+          "settlement": {
+            "type": "string"
+          },
+          "street": {
+            "type": "string"
+          },
+          "house": {
+            "type": "string"
+          },
+          "houseExtension": {
+            "type": "string"
+          },
+          "flat": {
+            "type": "string"
+          },
+          "codeOkato": {
+            "type": "string"
+          },
+          "codeKladr": {
+            "type": "string"
+          },
+          "actualFrom": {
+            "type": "string",
+            "format": "date"
+          },
+          "actualTo": {
+            "type": "string",
+            "format": "date"
+          },
+          "streetType": {
+            "type": "string"
+          },
+          "settlementWithType": {
+            "type": "string"
+          },
+          "cityType": {
+            "type": "string"
+          },
+          "regionWithType": {
+            "type": "string"
+          },
+          "areaWithType": {
+            "type": "string"
+          },
+          "korpus": {
+            "type": "string"
+          },
+          "stroenie": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "partyExcludedPersons": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "excludedPersonName": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "partyTaxResidencies": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "residenceCountry": {
+            "type": "object",
+            "properties": {
+              "countryShortName": {
+                "type": "string"
+              },
+              "countryCode": {
+                "type": "string"
+              },
+              "countryFullName": {
+                "type": "string"
+              },
+              "alfa2": {
+                "type": "string"
+              },
+              "alfa3": {
+                "type": "string"
+              }
+            }
+          },
+          "docType": {
+            "type": "object",
+            "properties": {
+              "docTypeCode": {
+                "type": "string"
+              },
+              "docTypeDesc": {
+                "type": "string"
+              },
+              "docTypeClass": {
+                "type": "string"
+              },
+              "allowToSalers": {
+                "type": "boolean"
+              }
+            }
+          },
+          "otherDocTypeDesc": {
+            "type": "string"
+          },
+          "startDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "endDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "daysCount": {
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "additionalAttributes": {
+      "type": "object"
+    }
+  }
+}

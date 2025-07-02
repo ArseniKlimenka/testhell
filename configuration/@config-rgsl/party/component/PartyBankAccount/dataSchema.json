@@ -1,0 +1,100 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "PartyBankAccount",
+    "type": "object",
+    "aiValidation": {
+        "rule": "validatePartyBankAccount"
+    },
+    "aiDataEnrichment": [
+        {
+            "name": "enrichBankByBIC",
+            "dataSource": "BanksDataSource"
+        },
+        {
+            "name": "enrichCurrencyByAccount",
+            "dataSource": "CurrenciesDataSource"
+        }
+    ],
+    "additionalProperties": true,
+    "properties": {
+        "bankId": {
+            "type": "string",
+            "aiTitle": "bankId"
+        },
+        "bankName": {
+            "type": "string",
+            "aiTitle": "bankName"
+        },
+        "bankBic": {
+            "type": "string",
+            "aiTitle": "bankBic"
+        },
+        "bankCorrespondentAccount": {
+            "type": "string",
+            "aiTitle": "bankCorrespondentAccount"
+        },
+        "SWIFT": {
+            "type": "string",
+            "aiTitle": "SWIFT"
+        },
+        "IBAN": {
+            "type": "string",
+            "aiTitle": "IBAN"
+        },
+        "foreignBank": {
+            "type": "boolean",
+            "aiTitle": "foreignBank"
+        },
+        "currency": {
+            "type": "object",
+            "additionalProperties": false,
+            "aiTitle": "currency",
+            "properties": {
+                "currencyCode": {
+                    "type": "string",
+                    "aiTitle": "currencyCode"
+                },
+                "currencyDesc": {
+                    "type": "string",
+                    "aiTitle": "currencyDesc"
+                },
+                "currencyNumericCode": {
+                    "type": "string",
+                    "aiTitle": "currencyNumericCode"
+                }
+            }
+        },
+        "number": {
+            "type": "string",
+            "aiTitle": "number"
+        },
+        "openingDate": {
+            "type": "string",
+            "aiFormat": "date",
+            "aiTitle": "openingDate",
+            "aiMeaning": "past"
+        },
+        "closingDate": {
+            "type": "string",
+            "aiFormat": "date",
+            "aiTitle": "closingDate",
+            "aiMeaning": "future"
+        },
+        "bankInn": {
+            "type": "string",
+            "aiTitle": "bankInn"
+        },
+        "isSettlementThroughFTD": {
+            "type": "boolean",
+            "aiTitle": "isSettlementThroughFTD"
+        },
+        "personalAccountNumber": {
+            "type": "string",
+            "aiTitle": "personalAccountNumber"
+        },
+        "ftdName": {
+            "type": "string",
+            "aiTitle": "ftdName"
+        }
+    }
+}

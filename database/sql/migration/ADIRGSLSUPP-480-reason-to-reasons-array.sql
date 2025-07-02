@@ -1,0 +1,13 @@
+UPDATE ud
+SET ud.BODY = JSON_MODIFY(ud.BODY, '$.inquiryReasons', JSON_QUERY(concat('[', JSON_QUERY(ud.BODY, '$.inquiryReason'), ']')))
+FROM bfx.UNIVERSAL_DOCUMENT ud
+LEFT JOIN CFX.PUBLISHED_ARTIFACT paUd ON paUd.PUBLISHED_ARTIFACT_ID = ud.PUBLISHED_ARTIFACT_ID
+WHERE (paUd.CODE_NAME = 'EndowmentInquiry' OR paUd.CODE_NAME = 'CancellationInquiry')
+AND JSON_QUERY(ud.BODY, '$.inquiryReason') IS NOT NULL
+
+UPDATE ud
+SET ud.BODY = JSON_MODIFY(ud.BODY, '$.inquiryReason', NULL)
+FROM bfx.UNIVERSAL_DOCUMENT ud
+LEFT JOIN CFX.PUBLISHED_ARTIFACT paUd ON paUd.PUBLISHED_ARTIFACT_ID = ud.PUBLISHED_ARTIFACT_ID
+WHERE (paUd.CODE_NAME = 'EndowmentInquiry' OR paUd.CODE_NAME = 'CancellationInquiry')
+AND JSON_QUERY(ud.BODY, '$.inquiryReason') IS NOT NULL

@@ -1,0 +1,3 @@
+insert into ACC.CT_DOCUMENT_TYPE (DOCUMENT_TYPE_ID, DESCRIPTION, PAYABLE)
+values (100001, 'Tolerance payment', 1)
+GO

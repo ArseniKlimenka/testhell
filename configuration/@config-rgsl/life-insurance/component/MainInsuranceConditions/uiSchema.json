@@ -1,0 +1,232 @@
+{
+    "type": "Section",
+    "label": "Main Insurance Conditions",
+    "isCollapsed": false,
+    "width": 12,
+    "elements": [
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "Lookup",
+                    "elementId": "partner",
+                    "readOnly": false,
+                    "label": "partner",
+                    "commands": [
+                        {
+                            "commandType": "executeOperation",
+                            "operation": "SEARCH",
+                            "errorHandling": "silent",
+                            "data": null
+                        }
+                    ],
+                    "value": {
+                        "$ref": "#"
+                    },
+                    "width": 12,
+                    "dialogButton": {},
+                    "clearButton": {
+                        "clearAction": "partnerClear"
+                    },
+                    "dialog": {
+                        "viewReference": {
+                            "configurationCodeName": "ServiceProviderSearchView",
+                            "configurationVersion": "1",
+                            "configurationConceptType": "SearchView"
+                        },
+                        "onLoad": "partnerOnLoad"
+                    },
+                    "onSelected": "partnerOnSelected",
+                    "selectedDisplayValueUISchema": {
+                        "type": "Input",
+                        "label": "partner",
+                        "readOnly": true,
+                        "value": {
+                            "$ref": "#/properties/partner/properties/partnerDescription"
+                        }
+                    },
+                    "rule": {
+                        "effect": "ENABLE_INITIAL",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "enablePartner",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "type": "Input",
+                    "label": "insuranceProduct",
+                    "value": {
+                        "$ref": "#/properties/insuranceProduct"
+                    },
+                    "control": "Dropdown",
+                    "autocomplete": {
+                        "minTextLength": 0,
+                        "dropDownItemsCount": 10000,
+                        "selectItemOnMatch": false
+                    },
+                    "source": {
+                        "dataSource": {
+                            "name": "ProductsFilterDataSource",
+                            "searchFieldPath": "description",
+                            "requestMapping": "productRequestMapping",
+                            "responseMapping": "productResponseMapping",
+                            "resultCount": 10000
+                        },
+                        "displayValueTemplate": "{{expr productDescription}} ({{expr productCode}})"
+                    },
+                    "width": 12,
+                    "filter": "insuranceProductFilter",
+                    "onValueChanged": [
+                        {
+                            "commandType": "executeAction",
+                            "actionName": "onChangeInsuranceProduct"
+                        }
+                    ],
+                    "rule": {
+                        "effect": "DISABLE_INITIAL",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "disableProduct",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    },
+                    "elementId": "insuranceProductId"
+                }
+            ],
+            "rule": {
+                "effect": "HIDE",
+                "condition": {
+                    "type": "FUNC",
+                    "ruleFunction": "hideSectionForAgent",
+                    "value": [
+                        {
+                            "$ref": "#"
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "type": "Group",
+            "elements": [
+                {
+                    "type": "Lookup",
+                    "elementId": "partner",
+                    "readOnly": false,
+                    "label": "partner",
+                    "commands": [
+                        {
+                            "commandType": "executeOperation",
+                            "operation": "SEARCH",
+                            "errorHandling": "silent",
+                            "data": null
+                        }
+                    ],
+                    "value": {
+                        "$ref": "#"
+                    },
+                    "width": 12,
+                    "dialogButton": {},
+                    "clearButton": {
+                        "clearAction": "partnerClear"
+                    },
+                    "dialog": {
+                        "viewReference": {
+                            "configurationCodeName": "ServiceProviderSearchView",
+                            "configurationVersion": "1",
+                            "configurationConceptType": "SearchView"
+                        },
+                        "onLoad": "partnerOnLoad"
+                    },
+                    "onSelected": "partnerOnSelected",
+                    "selectedDisplayValueUISchema": {
+                        "type": "Input",
+                        "label": "partner",
+                        "readOnly": true,
+                        "value": {
+                            "$ref": "#/properties/partner/properties/partnerDescription"
+                        }
+                    },
+                    "rule": {
+                        "effect": "ENABLE_INITIAL",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "enablePartner",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "type": "Input",
+                    "label": "insuranceProduct",
+                    "value": {
+                        "$ref": "#/properties/insuranceProduct"
+                    },
+                    "control": "Dropdown",
+                    "autocomplete": {
+                        "minTextLength": 0,
+                        "dropDownItemsCount": 10000,
+                        "selectItemOnMatch": false
+                    },
+                    "source": {
+                        "dataSource": {
+                            "name": "ProductsFilterDataSource",
+                            "searchFieldPath": "description",
+                            "requestMapping": "productRequestMapping",
+                            "responseMapping": "productResponseMapping",
+                            "resultCount": 10000
+                        },
+                        "displayFieldName": "productDescription"
+                    },
+                    "width": 12,
+                    "filter": "insuranceProductFilter",
+                    "onValueChanged": [
+                        {
+                            "commandType": "executeAction",
+                            "actionName": "onChangeInsuranceProduct"
+                        }
+                    ],
+                    "rule": {
+                        "effect": "DISABLE_INITIAL",
+                        "condition": {
+                            "type": "FUNC",
+                            "ruleFunction": "disableProduct",
+                            "value": [
+                                {
+                                    "$ref": "#"
+                                }
+                            ]
+                        }
+                    },
+                    "elementId": "insuranceProductId"
+                }
+            ],
+            "rule": {
+                "effect": "SHOW",
+                "condition": {
+                    "type": "FUNC",
+                    "ruleFunction": "hideSectionForAgent",
+                    "value": [
+                        {
+                            "$ref": "#"
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}

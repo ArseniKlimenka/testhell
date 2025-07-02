@@ -1,0 +1,38 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "DataSchemaForMGPolicyPrintout",
+    "description": "Schema for printing policy",
+    "type": "object",
+    "additionalProperties": true,
+    "aiDataEnrichment": [
+        {
+            "name": "GetContractRelatedData",
+            "integrationService": {
+                "name": "GetPolicyRelatedDataForClaimInsuranceAct",
+                "version": "1"
+            }
+        },
+        {
+            "name": "GetBankData",
+            "dataSource": "BanksDataSource"
+        },
+        {
+            "name": "GetAgentAgreementData",
+            "dataSource": "AAShortInfoDataSource"
+        },
+        {
+            "name": "GetSignerData",
+            "dataSource": "GetPartyDataSource"
+        },
+        {
+            "name": "GetRelatedClaim",
+            "dataSource": "ClaimSearchDataSource"
+        },
+        {
+            "name": "GetApprovalHistory",
+            "dataSource": "ClaimApprovalHistoryDataSource"
+        }
+    ],
+    "properties": {
+    }
+}

@@ -1,0 +1,65 @@
+{
+    "id": "RecalcInsuredSumImportLoadFromExcelUiSchema",
+    "type": "Group",
+    "elements": [
+        {
+            "type": "GridLayout",
+            "numberOfColumns": 12,
+            "elements": [
+                {
+                    "type": "Group",
+                    "elements": [
+                        {
+                            "elementId": "import-table",
+                            "type": "DataGrid",
+                            "orderBy": "fullName",
+                            "mode": "DataSource",
+                            "header": {
+                                "showReloadButton": true,
+                                "showNumberOfResults": true
+                            },
+                            "pagination": {
+                                "mode": "Regular",
+                                "pageSizes": [
+                                    5,
+                                    10,
+                                    15
+                                ]
+                            },
+                            "selection": {
+                                "mode": "None"
+                            },
+                            "height": "None",
+                            "columns": [
+                                {
+                                    "sortable": false,
+                                    "title": "excelRowNumber",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "defaultValue": " ",
+                                        "value": {
+                                            "$ref": "#/properties/resultData/properties/data/properties/excelRowNumber"
+                                        }
+                                    },
+                                    "name": "excelRowNumber"
+                                },
+                                {
+                                    "sortable": false,
+                                    "title": "contractNumber",
+                                    "cellContent": {
+                                        "type": "OutputText",
+                                        "defaultValue": " ",
+                                        "value": {
+                                            "$ref": "#/properties/resultData/properties/data/properties/contractNumber"
+                                        }
+                                    },
+                                    "name": "contractNumber"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

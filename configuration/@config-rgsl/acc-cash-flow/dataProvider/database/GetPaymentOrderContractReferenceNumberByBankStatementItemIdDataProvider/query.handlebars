@@ -1,0 +1,7 @@
+select distinct sat.REFERENCE_NUMBER
+from
+	acc_impl.PAYMENT_REFERENCE pr
+	inner join pas_impl.POLICY_HUB con on con.CONTRACT_NUMBER = pr.REFERENCE_NO
+	inner join acc_impl.PO_NETTED_CONTRACT_LINK pnc on pnc.POLICY_HKEY = con.POLICY_HKEY
+	inner join acc_impl.PAYMENT_ORDER_SAT sat on sat.PAYMENT_ORDER_HKEY = pnc.PAYMENT_ORDER_HKEY
+where pr.BANK_STATEMENT_ITEM_ID = @bsiId
